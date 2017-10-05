@@ -48,19 +48,30 @@ class omas(dict):
             self.__setitem__(key, omas(imas_version=self.imas_version))
         return dict.__getitem__(self, key)
 
+    def traverse(self, **kw):
+        '''
+        traverse the hierarchy and returns paths that have data
+
+        :return: list of paths that have data
+        '''
+        paths=kw.setdefault('paths',[])
+        path=kw.setdefault('path',[])
+        for kid in self.keys():
+            if isinstance(self[kid], omas):
+                self[kid].traverse(paths=paths,path=path+[kid])
+            else:
+                paths.append(path+[kid])
+        return paths
+
 def ods_sample():
-    #ods=omas(location='equilibrium.time_slice.0')
-
     ods=omas()
-    print(len(ods['equilibrium'].structure))
-    print(len(ods['equilibrium']['time_slice'].structure))
-    print(len(ods['equilibrium']['time_slice'][0]['boundary'].structure))
 
-    #ods['boundary']['x_point'][0]['r']=1
+    ods['equilibrium']['time_slice'][0]['boundary']=5
+    ods['equilibrium']['time_slice'][1]['boundary']=5
 
-    #print(ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0]['r'].structure)
-    #ods=omas(location='equilibrium.time_slice.0')
-    #print(ods['boundary']['x_point'][0]['r'].structure)
+    pprint(ods.traverse())
+
+from omas_imas import *
 
 #------------------------------
 if __name__ == '__main__':
