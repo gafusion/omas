@@ -229,7 +229,7 @@ def create_html_documentation(imas_version):
     filename=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'omas_doc.html']))
 
     rows={}
-    for structure_file in load_structure():
+    for structure_file in list_structures():
         print('Adding to html documentation: '+os.path.splitext(os.path.split(structure_file)[1])[0])
         structure=load_structure(structure_file)
         for item in structure:
@@ -254,11 +254,11 @@ def create_html_documentation(imas_version):
 #----------------------------------------------
 # must be run to generate necessary .json files
 #----------------------------------------------
-if __name__ == '__main__' and os.path.exists(imas_html_dir):
+if __name__ == '__main__' and os.path.exists(default_imas_html_dir):
 
-    if not os.path.exists(os.sep.join([imas_json_dir,imas_version,'clean.xls'])):
-        aggregate_imas_html_docs(imas_html_dir, imas_version)
+    if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):
+        aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
 
-    create_json_structure(imas_version)#,['equilibrium'])
+    create_json_structure(default_imas_version)#,['equilibrium'])
 
-    create_html_documentation(imas_version)
+    create_html_documentation(default_imas_version)

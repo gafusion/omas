@@ -80,7 +80,11 @@ def json_loader(object_pairs):
 # handling of OMAS json structures
 #----------------------------------------------
 _structures={}
-def load_structure(file=None):
+
+def list_structures(imas_version=default_imas_version):
+    return map(lambda x:os.path.splitext(os.path.split(x)[1])[0],glob.glob(imas_json_dir+os.sep+imas_version+os.sep+'*'+'.json'))
+
+def load_structure(file, imas_version=default_imas_version):
     '''
     load omas json structure file
 
@@ -88,10 +92,12 @@ def load_structure(file=None):
 
     :return: tuple with structure, hashing mapper, and ods
     '''
-    if file is None:
-        return glob.glob(imas_json_dir+os.sep+imas_version+os.sep+'*'+'.json')
     if os.sep not in file:
-        file=glob.glob(imas_json_dir+os.sep+imas_version+os.sep+file+'*'+'.json')[0]
+        filename=imas_json_dir+os.sep+imas_version+os.sep+file+'.json'
+        if not os.path.exists(filename):
+            raise(Exception('`%s` is not a valid IMAS structure'%file))
+        else:
+            file=os.path.abspath(filename)
     if file not in _structures:
         _structures[file]=json.loads(open(file,'r').read(),object_pairs_hook=json_loader)
     return _structures[file]
