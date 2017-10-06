@@ -141,6 +141,7 @@ def imas_get(ids, jpath, skipMissingNodes=False):
         else:
             out=out[p]
 
+    printd('data: '+repr(out),topic='imas')
     return out
 
 def hmas_set(ids, jpath, hierarcy, *args, **kw):
@@ -242,11 +243,9 @@ def test_omas_imas(ods):
     run=0
 
     paths=ods.traverse()
-    paths=[['equilibrium','time_aaa']]
-    #paths=save_omas_imas(ods,user,tokamak,version,shot,run,True)
+    paths=save_omas_imas(ods,user,tokamak,version,shot,run)#,True)
     ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
 #    equal_ods(ods,ods1)
-#    ods1=ods
     return ods1
 
 #------------------------------

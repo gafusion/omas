@@ -81,15 +81,17 @@ def ods_sample():
     ods=omas()
 
     ods['equilibrium']['time_slice'][0]['time']=1000.
-    ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0]['r']=5.
-    print(ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0].location)
-    ods['equilibrium']['time_slice'][1]['time']=2000.
-    ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
+#    ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0]['r']=numpy.atleast_1d(5.)
 
-    ods2=omas('equilibrium.time_slice.2')
-    ods2['time']=3000
-    ods2['boundary']['x_point'][0]['z']=0.
-    ods['equilibrium']['time_slice'][2]=ods2
+    ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5
+
+    #ods['equilibrium']['time_slice'][1]['time']=2000.
+    #ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
+
+    #ods2=omas('equilibrium.time_slice.2')
+    #ods2['time']=3000
+    #ods2['boundary']['x_point'][0]['z']=0.
+    #ods['equilibrium']['time_slice'][2]=ods2
 
     pprint(ods.traverse())
     return ods
