@@ -29,15 +29,16 @@ class omas(dict):
             self.structure=load_structure(key.split(separator)[0])
 
         #consistency checking
+        location='.'.join(filter(None,[self.location,str(key)]))
+        structure={}
+        structure_location=re.sub('\.[0-9]+','[:]',location)
+        for item in self.structure.keys():
+            if item.startswith(structure_location):
+                structure[item]=self.structure[item]
+        if not len(structure):
+            raise(Exception('`%s` is not a valid IMAS location'%location))
         if isinstance(value,omas):
-            value.location='.'.join(filter(None,[self.location,str(key)]))
-            structure={}
-            structure_location=re.sub('\.[0-9]+','[:]',value.location)
-            for item in self.structure.keys():
-                if item.startswith(structure_location):
-                    structure[item]=self.structure[item]
-            if not len(structure):
-                raise(Exception('`%s` is not a valid IMAS location'%value.location))
+            value.location=location
             value.structure=structure
 
         return dict.__setitem__(self, key, value)
@@ -78,16 +79,16 @@ class omas(dict):
 
 def ods_sample():
     ods=omas()
+
     ods['equilibrium']['time_slice'][0]['time']=1000.
-    ods['equilibrium']['time_slice'][0]['boundary']['x_point']['r']=5.
-    print(ods['equilibrium']['time_slice'][0]['boundary']['x_point'].location)
+    ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0]['r']=5.
+    print(ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0].location)
     ods['equilibrium']['time_slice'][1]['time']=2000.
-    ods['equilibrium']['time_slice'][1]['boundary']['x_point']['z']=0.
+    ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
 
     ods2=omas('equilibrium.time_slice.2')
     ods2['time']=3000
-    ods2['boundary']['x_point']['z']=0.
-
+    ods2['boundary']['x_point'][0]['z']=0.
     ods['equilibrium']['time_slice'][2]=ods2
 
     pprint(ods.traverse())
