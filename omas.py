@@ -78,9 +78,17 @@ class omas(dict):
 
 def ods_sample():
     ods=omas()
+    ods['equilibrium']['time_slice'][0]['time']=1000.
+    ods['equilibrium']['time_slice'][0]['boundary']['x_point']['r']=5.
+    print(ods['equilibrium']['time_slice'][0]['boundary']['x_point'].location)
+    ods['equilibrium']['time_slice'][1]['time']=2000.
+    ods['equilibrium']['time_slice'][1]['boundary']['x_point']['z']=0.
 
-    ods['equilibrium']['time_slice'][0]['boundary']=5
-    ods['equilibrium']['time_slice'][1]['boundary']=5
+    ods2=omas('equilibrium.time_slice.2')
+    ods2['time']=3000
+    ods2['boundary']['x_point']['z']=0.
+
+    ods['equilibrium']['time_slice'][2]=ods2
 
     pprint(ods.traverse())
     return ods
@@ -91,4 +99,4 @@ from omas_imas import *
 if __name__ == '__main__':
 
     ods=ods_sample()
-    save_to_imas(ods)
+

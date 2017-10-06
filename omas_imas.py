@@ -1,6 +1,7 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from omas_utils import *
+from omas import omas
 
 def imas_open(user, tokamak, version, shot, run, new=False):
     '''
@@ -132,10 +133,11 @@ def imas_get(ids, jpath, skipMissingNodes=False):
                 out=getattr(out,p)
             elif skipMissingNodes is not False:
                 if skipMissingNodes is None:
-                    printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath))
+                    printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath[:kp+1]))
+                    printe(out.__dict__.keys())
                 return None
             else:
-                raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath)))
+                raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath[:kp+1])))
         else:
             out=out[p]
 
@@ -212,6 +214,19 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
         hmas_set(ids,path,ods,True)
     return set_paths
 
+def load_omas_imas(user, tokamak, version, shot, run, paths):
+    ids=imas_open(user,tokamak,version,shot,run)
+
+    ods=omas()
+    for path in paths:
+        data=imas_get(ids,path,None)
+        h=ods
+        for step in path[:-1]:
+            h=h[step]
+        h[path[-1]]=data
+
+    return ods
+
 def test_omas_imas(ods):
     '''
     test save and load OMAS IMAS
@@ -226,9 +241,12 @@ def test_omas_imas(ods):
     shot=1
     run=0
 
-    paths=save_omas_imas(ods,user,tokamak,version,shot,run,True)
-#    ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
+    paths=ods.traverse()
+    paths=[['equilibrium','time_aaa']]
+    #paths=save_omas_imas(ods,user,tokamak,version,shot,run,True)
+    ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
 #    equal_ods(ods,ods1)
+#    ods1=ods
     return ods1
 
 #------------------------------
