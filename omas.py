@@ -14,16 +14,20 @@ class omas(dict):
             imas_version=os.path.split(sorted(glob.glob(imas_json_dir+os.sep+'*'))[-1])[-1]
             printd('OMAS class instantiated with IMAS version: '+imas_version)
         self.imas_version=imas_version
-        self.location=''
+        self.name=''
+        self.parent=None
         self.structure={}
 
-        #set base_location
-        if location:
-            h=self
-            for step in location.split(separator):
-                h=h[step]
-            self.location=h.location
-            self.structure=h.structure
+    @property
+    def location(self):
+        h=self
+        location=''
+        while str(h.name):
+            location='.'.join(filter(None,[str(h.name),location]))
+            h=h.parent()
+            if h is None:
+                break
+        return location
 
     def __setitem__(self, key, value):
         #if this is the head
@@ -39,8 +43,20 @@ class omas(dict):
                 structure[item]=self.structure[item]
         if not len(structure):
             raise(Exception('`%s` is not a valid IMAS location'%location))
+
         if isinstance(value,omas):
-            value.location=location
+            old_name=str(getattr(value,'name',''))
+            value.name=key
+            #deepcopy necessary to keep the location straight
+            if old_name and old_name!=key:
+                try:
+                    value1=copy.deepcopy(value)
+                except Exception:
+                    raise
+                finally:
+                    value.name=old_name
+                value=value1
+            value.parent=weakref.ref(self)
             value.structure=structure
 
         return dict.__setitem__(self, key, value)
@@ -80,7 +96,6 @@ class omas(dict):
 
 def ods_sample():
     ods=omas()
-
     ods['equilibrium']['time_slice'][0]['time']=1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5
 
@@ -89,13 +104,14 @@ def ods_sample():
         ods['equilibrium']['time_slice'][1]['time']=2000.
         ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
 
-    #test use of base location
-    ods2=omas('equilibrium.time_slice.2')
-    ods2['time']=3000
-    ods2['global_quantities']['ip']=2.0
-    ods['equilibrium']['time_slice'][3]=ods2
+    ods2=omas()
+    ods2['equilibrium']['time_slice'][2]=ods['equilibrium']['time_slice'][0]
+
+    print(ods['equilibrium']['time_slice'][0]['global_quantities'].location)
+    print(ods['equilibrium']['time_slice'][2]['global_quantities'].location)
 
     pprint(ods.paths())
+    pprint(ods2.paths())
     return ods
 
 from omas_imas import *

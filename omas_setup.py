@@ -13,6 +13,7 @@ from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
+import weakref
 
 #--------------------------------------------
 # configuration of directories and IMAS infos
