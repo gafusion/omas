@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
+from omas_utils import *
+
 def imas_open(user, tokamak, version, shot, run, new=False):
     '''
     function to open an IMAS
@@ -159,7 +161,7 @@ def hmas_set(ids, jpath, hierarcy, *args, **kw):
     :return: jpath if set was done, otherwise None
     '''
     printd('',topic='imas')
-    data=gethdata(hierarcy,jpath)['__data__']
+    data=hierarcy.get(jpath)
     printd('.'.join(map(str,jpath)),data,topic='imas')
     return imas_set(ids,jpath,data,*args,**kw)
 
@@ -195,20 +197,39 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
 
     set_paths=[]
     for path in paths:
-        set_paths.append( hmas_set(ids,path,hierarchy,None,allocate=True) )
+        set_paths.append( hmas_set(ids,path,ods,None,allocate=True) )
     set_paths=filter(None,set_paths)
 
     for path in set_paths:
         if 'time' in path[:1] or path[-1]!='time':
             continue
         printd('writing %s'%j2i(path))
-        hmas_set(ids,path,hierarchy,True)
+        hmas_set(ids,path,ods,True)
     for path in set_paths:
         if 'time' in path[:1] or path[-1]=='time':
             continue
         printd('writing %s'%j2i(path))
-        hmas_set(ids,path,hierarchy,True)
+        hmas_set(ids,path,ods,True)
     return set_paths
+
+def test_omas_imas(ods):
+    '''
+    test save and load OMAS IMAS
+
+    :param ods: ods
+
+    :return: ods
+    '''
+    user=os.environ['USER']
+    tokamak='D3D'
+    version=os.environ.get('IMAS_VERSION','3.10.1')
+    shot=1
+    run=0
+
+    paths=save_omas_imas(ods,user,tokamak,version,shot,run,True)
+#    ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
+#    equal_ods(ods,ods1)
+    return ods1
 
 #------------------------------
 if __name__ == '__main__':

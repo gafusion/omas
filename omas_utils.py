@@ -112,3 +112,19 @@ def info_node(node):
     '''
     data_structure=node.split(separator)[0]
     return load_structure(data_structure)[node]
+
+def j2i(jpath):
+    '''
+    Formats a json path as a IMAS path
+
+    :param jpath: json path, that is a list with strings and indices
+
+    :return: IMAS path
+    '''
+    ipath=jpath[0]
+    for step in jpath[1:]:
+        if isinstance(step,int):
+            ipath+="[%d]"%step
+        else:
+            ipath+='.%s'%step
+    return ipath

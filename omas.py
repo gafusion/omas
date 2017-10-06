@@ -63,6 +63,19 @@ class omas(dict):
                 paths.append(path+[kid])
         return paths
 
+    def get(self, path):
+        '''
+        get data from path
+
+        :param path: path in the ods hierarchy
+
+        :return: data at path in ods hierarchy
+        '''
+        h=self
+        for step in path:
+            h=h[step]
+        return h
+
 def ods_sample():
     ods=omas()
 
@@ -70,10 +83,12 @@ def ods_sample():
     ods['equilibrium']['time_slice'][1]['boundary']=5
 
     pprint(ods.traverse())
+    return ods
 
 from omas_imas import *
 
 #------------------------------
 if __name__ == '__main__':
 
-    ods_sample()
+    ods=ods_sample()
+    save_to_imas(ods)
