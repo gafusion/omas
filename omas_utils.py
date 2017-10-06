@@ -102,27 +102,16 @@ def load_structure(file, imas_version=default_imas_version):
         _structures[file]=json.loads(open(file,'r').read(),object_pairs_hook=json_loader)
     return _structures[file]
 
-def info_node(node):
+def o2i(path):
     '''
-    return omas structure attributes for a node
+    Formats a ODS path format into a IMAS path
 
-    :param node: node in the omas data structure
+    :param path: ODS path format
 
-    :return: attributes of the node
+    :return: IMAS path format
     '''
-    data_structure=node.split(separator)[0]
-    return load_structure(data_structure)[node]
-
-def j2i(jpath):
-    '''
-    Formats a json path as a IMAS path
-
-    :param jpath: json path, that is a list with strings and indices
-
-    :return: IMAS path
-    '''
-    ipath=jpath[0]
-    for step in jpath[1:]:
+    ipath=path[0]
+    for step in path[1:]:
         if isinstance(step,int):
             ipath+="[%d]"%step
         else:

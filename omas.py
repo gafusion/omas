@@ -16,6 +16,8 @@ class omas(dict):
         self.imas_version=imas_version
         self.location=''
         self.structure={}
+
+        #set base_location
         if location:
             h=self
             for step in location.split(separator):
@@ -44,14 +46,13 @@ class omas(dict):
         return dict.__setitem__(self, key, value)
 
     def __getitem__(self, key):
-        #dynamic path creation
-        if key not in self:
+        if key not in self: #dynamic path creation
             self.__setitem__(key, omas(imas_version=self.imas_version))
         return dict.__getitem__(self, key)
 
-    def traverse(self, **kw):
+    def paths(self, **kw):
         '''
-        traverse the hierarchy and returns paths that have data
+        Traverse the ods and return paths that have data
 
         :return: list of paths that have data
         '''
@@ -59,18 +60,18 @@ class omas(dict):
         path=kw.setdefault('path',[])
         for kid in self.keys():
             if isinstance(self[kid], omas):
-                self[kid].traverse(paths=paths,path=path+[kid])
+                self[kid].paths(paths=paths,path=path+[kid])
             else:
                 paths.append(path+[kid])
         return paths
 
     def get(self, path):
         '''
-        get data from path
+        Get data from path
 
-        :param path: path in the ods hierarchy
+        :param path: path in the ods
 
-        :return: data at path in ods hierarchy
+        :return: data at path in ods
         '''
         h=self
         for step in path:
@@ -81,19 +82,20 @@ def ods_sample():
     ods=omas()
 
     ods['equilibrium']['time_slice'][0]['time']=1000.
-#    ods['equilibrium']['time_slice'][0]['boundary']['x_point'][0]['r']=numpy.atleast_1d(5.)
-
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5
 
-    #ods['equilibrium']['time_slice'][1]['time']=2000.
-    #ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
+    # issue with x_point structure?
+    if False:
+        ods['equilibrium']['time_slice'][1]['time']=2000.
+        ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z']=0.
 
-    #ods2=omas('equilibrium.time_slice.2')
-    #ods2['time']=3000
-    #ods2['boundary']['x_point'][0]['z']=0.
-    #ods['equilibrium']['time_slice'][2]=ods2
+    #test use of base location
+    ods2=omas('equilibrium.time_slice.2')
+    ods2['time']=3000
+    ods2['global_quantities']['ip']=2.0
+    ods['equilibrium']['time_slice'][3]=ods2
 
-    pprint(ods.traverse())
+    pprint(ods.paths())
     return ods
 
 from omas_imas import *

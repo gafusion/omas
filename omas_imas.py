@@ -33,13 +33,13 @@ def imas_open(user, tokamak, version, shot, run, new=False):
         raise(Exception('Failed to establish connection to IMAS database (user:%s tokamak:%s version:%s shot:%s run:%s)'%(user,tokamak,version,shot,run)))
     return ids
 
-def imas_set(ids, jpath, value, skipMissingNodes=False, allocate=False):
+def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     '''
     assign a value to a path of an open IMAS ids
 
     :param ids: open IMAS ids to write to
 
-    :param jpath: IMAS path in json format
+    :param path: ODS path
 
     :param value: value to assign
 
@@ -50,58 +50,58 @@ def imas_set(ids, jpath, value, skipMissingNodes=False, allocate=False):
 
     :param allocate: whether to perform only IMAS memory allocation (ids.resize)
 
-    :return: jpath if set was done, otherwise None
+    :return: path if set was done, otherwise None
     '''
-    printd('setting: %s'%repr(jpath),topic='imas')
-    ds=jpath[0]
-    jpath=jpath[1:]
+    printd('setting: %s'%repr(path),topic='imas')
+    ds=path[0]
+    path=path[1:]
 
     if hasattr(ids,ds):
         m=getattr(ids,ds)
     elif skipMissingNodes is not False:
         if skipMissingNodes is None:
-            printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath))
+            printe('WARNING: %s is not part of IMAS structure'%o2i([ds]+path))
         return None
     else:
-        raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath)))
+        raise(AttributeError('%s is not part of IMAS structure'%o2i([ds]+path)))
     m.setExpIdx(0)
 
     out=m
-    for kp,p in enumerate(jpath):
+    for kp,p in enumerate(path):
         if isinstance(p,basestring):
             if hasattr(out,p):
-                if kp<(len(jpath)-1):
+                if kp<(len(path)-1):
                     out=getattr(out,p)
             elif skipMissingNodes is not False:
                 if skipMissingNodes is None:
-                    printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath))
+                    printe('WARNING: %s is not part of IMAS structure'%o2i([ds]+path))
                 return None
             else:
-                raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath)))
+                raise(AttributeError('%s is not part of IMAS structure'%o2i([ds]+path)))
         else:
             try:
                 out=out[p]
             except IndexError:
                 if not allocate:
-                    raise(IndexError('%s structure array exceed allocation'%j2i([ds]+jpath)))
+                    raise(IndexError('%s structure array exceed allocation'%o2i([ds]+path)))
                 printd('resizing: %d'%(p+1),topic='imas')
                 out.resize(p+1)
                 out=out[p]
 
     if allocate:
-        return [ds]+jpath
+        return [ds]+path
 
-    setattr(out,jpath[-1],value)
+    setattr(out,path[-1],value)
     m.put(0)
-    return [ds]+jpath
+    return [ds]+path
 
-def imas_get(ids, jpath, skipMissingNodes=False):
+def imas_get(ids, path, skipMissingNodes=False):
     '''
     read the value of a path in an open IMAS ids
 
     :param ids: open IMAS ids to read from
 
-    :param jpath: IMAS path in json format
+    :param path: ODS path
 
     :param skipMissingNodes:  if the IMAS path does not exists:
                              `False` raise an error
@@ -109,64 +109,39 @@ def imas_get(ids, jpath, skipMissingNodes=False):
                              `None` prints a warning message
 
     :return: the value that was read if successful or None otherwise
-
     '''
-    printd('fetching: %s'%repr(jpath),topic='imas')
-    ds=jpath[0]
-    jpath=jpath[1:]
+    printd('fetching: %s'%repr(path),topic='imas')
+    ds=path[0]
+    path=path[1:]
 
     if hasattr(ids,ds):
         m=getattr(ids,ds)
     elif skipMissingNodes is not False:
         if skipMissingNodes is None:
-            printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath))
+            printe('WARNING: %s is not part of IMAS structure'%o2i([ds]+path))
         return None
     else:
-        raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath)))
+        raise(AttributeError('%s is not part of IMAS structure'%o2i([ds]+path)))
 
     m.get()
 
     out=m
-    for kp,p in enumerate(jpath):
+    for kp,p in enumerate(path):
         if isinstance(p,basestring):
             if hasattr(out,p):
                 out=getattr(out,p)
             elif skipMissingNodes is not False:
                 if skipMissingNodes is None:
-                    printe('WARNING: %s is not part of IMAS structure'%j2i([ds]+jpath[:kp+1]))
+                    printe('WARNING: %s is not part of IMAS structure'%o2i([ds]+path[:kp+1]))
                     printe(out.__dict__.keys())
                 return None
             else:
-                raise(AttributeError('%s is not part of IMAS structure'%j2i([ds]+jpath[:kp+1])))
+                raise(AttributeError('%s is not part of IMAS structure'%o2i([ds]+path[:kp+1])))
         else:
             out=out[p]
 
     printd('data: '+repr(out),topic='imas')
     return out
-
-def hmas_set(ids, jpath, hierarcy, *args, **kw):
-    '''
-    convenience function to assign data to a path of an open IMAS ids from a json hierarcy
-
-    :param ids: open IMAS ids to write to
-
-    :param jpath: IMAS path in json format
-
-    :param hierarcy: json hierarchy
-
-    :param skipMissingNodes:  if the IMAS path does not exists:
-                             `False` raise an error
-                             `True` does not raise error
-                             `None` prints a warning message
-
-    :param allocate: whether to perform only IMAS memory allocation (ids.resize)
-
-    :return: jpath if set was done, otherwise None
-    '''
-    printd('',topic='imas')
-    data=hierarcy.get(jpath)
-    printd('.'.join(map(str,jpath)),data,topic='imas')
-    return imas_set(ids,jpath,data,*args,**kw)
 
 #---------------------------
 # save and load OMAS to IMAS
@@ -194,25 +169,25 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
 
     printd('Saving to IMAS: %s %s %s %d %d'%(user, tokamak, version, shot, run),topic='imas')
 
-    paths=ods.traverse()
+    paths=ods.paths()
 
     ids=imas_open(user, tokamak, version, shot, run, new)
 
     set_paths=[]
     for path in paths:
-        set_paths.append( hmas_set(ids,path,ods,None,allocate=True) )
+        set_paths.append( imas_set(ids,path,ods.get(path),None,allocate=True) )
     set_paths=filter(None,set_paths)
 
     for path in set_paths:
         if 'time' in path[:1] or path[-1]!='time':
             continue
-        printd('writing %s'%j2i(path))
-        hmas_set(ids,path,ods,True)
+        printd('writing %s'%o2i(path))
+        imas_set(ids,path,ods.get(path),True)
     for path in set_paths:
         if 'time' in path[:1] or path[-1]=='time':
             continue
-        printd('writing %s'%j2i(path))
-        hmas_set(ids,path,ods,True)
+        printd('writing %s'%o2i(path))
+        imas_set(ids,path,ods.get(path),True)
     return set_paths
 
 def load_omas_imas(user, tokamak, version, shot, run, paths):
@@ -242,7 +217,7 @@ def test_omas_imas(ods):
     shot=1
     run=0
 
-    paths=ods.traverse()
+    paths=ods.paths()
     paths=save_omas_imas(ods,user,tokamak,version,shot,run)#,True)
     ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
 #    equal_ods(ods,ods1)
