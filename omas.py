@@ -30,12 +30,28 @@ class omas(dict):
         return location
 
     def __setitem__(self, key, value):
+        #handle individual keys as well as full paths
+        if not isinstance(key,(list,tuple)):
+            key=str(key)
+            key=key.split('.')
+        else:
+            key=map(str,key)
+        try:
+            key[0]=int(key[0])
+        except ValueError:
+            pass
+
+        #if the user has entered path rather than a single key
+        if len(key)>1:
+            pass_on_value=value
+            value=omas(imas_version=self.imas_version)
+
         #if this is the head
         if not self.location:
-            self.structure=load_structure(key.split(separator)[0])
+            self.structure=load_structure(key[0].split(separator)[0])
 
         #consistency checking
-        location='.'.join(filter(None,[self.location,str(key)]))
+        location='.'.join(filter(None,[self.location,str(key[0])]))
         structure={}
         structure_location=re.sub('\.[0-9]+','[:]',location)
         for item in self.structure.keys():
@@ -44,11 +60,12 @@ class omas(dict):
         if not len(structure):
             raise(Exception('`%s` is not a valid IMAS location'%location))
 
+        #if the value is a dictionary structure
         if isinstance(value,omas):
             old_name=str(getattr(value,'name',''))
-            value.name=key
+            value.name=key[0]
             #deepcopy necessary to keep the location straight
-            if old_name and old_name!=key:
+            if old_name and old_name!=key[0]:
                 try:
                     value1=copy.deepcopy(value)
                 except Exception:
@@ -59,12 +76,35 @@ class omas(dict):
             value.parent=weakref.ref(self)
             value.structure=structure
 
-        return dict.__setitem__(self, key, value)
+        #if the user has entered path rather than a single key
+        if len(key)>1:
+            if key[0] not in self:
+                dict.__setitem__(self, key[0], value)
+            return self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
+        else:
+            return dict.__setitem__(self, key[0], value)
 
     def __getitem__(self, key):
-        if key not in self: #dynamic path creation
-            self.__setitem__(key, omas(imas_version=self.imas_version))
-        return dict.__getitem__(self, key)
+        #handle individual keys as well as full paths
+        if not isinstance(key,(list,tuple)):
+            key=str(key)
+            key=key.split('.')
+        else:
+            key=map(str,key)
+        try:
+            key[0]=int(key[0])
+        except ValueError:
+            pass
+
+        #dynamic path creation
+        if key[0] not in self:
+            self.__setitem__(key[0], omas(imas_version=self.imas_version))
+
+        if len(key)>1:
+            #if the user has entered path rather than a single key
+            return dict.__getitem__(self, key[0])['.'.join(key[1:])]
+        else:
+            return dict.__getitem__(self, key[0])
 
     def paths(self, **kw):
         '''
@@ -81,19 +121,6 @@ class omas(dict):
                 paths.append(path+[kid])
         return paths
 
-    def get(self, path):
-        '''
-        Get data from path
-
-        :param path: path in the ods
-
-        :return: data at path in ods
-        '''
-        h=self
-        for step in path:
-            h=h[step]
-        return h
-
 def ods_sample():
     ods=omas()
     ods['equilibrium']['time_slice'][0]['time']=1000.
@@ -109,6 +136,11 @@ def ods_sample():
 
     print(ods['equilibrium']['time_slice'][0]['global_quantities'].location)
     print(ods['equilibrium']['time_slice'][2]['global_quantities'].location)
+
+    ods['equilibrium.time_slice.1.global_quantities.ip']=2.
+    print(ods['equilibrium.time_slice']['1.global_quantities.ip'])
+    print(ods[['equilibrium','time_slice',1,'global_quantities','ip']])
+    print(ods[('equilibrium','time_slice','1','global_quantities','ip')])
 
     pprint(ods.paths())
     pprint(ods2.paths())
