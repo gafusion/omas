@@ -2,6 +2,25 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 
 from omas_utils import *
 
+def _omas_key_dict_preprocessor(key):
+    '''
+    converts a omas string path to a list of keys that make the path
+
+    :param key: omas string path
+
+    :return: list of keys that make the path
+    '''
+    if not isinstance(key,(list,tuple)):
+        key=str(key)
+        key=re.sub('\]','',re.sub('\[','.',key)).split('.')
+    else:
+        key=map(str,key)
+    try:
+        key[0]=int(key[0])
+    except ValueError:
+        pass
+    return key
+
 class omas(dict):
     '''
     OMAS class
@@ -31,15 +50,7 @@ class omas(dict):
 
     def __setitem__(self, key, value):
         #handle individual keys as well as full paths
-        if not isinstance(key,(list,tuple)):
-            key=str(key)
-            key=key.split('.')
-        else:
-            key=map(str,key)
-        try:
-            key[0]=int(key[0])
-        except ValueError:
-            pass
+        key=_omas_key_dict_preprocessor(key)
 
         #if the user has entered path rather than a single key
         if len(key)>1:
@@ -86,15 +97,7 @@ class omas(dict):
 
     def __getitem__(self, key):
         #handle individual keys as well as full paths
-        if not isinstance(key,(list,tuple)):
-            key=str(key)
-            key=key.split('.')
-        else:
-            key=map(str,key)
-        try:
-            key[0]=int(key[0])
-        except ValueError:
-            pass
+        key=_omas_key_dict_preprocessor(key)
 
         #dynamic path creation
         if key[0] not in self:
@@ -161,6 +164,8 @@ def ods_sample():
 
     ods['equilibrium.time_slice.1.time']=2000.
     ods['equilibrium.time_slice.1.global_quantities.ip']=2.
+    ods['equilibrium.time_slice[2].time']=3000.
+    ods['equilibrium.time_slice[2].global_quantities.ip']=3.
     print(ods['equilibrium.time_slice']['1.global_quantities.ip'])
     print(ods[['equilibrium','time_slice',1,'global_quantities','ip']])
     print(ods[('equilibrium','time_slice','1','global_quantities','ip')])
