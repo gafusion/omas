@@ -121,6 +121,15 @@ class omas(dict):
                 paths.append(path+[kid])
         return paths
 
+    def flat(self):
+        '''
+        :return: flat dictionary representation of the data
+        '''
+        tmp={}
+        for path in self.paths():
+            tmp['.'.join(map(str,path))]=self[path]
+        return tmp
+
 def ods_sample():
     ods=omas()
     ods['equilibrium']['time_slice'][0]['time']=1000.
@@ -144,6 +153,9 @@ def ods_sample():
 
     pprint(ods.paths())
     pprint(ods2.paths())
+
+    tmp=ods2.flat()
+    pprint(tmp)
     return ods
 
 from omas_imas import *
