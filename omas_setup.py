@@ -14,6 +14,7 @@ import re
 import numpy
 from pprint import pprint
 import weakref
+import cPickle as pickle
 
 #--------------------------------------------
 # configuration of directories and IMAS infos

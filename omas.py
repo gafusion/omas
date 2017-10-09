@@ -130,6 +130,19 @@ class omas(dict):
             tmp['.'.join(map(str,path))]=self[path]
         return tmp
 
+    def __getstate__(self):
+        #switching between weak/strong reference for .parent attribute
+        state = self.__dict__.copy()
+        if state['parent'] is not None:
+            state['parent'] = state['parent']()
+        return state
+
+    def __setstate__(self, state):
+        #switching between weak/strong reference for .parent attribute
+        self.__dict__ = state.copy()
+        if self.__dict__['parent'] is not None:
+            self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
+
 def ods_sample():
     ods=omas()
     ods['equilibrium']['time_slice'][0]['time']=1000.
@@ -146,6 +159,7 @@ def ods_sample():
     print(ods['equilibrium']['time_slice'][0]['global_quantities'].location)
     print(ods['equilibrium']['time_slice'][2]['global_quantities'].location)
 
+    ods['equilibrium.time_slice.1.time']=2000.
     ods['equilibrium.time_slice.1.global_quantities.ip']=2.
     print(ods['equilibrium.time_slice']['1.global_quantities.ip'])
     print(ods[['equilibrium','time_slice',1,'global_quantities','ip']])
@@ -154,8 +168,12 @@ def ods_sample():
     pprint(ods.paths())
     pprint(ods2.paths())
 
-    tmp=ods2.flat()
+    tmp=pickle.dumps(ods)
+    ods=pickle.loads(tmp)
+
+    tmp=ods.flat()
     pprint(tmp)
+
     return ods
 
 from omas_imas import *
