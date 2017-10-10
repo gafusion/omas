@@ -200,16 +200,58 @@ def ods_sample():
     return ods
 
 def save_omas_pkl(ods, filename, **kw):
+    '''
+    Save OMAS data set to Python pickle
+
+    :param ods: OMAS data set
+
+    :param filename: filename to save to
+
+    :param kw: keywords passed to pickle.dump function
+    '''
     with open(filename,'w') as f:
         pickle.dump(ods,f,**kw)
 
 def load_omas_pkl(filename):
+    '''
+    Load OMAS data set from Python pickle
+
+    :param filename: filename to save to
+
+    :returs: ods OMAS data set
+    '''
     with open(filename,'r') as f:
         return pickle.load(f)
 
+def test_omas_pkl(ods):
+    '''
+    test save and load Python pickle
+
+    :param ods: ods
+
+    :return: ods
+    '''
+    filename='test.pkl'
+    save_omas_pkl(ods,filename)
+    ods1=load_omas_pkl(filename)
+    return ods1
+
 from omas_imas import *
+
 from omas_s3 import *
+
+__all__=['omas',              'ods_sample',
+         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
+         'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
+         'save_omas_imas',    'load_omas_imas',    'test_omas_imas'
+         ]
+
 #------------------------------
 if __name__ == '__main__':
+    print('='*20)
 
+    from omas import ods_sample
+    os.environ['OMAS_DEBUG_TOPIC']='pkl'
     ods=ods_sample()
+
+    ods=test_omas_pkl(ods)
