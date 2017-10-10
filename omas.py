@@ -25,6 +25,14 @@ class omas(dict):
     '''
     OMAS class
     '''
+    def __new__(cls, *args, **kw):
+        instance = dict.__new__(cls, *args, **kw)
+        instance.imas_version=None
+        instance.name=''
+        instance.parent=None
+        instance.structure={}
+        return instance
+
     def __init__(self, location='', imas_version=None):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -33,14 +41,13 @@ class omas(dict):
             imas_version=os.path.split(sorted(glob.glob(imas_json_dir+os.sep+'*'))[-1])[-1]
             printd('OMAS class instantiated with IMAS version: '+imas_version)
         self.imas_version=imas_version
-        self.name=''
-        self.parent=None
-        self.structure={}
 
     @property
     def location(self):
         h=self
         location=''
+        if not hasattr(h,'name'):
+            pass
         while str(h.name):
             location='.'.join(filter(None,[str(h.name),location]))
             h=h.parent()
@@ -184,15 +191,25 @@ def ods_sample():
     tmp=pickle.dumps(ods)
     ods=pickle.loads(tmp)
 
+    save_omas_pkl(ods,'test.pkl')
+    ods=load_omas_pkl('test.pkl')
+
     tmp=ods.flat()
     pprint(tmp)
 
     return ods
 
-from omas_imas import *
+def save_omas_pkl(ods, filename, **kw):
+    with open(filename,'w') as f:
+        pickle.dump(ods,f,**kw)
 
+def load_omas_pkl(filename):
+    with open(filename,'r') as f:
+        return pickle.load(f)
+
+from omas_imas import *
+from omas_s3 import *
 #------------------------------
 if __name__ == '__main__':
 
     ods=ods_sample()
-

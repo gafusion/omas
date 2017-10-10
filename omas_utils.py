@@ -76,6 +76,64 @@ def json_loader(object_pairs):
         return complex(dct['real'],dct['imag'])
     return dct
 
+def credentials(system):
+    c={}
+    c['s3']={}
+    c['s3']['region_name']='us-east-1'
+    c['s3']['aws_access_key_id']='AKIAIDWE2IM2V73OGOPA'
+    c['s3']['aws_secret_access_key']='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'
+    return c[system]
+
+def remote_uri(uri, filename, up_down):
+    '''
+
+    :param uri:
+    :param filename:
+    :param up_down:
+    :return:
+    '''
+    if not re.match('\w+://\w+.*',uri):
+        return uri
+
+    tmp=uri.split('://')
+    system=tmp[0]
+    location='://'.join(tmp[1:])
+
+    if up_down not in ['down','up']:
+        raise(AttributeError('remote_uri up_down attribute must be set to either `up` or `down`'))
+
+    if system=='s3':
+        import boto3
+        s3bucket=location.split('/')[0]
+        s3connection = boto3.resource('s3',**credentials('s3'))
+        s3filename='/'.join(location.split('/')[1:])
+
+        if up_down=='down':
+            if filename is None:
+                filename=s3filename.split('/')[-1]
+            printd('Downloading %s to %s'%(uri,filename),topic='s3')
+            obj=s3connection.Object(s3bucket, s3filename)
+            obj.download_file(os.path.split(filename)[1])
+
+        elif up_down=='up':
+            printd('Uploading %s to %s'%(filename,uri),topic='s3')
+            from botocore.exceptions import ClientError
+            if s3filename.endswith('/'):
+                s3filename+=filename.split('/')[-1]
+            try:
+                s3connection.meta.client.head_bucket(Bucket=s3bucket)
+            except ClientError as _excp:
+                # If a client error is thrown, then check that it was a 404 error.
+                # If it was a 404 error, then the bucket does not exist.
+                error_code = int(_excp.response['Error']['Code'])
+                if error_code == 404:
+                    s3connection.create_bucket(Bucket=s3bucket)
+                else:
+                    raise
+            bucket = s3connection.Bucket(s3bucket)
+            data = open(filename, 'rb')
+            bucket.put_object(Key=s3filename, Body=data)#, Metadata=meta)
+
 #----------------------------------------------
 # handling of OMAS json structures
 #----------------------------------------------
