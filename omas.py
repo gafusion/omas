@@ -69,7 +69,15 @@ class omas(dict):
             if item.startswith(structure_location):
                 structure[item]=self.structure[item]
         if not len(structure):
-            raise(Exception('`%s` is not a valid IMAS location'%location))
+            print(self.location)
+            print(re.sub('\.[0-9]+','.:',self.location))
+            options=numpy.unique(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure))
+            if len(options)==1 and options[0]==':':
+                options='A numerical index is needed'
+            else:
+                options='Did you mean: %s'%options
+            spaces='           '+' '*(len(self.location)+1)
+            raise(Exception('`%s` is not a valid IMAS location\n'%location+spaces+'^\n'+spaces+'%s'%options))
 
         #if the value is a dictionary structure
         if isinstance(value,omas):

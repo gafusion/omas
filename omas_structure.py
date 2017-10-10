@@ -236,7 +236,7 @@ def create_html_documentation(imas_version):
             if not any([ item.endswith(k) for k in ['_error_index','_error_lower','_error_upper']]):
                 rows[item]="<tr><td><p>{item}</p></td><td><p>{coordinates}</p></td><td><p>{data_type}</p></td><td><p>{description}</p></td></tr>".format(
                     item=item,
-                    coordinates=re.sub(',',',<br>',str(map(str,structure[item]['coordinates'])))[1:-1],
+                    coordinates=re.sub('\[\]','',re.sub('[\'\"]','',re.sub(',',',<br>',str(map(str,structure[item]['coordinates']))))),
                     description=structure[item]['description'],
                     data_type=structure[item]['data_type']
                 )
