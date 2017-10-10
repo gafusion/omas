@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
+__all__=['save_omas_s3',     'load_omas_s3',     'test_omas_s3']
+
 from omas_utils import *
 from omas import *
 
@@ -47,7 +49,6 @@ def test_omas_s3(ods):
     save_omas_s3(ods,filename)
     ods1=load_omas_s3(filename)
     return ods1
-
 
 #------------------------------
 if __name__ == '__main__':

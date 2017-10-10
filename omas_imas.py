@@ -1,7 +1,7 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from omas_utils import *
-from omas import omas
+from omas import *
 
 def imas_open(user, tokamak, version, shot, run, new=False):
     '''
@@ -90,9 +90,16 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
 
     if allocate:
         return [ds]+path
-
-    setattr(out,path[-1],value)
-    m.put(0)
+    
+    if isinstance(value,(basestring,numpy.ndarray)):
+        setattr(out,path[-1],value)
+    else:
+        setattr(out,path[-1],numpy.array(value))
+    try:
+        m.put(0)
+    except Exception:
+        printe('Error setting: %s'%repr(path))
+        raise
     return [ds]+path
 
 def imas_get(ids, path, skipMissingNodes=False):
@@ -175,19 +182,19 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
 
     set_paths=[]
     for path in paths:
-        set_paths.append( imas_set(ids,path,ods.get(path),None,allocate=True) )
+        set_paths.append( imas_set(ids,path,ods[path],None,allocate=True) )
     set_paths=filter(None,set_paths)
 
     for path in set_paths:
         if 'time' in path[:1] or path[-1]!='time':
             continue
         printd('writing %s'%o2i(path))
-        imas_set(ids,path,ods.get(path),True)
+        imas_set(ids,path,ods[path],True)
     for path in set_paths:
         if 'time' in path[:1] or path[-1]=='time':
             continue
         printd('writing %s'%o2i(path))
-        imas_set(ids,path,ods.get(path),True)
+        imas_set(ids,path,ods[path],True)
     return set_paths
 
 def load_omas_imas(user, tokamak, version, shot, run, paths):
@@ -229,6 +236,16 @@ if __name__ == '__main__':
 
     from omas import ods_sample
     os.environ['OMAS_DEBUG_TOPIC']='imas'
-    ods=ods_sample()
+    #ods=ods_sample()
 
-    ods=test_omas_imas(ods)
+    #ods=test_omas_imas(ods)
+
+    ods=load_omas_pkl('test.pkl')
+
+    user=os.environ['USER']
+    tokamak='D3D'
+    version=os.environ.get('IMAS_VERSION','3.10.1')
+    shot=1
+    run=0
+
+    save_omas_imas(ods,user,tokamak,version,shot,run)

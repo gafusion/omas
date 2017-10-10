@@ -235,15 +235,18 @@ def test_omas_pkl(ods):
     ods1=load_omas_pkl(filename)
     return ods1
 
+__all__=['omas',              'ods_sample',        'omas_rcparams',
+         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl']
+
+#import omas_imas
 from omas_imas import *
 
+#__all__.extend(omas_imas.__all__)
+
+#import omas_s3
 from omas_s3 import *
 
-__all__=['omas',              'ods_sample',        'omas_rcparams',
-         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
-         'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
-         'save_omas_imas',    'load_omas_imas',    'test_omas_imas'
-         ]
+#__all__.extend(omas_s3.__all__)
 
 #------------------------------
 if __name__ == '__main__':
@@ -254,3 +257,14 @@ if __name__ == '__main__':
     ods=ods_sample()
 
     ods=test_omas_pkl(ods)
+
+    
+    ods=load_omas_s3('test.pkl')
+
+    user=os.environ['USER']
+    tokamak='D3D'
+    version=os.environ.get('IMAS_VERSION','3.10.1')
+    shot=1
+    run=0
+
+    save_omas_imas(ods,user,tokamak,version,shot,run)
