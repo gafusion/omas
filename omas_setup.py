@@ -17,6 +17,13 @@ import weakref
 import cPickle as pickle
 
 #--------------------------------------------
+# rcparams
+#--------------------------------------------
+omas_rcparams={
+    'consistency_check':True,
+}
+
+#--------------------------------------------
 # configuration of directories and IMAS infos
 #--------------------------------------------
 imas_json_dir=os.path.abspath(str(os.path.dirname(unicode(__file__, sys.getfilesystemencoding())))+'/imas_structures/')

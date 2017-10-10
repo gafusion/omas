@@ -69,22 +69,21 @@ class omas(dict):
             self.structure=load_structure(key[0].split(separator)[0])
 
         #consistency checking
-        location='.'.join(filter(None,[self.location,str(key[0])]))
         structure={}
-        structure_location=re.sub('\.[0-9]+','[:]',location)
-        for item in self.structure.keys():
-            if item.startswith(structure_location):
-                structure[item]=self.structure[item]
-        if not len(structure):
-            print(self.location)
-            print(re.sub('\.[0-9]+','.:',self.location))
-            options=numpy.unique(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure))
-            if len(options)==1 and options[0]==':':
-                options='A numerical index is needed'
-            else:
-                options='Did you mean: %s'%options
-            spaces='           '+' '*(len(self.location)+1)
-            raise(Exception('`%s` is not a valid IMAS location\n'%location+spaces+'^\n'+spaces+'%s'%options))
+        if omas_rcparams['consistency_check']:
+            location='.'.join(filter(None,[self.location,str(key[0])]))
+            structure_location=re.sub('\.[0-9]+','[:]',location)
+            for item in self.structure.keys():
+                if item.startswith(structure_location):
+                    structure[item]=self.structure[item]
+            if not len(structure):
+                options=numpy.unique(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure))
+                if len(options)==1 and options[0]==':':
+                    options='A numerical index is needed'
+                else:
+                    options='Did you mean: %s'%options
+                spaces='           '+' '*(len(self.location)+1)
+                raise(Exception('`%s` is not a valid IMAS location\n'%location+spaces+'^\n'+spaces+'%s'%options))
 
         #if the value is a dictionary structure
         if isinstance(value,omas):
@@ -240,7 +239,7 @@ from omas_imas import *
 
 from omas_s3 import *
 
-__all__=['omas',              'ods_sample',
+__all__=['omas',              'ods_sample',        'omas_rcparams',
          'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
          'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
          'save_omas_imas',    'load_omas_imas',    'test_omas_imas'
