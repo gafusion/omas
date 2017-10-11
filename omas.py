@@ -2,7 +2,9 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 
 from omas_utils import *
 
-__all__=['omas',              'ods_sample',        'omas_rcparams',
+__all__=['omas_rcparams',
+         'omas',              'ods_sample',        'different_ods',
+         'save_omas',         'load_omas',
          'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
          'save_omas_imas',    'load_omas_imas',    'test_omas_imas',
          'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
@@ -257,7 +259,7 @@ def load_omas_pkl(filename):
 
     :param filename: filename to save to
 
-    :returs: ods OMAS data set
+    :returns: ods OMAS data set
     '''
     with open(filename,'r') as f:
         return pickle.load(f)
@@ -281,6 +283,29 @@ def test_omas_pkl(ods):
 from omas_structure import *
 from omas_imas import *
 from omas_s3 import *
+
+#--------------------------------------------
+# save and load OMAS with default saving method
+#--------------------------------------------
+def save_omas(ods, filename):
+    '''
+    save omas to filename
+
+    :param ods: OMAS data set
+
+    :param filename: filename to save to
+    '''
+    return save_omas_pkl(ods,filename)
+
+def load_omas(filename):
+    '''
+    load omas from filename
+
+    :param filename: filename to save to
+
+    :returns: ods OMAS data set
+    '''
+    return load_omas_pkl(filename)
 
 #--------------------------------------------
 if __name__ == '__main__':
