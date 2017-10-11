@@ -19,7 +19,7 @@ save_omas(ods,'test.omas')
 ods1=load_omas('test.omas')
 # Check data consistency
 if not different_ods(ods, ods1):
-   print('OMAS data got saved to an loaded from file correctly')
+   print('OMAS data got saved to and loaded from file correctly')
 
 # Save to IMAS
 paths=save_omas_imas(ods, user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, new=False)
@@ -27,4 +27,4 @@ paths=save_omas_imas(ods, user='meneghini', tokamak='D3D', version='3.10.1', sho
 ods1=load_omas_imas(user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, paths=paths)
 # Check data consistency
 if not different_ods(ods, ods1):
-   print('OMAS data got saved to an loaded from IMAS correctly')
+   print('OMAS data got saved to and loaded from IMAS correctly')

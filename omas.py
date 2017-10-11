@@ -39,16 +39,28 @@ class omas(dict):
         instance.name=''
         instance.parent=None
         instance.structure={}
+        instance._consistency_check=omas_rcparams['consistency_check']
         return instance
 
-    def __init__(self, location='', imas_version=None):
+    def __init__(self, *args, **kw):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
         '''
+        imas_version=kw.pop('imas_version',None)
         if imas_version is None:
             imas_version=os.path.split(sorted(glob.glob(imas_json_dir+os.sep+'*'))[-1])[-1]
-            printd('OMAS class instantiated with IMAS version: '+imas_version)
         self.imas_version=imas_version
+
+    @property
+    def consistency_check(self):
+        return self._consistency_check
+
+    @consistency_check.setter
+    def consistency_check(self,value):
+        self._consistency_check=value
+        for item in self:
+            if isinstance(self[item],omas):
+                self[item].consistency_check=value
 
     @property
     def location(self):
@@ -72,13 +84,14 @@ class omas(dict):
             pass_on_value=value
             value=omas(imas_version=self.imas_version)
 
-        #if this is the head
-        if not self.location:
-            self.structure=load_structure(key[0].split(separator)[0])
-
-        #consistency checking
         structure={}
-        if omas_rcparams['consistency_check']:
+        #if structural checks are enabled
+        if self.consistency_check:
+            #if this is the head
+            if not self.location:
+                self.structure=load_structure(key[0].split(separator)[0])
+
+            #consistency checking
             location='.'.join(filter(None,[self.location,str(key[0])]))
             structure_location=re.sub('\.[0-9]+','[:]',location)
             for item in self.structure.keys():
@@ -283,6 +296,7 @@ def test_omas_pkl(ods):
 from omas_structure import *
 from omas_imas import *
 from omas_s3 import *
+from omas_json import *
 
 #--------------------------------------------
 # save and load OMAS with default saving method
@@ -295,7 +309,10 @@ def save_omas(ods, filename):
 
     :param filename: filename to save to
     '''
-    return save_omas_pkl(ods,filename)
+    if os.path.splitext(filename)[1].lower()=='.json':
+        save_omas_json(ods,filename)
+    else:
+        return save_omas_pkl(ods,filename)
 
 def load_omas(filename):
     '''
@@ -305,7 +322,10 @@ def load_omas(filename):
 
     :returns: ods OMAS data set
     '''
-    return load_omas_pkl(filename)
+    if os.path.splitext(filename)[1].lower()=='.json':
+        return load_omas_json(filename)
+    else:
+        return load_omas_pkl(filename)
 
 #--------------------------------------------
 if __name__ == '__main__':
