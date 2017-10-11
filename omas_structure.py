@@ -252,8 +252,6 @@ def create_html_documentation(imas_version):
         f.write('\n'.join(lines))
 
 #----------------------------------------------
-# must be run to generate necessary .json files
-#----------------------------------------------
 if __name__ == '__main__' and os.path.exists(default_imas_html_dir):
 
     if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):

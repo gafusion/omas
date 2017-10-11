@@ -1,8 +1,8 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
-#-----------------
+#--------------------------------------------
 # external imports
-#-----------------
+#--------------------------------------------
 import os
 import sys
 import glob

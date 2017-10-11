@@ -3,14 +3,14 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 __all__=['save_omas_s3',     'load_omas_s3',     'test_omas_s3']
 
 from omas_utils import *
-from omas import *
+from omas import omas, save_omas_pkl, load_omas_pkl
 
-#-----------------------------
-# save and load OMAS to S3
-#-----------------------------
 def _base_S3_uri():
     return  's3://omas3/{username}/'.format(username=os.environ['USER'])
 
+#--------------------------------------------
+# save and load OMAS with S3
+#--------------------------------------------
 def save_omas_s3(ods, filename, **kw):
     '''
     Save an OMAS data set to on Amazon S3 server
@@ -50,7 +50,7 @@ def test_omas_s3(ods):
     ods1=load_omas_s3(filename)
     return ods1
 
-#------------------------------
+#--------------------------------------------
 if __name__ == '__main__':
     print('='*20)
 

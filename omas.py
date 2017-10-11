@@ -2,6 +2,12 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 
 from omas_utils import *
 
+__all__=['omas',              'ods_sample',        'omas_rcparams',
+         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
+         'save_omas_imas',    'load_omas_imas',    'test_omas_imas',
+         'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
+         ]
+
 def _omas_key_dict_preprocessor(key):
     '''
     converts a omas string path to a list of keys that make the path
@@ -160,7 +166,14 @@ class omas(dict):
         if self.__dict__['parent'] is not None:
             self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
 
+#--------------------------------------------
+# tools
+#--------------------------------------------
 def ods_sample():
+    '''
+    create sample ODS data
+    :return:
+    '''
     ods=omas()
     ods['equilibrium']['time_slice'][0]['time']=1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5
@@ -173,19 +186,19 @@ def ods_sample():
     ods2=omas()
     ods2['equilibrium']['time_slice'][2]=ods['equilibrium']['time_slice'][0]
 
-    print(ods['equilibrium']['time_slice'][0]['global_quantities'].location)
-    print(ods['equilibrium']['time_slice'][2]['global_quantities'].location)
+    printd(ods['equilibrium']['time_slice'][0]['global_quantities'].location,topic='sample')
+    printd(ods['equilibrium']['time_slice'][2]['global_quantities'].location,topic='sample')
 
     ods['equilibrium.time_slice.1.time']=2000.
     ods['equilibrium.time_slice.1.global_quantities.ip']=2.
     ods['equilibrium.time_slice[2].time']=3000.
     ods['equilibrium.time_slice[2].global_quantities.ip']=3.
-    print(ods['equilibrium.time_slice']['1.global_quantities.ip'])
-    print(ods[['equilibrium','time_slice',1,'global_quantities','ip']])
-    print(ods[('equilibrium','time_slice','1','global_quantities','ip')])
+    printd(ods['equilibrium.time_slice']['1.global_quantities.ip'],topic='sample')
+    printd(ods[['equilibrium','time_slice',1,'global_quantities','ip']],topic='sample')
+    printd(ods[('equilibrium','time_slice','1','global_quantities','ip')],topic='sample')
 
-    pprint(ods.paths())
-    pprint(ods2.paths())
+    #pprint(ods.paths())
+    #pprint(ods2.paths())
 
     tmp=pickle.dumps(ods)
     ods=pickle.loads(tmp)
@@ -194,10 +207,37 @@ def ods_sample():
     ods=load_omas_pkl('test.pkl')
 
     tmp=ods.flat()
-    pprint(tmp)
+    #pprint(tmp)
 
     return ods
 
+def different_ods(ods1, ods2):
+    '''
+    Checks if two ODSs have any difference and returns the string with the cause of the different
+
+    :param ods1: first ods to check
+
+    :param ods2: second ods to check
+
+    :return: string with reason for difference, or False otherwise
+    '''
+    ods1=ods1.flat()
+    ods2=ods2.flat()
+
+    k1=set(ods1.keys())
+    k2=set(ods2.keys())
+    for k in k1.difference(k2):
+        return 'DIFF: key `%s` missing in 2nd ods'%k
+    for k in k2.difference(k1):
+        return 'DIFF: key `%s` missing in 1st ods'%k
+    for k in k1.intersection(k2):
+        if not numpy.allclose(ods1[k],ods2[k]):
+            return 'DIFF: `%s` differ in value'%k
+    return False
+
+#--------------------------------------------
+# save and load OMAS with Python pickle
+#--------------------------------------------
 def save_omas_pkl(ods, filename, **kw):
     '''
     Save OMAS data set to Python pickle
@@ -235,36 +275,54 @@ def test_omas_pkl(ods):
     ods1=load_omas_pkl(filename)
     return ods1
 
-__all__=['omas',              'ods_sample',        'omas_rcparams',
-         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl']
-
-#import omas_imas
+#--------------------------------------------
+# import other omas tools and methods in this namespace
+#--------------------------------------------
+from omas_structure import *
 from omas_imas import *
-
-#__all__.extend(omas_imas.__all__)
-
-#import omas_s3
 from omas_s3 import *
 
-#__all__.extend(omas_s3.__all__)
-
-#------------------------------
+#--------------------------------------------
 if __name__ == '__main__':
+
+    # if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):
+    #     aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
+    #
+    # create_json_structure(default_imas_version)#,['equilibrium'])
+    #
+    # create_html_documentation(default_imas_version)
+
     print('='*20)
 
-    from omas import ods_sample
-    os.environ['OMAS_DEBUG_TOPIC']='pkl'
+    os.environ['OMAS_DEBUG_TOPIC']='*'
     ods=ods_sample()
 
-    ods=test_omas_pkl(ods)
+    tests=['pkl','s3','imas']
+    results=numpy.zeros((len(tests),len(tests)))
 
-    
-    ods=load_omas_s3('test.pkl')
+    for k1,t1 in enumerate(tests):
+        failed1=False
+        try:
+            ods1=locals()['test_omas_'+t1](ods)
+        except Exception as _excp:
+            failed1=True
+        for k2,t2 in enumerate(tests):
+            try:
+                if failed1:
+                    raise
+                ods2=locals()['test_omas_'+t2](ods1)
 
-    user=os.environ['USER']
-    tokamak='D3D'
-    version=os.environ.get('IMAS_VERSION','3.10.1')
-    shot=1
-    run=0
+                different=different_ods(ods1,ods2)
+                if not different:
+                    print('%s - %s : OK'%(t1.ljust(5),t2.rjust(5)))
+                    results[k1,k2]=1.0
+                else:
+                    print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),different))
+                    results[k1,k2]=-1.0
 
-    save_omas_imas(ods,user,tokamak,version,shot,run)
+            except Exception as _excp:
+                print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),repr(_excp)))
+
+    print('='*20)
+    print(results.astype(int))
+    print('='*20)

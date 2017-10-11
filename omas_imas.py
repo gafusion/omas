@@ -1,8 +1,11 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from omas_utils import *
-from omas import *
+from omas import omas, save_omas_pkl, load_omas_pkl
 
+#--------------------------------------------
+# IMAS convenience functions
+#--------------------------------------------
 def imas_open(user, tokamak, version, shot, run, new=False):
     '''
     function to open an IMAS
@@ -150,9 +153,9 @@ def imas_get(ids, path, skipMissingNodes=False):
     printd('data: '+repr(out),topic='imas')
     return out
 
-#---------------------------
+#--------------------------------------------
 # save and load OMAS to IMAS
-#---------------------------
+#--------------------------------------------
 def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
     '''
     save OMAS data set to IMAS
@@ -230,7 +233,7 @@ def test_omas_imas(ods):
 #    equal_ods(ods,ods1)
     return ods1
 
-#------------------------------
+#--------------------------------------------
 if __name__ == '__main__':
     print('='*20)
 
