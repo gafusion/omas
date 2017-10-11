@@ -1,7 +1,5 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
-__all__=['save_omas_json',   'load_omas_json',   'test_omas_json']
-
 from omas_utils import *
 from omas import omas, save_omas_pkl, load_omas_pkl
 

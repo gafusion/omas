@@ -6,6 +6,7 @@ __all__=['omas_rcparams',
          'omas',              'ods_sample',        'different_ods',
          'save_omas',         'load_omas',
          'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
+         'save_omas_json',    'load_omas_json',    'test_omas_json',
          'save_omas_imas',    'load_omas_imas',    'test_omas_imas',
          'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
          ]
@@ -291,14 +292,6 @@ def test_omas_pkl(ods):
     return ods1
 
 #--------------------------------------------
-# import other omas tools and methods in this namespace
-#--------------------------------------------
-from omas_structure import *
-from omas_imas import *
-from omas_s3 import *
-from omas_json import *
-
-#--------------------------------------------
 # save and load OMAS with default saving method
 #--------------------------------------------
 def save_omas(ods, filename):
@@ -328,6 +321,14 @@ def load_omas(filename):
         return load_omas_pkl(filename)
 
 #--------------------------------------------
+# import other omas tools and methods in this namespace
+#--------------------------------------------
+from omas_structure import *
+from omas_imas import *
+from omas_s3 import *
+from omas_json import *
+
+#--------------------------------------------
 if __name__ == '__main__':
 
     # if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):
@@ -342,7 +343,7 @@ if __name__ == '__main__':
     os.environ['OMAS_DEBUG_TOPIC']='*'
     ods=ods_sample()
 
-    tests=['pkl','s3','imas']
+    tests=['pkl','json','s3','imas']
     results=numpy.zeros((len(tests),len(tests)))
 
     for k1,t1 in enumerate(tests):
