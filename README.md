@@ -1,0 +1,88 @@
+# **OMAS** (**O**rdered **M**ultidimensional **A**rray **S**tructure)
+
+OMAS is a set of Python tools that aim at simplifying the interface between third-party codes and the ITER IMAS data storage infrastructure. IMAS is a set of codes, an execution framework, a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data.
+
+The idea behind OMAS is to provide a Python API that can store data in a format that is compatible with the IMAS data model, using different storage systems. The OMAS library provides convenient APIs to convert data between the OMAS and IMAS storage systems. The ability of OMAS to handle data in an IMAS-compatible way, without relying on the IMAS library itself, exempts codes from such (cumbersome) dependency.
+
+An integrated modeling framework (such as [OMFIT](http://gafusion.github.io/OMFIT-source)) can act as wrappers around physics codes, mapping their outputs to OMAS, which can then read/write from/to IMAS or the other supported formats.
+
+The IMAS data model organizes data into a hierarchical tree. There data is stored in the leaf nodes, and the branches are structures or arrays of structures. The OMAS data structure maps one-to-one the IMAS data model.
+
+The following code snipplet shows how the Python `omas` class is used.
+
+  ```python
+from omas import *
+import numpy
+
+# instantiate new omas data structure (ODS)
+ods=omas()
+
+# add some 0D data
+ods['equilibrium']['time_slice'][0]['time']=1000.
+ods['equilibrium']['time_slice'][0]['global_quantities.ip']=1.E6
+# add some 1D data
+ods['equilibrium']['time_slice'][0]['profiles_1d.psi']=[1,2,3]
+# add some 2D data
+ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor']=[[1,2,3],[4,5,6]]
+
+# Save to file
+save_omas(ods,'test.omas')
+# Load from file
+ods1=load_omas('test.omas')
+# Check data consistency
+if not different_ods(ods, ods1):
+   print('OMAS data got saved to and loaded from file correctly')
+
+# Save to IMAS
+paths=save_omas_imas(ods, user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, new=False)
+# Load from IMAS
+ods1=load_omas_imas(user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, paths=paths)
+# Check data consistency
+if not different_ods(ods, ods1):
+   print('OMAS data got saved to and loaded from IMAS correctly')
+  ```
+
+The hierarchical IMAS data model is represented in OMAS as a set of nested `omas` objects. Techically speaking the Python `omas` class is a subclass of the standard Python dictionary class, and it inherits all of the functionalities, with the addition of:
+
+1. on the fly checks for consistency with IMAS data model
+
+2. graceful error handling with suggestions for navigating the hierarchical data structure
+
+3. dynamic creation of the tree hierarchy as items they are accessed
+
+4. support read/write/access using multiple formats
+
+	* standard Python dictionary format:
+	
+	  ```python
+     ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']
+	  ```
+
+	* IMAS hierarchical tree format:
+	
+	  ```python
+	  ods['equilibrium.time_slice[0].profiles_2d[0].psi']
+	  ```
+	
+	* dot separated string format: 
+	
+	  ```python
+	  ods['equilibrium.time_slice.0.profiles_2d.0.psi']
+	  ```
+	
+	* list of nodes format:
+	
+	  ```python
+	  ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]
+	  ```
+
+5. save/load data to/from:
+ 
+   * Python pickle: save/load `omas` objects to file using native Python serialization tools
+
+	* Json: ASCII file format for representing hierarchical data
+
+   * S3: remotely store/retrieve `omas` objects on Amazon Simple Storage Service 
+
+   * IMAS: save/load `omas` objects to IMAS (requires working IMAS installation)
+
