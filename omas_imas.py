@@ -201,6 +201,8 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
     return set_paths
 
 def load_omas_imas(user, tokamak, version, shot, run, paths):
+    printd('Loading from IMAS: %s %s %s %d %d'%(user, tokamak, version, shot, run),topic='imas')
+
     ids=imas_open(user,tokamak,version,shot,run)
 
     ods=omas()

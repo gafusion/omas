@@ -66,11 +66,11 @@ def json_loader(object_pairs, cls=dict):
     for x,y in object_pairs:
         dct[x]=y
     if '__ndarray_tolist__' in dct:
-        return array(dct['__ndarray_tolist__'],dtype=dct['dtype']).reshape(dct['shape'])
+        return numpy.array(dct['__ndarray_tolist__'],dtype=dct['dtype']).reshape(dct['shape'])
     elif ('__ndarray_tolist_real__' in dct and
           '__ndarray_tolist_imag__' in dct):
-          return (array(dct['__ndarray_tolist_real__'],dtype=dct['dtype']).reshape(dct['shape'])+
-                  array(dct['__ndarray_tolist_imag__'],dtype=dct['dtype']).reshape(dct['shape'])*1j)
+          return (numpy.array(dct['__ndarray_tolist_real__'],dtype=dct['dtype']).reshape(dct['shape'])+
+                  numpy.array(dct['__ndarray_tolist_imag__'],dtype=dct['dtype']).reshape(dct['shape'])*1j)
     elif '__ndarray__' in dct:
         data = base64.b64decode(dct['__ndarray__'])
         return np.frombuffer(data, dct['dtype']).reshape(dct['shape'])

@@ -7,6 +7,7 @@ __all__=['omas_rcparams',
          'save_omas',         'load_omas',
          'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
          'save_omas_json',    'load_omas_json',    'test_omas_json',
+         'save_omas_nc',      'load_omas_nc',      'test_omas_nc',
          'save_omas_imas',    'load_omas_imas',    'test_omas_imas',
          'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
          ]
@@ -183,6 +184,50 @@ class omas(dict):
             self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
 
 #--------------------------------------------
+# save and load OMAS with Python pickle
+#--------------------------------------------
+def save_omas_pkl(ods, filename, **kw):
+    '''
+    Save OMAS data set to Python pickle
+
+    :param ods: OMAS data set
+
+    :param filename: filename to save to
+
+    :param kw: keywords passed to pickle.dump function
+    '''
+    printd('Saving to %s'%(filename),topic='pkl')
+
+    with open(filename,'w') as f:
+        pickle.dump(ods,f,**kw)
+
+def load_omas_pkl(filename):
+    '''
+    Load OMAS data set from Python pickle
+
+    :param filename: filename to save to
+
+    :returns: ods OMAS data set
+    '''
+    printd('Loading from %s'%(filename),topic='pkl')
+
+    with open(filename,'r') as f:
+        return pickle.load(f)
+
+def test_omas_pkl(ods):
+    '''
+    test save and load Python pickle
+
+    :param ods: ods
+
+    :return: ods
+    '''
+    filename='test.pkl'
+    save_omas_pkl(ods,filename)
+    ods1=load_omas_pkl(filename)
+    return ods1
+
+#--------------------------------------------
 # tools
 #--------------------------------------------
 def ods_sample():
@@ -212,6 +257,8 @@ def ods_sample():
     printd(ods['equilibrium.time_slice']['1.global_quantities.ip'],topic='sample')
     printd(ods[['equilibrium','time_slice',1,'global_quantities','ip']],topic='sample')
     printd(ods[('equilibrium','time_slice','1','global_quantities','ip')],topic='sample')
+
+    ods['equilibrium.time_slice.0.profiles_1d.psi']=numpy.linspace(0,1,10)
 
     #pprint(ods.paths())
     #pprint(ods2.paths())
@@ -252,71 +299,35 @@ def different_ods(ods1, ods2):
     return False
 
 #--------------------------------------------
-# save and load OMAS with Python pickle
-#--------------------------------------------
-def save_omas_pkl(ods, filename, **kw):
-    '''
-    Save OMAS data set to Python pickle
-
-    :param ods: OMAS data set
-
-    :param filename: filename to save to
-
-    :param kw: keywords passed to pickle.dump function
-    '''
-    with open(filename,'w') as f:
-        pickle.dump(ods,f,**kw)
-
-def load_omas_pkl(filename):
-    '''
-    Load OMAS data set from Python pickle
-
-    :param filename: filename to save to
-
-    :returns: ods OMAS data set
-    '''
-    with open(filename,'r') as f:
-        return pickle.load(f)
-
-def test_omas_pkl(ods):
-    '''
-    test save and load Python pickle
-
-    :param ods: ods
-
-    :return: ods
-    '''
-    filename='test.pkl'
-    save_omas_pkl(ods,filename)
-    ods1=load_omas_pkl(filename)
-    return ods1
-
-#--------------------------------------------
 # save and load OMAS with default saving method
 #--------------------------------------------
 def save_omas(ods, filename):
     '''
-    save omas to filename
+    Save omas data to filename. The file extension defines format to use.
 
     :param ods: OMAS data set
 
     :param filename: filename to save to
     '''
     if os.path.splitext(filename)[1].lower()=='.json':
-        save_omas_json(ods,filename)
+        return save_omas_json(ods,filename)
+    elif os.path.splitext(filename)[1].lower()=='.nc':
+        return save_omas_nc(ods,filename)
     else:
         return save_omas_pkl(ods,filename)
 
 def load_omas(filename):
     '''
-    load omas from filename
+    Load omas data from filename. The file extension defines format to use.
 
-    :param filename: filename to save to
+    :param filename: filename to load from
 
     :returns: ods OMAS data set
     '''
     if os.path.splitext(filename)[1].lower()=='.json':
         return load_omas_json(filename)
+    elif os.path.splitext(filename)[1].lower()=='.nc':
+        return load_omas_nc(filename)
     else:
         return load_omas_pkl(filename)
 
@@ -326,6 +337,7 @@ def load_omas(filename):
 from omas_structure import *
 from omas_imas import *
 from omas_s3 import *
+from omas_nc import *
 from omas_json import *
 
 #--------------------------------------------
@@ -343,7 +355,7 @@ if __name__ == '__main__':
     os.environ['OMAS_DEBUG_TOPIC']='*'
     ods=ods_sample()
 
-    tests=['pkl','json','s3','imas']
+    tests=['pkl','json','nc','s3','imas']
     results=numpy.zeros((len(tests),len(tests)))
 
     for k1,t1 in enumerate(tests):

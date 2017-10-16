@@ -11,7 +11,7 @@ def _base_S3_uri():
 #--------------------------------------------
 def save_omas_s3(ods, filename, **kw):
     '''
-    Save an OMAS data set to on Amazon S3 server
+    Save an OMAS data set to NetCDF
 
     :param ods: OMAS data set
 
@@ -19,18 +19,20 @@ def save_omas_s3(ods, filename, **kw):
 
     :param kw: arguments passed to the save_omas_pkl function
     '''
+    printd('Saving to %s on S3'%(_base_S3_uri()+filename),topic='s3')
 
     save_omas_pkl(ods, filename, **kw)
     return remote_uri(_base_S3_uri(),filename,'up')
 
 def load_omas_s3(filename):
     '''
-    Load an OMAS data set from Amazon S3 server
+    Load an OMAS data set from NetCDF
 
     :param filename: filename to load from
 
     :return: OMAS data set
     '''
+    printd('loading from %s on S3'%(_base_S3_uri()+filename),topic='s3')
 
     remote_uri(_base_S3_uri()+filename, None, 'down')
     return load_omas_pkl(os.path.split(filename)[1])
