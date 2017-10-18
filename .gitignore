@@ -14,5 +14,8 @@ imas_structures/*/clean.html
 imas_structures/*/*.json
 
 sphinx/build/
+sphinx/source/data.rst
+
+docs/
 
 /test*
