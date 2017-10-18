@@ -13,4 +13,6 @@ imas_json
 imas_structures/*/clean.html
 imas_structures/*/*.json
 
+sphinx/build/
+
 /test*
