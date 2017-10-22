@@ -1,4 +1,4 @@
-from __future__ import absolute_import, print_function, division, unicode_literals
+from __future__ import print_function, division, unicode_literals
 
 from omas_utils import *
 
@@ -252,6 +252,12 @@ def create_html_documentation(imas_version):
         f.write('\n'.join(lines))
 
 #----------------------------------------------
+if 'IMAS_PREFIX' in os.environ:
+    default_imas_html_dir=os.environ['IMAS_PREFIX']+'/share/doc/imas/'
+else:
+    default_imas_html_dir='/Users/meneghini/tmp/imas'
+default_imas_html_dir=os.path.abspath(default_imas_html_dir)
+
 if __name__ == '__main__' and os.path.exists(default_imas_html_dir):
 
     if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):

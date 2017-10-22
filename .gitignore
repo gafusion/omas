@@ -9,13 +9,14 @@ __pycache__/
 
 omas_doc.html
 
-imas_json
-imas_structures/*/clean.html
-imas_structures/*/*.json
+omas/imas_structures/*/clean.html
+omas/imas_structures/*/*.json
 
 sphinx/build/
 sphinx/source/data.rst
 
 docs/
+dist/
+omas.egg-info/
 
 /test*

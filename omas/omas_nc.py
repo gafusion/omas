@@ -1,4 +1,4 @@
-from __future__ import absolute_import, print_function, division, unicode_literals
+from __future__ import print_function, division, unicode_literals
 
 from omas_utils import *
 from omas import omas, save_omas_pkl, load_omas_pkl

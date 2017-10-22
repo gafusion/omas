@@ -32,7 +32,7 @@ import sphinx_bootstrap_theme
 sys.path.insert(0, os.path.abspath('../../'))
 import omas
 
-shutil.copy2(os.path.abspath('../../imas_structures/3.10.1/omas_doc.html'),os.path.abspath('../source/data.rst'))
+shutil.copy2(os.path.abspath('../../omas/imas_structures/3.10.1/omas_doc.html'),os.path.abspath('../source/data.rst'))
 lines=open(os.path.abspath('../source/data.rst')).readlines()
 with open('../source/data.rst','w') as f:
     f.write('''.. raw:: html

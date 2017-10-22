@@ -1,4 +1,4 @@
-from __future__ import absolute_import, print_function, division, unicode_literals
+from __future__ import print_function, division, unicode_literals
 
 from omas_utils import *
 
@@ -298,6 +298,42 @@ def different_ods(ods1, ods2):
             return 'DIFF: `%s` differ in value'%k
     return False
 
+def omas_test_suite():
+    print('='*20)
+
+    os.environ['OMAS_DEBUG_TOPIC']='*'
+    ods=ods_sample()
+
+    tests=['pkl','json','nc','s3','imas']
+    results=numpy.zeros((len(tests),len(tests)))
+
+    for k1,t1 in enumerate(tests):
+        failed1=False
+        try:
+            ods1=locals()['test_omas_'+t1](ods)
+        except Exception as _excp:
+            failed1=True
+        for k2,t2 in enumerate(tests):
+            try:
+                if failed1:
+                    raise
+                ods2=locals()['test_omas_'+t2](ods1)
+
+                different=different_ods(ods1,ods2)
+                if not different:
+                    print('%s - %s : OK'%(t1.ljust(5),t2.rjust(5)))
+                    results[k1,k2]=1.0
+                else:
+                    print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),different))
+                    results[k1,k2]=-1.0
+
+            except Exception as _excp:
+                print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),repr(_excp)))
+
+    print('='*20)
+    print(results.astype(int))
+    print('='*20)
+
 #--------------------------------------------
 # save and load OMAS with default saving method
 #--------------------------------------------
@@ -342,45 +378,4 @@ from omas_json import *
 
 #--------------------------------------------
 if __name__ == '__main__':
-
-    # if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):
-    #     aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
-    #
-    # create_json_structure(default_imas_version)#,['equilibrium'])
-    #
-    # create_html_documentation(default_imas_version)
-
-    print('='*20)
-
-    os.environ['OMAS_DEBUG_TOPIC']='*'
-    ods=ods_sample()
-
-    tests=['pkl','json','nc','s3','imas']
-    results=numpy.zeros((len(tests),len(tests)))
-
-    for k1,t1 in enumerate(tests):
-        failed1=False
-        try:
-            ods1=locals()['test_omas_'+t1](ods)
-        except Exception as _excp:
-            failed1=True
-        for k2,t2 in enumerate(tests):
-            try:
-                if failed1:
-                    raise
-                ods2=locals()['test_omas_'+t2](ods1)
-
-                different=different_ods(ods1,ods2)
-                if not different:
-                    print('%s - %s : OK'%(t1.ljust(5),t2.rjust(5)))
-                    results[k1,k2]=1.0
-                else:
-                    print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),different))
-                    results[k1,k2]=-1.0
-
-            except Exception as _excp:
-                print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),repr(_excp)))
-
-    print('='*20)
-    print(results.astype(int))
-    print('='*20)
+    omas_test_suite()

@@ -1,6 +1,10 @@
 Installation
 ============
 
+To install OMAS::
+
+        pip install omas
+
 To get the OMAS source::
 
         git clone git@github.com:gafusion/omas.git
