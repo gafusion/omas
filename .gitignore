@@ -19,4 +19,4 @@ docs/
 dist/
 omas.egg-info/
 
-/test*
+test*

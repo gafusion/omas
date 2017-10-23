@@ -1,7 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from omas_utils import *
-from omas import omas, save_omas_pkl, load_omas_pkl
+from omas_core import omas, save_omas_pkl, load_omas_pkl
 
 #---------------------------
 # save and load OMAS to Json
@@ -63,7 +63,7 @@ def test_omas_json(ods):
 if __name__ == '__main__':
     print('='*20)
 
-    from omas import ods_sample
+    from omas_core import ods_sample
     os.environ['OMAS_DEBUG_TOPIC']='json'
     ods=ods_sample()
 

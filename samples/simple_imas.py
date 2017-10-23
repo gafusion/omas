@@ -1,6 +1,4 @@
-
 from omas import *
-import numpy
 
 # instantiate new omas data structure (ODS)
 ods=omas()

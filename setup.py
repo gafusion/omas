@@ -28,7 +28,7 @@ setup(
     keywords='integrated modeling OMFIT IMAS ITER',
     packages=find_packages(exclude=['docs']),
 
-    install_requires=['xarray','boto3'],
+    install_requires=['netCDF4','boto3'],
 
     extras_require={
         'imas': ['imas'],

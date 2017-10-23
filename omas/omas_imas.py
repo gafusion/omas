@@ -1,7 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from omas_utils import *
-from omas import omas, save_omas_pkl, load_omas_pkl
+from omas_core import omas, save_omas_pkl, load_omas_pkl
 
 #--------------------------------------------
 # IMAS convenience functions
@@ -239,7 +239,7 @@ def test_omas_imas(ods):
 if __name__ == '__main__':
     print('='*20)
 
-    from omas import ods_sample
+    from omas_core import ods_sample
     os.environ['OMAS_DEBUG_TOPIC']='imas'
     #ods=ods_sample()
 

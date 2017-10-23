@@ -4,7 +4,7 @@ from omas_utils import *
 
 __all__=['omas_rcparams',
          'omas',              'ods_sample',        'different_ods',
-         'save_omas',         'load_omas',
+         'save_omas',         'load_omas',         'test_omas_suite',
          'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
          'save_omas_json',    'load_omas_json',    'test_omas_json',
          'save_omas_nc',      'load_omas_nc',      'test_omas_nc',
@@ -298,7 +298,7 @@ def different_ods(ods1, ods2):
             return 'DIFF: `%s` differ in value'%k
     return False
 
-def omas_test_suite():
+def test_omas_suite():
     print('='*20)
 
     os.environ['OMAS_DEBUG_TOPIC']='*'
@@ -310,14 +310,14 @@ def omas_test_suite():
     for k1,t1 in enumerate(tests):
         failed1=False
         try:
-            ods1=locals()['test_omas_'+t1](ods)
+            ods1=globals()['test_omas_'+t1](ods)
         except Exception as _excp:
             failed1=True
         for k2,t2 in enumerate(tests):
             try:
                 if failed1:
                     raise
-                ods2=locals()['test_omas_'+t2](ods1)
+                ods2=globals()['test_omas_'+t2](ods1)
 
                 different=different_ods(ods1,ods2)
                 if not different:
@@ -370,7 +370,6 @@ def load_omas(filename):
 #--------------------------------------------
 # import other omas tools and methods in this namespace
 #--------------------------------------------
-from omas_structure import *
 from omas_imas import *
 from omas_s3 import *
 from omas_nc import *
@@ -378,4 +377,4 @@ from omas_json import *
 
 #--------------------------------------------
 if __name__ == '__main__':
-    omas_test_suite()
+    test_omas_suite()
