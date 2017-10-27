@@ -9,7 +9,7 @@ if not os.path.exists(here+'MANIFEST.in'):
 
 setup(
     name='omas',
-    version='0.0.3',
+    version='0.0.4',
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
@@ -18,10 +18,11 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-#        'Programming Language :: Python :: 3',
-#        'Programming Language :: Python :: 3.3',
-#        'Programming Language :: Python :: 3.4',
-#        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     # What does your project relate to?
@@ -31,6 +32,7 @@ setup(
     install_requires=['netCDF4','boto3'],
 
     extras_require={
-        'imas': ['imas'],
+        'interface with ITER IMAS': ['imas'],
+        'build json structures': ['pandas','xlrd']
     }
 )

@@ -1,15 +1,17 @@
 from __future__ import print_function, division, unicode_literals
 
-from omas_utils import *
+from .omas_utils import *
 
 __all__=['omas_rcparams',
-         'omas',              'ods_sample',        'different_ods',
-         'save_omas',         'load_omas',         'test_omas_suite',
-         'save_omas_pkl',     'load_omas_pkl',     'test_omas_pkl',
-         'save_omas_json',    'load_omas_json',    'test_omas_json',
-         'save_omas_nc',      'load_omas_nc',      'test_omas_nc',
-         'save_omas_imas',    'load_omas_imas',    'test_omas_imas',
-         'save_omas_s3',      'load_omas_s3',      'test_omas_s3',
+         'omas',                     'ods_sample',            'different_ods',
+         'save_omas',                'load_omas',             'test_omas_suite',
+         'save_omas_pkl',            'load_omas_pkl',         'test_omas_pkl',
+         'save_omas_json',           'load_omas_json',        'test_omas_json',
+         'save_omas_nc',             'load_omas_nc',          'test_omas_nc',
+         'save_omas_imas',           'load_omas_imas',        'test_omas_imas',
+         'save_omas_s3',             'load_omas_s3',          'test_omas_s3',
+         'aggregate_imas_html_docs', 'create_json_structure', 'create_html_documentation',
+         'imas_json_dir',            'default_imas_version'
          ]
 
 def _omas_key_dict_preprocessor(key):
@@ -24,7 +26,7 @@ def _omas_key_dict_preprocessor(key):
         key=str(key)
         key=re.sub('\]','',re.sub('\[','.',key)).split('.')
     else:
-        key=map(str,key)
+        key=list(map(str,key))
     try:
         key[0]=int(key[0])
     except ValueError:
@@ -35,13 +37,13 @@ class omas(dict):
     '''
     OMAS class
     '''
-    def __new__(cls, *args, **kw):
+    def __new__(cls, consistency_check=True, *args, **kw):
         instance = dict.__new__(cls, *args, **kw)
         instance.imas_version=None
         instance.name=''
         instance.parent=None
         instance.structure={}
-        instance._consistency_check=omas_rcparams['consistency_check']
+        instance._consistency_check=consistency_check
         return instance
 
     def __init__(self, *args, **kw):
@@ -100,7 +102,7 @@ class omas(dict):
                 if item.startswith(structure_location):
                     structure[item]=self.structure[item]
             if not len(structure):
-                options=numpy.unique(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure))
+                options=numpy.unique(list(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure)))
                 if len(options)==1 and options[0]==':':
                     options='A numerical index is needed'
                 else:
@@ -170,6 +172,19 @@ class omas(dict):
             tmp['.'.join(map(str,path))]=self[path]
         return tmp
 
+    def __deepcopy__(self,memo={}):
+        if hasattr(self,'_consistency_check'):
+            _consistency_checkBKP=self._consistency_check
+        else:
+            _consistency_checkBKP=omas_rcparams['consistency_check']
+        try:
+            self.consistency_check=False
+            tmp=pickle.loads(pickle.dumps(self,pickle.HIGHEST_PROTOCOL))
+            tmp.consistency_check=_consistency_checkBKP
+        finally:
+            self.consistency_check=_consistency_checkBKP
+        return tmp
+
     def __getstate__(self):
         #switching between weak/strong reference for .parent attribute
         state = self.__dict__.copy()
@@ -182,6 +197,9 @@ class omas(dict):
         self.__dict__ = state.copy()
         if self.__dict__['parent'] is not None:
             self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
+
+    def __getnewargs__(self):
+        return (False,)
 
 #--------------------------------------------
 # save and load OMAS with Python pickle
@@ -198,7 +216,7 @@ def save_omas_pkl(ods, filename, **kw):
     '''
     printd('Saving to %s'%(filename),topic='pkl')
 
-    with open(filename,'w') as f:
+    with open(filename,'wb') as f:
         pickle.dump(ods,f,**kw)
 
 def load_omas_pkl(filename):
@@ -211,7 +229,7 @@ def load_omas_pkl(filename):
     '''
     printd('Loading from %s'%(filename),topic='pkl')
 
-    with open(filename,'r') as f:
+    with open(filename,'rb') as f:
         return pickle.load(f)
 
 def test_omas_pkl(ods):
@@ -370,10 +388,11 @@ def load_omas(filename):
 #--------------------------------------------
 # import other omas tools and methods in this namespace
 #--------------------------------------------
-from omas_imas import *
-from omas_s3 import *
-from omas_nc import *
-from omas_json import *
+from .omas_imas import *
+from .omas_s3 import *
+from .omas_nc import *
+from .omas_json import *
+from .omas_structure import *
 
 #--------------------------------------------
 if __name__ == '__main__':

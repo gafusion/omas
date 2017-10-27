@@ -8,13 +8,19 @@ import sys
 import glob
 import json
 import copy
-import pandas
 from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
 import weakref
-import cPickle as pickle
+
+#Python3/2 import differences
+if sys.version_info < (3,0):
+    import cPickle as pickle
+else:
+    basestring=str
+    unicode=str
+    import pickle
 
 #--------------------------------------------
 # rcparams
@@ -26,7 +32,7 @@ omas_rcparams={
 #--------------------------------------------
 # configuration of directories and IMAS infos
 #--------------------------------------------
-imas_json_dir=os.path.abspath(str(os.path.dirname(unicode(__file__, sys.getfilesystemencoding())))+'/imas_structures/')
+imas_json_dir=os.path.abspath(str(os.path.dirname(__file__))+'/imas_structures/')
 
 separator='.'
 

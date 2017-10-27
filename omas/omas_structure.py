@@ -1,6 +1,6 @@
 from __future__ import print_function, division, unicode_literals
 
-from omas_utils import *
+from .omas_utils import *
 
 #--------------------------------------------
 # generation of the imas structure json files
@@ -70,6 +70,7 @@ def create_json_structure(imas_version, data_structures=[]):
                              All data structures are generated if `data_structures==[]`
     '''
     #read xls file
+    import pandas
     clean=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'clean']))
     data=pandas.read_excel(clean+'.xls','Sheet1')
     data.rename(columns={'Full path name': 'full_path', 'Description':'description', 'Data Type': 'data_type', 'Coordinates':'coordinates'}, inplace=True)
@@ -85,8 +86,8 @@ def create_json_structure(imas_version, data_structures=[]):
             sections[tbl]=k
     sections[None]=len(data)
     datas={}
-    for k,(start,stop) in enumerate(zip(sections.values()[:-1],sections.values()[1:])):
-        datas[sections.keys()[k]]=data[start+2:stop].reset_index()
+    for k,(start,stop) in enumerate(zip(list(sections.values())[:-1],list(sections.values())[1:])):
+        datas[list(sections.keys())[k]]=data[start+2:stop].reset_index()
 
     #data structures
     if not len(data_structures):
@@ -117,7 +118,7 @@ def create_json_structure(imas_version, data_structures=[]):
 
             if 'obsolescent' in '\n'.join(entries[k]['full_path']):
                 basepath='\n'.join(entries[k]['full_path']).strip().split('\n')[0]
-                for k1 in entries.keys():
+                for k1 in list(entries.keys()):
                     if basepath in '\n'.join(entries[k1]['full_path']):
                         del entries[k1]
             else:
@@ -133,7 +134,7 @@ def create_json_structure(imas_version, data_structures=[]):
                         entries[k][col]=map(lambda x:re.sub(r'\)',']',x),entries[k][col])
                         entries[k][col]=map(lambda x:fix.get(x,x),entries[k][col])
                         entries[k][col]=map(lambda x:x.split(' OR ')[0],entries[k][col])
-                        entries[k][col]=map(lambda x:x.split('IDS:')[-1],entries[k][col])
+                        entries[k][col]=list(map(lambda x:x.split('IDS:')[-1],entries[k][col]))
                         for k1 in range(len(entries[k][col])):
                             if entries[k][col][k1].startswith('1...N_'):
                                 entries[k][col][k1]=re.sub('1...N_(.*)s',r'\1_index',entries[k][col][k1]).lower()
@@ -209,7 +210,7 @@ def create_json_structure(imas_version, data_structures=[]):
             del structure[key]
 
         #convert separator
-        for key in structure.keys():
+        for key in list(structure.keys()):
             for k,c in enumerate(structure[key]['coordinates']):
                 structure[key]['coordinates'][k]=re.sub('/',separator,structure[key]['coordinates'][k])
             tmp=structure[key]

@@ -1,1 +1,1 @@
-from omas_core import *
+from .omas_core import *

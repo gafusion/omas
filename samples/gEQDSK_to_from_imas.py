@@ -18,11 +18,11 @@ paths = save_omas_imas(ods, user, tokamak, version,
                        shot, run, new)
 
 # load IMAS to OMAS data structure
-ods2 = load_omas_imas(user, tokamak, version, shot,
+ods1 = load_omas_imas(user, tokamak, version, shot,
                       run, paths)
 
 #read from OMAS data structure
-eq1=OMFITgeqdsk('133221.02000').from_omas(ods2)
+eq1=OMFITgeqdsk('133221.02000').from_omas(ods1)
 
 #save gEQDSK file
 eq1.deploy()

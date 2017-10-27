@@ -1,6 +1,6 @@
 from __future__ import print_function, division, unicode_literals
 
-from omas_setup import *
+from .omas_setup import *
 
 #--------------------------
 # general utility functions
@@ -13,7 +13,7 @@ def printd(*objects, **kw):
     topic=kw.pop('topic','')
     if isinstance(topic,basestring):
         topic=[topic]
-    topic=map(lambda x:x.lower(),topic)
+    topic=list(map(lambda x:x.lower(),topic))
     objects=['DEBUG:']+list(objects)
     if os.environ.get('OMAS_DEBUG_TOPIC','') in topic or ('*' in topic and len(os.environ.get('OMAS_DEBUG_TOPIC',''))):
         print(*objects, **kw)
@@ -142,7 +142,7 @@ def remote_uri(uri, filename, up_down):
 _structures={}
 
 def list_structures(imas_version=default_imas_version):
-    return map(lambda x:os.path.splitext(os.path.split(x)[1])[0],glob.glob(imas_json_dir+os.sep+imas_version+os.sep+'*'+'.json'))
+    return list(map(lambda x:os.path.splitext(os.path.split(x)[1])[0],glob.glob(imas_json_dir+os.sep+imas_version+os.sep+'*'+'.json')))
 
 def load_structure(file, imas_version=default_imas_version):
     '''
