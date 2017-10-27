@@ -26,11 +26,10 @@
 #
 # needs_sphinx = '1.0'
 
-import os,sys,shutil
+import os,sys,shutil,glob
 import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('../../'))
-import omas
 
 shutil.copy2(os.path.abspath('../../omas/imas_structures/3.10.1/omas_doc.html'),os.path.abspath('../source/data.rst'))
 lines=open(os.path.abspath('../source/data.rst')).readlines()
@@ -39,6 +38,27 @@ with open('../source/data.rst','w') as f:
 
 ''')
     f.write(''.join(['   '+line for line in lines]))
+
+txt=''
+for _file in glob.glob(os.path.abspath('../../omas/*.py')):
+    _what=os.path.splitext(os.path.split(_file)[1])[0]
+    if _what=='__init__':
+        continue
+    txt+=('\n'+_what+'\n'+'^'*len(_what)+'\n')
+    txt+='''
+.. automodule:: omas.%s
+   :show-inheritance:
+   :members:
+   :undoc-members:
+'''%((['classes.'+_what,_what]['classes' not in _file]))
+print(txt)
+with open('code.rst','w') as f:
+    f.write('''
+========
+OMAS API
+========
+''')
+    f.write(txt)
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom

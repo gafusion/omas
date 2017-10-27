@@ -11,9 +11,11 @@ To get the OMAS source::
         cd omas
         sudo pip install -e .[build_structures]
 
-OMAS is written in pure Python, and (with limited functionality) can work out of the box without any additional Python dependencies.
+-------------------------
+Installation requirements
+-------------------------
 
-Addidional Python dependencies are required depending on the data save formats used.
+Some Python dependencies are required depending on the data save formats used:
 
 +---------------+-----------------------+
 | OMAS format   |  Python Requirements  |

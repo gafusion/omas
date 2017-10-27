@@ -46,10 +46,20 @@ help:
 
 commit: clean html
 	cp -r $(BUILDDIR)/html/* $(BUILDDIR)/../../docs
+	cd $(BUILDDIR)/../../docs; git init
+	cd $(BUILDDIR)/../../docs; git remote add origin git@github.com:gafusion/omas.git
+	cd $(BUILDDIR)/../../docs; git remote -v
+	cd $(BUILDDIR)/../../docs; git checkout -b gh-pages
+	cd $(BUILDDIR)/../../docs; git add -A
+	cd $(BUILDDIR)/../../docs; git commit -m 'rebuilt documentation'
+
+push:
+	cd $(BUILDDIR)/../../docs; git push --force --set-upstream origin gh-pages
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILDDIR)/*
+	rm -rf $(BUILDDIR)/* $(BUILDDIR)/../../docs
+	mkdir $(BUILDDIR)/../../docs
 
 .PHONY: html
 html:
