@@ -281,8 +281,11 @@ def ods_sample():
     #pprint(ods.paths())
     #pprint(ods2.paths())
 
+    ckBKP=ods.consistency_check
     tmp=pickle.dumps(ods)
     ods=pickle.loads(tmp)
+    if ods.consistency_check!=ckBKP:
+        raise(Exception('consistency_check attribute changed'))
 
     save_omas_pkl(ods,'test.pkl')
     ods=load_omas_pkl('test.pkl')

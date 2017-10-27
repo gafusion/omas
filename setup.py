@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 import glob,os
 
 here=os.path.abspath(os.path.split(__file__)[0])+os.sep
@@ -9,7 +9,7 @@ if not os.path.exists(here+'MANIFEST.in'):
 
 setup(
     name='omas',
-    version='0.0.4',
+    version='0.0.5',
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
@@ -27,12 +27,10 @@ setup(
 
     # What does your project relate to?
     keywords='integrated modeling OMFIT IMAS ITER',
-    packages=find_packages(exclude=['docs']),
-
+    packages=['omas'],
     install_requires=['netCDF4','boto3'],
-
     extras_require={
-        'interface with ITER IMAS': ['imas'],
-        'build json structures': ['pandas','xlrd']
+        'iams': ['imas'],
+        'build_structures': ['pandas','xlrd']
     }
 )

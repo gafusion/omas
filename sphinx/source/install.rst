@@ -3,11 +3,13 @@ Installation
 
 To install OMAS::
 
-        pip install omas
+        sudo pip install omas
 
 To get the OMAS source::
 
         git clone git@github.com:gafusion/omas.git
+        cd omas
+        sudo pip install -e .[build_structures]
 
 OMAS is written in pure Python, and (with limited functionality) can work out of the box without any additional Python dependencies.
 

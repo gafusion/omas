@@ -85,3 +85,16 @@ The hierarchical IMAS data model is represented in OMAS as a set of nested `omas
    * S3: the cloud using Amazon Simple Storage Service  
 
    * IMAS: ITER data storage system
+
+## Installation
+
+* Users typical installation:
+  ```python
+  sudo pip install omas
+  ```
+* Developers installation
+  ```python
+  git clone git@github.com:gafusion/omas.git
+  cd omas                                   
+  sudo pip install -e .[build_structures]   
+  ```
