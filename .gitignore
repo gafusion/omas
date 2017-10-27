@@ -15,6 +15,7 @@ omas/imas_structures/*/*.json
 sphinx/build/
 sphinx/source/data.rst
 sphinx/source/code.rst
+sphinx/source/schema/
 
 docs/
 dist/

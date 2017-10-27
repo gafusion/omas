@@ -229,25 +229,26 @@ def create_json_structure(imas_version, data_structures=[]):
 def create_html_documentation(imas_version):
     filename=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'omas_doc.html']))
 
-    rows={}
+    table_header="<table border=1, width='100%'>"
+    sub_table_header="<tr><th>OMAS name</th><th>OMAS dimensions</th><th>Type</th><th>Description</th></tr>"
+
+    lines=[]
     for structure_file in list_structures():
         print('Adding to html documentation: '+os.path.splitext(os.path.split(structure_file)[1])[0])
         structure=load_structure(structure_file)
-        for item in structure:
+        lines.append('<!-- %s -->'%structure_file)
+        lines.append(table_header)
+        lines.append(sub_table_header)
+        for item in sorted(structure):
             if not any([ item.endswith(k) for k in ['_error_index','_error_lower','_error_upper']]):
-                rows[item]="<tr><td><p>{item}</p></td><td><p>{coordinates}</p></td><td><p>{data_type}</p></td><td><p>{description}</p></td></tr>".format(
+                lines.append("<tr><td><p>{item}</p></td><td><p>{coordinates}</p></td><td><p>{data_type}</p></td><td><p>{description}</p></td></tr>".format(
                     item=item,
                     coordinates=re.sub('\[\]','',re.sub('[\'\"]','',re.sub(',',',<br>',str(map(str,structure[item]['coordinates']))))),
                     description=structure[item]['description'],
                     data_type=structure[item]['data_type']
-                )
-
-    lines=[]
-    lines.append("<table border=1, width='100%'>")
-    lines.append("<tr><th>OMAS name</th><th>OMAS dimensions</th><th>Type</th><th>Description</th></tr>")
-    for row in sorted(rows.keys()):
-        lines.append(rows[row])
-    lines.append('</table>')
+                ))
+        lines.append('</table>')
+        lines.append('</table><p></p>')
 
     with open(filename,'w') as f:
         f.write('\n'.join(lines))

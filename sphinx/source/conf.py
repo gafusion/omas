@@ -26,18 +26,35 @@
 #
 # needs_sphinx = '1.0'
 
-import os,sys,shutil,glob
+import os,sys,shutil,glob,re
 import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('../../'))
 
+if os.path.exists('../source/schema/'):
+    shutil.rmtree('../source/schema/')
+os.makedirs('../source/schema/')
 shutil.copy2(os.path.abspath('../../omas/imas_structures/3.10.1/omas_doc.html'),os.path.abspath('../source/data.rst'))
 lines=open(os.path.abspath('../source/data.rst')).readlines()
-with open('../source/data.rst','w') as f:
-    f.write('''.. raw:: html
 
+f=None
+for k,line in enumerate(lines):
+    if '<!-- ' in line:
+        sub=re.sub('_',' ',re.sub('<!-- (.*) -->',r'\1',line).strip())
+        lines[k]='\n%s\n%s\n\n.. raw:: html\n\n'%(sub,'^'*len(sub)+'')
+        if f is not None:
+            f.close()
+        f=open('../source/schema/schema_%s.rst'%sub,'w')
+    else:
+        lines[k]='   '+lines[k]
+    f.write(lines[k])
+
+with open('../source/schema/whole_schema.rst','w') as f:
+    f.write('''
+complete schema
+===============
 ''')
-    f.write(''.join(['   '+line for line in lines]))
+    f.write(''.join(lines))
 
 txt=''
 for _file in glob.glob(os.path.abspath('../../omas/*.py')):
@@ -175,10 +192,10 @@ html_theme_options = {
     # Note the "1" or "True" value above as the third argument to indicate
     # an arbitrary url.
     'navbar_links': [#("Research", "publications"),
-                     ("Sample", "usage"),
-                     ("Idea", "how"),
+                     ("Concept", "how"),
+                     ("Example", "usage"),
                      ("Installation", "install"),
-                     ("Data","data"),
+                     ("Data schema","schema"),
                      ("API","code"),
                      #("Team", "contributors"),
                      #("Social", "social"),

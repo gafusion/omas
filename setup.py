@@ -1,6 +1,7 @@
 from setuptools import setup
 import glob,os
 
+#add .json IMAS structure files to the package
 here=os.path.abspath(os.path.split(__file__)[0])+os.sep
 if not os.path.exists(here+'MANIFEST.in'):
     with open(here+os.sep+'MANIFEST.in','w') as f:

@@ -1,6 +1,8 @@
 Installation
 ============
 
+The OMAS library runs on Python2 and Python3
+
 To install OMAS::
 
         sudo pip install omas
