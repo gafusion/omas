@@ -29,7 +29,7 @@ setup(
     # What does your project relate to?
     keywords='integrated modeling OMFIT IMAS ITER',
     packages=['omas'],
-    install_requires=['netCDF4','boto3'],
+    install_requires=['numpy','netCDF4','boto3'],
     extras_require={
         'iams': ['imas'],
         'build_structures': ['pandas','xlrd']

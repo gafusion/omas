@@ -78,7 +78,7 @@ def json_loader(object_pairs, cls=dict):
         return complex(dct['real'],dct['imag'])
     return dct
 
-def credentials(system):
+def _credentials(system):
     c={}
     c['s3']={}
     c['s3']['region_name']='us-east-1'
@@ -107,7 +107,7 @@ def remote_uri(uri, filename, up_down):
     if system=='s3':
         import boto3
         s3bucket=location.split('/')[0]
-        s3connection = boto3.resource('s3',**credentials('s3'))
+        s3connection = boto3.resource('s3',**_credentials('s3'))
         s3filename='/'.join(location.split('/')[1:])
 
         if up_down=='down':

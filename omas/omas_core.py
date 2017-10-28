@@ -49,6 +49,8 @@ class omas(dict):
     def __init__(self, *args, **kw):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
+
+        :param consistency_check: whether to enforce consistency with IMAS schema
         '''
         imas_version=kw.pop('imas_version',None)
         if imas_version is None:
@@ -57,6 +59,11 @@ class omas(dict):
 
     @property
     def consistency_check(self):
+        '''
+        property that sets whether consistency with IMAS schema is enabled or not
+
+        :return: True/False
+        '''
         return self._consistency_check
 
     @consistency_check.setter
@@ -68,6 +75,11 @@ class omas(dict):
 
     @property
     def location(self):
+        '''
+        property that returns the path in the IMAS schema
+
+        :return: string with location of current object
+        '''
         h=self
         location=''
         if not hasattr(h,'name'):

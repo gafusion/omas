@@ -31,6 +31,39 @@ import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('../../'))
 
+
+#==============
+# usage
+#==============
+samples={}
+for file in glob.glob(os.path.abspath('../../samples/*.py')):
+    what=os.path.splitext(os.path.split(file)[1])[0]
+    samples[what]='.. code-block:: python\n\n    '+'    '.join(open(file).readlines())
+
+with open('../source/usage.rst','w') as f:
+    f.write(
+'''
+Basic usage
+===========
+
+{simple_imas}
+
+Save and load OMAS data in different formats
+============================================
+
+{save_load_through}
+
+Usage with OMFIT classes
+========================
+Some classes of the `OMFIT framework <http://gafusion.github.io/OMFIT-source/>`_ support OMAS
+
+{geqdsk_to_from_imas}
+
+'''.format(**samples))
+
+#==============
+# SCHEMA
+#==============
 if os.path.exists('../source/schema/'):
     shutil.rmtree('../source/schema/')
 os.makedirs('../source/schema/')
@@ -56,20 +89,23 @@ complete schema
 ''')
     f.write(''.join(lines))
 
+#==============
+# API
+#==============
 txt=''
-for _file in glob.glob(os.path.abspath('../../omas/*.py')):
-    _what=os.path.splitext(os.path.split(_file)[1])[0]
-    if _what=='__init__':
+for file in glob.glob(os.path.abspath('../../omas/*.py')):
+    what=os.path.splitext(os.path.split(file)[1])[0]
+    if what in ['__init__','omas_setup']:
         continue
-    txt+=('\n'+_what+'\n'+'^'*len(_what)+'\n')
+    txt+=('\n'+what+'\n'+'^'*len(what)+'\n')
     txt+='''
 .. automodule:: omas.%s
    :show-inheritance:
    :members:
    :undoc-members:
-'''%((['classes.'+_what,_what]['classes' not in _file]))
+'''%((['classes.'+what,what]['classes' not in file]))
 print(txt)
-with open('code.rst','w') as f:
+with open('../source/code.rst','w') as f:
     f.write('''
 ========
 OMAS API
