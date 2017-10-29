@@ -50,6 +50,7 @@ commit: clean html
 	cd $(BUILDDIR)/../../docs; git remote add origin git@github.com:gafusion/omas.git
 	cd $(BUILDDIR)/../../docs; git remote -v
 	cd $(BUILDDIR)/../../docs; git checkout -b gh-pages
+	cd $(BUILDDIR)/../../docs; touch .nojekyll
 	cd $(BUILDDIR)/../../docs; git add -A
 	cd $(BUILDDIR)/../../docs; git commit -m 'rebuilt documentation'
 
