@@ -31,7 +31,6 @@ import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('../../'))
 
-
 #==============
 # usage
 #==============
@@ -205,7 +204,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = 'bootstrap'
@@ -279,10 +277,9 @@ html_theme_options = {
     'bootswatch_theme': "simplex",
 
     # Choose Bootstrap version.
-    # Values: "3" (default) or "2" (in quotes)
+    # Values: "4" or "3" or "2"
     'bootstrap_version': "3",
 }
-
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()

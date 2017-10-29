@@ -44,26 +44,24 @@ help:
 	@echo "  coverage   to run coverage check of the documentation (if enabled)"
 	@echo "  dummy      to check syntax errors of document sources"
 
-commit: clean html
-	cp -r $(BUILDDIR)/html/* $(BUILDDIR)/../../docs
-	cd $(BUILDDIR)/../../docs; git init
-	cd $(BUILDDIR)/../../docs; git remote add origin git@github.com:gafusion/omas.git
-	cd $(BUILDDIR)/../../docs; git remote -v
-	cd $(BUILDDIR)/../../docs; git checkout -b gh-pages
-	cd $(BUILDDIR)/../../docs; touch .nojekyll
-	cd $(BUILDDIR)/../../docs; git add -A
-	cd $(BUILDDIR)/../../docs; git commit -m 'rebuilt documentation'
+commit:
+	cd $(BUILDDIR)/html; git init
+	cd $(BUILDDIR)/html; git remote add origin git@github.com:gafusion/omas.git
+	cd $(BUILDDIR)/html; git remote -v
+	cd $(BUILDDIR)/html; git checkout -b gh-pages
+	cd $(BUILDDIR)/html; touch .nojekyll
+	cd $(BUILDDIR)/html; git add -A
+	cd $(BUILDDIR)/html; git commit -m 'rebuilt documentation'
 
 push:
-	cd $(BUILDDIR)/../../docs; git push --force --set-upstream origin gh-pages
+	cd $(BUILDDIR)/html; git push --force --set-upstream origin gh-pages
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILDDIR)/* $(BUILDDIR)/../../docs
-	mkdir $(BUILDDIR)/../../docs
+	rm -rf $(BUILDDIR)/*
 
 .PHONY: html
-html:
+html: clean
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
