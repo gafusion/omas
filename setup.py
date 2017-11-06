@@ -31,7 +31,7 @@ setup(
     packages=['omas'],
     install_requires=['numpy','netCDF4','boto3'],
     extras_require={
-        'iams': ['imas'],
+        'imas': ['imas'],
         'build_structures': ['pandas','xlrd']
     }
 )
