@@ -142,7 +142,7 @@ def remote_uri(uri, filename, up_down):
 _structures={}
 
 def list_structures(imas_version=default_imas_version):
-    return list(map(lambda x:os.path.splitext(os.path.split(x)[1])[0],glob.glob(imas_json_dir+os.sep+imas_version+os.sep+'*'+'.json')))
+    return list(map(lambda x:os.path.splitext(os.path.split(x)[1])[0],glob.glob(imas_json_dir+os.sep+re.sub('\.','_',imas_version)+os.sep+'*'+'.json')))
 
 def load_structure(file, imas_version=default_imas_version):
     '''
@@ -153,7 +153,7 @@ def load_structure(file, imas_version=default_imas_version):
     :return: tuple with structure, hashing mapper, and ods
     '''
     if os.sep not in file:
-        filename=imas_json_dir+os.sep+imas_version+os.sep+file+'.json'
+        filename=imas_json_dir+os.sep+re.sub('\.','_',imas_version)+os.sep+file+'.json'
         if not os.path.exists(filename):
             raise(Exception('`%s` is not a valid IMAS structure'%file))
         else:

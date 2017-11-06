@@ -3,14 +3,10 @@ import glob,os
 
 #add .json IMAS structure files to the package
 here=os.path.abspath(os.path.split(__file__)[0])+os.sep
-if not os.path.exists(here+'MANIFEST.in'):
-    with open(here+os.sep+'MANIFEST.in','w') as f:
-        for item in glob.glob(here+'omas'+os.sep+'imas_structures'+os.sep+'*'+os.sep+'*.json'):
-            f.write('include '+os.path.abspath(item)[len(here):]+'\n')
 
 setup(
     name='omas',
-    version='0.0.5',
+    version='0.0.1',
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
@@ -28,7 +24,10 @@ setup(
 
     # What does your project relate to?
     keywords='integrated modeling OMFIT IMAS ITER',
-    packages=['omas'],
+    packages=['omas','omas.imas_structures.3_10_1'],
+    package_data={
+        'omas.imas_structures.3_10_1': ['*.json'],
+    },
     install_requires=['numpy','netCDF4','boto3'],
     extras_require={
         'imas': ['imas'],

@@ -21,6 +21,10 @@ def aggregate_imas_html_docs(imas_html_dir, imas_version):
 
     :param imas_version: IMAS version
     '''
+    if os.path.exists(os.sep.join([imas_json_dir,re.sub('\.','_',default_imas_version),'clean.xls'])):
+        print(os.sep.join([imas_json_dir,re.sub('\.','_',default_imas_version),'clean.xls'])+' exists -- skipped aggregate_imas_html_docs step')
+        return
+
     from bs4 import BeautifulSoup
 
     files=glob.glob(imas_html_dir+'/*.html')
@@ -37,9 +41,9 @@ def aggregate_imas_html_docs(imas_html_dir, imas_version):
         tables.append( line%('---BREAK---',os.path.splitext(os.path.split(file)[1])[0],'','') )
         tables.append( soup.table.prettify() )
 
-    if not os.path.exists(imas_json_dir+os.sep+imas_version):
-        os.makedirs(imas_json_dir+os.sep+imas_version)
-    clean=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'clean']))
+    if not os.path.exists(imas_json_dir+os.sep+re.sub('\.','_',imas_version)):
+        os.makedirs(imas_json_dir+os.sep+re.sub('\.','_',imas_version))
+    clean=os.path.abspath(os.sep.join([imas_json_dir,re.sub('\.','_',imas_version),'clean']))
     open(clean+'.html','w').write( '\n\n\n'.join(tables).encode('utf-8').decode('ascii',errors='ignore') )
 
     print('')
@@ -71,7 +75,7 @@ def create_json_structure(imas_version, data_structures=[]):
     '''
     #read xls file
     import pandas
-    clean=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'clean']))
+    clean=os.path.abspath(os.sep.join([imas_json_dir,re.sub('\.','_',imas_version),'clean']))
     data=pandas.read_excel(clean+'.xls','Sheet1')
     data.rename(columns={'Full path name': 'full_path', 'Description':'description', 'Data Type': 'data_type', 'Coordinates':'coordinates'}, inplace=True)
 
@@ -224,10 +228,10 @@ def create_json_structure(imas_version, data_structures=[]):
         #deploy imas structures as json
         #pprint(structure)
         json_string=json.dumps(structure, default=json_dumper, indent=1, separators=(',',': '))
-        open(imas_json_dir+os.sep+imas_version+os.sep+section+'.json','w').write(json_string)
+        open(imas_json_dir+os.sep+re.sub('\.','_',imas_version)+os.sep+section+'.json','w').write(json_string)
 
 def create_html_documentation(imas_version):
-    filename=os.path.abspath(os.sep.join([imas_json_dir,imas_version,'omas_doc.html']))
+    filename=os.path.abspath(os.sep.join([imas_json_dir,re.sub('\.','_',imas_version),'omas_doc.html']))
 
     table_header="<table border=1, width='100%'>"
     sub_table_header="<tr><th>OMAS name</th><th>OMAS dimensions</th><th>Type</th><th>Description</th></tr>"
@@ -262,8 +266,7 @@ default_imas_html_dir=os.path.abspath(default_imas_html_dir)
 
 if __name__ == '__main__' and os.path.exists(default_imas_html_dir):
 
-    if not os.path.exists(os.sep.join([imas_json_dir,default_imas_version,'clean.xls'])):
-        aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
+    aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
 
     create_json_structure(default_imas_version)#,['equilibrium'])
 

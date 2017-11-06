@@ -55,7 +55,7 @@ class omas(dict):
         imas_version=kw.pop('imas_version',None)
         if imas_version is None:
             imas_version=os.path.split(sorted(glob.glob(imas_json_dir+os.sep+'*'))[-1])[-1]
-        self.imas_version=imas_version
+        self.imas_version=re.sub('_','.',imas_version)
 
     @property
     def consistency_check(self):
