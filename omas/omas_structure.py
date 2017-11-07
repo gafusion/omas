@@ -118,6 +118,10 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
                   'coordinates':numpy.atleast_2d(add_datastructures[k])[:,3].tolist(),
                   }
 
+    #cleanup old files
+    for file in glob.glob(imas_json_dir+os.sep+re.sub('\.','_',imas_version)+os.sep+'*.json'):
+        os.remove(file)
+
     #loop over the data structures
     structures={}
     for section in sorted(data_structures):
