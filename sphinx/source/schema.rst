@@ -1,3 +1,6 @@
+IMAS & OMAS data schema
+=======================
+
 OMAS enforces compliance with the ITER IMAS data schema
 
 The complete ITER IMAS data schema can be browsed here in a single page:

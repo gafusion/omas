@@ -66,8 +66,7 @@ Some classes of the `OMFIT framework <http://gafusion.github.io/OMFIT-source/>`_
 if os.path.exists('../source/schema/'):
     shutil.rmtree('../source/schema/')
 os.makedirs('../source/schema/')
-shutil.copy2(os.path.abspath('../../omas/imas_structures/3.10.1/omas_doc.html'),os.path.abspath('../source/data.rst'))
-lines=open(os.path.abspath('../source/data.rst')).readlines()
+lines=open(os.path.abspath('../../omas/imas_structures/3_10_1/omas_doc.html')).readlines()
 
 f=None
 for k,line in enumerate(lines):
