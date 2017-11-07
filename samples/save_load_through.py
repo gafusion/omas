@@ -26,12 +26,12 @@ ods = load_omas_s3(filename)
 # save/load IMAS
 user = os.environ['USER']
 tokamak = 'D3D'
-version = os.environ.get('IMAS_VERSION','3.10.1')
+imas_version = os.environ.get('IMAS_VERSION','3.10.1')
 shot = 1
 run = 0
 new = True
-paths = save_omas_imas(ods,  user, tokamak, version, shot, run, new)
-ods_end = load_omas_imas(user, tokamak, version, shot, run, paths)
+paths = save_omas_imas(ods,  user, tokamak, imas_version, shot, run, new)
+ods_end = load_omas_imas(user, tokamak, imas_version, shot, run, paths)
 
 # check data
 if not different_ods(ods_start, ods_end):

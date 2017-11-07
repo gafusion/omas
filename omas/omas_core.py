@@ -266,6 +266,9 @@ def ods_sample():
     :return:
     '''
     ods=omas()
+
+    ods['info.shot']=133221
+
     ods['equilibrium']['time_slice'][0]['time']=1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5
 

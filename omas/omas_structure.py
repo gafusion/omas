@@ -3,9 +3,18 @@ from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 
 #--------------------------------------------
+# get location of HTML IMAS documentation
+#----------------------------------------------
+if 'IMAS_PREFIX' in os.environ:
+    default_imas_html_dir=os.environ['IMAS_PREFIX']+'/share/doc/imas/'
+else:
+    default_imas_html_dir='/Users/meneghini/tmp/imas'
+default_imas_html_dir=os.path.abspath(default_imas_html_dir)
+
+#--------------------------------------------
 # generation of the imas structure json files
 #--------------------------------------------
-def aggregate_imas_html_docs(imas_html_dir, imas_version):
+def aggregate_imas_html_docs(imas_html_dir=default_imas_html_dir, imas_version=default_imas_version):
     '''
     this function aggregates all of the IMAS html documentation pages
     into a single clean.html page that is stored under the imas_structures folder.
@@ -52,17 +61,21 @@ def aggregate_imas_html_docs(imas_html_dir, imas_version):
     print('2. un-merge all cells in EXCEL')
     print('3. save excel document as %s'%(clean+'.xls'))
 
+# dictionary with things to fix in IMAS release
 fix={}
-fix['ic/surface_current/n_pol']='ic/surface_current/n_tor'
-fix['waveform/value.time']='waveform/time'
-fix['unit/beamlets_group/beamlets/positions/R']='unit/beamlets_group/beamlets/positions/r'
-fix['grid/rho_tor_norm']='distribution/profiles_1d/grid/rho_tor_norm'
-fix['distribution/grid/rho_tor_norm']='distribution/profiles_1d/grid/rho_tor_norm'
-fix['distribution/profiles_2d/grid/grid/rho_tor_norm']='distribution/profiles_1d/grid/rho_tor_norm'
-fix['grid/theta_straight']='distribution/profiles_2d/grid/theta_straight'
-fix['distribution/profiles_2d/grid/grid/grid/theta_straight']='distribution/profiles_2d/grid/theta_straight'
+# fix['ic[:]/surface_current[:]/n_pol']='ic[:]/surface_current[:]/n_tor'
 
-def create_json_structure(imas_version, data_structures=[]):
+#additional data structures (NOTE:info information carries shot/run/version/tokamak/user info through different save formats)
+add_datastructures={}
+add_datastructures['info']=[
+    ['shot',          'shot number',  'INT_0D', ''],
+    ['run',           'run number',   'INT_0D', ''],
+    ['imas_version',  'imas version', 'STR_0D', ''],
+    ['tokamak',       'tokamak name', 'STR_0D', ''],
+    ['user',          'user name',    'STR_0D', ''],
+]
+
+def create_json_structure(imas_version=default_imas_version, data_structures=[]):
     '''
     This function generates the OMAS structures .json files
     after the clean.xml file is been manually generated.
@@ -95,11 +108,19 @@ def create_json_structure(imas_version, data_structures=[]):
 
     #data structures
     if not len(data_structures):
-        data_structures=sorted(datas.keys())
+        data_structures=datas.keys()
+
+    for k in add_datastructures:
+        data_structures.append(k)
+        datas[k]={'full_path'  :numpy.atleast_2d(add_datastructures[k])[:,0].tolist(),
+                  'description':numpy.atleast_2d(add_datastructures[k])[:,1].tolist(),
+                  'data_type'  :numpy.atleast_2d(add_datastructures[k])[:,2].tolist(),
+                  'coordinates':numpy.atleast_2d(add_datastructures[k])[:,3].tolist(),
+                  }
 
     #loop over the data structures
     structures={}
-    for section in data_structures:
+    for section in sorted(data_structures):
         print('- %s'%section)
         data=datas[section]
         structure=structures[section]={}
@@ -142,6 +163,7 @@ def create_json_structure(imas_version, data_structures=[]):
                         for k1 in range(len(entries[k][col])):
                             if entries[k][col][k1].startswith('1...N_'):
                                 entries[k][col][k1]=re.sub('1...N_(.*)s',r'\1_index',entries[k][col][k1]).lower()
+                        entries[k][col]=filter(None,entries[k][col])
                     elif col=='data_type':
                         entries[k][col]='\n'.join(entries[k][col])
                         if entries[k][col]=='int_type':
@@ -196,7 +218,7 @@ def create_json_structure(imas_version, data_structures=[]):
                 elif re.sub(r'\[:\]$','',c)+'[:]' in structure:
                     pass
                 else:
-                    print('  %s not defined -- adding'%c)
+                    printe('  %s -- missing dimension in %s.%s'%(c,section,key))
                     base_coords.append(c)
                     structure[c]={}
                     structure[c]['description']='imas missing dimension'
@@ -230,11 +252,11 @@ def create_json_structure(imas_version, data_structures=[]):
         json_string=json.dumps(structure, default=json_dumper, indent=1, separators=(',',': '))
         open(imas_json_dir+os.sep+re.sub('\.','_',imas_version)+os.sep+section+'.json','w').write(json_string)
 
-def create_html_documentation(imas_version):
+def create_html_documentation(imas_version=default_imas_version):
     filename=os.path.abspath(os.sep.join([imas_json_dir,re.sub('\.','_',imas_version),'omas_doc.html']))
 
     table_header="<table border=1, width='100%'>"
-    sub_table_header="<tr><th>OMAS name</th><th>OMAS dimensions</th><th>Type</th><th>Description</th></tr>"
+    sub_table_header="<tr><th>Path</th><th>Dimensions</th><th>Type</th><th>Description</th></tr>"
 
     lines=[]
     for structure_file in list_structures():
@@ -256,18 +278,3 @@ def create_html_documentation(imas_version):
 
     with open(filename,'w') as f:
         f.write('\n'.join(lines))
-
-#----------------------------------------------
-if 'IMAS_PREFIX' in os.environ:
-    default_imas_html_dir=os.environ['IMAS_PREFIX']+'/share/doc/imas/'
-else:
-    default_imas_html_dir='/Users/meneghini/tmp/imas'
-default_imas_html_dir=os.path.abspath(default_imas_html_dir)
-
-if __name__ == '__main__' and os.path.exists(default_imas_html_dir):
-
-    aggregate_imas_html_docs(default_imas_html_dir, default_imas_version)
-
-    create_json_structure(default_imas_version)#,['equilibrium'])
-
-    create_html_documentation(default_imas_version)

@@ -6,7 +6,7 @@ from .omas_core import omas, save_omas_pkl, load_omas_pkl
 #--------------------------------------------
 # IMAS convenience functions
 #--------------------------------------------
-def imas_open(user, tokamak, version, shot, run, new=False):
+def imas_open(user, tokamak, imas_version, shot, run, new=False):
     '''
     function to open an IMAS
 
@@ -14,7 +14,7 @@ def imas_open(user, tokamak, version, shot, run, new=False):
 
     :param tokamak: IMAS tokamak
 
-    :param version: IMAS tokamak version
+    :param imas_version: IMAS version
 
     :param shot: IMAS shot
 
@@ -29,11 +29,11 @@ def imas_open(user, tokamak, version, shot, run, new=False):
     ids.setShot(shot)
     ids.setRun(run)
     if new:
-        ids.create_env(user,tokamak,version)
+        ids.create_env(user,tokamak,imas_version)
     else:
-        ids.open_env(user,tokamak,version)
+        ids.open_env(user,tokamak,imas_version)
     if not ids.isConnected():
-        raise(Exception('Failed to establish connection to IMAS database (user:%s tokamak:%s version:%s shot:%s run:%s)'%(user,tokamak,version,shot,run)))
+        raise(Exception('Failed to establish connection to IMAS database (user:%s tokamak:%s imas_version:%s shot:%s run:%s)'%(user,tokamak,imas_version,shot,run)))
     return ids
 
 def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
@@ -156,32 +156,43 @@ def imas_get(ids, path, skipMissingNodes=False):
 #--------------------------------------------
 # save and load OMAS to IMAS
 #--------------------------------------------
-def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
+def save_omas_imas(ods, user=None, tokamak=None, imas_version=None, shot=None, run=None, new=False):
     '''
     save OMAS data set to IMAS
 
     :param ods: OMAS data set
 
-    :param user: IMAS username
+    :param user: IMAS username (reads ods['info.user'] if user is None)
 
-    :param tokamak: IMAS tokamak
+    :param tokamak: IMAS tokamak (reads ods['info.tokamak'] if tokamak is None)
 
-    :param version: IMAS tokamak version
+    :param imas_version: IMAS version (reads ods['info.imas_version'] if imas_version is None)
 
-    :param shot: IMAS shot
+    :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
 
-    :param run: IMAS run id
+    :param run: IMAS run (reads ods['info.run'] if run is None)
 
     :param new: whether the open should create a new IMAS tree
 
-    :return: patsh that have been written to IMAS
+    :return: paths that have been written to IMAS
     '''
 
-    printd('Saving to IMAS: %s %s %s %d %d'%(user, tokamak, version, shot, run),topic='imas')
+    if user is None:
+        user=ods['info.user']
+    if tokamak is None:
+        tokamak=ods['info.tokamak']
+    if imas_version is None:
+        imas_version=ods['info.imas_version']
+    if shot is None:
+        shot=ods['info.shot']
+    if run is None:
+        run=ods['info.run']
+
+    printd('Saving to IMAS: %s %s %s %d %d'%(user, tokamak, imas_version, shot, run),topic='imas')
 
     paths=ods.paths()
 
-    ids=imas_open(user, tokamak, version, shot, run, new)
+    ids=imas_open(user, tokamak, imas_version, shot, run, new)
 
     set_paths=[]
     for path in paths:
@@ -200,10 +211,10 @@ def save_omas_imas(ods, user, tokamak, version, shot, run, new=False):
         imas_set(ids,path,ods[path],True)
     return set_paths
 
-def load_omas_imas(user, tokamak, version, shot, run, paths):
-    printd('Loading from IMAS: %s %s %s %d %d'%(user, tokamak, version, shot, run),topic='imas')
+def load_omas_imas(user, tokamak, imas_version, shot, run, paths):
+    printd('Loading from IMAS: %s %s %s %d %d'%(user, tokamak, imas_version, shot, run),topic='imas')
 
-    ids=imas_open(user,tokamak,version,shot,run)
+    ids=imas_open(user,tokamak,imas_version,shot,run)
 
     ods=omas()
     for path in paths:
@@ -212,6 +223,12 @@ def load_omas_imas(user, tokamak, version, shot, run, paths):
         for step in path[:-1]:
             h=h[step]
         h[path[-1]]=data
+
+    ods['info.shot']=shot
+    ods['info.run']=run
+    ods['info.imas_version']=imas_version
+    ods['info.tokamak']=tokamak
+    ods['info.user']=user
 
     return ods
 
@@ -225,13 +242,13 @@ def test_omas_imas(ods):
     '''
     user=os.environ['USER']
     tokamak='D3D'
-    version=os.environ.get('IMAS_VERSION','3.10.1')
+    imas_version=os.environ.get('IMAS_VERSION','3.10.1')
     shot=1
     run=0
 
     paths=ods.paths()
-    paths=save_omas_imas(ods,user,tokamak,version,shot,run)#,True)
-    ods1=load_omas_imas(user,tokamak,version,shot,run,paths)
+    paths=save_omas_imas(ods,user,tokamak,imas_version,shot,run)#,True)
+    ods1=load_omas_imas(user,tokamak,imas_version,shot,run,paths)
 #    equal_ods(ods,ods1)
     return ods1
 
@@ -249,8 +266,8 @@ if __name__ == '__main__':
 
     user=os.environ['USER']
     tokamak='D3D'
-    version=os.environ.get('IMAS_VERSION','3.10.1')
+    imas_version=os.environ.get('IMAS_VERSION','3.10.1')
     shot=1
     run=0
 
-    save_omas_imas(ods,user,tokamak,version,shot,run)
+    save_omas_imas(ods,user,tokamak,imas_version,shot,run)

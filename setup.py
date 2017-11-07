@@ -6,7 +6,7 @@ here=os.path.abspath(os.path.split(__file__)[0])+os.sep
 
 setup(
     name='omas',
-    version='0.0.1',
+    version='0.1.1',
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',

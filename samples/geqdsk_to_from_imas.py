@@ -10,15 +10,15 @@ ods=eq.to_omas()
 # save OMAS data structure to IMAS
 user = os.environ['USER']
 tokamak = 'D3D'
-version = os.environ.get('IMAS_VERSION','3.10.1')
+imas_version = os.environ.get('IMAS_VERSION','3.10.1')
 shot = 1
 run = 0
 new = True
-paths = save_omas_imas(ods, user, tokamak, version,
+paths = save_omas_imas(ods, user, tokamak, imas_version,
                        shot, run, new)
 
 # load IMAS to OMAS data structure
-ods1 = load_omas_imas(user, tokamak, version, shot,
+ods1 = load_omas_imas(user, tokamak, imas_version, shot,
                       run, paths)
 
 #read from OMAS data structure
