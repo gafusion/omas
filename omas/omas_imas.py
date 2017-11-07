@@ -59,12 +59,14 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     ds=path[0]
     path=path[1:]
 
+    if ds=='info':
+        return
     if hasattr(ids,ds):
         m=getattr(ids,ds)
     elif skipMissingNodes is not False:
         if skipMissingNodes is None:
             printe('WARNING: %s is not part of IMAS structure'%o2i([ds]+path))
-        return None
+        return
     else:
         raise(AttributeError('%s is not part of IMAS structure'%o2i([ds]+path)))
     m.setExpIdx(0)

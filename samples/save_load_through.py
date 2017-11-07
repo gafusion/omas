@@ -34,5 +34,8 @@ paths = save_omas_imas(ods,  user, tokamak, imas_version, shot, run, new)
 ods_end = load_omas_imas(user, tokamak, imas_version, shot, run, paths)
 
 # check data
-if not different_ods(ods_start, ods_end):
-   print('OMAS data got saved to and loaded correctly throughout')
+check=different_ods(ods, ods1)
+if not check:
+   print('OMAS data got saved and loaded correctly throughout')
+else:
+   print(check)

@@ -43,7 +43,16 @@ def load_omas_nc(filename):
     ods=omas()
     with Dataset(filename,'r') as dataset:
         for item in dataset.variables:
-            ods[item]=numpy.array(dataset.variables[item])
+            if dataset.variables[item].shape:
+                #arrays
+                ods[item]=numpy.array(dataset.variables[item])
+            else:
+                try:
+                    #scalars
+                    ods[item]=numpy.asscalar(dataset.variables[item][0])
+                except AttributeError:
+                    #strings
+                    ods[item]=dataset.variables[item][0]
     return ods
 
 def test_omas_nc(ods):
@@ -58,13 +67,3 @@ def test_omas_nc(ods):
     save_omas_nc(ods,filename)
     ods1=load_omas_nc(filename)
     return ods1
-
-#--------------------------------------------
-if __name__ == '__main__':
-    print('='*20)
-
-    from omas import ods_sample
-    os.environ['OMAS_DEBUG_TOPIC']='nc'
-    ods=ods_sample()
-
-    ods1=test_omas_nc(ods)
