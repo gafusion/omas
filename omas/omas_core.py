@@ -382,14 +382,14 @@ def test_omas_suite(test_type=None):
 
                     different=different_ods(ods1,ods2)
                     if not different:
-                        print('%s - %s : OK'%(t1.ljust(5),t2.rjust(5)))
+                        print('FROM %s TO %s : OK'%(t1.center(5),t2.center(5)))
                         results[k1,k2]=1.0
                     else:
-                        print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),different))
+                        print('FROM %s TO %s : NO --> %s'%(t1.center(5),t2.center(5),different))
                         results[k1,k2]=-1.0
 
                 except Exception as _excp:
-                    print('%s - %s : NO --> %s'%(t1.ljust(5),t2.rjust(5),repr(_excp)))
+                    print('FROM %s TO %s : NO --> %s'%(t1.center(5),t2.center(5),repr(_excp)))
 
         print('='*20)
         print(results.astype(int))
