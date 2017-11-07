@@ -269,9 +269,9 @@ def ods_sample():
 
     ods['info.user']=unicode(os.environ['USER'])
     ods['info.tokamak']='ITER'
-    ods['info.imas_version']=os.environ.get('IMAS_VERSION','3.10.1')
+    ods['info.imas_version']=unicode(os.environ.get('IMAS_VERSION','3.10.1'))
     ods['info.shot']=1
-    ods['info.run']=1
+    ods['info.run']=0
 
     ods['equilibrium']['time_slice'][0]['time']=1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip']=1.5

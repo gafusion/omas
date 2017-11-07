@@ -25,7 +25,7 @@ ods = load_omas_s3(filename)
 
 # save/load IMAS
 user = os.environ['USER']
-tokamak = 'D3D'
+tokamak = 'ITER'
 imas_version = os.environ.get('IMAS_VERSION','3.10.1')
 shot = 1
 run = 0

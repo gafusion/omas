@@ -9,7 +9,7 @@ ods=eq.to_omas()
 
 # save OMAS data structure to IMAS
 user = os.environ['USER']
-tokamak = 'D3D'
+tokamak = 'ITER'
 imas_version = os.environ.get('IMAS_VERSION','3.10.1')
 shot = 1
 run = 0

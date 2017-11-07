@@ -226,11 +226,11 @@ def load_omas_imas(user, tokamak, imas_version, shot, run, paths):
             h=h[step]
         h[path[-1]]=data
 
-    ods['info.shot']=shot
-    ods['info.run']=run
-    ods['info.imas_version']=imas_version
-    ods['info.tokamak']=tokamak
-    ods['info.user']=user
+    ods['info.shot']=int(shot)
+    ods['info.run']=int(run)
+    ods['info.imas_version']=unicode(imas_version)
+    ods['info.tokamak']=unicode(tokamak)
+    ods['info.user']=unicode(user)
 
     return ods
 
@@ -243,7 +243,7 @@ def test_omas_imas(ods):
     :return: ods
     '''
     user=os.environ['USER']
-    tokamak='D3D'
+    tokamak='ITER'
     imas_version=os.environ.get('IMAS_VERSION','3.10.1')
     shot=1
     run=0
@@ -267,7 +267,7 @@ if __name__ == '__main__':
     ods=load_omas_pkl('test.pkl')
 
     user=os.environ['USER']
-    tokamak='D3D'
+    tokamak='ITER'
     imas_version=os.environ.get('IMAS_VERSION','3.10.1')
     shot=1
     run=0

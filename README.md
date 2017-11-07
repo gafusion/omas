@@ -32,9 +32,9 @@ if not different_ods(ods, ods1):
    print('OMAS data was saved to and loaded from file correctly')
 
 # Save to IMAS
-paths=save_omas_imas(ods, user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, new=True)
+paths=save_omas_imas(ods, user='meneghini', tokamak='ITER', version='3.10.1', shot=133221, run=0, new=True)
 # Load from IMAS
-ods1=load_omas_imas(user='meneghini', tokamak='D3D', version='3.10.1', shot=133221, run=0, paths=paths)
+ods1=load_omas_imas(user='meneghini', tokamak='ITER', version='3.10.1', shot=133221, run=0, paths=paths)
 # Check data consistency
 if not different_ods(ods, ods1):
    print('OMAS data was saved to and loaded from IMAS correctly')
