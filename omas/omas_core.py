@@ -160,6 +160,16 @@ class omas(dict):
         else:
             return dict.__getitem__(self, key[0])
 
+    def __delitem__(self, key):
+        #handle individual keys as well as full paths
+        key=_omas_key_dict_preprocessor(key)
+        print(key)
+        if len(key)>1:
+            #if the user has entered path rather than a single key
+            del self[key[0]]['.'.join(key[1:])]
+        else:
+            return dict.__delitem__(self, key[0])
+
     def paths(self, **kw):
         '''
         Traverse the ods and return paths that have data
