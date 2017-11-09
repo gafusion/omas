@@ -11,7 +11,7 @@ def _base_S3_uri():
 #--------------------------------------------
 def save_omas_s3(ods, filename, **kw):
     '''
-    Save an OMAS data set to NetCDF
+    Save an OMAS data set to pickle and upload it to S3
 
     :param ods: OMAS data set
 
@@ -26,7 +26,7 @@ def save_omas_s3(ods, filename, **kw):
 
 def load_omas_s3(filename):
     '''
-    Load an OMAS data set from NetCDF
+    Download an OMAS data set from S3 and read it as pickle
 
     :param filename: filename to load from
 
@@ -39,7 +39,7 @@ def load_omas_s3(filename):
 
 def test_omas_s3(ods):
     '''
-    test save and load NetCDF
+    test save and load S3
 
     :param ods: ods
 
