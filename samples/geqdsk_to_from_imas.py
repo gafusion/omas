@@ -1,5 +1,9 @@
 from omfit.classes.omfit_eqdsk import OMFITeqdsk
 from omas import *
+import os
+
+#set OMAS debugging topic
+os.environ['OMAS_DEBUG_TOPIC']='imas'
 
 #read gEQDSK file in OMFIT
 eq=OMFITgeqdsk('133221.01000')
