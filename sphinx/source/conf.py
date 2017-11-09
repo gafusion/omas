@@ -54,7 +54,15 @@ Save and load OMAS data in different formats
 
 Usage with OMFIT classes
 ========================
-Some classes of the `OMFIT framework <http://gafusion.github.io/OMFIT-source/>`_ support OMAS
+Some classes of the `OMFIT framework <http://gafusion.github.io/OMFIT-source/>`_ classes support OMAS.
+For these classes the combination of OMFIT and OMAS facilitate saving/loading data to/from IMAS.
+In this example this is carried out for an equilibrium file (g-file).
+
+.. figure:: images/eq_omas_omfit.png
+  :align: center
+  :width: 75%
+  :alt: OMFIT+OMAS facilitate save/load gEQDSK to/from IMAS
+  :target: _images/eq_omas_omfit.png
 
 {geqdsk_to_from_imas}
 

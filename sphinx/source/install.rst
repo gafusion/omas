@@ -7,7 +7,7 @@ To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_::
 
         sudo pip install omas
 
-To install `OMAS from GitHub <http://gafusion.github.io/omas/>`_::
+To install `OMAS from GitHub <https://github.com/gafusion/omas>`_::
 
         git clone git@github.com:gafusion/omas.git
         cd omas
