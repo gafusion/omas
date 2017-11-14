@@ -109,7 +109,7 @@ class omas(dict):
 
             #consistency checking
             location='.'.join(filter(None,[self.location,str(key[0])]))
-            structure_location=re.sub('\.[0-9]+','[:]',location)
+            structure_location=re.sub('\.[0-9:]+','[:]',location)
             for item in self.structure.keys():
                 if item.startswith(structure_location):
                     structure[item]=self.structure[item]
@@ -150,8 +150,15 @@ class omas(dict):
         #handle individual keys as well as full paths
         key=_omas_key_dict_preprocessor(key)
 
+        #data slicing
+        if key[0]==':':
+            data=[]
+            for k in self.keys():
+                data.append( self['.'.join([str(k)]+key[1:])] )
+            return numpy.array(data)
+
         #dynamic path creation
-        if key[0] not in self:
+        elif key[0] not in self:
             self.__setitem__(key[0], omas(imas_version=self.imas_version))
 
         if len(key)>1:
@@ -277,6 +284,7 @@ def ods_sample():
     '''
     ods=omas()
 
+    #info ODS is used for keeping track of IMAS metadata
     ods['info.user']=unicode(os.environ['USER'])
     ods['info.tokamak']='ITER'
     ods['info.imas_version']=unicode(os.environ.get('IMAS_VERSION','3.10.1'))
@@ -301,14 +309,21 @@ def ods_sample():
     ods['equilibrium.time_slice.1.global_quantities.ip']=2.
     ods['equilibrium.time_slice[2].time']=3000.
     ods['equilibrium.time_slice[2].global_quantities.ip']=3.
+
+    #check different ways of addressing data
     printd(ods['equilibrium.time_slice']['1.global_quantities.ip'],topic='sample')
     printd(ods[['equilibrium','time_slice',1,'global_quantities','ip']],topic='sample')
     printd(ods[('equilibrium','time_slice','1','global_quantities','ip')],topic='sample')
+    printd(ods['equilibrium.time_slice.1.global_quantities.ip'],topic='sample')
+    printd(ods['equilibrium.time_slice[1].global_quantities.ip'],topic='sample')
 
     ods['equilibrium.time_slice.0.profiles_1d.psi']=numpy.linspace(0,1,10)
 
     #pprint(ods.paths())
     #pprint(ods2.paths())
+
+    #check data slicing is working
+    printd(ods['equilibrium.time_slice[:].global_quantities.ip'],topic='sample')
 
     ckBKP=ods.consistency_check
     tmp=pickle.dumps(ods)

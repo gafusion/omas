@@ -1,4 +1,8 @@
+import os
 from omas import *
+
+#set OMAS debugging topic
+os.environ['OMAS_DEBUG_TOPIC']='*'
 
 # load some sample data
 ods_start = ods_sample()

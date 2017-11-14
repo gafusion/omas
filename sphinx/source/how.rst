@@ -9,14 +9,16 @@ and it inherits all of the functionalities, with the addition of:
 
 3. dynamic creation of the tree hierarchy as items they are accessed
 
-4. support read/write/access using multiple formats::
+4. data slicing (not only in time)
+
+5. support read/write/access using multiple formats::
 
     ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']  #standard Python dictionary format
     ods['equilibrium.time_slice[0].profiles_2d[0].psi']            #IMAS hierarchical tree format
     ods['equilibrium.time_slice.0.profiles_2d.0.psi']              #dot separated string format
     ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]     #list of nodes format
 
-5. save/load omas objects to/from:
+6. save/load omas objects to/from:
 
    .. _omas_formats:
 
