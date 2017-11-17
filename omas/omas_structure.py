@@ -108,7 +108,7 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
 
     #data structures
     if not len(data_structures):
-        data_structures=datas.keys()
+        data_structures=list(datas.keys())
 
     for k in add_datastructures:
         data_structures.append(k)
@@ -167,7 +167,7 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
                         for k1 in range(len(entries[k][col])):
                             if entries[k][col][k1].startswith('1...N_'):
                                 entries[k][col][k1]=re.sub('1...N_(.*)s',r'\1_index',entries[k][col][k1]).lower()
-                        entries[k][col]=filter(None,entries[k][col])
+                        entries[k][col]=list(filter(None,entries[k][col]))
                     elif col=='data_type':
                         entries[k][col]='\n'.join(entries[k][col])
                         if entries[k][col]=='int_type':
