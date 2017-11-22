@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-install_requires = ['numpy', 'netCDF4', 'boto3']
+install_requires = ['numpy', 'netCDF4', 'boto3', 'future']
 
 extras_require = {'imas': ['imas'], 'build_structures': ['pandas', 'xlrd']}
 

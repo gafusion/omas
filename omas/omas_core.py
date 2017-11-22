@@ -1,4 +1,5 @@
 from __future__ import print_function, division, unicode_literals
+from future.builtins import super
 
 from .omas_utils import *
 
@@ -37,8 +38,8 @@ class omas(dict):
     OMAS class
     '''
 
-    def __new__(cls, consistency_check=True, *args, **kw):
-        instance = dict.__new__(cls, *args, **kw)
+    def __new__(cls, consistency_check=False, *args, **kw):
+        instance = super().__new__(cls, *args, **kw)
         instance.imas_version = None
         instance.name = ''
         instance.parent = None
@@ -143,10 +144,10 @@ class omas(dict):
         #if the user has entered path rather than a single key
         if len(key) > 1:
             if key[0] not in self:
-                dict.__setitem__(self, key[0], value)
-            return self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
+                super().__setitem__(key[0], value)
+            self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
         else:
-            return dict.__setitem__(self, key[0], value)
+            super().__setitem__(key[0], value)
 
     def __getitem__(self, key):
         #handle individual keys as well as full paths
@@ -164,10 +165,10 @@ class omas(dict):
             self.__setitem__(key[0], omas(imas_version=self.imas_version))
 
         if len(key) > 1:
-            #if the user has entered path rather than a single key
-            return dict.__getitem__(self, key[0])['.'.join(key[1:])]
+            # if the user has entered path rather than a single key
+            return super().__getitem__(key[0])['.'.join(key[1:])]
         else:
-            return dict.__getitem__(self, key[0])
+            return super().__getitem__(key[0])
 
     def __delitem__(self, key):
         #handle individual keys as well as full paths
@@ -177,7 +178,7 @@ class omas(dict):
             #if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
         else:
-            return dict.__delitem__(self, key[0])
+            return super().__delitem__(key[0])
 
     def paths(self, **kw):
         '''
