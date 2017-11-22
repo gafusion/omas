@@ -1,4 +1,5 @@
 from __future__ import print_function, division, unicode_literals
+import pyhdc
 from future.builtins import super
 
 from .omas_utils import *
@@ -33,7 +34,7 @@ def _omas_key_dict_preprocessor(key):
     return key
 
 
-class omas(dict):
+class omas(pyhdc.HDC):
     '''
     OMAS class
     '''
@@ -58,6 +59,16 @@ class omas(dict):
             imas_version = os.path.split(
                 sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1]
         self.imas_version = re.sub('_', '.', imas_version)
+        # sort out data argument for HDC
+        # either as a keyword
+        data = kw.pop('data', None)
+        # or the first positional
+        if data is None and args:
+            if len(args) > 1:
+                raise ValueError('Only single positional argument can be passed')
+            else:
+                data = args[0]
+        super().__init__(data=data)
 
     @property
     def consistency_check(self):
