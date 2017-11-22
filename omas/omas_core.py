@@ -94,29 +94,31 @@ class omas(dict):
         return location
 
     def __setitem__(self, key, value):
-        #handle individual keys as well as full paths
+        # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
 
-        #if the user has entered path rather than a single key
+        # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
             value = omas(imas_version=self.imas_version)
 
         structure = {}
-        #if structural checks are enabled
+        # if structural checks are enabled
         if self.consistency_check:
-            #if this is the head
+            # if this is the head
             if not self.location:
                 self.structure = load_structure(key[0].split(separator)[0])
 
-            #consistency checking
+            # consistency checking
             location = '.'.join(filter(None, [self.location, str(key[0])]))
             structure_location = re.sub('\.[0-9:]+', '[:]', location)
             for item in self.structure.keys():
                 if item.startswith(structure_location):
                     structure[item] = self.structure[item]
             if not len(structure):
-                options=numpy.unique(list(map(lambda x:re.sub('\[:\]','.:',x)[len(re.sub('\.[0-9]+','.:',self.location))+1:].split('.')[0],self.structure)))
+                options = numpy.unique(list(map(
+                    lambda x: re.sub('\[:\]', '.:', x)[len(re.sub('\.[0-9]+', '.:', self.location)) + 1:].split('.')[0],
+                    self.structure)))
                 if len(options) == 1 and options[0] == ':':
                     options = 'A numerical index is needed'
                 else:
@@ -125,11 +127,11 @@ class omas(dict):
                 raise (Exception('`%s` is not a valid IMAS location\n' % location + spaces
                                  + '^\n' + spaces + '%s' % options))
 
-        #if the value is a dictionary structure
+        # if the value is a dictionary structure
         if isinstance(value, omas):
             old_name = str(getattr(value, 'name', ''))
             value.name = key[0]
-            #deepcopy necessary to keep the location straight
+            # deepcopy necessary to keep the location straight
             if old_name and old_name != key[0]:
                 try:
                     value1 = copy.deepcopy(value)
@@ -141,7 +143,7 @@ class omas(dict):
             value.parent = weakref.ref(self)
             value.structure = structure
 
-        #if the user has entered path rather than a single key
+        # if the user has entered path rather than a single key
         if len(key) > 1:
             if key[0] not in self:
                 super().__setitem__(key[0], value)
@@ -150,17 +152,17 @@ class omas(dict):
             super().__setitem__(key[0], value)
 
     def __getitem__(self, key):
-        #handle individual keys as well as full paths
+        # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
 
-        #data slicing
+        # data slicing
         if key[0] == ':':
             data = []
             for k in self.keys():
                 data.append(self['.'.join([str(k)] + key[1:])])
             return numpy.array(data)
 
-        #dynamic path creation
+        # dynamic path creation
         elif key[0] not in self:
             self.__setitem__(key[0], omas(imas_version=self.imas_version))
 
@@ -171,11 +173,11 @@ class omas(dict):
             return super().__getitem__(key[0])
 
     def __delitem__(self, key):
-        #handle individual keys as well as full paths
+        # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
         print(key)
         if len(key) > 1:
-            #if the user has entered path rather than a single key
+            # if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
         else:
             return super().__delitem__(key[0])
@@ -218,25 +220,25 @@ class omas(dict):
         return tmp
 
     def __getstate__(self):
-        #switching between weak/strong reference for .parent attribute
+        # switching between weak/strong reference for .parent attribute
         state = self.__dict__.copy()
         if state['parent'] is not None:
             state['parent'] = state['parent']()
         return state
 
     def __setstate__(self, state):
-        #switching between weak/strong reference for .parent attribute
+        # switching between weak/strong reference for .parent attribute
         self.__dict__ = state.copy()
         if self.__dict__['parent'] is not None:
             self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
 
     def __getnewargs__(self):
-        return (False, )
+        return (False,)
 
 
-#--------------------------------------------
+# --------------------------------------------
 # save and load OMAS with Python pickle
-#--------------------------------------------
+# --------------------------------------------
 def save_omas_pkl(ods, filename, **kw):
     '''
     Save OMAS data set to Python pickle
@@ -281,9 +283,9 @@ def test_omas_pkl(ods):
     return ods1
 
 
-#--------------------------------------------
+# --------------------------------------------
 # tools
-#--------------------------------------------
+# --------------------------------------------
 def ods_sample():
     '''
     create sample ODS data
@@ -291,7 +293,7 @@ def ods_sample():
     '''
     ods = omas()
 
-    #info ODS is used for keeping track of IMAS metadata
+    # info ODS is used for keeping track of IMAS metadata
     ods['info.user'] = unicode(os.environ['USER'])
     ods['info.tokamak'] = 'ITER'
     ods['info.imas_version'] = unicode(os.environ.get('IMAS_VERSION', '3.10.1'))
@@ -319,7 +321,7 @@ def ods_sample():
     ods['equilibrium.time_slice[2].time'] = 3000.
     ods['equilibrium.time_slice[2].global_quantities.ip'] = 3.
 
-    #check different ways of addressing data
+    # check different ways of addressing data
     printd(ods['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
     printd(
         ods[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
@@ -331,10 +333,10 @@ def ods_sample():
 
     ods['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
 
-    #pprint(ods.paths())
-    #pprint(ods2.paths())
+    # pprint(ods.paths())
+    # pprint(ods2.paths())
 
-    #check data slicing is working
+    # check data slicing is working
     printd(ods['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
     ckBKP = ods.consistency_check
@@ -347,7 +349,7 @@ def ods_sample():
     ods = load_omas_pkl('test.pkl')
 
     tmp = ods.flat()
-    #pprint(tmp)
+    # pprint(tmp)
 
     return ods
 
@@ -442,9 +444,9 @@ def test_omas_suite(test_type=None):
 test_omas_suite.__doc__ = test_omas_suite.__doc__ % _tests
 
 
-#--------------------------------------------
+# --------------------------------------------
 # save and load OMAS with default saving method
-#--------------------------------------------
+# --------------------------------------------
 def save_omas(ods, filename):
     '''
     Save omas data to filename. The file extension defines format to use.
@@ -477,15 +479,15 @@ def load_omas(filename):
         return load_omas_pkl(filename)
 
 
-#--------------------------------------------
+# --------------------------------------------
 # import other omas tools and methods in this namespace
-#--------------------------------------------
+# --------------------------------------------
 from .omas_imas import *
 from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
 
-#--------------------------------------------
+# --------------------------------------------
 if __name__ == '__main__':
     test_omas_suite()
