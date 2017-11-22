@@ -1,5 +1,5 @@
 from setuptools import setup
-import glob, os
+import os
 
 install_requires = ['numpy', 'netCDF4', 'boto3']
 
