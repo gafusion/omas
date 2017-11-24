@@ -63,6 +63,7 @@ clean:
 .PHONY: html
 html: clean
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo 'google-site-verification: googleb0a3b5f53d7d9d8d.html' > $(BUILDDIR)/html/googleb0a3b5f53d7d9d8d.html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
