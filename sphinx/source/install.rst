@@ -11,7 +11,7 @@ To install `OMAS from GitHub <https://github.com/gafusion/omas>`_::
 
         git clone git@github.com:gafusion/omas.git
         cd omas
-        pip install -r requirements.txt
+        sudo pip install -r requirements.txt
         python samples/build_json_structures.py
         sudo pip install -e .
 
