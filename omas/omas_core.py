@@ -38,7 +38,7 @@ class omas(dict):
     OMAS class
     '''
 
-    def __new__(cls, consistency_check=False, *args, **kw):
+    def __new__(cls, consistency_check=omas_rcparams['consistency_check'], *args, **kw):
         instance = super().__new__(cls, *args, **kw)
         instance.imas_version = None
         instance.name = ''

@@ -23,7 +23,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 
 setup(
     name='omas',
-    version='0.1.4',
+    version='0.1.5',
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
