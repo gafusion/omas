@@ -127,8 +127,9 @@ class omas(pyhdc.HDC):
                 if item.startswith(structure_location):
                     structure[item] = self.structure[item]
             if not len(structure):
-                options = numpy.unique(list(map(lambda x: re.sub('\[:\]', '.:', x)[len(re.sub('\.[0-9] + ', '.:', self.location)) + 1:].split('.')[0],
-                                                self.structure)))
+                options = numpy.unique(list(map(
+                    lambda x: re.sub('\[:\]', '.:', x)[len(re.sub('\.[0-9]+', '.:', self.location)) + 1:].split('.')[0],
+                    self.structure)))
                 if len(options) == 1 and options[0] == ':':
                     options = 'A numerical index is needed'
                 else:
@@ -243,7 +244,7 @@ class omas(pyhdc.HDC):
             self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
 
     def __getnewargs__(self):
-        return (False, )
+        return (False,)
 
 
 # --------------------------------------------
