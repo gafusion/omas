@@ -6,5 +6,6 @@
 numpy               # required
 netCDF4             # required
 boto3               # required
+future              # required
 pandas              # build_structures
 xlrd                # build_structures

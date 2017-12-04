@@ -18,14 +18,12 @@ default_imas_html_dir = os.path.abspath(default_imas_html_dir)
 def aggregate_imas_html_docs(imas_html_dir=default_imas_html_dir, imas_version=default_imas_version):
     '''
     this function aggregates all of the IMAS html documentation pages
-    into a single clean.html page that is stored under the imas_structures folder.
-        omas/imas_structures/<imas_version>/clean.html
+    into a single omas/imas_structures/<imas_version>/clean.html
 
     This clean.html page is then --MANUALLY--:
     1. opened in EXCEL
     2. in EXCEL all cells are un-merged
-    3. the EXCEL document is finally saved as clean.xls
-        omas/imas_structures/<imas_version>/clean.xls
+    3. the EXCEL document is finally saved as omas/imas_structures/<imas_version>/clean.xls
 
     :param imas_html_dir: directory where the IMAS html documentation is stored
 
@@ -82,8 +80,7 @@ add_datastructures['info'] = [
 def create_json_structure(imas_version=default_imas_version, data_structures=[]):
     '''
     This function generates the OMAS structures .json files
-    after the clean.xml file is been manually generated.
-        omas/imas_structures/<imas_version>/clean.html
+    after the omas/imas_structures/<imas_version>/clean.html file is been manually generated.
 
     :param imas_version: IMAS version
 
