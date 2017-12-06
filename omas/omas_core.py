@@ -98,16 +98,29 @@ class omas(MutableMapping):
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
+        location = re.sub('^[0-9:]+$', ':', str(location))
 
         if self.consistency_check:
-            structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
-            if isinstance(value, omas):
-                if not self.structure:
-                    structure = load_structure(key[0])[1][key[0]]
+            try:
+                structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
+                if isinstance(value, omas):
+                    if not self.structure:
+                        structure = load_structure(key[0])[1][key[0]]
+                    else:
+                        structure = self.structure[structure_key[0]]
+                    # check that tha data will go in the right place
+                    self._validate(value, structure)
                 else:
-                    structure = self.structure[structure_key[0]]
-                # check that tha data will go in the right place
-                self._validate(value, structure)
+                    self.structure[structure_key[0]]
+
+            except (KeyError,TypeError):
+                options = list(self.structure.keys())
+                if len(options) == 1 and options[0] == ':':
+                    options = 'A numerical index is needed with n>=0'
+                else:
+                    options = 'Did you mean: %s' % options
+                spaces = '           ' + ' ' * (len(self.location) + 2)
+                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces + '^'*len(structure_key[0])+'\n' + '%s' % options) from None
 
         # check what container type is required and if necessary switch it
         if isinstance(key[0],int) and not isinstance(self.omas_data,list):
@@ -125,8 +138,6 @@ class omas(MutableMapping):
         if self.consistency_check:
             if isinstance(value, omas):
                 value.structure = structure
-            else:
-                self.structure[structure_key[0]]
 
         if isinstance(value, omas):
             value.location = location
@@ -148,7 +159,8 @@ class omas(MutableMapping):
         elif key[0]==len(self.omas_data):
             self.omas_data.append(value)
         else:
-            raise(IndexError('%s[:] index is at %d'%(self.location,len(self)-1)))
+            raise IndexError('%s[:] index is at %d'%(self.location,len(self.omas_data)-1))
+
     def __getitem__(self, key):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
