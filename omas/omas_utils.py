@@ -36,7 +36,10 @@ def json_dumper(obj):
 
     :return: json-compatible [dict/list] object
     '''
-    if isinstance(obj, numpy.ndarray):
+    from omas import omas
+    if isinstance(obj, omas):
+        return dict(zip(obj.keys(),obj.values()))
+    elif isinstance(obj, numpy.ndarray):
         if 'complex' in str(obj.dtype).lower():
             return dict(__ndarray_tolist_real__=obj.real.tolist(),
                         __ndarray_tolist_imag__=obj.imag.tolist(),

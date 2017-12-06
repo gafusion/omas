@@ -50,7 +50,7 @@ class omas(MutableMapping):
 
         :param consistency_check: whether to enforce consistency with IMAS schema
         '''
-        self.omas_data={}
+        self.omas_data=None
         self._consistency_check = consistency_check
         self.imas_version = imas_version
         self.location = location
@@ -80,7 +80,7 @@ class omas(MutableMapping):
 
         :param structure: reference structure
         '''
-        for key in value:
+        for key in value.keys():
             structure_key = re.sub('^[0-9:]+$', ':', str(key))
             if isinstance(value[key], omas) and value[key].consistency_check:
                 value._validate(value[key], structure[structure_key])
@@ -108,6 +108,22 @@ class omas(MutableMapping):
                     structure = self.structure[structure_key[0]]
                 # check that tha data will go in the right place
                 self._validate(value, structure)
+
+        # check what container type is required and if necessary switch it
+        if isinstance(key[0],int) and not isinstance(self.omas_data,list):
+            if not self.omas_data or not len(self.omas_data):
+                self.omas_data=[]
+            else:
+                raise(Exception('Cannot convert from dict to list once omas object has data'))
+        if not isinstance(key[0],int) and not isinstance(self.omas_data,dict):
+            if not self.omas_data or not len(self.omas_data):
+                self.omas_data={}
+            else:
+                raise(Exception('Cannot convert from list to dict once omas object has data'))
+
+        # now that all checks are completed we can assign the structure information
+        if self.consistency_check:
+            if isinstance(value, omas):
                 value.structure = structure
             else:
                 self.structure[structure_key[0]]
@@ -118,11 +134,21 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             if key[0] not in self.keys():
-                self.omas_data.__setitem__(key[0], value)
-            self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
+                if isinstance(self.omas_data,dict):
+                    self.omas_data[key[0]]=value
+                elif key[0]==len(self.omas_data):
+                    self.omas_data.append(value)
+                else:
+                    raise(IndexError('%s[:] index is at %d'%(self.location,len(self)-1)))
+            self[key[0]]['.'.join(key[1:])]= pass_on_value
+        elif isinstance(self.omas_data,dict):
+            self.omas_data[key[0]]=value
+        elif key[0] in self.omas_data:
+            self.omas_data[key[0]]=value
+        elif key[0]==len(self.omas_data):
+            self.omas_data.append(value)
         else:
-            self.omas_data.__setitem__(key[0], value)
-
+            raise(IndexError('%s[:] index is at %d'%(self.location,len(self)-1)))
     def __getitem__(self, key):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
@@ -140,9 +166,9 @@ class omas(MutableMapping):
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            return self.omas_data.__getitem__(key[0])['.'.join(key[1:])]
+            return self.omas_data[key[0]]['.'.join(key[1:])]
         else:
-            return self.omas_data.__getitem__(key[0])
+            return self.omas_data[key[0]]
 
     def __delitem__(self, key):
         # handle individual keys as well as full paths
@@ -193,10 +219,21 @@ class omas(MutableMapping):
         return value in self.omas_data
 
     def keys(self):
-        return self.omas_data.keys()
+        if isinstance(self.omas_data,dict):
+            return self.omas_data.keys()
+        elif isinstance(self.omas_data,list):
+            return range(len(self.omas_data))
+        else:
+            return []
 
-    def toJSON(self):
-        return self.omas_data
+    def values(self):
+        return [self[item] for item in self.keys()]
+
+    def __str__(self):
+        return str(self.omas_data)
+
+    def __repr__(self):
+        return repr(self.omas_data)
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
@@ -265,55 +302,51 @@ def ods_sample():
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
 
-    # issue with x_point structure?
-    if False:
-        ods['equilibrium']['time_slice'][1]['time'] = 2000.
-        ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z'] = 0.
-
-    ods2 = omas()
+    ods2 = copy.deepcopy(ods)
+    ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
     ods2['equilibrium']['time_slice'][2] = ods['equilibrium']['time_slice'][0]
 
     printd(
-        ods['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
     printd(
-        ods['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
 
-    ods['equilibrium.time_slice.1.time'] = 2000.
-    ods['equilibrium.time_slice.1.global_quantities.ip'] = 2.
-    ods['equilibrium.time_slice[2].time'] = 3000.
-    ods['equilibrium.time_slice[2].global_quantities.ip'] = 3.
+    ods2['equilibrium.time_slice.1.time'] = 2000.
+    ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
+    ods2['equilibrium.time_slice[2].time'] = 3000.
+    ods2['equilibrium.time_slice[2].global_quantities.ip'] = 3.
 
     # check different ways of addressing data
-    printd(ods['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
     printd(
-        ods[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
+        ods2[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
     printd(
-        ods[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')],
+        ods2[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')],
         topic='sample')
-    printd(ods['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
-    printd(ods['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
 
-    ods['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
+    ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
 
     # pprint(ods.paths())
     # pprint(ods2.paths())
 
     # check data slicing is working
-    printd(ods['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
     ckBKP = ods.consistency_check
-    tmp = pickle.dumps(ods)
-    ods = pickle.loads(tmp)
-    if ods.consistency_check != ckBKP:
+    tmp = pickle.dumps(ods2)
+    ods2 = pickle.loads(tmp)
+    if ods2.consistency_check != ckBKP:
         raise (Exception('consistency_check attribute changed'))
 
-    save_omas_pkl(ods, 'test.pkl')
-    ods = load_omas_pkl('test.pkl')
+    save_omas_pkl(ods2, 'test.pkl')
+    ods2 = load_omas_pkl('test.pkl')
 
-    tmp = ods.flat()
+    tmp = ods2.flat()
     # pprint(tmp)
 
-    return ods
+    return ods2
 
 
 def different_ods(ods1, ods2):
