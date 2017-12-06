@@ -51,10 +51,7 @@ def json_dumper(obj):
         return numpy.asscalar(obj)
     elif isinstance(obj, complex):
         return dict(__complex__=True, real=obj.real, imag=obj.imag)
-    try:
-        return obj.toJSON()
-    except Exception:
-        return obj.__dict__
+    return obj.toJSON()
 
 
 def json_loader(object_pairs, cls=dict):

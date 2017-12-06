@@ -1,5 +1,6 @@
 from __future__ import print_function, division, unicode_literals
 from future.builtins import super
+from collections.abc import MutableMapping
 
 from .omas_utils import *
 
@@ -33,23 +34,10 @@ def _omas_key_dict_preprocessor(key):
     return key
 
 
-class omas(dict):
+class omas(MutableMapping):
     '''
     OMAS class
     '''
-
-    def __new__(cls,
-                consistency_check=omas_rcparams['consistency_check'],
-                imas_version=default_imas_version,
-                location='',
-                structure={},
-                *args, **kw):
-        instance = super().__new__(cls)
-        instance.consistency_check = consistency_check
-        instance.imas_version = imas_version
-        instance.location = location
-        instance.structure = structure
-        return instance
 
     def __init__(self,
                  consistency_check=omas_rcparams['consistency_check'],
@@ -62,7 +50,11 @@ class omas(dict):
 
         :param consistency_check: whether to enforce consistency with IMAS schema
         '''
-        super().__init__(self, *args, **kw)
+        self.omas_data={}
+        self._consistency_check = consistency_check
+        self.imas_version = imas_version
+        self.location = location
+        self.structure = structure
 
     @property
     def consistency_check(self):
@@ -76,7 +68,7 @@ class omas(dict):
     @consistency_check.setter
     def consistency_check(self, value):
         self._consistency_check = value
-        for item in self:
+        for item in self.keys():
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
 
@@ -125,11 +117,11 @@ class omas(dict):
 
         # if the user has entered path rather than a single key
         if len(key) > 1:
-            if key[0] not in self:
-                super().__setitem__(key[0], value)
+            if key[0] not in self.keys():
+                self.omas_data.__setitem__(key[0], value)
             self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
         else:
-            super().__setitem__(key[0], value)
+            self.omas_data.__setitem__(key[0], value)
 
     def __getitem__(self, key):
         # handle individual keys as well as full paths
@@ -143,14 +135,14 @@ class omas(dict):
             return numpy.array(data)
 
         # dynamic path creation
-        elif key[0] not in self:
+        elif key[0] not in self.keys():
             self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            return super().__getitem__(key[0])['.'.join(key[1:])]
+            return self.omas_data.__getitem__(key[0])['.'.join(key[1:])]
         else:
-            return super().__getitem__(key[0])
+            return self.omas_data.__getitem__(key[0])
 
     def __delitem__(self, key):
         # handle individual keys as well as full paths
@@ -160,7 +152,7 @@ class omas(dict):
             # if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
         else:
-            return super().__delitem__(key[0])
+            return self.omas_data.__delitem__(key[0])
 
     def paths(self, **kw):
         '''
@@ -191,6 +183,20 @@ class omas(dict):
         # back from that string will use omas.__new__ with consistency_check=False
         return (False,)
 
+    def __len__(self):
+        return len(self.omas_data)
+
+    def __iter__(self):
+        return iter(self.omas_data)
+
+    def __contains__(self,value):
+        return value in self.omas_data
+
+    def keys(self):
+        return self.omas_data.keys()
+
+    def toJSON(self):
+        return self.omas_data
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
