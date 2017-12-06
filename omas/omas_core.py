@@ -41,8 +41,7 @@ class omas(dict):
     def __new__(cls, consistency_check=omas_rcparams['consistency_check'], *args, **kw):
         instance = super().__new__(cls, *args, **kw)
         instance.imas_version = None
-        instance.name = ''
-        instance.parent = None
+        instance.location = ''
         instance.structure = {}
         instance._consistency_check = consistency_check
         return instance
@@ -75,23 +74,13 @@ class omas(dict):
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
 
-    @property
-    def location(self):
-        '''
-        property that returns the path in the IMAS schema
-
-        :return: string with location of current object
-        '''
-        h = self
-        location = ''
-        if not hasattr(h, 'name'):
-            pass
-        while str(h.name):
-            location = '.'.join(filter(None, [str(h.name), location]))
-            h = h.parent()
-            if h is None:
-                break
-        return location
+    def validate(self, value, structure):
+        for key in value:
+            structure_key=re.sub('^[0-9:]+$', ':', str(key))
+            if isinstance(value[key],omas) and value[key].consistency_check:
+                value.validate(value[key],structure[structure_key])
+            else:
+                structure[structure_key]
 
     def __setitem__(self, key, value):
         # handle individual keys as well as full paths
@@ -100,48 +89,25 @@ class omas(dict):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version)
+            value = omas(imas_version=self.imas_version,consistency_check=self.consistency_check)
 
-        structure = {}
-        # if structural checks are enabled
+        # full path where we want to place the data
+        location = '.'.join(filter(None, [self.location, str(key[0])]))
+
         if self.consistency_check:
-            # if this is the head
-            if not self.location:
-                self.structure = load_structure(key[0].split(separator)[0])
-
-            # consistency checking
-            location = '.'.join(filter(None, [self.location, str(key[0])]))
-            structure_location = re.sub('\.[0-9:]+', '[:]', location)
-            for item in self.structure.keys():
-                if item.startswith(structure_location):
-                    structure[item] = self.structure[item]
-            if not len(structure):
-                options = numpy.unique(list(map(
-                    lambda x: re.sub('\[:\]', '.:', x)[len(re.sub('\.[0-9]+', '.:', self.location)) + 1:].split('.')[0],
-                    self.structure)))
-                if len(options) == 1 and options[0] == ':':
-                    options = 'A numerical index is needed'
+            structure_key = map(lambda x:re.sub('^[0-9:]+$', ':', str(x)),key)
+            if isinstance(value,omas):
+                if not self.structure:
+                    value.structure=load_structure(key[0])[1][key[0]]
                 else:
-                    options = 'Did you mean: %s' % options
-                spaces = '           ' + ' ' * (len(self.location) + 1)
-                raise (Exception('`%s` is not a valid IMAS location\n' % location + spaces
-                                 + '^\n' + spaces + '%s' % options))
+                    value.structure=self.structure[structure_key[0]]
+                # check that tha data will go in the right place
+                self.validate(value,value.structure)
+            else:
+                self.structure[structure_key[0]]
 
-        # if the value is a dictionary structure
-        if isinstance(value, omas):
-            old_name = str(getattr(value, 'name', ''))
-            value.name = key[0]
-            # deepcopy necessary to keep the location straight
-            if old_name and old_name != key[0]:
-                try:
-                    value1 = copy.deepcopy(value)
-                except Exception:
-                    raise
-                finally:
-                    value.name = old_name
-                value = value1
-            value.parent = weakref.ref(self)
-            value.structure = structure
+        if isinstance(value,omas):
+            value.location=location
 
         # if the user has entered path rather than a single key
         if len(key) > 1:
@@ -164,7 +130,7 @@ class omas(dict):
 
         # dynamic path creation
         elif key[0] not in self:
-            self.__setitem__(key[0], omas(imas_version=self.imas_version))
+            self.__setitem__(key[0], omas(imas_version=self.imas_version,consystency_check=self.consistency_check))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -205,36 +171,6 @@ class omas(dict):
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
         return tmp
-
-    def __deepcopy__(self, memo={}):
-        if hasattr(self, '_consistency_check'):
-            _consistency_checkBKP = self._consistency_check
-        else:
-            _consistency_checkBKP = omas_rcparams['consistency_check']
-        try:
-            self.consistency_check = False
-            tmp = pickle.loads(pickle.dumps(self, pickle.HIGHEST_PROTOCOL))
-            tmp.consistency_check = _consistency_checkBKP
-        finally:
-            self.consistency_check = _consistency_checkBKP
-        return tmp
-
-    def __getstate__(self):
-        # switching between weak/strong reference for .parent attribute
-        state = self.__dict__.copy()
-        if state['parent'] is not None:
-            state['parent'] = state['parent']()
-        return state
-
-    def __setstate__(self, state):
-        # switching between weak/strong reference for .parent attribute
-        self.__dict__ = state.copy()
-        if self.__dict__['parent'] is not None:
-            self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
-
-    def __getnewargs__(self):
-        return (False,)
-
 
 # --------------------------------------------
 # save and load OMAS with Python pickle

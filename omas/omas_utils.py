@@ -147,7 +147,7 @@ def remote_uri(uri, filename, up_down):
 # handling of OMAS json structures
 # ----------------------------------------------
 _structures = {}
-
+_structures_dict = {}
 
 def list_structures(imas_version=default_imas_version):
     return list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
@@ -170,8 +170,15 @@ def load_structure(file, imas_version=default_imas_version):
             file = os.path.abspath(filename)
     if file not in _structures:
         _structures[file] = json.loads(open(file, 'r').read(), object_pairs_hook=json_loader)
-    return _structures[file]
+        _structures_dict[file]={}
+        for item in _structures[file]:
+            h=_structures_dict[file]
+            for step in re.sub('\[:\]', '.:', item).split(separator):
+                if step not in h:
+                    h[step]={}
+                h=h[step]
 
+    return _structures[file],_structures_dict[file]
 
 def o2i(path):
     '''
