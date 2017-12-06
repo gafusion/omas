@@ -95,7 +95,7 @@ class omas(dict):
         location = '.'.join(filter(None, [self.location, str(key[0])]))
 
         if self.consistency_check:
-            structure_key = map(lambda x:re.sub('^[0-9:]+$', ':', str(x)),key)
+            structure_key = list(map(lambda x:re.sub('^[0-9:]+$', ':', str(x)),key))
             if isinstance(value,omas):
                 if not self.structure:
                     value.structure=load_structure(key[0])[1][key[0]]
@@ -171,6 +171,11 @@ class omas(dict):
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
         return tmp
+
+    def __getnewargs__(self):
+        # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
+        # back from that string will use omas.__new__ with consistency_check=False
+        return (False,)
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
