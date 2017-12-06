@@ -38,25 +38,31 @@ class omas(dict):
     OMAS class
     '''
 
-    def __new__(cls, consistency_check=omas_rcparams['consistency_check'], *args, **kw):
-        instance = super().__new__(cls, *args, **kw)
-        instance.imas_version = None
-        instance.location = ''
-        instance.structure = {}
-        instance._consistency_check = consistency_check
+    def __new__(cls,
+                consistency_check=omas_rcparams['consistency_check'],
+                imas_version=default_imas_version,
+                location='',
+                structure={},
+                *args, **kw):
+        instance = super().__new__(cls)
+        instance.consistency_check = consistency_check
+        instance.imas_version = imas_version
+        instance.location = location
+        instance.structure = structure
         return instance
 
-    def __init__(self, *args, **kw):
+    def __init__(self,
+                 consistency_check=omas_rcparams['consistency_check'],
+                 imas_version=None,
+                 location='',
+                 structure={},
+                 *args, **kw):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
         '''
-        imas_version = kw.pop('imas_version', None)
-        if imas_version is None:
-            imas_version = os.path.split(
-                sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1]
-        self.imas_version = re.sub('_', '.', imas_version)
+        super().__init__(self, *args, **kw)
 
     @property
     def consistency_check(self):
@@ -74,11 +80,18 @@ class omas(dict):
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
 
-    def validate(self, value, structure):
+    def _validate(self, value, structure):
+        '''
+        validate that the value is consistent with the provided structure field
+
+        :param value: sub-tree to be checked
+
+        :param structure: reference structure
+        '''
         for key in value:
-            structure_key=re.sub('^[0-9:]+$', ':', str(key))
-            if isinstance(value[key],omas) and value[key].consistency_check:
-                value.validate(value[key],structure[structure_key])
+            structure_key = re.sub('^[0-9:]+$', ':', str(key))
+            if isinstance(value[key], omas) and value[key].consistency_check:
+                value._validate(value[key], structure[structure_key])
             else:
                 structure[structure_key]
 
@@ -89,25 +102,26 @@ class omas(dict):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version,consistency_check=self.consistency_check)
+            value = omas(imas_version=self.imas_version, consistency_check=self.consistency_check)
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
 
         if self.consistency_check:
-            structure_key = list(map(lambda x:re.sub('^[0-9:]+$', ':', str(x)),key))
-            if isinstance(value,omas):
+            structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
+            if isinstance(value, omas):
                 if not self.structure:
-                    value.structure=load_structure(key[0])[1][key[0]]
+                    structure = load_structure(key[0])[1][key[0]]
                 else:
-                    value.structure=self.structure[structure_key[0]]
+                    structure = self.structure[structure_key[0]]
                 # check that tha data will go in the right place
-                self.validate(value,value.structure)
+                self._validate(value, structure)
+                value.structure = structure
             else:
                 self.structure[structure_key[0]]
 
-        if isinstance(value,omas):
-            value.location=location
+        if isinstance(value, omas):
+            value.location = location
 
         # if the user has entered path rather than a single key
         if len(key) > 1:
@@ -130,7 +144,7 @@ class omas(dict):
 
         # dynamic path creation
         elif key[0] not in self:
-            self.__setitem__(key[0], omas(imas_version=self.imas_version,consystency_check=self.consistency_check))
+            self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -176,6 +190,7 @@ class omas(dict):
         # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
         # back from that string will use omas.__new__ with consistency_check=False
         return (False,)
+
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
