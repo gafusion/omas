@@ -270,7 +270,7 @@ def create_html_documentation(imas_version=default_imas_version):
     lines = []
     for structure_file in list_structures():
         print('Adding to html documentation: ' + os.path.splitext(os.path.split(structure_file)[1])[0])
-        structure = load_structure(structure_file)
+        structure = load_structure(structure_file)[0]
         lines.append('<!-- %s -->' % structure_file)
         lines.append(table_header)
         lines.append(sub_table_header)
