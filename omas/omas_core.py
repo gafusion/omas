@@ -210,7 +210,7 @@ class omas(MutableMapping):
         '''
         :return: flat dictionary representation of the data
         '''
-        tmp = {}
+        tmp = OrderedDict()
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
         return tmp
