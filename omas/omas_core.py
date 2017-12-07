@@ -1,5 +1,4 @@
 from __future__ import print_function, division, unicode_literals
-from future.builtins import super
 
 from .omas_utils import *
 
@@ -33,31 +32,27 @@ def _omas_key_dict_preprocessor(key):
     return key
 
 
-class omas(dict):
+class omas(MutableMapping):
     '''
     OMAS class
     '''
 
-    def __new__(cls, consistency_check=omas_rcparams['consistency_check'], *args, **kw):
-        instance = super().__new__(cls, *args, **kw)
-        instance.imas_version = None
-        instance.name = ''
-        instance.parent = None
-        instance.structure = {}
-        instance._consistency_check = consistency_check
-        return instance
-
-    def __init__(self, *args, **kw):
+    def __init__(self,
+                 consistency_check=omas_rcparams['consistency_check'],
+                 imas_version=None,
+                 location='',
+                 structure={},
+                 *args, **kw):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
         '''
-        imas_version = kw.pop('imas_version', None)
-        if imas_version is None:
-            imas_version = os.path.split(
-                sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1]
-        self.imas_version = re.sub('_', '.', imas_version)
+        self.omas_data = None
+        self._consistency_check = consistency_check
+        self.imas_version = imas_version
+        self.location = location
+        self.structure = structure
 
     @property
     def consistency_check(self):
@@ -71,27 +66,24 @@ class omas(dict):
     @consistency_check.setter
     def consistency_check(self, value):
         self._consistency_check = value
-        for item in self:
+        for item in self.keys():
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
 
-    @property
-    def location(self):
+    def _validate(self, value, structure):
         '''
-        property that returns the path in the IMAS schema
+        validate that the value is consistent with the provided structure field
 
-        :return: string with location of current object
+        :param value: sub-tree to be checked
+
+        :param structure: reference structure
         '''
-        h = self
-        location = ''
-        if not hasattr(h, 'name'):
-            pass
-        while str(h.name):
-            location = '.'.join(filter(None, [str(h.name), location]))
-            h = h.parent()
-            if h is None:
-                break
-        return location
+        for key in value.keys():
+            structure_key = re.sub('^[0-9:]+$', ':', str(key))
+            if isinstance(value[key], omas) and value[key].consistency_check:
+                value._validate(value[key], structure[structure_key])
+            else:
+                structure[structure_key]
 
     def __setitem__(self, key, value):
         # handle individual keys as well as full paths
@@ -100,56 +92,73 @@ class omas(dict):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version)
+            value = omas(imas_version=self.imas_version, consistency_check=self.consistency_check)
 
-        structure = {}
-        # if structural checks are enabled
+        # full path where we want to place the data
+        location = '.'.join(filter(None, [self.location, str(key[0])]))
+        location = re.sub('^[0-9:]+$', ':', str(location))
+
         if self.consistency_check:
-            # if this is the head
-            if not self.location:
-                self.structure = load_structure(key[0].split(separator)[0])
+            try:
+                structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
+                if isinstance(value, omas):
+                    if not self.structure:
+                        structure = load_structure(key[0])[1][key[0]]
+                    else:
+                        structure = self.structure[structure_key[0]]
+                    # check that tha data will go in the right place
+                    self._validate(value, structure)
+                else:
+                    self.structure[structure_key[0]]
 
-            # consistency checking
-            location = '.'.join(filter(None, [self.location, str(key[0])]))
-            structure_location = re.sub('\.[0-9:]+', '[:]', location)
-            for item in self.structure.keys():
-                if item.startswith(structure_location):
-                    structure[item] = self.structure[item]
-            if not len(structure):
-                options = numpy.unique(list(map(
-                    lambda x: re.sub('\[:\]', '.:', x)[len(re.sub('\.[0-9]+', '.:', self.location)) + 1:].split('.')[0],
-                    self.structure)))
+            except (KeyError, TypeError):
+                options = list(self.structure.keys())
                 if len(options) == 1 and options[0] == ':':
-                    options = 'A numerical index is needed'
+                    options = 'A numerical index is needed with n>=0'
                 else:
                     options = 'Did you mean: %s' % options
-                spaces = '           ' + ' ' * (len(self.location) + 1)
-                raise (Exception('`%s` is not a valid IMAS location\n' % location + spaces
-                                 + '^\n' + spaces + '%s' % options))
+                spaces = '           ' + ' ' * (len(self.location) + 2)
+                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
+                    structure_key[0]) + '\n' + '%s' % options)
 
-        # if the value is a dictionary structure
+        # check what container type is required and if necessary switch it
+        if isinstance(key[0], int) and not isinstance(self.omas_data, list):
+            if not self.omas_data or not len(self.omas_data):
+                self.omas_data = []
+            else:
+                raise (Exception('Cannot convert from dict to list once omas object has data'))
+        if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
+            if not self.omas_data or not len(self.omas_data):
+                self.omas_data = {}
+            else:
+                raise (Exception('Cannot convert from list to dict once omas object has data'))
+
+        # now that all checks are completed we can assign the structure information
+        if self.consistency_check:
+            if isinstance(value, omas):
+                value.structure = structure
+
         if isinstance(value, omas):
-            old_name = str(getattr(value, 'name', ''))
-            value.name = key[0]
-            # deepcopy necessary to keep the location straight
-            if old_name and old_name != key[0]:
-                try:
-                    value1 = copy.deepcopy(value)
-                except Exception:
-                    raise
-                finally:
-                    value.name = old_name
-                value = value1
-            value.parent = weakref.ref(self)
-            value.structure = structure
+            value.location = location
 
         # if the user has entered path rather than a single key
         if len(key) > 1:
-            if key[0] not in self:
-                super().__setitem__(key[0], value)
-            self[key[0]].__setitem__('.'.join(key[1:]), pass_on_value)
+            if key[0] not in self.keys():
+                if isinstance(self.omas_data, dict):
+                    self.omas_data[key[0]] = value
+                elif key[0] == len(self.omas_data):
+                    self.omas_data.append(value)
+                else:
+                    raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
+            self[key[0]]['.'.join(key[1:])] = pass_on_value
+        elif isinstance(self.omas_data, dict):
+            self.omas_data[key[0]] = value
+        elif key[0] in self.omas_data:
+            self.omas_data[key[0]] = value
+        elif key[0] == len(self.omas_data):
+            self.omas_data.append(value)
         else:
-            super().__setitem__(key[0], value)
+            raise IndexError('%s[:] index is at %d' % (self.location, len(self.omas_data) - 1))
 
     def __getitem__(self, key):
         # handle individual keys as well as full paths
@@ -163,14 +172,14 @@ class omas(dict):
             return numpy.array(data)
 
         # dynamic path creation
-        elif key[0] not in self:
-            self.__setitem__(key[0], omas(imas_version=self.imas_version))
+        elif key[0] not in self.keys():
+            self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            return super().__getitem__(key[0])['.'.join(key[1:])]
+            return self.omas_data[key[0]]['.'.join(key[1:])]
         else:
-            return super().__getitem__(key[0])
+            return self.omas_data[key[0]]
 
     def __delitem__(self, key):
         # handle individual keys as well as full paths
@@ -180,7 +189,7 @@ class omas(dict):
             # if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
         else:
-            return super().__delitem__(key[0])
+            return self.omas_data.__delitem__(key[0])
 
     def paths(self, **kw):
         '''
@@ -201,39 +210,41 @@ class omas(dict):
         '''
         :return: flat dictionary representation of the data
         '''
-        tmp = {}
+        tmp = OrderedDict()
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
         return tmp
 
-    def __deepcopy__(self, memo={}):
-        if hasattr(self, '_consistency_check'):
-            _consistency_checkBKP = self._consistency_check
-        else:
-            _consistency_checkBKP = omas_rcparams['consistency_check']
-        try:
-            self.consistency_check = False
-            tmp = pickle.loads(pickle.dumps(self, pickle.HIGHEST_PROTOCOL))
-            tmp.consistency_check = _consistency_checkBKP
-        finally:
-            self.consistency_check = _consistency_checkBKP
-        return tmp
-
-    def __getstate__(self):
-        # switching between weak/strong reference for .parent attribute
-        state = self.__dict__.copy()
-        if state['parent'] is not None:
-            state['parent'] = state['parent']()
-        return state
-
-    def __setstate__(self, state):
-        # switching between weak/strong reference for .parent attribute
-        self.__dict__ = state.copy()
-        if self.__dict__['parent'] is not None:
-            self.__dict__['parent'] = weakref.ref(self.__dict__['parent'])
-
     def __getnewargs__(self):
+        # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
+        # back from that string will use omas.__new__ with consistency_check=False
         return (False,)
+
+    def __len__(self):
+        return len(self.omas_data)
+
+    def __iter__(self):
+        return iter(self.omas_data)
+
+    def __contains__(self, value):
+        return value in self.omas_data
+
+    def keys(self):
+        if isinstance(self.omas_data, dict):
+            return self.omas_data.keys()
+        elif isinstance(self.omas_data, list):
+            return range(len(self.omas_data))
+        else:
+            return []
+
+    def values(self):
+        return [self[item] for item in self.keys()]
+
+    def __str__(self):
+        return str(self.omas_data)
+
+    def __repr__(self):
+        return repr(self.omas_data)
 
 
 # --------------------------------------------
@@ -303,55 +314,51 @@ def ods_sample():
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
 
-    # issue with x_point structure?
-    if False:
-        ods['equilibrium']['time_slice'][1]['time'] = 2000.
-        ods['equilibrium']['time_slice'][1]['boundary']['x_point'][0]['z'] = 0.
-
-    ods2 = omas()
+    ods2 = copy.deepcopy(ods)
+    ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
     ods2['equilibrium']['time_slice'][2] = ods['equilibrium']['time_slice'][0]
 
     printd(
-        ods['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
     printd(
-        ods['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
 
-    ods['equilibrium.time_slice.1.time'] = 2000.
-    ods['equilibrium.time_slice.1.global_quantities.ip'] = 2.
-    ods['equilibrium.time_slice[2].time'] = 3000.
-    ods['equilibrium.time_slice[2].global_quantities.ip'] = 3.
+    ods2['equilibrium.time_slice.1.time'] = 2000.
+    ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
+    ods2['equilibrium.time_slice[2].time'] = 3000.
+    ods2['equilibrium.time_slice[2].global_quantities.ip'] = 3.
 
     # check different ways of addressing data
-    printd(ods['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
     printd(
-        ods[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
+        ods2[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
     printd(
-        ods[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')],
+        ods2[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')],
         topic='sample')
-    printd(ods['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
-    printd(ods['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
 
-    ods['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
+    ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
 
     # pprint(ods.paths())
     # pprint(ods2.paths())
 
     # check data slicing is working
-    printd(ods['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
     ckBKP = ods.consistency_check
-    tmp = pickle.dumps(ods)
-    ods = pickle.loads(tmp)
-    if ods.consistency_check != ckBKP:
+    tmp = pickle.dumps(ods2)
+    ods2 = pickle.loads(tmp)
+    if ods2.consistency_check != ckBKP:
         raise (Exception('consistency_check attribute changed'))
 
-    save_omas_pkl(ods, 'test.pkl')
-    ods = load_omas_pkl('test.pkl')
+    save_omas_pkl(ods2, 'test.pkl')
+    ods2 = load_omas_pkl('test.pkl')
 
-    tmp = ods.flat()
+    tmp = ods2.flat()
     # pprint(tmp)
 
-    return ods
+    return ods2
 
 
 def different_ods(ods1, ods2):

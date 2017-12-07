@@ -44,7 +44,7 @@ def load_omas_nc(filename):
     from netCDF4 import Dataset
     ods = omas()
     with Dataset(filename, 'r') as dataset:
-        for item in dataset.variables:
+        for item in dataset.variables.keys():
             if dataset.variables[item].shape:
                 # arrays
                 ods[item] = numpy.array(dataset.variables[item])

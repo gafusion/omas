@@ -36,7 +36,10 @@ def json_dumper(obj):
 
     :return: json-compatible [dict/list] object
     '''
-    if isinstance(obj, numpy.ndarray):
+    from omas import omas
+    if isinstance(obj, omas):
+        return OrderedDict(zip(obj.keys(), obj.values()))
+    elif isinstance(obj, numpy.ndarray):
         if 'complex' in str(obj.dtype).lower():
             return dict(__ndarray_tolist_real__=obj.real.tolist(),
                         __ndarray_tolist_imag__=obj.imag.tolist(),
@@ -51,10 +54,7 @@ def json_dumper(obj):
         return numpy.asscalar(obj)
     elif isinstance(obj, complex):
         return dict(__complex__=True, real=obj.real, imag=obj.imag)
-    try:
-        return obj.toJSON()
-    except Exception:
-        return obj.__dict__
+    return obj.toJSON()
 
 
 def json_loader(object_pairs, cls=dict):
@@ -147,6 +147,7 @@ def remote_uri(uri, filename, up_down):
 # handling of OMAS json structures
 # ----------------------------------------------
 _structures = {}
+_structures_dict = {}
 
 
 def list_structures(imas_version=default_imas_version):
@@ -170,7 +171,15 @@ def load_structure(file, imas_version=default_imas_version):
             file = os.path.abspath(filename)
     if file not in _structures:
         _structures[file] = json.loads(open(file, 'r').read(), object_pairs_hook=json_loader)
-    return _structures[file]
+        _structures_dict[file] = {}
+        for item in _structures[file]:
+            h = _structures_dict[file]
+            for step in re.sub('\[:\]', '.:', item).split(separator):
+                if step not in h:
+                    h[step] = {}
+                h = h[step]
+
+    return _structures[file], _structures_dict[file]
 
 
 def o2i(path):
