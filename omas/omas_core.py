@@ -45,13 +45,14 @@ class omas(MutableMapping):
                  imas_version=None,
                  location='',
                  structure={},
-                 *args, **kw):
+                 *args,
+                 **kw):
         '''
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
         '''
-        self.omas_data=None
+        self.omas_data = None
         self._consistency_check = consistency_check
         self.imas_version = imas_version
         self.location = location
@@ -95,7 +96,8 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version, consistency_check=self.consistency_check)
+            value = omas(
+                imas_version=self.imas_version, consistency_check=self.consistency_check)
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
@@ -114,26 +116,29 @@ class omas(MutableMapping):
                 else:
                     self.structure[structure_key[0]]
 
-            except (KeyError,TypeError):
+            except (KeyError, TypeError):
                 options = list(self.structure.keys())
                 if len(options) == 1 and options[0] == ':':
                     options = 'A numerical index is needed with n>=0'
                 else:
                     options = 'Did you mean: %s' % options
                 spaces = '           ' + ' ' * (len(self.location) + 2)
-                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces + '^'*len(structure_key[0])+'\n' + '%s' % options) from None
+                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces +
+                                '^' * len(structure_key[0]) + '\n' + '%s' % options) from None
 
         # check what container type is required and if necessary switch it
-        if isinstance(key[0],int) and not isinstance(self.omas_data,list):
+        if isinstance(key[0], int) and not isinstance(self.omas_data, list):
             if not self.omas_data or not len(self.omas_data):
-                self.omas_data=[]
+                self.omas_data = []
             else:
-                raise(Exception('Cannot convert from dict to list once omas object has data'))
-        if not isinstance(key[0],int) and not isinstance(self.omas_data,dict):
+                raise (
+                    Exception('Cannot convert from dict to list once omas object has data'))
+        if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
             if not self.omas_data or not len(self.omas_data):
-                self.omas_data={}
+                self.omas_data = {}
             else:
-                raise(Exception('Cannot convert from list to dict once omas object has data'))
+                raise (
+                    Exception('Cannot convert from list to dict once omas object has data'))
 
         # now that all checks are completed we can assign the structure information
         if self.consistency_check:
@@ -146,21 +151,23 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             if key[0] not in self.keys():
-                if isinstance(self.omas_data,dict):
-                    self.omas_data[key[0]]=value
-                elif key[0]==len(self.omas_data):
+                if isinstance(self.omas_data, dict):
+                    self.omas_data[key[0]] = value
+                elif key[0] == len(self.omas_data):
                     self.omas_data.append(value)
                 else:
-                    raise(IndexError('%s[:] index is at %d'%(self.location,len(self)-1)))
-            self[key[0]]['.'.join(key[1:])]= pass_on_value
-        elif isinstance(self.omas_data,dict):
-            self.omas_data[key[0]]=value
+                    raise (IndexError('%s[:] index is at %d' %
+                                      (self.location, len(self) - 1)))
+            self[key[0]]['.'.join(key[1:])] = pass_on_value
+        elif isinstance(self.omas_data, dict):
+            self.omas_data[key[0]] = value
         elif key[0] in self.omas_data:
-            self.omas_data[key[0]]=value
-        elif key[0]==len(self.omas_data):
+            self.omas_data[key[0]] = value
+        elif key[0] == len(self.omas_data):
             self.omas_data.append(value)
         else:
-            raise IndexError('%s[:] index is at %d'%(self.location,len(self.omas_data)-1))
+            raise IndexError('%s[:] index is at %d' %
+                             (self.location, len(self.omas_data) - 1))
 
     def __getitem__(self, key):
         # handle individual keys as well as full paths
@@ -175,7 +182,10 @@ class omas(MutableMapping):
 
         # dynamic path creation
         elif key[0] not in self.keys():
-            self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
+            self.__setitem__(key[0],
+                             omas(
+                                 imas_version=self.imas_version,
+                                 consistency_check=self.consistency_check))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -220,7 +230,7 @@ class omas(MutableMapping):
     def __getnewargs__(self):
         # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
         # back from that string will use omas.__new__ with consistency_check=False
-        return (False,)
+        return (False, )
 
     def __len__(self):
         return len(self.omas_data)
@@ -228,13 +238,13 @@ class omas(MutableMapping):
     def __iter__(self):
         return iter(self.omas_data)
 
-    def __contains__(self,value):
+    def __contains__(self, value):
         return value in self.omas_data
 
     def keys(self):
-        if isinstance(self.omas_data,dict):
+        if isinstance(self.omas_data, dict):
             return self.omas_data.keys()
-        elif isinstance(self.omas_data,list):
+        elif isinstance(self.omas_data, list):
             return range(len(self.omas_data))
         else:
             return []
@@ -247,6 +257,7 @@ class omas(MutableMapping):
 
     def __repr__(self):
         return repr(self.omas_data)
+
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
@@ -320,9 +331,11 @@ def ods_sample():
     ods2['equilibrium']['time_slice'][2] = ods['equilibrium']['time_slice'][0]
 
     printd(
-        ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][0]['global_quantities'].location,
+        topic='sample')
     printd(
-        ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
+        ods2['equilibrium']['time_slice'][2]['global_quantities'].location,
+        topic='sample')
 
     ods2['equilibrium.time_slice.1.time'] = 2000.
     ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
