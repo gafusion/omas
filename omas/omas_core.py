@@ -40,6 +40,9 @@ class omas(MutableMapping):
     OMAS class
     '''
 
+    _map_type = dict
+    _seq_type = list
+
     def __init__(self,
                  consistency_check=omas_rcparams['consistency_check'],
                  imas_version=None,
@@ -127,15 +130,15 @@ class omas(MutableMapping):
                                 '^' * len(structure_key[0]) + '\n' + '%s' % options) from None
 
         # check what container type is required and if necessary switch it
-        if isinstance(key[0], int) and not isinstance(self.omas_data, list):
+        if isinstance(key[0], int) and not isinstance(self.omas_data, self._seq_type):
             if not self.omas_data or not len(self.omas_data):
-                self.omas_data = []
+                self.omas_data = self._seq_type()
             else:
                 raise (
                     Exception('Cannot convert from dict to list once omas object has data'))
-        if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
+        if not isinstance(key[0], int) and not isinstance(self.omas_data, self._map_type):
             if not self.omas_data or not len(self.omas_data):
-                self.omas_data = {}
+                self.omas_data = self._map_type()
             else:
                 raise (
                     Exception('Cannot convert from list to dict once omas object has data'))
@@ -151,7 +154,7 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             if key[0] not in self.keys():
-                if isinstance(self.omas_data, dict):
+                if isinstance(self.omas_data, self._map_type):
                     self.omas_data[key[0]] = value
                 elif key[0] == len(self.omas_data):
                     self.omas_data.append(value)
@@ -159,7 +162,7 @@ class omas(MutableMapping):
                     raise (IndexError('%s[:] index is at %d' %
                                       (self.location, len(self) - 1)))
             self[key[0]]['.'.join(key[1:])] = pass_on_value
-        elif isinstance(self.omas_data, dict):
+        elif isinstance(self.omas_data, self._map_type):
             self.omas_data[key[0]] = value
         elif key[0] in self.omas_data:
             self.omas_data[key[0]] = value
@@ -242,9 +245,9 @@ class omas(MutableMapping):
         return value in self.omas_data
 
     def keys(self):
-        if isinstance(self.omas_data, dict):
+        if isinstance(self.omas_data, self._map_type):
             return self.omas_data.keys()
-        elif isinstance(self.omas_data, list):
+        elif isinstance(self.omas_data, self._seq_type):
             return range(len(self.omas_data))
         else:
             return []
