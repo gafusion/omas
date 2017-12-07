@@ -395,7 +395,7 @@ def different_ods(ods1, ods2):
     for k in k2.difference(k1):
         return 'DIFF: key `%s` missing in 1st ods' % k
     for k in k1.intersection(k2):
-        if type(ods1[k]) != type(ods2[k]):
+        if not isinstance(ods1[k], type(ods2[k])):
             return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
         elif isinstance(ods1[k], basestring):
             if ods1[k] != ods2[k]:
