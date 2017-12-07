@@ -12,15 +12,16 @@ from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
-import weakref
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
     import cPickle as pickle
+    from collections import MutableMapping
 else:
     basestring = str
     unicode = str
     import pickle
+    from collections.abc import MutableMapping
 
 # --------------------------------------------
 # rcparams
