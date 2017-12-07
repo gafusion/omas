@@ -1,5 +1,4 @@
 from __future__ import print_function, division, unicode_literals
-from future.builtins import super
 
 from .omas_utils import *
 
