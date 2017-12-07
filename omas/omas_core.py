@@ -228,10 +228,10 @@ class omas(MutableMapping):
 
     def __contains__(self, key):
         key = _omas_key_dict_preprocessor(key)
-        h=self
+        h = self
         for k in key:
             if k in h.omas_data:
-                h=h[k]
+                h = h[k]
                 continue
             else:
                 return False
@@ -329,8 +329,8 @@ def ods_sample():
     ods['info.run'] = 0
 
     # check .get() method
-    assert(ods.get('info.shot')==ods['info.shot'])
-    assert(ods.get('info.bad',None)==None)
+    assert (ods.get('info.shot') == ods['info.shot'])
+    assert (ods.get('info.bad', None) == None)
 
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5

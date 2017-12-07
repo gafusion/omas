@@ -198,40 +198,73 @@ def save_omas_imas(ods, user=None, tokamak=None, imas_version=None, shot=None, r
 
     printd('Saving to IMAS: %s %s %s %d %d' % (user, tokamak, imas_version, shot, run), topic='imas')
 
-    paths = ods.paths()
+    paths = set_paths = ods.paths()
 
-    ids = imas_open(user, tokamak, imas_version, shot, run, new)
+    try:
+        ids = imas_open(user, tokamak, imas_version, shot, run, new)
 
-    set_paths = []
-    for path in paths:
-        set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
-    set_paths = filter(None, set_paths)
+        set_paths = []
+        for path in paths:
+            set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
+        set_paths = filter(None, set_paths)
 
-    for path in set_paths:
-        if 'time' in path[:1] or path[-1] != 'time':
-            continue
-        printd('writing %s' % o2i(path))
-        imas_set(ids, path, ods[path], True)
-    for path in set_paths:
-        if 'time' in path[:1] or path[-1] == 'time':
-            continue
-        printd('writing %s' % o2i(path))
-        imas_set(ids, path, ods[path], True)
+        for path in set_paths:
+            if 'time' in path[:1] or path[-1] != 'time':
+                continue
+            printd('writing %s' % o2i(path))
+            imas_set(ids, path, ods[path], True)
+        for path in set_paths:
+            if 'time' in path[:1] or path[-1] == 'time':
+                continue
+            printd('writing %s' % o2i(path))
+            imas_set(ids, path, ods[path], True)
+
+    except ImportError:
+        if not omas_rcparams['allow_fake_imas_fallback']:
+            raise
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
+        printe('overloaded save_omas_imas: %s'%filename)
+        from . import save_omas_nc
+        if not os.path.exists(omas_rcparams['fake_imas_dir']):
+            os.makedirs(omas_rcparams['fake_imas_dir'])
+        save_omas_nc(ods, filename)
+
     return set_paths
 
 
-def load_omas_imas(user, tokamak, imas_version, shot, run, paths):
+def load_omas_imas(user=None, tokamak=None, imas_version=None, shot=None, run=None, paths=None):
+    if paths is None:
+        raise (Exception('Must specify paths to load'))
+
+    if user is None:
+        user = os.environ['USER']
+    if imas_version is None:
+        imas_version = default_imas_version
+    if shot is None:
+        shot = None
+    if run is None:
+        run = 0
+
     printd('Loading from IMAS: %s %s %s %d %d' % (user, tokamak, imas_version, shot, run), topic='imas')
 
-    ids = imas_open(user, tokamak, imas_version, shot, run)
+    try:
+        ids = imas_open(user, tokamak, imas_version, shot, run)
 
-    ods = omas()
-    for path in paths:
-        data = imas_get(ids, path, None)
-        h = ods
-        for step in path[:-1]:
-            h = h[step]
-        h[path[-1]] = data
+        ods = omas()
+        for path in paths:
+            data = imas_get(ids, path, None)
+            h = ods
+            for step in path[:-1]:
+                h = h[step]
+            h[path[-1]] = data
+
+    except ImportError:
+        if not omas_rcparams['allow_fake_imas_fallback']:
+            raise
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
+        printe('overloaded load_omas_imas: %s'%filename)
+        from . import load_omas_nc
+        ods=load_omas_nc(filename)
 
     ods['info.shot'] = int(shot)
     ods['info.run'] = int(run)
