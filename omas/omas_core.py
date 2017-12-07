@@ -2,13 +2,16 @@ from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
 
+__version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
+
 __all__ = [
     'omas_rcparams', 'omas', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
     'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
     'save_omas_json', 'load_omas_json', 'test_omas_json', 'save_omas_nc', 'load_omas_nc',
     'test_omas_nc', 'save_omas_imas', 'load_omas_imas', 'test_omas_imas', 'save_omas_s3',
     'load_omas_s3', 'test_omas_s3', 'aggregate_imas_html_docs', 'create_json_structure',
-    'create_html_documentation', 'imas_json_dir', 'default_imas_version'
+    'create_html_documentation', 'imas_json_dir', 'default_imas_version',
+    '__version__'
 ]
 
 
