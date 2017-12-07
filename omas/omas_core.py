@@ -246,6 +246,15 @@ class omas(MutableMapping):
     def __repr__(self):
         return repr(self.omas_data)
 
+    def get(self, key, default=None):
+        '''
+        Check if key is present and if not return default value without creating value in omas data structure
+        '''
+        if key not in self:
+            return default
+        else:
+            return self[key]
+
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
