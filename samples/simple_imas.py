@@ -22,19 +22,6 @@ save_omas(ods, 'test.omas')
 ods1 = load_omas('test.omas')
 
 # Save to IMAS
-paths = save_omas_imas(
-    ods,
-    user='meneghini',
-    tokamak='ITER',
-    imas_version='3.10.1',
-    shot=133221,
-    run=0,
-    new=True)
+paths = save_omas_imas(ods, tokamak='ITER', shot=1, new=True)
 # Load from IMAS
-ods1 = load_omas_imas(
-    user='meneghini',
-    tokamak='ITER',
-    imas_version='3.10.1',
-    shot=133221,
-    run=0,
-    paths=paths)
+ods1 = load_omas_imas(tokamak='ITER', shot=1, paths=paths)

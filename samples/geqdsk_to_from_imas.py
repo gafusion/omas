@@ -12,21 +12,13 @@ eq = OMFITgeqdsk(OMFITsrc+'/../samples/g133221.01000')
 ods = eq.to_omas()
 
 # save OMAS data structure to IMAS
-user = os.environ['USER']
-tokamak = 'ITER'
-imas_version = os.environ.get('IMAS_VERSION', '3.10.1')
-shot = 1
-run = 0
-new = True
-paths = save_omas_imas(ods, user, tokamak, imas_version,
-                       shot, run, new)
+paths = save_omas_imas(ods, tokamak='DIII-D', new=True)
 
 # load IMAS to OMAS data structure
-ods1 = load_omas_imas(user, tokamak, imas_version, shot,
-                      run, paths)
+ods1 = load_omas_imas(user, tokamak='DIII-D', paths=paths)
 
 # read from OMAS data structure
-eq1 = OMFITgeqdsk('133221.02000').from_omas(ods1)
+eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)
 
 # save gEQDSK file
 eq1.deploy()

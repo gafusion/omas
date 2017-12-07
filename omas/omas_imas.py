@@ -36,7 +36,7 @@ def imas_open(user, tokamak, imas_version, shot, run, new=False):
     if not ids.isConnected():
         raise (Exception(
             'Failed to establish connection to IMAS database (user:%s tokamak:%s imas_version:%s shot:%s run:%s)' % (
-            user, tokamak, imas_version, shot, run)))
+                user, tokamak, imas_version, shot, run)))
     return ids
 
 
@@ -170,15 +170,15 @@ def save_omas_imas(ods, user=None, tokamak=None, imas_version=None, shot=None, r
 
     :param ods: OMAS data set
 
-    :param user: IMAS username (reads ods['info.user'] if user is None)
+    :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
 
     :param tokamak: IMAS tokamak (reads ods['info.tokamak'] if tokamak is None)
 
-    :param imas_version: IMAS version (reads ods['info.imas_version'] if imas_version is None)
+    :param imas_version: IMAS version (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
 
     :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
 
-    :param run: IMAS run (reads ods['info.run'] if run is None)
+    :param run: IMAS run (reads ods['info.run'] if run is None and finally fallsback on 0)
 
     :param new: whether the open should create a new IMAS tree
 
@@ -186,15 +186,15 @@ def save_omas_imas(ods, user=None, tokamak=None, imas_version=None, shot=None, r
     '''
 
     if user is None:
-        user = ods['info.user']
+        user = ods.get('info.user', os.environ['USER'])
     if tokamak is None:
-        tokamak = ods['info.tokamak']
+        tokamak = ods.get('info.tokamak', None)
     if imas_version is None:
-        imas_version = ods['info.imas_version']
+        imas_version = ods.get('info.imas_version', default_imas_version)
     if shot is None:
-        shot = ods['info.shot']
+        shot = ods.get('info.shot', None)
     if run is None:
-        run = ods['info.run']
+        run = ods.get('info.run', 0)
 
     printd('Saving to IMAS: %s %s %s %d %d' % (user, tokamak, imas_version, shot, run), topic='imas')
 
