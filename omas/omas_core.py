@@ -226,8 +226,16 @@ class omas(MutableMapping):
     def __iter__(self):
         return iter(self.omas_data)
 
-    def __contains__(self, value):
-        return value in self.omas_data
+    def __contains__(self, key):
+        key = _omas_key_dict_preprocessor(key)
+        h=self
+        for k in key:
+            if k in h.omas_data:
+                h=h[k]
+                continue
+            else:
+                return False
+        return True
 
     def keys(self):
         if isinstance(self.omas_data, dict):
@@ -320,6 +328,10 @@ def ods_sample():
     ods['info.shot'] = 1
     ods['info.run'] = 0
 
+    # check .get() method
+    assert(ods.get('info.shot')==ods['info.shot'])
+    assert(ods.get('info.bad',None)==None)
+
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
 
@@ -404,12 +416,15 @@ def different_ods(ods1, ods2):
 _tests = ['pkl', 'json', 'nc', 's3', 'imas']
 
 
-def test_omas_suite(test_type=None):
+def test_omas_suite(ods=None, test_type=None):
     '''
+    :param ods: omas structure to test. If None this is set to ods_sample
+
     :param test_type: None tests all suite, otherwise choose among %s
     '''
 
-    ods = ods_sample()
+    if ods is None:
+        ods = ods_sample()
 
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type

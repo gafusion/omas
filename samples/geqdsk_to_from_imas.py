@@ -6,7 +6,7 @@ import os
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 
 # read gEQDSK file in OMFIT
-eq = OMFITgeqdsk(OMFITsrc+'/../samples/g133221.01000')
+eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
 
 # convert gEQDSK to OMAS data structure
 ods = eq.to_omas()
