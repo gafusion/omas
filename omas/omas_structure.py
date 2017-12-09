@@ -158,12 +158,14 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
                     if col == 'full_path':
                         entries[k][col] = '\n'.join(entries[k][col]).strip().split('\n')[0]
                         entries[k][col] = re.sub(r'\(i[0-9]+\)', '(:)', entries[k][col])
+                        entries[k][col] = re.sub(r'\(itime\)', '(:)', entries[k][col])
                         entries[k][col] = re.sub(r'\(', '[', entries[k][col])
                         entries[k][col] = re.sub(r'\)', ']', entries[k][col])
                         entries[k][col] = fix.get(entries[k][col], entries[k][col])
                     elif col == 'coordinates':
                         entries[k][col] = map(lambda x: re.sub('^[0-9]+- ', '', x), entries[k][col])
                         entries[k][col] = map(lambda x: re.sub(r'\(i[0-9]+\)', '(:)', x), entries[k][col])
+                        entries[k][col] = map(lambda x: re.sub(r'\(itime\)', '(:)', x), entries[k][col])
                         entries[k][col] = map(lambda x: re.sub(r'\(', '[', x), entries[k][col])
                         entries[k][col] = map(lambda x: re.sub(r'\)', ']', x), entries[k][col])
                         entries[k][col] = map(lambda x: fix.get(x, x), entries[k][col])
