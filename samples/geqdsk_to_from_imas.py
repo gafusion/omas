@@ -1,3 +1,4 @@
+from __future__ import print_function, division, unicode_literals
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 import os

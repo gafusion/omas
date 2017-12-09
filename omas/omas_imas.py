@@ -222,8 +222,9 @@ def save_omas_imas(ods, user=None, tokamak=None, imas_version=None, shot=None, r
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
-        printe('overloaded save_omas_imas: %s'%filename)
+        filename = os.sep.join(
+            [omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
+        printe('overloaded save_omas_imas: %s' % filename)
         from . import save_omas_nc
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
@@ -261,10 +262,11 @@ def load_omas_imas(user=None, tokamak=None, imas_version=None, shot=None, run=No
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
-        printe('overloaded load_omas_imas: %s'%filename)
+        filename = os.sep.join(
+            [omas_rcparams['fake_imas_dir'], '%s_%s_%s_%d_%d.nc' % (user, tokamak, imas_version, shot, run)])
+        printe('overloaded load_omas_imas: %s' % filename)
         from . import load_omas_nc
-        ods=load_omas_nc(filename)
+        ods = load_omas_nc(filename)
 
     ods['info.shot'] = int(shot)
     ods['info.run'] = int(run)

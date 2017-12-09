@@ -29,8 +29,8 @@ def aggregate_imas_html_docs(imas_html_dir=default_imas_html_dir, imas_version=d
 
     :param imas_version: IMAS version
     '''
-    if os.path.exists(os.sep.join([imas_json_dir, re.sub('\.', '_', default_imas_version), 'clean.xls'])):
-        print(os.sep.join([imas_json_dir, re.sub('\.', '_', default_imas_version),
+    if os.path.exists(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'clean.xls'])):
+        print(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version),
                            'clean.xls']) + ' exists -- skipped aggregate_imas_html_docs step')
         return
 
@@ -90,6 +90,7 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
     # read xls file
     import pandas
     clean = os.path.abspath(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'clean']))
+    print('reading %s.xls'%clean)
     data = pandas.read_excel(clean + '.xls', 'Sheet1')
     data.rename(columns={'Full path name': 'full_path', 'Description': 'description', 'Data Type': 'data_type',
                          'Coordinates': 'coordinates'}, inplace=True)
@@ -156,11 +157,13 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
                 for col in cols:
                     if col == 'full_path':
                         entries[k][col] = '\n'.join(entries[k][col]).strip().split('\n')[0]
+                        entries[k][col] = re.sub(r'\(i[0-9]+\)', '(:)', entries[k][col])
                         entries[k][col] = re.sub(r'\(', '[', entries[k][col])
                         entries[k][col] = re.sub(r'\)', ']', entries[k][col])
                         entries[k][col] = fix.get(entries[k][col], entries[k][col])
                     elif col == 'coordinates':
                         entries[k][col] = map(lambda x: re.sub('^[0-9]+- ', '', x), entries[k][col])
+                        entries[k][col] = map(lambda x: re.sub(r'\(i[0-9]+\)', '(:)', x), entries[k][col])
                         entries[k][col] = map(lambda x: re.sub(r'\(', '[', x), entries[k][col])
                         entries[k][col] = map(lambda x: re.sub(r'\)', ']', x), entries[k][col])
                         entries[k][col] = map(lambda x: fix.get(x, x), entries[k][col])
