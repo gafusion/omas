@@ -26,3 +26,10 @@ ods1 = load_omas('test.omas')
 paths = save_omas_imas(ods, tokamak='ITER', shot=1, new=True)
 # Load from IMAS
 ods1 = load_omas_imas(tokamak='ITER', shot=1, paths=paths)
+
+# check data
+check = different_ods(ods, ods1)
+if not check:
+    print('OMAS data got saved and loaded correctly')
+else:
+    print(check)

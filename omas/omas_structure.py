@@ -69,11 +69,11 @@ fix = {}
 # additional data structures (NOTE:info information carries shot/run/version/tokamak/user info through different save formats)
 add_datastructures = {}
 add_datastructures['info'] = [
+    ['user', 'user name', 'STR_0D', ''],
+    ['tokamak', 'tokamak name', 'STR_0D', ''],
     ['shot', 'shot number', 'INT_0D', ''],
     ['run', 'run number', 'INT_0D', ''],
     ['imas_version', 'imas version', 'STR_0D', ''],
-    ['tokamak', 'tokamak name', 'STR_0D', ''],
-    ['user', 'user name', 'STR_0D', ''],
 ]
 
 

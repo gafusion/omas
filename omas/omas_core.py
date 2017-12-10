@@ -92,6 +92,10 @@ class omas(MutableMapping):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
 
+        # non-scalar data is saved as numpy arrays
+        if isinstance(value,list):
+            value=numpy.array(value)
+
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
@@ -101,6 +105,7 @@ class omas(MutableMapping):
         location = '.'.join(filter(None, [self.location, str(key[0])]))
         location = re.sub('^[0-9:]+$', ':', str(location))
 
+        # perform consistency check with IMAS structure
         if self.consistency_check:
             try:
                 structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
@@ -327,7 +332,7 @@ def ods_sample():
     # info ODS is used for keeping track of IMAS metadata
     ods['info.user'] = unicode(os.environ['USER'])
     ods['info.tokamak'] = 'ITER'
-    ods['info.imas_version'] = unicode(os.environ.get('IMAS_VERSION', '3.10.1'))
+    ods['info.imas_version'] = default_imas_version
     ods['info.shot'] = 1
     ods['info.run'] = 0
 
@@ -401,9 +406,11 @@ def different_ods(ods1, ods2):
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
     for k in k1.difference(k2):
-        return 'DIFF: key `%s` missing in 2nd ods' % k
+        if not k.startswith('info.'):
+            return 'DIFF: key `%s` missing in 2nd ods' % k
     for k in k2.difference(k1):
-        return 'DIFF: key `%s` missing in 1st ods' % k
+        if not k.startswith('info.'):
+            return 'DIFF: key `%s` missing in 1st ods' % k
     for k in k1.intersection(k2):
         if type(ods1[k]) != type(ods2[k]):
             return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
@@ -419,7 +426,7 @@ def different_ods(ods1, ods2):
 _tests = ['pkl', 'json', 'nc', 's3', 'imas']
 
 
-def test_omas_suite(ods=None, test_type=None):
+def test_omas_suite(ods=None, test_type=None, do_raise=False):
     '''
     :param ods: omas structure to test. If None this is set to ods_sample
 
@@ -451,6 +458,8 @@ def test_omas_suite(ods=None, test_type=None):
                 ods1 = globals()['test_omas_' + t1](ods)
             except Exception as _excp:
                 failed1 = True
+                if do_raise:
+                    raise
             for k2, t2 in enumerate(_tests):
                 try:
                     if failed1:
@@ -469,7 +478,8 @@ def test_omas_suite(ods=None, test_type=None):
                 except Exception as _excp:
                     print('FROM %s TO %s : NO --> %s' %
                           (t1.center(5), t2.center(5), repr(_excp)))
-
+                    if do_raise:
+                        raise
         print('=' * 20)
         print(results.astype(int))
         print('=' * 20)
