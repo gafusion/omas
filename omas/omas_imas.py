@@ -63,8 +63,13 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
+    # `info` IDS is used by OMAS to hold user, tokamak, shot, run, imas_version
+    # for saving methods that do not carry that information. IMAS does not store
+    # this information as part of the data dictionary.
     if ds == 'info':
         return
+
+    # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
         m = getattr(ids, ds)
     elif skipMissingNodes is not False:
@@ -73,8 +78,11 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
         return
     else:
         raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
+
+    # what is ExpIdx ?
     m.setExpIdx(0)
 
+    # traverse IMAS structure until reaching the leaf
     out = m
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
@@ -97,18 +105,24 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
                 out.resize(p + 1)
                 out = out[p]
 
+    # if we are allocating data, simply stop here
     if allocate:
         return [ds] + path
 
+    # assign data to leaf node
     if isinstance(value, (basestring, numpy.ndarray)):
         setattr(out, path[-1], value)
     else:
         setattr(out, path[-1], numpy.array(value))
+
+    # write the data to IMAS
     try:
         m.put(0)
     except Exception:
         printe('Error setting: %s' % repr(path))
         raise
+
+    # return path
     return [ds] + path
 
 
@@ -185,6 +199,8 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
     :return: paths that have been written to IMAS
     '''
 
+    # handle default values for user, tokamak, shot, run, imas_version
+    # it tries to re-use existing information
     if user is None:
         user = ods.get('info.user', os.environ['USER'])
     if tokamak is None:
@@ -197,12 +213,15 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
     printd('Saving to IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
         user, tokamak, shot, run, imas_version), topic='imas')
 
+    # get the list of paths from ODS
     paths = set_paths = ods.paths()
 
     try:
+        # open IMAS tree
         ids = imas_open(user=user, tokamak=tokamak, shot=shot, run=run, new=new, imas_version=imas_version)
 
     except ImportError:
+        # fallback on saving IMAS as NC file if IMAS is not installed
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
         filename = os.sep.join(
@@ -220,16 +239,20 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
         save_omas_nc(ods, filename)
 
     else:
+        # allocate memory
         set_paths = []
         for path in paths:
             set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
         set_paths = filter(None, set_paths)
 
+        # first assign time information
         for path in set_paths:
             if 'time' in path[:1] or path[-1] != 'time':
                 continue
             printd('writing %s' % o2i(path))
             imas_set(ids, path, ods[path], True)
+
+        # make sure to assign time information
         for path in set_paths:
             if 'time' in path[:1] or path[-1] == 'time':
                 continue

@@ -15,10 +15,10 @@ ods = eq.to_omas()
 # save OMAS data structure to IMAS
 paths = save_omas_imas(ods, tokamak='DIII-D', new=True)
 
-# load IMAS to OMAS data structure
+# load OMAS data structure from IMAS
 ods1 = load_omas_imas(user, tokamak='DIII-D', paths=paths)
 
-# read from OMAS data structure
+# generate gEQDSK file from OMAS data structure
 eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)
 
 # save gEQDSK file

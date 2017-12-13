@@ -93,8 +93,8 @@ class omas(MutableMapping):
         key = _omas_key_dict_preprocessor(key)
 
         # non-scalar data is saved as numpy arrays
-        if isinstance(value,list):
-            value=numpy.array(value)
+        if isinstance(value, list):
+            value = numpy.array(value)
 
         # if the user has entered path rather than a single key
         if len(key) > 1:

@@ -47,9 +47,9 @@ def load_omas_json(filename, **kw):
 
     tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
 
-    tmp1=omas()
+    tmp1 = omas()
     for item in tmp.flat():
-        tmp1[item]=tmp[item]
+        tmp1[item] = tmp[item]
 
     return tmp1
 

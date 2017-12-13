@@ -90,7 +90,7 @@ def create_json_structure(imas_version=default_imas_version, data_structures=[])
     # read xls file
     import pandas
     clean = os.path.abspath(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'clean']))
-    print('reading %s.xls'%clean)
+    print('reading %s.xls' % clean)
     data = pandas.read_excel(clean + '.xls', 'Sheet1')
     data.rename(columns={'Full path name': 'full_path', 'Description': 'description', 'Data Type': 'data_type',
                          'Coordinates': 'coordinates'}, inplace=True)

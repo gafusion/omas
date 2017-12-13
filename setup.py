@@ -23,7 +23,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 
 setup(
     name='omas',
-    version=open('omas/version','r').read().strip(),
+    version=open('omas/version', 'r').read().strip(),
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
@@ -44,7 +44,7 @@ setup(
     packages=['omas', 'omas.imas_structures.3_10_1'],
     package_data={
         'omas.imas_structures.3_10_1': ['*.json'],
-        'omas': ['*.py','version']
+        'omas': ['*.py', 'version']
     },
     install_requires=install_requires,
     extras_require={'imas': ['imas'],
