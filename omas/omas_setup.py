@@ -12,6 +12,7 @@ from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
+import tempfile
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
@@ -29,7 +30,8 @@ else:
 omas_rcparams = {
     'consistency_check': bool(int(os.environ.get('OMAS_CONSISTENCY_CHECK', '1'))),
     'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR',
-                                    os.sep.join([os.environ['HOME'], 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
+                                    os.sep.join(
+                                        [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0')))
 }
 
