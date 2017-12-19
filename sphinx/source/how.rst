@@ -1,3 +1,6 @@
+Concept
+=======
+
 The hierarchical IMAS data model is represented in OMAS as a set of nested `omas` objects.
 
 Techically speaking **the Python `omas` class is a subclass of the standard Python dictionary class**,

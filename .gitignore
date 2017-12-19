@@ -22,4 +22,5 @@ docs/
 dist/
 omas.egg-info/
 
-test*
+test.*
+g133221*
