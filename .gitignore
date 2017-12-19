@@ -21,3 +21,6 @@ sphinx/source/schema/
 docs/
 dist/
 omas.egg-info/
+
+test.*
+g133221*

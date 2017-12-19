@@ -46,8 +46,12 @@ def load_omas_json(filename, **kw):
         return tmp
 
     tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
-    tmp.consistency_check = omas_rcparams['consistency_check']
-    return tmp
+
+    tmp1 = omas()
+    for item in tmp.flat():
+        tmp1[item] = tmp[item]
+
+    return tmp1
 
 
 def test_omas_json(ods):
