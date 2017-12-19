@@ -410,6 +410,7 @@ def different_ods(ods1, ods2):
 
 
 _tests = ['pkl', 'json', 'nc', 's3', 'imas']
+_tests = ['pkl', 'json', 'nc', 's3', 'imas', 'hdc']
 
 
 def test_omas_suite(test_type=None):
@@ -511,6 +512,7 @@ from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
+from .omas_hdc import *
 
 # --------------------------------------------
 if __name__ == '__main__':
