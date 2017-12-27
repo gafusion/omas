@@ -93,18 +93,17 @@ add_datastructures['info'] = {
 }
 
 
-def create_json_structure(imas_version=default_imas_version, data_structures=[]):
+def create_json_structure(imas_version=default_imas_version):
     file = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + 'IDSDef.xml'
 
     import xmltodict
     tmp = xmltodict.parse(open(file).read())
 
     def process_path(inv):
-        inv = re.sub(r'\(i[0-9]+\)', '(:)', inv)
-        inv = re.sub(r'\(itime\)', '(:)', inv)
-        inv = re.sub(r'\(', '[', inv)
-        inv = re.sub(r'\)', ']', inv)
         inv = re.sub(r'/', '.', inv)
+        inv = inv.split(' OR ')[0]
+        inv = remove_parentheses(inv, '[:]')
+        inv = re.sub('\[:\]$', '', inv)
         return inv
 
     def traverse(me, hout, path, fout):

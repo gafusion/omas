@@ -146,6 +146,36 @@ def remote_uri(uri, filename, up_down):
             bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
 
 
+def remove_parentheses(inv, replace_with=''):
+    '''
+    function used to remove/replace top-level matching parenthesis from a string
+
+    :param inv: input string
+
+    :param replace_with: string to replace matching parenthesis with
+
+    :return: input string without first set of matching parentheses
+    '''
+    k = 0
+    lp = ''
+    out = ''
+    for c in inv:
+        # go one level deep
+        if c == '(':
+            k += 1
+            lp = c
+        # go one level up
+        elif c == ')':
+            k -= 1
+            lp += c
+            if k == 0:
+                out += replace_with
+        # zero depth: add character to output string
+        elif k == 0:
+            out += c
+    return out
+
+
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
