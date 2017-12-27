@@ -9,6 +9,9 @@ __pycache__/
 
 omas_doc.html
 
+omas/data-dictionary
+omas/Saxon*
+IDSDef.xml
 omas/imas_structures/*/clean.html
 omas/imas_structures/*/*.json
 
@@ -16,6 +19,7 @@ sphinx/build/
 sphinx/source/data.rst
 sphinx/source/code.rst
 sphinx/source/usage.rst
+sphinx/source/schema.rst
 sphinx/source/schema/
 
 docs/

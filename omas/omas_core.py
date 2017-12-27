@@ -9,8 +9,9 @@ __all__ = [
     'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
     'save_omas_json', 'load_omas_json', 'test_omas_json', 'save_omas_nc', 'load_omas_nc',
     'test_omas_nc', 'save_omas_imas', 'load_omas_imas', 'test_omas_imas', 'save_omas_s3',
-    'load_omas_s3', 'test_omas_s3', 'aggregate_imas_html_docs', 'create_json_structure',
-    'create_html_documentation', 'imas_json_dir', 'default_imas_version',
+    'load_omas_s3', 'test_omas_s3',
+    'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
+    'imas_json_dir', 'default_imas_version',
     '__version__'
 ]
 
@@ -41,8 +42,8 @@ class omas(MutableMapping):
     '''
 
     def __init__(self,
+                 imas_version=default_imas_version,
                  consistency_check=omas_rcparams['consistency_check'],
-                 imas_version=None,
                  location='',
                  structure={},
                  *args, **kw):
@@ -111,7 +112,7 @@ class omas(MutableMapping):
                 structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
                 if isinstance(value, omas):
                     if not self.structure:
-                        structure = load_structure(key[0])[1][key[0]]
+                        structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
                         structure = self.structure[structure_key[0]]
                     # check that tha data will go in the right place

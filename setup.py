@@ -3,7 +3,7 @@ import os
 
 install_requires = ['numpy', 'netCDF4', 'boto3']
 
-extras_require = {'imas': ['imas'], 'build_structures': ['pandas', 'xlrd']}
+extras_require = {'imas': ['imas'], 'build_structures': ['xmltodict','bs4']}
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep

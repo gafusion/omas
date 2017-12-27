@@ -29,8 +29,26 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     ids = imas.ids()
     ids.setShot(shot)
     ids.setRun(run)
-    if new:
-        ids.create_env(user, tokamak, imas_version)
+
+    if user is None and tokamak is None:
+        pass
+    elif user is None or tokamak is None:
+        raise (Exception('user={user}, tokamak={tokamak}, imas_version={imas_version}\n'
+                         'Either specify all or none of `user`, `tokamak`, `imas_version`\n'
+                         'If none of them are specified then use `imasdb` command to set MDSPLUS_TREE_BASE_? environmental variables'.format(
+            user=user, tokamak=tokamak, shot=shot, run=run, imas_version=imas_version)))
+
+    if user is None and tokamak is None:
+        if new:
+            ids.create()
+        else:
+            ids.open()
+        if not ids.isConnected():
+            raise (Exception(
+                'Failed to establish connection to IMAS database'
+                '(shot:{shot} run:{run}, DB:{db})'.format(
+                    shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+
     else:
         ids.open_env(user, tokamak, imas_version)
     if not ids.isConnected():
@@ -154,8 +172,11 @@ def imas_get(ids, path, skipMissingNodes=False):
     else:
         raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
 
-    m.get()
+    # use time to figure out if this IDS has data
+    if not len(m.time):
+        m.get()
 
+    # traverse the IDS to get the data
     out = m
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
@@ -171,7 +192,6 @@ def imas_get(ids, path, skipMissingNodes=False):
         else:
             out = out[p]
 
-    printd('data: ' + repr(out), topic='imas')
     return out
 
 
@@ -210,8 +230,12 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
     if run is None:
         run = ods.get('info.run', 0)
 
-    printd('Saving to IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
-        user, tokamak, shot, run, imas_version), topic='imas')
+    if user is not None and tokamak is not None:
+        printd('Saving to IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
+            user, tokamak, shot, run, imas_version), topic='imas')
+    elif user is None and tokamak is None:
+        printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (
+            shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
     # get the list of paths from ODS
     paths = set_paths = ods.paths()
@@ -281,8 +305,9 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
 
     :return: OMAS data set
     '''
-    if paths is None:
-        raise (Exception('Must specify paths to load'))
+
+    if shot is None or run is None:
+        raise (Exception('`shot` and `run` must be specified'))
 
     printd('Loading from IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
         user, tokamak, shot, run, imas_version), topic='imas')
@@ -301,6 +326,35 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
         ods = load_omas_nc(filename)
 
     else:
+        # if paths is None then figure out what IDS are available and get ready to retrieve everything
+        if paths is None:
+            paths = [[structure] for structure in
+                     list_structures(imas_version=imas_version, list_add_datastructures=False)]
+        joined_paths = map(lambda x: separator.join(map(str, x)), paths)
+
+        # fetch relevant IDSs and find available signals
+        fetch_paths = []
+        for path in paths:
+            ds = path[0]
+            path = path[1:]
+            if not len(getattr(ids, ds).time):
+                getattr(ids, ds).get()
+            if len(getattr(ids, ds).time):
+                print('* ', ds)
+                available_paths = filled_paths_in_ids(ids, load_structure(ds,imas_version=imas_version)[1], [], [])
+                joined_available_paths = map(lambda x: separator.join(map(str, x)), available_paths)
+                for jpath, path in zip(joined_paths, paths):
+                    if path[0] != ds:
+                        continue
+                    jpath = re.sub('\.', '\\.', jpath)
+                    jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
+                    print(jpath)
+                    for japath, apath in zip(joined_available_paths, available_paths):
+                        if re.match(jpath, japath):
+                            fetch_paths.append(apath)
+            else:
+                print('- ', ds)
+
         ods = omas()
         for path in paths:
             data = imas_get(ids, path, None)
@@ -316,6 +370,33 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
     ods['info.imas_version'] = unicode(imas_version)
 
     return ods
+
+
+def filled_paths_in_ids(me, ds, path=[], paths=[]):
+    '''
+    list paths in an IDS that are filled
+
+    :param me: input ids
+
+    :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
+
+    :return: returns list of paths in an IDS that are filled
+    '''
+    if not len(ds):
+        paths.append(path)
+        # print(paths[-1])
+        return paths
+    keys = ds.keys()
+    if keys[0] == ':':
+        keys = range(len(me))
+    for kid in keys:
+        propagate_path = copy.copy(path)
+        propagate_path.append(kid)
+        if isinstance(kid, basestring):
+            paths = filled_paths_in_ids(getattr(me, kid), ds[kid], propagate_path, paths)
+        else:
+            paths = filled_paths_in_ids(me[kid], ds[':'], propagate_path, paths)
+    return paths
 
 
 def test_omas_imas(ods):
