@@ -17,13 +17,13 @@ __all__ = [
 
 
 def _omas_key_dict_preprocessor(key):
-    '''
+    """
     converts a omas string path to a list of keys that make the path
 
     :param key: omas string path
 
     :return: list of keys that make the path
-    '''
+    """
     if not isinstance(key, (list, tuple)):
         key = str(key)
         key = re.sub('\]', '', re.sub('\[', '.', key)).split('.')
@@ -37,34 +37,39 @@ def _omas_key_dict_preprocessor(key):
 
 
 class omas(MutableMapping):
-    '''
+    """
     OMAS class
-    '''
+    """
 
     def __init__(self,
                  imas_version=default_imas_version,
                  consistency_check=omas_rcparams['consistency_check'],
                  location='',
-                 structure={},
-                 *args, **kw):
-        '''
+                 structure=None):
+        """
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
-        '''
+
+        :param location: string with location of this object relative to IMAS schema
+
+        :param structure: IMAS schema to use
+        """
         self.omas_data = None
         self._consistency_check = consistency_check
         self.imas_version = imas_version
         self.location = location
+        if structure is None:
+            structure = {}
         self.structure = structure
 
     @property
     def consistency_check(self):
-        '''
+        """
         property that sets whether consistency with IMAS schema is enabled or not
 
         :return: True/False
-        '''
+        """
         return self._consistency_check
 
     @consistency_check.setter
@@ -75,13 +80,13 @@ class omas(MutableMapping):
                 self[item].consistency_check = value
 
     def _validate(self, value, structure):
-        '''
+        """
         validate that the value is consistent with the provided structure field
 
         :param value: sub-tree to be checked
 
         :param structure: reference structure
-        '''
+        """
         for key in value.keys():
             structure_key = re.sub('^[0-9:]+$', ':', str(key))
             if isinstance(value[key], omas) and value[key].consistency_check:
@@ -108,8 +113,9 @@ class omas(MutableMapping):
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
+            structure = {}
+            structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
             try:
-                structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
                 if isinstance(value, omas):
                     if not self.structure:
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
@@ -201,11 +207,11 @@ class omas(MutableMapping):
             return self.omas_data.__delitem__(key[0])
 
     def paths(self, **kw):
-        '''
+        """
         Traverse the ods and return paths that have data
 
         :return: list of paths that have data
-        '''
+        """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
@@ -216,9 +222,9 @@ class omas(MutableMapping):
         return paths
 
     def flat(self):
-        '''
+        """
         :return: flat dictionary representation of the data
-        '''
+        """
         tmp = OrderedDict()
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
@@ -264,9 +270,13 @@ class omas(MutableMapping):
         return repr(self.omas_data)
 
     def get(self, key, default=None):
-        '''
+        """
         Check if key is present and if not return default value without creating value in omas data structure
-        '''
+
+        :param key: dictionary key to get
+
+        :param default: return default if key is not found
+        """
         if key not in self:
             return default
         else:
@@ -277,7 +287,7 @@ class omas(MutableMapping):
 # save and load OMAS with Python pickle
 # --------------------------------------------
 def save_omas_pkl(ods, filename, **kw):
-    '''
+    """
     Save OMAS data set to Python pickle
 
     :param ods: OMAS data set
@@ -285,35 +295,35 @@ def save_omas_pkl(ods, filename, **kw):
     :param filename: filename to save to
 
     :param kw: keywords passed to pickle.dump function
-    '''
-    printd('Saving to %s' % (filename), topic='pkl')
+    """
+    printd('Saving to %s' % filename, topic='pkl')
 
     with open(filename, 'wb') as f:
         pickle.dump(ods, f, **kw)
 
 
 def load_omas_pkl(filename):
-    '''
+    """
     Load OMAS data set from Python pickle
 
     :param filename: filename to save to
 
     :returns: ods OMAS data set
-    '''
-    printd('Loading from %s' % (filename), topic='pkl')
+    """
+    printd('Loading from %s' % filename, topic='pkl')
 
     with open(filename, 'rb') as f:
         return pickle.load(f)
 
 
 def test_omas_pkl(ods):
-    '''
+    """
     test save and load Python pickle
 
     :param ods: ods
 
     :return: ods
-    '''
+    """
     filename = 'test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
@@ -324,10 +334,9 @@ def test_omas_pkl(ods):
 # tools
 # --------------------------------------------
 def ods_sample():
-    '''
+    """
     create sample ODS data
-    :return:
-    '''
+    """
     ods = omas()
 
     # info ODS is used for keeping track of IMAS metadata
@@ -339,7 +348,7 @@ def ods_sample():
 
     # check .get() method
     assert (ods.get('info.shot') == ods['info.shot'])
-    assert (ods.get('info.bad', None) == None)
+    assert (ods.get('info.bad', None) is None)
 
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
@@ -376,10 +385,10 @@ def ods_sample():
     # check data slicing is working
     printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
-    ckBKP = ods.consistency_check
+    ckbkp = ods.consistency_check
     tmp = pickle.dumps(ods2)
     ods2 = pickle.loads(tmp)
-    if ods2.consistency_check != ckBKP:
+    if ods2.consistency_check != ckbkp:
         raise (Exception('consistency_check attribute changed'))
 
     save_omas_pkl(ods2, 'test.pkl')
@@ -392,7 +401,7 @@ def ods_sample():
 
 
 def different_ods(ods1, ods2):
-    '''
+    """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
     :param ods1: first ods to check
@@ -400,7 +409,7 @@ def different_ods(ods1, ods2):
     :param ods2: second ods to check
 
     :return: string with reason for difference, or False otherwise
-    '''
+    """
     ods1 = ods1.flat()
     ods2 = ods2.flat()
 
@@ -428,11 +437,13 @@ _tests = ['pkl', 'json', 'nc', 's3', 'imas']
 
 
 def test_omas_suite(ods=None, test_type=None, do_raise=False):
-    '''
+    """
     :param ods: omas structure to test. If None this is set to ods_sample
 
     :param test_type: None tests all suite, otherwise choose among %s
-    '''
+
+    :param do_raise: raise error if something goes wrong
+    """
 
     if ods is None:
         ods = ods_sample()
@@ -493,13 +504,13 @@ test_omas_suite.__doc__ = test_omas_suite.__doc__ % _tests
 # save and load OMAS with default saving method
 # --------------------------------------------
 def save_omas(ods, filename):
-    '''
+    """
     Save omas data to filename. The file extension defines format to use.
 
     :param ods: OMAS data set
 
     :param filename: filename to save to
-    '''
+    """
     if os.path.splitext(filename)[1].lower() == '.json':
         return save_omas_json(ods, filename)
     elif os.path.splitext(filename)[1].lower() == '.nc':
@@ -509,13 +520,13 @@ def save_omas(ods, filename):
 
 
 def load_omas(filename):
-    '''
+    """
     Load omas data from filename. The file extension defines format to use.
 
     :param filename: filename to load from
 
     :returns: ods OMAS data set
-    '''
+    """
     if os.path.splitext(filename)[1].lower() == '.json':
         return load_omas_json(filename)
     elif os.path.splitext(filename)[1].lower() == '.nc':

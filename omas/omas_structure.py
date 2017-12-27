@@ -7,12 +7,12 @@ from .omas_utils import *
 # generation of the imas structure json files
 # --------------------------------------------
 def generate_xml_schemas():
-    '''
+    """
     Generate IMAS IDSDef.xml files by:
      1. clone the IMAS data-dictionary repository (access to git.iter.org required)
      2. download the Saxon XSLT and XQuery Processor
      3. generate IDSDef.xml in imas_structures folder
-    '''
+    """
     import subprocess
 
     # clone the IMAS data-dictionary repository
@@ -25,27 +25,27 @@ def generate_xml_schemas():
     # download Saxon
     sax_folder = os.sep.join([imas_json_dir, '..', 'SaxonHE9-6-0-10J'])
     if not os.path.exists(sax_folder):
-        subprocess.Popen('''
+        subprocess.Popen("""
         cd %s
         curl https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/9.6/SaxonHE9-6-0-10J.zip > SaxonHE9-6-0-10J.zip
         unzip -d SaxonHE9-6-0-10J SaxonHE9-6-0-10J.zip
-        rm SaxonHE9-6-0-10J.zip''' % os.sep.join([imas_json_dir, '..']), shell=True).communicate()
+        rm SaxonHE9-6-0-10J.zip""" % os.sep.join([imas_json_dir, '..']), shell=True).communicate()
 
     # find IMAS data-dictionary tags
     result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
     tags = filter(lambda x: x.startswith('3.') and int(x.split('.')[1]) >= 10, result.split())
 
     # fetch data structure updates
-    subprocess.Popen('''
+    subprocess.Popen("""
     cd {dd_folder}
     git fetch
-    '''.format(dd_folder=dd_folder), shell=True).communicate()
+    """.format(dd_folder=dd_folder), shell=True).communicate()
 
     # loop over tags and generate IDSDef.xml files
     for tag in tags:
         _tag = re.sub('\.', '_', tag)
         if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])):
-            subprocess.Popen('''
+            subprocess.Popen("""
                 export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
                 cd {dd_folder}
                 git checkout {tag}
@@ -53,7 +53,7 @@ def generate_xml_schemas():
                 make
                 mkdir {imas_json_dir}/{_tag}/
                 cp IDSDef.xml {imas_json_dir}/{_tag}/
-                '''.format(tag=tag, _tag=_tag, imas_json_dir=imas_json_dir,
+                """.format(tag=tag, _tag=_tag, imas_json_dir=imas_json_dir,
                            dd_folder=dd_folder), shell=True).communicate()
 
 

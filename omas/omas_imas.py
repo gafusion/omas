@@ -1,14 +1,14 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import omas, save_omas_pkl, load_omas_pkl
+from .omas_core import omas
 
 
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
 def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_version):
-    '''
+    """
     function to open an IMAS
 
     :param user: IMAS username
@@ -24,7 +24,7 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     :param imas_version: IMAS version
 
     :return: IMAS ids
-    '''
+    """
     import imas
     ids = imas.ids()
     ids.setShot(shot)
@@ -35,8 +35,9 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     elif user is None or tokamak is None:
         raise (Exception('user={user}, tokamak={tokamak}, imas_version={imas_version}\n'
                          'Either specify all or none of `user`, `tokamak`, `imas_version`\n'
-                         'If none of them are specified then use `imasdb` command to set MDSPLUS_TREE_BASE_? environmental variables'.format(
-            user=user, tokamak=tokamak, shot=shot, run=run, imas_version=imas_version)))
+                         'If none of them are specified then use `imasdb` command to set '
+                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, tokamak=tokamak, shot=shot,
+                                                                              run=run, imas_version=imas_version)))
 
     if user is None and tokamak is None:
         if new:
@@ -58,8 +59,8 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     return ids
 
 
-def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
-    '''
+def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
+    """
     assign a value to a path of an open IMAS ids
 
     :param ids: open IMAS ids to write to
@@ -68,7 +69,7 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
 
     :param value: value to assign
 
-    :param skipMissingNodes:  if the IMAS path does not exists:
+    :param skip_missing_nodes:  if the IMAS path does not exists:
                              `False` raise an error
                              `True` does not raise error
                              `None` prints a warning message
@@ -76,7 +77,7 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     :param allocate: whether to perform only IMAS memory allocation (ids.resize)
 
     :return: path if set was done, otherwise None
-    '''
+    """
     printd('setting: %s' % repr(path), topic='imas')
     ds = path[0]
     path = path[1:]
@@ -90,8 +91,8 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
         m = getattr(ids, ds)
-    elif skipMissingNodes is not False:
-        if skipMissingNodes is None:
+    elif skip_missing_nodes is not False:
+        if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
         return
     else:
@@ -107,8 +108,8 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
                     out = getattr(out, p)
-            elif skipMissingNodes is not False:
-                if skipMissingNodes is None:
+            elif skip_missing_nodes is not False:
+                if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
                 return None
             else:
@@ -144,29 +145,29 @@ def imas_set(ids, path, value, skipMissingNodes=False, allocate=False):
     return [ds] + path
 
 
-def imas_get(ids, path, skipMissingNodes=False):
-    '''
+def imas_get(ids, path, skip_missing_nodes=False):
+    """
     read the value of a path in an open IMAS ids
 
     :param ids: open IMAS ids to read from
 
     :param path: ODS path
 
-    :param skipMissingNodes:  if the IMAS path does not exists:
+    :param skip_missing_nodes:  if the IMAS path does not exists:
                              `False` raise an error
                              `True` does not raise error
                              `None` prints a warning message
 
     :return: the value that was read if successful or None otherwise
-    '''
+    """
     printd('fetching: %s' % repr(path), topic='imas')
     ds = path[0]
     path = path[1:]
 
     if hasattr(ids, ds):
         m = getattr(ids, ds)
-    elif skipMissingNodes is not False:
-        if skipMissingNodes is None:
+    elif skip_missing_nodes is not False:
+        if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
         return None
     else:
@@ -182,8 +183,8 @@ def imas_get(ids, path, skipMissingNodes=False):
         if isinstance(p, basestring):
             if hasattr(out, p):
                 out = getattr(out, p)
-            elif skipMissingNodes is not False:
-                if skipMissingNodes is None:
+            elif skip_missing_nodes is not False:
+                if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path[:kp + 1]))
                     printe(out.__dict__.keys())
                 return None
@@ -199,7 +200,7 @@ def imas_get(ids, path, skipMissingNodes=False):
 # save and load OMAS to IMAS
 # --------------------------------------------
 def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False, imas_version=default_imas_version):
-    '''
+    """
     save OMAS data set to IMAS
 
     :param ods: OMAS data set
@@ -214,10 +215,12 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     :param new: whether the open should create a new IMAS tree
 
-    :param imas_version: IMAS version (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
+    :param imas_version: IMAS version
+                         (reads ods['info.imas_version'] if imas_version is None
+                          and finally fallsback on imas version of current system)
 
     :return: paths that have been written to IMAS
-    '''
+    """
 
     # handle default values for user, tokamak, shot, run, imas_version
     # it tries to re-use existing information
@@ -288,7 +291,7 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
 def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths=None,
                    imas_version=default_imas_version):
-    '''
+    """
     load OMAS data set from IMAS
 
     :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
@@ -301,10 +304,12 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
 
     :param paths: paths that have been written to IMAS
 
-    :param imas_version: IMAS version (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
+    :param imas_version: IMAS version
+                         (reads ods['info.imas_version'] if imas_version is None
+                          and finally fallsback on imas version of current system)
 
     :return: OMAS data set
-    '''
+    """
 
     if shot is None or run is None:
         raise (Exception('`shot` and `run` must be specified'))
@@ -329,7 +334,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
         # if paths is None then figure out what IDS are available and get ready to retrieve everything
         if paths is None:
             paths = [[structure] for structure in
-                     list_structures(imas_version=imas_version, list_add_datastructures=False)]
+                     list_structures(imas_version=imas_version)]
         joined_paths = map(lambda x: separator.join(map(str, x)), paths)
 
         # fetch relevant IDSs and find available signals
@@ -341,7 +346,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                 getattr(ids, ds).get()
             if len(getattr(ids, ds).time):
                 print('* ', ds)
-                available_paths = filled_paths_in_ids(ids, load_structure(ds,imas_version=imas_version)[1], [], [])
+                available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
                 joined_available_paths = map(lambda x: separator.join(map(str, x)), available_paths)
                 for jpath, path in zip(joined_paths, paths):
                     if path[0] != ds:
@@ -372,8 +377,8 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
     return ods
 
 
-def filled_paths_in_ids(me, ds, path=[], paths=[]):
-    '''
+def filled_paths_in_ids(me, ds, path=None, paths=None):
+    """
     list paths in an IDS that are filled
 
     :param me: input ids
@@ -381,7 +386,11 @@ def filled_paths_in_ids(me, ds, path=[], paths=[]):
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
     :return: returns list of paths in an IDS that are filled
-    '''
+    """
+    if path is None:
+        path = []
+    if paths is None:
+        paths = []
     if not len(ds):
         paths.append(path)
         # print(paths[-1])
@@ -400,19 +409,18 @@ def filled_paths_in_ids(me, ds, path=[], paths=[]):
 
 
 def test_omas_imas(ods):
-    '''
+    """
     test save and load OMAS IMAS
 
     :param ods: ods
 
     :return: ods
-    '''
+    """
     user = os.environ['USER']
     tokamak = 'ITER'
     shot = 1
     run = 0
 
-    paths = ods.paths()
     paths = save_omas_imas(ods, user=user, tokamak=tokamak, shot=shot, run=run, new=True)
     ods1 = load_omas_imas(user=user, tokamak=tokamak, shot=shot, run=run, paths=paths)
     return ods1
