@@ -24,11 +24,12 @@ def save_omas_nc(ods, filename, **kw):
     with Dataset(filename, 'w', **kw) as dataset:
         for item in odsf:
             dims = []
+            data = numpy.asarray(odsf[item])
             for k in range(len(numpy.asarray(odsf[item]).shape)):
-                dims.append('%s__dim_%d' % (item, k))
-                dataset.createDimension(dims[-1], numpy.asarray(odsf[item]).shape[k])
-            tmp = dataset.createVariable(item, numpy.asarray(odsf[item]).dtype, dims)
-            tmp[:] = numpy.asarray(odsf[item])
+                dims.append('dim_%d' % (data.shape[k]))
+                if dims[-1] not in dataset.dimensions:
+                    dataset.createDimension(dims[-1], data.shape[k])
+            dataset.createVariable(item, data.dtype, dims)[:] = data
 
 
 def load_omas_nc(filename):
