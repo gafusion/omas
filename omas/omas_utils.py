@@ -16,7 +16,9 @@ def printd(*objects, **kw):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
-    if os.environ.get('OMAS_DEBUG_TOPIC', '') == '*' or os.environ.get('OMAS_DEBUG_TOPIC', '') in topic:
+    if os.environ.get('OMAS_DEBUG_TOPIC', '') and (
+                os.environ.get('OMAS_DEBUG_TOPIC', '') == '*' or os.environ.get('OMAS_DEBUG_TOPIC',
+                                                                                '') in topic or '*' in topic):
         printe(*objects, **kw)
 
 
