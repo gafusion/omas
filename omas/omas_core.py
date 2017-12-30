@@ -422,11 +422,11 @@ def different_ods(ods1, ods2):
         if not k.startswith('info.'):
             return 'DIFF: key `%s` missing in 1st ods' % k
     for k in k1.intersection(k2):
-        if type(ods1[k]) != type(ods2[k]):
-            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
-        elif isinstance(ods1[k], basestring):
+        if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
                 return 'DIFF: `%s` differ in value' % k
+        elif type(ods1[k]) != type(ods2[k]):
+            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
         else:
             if not numpy.allclose(ods1[k], ods2[k]):
                 return 'DIFF: `%s` differ in value' % k
