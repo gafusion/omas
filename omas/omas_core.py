@@ -458,9 +458,11 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
             print(check)
 
     else:
-        print('=' * 20)
 
         os.environ['OMAS_DEBUG_TOPIC'] = '*'
+        printd('OMAS is using IMAS data structure version `%s` as default' % default_imas_version, topic='*')
+
+        print('=' * 20)
 
         results = numpy.zeros((len(_tests), len(_tests)))
 
