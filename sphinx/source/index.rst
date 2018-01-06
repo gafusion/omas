@@ -7,11 +7,10 @@ Ordered Multidimensional Array Structure
   :alt: OMAS logo
   :target: _images/omas_logo_high_res.gif
 
-The `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (IMAS) defines a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data.
-Some of the major hurdles of adopting IMAS are its cumbersome installation procedure and requirements, and its inconvenient API.
+OMAS (Ordered Multidimensional Array Structure) is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (IMAS).
+ITER IMAS defines a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data.
 
-OMAS (Ordered Multidimensional Array Structure) is a Python library designed to address these issues.
-At the hear of OMAS is the idea of providing a convenient API which can store data in a format that is compatible with the IMAS data model, but using other storage systems in addition to the one provided by IMAS itself.
+At the heart of OMAS is the idea of providing a convenient API which can store data in a format that is compatible with the IMAS data model, but using other storage systems in addition to the one provided by IMAS itself.
 Within OMAS data compatible with the IMAS data model is easily translated between these different storage systems.
 Furthermore, any physics code or programming language that is capable of reading/writing data using one of the many OMAS supported data formats (eg. NetCDF) can take advantage of the functionalities provided by OMAS.
 
