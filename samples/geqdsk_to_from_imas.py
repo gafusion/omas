@@ -1,8 +1,9 @@
 from __future__ import print_function, division, unicode_literals
-from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
-import os
 
+import os
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+
+from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 
 # read gEQDSK file in OMFIT

@@ -1,7 +1,8 @@
 from __future__ import print_function, division, unicode_literals
-import os
 
+import os
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
+
 from omas import *
 
 # load some sample data
