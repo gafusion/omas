@@ -360,7 +360,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                 print('- ', ds)
 
         ods = omas()
-        for path in paths:
+        for path in fetch_paths:
             data = imas_get(ids, path, None)
             h = ods
             for step in path[:-1]:
