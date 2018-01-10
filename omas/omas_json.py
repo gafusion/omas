@@ -66,16 +66,3 @@ def test_omas_json(ods):
     save_omas_json(ods, filename)
     ods1 = load_omas_json(filename)
     return ods1
-
-
-# --------------------------------------------
-if __name__ == '__main__':
-    print('=' * 20)
-
-    from omas_core import ods_sample
-
-    os.environ['OMAS_DEBUG_TOPIC'] = 'json'
-    ods = ods_sample()
-
-    ods = test_omas_json(ods)
-    pprint(ods)

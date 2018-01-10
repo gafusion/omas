@@ -424,15 +424,3 @@ def test_omas_imas(ods):
     paths = save_omas_imas(ods, user=user, tokamak=tokamak, shot=shot, run=run, new=True)
     ods1 = load_omas_imas(user=user, tokamak=tokamak, shot=shot, run=run, paths=paths)
     return ods1
-
-
-# --------------------------------------------
-if __name__ == '__main__':
-    print('=' * 20)
-
-    from omas_core import ods_sample
-
-    os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
-    ods = ods_sample()
-
-    ods = test_omas_imas(ods)

@@ -545,7 +545,3 @@ from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
-
-# --------------------------------------------
-if __name__ == '__main__':
-    test_omas_suite()
