@@ -5,10 +5,12 @@ os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
 from omas import *
 
+generate_IDSDef_xml=False
 force_build_json = False
 
 # loops through the tags of the data-dictionary repository and generates the IDSDef.xml files for each one
-generate_xml_schemas()
+if generate_IDSDef_xml:
+    generate_xml_schemas()
 
 # loops over the available IDSDef.xml files and generates .json and omas_doc.html files
 for imas_version in sorted(map(lambda x: os.path.split(x)[-1], glob.glob(imas_json_dir + os.sep + '*'))):
