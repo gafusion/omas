@@ -333,8 +333,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
     else:
         # if paths is None then figure out what IDS are available and get ready to retrieve everything
         if paths is None:
-            paths = [[structure] for structure in
-                     list_structures(imas_version=imas_version)]
+            paths = sorted([[structure] for structure in list_structures(imas_version=imas_version)])
         joined_paths = map(lambda x: separator.join(map(str, x)), paths)
 
         # fetch relevant IDSs and find available signals
@@ -342,6 +341,8 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
         for path in paths:
             ds = path[0]
             path = path[1:]
+            if ds=='info':
+                continue
             if not len(getattr(ids, ds).time):
                 getattr(ids, ds).get()
             if len(getattr(ids, ds).time):
