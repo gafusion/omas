@@ -353,7 +353,6 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                         continue
                     jpath = re.sub('\.', '\\.', jpath)
                     jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
-                    print(jpath)
                     for japath, apath in zip(joined_available_paths, available_paths):
                         if re.match(jpath, japath):
                             fetch_paths.append(apath)
@@ -377,11 +376,11 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
     return ods
 
 
-def filled_paths_in_ids(me, ds, path=None, paths=None):
+def filled_paths_in_ids(ids, ds, path=None, paths=None):
     """
-    list paths in an IDS that are filled
+    list paths in an IDS that are filled.
 
-    :param me: input ids
+    :param ids: input ids
 
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
@@ -397,14 +396,14 @@ def filled_paths_in_ids(me, ds, path=None, paths=None):
         return paths
     keys = ds.keys()
     if keys[0] == ':':
-        keys = range(len(me))
+        keys = range(len(ids))
     for kid in keys:
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
         if isinstance(kid, basestring):
-            paths = filled_paths_in_ids(getattr(me, kid), ds[kid], propagate_path, paths)
+            paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, paths)
         else:
-            paths = filled_paths_in_ids(me[kid], ds[':'], propagate_path, paths)
+            paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, paths)
     return paths
 
 
