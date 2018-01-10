@@ -13,11 +13,13 @@ def _base_S3_uri(user):
 # --------------------------------------------
 def save_omas_s3(ods, filename, user=os.environ['USER'], **kw):
     """
-    Save an OMAS data set to pickle and upload it to S3
+    Save an OMAS object to pickle and upload it to S3
 
     :param ods: OMAS data set
 
     :param filename: filename to save to
+
+    :param user: username where to look for the file
 
     :param kw: arguments passed to the save_omas_pkl function
     """
@@ -29,9 +31,11 @@ def save_omas_s3(ods, filename, user=os.environ['USER'], **kw):
 
 def load_omas_s3(filename, user=os.environ['USER']):
     """
-    Download an OMAS data set from S3 and read it as pickle
+    Download an OMAS object from S3 and read it as pickle
 
     :param filename: filename to load from
+
+    :param user: username where to look for the file
 
     :return: OMAS data set
     """
@@ -39,6 +43,28 @@ def load_omas_s3(filename, user=os.environ['USER']):
 
     remote_uri(_base_S3_uri(user) + filename, None, 'down')
     return load_omas_pkl(os.path.split(filename)[1])
+
+
+def list_omas_s3(user=''):
+    """
+    List S3 content
+
+    :param user: username where to look for the file
+
+    :return: OMAS data set
+    """
+    return remote_uri(_base_S3_uri(user), None, 'list')
+
+
+def del_omas_s3(filename, user=os.environ['USER']):
+    """
+    Delete an OMAS object from S3
+
+    :param user: username where to look for the file
+
+    :return: OMAS data set
+    """
+    remote_uri(_base_S3_uri(user) + filename, None, 'del')
 
 
 def test_omas_s3(ods):

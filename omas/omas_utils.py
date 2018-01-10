@@ -95,13 +95,13 @@ def _credentials(system):
     return c[system]
 
 
-def remote_uri(uri, filename, up_down):
+def remote_uri(uri, filename, action):
     """
+    :param uri: uri of the container of the file
 
-    :param uri:
-    :param filename:
-    :param up_down:
-    :return:
+    :param filename: filename to act on
+
+    :param action: must be one of [`up`, `down`, `list`, `del`]
     """
     if not re.match('\w+://\w+.*', uri):
         return uri
@@ -110,8 +110,8 @@ def remote_uri(uri, filename, up_down):
     system = tmp[0]
     location = '://'.join(tmp[1:])
 
-    if up_down not in ['down', 'up']:
-        raise (AttributeError('remote_uri up_down attribute must be set to either `up` or `down`'))
+    if action not in ['down', 'up', 'list', 'del']:
+        raise (AttributeError('remote_uri action attribute must be one of [`up`, `down`, `list`, `del`]'))
 
     if system == 's3':
         import boto3
@@ -119,14 +119,28 @@ def remote_uri(uri, filename, up_down):
         s3connection = boto3.resource('s3', **_credentials('s3'))
         s3filename = '/'.join(location.split('/')[1:])
 
-        if up_down == 'down':
+        if action == 'list':
+            printd('Listing %s' % (uri), topic='s3')
+            files=map(lambda x:x.key,s3connection.Bucket(s3bucket).objects.all())
+            s3filename=s3filename.strip('/')
+            if s3filename:
+                files=filter(lambda x:x.startswith(s3filename),files)
+            return files
+
+        if action == 'del':
+            if filename is None:
+                filename = s3filename.split('/')[-1]
+            printd('Deleting %s' % uri, topic='s3')
+            s3connection.Object(s3bucket, s3filename).delete()
+
+        elif action == 'down':
             if filename is None:
                 filename = s3filename.split('/')[-1]
             printd('Downloading %s to %s' % (uri, filename), topic='s3')
             obj = s3connection.Object(s3bucket, s3filename)
             obj.download_file(os.path.split(filename)[1])
 
-        elif up_down == 'up':
+        elif action == 'up':
             printd('Uploading %s to %s' % (filename, uri), topic='s3')
             from botocore.exceptions import ClientError
             if s3filename.endswith('/'):
