@@ -362,12 +362,19 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
         # build omas data structure
         ods = omas()
         for path in fetch_paths:
-            # skip error fields if _error_index=-999999999
-            if path[-1].endswith('_error_index') or path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+            # skip _error_upper and _error_lower if _error_index=-999999999
+            if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                 data = imas_get(ids, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
                 if data==-999999999:
                     continue
+            # get data from ids
             data = imas_get(ids, path, None)
+            # skip empty arrays
+            if isinstance(data,numpy.ndarray) and not data.size:
+                continue
+            # skip missing floats and integers
+            if (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
+                continue
             #print(path)
             h = ods
             for step in path[:-1]:
