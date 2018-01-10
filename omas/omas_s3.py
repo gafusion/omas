@@ -50,6 +50,6 @@ def test_omas_s3(ods):
     :return: ods
     """
     filename = 'test.pkl'
-    save_omas_s3(ods, filename, username='omas_test')
-    ods1 = load_omas_s3(filename, username='omas_test')
+    save_omas_s3(ods, filename, user='omas_test')
+    ods1 = load_omas_s3(filename, user='omas_test')
     return ods1

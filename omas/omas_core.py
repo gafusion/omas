@@ -298,6 +298,8 @@ def save_omas_pkl(ods, filename, **kw):
     """
     printd('Saving to %s' % filename, topic='pkl')
 
+    kw.setdefault('protocol', pickle.HIGHEST_PROTOCOL)
+
     with open(filename, 'wb') as f:
         pickle.dump(ods, f, **kw)
 
