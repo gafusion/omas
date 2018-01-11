@@ -67,7 +67,7 @@ def del_omas_s3(filename, user=os.environ['USER']):
     remote_uri(_base_S3_uri(user) + filename, None, 'del')
 
 
-def scenario_database(machine=None, shot=None, run=None):
+def omas_scenario_database(machine=None, shot=None, run=None):
     """
     List and retrieve available IMAS scenarios
 

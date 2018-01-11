@@ -18,6 +18,7 @@ sphinx/build/
 sphinx/source/data.rst
 sphinx/source/code.rst
 sphinx/source/usage.rst
+sphinx/source/scenarios.rst
 sphinx/source/schema.rst
 sphinx/source/schema/
 
