@@ -81,14 +81,16 @@ def scenario_database(machine=None, shot=None, run=None):
     """
     if not machine and not shot and not run:
         remote_uri(_base_S3_uri('omas_shared') + 'scenario_summary.txt', None, 'down')
-        return open('scenario_summary.txt','r').read()
+        return open('scenario_summary.txt', 'r').read()
 
     elif machine and shot and run:
-        print('Fetching scenario file: {machine}_{shot}_{run}.pkl'.format(machine=machine,shot=shot,run=run))
-        return load_omas_s3('{machine}_{shot}_{run}.pkl'.format(machine=machine,shot=shot,run=run), user='omas_shared')
+        print('Fetching scenario file: {machine}_{shot}_{run}.pkl'.format(machine=machine, shot=shot, run=run))
+        return load_omas_s3('{machine}_{shot}_{run}.pkl'.format(machine=machine, shot=shot, run=run),
+                            user='omas_shared')
 
     else:
-        raise(Exception('machine, shot, run must either all be None or all be set'))
+        raise (Exception('machine, shot, run must either all be None or all be set'))
+
 
 def test_omas_s3(ods):
     """
