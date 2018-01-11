@@ -67,6 +67,29 @@ def del_omas_s3(filename, user=os.environ['USER']):
     remote_uri(_base_S3_uri(user) + filename, None, 'del')
 
 
+def scenario_database(machine=None, shot=None, run=None):
+    """
+    List and retrieve available IMAS scenarios
+
+    :param machine: string with the machine name of the scenario
+
+    :param shot: shot number
+
+    :param run: run number
+
+    :return: OMAS data set with the requested scenario
+    """
+    if not machine and not shot and not run:
+        remote_uri(_base_S3_uri('omas_shared') + 'scenario_summary.txt', None, 'down')
+        return open('scenario_summary.txt','r').read()
+
+    elif machine and shot and run:
+        print('Fetching scenario file: {machine}_{shot}_{run}.pkl'.format(machine=machine,shot=shot,run=run))
+        return load_omas_s3('{machine}_{shot}_{run}.pkl'.format(machine=machine,shot=shot,run=run), user='omas_shared')
+
+    else:
+        raise(Exception('machine, shot, run must either all be None or all be set'))
+
 def test_omas_s3(ods):
     """
     test save and load S3

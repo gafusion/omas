@@ -10,7 +10,7 @@ __all__ = [
     'save_omas_json', 'load_omas_json', 'test_omas_json',
     'save_omas_nc', 'load_omas_nc', 'test_omas_nc',
     'save_omas_imas', 'load_omas_imas', 'test_omas_imas',
-    'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version',
     '__version__'

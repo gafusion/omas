@@ -10,17 +10,18 @@ force_write_existing = False
 os.environ['OMAS_DEBUG_TOPIC'] = 's3'
 
 # parse scenario_summary output
-lines = subprocess.Popen('scenario_summary -c machine,shot,run,ref_name,workflow,idslist', stdout=subprocess.PIPE,
+what=['machine', 'shot','run','ref_name','ip','b0','fuelling','confinement','workflow']
+scenario_summary = subprocess.Popen('scenario_summary -c '+','.join(what), stdout=subprocess.PIPE,
                          shell=True).communicate()[0].split('\n')
+print('\n'.join(scenario_summary))
 scenarios = []
 ksep = 0
-for line in lines:
+for line in scenario_summary:
     if line.startswith('----'):
         ksep += 1
     elif ksep == 2:
         items = line.strip().split()
-        scenarios.append({'machine': items[0], 'shot': int(items[1]), 'run': int(items[2]), 'ref_name': items[3],
-                          'workflow': items[4], 'idslist': items[5:]})
+        scenarios.append(dict(zip(what,items)))
 
 # setup environmental variables
 tmp = subprocess.Popen('imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE', stdout=subprocess.PIPE,
@@ -28,7 +29,6 @@ tmp = subprocess.Popen('imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_T
 for line in tmp:
     if 'MDSPLUS_TREE_BASE' in line:
         env, value = re.sub(';', '', re.sub('export', '', line)).strip().split('=')
-        print(env, value)
         os.environ[env] = value
 
 # find out existing scenarios
@@ -54,3 +54,7 @@ for scenario in scenarios:
         ods[ids] = complete_ods[ids]
         ods['info'] = complete_ods['info']
         save_omas_pkl(ods, '{machine}_{shot}_{run}__{ids}.pkl'.format(ids=ids, **scenario))
+
+# upload scenario_summary
+open('scenario_summary.txt','w').write('\n'.join(scenario_summary))
+omas_s3.remote_uri(omas_s3._base_S3_uri('omas_shared'), 'scenario_summary.txt', 'up')
