@@ -210,8 +210,15 @@ def create_html_documentation(imas_version=default_imas_version):
     filename = os.path.abspath(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'omas_doc.html']))
 
     table_header = "<table border=1, width='100%'>"
-    sub_table_header = "<tr><th>Path</th><th>Dimensions</th><th>Type</th><th>Description</th></tr>"
+    sub_table_header = '<tr>' \
+                       '<th style="width:25%">Path</th>' \
+                       '<th style="width:25%">Dimensions</th>' \
+                       '<th>Type</th>' \
+                       '<th>Units</th>' \
+                       '<th>Description</th>' \
+                       '</tr>'
 
+    column_style='style="word-wrap:break-word;word-break:break-all"'
     lines = []
     for structure_file in list_structures(imas_version=imas_version):
         print('Adding to html documentation: ' + structure_file)
@@ -223,12 +230,20 @@ def create_html_documentation(imas_version=default_imas_version):
             if not any([item.endswith(k) for k in ['_error_index', '_error_lower', '_error_upper']]):
                 try:
                     lines.append(
-                        "<tr><td><p>{item}</p></td><td><p>{coordinates}</p></td><td><p>{data_type}</p></td><td><p>{description}</p></td></tr>".format(
+                        '<tr>'
+                        '<td {column_style}><p>{item}</p></td>' \
+                        '<td {column_style}><p>{coordinates}</p></td>' \
+                        '<td><p>{data_type}</p></td>' \
+                        '<td><p>{units}</p></td>' \
+                        '<td><p>{description}</p></td>'
+                        '</tr>'.format(
                             item=item,
                             coordinates=re.sub('\[\]', '', re.sub('[\'\"]', '', re.sub(',', ',<br>', str(
                                 map(str, structure[item].get('coordinates', '')))))),
+                            data_type=structure[item].get('data_type', ''),
+                            units=structure[item].get('units', ''),
                             description=structure[item].get('documentation', ''),
-                            data_type=structure[item].get('data_type', '')
+                            column_style=column_style
                         ))
                 except Exception:
                     printe(item)
