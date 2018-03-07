@@ -124,7 +124,7 @@ Fetch scenario data
 .. code-block:: python
 
     from omas import *
-    ods = omas_scenario_database(machine='ITER', shot=130500, run=1)
+    ods = omas_scenario_database(machine='ITER', shot=130010, run=1)
     plot( ods['core_profiles']['profiles_1d'][256]['electrons']['pressure'] )
 
 will return an OMAS class containing the data from the selected scenario:

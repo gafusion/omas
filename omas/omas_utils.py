@@ -115,6 +115,7 @@ def remote_uri(uri, filename, action):
 
     if system == 's3':
         import boto3
+        from boto3.s3.transfer import TransferConfig
         s3bucket = location.split('/')[0]
         s3connection = boto3.resource('s3', **_credentials('s3'))
         s3filename = '/'.join(location.split('/')[1:])
@@ -138,7 +139,9 @@ def remote_uri(uri, filename, action):
                 filename = s3filename.split('/')[-1]
             printd('Downloading %s to %s' % (uri, filename), topic='s3')
             obj = s3connection.Object(s3bucket, s3filename)
-            obj.download_file(os.path.split(filename)[1])
+            if not os.path.exists(os.path.abspath(os.path.split(filename)[0])):
+                os.makedirs(os.path.abspath(os.path.split(filename)[0]))
+            obj.download_file(filename)
 
         elif action == 'up':
             printd('Uploading %s to %s' % (filename, uri), topic='s3')
@@ -156,8 +159,8 @@ def remote_uri(uri, filename, action):
                 else:
                     raise
             bucket = s3connection.Bucket(s3bucket)
-            data = open(filename, 'rb')
-            bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
+            with open(filename, 'rb') as data:
+                bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
 
 
 def remove_parentheses(inv, replace_with=''):

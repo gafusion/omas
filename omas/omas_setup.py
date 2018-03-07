@@ -29,6 +29,9 @@ else:
 # --------------------------------------------
 omas_rcparams = {
     'consistency_check': bool(int(os.environ.get('OMAS_CONSISTENCY_CHECK', '1'))),
+    'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',
+                                    os.sep.join(
+                                        [tempfile.gettempdir(), 'OMAS_TMP_DIR'])),
     'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR',
                                     os.sep.join(
                                         [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
