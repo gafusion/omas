@@ -5,7 +5,7 @@ os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
 from omas import *
 
-generate_IDSDef_xml=False
+generate_IDSDef_xml=True
 force_build_json = False
 
 # loops through the tags of the data-dictionary repository and generates the IDSDef.xml files for each one
