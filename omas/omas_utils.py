@@ -141,7 +141,7 @@ def remote_uri(uri, filename, action):
             obj = s3connection.Object(s3bucket, s3filename)
             if not os.path.exists(os.path.abspath(os.path.split(filename)[0])):
                 os.makedirs(os.path.abspath(os.path.split(filename)[0]))
-            obj.download_file(filename)
+            obj.download_file(filename,Config=TransferConfig(use_threads=False))
 
         elif action == 'up':
             printd('Uploading %s to %s' % (filename, uri), topic='s3')
