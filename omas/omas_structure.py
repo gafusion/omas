@@ -33,7 +33,7 @@ def generate_xml_schemas():
 
     # find IMAS data-dictionary tags
     result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
-    tags = filter(lambda x: x.startswith('3.') and int(x.split('.')[1]) >= 10, result.split())
+    tags = filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split())
 
     # fetch data structure updates
     subprocess.Popen("""
@@ -155,7 +155,7 @@ def create_json_structure(imas_version=default_imas_version):
     # format conversions
     for item in sorted(fout):
         coords = []
-        for key in fout[item].keys():
+        for key in list(fout[item].keys()):
             if key != '@coordinates' and key.startswith('@coordinate'):
                 coords.append(process_path(fout[item][key]))
                 del fout[item][key]
@@ -252,4 +252,7 @@ def create_html_documentation(imas_version=default_imas_version):
         lines.append('</table><p></p>')
 
     with open(filename, 'w') as f:
-        f.write('\n'.join(lines).encode('utf-8'))
+        if sys.version_info < (3, 0):
+            f.write('\n'.join(lines).encode('utf-8'))
+        else:
+            f.write('\n'.join(lines))
