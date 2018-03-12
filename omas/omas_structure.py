@@ -111,6 +111,9 @@ def create_json_structure(imas_version=default_imas_version):
         hout_propagate = hout
         path_propagate = copy.deepcopy(path)
 
+        if '@structure_reference' in me and me['@structure_reference']=='self':
+            return hout, fout
+
         if '@name' in me:
             name = me['@name']
             path_propagate.append(name)
