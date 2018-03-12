@@ -29,6 +29,7 @@ else:
 # --------------------------------------------
 omas_rcparams = {
     'consistency_check': bool(int(os.environ.get('OMAS_CONSISTENCY_CHECK', '1'))),
+    'dynamic_path_creation': bool(int(os.environ.get('OMAS_DYNAMIC_PATH_CREATION', '1'))),
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',
                                     os.sep.join(
                                         [tempfile.gettempdir(), 'OMAS_TMP_DIR'])),

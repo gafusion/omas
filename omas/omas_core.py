@@ -45,6 +45,7 @@ class omas(MutableMapping):
     def __init__(self,
                  imas_version=default_imas_version,
                  consistency_check=omas_rcparams['consistency_check'],
+                 dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
                  structure=None):
         """
@@ -52,12 +53,15 @@ class omas(MutableMapping):
 
         :param consistency_check: whether to enforce consistency with IMAS schema
 
+        :param dynamic_path_creation: whether to dynamically create the path when setting an item
+
         :param location: string with location of this object relative to IMAS schema
 
         :param structure: IMAS schema to use
         """
         self.omas_data = None
         self._consistency_check = consistency_check
+        self._dynamic_path_creation = dynamic_path_creation
         self.imas_version = imas_version
         self.location = location
         if structure is None:
@@ -71,6 +75,8 @@ class omas(MutableMapping):
 
         :return: True/False
         """
+        if not hasattr(self,'_consistency_check'):
+            self._consistency_check=True
         return self._consistency_check
 
     @consistency_check.setter
@@ -79,6 +85,24 @@ class omas(MutableMapping):
         for item in self.keys():
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
+
+    @property
+    def dynamic_path_creation(self):
+        """
+        property that sets whether dynamic path creation is enabled or not
+
+        :return: True/False
+        """
+        if not hasattr(self,'_dynamic_path_creation'):
+            self._dynamic_path_creation=True
+        return self._dynamic_path_creation
+
+    @dynamic_path_creation.setter
+    def dynamic_path_creation(self, value):
+        self._dynamic_path_creation = value
+        for item in self.keys():
+            if isinstance(self[item], omas):
+                self[item].dynamic_path_creation = value
 
     def _validate(self, value, structure):
         """
@@ -106,7 +130,9 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version, consistency_check=self.consistency_check)
+            value = omas(imas_version=self.imas_version,
+                         consistency_check=self.consistency_check,
+                         dynamic_path_creation=self.dynamic_path_creation)
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
@@ -119,9 +145,12 @@ class omas(MutableMapping):
             try:
                 if isinstance(value, omas):
                     if not self.structure:
+                        #load the json structure file
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
                         structure = self.structure[structure_key[0]]
+                        if not len(structure):
+                            raise(ValueError('`%s` has no data'%location))
                     # check that tha data will go in the right place
                     self._validate(value, structure)
                 else:
@@ -134,7 +163,7 @@ class omas(MutableMapping):
                 else:
                     options = 'Did you mean: %s' % options
                 spaces = '           ' + ' ' * (len(self.location) + 2)
-                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
+                raise KeyError('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
                     structure_key[0]) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
@@ -189,7 +218,13 @@ class omas(MutableMapping):
 
         # dynamic path creation
         elif key[0] not in self.keys():
-            self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
+            if self.dynamic_path_creation:
+                self.__setitem__(key[0], omas(imas_version=self.imas_version,
+                                              consistency_check=self.consistency_check,
+                                              dynamic_path_creation=self.dynamic_path_creation))
+            else:
+                location = '.'.join(filter(None, [self.location, str(key[0])]))
+                raise(KeyError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -233,8 +268,8 @@ class omas(MutableMapping):
 
     def __getnewargs__(self):
         # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
-        # back from that string will use omas.__new__ with consistency_check=False
-        return (False,)
+        # back from that string will use omas.__new__ with consistency_check=False and dynamic_path_creation=True
+        return (False,True)
 
     def __len__(self):
         return len(self.omas_data)
@@ -342,8 +377,27 @@ def ods_sample():
     """
     ods = omas()
 
+    #check effect of disabling dynamic path creation
+    try:
+        ods.dynamic_path_creation=False
+        ods['info.user']
+    except KeyError:
+        ods['info']=omas()
+        ods['info.user'] = unicode(os.environ['USER'])
+    else:
+        raise(Exception('OMAS error handling dynamic_path_creation=False'))
+    finally:
+        ods.dynamic_path_creation=True
+
+    #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
+    try:
+        ods['info.tokamak']
+    except ValueError:
+        pass
+    else:
+        raise(Exception('OMAS error querying leaf that has not been set'))
+
     # info ODS is used for keeping track of IMAS metadata
-    ods['info.user'] = unicode(os.environ['USER'])
     ods['info.tokamak'] = 'ITER'
     ods['info.imas_version'] = default_imas_version
     ods['info.shot'] = 1
