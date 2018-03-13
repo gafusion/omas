@@ -94,15 +94,15 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
         m = getattr(ids, ds)
+        if not m.time.size:
+            m.time.resize(1)
+            m.time[0]=-1.0
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
         return
     else:
         raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
-
-    # what is ExpIdx ?
-    m.setExpIdx(0)
 
     # traverse IMAS structure until reaching the leaf
     out = m
@@ -277,17 +277,15 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
         # first assign time information
         for path in set_paths:
-            if 'time' in path[:1] or path[-1] != 'time':
-                continue
-            printd('writing %s' % o2i(path))
-            imas_set(ids, path, ods[path], True)
+            if path[-1] == 'time':
+                printd('writing %s' % o2i(path))
+                imas_set(ids, path, ods[path], True)
 
-        # make sure to assign time information
+        # then assign the rest
         for path in set_paths:
-            if 'time' in path[:1] or path[-1] == 'time':
-                continue
-            printd('writing %s' % o2i(path))
-            imas_set(ids, path, ods[path], True)
+            if path[-1] != 'time':
+                printd('writing %s' % o2i(path))
+                imas_set(ids, path, ods[path], True)
 
     return set_paths
 
@@ -335,8 +333,10 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
 
     else:
         # if paths is None then figure out what IDS are available and get ready to retrieve everything
+        verbose=False
         if paths is None:
             paths = sorted([[structure] for structure in list_structures(imas_version=imas_version)])
+            verbose=True
         joined_paths = map(lambda x: separator.join(map(str, x)), paths)
 
         # fetch relevant IDSs and find available signals
@@ -347,12 +347,12 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
             if ds=='info':
                 continue
             if not hasattr(ids,ds):
-                print('| ', ds)
+                if verbose: print('| ', ds)
                 continue
             if not len(getattr(ids, ds).time):
                 getattr(ids, ds).get()
             if len(getattr(ids, ds).time):
-                print('* ', ds)
+                if verbose: print('* ', ds)
                 available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
                 joined_available_paths = map(lambda x: separator.join(map(str, x)), available_paths)
                 for jpath, path in zip(joined_paths, paths):
@@ -364,11 +364,15 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                         if re.match(jpath, japath):
                             fetch_paths.append(apath)
             else:
-                print('- ', ds)
+                if verbose: print('- ', ds)
 
         # build omas data structure
         ods = omas()
         for path in fetch_paths:
+            if len(path)==2 and path[-1]=='time':
+                data = imas_get(ids, path, None)
+                if data[0]==-1:
+                    continue
             # skip _error_upper and _error_lower if _error_index=-999999999
             if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                 data = imas_get(ids, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
@@ -382,7 +386,10 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
             # skip missing floats and integers
             if (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
                 continue
-            #print(path)
+            # skip empty strings
+            if isinstance(data,unicode) and not len(data):
+                continue
+            #print(path,data)
             h = ods
             for step in path[:-1]:
                 h = h[step]
@@ -399,7 +406,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None):
     """
-    list paths in an IDS that are filled.
+    list paths in an IDS that are filled
 
     :param ids: input ids
 
@@ -413,7 +420,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None):
         paths = []
     if not len(ds):
         paths.append(path)
-        # print(paths[-1])
+        #print(paths[-1])
         return paths
     keys = ds.keys()
     if keys[0] == ':':
