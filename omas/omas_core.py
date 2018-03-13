@@ -145,7 +145,7 @@ class omas(MutableMapping):
             try:
                 if isinstance(value, omas):
                     if not self.structure:
-                        #load the json structure file
+                        # load the json structure file
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
                         structure = self.structure[structure_key[0]]
@@ -156,14 +156,14 @@ class omas(MutableMapping):
                 else:
                     self.structure[structure_key[0]]
 
-            except (KeyError, TypeError):
+            except (LookupError, TypeError):
                 options = list(self.structure.keys())
                 if len(options) == 1 and options[0] == ':':
                     options = 'A numerical index is needed with n>=0'
                 else:
                     options = 'Did you mean: %s' % options
-                spaces = '           ' + ' ' * (len(self.location) + 2)
-                raise KeyError('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
+                spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
+                raise LookupError('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
                     structure_key[0]) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
@@ -224,7 +224,7 @@ class omas(MutableMapping):
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
                 location = '.'.join(filter(None, [self.location, str(key[0])]))
-                raise(KeyError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
+                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -379,15 +379,15 @@ def ods_sample():
 
     #check effect of disabling dynamic path creation
     try:
-        ods.dynamic_path_creation=False
+        ods.dynamic_path_creation = False
         ods['info.user']
-    except KeyError:
-        ods['info']=omas()
+    except LookupError:
+        ods['info'] = omas()
         ods['info.user'] = unicode(os.environ['USER'])
     else:
         raise(Exception('OMAS error handling dynamic_path_creation=False'))
     finally:
-        ods.dynamic_path_creation=True
+        ods.dynamic_path_creation = True
 
     #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
     try:
