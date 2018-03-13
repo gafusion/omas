@@ -203,6 +203,8 @@ def create_json_structure(imas_version=default_imas_version):
 
     # deploy imas structures as json
     for structure in sorted(hout):
+        if structure=='time':
+            continue
         print(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json')
         json_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '))
         open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json', 'w').write(

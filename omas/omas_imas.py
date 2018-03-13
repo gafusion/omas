@@ -343,6 +343,9 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
             path = path[1:]
             if ds=='info':
                 continue
+            if not hasattr(ids,ds):
+                print('| ', ds)
+                continue
             if not len(getattr(ids, ds).time):
                 getattr(ids, ds).get()
             if len(getattr(ids, ds).time):

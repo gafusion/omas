@@ -6,6 +6,7 @@ import os
 from omas import *
 
 force_write_existing = False
+save_local=False
 
 os.environ['OMAS_DEBUG_TOPIC'] = 's3'
 
@@ -43,17 +44,18 @@ for scenario in scenarios:
 
     # fetch data
     print('Fetching scenario: {machine} {shot} {run}'.format(**scenario))
-    complete_ods = load_omas_imas(user=None, shot=scenario['shot'], run=scenario['run'], paths=None)
+    complete_ods = load_omas_imas(user=None, shot=int(scenario['shot']), run=int(scenario['run']), paths=None)
 
     # save data as complete ods (locally and remotely) as well as individual odss (locally only)
     save_omas_s3(complete_ods, '{machine}_{shot}_{run}.pkl'.format(**scenario), user='omas_shared')
-    for ids in complete_ods:
-        if ids == 'info':
-            continue
-        ods = omas()
-        ods[ids] = complete_ods[ids]
-        ods['info'] = complete_ods['info']
-        save_omas_pkl(ods, '{machine}_{shot}_{run}__{ids}.pkl'.format(ids=ids, **scenario))
+    if save_local:
+        for ids in complete_ods:
+            if ids == 'info':
+                continue
+            ods = omas()
+            ods[ids] = complete_ods[ids]
+            ods['info'] = complete_ods['info']
+            save_omas_pkl(ods, '{machine}_{shot}_{run}__{ids}.pkl'.format(ids=ids, **scenario))
 
 # upload scenario_summary
 open('scenario_summary.txt','w').write('\n'.join(scenario_summary))
