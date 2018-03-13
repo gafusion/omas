@@ -253,9 +253,9 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.nc' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
         printe('Overloaded save_omas_imas: %s' % filename)
-        from . import save_omas_nc
+        from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
         ods['info.user'] = unicode(user)
@@ -263,7 +263,7 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
         ods['info.shot'] = int(shot)
         ods['info.run'] = int(run)
         ods['info.imas_version'] = unicode(imas_version)
-        save_omas_nc(ods, filename)
+        save_omas_pkl(ods, filename)
 
     else:
         # allocate memory
@@ -325,10 +325,10 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.nc' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
-        from . import load_omas_nc
-        ods = load_omas_nc(filename)
+        from . import load_omas_pkl
+        ods = load_omas_pkl(filename)
 
     else:
         # if paths is None then figure out what IDS are available and get ready to retrieve everything
