@@ -51,7 +51,10 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
                     shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
-        ids.open_env(user, tokamak, imas_version)
+        if new:
+            ids.create_env(user, tokamak, imas_version)
+        else:
+            ids.open_env(user, tokamak, imas_version)
     if not ids.isConnected():
         raise (Exception(
             'Failed to establish connection to IMAS database (user:%s tokamak:%s shot:%s run:%s, imas_version:%s)' % (
