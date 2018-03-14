@@ -26,8 +26,11 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     :return: IMAS ids
     """
     import imas
+    printd("ids = imas.ids()",topic='imas_code')
     ids = imas.ids()
+    printd("ids.setShot(%s)"%shot,topic='imas_code')
     ids.setShot(shot)
+    printd("ids.setRun(%s)"%run,topic='imas_code')
     ids.setRun(run)
 
     if user is None and tokamak is None:
@@ -41,8 +44,10 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
 
     if user is None and tokamak is None:
         if new:
+            printd("ids.create()",topic='imas_code')
             ids.create()
         else:
+            printd("ids.open()",topic='imas_code')
             ids.open()
         if not ids.isConnected():
             raise (Exception(
@@ -52,9 +57,12 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
 
     else:
         if new:
+            printd("ids.create_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(imas_version)),topic='imas_code')
             ids.create_env(user, tokamak, imas_version)
         else:
+            printd("ids.open_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(imas_version)),topic='imas_code')
             ids.open_env(user, tokamak, imas_version)
+
     if not ids.isConnected():
         raise (Exception(
             'Failed to establish connection to IMAS database (user:%s tokamak:%s shot:%s run:%s, imas_version:%s)' % (
@@ -81,7 +89,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
-    #printd(['setting   ','allocating'][allocate]+': %s' % o2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
 
@@ -93,6 +100,8 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
+        printd("",topic='imas_code')
+        printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
         m = getattr(ids, ds)
         if not m.time.size:
             m.time.resize(1)
@@ -105,12 +114,14 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
 
     # traverse IMAS structure until reaching the leaf
+    printd("out = m",topic='imas_code')
     out = m
     for kp, p in enumerate(path):
         location=o2i([ds] + path[:kp+1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
+                    printd("out = getattr(out, %s)"%repr(p),topic='imas_code')
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -121,11 +132,14 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         else:
             try:
                 out = out[p]
+                printd("out = out[%s]"%p,topic='imas_code')
             except IndexError:
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='imas')
+                printd("out.resize(%s + 1)"%p,topic='imas_code')
                 out.resize(p + 1)
+                printd("out = out[%s]"%p,topic='imas_code')
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -135,12 +149,15 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # assign data to leaf node
     printd('setting  : %s'%location, topic='imas')
     if isinstance(value, (basestring, numpy.ndarray)):
+        printd("setattr(out, %s, %s)"%(repr(path[-1]),value),topic='imas_code')
         setattr(out, path[-1], value)
     else:
+        printd("setattr(out, %s, %s)"%(repr(path[-1]),repr(numpy.array(value))),topic='imas_code')
         setattr(out, path[-1], numpy.array(value))
 
     # write the data to IMAS
     try:
+        printd("m.put(0)",topic='imas_code')
         m.put(0)
     except Exception:
         printe('Error %s: %s' %(['setting   ','allocating'][allocate],repr(path)))
@@ -170,6 +187,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     path = path[1:]
 
     if hasattr(ids, ds):
+        printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -180,6 +198,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 
     # use time to figure out if this IDS has data
     if not len(m.time):
+        printd("m.get()",topic='imas_code')
         m.get()
 
     # traverse the IDS to get the data
@@ -187,6 +206,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
+                printd("out = getattr(out, %s)"%repr(p),topic='imas_code')
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -196,6 +216,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
             else:
                 raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path[:kp + 1])))
         else:
+            printd("out = out[%s]"%p,topic='imas_code')
             out = out[p]
 
     return out

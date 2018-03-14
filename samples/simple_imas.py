@@ -1,7 +1,8 @@
 from __future__ import print_function, division, unicode_literals
 
 import os
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+# set OMAS debugging topic
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code'
 
 from omas import *
 
@@ -16,6 +17,9 @@ ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
 ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3],
                                                                         [4, 5, 6]]
+if False:
+    #this raises an error
+    ods['equilibrium.time_slice.0.profiles_2d.0.grid_type']=1
 
 # Save to file
 save_omas(ods, 'test.omas')
