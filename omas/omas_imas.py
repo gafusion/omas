@@ -81,7 +81,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
-    printd('setting: %s' % repr(path), topic='imas')
+    #printd(['setting   ','allocating'][allocate]+': %s' % o2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
 
@@ -107,23 +107,24 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # traverse IMAS structure until reaching the leaf
     out = m
     for kp, p in enumerate(path):
+        location=o2i([ds] + path[:kp+1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
-                    printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
+                    printe('WARNING: %s is not part of IMAS structure' % location)
                 return None
             else:
-                raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
+                raise (AttributeError('%s is not part of IMAS structure' % location))
         else:
             try:
                 out = out[p]
             except IndexError:
                 if not allocate:
-                    raise (IndexError('%s structure array exceed allocation' % o2i([ds] + path)))
-                printd('resizing: %d' % (p + 1), topic='imas')
+                    raise (IndexError('%s structure array exceed allocation' % location))
+                printd('resizing  : %s'%location, topic='imas')
                 out.resize(p + 1)
                 out = out[p]
 
@@ -132,6 +133,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         return [ds] + path
 
     # assign data to leaf node
+    printd('setting  : %s'%location, topic='imas')
     if isinstance(value, (basestring, numpy.ndarray)):
         setattr(out, path[-1], value)
     else:
@@ -141,7 +143,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     try:
         m.put(0)
     except Exception:
-        printe('Error setting: %s' % repr(path))
+        printe('Error %s: %s' %(['setting   ','allocating'][allocate],repr(path)))
         raise
 
     # return path
@@ -163,7 +165,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 
     :return: the value that was read if successful or None otherwise
     """
-    printd('fetching: %s' % repr(path), topic='imas')
+    printd('fetching: %s' % o2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
 
