@@ -293,8 +293,9 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     else:
         # allocate memory
+        # NOTE: for how memory allocation works it is important to traverse the tree in reverse
         set_paths = []
-        for path in paths:
+        for path in reversed(paths):
             set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
         set_paths = filter(None, set_paths)
 
