@@ -25,11 +25,19 @@ def save_omas_nc(ods, filename, **kw):
         for item in odsf:
             dims = []
             data = numpy.asarray(odsf[item])
+            std  = None
+            if any(is_uncertain(data)):
+                std=std_devs(data)
+                data=nominal_values(data)
             for k in range(len(numpy.asarray(odsf[item]).shape)):
                 dims.append('dim_%d' % (data.shape[k]))
                 if dims[-1] not in dataset.dimensions:
                     dataset.createDimension(dims[-1], data.shape[k])
-            dataset.createVariable(item, data.dtype, dims)[:] = data
+            if std is None:
+                dataset.createVariable(item, data.dtype, dims)[:] = data
+            else:
+                dataset.createVariable(item, data.dtype, dims)[:] = data
+                dataset.createVariable(item+'_error_upper', data.dtype, dims)[:] = std
 
 
 def load_omas_nc(filename):
@@ -46,9 +54,15 @@ def load_omas_nc(filename):
     ods = omas()
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
+            if item.endswith('_error_upper'):
+                continue
             if dataset.variables[item].shape:
                 # arrays
-                ods[item] = numpy.array(dataset.variables[item])
+                if item+'_error_upper' in dataset.variables.keys():
+                    ods[item] = uarray(numpy.array(dataset.variables[item]),
+                                       numpy.array(dataset.variables[item+'_error_upper']))
+                else:
+                    ods[item] = numpy.array(dataset.variables[item])
             else:
                 try:
                     # scalars

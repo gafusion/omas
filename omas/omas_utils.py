@@ -30,6 +30,20 @@ def printe(*objects, **kw):
     print(*objects, **kw)
 
 
+def is_uncertain(var):
+    '''
+    :param var: Variable or array to test
+    :return: True if variable is instance of uncertainties or
+             array of shape var with elements indicating uncertainty
+    '''
+    def uncertain_check(x):
+        import uncertainties
+        return isinstance(x,uncertainties.core.AffineScalarFunc)
+    if numpy.iterable(var):
+        return numpy.reshape(numpy.array(map(uncertain_check,numpy.array(var).flat)),numpy.array(var).shape)
+    else:
+        return uncertain_check(var)
+
 def json_dumper(obj):
     """
     function used to dump objects to json format
@@ -41,13 +55,18 @@ def json_dumper(obj):
     from omas import omas
     if isinstance(obj, omas):
         return OrderedDict(zip(obj.keys(), obj.values()))
+    elif any(is_uncertain(obj)):
+        nomv=nominal_values(obj)
+        return dict(__udarray_tolist_avg__=nomv.tolist(),
+                    __udarray_tolist_std__=std_devs(obj).tolist(),
+                    dtype=str(nomv.dtype),
+                    shape=obj.shape)
     elif isinstance(obj, numpy.ndarray):
         if 'complex' in str(obj.dtype).lower():
             return dict(__ndarray_tolist_real__=obj.real.tolist(),
                         __ndarray_tolist_imag__=obj.imag.tolist(),
                         dtype=str(obj.dtype),
                         shape=obj.shape)
-
         else:
             return dict(__ndarray_tolist__=obj.tolist(),
                         dtype=str(obj.dtype),
@@ -78,6 +97,9 @@ def json_loader(object_pairs, cls=dict):
     elif '__ndarray_tolist_real__' in dct and '__ndarray_tolist_imag__' in dct:
         return (numpy.array(dct['__ndarray_tolist_real__'], dtype=dct['dtype']).reshape(dct['shape']) +
                 numpy.array(dct['__ndarray_tolist_imag__'], dtype=dct['dtype']).reshape(dct['shape']) * 1j)
+    elif '__udarray_tolist_avg__' in dct and '__udarray_tolist_std__' in dct:
+        return uarray(numpy.array(dct['__udarray_tolist_avg__'], dtype=dct['dtype']).reshape(dct['shape']),
+                      numpy.array(dct['__udarray_tolist_std__'], dtype=dct['dtype']).reshape(dct['shape']))
     elif '__ndarray__' in dct:
         import base64
         data = base64.b64decode(dct['__ndarray__'])

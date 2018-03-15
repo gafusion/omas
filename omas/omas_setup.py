@@ -13,6 +13,9 @@ import re
 import numpy
 from pprint import pprint
 import tempfile
+import uncertainties
+import uncertainties.unumpy as unumpy
+from uncertainties.unumpy import nominal_values, std_devs, uarray
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):

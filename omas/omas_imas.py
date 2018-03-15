@@ -89,6 +89,13 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
+    if any(is_uncertain(value)):
+        path=copy.deepcopy(path)
+        imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        path[-1]=path[-1]+'_error_upper'
+        imas_set(ids, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        return
+
     ds = path[0]
     path = path[1:]
 
@@ -389,6 +396,7 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                             fetch_paths.append(apath)
             else:
                 if verbose: print('- ', ds)
+        joined_fetch_paths=map(lambda x: separator.join(map(str, x)), fetch_paths)
 
         # build omas data structure
         ods = omas()
@@ -402,8 +410,12 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                 data = imas_get(ids, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
                 if data==-999999999:
                     continue
+            if path[-1].endswith('_error_upper'):
+                continue
             # get data from ids
             data = imas_get(ids, path, None)
+            if '.'.join(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                data = uarray(data,imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None))
             # skip empty arrays
             if isinstance(data,numpy.ndarray) and not data.size:
                 continue
