@@ -28,9 +28,9 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     import imas
     printd("ids = imas.ids()",topic='imas_code')
     ids = imas.ids()
-    printd("ids.setShot(%s)"%shot,topic='imas_code')
+    printd("ids.setShot(%d)"%shot,topic='imas_code')
     ids.setShot(shot)
-    printd("ids.setRun(%s)"%run,topic='imas_code')
+    printd("ids.setRun(%d)"%run,topic='imas_code')
     ids.setRun(run)
 
     if user is None and tokamak is None:
@@ -48,12 +48,15 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
             ids.create()
         else:
             printd("ids.open()",topic='imas_code')
-            ids.open()
+            try:
+                ids.open()
+            except Exception as _excp:
+                if 'Error opening imas shot' in str(_excp):
+                    raise(IOError('Error opening imas shot %d run %d'%(shot,run)))
         if not ids.isConnected():
-            raise (Exception(
-                'Failed to establish connection to IMAS database'
-                '(shot:{shot} run:{run}, DB:{db})'.format(
-                    shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+            raise (Exception('Failed to establish connection to IMAS database '
+                             '(shot:{shot} run:{run}, DB:{db})'.format(
+                             shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
         if new:
@@ -61,12 +64,15 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
             ids.create_env(user, tokamak, imas_version)
         else:
             printd("ids.open_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(imas_version)),topic='imas_code')
-            ids.open_env(user, tokamak, imas_version)
-
-    if not ids.isConnected():
-        raise (Exception(
-            'Failed to establish connection to IMAS database (user:%s tokamak:%s shot:%s run:%s, imas_version:%s)' % (
-                user, tokamak, shot, run, imas_version)))
+            try:
+                ids.open_env(user, tokamak, imas_version)
+            except Exception as _excp:
+                if 'Error opening imas shot' in str(_excp):
+                    raise(IOError('Error opening imas shot %d run %d'%(shot,run)))
+        if not ids.isConnected():
+            raise (Exception('Failed to establish connection to IMAS database '
+                             '(user:%s tokamak:%s shot:%s run:%s, imas_version:%s)' %
+                             (user, tokamak, shot, run, imas_version)))
     return ids
 
 
@@ -273,6 +279,9 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
         # open IMAS tree
         ids = imas_open(user=user, tokamak=tokamak, shot=shot, run=run, new=new, imas_version=imas_version)
 
+    except IOError as _excp:
+        raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
+        
     except ImportError:
         # fallback on saving IMAS as NC file if IMAS is not installed
         if not omas_rcparams['allow_fake_imas_fallback']:
