@@ -55,7 +55,7 @@ def json_dumper(obj):
     from omas import omas
     if isinstance(obj, omas):
         return OrderedDict(zip(obj.keys(), obj.values()))
-    elif any(is_uncertain(obj)):
+    elif numpy.atleast_1d(is_uncertain(obj)).any():
         nomv=nominal_values(obj)
         return dict(__udarray_tolist_avg__=nomv.tolist(),
                     __udarray_tolist_std__=std_devs(obj).tolist(),

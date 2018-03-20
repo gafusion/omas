@@ -26,7 +26,7 @@ def save_omas_nc(ods, filename, **kw):
             dims = []
             data = numpy.asarray(odsf[item])
             std  = None
-            if any(is_uncertain(data)):
+            if numpy.atleast_1d(is_uncertain(data)).any():
                 std=std_devs(data)
                 data=nominal_values(data)
             for k in range(len(numpy.asarray(odsf[item]).shape)):
