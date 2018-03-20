@@ -1,8 +1,8 @@
 import os
 import re
 
-file_in = os.path.abspath(os.sep.join([os.path.split(__file__)[0], '..', 'omas', 'omas_imas.py']))
-file_out = os.path.abspath(os.sep.join([os.path.split(__file__)[0], '..', 'omas', 'omas_itm.py']))
+file_in = os.path.abspath(os.sep.join([os.path.abspath(os.path.split(__file__)[0]), '..', 'omas', 'omas_imas.py']))
+file_out = os.path.abspath(os.sep.join([os.path.abspath(os.path.split(__file__)[0]), '..', 'omas', 'omas_itm.py']))
 
 print('Reading   : ' + file_in)
 

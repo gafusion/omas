@@ -95,7 +95,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
-    if any(is_uncertain(value)):
+    if numpy.atleast_1d(is_uncertain(value)).any():
         path=copy.deepcopy(path)
         imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         path[-1]=path[-1]+'_error_upper'
@@ -111,12 +111,17 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if ds == 'info':
         return
 
+    # for ITM we have to append Array to the name of the data structure
+    DS=ds
+    if 'imas'=='itm':
+        ds=ds+'Array'
+
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
         printd("",topic='imas_code')
         printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
         m = getattr(ids, ds)
-        if not m.time.size:
+        if hasattr(m,'time') and not isinstance(m.time,float) and not m.time.size:
             m.time.resize(1)
             m.time[0]=-1.0
     elif skip_missing_nodes is not False:
@@ -146,7 +151,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             try:
                 out = out[p]
                 printd("out = out[%s]"%p,topic='imas_code')
-            except IndexError:
+            except (AttributeError,IndexError): # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='imas')
@@ -157,7 +162,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # if we are allocating data, simply stop here
     if allocate:
-        return [ds] + path
+        return [DS] + path
 
     # assign data to leaf node
     printd('setting  : %s'%location, topic='imas')
@@ -177,7 +182,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         raise
 
     # return path
-    return [ds] + path
+    return [DS] + path
 
 
 def imas_get(ids, path, skip_missing_nodes=False):
@@ -198,6 +203,10 @@ def imas_get(ids, path, skip_missing_nodes=False):
     printd('fetching: %s' % o2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
+
+    # for ITM we have to append Array to the name of the data structure
+    if 'imas'=='itm':
+        ds=ds+'Array'
 
     if hasattr(ids, ds):
         printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
@@ -328,7 +337,6 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
                 imas_set(ids, path, ods[path], True)
 
     return set_paths
-
 
 def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths=None,
                    imas_version=default_imas_version):

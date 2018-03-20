@@ -44,4 +44,4 @@ else:
 
 # save CPO to ITM data system
 omas_rcparams['allow_fake_itm_fallback']=True
-save_omas_itm(cpo, tokamak='ITER', shot=1, new=True)
+save_omas_itm(cpo, tokamak='jet', shot=1, new=True)
