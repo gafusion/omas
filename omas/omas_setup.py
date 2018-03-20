@@ -27,6 +27,8 @@ else:
     import pickle
     from collections.abc import MutableMapping
 
+separator = '.'
+
 # --------------------------------------------
 # rcparams
 # --------------------------------------------
@@ -39,7 +41,11 @@ omas_rcparams = {
     'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR',
                                     os.sep.join(
                                         [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
-    'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0')))
+    'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
+    'fake_itm_dir': os.environ.get('OMAS_FAKE_ITM_DIR',
+                                    os.sep.join(
+                                        [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_ITM_DIR'])),
+    'allow_fake_itm_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_ITM_FALLBACK', '0')))
 }
 
 # --------------------------------------------
@@ -47,9 +53,15 @@ omas_rcparams = {
 # --------------------------------------------
 imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
 
-separator = '.'
-
 if 'IMAS_VERSION' in os.environ:
     default_imas_version = os.environ['IMAS_VERSION']
 else:
     default_imas_version = re.sub('_', '.', os.path.split(sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1])
+
+# --------------------------------------------
+# configuration of directories and ITM infos
+# --------------------------------------------
+if 'DATAVERSION_TAG' in os.environ:
+    default_itm_version = os.environ['DATAVERSION_TAG']
+else:
+    default_itm_version = '4.10b_rc'

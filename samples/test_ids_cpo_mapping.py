@@ -38,6 +38,10 @@ ids_out = omas_data_mapper(cpo, translate, flip_translate=True)
 # check that data did not get lost
 check = different_ods(ids_in, ids_out)
 if not check:
-    print('OMAS data got saved and loaded correctly')
+    print('OMAS data got translated correctly')
 else:
     print(check)
+
+# save CPO to ITM data system
+omas_rcparams['allow_fake_itm_fallback']=True
+save_omas_itm(cpo, tokamak='ITER', shot=1, new=True)
