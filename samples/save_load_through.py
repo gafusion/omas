@@ -1,8 +1,9 @@
-import os
-from omas import *
+from __future__ import print_function, division, unicode_literals
 
-# set OMAS debugging topic
+import os
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
+
+from omas import *
 
 # load some sample data
 ods_start = ods_sample()
@@ -28,14 +29,8 @@ save_omas_s3(ods, filename)
 ods = load_omas_s3(filename)
 
 # save/load IMAS
-user = os.environ['USER']
-tokamak = 'ITER'
-imas_version = os.environ.get('IMAS_VERSION', '3.10.1')
-shot = 1
-run = 0
-new = True
-paths = save_omas_imas(ods, user, tokamak, imas_version, shot, run, new)
-ods_end = load_omas_imas(user, tokamak, imas_version, shot, run, paths)
+paths = save_omas_imas(ods, tokamak='ITER', shot=1, new=True)
+ods1 = load_omas_imas(tokamak='ITER', shot=1, paths=paths)
 
 # check data
 check = different_ods(ods, ods1)

@@ -9,6 +9,8 @@ __pycache__/
 
 omas_doc.html
 
+omas/data-dictionary
+omas/Saxon*
 omas/imas_structures/*/clean.html
 omas/imas_structures/*/*.json
 
@@ -16,10 +18,15 @@ sphinx/build/
 sphinx/source/data.rst
 sphinx/source/code.rst
 sphinx/source/usage.rst
+sphinx/source/scenarios.rst
+sphinx/source/schema.rst
 sphinx/source/schema/
 
 docs/
 dist/
 omas.egg-info/
 
-test*
+test.*
+g133221*
+*.pkl
+scenario_summary.txt
