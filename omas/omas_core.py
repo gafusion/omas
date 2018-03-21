@@ -7,22 +7,25 @@ __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 've
 __all__ = [
     'omas_rcparams', 'omas', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
     'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
-    'save_omas_json', 'load_omas_json', 'test_omas_json', 'save_omas_nc', 'load_omas_nc',
-    'test_omas_nc', 'save_omas_imas', 'load_omas_imas', 'test_omas_imas', 'save_omas_s3',
-    'load_omas_s3', 'test_omas_s3', 'aggregate_imas_html_docs', 'create_json_structure',
-    'create_html_documentation', 'imas_json_dir', 'default_imas_version',
+    'save_omas_json', 'load_omas_json', 'test_omas_json',
+    'save_omas_nc', 'load_omas_nc', 'test_omas_nc',
+    'save_omas_imas', 'load_omas_imas', 'test_omas_imas',
+    'save_omas_itm', 'load_omas_itm', 'test_omas_itm',
+    'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'omas_scenario_database',
+    'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
+    'imas_json_dir', 'default_imas_version', 'omas_data_mapper',
     '__version__'
 ]
 
 
 def _omas_key_dict_preprocessor(key):
-    '''
+    """
     converts a omas string path to a list of keys that make the path
 
     :param key: omas string path
 
     :return: list of keys that make the path
-    '''
+    """
     if not isinstance(key, (list, tuple)):
         key = str(key)
         key = re.sub('\]', '', re.sub('\[', '.', key)).split('.')
@@ -36,34 +39,45 @@ def _omas_key_dict_preprocessor(key):
 
 
 class omas(MutableMapping):
-    '''
+    """
     OMAS class
-    '''
+    """
 
     def __init__(self,
+                 imas_version=default_imas_version,
                  consistency_check=omas_rcparams['consistency_check'],
-                 imas_version=None,
+                 dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
-                 structure={},
-                 *args, **kw):
-        '''
+                 structure=None):
+        """
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
-        '''
+
+        :param dynamic_path_creation: whether to dynamically create the path when setting an item
+
+        :param location: string with location of this object relative to IMAS schema
+
+        :param structure: IMAS schema to use
+        """
         self.omas_data = None
         self._consistency_check = consistency_check
+        self._dynamic_path_creation = dynamic_path_creation
         self.imas_version = imas_version
         self.location = location
+        if structure is None:
+            structure = {}
         self.structure = structure
 
     @property
     def consistency_check(self):
-        '''
+        """
         property that sets whether consistency with IMAS schema is enabled or not
 
         :return: True/False
-        '''
+        """
+        if not hasattr(self,'_consistency_check'):
+            self._consistency_check=True
         return self._consistency_check
 
     @consistency_check.setter
@@ -73,14 +87,32 @@ class omas(MutableMapping):
             if isinstance(self[item], omas):
                 self[item].consistency_check = value
 
+    @property
+    def dynamic_path_creation(self):
+        """
+        property that sets whether dynamic path creation is enabled or not
+
+        :return: True/False
+        """
+        if not hasattr(self,'_dynamic_path_creation'):
+            self._dynamic_path_creation=True
+        return self._dynamic_path_creation
+
+    @dynamic_path_creation.setter
+    def dynamic_path_creation(self, value):
+        self._dynamic_path_creation = value
+        for item in self.keys():
+            if isinstance(self[item], omas):
+                self[item].dynamic_path_creation = value
+
     def _validate(self, value, structure):
-        '''
+        """
         validate that the value is consistent with the provided structure field
 
         :param value: sub-tree to be checked
 
         :param structure: reference structure
-        '''
+        """
         for key in value.keys():
             structure_key = re.sub('^[0-9:]+$', ':', str(key))
             if isinstance(value[key], omas) and value[key].consistency_check:
@@ -99,7 +131,9 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version, consistency_check=self.consistency_check)
+            value = omas(imas_version=self.imas_version,
+                         consistency_check=self.consistency_check,
+                         dynamic_path_creation=self.dynamic_path_creation)
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
@@ -107,26 +141,30 @@ class omas(MutableMapping):
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
+            structure = {}
+            structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
             try:
-                structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
                 if isinstance(value, omas):
                     if not self.structure:
-                        structure = load_structure(key[0])[1][key[0]]
+                        # load the json structure file
+                        structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
                         structure = self.structure[structure_key[0]]
+                        if not len(structure):
+                            raise(ValueError('`%s` has no data'%location))
                     # check that tha data will go in the right place
                     self._validate(value, structure)
                 else:
                     self.structure[structure_key[0]]
 
-            except (KeyError, TypeError):
+            except (LookupError, TypeError):
                 options = list(self.structure.keys())
                 if len(options) == 1 and options[0] == ':':
                     options = 'A numerical index is needed with n>=0'
                 else:
                     options = 'Did you mean: %s' % options
-                spaces = '           ' + ' ' * (len(self.location) + 2)
-                raise Exception('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
+                spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
+                raise LookupError('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
                     structure_key[0]) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
@@ -181,7 +219,13 @@ class omas(MutableMapping):
 
         # dynamic path creation
         elif key[0] not in self.keys():
-            self.__setitem__(key[0], omas(imas_version=self.imas_version, consistency_check=self.consistency_check))
+            if self.dynamic_path_creation:
+                self.__setitem__(key[0], omas(imas_version=self.imas_version,
+                                              consistency_check=self.consistency_check,
+                                              dynamic_path_creation=self.dynamic_path_creation))
+            else:
+                location = '.'.join(filter(None, [self.location, str(key[0])]))
+                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -200,11 +244,11 @@ class omas(MutableMapping):
             return self.omas_data.__delitem__(key[0])
 
     def paths(self, **kw):
-        '''
+        """
         Traverse the ods and return paths that have data
 
         :return: list of paths that have data
-        '''
+        """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
@@ -215,9 +259,9 @@ class omas(MutableMapping):
         return paths
 
     def flat(self):
-        '''
+        """
         :return: flat dictionary representation of the data
-        '''
+        """
         tmp = OrderedDict()
         for path in self.paths():
             tmp['.'.join(map(str, path))] = self[path]
@@ -225,8 +269,8 @@ class omas(MutableMapping):
 
     def __getnewargs__(self):
         # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
-        # back from that string will use omas.__new__ with consistency_check=False
-        return (False,)
+        # back from that string will use omas.__new__ with consistency_check=False and dynamic_path_creation=True
+        return (False,True)
 
     def __len__(self):
         return len(self.omas_data)
@@ -263,9 +307,13 @@ class omas(MutableMapping):
         return repr(self.omas_data)
 
     def get(self, key, default=None):
-        '''
+        """
         Check if key is present and if not return default value without creating value in omas data structure
-        '''
+
+        :param key: dictionary key to get
+
+        :param default: return default if key is not found
+        """
         if key not in self:
             return default
         else:
@@ -276,7 +324,7 @@ class omas(MutableMapping):
 # save and load OMAS with Python pickle
 # --------------------------------------------
 def save_omas_pkl(ods, filename, **kw):
-    '''
+    """
     Save OMAS data set to Python pickle
 
     :param ods: OMAS data set
@@ -284,35 +332,37 @@ def save_omas_pkl(ods, filename, **kw):
     :param filename: filename to save to
 
     :param kw: keywords passed to pickle.dump function
-    '''
-    printd('Saving to %s' % (filename), topic='pkl')
+    """
+    printd('Saving to %s' % filename, topic='pkl')
+
+    kw.setdefault('protocol', pickle.HIGHEST_PROTOCOL)
 
     with open(filename, 'wb') as f:
         pickle.dump(ods, f, **kw)
 
 
 def load_omas_pkl(filename):
-    '''
+    """
     Load OMAS data set from Python pickle
 
     :param filename: filename to save to
 
     :returns: ods OMAS data set
-    '''
-    printd('Loading from %s' % (filename), topic='pkl')
+    """
+    printd('Loading from %s' % filename, topic='pkl')
 
     with open(filename, 'rb') as f:
         return pickle.load(f)
 
 
 def test_omas_pkl(ods):
-    '''
+    """
     test save and load Python pickle
 
     :param ods: ods
 
     :return: ods
-    '''
+    """
     filename = 'test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
@@ -323,14 +373,32 @@ def test_omas_pkl(ods):
 # tools
 # --------------------------------------------
 def ods_sample():
-    '''
+    """
     create sample ODS data
-    :return:
-    '''
+    """
     ods = omas()
 
+    #check effect of disabling dynamic path creation
+    try:
+        ods.dynamic_path_creation = False
+        ods['info.user']
+    except LookupError:
+        ods['info'] = omas()
+        ods['info.user'] = unicode(os.environ['USER'])
+    else:
+        raise(Exception('OMAS error handling dynamic_path_creation=False'))
+    finally:
+        ods.dynamic_path_creation = True
+
+    #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
+    try:
+        ods['info.tokamak']
+    except ValueError:
+        pass
+    else:
+        raise(Exception('OMAS error querying leaf that has not been set'))
+
     # info ODS is used for keeping track of IMAS metadata
-    ods['info.user'] = unicode(os.environ['USER'])
     ods['info.tokamak'] = 'ITER'
     ods['info.imas_version'] = default_imas_version
     ods['info.shot'] = 1
@@ -338,7 +406,7 @@ def ods_sample():
 
     # check .get() method
     assert (ods.get('info.shot') == ods['info.shot'])
-    assert (ods.get('info.bad', None) == None)
+    assert (ods.get('info.bad', None) is None)
 
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
@@ -375,10 +443,10 @@ def ods_sample():
     # check data slicing is working
     printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
-    ckBKP = ods.consistency_check
+    ckbkp = ods.consistency_check
     tmp = pickle.dumps(ods2)
     ods2 = pickle.loads(tmp)
-    if ods2.consistency_check != ckBKP:
+    if ods2.consistency_check != ckbkp:
         raise (Exception('consistency_check attribute changed'))
 
     save_omas_pkl(ods2, 'test.pkl')
@@ -391,7 +459,7 @@ def ods_sample():
 
 
 def different_ods(ods1, ods2):
-    '''
+    """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
     :param ods1: first ods to check
@@ -399,7 +467,7 @@ def different_ods(ods1, ods2):
     :param ods2: second ods to check
 
     :return: string with reason for difference, or False otherwise
-    '''
+    """
     ods1 = ods1.flat()
     ods2 = ods2.flat()
 
@@ -412,11 +480,11 @@ def different_ods(ods1, ods2):
         if not k.startswith('info.'):
             return 'DIFF: key `%s` missing in 1st ods' % k
     for k in k1.intersection(k2):
-        if type(ods1[k]) != type(ods2[k]):
-            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
-        elif isinstance(ods1[k], basestring):
+        if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
                 return 'DIFF: `%s` differ in value' % k
+        elif type(ods1[k]) != type(ods2[k]):
+            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
         else:
             if not numpy.allclose(ods1[k], ods2[k]):
                 return 'DIFF: `%s` differ in value' % k
@@ -427,11 +495,13 @@ _tests = ['pkl', 'json', 'nc', 's3', 'imas']
 
 
 def test_omas_suite(ods=None, test_type=None, do_raise=False):
-    '''
+    """
     :param ods: omas structure to test. If None this is set to ods_sample
 
     :param test_type: None tests all suite, otherwise choose among %s
-    '''
+
+    :param do_raise: raise error if something goes wrong
+    """
 
     if ods is None:
         ods = ods_sample()
@@ -446,9 +516,11 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
             print(check)
 
     else:
-        print('=' * 20)
 
         os.environ['OMAS_DEBUG_TOPIC'] = '*'
+        printd('OMAS is using IMAS data structure version `%s` as default' % default_imas_version, topic='*')
+
+        print('=' * 20)
 
         results = numpy.zeros((len(_tests), len(_tests)))
 
@@ -492,13 +564,13 @@ test_omas_suite.__doc__ = test_omas_suite.__doc__ % _tests
 # save and load OMAS with default saving method
 # --------------------------------------------
 def save_omas(ods, filename):
-    '''
+    """
     Save omas data to filename. The file extension defines format to use.
 
     :param ods: OMAS data set
 
     :param filename: filename to save to
-    '''
+    """
     if os.path.splitext(filename)[1].lower() == '.json':
         return save_omas_json(ods, filename)
     elif os.path.splitext(filename)[1].lower() == '.nc':
@@ -508,13 +580,13 @@ def save_omas(ods, filename):
 
 
 def load_omas(filename):
-    '''
+    """
     Load omas data from filename. The file extension defines format to use.
 
     :param filename: filename to load from
 
     :returns: ods OMAS data set
-    '''
+    """
     if os.path.splitext(filename)[1].lower() == '.json':
         return load_omas_json(filename)
     elif os.path.splitext(filename)[1].lower() == '.nc':
@@ -531,7 +603,4 @@ from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
-
-# --------------------------------------------
-if __name__ == '__main__':
-    test_omas_suite()
+from .omas_itm import *

@@ -34,7 +34,9 @@ The OMAS installation can be tested by running:
 
 This test saves and load a sample piece of data through the different OMAS save formats
 and checks that information does not get lost or corrupted. If successful,
-the test should output::
+the test should output:
+
+.. code-block:: none
 
     ====================
     FROM  pkl  TO  pkl  : OK
@@ -70,7 +72,9 @@ the test should output::
      [1 1 1 1 1]]
     ====================
 
-If for example `imas` is not installed on the system, the test output will look like::
+If for example `imas` is not installed on the system, the test output will look like:
+
+.. code-block:: none
 
     ====================
     FROM  pkl  TO  pkl  : OK
