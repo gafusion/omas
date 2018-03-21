@@ -338,7 +338,7 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     return set_paths
 
-def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths=None,
+def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
                    imas_version=default_imas_version):
     """
     load OMAS data set from IMAS
