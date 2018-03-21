@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 import glob
 
-install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties']
+install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties', 'future']
 
 extras_require = {'imas': ['imas'], 'build_structures': ['xmltodict','bs4']}
 

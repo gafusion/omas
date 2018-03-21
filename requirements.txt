@@ -6,5 +6,6 @@ numpy               # required
 netCDF4             # required
 boto3               # required
 uncertainties       # required
-pandas              # build_structures
-xlrd                # build_structures
+future              # required
+xmltodict           # build_structures
+bs4                 # build_structures
