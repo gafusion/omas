@@ -26,12 +26,8 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     :return: IMAS ids
     """
     import imas
-    printd("ids = imas.ids()",topic='imas_code')
-    ids = imas.ids()
-    printd("ids.setShot(%d)"%shot,topic='imas_code')
-    ids.setShot(shot)
-    printd("ids.setRun(%d)"%run,topic='imas_code')
-    ids.setRun(run)
+    printd("ids = imas.ids(%d,%d)"%(shot,run),topic='imas_code')
+    ids = imas.ids(shot,run)
 
     if user is None and tokamak is None:
         pass
@@ -327,9 +323,11 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
         for ds in ods.keys():
             if ds == 'info':
                 continue
+            printd("ids.%s.put(0)"%ds,topic='imas_code')
             getattr(ids,ds).put(0)
 
         # close connection to IMAS database
+        printd("ids.close()",topic='imas_code')
         ids.close()
 
     return set_paths
@@ -393,13 +391,12 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
             if not hasattr(ids,ds):
                 if verbose: print('| ', ds)
                 continue
+            # ids fetching
             if not len(getattr(ids, ds).time):
-                getattr(ids, ds).get()
-            if len(getattr(ids, ds).time):
-                # ids fetching
                 printd("ids.%s.get()"%ds,topic='imas_code')
                 getattr(ids, ds).get()
-                # ids discovery
+            # ids discovery
+            if len(getattr(ids, ds).time):
                 if verbose: print('* ', ds)
                 available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
                 joined_available_paths = map(o2i, available_paths)
