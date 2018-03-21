@@ -319,6 +319,16 @@ class omas(MutableMapping):
         else:
             return self[key]
 
+    def __getstate__(self):
+        tmp=copy.copy(self.__dict__)
+        for item in list(tmp.keys()):
+            if item not in omas_dictstate:
+                del tmp[item]
+        return tmp
+
+omas_dictstate=dir(omas)
+omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])
+
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
