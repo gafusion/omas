@@ -1,6 +1,5 @@
 from __future__ import print_function, division, unicode_literals
-from future.builtins import super
-from collections.abc import MutableMapping
+from collections import MutableMapping
 
 from .omas_utils import *
 

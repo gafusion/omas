@@ -16,16 +16,15 @@ import tempfile
 import uncertainties
 import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
+from collections import MutableMapping
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
     import cPickle as pickle
-    from collections import MutableMapping
 else:
     basestring = str
     unicode = str
     import pickle
-    from collections.abc import MutableMapping
 
 separator = '.'
 

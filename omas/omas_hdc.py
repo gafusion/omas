@@ -1,5 +1,5 @@
 from .omas_core import omas
-from collections.abc import Sequence
+from collections import Sequence
 import numpy
 try:
     from pyhdc import HDC
