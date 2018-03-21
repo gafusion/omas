@@ -38,9 +38,15 @@ def is_uncertain(var):
     '''
     def uncertain_check(x):
         import uncertainties
-        return isinstance(x,uncertainties.core.AffineScalarFunc)
+        return isinstance(x, uncertainties.core.AffineScalarFunc)
     if numpy.iterable(var):
-        return numpy.reshape(numpy.array(map(uncertain_check,numpy.array(var).flat)),numpy.array(var).shape)
+        # TODO this fails for some iterables, most notably strings
+        # TODO creating numpy arrays is quite an overhead
+        # original fix with numpy
+        # return numpy.reshape(numpy.fromiter(map(uncertain_check, numpy.array(var).flat),
+        #                                     dtype=numpy.array(var).dtype),
+        #                      numpy.array(var).shape)
+        return [is_uncertain(x) for x in var]
     else:
         return uncertain_check(var)
 
