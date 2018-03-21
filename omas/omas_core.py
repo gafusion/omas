@@ -236,7 +236,6 @@ class omas(MutableMapping):
     def __delitem__(self, key):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
-        print(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
