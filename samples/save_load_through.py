@@ -1,9 +1,9 @@
 from __future__ import print_function, division, unicode_literals
-import os
-from omas import *
 
-# set OMAS debugging topic
+import os
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
+
+from omas import *
 
 # load some sample data
 ods_start = ods_sample()

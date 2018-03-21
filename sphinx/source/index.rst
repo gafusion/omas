@@ -1,8 +1,18 @@
 Ordered Multidimensional Array Structure
 ========================================
 
-OMAS is a set of Python tools that aim at simplifying the interface between third-party codes and the ITER IMAS data storage infrastructure. IMAS is a set of codes, an execution framework, a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data. The IMAS data model organizes data into a hierarchical tree. There data is stored in the leaf nodes, and the branches are structures or arrays of structures.
+.. figure:: images/omas_logo_high_res.gif
+  :align: center
+  :width: 50%
+  :alt: OMAS logo
+  :target: _images/omas_logo_high_res.gif
 
-The idea behind OMAS is to provide a convenient Python API can store data in a format that is compatible with the IMAS data model, using other storage systems in addition to IMAS itself. The OMAS library provides convenient APIs to convert data between the OMAS and IMAS storage systems.  The ability of OMAS to handle data in an IMAS-compatible way, without relying on the IMAS library itself, exempts codes from such (cumbersome) dependency. Furthermore, any physics code or programming language that is capable of reading/writing data using one of the many OMAS supported data formats (eg. NetCDF) can take advantage of the functionalities provided by OMAS.
+OMAS (Ordered Multidimensional Array Structure) is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_) .
+ITER IMAS defines a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data.
 
-OMAS itself does not address the problem of mapping of the physics codes I/O to the IMAS data model. Instead, Python-based integrated modeling frameworks (such as `OMFIT <http://gafusion.github.io/OMFIT-source>`_ can be used to define wrappers that leverage OMAS to conveniently map the physics codes I/O, and enable their data to be exchanged with IMAS.
+At the heart of OMAS is the idea of providing a convenient API which can store data in a format that is compatible with the IMAS data model, but using other storage systems in addition to the one provided by IMAS itself.
+Within OMAS data compatible with the IMAS data model is easily translated between these different storage systems.
+Furthermore, any physics code or programming language that is capable of reading/writing data using one of the many OMAS supported data formats (eg. NetCDF) can take advantage of the functionalities provided by OMAS.
+
+OMAS itself does not address the problem of mapping of the physics codes I/O to the IMAS data model.
+Such mappings are defined in third party Python codes and frameworks, as done for example with the data classes of the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.

@@ -1,10 +1,10 @@
 from __future__ import print_function, division, unicode_literals
+
+import os
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
-import os
-
-# set OMAS debugging topic
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 
 # read gEQDSK file in OMFIT
 eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')

@@ -1,9 +1,10 @@
 from setuptools import setup
 import os
+import glob
 
-install_requires = ['numpy', 'netCDF4', 'boto3']
+install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties']
 
-extras_require = {'imas': ['imas'], 'build_structures': ['pandas', 'xlrd']}
+extras_require = {'imas': ['imas'], 'build_structures': ['xmltodict','bs4']}
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep
@@ -20,6 +21,15 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             if requirement != 'imas':
                 for item in extras_require[requirement]:
                     f.write(item.ljust(20) + '# %s\n' % requirement)
+
+packages = ['omas']
+package_data = {'omas': ['*.py', 'version']}
+
+for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
+    print(item)
+    packages.append('omas.imas_structures.' + os.path.split(item)[1])
+    package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
+
 
 setup(
     name='omas',
@@ -41,11 +51,8 @@ setup(
 
     # What does your project relate to?
     keywords='integrated modeling OMFIT IMAS ITER',
-    packages=['omas', 'omas.imas_structures.3_10_1'],
-    package_data={
-        'omas.imas_structures.3_10_1': ['*.json'],
-        'omas': ['*.py', 'version']
-    },
+    packages=packages,
+    package_data=package_data,
     install_requires=install_requires,
     extras_require={'imas': ['imas'],
                     'build_structures': ['pandas', 'xlrd']})

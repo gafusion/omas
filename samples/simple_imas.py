@@ -1,9 +1,10 @@
 from __future__ import print_function, division, unicode_literals
-import os
-from omas import *
 
+import os
 # set OMAS debugging topic
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code'
+
+from omas import *
 
 # Instantiate new OMAS Data Structure (ODS)
 ods = omas()
@@ -16,6 +17,9 @@ ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
 ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3],
                                                                         [4, 5, 6]]
+if False:
+    #this raises an error
+    ods['equilibrium.time_slice.0.profiles_2d.0.grid_type']=1
 
 # Save to file
 save_omas(ods, 'test.omas')
@@ -25,7 +29,7 @@ ods1 = load_omas('test.omas')
 # Save to IMAS
 paths = save_omas_imas(ods, tokamak='ITER', shot=1, new=True)
 # Load from IMAS
-ods1 = load_omas_imas(tokamak='ITER', shot=1, paths=paths)
+ods1 = load_omas_imas(tokamak='ITER', shot=1)#, paths=paths)
 
 # check data
 check = different_ods(ods, ods1)
