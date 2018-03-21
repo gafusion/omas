@@ -1,7 +1,10 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_setup import *
+import sys
 
+import externalImports
+sys.modules['externalImports']= externalImports
 
 # --------------------------
 # general utility functions
@@ -37,7 +40,6 @@ def is_uncertain(var):
              array of shape var with elements indicating uncertainty
     '''
     def uncertain_check(x):
-        import uncertainties
         return isinstance(x, uncertainties.core.AffineScalarFunc)
     if numpy.iterable(var):
         # TODO this fails for some iterables, most notably strings
