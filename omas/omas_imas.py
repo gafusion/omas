@@ -97,10 +97,10 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     """
     if numpy.atleast_1d(is_uncertain(value)).any():
         path=copy.deepcopy(path)
-        imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        tmp=imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         path[-1]=path[-1]+'_error_upper'
         imas_set(ids, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
-        return
+        return tmp
 
     ds = path[0]
     path = path[1:]
@@ -144,7 +144,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of IMAS structure' % location)
-                return None
+                return
             else:
                 raise (AttributeError('%s is not part of IMAS structure' % location))
         else:
@@ -422,17 +422,15 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
                 data = imas_get(ids, path, None)
                 if data[0]==-1:
                     continue
-            # skip _error_upper and _error_lower if _error_index=-999999999
+#            # skip _error_upper and _error_lower if _error_index=-999999999
+#            if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+#                data = imas_get(ids, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
+#                if data in [-999999999,-9E40]:
+#                    continue
             if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
-                data = imas_get(ids, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
-                if data==-999999999:
-                    continue
-            if path[-1].endswith('_error_upper'):
                 continue
             # get data from ids
             data = imas_get(ids, path, None)
-            if '.'.join(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
-                data = uarray(data,imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None))
             # skip empty arrays
             if isinstance(data,numpy.ndarray) and not data.size:
                 continue
@@ -442,6 +440,11 @@ def load_omas_imas(user=os.environ['USER'], tokamak=None, shot=None, run=0, path
             # skip empty strings
             if isinstance(data,unicode) and not len(data):
                 continue
+            # add uncertainty
+            if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
+                if stdata not in [-999999999,-9E40]:
+                    data = uarray(data,stdata)
             #print(path,data)
             h = ods
             for step in path[:-1]:
