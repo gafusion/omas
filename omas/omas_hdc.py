@@ -51,7 +51,7 @@ def load_omas_hdc(hdc):
         if hdc.get_type_str() == 'list':
             # list type
             ods = omas(consistency_check=False)
-            for i in range(hdc.get_shape()[0]):
+            for i in range(hdc.shape[0]):
                 ods[i] = load_omas_hdc(hdc[i])
         elif hdc.get_type_str() == 'struct':
             # mapping type
@@ -63,9 +63,9 @@ def load_omas_hdc(hdc):
             ods = omas(consistency_check=False)
         elif hdc.get_type_str() == 'string':
             # mapping type
-            ods = hdc.get_data()
+            ods = str(hdc)
         else:
-            ods = hdc.asarray()
+            ods = numpy.asarray(hdc)
             if numpy.isscalar(ods) or ods.size == 1:
                 ods = numpy.asscalar(ods)
 
