@@ -4,7 +4,8 @@ from .omas_setup import *
 import sys
 
 import externalImports
-sys.modules['externalImports']= externalImports
+if 'externalImports' not in sys.modules:
+    sys.modules['externalImports']= externalImports
 
 # --------------------------
 # general utility functions
