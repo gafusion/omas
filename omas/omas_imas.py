@@ -151,7 +151,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='imas')
-                printd("out.resize(%s + 1)"%p,topic='imas_code')
+                printd("out.resize(%d)"%(eval(p+1)),topic='imas_code')
                 out.resize(p + 1)
                 printd("out = out[%s]"%p,topic='imas_code')
                 out = out[p]
@@ -162,12 +162,10 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # assign data to leaf node
     printd('setting  : %s'%location, topic='imas')
-    if isinstance(value, (basestring, numpy.ndarray)):
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),value),topic='imas_code')
-        setattr(out, path[-1], value)
-    else:
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),repr(numpy.array(value))),topic='imas_code')
-        setattr(out, path[-1], numpy.array(value))
+    if not isinstance(value, (basestring, numpy.ndarray)):
+        value=numpy.array(value)
+    setattr(out, path[-1], value)
+    printd("setattr(out, %r, %r)"%(path[-1],value),topic='imas_code')
 
     # return path
     return [DS] + path

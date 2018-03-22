@@ -16,11 +16,19 @@ def printd(*objects, **kw):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
-    if os.environ.get('OMAS_DEBUG_TOPIC', '') and (
-                        os.environ.get('OMAS_DEBUG_TOPIC', '') == '*' or os.environ.get('OMAS_DEBUG_TOPIC',
-                                                                                        '') in topic or '*' in topic):
+    topic_selected=os.environ.get('OMAS_DEBUG_TOPIC', '')
+    dump=False
+    if topic_selected.endswith('_dump'):
+        dump=True
+        topic_selected=re.sub('_dump$','',topic_selected)
+    if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
         printe(*objects, **kw)
-
+        if dump:
+            fb=StringIO.StringIO()
+            print(objects[1:],file=fb)
+            with open('omas_dump.txt','a') as f:
+                f.write(fb.getvalue())
+            fb.close()
 
 def printe(*objects, **kw):
     """
