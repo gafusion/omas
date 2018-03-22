@@ -33,12 +33,8 @@ def itm_open(user, tokamak, shot, run, new=False, itm_version=default_itm_versio
     :return: ITM cpo
     """
     import ual
-    printd("cpo = ual.itm()",topic='itm_code')
-    cpo = ual.itm()
-    printd("cpo.setShot(%d)"%shot,topic='itm_code')
-    cpo.setShot(shot)
-    printd("cpo.setRun(%d)"%run,topic='itm_code')
-    cpo.setRun(run)
+    printd("cpo = itm.cpo(%d,%d)"%(shot,run),topic='itm_code')
+    cpo = itm.cpo(shot,run)
 
     if user is None and tokamak is None:
         pass
@@ -107,10 +103,10 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     """
     if numpy.atleast_1d(is_uncertain(value)).any():
         path=copy.deepcopy(path)
-        itm_set(cpo, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        tmp=itm_set(cpo, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         path[-1]=path[-1]+'_error_upper'
         itm_set(cpo, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
-        return
+        return tmp
 
     ds = path[0]
     path = path[1:]
@@ -154,7 +150,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of ITM structure' % location)
-                return None
+                return
             else:
                 raise (AttributeError('%s is not part of ITM structure' % location))
         else:
@@ -182,14 +178,6 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     else:
         printd("setattr(out, %s, %s)"%(repr(path[-1]),repr(numpy.array(value))),topic='itm_code')
         setattr(out, path[-1], numpy.array(value))
-
-    # write the data to ITM
-    try:
-        printd("m.put(0)",topic='itm_code')
-        m.put(0)
-    except Exception:
-        printe('Error %s: %s' %(['setting   ','allocating'][allocate],repr(path)))
-        raise
 
     # return path
     return [DS] + path
@@ -230,11 +218,6 @@ def itm_get(cpo, path, skip_missing_nodes=False):
         return None
     else:
         raise (AttributeError('%s is not part of ITM structure' % o2i([ds] + path)))
-
-    # use time to figure out if this CPO has data
-    if not len(m.time):
-        printd("m.get()",topic='itm_code')
-        m.get()
 
     # traverse the CPO to get the data
     out = m
@@ -352,13 +335,24 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
                 printd('writing %s' % o2i(path))
                 itm_set(cpo, path, ods[path], True)
 
+        # actual write of CPO data to ITM database
+        for ds in ods.keys():
+            if ds == 'info':
+                continue
+            printd("cpo.%s.put(0)"%ds,topic='itm_code')
+            getattr(cpo,ds).put(0)
+
+        # close connection to ITM database
+        printd("cpo.close()",topic='itm_code')
+        cpo.close()
+
     return set_paths
 
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths=None,
-                   itm_version=default_itm_version):
+def load_omas_itm(user=None, tokamak=None, shot=None, run=0, paths=None,
+                   itm_version=default_itm_version, verbose=None):
     """
     load OMAS data set from ITM
 
@@ -400,11 +394,11 @@ def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths
 
     else:
         # if paths is None then figure out what CPO are available and get ready to retrieve everything
-        verbose=False
         if paths is None:
             paths = sorted([[structure] for structure in list_structures(itm_version=itm_version)])
-            verbose=True
-        joined_paths = map(lambda x: separator.join(map(str, x)), paths)
+            if verbose is None:
+                verbose=True
+        joined_paths = map(o2i, paths)
 
         # fetch relevant CPOs and find available signals
         fetch_paths = []
@@ -416,12 +410,15 @@ def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths
             if not hasattr(cpo,ds):
                 if verbose: print('| ', ds)
                 continue
+            # cpo fetching
             if not len(getattr(cpo, ds).time):
+                printd("cpo.%s.get()"%ds,topic='itm_code')
                 getattr(cpo, ds).get()
+            # cpo discovery
             if len(getattr(cpo, ds).time):
                 if verbose: print('* ', ds)
                 available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
-                joined_available_paths = map(lambda x: separator.join(map(str, x)), available_paths)
+                joined_available_paths = map(o2i, available_paths)
                 for jpath, path in zip(joined_paths, paths):
                     if path[0] != ds:
                         continue
@@ -432,7 +429,7 @@ def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths
                             fetch_paths.append(apath)
             else:
                 if verbose: print('- ', ds)
-        joined_fetch_paths=map(lambda x: separator.join(map(str, x)), fetch_paths)
+        joined_fetch_paths=map(o2i, fetch_paths)
 
         # build omas data structure
         ods = omas()
@@ -441,17 +438,10 @@ def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths
                 data = itm_get(cpo, path, None)
                 if data[0]==-1:
                     continue
-            # skip _error_upper and _error_lower if _error_index=-999999999
             if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
-                data = itm_get(cpo, path[:-1]+['_error_'.join(path[-1].split('_error_')[:-1])+'_error_index'], None)
-                if data==-999999999:
-                    continue
-            if path[-1].endswith('_error_upper'):
                 continue
             # get data from cpo
             data = itm_get(cpo, path, None)
-            if '.'.join(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
-                data = uarray(data,itm_get(cpo, path[:-1]+[path[-1]+'_error_upper'], None))
             # skip empty arrays
             if isinstance(data,numpy.ndarray) and not data.size:
                 continue
@@ -461,6 +451,13 @@ def load_omas_itm(user=os.environ['USER'], tokamak=None, shot=None, run=0, paths
             # skip empty strings
             if isinstance(data,unicode) and not len(data):
                 continue
+            # add uncertainty
+            if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                stdata=itm_get(cpo, path[:-1]+[path[-1]+'_error_upper'], None)
+                if isinstance(stdata,numpy.ndarray) and not stdata.size:
+                    pass
+                else:
+                    data = uarray(data,stdata)
             #print(path,data)
             h = ods
             for step in path[:-1]:
