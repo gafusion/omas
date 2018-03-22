@@ -151,7 +151,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='imas')
-                printd("out.resize(%d)"%(eval(p+1)),topic='imas_code')
+                printd("out.resize(%d)"%p+1,topic='imas_code')
                 out.resize(p + 1)
                 printd("out = out[%s]"%p,topic='imas_code')
                 out = out[p]
