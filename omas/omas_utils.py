@@ -3,10 +3,6 @@ from __future__ import print_function, division, unicode_literals
 from .omas_setup import *
 import sys
 
-#import externalImports
-#if 'externalImports' not in sys.modules:
-#    sys.modules['externalImports']= externalImports
-
 # --------------------------
 # general utility functions
 # --------------------------
