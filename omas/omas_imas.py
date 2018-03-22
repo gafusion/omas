@@ -437,6 +437,8 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
                 stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
                 if isinstance(stdata,numpy.ndarray) and not stdata.size:
                     pass
+                if (isinstance(stdata,float) and stdata==-9E40) or (isinstance(stdata,int) and stdata==-999999999):
+                    pass
                 else:
                     data = uarray(data,stdata)
             #print(path,data)

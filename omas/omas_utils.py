@@ -293,20 +293,25 @@ def ids_cpo_mapper(ids, cpo=None):
         cpo = omas()
     cpo.consistency_check = False
 
-    for itime in range(len(ids['equilibrium.time'])):
-        cpo['equilibrium'][itime]['time'] = ids['equilibrium.time'][itime]
-        cpo['equilibrium'][itime]['profiles_1d.q'] = ids['equilibrium.time_slice'][itime]['profiles_1d.q']
-        cpo['equilibrium'][itime]['profiles_1d.rho_tor'] = ids['equilibrium.time_slice'][itime]['profiles_1d.rho_tor']
-        for iprof in range(len(ids['equilibrium.time_slice'][itime]['profiles_2d'])):
-            cpo['equilibrium'][itime]['profiles_2d'][iprof]['psi'] = ids['equilibrium.time_slice'][itime]['profiles_2d'][iprof]['psi']
-        cpo['coreprof'][itime]['te.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.temperature']
-        cpo['coreprof'][itime]['ne.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.density_thermal']
-        pdim = len(cpo['coreprof'][itime]['te.value'])
-        idim = len(ids['core_profiles.profiles_1d[0].ion'])
-        cpo['coreprof'][itime]['ni.value'] = numpy.zeros((pdim, idim))
-        cpo['coreprof'][itime]['ti.value'] = numpy.zeros((pdim, idim))
-        for iion in range(len(ids['core_profiles.profiles_1d'][itime]['ion'])):
-            cpo['coreprof'][itime]['ni.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['density']
-            cpo['coreprof'][itime]['ti.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature']
+    for itime in range(len(ids['core_profiles.time'])):
+
+        if 'equilibrium' in ids:
+            cpo['equilibrium'][itime]['time'] = ids['equilibrium.time'][itime]
+            cpo['equilibrium'][itime]['profiles_1d.q'] = ids['equilibrium.time_slice'][itime]['profiles_1d.q']
+            cpo['equilibrium'][itime]['profiles_1d.rho_tor'] = ids['equilibrium.time_slice'][itime]['profiles_1d.rho_tor']
+            for iprof in range(len(ids['equilibrium.time_slice'][itime]['profiles_2d'])):
+                cpo['equilibrium'][itime]['profiles_2d'][iprof]['psi'] = ids['equilibrium.time_slice'][itime]['profiles_2d'][iprof]['psi']
+
+        if 'core_profiles' in ids:
+            cpo['coreprof'][itime]['te.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.temperature']
+            cpo['coreprof'][itime]['ne.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.density']
+            pdim = len(cpo['coreprof'][itime]['te.value'])
+            idim = len(ids['core_profiles.profiles_1d[0].ion'])
+            cpo['coreprof'][itime]['ni.value'] = numpy.zeros((pdim, idim))
+            cpo['coreprof'][itime]['ti.value'] = numpy.zeros((pdim, idim))
+            for iion in range(len(ids['core_profiles.profiles_1d'][itime]['ion'])):
+                if 'density' in ids['core_profiles.profiles_1d'][itime]['ion'][iion]:
+                    cpo['coreprof'][itime]['ni.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['density']
+                cpo['coreprof'][itime]['ti.value'][:, iion] = nominal_values(ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature'])
 
     return cpo
