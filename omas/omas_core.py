@@ -13,7 +13,7 @@ __all__ = [
     'save_omas_itm', 'load_omas_itm', 'test_omas_itm',
     'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
-    'imas_json_dir', 'default_imas_version', 'omas_data_mapper',
+    'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper',
     '__version__'
 ]
 
@@ -236,7 +236,6 @@ class omas(MutableMapping):
     def __delitem__(self, key):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
-        print(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
             del self[key[0]]['.'.join(key[1:])]
@@ -325,6 +324,7 @@ class omas(MutableMapping):
             if item not in omas_dictstate:
                 del tmp[item]
         return tmp
+
 
 omas_dictstate=dir(omas)
 omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])

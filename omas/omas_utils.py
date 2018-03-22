@@ -47,6 +47,7 @@ def is_uncertain(var):
     else:
         return uncertain_check(var)
 
+
 def json_dumper(obj):
     """
     function used to dump objects to json format
@@ -281,104 +282,35 @@ def o2i(path):
     return ipath
 
 
-def omas_data_mapper(source, translate, flip_translate=False, consistency_check=False, verbose=False):
+def ids_cpo_mapper(ids, cpo=None):
     '''
-    map one data structure organization to another
+    translate (some) IDS fields to CPO
 
-    :param source: source omas data structure
+    :param ids: input omas data object (IDS format) to read
 
-    :param translate: translate dictionary
+    :param cpo: optional omas data object (CPO format) to which to write to
 
-    :param flip_translate: use translate dictionary in reverse
-
-    :param consistency_check: perform imas consistency check on output omas data structure
-
-    :param verbose: print mapping commands
-
-    :return: omas data structure
+    :return: cpo
     '''
-
-    if flip_translate:
-        translate=dict(zip(translate.values(),translate.keys()))
-
-    # generate internal mapping dictionary
-    ntr={}
-    for item in translate.keys():
-
-        # source paths
-        source_split_path = []
-        for sub in item.split('[{'):
-            source_split_path.extend(sub.split('}]'))
-        source_split_path = filter(None, source_split_path)
-        source_path = copy.deepcopy(source_split_path)
-        for k, sub in enumerate(source_path):
-            if k%2:
-                source_path[k] = '[{%s}]' % sub
-
-        # target paths
-        target_split_path = []
-        for sub in translate[item].split('[{'):
-            target_split_path.extend(sub.split('}]'))
-        target_split_path = filter(None, target_split_path)
-        target_path = copy.deepcopy(target_split_path)
-        for k, sub in enumerate(target_path):
-            if k%2:
-                target_path[k] = '[{%s}]' % sub
-
-        # populate internal mapping dictionary
-        ntr['.:'.join(source_split_path[::2])]={'original_source_path':item,
-                                                'original_target_path':translate[item],
-                                                }
-
-        if len(source_split_path)%2:
-            ntr['.:'.join(source_split_path[::2])].update({'source_split_path':source_split_path,
-                                                           'source_path':''.join(source_path),
-                                                           'source_slice':None})
-        else:
-            ntr['.:'.join(source_split_path[::2])].update({'source_split_path':source_split_path[:-1],
-                                                           'source_path':''.join(source_path[:-1]),
-                                                           'source_slice':source_split_path[-1]})
-
-        if len(target_split_path)%2:
-            ntr['.:'.join(source_split_path[::2])].update({'target_split_path':target_split_path,
-                                                           'target_path':''.join(target_path),
-                                                           'target_slice':None})
-        else:
-            ntr['.:'.join(source_split_path[::2])].update({'target_split_path':target_split_path[:-1],
-                                                           'target_path':''.join(target_path[:-1]),
-                                                           'target_slice':target_split_path[-1]})
-
-    #do the actual conversion
     from omas import omas
-    target = omas(consistency_check=consistency_check)
-    for item in source.flat():
-        an = re.sub('\.[0-9]+\.', '.:.', item)
-        if an in ntr.keys():
-            index_mapper = dict(zip(ntr[an]['source_split_path'][1::2], map(lambda x: x.strip('.'), re.findall('\.[0-9]+\.', item))))
-            index_mapper.setdefault('itime', 0)
+    if cpo is None:
+        cpo = omas()
+    cpo.consistency_check = False
 
-            #one to one mapping
-            if ntr[an]['source_slice'] is None:
-                cmd = ("target['%s']=source['%s']" % (ntr[an]['original_target_path'], ntr[an]['source_path']))
-                cmd = cmd.format(**index_mapper)
-                if verbose: print(cmd)
-                exec (cmd)
-            else:
-                #expand array into floats
-                for step in range(len(eval(("source['%s']" % ntr[an]['source_path']).format(**index_mapper)))):
-                    index_mapper[ntr[an]['source_slice']] = step
-                    cmd = ("target['%s']=source['%s'][%d]" % (ntr[an]['original_target_path'], ntr[an]['source_path'], step))
-                    cmd = cmd.format(**index_mapper)
-                    if verbose: print(cmd)
-                    exec (cmd)
+    for itime in range(len(ids['equilibrium.time'])):
+        cpo['equilibrium'][itime]['time'] = ids['equilibrium.time'][itime]
+        cpo['equilibrium'][itime]['profiles_1d.q'] = ids['equilibrium.time_slice'][itime]['profiles_1d.q']
+        cpo['equilibrium'][itime]['profiles_1d.rho_tor'] = ids['equilibrium.time_slice'][itime]['profiles_1d.rho_tor']
+        for iprof in range(len(ids['equilibrium.time_slice'][itime]['profiles_2d'])):
+            cpo['equilibrium'][itime]['profiles_2d'][iprof]['psi'] = ids['equilibrium.time_slice'][itime]['profiles_2d'][iprof]['psi']
+        cpo['coreprof'][itime]['te.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.temperature']
+        cpo['coreprof'][itime]['ne.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.density_thermal']
+        pdim = len(cpo['coreprof'][itime]['te.value'])
+        idim = len(ids['core_profiles.profiles_1d[0].ion'])
+        cpo['coreprof'][itime]['ni.value'] = numpy.zeros((pdim, idim))
+        cpo['coreprof'][itime]['ti.value'] = numpy.zeros((pdim, idim))
+        for iion in range(len(ids['core_profiles.profiles_1d'][itime]['ion'])):
+            cpo['coreprof'][itime]['ni.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['density']
+            cpo['coreprof'][itime]['ti.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature']
 
-    # collect floats into array
-    for item in source.flat():
-        an = re.sub('\.[0-9]+\.', '.:.', item)
-        if an in ntr and ntr[an]['target_slice'] is not None and isinstance(target[ntr[an]['target_path']], omas):
-            cmd = ("target['%s']=numpy.array(target['%s'].values())" % (ntr[an]['target_path'], ntr[an]['target_path']))
-            cmd = cmd.format(**index_mapper)
-            if verbose: print(cmd)
-            exec (cmd)
-
-    return target
+    return cpo
