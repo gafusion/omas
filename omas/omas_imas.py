@@ -300,35 +300,38 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
         save_omas_pkl(ods, filename)
 
     else:
-        # allocate memory
-        # NOTE: for how memory allocation works it is important to traverse the tree in reverse
-        set_paths = []
-        for path in reversed(paths):
-            set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
-        set_paths = filter(None, set_paths)
 
-        # first assign time information
-        for path in set_paths:
-            if path[-1] == 'time':
-                printd('writing %s' % o2i(path))
-                imas_set(ids, path, ods[path], True)
+        try:
+            # allocate memory
+            # NOTE: for how memory allocation works it is important to traverse the tree in reverse
+            set_paths = []
+            for path in reversed(paths):
+                set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
+            set_paths = filter(None, set_paths)
 
-        # then assign the rest
-        for path in set_paths:
-            if path[-1] != 'time':
-                printd('writing %s' % o2i(path))
-                imas_set(ids, path, ods[path], True)
+            # first assign time information
+            for path in set_paths:
+                if path[-1] == 'time':
+                    printd('writing %s' % o2i(path))
+                    imas_set(ids, path, ods[path], True)
 
-        # actual write of IDS data to IMAS database
-        for ds in ods.keys():
-            if ds == 'info':
-                continue
-            printd("ids.%s.put(0)"%ds,topic='imas_code')
-            getattr(ids,ds).put(0)
+            # then assign the rest
+            for path in set_paths:
+                if path[-1] != 'time':
+                    printd('writing %s' % o2i(path))
+                    imas_set(ids, path, ods[path], True)
 
-        # close connection to IMAS database
-        printd("ids.close()",topic='imas_code')
-        ids.close()
+            # actual write of IDS data to IMAS database
+            for ds in ods.keys():
+                if ds == 'info':
+                    continue
+                printd("ids.%s.put(0)"%ds,topic='imas_code')
+                getattr(ids,ds).put(0)
+
+        finally:
+            # close connection to IMAS database
+            printd("ids.close()",topic='imas_code')
+            ids.close()
 
     return set_paths
 
@@ -374,76 +377,87 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
         ods = load_omas_pkl(filename)
 
     else:
-        # if paths is None then figure out what IDS are available and get ready to retrieve everything
-        if paths is None:
-            paths = sorted([[structure] for structure in list_structures(imas_version=imas_version)])
-            if verbose is None:
-                verbose=True
-        joined_paths = map(o2i, paths)
 
-        # fetch relevant IDSs and find available signals
-        fetch_paths = []
-        for path in paths:
-            ds = path[0]
-            path = path[1:]
-            if ds=='info':
-                continue
-            if not hasattr(ids,ds):
-                if verbose: print('| ', ds)
-                continue
-            # ids fetching
-            if not len(getattr(ids, ds).time):
-                printd("ids.%s.get()"%ds,topic='imas_code')
-                getattr(ids, ds).get()
-            # ids discovery
-            if len(getattr(ids, ds).time):
-                if verbose: print('* ', ds)
-                available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
-                joined_available_paths = map(o2i, available_paths)
-                for jpath, path in zip(joined_paths, paths):
-                    if path[0] != ds:
-                        continue
-                    jpath = re.sub('\.', '\\.', jpath)
-                    jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
-                    for japath, apath in zip(joined_available_paths, available_paths):
-                        if re.match(jpath, japath):
-                            fetch_paths.append(apath)
-            else:
-                if verbose: print('- ', ds)
-        joined_fetch_paths=map(o2i, fetch_paths)
+        try:
+            # if paths is None then figure out what IDS are available and get ready to retrieve everything
+            if paths is None:
+                paths = sorted([[structure] for structure in list_structures(imas_version=imas_version)])
+                if verbose is None:
+                    verbose=True
+            joined_paths = map(o2i, paths)
 
-        # build omas data structure
-        ods = omas()
-        for path in fetch_paths:
-            if len(path)==2 and path[-1]=='time':
-                data = imas_get(ids, path, None)
-                if data[0]==-1:
+            # fetch relevant IDSs and find available signals
+            fetch_paths = []
+            for path in paths:
+                ds = path[0]
+                path = path[1:]
+                if ds=='info':
                     continue
-            if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
-                continue
-            # get data from ids
-            data = imas_get(ids, path, None)
-            # skip empty arrays
-            if isinstance(data,numpy.ndarray) and not data.size:
-                continue
-            # skip missing floats and integers
-            if (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
-                continue
-            # skip empty strings
-            if isinstance(data,unicode) and not len(data):
-                continue
-            # add uncertainty
-            if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
-                stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
-                if isinstance(stdata,numpy.ndarray) and not stdata.size:
-                    pass
+                if not hasattr(ids,ds):
+                    if verbose: print('| ', ds)
+                    continue
+                # ids fetching
+                if not len(getattr(ids, ds).time):
+                    printd("ids.%s.get()"%ds,topic='imas_code')
+                    getattr(ids, ds).get()
+                # ids discovery
+                if len(getattr(ids, ds).time):
+                    if verbose: print('* ', ds)
+                    available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
+                    joined_available_paths = map(o2i, available_paths)
+                    for jpath, path in zip(joined_paths, paths):
+                        if path[0] != ds:
+                            continue
+                        jpath = re.sub('\.', '\\.', jpath)
+                        jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
+                        for japath, apath in zip(joined_available_paths, available_paths):
+                            if re.match(jpath, japath):
+                                fetch_paths.append(apath)
                 else:
-                    data = uarray(data,stdata)
-            #print(path,data)
-            h = ods
-            for step in path[:-1]:
-                h = h[step]
-            h[path[-1]] = data
+                    if verbose: print('- ', ds)
+            joined_fetch_paths=map(o2i, fetch_paths)
+
+            # build omas data structure
+            ods = omas()
+            for path in fetch_paths:
+                if len(path)==2 and path[-1]=='time':
+                    data = imas_get(ids, path, None)
+                    if data[0]==-1:
+                        continue
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+                    continue
+                # get data from ids
+                data = imas_get(ids, path, None)
+                # skip empty arrays
+                if isinstance(data,numpy.ndarray) and not data.size:
+                    continue
+                # skip missing floats and integers
+                elif (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
+                    continue
+                # skip empty strings
+                elif isinstance(data,unicode) and not len(data):
+                    continue
+                # add uncertainty
+                if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                    stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
+                    if isinstance(stdata,numpy.ndarray) and not stdata.size:
+                        pass
+                    elif (isinstance(stdata,float) and stdata==-9E40) or (isinstance(stdata,int) and stdata==-999999999):
+                        pass
+                    elif isinstance(stdata,unicode) and not len(stdata):
+                        continue
+                    else:
+                        data = uarray(data,stdata)
+                #print(path,data)
+                h = ods
+                for step in path[:-1]:
+                    h = h[step]
+                h[path[-1]] = data
+
+        finally:
+            # close connection to IMAS database
+            printd("ids.close()",topic='imas_code')
+            ids.close()
 
     ods['info.user'] = unicode(user)
     ods['info.tokamak'] = unicode(tokamak)
