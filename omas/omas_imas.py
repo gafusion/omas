@@ -427,18 +427,20 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
             if isinstance(data,numpy.ndarray) and not data.size:
                 continue
             # skip missing floats and integers
-            if (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
+            elif (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
                 continue
             # skip empty strings
-            if isinstance(data,unicode) and not len(data):
+            elif isinstance(data,unicode) and not len(data):
                 continue
             # add uncertainty
             if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
                 stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
                 if isinstance(stdata,numpy.ndarray) and not stdata.size:
                     pass
-                if (isinstance(stdata,float) and stdata==-9E40) or (isinstance(stdata,int) and stdata==-999999999):
+                elif (isinstance(stdata,float) and stdata==-9E40) or (isinstance(stdata,int) and stdata==-999999999):
                     pass
+                elif isinstance(stdata,unicode) and not len(stdata):
+                    continue
                 else:
                     data = uarray(data,stdata)
             #print(path,data)
