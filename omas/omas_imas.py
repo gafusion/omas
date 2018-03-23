@@ -167,9 +167,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     setattr(out, path[-1], value)
     printd("setattr(out, %r, %s)"%(path[-1],re.sub('\\n','\n',repr(value))),topic='imas_code')
 
-    printd("m.put(0)",topic='imas_code')
-    m.put(0)
-
     # return path
     return [DS] + path
 
@@ -326,6 +323,8 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
             for ds in ods.keys():
                 if ds == 'info':
                     continue
+                if 'imas'=='itm':
+                    ds=ds+'Array'
                 printd("ids.%s.put(0)"%ds,topic='imas_code')
                 getattr(ids,ds).put(0)
 

@@ -125,7 +125,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the CPO
     if hasattr(cpo, ds):
         printd("",topic='itm_code')
-        printd("m = getattr(cpo, %s)"%repr(ds),topic='itm_code')
+        printd("m = getattr(cpo, %r)"%ds,topic='itm_code')
         m = getattr(cpo, ds)
         if hasattr(m,'time') and not isinstance(m.time,float) and not m.time.size:
             m.time.resize(1)
@@ -145,7 +145,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %s)"%repr(p),topic='itm_code')
+                    printd("out = getattr(out, %r)"%p,topic='itm_code')
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -175,7 +175,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     if not isinstance(value, (basestring, numpy.ndarray)):
         value=numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %r)"%(path[-1],value),topic='itm_code')
+    printd("setattr(out, %r, %s)"%(path[-1],re.sub('\\n','\n',repr(value))),topic='itm_code')
 
     # return path
     return [DS] + path
@@ -339,6 +339,8 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
             for ds in ods.keys():
                 if ds == 'info':
                     continue
+                if 'itm'=='itm':
+                    ds=ds+'Array'
                 printd("cpo.%s.put(0)"%ds,topic='itm_code')
                 getattr(cpo,ds).put(0)
 
