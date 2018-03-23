@@ -13,7 +13,7 @@ mod = re.sub('imas', 'itm', mod)
 mod = re.sub('IDS', 'CPO', mod)
 mod = re.sub('ids', 'cpo', mod)
 mod = re.sub('import itm', 'import ual', mod)
-mod = re.sub('cpo = itm\.cpo\(\)', 'cpo = ual.itm()', mod)
+mod = re.sub('cpo\s*=\s*itm\.cpo\(', 'cpo = ual.itm(', mod)
 
 mod = re.sub('\ndef', '\n\n# AUTOMATICALLY GENERATED FILE - DO NOT EDIT\n\ndef', mod)
 

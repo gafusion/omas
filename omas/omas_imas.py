@@ -115,7 +115,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
         printd("",topic='imas_code')
-        printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
+        printd("m = getattr(ids, %r)"%ds,topic='imas_code')
         m = getattr(ids, ds)
         if hasattr(m,'time') and not isinstance(m.time,float) and not m.time.size:
             m.time.resize(1)
@@ -135,7 +135,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %s)"%repr(p),topic='imas_code')
+                    printd("out = getattr(out, %r)"%p,topic='imas_code')
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -151,7 +151,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='imas')
-                printd("out.resize(%s + 1)"%p,topic='imas_code')
+                printd("out.resize(%d)"%(p+1),topic='imas_code')
                 out.resize(p + 1)
                 printd("out = out[%s]"%p,topic='imas_code')
                 out = out[p]
@@ -162,12 +162,10 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # assign data to leaf node
     printd('setting  : %s'%location, topic='imas')
-    if isinstance(value, (basestring, numpy.ndarray)):
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),value),topic='imas_code')
-        setattr(out, path[-1], value)
-    else:
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),repr(numpy.array(value))),topic='imas_code')
-        setattr(out, path[-1], numpy.array(value))
+    if not isinstance(value, (basestring, numpy.ndarray)):
+        value=numpy.array(value)
+    setattr(out, path[-1], value)
+    printd("setattr(out, %r, %s)"%(path[-1],re.sub('\\n','\n',repr(value))),topic='imas_code')
 
     # return path
     return [DS] + path
@@ -325,6 +323,8 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
             for ds in ods.keys():
                 if ds == 'info':
                     continue
+                if 'imas'=='itm':
+                    ds=ds+'Array'
                 printd("ids.%s.put(0)"%ds,topic='imas_code')
                 getattr(ids,ds).put(0)
 

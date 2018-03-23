@@ -2,7 +2,7 @@ from __future__ import print_function, division, unicode_literals
 
 import os
 # set OMAS debugging topic
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code'
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code_dump'
 
 from omas import *
 
