@@ -25,7 +25,7 @@ def printd(*objects, **kw):
         printe(*objects, **kw)
         if dump:
             fb=StringIO.StringIO()
-            print(objects[1:],file=fb)
+            print(*objects[1:],file=fb)
             with open('omas_dump.txt','a') as f:
                 f.write(fb.getvalue())
             fb.close()
