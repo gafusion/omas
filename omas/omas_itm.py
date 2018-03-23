@@ -161,7 +161,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='itm')
-                printd("out.resize(%d)"%p+1,topic='itm_code')
+                printd("out.resize(%d)"%(p+1),topic='itm_code')
                 out.resize(p + 1)
                 printd("out = out[%s]"%p,topic='itm_code')
                 out = out[p]
