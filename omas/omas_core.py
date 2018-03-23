@@ -9,6 +9,7 @@ __all__ = [
     'omas_rcparams', 'omas', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
     'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
     'save_omas_json', 'load_omas_json', 'test_omas_json',
+    'save_omas_hdc', 'load_omas_hdc', 'test_omas_hdc',
     'save_omas_nc', 'load_omas_nc', 'test_omas_nc',
     'save_omas_imas', 'load_omas_imas', 'test_omas_imas',
     'save_omas_itm', 'load_omas_itm', 'test_omas_itm',
