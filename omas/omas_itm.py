@@ -33,8 +33,8 @@ def itm_open(user, tokamak, shot, run, new=False, itm_version=default_itm_versio
     :return: ITM cpo
     """
     import ual
-    printd("cpo = itm.cpo(%d,%d)"%(shot,run),topic='itm_code')
-    cpo = itm.cpo(shot,run)
+    printd("cpo = ual.itm(%d,%d)"%(shot,run),topic='itm_code')
+    cpo = ual.itm(shot,run)
 
     if user is None and tokamak is None:
         pass
@@ -161,7 +161,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
                 printd('resizing  : %s'%location, topic='itm')
-                printd("out.resize(%s + 1)"%p,topic='itm_code')
+                printd("out.resize(%d)"%p+1,topic='itm_code')
                 out.resize(p + 1)
                 printd("out = out[%s]"%p,topic='itm_code')
                 out = out[p]
@@ -172,12 +172,10 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
 
     # assign data to leaf node
     printd('setting  : %s'%location, topic='itm')
-    if isinstance(value, (basestring, numpy.ndarray)):
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),value),topic='itm_code')
-        setattr(out, path[-1], value)
-    else:
-        printd("setattr(out, %s, %s)"%(repr(path[-1]),repr(numpy.array(value))),topic='itm_code')
-        setattr(out, path[-1], numpy.array(value))
+    if not isinstance(value, (basestring, numpy.ndarray)):
+        value=numpy.array(value)
+    setattr(out, path[-1], value)
+    printd("setattr(out, %r, %r)"%(path[-1],value),topic='itm_code')
 
     # return path
     return [DS] + path
@@ -316,35 +314,38 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
         save_omas_pkl(ods, filename)
 
     else:
-        # allocate memory
-        # NOTE: for how memory allocation works it is important to traverse the tree in reverse
-        set_paths = []
-        for path in reversed(paths):
-            set_paths.append(itm_set(cpo, path, ods[path], None, allocate=True))
-        set_paths = filter(None, set_paths)
 
-        # first assign time information
-        for path in set_paths:
-            if path[-1] == 'time':
-                printd('writing %s' % o2i(path))
-                itm_set(cpo, path, ods[path], True)
+        try:
+            # allocate memory
+            # NOTE: for how memory allocation works it is important to traverse the tree in reverse
+            set_paths = []
+            for path in reversed(paths):
+                set_paths.append(itm_set(cpo, path, ods[path], None, allocate=True))
+            set_paths = filter(None, set_paths)
 
-        # then assign the rest
-        for path in set_paths:
-            if path[-1] != 'time':
-                printd('writing %s' % o2i(path))
-                itm_set(cpo, path, ods[path], True)
+            # first assign time information
+            for path in set_paths:
+                if path[-1] == 'time':
+                    printd('writing %s' % o2i(path))
+                    itm_set(cpo, path, ods[path], True)
 
-        # actual write of CPO data to ITM database
-        for ds in ods.keys():
-            if ds == 'info':
-                continue
-            printd("cpo.%s.put(0)"%ds,topic='itm_code')
-            getattr(cpo,ds).put(0)
+            # then assign the rest
+            for path in set_paths:
+                if path[-1] != 'time':
+                    printd('writing %s' % o2i(path))
+                    itm_set(cpo, path, ods[path], True)
 
-        # close connection to ITM database
-        printd("cpo.close()",topic='itm_code')
-        cpo.close()
+            # actual write of CPO data to ITM database
+            for ds in ods.keys():
+                if ds == 'info':
+                    continue
+                printd("cpo.%s.put(0)"%ds,topic='itm_code')
+                getattr(cpo,ds).put(0)
+
+        finally:
+            # close connection to ITM database
+            printd("cpo.close()",topic='itm_code')
+            cpo.close()
 
     return set_paths
 
@@ -393,76 +394,87 @@ def load_omas_itm(user=None, tokamak=None, shot=None, run=0, paths=None,
         ods = load_omas_pkl(filename)
 
     else:
-        # if paths is None then figure out what CPO are available and get ready to retrieve everything
-        if paths is None:
-            paths = sorted([[structure] for structure in list_structures(itm_version=itm_version)])
-            if verbose is None:
-                verbose=True
-        joined_paths = map(o2i, paths)
 
-        # fetch relevant CPOs and find available signals
-        fetch_paths = []
-        for path in paths:
-            ds = path[0]
-            path = path[1:]
-            if ds=='info':
-                continue
-            if not hasattr(cpo,ds):
-                if verbose: print('| ', ds)
-                continue
-            # cpo fetching
-            if not len(getattr(cpo, ds).time):
-                printd("cpo.%s.get()"%ds,topic='itm_code')
-                getattr(cpo, ds).get()
-            # cpo discovery
-            if len(getattr(cpo, ds).time):
-                if verbose: print('* ', ds)
-                available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
-                joined_available_paths = map(o2i, available_paths)
-                for jpath, path in zip(joined_paths, paths):
-                    if path[0] != ds:
-                        continue
-                    jpath = re.sub('\.', '\\.', jpath)
-                    jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
-                    for japath, apath in zip(joined_available_paths, available_paths):
-                        if re.match(jpath, japath):
-                            fetch_paths.append(apath)
-            else:
-                if verbose: print('- ', ds)
-        joined_fetch_paths=map(o2i, fetch_paths)
+        try:
+            # if paths is None then figure out what CPO are available and get ready to retrieve everything
+            if paths is None:
+                paths = sorted([[structure] for structure in list_structures(itm_version=itm_version)])
+                if verbose is None:
+                    verbose=True
+            joined_paths = map(o2i, paths)
 
-        # build omas data structure
-        ods = omas()
-        for path in fetch_paths:
-            if len(path)==2 and path[-1]=='time':
-                data = itm_get(cpo, path, None)
-                if data[0]==-1:
+            # fetch relevant CPOs and find available signals
+            fetch_paths = []
+            for path in paths:
+                ds = path[0]
+                path = path[1:]
+                if ds=='info':
                     continue
-            if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
-                continue
-            # get data from cpo
-            data = itm_get(cpo, path, None)
-            # skip empty arrays
-            if isinstance(data,numpy.ndarray) and not data.size:
-                continue
-            # skip missing floats and integers
-            if (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
-                continue
-            # skip empty strings
-            if isinstance(data,unicode) and not len(data):
-                continue
-            # add uncertainty
-            if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
-                stdata=itm_get(cpo, path[:-1]+[path[-1]+'_error_upper'], None)
-                if isinstance(stdata,numpy.ndarray) and not stdata.size:
-                    pass
+                if not hasattr(cpo,ds):
+                    if verbose: print('| ', ds)
+                    continue
+                # cpo fetching
+                if not len(getattr(cpo, ds).time):
+                    printd("cpo.%s.get()"%ds,topic='itm_code')
+                    getattr(cpo, ds).get()
+                # cpo discovery
+                if len(getattr(cpo, ds).time):
+                    if verbose: print('* ', ds)
+                    available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
+                    joined_available_paths = map(o2i, available_paths)
+                    for jpath, path in zip(joined_paths, paths):
+                        if path[0] != ds:
+                            continue
+                        jpath = re.sub('\.', '\\.', jpath)
+                        jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
+                        for japath, apath in zip(joined_available_paths, available_paths):
+                            if re.match(jpath, japath):
+                                fetch_paths.append(apath)
                 else:
-                    data = uarray(data,stdata)
-            #print(path,data)
-            h = ods
-            for step in path[:-1]:
-                h = h[step]
-            h[path[-1]] = data
+                    if verbose: print('- ', ds)
+            joined_fetch_paths=map(o2i, fetch_paths)
+
+            # build omas data structure
+            ods = omas()
+            for path in fetch_paths:
+                if len(path)==2 and path[-1]=='time':
+                    data = itm_get(cpo, path, None)
+                    if data[0]==-1:
+                        continue
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+                    continue
+                # get data from cpo
+                data = itm_get(cpo, path, None)
+                # skip empty arrays
+                if isinstance(data,numpy.ndarray) and not data.size:
+                    continue
+                # skip missing floats and integers
+                elif (isinstance(data,float) and data==-9E40) or (isinstance(data,int) and data==-999999999):
+                    continue
+                # skip empty strings
+                elif isinstance(data,unicode) and not len(data):
+                    continue
+                # add uncertainty
+                if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                    stdata=itm_get(cpo, path[:-1]+[path[-1]+'_error_upper'], None)
+                    if isinstance(stdata,numpy.ndarray) and not stdata.size:
+                        pass
+                    elif (isinstance(stdata,float) and stdata==-9E40) or (isinstance(stdata,int) and stdata==-999999999):
+                        pass
+                    elif isinstance(stdata,unicode) and not len(stdata):
+                        continue
+                    else:
+                        data = uarray(data,stdata)
+                #print(path,data)
+                h = ods
+                for step in path[:-1]:
+                    h = h[step]
+                h[path[-1]] = data
+
+        finally:
+            # close connection to ITM database
+            printd("cpo.close()",topic='itm_code')
+            cpo.close()
 
     ods['info.user'] = unicode(user)
     ods['info.tokamak'] = unicode(tokamak)
