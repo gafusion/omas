@@ -506,7 +506,6 @@ def different_ods(ods1, ods2):
     return False
 
 
-_tests = ['pkl', 'json', 'nc', 's3', 'imas']
 _tests = ['pkl', 'json', 'nc', 's3', 'imas', 'hdc']
 
 
@@ -545,13 +544,13 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
             try:
                 ods1 = globals()['test_omas_' + t1](ods)
             except Exception as _excp:
-                failed1 = True
+                failed1 = _excp
                 if do_raise:
                     raise
             for k2, t2 in enumerate(_tests):
                 try:
                     if failed1:
-                        raise
+                        raise failed1
                     ods2 = globals()['test_omas_' + t2](ods1)
 
                     different = different_ods(ods1, ods2)
