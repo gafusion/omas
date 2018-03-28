@@ -30,6 +30,7 @@ def printd(*objects, **kw):
                 f.write(fb.getvalue())
             fb.close()
 
+
 def printe(*objects, **kw):
     """
     print to stderr
@@ -41,21 +42,21 @@ def printe(*objects, **kw):
 def is_uncertain(var):
     '''
     :param var: Variable or array to test
+
     :return: True if variable is instance of uncertainties or
              array of shape var with elements indicating uncertainty
     '''
-    def uncertain_check(x):
+    def _uncertain_check(x):
         return isinstance(x, uncertainties.core.AffineScalarFunc)
-    if numpy.iterable(var):
-        # TODO this fails for some iterables, most notably strings
-        # TODO creating numpy arrays is quite an overhead
-        # original fix with numpy
-        # return numpy.reshape(numpy.fromiter(map(uncertain_check, numpy.array(var).flat),
-        #                                     dtype=numpy.array(var).dtype),
-        #                      numpy.array(var).shape)
-        return [is_uncertain(x) for x in var]
+
+    if isinstance(var,basestring):
+        return False
+    elif numpy.iterable(var):
+        tmp=numpy.array(var).flat
+        tmp=numpy.array(list(map(_uncertain_check, tmp)))
+        return numpy.reshape(tmp,numpy.array(var).shape)
     else:
-        return uncertain_check(var)
+        return _uncertain_check(var)
 
 
 def json_dumper(obj):
@@ -69,12 +70,18 @@ def json_dumper(obj):
     from omas import omas
     if isinstance(obj, omas):
         return OrderedDict(zip(obj.keys(), obj.values()))
-    elif numpy.atleast_1d(is_uncertain(obj)).any():
-        nomv=nominal_values(obj)
-        return dict(__udarray_tolist_avg__=nomv.tolist(),
-                    __udarray_tolist_std__=std_devs(obj).tolist(),
-                    dtype=str(nomv.dtype),
-                    shape=obj.shape)
+
+    tmp=is_uncertain(obj)
+    if any(numpy.atleast_1d(tmp)):
+        if not len(numpy.array(tmp).shape):
+            return dict(__ufloat__=nominal_values(obj),
+                        __ufloat_std__=std_devs(obj))
+        else:
+            nomv=nominal_values(obj)
+            return dict(__udarray_tolist_avg__=nomv.tolist(),
+                        __udarray_tolist_std__=std_devs(obj).tolist(),
+                        dtype=str(nomv.dtype),
+                        shape=obj.shape)
     elif isinstance(obj, numpy.ndarray):
         if 'complex' in str(obj.dtype).lower():
             return dict(__ndarray_tolist_real__=obj.real.tolist(),
@@ -114,6 +121,8 @@ def json_loader(object_pairs, cls=dict):
     elif '__udarray_tolist_avg__' in dct and '__udarray_tolist_std__' in dct:
         return uarray(numpy.array(dct['__udarray_tolist_avg__'], dtype=dct['dtype']).reshape(dct['shape']),
                       numpy.array(dct['__udarray_tolist_std__'], dtype=dct['dtype']).reshape(dct['shape']))
+    elif '__ufloat__' in dct and '__ufloat_std__' in dct:
+        return ufloat(dct['__ufloat__'],dct['__ufloat_std__'])
     elif '__ndarray__' in dct:
         import base64
         data = base64.b64decode(dct['__ndarray__'])

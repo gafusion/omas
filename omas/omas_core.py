@@ -427,25 +427,23 @@ def ods_sample():
     ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
     ods2['equilibrium']['time_slice'][2] = ods['equilibrium']['time_slice'][0]
 
-    printd(
-        ods2['equilibrium']['time_slice'][0]['global_quantities'].location,
-        topic='sample')
-    printd(
-        ods2['equilibrium']['time_slice'][2]['global_quantities'].location,
-        topic='sample')
+    printd(ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
+    printd(ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
 
     ods2['equilibrium.time_slice.1.time'] = 2000.
     ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
     ods2['equilibrium.time_slice[2].time'] = 3000.
-    ods2['equilibrium.time_slice[2].global_quantities.ip'] = 3.
+
+    # uncertain scalar
+    ods2['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3,0.1)
+
+    # uncertain array
+    ods2['equilibrium.time_slice[2].profiles_1d.q'] = uarray([0.,1.,2.,3.],[0,.1,.2,.3])
 
     # check different ways of addressing data
     printd(ods2['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
-    printd(
-        ods2[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
-    printd(
-        ods2[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')],
-        topic='sample')
+    printd(ods2[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
+    printd(ods2[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')], topic='sample')
     printd(ods2['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
     printd(ods2['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
 
@@ -499,6 +497,9 @@ def different_ods(ods1, ods2):
                 return 'DIFF: `%s` differ in value' % k
         elif type(ods1[k]) != type(ods2[k]):
             return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
+        elif any(numpy.atleast_1d(is_uncertain(ods1[k]))) or any(numpy.atleast_1d(is_uncertain(ods2[k]))):
+            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k])) and not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k])):
+                return 'DIFF: `%s` differ in value' % k
         else:
             if not numpy.allclose(ods1[k], ods2[k]):
                 return 'DIFF: `%s` differ in value' % k
