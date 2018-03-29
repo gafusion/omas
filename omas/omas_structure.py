@@ -57,7 +57,7 @@ def generate_xml_schemas():
                            dd_folder=dd_folder), shell=True).communicate()
 
 
-# additional data structures (NOTE:info information carries shot/run/version/tokamak/user info through different save formats)
+# additional data structures (NOTE:info information carries shot/run/version/machine/user info through different save formats)
 add_datastructures = {}
 add_datastructures['info'] = {
     "info.shot": {
@@ -72,11 +72,11 @@ add_datastructures['info'] = {
         "data_type": "STR_0D",
         "description": "imas version"
     },
-    "info.tokamak": {
-        "full_path": "info.tokamak",
+    "info.machine": {
+        "full_path": "info.machine",
         "coordinates": [],
         "data_type": "STR_0D",
-        "description": "tokamak name"
+        "description": "machine name"
     },
     "info.user": {
         "full_path": "info.user",

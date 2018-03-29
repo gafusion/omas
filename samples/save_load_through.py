@@ -29,8 +29,8 @@ save_omas_s3(ods, filename)
 ods = load_omas_s3(filename)
 
 # save/load IMAS
-paths = save_omas_imas(ods, tokamak='ITER', shot=1, new=True)
-ods1 = load_omas_imas(tokamak='ITER', shot=1, paths=paths)
+paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
+ods1 = load_omas_imas(machine='ITER', shot=1, paths=paths)
 
 # check data
 check = different_ods(ods, ods1)

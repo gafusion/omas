@@ -7,13 +7,13 @@ from .omas_core import ODS
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_version):
+def imas_open(user, machine, shot, run, new=False, imas_version=default_imas_version):
     """
     function to open an IMAS
 
     :param user: IMAS username
 
-    :param tokamak: IMAS tokamak
+    :param machine: IMAS machine
 
     :param shot: IMAS shot
 
@@ -29,16 +29,16 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
     printd("ids = imas.ids(%d,%d)"%(shot,run),topic='imas_code')
     ids = imas.ids(shot,run)
 
-    if user is None and tokamak is None:
+    if user is None and machine is None:
         pass
-    elif user is None or tokamak is None:
-        raise (Exception('user={user}, tokamak={tokamak}, imas_version={imas_version}\n'
-                         'Either specify all or none of `user`, `tokamak`, `imas_version`\n'
+    elif user is None or machine is None:
+        raise (Exception('user={user}, machine={machine}, imas_version={imas_version}\n'
+                         'Either specify all or none of `user`, `machine`, `imas_version`\n'
                          'If none of them are specified then use `imasdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, tokamak=tokamak, shot=shot,
+                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, shot=shot,
                                                                               run=run, imas_version=imas_version)))
 
-    if user is None and tokamak is None:
+    if user is None and machine is None:
         if new:
             printd("ids.create()",topic='imas_code')
             ids.create()
@@ -56,19 +56,19 @@ def imas_open(user, tokamak, shot, run, new=False, imas_version=default_imas_ver
 
     else:
         if new:
-            printd("ids.create_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(imas_version)),topic='imas_code')
-            ids.create_env(user, tokamak, imas_version)
+            printd("ids.create_env(%s, %s, %s)"%(repr(user),repr(machine),repr(imas_version)),topic='imas_code')
+            ids.create_env(user, machine, imas_version)
         else:
-            printd("ids.open_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(imas_version)),topic='imas_code')
+            printd("ids.open_env(%s, %s, %s)"%(repr(user),repr(machine),repr(imas_version)),topic='imas_code')
             try:
-                ids.open_env(user, tokamak, imas_version)
+                ids.open_env(user, machine, imas_version)
             except Exception as _excp:
                 if 'Error opening imas shot' in str(_excp):
                     raise(IOError('Error opening imas shot %d run %d'%(shot,run)))
         if not ids.isConnected():
             raise (Exception('Failed to establish connection to IMAS database '
-                             '(user:%s tokamak:%s shot:%s run:%s, imas_version:%s)' %
-                             (user, tokamak, shot, run, imas_version)))
+                             '(user:%s machine:%s shot:%s run:%s, imas_version:%s)' %
+                             (user, machine, shot, run, imas_version)))
     return ids
 
 
@@ -101,7 +101,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` IDS is used by OMAS to hold user, tokamak, shot, run, imas_version
+    # `info` IDS is used by OMAS to hold user, machine, shot, run, imas_version
     # for saving methods that do not carry that information. IMAS does not store
     # this information as part of the data dictionary.
     if ds == 'info':
@@ -228,7 +228,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # --------------------------------------------
 # save and load OMAS to IMAS
 # --------------------------------------------
-def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False, imas_version=default_imas_version):
+def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False, imas_version=default_imas_version):
     """
     save OMAS data set to IMAS
 
@@ -236,7 +236,7 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param tokamak: IMAS tokamak (reads ods['info.tokamak'] if tokamak is None)
+    :param machine: IMAS machine (reads ods['info.machine'] if machine is None)
 
     :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
 
@@ -251,21 +251,21 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
     :return: paths that have been written to IMAS
     """
 
-    # handle default values for user, tokamak, shot, run, imas_version
+    # handle default values for user, machine, shot, run, imas_version
     # it tries to re-use existing information
     if user is None:
         user = ods.get('info.user', os.environ['USER'])
-    if tokamak is None:
-        tokamak = ods.get('info.tokamak', None)
+    if machine is None:
+        machine = ods.get('info.machine', None)
     if shot is None:
         shot = ods.get('info.shot', None)
     if run is None:
         run = ods.get('info.run', 0)
 
-    if user is not None and tokamak is not None:
-        printd('Saving to IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
-            user, tokamak, shot, run, imas_version), topic='imas')
-    elif user is None and tokamak is None:
+    if user is not None and machine is not None:
+        printd('Saving to IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (
+            user, machine, shot, run, imas_version), topic='imas')
+    elif user is None and machine is None:
         printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (
             shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
@@ -274,7 +274,7 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, tokamak=tokamak, shot=shot, run=run, new=new, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=new, imas_version=imas_version)
 
     except IOError as _excp:
         raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
@@ -285,13 +285,13 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', imas_version))])
         printe('Overloaded save_omas_imas: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
         ods['info.user'] = unicode(user)
-        ods['info.tokamak'] = unicode(tokamak)
+        ods['info.machine'] = unicode(machine)
         ods['info.shot'] = int(shot)
         ods['info.run'] = int(run)
         ods['info.imas_version'] = unicode(imas_version)
@@ -335,14 +335,14 @@ def save_omas_imas(ods, user=None, tokamak=None, shot=None, run=None, new=False,
 
     return set_paths
 
-def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
+def load_omas_imas(user=None, machine=None, shot=None, run=0, paths=None,
                    imas_version=default_imas_version, verbose=None):
     """
     load OMAS data set from IMAS
 
     :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param tokamak: IMAS tokamak (reads ods['info.tokamak'] if tokamak is None)
+    :param machine: IMAS machine (reads ods['info.machine'] if machine is None)
 
     :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
 
@@ -360,18 +360,18 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
     if shot is None or run is None:
         raise (Exception('`shot` and `run` must be specified'))
 
-    printd('Loading from IMAS (user:%s tokamak:%s shot:%d run:%d, imas_version:%s)' % (
-        user, tokamak, shot, run, imas_version), topic='imas')
+    printd('Loading from IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (
+        user, machine, shot, run, imas_version), topic='imas')
 
     try:
-        ids = imas_open(user=user, tokamak=tokamak, shot=shot, run=run, new=False, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=False, imas_version=imas_version)
 
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -460,7 +460,7 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
             ids.close()
 
     ods['info.user'] = unicode(user)
-    ods['info.tokamak'] = unicode(tokamak)
+    ods['info.machine'] = unicode(machine)
     ods['info.shot'] = int(shot)
     ods['info.run'] = int(run)
     ods['info.imas_version'] = unicode(imas_version)
@@ -508,10 +508,10 @@ def test_omas_imas(ods):
     :return: ods
     """
     user = os.environ['USER']
-    tokamak = 'ITER'
+    machine = 'ITER'
     shot = 1
     run = 0
 
-    paths = save_omas_imas(ods, user=user, tokamak=tokamak, shot=shot, run=run, new=True)
-    ods1 = load_omas_imas(user=user, tokamak=tokamak, shot=shot, run=run, paths=paths)
+    paths = save_omas_imas(ods, user=user, machine=machine, shot=shot, run=run, new=True)
+    ods1 = load_omas_imas(user=user, machine=machine, shot=shot, run=run, paths=paths)
     return ods1

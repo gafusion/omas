@@ -404,14 +404,14 @@ def ods_sample():
 
     #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
     try:
-        ods['info.tokamak']
+        ods['info.machine']
     except ValueError:
         pass
     else:
         raise(Exception('OMAS error querying leaf that has not been set'))
 
     # info ODS is used for keeping track of IMAS metadata
-    ods['info.tokamak'] = 'ITER'
+    ods['info.machine'] = 'ITER'
     ods['info.imas_version'] = default_imas_version
     ods['info.shot'] = 1
     ods['info.run'] = 0

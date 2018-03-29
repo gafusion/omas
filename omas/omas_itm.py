@@ -14,13 +14,13 @@ from .omas_core import ODS
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def itm_open(user, tokamak, shot, run, new=False, itm_version=default_itm_version):
+def itm_open(user, machine, shot, run, new=False, itm_version=default_itm_version):
     """
     function to open an ITM
 
     :param user: ITM username
 
-    :param tokamak: ITM tokamak
+    :param machine: ITM machine
 
     :param shot: ITM shot
 
@@ -36,16 +36,16 @@ def itm_open(user, tokamak, shot, run, new=False, itm_version=default_itm_versio
     printd("cpo = ual.itm(%d,%d)"%(shot,run),topic='itm_code')
     cpo = ual.itm(shot,run)
 
-    if user is None and tokamak is None:
+    if user is None and machine is None:
         pass
-    elif user is None or tokamak is None:
-        raise (Exception('user={user}, tokamak={tokamak}, itm_version={itm_version}\n'
-                         'Either specify all or none of `user`, `tokamak`, `itm_version`\n'
+    elif user is None or machine is None:
+        raise (Exception('user={user}, machine={machine}, itm_version={itm_version}\n'
+                         'Either specify all or none of `user`, `machine`, `itm_version`\n'
                          'If none of them are specified then use `itmdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, tokamak=tokamak, shot=shot,
+                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, shot=shot,
                                                                               run=run, itm_version=itm_version)))
 
-    if user is None and tokamak is None:
+    if user is None and machine is None:
         if new:
             printd("cpo.create()",topic='itm_code')
             cpo.create()
@@ -63,19 +63,19 @@ def itm_open(user, tokamak, shot, run, new=False, itm_version=default_itm_versio
 
     else:
         if new:
-            printd("cpo.create_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(itm_version)),topic='itm_code')
-            cpo.create_env(user, tokamak, itm_version)
+            printd("cpo.create_env(%s, %s, %s)"%(repr(user),repr(machine),repr(itm_version)),topic='itm_code')
+            cpo.create_env(user, machine, itm_version)
         else:
-            printd("cpo.open_env(%s, %s, %s)"%(repr(user),repr(tokamak),repr(itm_version)),topic='itm_code')
+            printd("cpo.open_env(%s, %s, %s)"%(repr(user),repr(machine),repr(itm_version)),topic='itm_code')
             try:
-                cpo.open_env(user, tokamak, itm_version)
+                cpo.open_env(user, machine, itm_version)
             except Exception as _excp:
                 if 'Error opening itm shot' in str(_excp):
                     raise(IOError('Error opening itm shot %d run %d'%(shot,run)))
         if not cpo.isConnected():
             raise (Exception('Failed to establish connection to ITM database '
-                             '(user:%s tokamak:%s shot:%s run:%s, itm_version:%s)' %
-                             (user, tokamak, shot, run, itm_version)))
+                             '(user:%s machine:%s shot:%s run:%s, itm_version:%s)' %
+                             (user, machine, shot, run, itm_version)))
     return cpo
 
 
@@ -111,7 +111,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` CPO is used by OMAS to hold user, tokamak, shot, run, itm_version
+    # `info` CPO is used by OMAS to hold user, machine, shot, run, itm_version
     # for saving methods that do not carry that information. ITM does not store
     # this information as part of the data dictionary.
     if ds == 'info':
@@ -244,7 +244,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, itm_version=default_itm_version):
+def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, itm_version=default_itm_version):
     """
     save OMAS data set to ITM
 
@@ -252,7 +252,7 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
 
     :param user: ITM username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param tokamak: ITM tokamak (reads ods['info.tokamak'] if tokamak is None)
+    :param machine: ITM machine (reads ods['info.machine'] if machine is None)
 
     :param shot: ITM shot (reads ods['info.shot'] if shot is None)
 
@@ -267,21 +267,21 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
     :return: paths that have been written to ITM
     """
 
-    # handle default values for user, tokamak, shot, run, itm_version
+    # handle default values for user, machine, shot, run, itm_version
     # it tries to re-use existing information
     if user is None:
         user = ods.get('info.user', os.environ['USER'])
-    if tokamak is None:
-        tokamak = ods.get('info.tokamak', None)
+    if machine is None:
+        machine = ods.get('info.machine', None)
     if shot is None:
         shot = ods.get('info.shot', None)
     if run is None:
         run = ods.get('info.run', 0)
 
-    if user is not None and tokamak is not None:
-        printd('Saving to ITM (user:%s tokamak:%s shot:%d run:%d, itm_version:%s)' % (
-            user, tokamak, shot, run, itm_version), topic='itm')
-    elif user is None and tokamak is None:
+    if user is not None and machine is not None:
+        printd('Saving to ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (
+            user, machine, shot, run, itm_version), topic='itm')
+    elif user is None and machine is None:
         printd('Saving to ITM (shot:%d run:%d, DB:%s)' % (
             shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='itm')
 
@@ -290,7 +290,7 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
 
     try:
         # open ITM tree
-        cpo = itm_open(user=user, tokamak=tokamak, shot=shot, run=run, new=new, itm_version=itm_version)
+        cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=new, itm_version=itm_version)
 
     except IOError as _excp:
         raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
@@ -301,13 +301,13 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_itm_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', itm_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', itm_version))])
         printe('Overloaded save_omas_itm: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_itm_dir']):
             os.makedirs(omas_rcparams['fake_itm_dir'])
         ods['info.user'] = unicode(user)
-        ods['info.tokamak'] = unicode(tokamak)
+        ods['info.machine'] = unicode(machine)
         ods['info.shot'] = int(shot)
         ods['info.run'] = int(run)
         ods['info.itm_version'] = unicode(itm_version)
@@ -354,14 +354,14 @@ def save_omas_itm(ods, user=None, tokamak=None, shot=None, run=None, new=False, 
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def load_omas_itm(user=None, tokamak=None, shot=None, run=0, paths=None,
+def load_omas_itm(user=None, machine=None, shot=None, run=0, paths=None,
                    itm_version=default_itm_version, verbose=None):
     """
     load OMAS data set from ITM
 
     :param user: ITM username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param tokamak: ITM tokamak (reads ods['info.tokamak'] if tokamak is None)
+    :param machine: ITM machine (reads ods['info.machine'] if machine is None)
 
     :param shot: ITM shot (reads ods['info.shot'] if shot is None)
 
@@ -379,18 +379,18 @@ def load_omas_itm(user=None, tokamak=None, shot=None, run=0, paths=None,
     if shot is None or run is None:
         raise (Exception('`shot` and `run` must be specified'))
 
-    printd('Loading from ITM (user:%s tokamak:%s shot:%d run:%d, itm_version:%s)' % (
-        user, tokamak, shot, run, itm_version), topic='itm')
+    printd('Loading from ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (
+        user, machine, shot, run, itm_version), topic='itm')
 
     try:
-        cpo = itm_open(user=user, tokamak=tokamak, shot=shot, run=run, new=False, itm_version=itm_version)
+        cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=False, itm_version=itm_version)
 
     except ImportError:
         if not omas_rcparams['allow_fake_itm_fallback']:
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_itm_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, tokamak, shot, run, re.sub('\.', '_', itm_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', itm_version))])
         printe('Overloaded load_omas_itm: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -479,7 +479,7 @@ def load_omas_itm(user=None, tokamak=None, shot=None, run=0, paths=None,
             cpo.close()
 
     ods['info.user'] = unicode(user)
-    ods['info.tokamak'] = unicode(tokamak)
+    ods['info.machine'] = unicode(machine)
     ods['info.shot'] = int(shot)
     ods['info.run'] = int(run)
     ods['info.itm_version'] = unicode(itm_version)
@@ -533,10 +533,10 @@ def test_omas_itm(ods):
     :return: ods
     """
     user = os.environ['USER']
-    tokamak = 'ITER'
+    machine = 'ITER'
     shot = 1
     run = 0
 
-    paths = save_omas_itm(ods, user=user, tokamak=tokamak, shot=shot, run=run, new=True)
-    ods1 = load_omas_itm(user=user, tokamak=tokamak, shot=shot, run=run, paths=paths)
+    paths = save_omas_itm(ods, user=user, machine=machine, shot=shot, run=run, new=True)
+    ods1 = load_omas_itm(user=user, machine=machine, shot=shot, run=run, paths=paths)
     return ods1
