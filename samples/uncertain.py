@@ -4,8 +4,10 @@ from omas import *
 import os
 import numpy
 import uncertainties.unumpy as unumpy
+from uncertainties import ufloat
 
 ods = ODS()
+ods['equilibrium.time_slice[0].global_quantities.ip'] = ufloat(3,0.1)
 ods['thomson_scattering.channel[0].t_e.data'] = unumpy.uarray([1,2,3],[.1,.2,.3])
 ods['thomson_scattering.channel[0].n_e.data'] = numpy.array([1.,2.,3.])
 ods['thomson_scattering.time']=numpy.linspace(0,1,3)
