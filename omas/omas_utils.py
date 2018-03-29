@@ -67,8 +67,8 @@ def json_dumper(obj):
 
     :return: json-compatible [dict/list] object
     """
-    from omas import omas
-    if isinstance(obj, omas):
+    from omas import ODS
+    if isinstance(obj, ODS):
         return OrderedDict(zip(obj.keys(), obj.values()))
 
     tmp=is_uncertain(obj)
@@ -311,9 +311,9 @@ def ids_cpo_mapper(ids, cpo=None):
 
     :return: cpo
     '''
-    from omas import omas
+    from omas import ODS
     if cpo is None:
-        cpo = omas()
+        cpo = ODS()
     cpo.consistency_check = False
 
     for itime in range(len(ids['core_profiles.time'])):

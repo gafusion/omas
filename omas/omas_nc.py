@@ -1,7 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import omas
+from .omas_core import ODS
 
 
 # --------------------------------------------
@@ -52,7 +52,7 @@ def load_omas_nc(filename):
     printd('Loading from %s' % filename, topic='nc')
 
     from netCDF4 import Dataset
-    ods = omas()
+    ods = ODS()
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):

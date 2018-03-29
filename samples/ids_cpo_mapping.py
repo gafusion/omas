@@ -5,7 +5,7 @@ import numpy
 from pprint import pprint
 
 # fill in with some test data
-ids = omas()
+ids = ODS()
 ids['equilibrium.code.name'] = 'test'
 ids['equilibrium.code.version'] = 'v0.0'
 ids['equilibrium.code.parameters'] = '<xml></xml>'

@@ -52,7 +52,7 @@ for scenario in scenarios:
         for ids in complete_ods:
             if ids == 'info':
                 continue
-            ods = omas()
+            ods = ODS()
             ods[ids] = complete_ods[ids]
             ods['info'] = complete_ods['info']
             save_omas_pkl(ods, '{machine}_{shot}_{run}__{ids}.pkl'.format(ids=ids, **scenario))

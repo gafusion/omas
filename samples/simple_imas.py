@@ -7,7 +7,7 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code_dump'
 from omas import *
 
 # Instantiate new OMAS Data Structure (ODS)
-ods = omas()
+ods = ODS()
 
 # 0D data
 ods['equilibrium']['time_slice'][0]['time'] = 1000.

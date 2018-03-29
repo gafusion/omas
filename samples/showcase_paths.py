@@ -3,7 +3,7 @@ import numpy
 
 from omas import *
 
-ods = omas()
+ods = ODS()
 
 # access data as dictionary
 ods['equilibrium']['time_slice'][0]['time'] = 1000.

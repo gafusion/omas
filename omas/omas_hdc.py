@@ -1,4 +1,4 @@
-from .omas_core import omas
+from .omas_core import ODS
 from collections import Sequence
 import numpy
 try:
@@ -24,7 +24,7 @@ def save_omas_hdc(ods):
     :return: HDC container
     """
     # recurrent function - check types
-    if isinstance(ods, omas):
+    if isinstance(ods, ODS):
         if isinstance(ods.keys(), Sequence):
             # list type
             # TODO implement a better check
@@ -56,17 +56,17 @@ def load_omas_hdc(hdc):
     else:
         if hdc.get_type_str() == 'list':
             # list type
-            ods = omas(consistency_check=False)
+            ods = ODS(consistency_check=False)
             for i in range(hdc.shape[0]):
                 ods[i] = load_omas_hdc(hdc[i])
         elif hdc.get_type_str() == 'struct':
             # mapping type
-            ods = omas(consistency_check=False)
+            ods = ODS(consistency_check=False)
             for key in hdc.keys():
                 ods[key] = load_omas_hdc(hdc[key])
         elif hdc.get_type_str() == 'null':
             # mapping type
-            ods = omas(consistency_check=False)
+            ods = ODS(consistency_check=False)
         elif hdc.get_type_str() == 'string':
             # mapping type
             ods = str(hdc)

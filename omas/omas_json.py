@@ -1,7 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import omas
+from .omas_core import ODS
 
 
 # ---------------------------
@@ -41,13 +41,13 @@ def load_omas_json(filename, **kw):
         filename = open(filename, 'r')
 
     def cls():
-        tmp = omas()
+        tmp = ODS()
         tmp.consistency_check = False
         return tmp
 
     tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
 
-    tmp1 = omas()
+    tmp1 = ODS()
     for item in tmp.flat():
         tmp1[item] = tmp[item]
 

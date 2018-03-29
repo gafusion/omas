@@ -13,7 +13,7 @@ from omas import *
 import numpy
 
 # instantiate new omas data structure (ODS)
-ods=omas()
+ods = ODS()
 
 # add some 0D data
 ods['equilibrium']['time_slice'][0]['time']=1000.

@@ -6,7 +6,7 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'omas_rcparams', 'omas', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
+    'omas_rcparams', 'ODS', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
     'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
     'save_omas_json', 'load_omas_json', 'test_omas_json',
     'save_omas_hdc', 'load_omas_hdc', 'test_omas_hdc',
@@ -40,7 +40,7 @@ def _omas_key_dict_preprocessor(key):
     return key
 
 
-class omas(MutableMapping):
+class ODS(MutableMapping):
     """
     OMAS class
     """
@@ -86,7 +86,7 @@ class omas(MutableMapping):
     def consistency_check(self, value):
         self._consistency_check = value
         for item in self.keys():
-            if isinstance(self[item], omas):
+            if isinstance(self[item], ODS):
                 self[item].consistency_check = value
 
     @property
@@ -104,7 +104,7 @@ class omas(MutableMapping):
     def dynamic_path_creation(self, value):
         self._dynamic_path_creation = value
         for item in self.keys():
-            if isinstance(self[item], omas):
+            if isinstance(self[item], ODS):
                 self[item].dynamic_path_creation = value
 
     def _validate(self, value, structure):
@@ -117,7 +117,7 @@ class omas(MutableMapping):
         """
         for key in value.keys():
             structure_key = re.sub('^[0-9:]+$', ':', str(key))
-            if isinstance(value[key], omas) and value[key].consistency_check:
+            if isinstance(value[key], ODS) and value[key].consistency_check:
                 value._validate(value[key], structure[structure_key])
             else:
                 structure[structure_key]
@@ -133,7 +133,7 @@ class omas(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = omas(imas_version=self.imas_version,
+            value = ODS(imas_version=self.imas_version,
                          consistency_check=self.consistency_check,
                          dynamic_path_creation=self.dynamic_path_creation)
 
@@ -146,7 +146,7 @@ class omas(MutableMapping):
             structure = {}
             structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
             try:
-                if isinstance(value, omas):
+                if isinstance(value, ODS):
                     if not self.structure:
                         # load the json structure file
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
@@ -183,10 +183,10 @@ class omas(MutableMapping):
 
         # now that all checks are completed we can assign the structure information
         if self.consistency_check:
-            if isinstance(value, omas):
+            if isinstance(value, ODS):
                 value.structure = structure
 
-        if isinstance(value, omas):
+        if isinstance(value, ODS):
             value.location = location
 
         # if the user has entered path rather than a single key
@@ -222,7 +222,7 @@ class omas(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
-                self.__setitem__(key[0], omas(imas_version=self.imas_version,
+                self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
@@ -253,7 +253,7 @@ class omas(MutableMapping):
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
-            if isinstance(self[kid], omas):
+            if isinstance(self[kid], ODS):
                 self[kid].paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
@@ -328,7 +328,7 @@ class omas(MutableMapping):
         return tmp
 
 
-omas_dictstate=dir(omas)
+omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])
 
 
@@ -388,14 +388,14 @@ def ods_sample():
     """
     create sample ODS data
     """
-    ods = omas()
+    ods = ODS()
 
     #check effect of disabling dynamic path creation
     try:
         ods.dynamic_path_creation = False
         ods['info.user']
     except LookupError:
-        ods['info'] = omas()
+        ods['info'] = ODS()
         ods['info.user'] = unicode(os.environ['USER'])
     else:
         raise(Exception('OMAS error handling dynamic_path_creation=False'))

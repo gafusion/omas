@@ -1,7 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import omas
+from .omas_core import ODS
 
 
 # --------------------------------------------
@@ -418,7 +418,7 @@ def load_omas_imas(user=None, tokamak=None, shot=None, run=0, paths=None,
             joined_fetch_paths=map(o2i, fetch_paths)
 
             # build omas data structure
-            ods = omas()
+            ods = ODS()
             for path in fetch_paths:
                 if len(path)==2 and path[-1]=='time':
                     data = imas_get(ids, path, None)
