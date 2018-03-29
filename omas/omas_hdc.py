@@ -20,6 +20,7 @@ def save_omas_hdc(ods):
     """Convert OMAS data structure to HDC
 
     :param ods: input data structure
+
     :return: HDC container
     """
     # recurrent function - check types
@@ -46,6 +47,7 @@ def load_omas_hdc(hdc):
     """Convert OMAS data structure to HDC
 
     :param ods: input data structure
+
     :return: HDC container
     """
     # recurrent function - check types
