@@ -94,10 +94,14 @@ add_datastructures['info'] = {
 
 
 def create_json_structure(imas_version=default_imas_version):
-    file = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + 'IDSDef.xml'
 
     import xmltodict
+    file = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + 'IDSDef.xml'
     tmp = xmltodict.parse(open(file).read())
+
+    for file in glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*.json'):
+        print('Remove '+file)
+        os.remove(file)
 
     def process_path(inv):
         inv = re.sub(r'/', '.', inv)
