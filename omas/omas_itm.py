@@ -354,12 +354,12 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def load_omas_itm(user=None, machine=None, shot=None, run=0, paths=None,
+def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
                    itm_version=default_itm_version, verbose=None):
     """
     load OMAS data set from ITM
 
-    :param user: ITM username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
+    :param user: ITM username (default is os.environ['USER'])
 
     :param machine: ITM machine (reads ods['info.machine'] if machine is None)
 

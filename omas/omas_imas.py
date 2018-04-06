@@ -254,7 +254,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     # handle default values for user, machine, shot, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('info.user', None)
+        user = ods.get('info.user', os.environ['USER'])
     if machine is None:
         machine = ods.get('info.machine', None)
     if shot is None:
@@ -335,12 +335,12 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
 
     return set_paths
 
-def load_omas_imas(user=None, machine=None, shot=None, run=0, paths=None,
+def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
                    imas_version=default_imas_version, verbose=None):
     """
     load OMAS data set from IMAS
 
-    :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
+    :param user: IMAS username (default is os.environ['USER'])
 
     :param machine: IMAS machine (reads ods['info.machine'] if machine is None)
 
