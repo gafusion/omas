@@ -254,7 +254,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     # handle default values for user, machine, shot, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('info.user', os.environ['USER'])
+        user = ods.get('info.user', None)
     if machine is None:
         machine = ods.get('info.machine', None)
     if shot is None:
