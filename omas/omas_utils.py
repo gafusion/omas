@@ -268,7 +268,7 @@ def load_structure(filename, imas_version):
                                  'Perhaps the structure files for IMAS version %s must be generated.\n'
                                  'Try running the `omas/samples/build_json_structures.py` script.'% (os.path.split(filename)[0],imas_version)))
             else:
-                raise (Exception('`%s` is not a valid IMAS structure' % filename))
+                raise (Exception('`%s` is not a valid IMAS %s structure' % (filename,imas_version)))
         else:
             filename = os.path.abspath(filename)
     if filename not in _structures:

@@ -79,7 +79,7 @@ class ODS(MutableMapping):
         :return: True/False
         """
         if not hasattr(self,'_consistency_check'):
-            self._consistency_check=True
+            self._consistency_check=omas_rcparams['consistency_check']
         return self._consistency_check
 
     @consistency_check.setter
@@ -160,14 +160,19 @@ class ODS(MutableMapping):
                     self.structure[structure_key[0]]
 
             except (LookupError, TypeError):
-                options = list(self.structure.keys())
-                if len(options) == 1 and options[0] == ':':
-                    options = 'A numerical index is needed with n>=0'
-                else:
-                    options = 'Did you mean: %s' % options
-                spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
-                raise LookupError('`%s` is not a valid IMAS location\n' % location + spaces + '^' * len(
-                    structure_key[0]) + '\n' + '%s' % options)
+                if self.consistency_check=='warn':
+                    printe('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version))
+                    if isinstance(value,ODS):
+                        value.consistency_check=False
+                elif self.consistency_check:
+                    options = list(self.structure.keys())
+                    if len(options) == 1 and options[0] == ':':
+                        options = 'A numerical index is needed with n>=0'
+                    else:
+                        options = 'Did you mean: %s' % options
+                    spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
+                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
+                        spaces + '^' * len(structure_key[0]) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
         if isinstance(key[0], int) and not isinstance(self.omas_data, list):
