@@ -338,3 +338,35 @@ def ids_cpo_mapper(ids, cpo=None):
                 cpo['coreprof'][itime]['ti.value'][:, iion] = nominal_values(ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature'])
 
     return cpo
+
+
+def omas_info(structures, imas_version=default_imas_version):
+    '''
+    This function returns an ods with the leaf nodes filled with their property informations
+
+    :param structures: list with ids names or string with ids name of which to retrieve the info
+
+    :return: ods
+    '''
+    from omas import ODS
+    ods = ODS(imas_version=imas_version)
+
+    if isinstance(structures,basestring):
+        structures=[structures]
+
+    for structure in structures:
+        tmp = load_structure(structure, imas_version)[0]
+        lst = sorted(tmp.keys())
+        for k, item in enumerate(lst):
+            if re.match('.*_error_(index|lower|upper)$', item.split('.')[-1]):
+                continue
+            parent = False
+            for item1 in lst[k + 1:]:
+                if '.'.join(item1.split('.')[:-1]).rstrip('[:]') == item:
+                    parent = True
+                    break
+            if parent:
+                continue
+            ods[re.sub(':', '0', item)] = tmp[item]
+
+    return ods
