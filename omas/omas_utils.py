@@ -35,7 +35,7 @@ def printe(*objects, **kw):
     """
     print to stderr
     """
-    kw['file'] = sys.__stderr__
+    kw['file'] = sys.stderr
     print(*objects, **kw)
 
 
