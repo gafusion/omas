@@ -288,7 +288,8 @@ class ODS(MutableMapping):
         key = _omas_key_dict_preprocessor(key)
         h = self
         for k in key:
-            if k in h.omas_data:
+            # h.omas_data is None when dict/list behaviour is not assigned
+            if h.omas_data is not None and k in h.omas_data:
                 h = h[k]
                 continue
             else:
