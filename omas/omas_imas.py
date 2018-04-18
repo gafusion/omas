@@ -381,7 +381,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
         try:
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
-                paths = sorted([[structure] for structure in list_structures(imas_version=imas_version)])
+                paths = [[structure] for structure in list_structures(imas_version=imas_version)]
                 if verbose is None:
                     verbose=True
             joined_paths = map(o2i, paths)

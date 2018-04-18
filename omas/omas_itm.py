@@ -400,7 +400,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
         try:
             # if paths is None then figure out what CPO are available and get ready to retrieve everything
             if paths is None:
-                paths = sorted([[structure] for structure in list_structures(itm_version=itm_version)])
+                paths = [[structure] for structure in list_structures(itm_version=itm_version)]
                 if verbose is None:
                     verbose=True
             joined_paths = map(o2i, paths)

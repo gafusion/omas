@@ -246,8 +246,8 @@ _structures_dict = {}
 
 
 def list_structures(imas_version):
-    return list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
-                    glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')))
+    return sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
+                  glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json'))))
 
 
 def load_structure(filename, imas_version):
