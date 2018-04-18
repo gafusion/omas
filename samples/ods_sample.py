@@ -8,6 +8,3 @@ from omas import *
 # test generation of a sample ods
 ods=ods_sample()
 print(ods)
-
-# test getting information about a ids structure
-print(omas_info('equilibrium'))
