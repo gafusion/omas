@@ -161,7 +161,7 @@ class ODS(MutableMapping):
 
             except (LookupError, TypeError):
                 if self.consistency_check=='warn':
-                    printe('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version))
+                    printe('`%s` is not a valid IMAS %s location' % (location, self.imas_version))
                     if isinstance(value,ODS):
                         value.consistency_check=False
                 elif self.consistency_check:
@@ -333,6 +333,11 @@ class ODS(MutableMapping):
                 del tmp[item]
         return tmp
 
+    def copy(self):
+        '''
+        :return: copy.deepcopy of current ODS object
+        '''
+        return copy.deepcopy(self)
 
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])
@@ -458,7 +463,7 @@ def ods_sample():
     # pprint(ods.paths())
     # pprint(ods2.paths())
 
-    # check data slicing is working
+    # check data slicing
     printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
 
     ckbkp = ods.consistency_check
@@ -467,13 +472,18 @@ def ods_sample():
     if ods2.consistency_check != ckbkp:
         raise (Exception('consistency_check attribute changed'))
 
+    # check picking
     save_omas_pkl(ods2, 'test.pkl')
     ods2 = load_omas_pkl('test.pkl')
 
+    # check flattening
     tmp = ods2.flat()
     # pprint(tmp)
 
-    return ods2
+    # check deepcopy
+    ods3=ods2.copy()
+
+    return ods3
 
 
 def different_ods(ods1, ods2):
