@@ -339,6 +339,13 @@ class ODS(MutableMapping):
         '''
         return copy.deepcopy(self)
 
+#plotting functions
+try:
+    from . import omas_plot
+    __all__.append('omas_plot')
+except ImportError as _excp:
+    printe('OMAS plotting function are not available: '+repr(_excp))
+
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])
 
