@@ -27,6 +27,18 @@ else:
     unicode = str
     import pickle
 
+    _orig_pickle_loads=pickle.loads
+    def _pickle_loads_python2compatible(*args,**kw):
+        kw.setdefault('encoding','latin1')
+        return _orig_pickle_loads(*args,**kw)
+    pickle.loads=_pickle_loads_python2compatible
+
+    _orig_pickle_load=pickle.load
+    def _pickle_load_python2compatible(*args,**kw):
+        kw.setdefault('encoding','latin1')
+        return _orig_pickle_load(*args,**kw)
+    pickle.load=_pickle_load_python2compatible
+
 separator = '.'
 
 # --------------------------------------------
