@@ -6,6 +6,8 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 
+#omas_rcparams['allow_fake_imas_fallback']=True
+
 # read gEQDSK file in OMFIT
 eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
 
