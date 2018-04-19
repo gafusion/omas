@@ -343,6 +343,8 @@ class ODS(MutableMapping):
 try:
     from . import omas_plot
     __all__.append('omas_plot')
+    for item in omas_plot.__all__:
+        setattr(ODS,'plot_'+item,getattr(omas_plot,item))
 except ImportError as _excp:
     printe('OMAS plotting function are not available: '+repr(_excp))
 
