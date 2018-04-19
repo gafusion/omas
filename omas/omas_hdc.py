@@ -1,18 +1,18 @@
 from .omas_core import ODS
 from collections import Sequence
 import numpy
+
 try:
-    _pyhdc_import_excp=None
+    _pyhdc_import_excp = None
     from pyhdc import HDC
 except ImportError as _excp:
-    _pyhdc_import_excp=_excp
+    _pyhdc_import_excp = _excp
 
-if _pyhdc_import_excp is not None:
     # replace HDC class by a simple exception throwing class
     class HDC(object):
         """Import error HDC class"""
 
-        def __init__(self, *args, ** kwargs):
+        def __init__(self, *args, **kwargs):
             raise _pyhdc_import_excp
 
 
