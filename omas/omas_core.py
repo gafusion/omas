@@ -339,7 +339,9 @@ class ODS(MutableMapping):
         '''
         return copy.deepcopy(self)
 
-#plotting functions
+# --------------------------------------------
+# import plotting functions and add them as ODS methods
+# --------------------------------------------
 try:
     from . import omas_plot
     __all__.append('omas_plot')
