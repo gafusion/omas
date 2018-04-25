@@ -280,12 +280,8 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     if fig is None:
         fig=pyplot.figure()
 
-    axs=[]
-
     ax=pyplot.subplot(1,3,1)
     ax=equilibrium_CX(ods, time_index=time_index, ax=ax, **kw)
-    axs.append(ax)
-
     eq=ods['equilibrium']['time_slice'][time_index]
 
     # x
@@ -299,7 +295,6 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     # pressure
     ax=pyplot.subplot(2,3,2)
-    axs.append(ax)
     ax.plot(x,eq['profiles_1d']['pressure'], **kw)
     kw.setdefault('color',ax.lines[-1].get_color())
     ax.set_title('$\,$ Pressure')
@@ -308,7 +303,6 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     # q
     ax=fig.add_subplot(2,3,3,sharex=ax)
-    axs.append(ax)
     ax.plot(x,eq['profiles_1d']['q'], **kw )
     ax.set_title('$q$ Safety factor')
     ax.ticklabel_format(style='sci', scilimits=(-1,2), axis='y')
@@ -318,7 +312,6 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     # dP_dpsi
     ax=fig.add_subplot(2,3,5,sharex=ax)
-    axs.append(ax)
     ax.plot(x,eq['profiles_1d']['dpressure_dpsi'], **kw )
     ax.set_title("$P\,^\\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1,2), axis='y')
@@ -326,13 +319,14 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     # FdF_dpsi
     ax=fig.add_subplot(236,sharex=ax)
-    axs.append(ax)
     ax.plot(x,eq['profiles_1d']['f_df_dpsi'], **kw)
     ax.set_title("$FF\,^\\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1,2), axis='y')
     pyplot.xlabel(xName)
 
     ax.set_xlim([0,1])
+
+    return fig
 
 @add_to__all__
 def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, **kw):
@@ -352,6 +346,9 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
     :return: list of axes
     '''
+    if fig is None:
+        fig=pyplot.figure()
+
     prof1d=ods['core_profiles']['profiles_1d'][time_index]
     x=prof1d['grid.rho_tor_norm']
 
@@ -360,7 +357,6 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
     r=len(prof1d['ion'])+1
 
-    axs=[]
     ax=None
     for k,item in enumerate(what):
 
@@ -368,10 +364,8 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         if combine_dens_temps:
             if k==0:
                 ax=ax0=pyplot.subplot(1,2,1)
-                axs.append(ax0)
         else:
             ax=ax0=pyplot.subplot(r,2,(2*k)+1,sharex=ax)
-            axs.append(ax)
         if any(is_uncertain(prof1d[item+'.density'])):
             uband(x,prof1d[item+'.density'],label=names[k],ax=ax0,**kw)
         else:
@@ -389,10 +383,8 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         if combine_dens_temps:
             if k==0:
                 ax=ax1=pyplot.subplot(1,2,2,sharex=ax0)
-                axs.append(ax1)
         else:
             ax=ax1=pyplot.subplot(r,2,(2*k)+2,sharex=ax)
-            axs.append(ax)
         if any(is_uncertain(prof1d[item+'.temperature'])):
             uband(x,prof1d[item+'.temperature'],label=names[k],ax=ax1,**kw)
         else:
@@ -403,4 +395,4 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
             ax1.set_title('Temperature [eV]')
 
     ax.set_xlim([0,1])
-    return axs
+    return fig
