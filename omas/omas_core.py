@@ -339,6 +339,13 @@ class ODS(MutableMapping):
         '''
         return copy.deepcopy(self)
 
+    def clear(self):
+        if isinstance(self.omas_data, dict):
+            self.omas_data.clear()
+            return self.omas_data
+        elif isinstance(self.omas_data, list):
+            self.omas_data[:]=[]
+            return self.omas_data
 # --------------------------------------------
 # import plotting functions and add them as ODS methods
 # --------------------------------------------
