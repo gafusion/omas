@@ -205,7 +205,10 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
     wall=None
     eq=ods['equilibrium']['time_slice'][time_index]
     if 'wall' in ods:
-        wall=ods['wall']['description_2d'][time_index]['limiter']['unit']
+        if time_index in ods['wall']['description_2d']:
+            wall=ods['wall']['description_2d'][time_index]['limiter']['unit']
+        elif 0 in ods['wall']['description_2d']:
+            wall=ods['wall']['description_2d'][0]['limiter']['unit']
 
     # first try to plot as function of `rho` and fallback on `psi`
     if 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']:
