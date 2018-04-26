@@ -134,8 +134,8 @@ class ODS(MutableMapping):
         if len(key) > 1:
             pass_on_value = value
             value = ODS(imas_version=self.imas_version,
-                         consistency_check=self.consistency_check,
-                         dynamic_path_creation=self.dynamic_path_creation)
+                        consistency_check=self.consistency_check,
+                        dynamic_path_creation=self.dynamic_path_creation)
 
         # full path where we want to place the data
         location = '.'.join(filter(None, [self.location, str(key[0])]))
@@ -179,12 +179,12 @@ class ODS(MutableMapping):
             if not self.omas_data or not len(self.omas_data):
                 self.omas_data = []
             else:
-                raise (Exception('Cannot convert from dict to list once omas object has data'))
+                raise (Exception('Cannot convert from dict to list once ODS has data'))
         if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
             if not self.omas_data or not len(self.omas_data):
                 self.omas_data = {}
             else:
-                raise (Exception('Cannot convert from list to dict once omas object has data'))
+                raise (Exception('Cannot convert from list to dict once ODS has data'))
 
         # now that all checks are completed we can assign the structure information
         if self.consistency_check:
@@ -194,7 +194,7 @@ class ODS(MutableMapping):
         if isinstance(value, ODS):
             value.location = location
 
-        # if the user has entered path rather than a single key
+        # if the user has entered a path rather than a single key
         if len(key) > 1:
             if key[0] not in self.keys():
                 if isinstance(self.omas_data, dict):
@@ -289,7 +289,7 @@ class ODS(MutableMapping):
         h = self
         for k in key:
             # h.omas_data is None when dict/list behaviour is not assigned
-            if h.omas_data is not None and k in h.omas_data:
+            if h.omas_data is not None and k in h.keys():
                 h = h[k]
                 continue
             else:
