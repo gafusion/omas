@@ -33,10 +33,11 @@ def _omas_key_dict_preprocessor(key):
         key = re.sub('\]', '', re.sub('\[', '.', key)).split('.')
     else:
         key = list(map(str, key))
-    try:
-        key[0] = int(key[0])
-    except ValueError:
-        pass
+    for k,item in enumerate(key):
+        try:
+            key[k] = int(item)
+        except ValueError:
+            pass
     return key
 
 
@@ -138,7 +139,7 @@ class ODS(MutableMapping):
                         dynamic_path_creation=self.dynamic_path_creation)
 
         # full path where we want to place the data
-        location = '.'.join(filter(None, [self.location, str(key[0])]))
+        location = l2o(filter(None, [self.location, key[0]]))
         location = re.sub('^[0-9:]+$', ':', str(location))
 
         # perform consistency check with IMAS structure
@@ -203,7 +204,7 @@ class ODS(MutableMapping):
                     self.omas_data.append(value)
                 else:
                     raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
-            self[key[0]]['.'.join(key[1:])] = pass_on_value
+            self[key[0]][l2o(key[1:])] = pass_on_value
         elif isinstance(self.omas_data, dict):
             self.omas_data[key[0]] = value
         elif key[0] in self.omas_data:
@@ -221,7 +222,7 @@ class ODS(MutableMapping):
         if key[0] == ':':
             data = []
             for k in self.keys():
-                data.append(self['.'.join([str(k)] + key[1:])])
+                data.append(self[l2o([k] + key[1:])])
             return numpy.array(data)
 
         # dynamic path creation
@@ -231,12 +232,12 @@ class ODS(MutableMapping):
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
-                location = '.'.join(filter(None, [self.location, str(key[0])]))
+                location = l2o(filter(None, [self.location, key[0]]))
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            return self.omas_data[key[0]]['.'.join(key[1:])]
+            return self.omas_data[key[0]][l2o(key[1:])]
         else:
             return self.omas_data[key[0]]
 
@@ -245,7 +246,7 @@ class ODS(MutableMapping):
         key = _omas_key_dict_preprocessor(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            del self[key[0]]['.'.join(key[1:])]
+            del self[key[0]][l2o(key[1:])]
         else:
             return self.omas_data.__delitem__(key[0])
 
@@ -270,7 +271,7 @@ class ODS(MutableMapping):
         """
         tmp = OrderedDict()
         for path in self.paths():
-            tmp['.'.join(map(str, path))] = self[path]
+            tmp[lo2(path)] = self[path]
         return tmp
 
     def __getnewargs__(self):

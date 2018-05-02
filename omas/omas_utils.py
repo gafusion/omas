@@ -301,6 +301,16 @@ def o2i(path):
     return ipath
 
 
+def l2o(path):
+    """
+    Formats a list into an ODS path format
+
+    :param path: list of strings and integers
+
+    :return: ODS path format
+    """
+    return separator.join(map(str,path))
+
 def ids_cpo_mapper(ids, cpo=None):
     '''
     translate (some) IDS fields to CPO
@@ -362,7 +372,7 @@ def omas_info(structures, imas_version=default_imas_version):
                 continue
             parent = False
             for item1 in lst[k + 1:]:
-                if '.'.join(item1.split('.')[:-1]).rstrip('[:]') == item:
+                if l2o(item1.split(separator)[:-1]).rstrip('[:]') == item:
                     parent = True
                     break
             if parent:
