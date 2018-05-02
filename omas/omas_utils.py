@@ -311,6 +311,7 @@ def l2o(path):
     """
     return separator.join(map(str,path))
 
+
 def ids_cpo_mapper(ids, cpo=None):
     '''
     translate (some) IDS fields to CPO

@@ -271,7 +271,7 @@ class ODS(MutableMapping):
         """
         tmp = OrderedDict()
         for path in self.paths():
-            tmp[lo2(path)] = self[path]
+            tmp[l2o(path)] = self[path]
         return tmp
 
     def __getnewargs__(self):
