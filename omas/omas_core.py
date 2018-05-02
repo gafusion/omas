@@ -218,6 +218,8 @@ class ODS(MutableMapping):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
 
+        dynamically_created = False
+
         # data slicing
         if key[0] == ':':
             data = []
@@ -233,11 +235,16 @@ class ODS(MutableMapping):
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
                 location = l2o(filter(None, [self.location, key[0]]))
-                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
+                raise(LookupError('Dynamic path creation is disabled, `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            return self.omas_data[key[0]][l2o(key[1:])]
+            try:
+                return self.omas_data[key[0]][l2o(key[1:])]
+            except ValueError:
+                if dynamically_created:
+                    del self[key[0]]
+                raise
         else:
             return self.omas_data[key[0]]
 
@@ -449,6 +456,12 @@ def ods_sample():
     # check .get() method
     assert (ods.get('info.shot') == ods['info.shot'])
     assert (ods.get('info.bad', None) is None)
+
+    # check that dynamic path creation during __getitem__ does not leave empty fields behind
+    try:
+        print(ods['wall.description_2d.0.limiter.unit.0.outline.r'])
+    except ValueError:
+        assert 'wall.description_2d.0.limiter.unit.0.outline' not in ods
 
     ods['equilibrium']['time_slice'][0]['time'] = 1000.
     ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
