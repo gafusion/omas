@@ -363,39 +363,44 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     ax=None
     for k,item in enumerate(what):
 
-        #densities
-        if combine_dens_temps:
-            if k==0:
-                ax=ax0=pyplot.subplot(1,2,1)
-        else:
-            ax=ax0=pyplot.subplot(r,2,(2*k)+1,sharex=ax)
-        if any(is_uncertain(prof1d[item+'.density'])):
-            uband(x,prof1d[item+'.density'],label=names[k],ax=ax0,**kw)
-        else:
-            ax0.plot(x,prof1d[item+'.density'],label=names[k],**kw)
-        if k==len(prof1d['ion']):
-            ax0.set_xlabel('$\\rho$')
-            if combine_dens_temps:
-                ax0.legend(loc=0).draggable(True)
-        if k==0:
-            ax0.set_title('Density [m$^{-3}$]')
-        if not combine_dens_temps:
-            ax0.set_ylabel(names[k])
+        #densities (thermal and fast)
+        for therm_fast in ['','_fast']:
+            therm_fast_name=['',' (fast)'][therm_fast=='_fast']
+            density=item+'.density'+therm_fast
+            if item+'.density'+therm_fast in prof1d:
+                if combine_dens_temps:
+                    if k==0:
+                        ax=ax0=pyplot.subplot(1,2,1)
+                else:
+                    ax=ax0=pyplot.subplot(r,2,(2*k)+1,sharex=ax)
+                if any(is_uncertain(prof1d[density])):
+                    uband(x,prof1d[density],label=names[k]+therm_fast_name,ax=ax0,**kw)
+                else:
+                    ax0.plot(x,prof1d[density],label=names[k]+therm_fast_name,**kw)
+                if k==len(prof1d['ion']):
+                    ax0.set_xlabel('$\\rho$')
+                    if combine_dens_temps:
+                        ax0.legend(loc=0).draggable(True)
+                if k==0:
+                    ax0.set_title('Density [m$^{-3}$]')
+                if not combine_dens_temps:
+                    ax0.set_ylabel(names[k])
 
         #temperatures
-        if combine_dens_temps:
+        if item+'.temperature' in prof1d:
+            if combine_dens_temps:
+                if k==0:
+                    ax=ax1=pyplot.subplot(1,2,2,sharex=ax0)
+            else:
+                ax=ax1=pyplot.subplot(r,2,(2*k)+2,sharex=ax)
+            if any(is_uncertain(prof1d[item+'.temperature'])):
+                uband(x,prof1d[item+'.temperature'],label=names[k],ax=ax1,**kw)
+            else:
+                ax1.plot(x,prof1d[item+'.temperature'],label=names[k],**kw)
+            if k==len(prof1d['ion']):
+                ax1.set_xlabel('$\\rho$')
             if k==0:
-                ax=ax1=pyplot.subplot(1,2,2,sharex=ax0)
-        else:
-            ax=ax1=pyplot.subplot(r,2,(2*k)+2,sharex=ax)
-        if any(is_uncertain(prof1d[item+'.temperature'])):
-            uband(x,prof1d[item+'.temperature'],label=names[k],ax=ax1,**kw)
-        else:
-            ax1.plot(x,prof1d[item+'.temperature'],label=names[k],**kw)
-        if k==len(prof1d['ion']):
-            ax1.set_xlabel('$\\rho$')
-        if k==0:
-            ax1.set_title('Temperature [eV]')
+                ax1.set_title('Temperature [eV]')
 
     ax.set_xlim([0,1])
     return fig
