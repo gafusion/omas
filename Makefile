@@ -1,10 +1,12 @@
 all:
 	@echo 'OMAS makefile help'
 	@echo ''
-	@echo ' - make json    : generate IMAS json structure files'
 	@echo ' - make docs    : generate sphyix documentation'
+	@echo ' - make json    : generate IMAS json structure files'
 	@echo ' - make itm     : generate omas_itm.py from omas_imas.py'
-	@echo ' - make release : push new OMAS release to pipy'
+	@echo ' - make git     : upload to OMAS github repo'
+	@echo ' - make pipy    : upload to pipy'
+	@echo ' - make release : all of the above'
 	@echo ''
 
 docs:
@@ -16,5 +18,11 @@ json:
 itm:
 	cd utilities && python generate_itm_interface.py
 
-release: docs json itm
+git:
+	git push
+
+pipy:
 	python setup.py sdist upload
+
+release: docs json itm git pipy
+	@echo Done!
