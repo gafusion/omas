@@ -280,7 +280,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :return: list of axes
+    :return: figure handler
     '''
     if fig is None:
         fig=pyplot.figure()
@@ -349,7 +349,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :return: list of axes
+    :return: figure handler
     '''
     if fig is None:
         fig=pyplot.figure()
@@ -375,10 +375,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                         ax=ax0=pyplot.subplot(1,2,1)
                 else:
                     ax=ax0=pyplot.subplot(r,2,(2*k)+1,sharex=ax)
-                if any(is_uncertain(prof1d[density])):
-                    uband(x,prof1d[density],label=names[k]+therm_fast_name,ax=ax0,**kw)
-                else:
-                    ax0.plot(x,prof1d[density],label=names[k]+therm_fast_name,**kw)
+                uband(x,prof1d[density],label=names[k]+therm_fast_name,ax=ax0,**kw)
                 if k==len(prof1d['ion']):
                     ax0.set_xlabel('$\\rho$')
                     if combine_dens_temps:
@@ -395,10 +392,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                     ax=ax1=pyplot.subplot(1,2,2,sharex=ax0)
             else:
                 ax=ax1=pyplot.subplot(r,2,(2*k)+2,sharex=ax)
-            if any(is_uncertain(prof1d[item+'.temperature'])):
-                uband(x,prof1d[item+'.temperature'],label=names[k],ax=ax1,**kw)
-            else:
-                ax1.plot(x,prof1d[item+'.temperature'],label=names[k],**kw)
+            uband(x,prof1d[item+'.temperature'],label=names[k],ax=ax1,**kw)
             if k==len(prof1d['ion']):
                 ax1.set_xlabel('$\\rho$')
             if k==0:
