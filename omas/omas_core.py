@@ -356,6 +356,20 @@ class ODS(MutableMapping):
         elif isinstance(self.omas_data, list):
             self.omas_data[:]=[]
             return self.omas_data
+
+
+# --------------------------------------------
+# import physics functions and add them as ODS methods
+# --------------------------------------------
+try:
+    from . import omas_physics
+    __all__.append('omas_physics')
+    for item in omas_physics.__all__:
+        setattr(ODS,'physics_'+item,getattr(omas_physics,item))
+except ImportError as _excp:
+    printe('OMAS physics function are not available: '+repr(_excp))
+
+
 # --------------------------------------------
 # import plotting functions and add them as ODS methods
 # --------------------------------------------
