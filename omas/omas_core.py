@@ -307,7 +307,7 @@ class ODS(MutableMapping):
 
     def keys(self):
         if isinstance(self.omas_data, dict):
-            return self.omas_data.keys()
+            return list(self.omas_data.keys())
         elif isinstance(self.omas_data, list):
             return range(len(self.omas_data))
         else:
@@ -457,6 +457,10 @@ def ods_sample():
     # check .get() method
     assert (ods.get('info.shot') == ods['info.shot'])
     assert (ods.get('info.bad', None) is None)
+
+    # check that keys is an iterable (so that Python 2/3 work the same way)
+    keys = ods.keys()
+    print( keys[0] == ':' )
 
     # check that dynamic path creation during __getitem__ does not leave empty fields behind
     try:
