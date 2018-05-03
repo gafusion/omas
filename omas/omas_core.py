@@ -230,12 +230,13 @@ class ODS(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
+                dynamically_created=True
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
                 location = l2o(filter(None, [self.location, key[0]]))
-                raise(LookupError('Dynamic path creation is disabled, `%s` needs to be manually created'%location))
+                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
