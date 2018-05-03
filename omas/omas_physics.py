@@ -44,6 +44,5 @@ def core_profiles_update_pressures(ods):
                     else:
                         prof1d['pressure_perpendicular']+=prof1d['ion'][k]['pressure_fast_perpendicular']
                         prof1d['pressure_parallel']+=prof1d['ion'][k]['pressure_fast_parallel']
-                        prof1d['pressure_ion_total']+=(2*prof1d['ion'][k]['pressure_fast_perpendicular']+prof1d['ion'][k]['pressure_fast_parallel'])
         prof1d['pressure_thermal']+=prof1d['pressure_ion_total']
     return ods
