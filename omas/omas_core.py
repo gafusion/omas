@@ -1,4 +1,5 @@
 from __future__ import print_function, division, unicode_literals
+
 from collections import MutableMapping
 
 from .omas_utils import *
@@ -291,7 +292,7 @@ class ODS(MutableMapping):
         return len(self.omas_data)
 
     def __iter__(self):
-        return iter(self.omas_data)
+        return iter(self.keys())
 
     def __contains__(self, key):
         key = _omas_key_dict_preprocessor(key)
