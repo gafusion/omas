@@ -241,7 +241,13 @@ def remove_parentheses(inv, replace_with=''):
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
+# IMAS structure info organized as flat entries
+# * IMAS syntax with `:` for list of structures
+# * each entry contains leafs attributes
 _structures = {}
+# IMAS structure info organized in hierarchical dictionaries
+# * list of structures as `:`
+# * the leafs are empty dictionaries
 _structures_dict = {}
 
 
