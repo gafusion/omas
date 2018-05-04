@@ -10,7 +10,8 @@ from omas import *
 #ods=load_omas_s3('STEP_sample')
 ods=load_omas_s3('OMFITprofiles_sample')
 
-ods.physics_core_profiles_update_pressures()
+ods.consistency_check=False
+ods.physics_core_profiles_pressures()
 ods.plot_core_profiles_pressures()
 show()
 
