@@ -417,15 +417,15 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     :return: axes handler
     '''
     if ax is None:
-        ax=pyplot.gca()
+        ax = pyplot.gca()
 
-    prof1d=ods['core_profiles']['profiles_1d'][time_index]
-    x=prof1d['grid.rho_tor_norm']
+    prof1d = ods['core_profiles']['profiles_1d'][time_index]
+    x = prof1d['grid.rho_tor_norm']
 
-    uband(x,prof1d['pressure_thermal'],ax=ax,label='Thermal')
-    uband(x,prof1d['pressure_ion_total'],ax=ax,label='Total ion')
-    uband(x,prof1d['pressure_perpendicular'],ax=ax,label='Perpendicular')
-    uband(x,prof1d['pressure_parallel'],ax=ax,label='Parallel')
-    ax.set_xlim([0,1])
+    for item in prof1d.flat().keys():
+        if 'pressure' in item:
+            uband(x, prof1d[item], ax=ax, label=item)
+
+    ax.set_xlim([0, 1])
     ax.legend(loc=0).draggable(True)
     return ax
