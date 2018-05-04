@@ -357,6 +357,17 @@ class ODS(MutableMapping):
             self.omas_data[:]=[]
             return self.omas_data
 
+    def copy_attrs_from(self, ods):
+        '''
+        copy %s attributes from input ods
+
+        :param ods: input ods
+
+        :return: self
+        '''
+        for item in omas_ods_attrs:
+            setattr(self,item,getattr(ods,item))
+        return self
 
 # --------------------------------------------
 # import physics functions and add them as ODS methods
@@ -381,9 +392,10 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: '+repr(_excp))
 
+omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure']
 omas_dictstate=dir(ODS)
-omas_dictstate.extend(['omas_data','_consistency_check','_dynamic_path_creation','imas_version','location','structure'])
-
+omas_dictstate.extend(['omas_data']+omas_ods_attrs)
+ODS.copy_attrs_from.__doc__=ODS.copy_attrs_from.__doc__%omas_ods_attrs
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
