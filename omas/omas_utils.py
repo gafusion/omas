@@ -282,7 +282,7 @@ def load_structure(filename, imas_version):
         _structures_dict[filename] = {}
         for item in _structures[filename]:
             h = _structures_dict[filename]
-            for step in re.sub('\[:\]', '.:', item).split(separator):
+            for step in i2o(item).split(separator):
                 if step not in h:
                     h[step] = {}
                 h = h[step]
@@ -307,6 +307,17 @@ def o2i(path):
     return ipath
 
 
+def i2o(path):
+    """
+    Formats a IMAS path format into an ODS path
+
+    :param path: IMAS path format
+
+    :return: ODS path format
+    """
+    return re.sub('\[:\]', '.:', path)
+
+
 def l2o(path):
     """
     Formats a list into an ODS path format
@@ -318,6 +329,7 @@ def l2o(path):
     location = separator.join(filter(None,map(str,path)))
     location = re.sub('[0-9:]+$', ':', str(location))
     return location
+
 
 def ids_cpo_mapper(ids, cpo=None):
     '''
