@@ -315,8 +315,9 @@ def l2o(path):
 
     :return: ODS path format
     """
-    return separator.join(map(str,path))
-
+    location = separator.join(filter(None,map(str,path)))
+    location = re.sub('[0-9:]+$', ':', str(location))
+    return location
 
 def ids_cpo_mapper(ids, cpo=None):
     '''

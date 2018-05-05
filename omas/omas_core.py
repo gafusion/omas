@@ -140,8 +140,7 @@ class ODS(MutableMapping):
                         dynamic_path_creation=self.dynamic_path_creation)
 
         # full path where we want to place the data
-        location = l2o(filter(None, [self.location, key[0]]))
-        location = re.sub('^[0-9:]+$', ':', str(location))
+        location = l2o([self.location, key[0]])
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
@@ -236,7 +235,7 @@ class ODS(MutableMapping):
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation))
             else:
-                location = l2o(filter(None, [self.location, key[0]]))
+                location = l2o([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
