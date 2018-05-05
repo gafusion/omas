@@ -52,6 +52,9 @@ class ODS(MutableMapping):
                  consistency_check=omas_rcparams['consistency_check'],
                  dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
+                 cocos=omas_rcparams['cocos'],
+                 cocosin=omas_rcparams['cocosin'],
+                 cocosout=omas_rcparams['cocosout'],
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -69,6 +72,9 @@ class ODS(MutableMapping):
         self._dynamic_path_creation = dynamic_path_creation
         self.imas_version = imas_version
         self.location = location
+        self._cocos = cocos
+        self.cocosin = cocosin
+        self.cocosout = cocosout
         if structure is None:
             structure = {}
         self.structure = structure
@@ -90,6 +96,57 @@ class ODS(MutableMapping):
         for item in self.keys():
             if isinstance(self[item], ODS):
                 self[item].consistency_check = value
+
+    @property
+    def cocos(self):
+        """
+        property that tells in what COCOS format the data is stored
+
+        :return: cocosin value
+        """
+        if not hasattr(self,'_cocos'):
+            self._cocos=omas_rcparams['cocos']
+        return self._cocos
+
+    @cocos.setter
+    def cocos(self, value):
+        raise(AttributeError('cocos parameter is readonly!'))
+
+    @property
+    def cocosin(self):
+        """
+        property that tells in what COCOS format the data will be input
+
+        :return: cocosin value
+        """
+        if not hasattr(self,'_cocosin'):
+            self._cocosin=omas_rcparams['cocosin']
+        return self._cocosin
+
+    @cocosin.setter
+    def cocosin(self, value):
+        self._cocosin = value
+        for item in self.keys():
+            if isinstance(self[item], ODS):
+                self[item].cocosin = value
+
+    @property
+    def cocosout(self):
+        """
+        property that tells in what COCOS format the data should be output
+
+        :return: cocosout value
+        """
+        if not hasattr(self,'_cocosout'):
+            self._cocosout=omas_rcparams['cocosout']
+        return self._cocosout
+
+    @cocosout.setter
+    def cocosout(self, value):
+        self._cocosout = value
+        for item in self.keys():
+            if isinstance(self[item], ODS):
+                self[item].cocosout = value
 
     @property
     def dynamic_path_creation(self):
@@ -137,10 +194,15 @@ class ODS(MutableMapping):
             pass_on_value = value
             value = ODS(imas_version=self.imas_version,
                         consistency_check=self.consistency_check,
-                        dynamic_path_creation=self.dynamic_path_creation)
+                        dynamic_path_creation=self.dynamic_path_creation,
+                        cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
+
+        # handle cocos transformations coming in
+        if self.cocosin != self.cocos and location in omas_physics.cocos_signals:
+            value = value * omas_physics.cocos_transform(self.cocosin, self.cocos)[omas_physics.cocos_signals[location]]
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
@@ -233,7 +295,8 @@ class ODS(MutableMapping):
                 dynamically_created=True
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
-                                              dynamic_path_creation=self.dynamic_path_creation))
+                                              dynamic_path_creation=self.dynamic_path_creation,
+                                              cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout))
             else:
                 location = l2o([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
@@ -247,7 +310,12 @@ class ODS(MutableMapping):
                     del self[key[0]]
                 raise
         else:
-            return self.omas_data[key[0]]
+            location = l2o([self.location, key[0]])
+            value=self.omas_data[key[0]]
+            # handle cocos transformations going out
+            if self.cocosout != self.cocos and location in omas_physics.cocos_signals:
+                value = value * omas_physics.cocos_transform(self.cocos, self.cocosout)[omas_physics.cocos_signals[location]]
+            return value
 
     def __delitem__(self, key):
         # handle individual keys as well as full paths
@@ -358,7 +426,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy ['_consistency_check','_dynamic_path_creation','imas_version','location','structure'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosin','_cocosout'] attributes from input ods
 
         :param ods: input ods
 
@@ -391,9 +459,10 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: '+repr(_excp))
 
-omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure']
+omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosin','_cocosout']
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data']+omas_ods_attrs)
+omas_dictstate=sorted(list(set(omas_dictstate)))
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
@@ -485,7 +554,7 @@ def ods_sample():
 
     # check that keys is an iterable (so that Python 2/3 work the same way)
     keys = ods.keys()
-    print( keys[0] == ':' )
+    keys[0]
 
     # check that dynamic path creation during __getitem__ does not leave empty fields behind
     try:
