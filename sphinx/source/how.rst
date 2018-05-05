@@ -10,7 +10,7 @@ and it inherits all of their functionalities, with the addition of:
 
 2. graceful error handling with suggestions for navigating the hierarchical data structure::
 
-    LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS 3.17.2 location
+    LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS location
                                            ^^^^^^^^^^^^^^
     Did you mean: ['coordinate_system', 'profiles_1d', 'profiles_2d', 'ggd', 'time', 'convergence', 'boundary', 'global_quantities', 'constraints']
 
@@ -21,14 +21,13 @@ and it inherits all of their functionalities, with the addition of:
     ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
     ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
 
-4. data slicing with `:` format (not only in time)::
+4. data slicing (not only in time) with `:` construct::
 
     ods['equilibrium.time_slice[:].global_quantities.ip']
 
 5. automatic `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ transform support::
 
-    ods=ODS(cocosin=2, cocosout=11)
-    ods['equilibrium.time_slice.0..profiles_1d.psi'] = linspace(0,1,10)
+    ods = ODS(cocosin=2, cocosout=11)
 
 6. seamless support for `uncertain <https://github.com/lebigot/uncertainties>`_ quantities::
 
