@@ -201,14 +201,14 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     # Transform
     transforms = {}
-    transforms['PRIME'] = sigma_Ip_eff * sigma_Bp_eff / (2 * numpy.pi) ** exp_Bp_eff
+    transforms['dPSI'] = sigma_Ip_eff * sigma_Bp_eff / (2 * numpy.pi) ** exp_Bp_eff
     transforms['PSI'] = sigma_Ip_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
     transforms['Q'] = sigma_Ip_eff * sigma_B0_eff * sigma_rhotp_eff
-    transforms['B'] = sigma_B0_eff
+    transforms['BT'] = sigma_B0_eff
     transforms['IP'] = sigma_Ip_eff
-    transforms['F'] = transforms['B']
-    transforms['F_FPRIME'] = transforms['PRIME']
-    transforms['PPRIME'] = transforms['PRIME']
+    transforms['F'] = transforms['BT']
+    transforms['F_FPRIME'] = transforms['dPSI']
+    transforms['PPRIME'] = transforms['dPSI']
 
     printd("COCOS tranformation from "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
     printd(transforms,topic='cocos')
