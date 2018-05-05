@@ -215,7 +215,78 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     return transforms
 
-#this dictionary defines the IMAS locations and the `cocos_transform` function
+#this dictionary defines the IMAS locations and the corresponding `cocos_transform` function
 cocos_signals = {}
+
+cocos_signals['equilibrium.time_slice.:.boundary.b_flux_pol_norm'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.exact'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.measured'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.reconstructed'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.standard_deviation'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.exact'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.measured'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.standard_deviation'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.exact'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.measured'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.standard_deviation'] = None
+cocos_signals['equilibrium.time_slice.:.constraints.ip.exact'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.constraints.ip.measured'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.constraints.ip.reconstructed'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.constraints.ip.standard_deviation'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.constraints.q.:.exact'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.constraints.q.:.measured'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.constraints.q.:.standard_deviation'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.ggd.:.b_field_tor.:.values'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.ggd.:.j_parallel.:.values'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.ggd.:.j_tor.:.values'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.ggd.:.phi.:.values'] = None
+cocos_signals['equilibrium.time_slice.:.ggd.:.psi.:.values'] = 'PSI'
+cocos_signals['equilibrium.time_slice.:.global_quantities.ip'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_tor'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.global_quantities.psi_axis'] = 'PSI'
+cocos_signals['equilibrium.time_slice.:.global_quantities.psi_boundary'] = 'PSI'
+cocos_signals['equilibrium.time_slice.:.global_quantities.q_95'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.global_quantities.q_axis'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.global_quantities.q_min.value'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_average'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_field_average'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_field_max'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_field_min'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_max'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.b_min'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.darea_dpsi'] = 'dPSI'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.darea_drho_tor'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.dpressure_dpsi'] = 'dPSI'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.dpsi_drho_tor'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.dvolume_dpsi'] = 'dPSI'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.dvolume_drho_tor'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.f'] = 'F'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.f_df_dpsi'] = 'F_FPRIME'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm1'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm2'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm3'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm4'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm5'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm6'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm7'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm8'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.gm9'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_1d.j_parallel'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.j_tor'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.phi'] = None
 cocos_signals['equilibrium.time_slice.:.profiles_1d.psi'] = 'PSI'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.q'] = 'Q'
+cocos_signals['equilibrium.time_slice.:.profiles_1d.rho_tor'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.b_field_tor'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.b_tor'] = 'BT'
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_parallel'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_tor'] = 'IP'
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.phi'] = None
+cocos_signals['equilibrium.time_slice.:.profiles_2d.:.psi'] = 'PSI'
+cocos_signals['equilibrium.vacuum_toroidal_field.b0'] = 'BT'
+
 __all__.append('cocos_signals')
