@@ -8,18 +8,27 @@ and it inherits all of their functionalities, with the addition of:
 
 1. on-the-fly check for consistency with IMAS data model
 
-2. graceful error handling with suggestions for navigating the hierarchical data structure
+2. graceful error handling with suggestions for navigating the hierarchical data structure::
 
-3. dynamic creation of the tree hierarchy as items they are accessed
+    LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS 3.17.2 location
+                                           ^^^^^^^^^^^^^^
+    Did you mean: ['coordinate_system', 'profiles_1d', 'profiles_2d', 'ggd', 'time', 'convergence', 'boundary', 'global_quantities', 'constraints']
 
-4. data slicing (not only in time)
-
-5. support read/write/access using multiple formats::
+3. dynamic creation of the tree hierarchy as items they are accessed with support for different syntaxes::
 
     ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary format
     ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree format
     ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
     ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
+
+4. data slicing with `:` format (not only in time)::
+
+    ods['equilibrium.time_slice[:].global_quantities.ip']
+
+5. automatic `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ transform support::
+
+    ods=ODS(cocosin=2, cocosout=11)
+    ods['equilibrium.time_slice.0..profiles_1d.psi'] = linspace(0,1,10)
 
 6. seamless support for `uncertain <https://github.com/lebigot/uncertainties>`_ quantities::
 
