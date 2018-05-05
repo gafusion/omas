@@ -327,7 +327,7 @@ def l2o(path):
     :return: ODS path format
     """
     location = separator.join(filter(None,map(str,path)))
-    location = re.sub('[0-9:]+$', ':', str(location))
+    location = re.sub('\.[0-9:]+$', '.:', str(location))
     return location
 
 
