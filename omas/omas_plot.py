@@ -8,7 +8,7 @@ from .omas_utils import *
 
 __all__ = []
 
-def add_to__all__(f):
+def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
 
@@ -184,7 +184,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 # ================================
 # ODSs' plotting methods
 # ================================
-@add_to__all__
+@add_to__ODS__
 def equilibrium_CX(ods, time_index=0, ax=None, **kw):
     '''
     Plot equilibrium cross-section
@@ -264,7 +264,7 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     return ax
 
-@add_to__all__
+@add_to__ODS__
 def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     '''
     Plot equilibrium cross-section and P, q, P', FF' profiles
@@ -331,7 +331,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     return fig
 
-@add_to__all__
+@add_to__ODS__
 def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, **kw):
     '''
     Plot densities and temperature profiles for electrons and all ion species
@@ -399,7 +399,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     ax.set_xlim([0, 1])
     return fig
 
-@add_to__all__
+@add_to__ODS__
 def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     '''
     Plot pressures in `ods['core_profiles']['profiles_1d'][time_index]`

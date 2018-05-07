@@ -1,11 +1,12 @@
 from __future__ import print_function, division, unicode_literals
 
 import numpy
+from contextlib import contextmanager
 from .omas_utils import *
 
 __all__ = []
 
-def add_to__all__(f):
+def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
 
@@ -13,7 +14,8 @@ def add_to__all__(f):
 class constants(object):
     e = 1.6021766208e-19
 
-@add_to__all__
+
+@add_to__ODS__
 def core_profiles_pressures(ods, update=True):
     '''
     calculates individual ions pressures
@@ -79,6 +81,7 @@ def core_profiles_pressures(ods, update=True):
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
 
     return ods_p
+
 
 def define_cocos(cocos_ind):
     """
@@ -176,7 +179,7 @@ def define_cocos(cocos_ind):
 
     return cocos
 
-@add_to__all__
+
 def cocos_transform(cocosin_index, cocosout_index):
     """
     :param cocosin_index: COCOS index in
@@ -214,6 +217,33 @@ def cocos_transform(cocosin_index, cocosout_index):
     printd(transforms,topic='cocos')
 
     return transforms
+
+
+@contextmanager
+def cocos_environment(ods, cocosin=None, cocosout=None):
+    '''
+    Provides OMAS environment within wich a certain COCOS convention is defined
+
+    :param ods: ODS on which to operate
+
+    :param cocosin: input COCOS convention
+
+    :param cocosout: output COCOS convention
+
+    :return: ODS with COCOS convention set
+    '''
+    old_cocosin = ods.cocosin
+    old_cocosout = ods.cocosout
+    if cocosin is not None:
+        ods.cocosin = cocosin
+    if cocosout is not None:
+        ods.cocosout = cocosout
+    try:
+        yield ods
+    finally:
+        ods.cocosin = old_cocosin
+        ods.cocosout = old_cocosout
+
 
 #this dictionary defines the IMAS locations and the corresponding `cocos_transform` function
 cocos_signals = {}
@@ -288,5 +318,3 @@ cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_tor'] = 'IP'
 cocos_signals['equilibrium.time_slice.:.profiles_2d.:.phi'] = None
 cocos_signals['equilibrium.time_slice.:.profiles_2d.:.psi'] = 'PSI'
 cocos_signals['equilibrium.vacuum_toroidal_field.b0'] = 'BT'
-
-__all__.append('cocos_signals')

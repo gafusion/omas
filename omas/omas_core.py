@@ -17,6 +17,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info',
+    'cocos_environment',
     '__version__'
 ]
 
@@ -65,6 +66,12 @@ class ODS(MutableMapping):
 
         :param location: string with location of this object relative to IMAS schema
 
+        :param cocos: internal COCOS representation (this can only be set when the object is created)
+
+        :param cocosin: COCOS representation of the data that is written to the ODS
+
+        :param cocosout: COCOS representation of the data that is read from the ODS
+
         :param structure: IMAS schema to use
         """
         self.omas_data = None
@@ -100,7 +107,8 @@ class ODS(MutableMapping):
     @property
     def cocos(self):
         """
-        property that tells in what COCOS format the data is stored
+        property that tells in what COCOS format the data is stored internally of the ODS
+        (NOTE: this parameter can only be set when the object is created)
 
         :return: cocosin value
         """
@@ -442,11 +450,12 @@ class ODS(MutableMapping):
 # --------------------------------------------
 try:
     from . import omas_physics
+    from .omas_physics import cocos_environment
     __all__.append('omas_physics')
     for item in omas_physics.__all__:
-        setattr(ODS,'physics_'+item,getattr(omas_physics,item))
+        setattr(ODS, 'physics_' + item, getattr(omas_physics, item))
 except ImportError as _excp:
-    printe('OMAS physics function are not available: '+repr(_excp))
+    printe('OMAS physics function are not available: ' + repr(_excp))
 
 
 # --------------------------------------------
@@ -456,9 +465,9 @@ try:
     from . import omas_plot
     __all__.append('omas_plot')
     for item in omas_plot.__all__:
-        setattr(ODS,'plot_'+item,getattr(omas_plot,item))
+        setattr(ODS, 'plot_' + item, getattr(omas_plot, item))
 except ImportError as _excp:
-    printe('OMAS plotting function are not available: '+repr(_excp))
+    printe('OMAS plotting function are not available: ' + repr(_excp))
 
 omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosin','_cocosout']
 omas_dictstate=dir(ODS)
