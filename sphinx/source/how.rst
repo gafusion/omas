@@ -1,39 +1,39 @@
 Concept
 =======
 
-The hierarchical IMAS data model is represented in OMAS as a set of nested `omas` objects.
 
-The Python `omas` class behaves like standard Python dictionary and list classes
-and it inherits all of their functionalities, with the addition of:
 
-1. on-the-fly check for consistency with IMAS data model
+The hierarchical IMAS data model is represented in OMAS as a set of nested `ODS` objects (OMAS Data Structure).
+The `ODS` class extends native Python dictionary and list classes with:
 
-2. graceful error handling with suggestions for navigating the hierarchical data structure::
+1. On-the-fly check for **consistency with IMAS data model**
+
+2. **Graceful error handling** with suggestions for navigating the hierarchical data structure::
 
     LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS location
                                            ^^^^^^^^^^^^^^
     Did you mean: ['coordinate_system', 'profiles_1d', 'profiles_2d', 'ggd', 'time', 'convergence', 'boundary', 'global_quantities', 'constraints']
 
-3. dynamic creation of the tree hierarchy as items they are accessed with support for different syntaxes::
+3. **Dynamic creation of the tree hierarchy** as items they are accessed with support for **different syntaxes**::
 
     ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary format
     ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree format
     ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
     ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
 
-4. data slicing (not only in time) with `:` construct::
+4. **Data slicing** (not only in time) with `:` construct::
 
     ods['equilibrium.time_slice[:].global_quantities.ip']
 
-5. automatic `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ transform support::
+5. Handling of `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ **transforms**::
 
     ods = ODS(cocosin=2, cocosout=11)
 
-6. seamless support for `uncertain <https://github.com/lebigot/uncertainties>`_ quantities::
+6. Handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
 
     ods['equilibrium.time_slice[0].profiles_1d.q'] = uarray(nom_value,std_dev)
 
-7. save/load omas objects to/from:
+7. Save/load ODSs to/from **different storage systems**:
 
    .. _omas_formats:
 
