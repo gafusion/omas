@@ -147,7 +147,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     result = []
     if ax is None:
-        ax = gca()
+        ax = pyplot.gca()
 
     # enable combinations of 1D and 2D x's and y's
     y = numpy.array(y)
@@ -397,6 +397,8 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                 ax1.set_title('Temperature [eV]')
 
     ax.set_xlim([0, 1])
+    ax0.set_ylim([0, ax0.get_ylim()[1]])
+    ax1.set_ylim([0, ax1.get_ylim()[1]])
     return fig
 
 @add_to__ODS__
