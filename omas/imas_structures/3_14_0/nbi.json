@@ -1,0 +1,1187 @@
+{
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius": {
+  "units": "m",
+  "documentation": "Variation of the tangency radius (major radius where the central line of a NBI unit is tangent to a circle around the torus)",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius"
+ },
+ "nbi.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/ids_properties/provider"
+ },
+ "nbi.unit[:].beamlets_group[:].position.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/r_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].position.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/phi_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].direction": {
+  "documentation": "Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/direction"
+ },
+ "nbi.unit[:].species.a_error_upper": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Upper error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/a_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.power_fractions": {
+  "data_type": "FLT_1D",
+  "documentation": "Fraction of power of a unit injected by each beamlet",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/power_fractions"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.angles_error_index": {
+  "documentation": "Index in the error_description list for \"angles\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/angles_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"delta_angle\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].position.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/r"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_horizontal_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"focal_length_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_horizontal_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.tangency_radii_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"tangency_radii\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/tangency_radii_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].vertical_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/vertical_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].position.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/z"
+ },
+ "nbi.unit[:].beamlets_group[:].position.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/r_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_vertical": {
+  "units": "m",
+  "documentation": "The vertical width of the beamlets group at the at the vertical focal point",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].horizontal_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/horizontal_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_vertical_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"focal_length_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_vertical_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].position.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/phi_error_index"
+ },
+ "nbi.unit[:].power.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/power/data_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].width_horizontal": {
+  "units": "m",
+  "documentation": "Horizontal width of the beam group at the injection unit surface (or grounded grid)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal"
+ },
+ "nbi.unit[:].beam_power_fraction.time": {
+  "full_path": "nbi/unit(i1)/beam_power_fraction/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].horizontal_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/horizontal_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].horizontal_error_index": {
+  "documentation": "Index in the error_description list for \"horizontal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/horizontal_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"delta_tangency_radius\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.angles": {
+  "data_type": "FLT_1D",
+  "documentation": "Angle of inclination between a line at the centre of a beamlet and the horiontal plane, for each beamlet",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/angles"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].particles_fraction_error_upper": {
+  "units": "-",
+  "documentation": "Upper error for \"particles_fraction\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/particles_fraction_error_upper"
+ },
+ "nbi.unit[:].beam_current_fraction.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_current_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_current_fraction/data"
+ },
+ "nbi.unit[:].beam_power_fraction.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_power_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tangency_radius": {
+  "units": "m",
+  "documentation": "Tangency radius (major radius where the central line of a NBI unit is tangent to a circle around the torus)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tangency_radius"
+ },
+ "nbi.unit[:].species.z_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Nuclear charge",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/z_n"
+ },
+ "nbi.unit[:].beam_current_fraction.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_index"
+ },
+ "nbi.unit[:].power.time": {
+  "full_path": "nbi/unit(i1)/power/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "nbi.unit[:].beam_power_fraction.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_power_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].horizontal": {
+  "units": "rad",
+  "documentation": "The horiztonal beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx).",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/horizontal"
+ },
+ "nbi.unit[:].energy.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/energy/data_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].width_vertical": {
+  "units": "m",
+  "documentation": "Vertical width of the beam group at the injection unit surface (or grounded grid)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.phi": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/phi"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r_error_index"
+ },
+ "nbi.unit[:].species.z_n_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/z_n_error_upper"
+ },
+ "nbi.unit[:].beam_power_fraction": {
+  "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "full_path": "nbi/unit(i1)/beam_power_fraction",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions": {
+  "documentation": "Position of each beamlet",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions",
+  "data_type": "structure"
+ },
+ "nbi.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/code/name"
+ },
+ "nbi.unit[:].power": {
+  "documentation": "Power",
+  "full_path": "nbi/unit(i1)/power",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beam_power_fraction.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].particles_fraction_error_lower": {
+  "units": "-",
+  "documentation": "Lower error for \"particles_fraction\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/particles_fraction_error_lower"
+ },
+ "nbi.unit[:].beam_current_fraction.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_current_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].position": {
+  "documentation": "R, Z, Phi position of the beamlet group centre",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi_error_index"
+ },
+ "nbi.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/code/commit"
+ },
+ "nbi": {
+  "lifecycle_version": "3.0.4",
+  "lifecycle_last_change": "3.10.2",
+  "documentation": "Neutral Beam Injection systems and description of the fast neutrals that arrive into the torus",
+  "full_path": "nbi",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_vertical": {
+  "units": "m",
+  "documentation": "Vertical focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum vertical width",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_vertical"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.tangency_radii_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"tangency_radii\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/tangency_radii_error_upper"
+ },
+ "nbi.unit[:].species.z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/species/z_n_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].vertical_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/vertical_error_lower"
+ },
+ "nbi.unit[:].beam_current_fraction.time": {
+  "full_path": "nbi/unit(i1)/beam_current_fraction/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].width_horizontal_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"width_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal_error_lower"
+ },
+ "nbi.unit[:].beam_power_fraction.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_power_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_power_fraction/data"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r_error_upper"
+ },
+ "nbi.unit[:].name": {
+  "documentation": "Name of the NBI unit",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "nbi/unit(i1)/name"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_horizontal_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"focal_length_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_horizontal_error_lower"
+ },
+ "nbi.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "nbi/ids_properties/homogeneous_time"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].vertical_error_index": {
+  "documentation": "Index in the error_description list for \"vertical\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/vertical_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].width_vertical_error_index": {
+  "documentation": "Index in the error_description list for \"width_vertical\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].particles_fraction_error_index": {
+  "documentation": "Index in the error_description list for \"particles_fraction\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/particles_fraction_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.phi_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/phi_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.tangency_radii": {
+  "data_type": "FLT_1D",
+  "documentation": "Tangency radius (major radius where the central line of a beamlet is tangent to a circle around the torus), for each beamlet",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/tangency_radii"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"delta_angle\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle_error_upper"
+ },
+ "nbi.unit[:].energy.time": {
+  "full_path": "nbi/unit(i1)/energy/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "nbi.unit[:].energy.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "nbi.unit[:].energy.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/energy/data_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.angles_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"angles\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/angles_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"width_min_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/r_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.r": {
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/r"
+ },
+ "nbi.unit[:].beamlets_group": {
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)",
+  "documentation": "Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "16"
+ },
+ "nbi.unit[:].identifier": {
+  "documentation": "ID of the NBI unit",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "nbi/unit(i1)/identifier"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].vertical": {
+  "units": "rad",
+  "documentation": "The vertical beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx).",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/vertical"
+ },
+ "nbi.unit[:].power.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "nbi.unit[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/power/data_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.z": {
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/z"
+ },
+ "nbi.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/ids_properties/creation_date"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.power_fractions_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_fractions\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/power_fractions_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.r_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/r_error_lower"
+ },
+ "nbi.unit[:].energy.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "nbi.unit[:].energy.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/energy/data_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].width_horizontal_error_index": {
+  "documentation": "Index in the error_description list for \"width_horizontal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.phi_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/phi_error_lower"
+ },
+ "nbi.code.output_flag": {
+  "full_path": "nbi/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "nbi.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"delta_tangency_radius\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/z_error_index"
+ },
+ "nbi.unit[:].beam_current_fraction.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...3",
+   "nbi.unit[:].beam_current_fraction.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_upper"
+ },
+ "nbi.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "nbi/code",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal_error_index": {
+  "documentation": "Index in the error_description list for \"width_min_horizontal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tangency_radius_error_index": {
+  "documentation": "Index in the error_description list for \"tangency_radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tangency_radius_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/phi_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].position.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/z_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_vertical_error_index": {
+  "documentation": "Index in the error_description list for \"width_min_vertical\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical_error_index"
+ },
+ "nbi.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/ids_properties/comment"
+ },
+ "nbi.unit[:].power.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "nbi.unit[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/power/data_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].width_vertical_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"width_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.r_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/r_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].angle_error_index": {
+  "documentation": "Index in the error_description list for \"angle\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/angle_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tangency_radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"tangency_radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tangency_radius_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].focus": {
+  "documentation": "Describes how the beamlet group is focused",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle": {
+  "units": "rad",
+  "documentation": "Variation of the angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.angles_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"angles\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/angles_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting": {
+  "data_type": "struct_array",
+  "documentation": "In case of dynamic beam tilting (i.e. during the pulse), e.g. for some Beam Emission Spectroscopy use cases, variations of position, tangency radius and angle with respect to their static value, for various time slices",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].tilting[:].time"
+  ],
+  "maxoccur": "unbounded",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)"
+ },
+ "nbi.unit[:].beamlets_group[:].width_vertical_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"width_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position": {
+  "documentation": "Variation of the position of the beamlet group centre",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].angle_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"angle\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/angle_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets": {
+  "documentation": "Detailed information on beamlets",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_vertical_error_index": {
+  "documentation": "Index in the error_description list for \"focal_length_vertical\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_vertical_error_index"
+ },
+ "nbi.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/ids_properties/source"
+ },
+ "nbi.unit[:].beamlets_group[:].position.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/z_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].position.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/phi_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle_error_index": {
+  "documentation": "Index in the error_description list for \"delta_angle\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle_error_index"
+ },
+ "nbi.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/code/parameters"
+ },
+ "nbi.unit[:].species.label": {
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/unit(i1)/species/label"
+ },
+ "nbi.unit[:].energy": {
+  "documentation": "Full energy of the injected species (acceleration of a single atom)",
+  "full_path": "nbi/unit(i1)/energy",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].position.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/phi"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component[:].particles_fraction": {
+  "units": "-",
+  "documentation": "Fraction of injected particles in the component",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/particles_fraction"
+ },
+ "nbi.unit[:].beamlets_group[:].divergence_component": {
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)",
+  "documentation": "Detailed information on beamlet divergence. Divergence is described as a superposition of Gaussian components with amplitide \"particles_fraction\" and vertical/horizontal divergence. Note that for positive ion NBI the divergence is well described by a single Gaussian",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "3"
+ },
+ "nbi.unit[:].species.a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/species/a_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].time": {
+  "units": "s",
+  "documentation": "Time",
+  "type": "dynamic",
+  "data_type": "flt_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/time"
+ },
+ "nbi.unit[:].beamlets_group[:].angle": {
+  "units": "rad",
+  "documentation": "Angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/angle"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_vertical_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"width_min_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical_error_lower"
+ },
+ "nbi.time": {
+  "full_path": "nbi/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.power_fractions_error_index": {
+  "documentation": "Index in the error_description list for \"power_fractions\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/power_fractions_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.tangency_radii_error_index": {
+  "documentation": "Index in the error_description list for \"tangency_radii\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/tangency_radii_error_index"
+ },
+ "nbi.unit[:].power.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Power",
+  "coordinates": [
+   "nbi.unit[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/power/data"
+ },
+ "nbi.unit[:].beamlets_group[:].tangency_radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"tangency_radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tangency_radius_error_upper"
+ },
+ "nbi.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/code/repository"
+ },
+ "nbi.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "nbi/code/version"
+ },
+ "nbi.unit[:].species.a": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Mass of atom",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/a"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_horizontal": {
+  "units": "m",
+  "documentation": "Horizontal focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum horizontal width",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_horizontal"
+ },
+ "nbi.unit[:].energy.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Full energy of the injected species (acceleration of a single atom)",
+  "coordinates": [
+   "nbi.unit[:].energy.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "nbi/unit(i1)/energy/data"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius_error_index": {
+  "documentation": "Index in the error_description list for \"delta_tangency_radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.z_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/z_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].angle_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"angle\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/angle_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.power_fractions_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_fractions\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
+  ],
+  "units": "rad",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/power_fractions_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].width_horizontal_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"width_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].beamlets.positions.z_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "coordinates": [
+   "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/z_error_upper"
+ },
+ "nbi.unit[:].species.z_n_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/z_n_error_lower"
+ },
+ "nbi.unit[:].species.a_error_lower": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Lower error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/species/a_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].position.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/r_error_index"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_horizontal_error_index": {
+  "documentation": "Index in the error_description list for \"focal_length_horizontal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_horizontal_error_index"
+ },
+ "nbi.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "nbi/ids_properties",
+  "data_type": "structure"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"width_min_horizontal\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal_error_upper"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.focal_length_vertical_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"focal_length_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_vertical_error_upper"
+ },
+ "nbi.unit[:].beam_current_fraction": {
+  "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "full_path": "nbi/unit(i1)/beam_current_fraction",
+  "data_type": "structure"
+ },
+ "nbi.unit": {
+  "full_path": "nbi/unit(i1)",
+  "documentation": "The NBI system is described as a set of units of which the power can be controlled individually.",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "32"
+ },
+ "nbi.unit[:].beamlets_group[:].position.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/z_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi_error_lower"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_vertical_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"width_min_vertical\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical_error_upper"
+ },
+ "nbi.unit[:].species": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Injected species",
+  "type": "constant",
+  "data_type": "structure",
+  "full_path": "nbi/unit(i1)/species"
+ },
+ "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal": {
+  "units": "m",
+  "documentation": "The horizontal width of the beamlets group at the at the horizontal focal point",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal"
+ }
+}

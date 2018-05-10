@@ -1,0 +1,1298 @@
+{
+ "bolometer.channel[:].detector.origin.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/phi"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector": {
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/r_error_index"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].detector.outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x1"
+ },
+ "bolometer.channel[:].detector.outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "bolometer.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x2"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/z"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/y"
+ },
+ "bolometer.channel[:].aperture[:].origin.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/z_error_index"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/phi_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/r_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/z_error_lower"
+ },
+ "bolometer.channel[:].detector.origin": {
+  "documentation": "Origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area. The X1 axis is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). The X3 axis is normal to the detector/aperture plane and oriented towards the plasma. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "bolometer/channel(i1)/detector/origin",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "bolometer.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x2_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/z_error_lower"
+ },
+ "bolometer": {
+  "lifecycle_version": "3.7.4",
+  "lifecycle_status": "alpha",
+  "documentation": "Bolometer diagnostic",
+  "maxoccur": "2",
+  "full_path": "bolometer"
+ },
+ "bolometer.channel[:].line_of_sight.second_point": {
+  "documentation": "Position of the second point",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].power.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "bolometer.channel[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "bolometer/channel(i1)/power/data_error_upper"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/x_error_index"
+ },
+ "bolometer.code.output_flag": {
+  "full_path": "bolometer/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "bolometer.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "bolometer.channel[:].power": {
+  "documentation": "Power received on the detector",
+  "full_path": "bolometer/channel(i1)/power",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].aperture[:].outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "bolometer.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x2"
+ },
+ "bolometer.channel[:].aperture[:].origin.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/phi_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x1_error_lower"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].detector.outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "bolometer.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x2_error_upper"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.third_point": {
+  "documentation": "Position of the third point",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/x_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].outline": {
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/r"
+ },
+ "bolometer.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/ids_properties/comment"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].origin.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/phi_error_upper"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].origin.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/r_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x1"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].detector": {
+  "documentation": "Detector description",
+  "full_path": "bolometer/channel(i1)/detector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].validity_timed": {
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "full_path": "bolometer/channel(i1)/validity_timed",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/y"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/x"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector": {
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/z"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/z_error_upper"
+ },
+ "bolometer.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/code/commit"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/x"
+ },
+ "bolometer.channel[:].detector.origin.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/r_error_upper"
+ },
+ "bolometer.channel[:].detector.outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/outline/x1_error_index"
+ },
+ "bolometer.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/channel(i1)/identifier"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/y_error_lower"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/z"
+ },
+ "bolometer.channel[:].aperture[:].origin.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/z_error_lower"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/y_error_lower"
+ },
+ "bolometer.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "bolometer/ids_properties",
+  "data_type": "structure"
+ },
+ "bolometer.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "bolometer/code",
+  "data_type": "structure"
+ },
+ "bolometer.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "bolometer/ids_properties/homogeneous_time"
+ },
+ "bolometer.channel[:].detector.origin.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/r"
+ },
+ "bolometer.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/code/name"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector": {
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].detector.outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "bolometer.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x2_error_lower"
+ },
+ "bolometer.channel[:].detector.origin.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/z"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/z_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x1_error_upper"
+ },
+ "bolometer.time": {
+  "full_path": "bolometer/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "bolometer.channel[:].line_of_sight.first_point": {
+  "documentation": "Position of the first point",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "bolometer.channel[:].power.time": {
+  "full_path": "bolometer/channel(i1)/power/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "bolometer.channel[:].power.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "bolometer.channel[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "bolometer/channel(i1)/power/data_error_lower"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector": {
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].detector.origin.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/phi_error_upper"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].power.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Power received on the detector",
+  "coordinates": [
+   "bolometer.channel[:].power.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "bolometer/channel(i1)/power/data"
+ },
+ "bolometer.channel[:].aperture[:].origin.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/phi"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/phi_error_upper"
+ },
+ "bolometer.channel[:].validity_timed.data": {
+  "full_path": "bolometer/channel(i1)/validity_timed/data",
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "type": "dynamic",
+  "coordinates": [
+   "bolometer.channel[:].validity_timed.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/x_error_index"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/phi"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/r_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/z_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].origin.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/r_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "bolometer.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x2_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "bolometer.channel[:].detector.origin.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/z_error_upper"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/z"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/y"
+ },
+ "bolometer.channel[:].aperture[:].origin.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/r_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x1_error_index"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/x"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/y"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/z"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/z_error_index"
+ },
+ "bolometer.channel[:].detector.outline": {
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "full_path": "bolometer/channel(i1)/detector/outline",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/z"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/x"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/r"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/z_error_lower"
+ },
+ "bolometer.channel[:].validity_timed.time": {
+  "full_path": "bolometer/channel(i1)/validity_timed/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/y_error_lower"
+ },
+ "bolometer.channel[:].detector.origin.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/origin/phi_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/z"
+ },
+ "bolometer.channel[:].aperture[:].origin.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/phi_error_index"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/z_error_lower"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].detector.outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x1_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/x_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/y_error_lower"
+ },
+ "bolometer.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/code/repository"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/z"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/r"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/z_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "bolometer.channel[:].detector.origin.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/origin/r_error_index"
+ },
+ "bolometer.channel[:].validity": {
+  "documentation": "Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "bolometer/channel(i1)/validity"
+ },
+ "bolometer.channel[:].detector.outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "bolometer/channel(i1)/detector/outline/x1_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight": {
+  "documentation": "Description of the reference line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
+  "full_path": "bolometer/channel(i1)/line_of_sight",
+  "data_type": "structure"
+ },
+ "bolometer.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/code/version"
+ },
+ "bolometer.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/code/parameters"
+ },
+ "bolometer.channel[:].aperture[:].outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x2_error_index"
+ },
+ "bolometer.channel[:].aperture[:].origin.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/z_error_upper"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index"
+ },
+ "bolometer.channel[:].detector.x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/z_error_lower"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/y_error_index"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.third_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/third_point/phi_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/z_error_upper"
+ },
+ "bolometer.channel[:].aperture": {
+  "full_path": "bolometer/channel(i1)/aperture(i2)",
+  "documentation": "Description of a set of collimating apertures",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "5"
+ },
+ "bolometer.channel[:].power.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/power/data_error_index"
+ },
+ "bolometer.channel[:].detector.origin.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/phi_error_lower"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/x"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/y"
+ },
+ "bolometer.channel[:].detector.x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/y_error_lower"
+ },
+ "bolometer.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/line_of_sight/first_point/r_error_upper"
+ },
+ "bolometer.channel[:].detector.origin.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/origin/z_error_index"
+ },
+ "bolometer.channel[:].detector.x2_unit_vector": {
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/detector/x2_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index"
+ },
+ "bolometer.channel[:].detector.origin.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/z_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].origin": {
+  "documentation": "Origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area. The X1 axis is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). The X3 axis is normal to the detector/aperture plane and oriented towards the plasma. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "bolometer/channel(i1)/name"
+ },
+ "bolometer.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/y_error_lower"
+ },
+ "bolometer.channel[:].detector.outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "bolometer/channel(i1)/detector/outline/x2_error_index"
+ },
+ "bolometer.channel[:].detector.origin.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/detector/origin/r_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/x_error_lower"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/z"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/x"
+ },
+ "bolometer.channel[:].aperture[:].x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/y"
+ },
+ "bolometer.channel[:].aperture[:].origin.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/z"
+ },
+ "bolometer.channel": {
+  "full_path": "bolometer/channel(i1)",
+  "documentation": "Set of channels (lines-of-sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "100"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector": {
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector",
+  "data_type": "structure"
+ },
+ "bolometer.channel[:].aperture[:].x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/y_error_upper"
+ },
+ "bolometer.channel[:].aperture[:].origin.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/origin/r"
+ }
+}

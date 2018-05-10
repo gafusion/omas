@@ -1,0 +1,759 @@
+{
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/z"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/r_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/r"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/z_error_lower"
+ },
+ "interfero_polarimeter.channel[:].ellipticity_initial_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"ellipticity_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity_initial_error_lower"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line/data_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight": {
+  "documentation": "Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle": {
+  "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].wavelength_polarimetry_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"wavelength_polarimetry\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_polarimetry_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "interfero_polarimeter.channel[:].validity_timed.data": {
+  "full_path": "interfero_polarimeter/channel(i1)/validity_timed/data",
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "type": "dynamic",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].validity_timed.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase/data_error_upper"
+ },
+ "interfero_polarimeter.channel[:].n_e_line.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].value": {
+  "units": "m",
+  "documentation": "Wavelength value",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/value"
+ },
+ "interfero_polarimeter.channel[:].ellipticity.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].polarisation_initial_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"polarisation_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/polarisation_initial_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/phi_error_lower"
+ },
+ "interfero_polarimeter.channel[:].n_e_line.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line/data_error_lower"
+ },
+ "interfero_polarimeter.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/code/commit"
+ },
+ "interfero_polarimeter.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/code/version"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle/data_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry": {
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)",
+  "documentation": "Set of wavelengths used for interferometry",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/r_error_lower"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase/data_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/phi"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase": {
+  "documentation": "Phase measured for this wavelength",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].wavelength_polarimetry_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"wavelength_polarimetry\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_polarimetry_error_upper"
+ },
+ "interfero_polarimeter.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/code/repository"
+ },
+ "interfero_polarimeter.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "interfero_polarimeter/ids_properties",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle/data"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line/data_error_lower"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line/data_error_index"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].wavelength_polarimetry": {
+  "units": "m",
+  "documentation": "Wavelength used for polarimetry",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_polarimetry"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].value_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"value\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/value_error_upper"
+ },
+ "interfero_polarimeter.channel": {
+  "full_path": "interfero_polarimeter/channel(i1)",
+  "documentation": "Set of channels (lines-of-sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "15"
+ },
+ "interfero_polarimeter.time": {
+  "full_path": "interfero_polarimeter/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "interfero_polarimeter/ids_properties/homogeneous_time"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point": {
+  "documentation": "Position of the first point",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].validity": {
+  "documentation": "Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/validity"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].ellipticity.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Ellipticity",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity/data"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "interfero_polarimeter.channel[:].validity_timed.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/validity_timed/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/z_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "interfero_polarimeter.channel[:].polarisation_initial_error_index": {
+  "documentation": "Index in the error_description list for \"polarisation_initial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/polarisation_initial_error_index"
+ },
+ "interfero_polarimeter.channel[:].n_e_line": {
+  "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths",
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].value_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"value\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/value_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/phi_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "interfero_polarimeter.channel[:].ellipticity.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity/data_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Line integrated density estimated from this wavelength",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line/data"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/phi_error_upper"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/value_error_index"
+ },
+ "interfero_polarimeter.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/code/parameters"
+ },
+ "interfero_polarimeter": {
+  "lifecycle_version": "3.0.4",
+  "lifecycle_status": "alpha",
+  "documentation": "Interfero-polarimeter diagnostic",
+  "maxoccur": "1",
+  "full_path": "interfero_polarimeter"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "interfero_polarimeter.channel[:].ellipticity_initial": {
+  "units": "m",
+  "documentation": "Initial ellipticity before entering the plasma",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity_initial"
+ },
+ "interfero_polarimeter.channel[:].n_e_line.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line/data"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase/data_error_lower"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].n_e_line": {
+  "documentation": "Line integrated density estimated from this wavelength",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/n_e_line",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].polarisation_initial": {
+  "units": "m",
+  "documentation": "Initial polarisation vector before entering the plasma",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/polarisation_initial"
+ },
+ "interfero_polarimeter.channel[:].ellipticity": {
+  "documentation": "Ellipticity",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Phase measured for this wavelength",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].wavelength_interferometry[:].phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_interferometry(i2)/phase/data"
+ },
+ "interfero_polarimeter.channel[:].polarisation_initial_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"polarisation_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/polarisation_initial_error_upper"
+ },
+ "interfero_polarimeter.channel[:].ellipticity.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity/data_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/r_error_index"
+ },
+ "interfero_polarimeter.channel[:].ellipticity.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity/data_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "interfero_polarimeter.channel[:].n_e_line.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line/data_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "interfero_polarimeter.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/identifier"
+ },
+ "interfero_polarimeter.code.output_flag": {
+  "full_path": "interfero_polarimeter/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "interfero_polarimeter.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point": {
+  "documentation": "Position of the third point",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interfero_polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle/data_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/z"
+ },
+ "interfero_polarimeter.channel[:].wavelength_polarimetry_error_index": {
+  "documentation": "Index in the error_description list for \"wavelength_polarimetry\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/wavelength_polarimetry_error_index"
+ },
+ "interfero_polarimeter.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/code/name"
+ },
+ "interfero_polarimeter.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "interfero_polarimeter/code",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].ellipticity_initial_error_index": {
+  "documentation": "Index in the error_description list for \"ellipticity_initial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity_initial_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/r"
+ },
+ "interfero_polarimeter.channel[:].validity_timed": {
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "full_path": "interfero_polarimeter/channel(i1)/validity_timed",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "interfero_polarimeter.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/name"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point": {
+  "documentation": "Position of the second point",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point",
+  "data_type": "structure"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.third_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/third_point/z_error_index"
+ },
+ "interfero_polarimeter.channel[:].n_e_line.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/n_e_line/data_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/z"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/r_error_upper"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "interfero_polarimeter.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/line_of_sight/first_point/r"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle.time": {
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interfero_polarimeter.channel[:].ellipticity_initial_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"ellipticity_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interfero_polarimeter/channel(i1)/ellipticity_initial_error_upper"
+ },
+ "interfero_polarimeter.channel[:].faraday_angle.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interfero_polarimeter/channel(i1)/faraday_angle/data_error_index"
+ },
+ "interfero_polarimeter.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interfero_polarimeter/ids_properties/comment"
+ }
+}

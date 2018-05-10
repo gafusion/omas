@@ -1,0 +1,173 @@
+{
+ "actuator.power_error_index": {
+  "documentation": "Index in the error_description list for \"power\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "actuator/power_error_index"
+ },
+ "actuator.generic_dynamic_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"generic_dynamic\"",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "actuator/generic_dynamic_error_upper"
+ },
+ "actuator.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/code/parameters"
+ },
+ "actuator.name": {
+  "units": "-",
+  "documentation": "Name of the actuator (IC, EC, NBI, LH)",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "actuator/name"
+ },
+ "actuator.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/ids_properties/comment"
+ },
+ "actuator.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "actuator/ids_properties/homogeneous_time"
+ },
+ "actuator.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/code/commit"
+ },
+ "actuator.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/code/name"
+ },
+ "actuator.generic_dynamic_error_index": {
+  "documentation": "Index in the error_description list for \"generic_dynamic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "actuator/generic_dynamic_error_index"
+ },
+ "actuator.power": {
+  "data_type": "FLT_2D",
+  "documentation": "Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations) ",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "actuator/power"
+ },
+ "actuator": {
+  "lifecycle_version": "3.0.0",
+  "lifecycle_status": "alpha",
+  "documentation": "Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component",
+  "maxoccur": "6",
+  "full_path": "actuator"
+ },
+ "actuator.power_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power\"",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "actuator/power_error_upper"
+ },
+ "actuator.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "actuator/ids_properties",
+  "data_type": "structure"
+ },
+ "actuator.time": {
+  "full_path": "actuator/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "actuator.channels": {
+  "full_path": "actuator/channels",
+  "documentation": "ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ...",
+  "type": "static",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D"
+ },
+ "actuator.generic_dynamic_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"generic_dynamic\"",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "actuator/generic_dynamic_error_lower"
+ },
+ "actuator.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/code/version"
+ },
+ "actuator.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "actuator/code/repository"
+ },
+ "actuator.generic_dynamic": {
+  "data_type": "FLT_2D",
+  "documentation": "Generic 2D dynamic slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "actuator/generic_dynamic"
+ },
+ "actuator.power_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power\"",
+  "coordinates": [
+   "actuator.channels",
+   "actuator.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "actuator/power_error_lower"
+ },
+ "actuator.code.output_flag": {
+  "full_path": "actuator/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "actuator.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "actuator.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "actuator/code",
+  "data_type": "structure"
+ }
+}

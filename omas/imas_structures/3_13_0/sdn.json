@@ -1,0 +1,195 @@
+{
+ "sdn.topic[:].signal[:].quality.data": {
+  "full_path": "sdn/topic(i1)/signal(i2)/quality/data",
+  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "type": "dynamic",
+  "coordinates": [
+   "sdn.topic[:].signal[:].quality.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "sdn.topic[:].signal[:].name": {
+  "documentation": "Signal name",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/topic(i1)/signal(i2)/name"
+ },
+ "sdn.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/code/parameters"
+ },
+ "sdn.topic[:].signal[:].allocated_position": {
+  "documentation": "Allocation of signal to a position in the SDN (1..N); this will be implementation specific",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "sdn/topic(i1)/signal(i2)/allocated_position"
+ },
+ "sdn.topic[:].signal[:].quality": {
+  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "full_path": "sdn/topic(i1)/signal(i2)/quality",
+  "data_type": "structure"
+ },
+ "sdn.time": {
+  "full_path": "sdn/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "sdn.topic[:].signal[:].value.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_upper"
+ },
+ "sdn.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "sdn/ids_properties",
+  "data_type": "structure"
+ },
+ "sdn.code.output_flag": {
+  "full_path": "sdn/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "sdn.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "sdn.topic[:].signal[:].quality.time": {
+  "full_path": "sdn/topic(i1)/signal(i2)/quality/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "sdn.topic[:].signal[:].definition": {
+  "documentation": "Signal definition",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/topic(i1)/signal(i2)/definition"
+ },
+ "sdn.topic[:].signal[:].value.time": {
+  "full_path": "sdn/topic(i1)/signal(i2)/value/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "sdn.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/ids_properties/comment"
+ },
+ "sdn.topic[:].name": {
+  "documentation": "Topic name",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/topic(i1)/name"
+ },
+ "sdn.topic": {
+  "full_path": "sdn/topic(i1)",
+  "documentation": "List of topics. SDN signals are grouped by topic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "20"
+ },
+ "sdn.topic[:].signal[:].value.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Signal value",
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data"
+ },
+ "sdn.topic[:].signal[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_index"
+ },
+ "sdn.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/code/version"
+ },
+ "sdn": {
+  "lifecycle_version": "3.0.0",
+  "lifecycle_last_change": "3.8.0",
+  "documentation": "Description of the Synchronous Data Network parameters and the signals on it",
+  "full_path": "sdn",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3"
+ },
+ "sdn.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/code/repository"
+ },
+ "sdn.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/code/commit"
+ },
+ "sdn.topic[:].signal[:].value": {
+  "documentation": "Signal value",
+  "full_path": "sdn/topic(i1)/signal(i2)/value",
+  "data_type": "structure"
+ },
+ "sdn.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "sdn/code",
+  "data_type": "structure"
+ },
+ "sdn.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "sdn/ids_properties/homogeneous_time"
+ },
+ "sdn.topic[:].signal[:].value.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_lower"
+ },
+ "sdn.topic[:].signal": {
+  "full_path": "sdn/topic(i1)/signal(i2)",
+  "documentation": "List of signals which can be allocated to the SDN",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "100"
+ },
+ "sdn.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "sdn/code/name"
+ }
+}

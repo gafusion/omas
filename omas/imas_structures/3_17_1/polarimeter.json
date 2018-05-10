@@ -1,0 +1,591 @@
+{
+ "polarimeter.channel[:].faraday_angle": {
+  "structure_reference": "",
+  "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/faraday_angle"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/phi"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "polarimeter.channel[:].ellipticity.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/ellipticity/data_error_index"
+ },
+ "polarimeter.channel[:].polarisation_initial_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"polarisation_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/polarisation_initial_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/r"
+ },
+ "polarimeter.channel[:].ellipticity.time": {
+  "full_path": "polarimeter/channel(i1)/ellipticity/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "polarimeter.channel[:].wavelength_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"wavelength\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/wavelength_error_lower"
+ },
+ "polarimeter.code.output_flag": {
+  "full_path": "polarimeter/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "polarimeter.time",
+   "polarimeter.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/phi_error_upper"
+ },
+ "polarimeter.channel[:].ellipticity_validity": {
+  "documentation": "Indicator of the validity of the ellipticity data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "polarimeter/channel(i1)/ellipticity_validity"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/z"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/r_error_upper"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "polarimeter.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/code/version"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the first point",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "polarimeter.channel[:].ellipticity_initial_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"ellipticity_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/ellipticity_initial_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/r_error_upper"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/r"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/phi_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/r_error_index"
+ },
+ "polarimeter.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/channel(i1)/name"
+ },
+ "polarimeter.channel[:].ellipticity.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "polarimeter.ellipticity.time",
+   "polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/ellipticity/data_error_upper"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the third point",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point"
+ },
+ "polarimeter.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/code/commit"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/z_error_index"
+ },
+ "polarimeter.channel[:].ellipticity_initial": {
+  "units": "m",
+  "documentation": "Initial ellipticity before entering the plasma",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/ellipticity_initial"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the second point",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "polarimeter.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/ids_properties/comment"
+ },
+ "polarimeter.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/ids_properties/provider"
+ },
+ "polarimeter.channel[:].ellipticity.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "polarimeter.ellipticity.time",
+   "polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/ellipticity/data_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "polarimeter.channel[:].polarisation_initial_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"polarisation_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/polarisation_initial_error_upper"
+ },
+ "polarimeter.channel[:].faraday_angle.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "polarimeter.faraday_angle.time",
+   "polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_upper"
+ },
+ "polarimeter.channel[:].wavelength_error_index": {
+  "documentation": "Index in the error_description list for \"wavelength\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/wavelength_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "polarimeter.channel[:].faraday_angle.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "polarimeter.faraday_angle.time",
+   "polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_lower"
+ },
+ "polarimeter.channel[:].faraday_angle_validity": {
+  "documentation": "Indicator of the validity of the faraday_angle data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "polarimeter/channel(i1)/faraday_angle_validity"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "polarimeter.channel[:].wavelength": {
+  "units": "m",
+  "documentation": "Wavelength used for polarimetry",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/wavelength"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/z_error_upper"
+ },
+ "polarimeter.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/code/name"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "polarimeter.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "polarimeter/ids_properties/homogeneous_time"
+ },
+ "polarimeter.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/channel(i1)/identifier"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/r_error_lower"
+ },
+ "polarimeter.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/code/repository"
+ },
+ "polarimeter.channel[:].ellipticity": {
+  "structure_reference": "",
+  "documentation": "Ellipticity",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/ellipticity"
+ },
+ "polarimeter.time": {
+  "full_path": "polarimeter/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "polarimeter.channel[:].ellipticity.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Ellipticity",
+  "coordinates": [
+   "polarimeter.ellipticity.time",
+   "polarimeter.channel[:].ellipticity.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/ellipticity/data"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "polarimeter.channel[:].faraday_angle.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
+  "coordinates": [
+   "polarimeter.faraday_angle.time",
+   "polarimeter.channel[:].faraday_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/data"
+ },
+ "polarimeter.ids_properties": {
+  "structure_reference": "ids_properties",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "data_type": "structure",
+  "full_path": "polarimeter/ids_properties"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "polarimeter.channel[:].faraday_angle.time": {
+  "full_path": "polarimeter/channel(i1)/faraday_angle/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "polarimeter.channel": {
+  "data_type": "struct_array",
+  "structure_reference": "polarimeter_channel",
+  "documentation": "Set of channels (lines-of-sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "15",
+  "full_path": "polarimeter/channel(i1)"
+ },
+ "polarimeter.code": {
+  "structure_reference": "code",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "data_type": "structure",
+  "full_path": "polarimeter/code"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/phi_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "polarimeter.channel[:].ellipticity_initial_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"ellipticity_initial\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/ellipticity_initial_error_upper"
+ },
+ "polarimeter.channel[:].polarisation_initial": {
+  "units": "m",
+  "documentation": "Initial polarisation vector before entering the plasma",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/polarisation_initial"
+ },
+ "polarimeter.channel[:].polarisation_initial_error_index": {
+  "documentation": "Index in the error_description list for \"polarisation_initial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/polarisation_initial_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/z"
+ },
+ "polarimeter.channel[:].wavelength_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"wavelength\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/wavelength_error_upper"
+ },
+ "polarimeter": {
+  "lifecycle_version": "3.15.0",
+  "lifecycle_last_change": "3.15.0",
+  "documentation": "Polarimeter diagnostic",
+  "full_path": "polarimeter",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2"
+ },
+ "polarimeter.channel[:].ellipticity_initial_error_index": {
+  "documentation": "Index in the error_description list for \"ellipticity_initial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/ellipticity_initial_error_index"
+ },
+ "polarimeter.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/code/parameters"
+ },
+ "polarimeter.channel[:].faraday_angle.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/r"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "polarimeter.channel[:].line_of_sight.third_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/z_error_lower"
+ },
+ "polarimeter.channel[:].line_of_sight": {
+  "structure_reference": "line_of_sight_3points",
+  "documentation": "Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
+  "data_type": "structure",
+  "full_path": "polarimeter/channel(i1)/line_of_sight"
+ },
+ "polarimeter.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/ids_properties/source"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/z"
+ },
+ "polarimeter.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "polarimeter/ids_properties/creation_date"
+ },
+ "polarimeter.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "polarimeter.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ }
+}

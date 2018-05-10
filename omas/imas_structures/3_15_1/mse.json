@@ -1,0 +1,1493 @@
+{
+ "mse.channel[:].detector.outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x1"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width": {
+  "documentation": "Full width of the spatially resolved zone in the R, Z and phi directions",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width",
+  "data_type": "structure"
+ },
+ "mse.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ },
+ "mse.channel[:].detector.x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"geometric_coefficients\"",
+  "coordinates": [
+   "1...9"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_upper"
+ },
+ "mse.channel[:].detector.x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/y_error_lower"
+ },
+ "mse.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/ids_properties/comment"
+ },
+ "mse.channel[:].aperture[:].centre.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/phi_error_index"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index"
+ },
+ "mse.channel[:].aperture[:].outline": {
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline",
+  "data_type": "structure"
+ },
+ "mse.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/code/repository"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z"
+ },
+ "mse.channel[:].detector.x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/z_error_upper"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z"
+ },
+ "mse.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/code/name"
+ },
+ "mse.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r"
+ },
+ "mse.channel[:].detector.x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/x_error_upper"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z_error_upper"
+ },
+ "mse.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/ids_properties/source"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_upper"
+ },
+ "mse.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "mse.channel[:].detector.radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/radius_error_lower"
+ },
+ "mse.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "mse/code",
+  "data_type": "structure"
+ },
+ "mse.channel[:].detector.centre.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/centre/r_error_index"
+ },
+ "mse.channel[:].detector.x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/x"
+ },
+ "mse.channel[:].detector.x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/y"
+ },
+ "mse.channel[:].detector.x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/z"
+ },
+ "mse.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/ids_properties/provider"
+ },
+ "mse.channel[:].detector.centre": {
+  "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "full_path": "mse/channel(i1)/detector/centre",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x_error_upper"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y_error_lower"
+ },
+ "mse.channel[:].detector.geometry_type": {
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "mse/channel(i1)/detector/geometry_type"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_lower"
+ },
+ "mse.channel[:].aperture[:].outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x1_error_lower"
+ },
+ "mse.channel[:].detector.x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/y"
+ },
+ "mse.channel[:].detector.centre.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/phi"
+ },
+ "mse.channel[:].detector.x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/x"
+ },
+ "mse.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "mse.channel[:].aperture[:].outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x1_error_upper"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index"
+ },
+ "mse.channel[:].detector.x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/x_error_index"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y_error_upper"
+ },
+ "mse.channel[:].detector.x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/z"
+ },
+ "mse.channel[:].aperture[:].radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/radius_error_lower"
+ },
+ "mse.channel[:].detector.x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/x"
+ },
+ "mse.channel[:].detector.x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/y"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index"
+ },
+ "mse.channel[:].detector.centre.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/r_error_upper"
+ },
+ "mse.channel[:].line_of_sight.second_point": {
+  "documentation": "Position of the second point",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x2_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre": {
+  "documentation": "Position of the centre of the spatially resolved zone",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].centre.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/r_error_index"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x_error_upper"
+ },
+ "mse.channel[:].aperture[:].outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x1_error_index"
+ },
+ "mse.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/ids_properties/creation_date"
+ },
+ "mse.channel[:].aperture[:].centre.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/phi"
+ },
+ "mse.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].line_of_sight.first_point": {
+  "documentation": "Position of the first point",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_upper"
+ },
+ "mse.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "mse/ids_properties/homogeneous_time"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index"
+ },
+ "mse.channel[:].aperture[:].centre.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/z"
+ },
+ "mse.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "mse.channel[:].detector.outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x1_error_upper"
+ },
+ "mse.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "mse.channel[:].aperture[:].centre.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/r"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z_error_upper"
+ },
+ "mse.channel[:].detector.x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/y_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_index"
+ },
+ "mse.channel[:].polarisation_angle.data": {
+  "data_type": "FLT_1D",
+  "documentation": "MSE polarisation angle",
+  "coordinates": [
+   "mse.channel[:].polarisation_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/polarisation_angle/data"
+ },
+ "mse.channel[:].aperture[:].outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "mse.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x2"
+ },
+ "mse.channel[:].aperture[:].outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x1"
+ },
+ "mse.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "mse.channel[:].polarisation_angle_validity": {
+  "documentation": "Indicator of the validity of the polarisation_angle data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "mse/channel(i1)/polarisation_angle_validity"
+ },
+ "mse.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/code/version"
+ },
+ "mse.channel[:].active_spatial_resolution": {
+  "data_type": "struct_array",
+  "documentation": "Spatial resolution of the measurement, calculated as a convolution of the atomic smearing, magnetic and beam geometry smearing and detector projection, for a set of time slices (use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse)",
+  "coordinates": [
+   "mse.channel[:].active_spatial_resolution[:].time"
+  ],
+  "maxoccur": "unbounded",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_lower"
+ },
+ "mse.channel[:].detector.x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].detector.outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/outline/x1_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_upper"
+ },
+ "mse.channel[:].detector.x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/z_error_upper"
+ },
+ "mse.channel[:].detector.x1_unit_vector": {
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].radius_error_index": {
+  "documentation": "Index in the error_description list for \"radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/radius_error_index"
+ },
+ "mse.code.output_flag": {
+  "full_path": "mse/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "mse.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].aperture": {
+  "full_path": "mse/channel(i1)/aperture(i2)",
+  "documentation": "Description of a set of collimating apertures",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "5"
+ },
+ "mse.channel[:].detector.centre.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/r_error_lower"
+ },
+ "mse.channel[:].aperture[:].centre.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/z_error_lower"
+ },
+ "mse.channel[:].detector.x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/x_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index"
+ },
+ "mse.channel[:].aperture[:].radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/radius_error_upper"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_lower"
+ },
+ "mse.channel[:].detector.outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "mse.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x2_error_lower"
+ },
+ "mse.channel[:].detector.centre.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/centre/phi_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_lower"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_upper"
+ },
+ "mse.channel[:].aperture[:].centre": {
+  "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre",
+  "data_type": "structure"
+ },
+ "mse.channel[:].polarisation_angle.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "mse.channel[:].polarisation_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/polarisation_angle/data_error_upper"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index"
+ },
+ "mse.channel": {
+  "full_path": "mse/channel(i1)",
+  "documentation": "Set of channels (lines of sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "20"
+ },
+ "mse.channel[:].detector.x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/x_error_upper"
+ },
+ "mse.channel[:].detector.x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/z_error_index"
+ },
+ "mse.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "mse.channel[:].aperture[:].radius": {
+  "units": "m",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/radius"
+ },
+ "mse.channel[:].detector.x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector": {
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].detector.x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/x_error_index"
+ },
+ "mse.channel[:].polarisation_angle": {
+  "documentation": "MSE polarisation angle",
+  "full_path": "mse/channel(i1)/polarisation_angle",
+  "data_type": "structure"
+ },
+ "mse.channel[:].detector.centre.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/z_error_lower"
+ },
+ "mse.channel[:].detector.x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/y_error_upper"
+ },
+ "mse.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "mse.channel[:].aperture[:].geometry_type": {
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/geometry_type"
+ },
+ "mse.channel[:].detector.radius_error_index": {
+  "documentation": "Index in the error_description list for \"radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/radius_error_index"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].aperture[:].centre.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/r_error_upper"
+ },
+ "mse.channel[:].detector.x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/y_error_index"
+ },
+ "mse.channel[:].polarisation_angle.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/polarisation_angle/data_error_index"
+ },
+ "mse.channel[:].detector.outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "mse.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x2_error_upper"
+ },
+ "mse": {
+  "lifecycle_version": "3.16.0",
+  "lifecycle_last_change": "3.16.0",
+  "documentation": "Motional Stark Effect diagnostic",
+  "full_path": "mse",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2"
+ },
+ "mse.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "mse.channel[:].aperture[:].centre.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/phi_error_lower"
+ },
+ "mse.channel[:].detector.centre.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/r"
+ },
+ "mse.channel[:].aperture[:].centre.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/z_error_upper"
+ },
+ "mse.channel[:].detector.outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x1_error_lower"
+ },
+ "mse.channel[:].detector.centre.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/z"
+ },
+ "mse.channel[:].detector.x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/y_error_lower"
+ },
+ "mse.channel[:].active_spatial_resolution[:].geometric_coefficients": {
+  "data_type": "FLT_1D",
+  "documentation": "Set of 9 geometric coefficients providing the MSE polarisation angle as a function of the local electric and magnetic field components (these are related to the angle between beam and line of sight). The list is ordered as follows : coefficients of BZ, BR, Bphi, ER (numerator of the MSE angle expression); coefficients of BZ, BR, Bphi, ER, EZ (denominator)",
+  "coordinates": [
+   "1...9"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_lower"
+ },
+ "mse.channel[:].detector.radius": {
+  "units": "m",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/radius"
+ },
+ "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"geometric_coefficients\"",
+  "coordinates": [
+   "1...9"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_lower"
+ },
+ "mse.channel[:].detector.outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/outline/x2_error_index"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y_error_upper"
+ },
+ "mse.channel[:].aperture[:].outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "mse.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x2_error_lower"
+ },
+ "mse.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "mse.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "mse.channel[:].polarisation_angle.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "mse.channel[:].polarisation_angle.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "mse/channel(i1)/polarisation_angle/data_error_lower"
+ },
+ "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_index": {
+  "documentation": "Index in the error_description list for \"geometric_coefficients\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_index"
+ },
+ "mse.channel[:].aperture[:].outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "mse.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/aperture(i2)/outline/x2_error_upper"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index"
+ },
+ "mse.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "mse.channel[:].detector.x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/z_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z"
+ },
+ "mse.time": {
+  "full_path": "mse/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x"
+ },
+ "mse.channel[:].detector": {
+  "documentation": "Detector description",
+  "full_path": "mse/channel(i1)/detector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "mse.channel[:].detector.outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "mse.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "mse/channel(i1)/detector/outline/x2"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index"
+ },
+ "mse.channel[:].aperture[:].centre.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/z_error_index"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y_error_lower"
+ },
+ "mse.channel[:].detector.x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/x_error_upper"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y_error_lower"
+ },
+ "mse.channel[:].detector.centre.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/phi_error_upper"
+ },
+ "mse.channel[:].detector.x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].detector.outline": {
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "full_path": "mse/channel(i1)/detector/outline",
+  "data_type": "structure"
+ },
+ "mse.channel[:].detector.radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/radius_error_upper"
+ },
+ "mse.channel[:].detector.x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/y_error_lower"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector": {
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].aperture[:].centre.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/r_error_lower"
+ },
+ "mse.channel[:].detector.x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/z_error_index"
+ },
+ "mse.channel[:].aperture[:].centre.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/centre/phi_error_upper"
+ },
+ "mse.channel[:].detector.x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].detector.centre.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/phi_error_lower"
+ },
+ "mse.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/r"
+ },
+ "mse.channel[:].detector.x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/z_error_lower"
+ },
+ "mse.channel[:].line_of_sight": {
+  "documentation": "Description of the line of sight of the channel, given by 2 points",
+  "full_path": "mse/channel(i1)/line_of_sight",
+  "data_type": "structure"
+ },
+ "mse.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/z"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_upper"
+ },
+ "mse.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/r"
+ },
+ "mse.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "mse/channel(i1)/name"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x_error_upper"
+ },
+ "mse.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/code/commit"
+ },
+ "mse.channel[:].detector.x3_unit_vector": {
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].active_spatial_resolution[:].time": {
+  "units": "s",
+  "documentation": "Time",
+  "type": "dynamic",
+  "data_type": "flt_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/time"
+ },
+ "mse.channel[:].detector.x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/y_error_upper"
+ },
+ "mse.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "mse/ids_properties",
+  "data_type": "structure"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_upper"
+ },
+ "mse.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "mse.channel[:].detector.x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/y_error_upper"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y_error_upper"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_lower"
+ },
+ "mse.channel[:].detector.centre.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/centre/z_error_index"
+ },
+ "mse.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z"
+ },
+ "mse.channel[:].active_spatial_resolution[:].centre.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi"
+ },
+ "mse.channel[:].detector.x2_unit_vector": {
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "mse/channel(i1)/detector/x2_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r"
+ },
+ "mse.channel[:].aperture[:].x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index"
+ },
+ "mse.channel[:].detector.x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x3_unit_vector/z_error_upper"
+ },
+ "mse.channel[:].polarisation_angle.time": {
+  "full_path": "mse/channel(i1)/polarisation_angle/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "mse.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mse/code/parameters"
+ },
+ "mse.channel[:].detector.x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/z"
+ },
+ "mse.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x_error_lower"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z_error_upper"
+ },
+ "mse.channel[:].aperture[:].x2_unit_vector": {
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector",
+  "data_type": "structure"
+ },
+ "mse.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/second_point/z"
+ },
+ "mse.channel[:].detector.centre.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/detector/centre/z_error_upper"
+ },
+ "mse.channel[:].active_spatial_resolution[:].width.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi"
+ },
+ "mse.channel[:].detector.x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mse/channel(i1)/detector/x1_unit_vector/y_error_index"
+ },
+ "mse.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "mse/channel(i1)/line_of_sight/first_point/r_error_upper"
+ }
+}

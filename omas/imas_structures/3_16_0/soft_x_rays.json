@@ -1,0 +1,1464 @@
+{
+ "soft_x_rays.channel[:].detector.x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].power_density.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Power received on the detector per unit surface, in multiple energy bands if available from the detector",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].power_density.time",
+   "soft_x_rays.power_density.time"
+  ],
+  "units": "W.m^-2",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/power_density/data"
+ },
+ "soft_x_rays.channel[:].detector.centre.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/phi_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "soft_x_rays.outline.x1",
+   "soft_x_rays.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x2_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x1"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "soft_x_rays.outline.x1",
+   "soft_x_rays.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x2"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "soft_x_rays/ids_properties/homogeneous_time"
+ },
+ "soft_x_rays.channel[:].intensity.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].intensity.time",
+   "soft_x_rays.intensity.time"
+  ],
+  "units": "m^-2.s^-1.sr^-1",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/intensity/data"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index"
+ },
+ "soft_x_rays.channel[:].detector": {
+  "structure_reference": "detector_aperture",
+  "documentation": "Detector description",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector"
+ },
+ "soft_x_rays.channel[:].aperture[:].radius": {
+  "units": "m",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/radius"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the second point",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].detector.centre.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/r_error_lower"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "soft_x_rays.channel[:].intensity.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/intensity/data_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x1_error_index"
+ },
+ "soft_x_rays.time": {
+  "full_path": "soft_x_rays/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/y_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "soft_x_rays.channel[:].power_density": {
+  "structure_reference": "",
+  "documentation": "Power received on the detector per unit surface, in multiple energy bands if available from the detector",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/power_density"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].validity_timed.data": {
+  "full_path": "soft_x_rays/channel(i1)/validity_timed/data",
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "type": "dynamic",
+  "coordinates": [
+   "soft_x_rays.validity_timed.time",
+   "soft_x_rays.channel[:].validity_timed.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "soft_x_rays.channel[:].detector.outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x1_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/phi_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index"
+ },
+ "soft_x_rays.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/ids_properties/comment"
+ },
+ "soft_x_rays.channel[:].detector.centre.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/z_error_upper"
+ },
+ "soft_x_rays.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/code/parameters"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x2_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/phi_error_lower"
+ },
+ "soft_x_rays.channel[:].energy_band[:].lower_bound_error_lower": {
+  "units": "eV",
+  "documentation": "Lower error for \"lower_bound\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/lower_bound_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/r_error_index"
+ },
+ "soft_x_rays.channel[:].energy_band[:].upper_bound_error_upper": {
+  "units": "eV",
+  "documentation": "Upper error for \"upper_bound\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/upper_bound_error_upper"
+ },
+ "soft_x_rays.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/channel(i1)/identifier"
+ },
+ "soft_x_rays.channel[:].line_of_sight": {
+  "structure_reference": "line_of_sight_2points",
+  "documentation": "Description of the line of sight of the channel, given by 2 points",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight"
+ },
+ "soft_x_rays.channel[:].detector.centre.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/r"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.centre.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/z"
+ },
+ "soft_x_rays.channel[:].detector.radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/radius_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].validity_timed": {
+  "structure_reference": "",
+  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/validity_timed"
+ },
+ "soft_x_rays.channel[:].power_density.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/power_density/data_error_index"
+ },
+ "soft_x_rays.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/ids_properties/source"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.centre.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/z_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline": {
+  "structure_reference": "x1x21d_static",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline"
+ },
+ "soft_x_rays.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/ids_properties/provider"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector"
+ },
+ "soft_x_rays.channel[:].energy_band": {
+  "data_type": "struct_array",
+  "structure_reference": "detector_energy_band",
+  "documentation": "Set of energy bands in which photons are counted by the detector",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "8",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/r"
+ },
+ "soft_x_rays.code.output_flag": {
+  "full_path": "soft_x_rays/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "soft_x_rays.time",
+   "soft_x_rays.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "soft_x_rays.channel[:].detector.centre.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/r_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel[:].energy_band[:].upper_bound": {
+  "units": "eV",
+  "documentation": "Upper bound of the energy band",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/upper_bound"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "soft_x_rays": {
+  "lifecycle_version": "3.10.2",
+  "lifecycle_last_change": "3.10.2",
+  "documentation": "Soft X-rays tomography diagnostic",
+  "full_path": "soft_x_rays",
+  "lifecycle_status": "alpha",
+  "maxoccur": "1"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].energy_band[:].upper_bound_error_lower": {
+  "units": "eV",
+  "documentation": "Lower error for \"upper_bound\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/upper_bound_error_lower"
+ },
+ "soft_x_rays.channel[:].validity_timed.time": {
+  "full_path": "soft_x_rays/channel(i1)/validity_timed/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "soft_x_rays.channel[:].power_density.time": {
+  "full_path": "soft_x_rays/channel(i1)/power_density/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/z"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.outline.x1": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x1"
+ },
+ "soft_x_rays.channel[:].detector.outline.x2": {
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "coordinates": [
+   "soft_x_rays.detector.outline.x1",
+   "soft_x_rays.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x2"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/r"
+ },
+ "soft_x_rays.channel[:].energy_band[:].lower_bound_error_index": {
+  "documentation": "Index in the error_description list for \"lower_bound\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/lower_bound_error_index"
+ },
+ "soft_x_rays.channel[:].intensity.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].intensity.time",
+   "soft_x_rays.intensity.time"
+  ],
+  "units": "m^-2.s^-1.sr^-1",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/intensity/data_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x1_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x1_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].intensity.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].intensity.time",
+   "soft_x_rays.intensity.time"
+  ],
+  "units": "m^-2.s^-1.sr^-1",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/intensity/data_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/z"
+ },
+ "soft_x_rays.channel[:].aperture[:].geometry_type": {
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/geometry_type"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.centre.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/phi"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "soft_x_rays.channel[:].aperture": {
+  "data_type": "struct_array",
+  "structure_reference": "detector_aperture",
+  "documentation": "Description of a set of collimating apertures",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "5",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.centre": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector"
+ },
+ "soft_x_rays.channel[:].aperture[:].radius_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/radius_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/y_error_index"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/z_error_index"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/r_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel": {
+  "data_type": "struct_array",
+  "structure_reference": "sxr_channel",
+  "documentation": "Set of channels (detector or pixel of a camera)",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "100",
+  "full_path": "soft_x_rays/channel(i1)"
+ },
+ "soft_x_rays.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/code/repository"
+ },
+ "soft_x_rays.channel[:].detector.centre.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/z_error_lower"
+ },
+ "soft_x_rays.channel[:].intensity.time": {
+  "full_path": "soft_x_rays/channel(i1)/intensity/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "soft_x_rays.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/code/version"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the first point",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point"
+ },
+ "soft_x_rays.channel[:].intensity": {
+  "structure_reference": "",
+  "documentation": "Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/intensity"
+ },
+ "soft_x_rays.channel[:].energy_band[:].lower_bound": {
+  "units": "eV",
+  "documentation": "Lower bound of the energy band",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/lower_bound"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].power_density.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].power_density.time",
+   "soft_x_rays.power_density.time"
+  ],
+  "units": "W.m^-2",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/power_density/data_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector"
+ },
+ "soft_x_rays.channel[:].detector.radius": {
+  "units": "m",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/radius"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "soft_x_rays.outline.x1",
+   "soft_x_rays.channel[:].aperture[:].outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x2_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.centre.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/r_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].outline.x2_error_index": {
+  "documentation": "Index in the error_description list for \"x2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline/x2_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index"
+ },
+ "soft_x_rays.channel[:].detector.radius_error_index": {
+  "documentation": "Index in the error_description list for \"radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/radius_error_index"
+ },
+ "soft_x_rays.ids_properties": {
+  "structure_reference": "ids_properties",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/ids_properties"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/z"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].detector.radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/radius_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].radius_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"radius\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/radius_error_lower"
+ },
+ "soft_x_rays.channel[:].energy_band[:].lower_bound_error_upper": {
+  "units": "eV",
+  "documentation": "Upper error for \"lower_bound\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/lower_bound_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.centre.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/phi_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.y_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/y_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/r_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/z_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/phi"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.x_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/x_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.geometry_type": {
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/geometry_type"
+ },
+ "soft_x_rays.channel[:].aperture[:].x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].energy_band[:].upper_bound_error_index": {
+  "documentation": "Index in the error_description list for \"upper_bound\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/upper_bound_error_index"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "soft_x_rays.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/code/commit"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].radius_error_index": {
+  "documentation": "Index in the error_description list for \"radius\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/radius_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre"
+ },
+ "soft_x_rays.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "soft_x_rays.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/channel(i1)/name"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"x\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/x_error_lower"
+ },
+ "soft_x_rays.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/code/name"
+ },
+ "soft_x_rays.channel[:].detector.centre.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/centre/phi_error_lower"
+ },
+ "soft_x_rays.code": {
+  "structure_reference": "code",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/code"
+ },
+ "soft_x_rays.channel[:].detector.outline.x1_error_index": {
+  "documentation": "Index in the error_description list for \"x1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x1_error_index"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/r"
+ },
+ "soft_x_rays.channel[:].validity": {
+  "documentation": "Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "soft_x_rays/channel(i1)/validity"
+ },
+ "soft_x_rays.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "soft_x_rays/ids_properties/creation_date"
+ },
+ "soft_x_rays.channel[:].detector.x2_unit_vector.x_error_index": {
+  "documentation": "Index in the error_description list for \"x\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x2_unit_vector/x_error_index"
+ },
+ "soft_x_rays.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.outline.x2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "coordinates": [
+   "soft_x_rays.detector.outline.x1",
+   "soft_x_rays.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x2_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x1_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x1_unit_vector"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.y_error_index": {
+  "documentation": "Index in the error_description list for \"y\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/y_error_index"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].detector.x1_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x1_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/z_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector.y_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"y\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/y_error_upper"
+ },
+ "soft_x_rays.channel[:].power_density.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "soft_x_rays.energy_band",
+   "soft_x_rays.channel[:].energy_band",
+   "soft_x_rays.channel[:].power_density.time",
+   "soft_x_rays.power_density.time"
+  ],
+  "units": "W.m^-2",
+  "type": "dynamic",
+  "full_path": "soft_x_rays/channel(i1)/power_density/data_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].x2_unit_vector": {
+  "structure_reference": "xyz0d_static",
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/x2_unit_vector"
+ },
+ "soft_x_rays.channel[:].detector.outline": {
+  "structure_reference": "x1x21d_static",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "data_type": "structure",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline"
+ },
+ "soft_x_rays.channel[:].detector.outline.x1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x1_error_upper"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.z": {
+  "units": "m",
+  "documentation": "Component along Z axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/z"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.x": {
+  "units": "m",
+  "documentation": "Component along X axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/x"
+ },
+ "soft_x_rays.channel[:].detector.x3_unit_vector.y": {
+  "units": "m",
+  "documentation": "Component along Y axis",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/detector/x3_unit_vector/y"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/phi_error_upper"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/r_error_lower"
+ },
+ "soft_x_rays.channel[:].aperture[:].centre.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/centre/z_error_lower"
+ },
+ "soft_x_rays.channel[:].detector.outline.x2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "coordinates": [
+   "soft_x_rays.detector.outline.x1",
+   "soft_x_rays.channel[:].detector.outline.x1"
+  ],
+  "units": "m",
+  "type": "static",
+  "full_path": "soft_x_rays/channel(i1)/detector/outline/x2_error_upper"
+ }
+}

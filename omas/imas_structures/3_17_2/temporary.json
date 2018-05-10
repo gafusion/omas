@@ -1,0 +1,1760 @@
+{
+ "temporary.dynamic_float4d[:].value.data_error_lower": {
+  "data_type": "FLT_4D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float4d(i1)/value/data_error_lower(:,:,:,:)"
+ },
+ "temporary.dynamic_float2d[:].value.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float2d[:].value.time",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float2d(i1)/value/data_error_upper(:,:)"
+ },
+ "temporary.dynamic_integer1d[:].value.time": {
+  "full_path": "temporary/dynamic_integer1d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.dynamic_float6d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float6d(i1)/identifier/description"
+ },
+ "temporary.constant_float2d[:].value": {
+  "data_type": "FLT_2D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float2d(i1)/value(:,:)"
+ },
+ "temporary.constant_float2d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float2d(i1)/identifier/description"
+ },
+ "temporary.constant_integer2d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_integer2d(i1)/identifier"
+ },
+ "temporary.dynamic_float2d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float2d(i1)/value/data_error_index"
+ },
+ "temporary.constant_float2d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float2d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float2d[:].value.time": {
+  "full_path": "temporary/dynamic_float2d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.constant_integer1d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_int_1d",
+  "documentation": "Constant 1D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_integer1d(i1)"
+ },
+ "temporary.constant_float3d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float3d(i1)/identifier/index"
+ },
+ "temporary.constant_float4d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float4d(i1)/identifier/name"
+ },
+ "temporary.dynamic_integer2d[:].value.time": {
+  "full_path": "temporary/dynamic_integer2d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.dynamic_float5d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float5d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float4d[:].value.data": {
+  "data_type": "FLT_4D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float4d(i1)/value/data(:,:,:,:)"
+ },
+ "temporary.dynamic_float6d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_6d",
+  "documentation": "Dynamic 6D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float6d(i1)"
+ },
+ "temporary.constant_integer1d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_integer1d(i1)/identifier/index"
+ },
+ "temporary.constant_string0d[:].value": {
+  "documentation": "Value",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_string0d(i1)/value"
+ },
+ "temporary.constant_string1d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_string_1d",
+  "documentation": "Constant 1D string",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_string1d(i1)"
+ },
+ "temporary.constant_string0d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_string0d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float1d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float1d(i1)/identifier/name"
+ },
+ "temporary.dynamic_integer1d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_int_1d",
+  "documentation": "Dynamic 1D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_integer1d(i1)"
+ },
+ "temporary.dynamic_float3d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float3d(i1)/identifier/name"
+ },
+ "temporary.constant_float6d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_6d",
+  "documentation": "Constant 6D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_float6d(i1)"
+ },
+ "temporary.dynamic_integer1d[:].value.data": {
+  "data_type": "INT_1D",
+  "documentation": "Value",
+  "coordinates": [
+   "temporary.value.time",
+   "temporary.dynamic_integer1d[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_integer1d(i1)/value/data(:)"
+ },
+ "temporary.constant_integer3d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_integer3d(i1)/identifier"
+ },
+ "temporary.constant_float2d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float2d(i1)/identifier"
+ },
+ "temporary.constant_float1d[:].value_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "-",
+  "type": "constant",
+  "full_path": "temporary/constant_float1d(i1)/value_error_lower(:)"
+ },
+ "temporary.constant_float3d[:].value_error_lower": {
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float3d(i1)/value_error_lower(:,:,:)"
+ },
+ "temporary.dynamic_integer2d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer2d(i1)/identifier/description"
+ },
+ "temporary.constant_float1d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_1d",
+  "documentation": "Constant 1D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "units": "mixed",
+  "full_path": "temporary/constant_float1d(i1)"
+ },
+ "temporary.dynamic_float1d[:].value.time": {
+  "full_path": "temporary/dynamic_float1d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.constant_float6d[:].value": {
+  "data_type": "FLT_6D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float6d(i1)/value(:,:,:,:,:,:)"
+ },
+ "temporary.constant_integer0d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_int_0d",
+  "documentation": "Constant 0D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_integer0d(i1)"
+ },
+ "temporary.dynamic_float4d[:].value.data_error_upper": {
+  "data_type": "FLT_4D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float4d(i1)/value/data_error_upper(:,:,:,:)"
+ },
+ "temporary.dynamic_float3d[:].value.data_error_lower": {
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float3d(i1)/value/data_error_lower(:,:,:)"
+ },
+ "temporary.dynamic_integer1d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_integer1d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float3d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_3d",
+  "documentation": "Dynamic 3D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float3d(i1)"
+ },
+ "temporary.constant_integer3d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer3d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float2d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float2d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float6d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float6d(i1)/value/data_error_index"
+ },
+ "temporary.constant_float2d[:].value_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float2d(i1)/value_error_lower(:,:)"
+ },
+ "temporary.constant_float6d[:].value_error_lower": {
+  "data_type": "FLT_6D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float6d(i1)/value_error_lower(:,:,:,:,:,:)"
+ },
+ "temporary.code": {
+  "structure_reference": "code",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "data_type": "structure",
+  "full_path": "temporary/code"
+ },
+ "temporary.dynamic_integer3d[:].value.time": {
+  "full_path": "temporary/dynamic_integer3d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.dynamic_float1d[:].value.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "temporary.value.time",
+   "temporary.dynamic_float1d[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float1d(i1)/value/data_error_lower(:)"
+ },
+ "temporary.constant_float2d[:].value_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float2d(i1)/value_error_upper(:,:)"
+ },
+ "temporary.constant_string0d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_string0d(i1)/identifier/index"
+ },
+ "temporary.constant_float1d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float1d(i1)/identifier"
+ },
+ "temporary.dynamic_float4d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float4d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float6d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float6d(i1)/value"
+ },
+ "temporary.dynamic_float5d[:].value.data_error_lower": {
+  "data_type": "FLT_5D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float5d(i1)/value/data_error_lower(:,:,:,:,:)"
+ },
+ "temporary.constant_float4d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_4d",
+  "documentation": "Constant 4D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_float4d(i1)"
+ },
+ "temporary.constant_integer3d[:].value": {
+  "data_type": "INT_3D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_integer3d(i1)/value(:,:,:)"
+ },
+ "temporary.constant_float5d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float5d(i1)/identifier/index"
+ },
+ "temporary.constant_integer1d[:].value": {
+  "full_path": "temporary/constant_integer1d(i1)/value(:)",
+  "documentation": "Value",
+  "type": "constant",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_1D"
+ },
+ "temporary.constant_float6d[:].value_error_upper": {
+  "data_type": "FLT_6D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float6d(i1)/value_error_upper(:,:,:,:,:,:)"
+ },
+ "temporary.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/code/parameters"
+ },
+ "temporary.constant_float5d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float5d(i1)/identifier"
+ },
+ "temporary.ids_properties.homogeneous_time": {
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/ids_properties/homogeneous_time"
+ },
+ "temporary.constant_float1d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float1d(i1)/identifier/description"
+ },
+ "temporary.dynamic_integer3d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer3d(i1)/identifier"
+ },
+ "temporary.constant_float6d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float6d(i1)/identifier/name"
+ },
+ "temporary.dynamic_integer2d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer2d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float6d[:].value.time": {
+  "full_path": "temporary/dynamic_float6d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.constant_float4d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float4d(i1)/identifier/index"
+ },
+ "temporary.dynamic_integer1d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer1d(i1)/value"
+ },
+ "temporary.dynamic_float1d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float1d(i1)/identifier/description"
+ },
+ "temporary.dynamic_integer3d[:].value.data": {
+  "data_type": "INT_3D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "temporary.dynamic_integer3d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_integer3d(i1)/value/data(:,:,:)"
+ },
+ "temporary.constant_float5d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float5d(i1)/value_error_index"
+ },
+ "temporary.dynamic_float2d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float2d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float1d[:].value.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "temporary.value.time",
+   "temporary.dynamic_float1d[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float1d(i1)/value/data_error_upper(:)"
+ },
+ "temporary.dynamic_float3d[:].value.data": {
+  "data_type": "FLT_3D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float3d(i1)/value/data(:,:,:)"
+ },
+ "temporary.dynamic_integer3d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_int_3d",
+  "documentation": "Dynamic 3D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_integer3d(i1)"
+ },
+ "temporary.dynamic_float5d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float5d(i1)/identifier/name"
+ },
+ "temporary.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/ids_properties/provider"
+ },
+ "temporary.dynamic_float3d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float3d(i1)/identifier"
+ },
+ "temporary.dynamic_integer2d[:].value.data": {
+  "data_type": "INT_2D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "temporary.dynamic_integer2d[:].value.time",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_integer2d(i1)/value/data(:,:)"
+ },
+ "temporary.dynamic_float5d[:].value.data": {
+  "data_type": "FLT_5D",
+  "documentation": "Value",
+  "coordinates": [
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float5d(i1)/value/data(:,:,:,:,:)"
+ },
+ "temporary.constant_float1d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float1d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float4d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float4d(i1)/identifier/name"
+ },
+ "temporary.constant_float6d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float6d(i1)/identifier"
+ },
+ "temporary.constant_float4d[:].value_error_lower": {
+  "data_type": "FLT_4D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float4d(i1)/value_error_lower(:,:,:,:)"
+ },
+ "temporary.constant_integer1d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer1d(i1)/identifier/name"
+ },
+ "temporary.constant_integer2d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_integer2d(i1)/identifier/index"
+ },
+ "temporary.constant_float3d[:].value": {
+  "data_type": "FLT_3D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float3d(i1)/value(:,:,:)"
+ },
+ "temporary.constant_float1d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float1d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float1d[:].value.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "coordinates": [
+   "temporary.value.time",
+   "temporary.dynamic_float1d[:].value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float1d(i1)/value/data(:)"
+ },
+ "temporary.dynamic_float6d[:].value.data": {
+  "data_type": "FLT_6D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float6d(i1)/value/data(:,:,:,:,:,:)"
+ },
+ "temporary.dynamic_float1d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float1d(i1)/identifier"
+ },
+ "temporary.dynamic_float1d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_1d",
+  "documentation": "Dynamic 1D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float1d(i1)"
+ },
+ "temporary.constant_string1d[:].value": {
+  "full_path": "temporary/constant_string1d(i1)/value(:)",
+  "documentation": "Value",
+  "type": "constant",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "STR_1D"
+ },
+ "temporary.constant_string1d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_string1d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float5d[:].value.time": {
+  "full_path": "temporary/dynamic_float5d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.ids_properties": {
+  "structure_reference": "ids_properties",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "data_type": "structure",
+  "full_path": "temporary/ids_properties"
+ },
+ "temporary.constant_string0d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_string_0d",
+  "documentation": "Constant 0D string",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_string0d(i1)"
+ },
+ "temporary.constant_float3d[:].value_error_upper": {
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float3d(i1)/value_error_upper(:,:,:)"
+ },
+ "temporary.dynamic_integer3d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer3d(i1)/identifier/description"
+ },
+ "temporary.constant_float4d[:].value_error_upper": {
+  "data_type": "FLT_4D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float4d(i1)/value_error_upper(:,:,:,:)"
+ },
+ "temporary.dynamic_integer3d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer3d(i1)/value"
+ },
+ "temporary.dynamic_integer3d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_integer3d(i1)/identifier/index"
+ },
+ "temporary.dynamic_integer2d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer2d(i1)/identifier"
+ },
+ "temporary.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/code/name"
+ },
+ "temporary.constant_float0d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float0d(i1)/identifier/index"
+ },
+ "temporary.dynamic_integer1d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer1d(i1)/identifier/description"
+ },
+ "temporary.constant_integer1d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_integer1d(i1)/identifier"
+ },
+ "temporary.constant_float2d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float2d(i1)/value_error_index"
+ },
+ "temporary.constant_float2d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_2d",
+  "documentation": "Constant 2D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_float2d(i1)"
+ },
+ "temporary.constant_integer1d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer1d(i1)/identifier/description"
+ },
+ "temporary.constant_float5d[:].value": {
+  "data_type": "FLT_5D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float5d(i1)/value(:,:,:,:,:)"
+ },
+ "temporary.constant_float4d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float4d(i1)/value_error_index"
+ },
+ "temporary.dynamic_float2d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_2d",
+  "documentation": "Dynamic 2D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float2d(i1)"
+ },
+ "temporary.constant_float0d[:].value": {
+  "units": "-",
+  "documentation": "Value",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "temporary/constant_float0d(i1)/value"
+ },
+ "temporary.dynamic_float4d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float4d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float3d[:].value.time": {
+  "full_path": "temporary/dynamic_float3d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.constant_float4d[:].value": {
+  "data_type": "FLT_4D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float4d(i1)/value(:,:,:,:)"
+ },
+ "temporary.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/code/version"
+ },
+ "temporary.constant_float3d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float3d(i1)/identifier"
+ },
+ "temporary.dynamic_float3d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float3d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float3d[:].value.data_error_upper": {
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float3d(i1)/value/data_error_upper(:,:,:)"
+ },
+ "temporary.dynamic_float2d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float2d(i1)/value"
+ },
+ "temporary.constant_integer2d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer2d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float3d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float3d(i1)/value/data_error_index"
+ },
+ "temporary.constant_float1d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float1d(i1)/value_error_index"
+ },
+ "temporary.dynamic_float5d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float5d(i1)/value/data_error_index"
+ },
+ "temporary.constant_float5d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_5d",
+  "documentation": "Constant 5D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_float5d(i1)"
+ },
+ "temporary.constant_integer2d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer2d(i1)/identifier/name"
+ },
+ "temporary.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/ids_properties/comment"
+ },
+ "temporary.constant_float5d[:].value_error_upper": {
+  "data_type": "FLT_5D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float5d(i1)/value_error_upper(:,:,:,:,:)"
+ },
+ "temporary.dynamic_float3d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float3d(i1)/value"
+ },
+ "temporary.dynamic_float3d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float3d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float4d[:].value.time": {
+  "full_path": "temporary/dynamic_float4d(i1)/value/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.dynamic_float6d[:].value.data_error_lower": {
+  "data_type": "FLT_6D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float6d(i1)/value/data_error_lower(:,:,:,:,:,:)"
+ },
+ "temporary.dynamic_integer2d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_integer2d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float6d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float6d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float4d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float4d(i1)/identifier"
+ },
+ "temporary.constant_float1d[:].value": {
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "-",
+  "type": "constant",
+  "full_path": "temporary/constant_float1d(i1)/value(:)"
+ },
+ "temporary.dynamic_float5d[:].value.data_error_upper": {
+  "data_type": "FLT_5D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float5d(i1)/value/data_error_upper(:,:,:,:,:)"
+ },
+ "temporary.dynamic_integer3d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer3d(i1)/identifier/name"
+ },
+ "temporary.constant_float0d[:].value_error_upper": {
+  "units": "-",
+  "documentation": "Upper error for \"value\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "temporary/constant_float0d(i1)/value_error_upper"
+ },
+ "temporary.constant_string0d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_string0d(i1)/identifier"
+ },
+ "temporary.constant_float5d[:].value_error_lower": {
+  "data_type": "FLT_5D",
+  "documentation": "Lower error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_float5d(i1)/value_error_lower(:,:,:,:,:)"
+ },
+ "temporary.dynamic_float5d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float5d(i1)/identifier"
+ },
+ "temporary.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/code/commit"
+ },
+ "temporary.dynamic_float2d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float2d(i1)/identifier"
+ },
+ "temporary.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/code/repository"
+ },
+ "temporary.dynamic_integer2d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_int_2d",
+  "documentation": "Dynamic 2D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_integer2d(i1)"
+ },
+ "temporary.constant_string1d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_string1d(i1)/identifier/name"
+ },
+ "temporary.dynamic_integer1d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer1d(i1)/identifier"
+ },
+ "temporary.dynamic_float6d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_float6d(i1)/identifier/name"
+ },
+ "temporary.constant_float5d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float5d(i1)/identifier/description"
+ },
+ "temporary.constant_float6d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float6d(i1)/identifier/description"
+ },
+ "temporary.constant_integer2d[:].value": {
+  "data_type": "INT_2D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "constant",
+  "full_path": "temporary/constant_integer2d(i1)/value(:,:)"
+ },
+ "temporary.constant_string0d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_string0d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float1d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float1d(i1)/value"
+ },
+ "temporary.constant_integer0d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer0d(i1)/identifier/description"
+ },
+ "temporary.code.output_flag": {
+  "full_path": "temporary/code/output_flag(:)",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "temporary.time",
+   "temporary.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "temporary.constant_float0d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_0d",
+  "documentation": "Constant 0D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "units": "mixed",
+  "full_path": "temporary/constant_float0d(i1)"
+ },
+ "temporary.constant_float0d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float0d(i1)/identifier"
+ },
+ "temporary.constant_float4d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_float4d(i1)/identifier"
+ },
+ "temporary.constant_float1d[:].value_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "-",
+  "type": "constant",
+  "full_path": "temporary/constant_float1d(i1)/value_error_upper(:)"
+ },
+ "temporary.constant_float6d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float6d(i1)/identifier/index"
+ },
+ "temporary.constant_float3d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float3d(i1)/identifier/name"
+ },
+ "temporary.constant_float4d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float4d(i1)/identifier/description"
+ },
+ "temporary.constant_float0d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float0d(i1)/value_error_index"
+ },
+ "temporary.constant_integer3d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_int_3d",
+  "documentation": "Constant 3D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_integer3d(i1)"
+ },
+ "temporary.constant_integer0d[:].value": {
+  "documentation": "Value",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_integer0d(i1)/value"
+ },
+ "temporary.constant_integer0d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_integer0d(i1)/identifier/index"
+ },
+ "temporary.time": {
+  "full_path": "temporary/time(:)",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "temporary.dynamic_float2d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float2d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float5d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float5d(i1)/value"
+ },
+ "temporary.dynamic_float2d[:].value.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float2d[:].value.time",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float2d(i1)/value/data_error_lower(:,:)"
+ },
+ "temporary.dynamic_float4d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_4d",
+  "documentation": "Dynamic 4D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float4d(i1)"
+ },
+ "temporary.dynamic_float1d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float1d(i1)/identifier/index"
+ },
+ "temporary.dynamic_float6d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float6d(i1)/identifier"
+ },
+ "temporary.constant_string1d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_string1d(i1)/identifier/index"
+ },
+ "temporary.constant_float0d[:].value_error_lower": {
+  "units": "-",
+  "documentation": "Lower error for \"value\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "temporary/constant_float0d(i1)/value_error_lower"
+ },
+ "temporary.dynamic_float2d[:].value.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Value",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float2d[:].value.time",
+   "temporary.value.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float2d(i1)/value/data(:,:)"
+ },
+ "temporary": {
+  "lifecycle_version": "3.0.0",
+  "lifecycle_last_change": "3.0.4",
+  "documentation": "Storage of undeclared data model components",
+  "full_path": "temporary",
+  "lifecycle_status": "alpha",
+  "maxoccur": "6"
+ },
+ "temporary.constant_integer3d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer3d(i1)/identifier/description"
+ },
+ "temporary.constant_float0d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float0d(i1)/identifier/name"
+ },
+ "temporary.constant_float5d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float5d(i1)/identifier/name"
+ },
+ "temporary.constant_string1d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_string1d(i1)/identifier"
+ },
+ "temporary.constant_integer3d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_integer3d(i1)/identifier/index"
+ },
+ "temporary.constant_float3d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_float_3d",
+  "documentation": "Constant 3D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_float3d(i1)"
+ },
+ "temporary.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/ids_properties/source"
+ },
+ "temporary.constant_float3d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float3d(i1)/identifier/description"
+ },
+ "temporary.constant_float3d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float3d(i1)/value_error_index"
+ },
+ "temporary.constant_float2d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/constant_float2d(i1)/identifier/index"
+ },
+ "temporary.constant_integer2d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_constant_quantities_int_2d",
+  "documentation": "Constant 2D integer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/constant_integer2d(i1)"
+ },
+ "temporary.constant_integer0d[:].identifier": {
+  "structure_reference": "identifier",
+  "documentation": "Description of the quantity using the standard identifier structure",
+  "data_type": "structure",
+  "full_path": "temporary/constant_integer0d(i1)/identifier"
+ },
+ "temporary.constant_float6d[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/constant_float6d(i1)/value_error_index"
+ },
+ "temporary.constant_float0d[:].identifier.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_float0d(i1)/identifier/description"
+ },
+ "temporary.dynamic_float4d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float4d(i1)/value/data_error_index"
+ },
+ "temporary.dynamic_integer1d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/dynamic_integer1d(i1)/identifier/name"
+ },
+ "temporary.dynamic_integer2d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_integer2d(i1)/value"
+ },
+ "temporary.dynamic_float4d[:].value": {
+  "structure_reference": "",
+  "documentation": "Value",
+  "data_type": "structure",
+  "full_path": "temporary/dynamic_float4d(i1)/value"
+ },
+ "temporary.dynamic_float1d[:].value.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "temporary/dynamic_float1d(i1)/value/data_error_index"
+ },
+ "temporary.dynamic_float5d": {
+  "data_type": "struct_array",
+  "structure_reference": "temporary_dynamic_quantities_float_5d",
+  "documentation": "Dynamic 5D float",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "10",
+  "full_path": "temporary/dynamic_float5d(i1)"
+ },
+ "temporary.dynamic_float6d[:].value.data_error_upper": {
+  "data_type": "FLT_6D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time",
+   "1...N",
+   "1...N",
+   "1...N",
+   "temporary.value.time",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "temporary/dynamic_float6d(i1)/value/data_error_upper(:,:,:,:,:,:)"
+ },
+ "temporary.constant_integer0d[:].identifier.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/constant_integer0d(i1)/identifier/name"
+ },
+ "temporary.dynamic_float5d[:].identifier.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "temporary/dynamic_float5d(i1)/identifier/index"
+ },
+ "temporary.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "temporary/ids_properties/creation_date"
+ }
+}

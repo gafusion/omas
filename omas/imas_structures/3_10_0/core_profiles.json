@@ -1,0 +1,4306 @@
+{
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) parallel pressure",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_min_error_index": {
+  "documentation": "Index in the error_description list for \"z_min\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial_error_lower"
+ },
+ "core_profiles.global_quantities.li": {
+  "lifecycle_version": "3.7.0",
+  "data_type": "FLT_1D",
+  "documentation": "Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type/name"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_error_index": {
+  "documentation": "Index in the error_description list for \"density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure": {
+  "data_type": "FLT_1D",
+  "documentation": "Pressure (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_tor_error_upper": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].multiple_states_flag": {
+  "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/multiple_states_flag"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_fast": {
+  "data_type": "FLT_1D",
+  "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel"
+ },
+ "core_profiles.global_quantities.ip_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"ip\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/ip_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_max": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Maximum Z of the charge state bundle (equal to z_min if no bundle)",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max"
+ },
+ "core_profiles.profiles_1d[:].pressure_thermal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_thermal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].n_i_total_over_n_e_error_index": {
+  "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_fast_error_index": {
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential_error_index": {
+  "documentation": "Index in the error_description list for \"ionisation_potential\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_upper"
+ },
+ "core_profiles.global_quantities.li_error_upper": {
+  "lifecycle_version": "3.7.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"li\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_n\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/radial_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor"
+ },
+ "core_profiles.global_quantities.beta_tor_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"beta_tor\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z_ion_square_1d\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast": {
+  "data_type": "FLT_1D",
+  "documentation": "Density of fast (non-thermal) particles",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast"
+ },
+ "core_profiles.profiles_1d[:].j_bootstrap": {
+  "data_type": "FLT_1D",
+  "documentation": "Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal"
+ },
+ "core_profiles.global_quantities.li_3": {
+  "data_type": "FLT_1D",
+  "documentation": "Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li_3"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density": {
+  "data_type": "FLT_1D",
+  "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state": {
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)",
+  "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.profiles_1d[:].pressure_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].a": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Mass of atom",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a"
+ },
+ "core_profiles.profiles_1d[:].j_ohmic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_ohmic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_ohmic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_ion\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_error_upper"
+ },
+ "core_profiles.global_quantities.beta_pol_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"beta_pol\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_pol_error_lower"
+ },
+ "core_profiles.profiles_1d[:].magnetic_shear": {
+  "data_type": "FLT_1D",
+  "documentation": "Magnetic shear, defined as rho_tor/q . dq/drho_tor",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear"
+ },
+ "core_profiles.profiles_1d[:].pressure_ion_total_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_ion_total\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast_error_index": {
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_fast_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel"
+ },
+ "core_profiles.time": {
+  "full_path": "core_profiles/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_fast_error_index": {
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_error_index": {
+  "documentation": "Index in the error_description list for \"z_ion\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_error_upper"
+ },
+ "core_profiles.profiles_1d[:].e_field.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/radial"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].conductivity_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"conductivity_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "ohm^-1.m^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity": {
+  "units": "m.s^-1",
+  "documentation": "Velocity",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].label": {
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/label"
+ },
+ "core_profiles.global_quantities.beta_pol_error_index": {
+  "documentation": "Index in the error_description list for \"beta_pol\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/beta_pol_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].a_error_upper": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Upper error for \"a\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"multiplicity\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Multiplicity of the atom",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity"
+ },
+ "core_profiles.profiles_1d[:].e_field.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"multiplicity\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular_error_upper"
+ },
+ "core_profiles.profiles_1d[:].t_i_average_error_index": {
+  "documentation": "Index in the error_description list for \"t_i_average\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/t_i_average_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_fast_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].magnetic_shear_error_index": {
+  "documentation": "Index in the error_description list for \"magnetic_shear\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].q": {
+  "data_type": "FLT_1D",
+  "documentation": "Safety factor",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/q"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].a": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Mass of atom",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_fast": {
+  "data_type": "FLT_1D",
+  "documentation": "Density of fast (non-thermal) particles",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast"
+ },
+ "core_profiles.global_quantities.current_bootstrap_error_index": {
+  "documentation": "Index in the error_description list for \"current_bootstrap\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/current_bootstrap_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel_error_upper"
+ },
+ "core_profiles.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/ids_properties/comment"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic_error_lower"
+ },
+ "core_profiles.global_quantities.current_bootstrap": {
+  "data_type": "FLT_1D",
+  "documentation": "Bootstrap current",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_bootstrap"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_norm": {
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].z_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Nuclear charge",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_error_index": {
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity": {
+  "units": "m.s^-1",
+  "documentation": "Velocity",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_pol": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal velocity",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol"
+ },
+ "core_profiles.profiles_1d[:].pressure_ion_total": {
+  "data_type": "FLT_1D",
+  "documentation": "Total (sum over ion species) thermal ion pressure",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total"
+ },
+ "core_profiles.profiles_1d[:].grid.area_error_index": {
+  "documentation": "Index in the error_description list for \"area\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/area_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature"
+ },
+ "core_profiles.profiles_1d[:].j_tor_error_index": {
+  "documentation": "Index in the error_description list for \"j_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/j_tor_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"e_field_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"vibrational_level\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_total_error_index": {
+  "documentation": "Index in the error_description list for \"j_total\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/j_total_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].z_n_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_n\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].zeff": {
+  "data_type": "FLT_1D",
+  "documentation": "Effective charge",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/zeff"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_tor": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal velocity",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].conductivity_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel conductivity",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "ohm^-1.m^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel"
+ },
+ "core_profiles.profiles_1d[:].grid.psi_error_index": {
+  "documentation": "Index in the error_description list for \"psi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/psi_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].label": {
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/label"
+ },
+ "core_profiles.profiles_1d[:].pressure_thermal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_thermal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral": {
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)",
+  "documentation": "Quantities related to the different neutral species",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.global_quantities.ip_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"ip\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/ip_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial"
+ },
+ "core_profiles.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/code/parameters"
+ },
+ "core_profiles.profiles_1d[:].e_field_parallel": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "V.m^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].ion_index": {
+  "documentation": "Index of the corresponding ion species in the ../../ion array",
+  "type": "dynamic",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/ion_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].neutral_index": {
+  "documentation": "Index of the corresponding neutral species in the ../../neutral array",
+  "type": "dynamic",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/neutral_index"
+ },
+ "core_profiles.profiles_1d[:].pressure_thermal_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_thermal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal_error_index"
+ },
+ "core_profiles.profiles_1d[:].grid.psi": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal magnetic flux",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Wb",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/psi"
+ },
+ "core_profiles.profiles_1d[:].j_bootstrap_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_bootstrap\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].temperature_error_index": {
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_norm_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity_error_index": {
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial"
+ },
+ "core_profiles.profiles_1d[:].j_non_inductive_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_non_inductive\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_1d_error_index": {
+  "documentation": "Index in the error_description list for \"z_ion_1d\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].t_i_average_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_i_average\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/t_i_average_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].pressure_ion_total_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_ion_total\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature (average over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density": {
+  "data_type": "FLT_1D",
+  "documentation": "Density (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure": {
+  "data_type": "FLT_1D",
+  "documentation": "Pressure (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type/index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"multiplicity\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_ohmic": {
+  "data_type": "FLT_1D",
+  "documentation": "Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_ohmic"
+ },
+ "core_profiles.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/code/version"
+ },
+ "core_profiles.global_quantities.energy_diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Plasma energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure ",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "J",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/energy_diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].e_field.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].e_field.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level_error_index": {
+  "documentation": "Index in the error_description list for \"vibrational_level\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_error_index": {
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].t_i_average": {
+  "data_type": "FLT_1D",
+  "documentation": "Ion temperature (averaged on charge states and ion species)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/t_i_average"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_fast_error_index": {
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d_error_index": {
+  "documentation": "Index in the error_description list for \"z_ion_square_1d\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d_error_index"
+ },
+ "core_profiles.profiles_1d[:].zeff_error_index": {
+  "documentation": "Index in the error_description list for \"zeff\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/zeff_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].multiple_states_flag": {
+  "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/multiple_states_flag"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].electron_configuration": {
+  "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/electron_configuration"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_max_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_max\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid": {
+  "documentation": "Radial grid",
+  "full_path": "core_profiles/profiles_1d(itime)/grid",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].z_n_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_n\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n_error_lower"
+ },
+ "core_profiles.global_quantities.li_error_lower": {
+  "lifecycle_version": "3.7.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"li\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_fast_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density": {
+  "data_type": "FLT_1D",
+  "documentation": "Density (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"vibrational_level\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure": {
+  "data_type": "FLT_1D",
+  "documentation": "Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure"
+ },
+ "core_profiles.profiles_1d[:].conductivity_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"conductivity_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "ohm^-1.m^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density": {
+  "data_type": "FLT_1D",
+  "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  ",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a_error_index"
+ },
+ "core_profiles.profiles_1d[:].j_bootstrap_error_index": {
+  "documentation": "Index in the error_description list for \"j_bootstrap\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Cumulative and average ionisation potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionisation potential of ion Xz\u2019+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state": {
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)",
+  "documentation": "Quantities related to the different states of the species (energy, excitation, ...)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.global_quantities.v_loop_error_index": {
+  "documentation": "Index in the error_description list for \"v_loop\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/v_loop_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial"
+ },
+ "core_profiles.profiles_1d[:].e_field_parallel_error_upper": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"e_field_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "V.m^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel_error_upper"
+ },
+ "core_profiles.global_quantities.v_loop_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"v_loop\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "V",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/v_loop_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial_error_lower"
+ },
+ "core_profiles.global_quantities.li_3_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"li_3\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li_3_error_upper"
+ },
+ "core_profiles.vacuum_toroidal_field.r0_error_index": {
+  "documentation": "Index in the error_description list for \"r0\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/vacuum_toroidal_field/r0_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_error_index": {
+  "documentation": "Index in the error_description list for \"density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_error_index": {
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) parallel pressure ",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_ion\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Vibrational level (can be bundled)",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].z_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Nuclear charge",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature (average over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature"
+ },
+ "core_profiles.profiles_1d[:].zeff_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"zeff\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/zeff_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"multiplicity\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity": {
+  "units": "m.s^-1",
+  "documentation": "Velocity (average over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].momentum_tor_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"momentum_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "kg.m^-1.s^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/momentum_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element": {
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)",
+  "documentation": "List of elements forming the atom or molecule",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].temperature_error_index": {
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_square_average\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average_error_lower"
+ },
+ "core_profiles.profiles_1d[:].n_i_total_over_n_e": {
+  "data_type": "FLT_1D",
+  "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level_error_index": {
+  "documentation": "Index in the error_description list for \"vibrational_level\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_square_average\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal"
+ },
+ "core_profiles.profiles_1d[:].q_error_index": {
+  "documentation": "Index in the error_description list for \"q\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/q_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel"
+ },
+ "core_profiles.profiles_1d[:].grid.psi_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"psi\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Wb",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/psi_error_upper"
+ },
+ "core_profiles.code.output_flag": {
+  "full_path": "core_profiles/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "core_profiles.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/code/repository"
+ },
+ "core_profiles.global_quantities.energy_diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"energy_diamagnetic\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "J",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/energy_diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"vibrational_level\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_error_lower"
+ },
+ "core_profiles.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "core_profiles/code",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_max_error_index": {
+  "documentation": "Index in the error_description list for \"z_max\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Vibrational level (can be bundled)",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Multiplicity of the atom",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_norm_error_index": {
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].z_n_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_n\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity": {
+  "units": "m.s^-1",
+  "documentation": "Velocity (average over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_fast_error_index": {
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast_error_index"
+ },
+ "core_profiles.profiles_1d[:].magnetic_shear_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"magnetic_shear\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.temperature_error_index": {
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_error_index"
+ },
+ "core_profiles.profiles_1d[:].n_i_total_over_n_e_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"n_i_total_over_n_e\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e_error_lower"
+ },
+ "core_profiles.vacuum_toroidal_field.r0_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r0\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/vacuum_toroidal_field/r0_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n_error_index"
+ },
+ "core_profiles.global_quantities.li_error_index": {
+  "documentation": "Index in the error_description list for \"li\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/li_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal"
+ },
+ "core_profiles.global_quantities.current_bootstrap_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_bootstrap\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_bootstrap_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].density_fast_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel_error_upper"
+ },
+ "core_profiles.global_quantities.beta_tor_error_index": {
+  "documentation": "Index in the error_description list for \"beta_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/beta_tor_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons": {
+  "documentation": "Quantities related to the electrons",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel_error_index"
+ },
+ "core_profiles.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/code/name"
+ },
+ "core_profiles.profiles_1d[:].pressure_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_error_index": {
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_error_index"
+ },
+ "core_profiles.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/code/commit"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].electron_configuration": {
+  "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/electron_configuration"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal_error_upper"
+ },
+ "core_profiles.vacuum_toroidal_field.b0": {
+  "data_type": "FLT_1D",
+  "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "core_profiles/vacuum_toroidal_field/b0"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_mode": {
+  "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_mode"
+ },
+ "core_profiles.profiles_1d[:].e_field.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel_error_index"
+ },
+ "core_profiles.global_quantities.beta_tor_norm": {
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] ",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor_norm"
+ },
+ "core_profiles.profiles_1d[:].e_field.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel"
+ },
+ "core_profiles.profiles_1d[:].pressure_ion_total_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_ion_total\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total_error_index"
+ },
+ "core_profiles.profiles_1d[:].q_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"q\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/q_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_tor": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal velocity (average over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  ",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular"
+ },
+ "core_profiles.profiles_1d[:].q_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"q\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/q_error_upper"
+ },
+ "core_profiles.profiles_1d[:].pressure_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_error_index": {
+  "documentation": "Index in the error_description list for \"density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_average": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Average Z of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average"
+ },
+ "core_profiles.profiles_1d[:].grid.volume_error_index": {
+  "documentation": "Index in the error_description list for \"volume\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/volume_error_index"
+ },
+ "core_profiles.global_quantities": {
+  "documentation": "Various global quantities derived from the profiles",
+  "full_path": "core_profiles/global_quantities",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_fast": {
+  "data_type": "FLT_1D",
+  "documentation": "Density of fast (non-thermal) particles",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"vibrational_level\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_pol_error_lower": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_pol\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid.volume_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"volume\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/volume_error_lower"
+ },
+ "core_profiles.global_quantities.energy_diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"energy_diamagnetic\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "J",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/energy_diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].momentum_tor_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"momentum_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "kg.m^-1.s^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/momentum_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].e_field_parallel_error_lower": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"e_field_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "V.m^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_min_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_min\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_total_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_total\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_total_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_tor_error_index": {
+  "documentation": "Index in the error_description list for \"velocity_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor_error_index"
+ },
+ "core_profiles.global_quantities.beta_pol_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"beta_pol\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_pol_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].a_error_lower": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Lower error for \"a\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a_error_lower"
+ },
+ "core_profiles.global_quantities.current_bootstrap_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_bootstrap\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_bootstrap_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.toroidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type/description"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular_error_index"
+ },
+ "core_profiles.profiles_1d[:].j_total": {
+  "data_type": "FLT_1D",
+  "documentation": "Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_total"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_fast_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].e_field.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal"
+ },
+ "core_profiles.profiles_1d[:].ion[:].label": {
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/label"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial_error_lower"
+ },
+ "core_profiles.global_quantities.current_non_inductive_error_index": {
+  "documentation": "Index in the error_description list for \"current_non_inductive\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/current_non_inductive_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) parallel pressure ",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial_error_lower"
+ },
+ "core_profiles.profiles_1d[:].zeff_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"zeff\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/zeff_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Fast (non-thermal) perpendicular pressure",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular"
+ },
+ "core_profiles.profiles_1d": {
+  "data_type": "struct_array",
+  "documentation": "Core plasma radial profiles for various time slices",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].time"
+  ],
+  "maxoccur": "unbounded",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_tor_error_lower": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.diamagnetic": {
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type": {
+  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type",
+  "data_type": "structure"
+ },
+ "core_profiles.global_quantities.current_non_inductive": {
+  "data_type": "FLT_1D",
+  "documentation": "Total non-inductive parallel current",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_non_inductive"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_mode": {
+  "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_mode"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_fast_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_error_index": {
+  "documentation": "Index in the error_description list for \"density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal_error_lower"
+ },
+ "core_profiles.vacuum_toroidal_field.b0_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"b0\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "core_profiles/vacuum_toroidal_field/b0_error_upper"
+ },
+ "core_profiles.profiles_1d[:].j_tor_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].a_error_upper": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Upper error for \"a\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a_error_upper"
+ },
+ "core_profiles.profiles_1d[:].momentum_tor": {
+  "data_type": "FLT_1D",
+  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "kg.m^-1.s^-1",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/momentum_tor"
+ },
+ "core_profiles.global_quantities.ip": {
+  "data_type": "FLT_1D",
+  "documentation": "Total plasma current",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/ip"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average_error_index": {
+  "documentation": "Index in the error_description list for \"z_square_average\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_1d_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z_ion_1d\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d_error_lower"
+ },
+ "core_profiles.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "core_profiles/ids_properties/homogeneous_time"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal"
+ },
+ "core_profiles.profiles_1d[:].magnetic_shear_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"magnetic_shear\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear_error_lower"
+ },
+ "core_profiles.profiles_1d[:].pressure_parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Total parallel pressure (electrons+ions, thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_error_upper"
+ },
+ "core_profiles.profiles_1d[:].j_total_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_total\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_total_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity": {
+  "units": "m.s^-1",
+  "documentation": "Velocity",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_pol_error_lower": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_pol\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_pol_error_index": {
+  "documentation": "Index in the error_description list for \"velocity_pol\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element": {
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)",
+  "documentation": "List of elements forming the atom or molecule",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular_error_upper"
+ },
+ "core_profiles.global_quantities.beta_tor_norm_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"beta_tor_norm\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor_norm_error_upper"
+ },
+ "core_profiles.profiles_1d[:].e_field.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].temperature_error_index": {
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature_error_index"
+ },
+ "core_profiles.global_quantities.ip_error_index": {
+  "documentation": "Index in the error_description list for \"ip\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/ip_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.radial": {
+  "data_type": "FLT_1D",
+  "documentation": "Radial component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_error_lower"
+ },
+ "core_profiles.global_quantities.li_3_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"li_3\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/li_3_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z_ion_square_1d\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_error_upper"
+ },
+ "core_profiles.profiles_1d[:].pressure_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"ionisation_potential\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_1d": {
+  "data_type": "FLT_1D",
+  "documentation": "Average charge of the ion species (sum of states charge weighted by state density and divided by ion density)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_min": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Minimum Z of the charge state bundle",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min"
+ },
+ "core_profiles.profiles_1d[:].t_i_average_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_i_average\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/t_i_average_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion": {
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)",
+  "documentation": "Quantities related to the different ion species",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "core_profiles.vacuum_toroidal_field.r0_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r0\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/vacuum_toroidal_field/r0_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity_error_index": {
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].element[:].a_error_lower": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Lower error for \"a\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_max_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_max\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max_error_upper"
+ },
+ "core_profiles.profiles_1d[:].grid.psi_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"psi\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Wb",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/psi_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_bootstrap_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_bootstrap\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_min_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_min\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].label": {
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "type": "dynamic",
+  "data_type": "STR_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/label"
+ },
+ "core_profiles.profiles_1d[:].j_ohmic_error_index": {
+  "documentation": "Index in the error_description list for \"j_ohmic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/j_ohmic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d": {
+  "data_type": "FLT_1D",
+  "documentation": "Average sqare charge of the ion species (sum of states square charge weighted by state density and divided by ion density)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d"
+ },
+ "core_profiles.profiles_1d[:].e_field.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].e_field": {
+  "units": "V.m^-1",
+  "documentation": "Electric field, averaged on the magnetic surface. E.g for the parellel component, average(E.B) / B0, using core_profiles/vacuum_toroidal_field/b0",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field",
+  "data_type": "structure"
+ },
+ "core_profiles.vacuum_toroidal_field.b0_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"b0\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "core_profiles/vacuum_toroidal_field/b0_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal_error_lower"
+ },
+ "core_profiles.vacuum_toroidal_field": {
+  "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
+  "full_path": "core_profiles/vacuum_toroidal_field",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].time": {
+  "units": "s",
+  "documentation": "Time",
+  "type": "dynamic",
+  "data_type": "flt_type",
+  "full_path": "core_profiles/profiles_1d(itime)/time"
+ },
+ "core_profiles.profiles_1d[:].electrons.temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion_1d_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z_ion_1d\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_error_lower"
+ },
+ "core_profiles.global_quantities.energy_diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"energy_diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/energy_diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_fast_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast_error_upper"
+ },
+ "core_profiles.profiles_1d[:].pressure_thermal": {
+  "data_type": "FLT_1D",
+  "documentation": "Thermal pressure (electrons+ions)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal"
+ },
+ "core_profiles.vacuum_toroidal_field.b0_error_index": {
+  "documentation": "Index in the error_description list for \"b0\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/vacuum_toroidal_field/b0_error_index"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_error_index": {
+  "documentation": "Index in the error_description list for \"rho_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.parallel_error_index": {
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].conductivity_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"conductivity_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.parallel": {
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure": {
+  "data_type": "FLT_1D",
+  "documentation": "Pressure (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure"
+ },
+ "core_profiles": {
+  "lifecycle_version": "3.1.0",
+  "lifecycle_status": "active",
+  "documentation": "Core plasma radial profiles",
+  "maxoccur": "6",
+  "full_path": "core_profiles"
+ },
+ "core_profiles.global_quantities.beta_tor_norm_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"beta_tor_norm\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor_norm_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid.volume": {
+  "data_type": "FLT_1D",
+  "documentation": "Volume enclosed inside the magnetic surface",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/volume"
+ },
+ "core_profiles.profiles_1d[:].pressure_perpendicular": {
+  "data_type": "FLT_1D",
+  "documentation": "Total perpendicular pressure (electrons+ions, thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_error_index": {
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].z_ion": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed), volume averaged over plasma radius",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_tor_error_lower": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_non_inductive": {
+  "data_type": "FLT_1D",
+  "documentation": "Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_pol": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal velocity (average over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol"
+ },
+ "core_profiles.profiles_1d[:].pressure_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_average_error_index": {
+  "documentation": "Index in the error_description list for \"z_average\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure": {
+  "data_type": "FLT_1D",
+  "documentation": "Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure"
+ },
+ "core_profiles.global_quantities.v_loop_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"v_loop\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "V",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/v_loop_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Average Z square of the charge state bundle (equal to z_min if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average"
+ },
+ "core_profiles.global_quantities.beta_pol": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal beta. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_pol"
+ },
+ "core_profiles.global_quantities.beta_tor_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"beta_tor\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_tor_error_upper": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal_error_lower"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_average_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_average\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular_error_index"
+ },
+ "core_profiles.global_quantities.beta_tor_norm_error_index": {
+  "documentation": "Index in the error_description list for \"beta_tor_norm\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/beta_tor_norm_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel_error_index": {
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].z_average_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_average\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity_pol_error_upper": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_pol\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol_error_upper"
+ },
+ "core_profiles.profiles_1d[:].j_non_inductive_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_non_inductive\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.density": {
+  "data_type": "FLT_1D",
+  "documentation": "Density (thermal+non-thermal)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density"
+ },
+ "core_profiles.profiles_1d[:].grid.area_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"area\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/area_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_fast_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_fast\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal_error_index": {
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_pol_error_index": {
+  "documentation": "Index in the error_description list for \"velocity_pol\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_error_index": {
+  "documentation": "Index in the error_description list for \"density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].density_fast": {
+  "data_type": "FLT_1D",
+  "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal"
+ },
+ "core_profiles.vacuum_toroidal_field.r0": {
+  "units": "m",
+  "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/vacuum_toroidal_field/r0"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic_error_upper"
+ },
+ "core_profiles.profiles_1d[:].grid.volume_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"volume\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/volume_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_pol_error_upper": {
+  "lifecycle_version": "3.3.0",
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_pol\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m.s^-1",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol_error_upper"
+ },
+ "core_profiles.profiles_1d[:].grid.rho_tor_norm_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm_error_lower"
+ },
+ "core_profiles.global_quantities.current_non_inductive_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_non_inductive\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_non_inductive_error_upper"
+ },
+ "core_profiles.profiles_1d[:].momentum_tor_error_index": {
+  "documentation": "Index in the error_description list for \"momentum_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/momentum_tor_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].pressure_perpendicular_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_non_inductive_error_index": {
+  "documentation": "Index in the error_description list for \"j_non_inductive\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"ionisation_potential\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential_error_lower"
+ },
+ "core_profiles.profiles_1d[:].j_ohmic_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_ohmic\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_ohmic_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].density_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_error_upper"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].density_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.diamagnetic_error_index": {
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_error_lower"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature_error_upper"
+ },
+ "core_profiles.global_quantities.beta_tor": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)), i.e. beta_toroidal = 2 mu0 int(p dV) / V / B0^2",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/beta_tor"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_upper"
+ },
+ "core_profiles.global_quantities.current_non_inductive_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_non_inductive\"",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "A",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/current_non_inductive_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid.area": {
+  "data_type": "FLT_1D",
+  "documentation": "Cross-sectional area of the flux surface",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/area"
+ },
+ "core_profiles.global_quantities.v_loop": {
+  "data_type": "FLT_1D",
+  "documentation": "LCFS loop voltage",
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "units": "V",
+  "type": "dynamic",
+  "full_path": "core_profiles/global_quantities/v_loop"
+ },
+ "core_profiles.global_quantities.li_3_error_index": {
+  "documentation": "Index in the error_description list for \"li_3\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/global_quantities/li_3_error_index"
+ },
+ "core_profiles.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "core_profiles/ids_properties",
+  "data_type": "structure"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity.poloidal": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].temperature_error_index": {
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].velocity_tor_error_index": {
+  "documentation": "Index in the error_description list for \"velocity_tor\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor_error_index"
+ },
+ "core_profiles.profiles_1d[:].j_tor_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_tor\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_tor_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.velocity.radial_error_index": {
+  "documentation": "Index in the error_description list for \"radial\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial_error_index"
+ },
+ "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal_error_index": {
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal_error_index"
+ },
+ "core_profiles.profiles_1d[:].ion[:].temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_error_upper"
+ },
+ "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].grid.area_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"area\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/grid/area_error_lower"
+ },
+ "core_profiles.profiles_1d[:].e_field.parallel_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel_error_lower"
+ },
+ "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "Pa",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular_error_upper"
+ },
+ "core_profiles.profiles_1d[:].j_tor": {
+  "data_type": "FLT_1D",
+  "documentation": "Total toroidal current density = average(J_Tor/R) / average(1/R)",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "A/m^2",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/j_tor"
+ },
+ "core_profiles.profiles_1d[:].ion[:].element[:].z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n_error_index"
+ },
+ "core_profiles.profiles_1d[:].n_i_total_over_n_e_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"n_i_total_over_n_e\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "-",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e_error_upper"
+ },
+ "core_profiles.profiles_1d[:].electrons.density_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density\"",
+  "coordinates": [
+   "core_profiles.profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "core_profiles/profiles_1d(itime)/electrons/density_error_lower"
+ }
+}

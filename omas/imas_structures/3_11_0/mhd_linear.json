@@ -1,0 +1,2325 @@
+{
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed": {
+  "units": "T",
+  "documentation": "Pertubed magnetic field for given toroidal mode number",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed": {
+  "units": "kg.m^-3",
+  "documentation": "Perturbed mass density for given toroidal mode number",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed"
+ },
+ "mhd_linear.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "mhd_linear/ids_properties",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_lower"
+ },
+ "mhd_linear.vacuum_toroidal_field.b0_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"b0\"",
+  "coordinates": [
+   "mhd_linear.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1": {
+  "units": "as parent",
+  "documentation": "First coordinate (radial)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"tau_resistive\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3": {
+  "units": "as parent",
+  "documentation": "Third coordinate (toroidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2": {
+  "units": "as parent",
+  "documentation": "Second coordinate (poloidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_index": {
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_index"
+ },
+ "mhd_linear.vacuum_toroidal_field.r0": {
+  "units": "m",
+  "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/vacuum_toroidal_field/r0"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1": {
+  "units": "as parent",
+  "documentation": "First coordinate (radial)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real"
+ },
+ "mhd_linear.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/code/version"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].frequency": {
+  "units": "Hz",
+  "documentation": "Frequency of the mode",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2": {
+  "units": "as parent",
+  "documentation": "Second coordinate (poloidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1": {
+  "units": "as parent",
+  "documentation": "First coordinate (radial)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2": {
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1": {
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed": {
+  "units": "eV",
+  "documentation": "Perturbed temperature for given toroidal mode number",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_index": {
+  "documentation": "Index in the error_description list for \"frequency\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed": {
+  "units": "T",
+  "documentation": "Pertubed magnetic field for given toroidal mode number",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3": {
+  "units": "as parent",
+  "documentation": "Third coordinate (toroidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element": {
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum": {
+  "documentation": "MHD modes in the vacuum",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element": {
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_index"
+ },
+ "mhd_linear.time_slice[:].time": {
+  "units": "s",
+  "documentation": "Time",
+  "type": "dynamic",
+  "data_type": "flt_type",
+  "full_path": "mhd_linear/time_slice(itime)/time"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_index": {
+  "documentation": "Index in the error_description list for \"tau_resistive\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_upper"
+ },
+ "mhd_linear.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "mhd_linear/ids_properties/homogeneous_time"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_lower": {
+  "units": "Hz",
+  "documentation": "Lower error for \"growthrate\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid": {
+  "documentation": "Definition of the 2D grid",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid",
+  "data_type": "structure"
+ },
+ "mhd_linear.time": {
+  "full_path": "mhd_linear/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "mhd_linear.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/ids_properties/comment"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_lower"
+ },
+ "mhd_linear.vacuum_toroidal_field": {
+  "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
+  "full_path": "mhd_linear/vacuum_toroidal_field",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].n_tor": {
+  "documentation": "Toroidal mode number of the MHD mode",
+  "type": "dynamic",
+  "data_type": "INT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/n_tor"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven": {
+  "data_type": "FLT_1D",
+  "documentation": "Alven time=R/vA=R0 sqrt(mi ni(rho))/B0",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed": {
+  "units": "m/s",
+  "documentation": "Pertubed velocity for given toroidal mode number",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2": {
+  "units": "as parent",
+  "documentation": "Second coordinate (poloidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3": {
+  "units": "as parent",
+  "documentation": "Third coordinate (toroidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1": {
+  "units": "as parent",
+  "documentation": "First coordinate (radial)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed": {
+  "units": "Pa",
+  "documentation": "Perturbed pressure for given toroidal mode number",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice": {
+  "data_type": "struct_array",
+  "documentation": "Core plasma radial profiles for various time slices",
+  "coordinates": [
+   "mhd_linear.time_slice[:].time"
+  ],
+  "maxoccur": "unbounded",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_index": {
+  "documentation": "Index in the error_description list for \"tau_alfven\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_index"
+ },
+ "mhd_linear.vacuum_toroidal_field.r0_error_index": {
+  "documentation": "Index in the error_description list for \"r0\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/vacuum_toroidal_field/r0_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed": {
+  "units": "T.m",
+  "documentation": "Pertubed vector potential for given toroidal mode number",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary"
+ },
+ "mhd_linear.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/code/commit"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/name"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type": {
+  "doc_identifier": "mhd_linear/mhd_linear_grid_type_identifier.xml",
+  "documentation": "Selection of one of a set of grid types",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_lower"
+ },
+ "mhd_linear.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/code/name"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_index": {
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2": {
+  "units": "as parent",
+  "documentation": "Second coordinate (poloidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_index"
+ },
+ "mhd_linear.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/code/parameters"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"tau_alfven\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode": {
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)",
+  "documentation": "Vector of toroidal modes",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "unbounded"
+ },
+ "mhd_linear.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "mhd_linear/code",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3": {
+  "units": "as parent",
+  "documentation": "Third coordinate (toroidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2": {
+  "units": "as parent",
+  "documentation": "Second coordinate (poloidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1": {
+  "units": "as parent",
+  "documentation": "First coordinate (radial)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive": {
+  "data_type": "FLT_1D",
+  "documentation": "Resistive time = mu_0 rho*rho/1.22/eta_neo",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].growthrate": {
+  "units": "Hz",
+  "documentation": "Linear growthrate of the mode",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_upper": {
+  "units": "Hz",
+  "documentation": "Upper error for \"growthrate\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type": {
+  "doc_identifier": "mhd_linear/mhd_linear_grid_type_identifier.xml",
+  "documentation": "Selection of one of a set of grid types",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_lower": {
+  "units": "Hz",
+  "documentation": "Lower error for \"frequency\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_upper": {
+  "units": "Hz",
+  "documentation": "Upper error for \"frequency\"",
+  "type": "dynamic",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid": {
+  "documentation": "Definition of the 2D grid",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "m^3",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_lower"
+ },
+ "mhd_linear.vacuum_toroidal_field.r0_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r0\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/vacuum_toroidal_field/r0_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma": {
+  "documentation": "MHD modes in the confined plasma",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed": {
+  "units": "T.m",
+  "documentation": "Pertubed vector potential for given toroidal mode number",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed",
+  "data_type": "structure"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/description"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_index": {
+  "documentation": "Index in the error_description list for \"growthrate\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_index": {
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_upper"
+ },
+ "mhd_linear.vacuum_toroidal_field.r0_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r0\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "mhd_linear/vacuum_toroidal_field/r0_error_upper"
+ },
+ "mhd_linear.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/code/repository"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1": {
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3": {
+  "units": "as parent",
+  "documentation": "Third coordinate (toroidal)",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_index": {
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_index"
+ },
+ "mhd_linear.vacuum_toroidal_field.b0_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"b0\"",
+  "coordinates": [
+   "mhd_linear.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_lower"
+ },
+ "mhd_linear": {
+  "lifecycle_version": "3.0.4",
+  "lifecycle_status": "alpha",
+  "documentation": "Magnetohydronamic linear stability",
+  "maxoccur": "3",
+  "full_path": "mhd_linear"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2": {
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2"
+ },
+ "mhd_linear.vacuum_toroidal_field.b0_error_index": {
+  "documentation": "Index in the error_description list for \"b0\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel": {
+  "units": "m",
+  "documentation": "Parallel displacement of the modes",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular": {
+  "units": "m",
+  "documentation": "Perpendicular displacement of the modes",
+  "type": "dynamic",
+  "data_type": "structure",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_index": {
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_index": {
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.index": {
+  "documentation": "Integer identifier (enumeration index within a list)",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_index"
+ },
+ "mhd_linear.code.output_flag": {
+  "full_path": "mhd_linear/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "mhd_linear.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"tau_alfven\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_index": {
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.name": {
+  "documentation": "Short string identifier",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/name"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real": {
+  "data_type": "FLT_2D",
+  "documentation": "Real part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"tau_resistive\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
+  ],
+  "units": "s",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"imaginary\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_upper"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary": {
+  "data_type": "FLT_2D",
+  "documentation": "Imaginary part",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"real\"",
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+  ],
+  "units": "as_parent",
+  "type": "dynamic",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_lower"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_index": {
+  "documentation": "Index in the error_description list for \"real\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_index"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.description": {
+  "documentation": "Verbose description",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/description"
+ },
+ "mhd_linear.vacuum_toroidal_field.b0": {
+  "data_type": "FLT_1D",
+  "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
+  "coordinates": [
+   "mhd_linear.time"
+  ],
+  "units": "T",
+  "type": "dynamic",
+  "full_path": "mhd_linear/vacuum_toroidal_field/b0"
+ }
+}

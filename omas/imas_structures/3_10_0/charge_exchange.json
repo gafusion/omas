@@ -1,0 +1,522 @@
+{
+ "charge_exchange.channel[:].velocity_pol": {
+  "documentation": "Poloidal velocity (of the emmitting impurity)",
+  "full_path": "charge_exchange/channel(i1)/velocity_pol",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel": {
+  "full_path": "charge_exchange/channel(i1)",
+  "documentation": "Set of channels (lines-of-sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "20"
+ },
+ "charge_exchange.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/code/name"
+ },
+ "charge_exchange.channel[:].temperature.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Ion temperature (of the emmitting impurity)",
+  "coordinates": [
+   "charge_exchange.channel[:].temperature.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/temperature/data"
+ },
+ "charge_exchange.channel[:].position.phi.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/phi/data_error_lower"
+ },
+ "charge_exchange.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/ids_properties/comment"
+ },
+ "charge_exchange.channel[:].z_n_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z_n\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_n_error_lower"
+ },
+ "charge_exchange.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "charge_exchange/ids_properties/homogeneous_time"
+ },
+ "charge_exchange.channel[:].position.z.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/z/data_error_upper"
+ },
+ "charge_exchange.channel[:].position.phi.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "coordinates": [
+   "charge_exchange.channel[:].position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/phi/data"
+ },
+ "charge_exchange.channel[:].temperature.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/temperature/data_error_index"
+ },
+ "charge_exchange.channel[:].temperature": {
+  "documentation": "Ion temperature (of the emmitting impurity)",
+  "full_path": "charge_exchange/channel(i1)/temperature",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel[:].z_ion_error_index": {
+  "documentation": "Index in the error_description list for \"z_ion\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/z_ion_error_index"
+ },
+ "charge_exchange.channel[:].temperature.time": {
+  "full_path": "charge_exchange/channel(i1)/temperature/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].temperature.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].temperature.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/temperature/data_error_upper"
+ },
+ "charge_exchange.channel[:].a": {
+  "data_type": "FLT_1D",
+  "documentation": "Mass of atom of the emmitting impurity. Varies according to channels since they are spanning different lines of sight",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Atomic Mass Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/a"
+ },
+ "charge_exchange.channel[:].velocity_tor.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal velocity (of the emmitting impurity)",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_tor.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_tor/data"
+ },
+ "charge_exchange.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/code/repository"
+ },
+ "charge_exchange.channel[:].position": {
+  "documentation": "Position of the measurements",
+  "full_path": "charge_exchange/channel(i1)/position",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/channel(i1)/identifier"
+ },
+ "charge_exchange.channel[:].temperature.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].temperature.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/temperature/data_error_lower"
+ },
+ "charge_exchange.channel[:].a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/a_error_index"
+ },
+ "charge_exchange.channel[:].velocity_pol.time": {
+  "full_path": "charge_exchange/channel(i1)/velocity_pol/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/z_n_error_index"
+ },
+ "charge_exchange.channel[:].position.r.time": {
+  "full_path": "charge_exchange/channel(i1)/position/r/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].position.phi": {
+  "documentation": "Toroidal angle",
+  "full_path": "charge_exchange/channel(i1)/position/phi",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel[:].position.r": {
+  "documentation": "Major radius",
+  "full_path": "charge_exchange/channel(i1)/position/r",
+  "data_type": "structure"
+ },
+ "charge_exchange": {
+  "lifecycle_version": "3.0.4",
+  "lifecycle_status": "alpha",
+  "documentation": "Charge exchange spectroscopy diagnostic",
+  "maxoccur": "2",
+  "full_path": "charge_exchange"
+ },
+ "charge_exchange.channel[:].position.phi.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/phi/data_error_upper"
+ },
+ "charge_exchange.channel[:].velocity_pol.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_pol.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_pol/data_error_lower"
+ },
+ "charge_exchange.channel[:].velocity_tor.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/velocity_tor/data_error_index"
+ },
+ "charge_exchange.channel[:].label": {
+  "full_path": "charge_exchange/channel(i1)/label",
+  "documentation": "String identifying the emmitting impurity (e.g. H+, D+, T+, He+2, C+6, ...)",
+  "type": "constant",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "data_type": "STR_1D"
+ },
+ "charge_exchange.channel[:].position.r.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/r/data_error_upper"
+ },
+ "charge_exchange.channel[:].velocity_pol.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/velocity_pol/data_error_index"
+ },
+ "charge_exchange.channel[:].z_n": {
+  "data_type": "FLT_1D",
+  "documentation": "Nuclear charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_n"
+ },
+ "charge_exchange.channel[:].z_ion": {
+  "data_type": "FLT_1D",
+  "documentation": "Ion charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_ion"
+ },
+ "charge_exchange.channel[:].position.z.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/z/data_error_lower"
+ },
+ "charge_exchange.channel[:].velocity_pol.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal velocity (of the emmitting impurity)",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_pol.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_pol/data"
+ },
+ "charge_exchange.channel[:].position.z.time": {
+  "full_path": "charge_exchange/channel(i1)/position/z/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].velocity_pol.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_pol.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_pol/data_error_upper"
+ },
+ "charge_exchange.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/channel(i1)/name"
+ },
+ "charge_exchange.channel[:].a_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"a\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Atomic Mass Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/a_error_upper"
+ },
+ "charge_exchange.channel[:].position.r.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/r/data_error_lower"
+ },
+ "charge_exchange.channel[:].z_n_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z_n\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_n_error_upper"
+ },
+ "charge_exchange.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/code/version"
+ },
+ "charge_exchange.channel[:].position.z.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "coordinates": [
+   "charge_exchange.channel[:].position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/z/data"
+ },
+ "charge_exchange.channel[:].velocity_tor": {
+  "documentation": "Toroidal velocity (of the emmitting impurity)",
+  "full_path": "charge_exchange/channel(i1)/velocity_tor",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel[:].position.z": {
+  "documentation": "Height",
+  "full_path": "charge_exchange/channel(i1)/position/z",
+  "data_type": "structure"
+ },
+ "charge_exchange.channel[:].position.r.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "coordinates": [
+   "charge_exchange.channel[:].position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/position/r/data"
+ },
+ "charge_exchange.time": {
+  "full_path": "charge_exchange/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/code/parameters"
+ },
+ "charge_exchange.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "charge_exchange/code",
+  "data_type": "structure"
+ },
+ "charge_exchange.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "charge_exchange/code/commit"
+ },
+ "charge_exchange.channel[:].velocity_tor.time": {
+  "full_path": "charge_exchange/channel(i1)/velocity_tor/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].position.phi.time": {
+  "full_path": "charge_exchange/channel(i1)/position/phi/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "charge_exchange.channel[:].velocity_tor.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_tor.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_tor/data_error_upper"
+ },
+ "charge_exchange.channel[:].z_ion_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z_ion\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_ion_error_lower"
+ },
+ "charge_exchange.channel[:].position.phi.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/position/phi/data_error_index"
+ },
+ "charge_exchange.channel[:].a_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"a\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Atomic Mass Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/a_error_lower"
+ },
+ "charge_exchange.channel[:].velocity_tor.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "charge_exchange.channel[:].velocity_tor.time"
+  ],
+  "units": "eV",
+  "type": "dynamic",
+  "full_path": "charge_exchange/channel(i1)/velocity_tor/data_error_lower"
+ },
+ "charge_exchange.channel[:].z_ion_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z_ion\"",
+  "coordinates": [
+   "charge_exchange.channel[:].channel_names"
+  ],
+  "units": "Elementary Charge Unit",
+  "type": "constant",
+  "full_path": "charge_exchange/channel(i1)/z_ion_error_upper"
+ },
+ "charge_exchange.channel[:].position.z.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/position/z/data_error_index"
+ },
+ "charge_exchange.channel[:].position.r.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "charge_exchange/channel(i1)/position/r/data_error_index"
+ },
+ "charge_exchange.code.output_flag": {
+  "full_path": "charge_exchange/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "charge_exchange.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "charge_exchange.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "charge_exchange/ids_properties",
+  "data_type": "structure"
+ }
+}

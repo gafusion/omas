@@ -1,0 +1,4149 @@
+{
+ "pulse_schedule.density_control.n_e_line.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference_name"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference_name"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference_name"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference_name"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference_type"
+ },
+ "pulse_schedule.nbi.mode.data": {
+  "full_path": "pulse_schedule/nbi/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.nbi.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.mode.data": {
+  "full_path": "pulse_schedule/ec/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.ec.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_lower"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/envelope_type"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/data_error_index"
+ },
+ "pulse_schedule.position_control": {
+  "documentation": "Plasma position and shape control references",
+  "full_path": "pulse_schedule/position_control",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.i_plasma": {
+  "units": "A",
+  "documentation": "Plasma current",
+  "full_path": "pulse_schedule/flux_control/i_plasma",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/envelope_type"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].power": {
+  "units": "W",
+  "documentation": "Power",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.mode.data": {
+  "full_path": "pulse_schedule/density_control/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.density_control.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.flux_control.li_3.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.li_3.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/li_3/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].multiplicity": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/multiplicity"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/data_error_lower"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.i_plasma.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference_type"
+ },
+ "pulse_schedule.position_control.gap[:].name": {
+  "documentation": "Name of the gap",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/name"
+ },
+ "pulse_schedule.lh.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/lh/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel": {
+  "units": "-",
+  "documentation": "Main parallel refractive index of the injected wave power spectrum",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel",
+  "data_type": "structure"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.li_3.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.flux_control.li_3.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/li_3/reference/data"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].fraction": {
+  "documentation": "Relative fraction of this species (in molecules) in the gas mixture",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/fraction"
+ },
+ "pulse_schedule.density_control.n_e_line.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.density_control.n_e_line.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference/data"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/data"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].multiplicity_error_upper": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/multiplicity_error_upper"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference_type"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference/data"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference/data_error_index"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/data_error_lower"
+ },
+ "pulse_schedule.ec.antenna[:].phase": {
+  "units": "rad",
+  "documentation": "Phase",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.triangularity.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/density_control/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.gap[:].value": {
+  "units": "m",
+  "documentation": "Value of the gap, i.e. distance between the reference point and the separatrix along the gap direction",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.gap": {
+  "full_path": "pulse_schedule/position_control/gap(i1)",
+  "documentation": "Set of gaps, defined by a reference point and a direction.",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "51"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/z_n_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.gap[:].value.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/data_error_lower"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference_name"
+ },
+ "pulse_schedule.density_control.zeff.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/zeff/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].energy": {
+  "units": "eV",
+  "documentation": "Full energy of the injected species (acceleration of a single atom)",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.triangularity.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity/reference_type"
+ },
+ "pulse_schedule.tf": {
+  "documentation": "Toroidal field references",
+  "full_path": "pulse_schedule/tf",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation/reference_type"
+ },
+ "pulse_schedule.time": {
+  "full_path": "pulse_schedule/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.flux_control.i_plasma.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference/data"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/data_error_lower"
+ },
+ "pulse_schedule.flux_control.li_3": {
+  "units": "-",
+  "documentation": "Internal inductance",
+  "full_path": "pulse_schedule/flux_control/li_3",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference.time": {
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/position_control/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.beta_normal.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference_type"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/envelope_type"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/data"
+ },
+ "pulse_schedule.position_control.triangularity": {
+  "units": "-",
+  "documentation": "Triangularity of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/triangularity",
+  "data_type": "structure"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor": {
+  "units": "rad",
+  "documentation": "Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi. Positive sign means the waves is injected anti-clockwise when viewed from above.",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point": {
+  "full_path": "pulse_schedule/position_control/strike_point(i1)",
+  "documentation": "Array of strike points, for each of them the RZ position is given",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "4"
+ },
+ "pulse_schedule.flux_control.li_3.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/li_3/reference_type"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].a_error_upper": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Upper error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/a_error_upper"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference_name"
+ },
+ "pulse_schedule.nbi.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/nbi/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d": {
+  "units": "-",
+  "documentation": "Average ratio of hydrogen over deuterium density",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d",
+  "data_type": "structure"
+ },
+ "pulse_schedule.nbi.mode.time": {
+  "full_path": "pulse_schedule/nbi/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.gap[:].angle_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"angle\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/angle_error_upper"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/data_error_index"
+ },
+ "pulse_schedule.flux_control.loop_voltage.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/envelope_type"
+ },
+ "pulse_schedule.position_control.x_point": {
+  "full_path": "pulse_schedule/position_control/x_point(i1)",
+  "documentation": "Array of X-points, for each of them the RZ position is given",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference.time": {
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].frequency": {
+  "units": "Hz",
+  "documentation": "Frequency",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.zeff.reference.time": {
+  "full_path": "pulse_schedule/density_control/zeff/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ic.mode.time": {
+  "full_path": "pulse_schedule/ic/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/envelope_type"
+ },
+ "pulse_schedule.position_control.minor_radius.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference_name"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].a_error_lower": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Lower error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/a_error_lower"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference_name"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.mode.data": {
+  "full_path": "pulse_schedule/position_control/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.position_control.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.density_control.zeff.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/zeff/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference.time": {
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.li_3.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/flux_control/li_3/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/data_error_lower"
+ },
+ "pulse_schedule.code.output_flag": {
+  "full_path": "pulse_schedule/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.flux_control.mode.time": {
+  "full_path": "pulse_schedule/flux_control/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference/data"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].label": {
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/label"
+ },
+ "pulse_schedule.position_control.elongation_upper": {
+  "units": "-",
+  "documentation": "Elongation (upper half w.r.t. geometric axis) of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/elongation_upper",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].name": {
+  "documentation": "Name of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/name"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference_type"
+ },
+ "pulse_schedule.position_control.gap[:].r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/gap(i1)/r_error_index"
+ },
+ "pulse_schedule.position_control.gap[:].z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/z_error_lower"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/data_error_lower"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/a_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].identifier": {
+  "documentation": "Identifier of the NBI unit",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/identifier"
+ },
+ "pulse_schedule.position_control.triangularity_lower.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/envelope_type"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference.time": {
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].name": {
+  "documentation": "Name of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/name"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].z_n_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/z_n_error_lower"
+ },
+ "pulse_schedule.density_control.valve[:].species": {
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)",
+  "documentation": "Species injected by the valve (may be more than one in case the valve injects a gas mixture)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "3"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_h_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/data_error_index"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference_type"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference_name"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/data"
+ },
+ "pulse_schedule.position_control.gap[:].r": {
+  "units": "m",
+  "documentation": "Major radius of the reference point",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/r"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference.time": {
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.mode.data": {
+  "full_path": "pulse_schedule/flux_control/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.flux_control.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.position_control.gap[:].z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/z_error_upper"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference_name"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.active_limiter_point": {
+  "documentation": "RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)",
+  "full_path": "pulse_schedule/position_control/active_limiter_point",
+  "data_type": "structure"
+ },
+ "pulse_schedule.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/code/name"
+ },
+ "pulse_schedule.density_control.zeff.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/zeff/reference_name"
+ },
+ "pulse_schedule.tf.mode.time": {
+  "full_path": "pulse_schedule/tf/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference_name"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference_type"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference_name"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference.time": {
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.density_control.n_e_line.reference.time": {
+  "full_path": "pulse_schedule/density_control/n_e_line/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/data"
+ },
+ "pulse_schedule.ec.antenna[:].power.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/envelope_type"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference.time": {
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.x_point[:].z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/envelope_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].atoms_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Number of atoms of this element in the molecule",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/atoms_n"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference_name"
+ },
+ "pulse_schedule.density_control.n_e_line.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.gap[:].angle": {
+  "units": "rad",
+  "documentation": "Angle between the direction in which the gap is measured (in the poloidal cross-section) and the horizontal axis. ",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/angle"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference_type"
+ },
+ "pulse_schedule.ic.antenna[:].power": {
+  "units": "W",
+  "documentation": "Power",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/data_error_index"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.strike_point[:].r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference.time": {
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/envelope_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference_name"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].z_n_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/z_n_error_upper"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference_name"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].a_error_index": {
+  "documentation": "Index in the error_description list for \"a\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/a_error_index"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference.time": {
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/data_error_upper"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/data"
+ },
+ "pulse_schedule.ec": {
+  "documentation": "Electron cyclotron heating and current drive system",
+  "full_path": "pulse_schedule/ec",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_e_line.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_e_line.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.triangularity.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity/reference/data"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/envelope_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/data_error_index"
+ },
+ "pulse_schedule.ec.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/ec/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/envelope_type"
+ },
+ "pulse_schedule.density_control.valve[:].name": {
+  "documentation": "Name of the valve",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/name"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference_type"
+ },
+ "pulse_schedule.position_control.elongation.reference.time": {
+  "full_path": "pulse_schedule/position_control/elongation/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/data"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference.time": {
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference/data_error_upper"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/data"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].z_n_error_upper": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Upper error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/z_n_error_upper"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].z_n_error_lower": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Lower error for \"z_n\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/z_n_error_lower"
+ },
+ "pulse_schedule.position_control.elongation.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation/reference/data_error_upper"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/data"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].z_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Nuclear charge",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/z_n"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference_type"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_t_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.mode.data": {
+  "full_path": "pulse_schedule/ic/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.ic.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.density_control.valve[:].identifier": {
+  "documentation": "Identifier of the valve",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/identifier"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/envelope_type"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference.time": {
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ic.antenna[:].frequency": {
+  "units": "Hz",
+  "documentation": "Frequency",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference_name"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/envelope_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference.time": {
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference_name"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference_name"
+ },
+ "pulse_schedule.tf.mode.data": {
+  "full_path": "pulse_schedule/tf/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.tf.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/data"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference_name"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.boundary_outline": {
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)",
+  "documentation": "Set of (R,Z) points defining the outline of the plasma boundary",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "51"
+ },
+ "pulse_schedule.position_control.minor_radius.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference.time": {
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/triangularity/reference_name"
+ },
+ "pulse_schedule.lh.antenna": {
+  "full_path": "pulse_schedule/lh/antenna(i1)",
+  "documentation": "Set of LH antennas",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "3"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/data"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference_name"
+ },
+ "pulse_schedule.nbi.unit[:].species": {
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)",
+  "documentation": "Species injected by the NBI unit (may be more than one in case the unit injects a gas mixture)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "3"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/data"
+ },
+ "pulse_schedule.position_control.gap[:].angle_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"angle\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/angle_error_lower"
+ },
+ "pulse_schedule.position_control.gap[:].r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/r_error_lower"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference.time": {
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].multiplicity_error_upper": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/multiplicity_error_upper"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference.time": {
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_h_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/data_error_upper"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element": {
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)",
+  "documentation": "List of elements forming the atom or molecule",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "5"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference.time": {
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/code/parameters"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference/data"
+ },
+ "pulse_schedule.lh.antenna[:].frequency": {
+  "units": "Hz",
+  "documentation": "Frequency",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_e_line": {
+  "units": "m^-2",
+  "documentation": "Line integrated electron density",
+  "full_path": "pulse_schedule/density_control/n_e_line",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/data_error_lower"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data"
+ },
+ "pulse_schedule.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ids_properties/comment"
+ },
+ "pulse_schedule.ic": {
+  "documentation": "Ion cyclotron heating and current drive system",
+  "full_path": "pulse_schedule/ic",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.beta_normal.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference/data_error_upper"
+ },
+ "pulse_schedule.lh.mode.time": {
+  "full_path": "pulse_schedule/lh/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.nbi.unit[:].power.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/envelope_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference_name"
+ },
+ "pulse_schedule.nbi.unit[:].energy.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/envelope_type"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/ic/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule": {
+  "lifecycle_version": "3.6.0",
+  "lifecycle_last_change": "3.10.2",
+  "documentation": "Description of Pulse Schedule, described by subsystems waveform references and an enveloppe around them. The controllers, pulse schedule and SDN are defined in separate IDSs. All names and identifiers of subsystems appearing in the pulse_schedule must be identical to those used in the IDSs describing the related subsystems.",
+  "full_path": "pulse_schedule",
+  "lifecycle_status": "alpha",
+  "maxoccur": "1"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.zeff.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/density_control/zeff/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/data_error_upper"
+ },
+ "pulse_schedule.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/code/repository"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference.time": {
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.li_3.reference.time": {
+  "full_path": "pulse_schedule/flux_control/li_3/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.lh.antenna[:].phase.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/envelope_type"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.density_control.n_h_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/data"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].label": {
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/label"
+ },
+ "pulse_schedule.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "pulse_schedule/code",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation/reference/data_error_lower"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/data"
+ },
+ "pulse_schedule.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/code/version"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.x_point[:].r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference_name"
+ },
+ "pulse_schedule.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "pulse_schedule/ids_properties",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.loop_voltage.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/data_error_upper"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/data_error_index"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference_type"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference.time": {
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference.time": {
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.triangularity.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity/envelope_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference_name"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/elongation/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference.time": {
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].a_error_upper": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Upper error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/a_error_upper"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference_name"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/data"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].a_error_lower": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Lower error for \"a\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/a_error_lower"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference.time": {
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/envelope_type"
+ },
+ "pulse_schedule.flux_control.li_3.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/li_3/envelope_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference_type"
+ },
+ "pulse_schedule.flux_control": {
+  "documentation": "Magnetic flux control references",
+  "full_path": "pulse_schedule/flux_control",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.gap[:].value.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/data_error_upper"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].energy.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/data"
+ },
+ "pulse_schedule.position_control.gap[:].r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/r_error_upper"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.elongation_upper.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation_upper/envelope_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.geometric_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/data"
+ },
+ "pulse_schedule.nbi.unit": {
+  "full_path": "pulse_schedule/nbi/unit(i1)",
+  "documentation": "Set of NBI units",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "36"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference_name"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].multiplicity_error_lower": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/multiplicity_error_lower"
+ },
+ "pulse_schedule.position_control.gap[:].z": {
+  "units": "m",
+  "documentation": "Height of the reference point",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/z"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference.time": {
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.flux_control.beta_normal": {
+  "units": "-",
+  "documentation": "Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA]",
+  "full_path": "pulse_schedule/flux_control/beta_normal",
+  "data_type": "structure"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference_name"
+ },
+ "pulse_schedule.flux_control.beta_normal.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/beta_normal/envelope_type"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].atoms_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Number of atoms of this element in the molecule",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/atoms_n"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/data"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference_name"
+ },
+ "pulse_schedule.flux_control.i_plasma.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/i_plasma/envelope_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference.time": {
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference_name"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.triangularity.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity/reference/data_error_lower"
+ },
+ "pulse_schedule.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ids_properties/homogeneous_time"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference_type"
+ },
+ "pulse_schedule.position_control.gap[:].value.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/envelope_type"
+ },
+ "pulse_schedule.ec.antenna[:].phase.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/envelope_type"
+ },
+ "pulse_schedule.flux_control.li_3.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.li_3.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/li_3/reference/data_error_lower"
+ },
+ "pulse_schedule.ic.antenna[:].phase.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/envelope_type"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference_type"
+ },
+ "pulse_schedule.lh.antenna[:].name": {
+  "documentation": "Name of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/name"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.gap[:].value.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/data"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference.time": {
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].z_n": {
+  "units": "Elementary Charge Unit",
+  "documentation": "Nuclear charge",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/z_n"
+ },
+ "pulse_schedule.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ids_properties/creation_date"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data"
+ },
+ "pulse_schedule.density_control.n_e_line.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference_type"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference_type"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference_type"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference_type"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.flux_control.beta_normal.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference/data"
+ },
+ "pulse_schedule.position_control.elongation.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation/reference/data"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d": {
+  "units": "-",
+  "documentation": "Average ratio of tritium over deuterium density",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.zeff": {
+  "units": "-",
+  "documentation": "Line average effective charge",
+  "full_path": "pulse_schedule/density_control/zeff",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference_name"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control": {
+  "documentation": "Gas injection system and density control references",
+  "full_path": "pulse_schedule/density_control",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].multiplicity_error_index": {
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/multiplicity_error_index"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference_name"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_lower"
+ },
+ "pulse_schedule.flux_control.li_3.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/flux_control/li_3/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.strike_point[:].r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/r/envelope_type"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/envelope_type"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/envelope_type"
+ },
+ "pulse_schedule.nbi": {
+  "documentation": "Neutral beam heating and current drive system",
+  "full_path": "pulse_schedule/nbi",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.zeff.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.zeff.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/zeff/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference.time": {
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference/data"
+ },
+ "pulse_schedule.position_control.triangularity.reference.time": {
+  "full_path": "pulse_schedule/position_control/triangularity/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.lh.antenna[:].power.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/envelope_type"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference.time": {
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].power": {
+  "units": "W",
+  "documentation": "Power",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data"
+ },
+ "pulse_schedule.lh.mode.data": {
+  "full_path": "pulse_schedule/lh/mode/data",
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "type": "dynamic",
+  "coordinates": [
+   "pulse_schedule.lh.mode.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_upper"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference_type"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.i_plasma.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.minor_radius": {
+  "units": "m",
+  "documentation": "Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)",
+  "full_path": "pulse_schedule/position_control/minor_radius",
+  "data_type": "structure"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/data_error_upper"
+ },
+ "pulse_schedule.tf.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/tf/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].multiplicity": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/multiplicity"
+ },
+ "pulse_schedule.position_control.elongation": {
+  "units": "-",
+  "documentation": "Elongation of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/elongation",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference_type"
+ },
+ "pulse_schedule.density_control.valve": {
+  "full_path": "pulse_schedule/density_control/valve(i1)",
+  "documentation": "Set of injection valves. Time-dependent",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "20"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference.time": {
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.lh.antenna[:].phase": {
+  "units": "rad",
+  "documentation": "Phasing between neighbour waveguides (in the toroidal direction)",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_h_over_n_d.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.triangularity.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/triangularity/reference/data_error_index"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/data_error_upper"
+ },
+ "pulse_schedule.lh.antenna[:].power.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/power/reference_type"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.flux_control.loop_voltage.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference/data"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_lower": {
+  "units": "-",
+  "documentation": "Elongation (lower half w.r.t. geometric axis) of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/elongation_lower",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_e_line.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_e_line.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.triangularity_upper.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/envelope_type"
+ },
+ "pulse_schedule.position_control.minor_radius.reference.time": {
+  "full_path": "pulse_schedule/position_control/minor_radius/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference_type"
+ },
+ "pulse_schedule.position_control.magnetic_axis": {
+  "documentation": "Magnetic axis position",
+  "full_path": "pulse_schedule/position_control/magnetic_axis",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation/envelope_type"
+ },
+ "pulse_schedule.position_control.elongation.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/elongation/reference/data_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].a": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Mass of atom",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/a"
+ },
+ "pulse_schedule.ic.antenna": {
+  "full_path": "pulse_schedule/ic/antenna(i1)",
+  "documentation": "Set of ICRH antennas",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "3"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference_name"
+ },
+ "pulse_schedule.ec.mode.time": {
+  "full_path": "pulse_schedule/ec/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/data_error_index"
+ },
+ "pulse_schedule.density_control.n_e_line.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_e_line/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/envelope_type"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.flux_control.loop_voltage.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference/data_error_lower"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.density_control.n_t_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/data"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].frequency.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/data_error_lower"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].z_n_error_index": {
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/z_n_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].frequency.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference_name"
+ },
+ "pulse_schedule.position_control.elongation_lower.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation_lower/envelope_type"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/envelope_type"
+ },
+ "pulse_schedule.lh.antenna[:].frequency.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/data_error_index"
+ },
+ "pulse_schedule.flux_control.mode": {
+  "documentation": "Control mode (operation mode and/or settings used by the controller)",
+  "full_path": "pulse_schedule/flux_control/mode",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.n_e_line.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/density_control/n_e_line/reference/data_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference_type"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_upper.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference_name"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference_type"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/envelope_type"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].multiplicity_error_lower": {
+  "lifecycle_version": "3.15.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "units": "Elementary Charge Unit",
+  "lifecycle_status": "obsolescent",
+  "type": "constant",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/multiplicity_error_lower"
+ },
+ "pulse_schedule.ic.antenna[:].power.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/envelope_type"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis": {
+  "documentation": "RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)",
+  "full_path": "pulse_schedule/position_control/geometric_axis",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference_type"
+ },
+ "pulse_schedule.flux_control.loop_voltage": {
+  "units": "V",
+  "documentation": "Loop voltage",
+  "full_path": "pulse_schedule/flux_control/loop_voltage",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].identifier": {
+  "documentation": "Identifier of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/identifier"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].energy.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.zeff.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.zeff.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/zeff/reference/data_error_lower"
+ },
+ "pulse_schedule.ec.antenna[:].power.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference_name"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/data_error_upper"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.minor_radius.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.minor_radius.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference/data"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference.time": {
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.lh": {
+  "documentation": "Lower Hybrid heating and current drive system",
+  "full_path": "pulse_schedule/lh",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.boundary_outline[:].r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/data_error_upper"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference.time": {
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference_type"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.zeff.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/zeff/reference_type"
+ },
+ "pulse_schedule.ic.antenna[:].power.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/data"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference.time": {
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.minor_radius.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/minor_radius/envelope_type"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].element[:].multiplicity_error_index": {
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/multiplicity_error_index"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/data_error_lower"
+ },
+ "pulse_schedule.ic.antenna[:].phase": {
+  "units": "rad",
+  "documentation": "Phase",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.x_point[:].r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.gap[:].angle_error_index": {
+  "documentation": "Index in the error_description list for \"angle\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/gap(i1)/angle_error_index"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.density_control.n_t_over_n_d.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.x_point[:].z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.minor_radius.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference_type"
+ },
+ "pulse_schedule.flux_control.li_3.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/flux_control/li_3/reference_name"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].power.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/data_error_upper"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_pol": {
+  "units": "rad",
+  "documentation": "Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R. Positive means wave launched downwards, negative means wave launched upwards",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference.time": {
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference_type"
+ },
+ "pulse_schedule.position_control.minor_radius.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.minor_radius.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/reference_type"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element[:].a": {
+  "units": "Atomic Mass Unit",
+  "documentation": "Mass of atom",
+  "type": "constant",
+  "data_type": "FLT_0D",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/a"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r": {
+  "units": "T.m",
+  "documentation": "Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference_name"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference/data_error_upper"
+ },
+ "pulse_schedule.lh.antenna[:].identifier": {
+  "documentation": "Identifier of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/identifier"
+ },
+ "pulse_schedule.position_control.geometric_axis.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference.time": {
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.geometric_axis.z": {
+  "units": "m",
+  "documentation": "Height",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference_type"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_lower"
+ },
+ "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_upper"
+ },
+ "pulse_schedule.density_control.n_t_over_n_d.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference_name"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/data_error_lower"
+ },
+ "pulse_schedule.lh.antenna[:].n_parallel.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/data_error_lower"
+ },
+ "pulse_schedule.flux_control.beta_normal.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/flux_control/beta_normal/reference_name"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].element": {
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)",
+  "documentation": "List of elements forming the atom or molecule",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "5"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference_type"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/data_error_index"
+ },
+ "pulse_schedule.ec.antenna[:].identifier": {
+  "documentation": "Identifier of the antenna",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/identifier"
+ },
+ "pulse_schedule.position_control.triangularity_upper": {
+  "units": "-",
+  "documentation": "Upper triangularity of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/triangularity_upper",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_index"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ic.antenna[:].frequency.reference.time": {
+  "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.triangularity_lower": {
+  "units": "-",
+  "documentation": "Lower triangularity of the plasma boundary",
+  "full_path": "pulse_schedule/position_control/triangularity_lower",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_lower.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.elongation_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/elongation_lower/reference/data_error_lower"
+ },
+ "pulse_schedule.flux_control.i_plasma.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/flux_control/i_plasma/reference_type"
+ },
+ "pulse_schedule.ec.antenna[:].phase.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference_type"
+ },
+ "pulse_schedule.position_control.triangularity_lower.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.triangularity_lower.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/triangularity_lower/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.gap[:].value.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/value/reference_type"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.x_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/data"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/data"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time": {
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ids_properties/provider"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference_name"
+ },
+ "pulse_schedule.density_control.mode.time": {
+  "full_path": "pulse_schedule/density_control/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.x_point[:].r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/r/envelope_type"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.ic.antenna[:].phase.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/data"
+ },
+ "pulse_schedule.position_control.triangularity_upper.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/triangularity_upper/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference_name"
+ },
+ "pulse_schedule.position_control.gap[:].identifier": {
+  "documentation": "Identifier of the gap",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/gap(i1)/identifier"
+ },
+ "pulse_schedule.tf.b_field_tor_vacuum_r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.density_control.valve[:].flow_rate": {
+  "units": "Pa.m^3.s^-1",
+  "documentation": "Flow rate of the valve",
+  "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.active_limiter_point.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/data"
+ },
+ "pulse_schedule.position_control.magnetic_axis.r.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.r.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/r/envelope_type"
+ },
+ "pulse_schedule.position_control.gap[:].z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/gap(i1)/z_error_index"
+ },
+ "pulse_schedule.position_control.triangularity.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/triangularity/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm": {
+  "units": "-",
+  "documentation": "Normalised toroidal flux coordinate at which the main deposition should occur",
+  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.geometric_axis.z.envelope_type": {
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/geometric_axis/z/envelope_type"
+ },
+ "pulse_schedule.ic.antenna[:].phase.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference_type"
+ },
+ "pulse_schedule.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/code/commit"
+ },
+ "pulse_schedule.nbi.unit[:].power": {
+  "units": "W",
+  "documentation": "Power",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power",
+  "data_type": "structure"
+ },
+ "pulse_schedule.position_control.elongation.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/position_control/elongation/reference_name"
+ },
+ "pulse_schedule.position_control.mode.time": {
+  "full_path": "pulse_schedule/position_control/mode/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "pulse_schedule.position_control.x_point[:].z.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/ids_properties/source"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].fraction": {
+  "documentation": "Relative fraction of this species (in molecules) in the gas mixture",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/fraction"
+ },
+ "pulse_schedule.lh.antenna[:].phase.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference_type"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference_name"
+ },
+ "pulse_schedule.position_control.minor_radius.reference.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.position_control.minor_radius.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference/data_error_upper"
+ },
+ "pulse_schedule.position_control.active_limiter_point.z.reference.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/data_error_index"
+ },
+ "pulse_schedule.nbi.unit[:].energy.reference.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "pulse_schedule.nbi.unit[:].energy.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/data_error_lower"
+ },
+ "pulse_schedule.position_control.strike_point[:].z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.strike_point[:].z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/data"
+ },
+ "pulse_schedule.flux_control.loop_voltage.reference_name": {
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/flux_control/loop_voltage/reference_name"
+ },
+ "pulse_schedule.position_control.magnetic_axis.z.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.position_control.magnetic_axis.z.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/data"
+ },
+ "pulse_schedule.position_control.elongation_upper.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/position_control/elongation_upper/reference_type"
+ },
+ "pulse_schedule.position_control.minor_radius.reference": {
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/position_control/minor_radius/reference",
+  "data_type": "structure"
+ },
+ "pulse_schedule.nbi.unit[:].name": {
+  "documentation": "Name of the NBI unit",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/name"
+ },
+ "pulse_schedule.density_control.zeff.reference.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Reference waveform",
+  "coordinates": [
+   "pulse_schedule.density_control.zeff.reference.time"
+  ],
+  "units": "mixed",
+  "type": "dynamic",
+  "full_path": "pulse_schedule/density_control/zeff/reference/data"
+ },
+ "pulse_schedule.nbi.unit[:].power.reference_type": {
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "pulse_schedule/nbi/unit(i1)/power/reference_type"
+ },
+ "pulse_schedule.ec.antenna": {
+  "full_path": "pulse_schedule/ec/antenna(i1)",
+  "documentation": "Set of ECRH antennas",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "10"
+ }
+}

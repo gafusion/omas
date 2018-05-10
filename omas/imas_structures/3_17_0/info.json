@@ -1,0 +1,32 @@
+{
+ "info.machine": {
+  "data_type": "STR_0D",
+  "coordinates": [],
+  "full_path": "info.machine",
+  "description": "machine name"
+ },
+ "info.user": {
+  "data_type": "STR_0D",
+  "coordinates": [],
+  "full_path": "info.user",
+  "description": "user name"
+ },
+ "info.shot": {
+  "data_type": "INT_0D",
+  "coordinates": [],
+  "full_path": "info.shot",
+  "description": "shot number"
+ },
+ "info.imas_version": {
+  "data_type": "STR_0D",
+  "coordinates": [],
+  "full_path": "info.imas_version",
+  "description": "imas version"
+ },
+ "info.run": {
+  "data_type": "INT_0D",
+  "coordinates": [],
+  "full_path": "info.run",
+  "description": "run number"
+ }
+}

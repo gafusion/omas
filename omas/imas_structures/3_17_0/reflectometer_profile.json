@@ -1,0 +1,903 @@
+{
+ "reflectometer_profile.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/code/commit"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r"
+ },
+ "reflectometer_profile.channel[:].sweep_time_error_upper": {
+  "units": "s",
+  "documentation": "Upper error for \"sweep_time\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/sweep_time_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z"
+ },
+ "reflectometer_profile.channel[:].position.phi": {
+  "structure_reference": "",
+  "documentation": "Toroidal angle",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/position/phi"
+ },
+ "reflectometer_profile.channel[:].phase.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.frequencies",
+   "reflectometer_profile.channel[:].frequencies",
+   "reflectometer_profile.channel[:].phase.time",
+   "reflectometer_profile.phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/phase/data_error_upper"
+ },
+ "reflectometer_profile": {
+  "lifecycle_version": "3.11.0",
+  "lifecycle_last_change": "3.11.0",
+  "documentation": "Profile reflectometer diagnostic. Multiple reflectometers are considered as independent diagnostics to be handled with different occurrence numbers",
+  "full_path": "reflectometer_profile",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission": {
+  "structure_reference": "line_of_sight_2points",
+  "documentation": "Description of the line of sight of the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission"
+ },
+ "reflectometer_profile.channel[:].frequencies": {
+  "data_type": "FLT_1D",
+  "documentation": "Array of frequencies scanned during a sweep",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "Hz",
+  "type": "static",
+  "full_path": "reflectometer_profile/channel(i1)/frequencies"
+ },
+ "reflectometer_profile.channel[:].position.z.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Height",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.z.time",
+   "reflectometer_profile.position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/z/data"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z"
+ },
+ "reflectometer_profile.channel[:].position.phi.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal angle",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.phi.time",
+   "reflectometer_profile.position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/phi/data"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the second point",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point"
+ },
+ "reflectometer_profile.channel[:].position.z.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection": {
+  "structure_reference": "line_of_sight_2points",
+  "documentation": "Description of the line of sight of the detection antenna, to be filled only if its position is distinct from the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection"
+ },
+ "reflectometer_profile.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/code/repository"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z_error_lower"
+ },
+ "reflectometer_profile.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/code/name"
+ },
+ "reflectometer_profile.channel[:].position.r.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.time",
+   "reflectometer_profile.position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi_error_index"
+ },
+ "reflectometer_profile.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/channel(i1)/name"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z_error_upper"
+ },
+ "reflectometer_profile.channel[:].position.z.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.z.time",
+   "reflectometer_profile.position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z_error_index"
+ },
+ "reflectometer_profile.channel[:].position.phi.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.phi.time",
+   "reflectometer_profile.position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z_error_upper"
+ },
+ "reflectometer_profile.channel[:].sweep_time_error_index": {
+  "documentation": "Index in the error_description list for \"sweep_time\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/sweep_time_error_index"
+ },
+ "reflectometer_profile.channel[:].position.z.time": {
+  "full_path": "reflectometer_profile/channel(i1)/position/z/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.channel[:].phase": {
+  "structure_reference": "",
+  "documentation": "Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/phase"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r_error_index"
+ },
+ "reflectometer_profile.channel[:].frequencies_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"frequencies\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "Hz",
+  "type": "static",
+  "full_path": "reflectometer_profile/channel(i1)/frequencies_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the second point",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point"
+ },
+ "reflectometer_profile.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/code/version"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z_error_upper"
+ },
+ "reflectometer_profile.type": {
+  "documentation": "Type of reflectometer (frequency_swept, radar, ...)",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/type"
+ },
+ "reflectometer_profile.channel[:].mode": {
+  "documentation": "Detection mode \"X\" or \"O\"",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/channel(i1)/mode"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi_error_lower"
+ },
+ "reflectometer_profile.code": {
+  "structure_reference": "code",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/code"
+ },
+ "reflectometer_profile.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/ids_properties/source"
+ },
+ "reflectometer_profile.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/ids_properties/provider"
+ },
+ "reflectometer_profile.channel[:].phase.time": {
+  "full_path": "reflectometer_profile/channel(i1)/phase/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r_error_upper"
+ },
+ "reflectometer_profile.channel[:].frequencies_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"frequencies\"",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "units": "Hz",
+  "type": "static",
+  "full_path": "reflectometer_profile/channel(i1)/frequencies_error_upper"
+ },
+ "reflectometer_profile.channel[:].position.z.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.z.time",
+   "reflectometer_profile.position.z.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_upper"
+ },
+ "reflectometer_profile.channel[:].frequencies_error_index": {
+  "documentation": "Index in the error_description list for \"frequencies\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/frequencies_error_index"
+ },
+ "reflectometer_profile.channel[:].phase.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.frequencies",
+   "reflectometer_profile.channel[:].frequencies",
+   "reflectometer_profile.channel[:].phase.time",
+   "reflectometer_profile.phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/phase/data_error_lower"
+ },
+ "reflectometer_profile.channel[:].sweep_time": {
+  "units": "s",
+  "documentation": "Duration of a sweep",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/sweep_time"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r_error_upper"
+ },
+ "reflectometer_profile.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/code/parameters"
+ },
+ "reflectometer_profile.channel[:].n_e": {
+  "structure_reference": "",
+  "documentation": "Electron density",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/n_e"
+ },
+ "reflectometer_profile.code.output_flag": {
+  "full_path": "reflectometer_profile/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "reflectometer_profile.time",
+   "reflectometer_profile.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r_error_index"
+ },
+ "reflectometer_profile.channel[:].position.r.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.time",
+   "reflectometer_profile.position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r_error_upper"
+ },
+ "reflectometer_profile.channel[:].position.phi.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.channel[:].r.data",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.r.data",
+   "1...N",
+   "reflectometer_profile.channel[:].position.phi.time",
+   "reflectometer_profile.position.phi.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi_error_upper"
+ },
+ "reflectometer_profile.channel[:].n_e.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_index"
+ },
+ "reflectometer_profile.channel[:].position.phi.time": {
+  "full_path": "reflectometer_profile/channel(i1)/position/phi/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.channel[:].phase.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch",
+  "coordinates": [
+   "reflectometer_profile.frequencies",
+   "reflectometer_profile.channel[:].frequencies",
+   "reflectometer_profile.channel[:].phase.time",
+   "reflectometer_profile.phase.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/phase/data"
+ },
+ "reflectometer_profile.channel[:].phase.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/phase/data_error_index"
+ },
+ "reflectometer_profile.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/channel(i1)/identifier"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi_error_index"
+ },
+ "reflectometer_profile.channel[:].position": {
+  "structure_reference": "rzphi2d_dynamic_aos1",
+  "documentation": "Position of the density measurements",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/position"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r_error_lower"
+ },
+ "reflectometer_profile.channel": {
+  "data_type": "struct_array",
+  "structure_reference": "reflectometer_channel",
+  "documentation": "Set of channels, e.g. different reception antennas or frequency bandwidths of the reflectometer",
+  "coordinates": [
+   "1...N"
+  ],
+  "maxoccur": "5",
+  "full_path": "reflectometer_profile/channel(i1)"
+ },
+ "reflectometer_profile.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "reflectometer_profile/ids_properties/homogeneous_time"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi"
+ },
+ "reflectometer_profile.channel[:].n_e.time": {
+  "full_path": "reflectometer_profile/channel(i1)/n_e/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.channel[:].n_e.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Electron density",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.channel[:].n_e.time",
+   "reflectometer_profile.n_e.time",
+   "1...N"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/n_e/data"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi_error_index"
+ },
+ "reflectometer_profile.channel[:].sweep_time_error_lower": {
+  "units": "s",
+  "documentation": "Lower error for \"sweep_time\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/sweep_time_error_lower"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the first point",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.first_point": {
+  "structure_reference": "rzphi0d_static",
+  "documentation": "Position of the first point",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point"
+ },
+ "reflectometer_profile.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/ids_properties/creation_date"
+ },
+ "reflectometer_profile.channel[:].n_e.data_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.channel[:].n_e.time",
+   "reflectometer_profile.n_e.time",
+   "1...N"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_upper"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r_error_lower"
+ },
+ "reflectometer_profile.channel[:].position.phi.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_index"
+ },
+ "reflectometer_profile.channel[:].position.r.time": {
+  "full_path": "reflectometer_profile/channel(i1)/position/r/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z_error_lower"
+ },
+ "reflectometer_profile.channel[:].position.r.data": {
+  "data_type": "FLT_2D",
+  "documentation": "Major radius",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.time",
+   "reflectometer_profile.position.r.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/position/r/data"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z"
+ },
+ "reflectometer_profile.channel[:].position.z": {
+  "structure_reference": "",
+  "documentation": "Height",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/position/z"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r"
+ },
+ "reflectometer_profile.channel[:].position.r": {
+  "structure_reference": "",
+  "documentation": "Major radius",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/channel(i1)/position/r"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z_error_index"
+ },
+ "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi_error_lower"
+ },
+ "reflectometer_profile.ids_properties": {
+  "structure_reference": "ids_properties",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "data_type": "structure",
+  "full_path": "reflectometer_profile/ids_properties"
+ },
+ "reflectometer_profile.channel[:].position.r.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_index"
+ },
+ "reflectometer_profile.time": {
+  "full_path": "reflectometer_profile/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "reflectometer_profile.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "reflectometer_profile/ids_properties/comment"
+ },
+ "reflectometer_profile.channel[:].n_e.data_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.position.r.data",
+   "reflectometer_profile.channel[:].position.r.data",
+   "reflectometer_profile.channel[:].n_e.time",
+   "reflectometer_profile.n_e.time",
+   "1...N"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_lower"
+ }
+}

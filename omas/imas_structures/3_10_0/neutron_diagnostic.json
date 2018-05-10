@@ -1,0 +1,939 @@
+{
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"flux\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-2",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_temperature_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"converter_temperature\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "K",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_lower"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_index": {
+  "documentation": "Index in the error_description list for \"count_limit_min\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"sensitivity\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "cps.m^2.s",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity_error_upper"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].probability_overlap": {
+  "units": "-",
+  "documentation": "Pulse probability overlap for recent plasma reaction",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density_error_index": {
+  "documentation": "Index in the error_description list for \"converter_nuclear_density\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density_error_index"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_temperature_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"converter_temperature\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "K",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_upper"
+ },
+ "neutron_diagnostic.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/code/name"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "cps",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_lower"
+ },
+ "neutron_diagnostic.unit_source[:].radiation": {
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)",
+  "documentation": "Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')",
+  "coordinates": [
+   "neutron_diagnostic.unit_source[:].radiation[:].index"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_volume_error_upper": {
+  "units": "m^3",
+  "documentation": "Upper error for \"converter_volume\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].position.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/z_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz_error_index": {
+  "documentation": "Index in the error_description list for \"d2flux_drdz\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz_error_index"
+ },
+ "neutron_diagnostic.characteristics.dead_time_error_upper": {
+  "units": "s",
+  "documentation": "Upper error for \"dead_time\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/dead_time_error_upper"
+ },
+ "neutron_diagnostic.synthetic_signals.total_neutron_flux": {
+  "data_type": "FLT_1D",
+  "documentation": "Total Neutron Flux in Dynamic",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "s^-1",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].probability_overlap_error_upper": {
+  "units": "-",
+  "documentation": "Upper error for \"probability_overlap\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_index"
+ },
+ "neutron_diagnostic.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/code/repository"
+ },
+ "neutron_diagnostic.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/ids_properties/comment"
+ },
+ "neutron_diagnostic.synthetic_signals.fusion_power_error_index": {
+  "documentation": "Index in the error_description list for \"fusion_power\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_index": {
+  "documentation": "Index in the error_description list for \"count_limit_max\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_index"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density_error_upper": {
+  "units": "m^-3",
+  "documentation": "Upper error for \"converter_nuclear_density\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].mode": {
+  "data_type": "struct_array",
+  "documentation": "Measuring Mode Properties and Data",
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].mode[:].index"
+  ],
+  "maxoccur": "50",
+  "type": "static",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Counting in Measuring Mode in Dynamic",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "cps",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_temperature": {
+  "data_type": "FLT_1D",
+  "documentation": "Temperature of detector's converter",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "K",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux": {
+  "data_type": "FLT_2D",
+  "documentation": "Radiation flux from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-2",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].probability_overlap_error_lower": {
+  "units": "-",
+  "documentation": "Lower error for \"probability_overlap\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].name": {
+  "documentation": "Name of Detector",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/name"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode": {
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)",
+  "documentation": "Characteristics of counting linear limits in recent Measuring modes for recent Plasma reaction type",
+  "coordinates": [
+   "neutron_diagnostic.characteristics.reaction[:].mode[:].index"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "5"
+ },
+ "neutron_diagnostic.synthetic_signals.total_neutron_flux_error_index": {
+  "documentation": "Index in the error_description list for \"total_neutron_flux\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_index"
+ },
+ "neutron_diagnostic.detectors": {
+  "full_path": "neutron_diagnostic/detectors(i1)",
+  "documentation": "Description of Detectors properties and Data in Neutron Diagnostic Module",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "50"
+ },
+ "neutron_diagnostic.unit_source[:].position.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/r_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min": {
+  "units": "cps",
+  "documentation": "Minimum count limit of recent Measuring Mode and plasma reaction",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min"
+ },
+ "neutron_diagnostic.characteristics.pulse_length_error_lower": {
+  "units": "s",
+  "documentation": "Lower error for \"pulse_length\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/pulse_length_error_lower"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max": {
+  "units": "cps",
+  "documentation": "Maximum count limit of recent Measuring Mode and plasma reaction",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].error": {
+  "units": "-",
+  "documentation": "Diagnostic's relative uncertainty for recent plasma reaction",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error"
+ },
+ "neutron_diagnostic.detectors[:].position.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/z_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting": {
+  "documentation": "Counting in Measuring Mode in Dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.characteristics.dead_time": {
+  "units": "s",
+  "documentation": "Dead time of detectors",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/dead_time"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].error_error_upper": {
+  "units": "-",
+  "documentation": "Upper error for \"error\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error_error_upper"
+ },
+ "neutron_diagnostic.characteristics.pulse_length": {
+  "units": "s",
+  "documentation": "Lower counting limit of recent Measuring Mode and plasma reaction",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/pulse_length"
+ },
+ "neutron_diagnostic.time": {
+  "full_path": "neutron_diagnostic/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_name": {
+  "documentation": "Name of detector's converter for resent particle",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_name"
+ },
+ "neutron_diagnostic.characteristics.dead_time_error_index": {
+  "documentation": "Index in the error_description list for \"dead_time\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/dead_time_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].index": {
+  "documentation": "Index of plasma reaction type",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/index"
+ },
+ "neutron_diagnostic.detectors[:].position.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/r_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_volume_error_lower": {
+  "units": "m^3",
+  "documentation": "Lower error for \"converter_volume\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_volume": {
+  "units": "m^3",
+  "documentation": "Volume of detector's converter for resent particle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_temperature_error_index": {
+  "documentation": "Index in the error_description list for \"converter_temperature\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_lower": {
+  "units": "cps",
+  "documentation": "Lower error for \"count_limit_min\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_lower"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].error_error_index": {
+  "documentation": "Index in the error_description list for \"error\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate_error_index": {
+  "documentation": "Index in the error_description list for \"reaction_rate\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].error_error_lower": {
+  "units": "-",
+  "documentation": "Lower error for \"error\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error_error_lower"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity_error_index": {
+  "documentation": "Index in the error_description list for \"sensitivity\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].index": {
+  "documentation": "Index of radiation type. TO BE REMOVED, since it is given by the index of the radiation array above.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/index"
+ },
+ "neutron_diagnostic.detectors[:].position.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/r"
+ },
+ "neutron_diagnostic.detectors[:].position": {
+  "documentation": "Detector Position Data",
+  "full_path": "neutron_diagnostic/detectors(i1)/position",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/code/commit"
+ },
+ "neutron_diagnostic.detectors[:].position.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/z"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_volume_error_index": {
+  "documentation": "Index in the error_description list for \"converter_volume\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume_error_index"
+ },
+ "neutron_diagnostic.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/code/version"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"d2flux_drdz\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-4",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz_error_lower"
+ },
+ "neutron_diagnostic.characteristics.dead_time_error_lower": {
+  "units": "s",
+  "documentation": "Lower error for \"dead_time\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/dead_time_error_lower"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].name": {
+  "documentation": "Name of Measuring Mode",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/name"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy_error_index": {
+  "documentation": "Index in the error_description list for \"energy\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy_error_index"
+ },
+ "neutron_diagnostic.detectors[:].radiation": {
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)",
+  "documentation": "Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')",
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].radiation[:].index"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "neutron_diagnostic.detectors[:].position.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/phi_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].index": {
+  "documentation": "Index of radiation type",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/index"
+ },
+ "neutron_diagnostic.synthetic_signals.fusion_power_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"fusion_power\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density_error_lower": {
+  "units": "m^-3",
+  "documentation": "Lower error for \"converter_nuclear_density\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].name": {
+  "documentation": "Name of Measuring Mode",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/name"
+ },
+ "neutron_diagnostic.unit_source[:].position.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/r_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].position.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/r_error_lower"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction": {
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)",
+  "documentation": "Plasma reaction (1 - 'DT'; 2 - 'DD')",
+  "coordinates": [
+   "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].index"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "neutron_diagnostic.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/ids_properties/homogeneous_time"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"d2flux_drdz\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-4",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz_error_upper"
+ },
+ "neutron_diagnostic.characteristics.reaction": {
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)",
+  "documentation": "Plasma reaction (1 -'DT'; 2 - 'DD')",
+  "coordinates": [
+   "neutron_diagnostic.characteristics.reaction[:].index"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "neutron_diagnostic.synthetic_signals.total_neutron_flux_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"total_neutron_flux\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "s^-1",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_lower"
+ },
+ "neutron_diagnostic.synthetic_signals.total_neutron_flux_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"total_neutron_flux\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "s^-1",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_upper"
+ },
+ "neutron_diagnostic.detectors[:].position.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/phi_error_upper"
+ },
+ "neutron_diagnostic.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "neutron_diagnostic/code/parameters"
+ },
+ "neutron_diagnostic.unit_source[:].position.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/z_error_upper"
+ },
+ "neutron_diagnostic.synthetic_signals.fusion_power_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"fusion_power\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_upper"
+ },
+ "neutron_diagnostic.synthetic_signals": {
+  "documentation": "Output Data from Neutron Diagnostic's Module",
+  "full_path": "neutron_diagnostic/synthetic_signals",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.detectors[:].position.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/phi_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].position.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/z"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz": {
+  "data_type": "FLT_2D",
+  "documentation": "Second deriviation of Radiation flux from Unit Ring Source in recent detector's converter for \"spline\" reconstruction(1 - Number of Detector, 2 - Energy of particles)",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-4",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_upper": {
+  "units": "cps",
+  "documentation": "Upper error for \"count_limit_min\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_upper"
+ },
+ "neutron_diagnostic.characteristics.pulse_length_error_index": {
+  "documentation": "Index in the error_description list for \"pulse_length\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/pulse_length_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].index": {
+  "documentation": "Index of plasma reaction type. To be removed, since it is given by the index of the reaction array above.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/index"
+ },
+ "neutron_diagnostic.unit_source": {
+  "full_path": "neutron_diagnostic/unit_source(i1)",
+  "documentation": "Unit ring sources description",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "50"
+ },
+ "neutron_diagnostic.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "neutron_diagnostic/code",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"energy\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "eV",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux_error_index": {
+  "documentation": "Index in the error_description list for \"flux\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux_error_index"
+ },
+ "neutron_diagnostic.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "neutron_diagnostic/ids_properties",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.detectors[:].position.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/phi"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_lower": {
+  "units": "cps",
+  "documentation": "Lower error for \"count_limit_max\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_lower"
+ },
+ "neutron_diagnostic.code.output_flag": {
+  "full_path": "neutron_diagnostic/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].index": {
+  "documentation": "Index of Measuring Mode",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/index"
+ },
+ "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density": {
+  "units": "m^-3",
+  "documentation": "Nuclear density of detector's converter for resent particle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate_error_upper": {
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"reaction_rate\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-3",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"reaction_rate\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-3",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate_error_lower"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].probability_overlap_error_index": {
+  "documentation": "Index in the error_description list for \"probability_overlap\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap_error_index"
+ },
+ "neutron_diagnostic.unit_source[:].position": {
+  "documentation": "Position of ring unit sources inside ITER vacuum vessel",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity": {
+  "data_type": "FLT_2D",
+  "documentation": "Sensitivity of converter's material in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "cps.m^2.s",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity"
+ },
+ "neutron_diagnostic": {
+  "lifecycle_version": "3.6.0",
+  "lifecycle_status": "alpha",
+  "documentation": "Neutron diagnostic such as DNFM, NFM or MFC",
+  "maxoccur": "3",
+  "full_path": "neutron_diagnostic"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"energy\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "eV",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].position.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/r_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].index": {
+  "documentation": "Index of Measuring Mode.  TO BE REMOVED: the mode index is provided by the index of the mode array above.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/index"
+ },
+ "neutron_diagnostic.characteristics": {
+  "documentation": "Description of Diagnostic's module detection characteristics for differen plasma modes based on Design Description",
+  "full_path": "neutron_diagnostic/characteristics",
+  "data_type": "structure"
+ },
+ "neutron_diagnostic.synthetic_signals.fusion_power": {
+  "data_type": "FLT_1D",
+  "documentation": "Fusion Power",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "W",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/synthetic_signals/fusion_power"
+ },
+ "neutron_diagnostic.characteristics.pulse_length_error_upper": {
+  "units": "s",
+  "documentation": "Upper error for \"pulse_length\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/pulse_length_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].position.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/z_error_lower"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy": {
+  "data_type": "FLT_1D",
+  "documentation": "Energy boundaries for Detector Radiator Flux",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "eV",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "neutron_diagnostic.time"
+  ],
+  "units": "cps",
+  "type": "dynamic",
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate": {
+  "data_type": "FLT_2D",
+  "documentation": "Reaction Rate on converter's material from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-3",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate"
+ },
+ "neutron_diagnostic.detectors[:].mode[:].counting.time": {
+  "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"sensitivity\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "cps.m^2.s",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].position.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/z_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].index": {
+  "documentation": "Number of Detector. TO BE REMOVED: the detector index is provided by the index of the detector array above.",
+  "type": "static",
+  "data_type": "INT_0D",
+  "full_path": "neutron_diagnostic/detectors(i1)/index"
+ },
+ "neutron_diagnostic.unit_source[:].position.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/r"
+ },
+ "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux_error_lower": {
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"flux\"",
+  "coordinates": [
+   "1...N",
+   "neutron_diagnostic.unit_source[:].unit_source[:].energy"
+  ],
+  "units": "m^-2",
+  "type": "static",
+  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux_error_lower"
+ },
+ "neutron_diagnostic.detectors[:].position.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/detectors(i1)/position/r_error_index"
+ },
+ "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_upper": {
+  "units": "cps",
+  "documentation": "Upper error for \"count_limit_max\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_upper"
+ },
+ "neutron_diagnostic.unit_source[:].position.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "neutron_diagnostic/unit_source(i1)/position/z_error_index"
+ }
+}

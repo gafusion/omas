@@ -1,0 +1,752 @@
+{
+ "interferometer.n_e_volume_average.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interferometer.n_e_volume_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/n_e_volume_average/data_error_lower"
+ },
+ "interferometer.n_e_volume_average.time": {
+  "full_path": "interferometer/n_e_volume_average/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_upper"
+ },
+ "interferometer.channel[:].n_e_line_average_validity": {
+  "documentation": "Indicator of the validity of the n_e_line_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "interferometer/channel(i1)/n_e_line_average_validity"
+ },
+ "interferometer.n_e_volume_average.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
+  "coordinates": [
+   "interferometer.n_e_volume_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/n_e_volume_average/data"
+ },
+ "interferometer.channel[:].wavelength[:].fring_jump_correction_times": {
+  "data_type": "FLT_1D",
+  "documentation": "List of time slices of the pulse on which a fringe jump correction has been made ",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "s",
+  "type": "constant",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/fring_jump_correction_times"
+ },
+ "interferometer.ids_properties.comment": {
+  "documentation": "Any comment describing the content of this IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/ids_properties/comment"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.first_point": {
+  "documentation": "Position of the first point",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].wavelength[:].phase_to_n_e_line_error_lower": {
+  "units": "m^-2.rad^-1",
+  "documentation": "Lower error for \"phase_to_n_e_line\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_lower"
+ },
+ "interferometer.channel[:].path_length_variation.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].path_length_variation.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/path_length_variation/data_error_lower"
+ },
+ "interferometer.code.version": {
+  "documentation": "Unique version (tag) of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/code/version"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_index"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_index"
+ },
+ "interferometer.channel[:].n_e_line.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line/data_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_upper"
+ },
+ "interferometer.channel[:].wavelength[:].phase_to_n_e_line_error_upper": {
+  "units": "m^-2.rad^-1",
+  "documentation": "Upper error for \"phase_to_n_e_line\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_upper"
+ },
+ "interferometer.code.commit": {
+  "documentation": "Unique commit reference of software",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/code/commit"
+ },
+ "interferometer.code.name": {
+  "documentation": "Name of software generating IDS",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/code/name"
+ },
+ "interferometer.ids_properties.provider": {
+  "documentation": "Name of the person in charge of producing this data",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/ids_properties/provider"
+ },
+ "interferometer.channel": {
+  "full_path": "interferometer/channel(i1)",
+  "documentation": "Set of channels (lines-of-sight)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "15"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_upper"
+ },
+ "interferometer.n_e_volume_average": {
+  "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
+  "full_path": "interferometer/n_e_volume_average",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.r_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_upper"
+ },
+ "interferometer.time": {
+  "full_path": "interferometer/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].n_e_line.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line/data"
+ },
+ "interferometer.channel[:].wavelength[:].value_error_index": {
+  "documentation": "Index in the error_description list for \"value\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_upper"
+ },
+ "interferometer.ids_properties.creation_date": {
+  "documentation": "Date at which this data has been produced",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/ids_properties/creation_date"
+ },
+ "interferometer": {
+  "lifecycle_version": "3.15.0",
+  "lifecycle_last_change": "3.15.0",
+  "documentation": "Interferometer diagnostic",
+  "full_path": "interferometer",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2"
+ },
+ "interferometer.channel[:].wavelength[:].fring_jump_correction_times_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"fring_jump_correction_times\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "s",
+  "type": "constant",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/fring_jump_correction_times_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point": {
+  "documentation": "Position of the third point",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
+  "coordinates": [
+   "interferometer.channel[:].wavelength[:].phase_corrected.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data"
+ },
+ "interferometer.channel[:].path_length_variation": {
+  "documentation": "Optical path length variation due to the plasma",
+  "full_path": "interferometer/channel(i1)/path_length_variation",
+  "data_type": "structure"
+ },
+ "interferometer.ids_properties": {
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "interferometer/ids_properties",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.phi_error_upper": {
+  "units": "rad",
+  "documentation": "Upper error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_upper"
+ },
+ "interferometer.channel[:].path_length_variation.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Optical path length variation due to the plasma",
+  "coordinates": [
+   "interferometer.channel[:].path_length_variation.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/path_length_variation/data"
+ },
+ "interferometer.channel[:].path_length_variation.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].path_length_variation.time"
+  ],
+  "units": "m",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/path_length_variation/data_error_upper"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.r_error_index": {
+  "documentation": "Index in the error_description list for \"r\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_index"
+ },
+ "interferometer.channel[:].n_e_line.time": {
+  "full_path": "interferometer/channel(i1)/n_e_line/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi"
+ },
+ "interferometer.channel[:].wavelength[:].phase_to_n_e_line_error_index": {
+  "documentation": "Index in the error_description list for \"phase_to_n_e_line\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_index"
+ },
+ "interferometer.channel[:].wavelength[:].fring_jump_correction_times_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"fring_jump_correction_times\"",
+  "coordinates": [
+   "1...N"
+  ],
+  "units": "s",
+  "type": "constant",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/fring_jump_correction_times_error_upper"
+ },
+ "interferometer.channel[:].path_length_variation.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/path_length_variation/data_error_index"
+ },
+ "interferometer.code": {
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "interferometer/code",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected.time": {
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_upper"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_upper"
+ },
+ "interferometer.channel[:].wavelength": {
+  "full_path": "interferometer/channel(i1)/wavelength(i2)",
+  "documentation": "Set of wavelengths used for interferometry",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "maxoccur": "2"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z"
+ },
+ "interferometer.channel[:].n_e_line_average.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_lower"
+ },
+ "interferometer.channel[:].n_e_line_average.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_upper"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r"
+ },
+ "interferometer.channel[:].path_length_variation.time": {
+  "full_path": "interferometer/channel(i1)/path_length_variation/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_lower"
+ },
+ "interferometer.channel[:].wavelength[:].value_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"value\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_lower"
+ },
+ "interferometer.channel[:].n_e_line_validity": {
+  "documentation": "Indicator of the validity of the n_e_line data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "interferometer/channel(i1)/n_e_line_validity"
+ },
+ "interferometer.channel[:].wavelength[:].value_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"value\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_upper"
+ },
+ "interferometer.channel[:].n_e_line": {
+  "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
+  "full_path": "interferometer/channel(i1)/n_e_line",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.z_error_upper": {
+  "units": "m",
+  "documentation": "Upper error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_upper"
+ },
+ "interferometer.ids_properties.source": {
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/ids_properties/source"
+ },
+ "interferometer.channel[:].wavelength[:].fring_jump_correction": {
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/fring_jump_correction",
+  "documentation": "Signed number of 2pi phase corrections applied to remove a fringe jump, for each time slice on which a correction has been made ",
+  "type": "constant",
+  "coordinates": [
+   "interferometer.channel[:].wavelength[:].fring_jump_correction_times"
+  ],
+  "data_type": "INT_1D"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected.data_error_lower": {
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].wavelength[:].phase_corrected.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_index"
+ },
+ "interferometer.n_e_volume_average.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/n_e_volume_average/data_error_index"
+ },
+ "interferometer.code.output_flag": {
+  "full_path": "interferometer/code/output_flag",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "type": "dynamic",
+  "coordinates": [
+   "interferometer.time"
+  ],
+  "data_type": "INT_1D"
+ },
+ "interferometer.channel[:].n_e_line_average.time": {
+  "full_path": "interferometer/channel(i1)/n_e_line_average/time",
+  "documentation": "Generic time [s]",
+  "type": "dynamic",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type"
+ },
+ "interferometer.channel[:].n_e_line.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line.time"
+  ],
+  "units": "m^-2",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line/data_error_upper"
+ },
+ "interferometer.channel[:].n_e_line_average.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_index"
+ },
+ "interferometer.code.parameters": {
+  "documentation": "List of the code specific parameters in XML format",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/code/parameters"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "units": "rad",
+  "documentation": "Lower error for \"phi\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_index"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected": {
+  "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.r_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"r\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_lower"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.r": {
+  "units": "m",
+  "documentation": "Major radius",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r"
+ },
+ "interferometer.channel[:].wavelength[:].fring_jump_correction_times_error_index": {
+  "documentation": "Index in the error_description list for \"fring_jump_correction_times\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/fring_jump_correction_times_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.second_point": {
+  "documentation": "Position of the second point",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.z": {
+  "units": "m",
+  "documentation": "Height",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z"
+ },
+ "interferometer.channel[:].identifier": {
+  "documentation": "ID of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/channel(i1)/identifier"
+ },
+ "interferometer.channel[:].line_of_sight": {
+  "documentation": "Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
+  "full_path": "interferometer/channel(i1)/line_of_sight",
+  "data_type": "structure"
+ },
+ "interferometer.channel[:].wavelength[:].phase_to_n_e_line": {
+  "units": "m^-2.rad^-1",
+  "documentation": "Conversion factor to be used to convert phase into line density for this wavelength",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line"
+ },
+ "interferometer.channel[:].n_e_line_average.data": {
+  "data_type": "FLT_1D",
+  "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
+  "coordinates": [
+   "interferometer.channel[:].n_e_line_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/data"
+ },
+ "interferometer.channel[:].wavelength[:].value": {
+  "units": "m",
+  "documentation": "Wavelength value",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/value"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.phi_error_index": {
+  "documentation": "Index in the error_description list for \"phi\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_index"
+ },
+ "interferometer.channel[:].wavelength[:].phase_corrected.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interferometer.channel[:].wavelength[:].phase_corrected.time"
+  ],
+  "units": "rad",
+  "type": "dynamic",
+  "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_upper"
+ },
+ "interferometer.channel[:].n_e_line.data_error_index": {
+  "documentation": "Index in the error_description list for \"data\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/n_e_line/data_error_index"
+ },
+ "interferometer.ids_properties.homogeneous_time": {
+  "documentation": "1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.",
+  "type": "constant",
+  "data_type": "INT_0D",
+  "full_path": "interferometer/ids_properties/homogeneous_time"
+ },
+ "interferometer.channel[:].line_of_sight.third_point.z_error_lower": {
+  "units": "m",
+  "documentation": "Lower error for \"z\"",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_lower"
+ },
+ "interferometer.n_e_volume_average.data_error_upper": {
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "coordinates": [
+   "interferometer.n_e_volume_average.time"
+  ],
+  "units": "m^-3",
+  "type": "dynamic",
+  "full_path": "interferometer/n_e_volume_average/data_error_upper"
+ },
+ "interferometer.code.repository": {
+  "documentation": "URL of software repository",
+  "type": "constant",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/code/repository"
+ },
+ "interferometer.channel[:].name": {
+  "documentation": "Name of the channel",
+  "type": "static",
+  "data_type": "STR_0D",
+  "full_path": "interferometer/channel(i1)/name"
+ },
+ "interferometer.channel[:].line_of_sight.second_point.z_error_index": {
+  "documentation": "Index in the error_description list for \"z\"",
+  "type": "constant",
+  "data_type": "int_type",
+  "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_index"
+ },
+ "interferometer.channel[:].line_of_sight.first_point.phi": {
+  "units": "rad",
+  "documentation": "Toroidal angle",
+  "type": "static",
+  "data_type": "FLT_0D",
+  "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi"
+ },
+ "interferometer.channel[:].n_e_line_average": {
+  "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
+  "full_path": "interferometer/channel(i1)/n_e_line_average",
+  "data_type": "structure"
+ }
+}
