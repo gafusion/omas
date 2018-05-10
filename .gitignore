@@ -11,8 +11,8 @@ omas_doc.html
 
 omas/data-dictionary
 omas/Saxon*
-omas/imas_structures/*/clean.html
-omas/imas_structures/*/*.json
+omas/imas_structures/*/*.html
+omas/imas_structures/*/*.xml
 
 sphinx/build/
 sphinx/source/data.rst
