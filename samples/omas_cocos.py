@@ -8,6 +8,8 @@ import numpy
 
 x=numpy.linspace(.1, 1, 10)
 
+# test different COCOS storage conventions
+
 ods = ODS(cocosin=11, cocos=11, cocosout=11)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] =x
 assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],x))
@@ -17,6 +19,8 @@ ods = ODS(cocosin=11, cocos=2, cocosout=11)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
+
+# test different COCOS in/out
 
 ods = ODS(cocosin=2, cocosout=11)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
@@ -28,15 +32,17 @@ ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
-ods = ODS(cocosin=2)
-with cocos_environment(ods, cocosin=11, cocosout=11) as ods1:
-    ods1['equilibrium.time_slice.0.profiles_1d.psi'] = x
-    assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],x))
-    print(ods1['equilibrium.time_slice.0.profiles_1d.psi'])
+# test cocos_environment
 
-ods1['equilibrium.time_slice.0.profiles_1d.psi'] = x
+ods = ODS(cocosin=2)
+with cocos_environment(ods, cocosin=11, cocosout=11):
+    ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+    assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],x))
+    print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
+
+ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 assert(numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'],-x*2*numpy.pi))
-print(ods1['equilibrium.time_slice.0.profiles_1d.psi'])
+print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
 # from omas.omas_utils import _structures as structures
 # from omas.omas_utils import *
