@@ -294,7 +294,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
 
     except IOError as _excp:
         raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
-        
+
     except ImportError:
         # fallback on saving ITM as NC file if ITM is not installed
         if not omas_rcparams['allow_fake_itm_fallback']:

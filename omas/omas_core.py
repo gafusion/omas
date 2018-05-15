@@ -17,7 +17,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info',
-    'cocos_environment',
+    'cocos_environment', 'cocos_transform',
     '__version__'
 ]
 
@@ -451,6 +451,7 @@ class ODS(MutableMapping):
 try:
     from . import omas_physics
     from .omas_physics import cocos_environment
+    from .omas_physics import cocos_transform
     __all__.append('omas_physics')
     for item in omas_physics.__all__:
         setattr(ODS, 'physics_' + item, getattr(omas_physics, item))

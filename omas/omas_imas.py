@@ -278,7 +278,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
 
     except IOError as _excp:
         raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
-        
+
     except ImportError:
         # fallback on saving IMAS as NC file if IMAS is not installed
         if not omas_rcparams['allow_fake_imas_fallback']:
