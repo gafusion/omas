@@ -1,7 +1,7 @@
 Installation
 ============
 
-The OMAS library runs on **Python2** and **Python3**
+The OMAS library runs on **Python2** and **Python3**.
 
 To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_::
 
