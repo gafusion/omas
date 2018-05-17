@@ -278,7 +278,9 @@ def load_structure(filename, imas_version):
         else:
             filename = os.path.abspath(filename)
     if filename not in _structures:
-        _structures[filename] = json.loads(open(filename, 'r').read(), object_pairs_hook=json_loader)
+        dump_string=open(filename, 'r').read()
+        _structures[filename] = json.loads(dump_string, object_pairs_hook=json_loader)
+        #_structures[filename] = pickle.loads(dump_string)
         _structures_dict[filename] = {}
         for item in _structures[filename]:
             h = _structures_dict[filename]
