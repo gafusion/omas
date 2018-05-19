@@ -403,14 +403,30 @@ class ODS(MutableMapping):
         """
         Check if key is present and if not return default value without creating value in omas data structure
 
-        :param key: dictionary key to get
+        :param key: key to get
 
-        :param default: return default if key is not found
+        :param default: default value
+
+        :return: return default if key is not found
         """
         if key not in self:
             return default
         else:
             return self[key]
+
+    def setdefault(self, key, value=None):
+        """
+        Set value if key is not present
+
+        :param key: key to get
+
+        :param value: value to set
+
+        :return: value
+        """
+        if key not in self:
+            self[key] = value
+        return self[key]
 
     def __getstate__(self):
         tmp=copy.copy(self.__dict__)
