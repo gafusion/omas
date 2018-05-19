@@ -445,6 +445,20 @@ class ODS(MutableMapping):
             setattr(self,item,getattr(ods,item))
         return self
 
+    def prune(self):
+        '''
+        Prune ODS branches that are leafless
+
+        :return: number of branches that were pruned
+        '''
+        n=0
+        for item in self.keys():
+            if isinstance(self[item], ODS):
+                n+=self[item].prune()
+                if not len(self[item].keys()):
+                    n+=1
+                    del self[item]
+        return n
 # --------------------------------------------
 # import physics functions and add them as ODS methods
 # --------------------------------------------
