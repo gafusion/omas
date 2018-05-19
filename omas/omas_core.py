@@ -267,14 +267,21 @@ class ODS(MutableMapping):
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
+            dynamically_created = False
             if key[0] not in self.keys():
+                dynamically_created = True
                 if isinstance(self.omas_data, dict):
                     self.omas_data[key[0]] = value
                 elif key[0] == len(self.omas_data):
                     self.omas_data.append(value)
                 else:
                     raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
-            self[key[0]][l2o(key[1:])] = pass_on_value
+            try:
+                self[key[0]][l2o(key[1:])] = pass_on_value
+            except LookupError:
+                if dynamically_created:
+                    del self[key[0]]
+                raise
         elif isinstance(self.omas_data, dict):
             self.omas_data[key[0]] = value
         elif key[0] in self.omas_data:
