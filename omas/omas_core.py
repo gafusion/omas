@@ -442,12 +442,16 @@ class ODS(MutableMapping):
         return copy.deepcopy(self)
 
     def clear(self):
+        '''
+        remove data from a branch
+
+        :return: current ODS object
+        '''
         if isinstance(self.omas_data, dict):
             self.omas_data.clear()
-            return self.omas_data
         elif isinstance(self.omas_data, list):
             self.omas_data[:]=[]
-            return self.omas_data
+        return self
 
     def copy_attrs_from(self, ods):
         '''
