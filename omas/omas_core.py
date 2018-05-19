@@ -20,7 +20,7 @@ __all__ = [
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info',
     'cocos_environment', 'cocos_transform', 'define_cocos',
-    'rcparams_environment','__version__'
+    'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
 

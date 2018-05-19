@@ -1,6 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 import os
+
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
