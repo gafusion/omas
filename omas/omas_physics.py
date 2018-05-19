@@ -1,7 +1,5 @@
 from __future__ import print_function, division, unicode_literals
 
-import numpy
-from contextlib import contextmanager
 from .omas_utils import *
 
 __all__ = []

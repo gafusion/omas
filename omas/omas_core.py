@@ -7,18 +7,20 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'omas_rcparams', 'ODS', 'ods_sample', 'different_ods', 'save_omas', 'load_omas',
-    'test_omas_suite', 'save_omas_pkl', 'load_omas_pkl', 'test_omas_pkl',
+    'ODS', 'ods_sample', 'different_ods',
+    'save_omas',      'load_omas',      'test_omas_suite',
+    'save_omas_pkl',  'load_omas_pkl',  'test_omas_pkl',
     'save_omas_json', 'load_omas_json', 'test_omas_json',
-    'save_omas_hdc', 'load_omas_hdc', 'test_omas_hdc',
-    'save_omas_nc', 'load_omas_nc', 'test_omas_nc',
+    'save_omas_hdc',  'load_omas_hdc',  'test_omas_hdc',
+    'save_omas_nc',   'load_omas_nc',   'test_omas_nc',
     'save_omas_imas', 'load_omas_imas', 'test_omas_imas',
-    'save_omas_itm', 'load_omas_itm', 'test_omas_itm',
-    'save_omas_s3', 'load_omas_s3', 'test_omas_s3', 'list_omas_s3', 'del_omas_s3', 'omas_scenario_database',
+    'save_omas_itm',  'load_omas_itm',  'test_omas_itm',
+    'save_omas_s3',   'load_omas_s3',   'test_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info',
     'cocos_environment', 'cocos_transform', 'define_cocos',
-    '__version__'
+    'rcparams_environment','__version__'
 ]
 
 

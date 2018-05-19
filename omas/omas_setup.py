@@ -18,6 +18,7 @@ import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 from io import StringIO
+from contextlib import contextmanager
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
@@ -48,8 +49,8 @@ omas_rcparams = {
     'cocos':11,
     'cocosin':11,
     'cocosout':11,
-    'consistency_check': bool(int(os.environ.get('OMAS_CONSISTENCY_CHECK', '1'))),
-    'dynamic_path_creation': bool(int(os.environ.get('OMAS_DYNAMIC_PATH_CREATION', '1'))),
+    'consistency_check': True,
+    'dynamic_path_creation': True,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',
                                     os.sep.join(
                                         [tempfile.gettempdir(), 'OMAS_TMP_DIR'])),
@@ -62,6 +63,15 @@ omas_rcparams = {
                                         [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_ITM_DIR'])),
     'allow_fake_itm_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_ITM_FALLBACK', '0')))
 }
+
+@contextmanager
+def rcparams_environment(**kw):
+    old_omas_rcparams=omas_rcparams.copy()
+    omas_rcparams.update(kw)
+    try:
+        yield omas_rcparams
+    finally:
+        omas_rcparams.update(old_omas_rcparams)
 
 # --------------------------------------------
 # configuration of directories and IMAS infos
