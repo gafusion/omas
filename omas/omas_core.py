@@ -385,9 +385,12 @@ class ODS(MutableMapping):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
                 h = h[k]
-                continue
+                continue  # continue to the next key
             else:
                 return False
+        # return False if checking existance of a leaf and the leaf exists but is unassigned
+        if isinstance(h, ODS) and h.omas_data is None:
+            return False
         return True
 
     def keys(self):
