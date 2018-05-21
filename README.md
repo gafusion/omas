@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gafusion/omas.svg?branch=master)](https://travis-ci.org/gafusion/omas)
+
 # **OMAS** (**O**rdered **M**ultidimensional **A**rray **S**tructure)
 
 OMAS is a set of Python tools that aim at simplifying the interface between third-party codes and the ITER IMAS data storage infrastructure. IMAS is a set of codes, an execution framework, a data model, a data get/put API, and a data storage infrastructure used for manipulating ITER data. The IMAS data model organizes data into a hierarchical tree. There data is stored in the leaf nodes, and the branches are structures or arrays of structures.
