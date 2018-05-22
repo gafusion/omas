@@ -97,6 +97,16 @@ def define_cocos(cocos_ind):
 
     cocos=dict.fromkeys(['sigma_Bp', 'sigma_RpZ', 'sigma_rhotp', 'sign_q_pos', 'sign_pprime_pos', 'exp_Bp'])
 
+    # all multipliers shouldn't change input values if cocos_ind is None
+    if cocos_ind is None:
+        cocos['exp_Bp']          = 0
+        cocos['sigma_Bp']        = +1
+        cocos['sigma_RpZ']       = +1
+        cocos['sigma_rhotp']     = +1
+        cocos['sign_q_pos']      = 0
+        cocos['sign_pprime_pos'] = 0
+        return cocos
+
     # if COCOS>=10, this should be 1
     cocos['exp_Bp'] = 0
     if cocos_ind>=10:
