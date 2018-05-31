@@ -26,7 +26,7 @@ __all__ = [
 
 def _omas_key_dict_preprocessor(key):
     """
-    converts a omas string path to a list of keys that make the path
+    converts the many different ways of addressing an ODS path to a list of keys
 
     :param key: omas string path
 
@@ -34,9 +34,13 @@ def _omas_key_dict_preprocessor(key):
     """
     if not isinstance(key, (list, tuple)):
         key = str(key)
-        key = re.sub('\]', '', re.sub('\[', '.', key)).split('.')
+        key = re.sub('\]', '', re.sub('\[', separator, key)).split(separator)
     else:
-        key = list(map(str, key))
+        tmp=[]
+        for item in key:
+            tmp.extend(str(item).split(separator))
+        key = tmp
+    key = filter(None,key)
     for k,item in enumerate(key):
         try:
             key[k] = int(item)
@@ -296,6 +300,9 @@ class ODS(MutableMapping):
     def __getitem__(self, key):
         # handle individual keys as well as full paths
         key = _omas_key_dict_preprocessor(key)
+
+        if not len(key):
+            return self
 
         dynamically_created = False
 
