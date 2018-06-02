@@ -40,7 +40,7 @@ def _omas_key_dict_preprocessor(key):
         for item in key:
             tmp.extend(str(item).split(separator))
         key = tmp
-    key = filter(None,key)
+    key = list(filter(None,key))
     for k,item in enumerate(key):
         try:
             key[k] = int(item)
@@ -146,7 +146,7 @@ class ODS(MutableMapping):
             for item in tmp:
                 times.append(tmp[item].time(extra_info=extra_info))
             # if any time information was found, return it
-            if len(filter(None, times)):
+            if len(list(filter(None, times))):
                 return add_is_homogeneous_info(numpy.array(times))
 
         # ODS not yet assigned
