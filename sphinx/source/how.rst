@@ -25,15 +25,30 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     ods['equilibrium.time_slice[:].global_quantities.ip']
 
-5. Handling of `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ **transforms**::
+5. Automatic `COCOS <https://linkinghub.elsevier.com/retrieve/pii/S0010465512002962>`_ **transformations**::
 
-    ods = ODS(cocosin=2, cocosout=11)
+    with cocos_environment(ods, cocosin=2):
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
-6. Handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
+6. Unified interface for **querying about time** dimension::
+
+    ods.time('equilibrium')
+    ods.time('equilibrium.time_slice')
+    ods.time('equilibrium.time_slice.0.global_quantities.ip')
+
+7. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
 
     ods['equilibrium.time_slice[0].profiles_1d.q'] = uarray(nom_value,std_dev)
 
-7. Save/load ODSs to/from **different storage systems**:
+8. Evaluate **derived quantities**::
+
+    ods.physics_core_profiles_pressures()
+
+9. **Predefined plot**::
+
+    ods.plot_core_profiles_summary()
+
+10. Save/load ODSs to/from **different storage systems**:
 
    .. _omas_formats:
 
