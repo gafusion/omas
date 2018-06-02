@@ -15,41 +15,52 @@ def add_to__ODS__(f):
 # ================================
 # plotting helper functions
 # ================================
-def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1):
+def compare_version(version1, version2):
+    """Returns 1 if version1 > version2, -1 if version1 < version2, or 0 if version1 == version2."""
+    version1 = sanitize_version_number(version1)
+    version2 = sanitize_version_number(version2)
+
+    def normalize(v):
+        if 'r' in v:
+            v = v.split('r')[0]
+        return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
+
+    return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
+
+def contourPaths(x, y, Z, levels, remove_boundary_points=False):
     '''
-    returns contour paths
+    :param x: 1D x coordinate
 
-    :param x: x grid
+    :param y: 1D y coordinate
 
-    :param y: y grid
+    :param Z: 2D data
 
-    :param Z: z values
+    :param levels: levels to trace
 
-    :param levels: levels of the contours
+    :param remove_boundary_points: remove traces at the boundary
 
-    :param remove_boundary_points: how to treat the last point of contour surfaces that are close
-
-    :param smooth_factor: smoothing before contouring
-
-    :return: list of matplotlib contour paths objects
+    :return: list of segments
     '''
     import matplotlib
-    from matplotlib import _cntr
-
-    sf = int(round(smooth_factor))
-    if sf > 1:
-        x = scipy.ndimage.zoom(x, sf)
-        y = scipy.ndimage.zoom(y, sf)
-        Z = scipy.ndimage.zoom(Z, sf)
+    if compare_version(matplotlib.__version__, '2.1') >= 0:
+        import matplotlib._contour as _contour
+    else:
+        from matplotlib import _cntr
 
     [X, Y] = numpy.meshgrid(x, y)
-    Cntr = matplotlib._cntr.Cntr(X, Y, Z)
+    if compare_version(matplotlib.__version__, '2.1') >= 0:
+        contour_generator = _contour.QuadContourGenerator(X, Y, Z, None, True, 0)
+    else:
+        Cntr = matplotlib._cntr.Cntr(X, Y, Z)
 
     allsegs = []
     for level in levels:
-        nlist = Cntr.trace(level)
-        nseg = len(nlist) // 2
-        segs = nlist[:nseg]
+        if compare_version(matplotlib.__version__, '2.1') >= 0:
+            segs = contour_generator.create_contour(level)
+        else:
+            nlist = Cntr.trace(level)
+            nseg = len(nlist) // 2
+            segs = nlist[:nseg]
         if not remove_boundary_points:
             segs_ = segs
         else:
@@ -223,8 +234,7 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     # contours
     line = numpy.array([numpy.nan, numpy.nan])
-    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D,
-                              levels, smooth_factor=1):
+    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D, levels):
         for item in item1:
             line = numpy.vstack((line, item.vertices, numpy.array([numpy.nan, numpy.nan])))
 
