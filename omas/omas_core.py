@@ -92,6 +92,78 @@ class ODS(MutableMapping):
             structure = {}
         self.structure = structure
 
+    def time(self, key='', extra_info=None):
+        """
+        Return the time information for a given ODS location
+
+        :param key: key to get
+
+        :param extra_info: dictionary that will be filled in place with extra information about time
+
+        :return: time information for a given ODS location (scalar or array)
+        """
+
+        def add_is_homogeneous_info(time):
+            if time is None:
+                extra_info['homogeneous_time']=None
+            elif len(numpy.atleast_1d(time))<=2:
+                extra_info['homogeneous_time']=None
+            else:
+                tmp=numpy.diff(time)
+                if numpy.sum(numpy.abs(tmp-tmp[0]))<1E-6:
+                    extra_info['homogeneous_time']=True
+                else:
+                    extra_info['homogeneous_time']=False
+            return time
+
+        # extra
+        if extra_info is None:
+            extra_info = {}
+
+        # process the key
+        key = _omas_key_dict_preprocessor(key)
+        tmp = self[key]
+        if not isinstance(tmp, ODS):
+            key = key[:-1]
+            tmp = self[key]
+
+        # this ODS has a children with 'time' information
+        if isinstance(tmp.omas_data, dict):
+            if 'time' in tmp:
+                extra_info['location'] = self.location + separator + 'time'
+                return add_is_homogeneous_info(tmp['time'])
+            # this node should have time filled, but the user did not do their job
+            elif 'time' in tmp.structure:
+                # try to assemble time information by looking in the children
+                for item in tmp.structure:
+                    if item in tmp and ':' in tmp.structure[item] and 'time' in tmp.structure[item][':']:
+                        return add_is_homogeneous_info(tmp.time(item, extra_info=extra_info))
+
+        # this ODS is an array of structures (which may or may not have time information)
+        elif isinstance(tmp.omas_data, list):
+            # assemble time array information from the children
+            times = []
+            for item in tmp:
+                times.append(tmp[item].time(extra_info=extra_info))
+            # if any time information was found, return it
+            if len(filter(None, times)):
+                return add_is_homogeneous_info(numpy.array(times))
+
+        # ODS not yet assigned
+        else:
+            return add_is_homogeneous_info(None)
+
+        # traverse tree upstream looking for the first parent that has time information
+        while len(key):
+            key.pop()
+            time = self.time(key, extra_info=extra_info)
+            if time is not None:
+                # if the parent with time information is an array of structures
+                # then return the time of the element that we are asking for
+                if isinstance(time, numpy.ndarray):
+                    time = time[key[-1]]
+                return add_is_homogeneous_info(time)
+
     @property
     def consistency_check(self):
         """
@@ -630,14 +702,15 @@ def ods_sample():
 
     ods2 = copy.deepcopy(ods)
     ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
-    ods2['equilibrium']['time_slice'][2] = ods['equilibrium']['time_slice'][0]
+    ods2['equilibrium.time_slice.1.time'] = 2000.
+
+    ods2['equilibrium']['time_slice'][2] = copy.deepcopy(ods['equilibrium']['time_slice'][0])
+    ods2['equilibrium.time_slice[2].time'] = 3000.
 
     printd(ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
     printd(ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
 
-    ods2['equilibrium.time_slice.1.time'] = 2000.
     ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
-    ods2['equilibrium.time_slice[2].time'] = 3000.
 
     # uncertain scalar
     ods2['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3,0.1)
