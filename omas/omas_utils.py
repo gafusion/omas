@@ -249,7 +249,8 @@ _structures = {}
 # * list of structures as `:`
 # * the leafs are empty dictionaries
 _structures_dict = {}
-
+# similar to `_structures_dict` but for use in omas_info
+_info_structures = {}
 
 def list_structures(imas_version):
     return sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
@@ -380,25 +381,33 @@ def omas_info(structures, imas_version=default_imas_version):
 
     :return: ods
     '''
-    from omas import ODS
-    ods = ODS(imas_version=imas_version)
 
     if isinstance(structures,basestring):
         structures=[structures]
 
-    for structure in structures:
-        tmp = load_structure(structure, imas_version)[0]
-        lst = sorted(tmp.keys())
-        for k, item in enumerate(lst):
-            if re.match('.*_error_(index|lower|upper)$', item.split('.')[-1]):
-                continue
-            parent = False
-            for item1 in lst[k + 1:]:
-                if l2o(item1.split(separator)[:-1]).rstrip('[:]') == item:
-                    parent = True
-                    break
-            if parent:
-                continue
-            ods[re.sub(':', '0', item)] = tmp[item]
+    if imas_version in _info_structures:
+        ods = _info_structures[imas_version]
 
-    return ods
+    else:
+        from omas import ODS
+        ods = ODS(imas_version=imas_version, consistency_check=False)
+        _info_structures[imas_version]=ods
+
+
+    for structure in structures:
+        if structure not in ods:
+            tmp = load_structure(structure, imas_version)[0]
+            lst = sorted(tmp.keys())
+            for k, item in enumerate(lst):
+                if re.match('.*_error_(index|lower|upper)$', item.split('.')[-1]):
+                    continue
+                parent = False
+                for item1 in lst[k + 1:]:
+                    if l2o(item1.split(separator)[:-1]).rstrip('[:]') == item:
+                        parent = True
+                        break
+                if parent:
+                    continue
+                ods[re.sub(':', '0', item)] = tmp[item]
+
+    return copy.deepcopy(ods)
