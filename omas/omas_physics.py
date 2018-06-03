@@ -201,14 +201,24 @@ def cocos_transform(cocosin_index, cocosout_index):
     Sauter, O., and S. Yu Medvedev. "Tokamak coordinate conventions: COCOS." Computer Physics Communications 184.2 (2013): 293-302.
     """
 
-    cocosin = define_cocos(cocosin_index)
-    cocosout = define_cocos(cocosout_index)
+    # Don't transform if either cocos is undefined
+    if (cocosin_index is None) or (cocosout_index is None):
+        printd("No COCOS tranformation for "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
+        sigma_Ip_eff    = 1
+        sigma_B0_eff    = 1
+        sigma_Bp_eff    = 1
+        exp_Bp_eff      = 0
+        sigma_rhotp_eff = 1
+    else:
+        printd("COCOS tranformation from "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
+        cocosin = define_cocos(cocosin_index)
+        cocosout = define_cocos(cocosout_index)
 
-    sigma_Ip_eff = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
-    sigma_B0_eff = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
-    sigma_Bp_eff = cocosin['sigma_Bp'] * cocosout['sigma_Bp']
-    exp_Bp_eff = cocosout['exp_Bp'] - cocosin['exp_Bp']
-    sigma_rhotp_eff = cocosin['sigma_rhotp'] * cocosout['sigma_rhotp']
+        sigma_Ip_eff    = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
+        sigma_B0_eff    = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
+        sigma_Bp_eff    = cocosin['sigma_Bp'] * cocosout['sigma_Bp']
+        exp_Bp_eff      = cocosout['exp_Bp'] - cocosin['exp_Bp']
+        sigma_rhotp_eff = cocosin['sigma_rhotp'] * cocosout['sigma_rhotp']
 
     # Transform
     transforms = {}
@@ -222,7 +232,6 @@ def cocos_transform(cocosin_index, cocosout_index):
     transforms['F_FPRIME'] = transforms['dPSI']
     transforms['PPRIME'] = transforms['dPSI']
 
-    printd("COCOS tranformation from "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
     printd(transforms,topic='cocos')
 
     return transforms
