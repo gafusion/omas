@@ -29,6 +29,7 @@
 import os, sys, shutil, glob, re
 import sphinx_bootstrap_theme
 from omas import *
+import time
 
 sys.path.insert(0, os.path.abspath('../../'))
 
@@ -250,7 +251,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'OMAS'
-copyright = '2017-2018, Orso Meneghini'
+copyright = '2017-'+time.strftime("%Y")+' O. Meneghini and collaborators'
 author = 'Orso Meneghini'
 
 # The version info for the project you're documenting, acts as replacement for
