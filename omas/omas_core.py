@@ -92,11 +92,23 @@ class ODS(MutableMapping):
             structure = {}
         self.structure = structure
 
+    def homogeneous_time(self, key=''):
+        '''
+        return whether time is homogeneous or not
+
+        :param key: ods location
+
+        :return:
+        '''
+        extra_info={}
+        self.time(key=key,extra_info=extra_info)
+        return extra_info['homogeneous_time']
+
     def time(self, key='', extra_info=None):
         """
         Return the time information for a given ODS location
 
-        :param key: key to get
+        :param key: ods location
 
         :param extra_info: dictionary that will be filled in place with extra information about time
 
@@ -494,7 +506,7 @@ class ODS(MutableMapping):
         """
         Check if key is present and if not return default value without creating value in omas data structure
 
-        :param key: key to get
+        :param key: ods location
 
         :param default: default value
 
@@ -509,7 +521,7 @@ class ODS(MutableMapping):
         """
         Set value if key is not present
 
-        :param key: key to get
+        :param key: ods location
 
         :param value: value to set
 

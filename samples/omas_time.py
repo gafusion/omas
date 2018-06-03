@@ -16,6 +16,9 @@ extra_info = {}
 print(ods.time('equilibrium', extra_info=extra_info))
 print(extra_info)
 
+# show use of .homogeneous_time property
+print(ods.homogeneous_time('equilibrium'))
+
 ods['equilibrium.time'] = [100, 200, 300]
 
 # get time information from explicitly set time array
@@ -37,3 +40,4 @@ print(extra_info)
 extra_info = {}
 print(ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info))
 print(extra_info)
+
