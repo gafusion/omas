@@ -161,11 +161,15 @@ def create_json_structure(imas_version=default_imas_version):
             if key.endswith('AosParent_relative') or key.endswith('_same_as'):
                 del fout[item][key]
             elif key != '@coordinates' and key.startswith('@coordinate'):
-                coords.append(process_path(fout[item][key]))
-                #del fout[item][key]
+                coords.append(fout[item][key])
+                del fout[item][key]
             elif key.startswith('@path'):
                 fout[item][key] = process_path(fout[item][key])
         if len(coords):
+            # # this is a check for duplicated coordinates, which it is not an error per se
+            # if len(numpy.unique(list(filter(lambda x: not x.startswith('1...'), coords)))) != len(list(filter(lambda x: not x.startswith('1...'), coords))):
+            #     printe('%s -X-> %s' % (item, coords))
+            coords = map(process_path, coords)
             fout[item]['@coordinates'] = coords
 
     # check dimensions

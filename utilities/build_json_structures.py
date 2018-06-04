@@ -1,12 +1,13 @@
 from __future__ import print_function, division, unicode_literals
 
 import os, re, glob
+
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
 from omas import *
 
 generate_IDSDef_xml = True
-force_build_json = False
+force_build_json = 'last'
 
 # loops through the tags of the data-dictionary repository and generates the IDSDef.xml files for each one
 if generate_IDSDef_xml:
