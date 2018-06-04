@@ -556,6 +556,38 @@ class ODS(MutableMapping):
                     n+=1
                     del self[item]
         return n
+
+    def set_time_array(self, key, time_index, value):
+        '''
+        Convenience function for setting time dependent arrays
+
+        :param key: ods location to edit
+
+        :param time_index: time index of the value to set
+
+        :param value: value to set
+
+        :return: time dependent array
+        '''
+
+        key = p2l(key)
+
+        orig_value = []
+        if key in self:
+            orig_value = numpy.atleast_1d(eval(self[key])).tolist()
+
+        # substitute
+        if time_index < len(orig_value):
+            orig_value[time_index] = value
+        # append
+        elif time_index == len(orig_value):
+            orig_value = orig_value + [value]
+        else:
+            raise (IndexError('%s has length and time_index %d is bejond range' % (l2o(key), len(orig_value), time_index)))
+
+        self[key] = numpy.atleast_1d(orig_value)
+        return orig_value
+
 # --------------------------------------------
 # import physics functions and add them as ODS methods
 # --------------------------------------------
