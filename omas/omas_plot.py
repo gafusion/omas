@@ -15,6 +15,13 @@ def add_to__ODS__(f):
 # ================================
 # plotting helper functions
 # ================================
+def sanitize_version_number(version):
+    """Removes common non-numerical characters from version numbers obtained from git tags, such as '_rc', etc."""
+    if version.startswith('.'):
+        version = '-1' + version
+    version = version.replace('_rc', '.')
+    return version
+
 def compare_version(version1, version2):
     """Returns 1 if version1 > version2, -1 if version1 < version2, or 0 if version1 == version2."""
     version1 = sanitize_version_number(version1)
