@@ -435,3 +435,19 @@ def omas_info(structures, imas_version=default_imas_version):
                 ods[re.sub(':', '0', item)] = tmp[item]
 
     return copy.deepcopy(ods)
+
+
+def omas_info_node(key, imas_version=default_imas_version):
+    '''
+    return information about a given node
+
+    :param key:
+
+    :param imas_version:
+
+    :return:
+    '''
+    key=p2l(key)
+    key=[':' if isinstance(item,int) else item for item in key]
+    tmp=load_structure(key[0], imas_version)[0]
+    return tmp[l2i(key)]

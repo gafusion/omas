@@ -18,7 +18,7 @@ __all__ = [
     'save_omas_s3',   'load_omas_s3',   'test_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
-    'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info',
+    'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
     'cocos_environment', 'cocos_transform', 'define_cocos',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
