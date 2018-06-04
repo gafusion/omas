@@ -122,16 +122,16 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             m.time[0]=-1.0
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
-            printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
+            printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
         return
     else:
-        raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
+        raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
 
     # traverse IMAS structure until reaching the leaf
     printd("out = m",topic='imas_code')
     out = m
     for kp, p in enumerate(path):
-        location=o2i([ds] + path[:kp+1])
+        location=l2i([ds] + path[:kp+1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
@@ -186,7 +186,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 
     :return: the value that was read if successful or None otherwise
     """
-    printd('fetching: %s' % o2i(path), topic='imas')
+    printd('fetching: %s' % l2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
 
@@ -199,10 +199,10 @@ def imas_get(ids, path, skip_missing_nodes=False):
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
-            printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path))
+            printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
         return None
     else:
-        raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path)))
+        raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
 
     # traverse the IDS to get the data
     out = m
@@ -213,11 +213,11 @@ def imas_get(ids, path, skip_missing_nodes=False):
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
-                    printe('WARNING: %s is not part of IMAS structure' % o2i([ds] + path[:kp + 1]))
+                    printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path[:kp + 1]))
                     printe(out.__dict__.keys())
                 return None
             else:
-                raise (AttributeError('%s is not part of IMAS structure' % o2i([ds] + path[:kp + 1])))
+                raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1])))
         else:
             printd("out = out[%s]"%p,topic='imas_code')
             out = out[p]
@@ -310,13 +310,13 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
             # first assign time information
             for path in set_paths:
                 if path[-1] == 'time':
-                    printd('writing %s' % o2i(path))
+                    printd('writing %s' % l2i(path))
                     imas_set(ids, path, ods[path], True)
 
             # then assign the rest
             for path in set_paths:
                 if path[-1] != 'time':
-                    printd('writing %s' % o2i(path))
+                    printd('writing %s' % l2i(path))
                     imas_set(ids, path, ods[path], True)
 
             # actual write of IDS data to IMAS database
@@ -438,7 +438,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                 elif isinstance(data,unicode) and not len(data):
                     continue
                 # add uncertainty
-                if o2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
+                if l2i(path[:-1]+[path[-1]+'_error_upper']) in joined_fetch_paths:
                     stdata=imas_get(ids, path[:-1]+[path[-1]+'_error_upper'], None)
                     if isinstance(stdata,numpy.ndarray) and not stdata.size:
                         pass

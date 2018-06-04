@@ -23,32 +23,6 @@ __all__ = [
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
-
-def _omas_key_dict_preprocessor(key):
-    """
-    converts the many different ways of addressing an ODS path to a list of keys
-
-    :param key: omas string path
-
-    :return: list of keys that make the path
-    """
-    if not isinstance(key, (list, tuple)):
-        key = str(key)
-        key = re.sub('\]', '', re.sub('\[', separator, key)).split(separator)
-    else:
-        tmp=[]
-        for item in key:
-            tmp.extend(str(item).split(separator))
-        key = tmp
-    key = list(filter(None,key))
-    for k,item in enumerate(key):
-        try:
-            key[k] = int(item)
-        except ValueError:
-            pass
-    return key
-
-
 class ODS(MutableMapping):
     """
     OMAS class
@@ -133,7 +107,7 @@ class ODS(MutableMapping):
             extra_info = {}
 
         # process the key
-        key = _omas_key_dict_preprocessor(key)
+        key = p2l(key)
         tmp = self[key]
         if not isinstance(tmp, ODS):
             key = key[:-1]
@@ -281,7 +255,7 @@ class ODS(MutableMapping):
 
     def __setitem__(self, key, value):
         # handle individual keys as well as full paths
-        key = _omas_key_dict_preprocessor(key)
+        key = p2l(key)
 
         # non-scalar data is saved as numpy arrays
         if isinstance(value, list):
@@ -383,7 +357,7 @@ class ODS(MutableMapping):
 
     def __getitem__(self, key):
         # handle individual keys as well as full paths
-        key = _omas_key_dict_preprocessor(key)
+        key = p2l(key)
 
         if not len(key):
             return self
@@ -427,7 +401,7 @@ class ODS(MutableMapping):
 
     def __delitem__(self, key):
         # handle individual keys as well as full paths
-        key = _omas_key_dict_preprocessor(key)
+        key = p2l(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
             del self[key[0]][l2o(key[1:])]
@@ -470,7 +444,7 @@ class ODS(MutableMapping):
         return iter(self.keys())
 
     def __contains__(self, key):
-        key = _omas_key_dict_preprocessor(key)
+        key = p2l(key)
         h = self
         for k in key:
             # h.omas_data is None when dict/list behaviour is not assigned

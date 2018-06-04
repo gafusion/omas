@@ -278,6 +278,7 @@ def load_structure(filename, imas_version):
                 raise (Exception('`%s` is not a valid IMAS %s structure' % (filename,imas_version)))
         else:
             filename = os.path.abspath(filename)
+
     if filename not in _structures:
         dump_string=open(filename, 'r').read()
         _structures[filename] = json.loads(dump_string, object_pairs_hook=json_loader)
@@ -293,9 +294,33 @@ def load_structure(filename, imas_version):
     return _structures[filename], _structures_dict[filename]
 
 
-def o2i(path):
+def p2l(key):
     """
-    Formats a ODS path format into a IMAS path
+    converts the many different ways of addressing an ODS path to a list of keys
+
+    :param key: ods location in some format
+
+    :return: list of keys that make the ods path
+    """
+    if not isinstance(key, (list, tuple)):
+        key = str(key)
+        key = re.sub('\]', '', re.sub('\[', separator, key)).split(separator)
+    else:
+        tmp=[]
+        for item in key:
+            tmp.extend(str(item).split(separator))
+        key = tmp
+    key = list(filter(None,key))
+    for k,item in enumerate(key):
+        try:
+            key[k] = int(item)
+        except ValueError:
+            pass
+    return key
+
+def l2i(path):
+    """
+    Formats a list into a IMAS path
 
     :param path: ODS path format
 
@@ -303,22 +328,11 @@ def o2i(path):
     """
     ipath = path[0]
     for step in path[1:]:
-        if isinstance(step, int):
-            ipath += "[%d]" % step
+        if isinstance(step, int) or step==':':
+            ipath += "[%s]" % step
         else:
             ipath += '.%s' % step
     return ipath
-
-
-def i2o(path):
-    """
-    Formats a IMAS path format into an ODS path
-
-    :param path: IMAS path format
-
-    :return: ODS path format
-    """
-    return re.sub('\[:\]', '.:', path)
 
 
 def l2o(path):
@@ -332,6 +346,17 @@ def l2o(path):
     location = separator.join(filter(None,map(str,path)))
     location = re.sub('\.[0-9:]+$', '.:', str(location))
     return location
+
+
+def i2o(path):
+    """
+    Formats a IMAS path format into an ODS path
+
+    :param path: IMAS path format
+
+    :return: ODS path format
+    """
+    return re.sub('\[([:0-9]+)\]', r'.\1', path)
 
 
 def ids_cpo_mapper(ids, cpo=None):
@@ -392,7 +417,6 @@ def omas_info(structures, imas_version=default_imas_version):
         from omas import ODS
         ods = ODS(imas_version=imas_version, consistency_check=False)
         _info_structures[imas_version]=ods
-
 
     for structure in structures:
         if structure not in ods:
