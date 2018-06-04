@@ -81,7 +81,11 @@ imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structur
 if 'OMAS_IMAS_VERSION' in os.environ:
     default_imas_version = os.environ['OMAS_IMAS_VERSION']
 else:
-    default_imas_version = re.sub('_', '.', os.path.split(sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1])
+    try:
+        default_imas_version = re.sub('_', '.', os.path.split(sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1])
+    except IndexError:
+        # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
+        default_imas_version = ''
 
 # --------------------------------------------
 # configuration of directories and ITM infos
