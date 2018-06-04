@@ -60,7 +60,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "polarimeter.time",
    "polarimeter.time"
   ],
   "data_type": "INT_1D"
@@ -174,7 +173,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "polarimeter.ellipticity.time",
    "polarimeter.channel[:].ellipticity.time"
   ],
   "units": "-",
@@ -235,7 +233,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "polarimeter.ellipticity.time",
    "polarimeter.channel[:].ellipticity.time"
   ],
   "units": "-",
@@ -259,7 +256,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "polarimeter.faraday_angle.time",
    "polarimeter.channel[:].faraday_angle.time"
   ],
   "units": "rad",
@@ -283,7 +279,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "polarimeter.faraday_angle.time",
    "polarimeter.channel[:].faraday_angle.time"
   ],
   "units": "rad",
@@ -387,7 +382,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ellipticity",
   "coordinates": [
-   "polarimeter.ellipticity.time",
    "polarimeter.channel[:].ellipticity.time"
   ],
   "units": "-",
@@ -405,7 +399,6 @@
   "data_type": "FLT_1D",
   "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
   "coordinates": [
-   "polarimeter.faraday_angle.time",
    "polarimeter.channel[:].faraday_angle.time"
   ],
   "units": "rad",

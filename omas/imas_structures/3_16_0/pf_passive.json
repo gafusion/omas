@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Curvature radius of each arc of circle",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -27,7 +26,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current\"",
   "coordinates": [
-   "pf_passive.",
    "pf_passive.time"
   ],
   "units": "A",
@@ -38,7 +36,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"curvature_radii\"",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -95,7 +92,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -131,7 +127,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -161,7 +156,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -179,7 +173,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "pf_passive.geometry.outline.r",
    "pf_passive.loop[:].element[:].geometry.outline.r"
   ],
   "units": "m",
@@ -190,7 +183,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -268,7 +260,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height of the start point of each arc of circle",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -292,7 +283,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radii of the start point of each arc of circle",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -303,7 +293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -364,7 +353,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "pf_passive.geometry.outline.r",
    "pf_passive.loop[:].element[:].geometry.outline.r"
   ],
   "units": "m",
@@ -375,7 +363,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"curvature_radii\"",
   "coordinates": [
-   "pf_passive.geometry.arcs_of_circle.r",
    "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -453,7 +440,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current\"",
   "coordinates": [
-   "pf_passive.",
    "pf_passive.time"
   ],
   "units": "A",
@@ -471,7 +457,6 @@
   "data_type": "FLT_1D",
   "documentation": "Passive loop current",
   "coordinates": [
-   "pf_passive.",
    "pf_passive.time"
   ],
   "units": "A",
@@ -488,7 +473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -537,7 +521,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "pf_passive.time",
    "pf_passive.time"
   ],
   "data_type": "INT_1D"
@@ -553,7 +536,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -616,7 +598,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "pf_passive.geometry.outline.r",
    "pf_passive.loop[:].element[:].geometry.outline.r"
   ],
   "units": "m",

@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron temperature",
   "coordinates": [
-   "thomson_scattering.t_e.time",
    "thomson_scattering.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -65,7 +64,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron density",
   "coordinates": [
-   "thomson_scattering.n_e.time",
    "thomson_scattering.channel[:].n_e.time"
   ],
   "units": "m^-3",
@@ -83,7 +81,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "thomson_scattering.n_e.time",
    "thomson_scattering.channel[:].n_e.time"
   ],
   "units": "m^-3",
@@ -129,7 +126,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "thomson_scattering.t_e.time",
    "thomson_scattering.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -140,7 +136,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "thomson_scattering.t_e.time",
    "thomson_scattering.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -191,7 +186,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "thomson_scattering.time",
    "thomson_scattering.time"
   ],
   "data_type": "INT_1D"
@@ -221,7 +215,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "thomson_scattering.n_e.time",
    "thomson_scattering.channel[:].n_e.time"
   ],
   "units": "m^-3",

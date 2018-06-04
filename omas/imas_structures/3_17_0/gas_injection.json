@@ -20,7 +20,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flow rate at the exit of the valve",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].valve[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -32,7 +31,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "gas_injection.time",
    "gas_injection.time"
   ],
   "data_type": "INT_1D"
@@ -58,7 +56,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flow rate at the exit of the pipe",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -145,7 +142,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "gas_injection.electron_rate.time",
    "gas_injection.pipe[:].valve[:].electron_rate.time"
   ],
   "units": "s^-1",
@@ -222,7 +218,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -344,7 +339,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].valve[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -405,7 +399,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -520,7 +513,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "gas_injection.electron_rate.time",
    "gas_injection.pipe[:].valve[:].electron_rate.time"
   ],
   "units": "s^-1",
@@ -538,7 +530,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "gas_injection.flow_rate.time",
    "gas_injection.pipe[:].valve[:].flow_rate.time"
   ],
   "units": "Pa.m^3.s^-1",
@@ -577,7 +568,6 @@
   "data_type": "FLT_1D",
   "documentation": "Number of electrons injected per second",
   "coordinates": [
-   "gas_injection.electron_rate.time",
    "gas_injection.pipe[:].valve[:].electron_rate.time"
   ],
   "units": "s^-1",

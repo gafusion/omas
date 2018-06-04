@@ -9,7 +9,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -26,7 +25,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -37,7 +35,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -68,7 +65,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -79,7 +75,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -90,7 +85,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_ohmic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -101,7 +95,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -118,7 +111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -129,7 +121,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -147,7 +138,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -158,7 +148,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -169,7 +158,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -180,7 +168,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -197,7 +184,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -208,7 +194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -225,7 +210,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -236,7 +220,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"t_i_average\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -247,7 +230,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -264,7 +246,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -275,7 +256,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -286,7 +266,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -316,7 +295,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -327,7 +305,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -338,7 +315,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -350,7 +326,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -374,7 +349,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"collisionality_norm\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -385,7 +359,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -396,7 +369,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -407,7 +379,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -418,7 +389,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -429,7 +399,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -447,7 +416,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -458,7 +426,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -475,7 +442,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -486,7 +452,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -497,7 +462,6 @@
   "data_type": "FLT_1D",
   "documentation": "Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -539,7 +503,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -550,7 +513,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -562,7 +524,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "core_instant_changes.time",
    "core_instant_changes.time"
   ],
   "data_type": "INT_1D"
@@ -584,7 +545,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -595,7 +555,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -613,7 +572,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -624,7 +582,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -635,7 +592,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -652,7 +608,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -663,7 +618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z_ion_square_1d\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -674,7 +628,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -685,7 +638,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z_ion_1d\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -703,7 +655,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -720,7 +671,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total parallel pressure (electrons+ions, thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -737,7 +687,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z_ion_1d\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -748,7 +697,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"collisionality_norm\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -765,7 +713,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -782,7 +729,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -793,7 +739,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total ion thermal density (sum over species and charge states)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -811,7 +756,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -822,7 +766,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -833,7 +776,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_ohmic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -844,7 +786,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -855,7 +796,6 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -900,7 +840,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -912,7 +851,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -930,7 +868,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -941,7 +878,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -953,7 +889,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -994,7 +929,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  ",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1005,7 +939,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1016,7 +949,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1027,7 +959,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1038,7 +969,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_non_inductive\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1055,7 +985,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1072,7 +1001,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1083,7 +1011,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1104,7 +1031,6 @@
   "data_type": "FLT_1D",
   "documentation": "Collisionality normalised to the bounce frequency",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1121,7 +1047,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1138,7 +1063,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1149,7 +1073,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1160,7 +1083,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1186,7 +1108,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel current driven inside the flux surface. Cumulative surface integral of j_total",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A",
@@ -1198,7 +1119,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1210,7 +1130,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1221,7 +1140,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1232,7 +1150,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1243,7 +1160,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_non_inductive\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1267,7 +1183,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1279,7 +1194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1315,7 +1229,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1335,7 +1248,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1368,7 +1280,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1379,7 +1290,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1397,7 +1307,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1420,7 +1329,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1431,7 +1339,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1443,7 +1350,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "V.m^-1",
@@ -1455,7 +1361,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1517,7 +1422,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1535,7 +1439,6 @@
   "data_type": "FLT_1D",
   "documentation": "Average charge of the ion species (sum of states charge weighted by state density and divided by ion density)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1552,7 +1455,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1575,7 +1477,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1587,7 +1488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1599,7 +1499,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -1610,7 +1509,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1621,7 +1519,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1651,7 +1548,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1668,7 +1564,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1686,7 +1581,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1724,7 +1618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1735,7 +1628,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total toroidal current density = average(J_Tor/R) / average(1/R)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1753,7 +1645,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1764,7 +1655,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1775,7 +1665,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_bootstrap\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1786,7 +1675,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1797,7 +1685,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1857,7 +1744,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1880,7 +1766,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -1897,7 +1782,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1908,7 +1792,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure ",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1919,7 +1802,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1930,7 +1812,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"zeff\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1941,7 +1822,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"zeff\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1952,7 +1832,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "kg.m^-1.s^-1",
@@ -1963,7 +1842,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1974,7 +1852,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -1985,7 +1862,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2002,7 +1878,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2013,7 +1888,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2024,7 +1898,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "core_instant_changes.time",
    "core_instant_changes.time"
   ],
   "units": "T",
@@ -2035,7 +1908,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2046,7 +1918,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_ion_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2057,7 +1928,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2074,7 +1944,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2086,7 +1955,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2110,7 +1978,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2121,7 +1988,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2138,7 +2004,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2149,7 +2014,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -2160,7 +2024,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2171,7 +2034,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2188,7 +2050,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2199,7 +2060,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2210,7 +2070,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2236,7 +2095,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2296,7 +2154,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2307,7 +2164,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2318,7 +2174,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z_ion_square_1d\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -2329,7 +2184,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2340,7 +2194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2364,7 +2217,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2375,7 +2227,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"conductivity_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "ohm^-1.m^-1",
@@ -2386,7 +2237,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2397,7 +2247,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of thermal particles",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2408,7 +2257,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2419,7 +2267,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure ",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2430,7 +2277,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  ",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2441,7 +2287,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "core_instant_changes.time",
    "core_instant_changes.time"
   ],
   "units": "T",
@@ -2453,7 +2298,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2465,7 +2309,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -2476,7 +2319,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2493,7 +2335,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2504,7 +2345,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2515,7 +2355,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2526,7 +2365,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "kg.m^-1.s^-1",
@@ -2537,7 +2375,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2555,7 +2392,6 @@
   "data_type": "FLT_1D",
   "documentation": "Thermal pressure (electrons+ions)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2566,7 +2402,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -2577,7 +2412,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total perpendicular pressure (electrons+ions, thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2588,7 +2422,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -2600,7 +2433,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2622,7 +2454,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2633,7 +2464,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2644,7 +2474,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2655,7 +2484,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2666,7 +2494,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -2678,7 +2505,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"e_field_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "V.m^-1",
@@ -2690,7 +2516,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2701,7 +2526,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2719,7 +2543,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2730,7 +2553,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2741,7 +2563,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2778,7 +2599,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -2789,7 +2609,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2800,7 +2619,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2811,7 +2629,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2822,7 +2639,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2871,7 +2687,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2882,7 +2697,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2899,7 +2713,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "kg.m^-1.s^-1",
@@ -2910,7 +2723,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2927,7 +2739,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2938,7 +2749,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_thermal_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2949,7 +2759,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2960,7 +2769,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -2990,7 +2798,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3001,7 +2808,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3012,7 +2818,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3023,7 +2828,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3034,7 +2838,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3045,7 +2848,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3075,7 +2877,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -3092,7 +2893,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3103,7 +2903,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3120,7 +2919,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3143,7 +2941,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3161,7 +2958,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3172,7 +2968,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"q\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -3189,7 +2984,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -3200,7 +2994,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3211,7 +3004,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3241,7 +3033,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3252,7 +3043,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3263,7 +3053,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3274,7 +3063,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total (sum over ion species) thermal ion pressure",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3286,7 +3074,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3298,7 +3085,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3322,7 +3108,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3358,7 +3143,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of thermal particles",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3390,7 +3174,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3422,7 +3205,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3433,7 +3215,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_ion_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3444,7 +3225,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3461,7 +3241,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3472,7 +3251,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -3489,7 +3267,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3506,7 +3283,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"conductivity_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "ohm^-1.m^-1",
@@ -3517,7 +3293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3534,7 +3309,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3545,7 +3319,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3563,7 +3336,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_thermal_total\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3574,7 +3346,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3585,7 +3356,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "core_instant_changes.time",
    "core_instant_changes.time"
   ],
   "units": "T",
@@ -3602,7 +3372,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -3619,7 +3388,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3630,7 +3398,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3653,7 +3420,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3664,7 +3430,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3681,7 +3446,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3698,7 +3462,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"t_i_average\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3709,7 +3472,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3720,7 +3482,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3731,7 +3492,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3754,7 +3514,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3777,7 +3536,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3788,7 +3546,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3799,7 +3556,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3810,7 +3566,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3821,7 +3576,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3838,7 +3592,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3849,7 +3602,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3866,7 +3618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3877,7 +3628,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -3888,7 +3638,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"magnetic_shear\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -3920,7 +3669,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3937,7 +3685,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -3948,7 +3695,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3971,7 +3717,6 @@
   "data_type": "FLT_1D",
   "documentation": "Safety factor",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -3982,7 +3727,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -3993,7 +3737,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4025,7 +3768,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4036,7 +3778,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4047,7 +3788,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4058,7 +3798,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4069,7 +3808,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4080,7 +3818,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_bootstrap\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -4091,7 +3828,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4102,7 +3838,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4113,7 +3848,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4130,7 +3864,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4154,7 +3887,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4166,7 +3898,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"e_field_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "V.m^-1",
@@ -4219,7 +3950,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_parallel_inside\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A",
@@ -4230,7 +3960,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4241,7 +3970,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2) ",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4252,7 +3980,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -4263,7 +3990,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4274,7 +4000,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4295,7 +4020,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4307,7 +4031,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4324,7 +4047,6 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetic shear, defined as rho_tor/q . dq/drho_tor",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4354,7 +4076,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4377,7 +4098,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel conductivity",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "ohm^-1.m^-1",
@@ -4401,7 +4121,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_tor\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -4412,7 +4131,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ion temperature (averaged on charge states and ion species)",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4429,7 +4147,6 @@
   "data_type": "FLT_1D",
   "documentation": "Effective charge",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4452,7 +4169,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4463,7 +4179,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4474,7 +4189,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4497,7 +4211,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4508,7 +4221,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -4520,7 +4232,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4545,7 +4256,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4562,7 +4272,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"q\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4579,7 +4288,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4603,7 +4311,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4621,7 +4328,6 @@
   "data_type": "FLT_1D",
   "documentation": "Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A/m^2",
@@ -4632,7 +4338,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4643,7 +4348,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"magnetic_shear\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4654,7 +4358,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4665,7 +4368,6 @@
   "data_type": "FLT_1D",
   "documentation": "Average sqare charge of the ion species (sum of states square charge weighted by state density and divided by ion density)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -4676,7 +4378,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -4699,7 +4400,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4722,7 +4422,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4745,7 +4444,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (thermal+non-thermal)",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4768,7 +4466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_parallel_inside\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "A",
@@ -4791,7 +4488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4802,7 +4498,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_parallel\"",
   "coordinates": [
-   "core_instant_changes.profiles_1d[:].grid.rho_tor_norm",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4813,7 +4508,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "as_parent",
@@ -4824,7 +4518,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of thermal particles",
   "coordinates": [
-   "core_instant_changes.",
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",

@@ -4,7 +4,6 @@
   "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
   "type": "dynamic",
   "coordinates": [
-   "sdn.quality.time",
    "sdn.topic[:].signal[:].quality.time"
   ],
   "data_type": "INT_1D"
@@ -13,7 +12,6 @@
   "data_type": "FLT_1D",
   "documentation": "Signal value",
   "coordinates": [
-   "sdn.value.time",
    "sdn.topic[:].signal[:].value.time"
   ],
   "units": "mixed",
@@ -57,7 +55,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "sdn.value.time",
    "sdn.topic[:].signal[:].value.time"
   ],
   "units": "mixed",
@@ -78,7 +75,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "sdn.time",
    "sdn.time"
   ],
   "data_type": "INT_1D"
@@ -198,7 +194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "sdn.value.time",
    "sdn.topic[:].signal[:].value.time"
   ],
   "units": "mixed",

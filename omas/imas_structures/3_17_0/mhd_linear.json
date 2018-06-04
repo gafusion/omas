@@ -3,10 +3,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -23,10 +21,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -36,10 +32,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -49,10 +43,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -68,10 +60,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -81,10 +71,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -94,10 +82,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -107,10 +93,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -134,10 +118,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -147,10 +129,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -160,7 +140,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "mhd_linear.time",
    "mhd_linear.time"
   ],
   "units": "T",
@@ -171,10 +150,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -184,10 +161,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -197,10 +172,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -216,10 +189,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -229,10 +200,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -242,10 +211,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -261,10 +228,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"volume_element\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -274,7 +239,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -293,7 +257,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"tau_resistive\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -326,10 +289,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -345,10 +306,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -370,10 +329,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -383,10 +340,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -396,10 +351,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -409,10 +362,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -428,10 +379,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -460,10 +409,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -479,10 +426,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -499,10 +444,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -512,10 +455,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -525,10 +466,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -538,7 +477,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -571,7 +509,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -582,7 +519,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -593,10 +529,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -612,10 +546,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -625,10 +557,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -638,10 +568,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -651,10 +579,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -664,10 +590,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -677,10 +601,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -690,10 +612,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -703,10 +623,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"volume_element\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -716,10 +634,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -729,10 +645,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -742,10 +656,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -755,10 +667,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -768,10 +678,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -781,10 +689,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -802,10 +708,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -828,10 +732,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -867,10 +769,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -880,10 +780,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -893,10 +791,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -912,10 +808,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -925,10 +819,8 @@
   "data_type": "FLT_2D",
   "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -938,10 +830,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -951,10 +841,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -970,10 +858,8 @@
   "data_type": "FLT_2D",
   "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -983,10 +869,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1015,10 +899,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1068,10 +950,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1087,10 +967,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1112,10 +990,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1137,10 +1013,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1150,10 +1024,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1163,7 +1035,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1174,10 +1045,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1187,7 +1056,6 @@
   "data_type": "FLT_1D",
   "documentation": "Alven time=R/vA=R0 sqrt(mi ni(rho))/B0",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -1205,10 +1073,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1234,10 +1100,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1255,10 +1119,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1276,10 +1138,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1306,10 +1166,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1350,10 +1208,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1369,7 +1225,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1380,10 +1235,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1393,10 +1246,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1406,10 +1257,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1425,10 +1274,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1444,10 +1291,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"volume_element\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -1470,10 +1315,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1483,10 +1326,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1502,10 +1343,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1515,10 +1354,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1534,10 +1371,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1547,10 +1382,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1568,10 +1401,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1581,10 +1412,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1594,10 +1423,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1607,10 +1434,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1638,7 +1463,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"tau_alfven\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -1649,10 +1473,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1662,10 +1484,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1721,7 +1541,6 @@
   "data_type": "FLT_1D",
   "documentation": "Resistive time = mu_0 rho*rho/1.22/eta_neo",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -1745,10 +1564,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1765,10 +1582,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1804,10 +1619,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1830,10 +1643,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1857,10 +1668,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1870,10 +1679,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"volume_element\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -1883,10 +1690,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1896,7 +1701,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1920,10 +1724,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1946,10 +1748,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1959,10 +1759,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1978,10 +1776,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -1991,10 +1787,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2004,10 +1798,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2029,10 +1821,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2048,10 +1838,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2067,10 +1855,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2080,10 +1866,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2093,10 +1877,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2112,10 +1894,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2138,10 +1918,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2151,10 +1929,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2164,7 +1940,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2195,7 +1970,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "mhd_linear.time",
    "mhd_linear.time"
   ],
   "units": "T",
@@ -2206,10 +1980,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2231,10 +2003,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2244,7 +2014,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2255,10 +2024,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2268,10 +2035,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2281,10 +2046,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2294,10 +2057,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2315,7 +2076,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2348,10 +2108,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2367,10 +2125,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2386,10 +2142,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2399,10 +2153,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2412,10 +2164,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2425,7 +2175,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2442,10 +2191,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2455,10 +2202,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2468,10 +2213,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2494,7 +2237,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "mhd_linear.time",
    "mhd_linear.time"
   ],
   "data_type": "INT_1D"
@@ -2503,7 +2245,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"tau_alfven\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -2526,10 +2267,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2545,10 +2284,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2558,10 +2295,8 @@
   "data_type": "FLT_2D",
   "documentation": "Real part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2571,7 +2306,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"tau_resistive\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1"
   ],
   "units": "s",
@@ -2582,10 +2316,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"imaginary\"",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2595,7 +2327,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2606,10 +2337,8 @@
   "data_type": "FLT_2D",
   "documentation": "Imaginary part",
   "coordinates": [
-   "mhd_linear.plasma.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
-   "mhd_linear.plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2619,10 +2348,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"real\"",
   "coordinates": [
-   "mhd_linear.vacuum.grid.dim1",
    "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
-   "mhd_linear.vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
   ],
   "units": "as_parent",
   "type": "dynamic",
@@ -2644,7 +2371,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "mhd_linear.time",
    "mhd_linear.time"
   ],
   "units": "T",

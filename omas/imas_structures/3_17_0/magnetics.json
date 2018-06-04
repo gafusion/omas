@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Measured magnetic field",
   "coordinates": [
-   "magnetics.field.time",
    "magnetics.bpol_probe[:].field.time"
   ],
   "units": "T",
@@ -14,7 +13,6 @@
   "data_type": "FLT_1D",
   "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above.",
   "coordinates": [
-   "magnetics.ip.time",
    "magnetics.method[:].ip.time"
   ],
   "units": "A",
@@ -26,7 +24,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "magnetics.time",
    "magnetics.time"
   ],
   "data_type": "INT_1D"
@@ -134,7 +131,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "magnetics.ip.time",
    "magnetics.method[:].ip.time"
   ],
   "units": "A",
@@ -309,7 +305,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "magnetics.diamagnetic_flux.time",
    "magnetics.method[:].diamagnetic_flux.time"
   ],
   "units": "Wb",
@@ -369,7 +364,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "magnetics.diamagnetic_flux.time",
    "magnetics.method[:].diamagnetic_flux.time"
   ],
   "units": "Wb",
@@ -387,7 +381,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "magnetics.field.time",
    "magnetics.bpol_probe[:].field.time"
   ],
   "units": "T",
@@ -505,7 +498,6 @@
   "data_type": "FLT_1D",
   "documentation": "Measured flux",
   "coordinates": [
-   "magnetics.flux.time",
    "magnetics.flux_loop[:].flux.time"
   ],
   "units": "Wb",
@@ -522,7 +514,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic flux",
   "coordinates": [
-   "magnetics.diamagnetic_flux.time",
    "magnetics.method[:].diamagnetic_flux.time"
   ],
   "units": "Wb",
@@ -547,7 +538,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "magnetics.flux.time",
    "magnetics.flux_loop[:].flux.time"
   ],
   "units": "Wb",
@@ -582,7 +572,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "magnetics.field.time",
    "magnetics.bpol_probe[:].field.time"
   ],
   "units": "T",
@@ -593,7 +582,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "magnetics.flux.time",
    "magnetics.flux_loop[:].flux.time"
   ],
   "units": "Wb",
@@ -660,7 +648,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "magnetics.ip.time",
    "magnetics.method[:].ip.time"
   ],
   "units": "A",

@@ -10,10 +10,8 @@
   "data_type": "FLT_2D",
   "documentation": "Power received on the detector per unit surface, in multiple energy bands if available from the detector",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].power_density.time",
-   "soft_x_rays.power_density.time"
+   "soft_x_rays.channel[:].power_density.time"
   ],
   "units": "W.m^-2",
   "type": "dynamic",
@@ -36,7 +34,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "soft_x_rays.outline.x1",
    "soft_x_rays.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -61,7 +58,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -72,7 +68,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "soft_x_rays.outline.x1",
    "soft_x_rays.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -103,10 +98,8 @@
   "data_type": "FLT_2D",
   "documentation": "Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].intensity.time",
-   "soft_x_rays.intensity.time"
+   "soft_x_rays.channel[:].intensity.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -269,7 +262,6 @@
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "type": "dynamic",
   "coordinates": [
-   "soft_x_rays.validity_timed.time",
    "soft_x_rays.channel[:].validity_timed.time"
   ],
   "data_type": "INT_1D"
@@ -278,7 +270,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -527,7 +518,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "soft_x_rays.time",
    "soft_x_rays.time"
   ],
   "data_type": "INT_1D"
@@ -645,7 +635,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -656,7 +645,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "soft_x_rays.detector.outline.x1",
    "soft_x_rays.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -680,10 +668,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].intensity.time",
-   "soft_x_rays.intensity.time"
+   "soft_x_rays.channel[:].intensity.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -706,7 +692,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -723,7 +708,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -747,10 +731,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].intensity.time",
-   "soft_x_rays.intensity.time"
+   "soft_x_rays.channel[:].intensity.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -958,10 +940,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].power_density.time",
-   "soft_x_rays.power_density.time"
+   "soft_x_rays.channel[:].power_density.time"
   ],
   "units": "W.m^-2",
   "type": "dynamic",
@@ -998,7 +978,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "soft_x_rays.outline.x1",
    "soft_x_rays.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -1318,7 +1297,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "soft_x_rays.detector.outline.x1",
    "soft_x_rays.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -1376,10 +1354,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "soft_x_rays.energy_band",
    "soft_x_rays.channel[:].energy_band",
-   "soft_x_rays.channel[:].power_density.time",
-   "soft_x_rays.power_density.time"
+   "soft_x_rays.channel[:].power_density.time"
   ],
   "units": "W.m^-2",
   "type": "dynamic",
@@ -1401,7 +1377,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1454,7 +1429,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "soft_x_rays.detector.outline.x1",
    "soft_x_rays.channel[:].detector.outline.x1"
   ],
   "units": "m",

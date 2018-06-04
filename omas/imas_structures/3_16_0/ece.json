@@ -38,7 +38,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "ece.time",
    "ece.time"
   ],
   "data_type": "INT_1D"
@@ -48,7 +47,6 @@
   "documentation": "Harmonic detected by the channel. 1 corresponds to the \"O1\" mode, while 2 corresponds to the \"X2\" mode. ",
   "type": "dynamic",
   "coordinates": [
-   "ece.harmonic.time",
    "ece.channel[:].harmonic.time"
   ],
   "data_type": "INT_1D"
@@ -57,7 +55,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.position.r.time",
    "ece.channel[:].position.r.time"
   ],
   "units": "m",
@@ -68,7 +65,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "ece.position.r.time",
    "ece.channel[:].position.r.time"
   ],
   "units": "m",
@@ -86,7 +82,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.position.r.time",
    "ece.channel[:].position.r.time"
   ],
   "units": "m",
@@ -103,7 +98,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle",
   "coordinates": [
-   "ece.position.phi.time",
    "ece.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -142,7 +136,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.frequency.time",
    "ece.channel[:].frequency.time"
   ],
   "units": "Hz",
@@ -193,7 +186,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "ece.position.z.time",
    "ece.channel[:].position.z.time"
   ],
   "units": "m",
@@ -218,7 +210,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.t_e_voltage.time",
    "ece.channel[:].t_e_voltage.time"
   ],
   "units": "V",
@@ -263,7 +254,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.position.z.time",
    "ece.channel[:].position.z.time"
   ],
   "units": "m",
@@ -280,7 +270,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.t_e.time",
    "ece.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -326,7 +315,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.frequency.time",
    "ece.channel[:].frequency.time"
   ],
   "units": "Hz",
@@ -343,7 +331,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.t_e.time",
    "ece.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -432,7 +419,6 @@
   "data_type": "FLT_1D",
   "documentation": "Raw voltage measured on each channel, from which the calibrated temperature data is then derived",
   "coordinates": [
-   "ece.t_e_voltage.time",
    "ece.channel[:].t_e_voltage.time"
   ],
   "units": "V",
@@ -480,7 +466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.position.phi.time",
    "ece.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -497,7 +482,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron temperature",
   "coordinates": [
-   "ece.t_e.time",
    "ece.channel[:].t_e.time"
   ],
   "units": "eV",
@@ -530,7 +514,6 @@
   "data_type": "FLT_1D",
   "documentation": "Frequency of the channel",
   "coordinates": [
-   "ece.frequency.time",
    "ece.channel[:].frequency.time"
   ],
   "units": "Hz",
@@ -569,7 +552,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.position.phi.time",
    "ece.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -580,7 +562,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ece.position.z.time",
    "ece.channel[:].position.z.time"
   ],
   "units": "m",
@@ -611,7 +592,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ece.t_e_voltage.time",
    "ece.channel[:].t_e_voltage.time"
   ],
   "units": "V",

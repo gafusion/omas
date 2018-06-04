@@ -49,7 +49,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.nbi.mode.time",
    "pulse_schedule.nbi.mode.time"
   ],
   "data_type": "INT_1D"
@@ -65,7 +64,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.ec.mode.time",
    "pulse_schedule.ec.mode.time"
   ],
   "data_type": "INT_1D"
@@ -74,7 +72,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.deposition_rho_tor_norm.reference.time",
    "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
   ],
   "units": "mixed",
@@ -129,7 +126,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_upper.reference.time",
    "pulse_schedule.position_control.elongation_upper.reference.time"
   ],
   "units": "mixed",
@@ -147,7 +143,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.density_control.mode.time",
    "pulse_schedule.density_control.mode.time"
   ],
   "data_type": "INT_1D"
@@ -156,7 +151,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.li_3.reference.time",
    "pulse_schedule.flux_control.li_3.reference.time"
   ],
   "units": "mixed",
@@ -182,7 +176,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.r.reference.time",
    "pulse_schedule.position_control.geometric_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -193,7 +186,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.i_plasma.reference.time",
    "pulse_schedule.flux_control.i_plasma.reference.time"
   ],
   "units": "mixed",
@@ -247,7 +239,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.flux_control.li_3.reference.time",
    "pulse_schedule.flux_control.li_3.reference.time"
   ],
   "units": "mixed",
@@ -264,7 +255,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.density_control.n_e_line.reference.time",
    "pulse_schedule.density_control.n_e_line.reference.time"
   ],
   "units": "mixed",
@@ -275,7 +265,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.lh.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -301,7 +290,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_lower.reference.time",
    "pulse_schedule.position_control.triangularity_lower.reference.time"
   ],
   "units": "mixed",
@@ -318,7 +306,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.strike_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -329,7 +316,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.nbi.unit[:].power.reference.time"
   ],
   "units": "mixed",
@@ -346,7 +332,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.lh.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -364,7 +349,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity.reference.time",
    "pulse_schedule.position_control.triangularity.reference.time"
   ],
   "units": "mixed",
@@ -388,7 +372,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.z.reference.time",
    "pulse_schedule.position_control.geometric_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -415,7 +398,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ec.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -432,7 +414,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.value.reference.time",
    "pulse_schedule.position_control.gap[:].value.reference.time"
   ],
   "units": "mixed",
@@ -443,7 +424,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ic.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -466,7 +446,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.z.reference.time",
    "pulse_schedule.position_control.geometric_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -477,7 +456,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.lh.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -495,7 +473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.r.reference.time",
    "pulse_schedule.position_control.active_limiter_point.r.reference.time"
   ],
   "units": "mixed",
@@ -546,7 +523,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.flux_control.i_plasma.reference.time",
    "pulse_schedule.flux_control.i_plasma.reference.time"
   ],
   "units": "mixed",
@@ -558,7 +534,6 @@
   "documentation": "Systems listening to this event",
   "type": "constant",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "STR_1D"
@@ -567,7 +542,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time",
    "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
   ],
   "units": "mixed",
@@ -606,7 +580,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.beta_normal.reference.time",
    "pulse_schedule.flux_control.beta_normal.reference.time"
   ],
   "units": "mixed",
@@ -635,7 +608,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.x_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -826,7 +798,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.x_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -837,7 +808,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.lh.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -849,7 +819,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.position_control.mode.time",
    "pulse_schedule.position_control.mode.time"
   ],
   "data_type": "INT_1D"
@@ -879,7 +848,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
   ],
   "units": "mixed",
@@ -897,7 +865,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.time",
    "pulse_schedule.time"
   ],
   "data_type": "INT_1D"
@@ -921,7 +888,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_upper.reference.time",
    "pulse_schedule.position_control.elongation_upper.reference.time"
   ],
   "units": "mixed",
@@ -951,7 +917,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ec.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -993,7 +958,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.r.reference.time",
    "pulse_schedule.position_control.active_limiter_point.r.reference.time"
   ],
   "units": "mixed",
@@ -1031,7 +995,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.launching_angle_pol.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
   ],
   "units": "mixed",
@@ -1065,7 +1028,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_h_over_n_d.reference.time",
    "pulse_schedule.density_control.n_h_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -1112,7 +1074,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.n_parallel.reference.time",
    "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
   ],
   "units": "mixed",
@@ -1146,7 +1107,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.flux_control.mode.time",
    "pulse_schedule.flux_control.mode.time"
   ],
   "data_type": "INT_1D"
@@ -1258,7 +1218,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.strike_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -1373,7 +1332,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ic.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -1437,7 +1395,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_upper.reference.time",
    "pulse_schedule.position_control.triangularity_upper.reference.time"
   ],
   "units": "mixed",
@@ -1469,7 +1426,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ec.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -1480,7 +1436,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.strike_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -1497,7 +1452,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ec.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -1508,7 +1462,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.z.reference.time",
    "pulse_schedule.position_control.geometric_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -1525,7 +1478,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_e_line.reference.time",
    "pulse_schedule.density_control.n_e_line.reference.time"
   ],
   "units": "mixed",
@@ -1536,7 +1488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity.reference.time",
    "pulse_schedule.position_control.triangularity.reference.time"
   ],
   "units": "mixed",
@@ -1598,7 +1549,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.r.reference.time",
    "pulse_schedule.position_control.magnetic_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -1618,7 +1568,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_upper.reference.time",
    "pulse_schedule.position_control.triangularity_upper.reference.time"
   ],
   "units": "mixed",
@@ -1629,7 +1578,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ec.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -1640,7 +1588,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
   ],
   "units": "mixed",
@@ -1671,7 +1618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.deposition_rho_tor_norm.reference.time",
    "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
   ],
   "units": "mixed",
@@ -1682,7 +1628,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
   ],
   "units": "mixed",
@@ -1700,7 +1645,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation.reference.time",
    "pulse_schedule.position_control.elongation.reference.time"
   ],
   "units": "mixed",
@@ -1723,7 +1667,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.flow_rate.reference.time",
    "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
   ],
   "units": "mixed",
@@ -1734,7 +1677,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flow_rate.reference.time",
    "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
   ],
   "units": "mixed",
@@ -1745,7 +1687,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.n_parallel.reference.time",
    "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
   ],
   "units": "mixed",
@@ -1769,7 +1710,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_t_over_n_d.reference.time",
    "pulse_schedule.density_control.n_t_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -1781,7 +1721,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.ic.mode.time",
    "pulse_schedule.ic.mode.time"
   ],
   "data_type": "INT_1D"
@@ -1790,7 +1729,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.z.reference.time",
    "pulse_schedule.position_control.magnetic_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -1875,7 +1813,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.tf.mode.time",
    "pulse_schedule.tf.mode.time"
   ],
   "data_type": "INT_1D"
@@ -1884,7 +1821,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
   ],
   "units": "mixed",
@@ -1901,7 +1837,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.x_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -1968,7 +1903,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.lh.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -2001,7 +1935,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.nbi.unit[:].power.reference.time"
   ],
   "units": "mixed",
@@ -2053,7 +1986,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_h_over_n_d.reference.time",
    "pulse_schedule.density_control.n_h_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -2089,7 +2021,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_lower.reference.time",
    "pulse_schedule.position_control.elongation_lower.reference.time"
   ],
   "units": "mixed",
@@ -2114,7 +2045,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.r.reference.time",
    "pulse_schedule.position_control.magnetic_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -2125,7 +2055,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ec.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -2148,7 +2077,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.beta_normal.reference.time",
    "pulse_schedule.flux_control.beta_normal.reference.time"
   ],
   "units": "mixed",
@@ -2192,7 +2120,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_lower.reference.time",
    "pulse_schedule.position_control.triangularity_lower.reference.time"
   ],
   "units": "mixed",
@@ -2253,7 +2180,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.r.reference.time",
    "pulse_schedule.position_control.geometric_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -2270,7 +2196,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.strike_point[:].r.reference.time"
   ],
   "units": "mixed",
@@ -2305,7 +2230,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.density_control.n_h_over_n_d.reference.time",
    "pulse_schedule.density_control.n_h_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -2328,7 +2252,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation.reference.time",
    "pulse_schedule.position_control.elongation.reference.time"
   ],
   "units": "mixed",
@@ -2339,7 +2262,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ic.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -2356,7 +2278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flow_rate.reference.time",
    "pulse_schedule.density_control.valve[:].flow_rate.reference.time"
   ],
   "units": "mixed",
@@ -2388,7 +2309,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.loop_voltage.reference.time",
    "pulse_schedule.flux_control.loop_voltage.reference.time"
   ],
   "units": "mixed",
@@ -2399,7 +2319,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ic.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -2516,7 +2435,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.lh.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -2543,7 +2461,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.x_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -2590,7 +2507,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.value.reference.time",
    "pulse_schedule.position_control.gap[:].value.reference.time"
   ],
   "units": "mixed",
@@ -2601,7 +2517,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.energy.reference.time",
    "pulse_schedule.nbi.unit[:].energy.reference.time"
   ],
   "units": "mixed",
@@ -2619,7 +2534,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ec.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -2636,7 +2550,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.lh.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -2653,7 +2566,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.geometric_axis.r.reference.time",
    "pulse_schedule.position_control.geometric_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -2769,7 +2681,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.r.reference.time",
    "pulse_schedule.position_control.active_limiter_point.r.reference.time"
   ],
   "units": "mixed",
@@ -2826,7 +2737,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity.reference.time",
    "pulse_schedule.position_control.triangularity.reference.time"
   ],
   "units": "mixed",
@@ -2874,7 +2784,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.li_3.reference.time",
    "pulse_schedule.flux_control.li_3.reference.time"
   ],
   "units": "mixed",
@@ -2891,7 +2800,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.z.reference.time",
    "pulse_schedule.position_control.active_limiter_point.z.reference.time"
   ],
   "units": "mixed",
@@ -2914,7 +2822,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ic.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -2931,7 +2838,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.value.reference.time",
    "pulse_schedule.position_control.gap[:].value.reference.time"
   ],
   "units": "mixed",
@@ -2964,7 +2870,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ec.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -3005,7 +2910,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.flux_control.beta_normal.reference.time",
    "pulse_schedule.flux_control.beta_normal.reference.time"
   ],
   "units": "mixed",
@@ -3016,7 +2920,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.elongation.reference.time",
    "pulse_schedule.position_control.elongation.reference.time"
   ],
   "units": "mixed",
@@ -3077,7 +2980,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.launching_angle_pol.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
   ],
   "units": "mixed",
@@ -3118,7 +3020,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.zeff.reference.time",
    "pulse_schedule.density_control.zeff.reference.time"
   ],
   "units": "mixed",
@@ -3129,7 +3030,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ic.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -3149,7 +3049,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_upper.reference.time",
    "pulse_schedule.position_control.triangularity_upper.reference.time"
   ],
   "units": "mixed",
@@ -3191,7 +3090,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.launching_angle_tor.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
   ],
   "units": "mixed",
@@ -3210,7 +3108,6 @@
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "type": "dynamic",
   "coordinates": [
-   "pulse_schedule.lh.mode.time",
    "pulse_schedule.lh.mode.time"
   ],
   "data_type": "INT_1D"
@@ -3219,7 +3116,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.deposition_rho_tor_norm.reference.time",
    "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
   ],
   "units": "mixed",
@@ -3236,7 +3132,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.i_plasma.reference.time",
    "pulse_schedule.flux_control.i_plasma.reference.time"
   ],
   "units": "mixed",
@@ -3260,7 +3155,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time",
    "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
   ],
   "units": "mixed",
@@ -3343,7 +3237,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.lh.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -3360,7 +3253,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.flux_control.loop_voltage.reference.time",
    "pulse_schedule.flux_control.loop_voltage.reference.time"
   ],
   "units": "mixed",
@@ -3384,7 +3276,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_e_line.reference.time",
    "pulse_schedule.density_control.n_e_line.reference.time"
   ],
   "units": "mixed",
@@ -3395,7 +3286,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.lh.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -3421,7 +3311,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.launching_angle_pol.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
   ],
   "units": "mixed",
@@ -3510,7 +3399,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.flux_control.loop_voltage.reference.time",
    "pulse_schedule.flux_control.loop_voltage.reference.time"
   ],
   "units": "mixed",
@@ -3521,7 +3409,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.density_control.n_t_over_n_d.reference.time",
    "pulse_schedule.density_control.n_t_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -3532,7 +3419,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.frequency.reference.time",
    "pulse_schedule.ic.antenna[:].frequency.reference.time"
   ],
   "units": "mixed",
@@ -3597,7 +3483,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_upper.reference.time",
    "pulse_schedule.position_control.elongation_upper.reference.time"
   ],
   "units": "mixed",
@@ -3667,7 +3552,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ec.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -3697,7 +3581,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.energy.reference.time",
    "pulse_schedule.nbi.unit[:].energy.reference.time"
   ],
   "units": "mixed",
@@ -3708,7 +3591,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.zeff.reference.time",
    "pulse_schedule.density_control.zeff.reference.time"
   ],
   "units": "mixed",
@@ -3725,7 +3607,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].z.reference.time"
   ],
   "units": "mixed",
@@ -3742,7 +3623,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.minor_radius.reference.time",
    "pulse_schedule.position_control.minor_radius.reference.time"
   ],
   "units": "mixed",
@@ -3768,7 +3648,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.r.reference.time",
    "pulse_schedule.position_control.boundary_outline[:].r.reference.time"
   ],
   "units": "mixed",
@@ -3806,7 +3685,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.ic.antenna[:].power.reference.time"
   ],
   "units": "mixed",
@@ -3844,7 +3722,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.n_parallel.reference.time",
    "pulse_schedule.lh.antenna[:].n_parallel.reference.time"
   ],
   "units": "mixed",
@@ -3875,7 +3752,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.density_control.n_t_over_n_d.reference.time",
    "pulse_schedule.density_control.n_t_over_n_d.reference.time"
   ],
   "units": "mixed",
@@ -3905,7 +3781,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.power.reference.time",
    "pulse_schedule.nbi.unit[:].power.reference.time"
   ],
   "units": "mixed",
@@ -3951,7 +3826,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.minor_radius.reference.time",
    "pulse_schedule.position_control.minor_radius.reference.time"
   ],
   "units": "mixed",
@@ -3988,7 +3862,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_lower.reference.time",
    "pulse_schedule.position_control.elongation_lower.reference.time"
   ],
   "units": "mixed",
@@ -4041,7 +3914,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.launching_angle_tor.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
   ],
   "units": "mixed",
@@ -4058,7 +3930,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.launching_angle_tor.reference.time",
    "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
   ],
   "units": "mixed",
@@ -4081,7 +3952,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.z.reference.time",
    "pulse_schedule.position_control.magnetic_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -4098,7 +3968,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.x_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -4131,7 +4000,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.strike_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -4173,7 +4041,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.r.reference.time",
    "pulse_schedule.position_control.magnetic_axis.r.reference.time"
   ],
   "units": "mixed",
@@ -4184,7 +4051,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.z.reference.time",
    "pulse_schedule.position_control.active_limiter_point.z.reference.time"
   ],
   "units": "mixed",
@@ -4223,7 +4089,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.elongation_lower.reference.time",
    "pulse_schedule.position_control.elongation_lower.reference.time"
   ],
   "units": "mixed",
@@ -4246,7 +4111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.triangularity_lower.reference.time",
    "pulse_schedule.position_control.triangularity_lower.reference.time"
   ],
   "units": "mixed",
@@ -4263,7 +4127,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.x_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -4274,7 +4137,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time",
    "pulse_schedule.tf.b_field_tor_vacuum_r.reference.time"
   ],
   "units": "mixed",
@@ -4321,7 +4183,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.phase.reference.time",
    "pulse_schedule.ic.antenna[:].phase.reference.time"
   ],
   "units": "mixed",
@@ -4363,7 +4224,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.active_limiter_point.z.reference.time",
    "pulse_schedule.position_control.active_limiter_point.z.reference.time"
   ],
   "units": "mixed",
@@ -4475,7 +4335,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pulse_schedule.position_control.minor_radius.reference.time",
    "pulse_schedule.position_control.minor_radius.reference.time"
   ],
   "units": "mixed",
@@ -4492,7 +4351,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pulse_schedule.energy.reference.time",
    "pulse_schedule.nbi.unit[:].energy.reference.time"
   ],
   "units": "mixed",
@@ -4503,7 +4361,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.z.reference.time",
    "pulse_schedule.position_control.strike_point[:].z.reference.time"
   ],
   "units": "mixed",
@@ -4520,7 +4377,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.position_control.magnetic_axis.z.reference.time",
    "pulse_schedule.position_control.magnetic_axis.z.reference.time"
   ],
   "units": "mixed",
@@ -4549,7 +4405,6 @@
   "data_type": "FLT_1D",
   "documentation": "Reference waveform",
   "coordinates": [
-   "pulse_schedule.density_control.zeff.reference.time",
    "pulse_schedule.density_control.zeff.reference.time"
   ],
   "units": "mixed",

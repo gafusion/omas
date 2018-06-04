@@ -54,7 +54,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -98,7 +97,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radii of the start point of each arc of circle",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -121,7 +119,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height of the start point of each arc of circle",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -138,7 +135,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "iron_core.geometry.outline.r",
    "iron_core.segment[:].geometry.outline.r"
   ],
   "units": "m",
@@ -149,7 +145,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "iron_core.magnetisation_z.time",
    "iron_core.segment[:].magnetisation_z.time"
   ],
   "units": "T",
@@ -168,7 +163,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "iron_core.time",
    "iron_core.time"
   ],
   "data_type": "INT_1D"
@@ -202,7 +196,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "iron_core.magnetisation_r.time",
    "iron_core.segment[:].magnetisation_r.time"
   ],
   "units": "T",
@@ -226,7 +219,6 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetisation M of the iron segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "coordinates": [
-   "iron_core.magnetisation_z.time",
    "iron_core.segment[:].magnetisation_z.time"
   ],
   "units": "T",
@@ -237,7 +229,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -268,7 +259,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -301,7 +291,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "iron_core.magnetisation_z.time",
    "iron_core.segment[:].magnetisation_z.time"
   ],
   "units": "T",
@@ -350,7 +339,6 @@
   "data_type": "FLT_1D",
   "documentation": "Curvature radius of each arc of circle",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -416,7 +404,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -427,7 +414,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"curvature_radii\"",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -458,7 +444,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",
@@ -481,7 +466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"curvature_radii\"",
   "coordinates": [
-   "iron_core.geometry.arcs_of_circle.r",
    "iron_core.segment[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -498,7 +482,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -539,7 +522,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "iron_core.geometry.outline.r",
    "iron_core.segment[:].geometry.outline.r"
   ],
   "units": "m",
@@ -550,7 +532,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"permeability_relative\"",
   "coordinates": [
-   "iron_core.b_field",
    "iron_core.segment[:].b_field"
   ],
   "units": "-",
@@ -561,7 +542,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -578,7 +558,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "iron_core.geometry.outline.r",
    "iron_core.segment[:].geometry.outline.r"
   ],
   "units": "m",
@@ -589,7 +568,6 @@
   "data_type": "FLT_1D",
   "documentation": "Relative permeability of the iron segment",
   "coordinates": [
-   "iron_core.b_field",
    "iron_core.segment[:].b_field"
   ],
   "units": "-",
@@ -635,7 +613,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "iron_core.magnetisation_r.time",
    "iron_core.segment[:].magnetisation_r.time"
   ],
   "units": "T",
@@ -658,7 +635,6 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetisation M of the iron segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "coordinates": [
-   "iron_core.magnetisation_r.time",
    "iron_core.segment[:].magnetisation_r.time"
   ],
   "units": "T",
@@ -684,7 +660,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -737,7 +712,6 @@
   "data_type": "FLT_1D",
   "documentation": "Array of magnetic field values, for each of which the relative permeability is given",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",
@@ -762,7 +736,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"permeability_relative\"",
   "coordinates": [
-   "iron_core.b_field",
    "iron_core.segment[:].b_field"
   ],
   "units": "-",
@@ -780,7 +753,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",

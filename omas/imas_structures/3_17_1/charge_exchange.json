@@ -25,7 +25,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ion temperature (of the emmitting impurity)",
   "coordinates": [
-   "charge_exchange.temperature.time",
    "charge_exchange.channel[:].temperature.time"
   ],
   "units": "eV",
@@ -36,7 +35,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.phi.time",
    "charge_exchange.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -66,7 +64,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.z.time",
    "charge_exchange.channel[:].position.z.time"
   ],
   "units": "m",
@@ -77,7 +74,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "coordinates": [
-   "charge_exchange.position.phi.time",
    "charge_exchange.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -115,7 +111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.temperature.time",
    "charge_exchange.channel[:].temperature.time"
   ],
   "units": "eV",
@@ -133,7 +128,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity (of the emmitting impurity) (oriented counter-clockwise when seen from above)",
   "coordinates": [
-   "charge_exchange.velocity_tor.time",
    "charge_exchange.channel[:].velocity_tor.time"
   ],
   "units": "m.s^-1",
@@ -162,7 +156,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.temperature.time",
    "charge_exchange.channel[:].temperature.time"
   ],
   "units": "eV",
@@ -223,7 +216,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.phi.time",
    "charge_exchange.channel[:].position.phi.time"
   ],
   "units": "rad",
@@ -234,7 +226,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.velocity_pol.time",
    "charge_exchange.channel[:].velocity_pol.time"
   ],
   "units": "m.s^-1",
@@ -257,7 +248,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.r.time",
    "charge_exchange.channel[:].position.r.time"
   ],
   "units": "m",
@@ -294,7 +284,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.z.time",
    "charge_exchange.channel[:].position.z.time"
   ],
   "units": "m",
@@ -305,7 +294,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity (of the emmitting impurity) (oriented clockwise when seen from front)",
   "coordinates": [
-   "charge_exchange.velocity_pol.time",
    "charge_exchange.channel[:].velocity_pol.time"
   ],
   "units": "m.s^-1",
@@ -325,7 +313,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.velocity_pol.time",
    "charge_exchange.channel[:].velocity_pol.time"
   ],
   "units": "m.s^-1",
@@ -349,7 +336,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.position.r.time",
    "charge_exchange.channel[:].position.r.time"
   ],
   "units": "m",
@@ -373,7 +359,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "charge_exchange.position.z.time",
    "charge_exchange.channel[:].position.z.time"
   ],
   "units": "m",
@@ -396,7 +381,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "charge_exchange.position.r.time",
    "charge_exchange.channel[:].position.r.time"
   ],
   "units": "m",
@@ -458,7 +442,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "charge_exchange.velocity_tor.time",
    "charge_exchange.channel[:].velocity_tor.time"
   ],
   "units": "m.s^-1",
@@ -495,7 +478,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "charge_exchange.velocity_tor.time",
    "charge_exchange.channel[:].velocity_tor.time"
   ],
   "units": "m.s^-1",
@@ -526,7 +508,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "charge_exchange.time",
    "charge_exchange.time"
   ],
   "data_type": "INT_1D"

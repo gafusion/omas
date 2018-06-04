@@ -50,7 +50,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fraction of power of a unit injected by each beamlet",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -88,7 +87,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"tangency_radii\"",
   "coordinates": [
-   "nbi.beamlets.positions.R",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
   ],
   "units": "m",
@@ -209,7 +207,6 @@
   "data_type": "FLT_1D",
   "documentation": "Angle of inclination between a line at the centre of a beamlet and the horiontal plane, for each beamlet",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -228,9 +225,7 @@
   "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_current_fraction.time",
-   "nbi.beam_current_fraction.time"
+   "nbi.unit[:].beam_current_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -241,9 +236,7 @@
   "documentation": "Lower error for \"data\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_power_fraction.time",
-   "nbi.beam_power_fraction.time"
+   "nbi.unit[:].beam_power_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -283,9 +276,7 @@
   "documentation": "Upper error for \"data\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_power_fraction.time",
-   "nbi.beam_power_fraction.time"
+   "nbi.unit[:].beam_power_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -315,7 +306,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -384,9 +374,7 @@
   "documentation": "Lower error for \"data\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_current_fraction.time",
-   "nbi.beam_current_fraction.time"
+   "nbi.unit[:].beam_current_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -436,7 +424,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"tangency_radii\"",
   "coordinates": [
-   "nbi.beamlets.positions.R",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
   ],
   "units": "m",
@@ -484,9 +471,7 @@
   "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_power_fraction.time",
-   "nbi.beam_power_fraction.time"
+   "nbi.unit[:].beam_power_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -540,7 +525,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -551,7 +535,6 @@
   "data_type": "FLT_1D",
   "documentation": "Tangency radius (major radius where the central line of a beamlet is tangent to a circle around the torus), for each beamlet",
   "coordinates": [
-   "nbi.beamlets.positions.R",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.R"
   ],
   "units": "m",
@@ -578,7 +561,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "nbi.energy.time",
    "nbi.unit[:].energy.time"
   ],
   "units": "eV",
@@ -589,7 +571,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"angles\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -613,7 +594,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -647,7 +627,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "nbi.power.time",
    "nbi.unit[:].power.time"
   ],
   "units": "W",
@@ -658,7 +637,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "m",
@@ -675,7 +653,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_fractions\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -686,7 +663,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -697,7 +673,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "nbi.energy.time",
    "nbi.unit[:].energy.time"
   ],
   "units": "eV",
@@ -714,7 +689,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -726,7 +700,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "nbi.time",
    "nbi.time"
   ],
   "data_type": "INT_1D"
@@ -749,9 +722,7 @@
   "documentation": "Upper error for \"data\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "nbi.unit[:].beam_current_fraction.time",
-   "nbi.beam_current_fraction.time"
+   "nbi.unit[:].beam_current_fraction.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -804,7 +775,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "nbi.power.time",
    "nbi.unit[:].power.time"
   ],
   "units": "W",
@@ -822,7 +792,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -859,7 +828,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"angles\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -1035,7 +1003,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power",
   "coordinates": [
-   "nbi.power.time",
    "nbi.unit[:].power.time"
   ],
   "units": "W",
@@ -1079,7 +1046,6 @@
   "data_type": "FLT_1D",
   "documentation": "Full energy of the injected species (acceleration of a single atom)",
   "coordinates": [
-   "nbi.energy.time",
    "nbi.unit[:].energy.time"
   ],
   "units": "eV",
@@ -1096,7 +1062,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "m",
@@ -1114,7 +1079,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_fractions\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "rad",
@@ -1132,7 +1096,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "nbi.beamlets.positions.r",
    "nbi.unit[:].beamlets_group[:].beamlets.positions.r"
   ],
   "units": "m",

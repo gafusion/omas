@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ic_antennas.power.time",
    "ic_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -14,7 +13,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -25,7 +23,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "rad",
@@ -36,7 +33,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -60,7 +56,6 @@
   "data_type": "FLT_1D",
   "documentation": "Root mean square current flowing along the strap",
   "coordinates": [
-   "ic_antennas.current.time",
    "ic_antennas.antenna[:].strap[:].current.time"
   ],
   "units": "A",
@@ -97,7 +92,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "ic_antennas.geometry.outline.r",
    "ic_antennas.antenna[:].strap[:].geometry.outline.r"
   ],
   "units": "m",
@@ -127,7 +121,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power",
   "coordinates": [
-   "ic_antennas.power.time",
    "ic_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -138,7 +131,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -162,7 +154,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ic_antennas.frequency.time",
    "ic_antennas.antenna[:].frequency.time"
   ],
   "units": "Hz",
@@ -209,7 +200,6 @@
   "data_type": "FLT_1D",
   "documentation": "Frequency",
   "coordinates": [
-   "ic_antennas.frequency.time",
    "ic_antennas.antenna[:].frequency.time"
   ],
   "units": "Hz",
@@ -306,10 +296,8 @@
   "data_type": "INT_1D",
   "documentation": "Spectrum of the total surface current on the antenna strap and passive components expressed in poloidal and toroidal modes",
   "coordinates": [
-   "ic_antennas.surface_current[:].m_pol",
    "ic_antennas.antenna[:].surface_current[:].m_pol",
-   "ic_antennas.antenna[:].surface_current[:].n_tor",
-   "ic_antennas.surface_current[:].n_tor"
+   "ic_antennas.antenna[:].surface_current[:].n_tor"
   ],
   "units": "A",
   "type": "dynamic",
@@ -400,7 +388,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "ic_antennas.geometry.outline.r",
    "ic_antennas.antenna[:].strap[:].geometry.outline.r"
   ],
   "units": "m",
@@ -462,7 +449,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -480,7 +466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "m",
@@ -492,7 +477,6 @@
   "documentation": "Toroidal mode numbers, used to describe the spectrum of the antenna current",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -501,7 +485,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -533,7 +516,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "ic_antennas.geometry.outline.r",
    "ic_antennas.antenna[:].strap[:].geometry.outline.r"
   ],
   "units": "m",
@@ -544,7 +526,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "rad",
@@ -561,7 +542,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ic_antennas.current.time",
    "ic_antennas.antenna[:].strap[:].current.time"
   ],
   "units": "A",
@@ -578,7 +558,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ic_antennas.power.time",
    "ic_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -635,7 +614,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ic_antennas.phase.time",
    "ic_antennas.antenna[:].strap[:].phase.time"
   ],
   "units": "rad",
@@ -646,7 +624,6 @@
   "data_type": "FLT_1D",
   "documentation": "Curvature radius of each arc of circle",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -674,7 +651,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -691,7 +667,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height of the start point of each arc of circle",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -715,7 +690,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radii of the start point of each arc of circle",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -734,7 +708,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "ic_antennas.time",
    "ic_antennas.time"
   ],
   "data_type": "INT_1D"
@@ -743,7 +716,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ic_antennas.phase.time",
    "ic_antennas.antenna[:].strap[:].phase.time"
   ],
   "units": "rad",
@@ -760,7 +732,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"curvature_radii\"",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -771,7 +742,6 @@
   "data_type": "FLT_1D",
   "documentation": "Phase of the strap current",
   "coordinates": [
-   "ic_antennas.phase.time",
    "ic_antennas.antenna[:].strap[:].phase.time"
   ],
   "units": "rad",
@@ -809,7 +779,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -870,7 +839,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -887,7 +855,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "m",
@@ -898,7 +865,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ic_antennas.frequency.time",
    "ic_antennas.antenna[:].frequency.time"
   ],
   "units": "Hz",
@@ -925,7 +891,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -936,7 +901,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"curvature_radii\"",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -967,7 +931,6 @@
   "documentation": "Poloidal mode numbers, used to describe the spectrum of the antenna current. The poloidal angle is defined from the reference point; the angle at a point (R,Z) is given by atan((Z-Zref)/(R-Rref)), where Rref=reference_point/r and Zref=reference_point/z",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -1062,7 +1025,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ic_antennas.current.time",
    "ic_antennas.antenna[:].strap[:].current.time"
   ],
   "units": "A",
@@ -1073,7 +1035,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "rad",
@@ -1084,7 +1045,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "ic_antennas.geometry.arcs_of_circle.r",
    "ic_antennas.antenna[:].strap[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -1128,7 +1088,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "ic_antennas.outline.r",
    "ic_antennas.antenna[:].strap[:].outline.r"
   ],
   "units": "m",

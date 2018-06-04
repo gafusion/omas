@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -20,7 +19,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pumping_speed\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -31,7 +29,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pumping_speed\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -42,7 +39,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power to cooling systems",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -73,7 +69,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particle_flux_from_plasma\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -96,7 +91,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pumping_speed\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -107,7 +101,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gas_puff\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -118,7 +111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inner_target_ion_total\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -145,7 +137,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].limiter.unit[:].outline.r"
   ],
   "units": "m",
@@ -157,9 +148,7 @@
   "documentation": "Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -169,7 +158,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_density_outer_target_max\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -198,7 +186,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "wall.j_tor.time",
    "wall.description_2d[:].vessel.unit[:].element[:].j_tor.time"
   ],
   "units": "A",
@@ -210,8 +197,6 @@
   "documentation": "Lower error for \"particle_flux_from_wall\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -223,9 +208,7 @@
   "documentation": "Lower error for \"particle_flux_from_wall\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -236,9 +219,7 @@
   "documentation": "Upper error for \"recycling_energy_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -290,7 +271,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].vessel.unit[:].element[:].outline.r"
   ],
   "units": "m",
@@ -313,7 +293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].vessel.unit[:].element[:].outline.r"
   ],
   "units": "m",
@@ -341,7 +320,6 @@
   "data_type": "FLT_1D",
   "documentation": "Particle flux from the plasma (in equivalent electrons)",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -393,8 +371,6 @@
   "documentation": "Particle flux from the wall corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), in equivalent electrons",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -411,7 +387,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gas_puff\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -432,7 +407,6 @@
   "data_type": "FLT_1D",
   "documentation": "Wall temperature",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "K",
@@ -523,7 +497,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inner_target\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -534,7 +507,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_density_inner_target_max\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -545,7 +517,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -556,7 +527,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron power on the inner target",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -567,7 +537,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "wall.outline[:].r",
    "wall.description_2d[:].mobile.unit[:].outline[:].r"
   ],
   "units": "m",
@@ -584,7 +553,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron power on the inner target",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -608,7 +576,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "K",
@@ -619,7 +586,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particle_flux_from_plasma\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -636,7 +602,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -647,7 +612,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "wall.annular.outline_inner.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_inner.r"
   ],
   "units": "m",
@@ -658,7 +622,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_to_cooling\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -669,7 +632,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -687,7 +649,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pumping_speed\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -698,7 +659,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "wall.annular.outline_outer.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_outer.r"
   ],
   "units": "m",
@@ -715,7 +675,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].vessel.unit[:].element[:].outline.r"
   ],
   "units": "m",
@@ -732,7 +691,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "wall.outline[:].r",
    "wall.description_2d[:].mobile.unit[:].outline[:].r"
   ],
   "units": "m",
@@ -750,7 +708,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -767,7 +724,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -785,9 +741,7 @@
   "documentation": "Upper error for \"sputtering_chemical_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -797,7 +751,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_outer_target\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -808,7 +761,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -819,7 +771,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gas_puff\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -830,7 +781,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pumped particle flux (in equivalent electrons)",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -877,7 +827,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particle_flux_from_plasma\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -894,7 +843,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].limiter.unit[:].outline.r"
   ],
   "units": "m",
@@ -905,7 +853,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power flowing from the plasma to the wall",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -944,9 +891,7 @@
   "documentation": "Particle flux from the wall corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -995,7 +940,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "wall.outline.r",
    "wall.description_2d[:].limiter.unit[:].outline.r"
   ],
   "units": "m",
@@ -1006,7 +950,6 @@
   "data_type": "FLT_1D",
   "documentation": "Maximum power density on the inner target",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1030,9 +973,7 @@
   "documentation": "Lower error for \"sputtering_chemical_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1042,7 +983,6 @@
   "data_type": "FLT_1D",
   "documentation": "Wall inventory, i.e. cumulated exchange of neutral species between plasma and wall from t = 0, positive if a species has gone to the wall, for that species",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "-",
@@ -1053,7 +993,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_to_cooling\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1077,7 +1016,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"wall_inventory\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "-",
@@ -1095,9 +1033,7 @@
   "documentation": "Particle recycling coefficient corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1107,7 +1043,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1137,7 +1072,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"wall_inventory\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "-",
@@ -1149,9 +1083,7 @@
   "documentation": "Energy recycling coefficient corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1167,7 +1099,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1192,9 +1123,7 @@
   "documentation": "Lower error for \"sputtering_physical_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1204,7 +1133,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_outer_target\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1215,7 +1143,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1226,7 +1153,6 @@
   "data_type": "FLT_1D",
   "documentation": "Maximum power density on the outer target",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1243,7 +1169,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "K",
@@ -1255,9 +1180,7 @@
   "documentation": "Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1267,7 +1190,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_from_plasma\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1286,7 +1208,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "data_type": "INT_1D"
@@ -1308,9 +1229,7 @@
   "documentation": "Lower error for \"recycling_energy_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1327,9 +1246,7 @@
   "documentation": "Upper error for \"particle_flux_from_wall\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -1339,7 +1256,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "wall.outline[:].r",
    "wall.description_2d[:].mobile.unit[:].outline[:].r"
   ],
   "units": "m",
@@ -1350,7 +1266,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_from_plasma\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1373,7 +1288,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1384,7 +1298,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1438,7 +1351,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal current induced in this block element",
   "coordinates": [
-   "wall.j_tor.time",
    "wall.description_2d[:].vessel.unit[:].element[:].j_tor.time"
   ],
   "units": "A",
@@ -1481,7 +1393,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particle_flux_from_plasma\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1511,9 +1422,7 @@
   "documentation": "Lower error for \"recycling_particles_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1524,9 +1433,7 @@
   "documentation": "Upper error for \"sputtering_physical_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1542,7 +1449,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inner_target\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1553,7 +1459,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inner_target_ion_total\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1573,7 +1478,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gas_puff\"",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1584,7 +1488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total ion (summed over ion species) power on the inner target",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1611,9 +1514,7 @@
   "documentation": "Upper error for \"recycling_particles_coefficient\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
-   "wall."
+   "wall.time"
   ],
   "units": "-",
   "type": "dynamic",
@@ -1623,7 +1524,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "wall.annular.outline_outer.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_outer.r"
   ],
   "units": "m",
@@ -1646,7 +1546,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "wall.j_tor.time",
    "wall.description_2d[:].vessel.unit[:].element[:].j_tor.time"
   ],
   "units": "A",
@@ -1663,7 +1562,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "wall.annular.outline_inner.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_inner.r"
   ],
   "units": "m",
@@ -1687,7 +1585,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "wall.annular.outline_inner.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_inner.r"
   ],
   "units": "m",
@@ -1698,7 +1595,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1709,7 +1605,6 @@
   "data_type": "FLT_1D",
   "documentation": "Gas puff rate for that species",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1720,7 +1615,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_density_inner_target_max\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1732,8 +1626,6 @@
   "documentation": "Upper error for \"particle_flux_from_wall\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1750,7 +1642,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1767,7 +1658,6 @@
   "data_type": "FLT_1D",
   "documentation": "Particle flux from the plasma for that species",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1790,7 +1680,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1813,7 +1702,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_density_outer_target_max\"",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "W",
@@ -1836,7 +1724,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pumped particle flux for that species",
   "coordinates": [
-   "wall.",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1859,7 +1746,6 @@
   "data_type": "FLT_1D",
   "documentation": "Gas puff rate (in equivalent electrons)",
   "coordinates": [
-   "wall.time",
    "wall.time"
   ],
   "units": "s^-1",
@@ -1905,7 +1791,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "wall.annular.outline_outer.r",
    "wall.description_2d[:].vessel.unit[:].annular.outline_outer.r"
   ],
   "units": "m",

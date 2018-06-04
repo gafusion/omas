@@ -65,7 +65,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -76,7 +75,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "bolometer.detector.outline.x1",
    "bolometer.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -134,7 +132,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "bolometer.power.time",
    "bolometer.channel[:].power.time"
   ],
   "units": "W",
@@ -197,7 +194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "bolometer.outline.x1",
    "bolometer.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -236,7 +232,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "bolometer.power.time",
    "bolometer.channel[:].power.time"
   ],
   "units": "W",
@@ -261,7 +256,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "data_type": "INT_1D"
@@ -270,7 +264,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "bolometer.outline.x1",
    "bolometer.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -295,7 +288,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -333,7 +325,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "bolometer.detector.outline.x1",
    "bolometer.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -368,7 +359,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total radiated power reconstructed from bolometry data",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -495,7 +485,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -553,7 +542,6 @@
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "type": "dynamic",
   "coordinates": [
-   "bolometer.validity_timed.time",
    "bolometer.channel[:].validity_timed.time"
   ],
   "data_type": "INT_1D"
@@ -706,7 +694,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_radiated_inside_lcfs\"",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -758,7 +745,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power received on the detector",
   "coordinates": [
-   "bolometer.power.time",
    "bolometer.channel[:].power.time"
   ],
   "units": "W",
@@ -871,7 +857,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "bolometer.outline.x1",
    "bolometer.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -969,7 +954,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_radiated_total\"",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -1021,7 +1005,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_radiated_total\"",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -1079,7 +1062,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1136,7 +1118,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_radiated_inside_lcfs\"",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -1160,7 +1141,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from the plasma inside the Last Closed Flux Surface, reconstructed from bolometry data",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "units": "W",
@@ -1209,7 +1189,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1239,7 +1218,6 @@
   "documentation": "Validity flag related to the radiated power reconstructions",
   "type": "dynamic",
   "coordinates": [
-   "bolometer.time",
    "bolometer.time"
   ],
   "data_type": "INT_1D"
@@ -1412,7 +1390,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "bolometer.detector.outline.x1",
    "bolometer.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -1470,7 +1447,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",

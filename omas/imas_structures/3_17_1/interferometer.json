@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_volume_average.time",
    "interferometer.n_e_volume_average.time"
   ],
   "units": "m^-3",
@@ -49,7 +48,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
   "coordinates": [
-   "interferometer.n_e_volume_average.time",
    "interferometer.n_e_volume_average.time"
   ],
   "units": "m^-3",
@@ -60,7 +58,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"fringe_jump_correction_times\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -96,7 +93,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "interferometer.path_length_variation.time",
    "interferometer.channel[:].path_length_variation.time"
   ],
   "units": "m",
@@ -131,7 +127,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_line.time",
    "interferometer.channel[:].n_e_line.time"
   ],
   "units": "m^-2",
@@ -219,7 +214,6 @@
   "data_type": "FLT_1D",
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
   "coordinates": [
-   "interferometer.n_e_line.time",
    "interferometer.channel[:].n_e_line.time"
   ],
   "units": "m^-2",
@@ -270,7 +264,6 @@
   "data_type": "FLT_1D",
   "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
   "coordinates": [
-   "interferometer.phase_corrected.time",
    "interferometer.channel[:].wavelength[:].phase_corrected.time"
   ],
   "units": "rad",
@@ -300,7 +293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Optical path length variation due to the plasma",
   "coordinates": [
-   "interferometer.path_length_variation.time",
    "interferometer.channel[:].path_length_variation.time"
   ],
   "units": "m",
@@ -311,7 +303,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "interferometer.path_length_variation.time",
    "interferometer.channel[:].path_length_variation.time"
   ],
   "units": "m",
@@ -323,7 +314,6 @@
   "documentation": "Signed number of 2pi phase corrections applied to remove a fringe jump, for each time slice on which a correction has been made ",
   "type": "constant",
   "coordinates": [
-   "interferometer.fringe_jump_correction_times",
    "interferometer.channel[:].wavelength[:].fringe_jump_correction_times"
   ],
   "data_type": "INT_1D"
@@ -433,7 +423,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_line_average.time",
    "interferometer.channel[:].n_e_line_average.time"
   ],
   "units": "m^-3",
@@ -444,7 +433,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_line_average.time",
    "interferometer.channel[:].n_e_line_average.time"
   ],
   "units": "m^-3",
@@ -498,7 +486,6 @@
   "data_type": "FLT_1D",
   "documentation": "List of time slices of the pulse on which a fringe jump correction has been made ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -541,7 +528,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"fringe_jump_correction_times\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -552,7 +538,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "interferometer.phase_corrected.time",
    "interferometer.channel[:].wavelength[:].phase_corrected.time"
   ],
   "units": "rad",
@@ -590,7 +575,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "interferometer.time",
    "interferometer.time"
   ],
   "data_type": "INT_1D"
@@ -608,7 +592,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_line.time",
    "interferometer.channel[:].n_e_line.time"
   ],
   "units": "m^-2",
@@ -696,7 +679,6 @@
   "data_type": "FLT_1D",
   "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "coordinates": [
-   "interferometer.n_e_line_average.time",
    "interferometer.channel[:].n_e_line_average.time"
   ],
   "units": "m^-3",
@@ -720,7 +702,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "interferometer.phase_corrected.time",
    "interferometer.channel[:].wavelength[:].phase_corrected.time"
   ],
   "units": "rad",
@@ -750,7 +731,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "interferometer.n_e_volume_average.time",
    "interferometer.n_e_volume_average.time"
   ],
   "units": "m^-3",

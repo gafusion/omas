@@ -55,7 +55,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "pf_active.time",
    "pf_active.time"
   ],
   "data_type": "INT_1D"
@@ -107,7 +106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.coil[:].current.time"
   ],
   "units": "A",
@@ -157,7 +155,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.circuit[:].current.time"
   ],
   "units": "V",
@@ -196,7 +193,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"combination\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -239,7 +235,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"curvature_radii\"",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -263,10 +258,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"current_limit_max\"",
   "coordinates": [
-   "pf_active.b_field_max",
    "pf_active.coil[:].b_field_max",
-   "pf_active.coil[:].temperature",
-   "pf_active.temperature"
+   "pf_active.coil[:].temperature"
   ],
   "units": "A",
   "type": "static",
@@ -309,10 +302,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"current_limit_max\"",
   "coordinates": [
-   "pf_active.b_field_max",
    "pf_active.coil[:].b_field_max",
-   "pf_active.coil[:].temperature",
-   "pf_active.temperature"
+   "pf_active.coil[:].temperature"
   ],
   "units": "A",
   "type": "static",
@@ -355,7 +346,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "K",
@@ -366,7 +356,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -416,7 +405,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.supply[:].voltage.time"
   ],
   "units": "V",
@@ -447,7 +435,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field_max\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",
@@ -480,7 +467,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.circuit[:].current.time"
   ],
   "units": "V",
@@ -498,7 +484,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -509,7 +494,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -568,7 +552,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -598,7 +581,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -626,7 +608,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.force.time",
    "pf_active.vertical_force[:].force.time"
   ],
   "units": "N",
@@ -663,7 +644,6 @@
   "data_type": "FLT_1D",
   "documentation": "Voltage on the coil terminals",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.coil[:].voltage.time"
   ],
   "units": "V",
@@ -694,7 +674,6 @@
   "data_type": "FLT_1D",
   "documentation": "Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.supply[:].current.time"
   ],
   "units": "A",
@@ -759,7 +738,6 @@
   "data_type": "FLT_1D",
   "documentation": "List of values of the maximum magnetic field on the conductor surface (coordinate for current_limit_max)",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",
@@ -784,7 +762,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -833,7 +810,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"curvature_radii\"",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -854,7 +830,6 @@
   "data_type": "FLT_1D",
   "documentation": "List of values of the conductor temperature (coordinate for current_limit_max)",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "K",
@@ -865,7 +840,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -885,7 +859,6 @@
   "data_type": "FLT_1D",
   "documentation": "Current in the circuit",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.circuit[:].current.time"
   ],
   "units": "V",
@@ -902,7 +875,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.supply[:].current.time"
   ],
   "units": "A",
@@ -913,7 +885,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"filter_denominator\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -964,7 +935,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "K",
@@ -981,7 +951,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height of the start point of each arc of circle",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -998,7 +967,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radii of the start point of each arc of circle",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1016,7 +984,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "pf_active.geometry.outline.r",
    "pf_active.coil[:].element[:].geometry.outline.r"
   ],
   "units": "m",
@@ -1034,7 +1001,6 @@
   "data_type": "FLT_1D",
   "documentation": "Coils involved in the force combinations. Normally the vertical force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1057,7 +1023,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.force.time",
    "pf_active.vertical_force[:].force.time"
   ],
   "units": "N",
@@ -1095,7 +1060,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field_max\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "T",
@@ -1106,7 +1070,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.coil[:].voltage.time"
   ],
   "units": "V",
@@ -1124,7 +1087,6 @@
   "data_type": "FLT_1D",
   "documentation": "Force ",
   "coordinates": [
-   "pf_active.force.time",
    "pf_active.vertical_force[:].force.time"
   ],
   "units": "N",
@@ -1135,7 +1097,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.supply[:].voltage.time"
   ],
   "units": "V",
@@ -1165,7 +1126,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"combination\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1195,7 +1155,6 @@
   "data_type": "FLT_1D",
   "documentation": "Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1238,7 +1197,6 @@
   "data_type": "FLT_1D",
   "documentation": "Voltage at the supply output",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.supply[:].voltage.time"
   ],
   "units": "V",
@@ -1278,7 +1236,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.coil[:].current.time"
   ],
   "units": "A",
@@ -1323,7 +1280,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"filter_denominator\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1334,7 +1290,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.supply[:].current.time"
   ],
   "units": "A",
@@ -1359,7 +1314,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"filter_numerator\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1383,7 +1337,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.circuit[:].voltage.time"
   ],
   "units": "V",
@@ -1394,7 +1347,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.coil[:].voltage.time"
   ],
   "units": "V",
@@ -1412,8 +1364,6 @@
   "url": "pf_active/PFConnections.html",
   "documentation": "Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise.",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -1440,7 +1390,6 @@
   "data_type": "FLT_1D",
   "documentation": "Curvature radius of each arc of circle",
   "coordinates": [
-   "pf_active.geometry.arcs_of_circle.r",
    "pf_active.coil[:].element[:].geometry.arcs_of_circle.r"
   ],
   "units": "m",
@@ -1483,7 +1432,6 @@
   "data_type": "FLT_1D",
   "documentation": "Current in the coil",
   "coordinates": [
-   "pf_active.current.time",
    "pf_active.coil[:].current.time"
   ],
   "units": "A",
@@ -1494,7 +1442,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.circuit[:].voltage.time"
   ],
   "units": "V",
@@ -1526,10 +1473,8 @@
   "data_type": "FLT_2D",
   "documentation": "Maximum tolerable current in the conductor",
   "coordinates": [
-   "pf_active.b_field_max",
    "pf_active.coil[:].b_field_max",
-   "pf_active.coil[:].temperature",
-   "pf_active.temperature"
+   "pf_active.coil[:].temperature"
   ],
   "units": "A",
   "type": "static",
@@ -1545,7 +1490,6 @@
   "data_type": "FLT_1D",
   "documentation": "Voltage on the circuit",
   "coordinates": [
-   "pf_active.voltage.time",
    "pf_active.circuit[:].voltage.time"
   ],
   "units": "V",
@@ -1587,7 +1531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "pf_active.geometry.outline.r",
    "pf_active.coil[:].element[:].geometry.outline.r"
   ],
   "units": "m",
@@ -1612,7 +1555,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "pf_active.geometry.outline.r",
    "pf_active.coil[:].element[:].geometry.outline.r"
   ],
   "units": "m",
@@ -1655,7 +1597,6 @@
   "data_type": "FLT_1D",
   "documentation": "Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1679,7 +1620,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"filter_numerator\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",

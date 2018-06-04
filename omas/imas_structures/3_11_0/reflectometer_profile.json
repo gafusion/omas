@@ -81,8 +81,6 @@
   "data_type": "FLT_2D",
   "documentation": "Height",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.z.time"
   ],
@@ -101,8 +99,6 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal angle",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.phi.time"
   ],
@@ -227,8 +223,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.z.time"
   ],
@@ -252,8 +246,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.phi.time"
   ],
@@ -430,8 +422,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.z.time"
   ],
@@ -532,8 +522,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "reflectometer_profile.channel[:].r.data",
-   "reflectometer_profile.channel[:].r.data",
    "1...N",
    "reflectometer_profile.channel[:].position.phi.time"
   ],
@@ -654,8 +642,6 @@
   "documentation": "Electron density",
   "coordinates": [
    "1...N",
-   "reflectometer_profile.channel[:].position.r.data",
-   "reflectometer_profile.channel[:].position.r.data",
    "reflectometer_profile.channel[:].n_e.time"
   ],
   "units": "m^-3",
@@ -690,8 +676,6 @@
   "documentation": "Upper error for \"data\"",
   "coordinates": [
    "1...N",
-   "reflectometer_profile.channel[:].position.r.data",
-   "reflectometer_profile.channel[:].position.r.data",
    "reflectometer_profile.channel[:].n_e.time"
   ],
   "units": "m^-3",
@@ -806,8 +790,6 @@
   "documentation": "Lower error for \"data\"",
   "coordinates": [
    "1...N",
-   "reflectometer_profile.channel[:].position.r.data",
-   "reflectometer_profile.channel[:].position.r.data",
    "reflectometer_profile.channel[:].n_e.time"
   ],
   "units": "m^-3",

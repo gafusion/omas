@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -34,7 +33,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometric_coefficients\"",
   "coordinates": [
-   "1...9",
    "1...9"
   ],
   "units": "mixed",
@@ -256,7 +254,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -294,7 +291,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -474,7 +470,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -517,7 +512,6 @@
   "data_type": "FLT_1D",
   "documentation": "MSE polarisation angle",
   "coordinates": [
-   "mse.polarisation_angle.time",
    "mse.channel[:].polarisation_angle.time"
   ],
   "units": "rad",
@@ -528,7 +522,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "mse.outline.x1",
    "mse.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -539,7 +532,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -627,7 +619,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "mse.time",
    "mse.time"
   ],
   "data_type": "INT_1D"
@@ -706,7 +697,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "mse.detector.outline.x1",
    "mse.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -743,7 +733,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "mse.polarisation_angle.time",
    "mse.channel[:].polarisation_angle.time"
   ],
   "units": "rad",
@@ -902,7 +891,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "mse.detector.outline.x1",
    "mse.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -949,7 +937,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -974,7 +961,6 @@
   "data_type": "FLT_1D",
   "documentation": "Set of 9 geometric coefficients providing the MSE polarisation angle as a function of the local electric and magnetic field components (these are related to the angle between beam and line of sight). The list is ordered as follows : coefficients of BZ, BR, Bphi, ER (numerator of the MSE angle expression); coefficients of BZ, BR, Bphi, ER, EZ (denominator)",
   "coordinates": [
-   "1...9",
    "1...9"
   ],
   "units": "mixed",
@@ -999,7 +985,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometric_coefficients\"",
   "coordinates": [
-   "1...9",
    "1...9"
   ],
   "units": "mixed",
@@ -1023,7 +1008,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "mse.outline.x1",
    "mse.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -1046,7 +1030,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "mse.polarisation_angle.time",
    "mse.channel[:].polarisation_angle.time"
   ],
   "units": "rad",
@@ -1063,7 +1046,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "mse.outline.x1",
    "mse.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -1156,7 +1138,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "mse.detector.outline.x1",
    "mse.channel[:].detector.outline.x1"
   ],
   "units": "m",

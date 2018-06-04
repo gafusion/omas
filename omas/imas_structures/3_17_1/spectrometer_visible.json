@@ -28,10 +28,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.radiance_spectra.time",
-   "spectrometer_visible.grating.radiance_spectra.time"
+   "spectrometer_visible.channel[:].grating.radiance_spectra.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -47,7 +45,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "rad",
@@ -58,10 +55,8 @@
   "data_type": "FLT_2D",
   "documentation": "Line gross integral intensities ",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.line_intensities.time",
-   "spectrometer_visible.filter.line_intensities.time"
+   "spectrometer_visible.channel[:].filter.line_intensities.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -126,10 +121,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.photon_count.time",
-   "spectrometer_visible.filter.photon_count.time"
+   "spectrometer_visible.channel[:].filter.photon_count.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -186,10 +179,8 @@
   "data_type": "FLT_2D",
   "documentation": "Intensity spectra (not calibrated)",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.intensity_spectra.time",
-   "spectrometer_visible.grating.intensity_spectra.time"
+   "spectrometer_visible.channel[:].grating.intensity_spectra.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -212,7 +203,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"processed_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -257,7 +247,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radiance_calibration\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths"
   ],
   "units": "m^-2.sr^-1",
@@ -373,7 +362,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"processed_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -426,7 +414,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"wavelengths\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -444,10 +431,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.calibrated_lines",
    "spectrometer_visible.channel[:].filter.calibrated_lines",
-   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time",
-   "spectrometer_visible.filter.calibrated_line_integrals.time"
+   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -476,10 +461,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.processed_lines",
    "spectrometer_visible.channel[:].filter.processed_lines",
-   "spectrometer_visible.channel[:].filter.line_radiances.time",
-   "spectrometer_visible.filter.line_radiances.time"
+   "spectrometer_visible.channel[:].filter.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -489,7 +472,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -506,7 +488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "m",
@@ -524,7 +505,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -547,7 +527,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radiance_calibration\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths"
   ],
   "units": "m^-2.sr^-1",
@@ -612,7 +591,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -623,7 +601,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x1 axis",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -646,7 +623,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -657,7 +633,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"calibrated_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -734,7 +709,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "spectrometer_visible.outline.x1",
    "spectrometer_visible.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -771,10 +745,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.line_intensities.time",
-   "spectrometer_visible.filter.line_intensities.time"
+   "spectrometer_visible.channel[:].filter.line_intensities.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -790,10 +762,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.calibrated_lines",
    "spectrometer_visible.channel[:].filter.calibrated_lines",
-   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time",
-   "spectrometer_visible.filter.calibrated_line_integrals.time"
+   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -849,7 +819,6 @@
   "data_type": "FLT_1D",
   "documentation": "Central wavelength of the calibrated lines",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -888,7 +857,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "m",
@@ -899,7 +867,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "rad",
@@ -911,7 +878,6 @@
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "type": "dynamic",
   "coordinates": [
-   "spectrometer_visible.validity_timed.time",
    "spectrometer_visible.channel[:].validity_timed.time"
   ],
   "data_type": "INT_1D"
@@ -945,7 +911,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -974,7 +939,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radiance calibration",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths"
   ],
   "units": "m^-2.sr^-1",
@@ -999,7 +963,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"raw_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1029,7 +992,6 @@
   "data_type": "FLT_1D",
   "documentation": "Central wavelength of the processed lines",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1046,7 +1008,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "spectrometer_visible.outline.x1",
    "spectrometer_visible.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -1057,7 +1018,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "-",
@@ -1130,10 +1090,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.processed_lines",
    "spectrometer_visible.channel[:].filter.processed_lines",
-   "spectrometer_visible.channel[:].filter.line_radiances.time",
-   "spectrometer_visible.filter.line_radiances.time"
+   "spectrometer_visible.channel[:].filter.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1149,7 +1107,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "rad",
@@ -1196,7 +1153,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "m",
@@ -1207,7 +1163,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1238,10 +1193,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.processed_lines",
    "spectrometer_visible.channel[:].grating.processed_lines",
-   "spectrometer_visible.channel[:].grating.line_radiances.time",
-   "spectrometer_visible.grating.line_radiances.time"
+   "spectrometer_visible.channel[:].grating.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1304,10 +1257,8 @@
   "data_type": "FLT_2D",
   "documentation": "Calibrated, background subtracted line integrals ",
   "coordinates": [
-   "spectrometer_visible.filter.processed_lines",
    "spectrometer_visible.channel[:].filter.processed_lines",
-   "spectrometer_visible.channel[:].filter.line_radiances.time",
-   "spectrometer_visible.filter.line_radiances.time"
+   "spectrometer_visible.channel[:].filter.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1323,7 +1274,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"wavelengths\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1353,10 +1303,8 @@
   "data_type": "FLT_2D",
   "documentation": "Calibrated, background subtracted line integrals ",
   "coordinates": [
-   "spectrometer_visible.grating.processed_lines",
    "spectrometer_visible.channel[:].grating.processed_lines",
-   "spectrometer_visible.channel[:].grating.line_radiances.time",
-   "spectrometer_visible.grating.line_radiances.time"
+   "spectrometer_visible.channel[:].grating.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1378,10 +1326,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.line_intensities.time",
-   "spectrometer_visible.filter.line_intensities.time"
+   "spectrometer_visible.channel[:].filter.line_intensities.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1461,10 +1407,8 @@
   "data_type": "FLT_2D",
   "documentation": "Detected photon count",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.photon_count.time",
-   "spectrometer_visible.filter.photon_count.time"
+   "spectrometer_visible.channel[:].filter.photon_count.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -1474,7 +1418,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1504,10 +1447,8 @@
   "data_type": "FLT_2D",
   "documentation": "Calibrated line gross areas integrals ",
   "coordinates": [
-   "spectrometer_visible.filter.calibrated_lines",
    "spectrometer_visible.channel[:].filter.calibrated_lines",
-   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time",
-   "spectrometer_visible.filter.calibrated_line_integrals.time"
+   "spectrometer_visible.channel[:].filter.calibrated_line_integrals.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -1525,7 +1466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "rad",
@@ -1558,7 +1498,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "m",
@@ -1588,7 +1527,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "-",
@@ -1633,7 +1571,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "rad",
@@ -1702,7 +1639,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1713,7 +1649,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"raw_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1738,7 +1673,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"calibrated_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -1776,7 +1710,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "spectrometer_visible.detector.outline.x1",
    "spectrometer_visible.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -1869,7 +1802,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "rad",
@@ -1880,10 +1812,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.intensity_spectra.time",
-   "spectrometer_visible.grating.intensity_spectra.time"
+   "spectrometer_visible.channel[:].grating.intensity_spectra.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -1941,7 +1871,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "spectrometer_visible.time",
    "spectrometer_visible.time"
   ],
   "data_type": "INT_1D"
@@ -1950,7 +1879,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2006,7 +1934,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2036,7 +1963,6 @@
   "data_type": "FLT_1D",
   "documentation": "Measured wavelengths",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2066,7 +1992,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"processed_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2096,7 +2021,6 @@
   "data_type": "FLT_1D",
   "documentation": "Values of the light collection efficiencies",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "-",
@@ -2120,7 +2044,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "spectrometer_visible.light_collection_efficiencies.positions.r",
    "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r"
   ],
   "units": "m",
@@ -2144,10 +2067,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.intensity_spectra.time",
-   "spectrometer_visible.grating.intensity_spectra.time"
+   "spectrometer_visible.channel[:].grating.intensity_spectra.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -2185,7 +2106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2251,7 +2171,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"processed_lines\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2283,7 +2202,6 @@
   "data_type": "FLT_1D",
   "documentation": "Central wavelength of the raw lines",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2313,10 +2231,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.processed_lines",
    "spectrometer_visible.channel[:].grating.processed_lines",
-   "spectrometer_visible.channel[:].grating.line_radiances.time",
-   "spectrometer_visible.grating.line_radiances.time"
+   "spectrometer_visible.channel[:].grating.line_radiances.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -2352,10 +2268,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.radiance_spectra.time",
-   "spectrometer_visible.grating.radiance_spectra.time"
+   "spectrometer_visible.channel[:].grating.radiance_spectra.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -2378,10 +2292,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "spectrometer_visible.filter.raw_lines",
    "spectrometer_visible.channel[:].filter.raw_lines",
-   "spectrometer_visible.channel[:].filter.photon_count.time",
-   "spectrometer_visible.filter.photon_count.time"
+   "spectrometer_visible.channel[:].filter.photon_count.time"
   ],
   "units": "s^-1",
   "type": "dynamic",
@@ -2478,7 +2390,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"x2\"",
   "coordinates": [
-   "spectrometer_visible.outline.x1",
    "spectrometer_visible.channel[:].aperture[:].outline.x1"
   ],
   "units": "m",
@@ -2527,7 +2438,6 @@
   "data_type": "FLT_1D",
   "documentation": "Central wavelength of the processed lines",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -2580,10 +2490,8 @@
   "data_type": "FLT_2D",
   "documentation": "Calibrated spectra",
   "coordinates": [
-   "spectrometer_visible.grating.wavelengths",
    "spectrometer_visible.channel[:].grating.wavelengths",
-   "spectrometer_visible.channel[:].grating.radiance_spectra.time",
-   "spectrometer_visible.grating.radiance_spectra.time"
+   "spectrometer_visible.channel[:].grating.radiance_spectra.time"
   ],
   "units": "m^-2.s^-1.sr^-1",
   "type": "dynamic",
@@ -2606,7 +2514,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"x2\"",
   "coordinates": [
-   "spectrometer_visible.detector.outline.x1",
    "spectrometer_visible.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -2624,7 +2531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Positions along x2 axis",
   "coordinates": [
-   "spectrometer_visible.detector.outline.x1",
    "spectrometer_visible.channel[:].detector.outline.x1"
   ],
   "units": "m",
@@ -2641,7 +2547,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "spectrometer_visible.detector_image.outline.r",
    "spectrometer_visible.channel[:].detector_image.outline.r"
   ],
   "units": "m",

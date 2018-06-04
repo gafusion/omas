@@ -10,18 +10,12 @@
   "data_type": "FLT_6D",
   "documentation": "6D table describing the process data",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -44,7 +38,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"table_1d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
@@ -141,18 +134,12 @@
   "data_type": "FLT_6D",
   "documentation": "Lower error for \"table_6d\"",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -192,7 +179,6 @@
   "data_type": "FLT_1D",
   "documentation": "1D table describing the process data",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
@@ -204,7 +190,6 @@
   "documentation": "An array identifying the metastable; if zero-length, then not a metastable; if of length 1, then the value indicates the electronic level for the metastable (mostly used for atoms/ions); if of length 2, then the 1st would indicate the electronic level and the second the vibrational level for the metastable (mostly used for molecules and molecular ions); if of length 3, then the 1st would indicate the electronic level, the second the vibrational level and the third the rotational level for the metastable (mostly used for molecules and molecular ions)",
   "type": "static",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -225,18 +210,12 @@
   "data_type": "FLT_6D",
   "documentation": "Upper error for \"table_6d\"",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -275,16 +254,11 @@
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"table_5d\"",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -294,12 +268,9 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"table_3d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -370,7 +341,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "units given by coordinate_system(:)/coordinate(:)/units",
@@ -381,14 +351,10 @@
   "data_type": "FLT_4D",
   "documentation": "4D table describing the process data",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -429,7 +395,6 @@
   "documentation": "Extrapolation strategy when leaving the domain. The first value of the vector describes the behaviour at lower bound, the second describes the at upper bound. Possible values: 0=none, report error; 1=boundary value; 2=linear extrapolation",
   "type": "static",
   "coordinates": [
-   "1...2",
    "1...2"
   ],
   "data_type": "INT_1D"
@@ -532,7 +497,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"table_1d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
@@ -556,14 +520,10 @@
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"table_4d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -585,7 +545,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "units given by coordinate_system(:)/coordinate(:)/units",
@@ -603,7 +562,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "amns_data.time",
    "amns_data.time"
   ],
   "data_type": "INT_1D"
@@ -631,10 +589,8 @@
   "data_type": "FLT_2D",
   "documentation": "2D table describing the process data",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -656,16 +612,11 @@
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"table_5d\"",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -720,7 +671,6 @@
   "data_type": "FLT_1D",
   "documentation": "Coordinate values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "units given by coordinate_system(:)/coordinate(:)/units",
@@ -828,16 +778,11 @@
   "data_type": "FLT_5D",
   "documentation": "5D table describing the process data",
   "coordinates": [
-   "amns_data.",
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -878,14 +823,10 @@
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"table_4d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -912,10 +853,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"table_2d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -965,7 +904,6 @@
   "documentation": "String description of discrete coordinate values (if interpolation_type=0). E.g., for spectroscopic lines, the spectroscopic description of the transition.",
   "type": "static",
   "coordinates": [
-   "amns_data.values",
    "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "STR_1D"
@@ -1001,12 +939,9 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"table_3d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -1046,10 +981,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"table_2d\"",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -1072,12 +1005,9 @@
   "data_type": "FLT_3D",
   "documentation": "3D table describing the process data",
   "coordinates": [
-   "amns_data.",
    "amns_data.coordinate_system[:].coordinate",
    "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.",
-   "amns_data."
+   "amns_data.coordinate_system[:].coordinate"
   ],
   "units": "units given by process(:)/results_units",
   "type": "static",
@@ -1137,7 +1067,6 @@
   "documentation": "An array identifying the metastable; if zero-length, then not a metastable; if of length 1, then the value indicates the electronic level for the metastable (mostly used for atoms/ions); if of length 2, then the 1st would indicate the electronic level and the second the vibrational level for the metastable (mostly used for molecules and molecular ions); if of length 3, then the 1st would indicate the electronic level, the second the vibrational level and the third the rotational level for the metastable (mostly used for molecules and molecular ions)",
   "type": "static",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"

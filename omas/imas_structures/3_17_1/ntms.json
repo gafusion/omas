@@ -10,7 +10,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"frequency\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "Hz",
@@ -21,7 +20,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "-",
@@ -54,7 +52,6 @@
   "data_type": "FLT_1D",
   "documentation": "Frequency of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "Hz",
@@ -78,7 +75,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux coordinate on which the mode is centred",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -97,9 +93,7 @@
   "documentation": "Upper error for \"delta_diff\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed",
-   "ntms.detailed_evolution.time_detailed"
+   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^2.s^-1",
   "type": "dynamic",
@@ -109,7 +103,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "kg.m^2.s^-2",
@@ -120,7 +113,6 @@
   "data_type": "FLT_1D",
   "documentation": "Phase of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad",
@@ -179,7 +171,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dwidth_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m/s",
@@ -240,7 +231,6 @@
   "data_type": "FLT_1D",
   "documentation": "Full width of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -258,7 +248,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the contribution",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "kg.m^2.s^-2",
@@ -279,7 +268,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised flux coordinate on which the mode is centred",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "-",
@@ -290,7 +278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -308,7 +295,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "ntms.time",
    "ntms.time"
   ],
   "data_type": "INT_1D"
@@ -324,7 +310,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"width\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -335,7 +320,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dphase_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad/s",
@@ -408,7 +392,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dwidth_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m/s",
@@ -419,7 +402,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dfrequency_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "s^-2",
@@ -448,7 +430,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"time_detailed\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -459,7 +440,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dphase_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad/s",
@@ -490,7 +470,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the contribution",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^-1",
@@ -552,7 +531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Extra diffusion coefficient for the transport equations of Te, ne, Ti ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "m^2.s^-1",
@@ -582,7 +560,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "ntms.time",
    "ntms.time"
   ],
   "units": "T",
@@ -630,7 +607,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time array used to describe the detailed evolution of the NTM",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -667,7 +643,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "ntms.time",
    "ntms.time"
   ],
   "units": "T",
@@ -699,7 +674,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"width\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -723,7 +697,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the phase of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad/s",
@@ -749,9 +722,7 @@
   "documentation": "Extra diffusion coefficient for the transport equations of Te, ne, Ti ",
   "coordinates": [
    "1...3",
-   "1...3",
-   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed",
-   "ntms.detailed_evolution.time_detailed"
+   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^2.s^-1",
   "type": "dynamic",
@@ -846,9 +817,7 @@
   "documentation": "Lower error for \"delta_diff\"",
   "coordinates": [
    "1...3",
-   "1...3",
-   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed",
-   "ntms.detailed_evolution.time_detailed"
+   "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^2.s^-1",
   "type": "dynamic",
@@ -892,7 +861,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^-1",
@@ -903,7 +871,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"time_detailed\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "s",
@@ -949,7 +916,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phase\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad",
@@ -960,7 +926,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the full width of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m/s",
@@ -997,7 +962,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "-",
@@ -1033,7 +997,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "kg.m^2.s^-2",
@@ -1051,7 +1014,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "ntms.time",
    "ntms.time"
   ],
   "units": "T",
@@ -1094,7 +1056,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dfrequency_dt\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "s^-2",
@@ -1105,7 +1066,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"delta_diff\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "m^2.s^-1",
@@ -1116,7 +1076,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"frequency\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "Hz",
@@ -1142,7 +1101,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phase\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "rad",
@@ -1153,7 +1111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the frequency of the mode",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "s^-2",
@@ -1171,7 +1128,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "ntms.",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m^-1",
@@ -1188,7 +1144,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "ntms.detailed_evolution.time_detailed",
    "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed"
   ],
   "units": "m",
@@ -1205,7 +1160,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"delta_diff\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "m^2.s^-1",

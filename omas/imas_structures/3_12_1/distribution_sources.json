@@ -59,8 +59,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -144,8 +142,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -594,8 +590,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -719,8 +713,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -1570,8 +1562,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -1597,8 +1587,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
    "1...N"

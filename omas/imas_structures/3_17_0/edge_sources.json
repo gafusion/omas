@@ -9,9 +9,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -59,9 +57,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -72,9 +68,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -91,7 +85,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -108,9 +101,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -121,9 +112,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -134,9 +123,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -147,7 +134,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -164,9 +150,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -183,7 +167,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -237,7 +220,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -259,7 +241,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -276,15 +257,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
-   "edge_sources.metric.tensor_covariant",
-   "edge_sources.element",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -304,7 +278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -378,7 +351,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -389,7 +361,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -400,7 +371,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -434,9 +404,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -447,9 +415,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -467,9 +433,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -492,9 +456,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -517,9 +479,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -537,9 +497,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -616,9 +574,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -629,11 +585,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "edge_sources.",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -650,9 +603,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -663,7 +614,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -674,7 +624,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -685,7 +634,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -702,7 +650,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -713,9 +660,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -764,9 +709,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -787,7 +730,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -798,9 +740,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -823,15 +763,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
-   "edge_sources.tensor_covariant",
-   "edge_sources.",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -853,9 +786,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -866,7 +797,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -877,7 +807,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -888,7 +817,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -914,7 +842,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -925,9 +852,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -973,7 +898,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -984,7 +908,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "edge_sources.element",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1007,9 +930,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1020,9 +941,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1046,15 +965,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
-   "edge_sources.tensor_covariant",
-   "edge_sources.",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1065,9 +977,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1078,7 +988,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1112,7 +1021,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "edge_sources.",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1155,7 +1063,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1166,7 +1073,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1208,7 +1114,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1229,7 +1134,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1306,7 +1210,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1317,9 +1220,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1336,7 +1237,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1347,7 +1247,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1371,7 +1270,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1389,7 +1287,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1413,7 +1310,6 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -1455,9 +1351,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1468,9 +1362,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1487,9 +1379,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1506,7 +1396,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1517,9 +1406,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1530,7 +1417,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1547,9 +1433,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].total_ion_energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1560,9 +1444,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1573,7 +1455,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1606,7 +1487,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1618,7 +1498,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "edge_sources.time",
    "edge_sources.time"
   ],
   "data_type": "INT_1D"
@@ -1633,7 +1512,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1650,9 +1528,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1686,7 +1562,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1734,9 +1609,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1747,7 +1620,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1795,11 +1667,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "edge_sources.",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1833,11 +1702,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_sources.element",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1866,9 +1732,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1908,7 +1772,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "edge_sources.element",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1926,7 +1789,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1937,7 +1799,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -1967,9 +1828,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1987,9 +1846,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2000,9 +1857,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2026,7 +1881,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2079,9 +1933,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2092,9 +1944,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2105,9 +1955,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2118,7 +1966,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2164,9 +2011,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2177,7 +2022,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2195,9 +2039,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2232,9 +2074,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2251,9 +2091,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2264,9 +2102,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2284,7 +2120,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2302,9 +2137,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].electrons.particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2327,7 +2160,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2338,9 +2170,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2377,7 +2207,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2388,7 +2217,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2405,9 +2233,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2418,7 +2244,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2473,11 +2298,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_sources.",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2488,7 +2310,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2532,7 +2353,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2543,9 +2363,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2600,9 +2418,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2619,7 +2435,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2630,9 +2445,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2649,9 +2462,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2668,7 +2479,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2679,9 +2489,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2712,9 +2520,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].total_ion_energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2725,9 +2531,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2750,7 +2554,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2761,9 +2564,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2781,9 +2582,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2807,7 +2606,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2818,9 +2616,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2853,9 +2649,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2866,7 +2660,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2877,9 +2670,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2890,7 +2681,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -2901,9 +2691,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2914,9 +2702,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2927,7 +2713,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2938,9 +2723,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2951,9 +2734,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].total_ion_energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2964,7 +2745,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3007,7 +2787,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3024,7 +2803,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3035,9 +2813,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3079,7 +2855,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3113,7 +2888,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3142,9 +2916,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3155,9 +2927,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3190,11 +2960,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "edge_sources.element",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3243,7 +3010,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "edge_sources.element",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -3254,9 +3020,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3267,9 +3031,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3280,9 +3042,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3293,7 +3053,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3340,7 +3099,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3369,9 +3127,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3382,7 +3138,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3399,9 +3154,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].current[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3412,7 +3165,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3429,9 +3181,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3442,7 +3192,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3466,7 +3215,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3527,7 +3275,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3547,7 +3294,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3558,9 +3304,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3577,9 +3321,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3619,15 +3361,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
-   "edge_sources.metric.tensor_covariant",
-   "edge_sources.element",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3644,7 +3379,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3670,9 +3404,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3683,7 +3415,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3714,7 +3445,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3725,9 +3455,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3745,7 +3473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3775,7 +3502,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3786,9 +3512,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3811,7 +3535,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3830,7 +3553,6 @@
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -3839,9 +3561,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3864,9 +3584,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3877,9 +3595,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3890,9 +3606,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3927,9 +3641,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3940,7 +3652,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3951,7 +3662,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -3979,9 +3689,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3992,15 +3700,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
-   "edge_sources.tensor_covariant",
-   "edge_sources.",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4011,7 +3712,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4034,7 +3734,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4045,9 +3744,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4058,7 +3755,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4086,9 +3782,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4105,9 +3799,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4118,7 +3810,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4129,7 +3820,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4152,9 +3842,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4177,9 +3865,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4190,9 +3876,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4203,7 +3887,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4214,9 +3897,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4245,9 +3926,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4285,7 +3964,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4296,7 +3974,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4307,7 +3984,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4325,7 +4001,6 @@
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -4340,7 +4015,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4351,7 +4025,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4362,7 +4035,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4380,9 +4052,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4422,7 +4092,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4456,7 +4125,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4467,7 +4135,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4494,7 +4161,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4505,9 +4171,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4525,7 +4189,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4543,9 +4206,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4556,9 +4217,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].current[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4643,9 +4302,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4676,9 +4333,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].current[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4689,9 +4344,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "edge_sources.values",
    "edge_sources.source[:].ggd[:].ion[:].energy[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4702,7 +4355,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4719,9 +4371,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4732,15 +4382,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
-   "edge_sources.metric.tensor_covariant",
-   "edge_sources.element",
    "1...N",
-   "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "edge_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4751,7 +4394,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4768,9 +4410,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4799,9 +4439,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4812,7 +4450,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4823,7 +4460,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4834,7 +4470,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4845,9 +4480,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4865,9 +4498,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4878,7 +4509,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4901,7 +4531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "edge_sources.",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4912,7 +4541,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4932,9 +4560,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4951,7 +4577,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4968,7 +4593,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -4990,9 +4614,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5003,7 +4625,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5014,9 +4635,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5027,11 +4646,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "edge_sources.element",
    "1...N",
    "edge_sources.grid_ggd[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5049,7 +4665,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5072,7 +4687,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5094,7 +4708,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5132,9 +4745,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5145,7 +4756,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5156,9 +4766,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5201,9 +4809,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5233,7 +4839,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5267,7 +4872,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5308,9 +4912,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5334,7 +4936,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5345,7 +4946,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5356,9 +4956,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5369,7 +4967,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5386,7 +4983,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "edge_sources.",
    "edge_sources.grid_ggd[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -5404,7 +5000,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial"
   ],
   "units": "as_parent",
@@ -5427,7 +5022,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "coordinates": [
-   "edge_sources.radial",
    "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial"
   ],
   "units": "as_parent",

@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.power.time",
    "ec_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -14,7 +13,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.r.time",
    "ec_antennas.antenna[:].launching_position.r.time"
   ],
   "units": "m",
@@ -32,9 +30,7 @@
   "documentation": "Lower error for \"data\"",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.spot.size.time",
-   "ec_antennas.beam.spot.size.time"
+   "ec_antennas.antenna[:].beam.spot.size.time"
   ],
   "units": "m",
   "type": "dynamic",
@@ -50,7 +46,6 @@
   "data_type": "FLT_1D",
   "documentation": "Rotation angle for the phase ellipse",
   "coordinates": [
-   "ec_antennas.beam.phase.angle.time",
    "ec_antennas.antenna[:].beam.phase.angle.time"
   ],
   "units": "rad",
@@ -76,7 +71,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_angle_pol.time",
    "ec_antennas.antenna[:].launching_angle_pol.time"
   ],
   "units": "rad",
@@ -87,7 +81,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.beam.phase.angle.time",
    "ec_antennas.antenna[:].beam.phase.angle.time"
   ],
   "units": "rad",
@@ -124,7 +117,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_angle_pol.time",
    "ec_antennas.antenna[:].launching_angle_pol.time"
   ],
   "units": "rad",
@@ -157,9 +149,7 @@
   "documentation": "Upper error for \"data\"",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.phase.curvature.time",
-   "ec_antennas.beam.phase.curvature.time"
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
   ],
   "units": "m^-1",
   "type": "dynamic",
@@ -221,7 +211,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.z.time",
    "ec_antennas.antenna[:].launching_position.z.time"
   ],
   "units": "m",
@@ -256,7 +245,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.beam.phase.angle.time",
    "ec_antennas.antenna[:].beam.phase.angle.time"
   ],
   "units": "rad",
@@ -273,7 +261,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.phi.time",
    "ec_antennas.antenna[:].launching_position.phi.time"
   ],
   "units": "rad",
@@ -312,7 +299,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_angle_tor.time",
    "ec_antennas.antenna[:].launching_angle_tor.time"
   ],
   "units": "rad",
@@ -341,7 +327,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "ec_antennas.launching_position.z.time",
    "ec_antennas.antenna[:].launching_position.z.time"
   ],
   "units": "m",
@@ -358,7 +343,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi",
   "coordinates": [
-   "ec_antennas.launching_angle_tor.time",
    "ec_antennas.antenna[:].launching_angle_tor.time"
   ],
   "units": "rad",
@@ -379,7 +363,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "ec_antennas.time",
    "ec_antennas.time"
   ],
   "data_type": "INT_1D"
@@ -388,7 +371,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;",
   "coordinates": [
-   "ec_antennas.launching_angle_pol.time",
    "ec_antennas.antenna[:].launching_angle_pol.time"
   ],
   "units": "rad",
@@ -399,7 +381,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.phi.time",
    "ec_antennas.antenna[:].launching_position.phi.time"
   ],
   "units": "rad",
@@ -423,9 +404,7 @@
   "documentation": "Lower error for \"data\"",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.phase.curvature.time",
-   "ec_antennas.beam.phase.curvature.time"
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
   ],
   "units": "m^-1",
   "type": "dynamic",
@@ -435,7 +414,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "ec_antennas.beam.spot.angle.time",
    "ec_antennas.antenna[:].beam.spot.angle.time"
   ],
   "units": "rad",
@@ -461,7 +439,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.power.time",
    "ec_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -484,7 +461,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.z.time",
    "ec_antennas.antenna[:].launching_position.z.time"
   ],
   "units": "m",
@@ -502,9 +478,7 @@
   "documentation": "Upper error for \"data\"",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.spot.size.time",
-   "ec_antennas.beam.spot.size.time"
+   "ec_antennas.antenna[:].beam.spot.size.time"
   ],
   "units": "m",
   "type": "dynamic",
@@ -514,7 +488,6 @@
   "data_type": "FLT_1D",
   "documentation": "Power",
   "coordinates": [
-   "ec_antennas.power.time",
    "ec_antennas.antenna[:].power.time"
   ],
   "units": "W",
@@ -526,7 +499,6 @@
   "documentation": "Incoming wave mode (+ or -1 for O/X mode)",
   "type": "dynamic",
   "coordinates": [
-   "ec_antennas.mode.time",
    "ec_antennas.antenna[:].mode.time"
   ],
   "data_type": "INT_1D"
@@ -554,9 +526,7 @@
   "documentation": "Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.phase.curvature.time",
-   "ec_antennas.beam.phase.curvature.time"
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
   ],
   "units": "m^-1",
   "type": "dynamic",
@@ -594,7 +564,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle",
   "coordinates": [
-   "ec_antennas.launching_position.phi.time",
    "ec_antennas.antenna[:].launching_position.phi.time"
   ],
   "units": "rad",
@@ -605,7 +574,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_angle_tor.time",
    "ec_antennas.antenna[:].launching_angle_tor.time"
   ],
   "units": "rad",
@@ -632,9 +600,7 @@
   "documentation": "Size of the spot ellipse",
   "coordinates": [
    "1...2",
-   "1...2",
-   "ec_antennas.antenna[:].beam.spot.size.time",
-   "ec_antennas.beam.spot.size.time"
+   "ec_antennas.antenna[:].beam.spot.size.time"
   ],
   "units": "m",
   "type": "dynamic",
@@ -669,7 +635,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.beam.spot.angle.time",
    "ec_antennas.antenna[:].beam.spot.angle.time"
   ],
   "units": "rad",
@@ -686,7 +651,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "ec_antennas.launching_position.r.time",
    "ec_antennas.antenna[:].launching_position.r.time"
   ],
   "units": "m",
@@ -715,7 +679,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "ec_antennas.launching_position.r.time",
    "ec_antennas.antenna[:].launching_position.r.time"
   ],
   "units": "m",
@@ -741,7 +704,6 @@
   "data_type": "FLT_1D",
   "documentation": "Rotation angle for the spot ellipse",
   "coordinates": [
-   "ec_antennas.beam.spot.angle.time",
    "ec_antennas.antenna[:].beam.spot.angle.time"
   ],
   "units": "rad",

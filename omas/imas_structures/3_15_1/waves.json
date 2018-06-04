@@ -167,8 +167,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -261,8 +259,6 @@
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^3",
@@ -285,8 +281,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -321,8 +315,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -335,8 +327,6 @@
   "documentation": "Lower error for \"area\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^2",
@@ -469,8 +459,6 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -492,8 +480,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -610,8 +596,6 @@
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -646,8 +630,6 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -778,8 +760,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -986,8 +966,6 @@
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^2",
@@ -1015,8 +993,6 @@
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) ",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "-",
@@ -1027,8 +1003,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1228,8 +1202,6 @@
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "Wb",
@@ -1258,8 +1230,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -1282,8 +1252,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the fast species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1360,8 +1328,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1398,8 +1364,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1483,8 +1447,6 @@
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^3",
@@ -1507,8 +1469,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1530,8 +1490,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -1622,8 +1580,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -1685,8 +1641,6 @@
   "documentation": "Height",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -1749,8 +1703,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -1805,8 +1757,6 @@
   "documentation": "Lower error for \"z\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -1982,8 +1932,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2015,8 +1963,6 @@
   "documentation": "Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -2253,8 +2199,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -2321,8 +2265,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -2363,8 +2305,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -2438,8 +2378,6 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2452,8 +2390,6 @@
   "documentation": "Lower error for \"theta_straight\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -2533,8 +2469,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2828,8 +2762,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2903,8 +2835,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2916,8 +2846,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -2988,8 +2916,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -3019,8 +2945,6 @@
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "Wb",
@@ -3089,8 +3013,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -3184,8 +3106,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the thermal species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -3256,8 +3176,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -3282,8 +3200,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -3565,8 +3481,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -3890,8 +3804,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -4042,8 +3954,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -4160,8 +4070,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -4295,8 +4203,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the thermal species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -4384,8 +4290,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -4464,8 +4368,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -4566,8 +4468,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -4590,8 +4490,6 @@
   "documentation": "Straight field line poloidal angle",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -4608,8 +4506,6 @@
   "data_type": "FLT_2D",
   "documentation": "Total absorbed wave power density (electrons + ion + fast populations)",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -4655,8 +4551,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5032,8 +4926,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5099,8 +4991,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the fast species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5157,8 +5047,6 @@
   "documentation": "Volume enclosed inside the magnetic surface",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^3",
@@ -5170,8 +5058,6 @@
   "documentation": "Poloidal magnetic flux",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "Wb",
@@ -5329,8 +5215,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5470,8 +5354,6 @@
   "documentation": "Upper error for \"theta_straight\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -5493,8 +5375,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5506,8 +5386,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5589,8 +5467,6 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5645,8 +5521,6 @@
   "documentation": "Upper error for \"z\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -5685,8 +5559,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5699,8 +5571,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5721,8 +5591,6 @@
   "documentation": "Upper error for \"area\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m^2",
@@ -5733,8 +5601,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5747,8 +5613,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -5798,8 +5662,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -5813,8 +5675,6 @@
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "-",
@@ -5982,8 +5842,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -6045,8 +5903,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -6074,8 +5930,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the fast species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -6102,8 +5956,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -6186,8 +6038,6 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power density on the thermal species",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -6238,8 +6088,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -6252,8 +6100,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -6267,8 +6113,6 @@
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "-",
@@ -6321,8 +6165,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -6336,8 +6178,6 @@
   "documentation": "Lower error for \"theta_geometric\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -6449,8 +6289,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"
@@ -6532,8 +6370,6 @@
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "m",
@@ -6642,8 +6478,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
-   "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
    "1...N"
@@ -6715,8 +6549,6 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -6779,8 +6611,6 @@
   "documentation": "Upper error for \"theta_geometric\"",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -6987,8 +6817,6 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -7006,8 +6834,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -7102,8 +6928,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast\"",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N",
    "1...N"
   ],
@@ -7206,8 +7030,6 @@
   "documentation": "Geometrical poloidal angle",
   "coordinates": [
    "1...N",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "1...N"
   ],
   "units": "rad",
@@ -7331,8 +7153,6 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
-   "waves.coherent_wave[:].profiles_2d[:].grid.r",
    "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
    "1...N"

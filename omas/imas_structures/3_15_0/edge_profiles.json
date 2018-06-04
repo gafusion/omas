@@ -7475,8 +7475,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -7943,8 +7941,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -7957,8 +7953,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -8039,8 +8033,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -13932,8 +13924,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"
@@ -15274,8 +15264,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "edge_profiles.ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "1...N",
    "edge_profiles.ggd[:].grid.grid_subset[:].element",
    "1...N"

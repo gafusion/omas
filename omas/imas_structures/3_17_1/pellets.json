@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"ablation_rate\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "s^-1",
@@ -14,7 +13,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m.s^-1",
@@ -25,7 +23,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "m",
@@ -36,7 +33,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ablation rate (electrons) along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "s^-1",
@@ -79,7 +75,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pellet velocity along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m.s^-1",
@@ -102,7 +97,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"ablation_rate\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "s^-1",
@@ -113,7 +107,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron density along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m^-3",
@@ -124,7 +117,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_e\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m^-3",
@@ -136,7 +128,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "pellets.time",
    "pellets.time"
   ],
   "data_type": "INT_1D"
@@ -145,7 +136,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "rad",
@@ -181,7 +171,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "rad",
@@ -192,7 +181,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -209,7 +197,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "rad",
@@ -227,7 +214,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"size\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -288,7 +274,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"distance\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -346,7 +331,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -375,7 +359,6 @@
   "data_type": "FLT_1D",
   "documentation": "Number of ablated particles (electrons) along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -438,7 +421,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m.s^-1",
@@ -487,7 +469,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "m",
@@ -498,7 +479,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -509,7 +489,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -532,7 +511,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"size\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -550,7 +528,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal coordinate along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -581,7 +558,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm_drift\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -620,7 +596,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "pellets.path_profiles.position.r",
    "pellets.time_slice[:].pellet[:].path_profiles.position.r"
   ],
   "units": "m",
@@ -631,7 +606,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"distance\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -642,7 +616,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_e\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "m^-3",
@@ -666,7 +639,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"ablated_particles\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -677,7 +649,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -688,7 +659,6 @@
   "data_type": "FLT_1D",
   "documentation": "Difference to due ExB drifts between the ablation and the final deposition locations, in terms of the normalised toroidal flux coordinate",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -743,7 +713,6 @@
   "data_type": "FLT_1D",
   "documentation": "Electron temperature along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "eV",
@@ -776,7 +745,6 @@
   "data_type": "FLT_1D",
   "documentation": "Distance along the pellet path, with the origin taken at path_geometry/first_point. Used as the main coordinate for the path_profiles structure ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -793,7 +761,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "Wb",
@@ -804,7 +771,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"t_e\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "eV",
@@ -829,7 +795,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm_drift\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -867,7 +832,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"ablated_particles\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "-",
@@ -903,7 +867,6 @@
   "data_type": "FLT_1D",
   "documentation": "Size of the pellet in the various dimensions, depending on the shape type. Spherical pellets: size(1) is the radius of the pellet. Cylindrical pellets: size(1) is the radius and size(2) is the height of the cylinder. Rectangular pellets: size(1) is the height, size(2) is the width and size(3) is the length",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -920,7 +883,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "Wb",
@@ -937,7 +899,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal flux along the pellet path ",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "Wb",
@@ -985,7 +946,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"t_e\"",
   "coordinates": [
-   "pellets.path_profiles.distance",
    "pellets.time_slice[:].pellet[:].path_profiles.distance"
   ],
   "units": "eV",

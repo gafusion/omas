@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -14,8 +13,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -28,8 +25,6 @@
   "documentation": "Lower error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -40,7 +35,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -52,7 +46,6 @@
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -73,7 +66,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -90,7 +82,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -101,7 +92,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -112,7 +102,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -123,7 +112,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -134,7 +122,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -157,7 +144,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -175,7 +161,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -186,7 +171,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -197,7 +181,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -214,7 +197,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -236,7 +218,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -247,7 +228,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -258,7 +238,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -269,7 +248,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -280,7 +258,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -298,7 +275,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dvolume_drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -309,7 +285,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -351,7 +326,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -368,7 +342,6 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -391,8 +364,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -445,7 +416,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -475,7 +445,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -498,8 +467,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -552,7 +519,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -569,7 +535,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -580,7 +545,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -591,7 +555,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dt_cphi\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -608,7 +571,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -639,7 +601,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -676,7 +637,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -712,7 +672,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -731,7 +690,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpsi_drho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-1",
@@ -742,7 +700,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -765,7 +722,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -789,7 +745,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -800,7 +755,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "transport_solver_numerics.time",
    "transport_solver_numerics.time"
   ],
   "units": "T",
@@ -817,7 +771,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -828,7 +781,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -839,7 +791,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of the poloidal flux profile with respect to time, at constant normalised toroidal flux coordinate",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -856,7 +807,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -867,7 +817,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -903,7 +852,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -930,7 +878,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d2psi_drho_tor2\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-2",
@@ -941,7 +888,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -952,7 +898,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -963,7 +908,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1001,7 +945,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1012,7 +955,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1048,7 +990,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.convergence.time_step.time",
    "transport_solver_numerics.convergence.time_step.time"
   ],
   "units": "s",
@@ -1059,7 +1000,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -1070,7 +1010,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1087,7 +1026,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1098,7 +1036,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1122,7 +1059,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1133,7 +1069,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1150,7 +1085,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1161,7 +1095,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -1185,7 +1118,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpsi_drho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-1",
@@ -1202,7 +1134,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -1226,7 +1157,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1237,7 +1167,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1248,7 +1177,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.convergence.time_step.time",
    "transport_solver_numerics.convergence.time_step.time"
   ],
   "units": "s",
@@ -1290,7 +1218,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1323,11 +1250,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "transport_solver_numerics.element",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1354,7 +1278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1378,7 +1301,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -1414,7 +1336,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second derivative of the poloidal flux profile with respect to the toroidal flux coordinate",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-2",
@@ -1439,8 +1360,6 @@
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1451,7 +1370,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1493,7 +1411,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1504,7 +1421,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1531,7 +1447,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1548,7 +1463,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1578,7 +1492,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1589,7 +1502,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1600,7 +1512,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1617,7 +1528,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1629,7 +1539,6 @@
   "documentation": "Names of the restart files",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "STR_1D"
@@ -1638,7 +1547,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1649,7 +1557,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1660,7 +1567,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1671,7 +1577,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1688,7 +1593,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1699,7 +1603,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1728,7 +1631,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -1751,7 +1653,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1784,7 +1685,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1795,7 +1695,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -1819,7 +1718,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -1830,8 +1728,6 @@
   "data_type": "FLT_2D",
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -1861,7 +1757,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -1901,7 +1796,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1918,7 +1812,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -1948,15 +1841,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "transport_solver_numerics.tensor_covariant",
-   "transport_solver_numerics.",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1967,7 +1853,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -1978,7 +1863,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -1995,7 +1879,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2006,7 +1889,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -2017,7 +1899,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total thermal ion pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2028,7 +1909,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -2039,7 +1919,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2068,7 +1947,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -2079,7 +1957,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2096,7 +1973,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2113,7 +1989,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2174,7 +2049,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2197,7 +2071,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2215,7 +2088,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2226,7 +2098,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second order radial derivative with respect to the primary coordinate",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -2243,15 +2114,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "transport_solver_numerics.element",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2262,7 +2126,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -2279,7 +2142,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step_min.time",
    "transport_solver_numerics.time_step_min.time"
   ],
   "units": "s",
@@ -2290,7 +2152,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2345,7 +2206,6 @@
   "data_type": "FLT_1D",
   "documentation": "Profile of the primary quantity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -2385,11 +2245,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "transport_solver_numerics.element",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2436,7 +2293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2480,7 +2336,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2491,7 +2346,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2561,7 +2415,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -2572,7 +2425,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2627,7 +2479,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2638,7 +2489,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2659,7 +2509,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step.time",
    "transport_solver_numerics.time_step.time"
   ],
   "units": "s",
@@ -2676,7 +2525,6 @@
   "data_type": "FLT_1D",
   "documentation": "Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)",
   "coordinates": [
-   "transport_solver_numerics.time_step.time",
    "transport_solver_numerics.time_step.time"
   ],
   "units": "s",
@@ -2687,7 +2535,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2731,7 +2578,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -2743,7 +2589,6 @@
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -2752,7 +2597,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -2763,7 +2607,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -2774,7 +2617,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -2791,8 +2633,6 @@
   "data_type": "FLT_2D",
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -2823,7 +2663,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpsi_dt_crho_tor_norm\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -2847,7 +2686,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -2865,7 +2703,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpsi_dt_cphi\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -2888,7 +2725,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -2899,7 +2735,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dvolume_drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -2917,7 +2752,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -2928,7 +2762,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2945,7 +2778,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2956,7 +2788,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -2967,7 +2798,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total thermal ion pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -2978,7 +2808,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative with respect to time, at constant toroidal flux (for current diffusion equation)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3002,7 +2831,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial derivative with respect to the primary coordinate",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3013,7 +2841,6 @@
   "data_type": "FLT_1D",
   "documentation": "Partial derivative of the toroidal flux coordinate profile with respect to time",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3057,7 +2884,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "transport_solver_numerics.element",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -3068,7 +2894,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3091,7 +2916,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3116,7 +2940,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3127,7 +2950,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3138,7 +2960,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3149,7 +2970,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of the poloidal flux profile with respect to the toroidal flux coordinate",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-1",
@@ -3174,7 +2994,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3185,7 +3004,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3202,7 +3020,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3219,7 +3036,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"profile\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3237,7 +3053,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"profile\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3248,11 +3063,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3282,7 +3094,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3294,8 +3105,6 @@
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3306,7 +3115,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3317,7 +3125,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3328,7 +3135,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -3351,7 +3157,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3419,7 +3224,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3430,7 +3234,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3469,7 +3272,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3486,7 +3288,6 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -3516,7 +3317,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -3527,7 +3327,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3545,8 +3344,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -3570,7 +3367,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -3600,7 +3396,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3611,7 +3406,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3628,7 +3422,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3659,7 +3452,6 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -3674,7 +3466,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -3703,7 +3494,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dr\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3751,7 +3541,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpsi_dt_crho_tor_norm\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -3780,7 +3569,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3791,7 +3579,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dt_cr\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3862,7 +3649,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -3873,11 +3659,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3900,7 +3683,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -3912,7 +3694,6 @@
   "documentation": "Descriptions of the restart files",
   "type": "dynamic",
   "coordinates": [
-   "transport_solver_numerics.restart_files[:].names",
    "transport_solver_numerics.restart_files[:].names"
   ],
   "data_type": "STR_1D"
@@ -3933,7 +3714,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dt_cr\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -3944,7 +3724,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -3973,7 +3752,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4000,7 +3778,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4011,7 +3788,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -4034,11 +3810,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "transport_solver_numerics.",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4055,7 +3828,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4079,7 +3851,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4103,7 +3874,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4132,7 +3902,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4143,7 +3912,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "transport_solver_numerics.time",
    "transport_solver_numerics.time"
   ],
   "units": "T",
@@ -4186,7 +3954,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -4203,7 +3970,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -4214,7 +3980,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4243,7 +4008,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4261,7 +4025,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4306,7 +4069,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4328,7 +4090,6 @@
   "data_type": "FLT_1D",
   "documentation": "Partial derivative with respect to time of the derivative of the volume with respect to the toroidal flux coordinate",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -4339,7 +4100,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4362,7 +4122,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4374,8 +4133,6 @@
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4386,7 +4143,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4403,7 +4159,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4426,7 +4181,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -4437,7 +4191,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4448,7 +4201,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4459,7 +4211,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4476,7 +4227,6 @@
   "data_type": "FLT_1D",
   "documentation": "Total thermal ion pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4487,7 +4237,6 @@
   "data_type": "FLT_1D",
   "documentation": "Partial derivative with respect to time of the derivative of the volume with respect to the toroidal flux coordinate",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -4533,7 +4282,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4544,7 +4292,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4587,7 +4334,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4598,7 +4344,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4622,8 +4367,6 @@
   "documentation": "Lower error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4634,7 +4377,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "transport_solver_numerics.element",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4658,7 +4400,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4689,7 +4430,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4700,7 +4440,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -4711,7 +4450,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4735,7 +4473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -4797,7 +4534,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4821,7 +4557,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -4845,7 +4580,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -4856,7 +4590,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4867,7 +4600,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4878,7 +4610,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4889,7 +4620,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -4906,7 +4636,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpsi_dt_cphi\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -4927,7 +4656,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative with respect to time, at constant primary coordinate coordinate (for current diffusion equation)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -4944,7 +4672,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -4955,7 +4682,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dvolume_drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -4966,7 +4692,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -5035,7 +4760,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -5059,7 +4783,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5070,7 +4793,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -5081,7 +4803,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -5098,7 +4819,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5134,7 +4854,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5155,7 +4874,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5166,7 +4884,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -5184,7 +4901,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5208,7 +4924,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -5219,7 +4934,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -5236,7 +4950,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -5253,7 +4966,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5270,7 +4982,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5316,7 +5027,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of the poloidal flux profile with respect to time, at constant toroidal flux",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -5349,7 +5059,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -5367,7 +5076,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5415,7 +5123,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -5439,7 +5146,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -5488,7 +5194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -5512,7 +5217,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -5523,7 +5227,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -5534,7 +5237,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -5545,7 +5247,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -5579,15 +5280,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "transport_solver_numerics.tensor_covariant",
-   "transport_solver_numerics.",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5605,8 +5299,6 @@
   "documentation": "Lower error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5617,7 +5309,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5635,7 +5326,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -5662,7 +5352,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step_average.time",
    "transport_solver_numerics.time_step_average.time"
   ],
   "units": "s",
@@ -5685,7 +5374,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -5702,7 +5390,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpsi_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -5720,7 +5407,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5731,7 +5417,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -5742,7 +5427,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of the poloidal flux profile with respect to time",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -5767,8 +5451,6 @@
   "documentation": "Upper error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5789,7 +5471,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5819,7 +5500,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -5830,7 +5510,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5841,7 +5520,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step_average.time",
    "transport_solver_numerics.time_step_average.time"
   ],
   "units": "s",
@@ -5852,7 +5530,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -5870,7 +5547,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -5887,7 +5563,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dr\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -5899,8 +5574,6 @@
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5911,7 +5584,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -5945,7 +5617,6 @@
   "data_type": "FLT_1D",
   "documentation": "Minimum internal time step used by the transport solver between the previous and the current time stored for this quantity (assuming all transport equations are solved with the same time step)",
   "coordinates": [
-   "transport_solver_numerics.time_step_min.time",
    "transport_solver_numerics.time_step_min.time"
   ],
   "units": "s",
@@ -5956,7 +5627,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -5967,7 +5637,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -5984,7 +5653,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6002,7 +5670,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "transport_solver_numerics.time",
    "transport_solver_numerics.time"
   ],
   "data_type": "INT_1D"
@@ -6018,7 +5685,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6090,7 +5756,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dt_cphi\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -6113,7 +5778,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6124,7 +5788,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -6156,11 +5819,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "transport_solver_numerics.element",
    "1...N",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6171,7 +5831,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6206,7 +5865,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6217,7 +5875,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6228,7 +5885,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -6252,7 +5908,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"profile\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -6263,7 +5918,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"profile\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -6274,7 +5928,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpsi_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "V",
@@ -6285,7 +5938,6 @@
   "data_type": "FLT_1D",
   "documentation": "Average internal time step used by the transport solver between the previous and the current time stored for this quantity (assuming all transport equations are solved with the same time step)",
   "coordinates": [
-   "transport_solver_numerics.time_step_average.time",
    "transport_solver_numerics.time_step_average.time"
   ],
   "units": "s",
@@ -6306,7 +5958,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6317,7 +5968,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6348,7 +5998,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6377,7 +6026,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6401,8 +6049,6 @@
   "documentation": "List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6423,7 +6069,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6441,7 +6086,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6482,7 +6126,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6519,7 +6162,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6548,7 +6190,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6559,7 +6200,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6570,7 +6210,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6587,7 +6226,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6617,7 +6255,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -6628,7 +6265,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6651,7 +6287,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6675,7 +6310,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dt\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -6692,7 +6326,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6703,7 +6336,6 @@
   "data_type": "FLT_1D",
   "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -6714,7 +6346,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6725,7 +6356,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6736,7 +6366,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6747,7 +6376,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6758,7 +6386,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6769,7 +6396,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6780,7 +6406,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For type/index = 1 to 3, only the first position in the vector is used. For type/index = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6820,7 +6445,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6831,7 +6455,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6848,7 +6471,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -6865,7 +6487,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6876,7 +6497,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -6887,15 +6507,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "transport_solver_numerics.element",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6924,7 +6537,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -6935,7 +6547,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -6958,7 +6569,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -6969,7 +6579,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -6999,7 +6608,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7017,7 +6625,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step.time",
    "transport_solver_numerics.time_step.time"
   ],
   "units": "s",
@@ -7028,7 +6635,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7045,7 +6651,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7056,7 +6661,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7073,7 +6677,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "transport_solver_numerics.element",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -7096,7 +6699,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial profile of the numerical coefficient",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -7107,7 +6709,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d_dt\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -7125,7 +6726,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7136,7 +6736,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7147,7 +6746,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -7158,7 +6756,6 @@
   "data_type": "FLT_1D",
   "documentation": "Partial derivative of the toroidal flux coordinate profile with respect to time",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7169,7 +6766,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7187,7 +6783,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7198,7 +6793,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7215,7 +6809,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7238,7 +6831,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d2psi_drho_tor2\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb.m^-2",
@@ -7249,7 +6841,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7260,7 +6851,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal velocity",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7272,8 +6862,6 @@
   "documentation": "Upper error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7284,7 +6872,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7301,7 +6888,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7319,7 +6905,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7330,7 +6915,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_tor\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7357,7 +6941,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -7374,7 +6957,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -7398,7 +6980,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7410,8 +6991,6 @@
   "documentation": "Upper error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7422,7 +7001,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -7433,7 +7011,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "transport_solver_numerics.time",
    "transport_solver_numerics.time"
   ],
   "units": "T",
@@ -7476,7 +7053,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -7493,7 +7069,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "coordinates": [
-   "transport_solver_numerics.time_step_min.time",
    "transport_solver_numerics.time_step_min.time"
   ],
   "units": "s",
@@ -7510,8 +7085,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -7542,7 +7115,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -7553,7 +7125,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7571,8 +7142,6 @@
   "documentation": "Upper error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7589,7 +7158,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -7618,7 +7186,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -7629,7 +7196,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_ion_total\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7646,7 +7212,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -7664,7 +7229,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d_dvolume_drho_tor_dt\"",
   "coordinates": [
-   "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2.s^-1",
@@ -7675,7 +7239,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d2_dr2\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -7686,7 +7249,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) particles",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7704,7 +7266,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d2_dr2\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm"
   ],
   "units": "mixed",
@@ -7733,7 +7294,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -7744,15 +7304,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "transport_solver_numerics.element",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7794,7 +7347,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7805,7 +7357,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7816,7 +7367,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal velocity (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7827,7 +7377,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_fast_perpendicular\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7844,7 +7393,6 @@
   "data_type": "FLT_1D",
   "documentation": "Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)",
   "coordinates": [
-   "transport_solver_numerics.convergence.time_step.time",
    "transport_solver_numerics.convergence.time_step.time"
   ],
   "units": "s",
@@ -7855,8 +7403,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
-   "1...N",
    "1...N",
    "1...N"
   ],
@@ -7874,7 +7420,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"velocity_pol\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m.s^-1",
@@ -7885,7 +7430,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_fast_parallel\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7905,7 +7449,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the boundary condition. For ID = 1 to 4, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3. ",
   "coordinates": [
-   "1...3",
    "1...3"
   ],
   "units": "mixed",
@@ -7968,7 +7511,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) perpendicular pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -7989,7 +7531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Temperature",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -8000,7 +7541,6 @@
   "data_type": "FLT_1D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -8018,15 +7558,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "transport_solver_numerics.tensor_covariant",
-   "transport_solver_numerics.",
    "1...N",
-   "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].element",
-   "transport_solver_numerics.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8062,7 +7595,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "eV",
@@ -8134,8 +7666,6 @@
   "documentation": "Lower error for \"values\"",
   "coordinates": [
    "1...N",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8164,7 +7694,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"density_fast\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^-3",
@@ -8210,7 +7739,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_total_over_n_e\"",
   "coordinates": [
-   "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "-",
@@ -8221,7 +7749,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",
@@ -8232,7 +7759,6 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) parallel pressure",
   "coordinates": [
-   "transport_solver_numerics.",
    "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm"
   ],
   "units": "Pa",

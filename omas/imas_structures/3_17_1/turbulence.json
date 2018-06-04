@@ -26,7 +26,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -37,10 +36,8 @@
   "data_type": "FLT_2D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -66,10 +63,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -79,10 +74,8 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -114,10 +107,8 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -160,10 +151,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -173,10 +162,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -223,10 +210,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -237,8 +222,6 @@
   "documentation": "Lower error for \"density\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -255,10 +238,8 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -296,10 +277,8 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -319,7 +298,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "turbulence.time",
    "turbulence.time"
   ],
   "data_type": "INT_1D"
@@ -338,10 +316,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -352,8 +328,6 @@
   "documentation": "Upper error for \"temperature\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
@@ -399,10 +373,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -425,8 +397,6 @@
   "documentation": "Density of thermal particles",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -481,10 +451,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -500,10 +468,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -519,7 +485,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -530,7 +495,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -555,10 +519,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -588,8 +550,6 @@
   "documentation": "Lower error for \"temperature\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
@@ -600,10 +560,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -624,8 +582,6 @@
   "documentation": "Density (thermal+non-thermal)",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -637,8 +593,6 @@
   "documentation": "Upper error for \"density_thermal\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -725,10 +679,8 @@
   "data_type": "FLT_2D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
   "type": "dynamic",
@@ -745,10 +697,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -758,10 +708,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density\"",
   "coordinates": [
-   "turbulence.",
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
-   "turbulence."
+   "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
   "type": "dynamic",
@@ -789,8 +737,6 @@
   "documentation": "Upper error for \"density\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -820,8 +766,6 @@
   "documentation": "Lower error for \"density_thermal\"",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "m^-3",
@@ -851,8 +795,6 @@
   "documentation": "Temperature",
   "coordinates": [
    "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim1",
-   "turbulence.grid_2d.dim2",
    "turbulence.grid_2d.dim2"
   ],
   "units": "eV",
@@ -863,7 +805,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -874,7 +815,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -913,7 +853,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",

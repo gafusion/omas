@@ -10,7 +10,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "W.m^-3",
@@ -21,7 +20,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -44,7 +42,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -62,15 +59,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.tensor_covariant",
-   "distribution_sources.",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -94,7 +84,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -154,15 +143,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.metric.tensor_covariant",
-   "distribution_sources.element",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -174,7 +156,6 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -220,11 +201,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -235,7 +213,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "s^-1.m^-3",
@@ -292,10 +269,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"positions\"",
   "coordinates": [
-   "distribution_sources.markers[:].weights",
    "distribution_sources.source[:].markers[:].weights",
-   "distribution_sources.source[:].markers[:].coordinate_identifier",
-   "distribution_sources.markers[:].coordinate_identifier"
+   "distribution_sources.source[:].markers[:].coordinate_identifier"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -312,7 +287,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "data_type": "INT_1D"
@@ -331,7 +305,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "N.m^-2",
@@ -356,7 +329,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -384,11 +356,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "distribution_sources.element",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -416,7 +385,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "Wb",
@@ -433,9 +401,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "distribution_sources.values",
    "distribution_sources.source[:].ggd[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -465,7 +431,6 @@
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -499,7 +464,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "distribution_sources.element",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -523,7 +487,6 @@
   "documentation": "List of indices of grid spaces (refers to ../grid/space) for which the source is discretely distributed. For example consider a source of 3.5 MeV alpha particles provided on a grid with two coordinates (spaces); rho_tor and energy. To specify that the source is given at energies exactly equal to 3.5 MeV, let discret have length 1 and set discrete(1)=2 since energy is dimension number 2. The source is then proportional to delta( 1 - energy / 3.5MeV ), where delta is the direct delta distribution. Discrete dimensions can only be used when the grid is rectangular.",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -561,7 +524,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "T",
@@ -594,7 +556,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -620,7 +581,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m",
@@ -631,7 +591,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "distribution_sources.",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -642,7 +601,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -659,15 +617,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.tensor_covariant",
-   "distribution_sources.",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -678,7 +629,6 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the energy transport equation",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "W.m^-3",
@@ -702,7 +652,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -713,7 +662,6 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the toroidal momentum equation",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "N.m^-2",
@@ -767,11 +715,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "distribution_sources.element",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -799,15 +744,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.metric.tensor_covariant",
-   "distribution_sources.element",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -825,7 +763,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "N.m^-2",
@@ -847,7 +784,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "W.m^-3",
@@ -871,11 +807,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "distribution_sources.",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -892,7 +825,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "distribution_sources.element",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -913,7 +845,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "s^-1.m^-3",
@@ -966,7 +897,6 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -1027,7 +957,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -1051,7 +980,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1087,11 +1015,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "distribution_sources.element",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1109,9 +1034,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "distribution_sources.values",
    "distribution_sources.source[:].ggd[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1142,7 +1065,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "T",
@@ -1165,7 +1087,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -1182,7 +1103,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -1211,7 +1131,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -1229,10 +1148,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"positions\"",
   "coordinates": [
-   "distribution_sources.markers[:].weights",
    "distribution_sources.source[:].markers[:].weights",
-   "distribution_sources.source[:].markers[:].coordinate_identifier",
-   "distribution_sources.markers[:].coordinate_identifier"
+   "distribution_sources.source[:].markers[:].coordinate_identifier"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -1252,7 +1169,6 @@
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -1314,7 +1230,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "T",
@@ -1325,7 +1240,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1336,11 +1250,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "distribution_sources.",
    "1...N",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1376,10 +1287,8 @@
   "data_type": "FLT_2D",
   "documentation": "Position of the markers in the set of coordinates. The first dimension corresponds to the number of markers, the second dimension to the set of coordinates",
   "coordinates": [
-   "distribution_sources.markers[:].weights",
    "distribution_sources.source[:].markers[:].weights",
-   "distribution_sources.source[:].markers[:].coordinate_identifier",
-   "distribution_sources.markers[:].coordinate_identifier"
+   "distribution_sources.source[:].markers[:].coordinate_identifier"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -1402,7 +1311,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1439,7 +1347,6 @@
   "data_type": "FLT_1D",
   "documentation": "Weight of the markers, i.e. number of real particles represented by each marker. The dimension of the vector correspond to the number of markers",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1582,7 +1489,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -1599,7 +1505,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1610,7 +1515,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "distribution_sources.time",
    "distribution_sources.time"
   ],
   "units": "m",
@@ -1621,7 +1525,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "distribution_sources.",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1632,7 +1535,6 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the density transport equation",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "s^-1.m^-3",
@@ -1699,7 +1601,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^2",
@@ -1717,15 +1618,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "distribution_sources.tensor_covariant",
-   "distribution_sources.",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1749,15 +1643,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "distribution_sources.metric.tensor_covariant",
-   "distribution_sources.element",
    "1...N",
-   "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element",
-   "distribution_sources.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1768,7 +1655,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "distribution_sources.element",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1804,7 +1690,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1815,7 +1700,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1838,7 +1722,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1872,7 +1755,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"weights\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1914,7 +1796,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"weights\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -1931,7 +1812,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2033,7 +1913,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "coordinates": [
-   "distribution_sources.profiles_1d[:].grid.rho_tor_norm",
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "units": "m^3",
@@ -2044,7 +1923,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "-",
@@ -2061,7 +1939,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "distribution_sources.",
    "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -2196,9 +2073,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "distribution_sources.values",
    "distribution_sources.source[:].ggd[:].particles[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",

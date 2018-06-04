@@ -3,7 +3,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -21,10 +20,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"volume_element\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -34,7 +31,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb",
@@ -78,10 +74,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -112,7 +106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm8\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -136,7 +129,6 @@
   "data_type": "FLT_1D",
   "documentation": "Elongation",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -149,8 +141,6 @@
   "documentation": "Lower error for \"g13_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -162,7 +152,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r_outboard\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -200,7 +189,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm9\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-1",
@@ -219,7 +207,6 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -280,9 +267,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -326,7 +311,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -360,7 +344,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3",
@@ -418,7 +401,6 @@
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -454,9 +436,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -467,7 +447,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial coordinate (major radius) on the inboard side of the magnetic axis",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -478,7 +457,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field_max\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -495,7 +473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -529,10 +506,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"j_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -574,14 +549,10 @@
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -631,8 +602,6 @@
   "documentation": "Lower error for \"g11_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -690,9 +659,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -729,7 +696,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"triangularity_lower\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -780,7 +746,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"f\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T.m",
@@ -798,10 +763,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal flux",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -811,7 +774,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -822,7 +784,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -840,7 +801,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -858,7 +818,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"elongation\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -870,7 +829,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_min\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -889,8 +847,6 @@
   "documentation": "Upper error for \"volume_element\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m^3",
@@ -901,7 +857,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged R",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -950,7 +905,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged grad_rho^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -968,7 +922,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged B^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2",
@@ -1012,7 +965,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm1\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -1023,7 +975,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "coordinates": [
-   "equilibrium.time",
    "equilibrium.time"
   ],
   "units": "T",
@@ -1034,7 +985,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb",
@@ -1052,7 +1002,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial coordinate (major radius) on the outboard side of the magnetic axis",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -1070,10 +1019,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"j_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -1095,8 +1042,6 @@
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -1114,10 +1059,8 @@
   "data_type": "FLT_2D",
   "documentation": "Parallel (to magnetic field) plasma current density",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -1127,9 +1070,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_parallel[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1160,10 +1101,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -1174,10 +1113,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -1202,8 +1139,6 @@
   "documentation": "metric coefficients g33,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -1221,7 +1156,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1232,7 +1166,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1257,7 +1190,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1284,7 +1216,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -1308,7 +1239,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1319,7 +1249,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1345,8 +1274,6 @@
   "documentation": "metric coefficients g12,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -1378,15 +1305,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1404,7 +1324,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "Wb",
@@ -1468,10 +1387,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -1481,7 +1398,6 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetic shear, defined as rho_tor/q . dq/drho_tor",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -1513,11 +1429,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1528,11 +1441,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1550,9 +1460,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1583,9 +1491,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].phi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1596,15 +1502,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1615,11 +1514,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1650,7 +1546,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"elongation\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -1709,10 +1604,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"theta\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "rad",
   "type": "dynamic",
@@ -1722,7 +1615,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial derivative of the cross-sectional area of the flux surface with respect to psi",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2.Wb^-1",
@@ -1760,7 +1652,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"trapped_fraction\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -1784,11 +1675,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1799,9 +1687,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_parallel[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -1813,10 +1699,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -1833,7 +1717,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -1851,7 +1734,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged toroidal current density = average(j_tor/R) / average(1/R)",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -1862,10 +1744,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -1887,10 +1767,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -1947,7 +1825,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb",
@@ -1976,10 +1853,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -1989,7 +1864,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2006,7 +1880,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2050,7 +1923,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"q\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -2061,9 +1933,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].phi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2086,7 +1956,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -2117,14 +1986,10 @@
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -2141,7 +2006,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2159,7 +2023,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -2170,7 +2033,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field_max\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -2183,8 +2045,6 @@
   "documentation": "Lower error for \"g22_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -2196,7 +2056,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"mass_density\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "kg.m^-3",
@@ -2207,7 +2066,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3",
@@ -2225,7 +2083,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2254,10 +2111,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal component of the magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -2303,9 +2158,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].phi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2329,7 +2182,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"darea_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -2346,7 +2198,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of pressure w.r.t. psi",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa.Wb^-1",
@@ -2357,7 +2208,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal flux",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "Wb",
@@ -2370,8 +2220,6 @@
   "documentation": "Upper error for \"g22_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -2384,10 +2232,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -2412,7 +2258,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2423,7 +2268,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2434,7 +2278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2501,7 +2344,6 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -2510,15 +2352,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2561,7 +2396,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r_inboard\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -2579,10 +2413,8 @@
   "data_type": "FLT_2D",
   "documentation": "Z component of the poloidal magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -2592,7 +2424,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"darea_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2.Wb^-1",
@@ -2603,10 +2434,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -2616,7 +2445,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -2627,7 +2455,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial derivative of the volume enclosed in the flux surface with respect to Psi",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3.Wb^-1",
@@ -2644,10 +2471,8 @@
   "data_type": "FLT_2D",
   "documentation": "R component of the poloidal magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -2657,7 +2482,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "coordinates": [
-   "equilibrium.time",
    "equilibrium.time"
   ],
   "units": "T",
@@ -2687,7 +2511,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2705,7 +2528,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2761,7 +2583,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2778,10 +2599,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"volume_element\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -2823,7 +2642,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -2840,7 +2658,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dvolume_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -2871,7 +2688,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -2897,8 +2713,6 @@
   "documentation": "Lower error for \"g23_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -2930,8 +2744,6 @@
   "documentation": "Upper error for \"z\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -2975,7 +2787,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_volume_norm\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -2994,8 +2805,6 @@
   "documentation": "Lower error for \"g11_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -3014,7 +2823,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"beta_pol\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -3044,10 +2852,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -3058,10 +2864,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"j_parallel\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -3084,10 +2888,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"psi\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -3109,10 +2911,8 @@
   "data_type": "FLT_2D",
   "documentation": "Values of the poloidal flux at the grid in the poloidal plane",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -3167,7 +2967,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3178,7 +2977,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3208,7 +3006,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic function (F=R B_Phi)",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T.m",
@@ -3232,7 +3029,6 @@
   "data_type": "FLT_1D",
   "documentation": "Mass density",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "kg.m^-3",
@@ -3243,7 +3039,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -3275,7 +3070,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of Psi with respect to Rho_Tor",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb/m",
@@ -3299,11 +3093,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3380,7 +3171,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"q\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -3404,7 +3194,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field_average\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -3445,7 +3234,6 @@
   "data_type": "FLT_1D",
   "documentation": "Trapped particle fraction",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -3456,7 +3244,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3467,15 +3254,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3486,7 +3266,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -3566,9 +3345,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].theta[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3606,15 +3383,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3638,10 +3408,8 @@
   "data_type": "FLT_2D",
   "documentation": "Values of the Height on the grid",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -3657,9 +3425,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3696,9 +3462,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_parallel[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3730,7 +3494,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"magnetic_shear\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -3754,7 +3517,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_parallel\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -3803,8 +3565,6 @@
   "documentation": "Lower error for \"r\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -3867,7 +3627,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -3884,7 +3643,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -3936,9 +3694,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -3949,7 +3705,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4017,8 +3772,6 @@
   "documentation": "metric coefficients g22,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -4030,10 +3783,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "type": "dynamic",
@@ -4043,7 +3794,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial derivative of the cross-sectional area of the flux surface with respect to rho_tor",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -4068,8 +3818,6 @@
   "documentation": "Values of the major radius on the grid",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -4080,7 +3828,6 @@
   "data_type": "FLT_1D",
   "documentation": "Surface area of the toroidal flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -4099,9 +3846,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4124,9 +3869,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].theta[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4137,7 +3880,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field_average\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4194,8 +3936,6 @@
   "documentation": "Upper error for \"g22_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -4244,7 +3984,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.outline.r",
    "equilibrium.time_slice[:].boundary.outline.r"
   ],
   "units": "m",
@@ -4281,8 +4020,6 @@
   "documentation": "Lower error for \"z\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -4323,8 +4060,6 @@
   "documentation": "Lower error for \"g12_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -4350,7 +4085,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_average\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4403,7 +4137,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4426,7 +4159,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.lcfs.r",
    "equilibrium.time_slice[:].boundary.lcfs.r"
   ],
   "units": "m",
@@ -4437,7 +4169,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4468,9 +4199,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4487,7 +4216,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged modulus of B (always positive, irrespective of the sign convention for the B-field direction).",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4498,9 +4226,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4530,7 +4256,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -4572,7 +4297,6 @@
   "data_type": "FLT_1D",
   "documentation": "Maximum(B) on the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4624,7 +4348,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_max\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4642,7 +4365,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4660,15 +4382,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4725,7 +4440,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4761,9 +4475,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].theta[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -4774,7 +4486,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower triangularity w.r.t. magnetic axis",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -4811,7 +4522,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -4856,7 +4566,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dvolume_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3.Wb^-1",
@@ -4867,7 +4576,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpsi_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb/m",
@@ -4911,7 +4619,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -4929,7 +4636,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_average\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -4942,7 +4648,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged B",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -5007,7 +4712,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpressure_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa.Wb^-1",
@@ -5018,7 +4722,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5036,7 +4739,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised square root of enclosed volume (radial coordinate). The normalizing value is the enclosed volume at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) ",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -5097,7 +4799,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5125,7 +4826,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r_inboard\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -5137,8 +4837,6 @@
   "documentation": "Lower error for \"volume_element\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m^3",
@@ -5168,7 +4866,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"f_df_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2.m^2/Wb",
@@ -5185,7 +4882,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"surface\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -5202,7 +4898,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -5220,7 +4915,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm4\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -5232,7 +4926,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_min\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -5244,9 +4937,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5257,9 +4948,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].j_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5288,10 +4977,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -5315,8 +5002,6 @@
   "documentation": "Upper error for \"r\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -5335,10 +5020,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal component of the magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -5357,8 +5040,6 @@
   "documentation": "metric coefficients g12,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -5388,7 +5069,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm6\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -5399,7 +5079,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) ",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -5429,7 +5108,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field_min\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -5462,10 +5140,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal plasma current density",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -5494,11 +5170,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5550,7 +5223,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5567,9 +5239,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].psi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5629,7 +5299,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5640,7 +5309,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5677,8 +5345,6 @@
   "documentation": "metric coefficients g33,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -5716,8 +5382,6 @@
   "documentation": "Upper error for \"g33_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -5729,7 +5393,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa",
@@ -5759,7 +5422,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -5810,7 +5472,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm2\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -5828,7 +5489,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"triangularity_upper\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -5851,15 +5511,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -5897,9 +5550,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -5917,7 +5568,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged 1/R",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-1",
@@ -5968,7 +5618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -5993,7 +5642,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm1\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -6006,8 +5654,6 @@
   "documentation": "Upper error for \"g33_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6025,7 +5671,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -6036,9 +5681,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6057,7 +5700,6 @@
   "data_type": "FLT_1D",
   "documentation": "Minimum(B) on the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -6069,7 +5711,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6080,7 +5721,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa",
@@ -6122,7 +5762,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm7\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -6135,8 +5774,6 @@
   "documentation": "metric coefficients g13,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6156,8 +5793,6 @@
   "documentation": "Upper error for \"g12_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6171,8 +5806,6 @@
   "documentation": "metric coefficients g23,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6212,8 +5845,6 @@
   "documentation": "Upper error for \"g23_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6225,7 +5856,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -6249,15 +5879,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6270,8 +5893,6 @@
   "documentation": "Upper error for \"g11_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6283,7 +5904,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged grad_rho^2/R^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -6294,7 +5914,6 @@
   "data_type": "FLT_1D",
   "documentation": "Minimum(B) on the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -6305,7 +5924,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -6334,7 +5952,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged 1/B^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -6364,7 +5981,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged grad_rho",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -6390,8 +6006,6 @@
   "documentation": "metric coefficients g11,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6403,7 +6017,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper triangularity w.r.t. magnetic axis",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -6414,7 +6027,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"surface\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -6426,7 +6038,6 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "type": "dynamic",
   "coordinates": [
-   "equilibrium.time",
    "equilibrium.time"
   ],
   "data_type": "INT_1D"
@@ -6442,9 +6053,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6483,8 +6092,6 @@
   "documentation": "Upper error for \"g12_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6502,7 +6109,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6513,7 +6119,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"darea_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2.Wb^-1",
@@ -6524,9 +6129,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].psi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6556,15 +6159,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6592,10 +6188,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"j_parallel\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "A.m^-2",
   "type": "dynamic",
@@ -6611,7 +6205,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6624,8 +6217,6 @@
   "documentation": "Upper error for \"g13_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -6649,7 +6240,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"f\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T.m",
@@ -6674,9 +6264,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].psi[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6694,7 +6282,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r_outboard\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -6705,7 +6292,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm2\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -6716,7 +6302,6 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed in the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3",
@@ -6733,7 +6318,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6789,7 +6373,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dvolume_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -6820,11 +6403,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -6888,7 +6468,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm4\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -6913,7 +6492,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -6981,10 +6559,8 @@
   "data_type": "FLT_2D",
   "documentation": "Values of the poloidal angle on the grid",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "rad",
   "type": "dynamic",
@@ -7007,7 +6583,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7037,15 +6612,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7083,8 +6651,6 @@
   "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m^3",
@@ -7141,7 +6707,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged 1/R^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-2",
@@ -7180,7 +6745,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field_min\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -7191,7 +6755,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.lcfs.r",
    "equilibrium.time_slice[:].boundary.lcfs.r"
   ],
   "units": "m",
@@ -7209,10 +6772,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -7233,7 +6794,6 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -7263,7 +6823,6 @@
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -7279,7 +6838,6 @@
   "data_type": "FLT_1D",
   "documentation": "Derivative of F w.r.t. Psi, multiplied with F",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2.m^2/Wb",
@@ -7297,7 +6855,6 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^2",
@@ -7309,10 +6866,8 @@
   "data_type": "FLT_2D",
   "documentation": "R component of the poloidal magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -7354,7 +6909,6 @@
   "data_type": "FLT_1D",
   "documentation": "Safety factor",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -7371,11 +6925,8 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7480,8 +7031,6 @@
   "documentation": "metric coefficients g11,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -7513,7 +7062,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm5\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2",
@@ -7537,7 +7085,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -7554,7 +7101,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -7565,14 +7111,10 @@
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -7583,8 +7125,6 @@
   "documentation": "Values of the Height on the grid",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "m",
@@ -7622,7 +7162,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dvolume_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^3.Wb^-1",
@@ -7645,7 +7184,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm6\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -7664,8 +7202,6 @@
   "documentation": "Lower error for \"g23_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -7677,7 +7213,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -7689,7 +7224,6 @@
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -7698,10 +7232,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phi\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -7711,7 +7243,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "coordinates": [
-   "equilibrium.time",
    "equilibrium.time"
   ],
   "units": "T",
@@ -7734,7 +7265,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dpsi_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Wb/m",
@@ -7756,7 +7286,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux surface averaged grad_rho^2/B^2",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^-2",
@@ -7794,7 +7323,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element"
   ],
   "units": "mixed",
@@ -7837,7 +7365,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -7862,10 +7389,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -7899,7 +7424,6 @@
   "data_type": "FLT_1D",
   "documentation": "Maximum(B) on the flux surface",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -7934,7 +7458,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"beta_pol\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -7945,14 +7468,10 @@
   "data_type": "FLT_4D",
   "documentation": "Contravariant metric tensor on every point of the grid described by grid_type",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -7976,11 +7495,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -7991,7 +7507,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm9\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m^-1",
@@ -8008,7 +7523,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8033,7 +7547,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dpressure_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa.Wb^-1",
@@ -8044,15 +7557,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
-   "equilibrium.tensor_covariant",
-   "equilibrium.",
    "1...N",
-   "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "equilibrium.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8112,7 +7618,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.lcfs.r",
    "equilibrium.time_slice[:].boundary.lcfs.r"
   ],
   "units": "m",
@@ -8137,7 +7642,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.outline.r",
    "equilibrium.time_slice[:].boundary.outline.r"
   ],
   "units": "m",
@@ -8193,7 +7697,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -8223,7 +7726,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm3\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -8241,9 +7743,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -8280,7 +7780,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8327,8 +7826,6 @@
   "documentation": "Lower error for \"g22_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8340,7 +7837,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal beta profile. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -8388,10 +7884,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -8407,15 +7901,8 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "coordinates": [
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
-   "equilibrium.metric.tensor_covariant",
-   "equilibrium.element",
    "1...N",
-   "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "equilibrium.metric.tensor_covariant",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8432,9 +7919,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_tor[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -8490,10 +7975,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_tor\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -8550,7 +8033,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"triangularity_upper\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -8574,7 +8056,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -8585,11 +8066,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8619,7 +8097,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_volume_norm\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -8650,8 +8127,6 @@
   "documentation": "Lower error for \"g33_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8665,8 +8140,6 @@
   "documentation": "Lower error for \"g33_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8722,8 +8195,6 @@
   "documentation": "metric coefficients g22,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8741,7 +8212,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm3\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -8767,8 +8237,6 @@
   "documentation": "Lower error for \"g12_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8786,11 +8254,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.element",
    "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -8803,8 +8268,6 @@
   "documentation": "Lower error for \"g13_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -8871,10 +8334,8 @@
   "data_type": "FLT_2D",
   "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m^3",
   "type": "dynamic",
@@ -8884,7 +8345,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -8925,14 +8385,10 @@
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -8965,7 +8421,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm8\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -8989,7 +8444,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -9028,8 +8482,6 @@
   "documentation": "Upper error for \"g23_contravariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -9054,7 +8506,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_parallel\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "A/m^2",
@@ -9085,7 +8536,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"trapped_fraction\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -9096,10 +8546,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phi\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "Wb",
   "type": "dynamic",
@@ -9173,8 +8621,6 @@
   "documentation": "Absolute value of the jacobian of the coordinate system",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -9269,7 +8715,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "coordinates": [
-   "equilibrium.element",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element"
   ],
   "units": "mixed",
@@ -9307,7 +8752,6 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "coordinates": [
-   "equilibrium.time_slice[:].boundary.outline.r",
    "equilibrium.time_slice[:].boundary.outline.r"
   ],
   "units": "m",
@@ -9333,8 +8777,6 @@
   "documentation": "Upper error for \"g13_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -9361,8 +8803,6 @@
   "documentation": "metric coefficients g23,  covariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -9411,7 +8851,6 @@
   "data_type": "FLT_1D",
   "documentation": "Pressure",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "Pa",
@@ -9433,9 +8872,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].z[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -9454,10 +8891,8 @@
   "data_type": "FLT_2D",
   "documentation": "Z component of the poloidal magnetic field",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "T",
   "lifecycle_status": "obsolescent",
@@ -9521,7 +8956,6 @@
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "type": "dynamic",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "data_type": "INT_1D"
@@ -9530,7 +8964,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -9548,7 +8981,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"f_df_dpsi\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2.m^2/Wb",
@@ -9589,7 +9021,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"gm7\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -9635,7 +9066,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"triangularity_lower\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -9674,7 +9104,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"darea_drho_tor\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "m",
@@ -9757,8 +9186,6 @@
   "documentation": "metric coefficients g13,  contravariant metric tensor for the grid described by grid_type",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -9777,7 +9204,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -9788,7 +9214,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "m",
@@ -9806,7 +9231,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"mass_density\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "kg.m^-3",
@@ -9829,14 +9253,10 @@
   "data_type": "FLT_4D",
   "documentation": "Covariant metric tensor on every point of the grid described by grid_type",
   "coordinates": [
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
-   "1...3"
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
   "type": "dynamic",
@@ -9846,10 +9266,8 @@
   "data_type": "FLT_2D",
   "documentation": "Values of the major radius on the grid",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "m",
   "type": "dynamic",
@@ -9889,7 +9307,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -9927,10 +9344,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"theta\"",
   "coordinates": [
-   "equilibrium.grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
-   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2",
-   "equilibrium.grid.dim2"
+   "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "units": "rad",
   "type": "dynamic",
@@ -9972,7 +9387,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "coordinates": [
-   "1...N",
    "1...N"
   ],
   "units": "Wb",
@@ -9983,11 +9397,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "coordinates": [
-   "equilibrium.",
    "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
-   "1...N",
-   "1...N",
    "1...N"
   ],
   "units": "mixed",
@@ -10030,7 +9441,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"magnetic_shear\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "-",
@@ -10048,9 +9458,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "coordinates": [
-   "equilibrium.values",
    "equilibrium.time_slice[:].ggd[:].b_field_r[:].values",
-   "1...N",
    "1...N"
   ],
   "units": "as_parent",
@@ -10069,7 +9477,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_max\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T",
@@ -10095,7 +9502,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"gm5\"",
   "coordinates": [
-   "equilibrium.time_slice[:].profiles_1d.psi",
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "units": "T^2",
@@ -10121,8 +9527,6 @@
   "documentation": "Upper error for \"jacobian\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
@@ -10135,8 +9539,6 @@
   "documentation": "Upper error for \"g11_covariant\"",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim1",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "units": "mixed",
