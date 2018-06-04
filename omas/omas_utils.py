@@ -447,7 +447,10 @@ def omas_info_node(key, imas_version=default_imas_version):
 
     :return:
     '''
-    key=p2l(key)
-    key=[':' if isinstance(item,int) else item for item in key]
-    tmp=load_structure(key[0], imas_version)[0]
-    return tmp[l2i(key)]
+    try:
+        key=p2l(key)
+        key=[':' if isinstance(item,int) else item for item in key]
+        tmp=load_structure(key[0], imas_version)[0]
+        return tmp[l2i(key)]
+    except KeyError:
+        return {}
