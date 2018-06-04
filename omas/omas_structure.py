@@ -62,31 +62,26 @@ add_datastructures = {}
 add_datastructures['info'] = {
     "info.shot": {
         "full_path": "info.shot",
-        "coordinates": [],
         "data_type": "INT_0D",
         "description": "shot number"
     },
     "info.imas_version": {
         "full_path": "info.imas_version",
-        "coordinates": [],
         "data_type": "STR_0D",
         "description": "imas version"
     },
     "info.machine": {
         "full_path": "info.machine",
-        "coordinates": [],
         "data_type": "STR_0D",
         "description": "machine name"
     },
     "info.user": {
         "full_path": "info.user",
-        "coordinates": [],
         "data_type": "STR_0D",
         "description": "user name"
     },
     "info.run": {
         "full_path": "info.run",
-        "coordinates": [],
         "data_type": "INT_0D",
         "description": "run number"
     }
@@ -163,9 +158,11 @@ def create_json_structure(imas_version=default_imas_version):
     for item in sorted(fout):
         coords = []
         for key in list(fout[item].keys()):
-            if key != '@coordinates' and key.startswith('@coordinate'):
-                coords.append(process_path(fout[item][key]))
+            if key.endswith('AosParent_relative') or key.endswith('_same_as'):
                 del fout[item][key]
+            elif key != '@coordinates' and key.startswith('@coordinate'):
+                coords.append(process_path(fout[item][key]))
+                #del fout[item][key]
             elif key.startswith('@path'):
                 fout[item][key] = process_path(fout[item][key])
         if len(coords):
