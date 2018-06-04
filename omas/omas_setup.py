@@ -78,15 +78,15 @@ def rcparams_environment(**kw):
 # --------------------------------------------
 imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
 
-if 'IMAS_VERSION' in os.environ:
-    default_imas_version = os.environ['IMAS_VERSION']
+if 'OMAS_IMAS_VERSION' in os.environ:
+    default_imas_version = os.environ['OMAS_IMAS_VERSION']
 else:
     default_imas_version = re.sub('_', '.', os.path.split(sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1])
 
 # --------------------------------------------
 # configuration of directories and ITM infos
 # --------------------------------------------
-if 'DATAVERSION_TAG' in os.environ:
-    default_itm_version = os.environ['DATAVERSION_TAG']
+if 'OMAS_DATAVERSION_TAG' in os.environ:
+    default_itm_version = os.environ['OMAS_DATAVERSION_TAG']
 else:
     default_itm_version = '4.10b_rc'
