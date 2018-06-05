@@ -83,16 +83,13 @@ def core_profiles_pressures(ods, update=True):
 
 def define_cocos(cocos_ind):
     """
-    Defines the cocos dictionary given a cocos index
+    Returns dictionary with COCOS coefficients given a COCOS index
 
-    https://crppwww.epfl.ch/~sauter/COCOS/
-    In the cocos, definition:
-    The * marks that in these cases abs(q) is effectively used (since ideal axisymmetric MHD does not depend on its sign)
+    https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit
 
-    Some codes do not really use the poloidal coordinates, therefore are compatible with two COCOS conventions (valid with sigma_rhotp = +-1). We mark with these cases ^ when we know it
+    :param cocos_ind: COCOS index
 
-    We do not discuss in detail the case where the phi direction is opposite in the cylindrical and the poloidal systems, since we think this case should not be used as it can be confusing.
-    However it is used, for example by the ASTRA code[12], so we refer to '-COCOS' with the COCOS convention being the one obtained with phi in the direction of the positive magnetic field.
+    :return: dictionary with COCOS coefficients
     """
 
     cocos=dict.fromkeys(['sigma_Bp', 'sigma_RpZ', 'sigma_rhotp', 'sign_q_pos', 'sign_pprime_pos', 'exp_Bp'])
@@ -190,15 +187,15 @@ def define_cocos(cocos_ind):
 
 def cocos_transform(cocosin_index, cocosout_index):
     """
+    Returns a dictionary with coefficients for how various quantities should get multiplied in order to go from cocosin_index to cocosout_index
+
+    https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit
+
     :param cocosin_index: COCOS index in
 
     :param cocosout_index: COCOS index out
 
-    :return: transformation multipliers
-
-    /home/matlab/crpptbx-8.3.0/CHEASEgui/eqdsk_cocos_transform.m
-    https://crppwww.epfl.ch/~sauter/COCOS/
-    Sauter, O., and S. Yu Medvedev. "Tokamak coordinate conventions: COCOS." Computer Physics Communications 184.2 (2013): 293-302.
+    :return: dictionary with transformation multipliers
     """
 
     # Don't transform if either cocos is undefined
