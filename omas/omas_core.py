@@ -327,8 +327,11 @@ class ODS(MutableMapping):
                 value.structure = structure
             else:
                 info = omas_info_node(location)
-                # check that the number of dimensions matches the number indicated in IMAS structure
-                if 'coordinates' in info and len(info['coordinates']):
+                # check consistency for scalar entries
+                if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+                    printe('%s must be a scalar of type %s' % (location, info['data_type']))
+                # check consistency for number of dimensions
+                elif 'coordinates' in info and len(info['coordinates']):
                     if not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']):
                         # may want to raise a ValueError in the future
                         printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
