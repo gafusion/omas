@@ -150,6 +150,55 @@ class ODS(MutableMapping):
                     time = time[key[-1]]
                 return add_is_homogeneous_info(time)
 
+    def slice_at_time(self, time=None, time_index=None):
+        '''
+        method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
+
+        :param time: time value to select
+
+        :param time_index: time index to select (NOTE: time_index has precedence over time)
+
+        :return: modified ODS
+        '''
+
+        # set time_index for parent and children
+        if 'time' in self:
+            if time_index is None:
+                time_index = numpy.where(self['time'] == time)[0]
+            else:
+                raise (ValueError(
+                    'time info is defined both in %s as well as upstream' % (self.location + separator + 'time')))
+
+        # loop over items
+        for item in self.keys():
+            # time (if present) is treated last
+            if item == 'time':
+                continue
+
+            # identify time-dependent data
+            info = omas_info_node(self.location + separator + item)
+            if 'coordinates' in info and any([k.endswith(separator + 'time') for k in info['coordinates']]):
+
+                # time-dependent arrays
+                if not isinstance(self[item], ODS):
+                    self[item] = numpy.atleast_1d(self[item][time_index])
+
+                # time-depentend list of ODSs
+                elif isinstance(self[item].omas_data, list) and len(self[item]) and 'time' in self[item][0]:
+                    for k in self[item].keys()[::-1]:
+                        if k != time_index:
+                            del self[item][k]
+
+            # go deeper inside ODSs that do not have time info
+            elif isinstance(self[item], ODS):
+                self[item].slice_at_time(time=time, time_index=time_index)
+
+        # treat time
+        if 'time' in self:
+            self['time'] = numpy.atleast_1d(self['time'][time_index])
+
+        return self
+
     @property
     def consistency_check(self):
         """

@@ -41,3 +41,8 @@ extra_info = {}
 print(ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info))
 print(extra_info)
 
+#--------------
+
+# slice at time
+ods1 = ods['equilibrium'].slice_at_time(100)
+print(ods.time('equilibrium'))

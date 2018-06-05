@@ -21,34 +21,38 @@ The `ODS` class extends native Python dictionary and list classes with:
     ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
     ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
 
-4. **Data slicing** (not only in time) with `:` construct::
+4. **Extract sigle time slice** from whole data structure::
 
-    ods['equilibrium.time_slice[:].global_quantities.ip']
+    ods.slice_at_time(1000.)
 
-5. Automatic `COCOS <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_ **transformations**::
+5. **Collect data across array of structures** (not only in time) with `:` construct::
+
+    ods['equilibrium.time_slice.:.global_quantities.ip']
+
+6. Automatic `COCOS <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_ **transformations**::
 
     with cocos_environment(ods, cocosin=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
-6. Unified interface for **querying about time** dimension::
+7. Unified interface for **querying about time** dimension::
 
     ods.time('equilibrium')
     ods.time('equilibrium.time_slice')
     ods.time('equilibrium.time_slice.0.global_quantities.ip')
 
-7. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
+8. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
 
-    ods['equilibrium.time_slice[0].profiles_1d.q'] = uarray(nom_value,std_dev)
+    ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
 
-8. Evaluate **derived quantities**::
+9. Evaluate **derived quantities**::
 
     ods.physics_core_profiles_pressures()
 
-9. **Predefined plot**::
+10. **Predefined plot**::
 
     ods.plot_core_profiles_summary()
 
-10. Save/load ODSs to/from **different storage systems**:
+11. Save/load ODSs to/from **different storage systems**:
 
    .. _omas_formats:
 
