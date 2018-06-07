@@ -460,11 +460,16 @@ def overlay(ods, ax=None, **kw):
     """
     if ax is None:
         ax = pyplot.gca()
-    supported_systems = ['gas_injection', 'thomson_scattering', 'bolometer']
-    for hw_sys in supported_systems:
-        if kw.get(hw_sys, False):
+    overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
+    for hw_sys in list_structures(ods.imas_version):
+        if kw.get(hw_sys, hw_sys in overlay_on_by_default):
             overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
-            eval('{}_overlay'.format(hw_sys))(ods, ax, **overlay_kw)
+            try:
+                overlay_function = eval('{}_overlay'.format(hw_sys))
+            except NameError:
+                pass
+            else:
+                overlay_function(ods, ax, **overlay_kw)
     return
 
 
