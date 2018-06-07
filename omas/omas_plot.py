@@ -460,19 +460,16 @@ def overlay(ods, ax=None, **kw):
     """
     if ax is None:
         ax = pyplot.gca()
-    if kw.pop('gas', False):
-        gas_overlay(ods, ax)
-    if kw.get('thomson', False):
-        tskw = kw.get('thomson', {}) if isinstance(kw.get('thomson', {}), dict) else {}
-        thomson_overlay(ods, ax, **tskw)
-    if kw.get('bolometer', False):
-        bolkw = kw.get('bolometer', {}) if isinstance(kw.get('bolometer', {}), dict) else {}
-        bolometer_overlay(ods, ax, **bolkw)
+    supported_systems = ['gas_injection', 'thomson_scattering', 'bolometer']
+    for hw_sys in supported_systems:
+        if kw.get(hw_sys, False):
+            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
+            eval('{}_overlay'.format(hw_sys))(ods, ax, **overlay_kw)
     return
 
 
 @add_to__ODS__
-def gas_overlay(ods, ax=None, angle_not_in_pipe_name=False):
+def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False):
     """
     Plots overlays of gas injectors
     :param ods: OMAS ODS instance
@@ -518,7 +515,7 @@ def gas_overlay(ods, ax=None, angle_not_in_pipe_name=False):
 
 
 @add_to__ODS__
-def thomson_overlay(ods, ax=None, **kw):
+def thomson_scattering_overlay(ods, ax=None, **kw):
     """
     Overlays Thomson channel locations
     :param ods: OMAS ODS instance
