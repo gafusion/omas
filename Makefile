@@ -9,8 +9,11 @@ all:
 	@echo ' - make release      : all of the above, in order'
 	@echo ''
 
-docs:
-	cd sphinx && make html && make commit && make push
+html:
+	cd sphinx && make html
+
+docs: html
+	make commit && make push
 
 json:
 	cd utilities && python build_json_structures.py
