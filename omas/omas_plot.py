@@ -454,9 +454,11 @@ def overlay(ods, ax=None, **kw):
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
     :param ods: OMAS ODS instance
     :param ax: Axes instance or None
-    :param kw: select plots by setting their names to True; e.g.: if you want the gas plot, set gas=True as a keyword.
+    :param kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
+        set gas_injection=True as a keyword.
         Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
-        method, as in thomson={'labelevery': 5}
+        method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
+        to plot, so you can set linestyle, color, etc.
     """
     if ax is None:
         ax = pyplot.gca()
@@ -474,7 +476,7 @@ def overlay(ods, ax=None, **kw):
 
 
 @add_to__ODS__
-def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False):
+def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     """
     Plots overlays of gas injectors
     :param ods: OMAS ODS instance
@@ -482,6 +484,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False):
     :param angle_not_in_pipe_name: bool
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
         angles in them.
+    :param kw: Additional keywords for gas plot:
+        colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
+            Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
+        *Remaining keywords are passed to plot call for drawing markers at the gas locations.
+
     """
     if ax is None:
         ax = pyplot.gca()
@@ -510,10 +517,13 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False):
         rsplit = mean([loc.split('_')[0] for loc in locations])
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
-    for loc in locations:
+    colors = numpy.atleast_1d(kw.pop('colors', kw.get('color', None))).tolist()
+    colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
+    kw.pop('color', None)
+    for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
         label = '\n'.join(locations[loc])
-        gas_mark = ax.plot(r, z, marker='d')
+        gas_mark = ax.plot(r, z, marker=kw.pop('marker', 'd'), color=colors[i], **kw)
         ax.text(r, z, label, color=gas_mark[0].get_color(),
                 va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
     return
@@ -529,16 +539,17 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
         labelevery: int
             Sets how often to label channels. labelevery=1 can get crowded.
         mask: bool array with length matching number of channels in ods
+        *Remaining keywords are passed to plot call
     """
     if ax is None:
         ax = pyplot.gca()
     nc = len(ods['thomson_scattering']['channel'])
     mask = kw.pop('mask', numpy.ones(nc, bool))
+    labelevery = kw.pop('labelevery', 5)
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
     ts_id = numpy.array([ods['thomson_scattering']['channel'][i]['identifier'] for i in range(nc)])[mask]
-    ts_mark = ax.plot(r, z, marker='+', label='Thomson scattering', linestyle=' ')
-    labelevery = kw.get('labelevery', 5)
+    ts_mark = ax.plot(r, z, marker='+', label='Thomson scattering', linestyle=' ', **kw)
     for i in range(nc):
         if (i % labelevery) == 0:
             ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize='xx-small')
@@ -555,6 +566,10 @@ def bolometer_overlay(ods, ax=None, **kw):
         labelevery: int
             Sets how often to label channels.
         mask: bool array with length matching number of channels in ods
+        reset_fan_color: bool
+            At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
+            cycler. This will override manually specified color.
+        *Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
     if ax is None:
         ax = pyplot.gca()
@@ -569,15 +584,17 @@ def bolometer_overlay(ods, ax=None, **kw):
 
     ncm = len(r1)
 
-    color = None
+    color = kw.pop('color', None)
+    reset_fan_color = kw.pop('reset_fan_color', True)
+    labelevery = kw.pop('labelevery', 2)
     for i in range(ncm):
-        if (i > 0) and bolo_id[i][0] != bolo_id[i-1][0]:
+        if (i > 0) and (bolo_id[i][0] != bolo_id[i-1][0]) and reset_fan_color:
             color = None  # Allow color to reset when changing fans
 
         bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]],
-                            color=color, alpha=0.8, label='Bolometers' if color is None else '')
+                            color=color, alpha=0.8, label='Bolometers' if (color is None) or (i == 0) else '', **kw)
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
-        if (i % kw.get('labelevery', 2)) == 0:
+        if (i % labelevery) == 0:
             ax.text(r2[i], z2[i], bolo_id[i], color=color,
                     ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z2[i] > 0)])
