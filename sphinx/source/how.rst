@@ -29,7 +29,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     ods['equilibrium.time_slice.:.global_quantities.ip']
 
-6. Automatic `COCOS <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_ **transformations**::
+6. Automatic **COCOS transformations** [`read the COCOS cheatsheat <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
 
     with cocos_environment(ods, cocosin=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
@@ -44,34 +44,34 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
 
-9. Evaluate **derived quantities**::
+9. Evaluate **derived quantities** from more fundamental ones::
 
     ods.physics_core_profiles_pressures()
 
-10. **Predefined plot**::
+10. **Predefined set of plots**::
 
     ods.plot_core_profiles_summary()
 
 11. Save/load ODSs to/from **different storage systems**:
 
-   .. _omas_formats:
+.. _omas_formats:
 
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | OMAS format   | Description                                                 | Storage type           | Remote storage |  Python Requirements  |
-   +===============+=============================================================+========================+================+=======================+
-   | **pickle**    | Files using native Python serialization tools               | Python binary file     |       no       |                       |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **Json**      | Using Json format for representing hierarchical data        | ASCII files            |       no       |                       |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **NetCDF**    | Files using binary NetCDF format                            | Binary files           |       no       |        netCDF4        |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **S3**        | Cloud storage using Amazon Simple Storage Service           | Object Store           |       yes      |         boto3         |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **HDC**       | Hierarchical Dynamic Containers                             | Memory                 |       no       |         pyhdc         |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **ITM**  (*)  | ITM data storage system                                     | ITM Database           |       no       |         itm           |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-   | **IMAS**      | ITER data storage system                                    | IMAS Database          |       no       |         imas          |
-   +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| OMAS format   | Description                                                 | Storage type           | Remote storage |  Python Requirements  |
++===============+=============================================================+========================+================+=======================+
+| **pickle**    | Files using native Python serialization tools               | Python binary file     |       no       |                       |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **Json**      | Using Json format for representing hierarchical data        | ASCII files            |       no       |                       |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **NetCDF**    | Files using binary NetCDF format                            | Binary files           |       no       |        netCDF4        |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **S3**        | Cloud storage using Amazon Simple Storage Service           | Object Store           |       yes      |         boto3         |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **HDC**       | Hierarchical Dynamic Containers                             | Memory                 |       no       |         pyhdc         |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **ITM**  (*)  | ITM data storage system                                     | ITM Database           |       no       |         itm           |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **IMAS**      | ITER data storage system                                    | IMAS Database          |       no       |         imas          |
++---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
 
 (\*) NOTE: In addition to the IMAS data model, OMAS can support any other hierarchical data representation where the data is stored in the leafs of the data structure. For example, ITM is a hierarchical data organization that is used by the `European Integrated Modeling Tokamak <http://iopscience.iop.org/article/10.1088/0029-5515/54/4/043018/meta>`_ effort and shares many similarities with IMAS. Writing data to ITM is supported by OMAS.

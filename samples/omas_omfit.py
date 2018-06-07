@@ -1,10 +1,7 @@
-#only works with python 2.7 since OMFIT is only Python 2.7 compatible
+# only works with python 2.7 since OMFIT is only Python 2.7 compatible
 from __future__ import print_function, division, unicode_literals
 
 from matplotlib.pyplot import show
-
-import os
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omfit.classes.omfit_gacode import OMFITgacode, OMFITsrc
