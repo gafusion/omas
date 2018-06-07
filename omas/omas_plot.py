@@ -475,6 +475,36 @@ def overlay(ods, ax=None, **kw):
     return
 
 
+def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
+    """
+    Gets a channel count for some hardware sys. 0 indicates empty. Provide check_loc to make sure some data exist.
+    Utility for CX hardware overlay functions.
+    :param ods: OMAS ODS instance
+    :param hw_sys: string describing the hardware system to check
+    :param check_loc: [optional] string
+        If provided, an additional check will be made to ensure that some data exist.
+        If this check fails, channel count will be set to 0
+    :param test_checker: [optional] string to evaluate into bool
+        Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
+    :param channels_name: string
+        Use if you need to generalize to something that doesn't have real channels but has something analogous,
+        like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
+    :return: Number of channels for this hardware system. 0 if there's trouble.
+    """
+    try:
+        nc = len(ods[hw_sys][channels_name])
+        if check_loc is not None:
+            checker = ods[check_loc]
+            if test_checker is not None:
+                assert eval(test_checker)
+    except (TypeError, AssertionError, ValueError):
+        nc = 0
+
+    if nc == 0:
+        printd('{} overlay could not find sufficient data to make a plot'.format(hw_sys))
+    return nc
+
+
 @add_to__ODS__
 def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     """
@@ -490,6 +520,13 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
 
     """
+    # Make sure there is something to plot or else just give up and return
+    npipes = get_channel_count(
+        ods, 'gas_injection', check_loc='gas_injection.pipe.0.exit_position.r', test_checker='checker > 0',
+        channels_name='pipe')
+    if npipes == 0:
+        return
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -541,9 +578,14 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
         mask: bool array with length matching number of channels in ods
         *Remaining keywords are passed to plot call
     """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+    if nc == 0:
+        return
+
     if ax is None:
         ax = pyplot.gca()
-    nc = len(ods['thomson_scattering']['channel'])
     mask = kw.pop('mask', numpy.ones(nc, bool))
     labelevery = kw.pop('labelevery', 5)
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
@@ -571,9 +613,14 @@ def bolometer_overlay(ods, ax=None, **kw):
             cycler. This will override manually specified color.
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='checker > 0')
+    if nc == 0:
+        return
+
     if ax is None:
         ax = pyplot.gca()
-    nc = len(ods['bolometer']['channel'])
     mask = kw.pop('mask', numpy.ones(nc, bool))
 
     r1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.r'] for i in range(nc)])[mask]
