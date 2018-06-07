@@ -452,8 +452,11 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
 def overlay(ods, ax=None, **kw):
     """
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
+
     :param ods: OMAS ODS instance
+
     :param ax: Axes instance or None
+
     :param kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
         set gas_injection=True as a keyword.
         Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
@@ -479,16 +482,22 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
     """
     Gets a channel count for some hardware sys. 0 indicates empty. Provide check_loc to make sure some data exist.
     Utility for CX hardware overlay functions.
+
     :param ods: OMAS ODS instance
+
     :param hw_sys: string describing the hardware system to check
+
     :param check_loc: [optional] string
         If provided, an additional check will be made to ensure that some data exist.
         If this check fails, channel count will be set to 0
+
     :param test_checker: [optional] string to evaluate into bool
         Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
+
     :param channels_name: string
         Use if you need to generalize to something that doesn't have real channels but has something analogous,
         like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
+
     :return: Number of channels for this hardware system. 0 if there's trouble.
     """
     try:
@@ -509,11 +518,15 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
 def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     """
     Plots overlays of gas injectors
+
     :param ods: OMAS ODS instance
+
     :param ax: Axes instance
+
     :param angle_not_in_pipe_name: bool
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
         angles in them.
+
     :param kw: Additional keywords for gas plot:
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
@@ -570,9 +583,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
 def thomson_scattering_overlay(ods, ax=None, **kw):
     """
     Overlays Thomson channel locations
+
     :param ods: OMAS ODS instance
+
     :param ax: Axes instance
-    :param kw: Additional keywords for Thomson plot:
+
+    :param **kw: Additional keywords for Thomson plot:
         labelevery: int
             Sets how often to label channels. labelevery=1 can get crowded.
         mask: bool array with length matching number of channels in ods
@@ -602,9 +618,12 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 def bolometer_overlay(ods, ax=None, **kw):
     """
     Overlays bolometer chords
+
     :param ods: ODS instance
+
     :param ax: Axes instance
-    :param kw: Additional keywords for bolometer plot
+
+    :param **kw: Additional keywords for bolometer plot
         labelevery: int
             Sets how often to label channels.
         mask: bool array with length matching number of channels in ods
