@@ -457,7 +457,7 @@ def overlay(ods, ax=None, **kw):
 
     :param ax: Axes instance or None
 
-    :param **kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
+    :param \**kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
         set gas_injection=True as a keyword.
         Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
         method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
@@ -527,7 +527,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
         angles in them.
 
-    :param **kw: Additional keywords for gas plot:
+    :param \**kw: Additional keywords for gas plot:
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
@@ -588,7 +588,7 @@ def interferometer_overlay(ods, ax=None, **kw):
 
     :param ax: Axes instance
 
-    :param **kw: Additional keywords
+    :param \**kw: Additional keywords
         *Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
@@ -622,7 +622,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     :param ax: Axes instance
 
-    :param **kw: Additional keywords for Thomson plot:
+    :param \**kw: Additional keywords for Thomson plot:
         labelevery: int
             Sets how often to label channels. labelevery=1 can get crowded.
         mask: bool array with length matching number of channels in ods
@@ -657,7 +657,7 @@ def bolometer_overlay(ods, ax=None, **kw):
 
     :param ax: Axes instance
 
-    :param **kw: Additional keywords for bolometer plot
+    :param \**kw: Additional keywords for bolometer plot
         labelevery: int
             Sets how often to label channels.
         mask: bool array with length matching number of channels in ods
