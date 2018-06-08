@@ -449,13 +449,17 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
 
 
 @add_to__ODS__
-def overlay(ods, ax=None, **kw):
+def overlay(ods, ax=None, allow_autoscale=True, **kw):
     """
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
 
     :param ax: Axes instance or None
+
+    :param allow_autoscale: bool
+        Certain overlays will be allowed to unlock xlim and ylim, assuming that they have been locked by equilibrium_CX.
+        If this option is disabled, then hardware systems like PF-coils will be off the plot and mostly invisible.
 
     :param \**kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
         set gas_injection=True as a keyword.
@@ -465,6 +469,7 @@ def overlay(ods, ax=None, **kw):
     """
     if ax is None:
         ax = pyplot.gca()
+
     overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
     for hw_sys in list_structures(ods.imas_version):
         if kw.get(hw_sys, hw_sys in overlay_on_by_default):
@@ -474,7 +479,11 @@ def overlay(ods, ax=None, **kw):
             except NameError:
                 pass
             else:
+                if allow_autoscale and hw_sys in ['pf_active']:  # Not all systems need expanded range to fit everything
+                    ax.set_xlim(auto=True)
+                    ax.set_ylim(auto=True)
                 overlay_function(ods, ax, **overlay_kw)
+
     return
 
 
@@ -718,7 +727,7 @@ def interferometer_overlay(ods, ax=None, **kw):
         r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
         line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
         color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=color)
+        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
 
     return
 
