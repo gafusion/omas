@@ -581,6 +581,50 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
 
 
 @add_to__ODS__
+def pf_active_overlay(ods, ax=None, **kw):
+    """
+    Plots overlays of interferometer chords.
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords
+        *Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.oblique.r', channels_name='coil',
+        test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    color = kw.pop('color', None)
+
+    for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
+        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
+        fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'], oblique['alpha'], oblique['beta']]
+
+        xarr = [fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5])]
+        yarr = [fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4])]
+        fcoil = ax.plot(xarr, yarr, color=color, **kw)
+        color = fcoil[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+
+    return
+
+
+@add_to__ODS__
 def magnetics_overlay(ods, ax=None, **kw):
     """
     Plots overlays of magnetics: B_pol probes and flux loops
