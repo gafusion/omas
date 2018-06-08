@@ -530,6 +530,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     :param \**kw: Additional keywords for gas plot:
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
+
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
 
     """
@@ -580,6 +581,71 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
 
 
 @add_to__ODS__
+def magnetics_overlay(ods, ax=None, **kw):
+    """
+    Plots overlays of magnetics: B_pol probes and flux loops
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords
+        show_bpol_probe: bool
+            Turn display of B_pol probes on/off
+
+        show_flux_loop: bool
+            Turn display of flux loops on/off
+
+        bpol_probe_color: matplotlib color specification for B_pol probes
+
+        flux_loop_color: matplotlib color specification for flux loops
+
+        bpol_probe_marker: matplotlib marker specification for B_pol probes
+
+        flux_loop_marker: matplotlib marker specification for flux loops
+
+        labelevery: int
+            Sets how often to label probes. labelevery=1 can get crowded. labelevery=0 turns off labels.
+
+        *Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nbp = get_channel_count(
+        ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe',
+        test_checker='checker > 0')
+    nfl = get_channel_count(
+        ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
+        test_checker='checker > 0')
+    if max([nbp, nfl]) == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    color = kw.pop('color', None)
+    kw.pop('marker', None)
+    kw.setdefault('linestyle', ' ')
+    labelevery = kw.pop('labelevery', 0)
+
+    def show_mag(n, topname, posroot, label, color_, marker):
+        r, z = [ods[topname][i][posroot]['r'] for i in range(n)], [ods[topname][i][posroot]['z'] for i in range(n)]
+        mark = ax.plot(r, z, color=color_, label=label, marker=marker, **kw)
+        color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+        for i in range(n):
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(r[i], z[i], ods[topname][i]['identifier'], color=color_)
+
+    if kw.pop('show_bpol_probe', True):
+        show_mag(nbp, 'magnetics.bpol_probe', 'position', '$B_{pol}$ probes',
+                 kw.pop('bpol_probe_color', color), kw.pop('bpol_probe_marker', 's'))
+    if kw.pop('show_flux_loop', True):
+        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops',
+                 kw.pop('flux_loop_color', color), kw.pop('flux_loop_marker', 'o'))
+
+    return
+
+
+@add_to__ODS__
 def interferometer_overlay(ods, ax=None, **kw):
     """
     Plots overlays of interferometer chords.
@@ -624,8 +690,10 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     :param \**kw: Additional keywords for Thomson plot:
         labelevery: int
-            Sets how often to label channels. labelevery=1 can get crowded.
+            Sets how often to label channels. labelevery=1 can get crowded. labelevery=0 turns off labels.
+
         mask: bool array with length matching number of channels in ods
+
         *Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
@@ -643,7 +711,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     ts_id = numpy.array([ods['thomson_scattering']['channel'][i]['identifier'] for i in range(nc)])[mask]
     ts_mark = ax.plot(r, z, marker='+', label='Thomson scattering', linestyle=' ', **kw)
     for i in range(nc):
-        if (i % labelevery) == 0:
+        if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize='xx-small')
     return
 
@@ -659,11 +727,14 @@ def bolometer_overlay(ods, ax=None, **kw):
 
     :param \**kw: Additional keywords for bolometer plot
         labelevery: int
-            Sets how often to label channels.
+            Sets how often to label channels. labelevery=0 turns off labels.
+
         mask: bool array with length matching number of channels in ods
+
         reset_fan_color: bool
             At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
             cycler. This will override manually specified color.
+
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
     # Make sure there is something to plot or else just give up and return
@@ -695,6 +766,6 @@ def bolometer_overlay(ods, ax=None, **kw):
                             color=color, alpha=0.8, label='Bolometers' if (color is None) or (i == 0) else '', **kw)
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
-        if (i % labelevery) == 0:
+        if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], bolo_id[i], color=color,
                     ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z2[i] > 0)])
