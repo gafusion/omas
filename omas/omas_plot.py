@@ -601,12 +601,14 @@ def interferometer_overlay(ods, ax=None, **kw):
     if ax is None:
         ax = pyplot.gca()
 
+    color = kw.pop('color', None)
     for i in range(nc):
         ch = ods['interferometer.channel'][i]
         los = ch['line_of_sight']
         r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
-        line = ax.plot([r1, r2], [z1, z2], **kw)
-        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=line[0].get_color())
+        line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
+        color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=color)
 
     return
 
