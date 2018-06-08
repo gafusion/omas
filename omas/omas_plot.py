@@ -457,7 +457,7 @@ def overlay(ods, ax=None, **kw):
 
     :param ax: Axes instance or None
 
-    :param kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
+    :param **kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
         set gas_injection=True as a keyword.
         Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
         method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
@@ -527,7 +527,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
         angles in them.
 
-    :param kw: Additional keywords for gas plot:
+    :param **kw: Additional keywords for gas plot:
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
         *Remaining keywords are passed to plot call for drawing markers at the gas locations.
@@ -576,6 +576,38 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
         gas_mark = ax.plot(r, z, marker=kw.pop('marker', 'd'), color=colors[i], **kw)
         ax.text(r, z, label, color=gas_mark[0].get_color(),
                 va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
+    return
+
+
+@add_to__ODS__
+def interferometer_overlay(ods, ax=None, **kw):
+    """
+    Plots overlays of interferometer chords.
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param **kw: Additional keywords
+        *Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
+        test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    for i in range(nc):
+        ch = ods['interferometer.channel'][i]
+        los = ch['line_of_sight']
+        r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
+        line = ax.plot([r1, r2], [z1, z2], **kw)
+        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=line[0].get_color())
+
     return
 
 
