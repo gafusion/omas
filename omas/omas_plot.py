@@ -602,7 +602,10 @@ def pf_active_overlay(ods, ax=None, **kw):
     :param ax: Axes instance
 
     :param \**kw: Additional keywords
-        *Remaining keywords are passed to plot call
+        scalex, scaley: passed to ax.autoscale_view() call at the end
+
+        *Remaining keywords are passed to matplotlib.patches.Polygon call
+            Hint: you may want to set facecolor instead of just color
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
@@ -614,24 +617,37 @@ def pf_active_overlay(ods, ax=None, **kw):
     if ax is None:
         ax = pyplot.gca()
 
-    color = kw.pop('color', None)
+    kw.setdefault('label', 'Active PF coils')
+    kw.setdefault('facecolor', 'gray')
+    kw.setdefault('edgecolor', 'k')
+    kw.setdefault('alpha', 0.7)
+    scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
 
+    patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
         oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
         fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'], oblique['alpha'], oblique['beta']]
 
-        xarr = [fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5])]
-        yarr = [fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4])]
-        fcoil = ax.plot(xarr, yarr, color=color, label='Active PF coils' if i == 0 else '', **kw)
-        color = fcoil[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+        xarr = [
+            fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+            fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+            fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+            fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+        ]
+        yarr = [
+            fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+            fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+            fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+            fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+        ]
+        path = numpy.array([xarr, yarr]).T
+        patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
+        kw.pop('label', None)  # Prevent label from being placed on more than one patch
+
+    for p in patches:
+        ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
+
+    ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
 
     return
 
