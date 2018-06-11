@@ -553,6 +553,8 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
             * labelevery: int
                 Sets how often to add labels to the plot. A setting of 0 disables labels, 1 labels every element,
                 2 labels every other element, 3 labels every third element, etc.
+
+            * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
     """
     if ax is None:
         ax = pyplot.gca()
@@ -575,7 +577,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
 
 @add_to__ODS__
-def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', colors=None, **kw):
+def gas_injection_overlay(
+        ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', simple_labels=False, label_spacer=0, colors=None,
+        **kw):
     """
     Plots overlays of gas injectors
 
@@ -593,6 +597,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
             GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
             RF_ on DIII-D, for example.
+
+    :param simple_labels: bool
+        Simplify labels by removing suffix after the last underscore.
+
+    :param label_spacer: int
+        Number of blank lines and spaces to insert between labels and symbol
 
     :param colors: list of matplotlib color specifications.
         These colors control the display of various gas ports. The list will be repeated to make sure it is long enough.
@@ -633,6 +643,9 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
             r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
             location_name = '{:0.3f}_{:0.3f}'.format(r, z)
 
+            if simple_labels:
+                label = '_'.join(label.split('_')[:-1])
+
             locations.setdefault(location_name, [])
             locations[location_name] += [label]
 
@@ -647,6 +660,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         rsplit = mean([loc.split('_')[0] for loc in locations])
 
     kw.setdefault('marker', 'd')
+    kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 1)
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
@@ -655,11 +669,14 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
-        label = '\n'.join(locations[loc])
+        label = '{spacer:}\n{spacer:}'.format(spacer=' '*label_spacer).join([''] + locations[loc] + [''])
         gas_mark = ax.plot(r, z, color=colors[i], **kw)
+        kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
+            va = ['top', 'bottom'][int(z > 0)]
+            label = '\n'*label_spacer + label if va == 'top' else label + '\n'*label_spacer
             ax.text(r, z, label, color=gas_mark[0].get_color(),
-                    va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
+                    va=va, ha=['left', 'right'][int(r < rsplit)], fontsize='xx-small')
     return
 
 
@@ -1028,4 +1045,4 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, **kw):
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], bolo_id[i], color=color,
-                    ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z2[i] > 0)])
+                    ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z1[i] > 0)], fontsize='xx-small')
