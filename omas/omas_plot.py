@@ -12,6 +12,7 @@ def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
 
+
 # ================================
 # plotting helper functions
 # ================================
@@ -21,6 +22,7 @@ def sanitize_version_number(version):
         version = '-1' + version
     version = version.replace('_rc', '.')
     return version
+
 
 def compare_version(version1, version2):
     """Returns 1 if version1 > version2, -1 if version1 < version2, or 0 if version1 == version2."""
@@ -33,6 +35,7 @@ def compare_version(version1, version2):
         return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
+
 
 def contourPaths(x, y, Z, levels, remove_boundary_points=False):
     '''
@@ -93,6 +96,7 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False):
         allsegs.append(segs)
     return allsegs
 
+
 class Uband(object):
     """
     This class wraps the line and PollyCollection(s) associated with a banded
@@ -115,6 +119,7 @@ class Uband(object):
         self.line = line  # matplotlib.lines.Line2D
         self.bands = list(matplotlib.cbook.flatten([bands]))  # matplotlib.collections.PolyCollection(s)
 
+
 def _method_factory(self, key, bands=True):
     """Add a method that calls the same method for line and band
     or just for the line"""
@@ -133,12 +138,14 @@ def _method_factory(self, key, bands=True):
             return getattr(self.line, key)(*args, **kw)
     return method
 
+
 for _name, _method in inspect.getmembers(matplotlib.lines.Line2D, predicate=inspect.ismethod):
     if _name.startswith('_'):
         continue
     setattr(Uband, _name, _method_factory(Uband, _name,
                                           bands=_name in ['set_color', 'set_lw', 'set_linewidth', 'set_dashes',
                                                           'set_linestyle']))
+
 
 def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
     '''
@@ -158,8 +165,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     :param \**kw: Passed to pyplot.plot
 
-    :return: list. A list of Uband objects containing the line and bands of each (x,y) along
-             the last dimension.
+    :return: list. A list of Uband objects containing the line and bands of each (x,y) along the last dimension.
 
     '''
 
@@ -198,6 +204,44 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
         result.append(tmp)
 
     return result
+
+
+def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
+    """
+    Utility function for CX hardware overlays.
+    Gets a channel count for some hardware systems.
+    Provide check_loc to make sure some data exist.
+
+    :param ods: OMAS ODS instance
+
+    :param hw_sys: string describing the hardware system to check
+
+    :param check_loc: [optional] string
+        If provided, an additional check will be made to ensure that some data exist.
+        If this check fails, channel count will be set to 0
+
+    :param test_checker: [optional] string to evaluate into bool
+        Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
+
+    :param channels_name: string
+        Use if you need to generalize to something that doesn't have real channels but has something analogous,
+        like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
+
+    :return: Number of channels for this hardware system. 0 indicates empty.
+    """
+    try:
+        nc = len(ods[hw_sys][channels_name])
+        if check_loc is not None:
+            checker = ods[check_loc]
+            if test_checker is not None:
+                assert eval(test_checker)
+    except (TypeError, AssertionError, ValueError):
+        nc = 0
+
+    if nc == 0:
+        printd('{} overlay could not find sufficient data to make a plot'.format(hw_sys))
+    return nc
+
 
 # ================================
 # ODSs' plotting methods
@@ -281,6 +325,7 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     return ax
 
+
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     '''
@@ -347,6 +392,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     ax.set_xlim([0, 1])
 
     return fig
+
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, **kw):
@@ -418,6 +464,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     ax1.set_ylim([0, ax1.get_ylim()[1]])
     return fig
 
+
 @add_to__ODS__
 def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     '''
@@ -448,6 +495,9 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     return ax
 
 
+# ================================
+# Hardware overlays
+# ================================
 @add_to__ODS__
 def overlay(ods, ax=None, allow_autoscale=True, **kw):
     """
@@ -490,42 +540,6 @@ def overlay(ods, ax=None, allow_autoscale=True, **kw):
     return
 
 
-def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
-    """
-    Gets a channel count for some hardware sys. 0 indicates empty. Provide check_loc to make sure some data exist.
-    Utility for CX hardware overlay functions.
-
-    :param ods: OMAS ODS instance
-
-    :param hw_sys: string describing the hardware system to check
-
-    :param check_loc: [optional] string
-        If provided, an additional check will be made to ensure that some data exist.
-        If this check fails, channel count will be set to 0
-
-    :param test_checker: [optional] string to evaluate into bool
-        Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
-
-    :param channels_name: string
-        Use if you need to generalize to something that doesn't have real channels but has something analogous,
-        like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
-
-    :return: Number of channels for this hardware system. 0 if there's trouble.
-    """
-    try:
-        nc = len(ods[hw_sys][channels_name])
-        if check_loc is not None:
-            checker = ods[check_loc]
-            if test_checker is not None:
-                assert eval(test_checker)
-    except (TypeError, AssertionError, ValueError):
-        nc = 0
-
-    if nc == 0:
-        printd('{} overlay could not find sufficient data to make a plot'.format(hw_sys))
-    return nc
-
-
 @add_to__ODS__
 def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     """
@@ -543,7 +557,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
 
-        *Remaining keywords are passed to plot call for drawing markers at the gas locations.
+        * Remaining keywords are passed to plot call for drawing markers at the gas locations.
 
     """
     # Make sure there is something to plot or else just give up and return
@@ -604,7 +618,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     :param \**kw: Additional keywords
         scalex, scaley: passed to ax.autoscale_view() call at the end
 
-        *Remaining keywords are passed to matplotlib.patches.Polygon call
+        * Remaining keywords are passed to matplotlib.patches.Polygon call
             Hint: you may want to set facecolor instead of just color
     """
     # Make sure there is something to plot or else just give up and return
@@ -679,7 +693,7 @@ def magnetics_overlay(ods, ax=None, **kw):
         labelevery: int
             Sets how often to label probes. labelevery=1 can get crowded. labelevery=0 turns off labels.
 
-        *Remaining keywords are passed to plot call
+        * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
     nbp = get_channel_count(
@@ -727,7 +741,7 @@ def interferometer_overlay(ods, ax=None, **kw):
     :param ax: Axes instance
 
     :param \**kw: Additional keywords
-        *Remaining keywords are passed to plot call
+        * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
@@ -766,7 +780,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
         mask: bool array with length matching number of channels in ods
 
-        *Remaining keywords are passed to plot call
+        * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
@@ -819,7 +833,7 @@ def charge_exchange_overlay(ods, ax=None, **kw):
 
         mask: bool array with length matching number of channels in ods
 
-        *Remaining keywords are passed to plot call
+        * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
@@ -905,7 +919,7 @@ def bolometer_overlay(ods, ax=None, **kw):
             At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
             cycler. This will override manually specified color.
 
-        *Remaining keywords are passed to plot call for drawing markers at the gas locations.
+        * Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
