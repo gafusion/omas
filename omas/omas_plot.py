@@ -466,13 +466,16 @@ def overlay(ods, ax=None, allow_autoscale=True, **kw):
         Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
         method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
         to plot, so you can set linestyle, color, etc.
+
+        Also can specify debug_all_plots = True to set plots to be on by default instead of off by default.
     """
     if ax is None:
         ax = pyplot.gca()
 
     overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
+    debug_all_plots = kw.pop('debug_all_plots', False)
     for hw_sys in list_structures(ods.imas_version):
-        if kw.get(hw_sys, hw_sys in overlay_on_by_default):
+        if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
             overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
             try:
                 overlay_function = eval('{}_overlay'.format(hw_sys))
@@ -627,7 +630,7 @@ def pf_active_overlay(ods, ax=None, **kw):
                 fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
                 fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
                 fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4])]
-        fcoil = ax.plot(xarr, yarr, color=color, **kw)
+        fcoil = ax.plot(xarr, yarr, color=color, label='Active PF coils' if i == 0 else '', **kw)
         color = fcoil[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
 
     return
@@ -758,6 +761,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     if ax is None:
         ax = pyplot.gca()
     mask = kw.pop('mask', numpy.ones(nc, bool))
+    nc = sum(mask)
     labelevery = kw.pop('labelevery', 5)
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
@@ -766,6 +770,103 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     for i in range(nc):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize='xx-small')
+    return
+
+
+@add_to__ODS__
+def charge_exchange_overlay(ods, ax=None, **kw):
+    """
+    Overlays Charge Exchange Recombination (CER) spectroscopy channel locations
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords for Thomson plot:
+        which_pos: string
+            'all': plot all valid positions this channel uses. This can vary in time depending on which beams are on.
+
+            'closest': for each channel, pick the time slice with valid data closest to the time used for the
+                equilibrium contours and show position at this time. Falls back to all if equilibrium time cannot be
+                read from time_slice 0 of equilibrium in the ODS.
+
+        color_tangential: color to use for tangentially-viewing channels
+
+        color_vertical: color to use for vertically-viewing channels
+
+        color_radial: color to use for radially-viewing channels
+
+        marker_tangential, marker_vertical, marker_radial: plot symbols to use for T, V, R viewing channels
+
+        labelevery: int
+            Sets how often to label channels. labelevery=1 can get crowded. labelevery=0 turns off labels.
+
+        mask: bool array with length matching number of channels in ods
+
+        *Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(checker > 0)')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    try:
+        eq_time = ods['equilibrium.time_slice.0.time']
+    except ValueError:
+        eq_time = None
+
+    # Resolve keywords
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+    labelevery = kw.pop('labelevery', 5)
+    which_pos = kw.pop('which_pos', 'closest') if eq_time is not None else 'all'
+    colors = {}
+    for colorkw in ['color_tangential', 'color_vertical', 'color_radial']:
+        ckw = kw.pop(colorkw, kw.get('color', None))
+        if ckw is not None:
+            colors[colorkw.split('_')[-1][0].upper()] = ckw
+    kw.pop('color', None)
+    marker = kw.pop('marker', None)
+    markers = {
+        'T': kw.pop('marker_tangential', 's' if marker is None else marker),
+        'V': kw.pop('marker_vertical', 'd' if marker is None else marker),
+        'R': kw.pop('marker_radial', '*' if marker is None else marker),
+    }
+
+    # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
+    r = [[numpy.NaN]] * nc
+    z = [[numpy.NaN]] * nc
+    for i in range(nc):
+        rs = ods['charge_exchange.channel'][i]['position.r.data']
+        zs = ods['charge_exchange.channel'][i]['position.z.data']
+        w = (rs > 0) & (~numpy.isnan(rs)) & (~numpy.isnan(zs))  # Validity mask: remove zero and NaN
+        ts = ods['charge_exchange.channel'][i]['position.r.time'][w]
+        rs = rs[w]
+        zs = zs[w]
+        if which_pos == 'all':  # Show the set of all valid positions measured by this channel.
+            rz = list(set(zip(rs, zs)))
+            r[i] = [rz[j][0] for j in range(len(rz))]
+            z[i] = [rz[j][1] for j in range(len(rz))]
+        else:  # 'closest': pick just the closest time. The list of positions will only have one element.
+            w = closest_index(ts, eq_time)
+            r[i] = [rs[w]]
+            z[i] = [zs[w]]
+    cer_id = numpy.array([ods['charge_exchange.channel'][i]['identifier'] for i in range(nc)])
+
+    # Plot
+    label_bank = {'T': 'Tang. CER', 'V': 'Vert. CER', 'R': 'Rad. CER'}  # These get popped so only one each in legend
+    for i in range(nc):
+        if mask[i]:
+            ch_type = cer_id[i][0].upper()
+            color = colors.get(ch_type, None)  # See if a color has been specified for this view direction
+            cer_mark = ax.plot(r[i], z[i], marker=markers.get(ch_type, 'x'), linestyle=' ', color=color,
+                               label=label_bank.pop(ch_type, ''), **kw)
+            colors[ch_type] = color = cer_mark[0].get_color()  # Save color for this view dir in case it was None
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(numpy.mean(r[i]), numpy.mean(z[i]), cer_id[i], color=color, fontsize='xx-small')
     return
 
 
@@ -815,8 +916,8 @@ def bolometer_overlay(ods, ax=None, **kw):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i-1][0]) and reset_fan_color:
             color = None  # Allow color to reset when changing fans
 
-        bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]],
-                            color=color, alpha=0.8, label='Bolometers' if (color is None) or (i == 0) else '', **kw)
+        bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]], color=color, alpha=0.8,
+                            label='Bolometers {}'.format(bolo_id[i][0]) if (color is None) or (i == 0) else '', **kw)
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
