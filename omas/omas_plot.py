@@ -526,8 +526,29 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
     return nc
 
 
+def gas_filter(label, which_gas):
+    """
+    Utility: processes the mask / which_gas selector for gas_injection_overlay
+    :param label: string
+        Label for a gas valve to be tested
+
+    :param which_gas: string or list
+        See gas_injection_overlay docstring
+
+    :return: bool
+        Flag indicating whether or not a valve with this label should be shown
+    """
+    include = False
+    if isinstance(which_gas, basestring):
+        if which_gas == 'all':
+            include = True
+    elif isinstance(which_gas, list):
+        include = any([wg in label for wg in which_gas])
+    return include
+
+
 @add_to__ODS__
-def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
+def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', **kw):
     """
     Plots overlays of gas injectors
 
@@ -538,6 +559,13 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     :param angle_not_in_pipe_name: bool
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
         angles in them.
+
+    :param which_gas: string or list
+        Filter for selecting which gas valves to display.
+        If string: get a preset group, like 'all'.
+        If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
+            GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
+            RF_ on DIII-D, for example.
 
     :param \**kw: Additional keywords for gas plot:
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
@@ -562,9 +590,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, **kw):
     locations = {}
     for i in pipes:
         pipe = pipes[i]
+        label = pipe['name']
+        if not gas_filter(label, which_gas):
+            continue  # Skip this valve because it's not active
+
         r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
         location_name = '{:0.3f}_{:0.3f}'.format(r, z)
-        label = pipe['name']
 
         locations.setdefault(location_name, [])
         locations[location_name] += [label]
@@ -746,7 +777,7 @@ def interferometer_overlay(ods, ax=None, **kw):
         r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
         line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
         color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        ax.text(min([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
+        ax.text(max([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
 
     return
 
