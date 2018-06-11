@@ -8,6 +8,7 @@ from .omas_utils import *
 
 __all__ = []
 
+
 def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
@@ -539,6 +540,15 @@ def overlay(ods, ax=None, allow_autoscale=True, **kw):
         to plot, so you can set linestyle, color, etc.
 
         Also can specify debug_all_plots = True to set plots to be on by default instead of off by default.
+        Overlay functions accept these standard keywords:
+
+            * mask: bool array
+                Set of flags for switching plot elements on/off. Must be equal to the number of channels or items to be
+                plotted.
+
+            * labelevery: int
+                Sets how often to add labels to the plot. A setting of 0 disables labels, 1 labels every element,
+                2 labels every other element, 3 labels every third element, etc.
     """
     if ax is None:
         ax = pyplot.gca()
@@ -585,6 +595,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         colors: List of colors for the various gas ports. The list will be repeated to make sure it is long enough.
             Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)]
 
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
         * Remaining keywords are passed to plot call for drawing markers at the gas locations.
 
     """
@@ -595,6 +607,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     if npipes == 0:
         return
 
+    mask = kw.pop('mask', ones(npipes, bool))
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -603,22 +617,23 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     # Identify gas injectors with the same poloidal location and group them so that their labels won't overlap.
     locations = {}
     for i in pipes:
-        pipe = pipes[i]
-        label = pipe['name']
-        if not gas_filter(label, which_gas):
-            continue  # Skip this valve because it's not active
+        if mask[i]:
+            pipe = pipes[i]
+            label = pipe['name']
+            if not gas_filter(label, which_gas):
+                continue  # Skip this valve because it's not active
 
-        r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
-        location_name = '{:0.3f}_{:0.3f}'.format(r, z)
+            r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
+            location_name = '{:0.3f}_{:0.3f}'.format(r, z)
 
-        locations.setdefault(location_name, [])
-        locations[location_name] += [label]
+            locations.setdefault(location_name, [])
+            locations[location_name] += [label]
 
-        if angle_not_in_pipe_name:
-            try:
-                label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/pi)))
-            except (TypeError, ValueError):
-                pass
+            if angle_not_in_pipe_name:
+                try:
+                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/pi)))
+                except (TypeError, ValueError):
+                    pass
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
     except ValueError:
@@ -632,8 +647,9 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         r, z = numpy.array(loc.split('_')).astype(float)
         label = '\n'.join(locations[loc])
         gas_mark = ax.plot(r, z, marker=kw.pop('marker', 'd'), color=colors[i], **kw)
-        ax.text(r, z, label, color=gas_mark[0].get_color(),
-                va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
+        if (labelevery > 0) and ((i % labelevery) == 0):
+            ax.text(r, z, label, color=gas_mark[0].get_color(),
+                    va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
     return
 
 
@@ -648,6 +664,8 @@ def pf_active_overlay(ods, ax=None, **kw):
 
     :param \**kw: Additional keywords
         scalex, scaley: passed to ax.autoscale_view() call at the end
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
 
         * Remaining keywords are passed to matplotlib.patches.Polygon call
             Hint: you may want to set facecolor instead of just color
@@ -666,28 +684,38 @@ def pf_active_overlay(ods, ax=None, **kw):
     kw.setdefault('facecolor', 'gray')
     kw.setdefault('edgecolor', 'k')
     kw.setdefault('alpha', 0.7)
+    labelevery = kw.pop('labelevery', 0)
+    mask = kw.pop('mask', ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
 
     patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
-        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
-        fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'], oblique['alpha'], oblique['beta']]
+        if mask[i]:
+            oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
+            fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
+                    oblique['alpha'], oblique['beta']]
 
-        xarr = [
-            fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-            fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-            fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-            fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-        ]
-        yarr = [
-            fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-            fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-            fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
-            fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
-        ]
-        path = numpy.array([xarr, yarr]).T
-        patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
-        kw.pop('label', None)  # Prevent label from being placed on more than one patch
+            xarr = [
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+            ]
+            yarr = [
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+            ]
+            path = numpy.array([xarr, yarr]).T
+            patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
+            kw.pop('label', None)  # Prevent label from being placed on more than one patch
+            try:
+                pf_id = ods['pf_active.coil'][i]['element.0.identifier']
+            except ValueError:
+                pf_id = None
+            if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
+                ax.text(numpy.mean(xarr), numpy.mean(yarr), pf_id, ha='center', va='center')
 
     for p in patches:
         ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
@@ -724,6 +752,8 @@ def magnetics_overlay(ods, ax=None, **kw):
         labelevery: int
             Sets how often to label probes. labelevery=1 can get crowded. labelevery=0 turns off labels.
 
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
         * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
@@ -743,21 +773,22 @@ def magnetics_overlay(ods, ax=None, **kw):
     kw.pop('marker', None)
     kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 0)
+    mask = kw.pop('mask', ones(npb+nfl, bool))
 
-    def show_mag(n, topname, posroot, label, color_, marker):
+    def show_mag(n, topname, posroot, label, color_, marker, mask_):
         r, z = [ods[topname][i][posroot]['r'] for i in range(n)], [ods[topname][i][posroot]['z'] for i in range(n)]
-        mark = ax.plot(r, z, color=color_, label=label, marker=marker, **kw)
+        mark = ax.plot(r[mask_], z[mask_], color=color_, label=label, marker=marker, **kw)
         color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        for i in range(n):
+        for i in range(sum(mask_)):
             if (labelevery > 0) and ((i % labelevery) == 0):
-                ax.text(r[i], z[i], ods[topname][i]['identifier'], color=color_)
+                ax.text(r[mask_][i], z[mask_][i], ods[topname][i]['identifier'], color=color_)
 
-    if kw.pop('show_bpol_probe', True):
-        show_mag(nbp, 'magnetics.bpol_probe', 'position', '$B_{pol}$ probes',
-                 kw.pop('bpol_probe_color', color), kw.pop('bpol_probe_marker', 's'))
-    if kw.pop('show_flux_loop', True):
-        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops',
-                 kw.pop('flux_loop_color', color), kw.pop('flux_loop_marker', 'o'))
+    if show_bpol_probe:
+        show_mag(
+            nbp, 'magnetics.bpol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker,
+            mask[:nbp])
+    if show_flux_loop:
+        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
 
     return
 
@@ -772,6 +803,9 @@ def interferometer_overlay(ods, ax=None, **kw):
     :param ax: Axes instance
 
     :param \**kw: Additional keywords
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
         * Remaining keywords are passed to plot call
     """
     # Make sure there is something to plot or else just give up and return
@@ -785,13 +819,17 @@ def interferometer_overlay(ods, ax=None, **kw):
         ax = pyplot.gca()
 
     color = kw.pop('color', None)
+    labelevery = kw.pop('labelevery', 1)
+    mask = kw.pop('mask', ones(nc, bool))
     for i in range(nc):
-        ch = ods['interferometer.channel'][i]
-        los = ch['line_of_sight']
-        r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
-        line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
-        color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        ax.text(max([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
+        if mask[i]:
+            ch = ods['interferometer.channel'][i]
+            los = ch['line_of_sight']
+            r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
+            line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
+            color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(max([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
 
     return
 
@@ -806,10 +844,8 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     :param ax: Axes instance
 
     :param \**kw: Additional keywords for Thomson plot:
-        labelevery: int
-            Sets how often to label channels. labelevery=1 can get crowded. labelevery=0 turns off labels.
 
-        mask: bool array with length matching number of channels in ods
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
 
         * Remaining keywords are passed to plot call
     """
@@ -859,10 +895,7 @@ def charge_exchange_overlay(ods, ax=None, **kw):
 
         marker_tangential, marker_vertical, marker_radial: plot symbols to use for T, V, R viewing channels
 
-        labelevery: int
-            Sets how often to label channels. labelevery=1 can get crowded. labelevery=0 turns off labels.
-
-        mask: bool array with length matching number of channels in ods
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
 
         * Remaining keywords are passed to plot call
     """
@@ -949,6 +982,7 @@ def bolometer_overlay(ods, ax=None, **kw):
         reset_fan_color: bool
             At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
             cycler. This will override manually specified color.
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
 
         * Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
