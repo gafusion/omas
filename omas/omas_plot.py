@@ -8,9 +8,11 @@ from .omas_utils import *
 
 __all__ = []
 
+
 def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
+
 
 # ================================
 # plotting helper functions
@@ -21,6 +23,7 @@ def sanitize_version_number(version):
         version = '-1' + version
     version = version.replace('_rc', '.')
     return version
+
 
 def compare_version(version1, version2):
     """Returns 1 if version1 > version2, -1 if version1 < version2, or 0 if version1 == version2."""
@@ -33,6 +36,7 @@ def compare_version(version1, version2):
         return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
+
 
 def contourPaths(x, y, Z, levels, remove_boundary_points=False):
     '''
@@ -93,6 +97,7 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False):
         allsegs.append(segs)
     return allsegs
 
+
 class Uband(object):
     """
     This class wraps the line and PollyCollection(s) associated with a banded
@@ -115,6 +120,7 @@ class Uband(object):
         self.line = line  # matplotlib.lines.Line2D
         self.bands = list(matplotlib.cbook.flatten([bands]))  # matplotlib.collections.PolyCollection(s)
 
+
 def _method_factory(self, key, bands=True):
     """Add a method that calls the same method for line and band
     or just for the line"""
@@ -133,12 +139,14 @@ def _method_factory(self, key, bands=True):
             return getattr(self.line, key)(*args, **kw)
     return method
 
+
 for _name, _method in inspect.getmembers(matplotlib.lines.Line2D, predicate=inspect.ismethod):
     if _name.startswith('_'):
         continue
     setattr(Uband, _name, _method_factory(Uband, _name,
                                           bands=_name in ['set_color', 'set_lw', 'set_linewidth', 'set_dashes',
                                                           'set_linestyle']))
+
 
 def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
     '''
@@ -158,8 +166,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     :param \**kw: Passed to pyplot.plot
 
-    :return: list. A list of Uband objects containing the line and bands of each (x,y) along
-             the last dimension.
+    :return: list. A list of Uband objects containing the line and bands of each (x,y) along the last dimension.
 
     '''
 
@@ -198,6 +205,65 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
         result.append(tmp)
 
     return result
+
+
+def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
+    """
+    Utility function for CX hardware overlays.
+    Gets a channel count for some hardware systems.
+    Provide check_loc to make sure some data exist.
+
+    :param ods: OMAS ODS instance
+
+    :param hw_sys: string describing the hardware system to check
+
+    :param check_loc: [optional] string
+        If provided, an additional check will be made to ensure that some data exist.
+        If this check fails, channel count will be set to 0
+
+    :param test_checker: [optional] string to evaluate into bool
+        Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
+
+    :param channels_name: string
+        Use if you need to generalize to something that doesn't have real channels but has something analogous,
+        like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
+
+    :return: Number of channels for this hardware system. 0 indicates empty.
+    """
+    try:
+        nc = len(ods[hw_sys][channels_name])
+        if check_loc is not None:
+            checker = ods[check_loc]
+            if test_checker is not None:
+                assert eval(test_checker)
+    except (TypeError, AssertionError, ValueError):
+        nc = 0
+
+    if nc == 0:
+        printd('{} overlay could not find sufficient data to make a plot'.format(hw_sys))
+    return nc
+
+
+def gas_filter(label, which_gas):
+    """
+    Utility: processes the mask / which_gas selector for gas_injection_overlay
+    :param label: string
+        Label for a gas valve to be tested
+
+    :param which_gas: string or list
+        See gas_injection_overlay docstring
+
+    :return: bool
+        Flag indicating whether or not a valve with this label should be shown
+    """
+    include = False
+    if isinstance(which_gas, basestring):
+        if which_gas == 'all':
+            include = True
+    elif isinstance(which_gas, list):
+        include = any([wg in label for wg in which_gas])
+    return include
+
 
 # ================================
 # ODSs' plotting methods
@@ -281,6 +347,7 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     return ax
 
+
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     '''
@@ -347,6 +414,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     ax.set_xlim([0, 1])
 
     return fig
+
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, **kw):
@@ -418,6 +486,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     ax1.set_ylim([0, ax1.get_ylim()[1]])
     return fig
 
+
 @add_to__ODS__
 def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     '''
@@ -446,3 +515,517 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     ax.set_xlim([0, 1])
     ax.legend(loc=0).draggable(True)
     return ax
+
+
+# ================================
+# Hardware overlays
+# ================================
+@add_to__ODS__
+def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
+    """
+    Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance or None
+
+    :param allow_autoscale: bool
+        Certain overlays will be allowed to unlock xlim and ylim, assuming that they have been locked by equilibrium_CX.
+        If this option is disabled, then hardware systems like PF-coils will be off the plot and mostly invisible.
+
+    :param debug_all_plots: bool
+        Individual hardware systems are on by default instead of off by default.
+
+    :param \**kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
+        set gas_injection=True as a keyword. If debug_all_plots is True, then you can turn off individual plots by,
+        for example, set_gas_injection=False.
+
+        Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
+        method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
+        to plot, so you can set linestyle, color, etc.
+
+        Overlay functions accept these standard keywords:
+
+            * mask: bool array
+                Set of flags for switching plot elements on/off. Must be equal to the number of channels or items to be
+                plotted.
+
+            * labelevery: int
+                Sets how often to add labels to the plot. A setting of 0 disables labels, 1 labels every element,
+                2 labels every other element, 3 labels every third element, etc.
+    """
+    if ax is None:
+        ax = pyplot.gca()
+
+    overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
+    for hw_sys in list_structures(ods.imas_version):
+        if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
+            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
+            try:
+                overlay_function = eval('{}_overlay'.format(hw_sys))
+            except NameError:
+                pass
+            else:
+                if allow_autoscale and hw_sys in ['pf_active']:  # Not all systems need expanded range to fit everything
+                    ax.set_xlim(auto=True)
+                    ax.set_ylim(auto=True)
+                overlay_function(ods, ax, **overlay_kw)
+
+    return
+
+
+@add_to__ODS__
+def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', colors=None, **kw):
+    """
+    Plots overlays of gas injectors
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param angle_not_in_pipe_name: bool
+        Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
+        angles in them.
+
+    :param which_gas: string or list
+        Filter for selecting which gas valves to display.
+        If string: get a preset group, like 'all'.
+        If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
+            GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
+            RF_ on DIII-D, for example.
+
+    :param colors: list of matplotlib color specifications.
+        These colors control the display of various gas ports. The list will be repeated to make sure it is long enough.
+        Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)].
+        If the color keyword is used (See \**kw), then color will be popped to set the default for colors in case colors
+        is None.
+
+    :param \**kw: Additional keywords for gas plot:
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call for drawing markers at the gas locations.
+
+    """
+    # Make sure there is something to plot or else just give up and return
+    npipes = get_channel_count(
+        ods, 'gas_injection', check_loc='gas_injection.pipe.0.exit_position.r', test_checker='checker > 0',
+        channels_name='pipe')
+    if npipes == 0:
+        return
+
+    mask = kw.pop('mask', numpy.ones(npipes, bool))
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    pipes = ods['gas_injection']['pipe']  # Shortcut
+
+    # Identify gas injectors with the same poloidal location and group them so that their labels won't overlap.
+    locations = {}
+    for i in pipes:
+        if mask[i]:
+            pipe = pipes[i]
+            label = pipe['name']
+            if not gas_filter(label, which_gas):
+                continue  # Skip this valve because it's not active
+
+            r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
+            location_name = '{:0.3f}_{:0.3f}'.format(r, z)
+
+            locations.setdefault(location_name, [])
+            locations[location_name] += [label]
+
+            if angle_not_in_pipe_name:
+                try:
+                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/pi)))
+                except (TypeError, ValueError):
+                    pass
+    try:
+        rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
+    except ValueError:
+        rsplit = mean([loc.split('_')[0] for loc in locations])
+
+    kw.setdefault('marker', 'd')
+    labelevery = kw.pop('labelevery', 1)
+
+    # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
+    default_color = kw.pop('color', None)
+    colors = numpy.atleast_1d(default_color if colors is None else colors).tolist()
+    colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
+    for i, loc in enumerate(locations):
+        r, z = numpy.array(loc.split('_')).astype(float)
+        label = '\n'.join(locations[loc])
+        gas_mark = ax.plot(r, z, color=colors[i], **kw)
+        if (labelevery > 0) and ((i % labelevery) == 0):
+            ax.text(r, z, label, color=gas_mark[0].get_color(),
+                    va=['top', 'bottom'][int(z > 0)], ha=['left', 'right'][int(r < rsplit)])
+    return
+
+
+@add_to__ODS__
+def pf_active_overlay(ods, ax=None, **kw):
+    """
+    Plots overlays of interferometer chords.
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords
+        scalex, scaley: passed to ax.autoscale_view() call at the end
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to matplotlib.patches.Polygon call
+            Hint: you may want to set facecolor instead of just color
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.oblique.r', channels_name='coil',
+        test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    kw.setdefault('label', 'Active PF coils')
+    kw.setdefault('facecolor', 'gray')
+    kw.setdefault('edgecolor', 'k')
+    kw.setdefault('alpha', 0.7)
+    labelevery = kw.pop('labelevery', 0)
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+    scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
+
+    patches = []
+    for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
+        if mask[i]:
+            oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
+            fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
+                    oblique['alpha'], oblique['beta']]
+
+            xarr = [
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+            ]
+            yarr = [
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+            ]
+            path = numpy.array([xarr, yarr]).T
+            patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
+            kw.pop('label', None)  # Prevent label from being placed on more than one patch
+            try:
+                pf_id = ods['pf_active.coil'][i]['element.0.identifier']
+            except ValueError:
+                pf_id = None
+            if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
+                ax.text(numpy.mean(xarr), numpy.mean(yarr), pf_id, ha='center', va='center')
+
+    for p in patches:
+        ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
+
+    ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
+
+    return
+
+
+@add_to__ODS__
+def magnetics_overlay(
+        ods, ax=None, show_bpol_probe=True, show_flux_loop=True, bpol_probe_color=None, flux_loop_color=None,
+        bpol_probe_marker='s', flux_loop_marker='o', **kw):
+    """
+    Plots overlays of magnetics: B_pol probes and flux loops
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param show_bpol_probe: bool
+        Turn display of B_pol probes on/off
+
+    :param show_flux_loop: bool
+        Turn display of flux loops on/off
+
+    :param bpol_probe_color: matplotlib color specification for B_pol probes
+
+    :param flux_loop_color: matplotlib color specification for flux loops
+
+    :param bpol_probe_marker: matplotlib marker specification for B_pol probes
+
+    :param flux_loop_marker: matplotlib marker specification for flux loops
+
+    :param \**kw: Additional keywords
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nbp = get_channel_count(
+        ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe',
+        test_checker='checker > 0')
+    nfl = get_channel_count(
+        ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
+        test_checker='checker > 0')
+    if max([nbp, nfl]) == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    color = kw.pop('color', None)
+    bpol_probe_color = color if bpol_probe_color is None else bpol_probe_color
+    flux_loop_color = color if flux_loop_color is None else flux_loop_color
+    kw.pop('marker', None)
+    kw.setdefault('linestyle', ' ')
+    labelevery = kw.pop('labelevery', 0)
+    mask = kw.pop('mask', numpy.ones(nbp+nfl, bool))
+
+    def show_mag(n, topname, posroot, label, color_, marker, mask_):
+        r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
+        z = numpy.array([ods[topname][i][posroot]['z'] for i in range(n)])
+        mark = ax.plot(r[mask_], z[mask_], color=color_, label=label, marker=marker, **kw)
+        color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+        for i in range(sum(mask_)):
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(r[mask_][i], z[mask_][i], ods[topname][i]['identifier'], color=color_)
+
+    if show_bpol_probe:
+        show_mag(
+            nbp, 'magnetics.bpol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker,
+            mask[:nbp])
+    if show_flux_loop:
+        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
+
+    return
+
+
+@add_to__ODS__
+def interferometer_overlay(ods, ax=None, **kw):
+    """
+    Plots overlays of interferometer chords.
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
+        test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    color = kw.pop('color', None)
+    labelevery = kw.pop('labelevery', 1)
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+    for i in range(nc):
+        if mask[i]:
+            ch = ods['interferometer.channel'][i]
+            los = ch['line_of_sight']
+            r1, z1, r2, z2 = los['first_point.r'], los['first_point.z'], los['second_point.r'], los['second_point.z']
+            line = ax.plot([r1, r2], [z1, z2], color=color, label='interferometer' if i == 0 else '', **kw)
+            color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(max([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left')
+
+    return
+
+
+@add_to__ODS__
+def thomson_scattering_overlay(ods, ax=None, **kw):
+    """
+    Overlays Thomson channel locations
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords for Thomson plot:
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+    nc = sum(mask)
+    labelevery = kw.pop('labelevery', 5)
+    r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
+    z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
+    ts_id = numpy.array([ods['thomson_scattering']['channel'][i]['identifier'] for i in range(nc)])[mask]
+    ts_mark = ax.plot(r, z, marker='+', label='Thomson scattering', linestyle=' ', **kw)
+    for i in range(nc):
+        if (labelevery > 0) and ((i % labelevery) == 0):
+            ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize='xx-small')
+    return
+
+
+@add_to__ODS__
+def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
+    """
+    Overlays Charge Exchange Recombination (CER) spectroscopy channel locations
+
+    :param ods: OMAS ODS instance
+
+    :param ax: Axes instance
+
+    :param which_pos: string
+        'all': plot all valid positions this channel uses. This can vary in time depending on which beams are on.
+
+        'closest': for each channel, pick the time slice with valid data closest to the time used for the
+            equilibrium contours and show position at this time. Falls back to all if equilibrium time cannot be
+            read from time_slice 0 of equilibrium in the ODS.
+
+    :param \**kw: Additional keywords for CER plot:
+
+        color_tangential: color to use for tangentially-viewing channels
+
+        color_vertical: color to use for vertically-viewing channels
+
+        color_radial: color to use for radially-viewing channels
+
+        marker_tangential, marker_vertical, marker_radial: plot symbols to use for T, V, R viewing channels
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(checker > 0)')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    try:
+        eq_time = ods['equilibrium.time_slice.0.time']
+    except ValueError:
+        eq_time = None
+
+    # Resolve keywords
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+    labelevery = kw.pop('labelevery', 5)
+    if eq_time is None:
+        which_pos = 'all'
+    colors = {}
+    for colorkw in ['color_tangential', 'color_vertical', 'color_radial']:
+        ckw = kw.pop(colorkw, kw.get('color', None))
+        if ckw is not None:
+            colors[colorkw.split('_')[-1][0].upper()] = ckw
+    kw.pop('color', None)
+    marker = kw.pop('marker', None)
+    markers = {
+        'T': kw.pop('marker_tangential', 's' if marker is None else marker),
+        'V': kw.pop('marker_vertical', 'd' if marker is None else marker),
+        'R': kw.pop('marker_radial', '*' if marker is None else marker),
+    }
+
+    # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
+    r = [[numpy.NaN]] * nc
+    z = [[numpy.NaN]] * nc
+    for i in range(nc):
+        rs = ods['charge_exchange.channel'][i]['position.r.data']
+        zs = ods['charge_exchange.channel'][i]['position.z.data']
+        w = (rs > 0) & (~numpy.isnan(rs)) & (~numpy.isnan(zs))  # Validity mask: remove zero and NaN
+        ts = ods['charge_exchange.channel'][i]['position.r.time'][w]
+        rs = rs[w]
+        zs = zs[w]
+        if which_pos == 'all':  # Show the set of all valid positions measured by this channel.
+            rz = list(set(zip(rs, zs)))
+            r[i] = [rz[j][0] for j in range(len(rz))]
+            z[i] = [rz[j][1] for j in range(len(rz))]
+        else:  # 'closest': pick just the closest time. The list of positions will only have one element.
+            w = closest_index(ts, eq_time)
+            r[i] = [rs[w]]
+            z[i] = [zs[w]]
+    cer_id = numpy.array([ods['charge_exchange.channel'][i]['identifier'] for i in range(nc)])
+
+    # Plot
+    label_bank = {'T': 'Tang. CER', 'V': 'Vert. CER', 'R': 'Rad. CER'}  # These get popped so only one each in legend
+    for i in range(nc):
+        if mask[i]:
+            ch_type = cer_id[i][0].upper()
+            color = colors.get(ch_type, None)  # See if a color has been specified for this view direction
+            cer_mark = ax.plot(r[i], z[i], marker=markers.get(ch_type, 'x'), linestyle=' ', color=color,
+                               label=label_bank.pop(ch_type, ''), **kw)
+            colors[ch_type] = color = cer_mark[0].get_color()  # Save color for this view dir in case it was None
+            if (labelevery > 0) and ((i % labelevery) == 0):
+                ax.text(numpy.mean(r[i]), numpy.mean(z[i]), cer_id[i], color=color, fontsize='xx-small')
+    return
+
+
+@add_to__ODS__
+def bolometer_overlay(ods, ax=None, reset_fan_color=True, **kw):
+    """
+    Overlays bolometer chords
+
+    :param ods: ODS instance
+
+    :param ax: Axes instance
+
+    :param reset_fan_color: bool
+        At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
+        cycler. This will override manually specified color.
+
+    :param \**kw: Additional keywords for bolometer plot
+
+        * Accepts standard omas_plot overlay keywords: mask, labelevery
+
+        * Remaining keywords are passed to plot call for drawing markers at the gas locations.
+    """
+    # Make sure there is something to plot or else just give up and return
+    nc = get_channel_count(
+        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='checker > 0')
+    if nc == 0:
+        return
+
+    if ax is None:
+        ax = pyplot.gca()
+    mask = kw.pop('mask', numpy.ones(nc, bool))
+
+    r1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.r'] for i in range(nc)])[mask]
+    z1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.z'] for i in range(nc)])[mask]
+    r2 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.second_point.r'] for i in range(nc)])[mask]
+    z2 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.second_point.z'] for i in range(nc)])[mask]
+    bolo_id = numpy.array([ods['bolometer']['channel'][i]['identifier'] for i in range(nc)])[mask]
+
+    ncm = len(r1)
+
+    color = kw.pop('color', None)
+    labelevery = kw.pop('labelevery', 2)
+    for i in range(ncm):
+        if (i > 0) and (bolo_id[i][0] != bolo_id[i-1][0]) and reset_fan_color:
+            color = None  # Allow color to reset when changing fans
+
+        bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]], color=color, alpha=0.8,
+                            label='Bolometers {}'.format(bolo_id[i][0]) if (color is None) or (i == 0) else '', **kw)
+        if color is None:
+            color = bolo_line[0].get_color()  # Make subsequent lines the same color
+        if (labelevery > 0) and ((i % labelevery) == 0):
+            ax.text(r2[i], z2[i], bolo_id[i], color=color,
+                    ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z2[i] > 0)])

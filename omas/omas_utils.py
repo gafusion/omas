@@ -3,6 +3,7 @@ from __future__ import print_function, division, unicode_literals
 from .omas_setup import *
 import sys
 
+
 # --------------------------
 # general utility functions
 # --------------------------
@@ -57,6 +58,21 @@ def is_uncertain(var):
         return numpy.reshape(tmp,numpy.array(var).shape)
     else:
         return _uncertain_check(var)
+
+
+def is_numeric(value):
+    """
+    Convenience function check if value is numeric
+
+    :param value: value to check
+
+    :return: True/False
+    """
+    try:
+        0+value
+        return True
+    except TypeError:
+        return False
 
 
 def json_dumper(obj):
@@ -230,6 +246,50 @@ def remove_parentheses(inv, replace_with=''):
     return out
 
 
+def closest_index(my_list, my_number=0):
+    """
+    Given a SORTED iterable (a numeric array or list of numbers) and a numeric scalar my_number, find the index of the
+    number in the list that is closest to my_number
+
+    :param my_list: Sorted iterable (list or array) to search for number closest to my_number
+
+    :param my_number: Number to get close to in my_list
+
+    :return: Index of my_list element closest to my_number
+
+    :note: If two numbers are equally close, returns the index of the smallest number.
+    """
+    import bisect
+
+    if not hasattr(my_list, '__iter__'):
+        raise TypeError("closestIndex() in utils_math.py requires an iterable as the first argument. Got "
+                        "instead: {:}".format(my_list))
+
+    if not is_numeric(my_number):
+        if hasattr(my_number, '__iter__') and len(my_number) == 1 and is_numeric(my_number[0]):
+            printw('Warning: closestIndex got a len()=1 iterable instead of a scalar for my_number. my_number[0] will '
+                   'be used, but please input a scalar next time.')
+            # Before, the function would run without an error if given a one element array, but it would not return the
+            # correct answer.
+            my_number = my_number[0]
+            printd('my_number is now {:}'.format(my_number))
+        else:
+            raise TypeError("closestIndex() in utils_math.py requires a numeric scalar as the second argument. Got "
+                            "instead: {:}".format(my_number))
+
+    pos = bisect.bisect_left(my_list, my_number)
+    if pos == 0:
+        return 0
+    if pos == len(my_list):
+        return pos-1
+    before = pos - 1
+    after = pos
+    if my_list[after] - my_number < my_number - my_list[before]:
+        return pos
+    else:
+        return pos-1
+
+
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
@@ -243,6 +303,7 @@ _structures = {}
 _structures_dict = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
+
 
 def list_structures(imas_version):
     return sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
