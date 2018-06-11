@@ -265,6 +265,64 @@ def gas_filter(label, which_gas):
     return include
 
 
+def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=None, pad=1.0, **kw):
+    """
+    Draws an arrow pointing in from the gas valve
+    :param ods: ODS instance
+
+    :param r: float
+        R position of gas injector (m)
+
+    :param z: float
+        Z position of gas injector (m)
+
+    :param direction: float
+        Direction of injection (radians, COCOS 1/11)
+
+    :param snap_to: float
+        Snap direction angle to nearest value. Set snap to pi/4 to snap to 0, pi/4, pi/2, 3pi/4, etc. No in-between.
+
+    :param ax: Axes instance to plot on
+
+    :param color: matplotlib color specification
+
+    :param pad: float
+        Padding between arrow tip and specified (r,z)
+    """
+
+    def pick_direction():
+        """Guesses the direction for the arrow (from injector toward machine) in case you don't know"""
+        dr = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['r'] - r
+        dz = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['z'] - z
+        theta = -numpy.arctan2(dz, dr)  # negative is to make it COCOS1/11 compliant
+        if snap_to > 0:
+            theta = snap_to * round(theta/snap_to)
+        return theta
+
+    if direction is None:
+        direction = pick_direction()
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    shaft_len = 3.5 * (1+pad)/2.
+
+    da = numpy.pi/10  # Angular half width of the arrow head
+    x0 = numpy.cos(direction) * pad
+    y0 = numpy.sin(direction) * pad
+    head_mark = [
+        (x0, y0),
+        (x0+numpy.cos(direction+da), y0+numpy.sin(direction+da)),
+        (x0+numpy.cos(direction), y0+numpy.sin(direction)),
+        (x0+shaft_len*numpy.cos(direction), y0+shaft_len*numpy.sin(direction)),
+        (x0+numpy.cos(direction), y0+numpy.sin(direction)),
+        (x0+numpy.cos(direction-da), y0+numpy.sin(direction-da)),
+    ]
+
+    kw.pop('marker', None)  # Ignore this
+    return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
+
+
 # ================================
 # ODSs' plotting methods
 # ================================
@@ -568,7 +626,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
             except NameError:
                 pass
             else:
-                if allow_autoscale and hw_sys in ['pf_active']:  # Not all systems need expanded range to fit everything
+                if allow_autoscale and hw_sys in ['pf_active', 'gas_injection']:  # Not all systems need expanded range to fit everything
                     ax.set_xlim(auto=True)
                     ax.set_ylim(auto=True)
                 overlay_function(ods, ax, **overlay_kw)
@@ -579,7 +637,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 @add_to__ODS__
 def gas_injection_overlay(
         ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', simple_labels=False, label_spacer=0, colors=None,
-        **kw):
+        draw_arrow=True, **kw):
     """
     Plots overlays of gas injectors
 
@@ -609,6 +667,9 @@ def gas_injection_overlay(
         Do not specify a single RGB tuple by itself. However, a single tuple inside list is okay [(0.9, 0, 0, 0.9)].
         If the color keyword is used (See \**kw), then color will be popped to set the default for colors in case colors
         is None.
+
+    :param draw_arrow: bool or dict
+        Draw an arrow toward the machine at the location of the gas valve. If dict, pass keywords to arrow drawing func.
 
     :param \**kw: Additional keywords for gas plot:
 
@@ -670,7 +731,11 @@ def gas_injection_overlay(
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
         label = '{spacer:}\n{spacer:}'.format(spacer=' '*label_spacer).join([''] + locations[loc] + [''])
-        gas_mark = ax.plot(r, z, color=colors[i], **kw)
+        if draw_arrow:
+            kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
+            gas_mark = gas_arrow(ods, r, z, ax=ax, color=colors[i], **kw)
+        else:
+            gas_mark = ax.plot(r, z, color=colors[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
             va = ['top', 'bottom'][int(z > 0)]
