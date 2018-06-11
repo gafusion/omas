@@ -132,14 +132,6 @@ def json_loader(object_pairs, cls=dict):
     return dct
 
 
-def _credentials(system):
-    c = {'s3': {}}
-    c['s3']['region_name'] = 'us-east-1'
-    c['s3']['aws_access_key_id'] = 'AKIAIDWE2IM2V73OGOPA'
-    c['s3']['aws_secret_access_key'] = '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'
-    return c[system]
-
-
 def remote_uri(uri, filename, action):
     """
     :param uri: uri of the container of the file
@@ -162,7 +154,7 @@ def remote_uri(uri, filename, action):
         import boto3
         from boto3.s3.transfer import TransferConfig
         s3bucket = location.split('/')[0]
-        s3connection = boto3.resource('s3', **_credentials('s3'))
+        s3connection = boto3.resource('s3')
         s3filename = '/'.join(location.split('/')[1:])
 
         if action == 'list':
@@ -317,6 +309,7 @@ def p2l(key):
         except ValueError:
             pass
     return key
+
 
 def l2i(path):
     """
