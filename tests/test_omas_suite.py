@@ -10,7 +10,7 @@ from omas import *
 class TestOmasSuite(unittest.TestCase):
 
     def test_omas(self):
-        test_omas_suite(ods=None, test_type=None, do_raise=False)
+        through_omas_suite(ods=None, test_type=None, do_raise=False)
         # do_raise = False will prevent exceptions! The test does nothing but look pretty.
 
 

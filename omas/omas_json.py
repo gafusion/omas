@@ -54,7 +54,7 @@ def load_omas_json(filename, **kw):
     return tmp1
 
 
-def test_omas_json(ods):
+def through_omas_json(ods):
     """
     test save and load OMAS Json
 

@@ -105,7 +105,7 @@ def omas_scenario_database(machine=None, shot=None, run=None,
     else:
         raise (Exception('machine, shot, run must either all be None or all be set'))
 
-def test_omas_s3(ods):
+def through_omas_s3(ods):
     """
     test save and load S3
 
