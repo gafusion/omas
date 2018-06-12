@@ -99,27 +99,47 @@ class TestOmasPlot(unittest.TestCase):
 
     ods = ods_sample()
     ods = add_eq_sample_data(ods)
-    show_plots = True  # This will get in the way of automatic testing
+    show_all_plots = False  # This will get in the way of automatic testing
+    show_key_plots = False  # Shows plots that a human should check sometimes. Also a problem for auto-testing.
     verbose = False
 
     def printv(self, *arg):
+        """Utility for tests to use"""
         if self.verbose:
             print(*arg)
 
+    # Equilibrium
     def test_eqcx(self):
         self.printv('TestOmasPlot.test_eqcx...')
         self.ods.plot_equilibrium_CX()
-        if self.show_plots:
+        if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_eqcx done')
 
+    # Thomson scattering
     def test_ts_overlay(self):
         self.printv('TestOmasPlot.test_ts_overlay...')
         ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
         ts_ods.plot_overlay(thomson_scattering=True)
-        if self.show_plots:
+        if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_ts_overlay done')
+
+    def test_ts_overlay_mask(self):
+        self.printv('TestOmasPlot.test_ts_overlay_mask...')
+        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
+        nc = ts_ods.plot_get_channel_count('thomson_scattering')
+        mask0 = numpy.ones(nc, bool)
+        markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
+        markers *= int(numpy.ceil(float(nc)/len(markers)))
+        for i in range(nc):
+            mask = copy.copy(mask0)
+            mask[i] = False
+            print(mask)
+            ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i)))
+        if self.show_all_plots or show_key_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_ts_overlay_mask done')
 
 
 if __name__ == '__main__':
