@@ -8,14 +8,14 @@ __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 've
 
 __all__ = [
     'ODS', 'ods_sample', 'different_ods',
-    'save_omas',      'load_omas',      'test_omas_suite',
-    'save_omas_pkl',  'load_omas_pkl',  'test_omas_pkl',
-    'save_omas_json', 'load_omas_json', 'test_omas_json',
-    'save_omas_hdc',  'load_omas_hdc',  'test_omas_hdc',
-    'save_omas_nc',   'load_omas_nc',   'test_omas_nc',
-    'save_omas_imas', 'load_omas_imas', 'test_omas_imas',
-    'save_omas_itm',  'load_omas_itm',  'test_omas_itm',
-    'save_omas_s3',   'load_omas_s3',   'test_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'save_omas',      'load_omas',      'through_omas_suite',
+    'save_omas_pkl',  'load_omas_pkl',  'through_omas_pkl',
+    'save_omas_json', 'load_omas_json', 'through_omas_json',
+    'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
+    'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
+    'save_omas_imas', 'load_omas_imas', 'through_omas_imas',
+    'save_omas_itm',  'load_omas_itm',  'through_omas_itm',
+    'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'omas_scenario_database',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'default_imas_version', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
@@ -711,7 +711,7 @@ def load_omas_pkl(filename):
         return pickle.load(f)
 
 
-def test_omas_pkl(ods):
+def through_omas_pkl(ods):
     """
     test save and load Python pickle
 
@@ -869,7 +869,7 @@ def different_ods(ods1, ods2):
 _tests = ['pkl', 'json', 'nc', 's3', 'imas', 'hdc']
 
 
-def test_omas_suite(ods=None, test_type=None, do_raise=False):
+def through_omas_suite(ods=None, test_type=None, do_raise=False):
     """
     :param ods: omas structure to test. If None this is set to ods_sample
 
@@ -883,7 +883,7 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
 
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type
-        ods1 = globals()['test_omas_' + test_type](ods)
+        ods1 = globals()['through_omas_' + test_type](ods)
         check = different_ods(ods, ods1)
         if not check:
             print('OMAS data got saved and loaded correctly')
@@ -902,7 +902,7 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
         for k1, t1 in enumerate(_tests):
             failed1 = False
             try:
-                ods1 = globals()['test_omas_' + t1](ods)
+                ods1 = globals()['through_omas_' + t1](ods)
             except Exception as _excp:
                 failed1 = _excp
                 if do_raise:
@@ -911,7 +911,7 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
                 try:
                     if failed1:
                         raise failed1
-                    ods2 = globals()['test_omas_' + t2](ods1)
+                    ods2 = globals()['through_omas_' + t2](ods1)
 
                     different = different_ods(ods1, ods2)
                     if not different:
@@ -932,7 +932,7 @@ def test_omas_suite(ods=None, test_type=None, do_raise=False):
         print('=' * 20)
 
 
-test_omas_suite.__doc__ = test_omas_suite.__doc__ % _tests
+through_omas_suite.__doc__ = through_omas_suite.__doc__ % _tests
 
 
 # --------------------------------------------

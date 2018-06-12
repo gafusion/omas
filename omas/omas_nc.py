@@ -79,7 +79,7 @@ def load_omas_nc(filename):
     return ods
 
 
-def test_omas_nc(ods):
+def through_omas_nc(ods):
     """
     test save and load NetCDF
 
