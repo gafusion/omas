@@ -1062,7 +1062,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
 
 @add_to__ODS__
-def bolometer_overlay(ods, ax=None, reset_fan_color=True, **kw):
+def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     """
     Overlays bolometer chords
 
@@ -1073,6 +1073,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, **kw):
     :param reset_fan_color: bool
         At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
         cycler. This will override manually specified color.
+
+    :param colors: list of matplotlib color specifications. Do not use a single RGBA style spec.
 
     :param \**kw: Additional keywords for bolometer plot
 
@@ -1098,14 +1100,26 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, **kw):
 
     ncm = len(r1)
 
-    color = kw.pop('color', None)
+    if colors is None:
+        colors = [kw.pop('color', None)]*nc
+    else:
+        colors *= nc  # Just make sure that this will always be long enough.
+    ci = 0
+    color = colors[ci]
+    kw.setdefault('alpha', 0.8)
+    default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i-1][0]) and reset_fan_color:
-            color = None  # Allow color to reset when changing fans
+            ci += 1
+            color = colors[ci]  # Allow color to reset when changing fans
+            new_label = True
+        else:
+            new_label = False
 
-        bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]], color=color, alpha=0.8,
-                            label='Bolometers {}'.format(bolo_id[i][0]) if (color is None) or (i == 0) else '', **kw)
+        label = 'Bolometers {}'.format(bolo_id[i][0]) if default_label is None else default_label
+        bolo_line = ax.plot([r1[i], r2[i]], [z1[i], z2[i]], color=color,
+                            label=label if new_label or (i == 0) else '', **kw)
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
