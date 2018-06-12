@@ -6,6 +6,7 @@ python:
 
 install:
  - pip install .
+ - pip install matplotlib
  - pip install coverage #codecov
 
 before_script:
