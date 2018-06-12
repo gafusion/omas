@@ -87,7 +87,9 @@ def through_omas_nc(ods):
 
     :return: ods
     """
-    filename = 'test.nc'
+    if not os.path.exists(tempfile.gettempdir()+'/OMAS_TESTS/'):
+        os.makedirs(tempfile.gettempdir()+'/OMAS_TESTS/')
+    filename = tempfile.gettempdir()+'/OMAS_TESTS/test.nc'
     save_omas_nc(ods, filename)
     ods1 = load_omas_nc(filename)
     return ods1
