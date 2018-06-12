@@ -7,7 +7,7 @@ python:
 install:
  - pip install .
  - pip install matplotlib
- - pip install coverage #codecov
+ - pip install coverage codecov
 
 before_script:
  # From pyqtgraph's .travis.yml: https://github.com/pyqtgraph/pyqtgraph/blob/develop/.travis.yml
