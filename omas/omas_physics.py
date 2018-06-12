@@ -219,15 +219,19 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     # Transform
     transforms = {}
-    transforms['dPSI'] = sigma_Ip_eff * sigma_Bp_eff / (2 * numpy.pi) ** exp_Bp_eff
-    transforms['PSI'] = sigma_Ip_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
-    transforms['Q'] = sigma_Ip_eff * sigma_B0_eff * sigma_rhotp_eff
-    transforms['BT'] = sigma_B0_eff
-    transforms['BP'] = sigma_Bp_eff
-    transforms['IP'] = sigma_Ip_eff
-    transforms['F'] = transforms['BT']
+    transforms['1/PSI'] = sigma_Ip_eff * sigma_Bp_eff / (2 * numpy.pi) ** exp_Bp_eff
+    transforms['invPSI'] = transforms['1/PSI']
+    transforms['dPSI'] = transforms['1/PSI']
     transforms['F_FPRIME'] = transforms['dPSI']
     transforms['PPRIME'] = transforms['dPSI']
+    transforms['PSI'] = sigma_Ip_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
+    transforms['Q'] = sigma_Ip_eff * sigma_B0_eff * sigma_rhotp_eff
+    transforms['TOR'] = sigma_B0_eff
+    transforms['BT'] = transforms['TOR']
+    transforms['IP'] = transforms['TOR']
+    transforms['F'] = transforms['TOR']
+    transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
+    transforms['BP'] = transforms['POL']
 
     printd(transforms,topic='cocos')
 
