@@ -38,8 +38,8 @@ def compare_version(version1, version2):
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
 
-def contourPaths(x, y, Z, levels, remove_boundary_points=False):
-    '''
+def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1):
+    """
     :param x: 1D x coordinate
 
     :param y: 1D y coordinate
@@ -50,13 +50,22 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False):
 
     :param remove_boundary_points: remove traces at the boundary
 
+    :param smooth_factor: smooth contours by cranking up grid resolution
+
     :return: list of segments
-    '''
+    """
     import matplotlib
+    import scipy
     if compare_version(matplotlib.__version__, '2.1') >= 0:
         import matplotlib._contour as _contour
     else:
         from matplotlib import _cntr
+
+    sf = int(round(smooth_factor))
+    if sf > 1:
+        x = scipy.ndimage.zoom(x, sf)
+        y = scipy.ndimage.zoom(y, sf)
+        Z = scipy.ndimage.zoom(Z, sf)
 
     [X, Y] = numpy.meshgrid(x, y)
     if compare_version(matplotlib.__version__, '2.1') >= 0:
@@ -327,8 +336,8 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=0, ax=None, **kw):
-    '''
+def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0.1], ax=None, **kw):
+    """
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
 
@@ -336,14 +345,21 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     :param time_index: time slice to plot
 
+    :param contour_smooth: Provides smoother contours by up-sampling first if >= 1 after rounding to nearest int.
+
+    :param levels: list of sorted numeric values to pass to 2D plot as contour levels
+
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
     :param kw: arguments passed to matplotlib plot statements
 
     :return: axes
-    '''
+    """
     if ax is None:
         ax = pyplot.gca()
+
+    label = kw.pop('label', '')  # Withhold this from all plots except the boundary to avoid spamming legend
+    kw.setdefault('linewidth', 1)
 
     wall = None
     eq = ods['equilibrium']['time_slice'][time_index]
@@ -361,11 +377,11 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
         value2D = eq['profiles_2d'][0]['psi']
         value1D = eq['profiles_1d']['psi']
     value2D = (value2D - min(value1D)) / (max(value1D) - min(value1D))
-    levels = numpy.r_[0.1:10:0.1]
 
     # contours
     line = numpy.array([numpy.nan, numpy.nan])
-    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D, levels):
+    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D,
+                              levels, smooth_factor=contour_smooth):
         for item in item1:
             line = numpy.vstack((line, item.vertices, numpy.array([numpy.nan, numpy.nan])))
 
@@ -381,11 +397,11 @@ def equilibrium_CX(ods, time_index=0, ax=None, **kw):
 
     # plotting style
     kw1 = copy.deepcopy(kw)
-    kw1['linewidth'] = kw.setdefault('linewidth', 1) + 1
+    kw1['linewidth'] = kw['linewidth'] + 1
     kw1.setdefault('color', ax.lines[-1].get_color())
 
     # boundary
-    ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], **kw1)
+    ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], label=label, **kw1)
 
     # axis
     ax.plot(eq['global_quantities']['magnetic_axis']['r'], eq['global_quantities']['magnetic_axis']['z'], '+', **kw1)
