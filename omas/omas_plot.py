@@ -58,6 +58,7 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1)
     try:
         from scipy import ndimage
     except ImportError:
+        printd('Warning: failed to import scipy in contourPaths. smoothing disabled.')
         ndimage = None
     if compare_version(matplotlib.__version__, '2.1') >= 0:
         import matplotlib._contour as _contour
