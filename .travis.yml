@@ -6,5 +6,17 @@ python:
 
 install:
  - pip install .
+ - pip install coverage #codecov
 
-script: python utilities/omas_suite_test.py
+before_script:
+ # From pyqtgraph's .travis.yml: https://github.com/pyqtgraph/pyqtgraph/blob/develop/.travis.yml
+ # We need to create a (fake) display on Travis, let's use a funny resolution
+ - export DISPLAY=:99.0
+ - "sh -e /etc/init.d/xvfb start"
+ - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
+
+script:
+ - coverage run -m unittest discover --pattern=*.py -s tests
+
+#after_success:
+# - codecov
