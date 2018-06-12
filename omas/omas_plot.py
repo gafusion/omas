@@ -50,19 +50,22 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1)
 
     :param remove_boundary_points: remove traces at the boundary
 
-    :param smooth_factor: smooth contours by cranking up grid resolution
+    :param smooth_factor: smooth contours by cranking up grid resolution. Requires scipy.
 
     :return: list of segments
     """
     import matplotlib
-    from scipy import ndimage
+    try:
+        from scipy import ndimage
+    except ImportError:
+        ndimage = None
     if compare_version(matplotlib.__version__, '2.1') >= 0:
         import matplotlib._contour as _contour
     else:
         from matplotlib import _cntr
 
     sf = int(round(smooth_factor))
-    if sf > 1:
+    if sf > 1 and ndimage is not None:
         x = ndimage.zoom(x, sf)
         y = ndimage.zoom(y, sf)
         Z = ndimage.zoom(Z, sf)
