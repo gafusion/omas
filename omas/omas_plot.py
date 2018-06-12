@@ -984,13 +984,16 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     labelevery = kw.pop('labelevery', 5)
     notesize = kw.pop('notesize', 'xx-small')
     mask = kw.pop('mask', numpy.ones(nc, bool))
-    nc = sum(mask)
+    kw.setdefault('marker', '+')
+    kw.setdefault('label', 'Thomson scattering')
+    kw.setdefault('linestyle', ' ')
 
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
     ts_id = numpy.array([ods['thomson_scattering']['channel'][i]['identifier'] for i in range(nc)])[mask]
-    ts_mark = ax.plot(r, z, marker='+', label='Thomson scattering', linestyle=' ', **kw)
-    for i in range(nc):
+
+    ts_mark = ax.plot(r, z, **kw)
+    for i in range(sum(mask)):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize=notesize)
     return
