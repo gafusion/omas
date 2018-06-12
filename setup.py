@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 import glob
 
-install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties']
+install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties', 'matplotlib', 'scipy']
 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
