@@ -310,7 +310,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
         """Guesses the direction for the arrow (from injector toward machine) in case you don't know"""
         dr = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['r'] - r
         dz = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['z'] - z
-        theta = -numpy.arctan2(dz, dr)  # negative is to make it COCOS1/11 compliant
+        theta = -numpy.arctan2(dz, -dr)
         if snap_to > 0:
             theta = snap_to * round(theta/snap_to)
         return theta

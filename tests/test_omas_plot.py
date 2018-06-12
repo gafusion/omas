@@ -135,6 +135,16 @@ class TestOmasPlot(unittest.TestCase):
             plt.show()
         self.printv('  TestOmasPlot.test_bolo_overlay_mask done')
 
+    # Gas
+    def test_gas_overlay(self):
+        self.printv('TestOmasPlot.test_gas_overlay...')
+        gas_ods = add_gas_sample_data(copy.deepcopy(self.ods))
+        gas_ods = add_eq_sample_data(gas_ods)
+        gas_ods.plot_overlay(thomson_scattering=False, gas_injection=True)
+        if self.show_all_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_gas_overlay done')
+
 
 if __name__ == '__main__':
     unittest.main()

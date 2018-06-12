@@ -69,7 +69,8 @@ def add_eq_sample_data(ods):
 def add_ts_sample_data(ods, nc=10):
     """
     Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
+    The original is modified, so deepcopy first if you want different ODSs.
 
     :param ods: ODS instance
 
@@ -95,7 +96,8 @@ def add_ts_sample_data(ods, nc=10):
 def add_bolo_sample_data(ods, nc=10):
     """
     Adds some FAKE bolometer chord locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
+    The original is modified, so deepcopy first if you want different ODSs.
 
     :param ods: ODS instance
 
@@ -116,6 +118,40 @@ def add_bolo_sample_data(ods, nc=10):
         ch['first_point.z'] = z0 + 0.001 * i
         ch['second_point.r'] = ch['first_point.r'] + numpy.cos(angles[i])
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
+        ch['first_point.phi'] = ch['second_point.phi'] = 6.5
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
+
+    return ods
+
+
+@make_available
+def add_gas_sample_data(ods):
+    """
+    Adds some FAKE gas injection locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
+    The original is modified, so deepcopy first if you want different ODSs.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE GAS INJECTION HARDWARE INFORMATION added.
+    """
+
+    ods['gas_injection.pipe.0.name'] = 'FAKE_GAS_A'
+    ods['gas_injection.pipe.0.exit_position.r'] = 2.25
+    ods['gas_injection.pipe.0.exit_position.z'] = 0.0
+    ods['gas_injection.pipe.0.exit_position.phi'] = 6.5
+    ods['gas_injection.pipe.0.valve.0.identifier'] = 'FAKE_GAS_VALVE_A'
+
+    ods['gas_injection.pipe.1.name'] = 'FAKE_GAS_B'
+    ods['gas_injection.pipe.1.exit_position.r'] = 1.65
+    ods['gas_injection.pipe.1.exit_position.z'] = 1.1
+    ods['gas_injection.pipe.1.exit_position.phi'] = 6.5
+    ods['gas_injection.pipe.1.valve.0.identifier'] = 'FAKE_GAS_VALVE_B'
+
+    ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
+    ods['gas_injection.pipe.2.exit_position.r'] = 2.1
+    ods['gas_injection.pipe.2.exit_position.z'] = -0.6
+    ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
+    ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
 
     return ods
