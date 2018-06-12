@@ -36,11 +36,37 @@ class TestOmasPlot(unittest.TestCase):
     show_inspectable_plots = False  # Shows plots that a human could check sometimes. Also a problem for auto-testing.
     verbose = False
 
-    # Utilities
+    # Utilities for this test
     def printv(self, *arg):
         """Utility for tests to use"""
         if self.verbose:
             print(*arg)
+
+    # Support functions
+    def test_ch_count(self):
+        self.printv('TestOmasPlot.test_ch_count...')
+        nc = 10
+        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods), nc=nc)
+        nc_ts = ts_ods.plot_get_channel_count('thomson_scattering')
+        assert nc_ts == nc
+
+        empty_ods = ODS()
+        nc_empty = empty_ods.plot_get_channel_count('thomson_scattering')
+        assert nc_empty == 0
+
+        nc_ts_check_pass = ts_ods.plot_get_channel_count(
+            'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        assert nc_ts_check_pass == nc
+
+        nc_ts_check_fail = ts_ods.plot_get_channel_count(
+            'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
+        assert nc_ts_check_fail == 0
+
+        nc_ts_check_fail2 = ts_ods.plot_get_channel_count(
+            'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
+        assert nc_ts_check_fail2 == 0
+
+        self.printv('  TestOmasPlot.test_ch_count done.')
 
     # Equilibrium
     def test_eqcx(self):

@@ -66,39 +66,44 @@ def add_eq_sample_data(ods):
 
 
 @make_available
-def add_ts_sample_data(ods):
+def add_ts_sample_data(ods, nc=10):
     """
     Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
+    :param nc: Number of channels to add.
+
     :return: ODS instance with FAKE THOMSON HARDWARE INFORMATION added.
     """
 
-    for i in range(10):
+    r = numpy.linspace(1.935, 1.945, nc)
+    z = numpy.linspace(-0.7, 0.2, nc)
+    for i in range(nc):
         ch = ods['thomson_scattering.channel'][i]
         ch['identifier'] = 'F{:02d}'.format(i)  # F for fake
         ch['name'] = 'Fake Thomson channel for testing {}'.format(i)
-        ch['position.phi'] = 6.5
-        ch['position.r'] = 1.94 + 0.01 * i
-        ch['position.z'] = -0.7 + 0.05 * i
+        ch['position.phi'] = 6.5  # This angle in rad should look bad to someone who doesn't notice the Fake labels
+        ch['position.r'] = r[i]
+        ch['position.z'] = z[i]
 
     return ods
 
 
 @make_available
-def add_bolo_sample_data(ods):
+def add_bolo_sample_data(ods, nc=10):
     """
     Adds some FAKE bolometer chord locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
+    :param nc: 10  # Number of fake channels to make up for testing
+
     :return: ODS instance with FAKE BOLOMETER HARDWARE INFORMATION added.
     """
 
-    nc = 10  # Number of fake channels to make up for testing
     angles = numpy.pi + numpy.linspace(-numpy.pi/4.0, numpy.pi/4.0, nc)
 
     # FAKE origin for the FAKE bolometer fan
