@@ -19,5 +19,5 @@ before_script:
 script:
  - coverage run -m unittest discover --pattern=*.py -s tests
 
-#after_success:
-# - codecov
+after_success:
+ - codecov
