@@ -100,9 +100,10 @@ class TestOmasPlot(unittest.TestCase):
     ods = ods_sample()
     ods = add_eq_sample_data(ods)
     show_all_plots = False  # This will get in the way of automatic testing
-    show_key_plots = False  # Shows plots that a human should check sometimes. Also a problem for auto-testing.
+    show_inspectable_plots = False  # Shows plots that a human could check sometimes. Also a problem for auto-testing.
     verbose = False
 
+    # Utilities
     def printv(self, *arg):
         """Utility for tests to use"""
         if self.verbose:
@@ -137,9 +138,18 @@ class TestOmasPlot(unittest.TestCase):
             mask[i] = False
             print(mask)
             ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i)))
-        if self.show_all_plots or show_key_plots:
+        if self.show_all_plots or self.show_inspectable_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_ts_overlay_mask done')
+
+    def test_ts_overlay_labels(self):
+        self.printv('TestOmasPlot.test_ts_overlay_labels...')
+        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
+        for i, lab in enumerate([2, 3, 5, 7]):
+            ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10+i*2+lab, color='k'))
+        if self.show_all_plots or self.show_inspectable_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_ts_overlay_labels done')
 
 
 if __name__ == '__main__':
