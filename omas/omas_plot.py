@@ -216,6 +216,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
     return result
 
 
+@add_to__ODS__
 def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
     """
     Utility function for CX hardware overlays.
@@ -224,18 +225,20 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
 
     :param ods: OMAS ODS instance
 
-    :param hw_sys: string describing the hardware system to check
+    :param hw_sys: string
+        Hardware system to check. Must be a valid top level IDS name, like 'thomson_scattering'
 
     :param check_loc: [optional] string
         If provided, an additional check will be made to ensure that some data exist.
         If this check fails, channel count will be set to 0
+        Example: 'thomson_scattering.channel.0.position.r'
 
     :param test_checker: [optional] string to evaluate into bool
         Like "checker > 0", where checker = ods[check_loc]. If this test fails, nc will be set to 0
 
     :param channels_name: string
         Use if you need to generalize to something that doesn't have real channels but has something analogous,
-        like how gas_injection has 'pipe' that's shaped like 'channel' is in thomson_scattering.
+        like how 'gas_injection' has 'pipe' that's shaped like 'channel' is in 'thomson_scattering'.
 
     :return: Number of channels for this hardware system. 0 indicates empty.
     """
