@@ -55,7 +55,7 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1)
     :return: list of segments
     """
     import matplotlib
-    import scipy
+    from scipy import ndimage
     if compare_version(matplotlib.__version__, '2.1') >= 0:
         import matplotlib._contour as _contour
     else:
@@ -63,9 +63,9 @@ def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1)
 
     sf = int(round(smooth_factor))
     if sf > 1:
-        x = scipy.ndimage.zoom(x, sf)
-        y = scipy.ndimage.zoom(y, sf)
-        Z = scipy.ndimage.zoom(Z, sf)
+        x = ndimage.zoom(x, sf)
+        y = ndimage.zoom(y, sf)
+        Z = ndimage.zoom(Z, sf)
 
     [X, Y] = numpy.meshgrid(x, y)
     if compare_version(matplotlib.__version__, '2.1') >= 0:
