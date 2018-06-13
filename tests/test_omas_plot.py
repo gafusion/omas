@@ -30,7 +30,7 @@ class TestOmasPlot(unittest.TestCase):
 
     # Flags to edit while testing
     show_plots = False  # This will get in the way of automatic testing
-    verbose = True  # Spammy, but occasionally useful for debugging a weird problem
+    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
     ods = ODS()
@@ -168,6 +168,7 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.sample_charge_exchange()
         cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=True)
         # Keywords
+        cer_ods.sample_equilibrium()
         cer_ods.plot_overlay(
             thomson_scattering=False,
             charge_exchange=dict(which_pos='closest', color_tangential='r', color_vertical='b', marker_tangential='h'))
@@ -223,9 +224,13 @@ class TestOmasPlot(unittest.TestCase):
         # Fancy keywords tests
         gas_ods.plot_overlay(
             thomson_scattering=False,
-            gas_injection=dict(which_gas=['GASA', 'GASB'], simple_labels=True, draw_arrow=False))
+            gas_injection=dict(which_gas=['GASA', 'GASB'], draw_arrow=False))
+        gas_ods.plot_overlay(
+            thomson_scattering=False,
+            gas_injection=dict(which_gas=['FAKE_GAS_A', 'FAKE_GAS_B'], draw_arrow=False))
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['NON-EXISTENT GAS VALVE']))
-        gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True))
+        gas_ods.plot_overlay(
+            thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True), simple_labels=True)
 
         # Test direct call
         gas_ods.plot_gas_injection_overlay()

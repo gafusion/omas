@@ -202,7 +202,8 @@ def pf_active(ods):
         oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
         oblique['beta'] = fc_dat[i][5] * numpy.pi/180
         ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
-        ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
+        if i < (nc-1):  # Don't put the identifier on the last one to test handling of missing identifiers
+            ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
 
     return ods
 
@@ -360,7 +361,7 @@ def bolometer(ods, nc=10):
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
 
-    ods['bolometer.channel'][nc-1]['identifier'] = 'fan 2 fake bolo'  # This tests separate colors per fan in overlay
+    ods['bolometer.channel'][nc-1]['identifier'] = 'bolo fan 2 fake'  # This tests separate colors per fan in overlay
 
     return ods
 
