@@ -70,41 +70,6 @@ def del_omas_s3(filename, user=os.environ['USER']):
     """
     remote_uri(_base_S3_uri(user) + filename, None, 'del')
 
-def omas_scenario_database(machine=None, shot=None, run=None,
-                           tmp_dir=omas_rcparams['fake_imas_dir'] + os.sep + 'scenarios', skip_existing=True):
-    """
-    List and retrieve available IMAS scenarios
-
-    :param machine: string with the machine name of the scenario
-
-    :param shot: shot number
-
-    :param run: run number
-
-    :param tmp_dir: temporary folder for storing S3 file on local workstation
-
-    :param skip_existing: do not download S3 file if already present
-
-    :return: OMAS data set with the requested scenario
-    """
-    if not machine and not shot and not run:
-        remote_uri(_base_S3_uri('omas_shared') + 'scenario_summary.txt',
-                   omas_rcparams['fake_imas_dir'] + os.sep + 'scenarios' + os.sep + 'scenario_summary.txt', 'down')
-        return open('scenario_summary.txt', 'r').read()
-
-    elif machine and shot and run:
-        filename = os.path.abspath(tmp_dir) + os.sep + '{machine}_{shot}_{run}.pkl'.format(machine=machine, shot=shot,
-                                                                                           run=run)
-        if skip_existing and os.path.exists(filename):
-            print('Loading scenario file from storage: %s' % filename)
-            return load_omas_pkl(filename)
-        else:
-            print('Fetching scenario file: %s' % os.path.split(filename)[1])
-            return load_omas_s3(os.path.split(filename)[1], user='omas_shared', tmp_dir=os.path.split(filename)[0])
-
-    else:
-        raise (Exception('machine, shot, run must either all be None or all be set'))
-
 def through_omas_s3(ods):
     """
     test save and load S3

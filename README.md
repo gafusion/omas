@@ -8,4 +8,4 @@ The idea behind OMAS is to provide a convenient Python API can store data in a f
 
 OMAS itself does not address the problem of mapping of the physics codes I/O to the IMAS data model. Instead, Python-based integrated modeling frameworks (such as [OMFIT](http://gafusion.github.io/OMFIT-source)) can be used to define wrappers that leverage OMAS to conveniently map the physics codes I/O, and enable their data to be exchanged with IMAS.
 
-For more info, visit: https://gafusion.github.io/omas/scenarios.html
+For more info, visit: https://gafusion.github.io/omas

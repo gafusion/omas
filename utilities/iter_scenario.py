@@ -5,8 +5,9 @@ import re
 import os
 from omas import *
 
-force_write_existing = False
-save_local=False
+process_existing = False
+save_local = False
+s3_username = os.environ['USER']
 
 os.environ['OMAS_DEBUG_TOPIC'] = 's3'
 
@@ -22,7 +23,7 @@ for line in scenario_summary:
         ksep += 1
     elif ksep == 2:
         items = line.strip().split()
-        scenarios.append(dict(zip(what,items)))
+        scenarios.append(dict(zip(what, items)))
 
 # setup environmental variables
 tmp = subprocess.Popen('imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE', stdout=subprocess.PIPE,
@@ -33,12 +34,15 @@ for line in tmp:
         os.environ[env] = value
 
 # find out existing scenarios
-existing = list_omas_s3('omas_shared')
+if save_local:
+    existing = glob.glob('*.pkl')
+else:
+    existing = map(lambda x=x.split(x)[1], list_omas_s3(s3_username))
 
 # loop over scenarios
 for scenario in scenarios:
     # skip scenarios that have already been processed
-    if not force_write_existing and 'omas_shared/{machine}_{shot}_{run}.pkl'.format(**scenario) in existing:
+    if not process_existing and '{machine}_{shot}_{run}.pkl'.format(**scenario) in existing:
         print('Skip scenario: {machine} {shot} {run}'.format(**scenario))
         continue
 
@@ -47,16 +51,12 @@ for scenario in scenarios:
     complete_ods = load_omas_imas(user=None, shot=int(scenario['shot']), run=int(scenario['run']), paths=None)
 
     # save data as complete ods (locally and remotely) as well as individual odss (locally only)
-    save_omas_s3(complete_ods, '{machine}_{shot}_{run}.pkl'.format(**scenario), user='omas_shared')
     if save_local:
-        for ids in complete_ods:
-            if ids == 'info':
-                continue
-            ods = ODS()
-            ods[ids] = complete_ods[ids]
-            ods['info'] = complete_ods['info']
-            save_omas_pkl(ods, '{machine}_{shot}_{run}__{ids}.pkl'.format(ids=ids, **scenario))
+        save_omas_pkl(complete_ods, '{machine}_{shot}_{run}.pkl'.format(ids=ids, **scenario))
+    else:
+        save_omas_s3(complete_ods, '{machine}_{shot}_{run}.pkl'.format(**scenario), user=s3_username)
 
 # upload scenario_summary
-open('scenario_summary.txt','w').write('\n'.join(scenario_summary))
-omas_s3.remote_uri(omas_s3._base_S3_uri('omas_shared'), 'scenario_summary.txt', 'up')
+if not save_local:
+    open('scenario_summary.txt', 'w').write('\n'.join(scenario_summary))
+    omas_s3.remote_uri(omas_s3._base_S3_uri(s3_username), 'scenario_summary.txt', 'up')
