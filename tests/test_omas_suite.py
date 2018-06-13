@@ -4,25 +4,34 @@
 from __future__ import print_function, division, unicode_literals
 import unittest
 
+import os
 from omas import *
 
 try:
     import imas
-    HAVE_IMAS = True
-except ImportError:
-    HAVE_IMAS = False
+    failed_IMAS = False
+except ImportError as _excp:
+    failed_IMAS = _excp
 
 try:
     import hdc
-    HAVE_HDC = True
-except ImportError:
-    HAVE_HDC = False
+    failed_HDC = False
+except ImportError as _excp:
+    failed_HDC = _excp
 
 try:
     import ual
-    HAVE_ITM = True
-except ImportError:
-    HAVE_ITM = False
+    failed_ITM = False
+except ImportError as _excp:
+    failed_ITM = _excp
+
+try:
+    if not os.path.exists(os.environ.get('AWS_CONFIG_FILE',os.environ['HOME']+'/.aws/config')):
+        raise(RuntimeError('Missing AWS configuration file ~/.aws/config'))
+    failed_S3 = False
+except RuntimeError as _excp:
+    failed_S3 = _excp
+
 
 ods = ods_sample()
 
@@ -37,18 +46,19 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_nc(self):
         through_omas_nc(ods)
 
+    @unittest.skipUnless(not failed_S3, str(failed_S3))
     def test_omas_s3(self):
         through_omas_s3(ods)
 
-    @unittest.skipUnless(HAVE_IMAS, "requires imas")
+    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
     def test_omas_imas(self):
         through_omas_imas(ods)
 
-    @unittest.skipUnless(HAVE_HDC, "requires hdc")
+    @unittest.skipUnless(not failed_HDC, str(failed_HDC))
     def test_omas_hdc(self):
         through_omas_hdc(ods)
 
-    @unittest.skipUnless(HAVE_ITM, "requires ual")
+    @unittest.skipUnless(not failed_ITM, str(failed_ITM))
     def test_omas_itm(self):
         through_omas_itm(ods)
 
