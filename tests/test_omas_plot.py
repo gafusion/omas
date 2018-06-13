@@ -29,9 +29,8 @@ class TestOmasPlot(unittest.TestCase):
     """
 
     # Flags to edit while testing
-    show_all_plots = False  # This will get in the way of automatic testing
-    show_inspectable_plots = False  # Shows plots that a human could check sometimes. Also a problem for auto-testing.
-    verbose = False
+    show_plots = False  # This will get in the way of automatic testing
+    verbose = True  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
     ods = ODS()
@@ -53,7 +52,6 @@ class TestOmasPlot(unittest.TestCase):
 
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
-        self.printv('TestOmasPlot.test_ch_count...')
         nc = 10
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering(nc=nc)
@@ -76,12 +74,9 @@ class TestOmasPlot(unittest.TestCase):
             'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
         assert nc_ts_check_fail2 == 0
 
-        self.printv('  TestOmasPlot.test_ch_count done.')
-
     def test_uband(self):
         from omas.omas_plot import uband
-        self.printv('TestOmasPlot.test_uband...')
-        fig, ax = plt.subplots(1)
+        ax = plt.gca()
         ub1 = uband(self.x, self.u, ax)
         ub2 = uband(self.x, -self.u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
@@ -89,13 +84,8 @@ class TestOmasPlot(unittest.TestCase):
         ub4 = uband(self.ux, self.y)
         assert ub3 != ub4
         assert ub1 != ub3
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_uband done.')
 
     def test_all_overlays(self):
-        self.printv('TestOmasPlot.test_all_overlays...')
-        plt.figure()
         ods2 = copy.deepcopy(self.ods)
         for hw_sys in list_structures(ods2.imas_version):
             try:
@@ -104,21 +94,13 @@ class TestOmasPlot(unittest.TestCase):
             except AttributeError:
                 pass
         ods2.plot_overlay(debug_all_plots=True)
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_all_overlays done')
 
     # Equilibrium cross section plot
     def test_eqcx(self):
-        self.printv('TestOmasPlot.test_eqcx...')
         self.ods.plot_equilibrium_CX()
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_eqcx done')
 
     # PF active overlay
     def test_pf_active_overlay(self):
-        self.printv('TestOmasPlot.test_pf_active_overlay...')
         # Basic test
         pf_ods = copy.deepcopy(self.ods)
         pf_ods.sample_pf_active()
@@ -130,13 +112,9 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, pf_active=True)
         ODS().plot_pf_active_overlay()
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_pf_active_overlay done')
 
     # Magnetics overlay
     def test_magnetics_overlay(self):
-        self.printv('TestOmasPlot.test_magnetics_overlay...')
         # Basic test
         mag_ods = copy.deepcopy(self.ods)
         mag_ods.sample_magnetics()
@@ -153,13 +131,9 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, magnetics=True)
         ODS().plot_magnetics_overlay()
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_magnetics_overlay done')
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
-        self.printv('TestOmasPlot.test_ts_overlay...')
         # Basic test
         ts_ods = copy.deepcopy(self.ods)
         ts_ods.sample_thomson_scattering()
@@ -168,12 +142,8 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods.plot_thomson_scattering_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True)
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_ts_overlay done')
 
     def test_ts_overlay_mask(self):
-        self.printv('TestOmasPlot.test_ts_overlay_mask...')
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         nc = ts_ods.plot_get_channel_count('thomson_scattering')
@@ -184,23 +154,15 @@ class TestOmasPlot(unittest.TestCase):
             mask = copy.copy(mask0)
             mask[i] = False
             ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i)))
-        if self.show_all_plots or self.show_inspectable_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_ts_overlay_mask done')
 
     def test_ts_overlay_labels(self):
-        self.printv('TestOmasPlot.test_ts_overlay_labels...')
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10+i*2+lab, color='k'))
-        if self.show_all_plots or self.show_inspectable_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_ts_overlay_labels done')
 
     # Charge exchange overlay
     def test_cer_overlay(self):
-        self.printv('TestOmasPlot.test_cer_overlay...')
         # Basic test
         cer_ods = copy.deepcopy(self.ods)
         cer_ods.sample_charge_exchange()
@@ -213,13 +175,9 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, charge_exchange=True)
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_cer_overlay done')
 
     # Inteferometer overlay
     def test_interferometer_overlay(self):
-        self.printv('TestOmasPlot.test_interferometer_overlay...')
         # Basic test
         intf_ods = copy.deepcopy(self.ods)
         intf_ods.sample_interferometer()
@@ -228,13 +186,9 @@ class TestOmasPlot(unittest.TestCase):
         intf_ods.plot_interferometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, interferometer=True)
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_interferometer_overlay done')
 
     # Bolometer overlay
     def test_bolo_overlay(self):
-        self.printv('TestOmasPlot.test_bolo_overlay...')
         # Basic test
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods.sample_bolometer()
@@ -245,12 +199,8 @@ class TestOmasPlot(unittest.TestCase):
         bolo_ods.plot_bolometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, bolometer=True)
-        if self.show_all_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_bolo_overlay done')
 
     def test_bolo_overlay_mask(self):
-        self.printv('TestOmasPlot.test_bolo_overlay_mask...')
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods = bolo_ods.sample_bolometer()
         nc = bolo_ods.plot_get_channel_count('bolometer')
@@ -263,13 +213,9 @@ class TestOmasPlot(unittest.TestCase):
             bolo_ods.plot_overlay(
                 thomson_scattering=False,
                 bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i), lw=0.5*(nc-i)))
-        if self.show_all_plots or self.show_inspectable_plots:
-            plt.show()
-        self.printv('  TestOmasPlot.test_bolo_overlay_mask done')
 
     # Gas injection overlay
     def test_gas_overlay(self):
-        self.printv('TestOmasPlot.test_gas_overlay...')
         # Basic test
         gas_ods = copy.deepcopy(self.ods)
         gas_ods = gas_ods.sample_gas_injection()
@@ -287,9 +233,22 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
-        if self.show_all_plots:
+
+    def setUp(self):
+        test_id = self.id()
+        test_name = '.'.join(test_id.split('.')[-2:])
+        if test_name not in ['TestOmasPlot.test_ch_count']:
+            plt.figure(test_name)
+        self.printv('{}...'.format(test_name))
+
+    def tearDown(self):
+        test_name = '.'.join(self.id().split('.')[-2:])
+        self.printv('    {} done.'.format(test_name))
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.show_plots:
             plt.show()
-        self.printv('  TestOmasPlot.test_gas_overlay done')
 
 
 if __name__ == '__main__':

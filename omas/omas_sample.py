@@ -185,7 +185,7 @@ def pf_active(ods):
     :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
     """
 
-    nc = 2
+    nc = 4
     fc_dat = [
         #  R        Z       dR      dZ    tilt1  tilt2
         [.8608,  .16830,  .0508,  .32106,  0.0,  90.0],
