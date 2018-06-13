@@ -779,7 +779,8 @@ def gas_injection_overlay(
 @add_to__ODS__
 def pf_active_overlay(ods, ax=None, **kw):
     """
-    Plots overlays of interferometer chords.
+    Plots overlays of active PF coils.
+    INCOMPLETE: only the oblique geometry definition is treated so far. More should be added later.
 
     :param ods: OMAS ODS instance
 
@@ -819,7 +820,7 @@ def pf_active_overlay(ods, ax=None, **kw):
             fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
                     oblique['alpha'], oblique['beta']]
 
-            ct = cocos_transform(11, ods.cocos)['BP']
+            ct = cocos_transform(ods.cocos, 11)['BP']
 
             xarr = [
                 fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
