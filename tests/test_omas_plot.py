@@ -38,6 +38,9 @@ class TestOmasPlot(unittest.TestCase):
     ods.sample_equilibrium()
 
     x = numpy.linspace(0, 1.6, 25)
+    xe = (x[1]-x[0])*0.75 + x * 0
+    ux = unumpy.uarray(x, xe)
+
     y = 2*x**2
     e = 0.1 + y*0.01 + x*0.01
     u = unumpy.uarray(y, e)
@@ -82,6 +85,10 @@ class TestOmasPlot(unittest.TestCase):
         ub1 = uband(self.x, self.u, ax)
         ub2 = uband(self.x, -self.u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
+        ub3 = uband(self.ux, self.u)
+        ub4 = uband(self.ux, self.y)
+        assert ub3 != ub4
+        assert ub1 != ub3
         if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_uband done.')
@@ -198,6 +205,10 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods = copy.deepcopy(self.ods)
         cer_ods.sample_charge_exchange()
         cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=True)
+        # Keywords
+        cer_ods.plot_overlay(
+            thomson_scattering=False,
+            charge_exchange=dict(which_pos='closest', color_tangential='r', color_vertical='b', marker_tangential='h'))
         # Test direct call
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
@@ -228,6 +239,8 @@ class TestOmasPlot(unittest.TestCase):
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods.sample_bolometer()
         bolo_ods.plot_overlay(thomson_scattering=False, bolometer=True)
+        # Keywords
+        bolo_ods.plot_overlay(thomson_scattering=False, bolometer=dict(colors='rgb', reset_fan_color=True))
         # Test direct call
         bolo_ods.plot_bolometer_overlay()
         # Test empty one; make sure fail is graceful

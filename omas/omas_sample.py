@@ -202,6 +202,7 @@ def pf_active(ods):
         oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
         oblique['beta'] = fc_dat[i][5] * numpy.pi/180
         ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
+        ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
 
     return ods
 
@@ -359,6 +360,8 @@ def bolometer(ods, nc=10):
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
 
+    ods['bolometer.channel'][nc-1]['identifier'] = 'fan 2 fake bolo'  # This tests separate colors per fan in overlay
+
     return ods
 
 
@@ -389,8 +392,8 @@ def gas_injection(ods):
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
     ods['gas_injection.pipe.2.exit_position.r'] = 2.1
     ods['gas_injection.pipe.2.exit_position.z'] = -0.6
-    ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
+    # This one deliberately doesn't have a phi angle defined, for testing purposes.
 
     return ods
 
