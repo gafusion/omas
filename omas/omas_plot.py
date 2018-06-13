@@ -738,7 +738,7 @@ def gas_injection_overlay(
 
             if angle_not_in_pipe_name:
                 try:
-                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/pi)))
+                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/numpy.pi)))
                 except (TypeError, ValueError):
                     pass
     try:
