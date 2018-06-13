@@ -5,7 +5,7 @@ from matplotlib import pyplot
 
 import inspect
 from .omas_utils import *
-from omas_physics import cocos_transform
+from .omas_physics import cocos_transform
 
 __all__ = []
 
