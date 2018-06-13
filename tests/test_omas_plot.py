@@ -45,7 +45,7 @@ class TestOmasPlot(unittest.TestCase):
         self.printv('TestOmasPlot.test_ch_count...')
         nc = 10
         ts_ods = copy.deepcopy(self.ods)
-        ts_ods = ts_ods.sample_thomson(nc=nc)
+        ts_ods = ts_ods.sample_thomson_scattering(nc=nc)
         nc_ts = ts_ods.plot_get_channel_count('thomson_scattering')
         assert nc_ts == nc
 
@@ -79,7 +79,7 @@ class TestOmasPlot(unittest.TestCase):
     def test_ts_overlay(self):
         self.printv('TestOmasPlot.test_ts_overlay...')
         ts_ods = copy.deepcopy(self.ods)
-        ts_ods = ts_ods.sample_thomson()
+        ts_ods = ts_ods.sample_thomson_scattering()
         ts_ods.plot_overlay(thomson_scattering=True)
         if self.show_all_plots:
             plt.show()
@@ -88,7 +88,7 @@ class TestOmasPlot(unittest.TestCase):
     def test_ts_overlay_mask(self):
         self.printv('TestOmasPlot.test_ts_overlay_mask...')
         ts_ods = copy.deepcopy(self.ods)
-        ts_ods = ts_ods.sample_thomson()
+        ts_ods = ts_ods.sample_thomson_scattering()
         nc = ts_ods.plot_get_channel_count('thomson_scattering')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
@@ -104,7 +104,7 @@ class TestOmasPlot(unittest.TestCase):
     def test_ts_overlay_labels(self):
         self.printv('TestOmasPlot.test_ts_overlay_labels...')
         ts_ods = copy.deepcopy(self.ods)
-        ts_ods = ts_ods.sample_thomson()
+        ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10+i*2+lab, color='k'))
         if self.show_all_plots or self.show_inspectable_plots:

@@ -175,7 +175,7 @@ def equilibrium(ods, time_index=0):
 
 
 @add_to_ODS
-def thomson(ods, nc=10):
+def thomson_scattering(ods, nc=10):
     """
     Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real.
