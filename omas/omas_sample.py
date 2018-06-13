@@ -182,7 +182,7 @@ def pf_active(ods):
 
     :param ods: ODS instance
 
-    :return: ODS instance with FAKE THOMSON HARDWARE INFORMATION added.
+    :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
     """
 
     nc = 2
@@ -202,6 +202,47 @@ def pf_active(ods):
         oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
         oblique['beta'] = fc_dat[i][5] * numpy.pi/180
         ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
+
+    return ods
+
+
+@add_to_ODS
+def magnetics(ods):
+    """
+    Adds some FAKE magnetic probe locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE MAGNETICS HARDWARE INFORMATION added.
+    """
+
+    nbp = 12
+    nfl = 7
+
+    r0 = 1.5
+    z0 = 0.0
+    abp = 0.8
+    afl = 1.0
+
+    angle_bp = numpy.linspace(0, 2*numpy.pi, nbp+1)[:-1]
+    rp = r0 + abp * numpy.cos(angle_bp)
+    zp = z0 + abp * numpy.sin(angle_bp)
+
+    angle_fl = numpy.linspace(0, 2*numpy.pi, nfl + 1)[:-1]
+    rf = r0 + afl * numpy.cos(angle_fl)
+    zf = z0 + afl * numpy.sin(angle_fl)
+
+    for i in range(nbp):
+        ods['magnetics.bpol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
+        ods['magnetics.bpol_probe'][i]['position.r'] = rp[i]
+        ods['magnetics.bpol_probe'][i]['position.z'] = zp[i]
+        ods['magnetics.bpol_probe'][i]['position.phi'] = 6.5
+
+    for i in range(nfl):
+        ods['magnetics.flux_loop'][i]['identifier'] = 'FAKE flux loop {}'.format(i)
+        ods['magnetics.flux_loop'][i]['position.0.r'] = rf[i]
+        ods['magnetics.flux_loop'][i]['position.0.z'] = zf[i]
 
     return ods
 

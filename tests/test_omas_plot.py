@@ -117,14 +117,38 @@ class TestOmasPlot(unittest.TestCase):
         pf_ods.sample_pf_active()
         pf_ods.plot_overlay(thomson_scattering=False, pf_active=True)
         # Test keywords
-        pf_ods.plot_overlay(thomson_scattering=False, pf_active=dict(facecolor='r'))
+        pf_ods.plot_overlay(thomson_scattering=False, pf_active=dict(facecolor='r', labelevery=1))
         # Test direct call
         pf_ods.plot_pf_active_overlay()
         # Test empty one; make sure fail is graceful
-        ODS().plot_overlay(thomson_scattering=True)
+        ODS().plot_overlay(thomson_scattering=True, pf_active=True)
+        ODS().plot_pf_active_overlay()
         if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_pf_active_overlay done')
+
+    # Magnetics overlay
+    def test_magnetics_overlay(self):
+        self.printv('TestOmasPlot.test_magnetics_overlay...')
+        # Basic test
+        mag_ods = copy.deepcopy(self.ods)
+        mag_ods.sample_magnetics()
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
+        # Test keywords
+        mag_ods.plot_overlay(
+            thomson_scattering=False,
+            magnetics=dict(bpol_probe_color='r', bpol_probe_marker='x', show_flux_loop=False, labelevery=1))
+        mag_ods.plot_overlay(
+            thomson_scattering=False,
+            magnetics=dict(bpol_probe_color='m', flux_loop_marker='+', show_bpol_probe=False, notesize=9, labelevery=1))
+        # Test direct call
+        mag_ods.plot_magnetics_overlay()
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=True, magnetics=True)
+        ODS().plot_magnetics_overlay()
+        if self.show_all_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_magnetics_overlay done')
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
@@ -227,6 +251,8 @@ class TestOmasPlot(unittest.TestCase):
             thomson_scattering=False,
             gas_injection=dict(which_gas=['GASA', 'GASB'], simple_labels=True, draw_arrow=False))
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['NON-EXISTENT GAS VALVE']))
+        gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True))
+
         # Test direct call
         gas_ods.plot_gas_injection_overlay()
         # Test empty one; make sure fail is graceful
