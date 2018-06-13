@@ -8,11 +8,6 @@ This example loads some data from S3, augments the ODS with pressure information
 from __future__ import print_function, division, unicode_literals
 
 from matplotlib.pyplot import show
-
-import os
-
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
-
 from omas import *
 
 # load some data from S3
