@@ -168,10 +168,12 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.sample_charge_exchange()
         cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=True)
         # Keywords
-        cer_ods.sample_equilibrium()
+        cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=dict(which_pos='all'))
         cer_ods.plot_overlay(
             thomson_scattering=False,
             charge_exchange=dict(which_pos='closest', color_tangential='r', color_vertical='b', marker_tangential='h'))
+        # Make a fresh copy with no EQ data so it will trigger the exception and fall back to which_pos='all'
+        ODS().sample_charge_exchange().plot_overlay(thomson_scattering=False, charge_exchange=dict(which_pos='closest'))
         # Test direct call
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
