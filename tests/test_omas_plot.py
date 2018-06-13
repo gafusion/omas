@@ -21,17 +21,15 @@ from matplotlib import pyplot as plt
 # OMAS imports
 from omas import *
 
-# Testing imports
-from utils_for_test import *
-
 
 class TestOmasPlot(unittest.TestCase):
     """
     Test suite for omas_plot.py
     """
 
-    ods = ods_sample()
-    ods = add_eq_sample_data(ods)
+    ods = ODS()
+    ods.sample_equilibrium()
+
     show_all_plots = False  # This will get in the way of automatic testing
     show_inspectable_plots = False  # Shows plots that a human could check sometimes. Also a problem for auto-testing.
     verbose = False
@@ -46,7 +44,8 @@ class TestOmasPlot(unittest.TestCase):
     def test_ch_count(self):
         self.printv('TestOmasPlot.test_ch_count...')
         nc = 10
-        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods), nc=nc)
+        ts_ods = copy.deepcopy(self.ods)
+        ts_ods = ts_ods.sample_thomson(nc=nc)
         nc_ts = ts_ods.plot_get_channel_count('thomson_scattering')
         assert nc_ts == nc
 
@@ -79,7 +78,8 @@ class TestOmasPlot(unittest.TestCase):
     # Thomson scattering
     def test_ts_overlay(self):
         self.printv('TestOmasPlot.test_ts_overlay...')
-        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
+        ts_ods = copy.deepcopy(self.ods)
+        ts_ods = ts_ods.sample_thomson()
         ts_ods.plot_overlay(thomson_scattering=True)
         if self.show_all_plots:
             plt.show()
@@ -87,7 +87,8 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_ts_overlay_mask(self):
         self.printv('TestOmasPlot.test_ts_overlay_mask...')
-        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
+        ts_ods = copy.deepcopy(self.ods)
+        ts_ods = ts_ods.sample_thomson()
         nc = ts_ods.plot_get_channel_count('thomson_scattering')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
@@ -102,7 +103,8 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_ts_overlay_labels(self):
         self.printv('TestOmasPlot.test_ts_overlay_labels...')
-        ts_ods = add_ts_sample_data(copy.deepcopy(self.ods))
+        ts_ods = copy.deepcopy(self.ods)
+        ts_ods = ts_ods.sample_thomson()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10+i*2+lab, color='k'))
         if self.show_all_plots or self.show_inspectable_plots:
@@ -112,7 +114,8 @@ class TestOmasPlot(unittest.TestCase):
     # Bolometers
     def test_bolo_overlay(self):
         self.printv('TestOmasPlot.test_bolo_overlay...')
-        bolo_ods = add_bolo_sample_data(copy.deepcopy(self.ods))
+        bolo_ods = copy.deepcopy(self.ods)
+        bolo_ods = bolo_ods.sample_bolometer()
         bolo_ods.plot_overlay(thomson_scattering=False, bolometer=True)
         if self.show_all_plots:
             plt.show()
@@ -120,7 +123,8 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_bolo_overlay_mask(self):
         self.printv('TestOmasPlot.test_bolo_overlay_mask...')
-        bolo_ods = add_bolo_sample_data(copy.deepcopy(self.ods))
+        bolo_ods = copy.deepcopy(self.ods)
+        bolo_ods = bolo_ods.sample_bolometer()
         nc = bolo_ods.plot_get_channel_count('bolometer')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
@@ -138,8 +142,8 @@ class TestOmasPlot(unittest.TestCase):
     # Gas
     def test_gas_overlay(self):
         self.printv('TestOmasPlot.test_gas_overlay...')
-        gas_ods = add_gas_sample_data(copy.deepcopy(self.ods))
-        gas_ods = add_eq_sample_data(gas_ods)
+        gas_ods = copy.deepcopy(self.ods)
+        gas_ods = gas_ods.sample_gas_injection()
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=True)
         if self.show_all_plots:
             plt.show()

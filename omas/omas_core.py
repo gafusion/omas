@@ -90,15 +90,15 @@ class ODS(MutableMapping):
 
         def add_is_homogeneous_info(time):
             if time is None:
-                extra_info['homogeneous_time']=None
-            elif len(numpy.atleast_1d(time))<=2:
-                extra_info['homogeneous_time']=None
+                extra_info['homogeneous_time'] = None
+            elif len(numpy.atleast_1d(time)) <= 2:
+                extra_info['homogeneous_time'] = None
             else:
-                tmp=numpy.diff(time)
-                if numpy.sum(numpy.abs(tmp-tmp[0]))<1E-6:
-                    extra_info['homogeneous_time']=True
+                tmp = numpy.diff(time)
+                if numpy.sum(numpy.abs(tmp - tmp[0])) < 1E-6:
+                    extra_info['homogeneous_time'] = True
                 else:
-                    extra_info['homogeneous_time']=False
+                    extra_info['homogeneous_time'] = False
             return time
 
         # extra
@@ -645,6 +645,18 @@ class ODS(MutableMapping):
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value
+
+# --------------------------------------------
+# import sample functions and add them as ODS methods
+# --------------------------------------------
+try:
+    from . import omas_sample
+    from .omas_sample import ods_sample
+    __all__.append('omas_sample')
+    for item in omas_sample.__all__:
+        setattr(ODS, 'sample_' + item, getattr(omas_sample, item))
+except ImportError as _excp:
+    printe('OMAS sample function are not available: ' + repr(_excp))
 
 # --------------------------------------------
 # import physics functions and add them as ODS methods

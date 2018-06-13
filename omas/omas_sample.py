@@ -1,22 +1,18 @@
-# # -*- coding: utf-8 -*-
-
-"""
-Miscellaneous utility and helper functions to support various tests in this folder.
-"""
-
 from __future__ import print_function, division, unicode_literals
 import numpy
+from .omas_core import ODS
+
 
 __all__ = []
 
 
-def make_available(f):
+def add_to_ODS(f):
     __all__.append(f.__name__)
     return f
 
 
-@make_available
-def add_eq_sample_data(ods):
+@add_to_ODS
+def equilibrium(ods, time_index=0):
     """
     Expands an ODS by adding a (heavily down-sampled) psi map to it with low precision. This function can overwrite
     existing data if you're not careful. The original is modified, so deepcopy first if you want different ODSs.
@@ -51,26 +47,26 @@ def add_eq_sample_data(ods):
     wall_z_small = numpy.array([-0., 1.21, 1.12, 1.17, 1.19, 1.17, 1.29, 1.31, 1.32, 1.16, 1.18, 1.23, 1.1, 1.14, 0.81,
                                 0.09, -0.59, -1.27, -1.3, -0.38])
 
-    ods['equilibrium.time_slice.0.profiles_2d.0.psi'] = psi_small
-    ods['equilibrium.time_slice.0.profiles_2d.0.grid.dim1'] = grid1_small
-    ods['equilibrium.time_slice.0.profiles_2d.0.grid.dim2'] = grid2_small
-    ods['equilibrium.time_slice.0.boundary.outline.r'] = bdry_r_small
-    ods['equilibrium.time_slice.0.boundary.outline.z'] = bdry_z_small
+    ods['equilibrium.time_slice'][time_index]['profiles_1d.psi'] = numpy.linspace(0,1,11)
+    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.psi'] = psi_small
+    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim1'] = grid1_small
+    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim2'] = grid2_small
+    ods['equilibrium.time_slice'][time_index]['boundary.outline.r'] = bdry_r_small
+    ods['equilibrium.time_slice'][time_index]['boundary.outline.z'] = bdry_z_small
 
-    ods['equilibrium.time_slice.0.global_quantities.magnetic_axis.r'] = 1.77
-    ods['equilibrium.time_slice.0.global_quantities.magnetic_axis.z'] = 0.05
+    ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.r'] = 1.77
+    ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.z'] = 0.05
 
     ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
     ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
     return ods
 
 
-@make_available
-def add_ts_sample_data(ods, nc=10):
+@add_to_ODS
+def thomson(ods, nc=10):
     """
     Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
-    The original is modified, so deepcopy first if you want different ODSs.
+    with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
@@ -92,12 +88,11 @@ def add_ts_sample_data(ods, nc=10):
     return ods
 
 
-@make_available
-def add_bolo_sample_data(ods, nc=10):
+@add_to_ODS
+def bolometer(ods, nc=10):
     """
     Adds some FAKE bolometer chord locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
-    The original is modified, so deepcopy first if you want different ODSs.
+    with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
@@ -118,14 +113,13 @@ def add_bolo_sample_data(ods, nc=10):
         ch['first_point.z'] = z0 + 0.001 * i
         ch['second_point.r'] = ch['first_point.r'] + numpy.cos(angles[i])
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
-        ch['first_point.phi'] = ch['second_point.phi'] = 6.5
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
 
     return ods
 
 
-@make_available
-def add_gas_sample_data(ods):
+@add_to_ODS
+def gas_injection(ods):
     """
     Adds some FAKE gas injection locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
@@ -155,3 +149,111 @@ def add_gas_sample_data(ods):
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
 
     return ods
+
+
+def ods_sample():
+    ods=ODS()
+    for item in __all__:
+        print(item)
+        ods=eval(item)(ods)
+    return ods
+
+
+def ods_sample_old():
+    """
+    create sample ODS data
+    """
+    from .omas_core import ODS
+    ods = ODS()
+
+    #check effect of disabling dynamic path creation
+    try:
+        ods.dynamic_path_creation = False
+        ods['info.user']
+    except LookupError:
+        ods['info'] = ODS()
+        ods['info.user'] = unicode(os.environ['USER'])
+    else:
+        raise(Exception('OMAS error handling dynamic_path_creation=False'))
+    finally:
+        ods.dynamic_path_creation = True
+
+    #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
+    try:
+        ods['info.machine']
+    except ValueError:
+        pass
+    else:
+        raise(Exception('OMAS error querying leaf that has not been set'))
+
+    # info ODS is used for keeping track of IMAS metadata
+    ods['info.machine'] = 'ITER'
+    ods['info.imas_version'] = default_imas_version
+    ods['info.shot'] = 1
+    ods['info.run'] = 0
+
+    # check .get() method
+    assert (ods.get('info.shot') == ods['info.shot'])
+    assert (ods.get('info.bad', None) is None)
+
+    # check that keys is an iterable (so that Python 2/3 work the same way)
+    keys = ods.keys()
+    keys[0]
+
+    # check that dynamic path creation during __getitem__ does not leave empty fields behind
+    try:
+        print(ods['wall.description_2d.0.limiter.unit.0.outline.r'])
+    except ValueError:
+        assert 'wall.description_2d.0.limiter.unit.0.outline' not in ods
+
+    ods['equilibrium']['time_slice'][0]['time'] = 1000.
+    ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
+
+    ods2 = copy.deepcopy(ods)
+    ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
+    ods2['equilibrium.time_slice.1.time'] = 2000.
+
+    ods2['equilibrium']['time_slice'][2] = copy.deepcopy(ods['equilibrium']['time_slice'][0])
+    ods2['equilibrium.time_slice[2].time'] = 3000.
+
+    printd(ods2['equilibrium']['time_slice'][0]['global_quantities'].location, topic='sample')
+    printd(ods2['equilibrium']['time_slice'][2]['global_quantities'].location, topic='sample')
+
+    ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
+
+    # uncertain scalar
+    ods2['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3,0.1)
+
+    # uncertain array
+    ods2['equilibrium.time_slice[2].profiles_1d.q'] = uarray([0.,1.,2.,3.],[0,.1,.2,.3])
+
+    # check different ways of addressing data
+    printd(ods2['equilibrium.time_slice']['1.global_quantities.ip'], topic='sample')
+    printd(ods2[['equilibrium', 'time_slice', 1, 'global_quantities', 'ip']], topic='sample')
+    printd(ods2[('equilibrium', 'time_slice', '1', 'global_quantities', 'ip')], topic='sample')
+    printd(ods2['equilibrium.time_slice.1.global_quantities.ip'], topic='sample')
+    printd(ods2['equilibrium.time_slice[1].global_quantities.ip'], topic='sample')
+
+    ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
+
+    # pprint(ods.paths())
+    # pprint(ods2.paths())
+
+    # check data slicing
+    printd(ods2['equilibrium.time_slice[:].global_quantities.ip'], topic='sample')
+
+    ckbkp = ods.consistency_check
+    tmp = pickle.dumps(ods2)
+    ods2 = pickle.loads(tmp)
+    if ods2.consistency_check != ckbkp:
+        raise (Exception('consistency_check attribute changed'))
+
+    # check flattening
+    tmp = ods2.flat()
+    # pprint(tmp)
+
+    # check deepcopy
+    ods3=ods2.copy()
+
+    return ods3
+
