@@ -28,7 +28,7 @@ The OMAS installation can be tested by running:
 .. code-block:: python
 
     from omas import *
-    test_omas_suite()
+    through_omas_suite()
 
 This test saves and load a sample piece of data through the different OMAS save formats
 and checks that information does not get lost or corrupted. If successful,

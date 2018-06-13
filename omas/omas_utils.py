@@ -3,6 +3,44 @@ from __future__ import print_function, division, unicode_literals
 from .omas_setup import *
 import sys
 
+# --------------------------------------------
+# ODS utilities
+# --------------------------------------------
+def different_ods(ods1, ods2):
+    """
+    Checks if two ODSs have any difference and returns the string with the cause of the different
+
+    :param ods1: first ods to check
+
+    :param ods2: second ods to check
+
+    :return: string with reason for difference, or False otherwise
+    """
+    ods1 = ods1.flat()
+    ods2 = ods2.flat()
+
+    k1 = set(ods1.keys())
+    k2 = set(ods2.keys())
+    for k in k1.difference(k2):
+        if not k.startswith('info.'):
+            return 'DIFF: key `%s` missing in 2nd ods' % k
+    for k in k2.difference(k1):
+        if not k.startswith('info.'):
+            return 'DIFF: key `%s` missing in 1st ods' % k
+    for k in k1.intersection(k2):
+        if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
+            if ods1[k] != ods2[k]:
+                return 'DIFF: `%s` differ in value' % k
+        elif type(ods1[k]) != type(ods2[k]):
+            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
+        elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
+            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k])) and not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k])):
+                return 'DIFF: `%s` differ in value' % k
+        else:
+            if not numpy.allclose(ods1[k], ods2[k]):
+                return 'DIFF: `%s` differ in value' % k
+    return False
+
 
 # --------------------------
 # general utility functions
@@ -17,17 +55,17 @@ def printd(*objects, **kw):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
-    topic_selected=os.environ.get('OMAS_DEBUG_TOPIC', '')
-    dump=False
+    topic_selected = os.environ.get('OMAS_DEBUG_TOPIC', '')
+    dump = False
     if topic_selected.endswith('_dump'):
-        dump=True
-        topic_selected=re.sub('_dump$','',topic_selected)
+        dump = True
+        topic_selected = re.sub('_dump$', '', topic_selected)
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
         printe(*objects, **kw)
         if dump:
-            fb=StringIO.StringIO()
-            print(*objects[1:],file=fb)
-            with open('omas_dump.txt','a') as f:
+            fb = StringIO.StringIO()
+            print(*objects[1:], file=fb)
+            with open('omas_dump.txt', 'a') as f:
                 f.write(fb.getvalue())
             fb.close()
 
@@ -38,6 +76,10 @@ def printe(*objects, **kw):
     """
     kw['file'] = sys.stderr
     print(*objects, **kw)
+
+
+# printw works like printe (this is done to allow mindless copy of some OMFIT functions in OMAS)
+printw = printe
 
 
 def is_uncertain(var):
@@ -88,7 +130,7 @@ def json_dumper(obj):
         return OrderedDict(zip(obj.keys(), obj.values()))
 
     tmp=is_uncertain(obj)
-    if any(numpy.atleast_1d(tmp)):
+    if numpy.any(numpy.atleast_1d(tmp)):
         if not len(numpy.array(tmp).shape):
             return dict(__ufloat__=nominal_values(obj),
                         __ufloat_std__=std_devs(obj))

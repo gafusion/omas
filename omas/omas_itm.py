@@ -524,7 +524,7 @@ def filled_paths_in_cpo(cpo, ds, path=None, paths=None):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def test_omas_itm(ods):
+def through_omas_itm(ods):
     """
     test save and load OMAS ITM
 

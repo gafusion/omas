@@ -27,7 +27,7 @@ def save_omas_nc(ods, filename, **kw):
             data = numpy.asarray(odsf[item])
             std  = None
             tmp=is_uncertain(odsf[item])
-            if any(numpy.atleast_1d(tmp)):
+            if numpy.any(numpy.atleast_1d(tmp)):
                 std=std_devs(data)
                 data=nominal_values(data)
             for k in range(len(numpy.asarray(odsf[item]).shape)):
@@ -79,7 +79,7 @@ def load_omas_nc(filename):
     return ods
 
 
-def test_omas_nc(ods):
+def through_omas_nc(ods):
     """
     test save and load NetCDF
 
@@ -87,7 +87,9 @@ def test_omas_nc(ods):
 
     :return: ods
     """
-    filename = 'test.nc'
+    if not os.path.exists(tempfile.gettempdir()+'/OMAS_TESTS/'):
+        os.makedirs(tempfile.gettempdir()+'/OMAS_TESTS/')
+    filename = tempfile.gettempdir()+'/OMAS_TESTS/test.nc'
     save_omas_nc(ods, filename)
     ods1 = load_omas_nc(filename)
     return ods1

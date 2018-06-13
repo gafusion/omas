@@ -80,7 +80,7 @@ def load_omas_hdc(hdc):
     return ods
 
 
-def test_omas_hdc(ods):
+def through_omas_hdc(ods):
     '''
     test save and load HDC
 
