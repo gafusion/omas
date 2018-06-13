@@ -175,6 +175,38 @@ def equilibrium(ods, time_index=0):
 
 
 @add_to_ODS
+def pf_active(ods):
+    """
+    Adds some FAKE active PF coil locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE THOMSON HARDWARE INFORMATION added.
+    """
+
+    nc = 2
+    fc_dat = [
+        #  R        Z       dR      dZ    tilt1  tilt2
+        [.8608,  .16830,  .0508,  .32106,  0.0,  90.0],
+        [1.0041,  1.5169,  .13920,  .11940,  45.0,  90.0],
+        [2.6124,  0.4376,  0.17320,  0.1946,  0.0,  92.40],
+        [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
+    ]
+    for i in range(nc):
+        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
+        oblique['r'] = fc_dat[i][0]
+        oblique['z'] = fc_dat[i][1]
+        oblique['length'] = fc_dat[i][2]  # Or width in R
+        oblique['thickness'] = fc_dat[i][3]  # Or height in Z
+        oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
+        oblique['beta'] = fc_dat[i][5] * numpy.pi/180
+        ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
+
+    return ods
+
+
+@add_to_ODS
 def thomson_scattering(ods, nc=10):
     """
     Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
