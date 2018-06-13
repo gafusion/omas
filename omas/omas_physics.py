@@ -387,7 +387,7 @@ cocos_signals['core_sources.source.:.profiles_1d.:.j_parallel'] = 'IP'
 cocos_signals['core_sources.vacuum_toroidal_field.b0'] = 'BT'
 
 # cocos_structures contains the list of all the IDSs that have been checked for COCOS convention transformations
-cocos_structures = []
+cocos_structures = ['wall', 'info']
 for item in cocos_signals:
     structure_name = item.split(separator)[0]
     if structure_name not in cocos_structures:
