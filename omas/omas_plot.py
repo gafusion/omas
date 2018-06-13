@@ -738,13 +738,14 @@ def gas_injection_overlay(
 
             if angle_not_in_pipe_name:
                 try:
-                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/pi)))
+                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/numpy.pi)))
                 except (TypeError, ValueError):
                     pass
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
     except ValueError:
-        rsplit = mean([loc.split('_')[0] for loc in locations])
+        draw_arrow = False  # This won't work without magnetic axis data, either.
+        rsplit = numpy.mean([float(loc.split('_')[0]) for loc in locations])
 
     kw.setdefault('marker', 'd')
     kw.setdefault('linestyle', ' ')

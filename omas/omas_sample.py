@@ -165,12 +165,88 @@ def equilibrium(ods, time_index=0):
     ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim2'] = grid2_small
     ods['equilibrium.time_slice'][time_index]['boundary.outline.r'] = bdry_r_small
     ods['equilibrium.time_slice'][time_index]['boundary.outline.z'] = bdry_z_small
+    ods['equilibrium.time_slice'][time_index]['time'] = 2.0
 
     ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.r'] = 1.77
     ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.z'] = 0.05
 
     ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
     ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
+    return ods
+
+
+@add_to_ODS
+def pf_active(ods):
+    """
+    Adds some FAKE active PF coil locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
+    """
+
+    nc = 4
+    fc_dat = [
+        #  R        Z       dR      dZ    tilt1  tilt2
+        [.8608,  .16830,  .0508,  .32106,  0.0,  90.0],
+        [1.0041,  1.5169,  .13920,  .11940,  45.0,  90.0],
+        [2.6124,  0.4376,  0.17320,  0.1946,  0.0,  92.40],
+        [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
+    ]
+    for i in range(nc):
+        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
+        oblique['r'] = fc_dat[i][0]
+        oblique['z'] = fc_dat[i][1]
+        oblique['length'] = fc_dat[i][2]  # Or width in R
+        oblique['thickness'] = fc_dat[i][3]  # Or height in Z
+        oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
+        oblique['beta'] = fc_dat[i][5] * numpy.pi/180
+        ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
+        if i < (nc-1):  # Don't put the identifier on the last one to test handling of missing identifiers
+            ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
+
+    return ods
+
+
+@add_to_ODS
+def magnetics(ods):
+    """
+    Adds some FAKE magnetic probe locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE MAGNETICS HARDWARE INFORMATION added.
+    """
+
+    nbp = 12
+    nfl = 7
+
+    r0 = 1.5
+    z0 = 0.0
+    abp = 0.8
+    afl = 1.0
+
+    angle_bp = numpy.linspace(0, 2*numpy.pi, nbp+1)[:-1]
+    rp = r0 + abp * numpy.cos(angle_bp)
+    zp = z0 + abp * numpy.sin(angle_bp)
+
+    angle_fl = numpy.linspace(0, 2*numpy.pi, nfl + 1)[:-1]
+    rf = r0 + afl * numpy.cos(angle_fl)
+    zf = z0 + afl * numpy.sin(angle_fl)
+
+    for i in range(nbp):
+        ods['magnetics.bpol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
+        ods['magnetics.bpol_probe'][i]['position.r'] = rp[i]
+        ods['magnetics.bpol_probe'][i]['position.z'] = zp[i]
+        ods['magnetics.bpol_probe'][i]['position.phi'] = 6.5
+
+    for i in range(nfl):
+        ods['magnetics.flux_loop'][i]['identifier'] = 'FAKE flux loop {}'.format(i)
+        ods['magnetics.flux_loop'][i]['position.0.r'] = rf[i]
+        ods['magnetics.flux_loop'][i]['position.0.z'] = zf[i]
+
     return ods
 
 
@@ -191,11 +267,70 @@ def thomson_scattering(ods, nc=10):
     z = numpy.linspace(-0.7, 0.2, nc)
     for i in range(nc):
         ch = ods['thomson_scattering.channel'][i]
-        ch['identifier'] = 'F{:02d}'.format(i)  # F for fake
+        ch['identifier'] = 'F_TS_{:02d}'.format(i)  # F for fake
         ch['name'] = 'Fake Thomson channel for testing {}'.format(i)
         ch['position.phi'] = 6.5  # This angle in rad should look bad to someone who doesn't notice the Fake labels
         ch['position.r'] = r[i]
         ch['position.z'] = z[i]
+
+    return ods
+
+
+@add_to_ODS
+def charge_exchange(ods, nc=10):
+    """
+    Adds some FAKE CER channel locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
+    The original is modified, so deepcopy first if you want different ODSs.
+
+    :param ods: ODS instance
+
+    :param nc: Number of channels to add.
+
+    :return: ODS instance with FAKE CER HARDWARE INFORMATION added.
+    """
+
+    r = numpy.linspace(1.4, 2.2, nc)
+    z = numpy.linspace(0.05, -0.07, nc)
+    for i in range(nc):
+        ch = ods['charge_exchange.channel'][i]
+        ch['identifier'] = 'FAKE_CER_{:02d}'.format(i)  # F for fake
+        ch['name'] = 'Fake CER channel for testing {}'.format(i)
+        for x in ['r', 'z', 'phi']:
+            ch['position'][x]['time'] = numpy.array([0])
+        ch['position.phi.data'] = numpy.array([6.5])
+        ch['position.r.data'] = numpy.array([r[i]])
+        ch['position.z.data'] = numpy.array([z[i]])
+
+    return ods
+
+
+@add_to_ODS
+def interferometer(ods):
+    """
+    Adds some FAKE interferometer locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE INTERFEROMETER HARDWARE INFORMATION added.
+    """
+    ods['interferometer.channel.0.identifier'] = 'FAKE horz. interf.'
+    r0 = ods['interferometer.channel.0.line_of_sight']
+    r0['first_point.phi'] = r0['second_point.phi'] = 225 * (-numpy.pi / 180)
+    r0['first_point.r'], r0['second_point.r'] = 3.0, 0.8
+    r0['first_point.z'] = r0['second_point.z'] = 0.0
+
+    i = 0
+    ods['interferometer.channel'][i + 1]['identifier'] = 'FAKE vert. interf.'
+    los = ods['interferometer.channel'][i + 1]['line_of_sight']
+    los['first_point.phi'] = los['second_point.phi'] = 240 * (-numpy.pi / 180)
+    los['first_point.r'] = los['second_point.r'] = 1.48
+    los['first_point.z'], los['second_point.z'] = -1.8, 1.8
+
+    for j in range(len(ods['interferometer.channel'])):
+        ch = ods['interferometer.channel'][j]
+        ch['line_of_sight.third_point'] = copy.deepcopy(ch['line_of_sight.first_point'])
 
     return ods
 
@@ -227,6 +362,8 @@ def bolometer(ods, nc=10):
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
 
+    ods['bolometer.channel'][nc-1]['identifier'] = 'bolo fan 2 fake'  # This tests separate colors per fan in overlay
+
     return ods
 
 
@@ -257,8 +394,8 @@ def gas_injection(ods):
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
     ods['gas_injection.pipe.2.exit_position.r'] = 2.1
     ods['gas_injection.pipe.2.exit_position.z'] = -0.6
-    ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
+    # This one deliberately doesn't have a phi angle defined, for testing purposes.
 
     return ods
 
