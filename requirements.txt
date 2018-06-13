@@ -6,8 +6,10 @@ numpy               # required
 netCDF4             # required
 boto3               # required
 uncertainties       # required
+matplotlib          # required
+scipy               # required
 #pyhdc              # hdc
 #pyual              # ual
 #imas               # imas
-xmltodict           # build_structures
-bs4                 # build_structures
+#xmltodict          # build_structures
+#bs4                # build_structures

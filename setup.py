@@ -22,7 +22,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             f.write(item.ljust(20) + '# required\n')
         for requirement in extras_require:
             for item in extras_require[requirement]:
-                if requirement in ['imas','hdc','ual']:
+                if requirement in ['imas','hdc','ual','build_structures']:
                     item='#'+item
                 f.write(item.ljust(20) + '# %s\n' % requirement)
 
