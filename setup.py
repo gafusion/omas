@@ -7,7 +7,8 @@ install_requires = ['numpy', 'netCDF4', 'boto3', 'uncertainties', 'matplotlib', 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
                   'ual': ['pyual'],
-                  'build_structures': ['xmltodict','bs4']}
+                  'build_structures': ['xmltodict','bs4'],
+                  'build_documentation': ['Sphinx','sphinx-bootstrap-theme','sphinx-gallery']}
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep

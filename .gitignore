@@ -21,6 +21,7 @@ sphinx/source/usage.rst
 sphinx/source/scenarios.rst
 sphinx/source/schema.rst
 sphinx/source/schema/
+sphinx/source/auto_examples/
 
 docs/
 dist/

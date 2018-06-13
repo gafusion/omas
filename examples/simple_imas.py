@@ -1,12 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Simple IMAS
+===========
+Simple script showcasing OMAS writing minimal amount of data to IMAS.
+Also, this script shows the use of 'imas_code_dump' as an `OMAS_DEBUG_TOPIC`,
+which can be useful for debugging purposes.
+"""
+
 from __future__ import print_function, division, unicode_literals
 
 import os
-# set OMAS debugging topic
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code_dump'
-
 from omas import *
 
-# Instantiate new OMAS Data Structure (ODS)
+# set OMAS debugging topic
+# NOTE: appending '_dump' to a debug topic will write a omas.dump file in the working directory
+#       with the debug output in it. The 'imas_code_dump' is particularly useful since it generates
+#       the exact list of Python commands that OMAS used to work with IMAS.
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code_dump'
+
 ods = ODS()
 
 # 0D data
@@ -15,16 +26,7 @@ ods['equilibrium']['time_slice'][0]['global_quantities.ip'] = 1.E6
 # 1D data
 ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
-ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3],
-                                                                        [4, 5, 6]]
-if False:
-    #this raises an error
-    ods['equilibrium.time_slice.0.profiles_2d.0.grid_type']=1
-
-# Save to file
-save_omas(ods, 'test.omas')
-# Load from file
-ods1 = load_omas('test.omas')
+ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3], [4, 5, 6]]
 
 # Save to IMAS
 paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
