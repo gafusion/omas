@@ -230,7 +230,7 @@ class TestOmasPlot(unittest.TestCase):
             gas_injection=dict(which_gas=['FAKE_GAS_A', 'FAKE_GAS_B'], draw_arrow=False))
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['NON-EXISTENT GAS VALVE']))
         gas_ods.plot_overlay(
-            thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True), simple_labels=True)
+            thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True, simple_labels=True))
 
         # Test direct call
         gas_ods.plot_gas_injection_overlay()

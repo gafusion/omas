@@ -165,6 +165,7 @@ def equilibrium(ods, time_index=0):
     ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim2'] = grid2_small
     ods['equilibrium.time_slice'][time_index]['boundary.outline.r'] = bdry_r_small
     ods['equilibrium.time_slice'][time_index]['boundary.outline.z'] = bdry_z_small
+    ods['equilibrium.time_slice'][time_index]['time'] = 2.0
 
     ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.r'] = 1.77
     ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.z'] = 0.05
