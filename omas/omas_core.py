@@ -307,6 +307,9 @@ class ODS(MutableMapping):
         # non-scalar data is saved as numpy arrays
         if isinstance(value, list):
             value = numpy.array(value)
+        # floats as python floats
+        elif isinstance(value, numpy.float64):
+            value = float(value)
 
         # if the user has entered path rather than a single key
         if len(key) > 1:
