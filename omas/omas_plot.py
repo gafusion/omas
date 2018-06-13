@@ -5,6 +5,7 @@ from matplotlib import pyplot
 
 import inspect
 from .omas_utils import *
+from omas_physics import cocos_transform
 
 __all__ = []
 
@@ -293,7 +294,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
         Z position of gas injector (m)
 
     :param direction: float
-        Direction of injection (radians, COCOS 1/11)
+        Direction of injection (radians, COCOS should match ods.cocos). None = try to guess.
 
     :param snap_to: float
         Snap direction angle to nearest value. Set snap to pi/4 to snap to 0, pi/4, pi/2, 3pi/4, etc. No in-between.
@@ -317,6 +318,8 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
 
     if direction is None:
         direction = pick_direction()
+    else:
+        direction = cocos_transform(ods.cocos, 11)['BP'] * direction
 
     if ax is None:
         ax = pyplot.gca()
@@ -816,17 +819,19 @@ def pf_active_overlay(ods, ax=None, **kw):
             fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
                     oblique['alpha'], oblique['beta']]
 
+            ct = cocos_transform(11, ods.cocos)['BP']
+
             xarr = [
-                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
-                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(numpy.pi/2. - fdat[5]),
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
             ]
             yarr = [
-                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
-                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(fdat[4]),
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
             ]
             path = numpy.array([xarr, yarr]).T
             patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
