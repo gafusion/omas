@@ -206,6 +206,21 @@ class TestOmasPlot(unittest.TestCase):
             plt.show()
         self.printv('  TestOmasPlot.test_cer_overlay done')
 
+    # Inteferometer overlay
+    def test_interferometer_overlay(self):
+        self.printv('TestOmasPlot.test_interferometer_overlay...')
+        # Basic test
+        intf_ods = copy.deepcopy(self.ods)
+        intf_ods.sample_interferometer()
+        intf_ods.plot_overlay(thomson_scattering=False, interferometer=True)
+        # Test direct call
+        intf_ods.plot_interferometer_overlay()
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=False, interferometer=True)
+        if self.show_all_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_interferometer_overlay done')
+
     # Bolometer overlay
     def test_bolo_overlay(self):
         self.printv('TestOmasPlot.test_bolo_overlay...')

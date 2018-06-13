@@ -303,6 +303,36 @@ def charge_exchange(ods, nc=10):
 
 
 @add_to_ODS
+def interferometer(ods):
+    """
+    Adds some FAKE interferometer locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real.
+
+    :param ods: ODS instance
+
+    :return: ODS instance with FAKE INTERFEROMETER HARDWARE INFORMATION added.
+    """
+    ods['interferometer.channel.0.identifier'] = 'FAKE horz. interf.'
+    r0 = ods['interferometer.channel.0.line_of_sight']
+    r0['first_point.phi'] = r0['second_point.phi'] = 225 * (-numpy.pi / 180)
+    r0['first_point.r'], r0['second_point.r'] = 3.0, 0.8
+    r0['first_point.z'] = r0['second_point.z'] = 0.0
+
+    i = 0
+    ods['interferometer.channel'][i + 1]['identifier'] = 'FAKE vert. interf.'
+    los = ods['interferometer.channel'][i + 1]['line_of_sight']
+    los['first_point.phi'] = los['second_point.phi'] = 240 * (-numpy.pi / 180)
+    los['first_point.r'] = los['second_point.r'] = 1.48
+    los['first_point.z'], los['second_point.z'] = -1.8, 1.8
+
+    for j in range(len(ods['interferometer.channel'])):
+        ch = ods['interferometer.channel'][j]
+        ch['line_of_sight.third_point'] = copy.deepcopy(ch['line_of_sight.first_point'])
+
+    return ods
+
+
+@add_to_ODS
 def bolometer(ods, nc=10):
     """
     Adds some FAKE bolometer chord locations so that the overlay plot will work in tests. It's fine to test
