@@ -18,7 +18,7 @@ html:
 	cd sphinx && make html
 
 docs: html
-	make commit && make push
+	cd sphinx && make commit && make push
 
 json:
 	cd utilities && python build_json_structures.py
