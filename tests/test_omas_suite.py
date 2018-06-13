@@ -35,6 +35,7 @@ except RuntimeError as _excp:
 
 ods = ods_sample()
 
+
 class TestOmasSuite(unittest.TestCase):
 
     def test_omas_pkl(self):

@@ -19,6 +19,10 @@ from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 from io import StringIO
 from contextlib import contextmanager
+import warnings
+formatwarning_orig = warnings.formatwarning
+warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
+    formatwarning_orig(message, category, filename, lineno, line='')
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):

@@ -264,8 +264,25 @@ def cocos_environment(ods, cocosin=None, cocosout=None):
         ods.cocosout = old_cocosout
 
 
-#this dictionary defines the IMAS locations and the corresponding `cocos_transform` function
+# This dictionary defines the IMAS locations and the corresponding `cocos_transform` function
 cocos_signals = {}
+
+def print_utility_cocos_signals(structures):
+    '''
+    This is a utility function for printing the cocos_signals entries as the ones defined in omas/omas_physics.py
+    The printed text must be copied to omas/omas_physics.py and the COCOS transformations assigned by hand.
+    '''
+    if isinstance(structures, basestring):
+        structures = [structures]
+    from .omas_utils import _structures
+    from .omas_utils import i2o
+    from .omas_core import ODS
+    ods = ODS()
+    for structure in structures:
+        ods[structure]
+        for item in sorted(list(list(_structures.values())[0].keys())):
+            if item.startswith(structure) and '_error_' not in item:
+                print("cocos_signals['%s']=" % i2o(item))
 
 # EQUILIBRIUM
 cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.exact'] = 'BT'
@@ -368,3 +385,10 @@ cocos_signals['core_sources.source.:.profiles_1d.:.current_parallel_inside'] = '
 cocos_signals['core_sources.source.:.profiles_1d.:.torque_tor_inside'] = 'BT'
 cocos_signals['core_sources.source.:.profiles_1d.:.j_parallel'] = 'IP'
 cocos_signals['core_sources.vacuum_toroidal_field.b0'] = 'BT'
+
+# cocos_structures contains the list of all the IDSs that have been checked for COCOS convention transformations
+cocos_structures = []
+for item in cocos_signals:
+    structure_name = item.split(separator)[0]
+    if structure_name not in cocos_structures:
+        cocos_structures.append(structure_name)

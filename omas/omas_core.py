@@ -320,7 +320,7 @@ class ODS(MutableMapping):
         location = l2o([self.location, key[0]])
 
         # handle cocos transformations coming in
-        if self.cocosin != self.cocos and location in omas_physics.cocos_signals:
+        if self.cocosin != self.cocos and separator in location and location in omas_physics.cocos_signals:
             value = value * omas_physics.cocos_transform(self.cocosin, self.cocos)[omas_physics.cocos_signals[location]]
 
         # perform consistency check with IMAS structure
@@ -332,6 +332,18 @@ class ODS(MutableMapping):
                     if not self.structure:
                         # load the json structure file
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
+                        if key[0] not in omas_physics.cocos_structures:
+                            warnings.warn('''
+Automatic COCOS transformations have not been defined for `{structure}` structure
+To define it, do the following:
+
+> from omas.omas_physics import print_utility_cocos_signals
+> print_utility_cocos_signals('{structure}')
+
+This will print the cocos_signals entries as the ones defined in omas/omas_physics.py
+The printed text must be copied to omas/omas_physics.py and the COCOS transformations assigned by hand.
+If in doubt, ask an OMAS developer.
+'''.format(structure=key[0]))
                     else:
                         structure = self.structure[structure_key[0]]
                         if not len(structure):
