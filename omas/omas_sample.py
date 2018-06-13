@@ -191,11 +191,40 @@ def thomson_scattering(ods, nc=10):
     z = numpy.linspace(-0.7, 0.2, nc)
     for i in range(nc):
         ch = ods['thomson_scattering.channel'][i]
-        ch['identifier'] = 'F{:02d}'.format(i)  # F for fake
+        ch['identifier'] = 'F_TS_{:02d}'.format(i)  # F for fake
         ch['name'] = 'Fake Thomson channel for testing {}'.format(i)
         ch['position.phi'] = 6.5  # This angle in rad should look bad to someone who doesn't notice the Fake labels
         ch['position.r'] = r[i]
         ch['position.z'] = z[i]
+
+    return ods
+
+
+@add_to_ODS
+def charge_exchange(ods, nc=10):
+    """
+    Adds some FAKE CER channel locations so that the overlay plot will work in tests. It's fine to test
+    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
+    The original is modified, so deepcopy first if you want different ODSs.
+
+    :param ods: ODS instance
+
+    :param nc: Number of channels to add.
+
+    :return: ODS instance with FAKE CER HARDWARE INFORMATION added.
+    """
+
+    r = numpy.linspace(1.4, 2.2, nc)
+    z = numpy.linspace(0.05, -0.07, nc)
+    for i in range(nc):
+        ch = ods['charge_exchange.channel'][i]
+        ch['identifier'] = 'FAKE_CER_{:02d}'.format(i)  # F for fake
+        ch['name'] = 'Fake CER channel for testing {}'.format(i)
+        for x in ['r', 'z', 'phi']:
+            ch['position'][x]['time'] = numpy.array([0])
+        ch['position.phi.data'] = numpy.array([6.5])
+        ch['position.r.data'] = numpy.array([r[i]])
+        ch['position.z.data'] = numpy.array([z[i]])
 
     return ods
 

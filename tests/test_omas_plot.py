@@ -20,6 +20,7 @@ from matplotlib import pyplot as plt
 
 # OMAS imports
 from omas import *
+from omas.omas_utils import *
 
 
 class TestOmasPlot(unittest.TestCase):
@@ -40,7 +41,7 @@ class TestOmasPlot(unittest.TestCase):
         if self.verbose:
             print(*arg)
 
-    # Support functions
+    # Support functions and general overlay tests
     def test_ch_count(self):
         self.printv('TestOmasPlot.test_ch_count...')
         nc = 10
@@ -67,6 +68,21 @@ class TestOmasPlot(unittest.TestCase):
 
         self.printv('  TestOmasPlot.test_ch_count done.')
 
+    def test_all_overlays(self):
+        self.printv('TestOmasPlot.test_all_overlays...')
+        plt.figure()
+        ods2 = copy.deepcopy(self.ods)
+        for hw_sys in list_structures(ods2.imas_version):
+            try:
+                sample_func = getattr(ODS, 'sample_{}'.format(hw_sys))
+                ods2 = sample_func(ods2)
+            except AttributeError:
+                pass
+        ods2.plot_overlay(debug_all_plots=True)
+        if self.show_all_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_all_overlays done')
+
     # Equilibrium
     def test_eqcx(self):
         self.printv('TestOmasPlot.test_eqcx...')
@@ -81,6 +97,8 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         ts_ods.plot_overlay(thomson_scattering=True)
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=True)
         if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_ts_overlay done')
@@ -111,12 +129,26 @@ class TestOmasPlot(unittest.TestCase):
             plt.show()
         self.printv('  TestOmasPlot.test_ts_overlay_labels done')
 
+    # Charge exchange
+    def test_cer_overlay(self):
+        self.printv('TestOmasPlot.test_cer_overlay...')
+        cer_ods = copy.deepcopy(self.ods)
+        cer_ods.sample_charge_exchange()
+        cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=True)
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=False, charge_exchange=True)
+        if self.show_all_plots:
+            plt.show()
+        self.printv('  TestOmasPlot.test_cer_overlay done')
+
     # Bolometers
     def test_bolo_overlay(self):
         self.printv('TestOmasPlot.test_bolo_overlay...')
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods = bolo_ods.sample_bolometer()
         bolo_ods.plot_overlay(thomson_scattering=False, bolometer=True)
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=False, bolometer=True)
         if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_bolo_overlay done')
@@ -145,6 +177,8 @@ class TestOmasPlot(unittest.TestCase):
         gas_ods = copy.deepcopy(self.ods)
         gas_ods = gas_ods.sample_gas_injection()
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=True)
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         if self.show_all_plots:
             plt.show()
         self.printv('  TestOmasPlot.test_gas_overlay done')
