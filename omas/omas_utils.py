@@ -55,17 +55,17 @@ def printd(*objects, **kw):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
-    topic_selected=os.environ.get('OMAS_DEBUG_TOPIC', '')
-    dump=False
+    topic_selected = os.environ.get('OMAS_DEBUG_TOPIC', '')
+    dump = False
     if topic_selected.endswith('_dump'):
-        dump=True
-        topic_selected=re.sub('_dump$','',topic_selected)
+        dump = True
+        topic_selected = re.sub('_dump$', '', topic_selected)
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
         printe(*objects, **kw)
         if dump:
-            fb=StringIO.StringIO()
-            print(*objects[1:],file=fb)
-            with open('omas_dump.txt','a') as f:
+            fb = StringIO.StringIO()
+            print(*objects[1:], file=fb)
+            with open('omas_dump.txt', 'a') as f:
                 f.write(fb.getvalue())
             fb.close()
 
@@ -76,6 +76,10 @@ def printe(*objects, **kw):
     """
     kw['file'] = sys.stderr
     print(*objects, **kw)
+
+
+# printw works like printe (this is done to allow mindless copy of some OMFIT functions in OMAS)
+printw = printe
 
 
 def is_uncertain(var):
