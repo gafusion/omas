@@ -95,6 +95,14 @@ class TestOmasPlot(unittest.TestCase):
                 pass
         ods2.plot_overlay(debug_all_plots=True)
 
+    def test_gas_arrow(self):
+        from omas.omas_plot import gas_arrow
+        self.printv('  gas_arrow ods.cocos = {}'.format(self.ods.cocos))
+        # Explicitly test the direction keyword
+        gas_arrow(self.ods, 1.5, 0.0, direction=0, color='k')
+        gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
+        gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
+
     # Equilibrium cross section plot
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()

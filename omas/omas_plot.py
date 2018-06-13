@@ -311,7 +311,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
         """Guesses the direction for the arrow (from injector toward machine) in case you don't know"""
         dr = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['r'] - r
         dz = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['z'] - z
-        theta = -numpy.arctan2(dz, -dr)
+        theta = numpy.arctan2(dz, -dr)
         if snap_to > 0:
             theta = snap_to * round(theta/snap_to)
         return theta
@@ -327,15 +327,15 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     shaft_len = 3.5 * (1+pad)/2.
 
     da = numpy.pi/10  # Angular half width of the arrow head
-    x0 = numpy.cos(direction) * pad
-    y0 = numpy.sin(direction) * pad
+    x0 = numpy.cos(-direction) * pad
+    y0 = numpy.sin(-direction) * pad
     head_mark = [
         (x0, y0),
-        (x0+numpy.cos(direction+da), y0+numpy.sin(direction+da)),
-        (x0+numpy.cos(direction), y0+numpy.sin(direction)),
-        (x0+shaft_len*numpy.cos(direction), y0+shaft_len*numpy.sin(direction)),
-        (x0+numpy.cos(direction), y0+numpy.sin(direction)),
-        (x0+numpy.cos(direction-da), y0+numpy.sin(direction-da)),
+        (x0+numpy.cos(-direction+da), y0+numpy.sin(-direction+da)),
+        (x0+numpy.cos(-direction), y0+numpy.sin(-direction)),
+        (x0+shaft_len*numpy.cos(-direction), y0+shaft_len*numpy.sin(-direction)),
+        (x0+numpy.cos(-direction), y0+numpy.sin(-direction)),
+        (x0+numpy.cos(-direction-da), y0+numpy.sin(-direction-da)),
     ]
 
     kw.pop('marker', None)  # Ignore this
