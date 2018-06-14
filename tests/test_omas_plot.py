@@ -131,6 +131,11 @@ class TestOmasPlot(unittest.TestCase):
         ods2.plot_core_profiles_summary(
             fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
 
+    def test_core_pressure(self):
+        ods2 = copy.copy(self.ods)
+        ods2.sample_profiles()
+        ods2.plot_core_profiles_pressures()
+
     # PF active overlay
     def test_pf_active_overlay(self):
         # Basic test

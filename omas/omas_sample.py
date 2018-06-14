@@ -237,11 +237,16 @@ def profiles(ods, time_index=0, nx=11):
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
 
+    from scipy import constants
+    ee = constants.e
+
     prof1d = ods['core_profiles.profiles_1d'][time_index]
     x = prof1d['grid.rho_tor_norm'] = numpy.linspace(0, 1, nx)
     prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
     prof1d['electrons.density_thermal'] = prof1d['electrons.density']
     prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
+    prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
+    prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
 
     prof1d['ion.0.label'] = 'D+'
     prof1d['ion.0.element.0.z_n'] = 1.0
@@ -251,6 +256,8 @@ def profiles(ods, time_index=0, nx=11):
     prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
     prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
     prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
+    prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
+    prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
 
     prof1d['ion.1.label'] = 'C+6'
     prof1d['ion.1.element.0.z_n'] = 6.0
@@ -259,6 +266,8 @@ def profiles(ods, time_index=0, nx=11):
     prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
     prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
     prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
+    prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
+    prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
 
     return ods
 
