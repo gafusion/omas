@@ -124,7 +124,7 @@ def misc(ods):
 
 
 @add_to_ODS
-def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
+def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, include_wall=True):
     """
     Expands an ODS by adding a (heavily down-sampled) psi map to it with low precision. This function can overwrite
     existing data if you're not careful. The original is modified, so deepcopy first if you want different ODSs.
@@ -139,6 +139,9 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
 
     :param include_phi: bool
         Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)
+
+    :param include_wall: bool
+        Include the first wall
 
     :return: ODS instance with equilibrium data added
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
@@ -209,8 +212,9 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
             [-6.16, -5.8, -5.57, -5.14, -5.11, -5.38, -6.24, -8.08, -10.29, -14.48, -16.14],
             [-5.85, -5.73, -5.81, -5.8, -5.95, -6.2, -7., -8.46, -10.1, -12.77, -13.89]])
 
-    ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
-    ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
+    if include_wall:
+        ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
+        ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
 
     return ods
 
