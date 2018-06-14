@@ -707,7 +707,7 @@
   "documentation": "Value",
   "data_type": "INT_0D",
   "type": "constant",
-  "units": "-",
+  "units": "?",
   "full_path": "summary/disruption/mitigation_valve/value"
  },
  "summary.disruption.time": {
@@ -6220,7 +6220,7 @@
   "documentation": "Value",
   "data_type": "INT_0D",
   "type": "static",
-  "units": "A",
+  "units": "?",
   "full_path": "summary/heating_current_drive/nbi(i1)/direction/value"
  },
  "summary.heating_current_drive.nbi[:].energy": {

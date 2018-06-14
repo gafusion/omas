@@ -4577,7 +4577,7 @@
   "documentation": "Set of safety factor estimates at various positions",
   "data_type": "struct_array",
   "maxoccur": "unbounded",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)",
   "coordinates": [
    "1...N"
@@ -4587,7 +4587,7 @@
   "documentation": "Chi-squared difference of (reconstructed-measured)",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/chi_squared"
  },
  "equilibrium.time_slice[:].constraints.q[:].chi_squared_error_index": {
@@ -4600,14 +4600,14 @@
   "documentation": "Lower error for \"chi_squared\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/chi_squared_error_lower"
  },
  "equilibrium.time_slice[:].constraints.q[:].chi_squared_error_upper": {
   "documentation": "Upper error for \"chi_squared\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/chi_squared_error_upper"
  },
  "equilibrium.time_slice[:].constraints.q[:].exact": {
@@ -4620,7 +4620,7 @@
   "documentation": "Measured value",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/measured"
  },
  "equilibrium.time_slice[:].constraints.q[:].measured_error_index": {
@@ -4633,14 +4633,14 @@
   "documentation": "Lower error for \"measured\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/measured_error_lower"
  },
  "equilibrium.time_slice[:].constraints.q[:].measured_error_upper": {
   "documentation": "Upper error for \"measured\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "Pa",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/measured_error_upper"
  },
  "equilibrium.time_slice[:].constraints.q[:].position": {
@@ -4734,7 +4734,7 @@
   "documentation": "Value calculated from the reconstructed equilibrium",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/reconstructed"
  },
  "equilibrium.time_slice[:].constraints.q[:].reconstructed_error_index": {
@@ -4747,14 +4747,14 @@
   "documentation": "Lower error for \"reconstructed\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/reconstructed_error_lower"
  },
  "equilibrium.time_slice[:].constraints.q[:].reconstructed_error_upper": {
   "documentation": "Upper error for \"reconstructed\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/reconstructed_error_upper"
  },
  "equilibrium.time_slice[:].constraints.q[:].source": {
@@ -4767,7 +4767,7 @@
   "documentation": "Standard deviation of the measurement",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/standard_deviation"
  },
  "equilibrium.time_slice[:].constraints.q[:].standard_deviation_error_index": {
@@ -4780,14 +4780,14 @@
   "documentation": "Lower error for \"standard_deviation\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/standard_deviation_error_lower"
  },
  "equilibrium.time_slice[:].constraints.q[:].standard_deviation_error_upper": {
   "documentation": "Upper error for \"standard_deviation\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "-",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/standard_deviation_error_upper"
  },
  "equilibrium.time_slice[:].constraints.q[:].time_measurement": {
@@ -5017,7 +5017,7 @@
   "documentation": "Standard deviation of the measurement",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "?",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/standard_deviation"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].standard_deviation_error_index": {
@@ -5030,14 +5030,14 @@
   "documentation": "Lower error for \"standard_deviation\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "?",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/standard_deviation_error_lower"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].standard_deviation_error_upper": {
   "documentation": "Upper error for \"standard_deviation\"",
   "data_type": "FLT_0D",
   "type": "dynamic",
-  "units": "m",
+  "units": "?",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/standard_deviation_error_upper"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].time_measurement": {

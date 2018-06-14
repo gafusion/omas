@@ -105,7 +105,7 @@ def create_json_structure(imas_version=default_imas_version):
         inv = re.sub('\[:\]$', '', inv)
         return inv
 
-    def traverse(me, hout, path, fout):
+    def traverse(me, hout, path, fout, parent_units):
         me = copy.copy(me)
         hout_propagate = hout
         path_propagate = copy.deepcopy(path)
@@ -138,11 +138,18 @@ def create_json_structure(imas_version=default_imas_version):
         else:
             keys = me.keys()
 
+        if '@units' in me:
+            if fname=='equilibrium.time_slice[:].constraints.q': # bug fix for v3.18.0
+                me['@units']='-'
+            if me['@units']=='as_parent':
+                me['@units']=parent_units
+            parent_units=me['@units']
+
         is_leaf = True
         for kid in keys:
             if isinstance(me[kid], (dict, list)):
                 is_leaf = False
-                traverse(me[kid], hout_propagate, path_propagate, fout)
+                traverse(me[kid], hout_propagate, path_propagate, fout, parent_units)
             elif kid not in ['@name', '@xmlns:fn']:
                 hout_propagate[kid] = me[kid]
                 fout[fname][kid] = me[kid]
@@ -152,7 +159,7 @@ def create_json_structure(imas_version=default_imas_version):
 
         return hout, fout
 
-    hout, fout = traverse(tmp, {}, [], {})
+    hout, fout = traverse(tmp, {}, [], {}, '?')
 
     # format conversions
     for item in sorted(fout):
@@ -181,11 +188,6 @@ def create_json_structure(imas_version=default_imas_version):
                     continue
                 if coord not in fout:
                     printe('%s --> %s' % (item, coord))
-        if '@units' in fout[item]:
-            if fout[item]['@units']=='as_parent':
-                fout[item]['@units']=units
-            else:
-                units=fout[item]['@units']
 
     # cleanup entries
     for item in sorted(fout):
