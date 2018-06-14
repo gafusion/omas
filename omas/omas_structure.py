@@ -169,7 +169,7 @@ def create_json_structure(imas_version=default_imas_version):
             # # this is a check for duplicated coordinates, which it is not an error per se
             # if len(numpy.unique(list(filter(lambda x: not x.startswith('1...'), coords)))) != len(list(filter(lambda x: not x.startswith('1...'), coords))):
             #     printe('%s -X-> %s' % (item, coords))
-            coords = map(process_path, coords)
+            coords = list(map(process_path, coords))
             fout[item]['@coordinates'] = coords
 
     # check dimensions
@@ -186,7 +186,7 @@ def create_json_structure(imas_version=default_imas_version):
     for item in sorted(fout):
         keys = fout[item].keys()
         values = fout[item].values()
-        keys = map(lambda x: re.sub('^@', '', x), keys)
+        keys = list(map(lambda x: re.sub('^@', '', x), keys))
         fout[item] = dict(zip(keys, values))
 
     # break into pieces
@@ -249,7 +249,7 @@ def create_html_documentation(imas_version=default_imas_version):
                         '</tr>'.format(
                             item=item,
                             coordinates=re.sub('\[\]', '', re.sub('[\'\"]', '', re.sub(',', ',<br>', str(
-                                map(str, structure[item].get('coordinates', '')))))),
+                                list(map(str, structure[item].get('coordinates', ''))))))),
                             data_type=structure[item].get('data_type', ''),
                             units=structure[item].get('units', ''),
                             description=structure[item].get('documentation', ''),

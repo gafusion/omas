@@ -167,7 +167,7 @@ def json_loader(object_pairs, cls=dict):
 
     :return: ojbect
     """
-    object_pairs = map(lambda o: (o[0], o[1]), object_pairs)
+    object_pairs = list(map(lambda o: (o[0], o[1]), object_pairs))
     dct = cls()
     for x, y in object_pairs:
         dct[x] = y
@@ -217,7 +217,7 @@ def remote_uri(uri, filename, action):
 
         if action == 'list':
             printd('Listing %s' % (uri), topic='s3')
-            files=map(lambda x:x.key,s3connection.Bucket(s3bucket).objects.all())
+            files=list(map(lambda x:x.key,s3connection.Bucket(s3bucket).objects.all()))
             s3filename=s3filename.strip('/')
             if s3filename:
                 files=filter(lambda x:x.startswith(s3filename),files)
