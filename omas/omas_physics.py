@@ -285,15 +285,12 @@ def print_utility_cocos_signals(structures):
                 print("cocos_signals['%s']=" % i2o(item))
 
 # EQUILIBRIUM
-cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.exact'] = 'BT'
 cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.measured'] = 'BT'
 cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.reconstructed'] = 'BT'
 cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.standard_deviation'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.constraints.ip.exact'] = 'IP'
 cocos_signals['equilibrium.time_slice.:.constraints.ip.measured'] = 'IP'
 cocos_signals['equilibrium.time_slice.:.constraints.ip.reconstructed'] = 'IP'
 cocos_signals['equilibrium.time_slice.:.constraints.ip.standard_deviation'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.constraints.q.:.exact'] = 'Q'
 cocos_signals['equilibrium.time_slice.:.constraints.q.:.measured'] = 'Q'
 cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed'] = 'Q'
 cocos_signals['equilibrium.time_slice.:.constraints.q.:.standard_deviation'] = 'Q'
