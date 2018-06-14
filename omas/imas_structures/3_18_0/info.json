@@ -1,27 +1,27 @@
 {
- "info.machine": {
-  "data_type": "STR_0D",
-  "full_path": "info.machine",
-  "description": "machine name"
- },
- "info.user": {
-  "data_type": "STR_0D",
-  "full_path": "info.user",
-  "description": "user name"
- },
  "info.shot": {
-  "data_type": "INT_0D",
   "full_path": "info.shot",
+  "data_type": "INT_0D",
   "description": "shot number"
  },
  "info.imas_version": {
-  "data_type": "STR_0D",
   "full_path": "info.imas_version",
+  "data_type": "STR_0D",
   "description": "imas version"
  },
+ "info.machine": {
+  "full_path": "info.machine",
+  "data_type": "STR_0D",
+  "description": "machine name"
+ },
+ "info.user": {
+  "full_path": "info.user",
+  "data_type": "STR_0D",
+  "description": "user name"
+ },
  "info.run": {
-  "data_type": "INT_0D",
   "full_path": "info.run",
+  "data_type": "INT_0D",
   "description": "run number"
  }
 }

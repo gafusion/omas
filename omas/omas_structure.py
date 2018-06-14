@@ -181,6 +181,11 @@ def create_json_structure(imas_version=default_imas_version):
                     continue
                 if coord not in fout:
                     printe('%s --> %s' % (item, coord))
+        if '@units' in fout[item]:
+            if fout[item]['@units']=='as_parent':
+                fout[item]['@units']=units
+            else:
+                units=fout[item]['@units']
 
     # cleanup entries
     for item in sorted(fout):
