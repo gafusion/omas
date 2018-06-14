@@ -18,11 +18,11 @@ cocos_signals = {}
 cocos_signals['barometry.gauge.:.position.phi']='?'                      #[ADD?]# 2.000000 # phi  [rad]
 
 # BOLOMETER
-cocos_signals['bolometer.channel.:.aperture.:.centre.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['bolometer.channel.:.detector.centre.phi']='?'                      #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['bolometer.channel.:.line_of_sight.first_point.phi']='?'            #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['bolometer.channel.:.line_of_sight.second_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['bolometer.channel.:.line_of_sight.third_point.phi']='?'            #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['bolometer.channel.:.aperture.:.centre.phi']='BT'                          # 2.000000 # phi  [rad]
+cocos_signals['bolometer.channel.:.detector.centre.phi']='BT'                            # 2.000000 # phi  [rad]
+cocos_signals['bolometer.channel.:.line_of_sight.first_point.phi']='BT'                  # 2.000000 # phi  [rad]
+cocos_signals['bolometer.channel.:.line_of_sight.second_point.phi']='BT'                 # 2.000000 # phi  [rad]
+cocos_signals['bolometer.channel.:.line_of_sight.third_point.phi']='BT'                  # 2.000000 # phi  [rad]
 
 # CHARGE_EXCHANGE
 cocos_signals['charge_exchange.channel.:.velocity_pol.data']='?'           #[ADD?]# 2.500000 # velocity  _pol  [m.s^-1]
@@ -457,7 +457,7 @@ cocos_signals['equilibrium.time_slice.:.constraints.ip.standard_deviation']='IP'
 cocos_signals['equilibrium.time_slice.:.constraints.q.:.standard_deviation']='Q'                                           #[DEL?]# -1.000000 # standard_deviation
 
 # GAS_INJECTION
-cocos_signals['gas_injection.pipe.:.exit_position.phi']='?'                                  #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['gas_injection.pipe.:.exit_position.phi']='BT'                                        # 2.000000 # phi  [rad]
 
 # IC_ANTENNAS
 cocos_signals['ic_antennas.antenna.:.strap.:.outline.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
@@ -468,19 +468,19 @@ cocos_signals['ic_antennas.antenna.:.surface_current.:.spectrum']='?'           
 # INFO
 
 # INTERFEROMETER
-cocos_signals['interferometer.channel.:.line_of_sight.first_point.phi']='?'                       #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['interferometer.channel.:.line_of_sight.second_point.phi']='?'                      #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['interferometer.channel.:.line_of_sight.third_point.phi']='?'                       #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['interferometer.channel.:.line_of_sight.first_point.phi']='BT'                             # 2.000000 # phi  [rad]
+cocos_signals['interferometer.channel.:.line_of_sight.second_point.phi']='BT'                            # 2.000000 # phi  [rad]
+cocos_signals['interferometer.channel.:.line_of_sight.third_point.phi']='BT'                             # 2.000000 # phi  [rad]
 
 # IRON_CORE
 cocos_signals['iron_core.segment.:.b_field']='?'                                           #[ADD?]# 3.000000 # b  b_field  [T]
 
 # MAGNETICS
 cocos_signals['magnetics.bpol_probe.:.poloidal_angle']='?'              #[ADD?]# 2.000000 # poloidal  [rad]
-cocos_signals['magnetics.bpol_probe.:.position.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['magnetics.bpol_probe.:.toroidal_angle']='?'              #[ADD?]# 2.000000 # toroidal  [rad]
-cocos_signals['magnetics.flux_loop.:.position.:.phi']='?'               #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['magnetics.method.:.ip.data']='?'                         #[ADD?]# 1.750000 # ip  [A]
+cocos_signals['magnetics.bpol_probe.:.position.phi']='BT'                      # 2.000000 # phi  [rad]
+cocos_signals['magnetics.flux_loop.:.position.:.phi']='BT'                     # 2.000000 # phi  [rad]
+cocos_signals['magnetics.method.:.ip.data']='IP'                               # 1.750000 # ip  [A]
 
 # MHD_LINEAR
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.b_field_perturbed.coordinate1.imaginary']='?'            #[ADD?]# 2.875000 # toroidal  b  b_field  [as parent]
@@ -758,7 +758,7 @@ cocos_signals['tf.coil.:.current.data']='?'                                     
 cocos_signals['tf.field_map.:.a_field_tor.:.values']='?'                                              #[ADD?]# 1.600000 # _tor  [T.m]
 
 # THOMSON_SCATTERING
-cocos_signals['thomson_scattering.channel.:.position.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['thomson_scattering.channel.:.position.phi']='BT'                 # 2.000000 # phi  [rad]
 
 # TRANSPORT_SOLVER_NUMERICS
 cocos_signals['transport_solver_numerics.derivatives_1d.:.electrons.d2_drho_tor_norm2.velocity_pol']='?'                                   #[ADD?]# 3.000000 # velocity  _pol  [m.s^-1]
