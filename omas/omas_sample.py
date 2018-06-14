@@ -196,7 +196,7 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
         ods['equilibrium.time_slice'][time_index]['profiles_1d.phi'] = numpy.array([
             1.11e-05, -1.77e-01, -3.77e-01, -5.85e-01, -8.19e-01, -1.07e+00, -1.36e+00, -1.68e+00, -2.05e+00, -2.48e+00,
             -3.03e+00])
-        ods['equilibrium.time_slice'][time_index]['profiles_2d.0.psi'] = numpy.array([
+        ods['equilibrium.time_slice'][time_index]['profiles_2d.0.phi'] = numpy.array([
             [-4.09, -2.65, -1.87, -1.86, -2.54, -2.63, -4.17, -7.24, -9.35, -11.34, -12.54],
             [-4.48, -3.37, -3.14, -2.92, -3.3, -4.16, -5.91, -8.89, -12.19, -17.83, -20.1],
             [-5.97, -5., -4.21, -3.34, -3.42, -4.04, -5.57, -8.7, -12.09, -18.82, -21.72],
