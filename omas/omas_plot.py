@@ -434,7 +434,7 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
 
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=0, fig=None, **kw):
-    '''
+    """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
 
@@ -447,7 +447,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     :param kw: arguments passed to matplotlib plot statements
 
     :return: figure handler
-    '''
+    """
     if fig is None:
         fig = pyplot.figure()
 
@@ -503,7 +503,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True,
                           show_total_density=False, **kw):
-    '''
+    """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
 
@@ -524,7 +524,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     :param kw: arguments passed to matplotlib plot statements
 
     :return: figure handler
-    '''
+    """
     if fig is None:
         fig = pyplot.figure()
 
@@ -588,7 +588,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
 @add_to__ODS__
 def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
-    '''
+    """
     Plot pressures in `ods['core_profiles']['profiles_1d'][time_index]`
 
     :param ods: input ods
@@ -600,7 +600,7 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     :param kw: arguments passed to matplotlib plot statements
 
     :return: axes handler
-    '''
+    """
     if ax is None:
         ax = pyplot.gca()
 
