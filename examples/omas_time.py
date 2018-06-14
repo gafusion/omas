@@ -26,7 +26,12 @@ print(extra_info)
 # show use of .homogeneous_time property
 print(ods.homogeneous_time('equilibrium'))
 
-ods['equilibrium.time'] = [100, 200, 300]
+# time arrays can be set using `set_time_array` function
+# this simplifies the logic in the code since one does not
+# have to check if the array was already there or not
+ods.set_time_array('equilibrium.time',0,100)
+ods.set_time_array('equilibrium.time',1,200)
+ods.set_time_array('equilibrium.time',2,300)
 
 # get time information from explicitly set time array
 extra_info = {}
@@ -47,8 +52,6 @@ print(extra_info)
 extra_info = {}
 print(ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info))
 print(extra_info)
-
-#--------------
 
 # slice at time
 ods1 = ods['equilibrium'].slice_at_time(100)

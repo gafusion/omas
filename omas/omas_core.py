@@ -646,7 +646,7 @@ If in doubt, ask an OMAS developer.
 
         orig_value = []
         if key in self:
-            orig_value = numpy.atleast_1d(eval(self[key])).tolist()
+            orig_value = numpy.atleast_1d(self[key]).tolist()
 
         # substitute
         if time_index < len(orig_value):
