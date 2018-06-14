@@ -103,9 +103,15 @@ class TestOmasPlot(unittest.TestCase):
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
         gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
 
-    # Equilibrium cross section plot
+    # Equilibrium plots
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()
+
+    def test_eq_summary(self):
+        ods2 = ODS().sample_equilibrium(include_profiles=True)
+        ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=True)
+        ods2.plot_equilibrium_summary(fig=plt.gcf())
+        ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
 
     # PF active overlay
     def test_pf_active_overlay(self):
