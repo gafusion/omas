@@ -609,9 +609,24 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
 
     for item in prof1d.flat().keys():
         if 'pressure' in item:
-            uband(x, prof1d[item], ax=ax, label=item)
+            if 'ion' in item:
+                try:
+                    i = int(item.split("ion.")[-1].split('.')[0])
+                    label = prof1d['ion'][i]['label']
+                except ValueError:
+                    label = item
+            elif 'electrons' in item:
+                label = 'e$^-$'
+            else:
+                label = item
+            if item != label:
+                label += ' (thermal)' if 'thermal' in item else ''
+                label += ' (fast)' if 'fast' in item else ''
+            uband(x, prof1d[item], ax=ax, label=label)
 
     ax.set_xlim([0, 1])
+    ax.set_ylabel('Pressure (Pa)')
+    ax.set_xlabel('$\\rho_N$')
     ax.legend(loc=0).draggable(True)
     return ax
 
