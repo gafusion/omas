@@ -141,6 +141,8 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
         Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)
 
     :return: ODS instance with equilibrium data added
+        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
+        some contexts. If you do not want the original to be modified, deepcopy it first.
     """
 
     # These arrays were decimated to make them smaller; we don't need something nice looking for these tests and we
@@ -209,6 +211,50 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False):
 
     ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
     ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
+
+    return ods
+
+
+@add_to_ODS
+def profiles(ods, time_index=0, nx=11):
+    """
+    Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
+    roughly resemble something similar to a real plasma a little bit.
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :param nx: int
+        Number of points in test profiles
+
+    :return: ODS instance with profiles added.
+        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
+        some contexts. If you do not want the original to be modified, deepcopy it first.
+    """
+
+    prof1d = ods['core_profiles.profiles_1d'][time_index]
+    x = prof1d['grid.rho_tor_norm'] = numpy.linspace(0, 1, nx)
+    prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
+    prof1d['electrons.density_thermal'] = prof1d['electrons.density']
+    prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
+
+    prof1d['ion.0.label'] = 'D+'
+    prof1d['ion.0.element.0.z_n'] = 1.0
+    prof1d['ion.0.element.0.atoms_n'] = 1.0
+    prof1d['ion.0.element.0.a'] = 2.
+    prof1d['ion.0.density'] = prof1d['electrons.density'] * 0.6 / prof1d['ion.0.element.0.z_n']
+    prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
+    prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
+    prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
+
+    prof1d['ion.1.label'] = 'C+6'
+    prof1d['ion.1.element.0.z_n'] = 6.0
+    prof1d['ion.1.element.0.atoms_n'] = 1.0
+    prof1d['ion.1.element.0.a'] = 12.
+    prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
+    prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
+    prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
 
     return ods
 

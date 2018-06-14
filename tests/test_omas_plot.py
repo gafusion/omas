@@ -113,6 +113,19 @@ class TestOmasPlot(unittest.TestCase):
         ods2.plot_equilibrium_summary(fig=plt.gcf())
         ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
 
+    def test_core_profiles(self):
+        ods2 = copy.copy(self.ods)
+        ods2.sample_profiles()
+        ods2.plot_core_profiles_summary(fig=plt.gcf())
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
+            show_total_density=True)
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
+            show_total_density=True)
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+
     # PF active overlay
     def test_pf_active_overlay(self):
         # Basic test
