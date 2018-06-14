@@ -44,5 +44,5 @@ ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip']
 # In the above example `consistency_check = True` result in the following error::
 #
 #     LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS 3.18.0 location
-#                                       ^^^^^^^^^^^^^^
+#                                            ^^^^^^^^^^^^^^
 #     Did you mean: ['profiles_2d', 'ggd', 'boundary', 'profiles_1d', 'constraints', 'global_quantities', 'coordinate_system', 'boundary_separatrix', 'time', 'convergence']

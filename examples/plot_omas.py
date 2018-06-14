@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 OMAS plot examples
-================
+==================
 This example loads some data from S3, augments the ODS with pressure information, and generates some plots
 """
 
