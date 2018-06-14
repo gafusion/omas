@@ -232,6 +232,7 @@ def cocos_transform(cocosin_index, cocosout_index):
     transforms['F'] = transforms['TOR']
     transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
     transforms['BP'] = transforms['POL']
+    transforms[None] = 1
 
     printd(transforms,topic='cocos')
 
