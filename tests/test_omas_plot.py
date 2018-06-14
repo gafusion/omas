@@ -30,6 +30,7 @@ class TestOmasPlot(unittest.TestCase):
 
     # Flags to edit while testing
     show_plots = False  # This will get in the way of automatic testing
+    keep_plots_open = False
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
@@ -103,9 +104,41 @@ class TestOmasPlot(unittest.TestCase):
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
         gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
 
-    # Equilibrium cross section plot
+    # Equilibrium plots
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()
+        ods2 = ODS().sample_equilibrium(include_phi=True)
+        ods2.plot_equilibrium_CX()  # Should be vs. rho this time
+        ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        plt.figure('TestOmasPlot.test_eqcx missing wall')
+        ODS().sample_equilibrium(include_wall=False).plot_equilibrium_CX()  # No wall
+
+    def test_eq_summary(self):
+        ods2 = ODS().sample_equilibrium(include_profiles=True)
+        ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=True)
+        ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
+        ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
+
+    def test_core_profiles(self):
+        ods2 = copy.deepcopy(self.ods)
+        ods2.sample_profiles()
+        ods2.plot_core_profiles_summary(fig=plt.gcf())
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
+            show_total_density=True)
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
+            show_total_density=True)
+        ods2.plot_core_profiles_summary(
+            fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+
+    def test_core_pressure(self):
+        ods2 = copy.deepcopy(self.ods)
+        ods2.sample_profiles()
+        ods2.plot_core_profiles_pressures()
+        ods3 = copy.deepcopy(self.ods)
+        ods3.sample_profiles(add_junk_ion=True)
+        ods3.plot_core_profiles_pressures()
 
     # PF active overlay
     def test_pf_active_overlay(self):
@@ -253,12 +286,14 @@ class TestOmasPlot(unittest.TestCase):
         test_id = self.id()
         test_name = '.'.join(test_id.split('.')[-2:])
         if test_name not in ['TestOmasPlot.test_ch_count']:
-            plt.figure(test_name)
+            self.fig = plt.figure(test_name)
         self.printv('{}...'.format(test_name))
 
     def tearDown(self):
         test_name = '.'.join(self.id().split('.')[-2:])
         self.printv('    {} done.'.format(test_name))
+        if not self.keep_plots_open:
+            plt.close()
 
     @classmethod
     def tearDownClass(cls):
