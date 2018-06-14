@@ -501,7 +501,8 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, **kw):
+def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True,
+                          show_total_density=False, **kw):
     '''
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -513,6 +514,12 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
     :param combine_dens_temps: combine species plot of density and temperatures
+
+    :param show_thermal_fast_breakdown: bool
+        Show thermal and fast components of density in addition to total if available
+
+    :param show_total_density: bool
+        Show total thermal+fast in addition to thermal/fast breakdown if available
 
     :param kw: arguments passed to matplotlib plot statements
 
@@ -533,8 +540,16 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     for k, item in enumerate(what):
 
         # densities (thermal and fast)
-        for therm_fast in ['', '_fast']:
-            therm_fast_name = ['', ' (fast)'][therm_fast == '_fast']
+        for therm_fast in ['', '_thermal', '_fast']:
+            if (not show_thermal_fast_breakdown) and len(therm_fast):
+                continue  # Skip _thermal and _fast because the flag turned these details off
+            if (not show_total_density) and (len(therm_fast) == 0):
+                continue  # Skip total thermal+fast because the flag turned it off
+            therm_fast_name = {
+                '': ' (thermal+fast)',
+                '_thermal': ' (thermal)' if show_total_density else '',
+                '_fast': ' (fast)',
+            }[therm_fast]
             density = item + '.density' + therm_fast
             if item + '.density' + therm_fast in prof1d:
                 if combine_dens_temps:
