@@ -119,7 +119,7 @@ class TestOmasPlot(unittest.TestCase):
         ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
 
     def test_core_profiles(self):
-        ods2 = copy.copy(self.ods)
+        ods2 = copy.deepcopy(self.ods)
         ods2.sample_profiles()
         ods2.plot_core_profiles_summary(fig=plt.gcf())
         ods2.plot_core_profiles_summary(
@@ -132,9 +132,12 @@ class TestOmasPlot(unittest.TestCase):
             fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
 
     def test_core_pressure(self):
-        ods2 = copy.copy(self.ods)
+        ods2 = copy.deepcopy(self.ods)
         ods2.sample_profiles()
         ods2.plot_core_profiles_pressures()
+        ods3 = copy.deepcopy(self.ods)
+        ods3.sample_profiles(add_junk_ion=True)
+        ods3.plot_core_profiles_pressures()
 
     # PF active overlay
     def test_pf_active_overlay(self):

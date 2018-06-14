@@ -220,7 +220,7 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, in
 
 
 @add_to_ODS
-def profiles(ods, time_index=0, nx=11):
+def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     """
     Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
     roughly resemble something similar to a real plasma a little bit.
@@ -231,6 +231,9 @@ def profiles(ods, time_index=0, nx=11):
 
     :param nx: int
         Number of points in test profiles
+
+    :param add_junk_ion: bool
+        Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.
 
     :return: ODS instance with profiles added.
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
@@ -268,6 +271,15 @@ def profiles(ods, time_index=0, nx=11):
     prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
     prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
     prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
+
+    if add_junk_ion:
+        junki = prof1d['ion.2']
+        junki['density'] = x*0
+        junki['temperature'] = x*0
+        junki['pressure'] = x*0
+
+        junkn = prof1d['neutral.0']
+        junkn['density'] = x*0
 
     return ods
 
