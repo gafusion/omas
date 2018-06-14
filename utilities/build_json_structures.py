@@ -23,3 +23,4 @@ for imas_version in imas_versions:
     if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and imas_version==imas_versions[-1]):
         create_json_structure(imas_version=imas_version)
         create_html_documentation(imas_version=imas_version)
+

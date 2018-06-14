@@ -267,7 +267,7 @@ def generate_cocos_signals(structures=[], threshold=0):
     """
     This is a utility function for generating the omas_cocos.py Python file
 
-    :param structures: list of structures to generate
+    :param structures: list of structures for which to generate COCOS signals
 
     :param threshold: score threshold below which singals entries will not be written in omas_cocos.py
     * 0 is a reasonable threshold for catching signals that should have an associated COCOS transform
@@ -282,6 +282,13 @@ def generate_cocos_signals(structures=[], threshold=0):
         if units not in cocos_units:
             cocos_units.append(units)
     cocos_units = set(cocos_units).difference(set(['?']))
+
+    # make sure to keep around structures that are already in omas_cocos.py
+    cocos_structures = []
+    for item in _cocos_signals:
+        structure_name = item.split(separator)[0]
+        if structure_name not in cocos_structures:
+            cocos_structures.append(structure_name)
 
     if isinstance(structures, basestring):
         structures = [structures]
@@ -321,9 +328,9 @@ def generate_cocos_signals(structures=[], threshold=0):
         for item in sorted(list(list(_structures[d[structure]].keys()))):
             item = i2o(item)
             item_ = item
-            if item.endswith(':.values'):
+            if any([item.endswith(k) for k in [':.values',':.value',':.data']]):
                 item_ = l2o(p2l(item)[:-2])
-            elif item.endswith('.values'):
+            elif any([item.endswith(k) for k in ['.values','.value','.data']]):
                 item_ = l2o(p2l(item)[:-1])
             m = max(m, len(item))
             score = 0
@@ -339,10 +346,10 @@ def generate_cocos_signals(structures=[], threshold=0):
                 elif units in [None, 's']:
                     out[structure].setdefault(-1, []).append((item, '[%s]' % units))
                     continue
-                elif any([item_.endswith(k) for k in
-                          ['.chi_squared', '.standard_deviation', '.weight', '.coefficients', '.r', '.z', '.beta_tor',
-                           '.beta_pol', '.radial', '_r', '_z', '.rho_tor_norm', '.darea_drho_tor',
-                           '.dvolume_drho_tor']]):
+                elif any([(item_.endswith('.'+k) or item_.endswith('_'+k) or '.'+k+'.' in item) for k in
+                          ['chi_squared', 'standard_deviation', 'weight', 'coefficients', 'r', 'z', 'beta_tor',
+                           'beta_pol', 'radial', 'rho_tor_norm', 'darea_drho_tor',
+                           'dvolume_drho_tor','ratio','fraction','rate','d','flux','v']]):
                     out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
                     continue
                 elif any([k in documentation for k in ['always positive']]):
@@ -412,11 +419,17 @@ def generate_cocos_signals(structures=[], threshold=0):
     return out
 
 # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
-from .omas_cocos import cocos_signals
+from .omas_cocos import cocos_signals as _cocos_signals
 
-# cocos_structures contains the list of all the IDSs that have been checked for COCOS convention transformations
-cocos_structures = ['info']
-for item in cocos_signals:
-    structure_name = item.split(separator)[0]
-    if structure_name not in cocos_structures:
-        cocos_structures.append(structure_name)
+# The CocosSignals class is just a dictionary that raises warnings when users access
+# entries that are likely to need a COCOS transformation, but do not have one.
+class CocosSignals(dict):
+    def __getitem__(self, key):
+        value = dict.__getitem__(self, key)
+        if value == '?':
+            warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py')
+        return value
+
+# cocos_signals is the actual dictionary
+cocos_signals = CocosSignals()
+cocos_signals.update(_cocos_signals)
