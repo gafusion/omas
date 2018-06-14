@@ -391,7 +391,7 @@ def load_structure(filename, imas_version):
 
 def p2l(key):
     """
-    converts the many different ways of addressing an ODS path to a list of keys
+    Converts the many different ways of addressing an ODS path to a list of keys (['bla',0,'bla'])
 
     :param key: ods location in some format
 
@@ -416,7 +416,7 @@ def p2l(key):
 
 def l2i(path):
     """
-    Formats a list into a IMAS path
+    Formats a list (['bla',0,'bla']) into a IMAS path ('bla[0].bla')
 
     :param path: ODS path format
 
@@ -431,22 +431,36 @@ def l2i(path):
     return ipath
 
 
+def l2u(path):
+    """
+    Formats a list (['bla',0,'bla']) into a universal ODS path format ('bla.:.bla')
+    NOTE: a universal ODS path substitutes lists indices with :
+
+    :param path: list of strings and integers
+
+    :return: universal ODS path format
+    """
+    location = separator.join(filter(None, map(str, path)))
+    location = re.sub('\.[0-9:]+', '.:', str(location))
+    return location
+
+
 def l2o(path):
     """
-    Formats a list into an ODS path format
+    Formats a list (['bla',0,'bla']) into an ODS path format ('bla.0.bla')
 
     :param path: list of strings and integers
 
     :return: ODS path format
     """
-    location = separator.join(filter(None,map(str,path)))
-    location = re.sub('\.[0-9:]+$', '.:', str(location))
+    location = separator.join(filter(None, map(str, path)))
+    location = re.sub('\.([0-9:]+)', r'.\1', str(location))
     return location
 
 
 def i2o(path):
     """
-    Formats a IMAS path format into an ODS path
+    Formats a IMAS path ('bla[0].bla') format into an ODS path ('bla.0.bla')
 
     :param path: IMAS path format
 
@@ -523,7 +537,7 @@ def omas_info(structures, imas_version=default_imas_version):
                     continue
                 parent = False
                 for item1 in lst[k + 1:]:
-                    if l2o(item1.split(separator)[:-1]).rstrip('[:]') == item:
+                    if l2u(item1.split(separator)[:-1]).rstrip('[:]') == item:
                         parent = True
                         break
                 if parent:

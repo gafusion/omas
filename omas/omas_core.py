@@ -320,7 +320,7 @@ class ODS(MutableMapping):
                         cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout)
 
         # full path where we want to place the data
-        location = l2o([self.location, key[0]])
+        location = l2u([self.location, key[0]])
 
         # handle cocos transformations coming in
         if self.cocosin != self.cocos and separator in location and location in omas_physics.cocos_signals:
@@ -452,7 +452,7 @@ If in doubt, ask an OMAS developer.
                                               dynamic_path_creation=self.dynamic_path_creation,
                                               cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout))
             else:
-                location = l2o([self.location, key[0]])
+                location = l2u([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
@@ -464,7 +464,7 @@ If in doubt, ask an OMAS developer.
                     del self[key[0]]
                 raise
         else:
-            location = l2o([self.location, key[0]])
+            location = l2u([self.location, key[0]])
             value=self.omas_data[key[0]]
             # handle cocos transformations going out
             if self.cocosout != self.cocos and location in omas_physics.cocos_signals:
