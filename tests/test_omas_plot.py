@@ -30,6 +30,7 @@ class TestOmasPlot(unittest.TestCase):
 
     # Flags to edit while testing
     show_plots = False  # This will get in the way of automatic testing
+    keep_plots_open = False
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
@@ -285,12 +286,14 @@ class TestOmasPlot(unittest.TestCase):
         test_id = self.id()
         test_name = '.'.join(test_id.split('.')[-2:])
         if test_name not in ['TestOmasPlot.test_ch_count']:
-            plt.figure(test_name)
+            self.fig = plt.figure(test_name)
         self.printv('{}...'.format(test_name))
 
     def tearDown(self):
         test_name = '.'.join(self.id().split('.')[-2:])
         self.printv('    {} done.'.format(test_name))
+        if not self.keep_plots_open:
+            plt.close()
 
     @classmethod
     def tearDownClass(cls):

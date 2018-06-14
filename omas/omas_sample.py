@@ -279,7 +279,7 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
         junki['pressure'] = x*0
 
         junkn = prof1d['neutral.0']
-        junkn['density'] = x*0
+        junkn['pressure'] = x*0
 
     return ods
 
