@@ -264,127 +264,103 @@ def cocos_environment(ods, cocosin=None, cocosout=None):
         ods.cocosout = old_cocosout
 
 
-# This dictionary defines the IMAS locations and the corresponding `cocos_transform` function
-cocos_signals = {}
 
-def print_utility_cocos_signals(structures):
+def generate_cocos_signals(structures, threshold=0):
     '''
     This is a utility function for printing the cocos_signals entries as the ones defined in omas/omas_physics.py
     The printed text must be copied to omas/omas_physics.py and the COCOS transformations assigned by hand.
     '''
+    # units of entries currently in cocos_singals
+    cocos_units = []
+    for item in cocos_signals:
+        units = omas_info_node(item)['units']
+        if units not in cocos_units:
+            cocos_units.append(units)
+
     if isinstance(structures, basestring):
         structures = [structures]
+    structures += cocos_structures
+    structures = numpy.unique(structures)
+
     from .omas_utils import _structures
     from .omas_utils import i2o
     from .omas_core import ODS
     ods = ODS()
+    out = {}
+    text=['cocos_signals = {}']
     for structure in structures:
+        text.extend(['','# '+structure.upper()])
+        out[structure] = {}
         ods[structure]
-        for item in sorted(list(list(_structures.values())[0].keys())):
+        d = dict_structures(imas_version=default_imas_version)
+        m = 0
+        for item in sorted(list(list(_structures[d[structure]].keys()))):
+            item=i2o(item)
+            m=max(m,len(item))
+            score = 0
+            rationale = []
             if item.startswith(structure) and '_error_' not in item:
-                print("cocos_signals['%s']=" % i2o(item))
+                entry = "cocos_signals['%s']=" % i2o(item)
+                info = omas_info_node(item)
+                units = info.get('units', None)
+                data_type = info.get('data_type', None)
+                if data_type in ['structure','STR_0D','struct_array']:
+                    continue
+                elif units in [None,'s']:
+                    out[structure].setdefault(-1, []).append((item,'[%s]'%units))
+                    continue
+                elif any([item.endswith(k) for k in ['chi_squared','standard_deviation','weight','coefficients','.r','.z']]):
+                    out[structure].setdefault(-1, []).append((item,p2l(item)[-1]))
+                    continue
+                n=item.count(separator)
+                for pnt,key in enumerate(p2l(item)):
+                    pnt=float(pnt)/n
+                    for k in ['q','ip','b0','phi','psi','f_df']:
+                        if key==k:
+                            rationale += [k]
+                            score += pnt
+                            break
+                    for k in ['q','j','phi','psi','ip','b','f','v','f_df']:
+                        if key.startswith('%s_'%k):
+                            rationale += [k]
+                            score += pnt
+                            break
+                    for k in ['velocity','current','b_field','e_field','torque','momentum']:
+                        if k in key and key not in ['heating_current_drive']:
+                            rationale += [k]
+                            score += pnt
+                            break
+                    for k in ['_dpsi']:
+                        if k in key and k+'_norm' not in key:
+                            rationale += [k]
+                            score += pnt
+                            break
+                    for k in ['poloidal','toroidal','parallel','_tor','_pol','_par','tor_','pol_','par_']:
+                        if key.endswith(k) or key.startswith(k) and key not in ['beta_pol','beta_pol']:
+                            rationale += [k]
+                            score += pnt
+                            break
+                if units in cocos_units:
+                    if len(rationale):
+                        rationale += ['[%s]'%units]
+                        score += 1
+                out[structure].setdefault(score, []).append((item,'  '.join(rationale)))
+        for score in reversed(sorted(out[structure])):
+            if score>threshold or item in cocos_signals:
+                for item,rationale in out[structure][score]:
+                    attention='# <--> '
+                    if item in cocos_signals:
+                        attention='       '
+                    text.append(("cocos_signals['%s']='%s'" %(item,cocos_signals.get(item,'?'))).ljust(m+20)+attention+'# %3.3f # %s'%(score,rationale))
 
-# EQUILIBRIUM
-cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.measured'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.reconstructed'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.standard_deviation'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.constraints.ip.measured'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.constraints.ip.reconstructed'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.constraints.ip.standard_deviation'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.constraints.q.:.measured'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.constraints.q.:.standard_deviation'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.ggd.:.b_field_tor.:.values'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.ggd.:.j_parallel.:.values'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.ggd.:.j_tor.:.values'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.ggd.:.phi.:.values'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.ggd.:.psi.:.values'] = 'PSI'
-cocos_signals['equilibrium.time_slice.:.global_quantities.ip'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_tor'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.global_quantities.psi_axis'] = 'PSI'
-cocos_signals['equilibrium.time_slice.:.global_quantities.psi_boundary'] = 'PSI'
-cocos_signals['equilibrium.time_slice.:.global_quantities.q_95'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.global_quantities.q_axis'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.global_quantities.q_min.value'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.b_average'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.b_max'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.b_min'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.darea_dpsi'] = 'dPSI'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.dpressure_dpsi'] = 'dPSI'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.dpsi_drho_tor'] = 'PSI'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.dvolume_dpsi'] = 'dPSI'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.f'] = 'F'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.f_df_dpsi'] = 'F_FPRIME'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.j_parallel'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.j_tor'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.phi'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.psi'] = 'PSI'
-cocos_signals['equilibrium.time_slice.:.profiles_1d.q'] = 'Q'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.b_field_tor'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.b_tor'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_parallel'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_tor'] = 'IP'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.phi'] = 'BT'
-cocos_signals['equilibrium.time_slice.:.profiles_2d.:.psi'] = 'PSI'
-cocos_signals['equilibrium.vacuum_toroidal_field.b0'] = 'BT'
+        print('\n'.join(text))
+    return out
 
-# CORE_PROFILES
-cocos_signals['core_profiles.profiles_1d.:.j_total'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.e_field_parallel'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.j_non_inductive'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.e_field.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.e_field.parallel'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.e_field.toroidal'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.e_field.diamagnetic'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.j_tor'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.momentum_tor'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity_tor'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.parallel'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.toroidal'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.diamagnetic'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity_pol'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.parallel'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.toroidal'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.diamagnetic'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.parallel'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.toroidal'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.diamagnetic'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.parallel'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.toroidal'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.diamagnetic'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.grid.psi'] = 'PSI'
-cocos_signals['core_profiles.profiles_1d.:.j_bootstrap'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.q'] = 'Q'
-cocos_signals['core_profiles.profiles_1d.:.j_ohmic'] = 'IP'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity_tor'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity_pol'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.poloidal'] = 'BP'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.parallel'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.toroidal'] = 'BT'
-cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.diamagnetic'] = 'BT'
-cocos_signals['core_profiles.vacuum_toroidal_field.b0'] = 'BT'
-cocos_signals['core_profiles.global_quantities.ip'] = 'IP'
-cocos_signals['core_profiles.global_quantities.v_loop'] =  'IP'
-cocos_signals['core_profiles.global_quantities.current_bootstrap'] = 'IP'
-cocos_signals['core_profiles.global_quantities.current_non_inductive'] = 'IP'
-
-# CORE_SOURCES
-cocos_signals['core_sources.source.:.global_quantities.:.current_parallel'] = 'IP'
-cocos_signals['core_sources.source.:.global_quantities.:.torque_tor'] = 'BT'
-cocos_signals['core_sources.source.:.profiles_1d.:.momentum_tor'] = 'BT'
-cocos_signals['core_sources.source.:.profiles_1d.:.grid.psi'] = 'PSI'
-cocos_signals['core_sources.source.:.profiles_1d.:.current_parallel_inside'] = 'IP'
-cocos_signals['core_sources.source.:.profiles_1d.:.torque_tor_inside'] = 'BT'
-cocos_signals['core_sources.source.:.profiles_1d.:.j_parallel'] = 'IP'
-cocos_signals['core_sources.vacuum_toroidal_field.b0'] = 'BT'
+# cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
+from .omas_cocos import cocos_signals
 
 # cocos_structures contains the list of all the IDSs that have been checked for COCOS convention transformations
-cocos_structures = ['wall', 'info']
+cocos_structures = ['summary','wall', 'info']
 for item in cocos_signals:
     structure_name = item.split(separator)[0]
     if structure_name not in cocos_structures:

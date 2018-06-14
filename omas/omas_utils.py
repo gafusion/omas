@@ -348,8 +348,27 @@ _info_structures = {}
 
 
 def list_structures(imas_version):
+    '''
+    list names of structures in imas version
+
+    :param imas_version: imas version
+
+    :return: list
+    '''
     return sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
                   glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json'))))
+
+
+def dict_structures(imas_version):
+    '''
+    maps structure names to filenames
+
+    :param imas_version: imas version
+
+    :return: dictionary
+    '''
+    paths=glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
+    return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],paths)),paths))
 
 
 def load_structure(filename, imas_version):
@@ -366,11 +385,11 @@ def load_structure(filename, imas_version):
         filename = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + filename + '.json'
         if not os.path.exists(filename):
             if not os.path.exists(os.path.split(filename)[0]) or not os.path.exists(os.path.split(filename)[0]+os.sep+'info.json'):
-                raise (Exception('`%s` is not a valid IMAS structure directory.\n'
+                raise (ValueError('`%s` is not a valid IMAS structure directory.\n'
                                  'Perhaps the structure files for IMAS version %s must be generated.\n'
                                  'Try running the `omas/samples/build_json_structures.py` script.'% (os.path.split(filename)[0],imas_version)))
             else:
-                raise (Exception('`%s` is not a valid IMAS %s structure' % (filename,imas_version)))
+                raise (ValueError('`%s` is not a valid IMAS %s structure' % (filename,imas_version)))
         else:
             filename = os.path.abspath(filename)
 
