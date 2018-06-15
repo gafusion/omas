@@ -350,7 +350,7 @@ def generate_cocos_signals(structures=[], threshold=0):
                 elif any([(item_.endswith('.'+k) or item_.endswith('_'+k) or '.'+k+'.' in item) for k in
                           ['chi_squared', 'standard_deviation', 'weight', 'coefficients', 'r', 'z', 'beta_tor',
                            'beta_pol', 'radial', 'rho_tor_norm', 'darea_drho_tor',
-                           'dvolume_drho_tor','ratio','fraction','rate','d','flux','v']]):
+                           'dvolume_drho_tor','ratio','fraction','rate','d','flux','v','b_field_max','width_tor']]):
                     out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
                     continue
                 elif any([k in documentation for k in ['always positive']]):
