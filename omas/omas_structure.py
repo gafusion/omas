@@ -218,7 +218,7 @@ def create_json_structure(imas_version=default_imas_version):
         if structure=='time':
             continue
         print(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json')
-        dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '))
+        dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
         #dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
         open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
 

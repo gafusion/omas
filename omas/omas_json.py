@@ -20,7 +20,7 @@ def save_omas_json(ods, filename, **kw):
 
     printd('Saving OMAS data to Json: %s' % filename, topic=['Json', 'json'])
 
-    json_string = json.dumps(ods, default=json_dumper, indent=0, separators=(',', ': '), **kw)
+    json_string = json.dumps(ods, default=json_dumper, indent=0, separators=(',', ': '), sort_keys=True, **kw)
     open(filename, 'w').write(json_string)
 
 
