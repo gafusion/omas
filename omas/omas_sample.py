@@ -2,7 +2,7 @@ from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
 from .omas_core import ODS
-
+from .omas_physics import constants
 
 __all__ = []
 
@@ -240,7 +240,6 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
 
-    from scipy import constants
     ee = constants.e
 
     prof1d = ods['core_profiles.profiles_1d'][time_index]
