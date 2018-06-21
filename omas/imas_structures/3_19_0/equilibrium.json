@@ -133,8 +133,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -151,8 +151,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -163,8 +163,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -175,8 +175,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -193,8 +193,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -205,8 +205,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -327,8 +327,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -345,8 +345,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -357,8 +357,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -369,8 +369,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -387,8 +387,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -399,8 +399,8 @@
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.grids_ggd[:].grid[:].grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -5873,10 +5873,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_contravariant": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Contravariant metric tensor on every point of the grid described by grid_type",
@@ -5892,10 +5892,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"tensor_contravariant\"",
@@ -5905,10 +5905,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"tensor_contravariant\"",
@@ -5918,10 +5918,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_covariant": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Covariant metric tensor on every point of the grid described by grid_type",
@@ -5937,10 +5937,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_covariant_error_lower": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"tensor_covariant\"",
@@ -5950,10 +5950,10 @@
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_covariant_error_upper": {
   "coordinates": [
-   "1...3",
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
+   "equilibrium.time_slice[:].coordinate_system.grid.dim2",
    "1...3",
-   "equilibrium.time_slice[:].coordinate_system.grid.dim2"
+   "1...3"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"tensor_covariant\"",
@@ -6372,8 +6372,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6390,8 +6390,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6402,8 +6402,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6414,8 +6414,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6432,8 +6432,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6444,8 +6444,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6566,8 +6566,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6584,8 +6584,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6596,8 +6596,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6608,8 +6608,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6626,8 +6626,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -6638,8 +6638,8 @@
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",

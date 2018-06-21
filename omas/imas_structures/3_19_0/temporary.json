@@ -1052,9 +1052,9 @@
  },
  "temporary.dynamic_float3d[:].value.data": {
   "coordinates": [
-   "temporary.dynamic_float3d[:].value.time",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time"
   ],
   "data_type": "FLT_3D",
   "documentation": "Value",
@@ -1070,9 +1070,9 @@
  },
  "temporary.dynamic_float3d[:].value.data_error_lower": {
   "coordinates": [
-   "temporary.dynamic_float3d[:].value.time",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"data\"",
@@ -1082,9 +1082,9 @@
  },
  "temporary.dynamic_float3d[:].value.data_error_upper": {
   "coordinates": [
-   "temporary.dynamic_float3d[:].value.time",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float3d[:].value.time"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"data\"",
@@ -1145,8 +1145,8 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float4d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time"
   ],
   "data_type": "FLT_4D",
   "documentation": "Value",
@@ -1164,8 +1164,8 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float4d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"data\"",
@@ -1177,8 +1177,8 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float4d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float4d[:].value.time"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"data\"",
@@ -1240,8 +1240,8 @@
    "1...N",
    "1...N",
    "1...N",
-   "temporary.dynamic_float5d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time"
   ],
   "data_type": "FLT_5D",
   "documentation": "Value",
@@ -1260,8 +1260,8 @@
    "1...N",
    "1...N",
    "1...N",
-   "temporary.dynamic_float5d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"data\"",
@@ -1274,8 +1274,8 @@
    "1...N",
    "1...N",
    "1...N",
-   "temporary.dynamic_float5d[:].value.time",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float5d[:].value.time"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"data\"",
@@ -1336,10 +1336,10 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float6d[:].value.time",
    "1...N",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time"
   ],
   "data_type": "FLT_6D",
   "documentation": "Value",
@@ -1357,10 +1357,10 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float6d[:].value.time",
    "1...N",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time"
   ],
   "data_type": "FLT_6D",
   "documentation": "Lower error for \"data\"",
@@ -1372,10 +1372,10 @@
   "coordinates": [
    "1...N",
    "1...N",
-   "temporary.dynamic_float6d[:].value.time",
    "1...N",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_float6d[:].value.time"
   ],
   "data_type": "FLT_6D",
   "documentation": "Upper error for \"data\"",
@@ -1553,9 +1553,9 @@
  },
  "temporary.dynamic_integer3d[:].value.data": {
   "coordinates": [
-   "temporary.dynamic_integer3d[:].value.time",
    "1...N",
-   "1...N"
+   "1...N",
+   "temporary.dynamic_integer3d[:].value.time"
   ],
   "data_type": "INT_3D",
   "documentation": "Value",

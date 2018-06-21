@@ -164,7 +164,7 @@ def create_json_structure(imas_version=default_imas_version):
     # format conversions
     for item in sorted(fout):
         coords = []
-        for key in list(fout[item].keys()):
+        for key in sorted(list(fout[item].keys())):
             if key.endswith('AosParent_relative') or key.endswith('_same_as'):
                 del fout[item][key]
             elif key != '@coordinates' and key.startswith('@coordinate'):

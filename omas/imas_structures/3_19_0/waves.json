@@ -2108,8 +2108,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2126,8 +2126,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2138,8 +2138,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2150,8 +2150,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2168,8 +2168,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2180,8 +2180,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2302,8 +2302,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_contravariant": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2320,8 +2320,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_contravariant_error_lower": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2332,8 +2332,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_contravariant_error_upper": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2344,8 +2344,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2362,8 +2362,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant_error_lower": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -2374,8 +2374,8 @@
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant_error_upper": {
   "coordinates": [
-   "1...N",
    "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].element",
+   "1...N",
    "1...N"
   ],
   "data_type": "FLT_3D",
@@ -5844,9 +5844,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
@@ -5862,9 +5862,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
@@ -5874,9 +5874,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
@@ -5925,9 +5925,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
@@ -5943,9 +5943,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
@@ -5955,9 +5955,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
@@ -6517,9 +6517,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
@@ -6535,9 +6535,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
@@ -6547,9 +6547,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
@@ -6598,9 +6598,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
@@ -6616,9 +6616,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
@@ -6628,9 +6628,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
@@ -6701,9 +6701,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
@@ -6719,9 +6719,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
@@ -6731,9 +6731,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
@@ -6782,9 +6782,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
@@ -6800,9 +6800,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
@@ -6812,9 +6812,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
@@ -6986,9 +6986,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density_n_tor": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density per toroidal mode number",
@@ -7004,9 +7004,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density_n_tor_error_lower": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_n_tor\"",
@@ -7016,9 +7016,9 @@
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density_n_tor_error_upper": {
   "coordinates": [
-   "waves.coherent_wave[:].profiles_2d[:].n_tor",
    "1...N",
-   "1...N"
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_n_tor\"",
