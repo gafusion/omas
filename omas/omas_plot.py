@@ -826,8 +826,8 @@ def pf_active_overlay(ods, ax=None, **kw):
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.oblique.r', channels_name='coil',
-        test_checker='checker > 0')
+        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.geometry_type', channels_name='coil',
+        test_checker='checker > -1')
     if nc == 0:
         return
 
@@ -843,28 +843,37 @@ def pf_active_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
 
+    def path_rectangle(rectangle):
+        """
+        :param rectangle: ODS sub-folder: element.*.geometry.rectangle
+        :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
+        """
+        x = rectangle['r']
+        y = rectangle['z']
+        dx = rectangle['width']
+        dy = rectangle['height']
+        return numpy.array([
+            [x - dx / 2., x - dx / 2., x + dx / 2., x + dx / 2.],
+            [y - dy / 2., y + dy / 2., y + dy / 2., y - dy / 2.]]).T
+
+    def path_outline(outline):
+        """
+        :param outline: ODS sub-folder: element.*.geometry.outline
+        :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
+        """
+        return numpy.array([outline['r'], outline['z']]).T
+
+    geo_type_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+
     patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
         if mask[i]:
-            oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
-            fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
-                    oblique['alpha'], oblique['beta']]
-
-            ct = cocos_transform(ods.cocos, 11)['BP']
-
-            xarr = [
-                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-            ]
-            yarr = [
-                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-            ]
-            path = numpy.array([xarr, yarr]).T
+            geometry_type = geo_type_map[ods['pf_active.coil'][i]['element.0.geometry.geometry_type']]
+            try:
+                path = eval('path_'+geometry_type)(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
+            except NameError:
+                print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(i, geometry_type))
+                continue
             patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
             kw.pop('label', None)  # Prevent label from being placed on more than one patch
             try:
@@ -1200,5 +1209,5 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
-            ax.text(r2[i], z2[i], bolo_id[i], color=color,
-                    ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z1[i] > 0)], fontsize=notesize)
+            ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
+                    ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
