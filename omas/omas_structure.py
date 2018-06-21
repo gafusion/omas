@@ -245,6 +245,9 @@ def create_html_documentation(imas_version=default_imas_version):
         lines.append(sub_table_header)
         for item in sorted(structure):
             if not any([item.endswith(k) for k in ['_error_index', '_error_lower', '_error_upper']]):
+                is_uncertain = ''
+                if item + '_error_upper' in structure:
+                    is_uncertain = ' (uncertain)'
                 try:
                     lines.append(
                         '<tr>'
@@ -257,7 +260,7 @@ def create_html_documentation(imas_version=default_imas_version):
                             item=item,
                             coordinates=re.sub('\[\]', '', re.sub('[\'\"]', '', re.sub(',', ',<br>', str(
                                 list(map(str, structure[item].get('coordinates', ''))))))),
-                            data_type=structure[item].get('data_type', ''),
+                            data_type=structure[item].get('data_type', '') + is_uncertain,
                             units=structure[item].get('units', ''),
                             description=structure[item].get('documentation', ''),
                             column_style=column_style
