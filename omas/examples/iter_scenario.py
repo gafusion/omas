@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# # -*- coding: utf-8 -*-
+"""
+Work with ITER IMAS scenario database
+=====================================
+This example converts --ALL-- IMAS scenarios to ODS format.
+The script is meant to be run on the ITER workstations,
+since it requires access to the `scenario_summary` utility,
+as well as the data that is stored in the ITER IMAS database.
+"""
+
 from __future__ import print_function, division, unicode_literals
 
 import subprocess
