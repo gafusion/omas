@@ -302,17 +302,37 @@ def pf_active(ods):
         [2.6124,  0.4376,  0.17320,  0.1946,  0.0,  92.40],
         [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
     ]
+
+    geo_type_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+
     for i in range(nc):
-        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
-        oblique['r'] = fc_dat[i][0]
-        oblique['z'] = fc_dat[i][1]
-        oblique['length'] = fc_dat[i][2]  # Or width in R
-        oblique['thickness'] = fc_dat[i][3]  # Or height in Z
-        oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
-        oblique['beta'] = fc_dat[i][5] * numpy.pi/180
-        ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
-        if i < (nc-1):  # Don't put the identifier on the last one to test handling of missing identifiers
-            ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
+        if (fc_dat[i][4] == 0) and (fc_dat[i][5] == 0):
+            rect = ods['pf_active.coil'][i]['element.0.geometry.rectangle']
+            rect['r'] = fc_dat[i][0]
+            rect['z'] = fc_dat[i][1]
+            rect['width'] = fc_dat[i][2]  # Or width in R
+            rect['height'] = fc_dat[i][3]  # Or height in Z
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = \
+                (numpy.array(geo_type_map) == 'rectangle').argmax()
+        else:
+            outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
+            fdat = fc_dat[i]
+            fdat[4] = -fc_dat[i][4] * numpy.pi / 180
+            fdat[5] = -(fc_dat[i][5] * numpy.pi / 180 if fc_dat[i][5] != 0 else numpy.pi / 2)
+            outline['r'] = [
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+             ]
+            outline['z'] = [
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
+            ]
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = \
+                (numpy.array(geo_type_map) == 'outline').argmax()
 
     return ods
 
