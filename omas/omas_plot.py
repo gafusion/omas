@@ -352,7 +352,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
         Name of subsystem or ODS, like 'pf_active'
 
     :param imas_version: string or None
-        IMAS version to use when mapping. Most recent version is used if None
+        IMAS version to use when mapping. Can be None if lookup for subsys is not version sensitive.
 
     :param reverse: bool
         Switches the roles of param geometry_type and return
@@ -363,7 +363,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
     """
 
     if imas_version is None:
-        imas_version = ODS().imas_version
+        imas_version = '99.99.99'  # Unrecognized
 
     if subsys == 'pf_active':
         if compare_version(imas_version, '3.19.0') <= 0:

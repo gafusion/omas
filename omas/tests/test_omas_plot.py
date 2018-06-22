@@ -104,6 +104,17 @@ class TestOmasPlot(unittest.TestCase):
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
         gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
 
+    def test_geo_type_lookup(self):
+        from omas.omas_plot import geo_type_lookup
+        # Basic tests
+        assert geo_type_lookup(0, 'pf_active', imas_version='3.19.0', reverse=False) == 'outline'
+        assert geo_type_lookup('outline', 'pf_active', imas_version='3.19.0', reverse=True) == 0
+        assert geo_type_lookup(1, 'pf_active', imas_version='3.19.0', reverse=False) == 'rectangle'
+        assert geo_type_lookup('rectangle', 'pf_active', imas_version='3.19.0', reverse=True) == 1
+        # Test handling of problem cases
+        assert geo_type_lookup(0, 'unrecognized_nonsense_fail', imas_version=None, reverse=False) is None
+        assert geo_type_lookup(0, 'pf_active', imas_version='99.99.99', reverse=False) == 'outline'
+
     # Equilibrium plots
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()
