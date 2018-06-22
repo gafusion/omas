@@ -3,6 +3,7 @@ from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 from .omas_core import ODS
 from .omas_physics import constants
+from .omas_plot import geo_type_lookup
 
 __all__ = []
 
@@ -311,7 +312,8 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
         [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
     ]
 
-    geo_type_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+    rect_code = geo_type_lookup('rectangle', 'pf_active', ods.imas_version, reverse=True)
+    outline_code = geo_type_lookup('outline', 'pf_active', ods.imas_version, reverse=True)
 
     for i in range(nc_reg):
         if (fc_dat[i][4] == 0) and (fc_dat[i][5] == 0):
@@ -320,8 +322,7 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
             rect['z'] = fc_dat[i][1]
             rect['width'] = fc_dat[i][2]  # Or width in R
             rect['height'] = fc_dat[i][3]  # Or height in Z
-            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = \
-                (numpy.array(geo_type_map) == 'rectangle').argmax()
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = rect_code
         else:
             outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
             fdat = fc_dat[i]
@@ -339,8 +340,7 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
                 fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
                 fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
             ]
-            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = \
-                (numpy.array(geo_type_map) == 'outline').argmax()
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = outline_code
 
     for i in range(nc_reg, nc_reg+nc_weird):
         # This isn't a real geometry_type, so it should trigger the contingency

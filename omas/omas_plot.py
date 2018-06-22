@@ -342,6 +342,46 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
 
 
+def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
+    """
+    Given a geometry type code
+    :param geometry_type: int (or string if reverse=True)
+        Geometry type code (or geometry name if reverse)
+
+    :param subsys: string
+        Name of subsystem or ODS, like 'pf_active'
+
+    :param imas_version: string or None
+        IMAS version to use when mapping. Most recent version is used if None
+
+    :param reverse: bool
+        Switches the roles of param geometry_type and return
+
+    :return: string (or int if reverse=True)
+        Name of the field indicated by geometry_type (or type code if reverse=True).
+        For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 0` means 'outline'.
+    """
+
+    if imas_version is None:
+        imas_version = ODS().imas_version
+
+    if subsys == 'pf_active':
+        if compare_version(imas_version, '3.19.0') <= 0:
+            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+        else:
+            print('Warning: unrecognized IMAS version ({}). '
+                  'Using geometry type mapping for 3.19.0, although it may be out of date.'.format(imas_version))
+            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+    else:
+        print('Warning: unrecognized IMAS substructure ({})'.format(subsys))
+        return None
+
+    if reverse:
+        return (numpy.array(geo_map) == geometry_type).argmax()
+    else:
+        return geo_map[geometry_type]
+
+
 # ================================
 # ODSs' plotting methods
 # ================================
@@ -865,13 +905,12 @@ def pf_active_overlay(ods, ax=None, **kw):
         """
         return numpy.array([outline['r'], outline['z']]).T
 
-    geo_type_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
-
     patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
         if mask[i]:
             try:
-                geometry_type = geo_type_map[ods['pf_active.coil'][i]['element.0.geometry.geometry_type']]
+                geometry_type = geo_type_lookup(ods['pf_active.coil'][i]['element.0.geometry.geometry_type'],
+                                                'pf_active', ods.imas_version)
             except (IndexError, ValueError):
                 geometry_type = 'unrecognized'
             try:
