@@ -144,7 +144,7 @@ class TestOmasPlot(unittest.TestCase):
     def test_pf_active_overlay(self):
         # Basic test
         pf_ods = copy.deepcopy(self.ods)
-        pf_ods.sample_pf_active()
+        pf_ods.sample_pf_active(nc_weird=1, nc_undefined=1)
         pf_ods.plot_overlay(thomson_scattering=False, pf_active=True)
         # Test keywords
         pf_ods.plot_overlay(thomson_scattering=False, pf_active=dict(facecolor='r', labelevery=1))

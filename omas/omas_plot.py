@@ -868,7 +868,10 @@ def pf_active_overlay(ods, ax=None, **kw):
     patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
         if mask[i]:
-            geometry_type = geo_type_map[ods['pf_active.coil'][i]['element.0.geometry.geometry_type']]
+            try:
+                geometry_type = geo_type_map[ods['pf_active.coil'][i]['element.0.geometry.geometry_type']]
+            except (IndexError, ValueError):
+                geometry_type = 'unrecognized'
             try:
                 path = eval('path_'+geometry_type)(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
             except NameError:

@@ -284,17 +284,25 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
 
 
 @add_to_ODS
-def pf_active(ods):
+def pf_active(ods, nc_weird=0, nc_undefined=0):
     """
     Adds some FAKE active PF coil locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
+    :param nc_weird: int
+        Number of coils with badly defined geometry to include for testing plot overlay robustness
+
+    :param nc_undefined: int
+        Number of coils with undefined geometry_type (But valid r, z outlines) to include for testing plot overlay
+        robustness.
+
     :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
     """
 
-    nc = 4
+    nc_reg = 4
+    nc = nc_reg+nc_weird+nc_undefined
     fc_dat = [
         #  R        Z       dR      dZ    tilt1  tilt2
         [.8608,  .16830,  .0508,  .32106,  0.0,  0.0],
@@ -305,7 +313,7 @@ def pf_active(ods):
 
     geo_type_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
 
-    for i in range(nc):
+    for i in range(nc_reg):
         if (fc_dat[i][4] == 0) and (fc_dat[i][5] == 0):
             rect = ods['pf_active.coil'][i]['element.0.geometry.rectangle']
             rect['r'] = fc_dat[i][0]
@@ -333,6 +341,15 @@ def pf_active(ods):
             ]
             ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = \
                 (numpy.array(geo_type_map) == 'outline').argmax()
+
+    for i in range(nc_reg, nc_reg+nc_weird):
+        # This isn't a real geometry_type, so it should trigger the contingency
+        ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = 99
+    for i in range(nc_reg+nc_weird, nc):
+        # This one doesn't have geometry_type defined, so the plot overlay will have trouble looking up which type it is
+        outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
+        outline['r'] = [1.5, 1.6, 1.7, 1.5]
+        outline['z'] = [0.1, 0.3, -0.1, 0]
 
     return ods
 
