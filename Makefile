@@ -21,10 +21,10 @@ docs: html
 	cd sphinx && make commit && make push
 
 json:
-	cd utilities && python build_json_structures.py
+	cd omas/utilities && python build_json_structures.py
 
 itm:
-	cd utilities && python generate_itm_interface.py
+	cd omas/utilities && python generate_itm_interface.py
 
 git:
 	git push

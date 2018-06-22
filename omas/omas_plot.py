@@ -536,7 +536,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
     r = len(prof1d['ion']) + 1
 
-    ax = None
+    ax = ax0 = ax1 = None
     for k, item in enumerate(what):
 
         # densities (thermal and fast)
@@ -571,7 +571,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         if item + '.temperature' in prof1d:
             if combine_dens_temps:
                 if k == 0:
-                    ax = ax1 = pyplot.subplot(1, 2, 2, sharex=ax0)
+                    ax = ax1 = pyplot.subplot(1, 2, 2, sharex=ax)
             else:
                 ax = ax1 = pyplot.subplot(r, 2, (2 * k) + 2, sharex=ax)
             uband(x, prof1d[item + '.temperature'], label=names[k], ax=ax1, **kw)
@@ -581,8 +581,10 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                 ax1.set_title('Temperature [eV]')
 
     ax.set_xlim([0, 1])
-    ax0.set_ylim([0, ax0.get_ylim()[1]])
-    ax1.set_ylim([0, ax1.get_ylim()[1]])
+    if ax0 is not None:
+        ax0.set_ylim([0, ax0.get_ylim()[1]])
+    if ax1 is not None:
+        ax1.set_ylim([0, ax1.get_ylim()[1]])
     return fig
 
 

@@ -13,97 +13,23 @@ To install `OMAS from GitHub <https://github.com/gafusion/omas>`_::
         cd omas
         sudo pip install -e .        # add this `omas` directory to your $PYTHONPATH
 
--------------------------
-Installation requirements
--------------------------
-
-Some Python packages are required :ref:`depending on the data formats used <omas_formats>`
+Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
 
 --------------------
 Testing installation
 --------------------
 
-The OMAS installation can be tested by running:
-
-.. code-block:: python
-
-    from omas import *
-    through_omas_suite()
-
-This test saves and load a sample piece of data through the different OMAS save formats
-and checks that information does not get lost or corrupted. If successful,
-the test should output:
+The OMAS installation can be tested by running the regression tests:
 
 .. code-block:: none
 
-    ====================
-    FROM  pkl  TO  pkl  : OK
-    FROM  pkl  TO  json : OK
-    FROM  pkl  TO   nc  : OK
-    FROM  pkl  TO   s3  : OK
-    FROM  pkl  TO  imas : OK
-    FROM  json TO  pkl  : OK
-    FROM  json TO  json : OK
-    FROM  json TO   nc  : OK
-    FROM  json TO   s3  : OK
-    FROM  json TO  imas : OK
-    FROM   nc  TO  pkl  : OK
-    FROM   nc  TO  json : OK
-    FROM   nc  TO   nc  : OK
-    FROM   nc  TO   s3  : OK
-    FROM   nc  TO  imas : OK
-    FROM   s3  TO  pkl  : OK
-    FROM   s3  TO  json : OK
-    FROM   s3  TO   nc  : OK
-    FROM   s3  TO   s3  : OK
-    FROM   s3  TO  imas : OK
-    FROM  imas TO  pkl  : OK
-    FROM  imas TO  json : OK
-    FROM  imas TO   nc  : OK
-    FROM  imas TO   s3  : OK
-    FROM  imas TO  imas : OK
-    ====================
-    [[1 1 1 1 1]
-     [1 1 1 1 1]
-     [1 1 1 1 1]
-     [1 1 1 1 1]
-     [1 1 1 1 1]]
-    ====================
+    cd omas
+    python omas/tests/test_omas_plot.py
+    python omas/tests/test_omas_suite.py
 
-If for example `imas` is not installed on the system, the test output will look like:
+A summary of the storage systems
 
 .. code-block:: none
 
-    ====================
-    FROM  pkl  TO  pkl  : OK
-    FROM  pkl  TO  json : OK
-    FROM  pkl  TO   nc  : OK
-    FROM  pkl  TO   s3  : OK
-    FROM  pkl  TO  imas : NO --> ImportError('No module named imas',)
-    FROM  json TO  pkl  : OK
-    FROM  json TO  json : OK
-    FROM  json TO   nc  : OK
-    FROM  json TO   s3  : OK
-    FROM  json TO  imas : NO --> ImportError('No module named imas',)
-    FROM   nc  TO  pkl  : OK
-    FROM   nc  TO  json : OK
-    FROM   nc  TO   nc  : OK
-    FROM   nc  TO   s3  : OK
-    FROM   nc  TO  imas : NO --> ImportError('No module named imas',)
-    FROM   s3  TO  pkl  : OK
-    FROM   s3  TO  json : OK
-    FROM   s3  TO   nc  : OK
-    FROM   s3  TO   s3  : OK
-    FROM   s3  TO  imas : NO --> ImportError('No module named imas',)
-    FROM  imas TO  pkl  : NO --> ImportError('No module named imas',)
-    FROM  imas TO  json : NO --> ImportError('No module named imas',)
-    FROM  imas TO   nc  : NO --> ImportError('No module named imas',)
-    FROM  imas TO   s3  : NO --> ImportError('No module named imas',)
-    FROM  imas TO  imas : NO --> ImportError('No module named imas',)
-    ====================
-    [[1 1 1 1 0]
-     [1 1 1 1 0]
-     [1 1 1 1 0]
-     [1 1 1 1 0]
-     [0 0 0 0 0]]
-    ====================
+    cd omas
+    python omas/examples/save_load_all.py
