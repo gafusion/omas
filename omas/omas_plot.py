@@ -342,7 +342,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
 
 
-def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
+def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, reverse=False):
     """
     Given a geometry type code
     :param geometry_type: int (or string if reverse=True)
@@ -351,8 +351,8 @@ def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
     :param subsys: string
         Name of subsystem or ODS, like 'pf_active'
 
-    :param imas_version: string or None
-        IMAS version to use when mapping. Can be None if lookup for subsys is not version sensitive.
+    :param imas_version: string
+        IMAS version to use when mapping
 
     :param reverse: bool
         Switches the roles of param geometry_type and return
@@ -361,9 +361,6 @@ def geo_type_lookup(geometry_type, subsys, imas_version=None, reverse=False):
         Name of the field indicated by geometry_type (or type code if reverse=True).
         For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 0` means 'outline'.
     """
-
-    if imas_version is None:
-        imas_version = '99.99.99'  # Unrecognized
 
     if subsys == 'pf_active':
         if compare_version(imas_version, '3.19.0') <= 0:
