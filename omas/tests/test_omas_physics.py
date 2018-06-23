@@ -56,7 +56,7 @@ class TestOmasPhysics(unittest.TestCase):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_profiles(include_pressure=False)
         ods3 = copy.deepcopy(self.ods)
-        updated_ods = core_profiles_pressures(ods2)
+        updated_ods = core_profiles_pressures(ods2, update=False)
         updated_ods3 = core_profiles_pressures(ods3, update=True)
 
         assert updated_ods3 == ods3

@@ -84,6 +84,13 @@ class TestOmasUtils(unittest.TestCase):
         self.printv('  diff_prof4 = {}'.format(diff_prof4))
         assert isinstance(diff_prof4, basestring)
         assert 'value' in diff_prof4
+        ods2.sample_profiles()
+        ods2['core_profiles.code.name'] = 'fake name 1'
+        ods3['core_profiles.code.name'] = 'fake name 2'
+        diff_prof5 = different_ods(ods2, ods3)
+        self.printv('  diff_prof5 = {}'.format(diff_prof5))
+        assert isinstance(diff_prof5, basestring)
+        assert 'name' in diff_prof5
 
     def test_printe(self):
         printe('printe_test,', end='')
@@ -106,6 +113,8 @@ class TestOmasUtils(unittest.TestCase):
         assert closest_index([1, 2, 3], 1) == 0  # Special: The first element is the one sought
         assert closest_index(numpy.array([1, 2, 3, 4]), 4) == 3  # Special: The last element is the one sought
         assert closest_index([1, 2, 2, 3], 2) == 1  # Special: duplicated value: pick first instance
+        assert closest_index([1, 2, 3, 4], 2.2) == 1  # Make sure it works for numbers in between
+        assert closest_index([1, 2, 3, 4], 2.7) == 2
         # Exception handling and coping with problems
         self.assertRaises(TypeError, closest_index, 5, 5)  # First arg is not a list --> TypeError
         self.assertRaises(TypeError, closest_index, [1, 2, 3], 'string_not_number')
