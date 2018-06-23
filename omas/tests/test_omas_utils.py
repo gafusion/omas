@@ -30,7 +30,7 @@ class TestOmasUtils(unittest.TestCase):
     """
 
     # Flags to edit while testing
-    verbose = True  # Spammy, but occasionally useful for debugging a weird problem
+    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
     ods = ODS()
@@ -58,7 +58,7 @@ class TestOmasUtils(unittest.TestCase):
         diff_eq = different_ods(self.ods, ods2)
         self.printv('  diff_eq = {}'.format(diff_eq))
         assert isinstance(diff_eq, basestring)
-        assert 'equilibrium' in diff_eq
+        assert ('equilibrium' in diff_eq) or ('wall' in diff_eq)
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
         ods3.sample_profiles()
@@ -86,8 +86,8 @@ class TestOmasUtils(unittest.TestCase):
         assert 'value' in diff_prof4
 
     def test_printe(self):
-        printe('blah blah printe test')
-        printw('blah blah printw test')
+        printe('printe_test,', end='')
+        printw('printw_test', end='')
 
     def test_is_numeric(self):
         assert is_numeric(5) is True
