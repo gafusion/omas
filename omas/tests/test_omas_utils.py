@@ -34,6 +34,7 @@ class TestOmasUtils(unittest.TestCase):
 
     # Sample data for use in tests
     ods = ODS()
+    specific_test_version = '3.18.0'
 
     # Utilities for this test
     def printv(self, *arg):
@@ -93,6 +94,44 @@ class TestOmasUtils(unittest.TestCase):
 
     def test_remove_parentheses(self):
         assert remove_parentheses('zoom(blah)what', replace_with='|') == 'zoom|what'
+
+    def test_closest_index(self):
+        # Basic tests
+        assert closest_index([1, 2, 3, 4], 3) == 2  # Basic test
+        assert closest_index([1, 2, 3], 1) == 0  # Special: The first element is the one sought
+        assert closest_index(numpy.array([1, 2, 3, 4]), 4) == 3  # Special: The last element is the one sought
+        assert closest_index([1, 2, 2, 3], 2) == 1  # Special: duplicated value: pick first instance
+        # Exception handling and coping with problems
+        self.assertRaises(TypeError, closest_index, 5, 5)  # First arg is not a list --> TypeError
+        self.assertRaises(TypeError, closest_index, [1, 2, 3], 'string_not_number')
+        assert closest_index([1, 2, 3], [3]) == 2  # Should use first element of second arg if it's not a scalar
+        self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
+
+    def test_list_structures(self):  # Also tests dict_structures
+        struct_list = list_structures(default_imas_version)
+        struct_list2 = list_structures(self.specific_test_version)
+        assert isinstance(struct_list, list)
+        assert isinstance(struct_list2, list)
+        assert isinstance(struct_list[0], basestring)
+        assert 'pf_active' in struct_list2
+        struct_dict = dict_structures(default_imas_version)
+        struct_dict2 = dict_structures(self.specific_test_version)
+        assert isinstance(struct_dict, dict)
+        assert isinstance(struct_dict2, dict)
+        assert 'pf_active' in struct_dict2.keys()
+        assert all([item in struct_dict.keys() for item in struct_list])
+        assert all([item in struct_dict2.keys() for item in struct_list2])
+
+    def test_omas_info(self):
+        get_list = ['pf_active', 'thomson_scattering', 'charge_exchange']
+        ods_info_pfa = omas_info(get_list[0])
+        ods_info_pfa2 = omas_info(get_list[0], self.specific_test_version)
+        assert get_list[0] in ods_info_pfa.keys()
+        assert get_list[0] in ods_info_pfa2.keys()
+        if get_list[0] == 'pf_active':
+            assert isinstance(ods_info_pfa['pf_active.circuit.0.connections.documentation'], basestring)
+        ods_info_list = omas_info(get_list)
+        assert all([item in ods_info_list for item in get_list])
 
 
 if __name__ == '__main__':
