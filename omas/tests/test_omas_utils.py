@@ -91,6 +91,10 @@ class TestOmasUtils(unittest.TestCase):
         self.printv('  diff_prof5 = {}'.format(diff_prof5))
         assert isinstance(diff_prof5, basestring)
         assert 'name' in diff_prof5
+        ods3['core_profiles.code.name'] = numpy.array([2, 3, 4])
+        assert isinstance(different_ods(ods2, ods3), basestring)
+        ods2['core_profiles.code.name'] = uarray(numpy.array([2, 3, 4]), numpy.array([1, 1, 1]))
+        assert isinstance(different_ods(ods2, ods3), basestring)
 
     def test_printe(self):
         printe('printe_test,', end='')
