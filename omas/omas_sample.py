@@ -220,7 +220,7 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, in
 
 
 @add_to_ODS
-def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
+def profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
     """
     Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
     roughly resemble something similar to a real plasma a little bit.
@@ -235,6 +235,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     :param add_junk_ion: bool
         Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.
 
+    :param include_pressure: bool
+        Include pressure profiles when temperature and density are added
+
     :return: ODS instance with profiles added.
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
@@ -247,8 +250,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
     prof1d['electrons.density_thermal'] = prof1d['electrons.density']
     prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
-    prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
-    prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
+    if include_pressure:
+        prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
+        prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
 
     prof1d['ion.0.label'] = 'D+'
     prof1d['ion.0.element.0.z_n'] = 1.0
@@ -258,8 +262,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
     prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
     prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
-    prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
-    prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
+    if include_pressure:
+        prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
+        prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
 
     prof1d['ion.1.label'] = 'C+6'
     prof1d['ion.1.element.0.z_n'] = 6.0
@@ -268,17 +273,19 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
     prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
     prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
-    prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
-    prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
+    if include_pressure:
+        prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
+        prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
 
     if add_junk_ion:
         junki = prof1d['ion.2']
         junki['density'] = x*0
         junki['temperature'] = x*0
-        junki['pressure'] = x*0
 
         junkn = prof1d['neutral.0']
-        junkn['pressure'] = x*0
+        if include_pressure:
+            junki['pressure'] = x*0
+            junkn['pressure'] = x*0
 
     return ods
 

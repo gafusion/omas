@@ -3,7 +3,8 @@
 
 """
 Test script for omas/omas_plot.py
-python -m unittest test_omas_plot
+python -m unittest test_omas_plot (from omas/omas/tests)
+python -m unittest discover omas (from omas top level; runs all tests)
 """
 
 # Basic imports
