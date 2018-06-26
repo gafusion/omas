@@ -342,6 +342,43 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
 
 
+def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, reverse=False):
+    """
+    Given a geometry type code
+    :param geometry_type: int (or string if reverse=True)
+        Geometry type code (or geometry name if reverse)
+
+    :param subsys: string
+        Name of subsystem or ODS, like 'pf_active'
+
+    :param imas_version: string
+        IMAS version to use when mapping
+
+    :param reverse: bool
+        Switches the roles of param geometry_type and return
+
+    :return: string (or int if reverse=True)
+        Name of the field indicated by geometry_type (or type code if reverse=True).
+        For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 0` means 'outline'.
+    """
+
+    if subsys == 'pf_active':
+        if compare_version(imas_version, '3.19.0') <= 0:
+            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+        else:
+            print('Warning: unrecognized IMAS version ({}). '
+                  'Using geometry type mapping for 3.19.0, although it may be out of date.'.format(imas_version))
+            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
+    else:
+        print('Warning: unrecognized IMAS substructure ({})'.format(subsys))
+        return None
+
+    if reverse:
+        return (numpy.array(geo_map) == geometry_type).argmax()
+    else:
+        return geo_map[geometry_type]
+
+
 # ================================
 # ODSs' plotting methods
 # ================================
@@ -828,8 +865,8 @@ def pf_active_overlay(ods, ax=None, **kw):
     """
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.oblique.r', channels_name='coil',
-        test_checker='checker > 0')
+        ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.geometry_type', channels_name='coil',
+        test_checker='checker > -1')
     if nc == 0:
         return
 
@@ -845,28 +882,39 @@ def pf_active_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
 
+    def path_rectangle(rectangle):
+        """
+        :param rectangle: ODS sub-folder: element.*.geometry.rectangle
+        :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
+        """
+        x = rectangle['r']
+        y = rectangle['z']
+        dx = rectangle['width']
+        dy = rectangle['height']
+        return numpy.array([
+            [x - dx / 2., x - dx / 2., x + dx / 2., x + dx / 2.],
+            [y - dy / 2., y + dy / 2., y + dy / 2., y - dy / 2.]]).T
+
+    def path_outline(outline):
+        """
+        :param outline: ODS sub-folder: element.*.geometry.outline
+        :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
+        """
+        return numpy.array([outline['r'], outline['z']]).T
+
     patches = []
     for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
         if mask[i]:
-            oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
-            fdat = [oblique['r'], oblique['z'], oblique['length'], oblique['thickness'],
-                    oblique['alpha'], oblique['beta']]
-
-            ct = cocos_transform(ods.cocos, 11)['BP']
-
-            xarr = [
-                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan(ct*(numpy.pi/2. + fdat[5])),
-            ]
-            yarr = [
-                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(ct*-fdat[4]),
-            ]
-            path = numpy.array([xarr, yarr]).T
+            try:
+                geometry_type = geo_type_lookup(ods['pf_active.coil'][i]['element.0.geometry.geometry_type'],
+                                                'pf_active', ods.imas_version)
+            except (IndexError, ValueError):
+                geometry_type = 'unrecognized'
+            try:
+                path = eval('path_'+geometry_type)(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
+            except NameError:
+                print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(i, geometry_type))
+                continue
             patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
             kw.pop('label', None)  # Prevent label from being placed on more than one patch
             try:
@@ -1202,5 +1250,5 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
         if color is None:
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
-            ax.text(r2[i], z2[i], bolo_id[i], color=color,
-                    ha=['right', 'left'][int(z1[i] > 0)], va=['top', 'bottom'][int(z1[i] > 0)], fontsize=notesize)
+            ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
+                    ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
