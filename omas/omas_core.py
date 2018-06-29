@@ -32,8 +32,7 @@ class ODS(MutableMapping):
                  dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
                  cocos=omas_rcparams['cocos'],
-                 cocosin=omas_rcparams['cocosin'],
-                 cocosout=omas_rcparams['cocosout'],
+                 cocosio=omas_rcparams['cocosio'],
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -46,9 +45,7 @@ class ODS(MutableMapping):
 
         :param cocos: internal COCOS representation (this can only be set when the object is created)
 
-        :param cocosin: COCOS representation of the data that is written to the ODS
-
-        :param cocosout: COCOS representation of the data that is read from the ODS
+        :param cocosio: COCOS representation of the data that is read/written from/to the ODS
 
         :param structure: IMAS schema to use
         """
@@ -58,8 +55,7 @@ class ODS(MutableMapping):
         self.imas_version = imas_version
         self.location = location
         self._cocos = cocos
-        self.cocosin = cocosin
-        self.cocosout = cocosout
+        self.cocosio = cocosio
         if structure is None:
             structure = {}
         self.structure = structure
@@ -221,7 +217,7 @@ class ODS(MutableMapping):
         property that tells in what COCOS format the data is stored internally of the ODS
         (NOTE: this parameter can only be set when the object is created)
 
-        :return: cocosin value
+        :return: cocos value
         """
         if not hasattr(self,'_cocos'):
             self._cocos=omas_rcparams['cocos']
@@ -232,40 +228,22 @@ class ODS(MutableMapping):
         raise(AttributeError('cocos parameter is readonly!'))
 
     @property
-    def cocosin(self):
+    def cocosio(self):
         """
-        property that tells in what COCOS format the data will be input
+        property that tells in what COCOS format the data will be input/output
 
-        :return: cocosin value
+        :return: cocosio value
         """
-        if not hasattr(self,'_cocosin'):
-            self._cocosin=omas_rcparams['cocosin']
-        return self._cocosin
+        if not hasattr(self,'_cocosio'):
+            self._cocosio=omas_rcparams['cocosio']
+        return self._cocosio
 
-    @cocosin.setter
-    def cocosin(self, value):
-        self._cocosin = value
+    @cocosio.setter
+    def cocosio(self, value):
+        self._cocosio = value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].cocosin = value
-
-    @property
-    def cocosout(self):
-        """
-        property that tells in what COCOS format the data should be output
-
-        :return: cocosout value
-        """
-        if not hasattr(self,'_cocosout'):
-            self._cocosout=omas_rcparams['cocosout']
-        return self._cocosout
-
-    @cocosout.setter
-    def cocosout(self, value):
-        self._cocosout = value
-        for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].cocosout = value
+                self[item].cocosio = value
 
     @property
     def dynamic_path_creation(self):
@@ -317,14 +295,14 @@ class ODS(MutableMapping):
             value = ODS(imas_version=self.imas_version,
                         consistency_check=self.consistency_check,
                         dynamic_path_creation=self.dynamic_path_creation,
-                        cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout)
+                        cocos=self.cocos, cocosio=self.cocosio)
 
         # full path where we want to place the data
         location = l2u([self.location, key[0]])
 
         # handle cocos transformations coming in
-        if self.cocosin != self.cocos and separator in location and location in omas_physics.cocos_signals:
-            value = value * omas_physics.cocos_transform(self.cocosin, self.cocos)[omas_physics.cocos_signals[location]]
+        if self.cocosio != self.cocos and separator in location and location in omas_physics.cocos_signals:
+            value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[location]]
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
@@ -438,7 +416,7 @@ class ODS(MutableMapping):
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation,
-                                              cocos=self.cocos, cocosin=self.cocosin, cocosout=self.cocosout))
+                                              cocos=self.cocos, cocosio=self.cocosio))
             else:
                 location = l2u([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
@@ -455,8 +433,8 @@ class ODS(MutableMapping):
             location = l2u([self.location, key[0]])
             value=self.omas_data[key[0]]
             # handle cocos transformations going out
-            if self.cocosout != self.cocos and location in omas_physics.cocos_signals:
-                value = value * omas_physics.cocos_transform(self.cocos, self.cocosout)[omas_physics.cocos_signals[location]]
+            if self.cocosio != self.cocos and location in omas_physics.cocos_signals:
+                value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[location]]
             return value
 
     def __delitem__(self, key):
@@ -592,7 +570,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosin','_cocosout'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio'] attributes from input ods
 
         :param ods: input ods
 
@@ -684,7 +662,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosin','_cocosout']
+omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio']
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data']+omas_ods_attrs)
 omas_dictstate=sorted(list(set(omas_dictstate)))

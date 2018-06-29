@@ -240,29 +240,23 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 
 @contextmanager
-def cocos_environment(ods, cocosin=None, cocosout=None):
+def cocos_environment(ods, cocosio=None):
     '''
     Provides OMAS environment within wich a certain COCOS convention is defined
 
     :param ods: ODS on which to operate
 
-    :param cocosin: input COCOS convention
-
-    :param cocosout: output COCOS convention
+    :param cocosio: input/output COCOS convention
 
     :return: ODS with COCOS convention set
     '''
-    old_cocosin = ods.cocosin
-    old_cocosout = ods.cocosout
-    if cocosin is not None:
-        ods.cocosin = cocosin
-    if cocosout is not None:
-        ods.cocosout = cocosout
+    old_cocosio = ods.cocosio
+    if cocosio is not None:
+        ods.cocosio = cocosio
     try:
         yield ods
     finally:
-        ods.cocosin = old_cocosin
-        ods.cocosout = old_cocosout
+        ods.cocosio = old_cocosio
 
 def generate_cocos_signals(structures=[], threshold=0):
     """

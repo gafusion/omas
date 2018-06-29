@@ -51,8 +51,7 @@ separator = '.'
 # --------------------------------------------
 omas_rcparams = {
     'cocos':11,
-    'cocosin':11,
-    'cocosout':11,
+    'cocosio':11,
     'consistency_check': True,
     'dynamic_path_creation': True,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',

@@ -19,36 +19,40 @@ x = numpy.linspace(.1, 1, 10)
 
 # use different COCOS storage conventions
 
-ods = ODS(cocosin=11, cocos=11, cocosout=11)
+ods = ODS(cocosio=11, cocos=11)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
-ods = ODS(cocosin=11, cocos=2, cocosout=11)
+ods = ODS(cocosio=11, cocos=2)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
-# use different COCOS in/out
-
-ods = ODS(cocosin=2, cocosout=11)
+ods = ODS(cocosio=2, cocos=11)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi))
+assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
-ods = ODS(cocosin=2, cocosout=2)
+ods = ODS(cocosio=2, cocos=2)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
+
+# reassign the same value
+ods = ODS(cocosio=2)
+ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+ods['equilibrium.time_slice.0.profiles_1d.psi'] = ods['equilibrium.time_slice.0.profiles_1d.psi']
 assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
 # use cocos_environment
-
-ods = ODS(cocosin=2)
-with cocos_environment(ods, cocosin=11, cocosout=11):
-    ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-    assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+ods = ODS(cocosio=2)
+ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+with cocos_environment(ods, cocosio=11):
+    assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*(2*numpy.pi)))
     print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi))
+assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
