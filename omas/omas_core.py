@@ -301,7 +301,7 @@ class ODS(MutableMapping):
         location = l2u([self.location, key[0]])
 
         # handle cocos transformations coming in
-        if self.cocosio != self.cocos and separator in location and location in omas_physics.cocos_signals:
+        if self.cocosio != self.cocos and separator in location and location in omas_physics.cocos_signals and not isinstance(value, ODS):
             value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[location]]
 
         # perform consistency check with IMAS structure
@@ -433,7 +433,7 @@ class ODS(MutableMapping):
             location = l2u([self.location, key[0]])
             value=self.omas_data[key[0]]
             # handle cocos transformations going out
-            if self.cocosio != self.cocos and location in omas_physics.cocos_signals:
+            if self.cocosio != self.cocos and separator in location and location in omas_physics.cocos_signals and not isinstance(value, ODS):
                 value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[location]]
             return value
 
