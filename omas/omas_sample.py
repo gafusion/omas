@@ -3,6 +3,7 @@ from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 from .omas_core import ODS
 from .omas_physics import constants
+from .omas_plot import geo_type_lookup
 
 __all__ = []
 
@@ -220,7 +221,7 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, in
 
 
 @add_to_ODS
-def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
+def profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
     """
     Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
     roughly resemble something similar to a real plasma a little bit.
@@ -235,6 +236,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     :param add_junk_ion: bool
         Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.
 
+    :param include_pressure: bool
+        Include pressure profiles when temperature and density are added
+
     :return: ODS instance with profiles added.
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
@@ -247,8 +251,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
     prof1d['electrons.density_thermal'] = prof1d['electrons.density']
     prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
-    prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
-    prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
+    if include_pressure:
+        prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
+        prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
 
     prof1d['ion.0.label'] = 'D+'
     prof1d['ion.0.element.0.z_n'] = 1.0
@@ -258,8 +263,9 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
     prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
     prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
-    prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
-    prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
+    if include_pressure:
+        prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
+        prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
 
     prof1d['ion.1.label'] = 'C+6'
     prof1d['ion.1.element.0.z_n'] = 6.0
@@ -268,51 +274,89 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False):
     prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
     prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
     prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
-    prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
-    prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
+    if include_pressure:
+        prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
+        prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
 
     if add_junk_ion:
         junki = prof1d['ion.2']
         junki['density'] = x*0
         junki['temperature'] = x*0
-        junki['pressure'] = x*0
 
         junkn = prof1d['neutral.0']
-        junkn['pressure'] = x*0
+        if include_pressure:
+            junki['pressure'] = x*0
+            junkn['pressure'] = x*0
 
     return ods
 
 
 @add_to_ODS
-def pf_active(ods):
+def pf_active(ods, nc_weird=0, nc_undefined=0):
     """
     Adds some FAKE active PF coil locations so that the overlay plot will work in tests. It's fine to test
     with dummy data as long as you know it's not real.
 
     :param ods: ODS instance
 
+    :param nc_weird: int
+        Number of coils with badly defined geometry to include for testing plot overlay robustness
+
+    :param nc_undefined: int
+        Number of coils with undefined geometry_type (But valid r, z outlines) to include for testing plot overlay
+        robustness.
+
     :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
     """
 
-    nc = 4
+    nc_reg = 4
+    nc = nc_reg+nc_weird+nc_undefined
     fc_dat = [
         #  R        Z       dR      dZ    tilt1  tilt2
-        [.8608,  .16830,  .0508,  .32106,  0.0,  90.0],
-        [1.0041,  1.5169,  .13920,  .11940,  45.0,  90.0],
+        [.8608,  .16830,  .0508,  .32106,  0.0,  0.0],
+        [1.0041,  1.5169,  .13920,  .11940,  45.0,  0.0],
         [2.6124,  0.4376,  0.17320,  0.1946,  0.0,  92.40],
         [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
     ]
-    for i in range(nc):
-        oblique = ods['pf_active.coil'][i]['element.0.geometry.oblique']
-        oblique['r'] = fc_dat[i][0]
-        oblique['z'] = fc_dat[i][1]
-        oblique['length'] = fc_dat[i][2]  # Or width in R
-        oblique['thickness'] = fc_dat[i][3]  # Or height in Z
-        oblique['alpha'] = fc_dat[i][4] * numpy.pi/180
-        oblique['beta'] = fc_dat[i][5] * numpy.pi/180
-        ods['pf_active.coil'][i]['identifier'] = 'FAKE PF COIL {}'.format(i)
-        if i < (nc-1):  # Don't put the identifier on the last one to test handling of missing identifiers
-            ods['pf_active.coil'][i]['element.0.identifier'] = 'FAKE PF COIL element {} . 0'.format(i)
+
+    rect_code = geo_type_lookup('rectangle', 'pf_active', ods.imas_version, reverse=True)
+    outline_code = geo_type_lookup('outline', 'pf_active', ods.imas_version, reverse=True)
+
+    for i in range(nc_reg):
+        if (fc_dat[i][4] == 0) and (fc_dat[i][5] == 0):
+            rect = ods['pf_active.coil'][i]['element.0.geometry.rectangle']
+            rect['r'] = fc_dat[i][0]
+            rect['z'] = fc_dat[i][1]
+            rect['width'] = fc_dat[i][2]  # Or width in R
+            rect['height'] = fc_dat[i][3]  # Or height in Z
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = rect_code
+        else:
+            outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
+            fdat = fc_dat[i]
+            fdat[4] = -fc_dat[i][4] * numpy.pi / 180
+            fdat[5] = -(fc_dat[i][5] * numpy.pi / 180 if fc_dat[i][5] != 0 else numpy.pi / 2)
+            outline['r'] = [
+                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi/2. + fdat[5])),
+             ]
+            outline['z'] = [
+                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
+            ]
+            ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = outline_code
+
+    for i in range(nc_reg, nc_reg+nc_weird):
+        # This isn't a real geometry_type, so it should trigger the contingency
+        ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = 99
+    for i in range(nc_reg+nc_weird, nc):
+        # This one doesn't have geometry_type defined, so the plot overlay will have trouble looking up which type it is
+        outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
+        outline['r'] = [1.5, 1.6, 1.7, 1.5]
+        outline['z'] = [0.1, 0.3, -0.1, 0]
 
     return ods
 

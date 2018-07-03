@@ -3,7 +3,8 @@
 
 """
 Test script for omas/omas_plot.py
-python -m unittest test_omas_plot
+python -m unittest test_omas_plot (from omas/omas/tests)
+python -m unittest discover omas (from omas top level; runs all tests)
 """
 
 # Basic imports
@@ -104,6 +105,17 @@ class TestOmasPlot(unittest.TestCase):
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
         gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
 
+    def test_geo_type_lookup(self):
+        from omas.omas_plot import geo_type_lookup
+        # Basic tests
+        assert geo_type_lookup(0, 'pf_active', imas_version='3.19.0', reverse=False) == 'outline'
+        assert geo_type_lookup('outline', 'pf_active', imas_version='3.19.0', reverse=True) == 0
+        assert geo_type_lookup(1, 'pf_active', imas_version='3.19.0', reverse=False) == 'rectangle'
+        assert geo_type_lookup('rectangle', 'pf_active', imas_version='3.19.0', reverse=True) == 1
+        # Test handling of problem cases
+        assert geo_type_lookup(0, 'unrecognized_nonsense_fail', imas_version=None, reverse=False) is None
+        assert geo_type_lookup(0, 'pf_active', imas_version='99.99.99', reverse=False) == 'outline'
+
     # Equilibrium plots
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()
@@ -144,7 +156,7 @@ class TestOmasPlot(unittest.TestCase):
     def test_pf_active_overlay(self):
         # Basic test
         pf_ods = copy.deepcopy(self.ods)
-        pf_ods.sample_pf_active()
+        pf_ods.sample_pf_active(nc_weird=1, nc_undefined=1)
         pf_ods.plot_overlay(thomson_scattering=False, pf_active=True)
         # Test keywords
         pf_ods.plot_overlay(thomson_scattering=False, pf_active=dict(facecolor='r', labelevery=1))
