@@ -5,6 +5,7 @@ from .omas_utils import *
 
 # --------------------------------------------
 # generation of the imas structure json files
+# IDS's XML documentation can be found where IMAS is installed at: $IMAS_PREFIX/share/doc/imas/html_documentation.html
 # --------------------------------------------
 def generate_xml_schemas():
     """
@@ -105,10 +106,11 @@ def create_json_structure(imas_version=default_imas_version):
         inv = re.sub('\[:\]$', '', inv)
         return inv
 
-    def traverse(me, hout, path, fout, parent_units):
+    def traverse(me, hout, path, fout, parent):
         me = copy.copy(me)
         hout_propagate = hout
         path_propagate = copy.deepcopy(path)
+        parent=copy.deepcopy(parent)
 
         if '@structure_reference' in me and me['@structure_reference']=='self':
             return hout, fout
@@ -142,14 +144,19 @@ def create_json_structure(imas_version=default_imas_version):
             if fname=='equilibrium.time_slice[:].constraints.q': # bug fix for v3.18.0
                 me['@units']='-'
             if me['@units'] in ['as_parent','as parent']:
-                me['@units']=parent_units
-            parent_units=me['@units']
+                me['@units']=parent['units']
+            parent['units']=me['@units']
+
+        if '@lifecycle_status' in me:
+            parent['lifecycle_status']=me['@lifecycle_status']
+        elif parent['lifecycle_status'] and not isinstance(me, list):
+            me['@lifecycle_status']=parent['lifecycle_status']
 
         is_leaf = True
         for kid in keys:
             if isinstance(me[kid], (dict, list)):
                 is_leaf = False
-                traverse(me[kid], hout_propagate, path_propagate, fout, parent_units)
+                traverse(me[kid], hout_propagate, path_propagate, fout, parent)
             elif kid not in ['@name', '@xmlns:fn']:
                 hout_propagate[kid] = me[kid]
                 fout[fname][kid] = me[kid]
@@ -159,7 +166,10 @@ def create_json_structure(imas_version=default_imas_version):
 
         return hout, fout
 
-    hout, fout = traverse(tmp, {}, [], {}, '?')
+    parent={}
+    parent['units']='?'
+    parent['lifecycle_status']=''
+    hout, fout = traverse(me=tmp, hout={}, path=[], fout={}, parent=parent)
 
     # format conversions
     for item in sorted(fout):
@@ -248,10 +258,13 @@ def create_html_documentation(imas_version=default_imas_version):
                 is_uncertain = ''
                 if item + '_error_upper' in structure:
                     is_uncertain = ' (uncertain)'
+                status = ''
+                if 'lifecycle_status' in structure[item] and structure[item]['lifecycle_status'] not in ['active']:
+                    status = '</p><p><strong>(%s)</strong>'%structure[item]['lifecycle_status']
                 try:
                     lines.append(
                         '<tr>'
-                        '<td {column_style}><p>{item}</p></td>' \
+                        '<td {column_style}><p>{item}{status}</p></td>' \
                         '<td {column_style}><p>{coordinates}</p></td>' \
                         '<td><p>{data_type}</p></td>' \
                         '<td><p>{units}</p></td>' \
@@ -263,6 +276,7 @@ def create_html_documentation(imas_version=default_imas_version):
                             data_type=structure[item].get('data_type', '') + is_uncertain,
                             units=structure[item].get('units', ''),
                             description=structure[item].get('documentation', ''),
+                            status=status,
                             column_style=column_style
                         ))
                 except Exception:
