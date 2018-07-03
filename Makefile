@@ -2,12 +2,13 @@ all:
 	@echo 'OMAS makefile help'
 	@echo ''
 	@echo ' - make requirements : build requirements.txt'
-	@echo ' - make docs         : generate sphyix documentation'
+	@echo ' - make docs         : generate sphyix documentation and pushes it online'
 	@echo ' - make json         : generate IMAS json structure files'
 	@echo ' - make itm          : generate omas_itm.py from omas_imas.py'
 	@echo ' - make git          : push to github repo'
 	@echo ' - make pipy         : upload to pipy'
 	@echo ' - make release      : all of the above, in order'
+	@echo ' - make html         : generate sphyix documentation'
 	@echo ''
 
 requirements:
