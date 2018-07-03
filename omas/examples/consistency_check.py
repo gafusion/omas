@@ -46,8 +46,8 @@ ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
 ###################################
 # In the above example `consistency_check = warn` or `True` result in the following warnings::
 #
-# equilibrium.time_slice.:.profiles_2d.:.b_tor must be an array with dimensions: ['equilibrium.time_slice[:].profiles_2d[:].grid.dim1', 'equilibrium.time_slice[:].profiles_2d[:].grid.dim2']
-# equilibrium.time_slice.:.profiles_2d.:.b_tor is in OBSOLESCENT state
+#     equilibrium.time_slice.:.profiles_2d.:.b_tor must be an array with dimensions: ['equilibrium.time_slice[:].profiles_2d[:].grid.dim1', 'equilibrium.time_slice[:].profiles_2d[:].grid.dim2']
+#     equilibrium.time_slice.:.profiles_2d.:.b_tor is in OBSOLESCENT state
 
 print('*' * 20)
 print("consistency_check = True")
