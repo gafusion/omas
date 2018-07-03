@@ -24,22 +24,42 @@ print('consistency_check = False')
 print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = False
+# add entry with wrong dimensions
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+# add entry that is obsolescent
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+# add entry that does not exist in IMAS
 ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
-print(ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'])
 
 print('*' * 20)
 print("consistency_check = 'warn'")
 print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = 'warn'
-ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
-print(ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'])
+# add entry with wrong dimensions
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+# add entry that is obsolescent
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+# add entry that does not exist in IMAS
+ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
+
+###################################
+# In the above example `consistency_check = warn` or `True` result in the following warnings::
+#
+# equilibrium.time_slice.:.profiles_2d.:.b_tor must be an array with dimensions: ['equilibrium.time_slice[:].profiles_2d[:].grid.dim1', 'equilibrium.time_slice[:].profiles_2d[:].grid.dim2']
+# equilibrium.time_slice.:.profiles_2d.:.b_tor is in OBSOLESCENT state
 
 print('*' * 20)
 print("consistency_check = True")
 print('*' * 20)
 ods = ods_sample()
-ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip']
+ods.consistency_check = True # this is the default
+# add entry with wrong dimensions
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+# add entry that is obsolescent
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+# add entry that does not exist in IMAS
+ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
 
 ###################################
 # In the above example `consistency_check = True` result in the following error::
