@@ -11,21 +11,18 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "ntms/code",
-  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "ntms.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ntms/code/commit",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "ntms/code/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.code.output_flag": {
@@ -35,70 +32,60 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "ntms/code/output_flag(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "ntms/code/parameters",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "ntms/code/repository",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "ntms/code/version",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "ntms/ids_properties",
-  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "ntms.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "ntms/ids_properties/comment",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "ntms/ids_properties/creation_date",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "ntms/ids_properties/homogeneous_time",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "ntms/ids_properties/provider",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "ntms/ids_properties/source",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time": {
@@ -108,7 +95,6 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "ntms/time(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice": {
@@ -118,7 +104,6 @@
   "data_type": "struct_array",
   "documentation": "Description of neoclassical tearing modes for various time slices",
   "full_path": "ntms/time_slice(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice",
   "type": "dynamic"
@@ -130,7 +115,6 @@
   "data_type": "struct_array",
   "documentation": "List of the various NTM modes appearing during the simulation. If a mode appears several times, use several indices in this array of structure with the same m,n values.",
   "full_path": "ntms/time_slice(itime)/mode(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice_mode"
  },
@@ -138,7 +122,6 @@
   "data_type": "STR_0D",
   "documentation": "Description of how the mode evolution is calculated",
   "full_path": "ntms/time_slice(itime)/mode(i1)/calculation_method",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].delta_diff": {
@@ -148,7 +131,6 @@
   "data_type": "FLT_1D",
   "documentation": "Extra diffusion coefficient for the transport equations of Te, ne, Ti ",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -156,7 +138,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].delta_diff_error_lower": {
@@ -166,7 +147,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -177,7 +157,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -188,7 +167,6 @@
   "data_type": "struct_array",
   "documentation": "deltaw contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice_mode_evolution_deltaw"
  },
@@ -196,14 +174,12 @@
   "data_type": "STR_0D",
   "documentation": "Name of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].deltaw[:].value": {
   "data_type": "FLT_0D",
   "documentation": "Value of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -211,14 +187,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].deltaw[:].value_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -226,7 +200,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -234,14 +207,12 @@
   "data_type": "structure",
   "documentation": "Detailed NTM evolution on a finer timebase than the time_slice array of structure",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution",
-  "lifecycle_status": "alpha",
   "structure_reference": "ntm_time_slice_mode_detailed_evolution"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.calculation_method": {
   "data_type": "STR_0D",
   "documentation": "Description of how the mode evolution is calculated",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/calculation_method",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.delta_diff": {
@@ -252,7 +223,6 @@
   "data_type": "FLT_2D",
   "documentation": "Extra diffusion coefficient for the transport equations of Te, ne, Ti ",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -260,7 +230,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.delta_diff_error_lower": {
@@ -271,7 +240,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -283,7 +251,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -294,7 +261,6 @@
   "data_type": "struct_array",
   "documentation": "deltaw contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice_mode_detailed_evolution_deltaw"
  },
@@ -302,7 +268,6 @@
   "data_type": "STR_0D",
   "documentation": "Name of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.deltaw[:].value": {
@@ -312,7 +277,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -320,7 +284,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.deltaw[:].value_error_lower": {
@@ -330,7 +293,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -341,7 +303,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -352,7 +313,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the frequency of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -360,7 +320,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dfrequency_dt_error_lower": {
@@ -370,7 +329,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -381,7 +339,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -392,7 +349,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the phase of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -400,7 +356,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dphase_dt_error_lower": {
@@ -410,7 +365,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -421,7 +375,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -432,7 +385,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time derivative of the full width of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -440,7 +392,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dwidth_dt_error_lower": {
@@ -450,7 +401,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -461,7 +411,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -472,7 +421,6 @@
   "data_type": "FLT_1D",
   "documentation": "Frequency of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -480,7 +428,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.frequency_error_lower": {
@@ -490,7 +437,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -501,7 +447,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -509,14 +454,12 @@
   "data_type": "INT_0D",
   "documentation": "Poloidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/m_pol",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/n_tor",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.phase": {
@@ -526,7 +469,6 @@
   "data_type": "FLT_1D",
   "documentation": "Phase of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -534,7 +476,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.phase_error_lower": {
@@ -544,7 +485,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -555,7 +495,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -566,7 +505,6 @@
   "data_type": "FLT_1D",
   "documentation": "Flux coordinate on which the mode is centred",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -574,7 +512,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_error_lower": {
@@ -584,7 +521,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -595,7 +531,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -606,7 +541,6 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised flux coordinate on which the mode is centred",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -614,7 +548,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_norm_error_lower": {
@@ -624,7 +557,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -635,7 +567,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -646,7 +577,6 @@
   "data_type": "FLT_1D",
   "documentation": "Time array used to describe the detailed evolution of the NTM",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -654,7 +584,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"time_detailed\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed_error_lower": {
@@ -664,7 +593,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"time_detailed\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -675,7 +603,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"time_detailed\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -686,7 +613,6 @@
   "data_type": "struct_array",
   "documentation": "torque contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice_mode_detailed_evolution_torque"
  },
@@ -694,7 +620,6 @@
   "data_type": "STR_0D",
   "documentation": "Name of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.torque[:].value": {
@@ -704,7 +629,6 @@
   "data_type": "FLT_1D",
   "documentation": "Value of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -712,7 +636,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.torque[:].value_error_lower": {
@@ -722,7 +645,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -733,7 +655,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -744,7 +665,6 @@
   "data_type": "FLT_1D",
   "documentation": "Full width of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -752,7 +672,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.width_error_lower": {
@@ -762,7 +681,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -773,7 +691,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -781,7 +698,6 @@
   "data_type": "FLT_0D",
   "documentation": "Time derivative of the frequency of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -789,14 +705,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].dfrequency_dt_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -804,7 +718,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-2"
  },
@@ -812,7 +725,6 @@
   "data_type": "FLT_0D",
   "documentation": "Time derivative of the phase of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -820,14 +732,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].dphase_dt_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -835,7 +745,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad/s"
  },
@@ -843,7 +752,6 @@
   "data_type": "FLT_0D",
   "documentation": "Time derivative of the full width of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -851,14 +759,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].dwidth_dt_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -866,7 +772,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m/s"
  },
@@ -874,7 +779,6 @@
   "data_type": "FLT_0D",
   "documentation": "Frequency of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -882,14 +786,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].frequency_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -897,7 +799,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -905,49 +806,42 @@
   "data_type": "INT_0D",
   "documentation": "Poloidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/m_pol",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/n_tor",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset": {
   "data_type": "structure",
   "documentation": "NTM onset characteristics",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset",
-  "lifecycle_status": "alpha",
   "structure_reference": "ntm_time_slice_mode_onset"
  },
  "ntms.time_slice[:].mode[:].onset.cause": {
   "data_type": "STR_0D",
   "documentation": "Cause of the mode onset",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/cause",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.m_pol": {
   "data_type": "INT_0D",
   "documentation": "Poloidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/m_pol",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/n_tor",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.phase": {
   "data_type": "FLT_0D",
   "documentation": "Phase of the mode at onset",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -955,14 +849,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].onset.phase_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -970,7 +862,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -978,7 +869,6 @@
   "data_type": "FLT_0D",
   "documentation": "Offset time (when a mode disappears). If the mode reappears later in the simulation, use another index of the mode array of structure",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -986,14 +876,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"time_offset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].onset.time_offset_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"time_offset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1001,7 +889,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"time_offset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1009,7 +896,6 @@
   "data_type": "FLT_0D",
   "documentation": "Onset time",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1017,14 +903,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"time_onset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].onset.time_onset_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"time_onset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1032,7 +916,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"time_onset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1040,7 +923,6 @@
   "data_type": "FLT_0D",
   "documentation": "Seed island full width at onset time",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1048,14 +930,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].onset.width_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1063,7 +943,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1071,7 +950,6 @@
   "data_type": "FLT_0D",
   "documentation": "Phase of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1079,14 +957,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].phase_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1094,7 +970,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1102,7 +977,6 @@
   "data_type": "FLT_0D",
   "documentation": "Flux coordinate on which the mode is centred",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1110,14 +984,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].rho_tor_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1125,7 +997,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1133,7 +1004,6 @@
   "data_type": "FLT_0D",
   "documentation": "Normalised flux coordinate on which the mode is centred",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1141,14 +1011,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].rho_tor_norm_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1156,7 +1024,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1167,7 +1034,6 @@
   "data_type": "struct_array",
   "documentation": "torque contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ntm_time_slice_mode_evolution_torque"
  },
@@ -1175,14 +1041,12 @@
   "data_type": "STR_0D",
   "documentation": "Name of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].torque[:].value": {
   "data_type": "FLT_0D",
   "documentation": "Value of the contribution",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -1190,14 +1054,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].torque[:].value_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -1205,7 +1067,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -1213,7 +1074,6 @@
   "data_type": "FLT_0D",
   "documentation": "Full width of the mode",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1221,14 +1081,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.time_slice[:].mode[:].width_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1236,7 +1094,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1244,7 +1101,6 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "ntms/time_slice(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1252,7 +1108,6 @@
   "data_type": "structure",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "ntms/vacuum_toroidal_field",
-  "lifecycle_status": "alpha",
   "structure_reference": "b_tor_vacuum_1"
  },
  "ntms.vacuum_toroidal_field.b0": {
@@ -1262,7 +1117,6 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "ntms/vacuum_toroidal_field/b0(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1270,7 +1124,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "ntms/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.vacuum_toroidal_field.b0_error_lower": {
@@ -1280,7 +1133,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "full_path": "ntms/vacuum_toroidal_field/b0_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1291,7 +1143,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "full_path": "ntms/vacuum_toroidal_field/b0_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1299,7 +1150,6 @@
   "data_type": "FLT_0D",
   "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
   "full_path": "ntms/vacuum_toroidal_field/r0",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1307,14 +1157,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "ntms/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "ntms.vacuum_toroidal_field.r0_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r0\"",
   "full_path": "ntms/vacuum_toroidal_field/r0_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1322,7 +1170,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r0\"",
   "full_path": "ntms/vacuum_toroidal_field/r0_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  }

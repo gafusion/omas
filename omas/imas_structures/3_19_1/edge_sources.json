@@ -11,21 +11,18 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "edge_sources/code",
-  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "edge_sources.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/code/commit",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "edge_sources/code/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.code.output_flag": {
@@ -35,28 +32,24 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "edge_sources/code/output_flag(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "edge_sources/code/parameters",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "edge_sources/code/repository",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "edge_sources/code/version",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd": {
@@ -66,7 +59,6 @@
   "data_type": "struct_array",
   "documentation": "Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebases",
   "full_path": "edge_sources/grid_ggd(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
   "type": "dynamic"
@@ -78,7 +70,6 @@
   "data_type": "struct_array",
   "documentation": "Grid subsets",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset"
  },
@@ -89,7 +80,6 @@
   "data_type": "struct_array",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_metric"
  },
@@ -100,7 +90,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -108,7 +97,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].jacobian_error_lower": {
@@ -118,7 +106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -129,7 +116,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -142,7 +128,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -150,7 +135,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_contravariant_error_lower": {
@@ -162,7 +146,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -175,7 +158,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -188,7 +170,6 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -196,7 +177,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant_error_lower": {
@@ -208,7 +188,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -221,7 +200,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -229,7 +207,6 @@
   "data_type": "INT_0D",
   "documentation": "Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/dimension",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].element": {
@@ -239,7 +216,6 @@
   "data_type": "struct_array",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/element(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_element"
  },
@@ -250,7 +226,6 @@
   "data_type": "struct_array",
   "documentation": "Set of objects defining the element",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/element(i2)/object(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_element_object"
  },
@@ -258,56 +233,48 @@
   "data_type": "INT_0D",
   "documentation": "Dimension of the object",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/element(i2)/object(i3)/dimension",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].element[:].object[:].index": {
   "data_type": "INT_0D",
   "documentation": "Object index",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/element(i2)/object(i3)/index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].element[:].object[:].space": {
   "data_type": "INT_0D",
   "documentation": "Index of the space from which that object is taken",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/element(i2)/object(i3)/space",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].identifier": {
   "data_type": "structure",
   "documentation": "Grid subset identifier",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier/description",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier/index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric": {
   "data_type": "structure",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric",
-  "lifecycle_status": "alpha",
   "structure_reference": "generic_grid_dynamic_grid_subset_metric"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.jacobian": {
@@ -317,7 +284,6 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/jacobian(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -325,7 +291,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/jacobian_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.jacobian_error_lower": {
@@ -335,7 +300,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/jacobian_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -346,7 +310,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/jacobian_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -359,7 +322,6 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -367,7 +329,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_contravariant_error_lower": {
@@ -379,7 +340,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -392,7 +352,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -405,7 +364,6 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -413,7 +371,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant_error_lower": {
@@ -425,7 +382,6 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -438,7 +394,6 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -446,28 +401,24 @@
   "data_type": "structure",
   "documentation": "Grid identifier",
   "full_path": "edge_sources/grid_ggd(itime)/identifier",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "edge_sources.grid_ggd[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/grid_ggd(itime)/identifier/description",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/grid_ggd(itime)/identifier/index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/grid_ggd(itime)/identifier/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space": {
@@ -477,7 +428,6 @@
   "data_type": "struct_array",
   "documentation": "Set of grid spaces",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space"
  },
@@ -488,35 +438,30 @@
   "data_type": "INT_1D",
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/coordinates_type(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].geometry_type": {
   "data_type": "structure",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/geometry_type",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "edge_sources.grid_ggd[:].space[:].geometry_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/geometry_type/description",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].geometry_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/geometry_type/index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].geometry_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/geometry_type/name",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension": {
@@ -526,7 +471,6 @@
   "data_type": "struct_array",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension"
  },
@@ -537,7 +481,6 @@
   "data_type": "struct_array",
   "documentation": "Set of objects for a given dimension",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension_object"
  },
@@ -548,7 +491,6 @@
   "data_type": "struct_array",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension_object_boundary"
  },
@@ -556,7 +498,6 @@
   "data_type": "INT_0D",
   "documentation": "Index of this (n-1)-dimensional boundary object",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)/index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].boundary[:].neighbours": {
@@ -566,7 +507,6 @@
   "data_type": "INT_1D",
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)/neighbours(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry": {
@@ -576,7 +516,6 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -584,7 +523,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_error_lower": {
@@ -594,7 +532,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -605,7 +542,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -613,7 +549,6 @@
   "data_type": "FLT_0D",
   "documentation": "Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -621,14 +556,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].measure_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measure\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -636,7 +569,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measure\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -647,14 +579,12 @@
   "data_type": "INT_1D",
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/nodes(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].time": {
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "edge_sources/grid_ggd(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -662,42 +592,36 @@
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "edge_sources/ids_properties",
-  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "edge_sources.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "edge_sources/ids_properties/comment",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "edge_sources/ids_properties/creation_date",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "edge_sources/ids_properties/homogeneous_time",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "edge_sources/ids_properties/provider",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "edge_sources/ids_properties/source",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source": {
@@ -707,7 +631,6 @@
   "data_type": "struct_array",
   "documentation": "Set of source terms",
   "full_path": "edge_sources/source(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "80",
   "structure_reference": "edge_sources_source"
  },
@@ -718,7 +641,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms represented using the general grid description, for various time slices",
   "full_path": "edge_sources/source(i1)/ggd(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd",
   "type": "dynamic"
@@ -730,7 +652,6 @@
   "data_type": "struct_array",
   "documentation": "Current density source",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "A.m^-2"
@@ -743,7 +664,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -751,7 +671,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].current[:].coefficients_error_lower": {
@@ -762,7 +681,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -774,7 +692,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -782,14 +699,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].current[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].current[:].values": {
@@ -799,7 +714,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -807,7 +721,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].current[:].values_error_lower": {
@@ -817,7 +730,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -828,7 +740,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -836,7 +747,6 @@
   "data_type": "structure",
   "documentation": "Sources for electrons",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons",
-  "lifecycle_status": "alpha",
   "structure_reference": "edge_sources_source_ggd_electrons"
  },
  "edge_sources.source[:].ggd[:].electrons.energy": {
@@ -846,7 +756,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the electron energy equation, given on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -859,7 +768,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -867,7 +775,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].coefficients_error_lower": {
@@ -878,7 +785,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -890,7 +796,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -898,14 +803,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].values": {
@@ -915,7 +818,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -923,7 +825,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].values_error_lower": {
@@ -933,7 +834,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -944,7 +844,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -955,7 +854,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for electron density equation, given on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "m^-3.s^-1"
@@ -968,7 +866,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -976,7 +873,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].coefficients_error_lower": {
@@ -987,7 +883,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -999,7 +894,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1007,14 +901,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].values": {
@@ -1024,7 +916,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1032,7 +923,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].values_error_lower": {
@@ -1042,7 +932,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1053,7 +942,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1064,7 +952,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different ion species",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_ion"
  },
@@ -1075,7 +962,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -1083,7 +969,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/a",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1091,14 +976,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1106,7 +989,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1114,7 +996,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1131,7 +1012,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].multiplicity_error_lower": {
@@ -1156,7 +1036,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/z_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1164,14 +1043,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1179,7 +1056,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1190,7 +1066,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the ion energy transport equation, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -1203,7 +1078,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1211,7 +1085,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].coefficients_error_lower": {
@@ -1222,7 +1095,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1234,7 +1106,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1242,14 +1113,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].values": {
@@ -1259,7 +1128,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1267,7 +1135,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].values_error_lower": {
@@ -1277,7 +1144,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1288,7 +1154,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1296,7 +1161,6 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum": {
@@ -1306,7 +1170,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for momentum equations (sum over states when multiple states are considered), on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_vector_components",
   "units": "kg.m^-1.s^-2"
@@ -1318,7 +1181,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1330,7 +1192,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1338,7 +1199,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -1349,7 +1209,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1361,7 +1220,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1369,7 +1227,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].diamagnetic_error_lower": {
@@ -1379,7 +1236,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1390,7 +1246,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1398,14 +1253,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].parallel": {
@@ -1415,7 +1268,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1427,7 +1279,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1435,7 +1286,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].parallel_coefficients_error_lower": {
@@ -1446,7 +1296,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1458,7 +1307,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1466,7 +1314,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].parallel_error_lower": {
@@ -1476,7 +1323,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1487,7 +1333,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1498,7 +1343,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1510,7 +1354,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1518,7 +1361,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -1529,7 +1371,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1541,7 +1382,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1549,7 +1389,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].poloidal_error_lower": {
@@ -1559,7 +1398,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1570,7 +1408,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1581,7 +1418,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1593,7 +1429,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1601,7 +1436,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial_coefficients_error_lower": {
@@ -1612,7 +1446,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1624,7 +1457,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1632,7 +1464,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial_error_lower": {
@@ -1642,7 +1473,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1653,7 +1483,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1664,7 +1493,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1676,7 +1504,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1684,7 +1511,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -1695,7 +1521,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1707,7 +1532,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1715,7 +1539,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].toroidal_error_lower": {
@@ -1725,7 +1548,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1736,7 +1558,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1744,14 +1565,12 @@
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/multiple_states_flag",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/neutral_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles": {
@@ -1761,7 +1580,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for ion density equation, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "s^-1.m^-3"
@@ -1774,7 +1592,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1782,7 +1599,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].coefficients_error_lower": {
@@ -1793,7 +1609,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1805,7 +1620,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1813,14 +1627,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].values": {
@@ -1830,7 +1642,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1838,7 +1649,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].values_error_lower": {
@@ -1848,7 +1658,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1859,7 +1668,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1870,7 +1678,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different charge states of the species (ionisation, energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_ion_state"
  },
@@ -1878,7 +1685,6 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/electron_configuration",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy": {
@@ -1888,7 +1694,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms for the charge state energy transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -1901,7 +1706,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1909,7 +1713,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].coefficients_error_lower": {
@@ -1920,7 +1723,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1932,7 +1734,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1940,14 +1741,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values": {
@@ -1957,7 +1756,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1965,7 +1763,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values_error_lower": {
@@ -1975,7 +1772,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1986,7 +1782,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1994,7 +1789,6 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum": {
@@ -2004,7 +1798,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for momentum equations, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_vector_components",
   "units": "kg.m^-1.s^-2"
@@ -2016,7 +1809,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2028,7 +1820,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2036,7 +1827,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -2047,7 +1837,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2059,7 +1848,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2067,7 +1855,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].diamagnetic_error_lower": {
@@ -2077,7 +1864,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2088,7 +1874,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2096,14 +1881,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].parallel": {
@@ -2113,7 +1896,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2125,7 +1907,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2133,7 +1914,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].parallel_coefficients_error_lower": {
@@ -2144,7 +1924,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2156,7 +1935,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2164,7 +1942,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].parallel_error_lower": {
@@ -2174,7 +1951,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2185,7 +1961,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2196,7 +1971,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2208,7 +1982,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2216,7 +1989,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -2227,7 +1999,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2239,7 +2010,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2247,7 +2017,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].poloidal_error_lower": {
@@ -2257,7 +2026,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2268,7 +2036,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2279,7 +2046,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2291,7 +2057,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2299,7 +2064,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial_coefficients_error_lower": {
@@ -2310,7 +2074,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2322,7 +2085,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2330,7 +2092,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial_error_lower": {
@@ -2340,7 +2101,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2351,7 +2111,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2362,7 +2121,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2374,7 +2132,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2382,7 +2139,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -2393,7 +2149,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2405,7 +2160,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2413,7 +2167,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].toroidal_error_lower": {
@@ -2423,7 +2176,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2434,7 +2186,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2445,7 +2196,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the charge state density transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "s^-1.m^-3"
@@ -2458,7 +2208,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2466,7 +2215,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].coefficients_error_lower": {
@@ -2477,7 +2225,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2489,7 +2236,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2497,14 +2243,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values": {
@@ -2514,7 +2258,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2522,7 +2265,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values_error_lower": {
@@ -2532,7 +2274,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2543,7 +2284,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2551,7 +2291,6 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2559,14 +2298,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2574,7 +2311,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2582,14 +2318,12 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_mode",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2597,14 +2331,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2612,7 +2344,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2620,7 +2351,6 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2628,14 +2358,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2643,7 +2371,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2651,7 +2378,6 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/z_ion",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2659,14 +2385,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].ion[:].z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/z_ion_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2674,7 +2398,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/z_ion_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2685,7 +2408,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for total momentum equations, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_vector_components",
   "units": "kg.m^-1.s^-2"
@@ -2697,7 +2419,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2709,7 +2430,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2717,7 +2437,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -2728,7 +2447,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2740,7 +2458,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2748,7 +2465,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].diamagnetic_error_lower": {
@@ -2758,7 +2474,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2769,7 +2484,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2777,14 +2491,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].parallel": {
@@ -2794,7 +2506,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2806,7 +2517,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2814,7 +2524,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].parallel_coefficients_error_lower": {
@@ -2825,7 +2534,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2837,7 +2545,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2845,7 +2552,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].parallel_error_lower": {
@@ -2855,7 +2561,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2866,7 +2571,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2877,7 +2581,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2889,7 +2592,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2897,7 +2599,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -2908,7 +2609,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2920,7 +2620,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2928,7 +2627,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].poloidal_error_lower": {
@@ -2938,7 +2636,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2949,7 +2646,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2960,7 +2656,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2972,7 +2667,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -2980,7 +2674,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].radial_coefficients_error_lower": {
@@ -2991,7 +2684,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3003,7 +2695,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3011,7 +2702,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].radial_error_lower": {
@@ -3021,7 +2711,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3032,7 +2721,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3043,7 +2731,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3055,7 +2742,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3063,7 +2749,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -3074,7 +2759,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3086,7 +2770,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3094,7 +2777,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].momentum[:].toroidal_error_lower": {
@@ -3104,7 +2786,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3115,7 +2796,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3126,7 +2806,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different neutral species",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_neutral"
  },
@@ -3137,7 +2816,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -3145,7 +2823,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/a",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -3153,14 +2830,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -3168,7 +2843,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -3176,7 +2850,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -3193,7 +2866,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -3218,7 +2890,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -3226,14 +2897,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -3241,7 +2910,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -3252,7 +2920,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the ion energy transport equation, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -3265,7 +2932,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3273,7 +2939,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].coefficients_error_lower": {
@@ -3284,7 +2949,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3296,7 +2960,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3304,14 +2967,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].values": {
@@ -3321,7 +2982,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3329,7 +2989,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].values_error_lower": {
@@ -3339,7 +2998,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3350,7 +3008,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3358,14 +3015,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding ion species in the ../../ion array",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/ion_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].label": {
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum": {
@@ -3375,7 +3030,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for momentum equations (sum over states when multiple states are considered), on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_vector_components",
   "units": "kg.m^-1.s^-2"
@@ -3387,7 +3041,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3399,7 +3052,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3407,7 +3059,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -3418,7 +3069,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3430,7 +3080,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3438,7 +3087,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].diamagnetic_error_lower": {
@@ -3448,7 +3096,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3459,7 +3106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3467,14 +3113,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].parallel": {
@@ -3484,7 +3128,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3496,7 +3139,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3504,7 +3146,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].parallel_coefficients_error_lower": {
@@ -3515,7 +3156,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3527,7 +3167,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3535,7 +3174,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].parallel_error_lower": {
@@ -3545,7 +3183,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3556,7 +3193,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3567,7 +3203,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3579,7 +3214,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3587,7 +3221,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -3598,7 +3231,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3610,7 +3242,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3618,7 +3249,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].poloidal_error_lower": {
@@ -3628,7 +3258,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3639,7 +3268,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3650,7 +3278,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3662,7 +3289,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3670,7 +3296,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial_coefficients_error_lower": {
@@ -3681,7 +3306,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3693,7 +3317,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3701,7 +3324,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial_error_lower": {
@@ -3711,7 +3333,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3722,7 +3343,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3733,7 +3353,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3745,7 +3364,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3753,7 +3371,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -3764,7 +3381,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3776,7 +3392,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3784,7 +3399,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].toroidal_error_lower": {
@@ -3794,7 +3408,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3805,7 +3418,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -3813,7 +3425,6 @@
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/multiple_states_flag",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles": {
@@ -3823,7 +3434,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for ion density equation, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "s^-1.m^-3"
@@ -3836,7 +3446,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3844,7 +3453,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].coefficients_error_lower": {
@@ -3855,7 +3463,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3867,7 +3474,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3875,14 +3481,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].values": {
@@ -3892,7 +3496,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3900,7 +3503,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].values_error_lower": {
@@ -3910,7 +3512,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3921,7 +3522,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -3932,7 +3532,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different charge states of the species (energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_neutral_state"
  },
@@ -3940,7 +3539,6 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/electron_configuration",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy": {
@@ -3950,7 +3548,6 @@
   "data_type": "struct_array",
   "documentation": "Source terms for the charge state energy transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -3963,7 +3560,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3971,7 +3567,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].coefficients_error_lower": {
@@ -3982,7 +3577,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -3994,7 +3588,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4002,14 +3595,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values": {
@@ -4019,7 +3610,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4027,7 +3617,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values_error_lower": {
@@ -4037,7 +3626,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4048,7 +3636,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4056,7 +3643,6 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum": {
@@ -4066,7 +3652,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for momentum equations, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_vector_components",
   "units": "kg.m^-1.s^-2"
@@ -4078,7 +3663,6 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4090,7 +3674,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4098,7 +3681,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -4109,7 +3691,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4121,7 +3702,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4129,7 +3709,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].diamagnetic_error_lower": {
@@ -4139,7 +3718,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4150,7 +3728,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4158,14 +3735,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].parallel": {
@@ -4175,7 +3750,6 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4187,7 +3761,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4195,7 +3768,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].parallel_coefficients_error_lower": {
@@ -4206,7 +3778,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4218,7 +3789,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4226,7 +3796,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].parallel_error_lower": {
@@ -4236,7 +3805,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4247,7 +3815,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4258,7 +3825,6 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4270,7 +3836,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4278,7 +3843,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -4289,7 +3853,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4301,7 +3864,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4309,7 +3871,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].poloidal_error_lower": {
@@ -4319,7 +3880,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4330,7 +3890,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4341,7 +3900,6 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4353,7 +3911,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4361,7 +3918,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial_coefficients_error_lower": {
@@ -4372,7 +3928,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4384,7 +3939,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4392,7 +3946,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial_error_lower": {
@@ -4402,7 +3955,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4413,7 +3965,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4424,7 +3975,6 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4436,7 +3986,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4444,7 +3993,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -4455,7 +4003,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4467,7 +4014,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4475,7 +4021,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].toroidal_error_lower": {
@@ -4485,7 +4030,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4496,7 +4040,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4504,28 +4047,24 @@
   "data_type": "structure",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/neutral_type",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/neutral_type/description",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/neutral_type/index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/neutral_type/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles": {
@@ -4535,7 +4074,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the charge state density transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "s^-1.m^-3"
@@ -4548,7 +4086,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4556,7 +4093,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].coefficients_error_lower": {
@@ -4567,7 +4103,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4579,7 +4114,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4587,14 +4121,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values": {
@@ -4604,7 +4136,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4612,7 +4143,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values_error_lower": {
@@ -4622,7 +4152,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4633,7 +4162,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -4641,7 +4169,6 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4649,14 +4176,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4664,7 +4189,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4672,14 +4196,12 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_mode",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].time": {
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "edge_sources/source(i1)/ggd(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -4690,7 +4212,6 @@
   "data_type": "struct_array",
   "documentation": "Source term for the total (summed over ion  species) energy equation, on various grid subsets",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "W.m^-3"
@@ -4703,7 +4224,6 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4711,7 +4231,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].coefficients_error_lower": {
@@ -4722,7 +4241,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4734,7 +4252,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4742,14 +4259,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].values": {
@@ -4759,7 +4274,6 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/values(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4767,7 +4281,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/values_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].values_error_lower": {
@@ -4777,7 +4290,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4788,7 +4300,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -4799,7 +4310,6 @@
   "data_type": "struct_array",
   "documentation": "Quantities provided at a faster sampling rate than the full ggd quantities. These are either integrated quantities or local quantities provided on a reduced set of positions. Positions and integration domains are described by a set of grid_subsets (of size 1 for a position). ",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_fast",
   "type": "dynamic"
@@ -4811,7 +4321,6 @@
   "data_type": "struct_array",
   "documentation": "Source term integrals related to the various ion species",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_fast_ion"
  },
@@ -4822,7 +4331,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -4830,7 +4338,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/a",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -4838,14 +4345,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -4853,7 +4358,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -4861,7 +4365,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4878,7 +4381,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].multiplicity_error_lower": {
@@ -4903,7 +4405,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/z_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4911,14 +4412,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4926,7 +4425,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -4934,14 +4432,12 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/neutral_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power": {
@@ -4951,7 +4447,6 @@
   "data_type": "struct_array",
   "documentation": "Total power source or sink related to this ion species, integrated over the volume of the grid subset, for various grid subsets.",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar_single_position",
   "units": "W"
@@ -4960,21 +4455,18 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/grid_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/grid_subset_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power[:].value": {
   "data_type": "FLT_0D",
   "documentation": "Scalar value of the quantity on the grid subset (corresponding to a single local position or to an integrated value over the subset)",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/value",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -4982,14 +4474,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/value_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power[:].value_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"value\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/value_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -4997,7 +4487,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"value\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/value_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -5005,7 +4494,6 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/z_ion",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5013,14 +4501,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/z_ion_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5028,7 +4514,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/z_ion_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5036,7 +4521,6 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -5044,42 +4528,36 @@
   "data_type": "structure",
   "documentation": "Source term identifier (process causing this source term)",
   "full_path": "edge_sources/source(i1)/identifier",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "edge_sources.source[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/source(i1)/identifier/description",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/source(i1)/identifier/index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/source(i1)/identifier/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species": {
   "data_type": "structure",
   "documentation": "Species causing this source term (if relevant, e.g. a particular ion or neutral state in case of line radiation)",
   "full_path": "edge_sources/source(i1)/species",
-  "lifecycle_status": "alpha",
   "structure_reference": "distribution_species"
  },
  "edge_sources.source[:].species.ion": {
   "data_type": "structure",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "edge_sources/source(i1)/species/ion",
-  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_ions_constant"
  },
  "edge_sources.source[:].species.ion.element": {
@@ -5089,7 +4567,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -5097,7 +4574,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/a",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5105,14 +4581,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5120,7 +4594,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5128,7 +4601,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5145,7 +4617,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].multiplicity_error_lower": {
@@ -5170,7 +4641,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/z_n",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5178,14 +4648,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5193,7 +4661,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5201,35 +4668,30 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "edge_sources/source(i1)/species/ion/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state": {
   "data_type": "structure",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/species/ion/state",
-  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_ion_state_constant"
  },
  "edge_sources.source[:].species.ion.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "edge_sources/source(i1)/species/ion/state/electron_configuration",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_sources/source(i1)/species/ion/state/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_level",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5237,14 +4699,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_level_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_level_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5252,7 +4712,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_level_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5260,14 +4719,12 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_mode",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle (equal to z_min if no bundle)",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_max",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5275,14 +4732,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_max_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_max_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5290,7 +4745,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_max_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5298,7 +4752,6 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_min",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5306,14 +4759,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_min_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_min_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5321,7 +4772,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_min_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5329,7 +4779,6 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "edge_sources/source(i1)/species/ion/z_ion",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5337,14 +4786,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/species/ion/z_ion_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/species/ion/z_ion_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5352,7 +4799,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/species/ion/z_ion_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5360,7 +4806,6 @@
   "data_type": "structure",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "edge_sources/source(i1)/species/neutral",
-  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_neutral_constant"
  },
  "edge_sources.source[:].species.neutral.element": {
@@ -5370,7 +4815,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -5378,7 +4822,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/a",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5386,14 +4829,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5401,7 +4842,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -5409,7 +4849,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5426,7 +4865,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].multiplicity_error_lower": {
@@ -5451,7 +4889,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/z_n",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5459,14 +4896,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5474,7 +4909,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5482,28 +4916,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "edge_sources/source(i1)/species/neutral/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state": {
   "data_type": "structure",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/species/neutral/state",
-  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_neutral_state_constant"
  },
  "edge_sources.source[:].species.neutral.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "edge_sources/source(i1)/species/neutral/state/electron_configuration",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying neutral state ",
   "full_path": "edge_sources/source(i1)/species/neutral/state/label",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.neutral_type": {
@@ -5511,35 +4941,30 @@
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "edge_sources/source(i1)/species/neutral/state/neutral_type",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "edge_sources.source[:].species.neutral.state.neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/source(i1)/species/neutral/state/neutral_type/description",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/source(i1)/species/neutral/state/neutral_type/index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/source(i1)/species/neutral/state/neutral_type/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_level",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5547,14 +4972,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_level_error_lower",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5562,7 +4985,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_level_error_upper",
-  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -5570,7 +4992,6 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_mode",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.type": {
@@ -5578,28 +4999,24 @@
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon",
   "full_path": "edge_sources/source(i1)/species/type",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "edge_sources.source[:].species.type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "edge_sources/source(i1)/species/type/description",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "edge_sources/source(i1)/species/type/index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.source[:].species.type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/source(i1)/species/type/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "edge_sources.time": {
@@ -5609,7 +5026,6 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "edge_sources/time(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  }
 }

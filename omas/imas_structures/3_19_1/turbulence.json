@@ -11,21 +11,18 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "turbulence/code",
-  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "turbulence.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "turbulence/code/commit",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "turbulence/code/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.code.output_flag": {
@@ -35,28 +32,24 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "turbulence/code/output_flag(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "turbulence.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "turbulence/code/parameters",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "turbulence/code/repository",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "turbulence/code/version",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.grid_2d": {
@@ -66,7 +59,6 @@
   "data_type": "struct_array",
   "documentation": "Values for the 2D grid, for various time slices. The timebase of this array of structure must be a subset of the profiles_2d timebase",
   "full_path": "turbulence/grid_2d(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "turbulence_profiles_2d_grid",
   "type": "dynamic"
@@ -78,7 +70,6 @@
   "data_type": "FLT_1D",
   "documentation": "First dimension values",
   "full_path": "turbulence/grid_2d(itime)/dim1(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -86,7 +77,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "turbulence/grid_2d(itime)/dim1_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.grid_2d[:].dim1_error_lower": {
@@ -96,7 +86,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim1\"",
   "full_path": "turbulence/grid_2d(itime)/dim1_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -107,7 +96,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim1\"",
   "full_path": "turbulence/grid_2d(itime)/dim1_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -118,7 +106,6 @@
   "data_type": "FLT_1D",
   "documentation": "Second dimension values",
   "full_path": "turbulence/grid_2d(itime)/dim2(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -126,7 +113,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "turbulence/grid_2d(itime)/dim2_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.grid_2d[:].dim2_error_lower": {
@@ -136,7 +122,6 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"dim2\"",
   "full_path": "turbulence/grid_2d(itime)/dim2_error_lower(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -147,7 +132,6 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"dim2\"",
   "full_path": "turbulence/grid_2d(itime)/dim2_error_upper(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -155,7 +139,6 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "turbulence/grid_2d(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -164,70 +147,60 @@
   "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
   "documentation": "Selection of one of a set of grid types for grid_2d",
   "full_path": "turbulence/grid_2d_type",
-  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "turbulence.grid_2d_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "turbulence/grid_2d_type/description",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.grid_2d_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "turbulence/grid_2d_type/index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.grid_2d_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "turbulence/grid_2d_type/name",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "turbulence/ids_properties",
-  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "turbulence.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "turbulence/ids_properties/comment",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "turbulence/ids_properties/creation_date",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "turbulence/ids_properties/homogeneous_time",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "turbulence/ids_properties/provider",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "turbulence/ids_properties/source",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d": {
@@ -237,7 +210,6 @@
   "data_type": "struct_array",
   "documentation": "Fluctuating physical quantities for various time slices",
   "full_path": "turbulence/profiles_2d(itime)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "turbulence_profiles_2d",
   "type": "dynamic"
@@ -249,7 +221,6 @@
   "data_type": "structure",
   "documentation": "Quantities related to electrons",
   "full_path": "turbulence/profiles_2d(itime)/electrons",
-  "lifecycle_status": "alpha",
   "structure_reference": "turbulence_profiles_2d_electrons",
   "units": "Wb"
  },
@@ -261,7 +232,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal+non-thermal)",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -269,7 +239,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].electrons.density_error_lower": {
@@ -280,7 +249,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -292,7 +260,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -304,7 +271,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density of thermal particles",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_thermal(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -312,7 +278,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_thermal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].electrons.density_thermal_error_lower": {
@@ -323,7 +288,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_thermal_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -335,7 +299,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_thermal_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -347,7 +310,6 @@
   "data_type": "FLT_2D",
   "documentation": "Temperature",
   "full_path": "turbulence/profiles_2d(itime)/electrons/temperature(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -355,7 +317,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/temperature_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].electrons.temperature_error_lower": {
@@ -366,7 +327,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/temperature_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -378,7 +338,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/temperature_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -389,7 +348,6 @@
   "data_type": "struct_array",
   "documentation": "Quantities related to the various ion species",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "turbulence_profiles_2d_ions"
  },
@@ -401,7 +359,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -409,7 +366,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].density_error_lower": {
@@ -420,7 +376,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -432,7 +387,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -444,7 +398,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_thermal(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -452,7 +405,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_thermal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].density_thermal_error_lower": {
@@ -463,7 +415,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_thermal_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -475,7 +426,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_thermal_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -486,7 +436,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -494,7 +443,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/a",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -502,14 +450,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -517,7 +463,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -525,7 +470,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -542,7 +486,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -567,7 +510,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/z_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -575,14 +517,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -590,7 +530,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -598,14 +537,12 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/label",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "turbulence.profiles_2d[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/neutral_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "turbulence.profiles_2d[:].ion[:].temperature": {
@@ -616,7 +553,6 @@
   "data_type": "FLT_2D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/temperature(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -624,7 +560,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/temperature_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].temperature_error_lower": {
@@ -635,7 +570,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/temperature_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -647,7 +581,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/temperature_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -655,7 +588,6 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed), volume averaged over plasma radius",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/z_ion",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -663,14 +595,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/z_ion_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].ion[:].z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/z_ion_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -678,7 +608,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/z_ion_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -689,7 +618,6 @@
   "data_type": "struct_array",
   "documentation": "Quantities related to the various neutral species",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "turbulence_profiles_2d_neutral"
  },
@@ -701,7 +629,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -709,7 +636,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].density_error_lower": {
@@ -720,7 +646,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -732,7 +657,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -744,7 +668,6 @@
   "data_type": "FLT_2D",
   "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_thermal(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -752,7 +675,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_thermal_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].density_thermal_error_lower": {
@@ -763,7 +685,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_thermal_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -775,7 +696,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_thermal_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -786,7 +706,6 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)",
-  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -794,7 +713,6 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/a",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -802,14 +720,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/a_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/a_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -817,7 +733,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/a_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -825,7 +740,6 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/atoms_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -842,7 +756,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -867,7 +780,6 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/z_n",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -875,14 +787,12 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/z_n_error_lower",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -890,7 +800,6 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/z_n_error_upper",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -898,14 +807,12 @@
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding ion species in the ../../ion array",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/ion_index",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "turbulence.profiles_2d[:].neutral[:].label": {
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/label",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "turbulence.profiles_2d[:].neutral[:].temperature": {
@@ -916,7 +823,6 @@
   "data_type": "FLT_2D",
   "documentation": "Temperature (average over charge states when multiple charge states are considered)",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/temperature(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -924,7 +830,6 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/temperature_error_index",
-  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "turbulence.profiles_2d[:].neutral[:].temperature_error_lower": {
@@ -935,7 +840,6 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/temperature_error_lower(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -947,7 +851,6 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/temperature_error_upper(:,:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -955,7 +858,6 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "turbulence/profiles_2d(itime)/time",
-  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -966,7 +868,6 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "turbulence/time(:)",
-  "lifecycle_status": "alpha",
   "type": "dynamic"
  }
 }
