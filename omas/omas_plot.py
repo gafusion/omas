@@ -360,18 +360,15 @@ def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, re
     :return: string (or int if reverse=True)
         Name of the field indicated by geometry_type (or type code if reverse=True).
         For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 0` means 'outline'.
+        In version 3.19.0 the following geometry types exist {1: 'outline', 2: 'rectangle', 4: 'arcs of circle'}
     """
 
-    if subsys == 'pf_active':
-        if compare_version(imas_version, '3.19.0') <= 0:
-            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
-        else:
-            print('Warning: unrecognized IMAS version ({}). '
-                  'Using geometry type mapping for 3.19.0, although it may be out of date.'.format(imas_version))
-            geo_map = ['outline', 'rectangle', 'oblique', 'arcs_of_circle']
-    else:
-        print('Warning: unrecognized IMAS substructure ({})'.format(subsys))
-        return None
+    # fetche information from IMAS data description of pf_active.coil[:].element[:].geometry.geometry_type
+    geo_map=eval('{%s}'%omas_info_node("pf_active.coil.:.element.:.geometry.geometry_type",
+                                       imas_version=imas_version)['documentation'].split('(')[-1][:-2])
+    print(geo_map)
+    if 3 not in geo_map:
+        geo_map[3]='oblique' # for backward compatibility
 
     if reverse:
         return (numpy.array(geo_map) == geometry_type).argmax()
