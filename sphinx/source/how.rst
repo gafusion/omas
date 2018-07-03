@@ -1,12 +1,18 @@
 Concept
 =======
 
-
-
 The hierarchical IMAS data model is represented in OMAS as a set of nested `ODS` objects (OMAS Data Structure).
 The `ODS` class extends native Python dictionary and list classes with:
 
-1. On-the-fly check for **consistency with IMAS data model**
+1. On-the-fly check for **compliance with IMAS data model**
+
+   * enforce consistency with IMAS data structure
+
+   * enforce correct data type
+
+   * enforce correct number of data dimensions (1D, 2D, 3D, ...)
+
+   * warn if obsolescent IMAS entries are used
 
 2. **Graceful error handling** with suggestions for navigating the hierarchical data structure::
 
@@ -31,14 +37,14 @@ The `ODS` class extends native Python dictionary and list classes with:
 
 6. Automatic **COCOS transformations** [`read the COCOS cheatsheat <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
 
-    with cocos_environment(ods, cocosin=2):
+    with cocos_environment(ods, cocosio=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
 7. Unified interface for **querying about time** dimension::
 
-    ods.time('equilibrium')
-    ods.time('equilibrium.time_slice')
-    ods.time('equilibrium.time_slice.0.global_quantities.ip')
+    ods.time('equilibrium')                                     # will return an array of times
+    ods.time('equilibrium.time_slice')                          # will return an array of times
+    ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
 8. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
 
