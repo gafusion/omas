@@ -383,7 +383,8 @@ def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, re
         geo_map[3] = 'oblique'  # For backward compatibility
 
     if reverse:
-        return geo_map.keys()[geo_map.values().index(geometry_type)]
+        # https://stackoverflow.com/a/13149770/6605826
+        return list(geo_map.keys())[list(geo_map.values()).index(geometry_type)]
     else:
         return geo_map.get(geometry_type, None)
 
