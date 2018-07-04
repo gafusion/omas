@@ -369,13 +369,13 @@ def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, re
         'pf_active': 'pf_active.coil.:.element.:.geometry.geometry_type',
     }
     if subsys not in lookup.keys():
-        print('Warning: unrecognized IMAS substructure ({})'.format(subsys))
+        printe('Warning: unrecognized IMAS substructure ({})'.format(subsys))
         return None
 
     try:
         doc = omas_info_node(lookup[subsys], imas_version=imas_version)['documentation']
-    except ValueError:
-        print('Warning: unrecognized IMAS version ({})'.format(imas_version))
+    except ValueError as _excp:
+        printe('Warning: unrecognized IMAS version ({}). Details: {}'.format(imas_version, _excp))
         return None
 
     geo_map = eval('{%s}' % doc.split('(')[-1][:-2])
