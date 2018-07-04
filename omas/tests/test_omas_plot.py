@@ -108,13 +108,16 @@ class TestOmasPlot(unittest.TestCase):
     def test_geo_type_lookup(self):
         from omas.omas_plot import geo_type_lookup
         # Basic tests
-        assert geo_type_lookup(0, 'pf_active', imas_version='3.19.0', reverse=False) == 'outline'
-        assert geo_type_lookup('outline', 'pf_active', imas_version='3.19.0', reverse=True) == 0
-        assert geo_type_lookup(1, 'pf_active', imas_version='3.19.0', reverse=False) == 'rectangle'
-        assert geo_type_lookup('rectangle', 'pf_active', imas_version='3.19.0', reverse=True) == 1
+        assert geo_type_lookup(1, 'pf_active', imas_version='3.19.0', reverse=False) == 'outline'
+        assert geo_type_lookup(1, 'pf_active', imas_version='3.18.0', reverse=False) == 'outline'
+        assert geo_type_lookup(1, 'pf_active', reverse=False) == 'outline'
+        assert geo_type_lookup('outline', 'pf_active', imas_version='3.19.0', reverse=True) == 1
+        assert geo_type_lookup(2, 'pf_active', imas_version='3.19.0', reverse=False) == 'rectangle'
+        assert geo_type_lookup(4, 'pf_active', imas_version='3.19.0', reverse=False) == 'arcs of circle'
+        assert geo_type_lookup('rectangle', 'pf_active', imas_version='3.19.0', reverse=True) == 2
         # Test handling of problem cases
-        assert geo_type_lookup(0, 'unrecognized_nonsense_fail', imas_version=None, reverse=False) is None
-        assert geo_type_lookup(0, 'pf_active', imas_version='99.99.99', reverse=False) == 'outline'
+        assert geo_type_lookup(1, 'unrecognized_nonsense_fail', imas_version=None, reverse=False) is None
+        assert geo_type_lookup(1, 'pf_active', imas_version='99.99.99', reverse=False) is None
 
     # Equilibrium plots
     def test_eqcx(self):
