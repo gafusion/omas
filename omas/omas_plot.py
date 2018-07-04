@@ -359,21 +359,33 @@ def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, re
 
     :return: string (or int if reverse=True)
         Name of the field indicated by geometry_type (or type code if reverse=True).
-        For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 0` means 'outline'.
+        For example: In IMAS 3.19.0, `pf_active.coil[:].element[:].geometry.geometry_type = 1` means 'outline'.
         In version 3.19.0 the following geometry types exist {1: 'outline', 2: 'rectangle', 4: 'arcs of circle'}
     """
 
-    # fetche information from IMAS data description of pf_active.coil[:].element[:].geometry.geometry_type
-    geo_map=eval('{%s}'%omas_info_node("pf_active.coil.:.element.:.geometry.geometry_type",
-                                       imas_version=imas_version)['documentation'].split('(')[-1][:-2])
-    print(geo_map)
+    # Fetch information from IMAS data description of geometry_type for the relevant subsys
+    lookup = {
+        'ic_antennas': 'ic_antennas.antenna.:.strap.:.geometry.geometry_type',
+        'pf_active': 'pf_active.coil.:.element.:.geometry.geometry_type',
+    }
+    if subsys not in lookup.keys():
+        print('Warning: unrecognized IMAS substructure ({})'.format(subsys))
+        return None
+
+    try:
+        doc = omas_info_node(lookup[subsys], imas_version=imas_version)['documentation']
+    except ValueError:
+        print('Warning: unrecognized IMAS version ({})'.format(imas_version))
+        return None
+
+    geo_map = eval('{%s}' % doc.split('(')[-1][:-2])
     if 3 not in geo_map:
-        geo_map[3]='oblique' # for backward compatibility
+        geo_map[3] = 'oblique'  # For backward compatibility
 
     if reverse:
-        return (numpy.array(geo_map) == geometry_type).argmax()
+        return geo_map.keys()[geo_map.values().index(geometry_type)]
     else:
-        return geo_map[geometry_type]
+        return geo_map.get(geometry_type, None)
 
 
 # ================================
@@ -908,7 +920,8 @@ def pf_active_overlay(ods, ax=None, **kw):
             except (IndexError, ValueError):
                 geometry_type = 'unrecognized'
             try:
-                path = eval('path_'+geometry_type)(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
+                path = eval('path_{}'.format(geometry_type))(
+                    ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
             except NameError:
                 print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(i, geometry_type))
                 continue
