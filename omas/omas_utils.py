@@ -353,50 +353,46 @@ def list_structures(imas_version):
 
     :param imas_version: imas version
 
-    :return: list
+    :return: list with names of structures in imas version
     '''
-    return sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
-                  glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json'))))
+    structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
+                        glob.glob( imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json'))))
+    if not len(structures):
+        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
+    return structures
 
 
 def dict_structures(imas_version):
     '''
-    maps structure names to filenames
+    maps structure names to json filenames
 
     :param imas_version: imas version
 
-    :return: dictionary
+    :return: dictionary maps structure names to json  filenames
     '''
-    paths=glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
-    return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],paths)),paths))
+    paths = glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
+    if not len(paths):
+        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
+    return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
 
 
-def load_structure(filename, imas_version):
+def load_structure(filename, imas_version=None):
     """
-    load omas json structure filename
+    load omas structure from given json filename or
 
     :param filename: full path or IDS string
 
-    :param imas_version: imas version to load the data schema of (ignored if filename is a full path)
+    :param imas_version: imas version to load the data schema of (optional if filename is a full path)
 
     :return: tuple with structure, hashing mapper, and ods
     """
     if os.sep not in filename:
-        filename = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + filename + '.json'
-        if not os.path.exists(filename):
-            if not os.path.exists(os.path.split(filename)[0]) or not os.path.exists(os.path.split(filename)[0]+os.sep+'info.json'):
-                raise (ValueError('`%s` is not a valid IMAS structure directory.\n'
-                                 'Perhaps the structure files for IMAS version %s must be generated.\n'
-                                 'Try running the `omas/samples/build_json_structures.py` script.'% (os.path.split(filename)[0],imas_version)))
-            else:
-                raise (ValueError('`%s` is not a valid IMAS %s structure' % (filename,imas_version)))
-        else:
-            filename = os.path.abspath(filename)
+        filename = dict_structures(imas_version)[filename]
 
     if filename not in _structures:
-        dump_string=open(filename, 'r').read()
+        dump_string = open(filename, 'r').read()
         _structures[filename] = json.loads(dump_string, object_pairs_hook=json_loader)
-        #_structures[filename] = pickle.loads(dump_string)
+        # _structures[filename] = pickle.loads(dump_string)
         _structures_dict[filename] = {}
         for item in _structures[filename]:
             h = _structures_dict[filename]
@@ -526,7 +522,6 @@ def ids_cpo_mapper(ids, cpo=None):
 
     return cpo
 
-
 def omas_info(structures, imas_version=default_imas_version):
     '''
     This function returns an ods with the leaf nodes filled with their property informations
@@ -536,8 +531,8 @@ def omas_info(structures, imas_version=default_imas_version):
     :return: ods
     '''
 
-    if isinstance(structures,basestring):
-        structures=[structures]
+    if isinstance(structures, basestring):
+        structures = [structures]
 
     if imas_version in _info_structures:
         ods = _info_structures[imas_version]
@@ -545,7 +540,7 @@ def omas_info(structures, imas_version=default_imas_version):
     else:
         from omas import ODS
         ods = ODS(imas_version=imas_version, consistency_check=False)
-        _info_structures[imas_version]=ods
+        _info_structures[imas_version] = ods
 
     for structure in structures:
         if structure not in ods:
@@ -570,16 +565,16 @@ def omas_info_node(key, imas_version=default_imas_version):
     '''
     return information about a given node
 
-    :param key:
+    :param key: IMAS path
 
-    :param imas_version:
+    :param imas_version: IMAS version to look up
 
-    :return:
+    :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     '''
     try:
-        key=p2l(key)
-        key=[':' if isinstance(item,int) else item for item in key]
-        tmp=load_structure(key[0], imas_version)[0]
+        key = p2l(key)
+        key = [':' if isinstance(item, int) else item for item in key]
+        tmp = load_structure(key[0], imas_version)[0]
         return tmp[l2i(key)]
     except KeyError:
         return {}

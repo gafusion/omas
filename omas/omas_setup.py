@@ -81,11 +81,13 @@ def rcparams_environment(**kw):
 # --------------------------------------------
 imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
 
+imas_versions = list(map(lambda x:re.sub('_', '.',os.path.basename(x)),sorted(glob.glob(imas_json_dir + os.sep + '*'))))
+
 if 'OMAS_IMAS_VERSION' in os.environ:
     default_imas_version = os.environ['OMAS_IMAS_VERSION']
 else:
     try:
-        default_imas_version = re.sub('_', '.', os.path.split(sorted(glob.glob(imas_json_dir + os.sep + '*'))[-1])[-1])
+        default_imas_version = imas_versions[-1]
     except IndexError:
         # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
         default_imas_version = ''

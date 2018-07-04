@@ -345,6 +345,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
 def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, reverse=False):
     """
     Given a geometry type code
+
     :param geometry_type: int (or string if reverse=True)
         Geometry type code (or geometry name if reverse)
 
@@ -375,7 +376,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, re
     try:
         doc = omas_info_node(lookup[subsys], imas_version=imas_version)['documentation']
     except ValueError as _excp:
-        printe('Warning: unrecognized IMAS version ({}). Details: {}'.format(imas_version, _excp))
+        printe(repr(_excp))
         return None
 
     geo_map = eval('{%s}' % doc.split('(')[-1][:-2])
