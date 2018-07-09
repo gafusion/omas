@@ -28,8 +28,8 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
                 f.write(item.ljust(25) + '# %s\n' % requirement)
 
 
-packages = ['omas']
-package_data = {'omas': ['*.py', 'version']}
+packages = ['omas','omas.tests']
+package_data = {'omas': ['*.py', 'version'],'omas.tests':['*.py']}
 for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
     print(item)
     packages.append('omas.imas_structures.' + os.path.split(item)[1])
