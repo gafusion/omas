@@ -8,6 +8,7 @@ def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
 
+
 # constants class that mimics scipy.constants
 class constants(object):
     e = 1.6021766208e-19
@@ -240,6 +241,31 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 
 @contextmanager
+def coords_environment(ods, coordsio=None):
+    '''
+    Provides OMAS environment within wich coordinates are interpolated
+
+    :param ods: ODS on which to operate
+
+    :param coordsio: dictionary of coordinates
+
+    :return: ODS with coordinate interpolations set
+    '''
+    if isinstance(coordsio, dict):
+        from omas import ODS
+        tmp = ODS()
+        tmp.update(coordsio)
+        coordsio = tmp
+    old_coordsio = ods.coordsio
+    if coordsio is not None:
+        ods.coordsio = coordsio
+    try:
+        yield ods
+    finally:
+        ods.coordsio = old_coordsio
+
+
+@contextmanager
 def cocos_environment(ods, cocosio=None):
     '''
     Provides OMAS environment within wich a certain COCOS convention is defined
@@ -257,6 +283,7 @@ def cocos_environment(ods, cocosio=None):
         yield ods
     finally:
         ods.cocosio = old_cocosio
+
 
 def generate_cocos_signals(structures=[], threshold=0):
     """
@@ -415,6 +442,7 @@ def generate_cocos_signals(structures=[], threshold=0):
 
 # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
 from .omas_cocos import cocos_signals as _cocos_signals
+
 
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
