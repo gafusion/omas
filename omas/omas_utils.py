@@ -494,6 +494,29 @@ def i2o(path):
     return re.sub('\[([:0-9]+)\]', r'.\1', path)
 
 
+def u2o(upath, path):
+    '''
+    Fills in `:` in a universal ODS path with integers from a ODS path.
+    e.g. uo2('bla.:.hello.:.bla','bla.1.hello.2.ddd')) becomes ('bla.1.hello.2.bla')
+
+    :param upath: universal ODS path
+
+    :param path: ODS path
+
+    :return: filled in ODS path
+    '''
+    ol = p2l(path)
+    ul = p2l(upath)
+    for k in range(min([len(ul), len(ol)])):
+        if ul[k] == ':' and isinstance(ol[k], int):
+            ul[k] = ol[k]
+        elif ul[k] == ol[k]:
+            continue
+        else:
+            break
+    return l2o(ul)
+
+
 def ids_cpo_mapper(ids, cpo=None):
     '''
     translate (some) IDS fields to CPO
