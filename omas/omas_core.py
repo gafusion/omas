@@ -330,12 +330,8 @@ class ODS(MutableMapping):
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
 
-        # handle cocos transformations coming in
-        if self.cocosio != self.cocos and separator in location and o2u(ulocation) in omas_physics.cocos_signals and not isinstance(value, ODS):
-            value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
-
-        # perform consistency check with IMAS structure
         if self.consistency_check:
+            # perform consistency check with IMAS structure
             structure = {}
             structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
             try:
@@ -349,6 +345,9 @@ class ODS(MutableMapping):
                             raise(ValueError('`%s` has no data'%location))
                     # check that tha data will go in the right place
                     self._validate(value, structure)
+                    # assign structure and location information
+                    value.structure = structure
+                    value.location = location
                 else:
                     self.structure[structure_key[0]]
 
@@ -380,43 +379,41 @@ class ODS(MutableMapping):
                 raise (Exception('Cannot convert from list to dict once ODS has data'))
 
         # now that all checks are completed we can assign the structure information
-        if self.consistency_check:
-            if isinstance(value, ODS):
-                value.structure = structure
-            else:
-                info = omas_info_node(o2u(location))
-                # check consistency for scalar entries
-                if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    printe('%s must be a scalar of type %s' % (location, info['data_type']))
-                # check consistency for number of dimensions
-                elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                    # may want to raise a ValueError in the future
-                    printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
-                elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                    printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+        if self.consistency_check and not isinstance(value, ODS):
+            # handle cocos transformations coming in
+            if self.cocosio != self.cocos and separator in location and o2u(ulocation) in omas_physics.cocos_signals and not isinstance(value, ODS):
+                value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
 
-                # coordinates interpolation
-                if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
-                    # lets start by figuring out a simple 1D problem
-                    if len(info['coordinates']) > 1:
-                        raise (Exception('coordio does not support multidimentional interpolation just yet'))
-                    # coordinates in ODS format
-                    coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
-                    # if the (first) coordinate is in self.coordsio
-                    if coord_location[0] in self.coordsio:
-                        coord, _ = trim_common_path(coord_location[0], self.location)
-                        # if the coord is not yet part of the ODS add it
-                        if coord not in self:
-                            self[coord] = self.coordsio[coord_location[0]]
-                        # if the coord is already part of the ODS interpolate the value to that coordinate
-                        else:
-                            if len(self.coordsio[coord_location[0]]) != len(value):
-                                raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (
-                                    coord_location[0], self.coordsio[coord_location[0]].shape, location, value.shape)))
-                            value = numpy.interp(self[coord], self.coordsio[coord_location[0]], value)
+            info = omas_info_node(o2u(location))
+            # check consistency for scalar entries
+            if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+                printe('%s must be a scalar of type %s' % (location, info['data_type']))
+            # check consistency for number of dimensions
+            elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+                # may want to raise a ValueError in the future
+                printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
+            elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
+                printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
-        if isinstance(value, ODS):
-            value.location = location
+            # coordinates interpolation
+            if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+                # lets start by figuring out a simple 1D problem
+                if len(info['coordinates']) > 1:
+                    raise (Exception('coordio does not support multidimentional interpolation just yet'))
+                # coordinates in ODS format
+                coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
+                # if the (first) coordinate is in self.coordsio
+                if coord_location[0] in self.coordsio:
+                    coord, _ = trim_common_path(coord_location[0], self.location)
+                    # if the coord is not yet part of the ODS add it
+                    if coord not in self:
+                        self[coord] = self.coordsio[coord_location[0]]
+                    # if the coord is already part of the ODS interpolate the value to that coordinate
+                    else:
+                        if len(self.coordsio[coord_location[0]]) != len(value):
+                            raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (
+                                coord_location[0], self.coordsio[coord_location[0]].shape, location, value.shape)))
+                        value = numpy.interp(self[coord], self.coordsio[coord_location[0]], value)
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -484,28 +481,27 @@ class ODS(MutableMapping):
             location = l2o([self.location, key[0]])
             value = self.omas_data[key[0]]
 
-            if not isinstance(value, ODS):
+            if self.consistency_check and not isinstance(value, ODS):
                 # handle cocos transformations going out
                 if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
                     value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
 
-                if self.consistency_check:
-                    info = omas_info_node(o2u(location))
-                    # coordinates interpolation
-                    if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
-                        # lets start by figuring out a simple 1D problem
-                        if len(info['coordinates']) > 1:
-                            raise (Exception('coordio does not support multidimentional interpolation just yet'))
-                        # coordinates in ODS format
-                        coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
-                        # if the (first) coordinate is in self.coordsio
-                        if coord_location[0] in self.coordsio:
-                            # if the coordinate part of the ODS
-                            coord, _ = trim_common_path(coord_location[0], self.location)
-                            if coord in self:
-                                if len(self[coord]) != len(value):
-                                    raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
-                                value = numpy.interp(self.coordsio[coord_location[0]], self[coord], value)
+                info = omas_info_node(o2u(location))
+                # coordinates interpolation
+                if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+                    # lets start by figuring out a simple 1D problem
+                    if len(info['coordinates']) > 1:
+                        raise (Exception('coordio does not support multidimentional interpolation just yet'))
+                    # coordinates in ODS format
+                    coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
+                    # if the (first) coordinate is in self.coordsio
+                    if coord_location[0] in self.coordsio:
+                        # if the coordinate part of the ODS
+                        coord, _ = trim_common_path(coord_location[0], self.location)
+                        if coord in self:
+                            if len(self[coord]) != len(value):
+                                raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
+                            value = numpy.interp(self.coordsio[coord_location[0]], self[coord], value)
 
             return value
 
