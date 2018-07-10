@@ -40,25 +40,31 @@ The `ODS` class extends native Python dictionary and list classes with:
     with cocos_environment(ods, cocosio=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
-7. Unified interface for **querying about time** dimension::
+7. Automatic **coordinate interpolations**::
+
+    ods['equilibrium.time_slice[0].profiles_1d.pressure'] = linspace(min(gEQDSK['psi']), max(gEQDSK['psi']), 10)
+    with coords_environment(ods, {'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
+        ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
+
+8. Unified interface for **querying about time** dimension::
 
     ods.time('equilibrium')                                     # will return an array of times
     ods.time('equilibrium.time_slice')                          # will return an array of times
     ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
-8. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
+9. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
 
     ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
 
-9. Evaluate **derived quantities** from more fundamental ones::
+10. Evaluate **derived quantities** from more fundamental ones::
 
     ods.physics_core_profiles_pressures()
 
-10. **Predefined set of plots**::
+11. **Predefined set of plots**::
 
     ods.plot_core_profiles_summary()
 
-11. Save/load ODSs to/from **different storage systems**:
+12. Save/load ODSs to/from **different storage systems**:
 
 .. _omas_formats:
 
