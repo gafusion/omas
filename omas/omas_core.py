@@ -17,7 +17,7 @@ __all__ = [
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'default_imas_version', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
-    'cocos_environment', 'cocos_transform', 'define_cocos',
+    'cocos_environment', 'cocos_transform', 'define_cocos', 'coords_environment',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
@@ -33,7 +33,7 @@ class ODS(MutableMapping):
                  location='',
                  cocos=omas_rcparams['cocos'],
                  cocosio=omas_rcparams['cocosio'],
-                 input_coordinates={},
+                 coordsio={},
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -48,6 +48,8 @@ class ODS(MutableMapping):
 
         :param cocosio: COCOS representation of the data that is read/written from/to the ODS
 
+        :param coordsio: ODS with coordinates to use for the data that is read/written from/to the ODS
+
         :param structure: IMAS schema to use
         """
         self.omas_data = None
@@ -57,6 +59,7 @@ class ODS(MutableMapping):
         self.location = location
         self._cocos = cocos
         self.cocosio = cocosio
+        self.coordsio = coordsio
         if structure is None:
             structure = {}
         self.structure = structure
@@ -235,8 +238,8 @@ class ODS(MutableMapping):
 
         :return: cocosio value
         """
-        if not hasattr(self,'_cocosio'):
-            self._cocosio=omas_rcparams['cocosio']
+        if not hasattr(self, '_cocosio'):
+            self._cocosio = omas_rcparams['cocosio']
         return self._cocosio
 
     @cocosio.setter
@@ -245,6 +248,24 @@ class ODS(MutableMapping):
         for item in self.keys():
             if isinstance(self[item], ODS):
                 self[item].cocosio = value
+
+    @property
+    def coordsio(self):
+        """
+        property that tells in what COCOS format the data will be input/output
+
+        :return: coordsio value
+        """
+        if not hasattr(self, '_coordsio'):
+            self._coordsio = omas_rcparams['coordsio']
+        return self._coordsio
+
+    @coordsio.setter
+    def coordsio(self, value):
+        self._coordsio = value
+        for item in self.keys():
+            if isinstance(self[item], ODS):
+                self[item].coordsio = value
 
     @property
     def dynamic_path_creation(self):
@@ -303,7 +324,7 @@ class ODS(MutableMapping):
             value = ODS(imas_version=self.imas_version,
                         consistency_check=self.consistency_check,
                         dynamic_path_creation=self.dynamic_path_creation,
-                        cocos=self.cocos, cocosio=self.cocosio)
+                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -373,6 +394,25 @@ class ODS(MutableMapping):
                 elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
                     printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
+                # coordinates interpolation
+                if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+                    # lets start by figuring out a simple 1D problem
+                    if len(info['coordinates']) > 1:
+                        raise (Exception('coordio does not support multidimentional interpolation just yet'))
+                    # coordinates in ODS format
+                    coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
+                    # if the (first) coordinate is in self.coordsio
+                    if coord_location[0] in self.coordsio:
+                        # if the coordinate is not yet part of the ODS add it
+                        coord,_=trim_common_path(coord_location[0],self.location)
+                        if coord not in self:
+                            self[coord] = self.coordsio[coord_location[0]]
+                        # if the coordinate is already part of the ODS interpolate the value to that coordinate
+                        else:
+                            if len(self.coordsio[coord_location[0]]) != len(value):
+                                raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
+                            value = numpy.interp(self[coord], self.coordsio[coord_location[0]], value)
+
         if isinstance(value, ODS):
             value.location = location
 
@@ -425,7 +465,7 @@ class ODS(MutableMapping):
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation,
-                                              cocos=self.cocos, cocosio=self.cocosio))
+                                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
             else:
                 location = l2o([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
@@ -579,7 +619,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio] attributes from input ods
 
         :param ods: input ods
 
@@ -652,7 +692,7 @@ except ImportError as _excp:
 # --------------------------------------------
 try:
     from . import omas_physics
-    from .omas_physics import cocos_environment, cocos_transform, define_cocos
+    from .omas_physics import cocos_environment, cocos_transform, define_cocos, coords_environment
     __all__.append('omas_physics')
     for item in omas_physics.__all__:
         setattr(ODS, 'physics_' + item, getattr(omas_physics, item))
@@ -671,7 +711,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio']
+omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio']
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data']+omas_ods_attrs)
 omas_dictstate=sorted(list(set(omas_dictstate)))
