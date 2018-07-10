@@ -42,7 +42,6 @@ The `ODS` class extends native Python dictionary and list classes with:
 
 7. Automatic **coordinate interpolations**::
 
-    ods['equilibrium.time_slice[0].profiles_1d.pressure'] = linspace(min(gEQDSK['psi']), max(gEQDSK['psi']), 10)
     with coords_environment(ods, {'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
         ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
 

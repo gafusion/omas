@@ -104,5 +104,10 @@ class TestOmasSuite(unittest.TestCase):
         assert (len(ods4['equilibrium.time_slice[0].profiles_1d.f']) == 5)
         assert (len(ods4['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
 
+        # ods can be queried on different coordinates
+        with coords_environment(ods4, ods1):
+            assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==10)
+        assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==5)
+
 if __name__ == '__main__':
     unittest.main()

@@ -403,14 +403,15 @@ class ODS(MutableMapping):
                     coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
                     # if the (first) coordinate is in self.coordsio
                     if coord_location[0] in self.coordsio:
-                        # if the coordinate is not yet part of the ODS add it
-                        coord,_=trim_common_path(coord_location[0],self.location)
+                        coord, _ = trim_common_path(coord_location[0], self.location)
+                        # if the coord is not yet part of the ODS add it
                         if coord not in self:
                             self[coord] = self.coordsio[coord_location[0]]
-                        # if the coordinate is already part of the ODS interpolate the value to that coordinate
+                        # if the coord is already part of the ODS interpolate the value to that coordinate
                         else:
                             if len(self.coordsio[coord_location[0]]) != len(value):
-                                raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
+                                raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (
+                                    coord_location[0], self.coordsio[coord_location[0]].shape, location, value.shape)))
                             value = numpy.interp(self[coord], self.coordsio[coord_location[0]], value)
 
         if isinstance(value, ODS):
@@ -480,10 +481,31 @@ class ODS(MutableMapping):
                 raise
         else:
             location = l2o([self.location, key[0]])
-            value=self.omas_data[key[0]]
-            # handle cocos transformations going out
-            if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals and not isinstance(value, ODS):
-                value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
+            value = self.omas_data[key[0]]
+
+            if not isinstance(value, ODS):
+                # handle cocos transformations going out
+                if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
+                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
+
+                if self.consistency_check:
+                    info = omas_info_node(o2u(location))
+                    # coordinates interpolation
+                    if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+                        # lets start by figuring out a simple 1D problem
+                        if len(info['coordinates']) > 1:
+                            raise (Exception('coordio does not support multidimentional interpolation just yet'))
+                        # coordinates in ODS format
+                        coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
+                        # if the (first) coordinate is in self.coordsio
+                        if coord_location[0] in self.coordsio:
+                            # if the coordinate part of the ODS
+                            coord, _ = trim_common_path(coord_location[0], self.location)
+                            if coord in self:
+                                if len(self[coord]) != len(value):
+                                    raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
+                                value = numpy.interp(self.coordsio[coord_location[0]], self[coord], value)
+
             return value
 
     def __delitem__(self, key):
