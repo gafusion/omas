@@ -456,8 +456,7 @@ def l2u(path):
     :return: universal ODS path format
     """
     location = separator.join(filter(None, map(str, path)))
-    location = re.sub('\.[0-9:]+', '.:', str(location))
-    return location
+    return o2u(location)
 
 
 def l2o(path):
@@ -471,6 +470,17 @@ def l2o(path):
     location = separator.join(filter(None, map(str, path)))
     location = re.sub('\.([0-9:]+)', r'.\1', str(location))
     return location
+
+
+def o2u(path):
+    '''
+    Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
+
+    :param path: ODS path format
+
+    :return: universal ODS path format
+    '''
+    return re.sub('\.[0-9:]+', '.:', str(path))
 
 
 def i2o(path):

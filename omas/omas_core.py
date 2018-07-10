@@ -30,9 +30,10 @@ class ODS(MutableMapping):
                  imas_version=default_imas_version,
                  consistency_check=omas_rcparams['consistency_check'],
                  dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
-                 ulocation='',
+                 location='',
                  cocos=omas_rcparams['cocos'],
                  cocosio=omas_rcparams['cocosio'],
+                 input_coordinates={},
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -41,7 +42,7 @@ class ODS(MutableMapping):
 
         :param dynamic_path_creation: whether to dynamically create the path when setting an item
 
-        :param ulocation: string with universal location of this object relative to IMAS schema
+        :param location: string with location of this object relative to IMAS schema in ODS path format
 
         :param cocos: internal COCOS representation (this can only be set when the object is created)
 
@@ -53,7 +54,7 @@ class ODS(MutableMapping):
         self._consistency_check = consistency_check
         self._dynamic_path_creation = dynamic_path_creation
         self.imas_version = imas_version
-        self.ulocation = ulocation
+        self.location = location
         self._cocos = cocos
         self.cocosio = cocosio
         if structure is None:
@@ -110,7 +111,7 @@ class ODS(MutableMapping):
         # this ODS has a children with 'time' information
         if isinstance(tmp.omas_data, dict):
             if 'time' in tmp:
-                extra_info['ulocation'] = self.ulocation + separator + 'time'
+                extra_info['location'] = self.location + separator + 'time'
                 return add_is_homogeneous_info(tmp['time'])
             # this node should have time filled, but the user did not do their job
             elif 'time' in tmp.structure:
@@ -161,7 +162,7 @@ class ODS(MutableMapping):
                 time_index = numpy.where(self['time'] == time)[0]
             else:
                 raise (ValueError(
-                    'time info is defined both in %s as well as upstream' % (self.ulocation + separator + 'time')))
+                    'time info is defined both in %s as well as upstream' % (self.location + separator + 'time')))
 
         # loop over items
         for item in self.keys():
@@ -256,6 +257,13 @@ class ODS(MutableMapping):
             self._dynamic_path_creation=True
         return self._dynamic_path_creation
 
+    @property
+    def ulocation(self):
+        '''
+        :return: string with location of this object in universal ODS path format
+        '''
+        return o2u(self.location)
+
     @dynamic_path_creation.setter
     def dynamic_path_creation(self, value):
         self._dynamic_path_creation = value
@@ -298,11 +306,11 @@ class ODS(MutableMapping):
                         cocos=self.cocos, cocosio=self.cocosio)
 
         # full path where we want to place the data
-        ulocation = l2u([self.ulocation, key[0]])
+        location = l2o([self.location, key[0]])
 
         # handle cocos transformations coming in
-        if self.cocosio != self.cocos and separator in ulocation and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
-            value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
+        if self.cocosio != self.cocos and separator in location and o2u(ulocation) in omas_physics.cocos_signals and not isinstance(value, ODS):
+            value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
 
         # perform consistency check with IMAS structure
         if self.consistency_check:
@@ -316,7 +324,7 @@ class ODS(MutableMapping):
                     else:
                         structure = self.structure[structure_key[0]]
                         if not len(structure):
-                            raise(ValueError('`%s` has no data'%ulocation))
+                            raise(ValueError('`%s` has no data'%location))
                     # check that tha data will go in the right place
                     self._validate(value, structure)
                 else:
@@ -324,7 +332,7 @@ class ODS(MutableMapping):
 
             except (LookupError, TypeError):
                 if self.consistency_check=='warn':
-                    printe('`%s` is not a valid IMAS %s location' % (ulocation, self.imas_version))
+                    printe('`%s` is not a valid IMAS %s location' % (location, self.imas_version))
                     if isinstance(value,ODS):
                         value.consistency_check=False
                 elif self.consistency_check:
@@ -333,8 +341,8 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    spaces = ' '*len('LookupError')+'  '+' ' * (len(self.ulocation) + 2)
-                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (ulocation, self.imas_version) +
+                    spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
+                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
                         spaces + '^' * len(structure_key[0]) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
@@ -354,19 +362,19 @@ class ODS(MutableMapping):
             if isinstance(value, ODS):
                 value.structure = structure
             else:
-                info = omas_info_node(ulocation)
+                info = omas_info_node(o2u(location))
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    printe('%s must be a scalar of type %s' % (ulocation, info['data_type']))
+                    printe('%s must be a scalar of type %s' % (location, info['data_type']))
                 # check consistency for number of dimensions
                 elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
                     # may want to raise a ValueError in the future
-                    printe('%s must be an array with dimensions: %s' % (ulocation, info['coordinates']))
+                    printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
                 elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                    printe('%s is in %s state' % (ulocation, info['lifecycle_status'].upper()))
+                    printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
         if isinstance(value, ODS):
-            value.ulocation = ulocation
+            value.location = location
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -378,7 +386,7 @@ class ODS(MutableMapping):
                 elif key[0] == len(self.omas_data):
                     self.omas_data.append(value)
                 else:
-                    raise (IndexError('%s[:] index is at %d' % (self.ulocation, len(self) - 1)))
+                    raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
             try:
                 self[key[0]][l2o(key[1:])] = pass_on_value
             except LookupError:
@@ -392,7 +400,7 @@ class ODS(MutableMapping):
         elif key[0] == len(self.omas_data):
             self.omas_data.append(value)
         else:
-            raise IndexError('%s[:] index is at %d' % (self.ulocation, len(self.omas_data) - 1))
+            raise IndexError('%s[:] index is at %d' % (self.location, len(self.omas_data) - 1))
 
     def __getitem__(self, key):
         # handle individual keys as well as full paths
@@ -419,8 +427,8 @@ class ODS(MutableMapping):
                                               dynamic_path_creation=self.dynamic_path_creation,
                                               cocos=self.cocos, cocosio=self.cocosio))
             else:
-                ulocation = l2u([self.ulocation, key[0]])
-                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%ulocation))
+                location = l2o([self.location, key[0]])
+                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
         if len(key) > 1:
             # if the user has entered path rather than a single key
@@ -431,11 +439,11 @@ class ODS(MutableMapping):
                     del self[key[0]]
                 raise
         else:
-            ulocation = l2u([self.ulocation, key[0]])
+            location = l2o([self.location, key[0]])
             value=self.omas_data[key[0]]
             # handle cocos transformations going out
-            if self.cocosio != self.cocos and separator in ulocation and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
-                value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[ulocation]]
+            if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals and not isinstance(value, ODS):
+                value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
             return value
 
     def __delitem__(self, key):
@@ -571,7 +579,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','ulocation','structure','_cocos','_cocosio'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio'] attributes from input ods
 
         :param ods: input ods
 
@@ -663,7 +671,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','ulocation','structure','_cocos','_cocosio']
+omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio']
 omas_dictstate=dir(ODS)
 omas_dictstate.extend(['omas_data']+omas_ods_attrs)
 omas_dictstate=sorted(list(set(omas_dictstate)))
