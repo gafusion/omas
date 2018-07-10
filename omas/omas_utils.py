@@ -517,6 +517,22 @@ def u2o(upath, path):
     return l2o(ul)
 
 
+def trim_common_path(p1, p2):
+    '''
+    return paths in lists format trimmed of the common first path between paths p1 and p2
+
+    :param p1: ODS path
+
+    :param p2: ODS path
+
+    :return: paths in list format trimmed of common part
+    '''
+    p1 = p2l(p1)
+    p2 = p2l(p2)
+    both = [x if x[0] == x[1] else None for x in zip(p1, p2)] + [None]
+    return p1[both.index(None):], p2[both.index(None):]
+
+
 def ids_cpo_mapper(ids, cpo=None):
     '''
     translate (some) IDS fields to CPO
@@ -554,6 +570,7 @@ def ids_cpo_mapper(ids, cpo=None):
                 cpo['coreprof'][itime]['ti.value'][:, iion] = nominal_values(ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature'])
 
     return cpo
+
 
 def omas_info(structures, imas_version=default_imas_version):
     '''
