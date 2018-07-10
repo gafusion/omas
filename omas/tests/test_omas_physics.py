@@ -88,6 +88,45 @@ class TestOmasPhysics(unittest.TestCase):
                 for thing in ['BT', 'TOR', 'POL', 'Q']:
                     assert cocos_transform(cocos_ind+cocos_add*10, cocos_ind+cocos_add*10)[thing] == 1
 
+    def test_omas_coordinates_intepolation(self):
+        # if a coordinate exists, then that is the coordinate that it is used
+        ods1 = ODS()
+        ods1['equilibrium.time_slice[0].profiles_1d.psi'] = numpy.linspace(0, 1, 10)
+        with omas_environment(ods1, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': numpy.linspace(0, 1, 5)}):
+            ods1['equilibrium.time_slice[0].profiles_1d.f'] = numpy.linspace(0, 1, 5)
+        assert (len(ods1['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+
+        # if a does not exists, then that coordinate is set
+        ods2 = ODS()
+        with omas_environment(ods2, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': numpy.linspace(0, 1, 5)}):
+            ods2['equilibrium.time_slice[0].profiles_1d.pressure'] = numpy.linspace(0, 1, 5)
+        assert (len(ods2['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
+
+        # coordinates can be taken from existing ODSs
+        ods3 = ODS()
+        with omas_environment(ods3, coordsio=ods1):
+            ods3['equilibrium.time_slice[0].profiles_1d.f'] = ods1['equilibrium.time_slice[0].profiles_1d.f']
+        with omas_environment(ods3, coordsio=ods2):
+            ods3['equilibrium.time_slice[0].profiles_1d.pressure'] = ods2[
+                'equilibrium.time_slice[0].profiles_1d.pressure']
+        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.pressure']) == 10)
+
+        # order matters
+        ods4 = ODS()
+        with omas_environment(ods4, coordsio=ods2):
+            ods4['equilibrium.time_slice[0].profiles_1d.pressure'] = ods2[
+                'equilibrium.time_slice[0].profiles_1d.pressure']
+        with omas_environment(ods4, coordsio=ods1):
+            ods4['equilibrium.time_slice[0].profiles_1d.f'] = ods1['equilibrium.time_slice[0].profiles_1d.f']
+        assert (len(ods4['equilibrium.time_slice[0].profiles_1d.f']) == 5)
+        assert (len(ods4['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
+
+        # ods can be queried on different coordinates
+        with omas_environment(ods4, coordsio=ods1):
+            assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==10)
+        assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==5)
+
 
 if __name__ == '__main__':
     unittest.main()
