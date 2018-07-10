@@ -82,7 +82,7 @@ def misc(ods):
     ods2['equilibrium']['time_slice'][2] = copy.deepcopy(ods['equilibrium']['time_slice'][0])
     ods2['equilibrium.time_slice[2].time'] = 3000.
 
-    assert(ods2['equilibrium']['time_slice'][0]['global_quantities'].location==ods2['equilibrium']['time_slice'][2]['global_quantities'].location)
+    assert(ods2['equilibrium']['time_slice'][0]['global_quantities'].ulocation==ods2['equilibrium']['time_slice'][2]['global_quantities'].ulocation)
 
     ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
 
@@ -92,7 +92,7 @@ def misc(ods):
                  ods2[('equilibrium', 'time_slice', '1', 'global_quantities')],
                  ods2['equilibrium.time_slice.1.global_quantities'],
                  ods2['equilibrium.time_slice[1].global_quantities']]:
-        assert item.location=='equilibrium.time_slice.:.global_quantities'
+        assert item.ulocation=='equilibrium.time_slice.:.global_quantities'
 
     ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
 
