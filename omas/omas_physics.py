@@ -241,48 +241,36 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 
 @contextmanager
-def coords_environment(ods, coordsio=None):
+def omas_environment(ods, cocosio=None, coordsio=None):
     '''
-    Provides OMAS environment within wich coordinates are interpolated
+    Provides environment for data input/output to/from OMAS
 
     :param ods: ODS on which to operate
 
-    :param coordsio: dictionary of coordinates
+    :param cocosio: COCOS convention
 
-    :return: ODS with coordinate interpolations set
+    :param coordsio: dictionary/ODS with coordinates for data interpolation
+
+    :return: ODS with environmen set
     '''
+
     if isinstance(coordsio, dict):
         from omas import ODS
         tmp = ODS()
         tmp.update(coordsio)
         coordsio = tmp
+
     old_coordsio = ods.coordsio
+    old_cocosio = ods.cocosio
+    if cocosio is not None:
+        ods.cocosio = cocosio
     if coordsio is not None:
         ods.coordsio = coordsio
     try:
         yield ods
     finally:
-        ods.coordsio = old_coordsio
-
-
-@contextmanager
-def cocos_environment(ods, cocosio=None):
-    '''
-    Provides OMAS environment within wich a certain COCOS convention is defined
-
-    :param ods: ODS on which to operate
-
-    :param cocosio: input/output COCOS convention
-
-    :return: ODS with COCOS convention set
-    '''
-    old_cocosio = ods.cocosio
-    if cocosio is not None:
-        ods.cocosio = cocosio
-    try:
-        yield ods
-    finally:
         ods.cocosio = old_cocosio
+        ods.coordsio = old_coordsio
 
 
 def generate_cocos_signals(structures=[], threshold=0):
@@ -456,3 +444,41 @@ class CocosSignals(dict):
 # cocos_signals is the actual dictionary
 cocos_signals = CocosSignals()
 cocos_signals.update(_cocos_signals)
+
+#=======================
+# BACKWARD COMPATIBILITY
+#=======================
+
+@contextmanager
+def coords_environment(ods, coordsio=None):
+    '''
+    DEPRECATED: use omas_environment(ods, coordsio=...) instead
+
+    Provides OMAS environment within wich coordinates are interpolated
+
+    :param ods: ODS on which to operate
+
+    :param coordsio: dictionary of coordinates
+
+    :return: ODS with coordinate interpolations set
+    '''
+    warnings.warn('coords_environment is deprecated. Use omas_environment(ods, coordsio=...) instead.')
+    with omas_environment(ods, coordsio=coordsio):
+        yield ods
+
+@contextmanager
+def cocos_environment(ods, cocosio=None):
+    '''
+    DEPRECATED: use omas_environment(ods, cocosio=...) instead
+
+    Provides OMAS environment within wich a certain COCOS convention is defined
+
+    :param ods: ODS on which to operate
+
+    :param cocosio: input/output COCOS convention
+
+    :return: ODS with COCOS convention set
+    '''
+    warnings.warn('cocos_environment is deprecated. Use omas_environment(ods, cocosio=...) instead.')
+    with omas_environment(ods, coocosio=coocosio):
+        yield ods

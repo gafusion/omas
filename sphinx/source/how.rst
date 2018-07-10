@@ -37,12 +37,12 @@ The `ODS` class extends native Python dictionary and list classes with:
 
 6. Automatic **COCOS transformations** [`read the COCOS cheatsheat <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
 
-    with cocos_environment(ods, cocosio=2):
+    with omas_environment(ods, cocosio=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
 7. Automatic **coordinate interpolations**::
 
-    with coords_environment(ods, {'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
+    with omas_environment(ods, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
         ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
 
 8. Unified interface for **querying about time** dimension::
