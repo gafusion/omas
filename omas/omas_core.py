@@ -399,15 +399,16 @@ class ODS(MutableMapping):
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
             # handle cocos transformations coming in
-            if self.cocosio != self.cocos and separator in location and o2u(ulocation) in omas_physics.cocos_signals and not isinstance(value, ODS):
+            if self.cocosio != self.cocos and separator in location and self.ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
                 value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
 
             # get node information
             info = omas_info_node(o2u(location))
 
             # handle units (Python pint package)
-            if pint is not None and 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
-                value=value.to(info['units']).magnitude
+            if pint is not None:
+                if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
+                    value=value.to(info['units']).magnitude
 
             # check consistency for scalar entries
             if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
