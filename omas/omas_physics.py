@@ -46,32 +46,79 @@ def core_profiles_pressures(ods, update=True):
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
         prof1d_p = ods_p['core_profiles']['profiles_1d'][time_index]
-        __p__ = prof1d['electrons']['density'] * prof1d['electrons']['temperature'] * constants.e
-        prof1d_p['pressure_thermal'] = __p__
-        prof1d_p['pressure_ion_total'] = __p__ * 0.0
-        prof1d_p['pressure_perpendicular'] = __p__ / 3.
-        prof1d_p['pressure_parallel'] = __p__ / 3.
+
+        if not update:
+            prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
+
+        __zeros__ = 0.*prof1d['grid']['rho_tor_norm']
+
+        prof1d_p['pressure_thermal']       = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_ion_total']     = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_perpendicular'] = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_parallel']      = copy.deepcopy(__zeros__)
+
+        # electrons
+        prof1d_p['electrons']['pressure'] = copy.deepcopy(__zeros__)
+
+        __p__ = None
+        if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
+            __p__ = prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e
+        elif 'pressure_thermal' in prof1d['electrons']:
+            __p__ = prof1d['electrons']['pressure_thermal']
+
+        if __p__ is not None:
+            prof1d_p['electrons']['pressure_thermal'] = __p__
+            prof1d_p['electrons']['pressure']  += __p__
+            prof1d_p['pressure_thermal']       += __p__
+            prof1d_p['pressure_perpendicular'] += __p__ / 3.
+            prof1d_p['pressure_parallel']      += __p__ / 3.
+
+        if 'pressure_fast_perpendicular' in prof1d['electrons']:
+            __p__ = prof1d['electrons']['pressure_fast_perpendicular']
+            if not update:
+                prof1d_p['electrons']['pressure_fast_perpendicular'] = __p__
+            prof1d_p['electrons']['pressure']  += 2. * __p__
+            prof1d_p['pressure_perpendicular'] += __p__
+
+        if 'pressure_fast_parallel' in prof1d['electrons']:
+            __p__ = prof1d['electrons']['pressure_fast_parallel']
+            if not update:
+                prof1d_p['electrons']['pressure_fast_parallel'] = __p__
+            prof1d_p['electrons']['pressure'] += __p__
+            prof1d_p['pressure_parallel']     += __p__
+
+        #ions
         for k in range(len(prof1d['ion'])):
-            prof1d_p['ion'][k]['pressure'] = __p__ * 0.0
-            for therm_fast, density in [('therm', 'density'), ('fast', 'density_fast')]:
-                if (len(prof1d['ion']) and density in prof1d['ion'][k] and numpy.sum(
-                        numpy.abs(prof1d['ion'][k][density])) > 0):
-                    if therm_fast == 'therm':
-                        __p__ = prof1d['ion'][k]['density'] * prof1d['ion'][k]['temperature'] * constants.e
-                        prof1d_p['ion'][k]['pressure_thermal'] = __p__
-                        prof1d_p['pressure_ion_total'] += __p__
-                        prof1d_p['pressure_thermal'] += __p__
-                        prof1d_p['pressure_perpendicular'] += __p__ / 3.
-                        prof1d_p['pressure_parallel'] += __p__ / 3.
-                    else:
-                        if not update:
-                            prof1d_p['ion'][k]['pressure_fast_perpendicular'] = prof1d['ion'][k][
-                                'pressure_fast_perpendicular']
-                            prof1d_p['ion'][k]['pressure_fast_parallel'] = prof1d['ion'][k]['pressure_fast_parallel']
-                        prof1d_p['pressure_perpendicular'] += prof1d['ion'][k]['pressure_fast_perpendicular']
-                        prof1d_p['pressure_parallel'] += prof1d['ion'][k]['pressure_fast_parallel']
-                        __p__ = prof1d_p['ion'][k]['pressure_fast_perpendicular'] * 2 + prof1d_p['ion'][k]['pressure_fast_parallel']
-                    prof1d_p['ion'][k]['pressure'] += __p__
+
+            prof1d_p['ion'][k]['pressure'] = copy.deepcopy(__zeros__)
+
+            __p__ = None
+            if 'density_thermal' in prof1d['ion'][k] and 'temperature' in prof1d['ion'][k]:
+                __p__ = prof1d['ion'][k]['density_thermal'] * prof1d['ion'][k]['temperature'] * constants.e
+            elif 'pressure_thermal' in prof1d['ion'][k]:
+                __p__ = prof1d['ion'][k]['pressure_thermal']
+
+            if __p__ is not None:
+                prof1d_p['ion'][k]['pressure_thermal'] = __p__
+                prof1d_p['ion'][k]['pressure']     += __p__
+                prof1d_p['pressure_thermal']       += __p__
+                prof1d_p['pressure_perpendicular'] += __p__ / 3.
+                prof1d_p['pressure_parallel']      += __p__ / 3.
+                prof1d_p['pressure_ion_total']     += __p__
+
+            if 'pressure_fast_perpendicular' in prof1d['ion'][k]:
+                __p__ = prof1d['ion'][k]['pressure_fast_perpendicular']
+                if not update:
+                    prof1d_p['ion'][k]['pressure_fast_perpendicular'] = __p__
+                prof1d_p['ion'][k]['pressure']     += 2. * __p__
+                prof1d_p['pressure_perpendicular'] += __p__
+
+            if 'pressure_fast_parallel' in prof1d['ion'][k]:
+                __p__ = prof1d['ion'][k]['pressure_fast_parallel']
+                if not update:
+                    prof1d_p['ion'][k]['pressure_fast_parallel'] = __p__
+                prof1d_p['ion'][k]['pressure'] +=  __p__
+                prof1d_p['pressure_parallel']  += __p__
 
         #extra pressure information that is not within IMAS structure is set only if consistency_check is not True
         if ods_p.consistency_check is not True:
@@ -81,6 +128,46 @@ def core_profiles_pressures(ods, update=True):
 
     return ods_p
 
+
+@add_to__ODS__
+def core_profiles_densities(ods, update=True):
+    '''
+    calculates density from density_thermal and density_fast
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    '''
+
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    for time_index in ods['core_profiles']['profiles_1d']:
+        prof1d = ods['core_profiles']['profiles_1d'][time_index]
+        prof1d_n = ods_n['core_profiles']['profiles_1d'][time_index]
+
+        if not update:
+            prof1d_n['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
+
+        __zeros__ = 0.*prof1d['grid']['rho_tor_norm']
+
+        # electrons
+        prof1d_n['electrons']['density'] = copy.deepcopy(__zeros__)
+        for density in ['density_thermal','density_fast']:
+            if density in prof1d['electrons']:
+                 prof1d_n['electrons']['density'] += prof1d['electrons'][density]
+
+        # ions
+        for k in range(len(prof1d['ion'])):
+            prof1d_n['ion'][k]['density'] = copy.deepcopy(__zeros__)
+            for density in ['density_thermal','density_fast']:
+                if density in prof1d['ion'][k]:
+                    prof1d_n['ion'][k]['density'] += prof1d['ion'][k][density]
+    return ods_n
 
 def define_cocos(cocos_ind):
     """

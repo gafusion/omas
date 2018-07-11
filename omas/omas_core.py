@@ -669,7 +669,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio'] attributes from input ods
 
         :param ods: input ods
 
