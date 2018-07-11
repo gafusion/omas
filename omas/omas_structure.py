@@ -147,6 +147,7 @@ def create_json_structure(imas_version=default_imas_version):
                 me['@units']=parent['units']
             parent['units']=me['@units']
 
+        # children inherit lifecycle status from parent
         if '@lifecycle_status' in me:
             parent['lifecycle_status']=me['@lifecycle_status']
         elif parent['lifecycle_status'] and not isinstance(me, list):
@@ -249,28 +250,43 @@ def create_html_documentation(imas_version=default_imas_version):
     lines = []
     for structure_file in list_structures(imas_version=imas_version):
         print('Adding to html documentation: ' + structure_file)
+        # load structure information
         structure = load_structure(structure_file, imas_version=imas_version)[0]
+        # idenfity coordinates in the structure
+        coords = []
+        for item in structure:
+            if 'coordinates' in structure[item]:
+                coords.extend(structure[item]['coordinates'])
+        coords = list(filter(lambda x: '...' not in x, set(coords)))
+        # generate output
         lines.append('<!-- %s -->' % structure_file)
         lines.append(table_header)
         lines.append(sub_table_header)
         for item in sorted(structure):
             if not any([item.endswith(k) for k in ['_error_index', '_error_lower', '_error_upper']]):
+                # uncertain quantities
                 is_uncertain = ''
                 if item + '_error_upper' in structure:
                     is_uncertain = ' (uncertain)'
+                # lifecycle status
                 status = ''
                 if 'lifecycle_status' in structure[item] and structure[item]['lifecycle_status'] not in ['active']:
-                    status = '</p><p><strong>(%s)</strong>'%structure[item]['lifecycle_status']
+                    color_mapper={'alpha':'blue','obsolescent':'red'}
+                    status = '</p><p><font color="%s">(%s)</font>'%(color_mapper.get(structure[item]['lifecycle_status'],'orange'),structure[item]['lifecycle_status'])
+                # highlight entries that are a coordinate
+                item_with_coordinate_highlight = item
+                if item in coords:
+                    item_with_coordinate_highlight='<strong>%s</strong>'%item
                 try:
                     lines.append(
                         '<tr>'
-                        '<td {column_style}><p>{item}{status}</p></td>' \
+                        '<td {column_style}><p>{item_with_coordinate_highlight}{status}</p></td>' \
                         '<td {column_style}><p>{coordinates}</p></td>' \
                         '<td><p>{data_type}</p></td>' \
                         '<td><p>{units}</p></td>' \
                         '<td><p>{description}</p></td>'
                         '</tr>'.format(
-                            item=item,
+                            item_with_coordinate_highlight=item_with_coordinate_highlight,
                             coordinates=re.sub('\[\]', '', re.sub('[\'\"]', '', re.sub(',', ',<br>', str(
                                 list(map(str, structure[item].get('coordinates', ''))))))),
                             data_type=structure[item].get('data_type', '') + is_uncertain,
