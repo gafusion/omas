@@ -10,26 +10,24 @@ from omas import *
 
 try:
     import imas
-
     failed_IMAS = False
 except ImportError as _excp:
     failed_IMAS = _excp
 
 try:
     import hdc
-
     failed_HDC = False
 except ImportError as _excp:
     failed_HDC = _excp
 
 try:
     import ual
-
     failed_ITM = False
 except ImportError as _excp:
     failed_ITM = _excp
 
 try:
+    import boto3
     if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
         raise (RuntimeError('Missing AWS configuration file ~/.aws/config'))
     failed_S3 = False

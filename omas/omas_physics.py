@@ -241,7 +241,7 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None):
+def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
     '''
     Provides environment for data input/output to/from OMAS
 
@@ -250,6 +250,8 @@ def omas_environment(ods, cocosio=None, coordsio=None):
     :param cocosio: COCOS convention
 
     :param coordsio: dictionary/ODS with coordinates for data interpolation
+
+    :param unitsio: True/False whether data read from OMAS should have units
 
     :return: ODS with environmen set
     '''
@@ -262,16 +264,19 @@ def omas_environment(ods, cocosio=None, coordsio=None):
 
     old_coordsio = ods.coordsio
     old_cocosio = ods.cocosio
+    old_unitsio = ods.unitsio
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
         ods.coordsio = coordsio
+    if unitsio is not None:
+        ods.unitsio = unitsio
     try:
         yield ods
     finally:
         ods.cocosio = old_cocosio
         ods.coordsio = old_coordsio
-
+        ods.unitsio = old_unitsio
 
 def generate_cocos_signals(structures=[], threshold=0):
     """

@@ -24,6 +24,11 @@ from omas import *
 from omas.omas_utils import *
 from omas.omas_physics import *
 
+try:
+    import pint
+    failed_PINT = False
+except ImportError as _excp:
+    failed_PINT = _excp
 
 class TestOmasPhysics(unittest.TestCase):
     """
@@ -127,6 +132,17 @@ class TestOmasPhysics(unittest.TestCase):
             assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==10)
         assert(len(ods4['equilibrium.time_slice[0].profiles_1d.f'])==5)
 
+    @unittest.skipUnless(not failed_PINT, str(failed_PINT))
+    def test_handle_units(self):
+        ods=ODS()
+
+        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
+        assert(ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']==0.008)
+
+        with omas_environment(ods, unitsio=True):
+            tmp=ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
+            assert(tmp.magnitude==0.008)
+            assert(tmp.units=='second')
 
 if __name__ == '__main__':
     unittest.main()

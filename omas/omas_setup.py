@@ -12,17 +12,27 @@ from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
-import tempfile
-import uncertainties
-import uncertainties.unumpy as unumpy
-from uncertainties.unumpy import nominal_values, std_devs, uarray
-from uncertainties import ufloat
 from io import StringIO
 from contextlib import contextmanager
+import tempfile
 import warnings
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
     formatwarning_orig(message, category, filename, lineno, line='')
+# Pint
+try:
+    import pint
+    from pint import UnitRegistry
+    ureg = UnitRegistry()
+except ImportError:
+    pint = None
+    ureg = None
+    warnings.warn('pint Python library not found')
+# Uncertainties
+import uncertainties
+import uncertainties.unumpy as unumpy
+from uncertainties.unumpy import nominal_values, std_devs, uarray
+from uncertainties import ufloat
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
@@ -54,6 +64,7 @@ omas_rcparams = {
     'cocosio':11,
     'consistency_check': True,
     'dynamic_path_creation': True,
+    'unitsio': False,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',
                                     os.sep.join(
                                         [tempfile.gettempdir(), 'OMAS_TMP_DIR'])),

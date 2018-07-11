@@ -45,25 +45,29 @@ The `ODS` class extends native Python dictionary and list classes with:
     with omas_environment(ods, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
         ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
 
-8. Unified interface for **querying about time** dimension::
+8. Automatic **units conversions** via `pint Python package <http://pint.readthedocs.io/en/latest/>`_::
+
+    ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * milliseconds
+
+9. Unified interface for **querying about time** dimension::
 
     ods.time('equilibrium')                                     # will return an array of times
     ods.time('equilibrium.time_slice')                          # will return an array of times
     ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
-9. Seamless handling of `uncertain <https://github.com/lebigot/uncertainties>`_ **quantities**::
+10. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_::
 
     ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
 
-10. Evaluate **derived quantities** from more fundamental ones::
+11. Evaluate **derived quantities** from more fundamental ones::
 
     ods.physics_core_profiles_pressures()
 
-11. **Predefined set of plots**::
+12. **Predefined set of plots**::
 
     ods.plot_core_profiles_summary()
 
-12. Save/load ODSs to/from **different storage systems**:
+13. Save/load ODSs to/from **different storage systems**:
 
 .. _omas_formats:
 

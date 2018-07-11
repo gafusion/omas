@@ -251,6 +251,24 @@ class ODS(MutableMapping):
                 self[item].cocosio = value
 
     @property
+    def unitsio(self):
+        """
+        property that if data should be returned with units or not
+
+        :return: unitsio value
+        """
+        if not hasattr(self, '_unitsio'):
+            self._unitsio = omas_rcparams['unitsio']
+        return self._unitsio
+
+    @unitsio.setter
+    def unitsio(self, value):
+        self._unitsio = value
+        for item in self.keys():
+            if isinstance(self[item], ODS):
+                self[item].unitsio = value
+
+    @property
     def coordsio(self):
         """
         property that tells in what COCOS format the data will be input/output
@@ -312,13 +330,6 @@ class ODS(MutableMapping):
         # handle individual keys as well as full paths
         key = p2l(key)
 
-        # non-scalar data is saved as numpy arrays
-        if isinstance(value, list):
-            value = numpy.array(value)
-        # floats as python floats
-        elif isinstance(value, numpy.float64):
-            value = float(value)
-
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
@@ -378,13 +389,26 @@ class ODS(MutableMapping):
             else:
                 raise (Exception('Cannot convert from list to dict once ODS has data'))
 
+        # non-scalar data is saved as numpy arrays
+        if isinstance(value, list):
+            value = numpy.array(value)
+        # floats as python floats
+        elif isinstance(value, numpy.float64):
+            value = float(value)
+
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
             # handle cocos transformations coming in
             if self.cocosio != self.cocos and separator in location and o2u(ulocation) in omas_physics.cocos_signals and not isinstance(value, ODS):
                 value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
 
+            # get node information
             info = omas_info_node(o2u(location))
+
+            # handle units (Python pint package)
+            if pint is not None and 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
+                value=value.to(info['units']).magnitude
+
             # check consistency for scalar entries
             if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
                 printe('%s must be a scalar of type %s' % (location, info['data_type']))
@@ -486,7 +510,9 @@ class ODS(MutableMapping):
                 if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
                     value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
 
+                # get node information
                 info = omas_info_node(o2u(location))
+
                 # coordinates interpolation
                 if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
                     # lets start by figuring out a simple 1D problem
@@ -502,6 +528,10 @@ class ODS(MutableMapping):
                             if len(self[coord]) != len(value):
                                 raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
                             value = numpy.interp(self.coordsio[coord_location[0]], self[coord], value)
+
+                # handle units (Python pint package)
+                if pint is not None and 'units' in info and self.unitsio:
+                    value = value * getattr(ureg, info['units'])
 
             return value
 
