@@ -19,13 +19,14 @@ This example only works with python 2.7 since OMFIT is only Python 2.7 compatibl
 from __future__ import print_function, division, unicode_literals
 
 import os
-
-os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+from matplotlib import pyplot
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 
-# omas_rcparams['allow_fake_imas_fallback']=True
+# settings
+os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
+omas_rcparams['allow_fake_imas_fallback'] = True
 
 # read gEQDSK file in OMFIT
 eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
@@ -44,3 +45,8 @@ eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)
 
 # save gEQDSK file
 eq1.deploy('g133221.02000')
+
+# plot
+eq.plot()
+eq1.plot()
+pyplot.show()
