@@ -485,5 +485,5 @@ def cocos_environment(ods, cocosio=None):
     :return: ODS with COCOS convention set
     '''
     warnings.warn('cocos_environment is deprecated. Use omas_environment(ods, cocosio=...) instead.')
-    with omas_environment(ods, coocosio=coocosio):
+    with omas_environment(ods, cocosio=cocosio):
         yield ods
