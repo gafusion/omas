@@ -430,11 +430,8 @@ class ODS(MutableMapping):
                 # if the (first) coordinate is in self.coordsio
                 if coord_location[0] in self.coordsio:
                     coord, _ = trim_common_path(coord_location[0], self.location)
-                    # if the coord is not yet part of the ODS add it
-                    if coord not in self:
-                        self[coord] = self.coordsio[coord_location[0]]
                     # if the coord is already part of the ODS interpolate the value to that coordinate
-                    else:
+                    if coord in self:
                         if len(self.coordsio[coord_location[0]]) != len(value):
                             raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (
                                 coord_location[0], self.coordsio[coord_location[0]].shape, location, value.shape)))

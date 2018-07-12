@@ -9,7 +9,7 @@
  },
  "em_coupling.active_coils": {
   "coordinates": [
-   "em_coupling.IDS:pf_active.coil"
+   "pf_active.coil"
   ],
   "data_type": "STR_1D",
   "documentation": "List of the names of the active PF+CS coils",
@@ -200,7 +200,7 @@
  },
  "em_coupling.flux_loops": {
   "coordinates": [
-   "em_coupling.IDS:magnetics.flux_loop"
+   "magnetics.flux_loop"
   ],
   "data_type": "STR_1D",
   "documentation": "List of the names of the axisymmetric flux loops",
@@ -649,7 +649,7 @@
  },
  "em_coupling.passive_loops": {
   "coordinates": [
-   "em_coupling.IDS:pf_passive.loop"
+   "pf_passive.loop"
   ],
   "data_type": "STR_1D",
   "documentation": "List of the names of the passive loops",
@@ -659,7 +659,7 @@
  },
  "em_coupling.poloidal_probes": {
   "coordinates": [
-   "em_coupling.IDS:magnetics.bpol_probe"
+   "magnetics.bpol_probe"
   ],
   "data_type": "STR_1D",
   "documentation": "List of the names of poloidal field probes",

@@ -190,6 +190,11 @@ def create_json_structure(imas_version=default_imas_version):
             coords = list(map(process_path, coords))
             fout[item]['@coordinates'] = coords
 
+    # deal with cross-referenced coordinates
+    for item in sorted(fout):
+        if '@coordinates' in fout[item]:
+            fout[item]['@coordinates'] = list(map(lambda x: re.sub('^.*\.IDS:', '', x), fout[item]['@coordinates']))
+
     # check dimensions
     for item in sorted(fout):
         coord = []
