@@ -97,6 +97,9 @@ class TestOmasPhysics(unittest.TestCase):
         data5 = numpy.linspace(0, 1, 5)
         data10 = numpy.linspace(0, 1, 10)
 
+        if self.verbose:
+            os.environ['OMAS_DEBUG_TOPIC'] = 'coordsio'
+
         # data can be entered without any coordinate checks
         ods0 = ODS()
         ods0['equilibrium.time_slice[0].profiles_1d.psi'] = data10
@@ -110,13 +113,11 @@ class TestOmasPhysics(unittest.TestCase):
             ods1['equilibrium.time_slice[0].profiles_1d.f'] = data5
         assert (len(ods1['equilibrium.time_slice[0].profiles_1d.f']) == 10)
 
-        # if a coordinate does not exists, then a warning is printed
+        # if a coordinate does not exists, then it is added
         ods2 = ODS()
         with omas_environment(ods2, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': data5}):
             ods2['equilibrium.time_slice[0].profiles_1d.pressure'] = data5
         assert (len(ods2['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
-        # but we can still add it later
-        ods2['equilibrium.time_slice[0].profiles_1d.psi'] = data5
 
         # coordinates can be easily copied over from existing ODSs with .coordinates() method
         ods3 = ODS()
@@ -124,8 +125,7 @@ class TestOmasPhysics(unittest.TestCase):
         with omas_environment(ods3, coordsio=ods1):
             ods3['equilibrium.time_slice[0].profiles_1d.f'] = ods1['equilibrium.time_slice[0].profiles_1d.f']
         with omas_environment(ods3, coordsio=ods2):
-            pressure = ods2['equilibrium.time_slice[0].profiles_1d.pressure']
-            ods3['equilibrium.time_slice[0].profiles_1d.pressure'] = pressure
+            ods3['equilibrium.time_slice[0].profiles_1d.pressure'] = ods2['equilibrium.time_slice[0].profiles_1d.pressure']
         assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
         assert (len(ods3['equilibrium.time_slice[0].profiles_1d.pressure']) == 10)
 
@@ -133,6 +133,10 @@ class TestOmasPhysics(unittest.TestCase):
         with omas_environment(ods3, coordsio=ods2):
             assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 5)
         assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+
+        # ods can be queried on different coordinates than they were originally filled in (ods example)
+        with omas_environment(ods3, coordsio=ods3):
+            assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
 
         # ods can be queried on different coordinates than they were originally filled in (dictionary example)
         with omas_environment(ods3, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': data5}):
