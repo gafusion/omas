@@ -62,6 +62,7 @@ separator = '.'
 omas_rcparams = {
     'cocos':11,
     'cocosio':11,
+    'coordsio':{},
     'consistency_check': True,
     'dynamic_path_creation': True,
     'unitsio': False,
