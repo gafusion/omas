@@ -2643,7 +2643,7 @@
  },
  "equilibrium.time_slice[:].constraints.bpol_probe": {
   "coordinates": [
-   "equilibrium.IDS:magnetics.bpol_probe"
+   "magnetics.bpol_probe"
   ],
   "data_type": "struct_array",
   "documentation": "Set of poloidal field probes",
@@ -3063,7 +3063,7 @@
  },
  "equilibrium.time_slice[:].constraints.faraday_angle": {
   "coordinates": [
-   "equilibrium.IDS:polarimeter.channel"
+   "polarimeter.channel"
   ],
   "data_type": "struct_array",
   "documentation": "Set of faraday angles",
@@ -3275,7 +3275,7 @@
  },
  "equilibrium.time_slice[:].constraints.flux_loop": {
   "coordinates": [
-   "equilibrium.IDS:magnetics.flux_loop"
+   "magnetics.flux_loop"
   ],
   "data_type": "struct_array",
   "documentation": "Set of flux loops",
@@ -3695,7 +3695,7 @@
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment": {
   "coordinates": [
-   "equilibrium.IDS:iron_core.segment"
+   "iron_core.segment"
   ],
   "data_type": "struct_array",
   "documentation": "Magnetisation M of a set of iron core segments",
@@ -4123,7 +4123,7 @@
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle": {
   "coordinates": [
-   "equilibrium.IDS:mse.channel"
+   "mse.channel"
   ],
   "data_type": "struct_array",
   "documentation": "Set of MSE polarisation angles",
@@ -4547,7 +4547,7 @@
  },
  "equilibrium.time_slice[:].constraints.n_e_line": {
   "coordinates": [
-   "equilibrium.IDS:interferometer.channel"
+   "interferometer.channel"
   ],
   "data_type": "struct_array",
   "documentation": "Set of line integrated density measurements",
@@ -4759,7 +4759,7 @@
  },
  "equilibrium.time_slice[:].constraints.pf_current": {
   "coordinates": [
-   "equilibrium.IDS:pf_active.coil"
+   "pf_active.coil"
   ],
   "data_type": "struct_array",
   "documentation": "Current in a set of poloidal field coils",
