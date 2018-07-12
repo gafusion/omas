@@ -276,11 +276,13 @@ class ODS(MutableMapping):
         :return: coordsio value
         """
         if not hasattr(self, '_coordsio'):
-            self._coordsio = omas_rcparams['coordsio']
+            self._coordsio = (None, omas_rcparams['coordsio'])
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, value):
+        if not isinstance(value,(list,tuple)):
+            value=(self,value)
         self._coordsio = value
         for item in self.keys():
             if isinstance(self[item], ODS):
@@ -421,21 +423,25 @@ class ODS(MutableMapping):
                 printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
             # coordinates interpolation
-            if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+            ods_coordinates, requested_coordinates = self.coordsio
+            if len(requested_coordinates) and 'coordinates' in info and any(
+                    [not coord.startswith('1...') for coord in info['coordinates']]):
                 # lets start by figuring out a simple 1D problem
                 if len(info['coordinates']) > 1:
                     raise (Exception('coordio does not support multidimentional interpolation just yet'))
                 # coordinates in ODS format
                 coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
-                # if the (first) coordinate is in self.coordsio
-                if coord_location[0] in self.coordsio:
-                    coord, _ = trim_common_path(coord_location[0], self.location)
+
+                # if the (first) coordinate is in requested_coordinates
+                coordinate = coord_location[0]
+                if coordinate in requested_coordinates:
                     # if the coord is already part of the ODS interpolate the value to that coordinate
-                    if coord in self:
-                        if len(self.coordsio[coord_location[0]]) != len(value):
-                            raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (
-                                coord_location[0], self.coordsio[coord_location[0]].shape, location, value.shape)))
-                        value = numpy.interp(self[coord], self.coordsio[coord_location[0]], value)
+                    if coordinate in ods_coordinates:
+                        if len(requested_coordinates[coord_location[0]]) != len(value):
+                            raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (coordinate, requested_coordinates[coord_location[0]].shape, location, value.shape)))
+                        value = numpy.interp(ods_coordinates[coord_location[0]],requested_coordinates[coord_location[0]], value)
+                else:
+                    printe('Setting `%s` without first specifying coordinate `%s`' % (self.location, coordinate))
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -512,20 +518,22 @@ class ODS(MutableMapping):
                 info = omas_info_node(o2u(location))
 
                 # coordinates interpolation
-                if len(self.coordsio) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
+                ods_coordinates, requested_coordinates = self.coordsio
+                if len(requested_coordinates) and 'coordinates' in info and any([not coord.startswith('1...') for coord in info['coordinates']]):
                     # lets start by figuring out a simple 1D problem
                     if len(info['coordinates']) > 1:
                         raise (Exception('coordio does not support multidimentional interpolation just yet'))
                     # coordinates in ODS format
                     coord_location = list(map(lambda x: u2o(x, self.location), info['coordinates']))
-                    # if the (first) coordinate is in self.coordsio
-                    if coord_location[0] in self.coordsio:
+
+                    # if the (first) coordinate is in requested_coordinates
+                    coordinate = coord_location[0]
+                    if coordinate in requested_coordinates:
                         # if the coordinate part of the ODS
-                        coord, _ = trim_common_path(coord_location[0], self.location)
-                        if coord in self:
-                            if len(self[coord]) != len(value):
-                                raise(Exception('coordsio[%s].shape=%d does not match %s.shape=%d'%(coord_location[0],self.coordsio[coord_location[0]].shape,location,value.shape)))
-                            value = numpy.interp(self.coordsio[coord_location[0]], self[coord], value)
+                        if coordinate in ods_coordinates:
+                            if len(ods_coordinates[coord_location[0]]) != len(value):
+                                raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (coordinate, requested_coordinates[coord_location[0]].shape, location, value.shape)))
+                            value = numpy.interp(requested_coordinates[coord_location[0]],ods_coordinates[coord_location[0]], value)
 
                 # handle units (Python pint package)
                 if pint is not None and 'units' in info and self.unitsio:

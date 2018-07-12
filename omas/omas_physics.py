@@ -268,7 +268,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
-        ods.coordsio = coordsio
+        ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
     try:
