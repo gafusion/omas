@@ -169,6 +169,42 @@ def core_profiles_densities(ods, update=True):
                     prof1d_n['ion'][k]['density'] += prof1d['ion'][k][density]
     return ods_n
 
+@add_to__ODS__
+def core_profiles_zeff(ods, update=True, use_electrons_density=False):
+    '''
+    calculates effective charge
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :param use_electrons_density: 
+            denominator core_profiles.profiles_1d.:.electrons.density 
+            instead of sum Z*n_i
+
+    :return: updated ods
+    '''
+
+    ods_z = core_profiles_densities(ods,update=update)
+
+    for time_index in ods['core_profiles']['profiles_1d']:
+        prof1d = ods['core_profiles']['profiles_1d'][time_index]
+        prof1d_z = ods_z['core_profiles']['profiles_1d'][time_index]
+
+        Z2n = 0.*prof1d_z['grid']['rho_tor_norm']
+        Zn  = 0.*prof1d_z['grid']['rho_tor_norm']
+
+        for k in range(len(prof1d['ion'])):
+            Z = prof1d['ion'][k]['element'][0]['z_n'] # from old ODS
+            n = prof1d_z['ion'][k]['density']         # from new ODS
+            Z2n += n*Z**2
+            Zn  += n*Z
+            if use_electrons_density:
+                prof1d_z['zeff'] = Z2n/prof1d_z['electrons']['density']
+            else:
+                prof1d_z['zeff'] = Z2n/Zn
+    return ods_z
+
 def define_cocos(cocos_ind):
     """
     Returns dictionary with COCOS coefficients given a COCOS index
