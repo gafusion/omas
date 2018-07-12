@@ -34,7 +34,7 @@ class ODS(MutableMapping):
                  location='',
                  cocos=omas_rcparams['cocos'],
                  cocosio=omas_rcparams['cocosio'],
-                 coordsio={},
+                 coordsio=omas_rcparams['coordsio'],
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names

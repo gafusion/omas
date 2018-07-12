@@ -33,5 +33,5 @@ git:
 pipy:
 	python setup.py sdist upload
 
-release: requirements docs json itm git pipy
+release: requirements json docs itm git pipy
 	@echo 'Done!'

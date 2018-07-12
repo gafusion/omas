@@ -11,18 +11,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "sawteeth/code",
+  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "sawteeth.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "sawteeth/code/commit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "sawteeth/code/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.code.output_flag": {
@@ -32,24 +35,28 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "sawteeth/code/output_flag(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "sawteeth.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "sawteeth/code/parameters",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "sawteeth/code/repository",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "sawteeth/code/version",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.crash_trigger": {
@@ -59,12 +66,14 @@
   "data_type": "INT_1D",
   "documentation": "Flag indicating whether a crash condition has been satisfied : 0 = no crash. N(>0) = crash triggered due to condition N as follows. 1: crash triggered by the ideal kink criterion; 2: crash triggered by the ideal kink criterion including kinetic effects from fast particles; 31: crash triggered by the resistive kink criterion (meeting necessary conditions for reconnection); 32: crash triggered by the resistive kink criterion (resistive kink mode is unstable). The distinction between 31 and 32 only indicates whether (31) or (32) was the last criterion to be satisfied",
   "full_path": "sawteeth/crash_trigger(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "sawteeth.diagnostics": {
   "data_type": "structure",
   "documentation": "Detailed information about the sawtooth characteristics",
   "full_path": "sawteeth/diagnostics",
+  "lifecycle_status": "alpha",
   "structure_reference": "sawteeth_diagnostics"
  },
  "sawteeth.diagnostics.magnetic_shear_q1": {
@@ -74,6 +83,7 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetic shear at surface q = 1, defined as rho_tor/q . dq/drho_tor",
   "full_path": "sawteeth/diagnostics/magnetic_shear_q1(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -81,6 +91,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"magnetic_shear_q1\"",
   "full_path": "sawteeth/diagnostics/magnetic_shear_q1_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.magnetic_shear_q1_error_lower": {
@@ -90,6 +101,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"magnetic_shear_q1\"",
   "full_path": "sawteeth/diagnostics/magnetic_shear_q1_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -100,6 +112,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"magnetic_shear_q1\"",
   "full_path": "sawteeth/diagnostics/magnetic_shear_q1_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -110,6 +123,7 @@
   "data_type": "FLT_1D",
   "documentation": "Time at which the previous sawtooth crash occured",
   "full_path": "sawteeth/diagnostics/previous_crash_time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -117,6 +131,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"previous_crash_time\"",
   "full_path": "sawteeth/diagnostics/previous_crash_time_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.previous_crash_time_error_lower": {
@@ -126,6 +141,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"previous_crash_time\"",
   "full_path": "sawteeth/diagnostics/previous_crash_time_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -136,6 +152,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"previous_crash_time\"",
   "full_path": "sawteeth/diagnostics/previous_crash_time_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -146,6 +163,7 @@
   "data_type": "INT_1D",
   "documentation": "Previous crash trigger. Flag indicating whether a crash condition has been satisfied : 0 = no crash. N(>0) = crash triggered due to condition N",
   "full_path": "sawteeth/diagnostics/previous_crash_trigger(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "sawteeth.diagnostics.previous_period": {
@@ -155,6 +173,7 @@
   "data_type": "FLT_1D",
   "documentation": "Previous sawtooth period",
   "full_path": "sawteeth/diagnostics/previous_period(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -162,6 +181,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"previous_period\"",
   "full_path": "sawteeth/diagnostics/previous_period_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.previous_period_error_lower": {
@@ -171,6 +191,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"previous_period\"",
   "full_path": "sawteeth/diagnostics/previous_period_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -181,6 +202,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"previous_period\"",
   "full_path": "sawteeth/diagnostics/previous_period_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -191,6 +213,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate at inversion radius",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_inversion(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -198,6 +221,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm_inversion\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_inversion_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.rho_tor_norm_inversion_error_lower": {
@@ -207,6 +231,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm_inversion\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_inversion_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -217,6 +242,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm_inversion\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_inversion_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -227,6 +253,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate at mixing radius",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_mixing(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -234,6 +261,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm_mixing\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_mixing_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.rho_tor_norm_mixing_error_lower": {
@@ -243,6 +271,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm_mixing\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_mixing_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -253,6 +282,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm_mixing\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_mixing_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -263,6 +293,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate at surface q = 1",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_q1(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -270,6 +301,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm_q1\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_q1_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.diagnostics.rho_tor_norm_q1_error_lower": {
@@ -279,6 +311,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm_q1\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_q1_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -289,6 +322,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm_q1\"",
   "full_path": "sawteeth/diagnostics/rho_tor_norm_q1_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -296,36 +330,42 @@
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "sawteeth/ids_properties",
+  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "sawteeth.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "sawteeth/ids_properties/comment",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "sawteeth/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "sawteeth/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "sawteeth/ids_properties/provider",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "sawteeth/ids_properties/source",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d": {
@@ -335,6 +375,7 @@
   "data_type": "struct_array",
   "documentation": "Core profiles after sawtooth crash for various time slices",
   "full_path": "sawteeth/profiles_1d(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "sawteeth_profiles_1d",
   "type": "dynamic"
@@ -346,6 +387,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel conductivity",
   "full_path": "sawteeth/profiles_1d(itime)/conductivity_parallel(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -353,6 +395,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/conductivity_parallel_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].conductivity_parallel_error_lower": {
@@ -362,6 +405,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"conductivity_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/conductivity_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -372,6 +416,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"conductivity_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/conductivity_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -382,6 +427,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "full_path": "sawteeth/profiles_1d(itime)/e_field_parallel(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -389,6 +435,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"e_field_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/e_field_parallel_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].e_field_parallel_error_lower": {
@@ -398,6 +445,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"e_field_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/e_field_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -408,6 +456,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"e_field_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/e_field_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -415,6 +464,7 @@
   "data_type": "structure",
   "documentation": "Radial grid",
   "full_path": "sawteeth/profiles_1d(itime)/grid",
+  "lifecycle_status": "alpha",
   "structure_reference": "core_radial_grid"
  },
  "sawteeth.profiles_1d[:].grid.area": {
@@ -424,6 +474,7 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "full_path": "sawteeth/profiles_1d(itime)/grid/area(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -431,6 +482,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/area_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].grid.area_error_lower": {
@@ -440,6 +492,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/area_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -450,6 +503,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/area_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -460,6 +514,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "full_path": "sawteeth/profiles_1d(itime)/grid/psi(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -467,6 +522,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/psi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].grid.psi_error_lower": {
@@ -476,6 +532,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/psi_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -486,6 +543,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/psi_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -496,6 +554,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -503,6 +562,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].grid.rho_tor_error_lower": {
@@ -512,6 +572,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -522,6 +583,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -532,6 +594,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -539,6 +602,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_norm_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -548,6 +612,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -558,6 +623,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -568,6 +634,7 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "full_path": "sawteeth/profiles_1d(itime)/grid/volume(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -575,6 +642,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/volume_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].grid.volume_error_lower": {
@@ -584,6 +652,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/volume_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -594,6 +663,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "full_path": "sawteeth/profiles_1d(itime)/grid/volume_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -604,6 +674,7 @@
   "data_type": "FLT_1D",
   "documentation": "Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "full_path": "sawteeth/profiles_1d(itime)/j_bootstrap(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -611,6 +682,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_bootstrap\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_bootstrap_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].j_bootstrap_error_lower": {
@@ -620,6 +692,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_bootstrap\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_bootstrap_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -630,6 +703,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_bootstrap\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_bootstrap_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -640,6 +714,7 @@
   "data_type": "FLT_1D",
   "documentation": "Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "full_path": "sawteeth/profiles_1d(itime)/j_non_inductive(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -647,6 +722,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_non_inductive\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_non_inductive_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].j_non_inductive_error_lower": {
@@ -656,6 +732,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_non_inductive\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_non_inductive_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -666,6 +743,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_non_inductive\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_non_inductive_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -676,6 +754,7 @@
   "data_type": "FLT_1D",
   "documentation": "Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "full_path": "sawteeth/profiles_1d(itime)/j_ohmic(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -683,6 +762,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_ohmic\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_ohmic_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].j_ohmic_error_lower": {
@@ -692,6 +772,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_ohmic\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_ohmic_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -702,6 +783,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_ohmic\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_ohmic_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -712,6 +794,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total toroidal current density = average(J_Tor/R) / average(1/R)",
   "full_path": "sawteeth/profiles_1d(itime)/j_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -719,6 +802,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].j_tor_error_lower": {
@@ -728,6 +812,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -738,6 +823,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -748,6 +834,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0",
   "full_path": "sawteeth/profiles_1d(itime)/j_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -755,6 +842,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].j_total_error_lower": {
@@ -764,6 +852,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -774,6 +863,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/j_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -784,6 +874,7 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetic shear, defined as rho_tor/q . dq/drho_tor",
   "full_path": "sawteeth/profiles_1d(itime)/magnetic_shear(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -791,6 +882,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"magnetic_shear\"",
   "full_path": "sawteeth/profiles_1d(itime)/magnetic_shear_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].magnetic_shear_error_lower": {
@@ -800,6 +892,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"magnetic_shear\"",
   "full_path": "sawteeth/profiles_1d(itime)/magnetic_shear_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -810,6 +903,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"magnetic_shear\"",
   "full_path": "sawteeth/profiles_1d(itime)/magnetic_shear_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -820,6 +914,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons ",
   "full_path": "sawteeth/profiles_1d(itime)/momentum_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m/s"
  },
@@ -827,6 +922,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/momentum_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].momentum_tor_error_lower": {
@@ -836,6 +932,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/momentum_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m/s"
  },
@@ -846,6 +943,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "sawteeth/profiles_1d(itime)/momentum_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "kg.m/s"
  },
@@ -856,6 +954,7 @@
   "data_type": "FLT_1D",
   "documentation": "Electron density (thermal+non-thermal)",
   "full_path": "sawteeth/profiles_1d(itime)/n_e(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -863,6 +962,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].n_e_error_lower": {
@@ -872,6 +972,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -882,6 +983,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -892,6 +994,7 @@
   "data_type": "FLT_1D",
   "documentation": "Density of fast (non-thermal) electrons",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_fast(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -899,6 +1002,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"n_e_fast\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_fast_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].n_e_fast_error_lower": {
@@ -908,6 +1012,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_e_fast\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_fast_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -918,6 +1023,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_e_fast\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_e_fast_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -928,6 +1034,7 @@
   "data_type": "FLT_1D",
   "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
   "full_path": "sawteeth/profiles_1d(itime)/n_i_total_over_n_e(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -935,6 +1042,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_i_total_over_n_e_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].n_i_total_over_n_e_error_lower": {
@@ -944,6 +1052,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"n_i_total_over_n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_i_total_over_n_e_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -954,6 +1063,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"n_i_total_over_n_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/n_i_total_over_n_e_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -964,6 +1074,7 @@
   "data_type": "FLT_1D",
   "documentation": "Electron pressure",
   "full_path": "sawteeth/profiles_1d(itime)/p_e(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -971,6 +1082,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_e_error_lower": {
@@ -980,6 +1092,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -990,6 +1103,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1000,6 +1114,7 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) electron parallel pressure",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_parallel(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1007,6 +1122,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_e_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_parallel_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_e_fast_parallel_error_lower": {
@@ -1016,6 +1132,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_e_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1026,6 +1143,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_e_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1036,6 +1154,7 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) electron perpendicular pressure",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_perpendicular(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1043,6 +1162,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_e_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_perpendicular_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_e_fast_perpendicular_error_lower": {
@@ -1052,6 +1172,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_e_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_perpendicular_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1062,6 +1183,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_e_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_e_fast_perpendicular_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1072,6 +1194,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total ion pressure (sum over the ion species)",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1079,6 +1202,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_i_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_i_total_error_lower": {
@@ -1088,6 +1212,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_i_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1098,6 +1223,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_i_total\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1108,6 +1234,7 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) total ion (sum over the ion species) parallel pressure",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_parallel(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1115,6 +1242,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_i_total_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_parallel_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_i_total_fast_parallel_error_lower": {
@@ -1124,6 +1252,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_i_total_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1134,6 +1263,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_i_total_fast_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1144,6 +1274,7 @@
   "data_type": "FLT_1D",
   "documentation": "Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_perpendicular(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1151,6 +1282,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"p_i_total_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_perpendicular_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].p_i_total_fast_perpendicular_error_lower": {
@@ -1160,6 +1292,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"p_i_total_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_perpendicular_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1170,6 +1303,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"p_i_total_fast_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/p_i_total_fast_perpendicular_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1180,6 +1314,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux",
   "full_path": "sawteeth/profiles_1d(itime)/phi(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1187,6 +1322,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "sawteeth/profiles_1d(itime)/phi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].phi_error_lower": {
@@ -1196,6 +1332,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
   "full_path": "sawteeth/profiles_1d(itime)/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1206,6 +1343,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
   "full_path": "sawteeth/profiles_1d(itime)/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1216,6 +1354,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total parallel pressure (electrons+ions, thermal+non-thermal)",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_parallel(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1223,6 +1362,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"pressure_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_parallel_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].pressure_parallel_error_lower": {
@@ -1232,6 +1372,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1242,6 +1383,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_parallel\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1252,6 +1394,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total perpendicular pressure (electrons+ions, thermal+non-thermal)",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_perpendicular(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1259,6 +1402,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_perpendicular_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].pressure_perpendicular_error_lower": {
@@ -1268,6 +1412,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_perpendicular_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1278,6 +1423,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_perpendicular\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_perpendicular_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1288,6 +1434,7 @@
   "data_type": "FLT_1D",
   "documentation": "Thermal pressure (electrons+ions)",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_thermal(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1295,6 +1442,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_thermal_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].pressure_thermal_error_lower": {
@@ -1304,6 +1452,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"pressure_thermal\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_thermal_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1314,6 +1463,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"pressure_thermal\"",
   "full_path": "sawteeth/profiles_1d(itime)/pressure_thermal_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -1324,6 +1474,7 @@
   "data_type": "FLT_1D",
   "documentation": "Psi* = psi - phi, after the sawtooth crash",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_post_crash(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1331,6 +1482,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi_star_post_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_post_crash_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].psi_star_post_crash_error_lower": {
@@ -1340,6 +1492,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi_star_post_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_post_crash_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1350,6 +1503,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi_star_post_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_post_crash_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1360,6 +1514,7 @@
   "data_type": "FLT_1D",
   "documentation": "Psi* = psi - phi, just before the sawtooth crash",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_pre_crash(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1367,6 +1522,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi_star_pre_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_pre_crash_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].psi_star_pre_crash_error_lower": {
@@ -1376,6 +1532,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi_star_pre_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_pre_crash_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1386,6 +1543,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi_star_pre_crash\"",
   "full_path": "sawteeth/profiles_1d(itime)/psi_star_pre_crash_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1396,6 +1554,7 @@
   "data_type": "FLT_1D",
   "documentation": "Safety factor",
   "full_path": "sawteeth/profiles_1d(itime)/q(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1403,6 +1562,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "sawteeth/profiles_1d(itime)/q_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].q_error_lower": {
@@ -1412,6 +1572,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"q\"",
   "full_path": "sawteeth/profiles_1d(itime)/q_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1422,6 +1583,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"q\"",
   "full_path": "sawteeth/profiles_1d(itime)/q_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1432,6 +1594,7 @@
   "data_type": "FLT_1D",
   "documentation": "Electron temperature",
   "full_path": "sawteeth/profiles_1d(itime)/t_e(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1439,6 +1602,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"t_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_e_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].t_e_error_lower": {
@@ -1448,6 +1612,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"t_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_e_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1458,6 +1623,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"t_e\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_e_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1468,6 +1634,7 @@
   "data_type": "FLT_1D",
   "documentation": "Ion temperature (averaged on charge states and ion species)",
   "full_path": "sawteeth/profiles_1d(itime)/t_i_average(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1475,6 +1642,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"t_i_average\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_i_average_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].t_i_average_error_lower": {
@@ -1484,6 +1652,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"t_i_average\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_i_average_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1494,6 +1663,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"t_i_average\"",
   "full_path": "sawteeth/profiles_1d(itime)/t_i_average_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1501,6 +1671,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "sawteeth/profiles_1d(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1511,6 +1682,7 @@
   "data_type": "FLT_1D",
   "documentation": "Effective charge",
   "full_path": "sawteeth/profiles_1d(itime)/zeff(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1518,6 +1690,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"zeff\"",
   "full_path": "sawteeth/profiles_1d(itime)/zeff_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.profiles_1d[:].zeff_error_lower": {
@@ -1527,6 +1700,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"zeff\"",
   "full_path": "sawteeth/profiles_1d(itime)/zeff_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1537,6 +1711,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"zeff\"",
   "full_path": "sawteeth/profiles_1d(itime)/zeff_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1547,12 +1722,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "sawteeth/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "sawteeth.vacuum_toroidal_field": {
   "data_type": "structure",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "sawteeth/vacuum_toroidal_field",
+  "lifecycle_status": "alpha",
   "structure_reference": "b_tor_vacuum_1"
  },
  "sawteeth.vacuum_toroidal_field.b0": {
@@ -1562,6 +1739,7 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "sawteeth/vacuum_toroidal_field/b0(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1569,6 +1747,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/b0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.vacuum_toroidal_field.b0_error_lower": {
@@ -1578,6 +1757,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/b0_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1588,6 +1768,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/b0_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1595,6 +1776,7 @@
   "data_type": "FLT_0D",
   "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
   "full_path": "sawteeth/vacuum_toroidal_field/r0",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1602,12 +1784,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/r0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "sawteeth.vacuum_toroidal_field.r0_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/r0_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1615,6 +1799,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r0\"",
   "full_path": "sawteeth/vacuum_toroidal_field/r0_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  }
