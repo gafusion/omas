@@ -557,6 +557,16 @@ class ODS(MutableMapping):
                 paths.append(path + [kid])
         return paths
 
+    def full_paths(self, **kw):
+        """
+        Traverse the ods and return paths from root of ODS that have data
+
+        :return: list of paths that have data
+        """
+        paths = self.paths()
+        location = p2l(self.location)
+        return [location + path for path in paths]
+
     def flat(self):
         """
         :return: flat dictionary representation of the data
@@ -721,6 +731,18 @@ class ODS(MutableMapping):
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value
+
+    def coordinates(self):
+        '''
+        return list of coordinates in a given ODS
+
+        :return: list of strings with coordinates in ODS format
+        '''
+        ods=ODS()
+        for item in self.full_paths():
+            if l2u(item) in omas_coordinates(self.imas_version):
+                ods[item]=self[item]
+        return ods
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods

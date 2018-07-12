@@ -238,6 +238,11 @@ def create_json_structure(imas_version=default_imas_version):
         #dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
         open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
 
+    # generate coordinates cache file
+    coords = extract_coordinates()
+    dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
+    open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
+
 
 def create_html_documentation(imas_version=default_imas_version):
     filename = os.path.abspath(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'omas_doc.html']))
@@ -311,3 +316,27 @@ def create_html_documentation(imas_version=default_imas_version):
             f.write('\n'.join(lines).encode('utf-8'))
         else:
             f.write('\n'.join(lines))
+
+
+def extract_coordinates(imas_version=default_imas_version):
+    '''
+    return list of strings with coordinates across all structures
+
+    :param imas_version: imas version
+
+    :return: list with coordinate
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    omas_coordinates=set()
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+        coords = []
+        for item in tmp:
+            if 'coordinates' in tmp[item]:
+                coords.extend(map(i2o,tmp[item]['coordinates']))
+        coords = list(filter(lambda x: '...' not in x, set(coords)))
+        omas_coordinates.update(coords)
+
+    return sorted(list(omas_coordinates))
