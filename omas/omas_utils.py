@@ -512,6 +512,17 @@ def i2o(path):
     return re.sub('\[([:0-9]+)\]', r'.\1', path)
 
 
+def o2i(path):
+    """
+    Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
+
+    :param path: ODS path format
+
+    :return: IMAS path format
+    """
+    return re.sub('\.([:0-9]+)', r'[\1]', path)
+
+
 def u2o(upath, path):
     '''
     Fills in `:` in a universal ODS path with integers from a ODS path.
