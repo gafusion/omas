@@ -42,9 +42,9 @@ class TestOmasCore(unittest.TestCase):
         self.printv('    {} done.'.format(test_name))
 
     def test_coordinates(self):
-        ods=ods_sample()
-        assert(len(ods.coordinates())>0)
-        assert(len(ods['equilibrium'].coordinates())>0)
+        ods = ods_sample()
+        assert (len(ods.coordinates()) > 0)
+        assert (len(ods['equilibrium'].coordinates()) > 0)
 
 if __name__ == '__main__':
     unittest.main()

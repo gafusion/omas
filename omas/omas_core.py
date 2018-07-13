@@ -748,15 +748,19 @@ class ODS(MutableMapping):
 
     def coordinates(self):
         '''
-        return list of coordinates in a given ODS
+        return dictionary with coordinates in a given ODS
+        NOTE: this needs to be a dictionary and not an ODS since a given coordinates may be
+            present only at certain indexes of an arrays of strucutures and an ODS cannot
+            represent that.
 
-        :return: list of strings with coordinates in ODS format
+        :return: dictionary with coordinates
         '''
-        ods=ODS()
-        for item in self.full_paths():
-            if l2u(item) in omas_coordinates(self.imas_version):
-                ods[item]=self[item]
-        return ods
+        n=len(self.location)
+        coords={}
+        for full_path in self.full_paths():
+            if l2u(full_path) in omas_coordinates(self.imas_version):
+                coords[l2o(full_path)] = self[l2o(full_path)[n:]]
+        return coords
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
