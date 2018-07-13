@@ -658,6 +658,7 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     x = prof1d['grid.rho_tor_norm']
 
     for item in prof1d.paths():
+        item = l2o(item)
         if 'pressure' in item:
             if 'ion' in item:
                 try:
