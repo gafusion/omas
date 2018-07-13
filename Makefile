@@ -1,6 +1,7 @@
 all:
 	@echo 'OMAS makefile help'
 	@echo ''
+	@echo ' - make tests        : run all regression tests
 	@echo ' - make requirements : build requirements.txt'
 	@echo ' - make docs         : generate sphyix documentation and pushes it online'
 	@echo ' - make json         : generate IMAS json structure files'
@@ -10,6 +11,9 @@ all:
 	@echo ' - make release      : all of the above, in order'
 	@echo ' - make html         : generate sphyix documentation'
 	@echo ''
+
+tests:
+	python -m unittest discover --pattern="*.py" -s omas/tests/
 
 requirements:
 	rm requirements.txt
