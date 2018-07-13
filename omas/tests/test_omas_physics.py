@@ -56,7 +56,6 @@ class TestOmasPhysics(unittest.TestCase):
         test_name = '.'.join(self.id().split('.')[-2:])
         self.printv('    {} done.'.format(test_name))
 
-    @unittest.expectedFailure  # TODO: fix core_profiles_pressures or revise this test
     def test_core_profiles_pressures(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_profiles(include_pressure=False)
