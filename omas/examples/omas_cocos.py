@@ -46,10 +46,10 @@ ods['equilibrium.time_slice.0.profiles_1d.psi'] = ods['equilibrium.time_slice.0.
 assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
-# use cocos_environment
+# use omas_environment
 ods = ODS(cocosio=2)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-with cocos_environment(ods, cocosio=11):
+with omas_environment(ods, cocosio=11):
     assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*(2*numpy.pi)))
     print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 

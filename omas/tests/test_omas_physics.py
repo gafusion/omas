@@ -154,7 +154,6 @@ class TestOmasPhysics(unittest.TestCase):
         ods6 = ODS()
         ods6['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
 
-
     @unittest.skipUnless(not failed_PINT, str(failed_PINT))
     def test_handle_units(self):
         ods=ODS()
@@ -167,7 +166,41 @@ class TestOmasPhysics(unittest.TestCase):
             assert(tmp.magnitude==0.008)
             assert(tmp.units=='second')
 
+    def test_cocos(self):
+        x = numpy.linspace(.1, 1, 10)
+
+        ods = ODS(cocosio=11, cocos=11)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
+        ods = ODS(cocosio=11, cocos=2)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
+        ods = ODS(cocosio=2, cocos=11)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
+        ods = ODS(cocosio=2, cocos=2)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
+        # reassign the same value
+        ods = ODS(cocosio=2)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = ods['equilibrium.time_slice.0.profiles_1d.psi']
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
+        # use omas_environment
+        ods = ODS(cocosio=2)
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        with omas_environment(ods, cocosio=11):
+            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*(2*numpy.pi)))
+
+        ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+
 if __name__ == '__main__':
     #unittest.main()
 
-    TestOmasPhysics().test_omas_coordinates_intepolation()
+    TestOmasPhysics().test_cocos()
