@@ -346,6 +346,7 @@ _structures_dict = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
 
+_coordinates = {}
 
 def list_structures(imas_version):
     '''
@@ -355,8 +356,9 @@ def list_structures(imas_version):
 
     :return: list with names of structures in imas version
     '''
-    structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],
-                        glob.glob( imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json'))))
+    json_filenames = glob.glob( imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
+    json_filenames = filter(lambda x:os.path.basename(x)[0]!='_', json_filenames)
+    structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],json_filenames)))
     if not len(structures):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
     return structures
@@ -402,6 +404,22 @@ def load_structure(filename, imas_version=None):
                 h = h[step]
 
     return _structures[filename], _structures_dict[filename]
+
+
+def omas_coordinates(imas_version=default_imas_version):
+    '''
+    return list of coordinates
+
+    :param imas_version: IMAS version to look up
+
+    :return: list of strings with IMAS coordinates
+    '''
+    # caching
+    if imas_version not in _coordinates:
+        filename = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '_coordinates.json'
+        with open(filename,'r') as f:
+            _coordinates[imas_version] = json.loads(f.read(), object_pairs_hook=json_loader)
+    return _coordinates[imas_version]
 
 
 def p2l(key):
@@ -494,6 +512,17 @@ def i2o(path):
     return re.sub('\[([:0-9]+)\]', r'.\1', path)
 
 
+def o2i(path):
+    """
+    Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
+
+    :param path: ODS path format
+
+    :return: IMAS path format
+    """
+    return re.sub('\.([:0-9]+)', r'[\1]', path)
+
+
 def u2o(upath, path):
     '''
     Fills in `:` in a universal ODS path with integers from a ODS path.
@@ -584,13 +613,11 @@ def omas_info(structures, imas_version=default_imas_version):
     if isinstance(structures, basestring):
         structures = [structures]
 
-    if imas_version in _info_structures:
-        ods = _info_structures[imas_version]
-
-    else:
+    # caching
+    if imas_version not in _info_structures:
         from omas import ODS
-        ods = ODS(imas_version=imas_version, consistency_check=False)
-        _info_structures[imas_version] = ods
+        _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
+    ods = _info_structures[imas_version]
 
     for structure in structures:
         if structure not in ods:

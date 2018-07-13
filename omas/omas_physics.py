@@ -391,7 +391,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
-        ods.coordsio = coordsio
+        ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
     try:
@@ -608,5 +608,5 @@ def cocos_environment(ods, cocosio=None):
     :return: ODS with COCOS convention set
     '''
     warnings.warn('cocos_environment is deprecated. Use omas_environment(ods, cocosio=...) instead.')
-    with omas_environment(ods, coocosio=coocosio):
+    with omas_environment(ods, cocosio=cocosio):
         yield ods
