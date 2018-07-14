@@ -138,20 +138,21 @@ def create_json_structure(imas_version=default_imas_version):
         if isinstance(me, list):
             keys = range(len(me))
         else:
-            keys = me.keys()
+            keys = list(me.keys())
 
         if '@units' in me:
-            if fname=='equilibrium.time_slice[:].constraints.q': # bug fix for v3.18.0
-                me['@units']='-'
-            if me['@units'] in ['as_parent','as parent']:
-                me['@units']=parent['units']
-            parent['units']=me['@units']
+            if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
+                me['@units'] = '-'
+            if me['@units'] in ['as_parent', 'as parent']:
+                me['@units'] = parent['units']
+            parent['units'] = me['@units']
 
         # children inherit lifecycle status from parent
         if '@lifecycle_status' in me:
-            parent['lifecycle_status']=me['@lifecycle_status']
+            parent['lifecycle_status'] = me['@lifecycle_status']
         elif parent['lifecycle_status'] and not isinstance(me, list):
-            me['@lifecycle_status']=parent['lifecycle_status']
+            me['@lifecycle_status'] = parent['lifecycle_status']
+            keys.append('@lifecycle_status')
 
         is_leaf = True
         for kid in keys:
