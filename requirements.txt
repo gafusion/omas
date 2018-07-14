@@ -3,9 +3,10 @@
 # usage: pip install -r requirements.txt
 
 numpy                    # required
+uncertainties            # required
+pint                     # required
 netCDF4                  # required
 boto3                    # required
-uncertainties            # required
 matplotlib               # required
 scipy                    # required
 Sphinx                   # build_documentation
