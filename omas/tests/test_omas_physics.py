@@ -38,9 +38,6 @@ class TestOmasPhysics(unittest.TestCase):
     # Flags to edit while testing
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
-    # Sample data for use in tests
-    ods = ODS()
-
     # Utilities for this test
     def printv(self, *arg):
         """Utility for tests to use"""
@@ -57,15 +54,16 @@ class TestOmasPhysics(unittest.TestCase):
         self.printv('    {} done.'.format(test_name))
 
     def test_core_profiles_pressures(self):
-        ods2 = copy.deepcopy(self.ods)
-        ods2.sample_profiles(include_pressure=False)
-        ods3 = copy.deepcopy(self.ods)
-        updated_ods = core_profiles_pressures(ods2, update=False)
-        updated_ods3 = core_profiles_pressures(ods3, update=True)
+        ods = ODS()
+        ods.sample_profiles(include_pressure=False)
+        core_profiles_pressures(ods, update=True)
 
-        assert updated_ods3 == ods3
-        assert updated_ods != ods2
-        assert updated_ods3 == updated_ods
+        ods = ODS()
+        ods.sample_profiles(include_pressure=False)
+        ods2 = core_profiles_pressures(ods, update=False)
+        ods.update(ods2)
+
+        assert (not different_ods(ods, ods2))
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
@@ -200,6 +198,4 @@ class TestOmasPhysics(unittest.TestCase):
         assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 
 if __name__ == '__main__':
-    #unittest.main()
-
-    TestOmasPhysics().test_cocos()
+    unittest.main()

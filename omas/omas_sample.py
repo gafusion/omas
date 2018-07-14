@@ -19,10 +19,10 @@ def ods_sample():
 
     :return: sample ods
     '''
-    ods=ODS()
+    ods = ODS()
     for item in __all__:
-        printd('Adding %s sample data to ods'%item,topic='sample')
-        ods=eval(item)(ods)
+        printd('Adding %s sample data to ods' % item, topic='sample')
+        ods = eval(item)(ods)
     return ods
 
 
