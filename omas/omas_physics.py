@@ -382,6 +382,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
     if isinstance(coordsio, dict):
         from omas import ODS
         tmp = ODS()
+        tmp.dynamic_path_creation='dynamic_array_structures'
         tmp.update(coordsio)
         coordsio = tmp
 
