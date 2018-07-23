@@ -392,7 +392,8 @@ def load_structure(filename, imas_version=None):
         filename = dict_structures(imas_version)[filename]
 
     if filename not in _structures:
-        dump_string = open(filename, 'r').read()
+        with open(filename, 'r') as f:
+            dump_string = f.read()
         _structures[filename] = json.loads(dump_string, object_pairs_hook=json_loader)
         # _structures[filename] = pickle.loads(dump_string)
         _structures_dict[filename] = {}

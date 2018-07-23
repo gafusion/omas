@@ -56,14 +56,18 @@ class TestOmasPhysics(unittest.TestCase):
     def test_core_profiles_pressures(self):
         ods = ODS()
         ods.sample_profiles(include_pressure=False)
-        core_profiles_pressures(ods, update=True)
+        ods2 = core_profiles_pressures(ods, update=True)
+
+        diff = different_ods(ods, ods2)
+        assert (not diff)
 
         ods = ODS()
         ods.sample_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=False)
         ods.update(ods2)
 
-        assert (not different_ods(ods, ods2))
+        diff = different_ods(ods, ods2)
+        assert (diff)
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
