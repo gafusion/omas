@@ -364,7 +364,7 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
+def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
     '''
     Provides environment for data input/output to/from OMAS
 
@@ -376,6 +376,8 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
 
     :param unitsio: True/False whether data read from OMAS should have units
 
+    :param kw: extra keywords set attributes of the ods (eg. 'consistency_check','dynamic_path_creation','imas_version')
+
     :return: ODS with environmen set
     '''
 
@@ -386,21 +388,27 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None):
         tmp.update(coordsio)
         coordsio = tmp
 
-    old_coordsio = ods.coordsio
-    old_cocosio = ods.cocosio
-    old_unitsio = ods.unitsio
+    bkp_coordsio = ods.coordsio
+    bkp_cocosio = ods.cocosio
+    bkp_unitsio = ods.unitsio
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
         ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
+    bkp_args = {}
+    for item in kw:
+        bkp_args[item] = getattr(ods, item)
+        setattr(ods, item, kw[item])
     try:
         yield ods
     finally:
-        ods.cocosio = old_cocosio
-        ods.coordsio = old_coordsio
-        ods.unitsio = old_unitsio
+        ods.cocosio = bkp_cocosio
+        ods.coordsio = bkp_coordsio
+        ods.unitsio = bkp_unitsio
+        for item in kw:
+            setattr(ods, item, bkp_args[item])
 
 def generate_cocos_signals(structures=[], threshold=0):
     """
