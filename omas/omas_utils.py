@@ -388,23 +388,29 @@ def load_structure(filename, imas_version=None):
 
     :return: tuple with structure, hashing mapper, and ods
     """
+
+    filename0 = filename
+    id=(filename0,imas_version)
+    if id in _structures and id in _structures_dict:
+        return _structures[id], _structures_dict[id]
+
     if os.sep not in filename:
         filename = dict_structures(imas_version)[filename]
 
     if filename not in _structures:
         with open(filename, 'r') as f:
             dump_string = f.read()
-        _structures[filename] = json.loads(dump_string, object_pairs_hook=json_loader)
-        # _structures[filename] = pickle.loads(dump_string)
-        _structures_dict[filename] = {}
-        for item in _structures[filename]:
-            h = _structures_dict[filename]
+        _structures[id] = json.loads(dump_string, object_pairs_hook=json_loader)
+        # _structures[id] = pickle.loads(dump_string)
+        _structures_dict[id] = {}
+        for item in _structures[id]:
+            h = _structures_dict[id]
             for step in i2o(item).split(separator):
                 if step not in h:
                     h[step] = {}
                 h = h[step]
 
-    return _structures[filename], _structures_dict[filename]
+    return _structures[id], _structures_dict[id]
 
 
 def omas_coordinates(imas_version=default_imas_version):

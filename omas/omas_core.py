@@ -400,7 +400,7 @@ class ODS(MutableMapping):
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
             # handle cocos transformations coming in
-            if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals and not isinstance(value, ODS):
+            if self.cocosio and self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals and not isinstance(value, ODS):
                 value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
 
             # get node information
@@ -535,7 +535,7 @@ class ODS(MutableMapping):
 
             if self.consistency_check and not isinstance(value, ODS):
                 # handle cocos transformations going out
-                if self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
+                if self.cocosio and self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
                     value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
 
                 # get node information

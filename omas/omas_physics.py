@@ -388,6 +388,9 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
         tmp.update(coordsio)
         coordsio = tmp
 
+    if cocosio is not None and not isinstance(cocosio,int):
+        raise(ValueError('cocosio can only be an integer'))
+
     bkp_coordsio = ods.coordsio
     bkp_cocosio = ods.cocosio
     bkp_unitsio = ods.unitsio
