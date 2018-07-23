@@ -534,6 +534,8 @@ def u2o(upath, path):
 
     :return: filled in ODS path
     '''
+    if upath.startswith('1...'):
+        return upath
     ol = p2l(path)
     ul = p2l(upath)
     for k in range(min([len(ul), len(ol)])):

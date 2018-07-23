@@ -175,6 +175,7 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, in
                                 0.09, -0.59, -1.27, -1.3, -0.38])
 
     ods['equilibrium.time_slice'][time_index]['profiles_1d.psi'] = numpy.linspace(0, 1, 11)
+    ods['equilibrium.time_slice'][time_index]['profiles_1d.pressure'] = (1-numpy.linspace(0, 1, 11))**2
     ods['equilibrium.time_slice'][time_index]['profiles_2d.0.psi'] = psi_small
     ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim1'] = grid1_small
     ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim2'] = grid2_small
