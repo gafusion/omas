@@ -94,7 +94,7 @@ class TestOmasPhysics(unittest.TestCase):
                 for thing in ['BT', 'TOR', 'POL', 'Q']:
                     assert cocos_transform(cocos_ind+cocos_add*10, cocos_ind+cocos_add*10)[thing] == 1
 
-    def test_omas_coordinates_intepolation(self):
+    def test_coordsio(self):
         data5 = numpy.linspace(0, 1, 5)
         data10 = numpy.linspace(0, 1, 10)
 
@@ -155,19 +155,7 @@ class TestOmasPhysics(unittest.TestCase):
         ods6 = ODS()
         ods6['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
 
-    @unittest.skipUnless(not failed_PINT, str(failed_PINT))
-    def test_handle_units(self):
-        ods=ODS()
-
-        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
-        assert(ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']==0.008)
-
-        with omas_environment(ods, unitsio=True):
-            tmp=ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
-            assert(tmp.magnitude==0.008)
-            assert(tmp.units=='second')
-
-    def test_cocos(self):
+    def test_cocosio(self):
         x = numpy.linspace(.1, 1, 10)
 
         ods = ODS(cocosio=11, cocos=11)
@@ -201,5 +189,38 @@ class TestOmasPhysics(unittest.TestCase):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
         assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
 
+    def test_coordsio_cocosio(self):
+        x = numpy.linspace(0.1, 1, 11)
+        y = numpy.linspace(-1, 1, 11)
+
+        xh = numpy.linspace(0.1, 1, 21)
+        yh = numpy.linspace(-1, 1, 21)
+
+        ods = ODS(cocos=11)
+        with omas_environment(ods, cocosio=2):
+            ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
+            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*2*numpy.pi))
+
+        with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi':xh}):
+            ods['equilibrium.time_slice.0.profiles_1d.pressure'] = yh
+            print(ods['equilibrium.time_slice.0.profiles_1d.pressure'])
+            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], xh))
+        print(ods['equilibrium.time_slice.0.profiles_1d.pressure'])
+        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*2*numpy.pi))
+
+    @unittest.skipUnless(not failed_PINT, str(failed_PINT))
+    def test_handle_units(self):
+        ods=ODS()
+
+        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
+        assert(ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']==0.008)
+
+        with omas_environment(ods, unitsio=True):
+            tmp=ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
+            assert(tmp.magnitude==0.008)
+            assert(tmp.units=='second')
+
 if __name__ == '__main__':
-    unittest.main()
+    #unittest.main()
+    TestOmasPhysics().test_coordsio_cocosio()
