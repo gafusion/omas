@@ -281,8 +281,8 @@ class ODS(MutableMapping):
 
     @coordsio.setter
     def coordsio(self, value):
-        if not isinstance(value,(list,tuple)):
-            value=(self,value)
+        if not isinstance(value, (list, tuple)):
+            value = (self, value)
         self._coordsio = value
         for item in self.keys():
             if isinstance(self[item], ODS):
@@ -434,13 +434,13 @@ class ODS(MutableMapping):
                     for coordinate in coordinates:
                         if coordinate not in ods_coordinates and coordinate in input_coordinates:
                             printd('Adding %s coordinate to ods' % (coordinate), topic='coordsio')
-                            ods_coordinates[coordinate] = input_coordinates[coordinate]
+                            ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate,False)
 
                     # if all coordinates information is present
                     if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
                         # if there is any coordinate that does not match
-                        if any([len(input_coordinates[coord]) != len(ods_coordinates[coord]) or
-                                (not numpy.allclose(input_coordinates[coord], ods_coordinates[coord])) for coord in coordinates]):
+                        if any([len(input_coordinates.__getitem__(coord,False)) != len(ods_coordinates.__getitem__(coord,False)) or
+                                (not numpy.allclose(input_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
 
                             # for the time being omas interpolates only 1D quantities
                             if len(info['coordinates']) > 1:
@@ -448,18 +448,17 @@ class ODS(MutableMapping):
 
                             # if the (first) coordinate is in input_coordinates
                             coordinate = coordinates[0]
-                            if len(input_coordinates[coordinate]) != len(value):
-                                raise (Exception('coordsio[%s].shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates[coordinate].shape, location, value.shape)))
-                            if (len(input_coordinates[coordinate])==len(ods_coordinates[coordinate]) and (input_coordinates[coordinate]==ods_coordinates[coordinate]).all()):
-                                printd('%s ods and input coordinate match'%(coordinate), topic='coordsio')
-                            else:
-                                printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
-                                value = numpy.interp(ods_coordinates[coordinate],input_coordinates[coordinate], value)
+                            if len(input_coordinates.__getitem__(coordinate,False)) != len(value):
+                                raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
+                            printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
+                            value = numpy.interp(ods_coordinates.__getitem__(coordinate,False),input_coordinates.__getitem__(coordinate,False), value)
+                        else:
+                            printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                     else:
                         printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                elif o2u(location) in omas_coordinates(self.imas_version) and location in input_coordinates and location in ods_coordinates:
-                    value = ods_coordinates[location]
+                elif o2u(location) in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                    value = ods_coordinates.__getitem__(location,False)
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -493,7 +492,7 @@ class ODS(MutableMapping):
         else:
             raise IndexError('%s[:] index is at %d' % (self.location, len(self.omas_data) - 1))
 
-    def __getitem__(self, key):
+    def __getitem__(self, key, consistency_check=True):
         # handle individual keys as well as full paths
         key = p2l(key)
 
@@ -524,7 +523,7 @@ class ODS(MutableMapping):
         if len(key) > 1:
             # if the user has entered path rather than a single key
             try:
-                return self.omas_data[key[0]][l2o(key[1:])]
+                return self.omas_data[key[0]].__getitem__(l2o(key[1:]),consistency_check)
             except ValueError:
                 if dynamically_created:
                     del self[key[0]]
@@ -543,7 +542,7 @@ class ODS(MutableMapping):
 
                 # coordinates interpolation
                 ods_coordinates, output_coordinates = self.coordsio
-                if output_coordinates:
+                if consistency_check and output_coordinates:
                     all_coordinates = []
                     coordinates = []
                     if len(output_coordinates) and 'coordinates' in info:
@@ -553,8 +552,8 @@ class ODS(MutableMapping):
                         # if all coordinates information is present
                         if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(output_coordinates[coord]) != len(ods_coordinates[coord]) or
-                                    (not numpy.allclose(output_coordinates[coord], ods_coordinates[coord])) for coord in coordinates]):
+                            if any([len(output_coordinates.__getitem__(coord,False)) != len(ods_coordinates.__getitem__(coord,False)) or
+                                    (not numpy.allclose(output_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
@@ -562,15 +561,17 @@ class ODS(MutableMapping):
 
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
-                                if len(ods_coordinates[coordinate]) != len(value):
-                                    raise (Exception('coordsio[%s].shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates[coordinate].shape, location, value.shape)))
-                                if (len(output_coordinates[coordinate])==len(ods_coordinates[coordinate]) and (output_coordinates[coordinate]==ods_coordinates[coordinate]).all()):
-                                    printd('%s ods and output coordinate match'%(coordinate), topic='coordsio')
-                                else:
-                                    printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
-                                    value = numpy.interp(output_coordinates[coordinate], ods_coordinates[coordinate], value)
+                                if len(ods_coordinates.__getitem__(coordinate,False)) != len(value):
+                                    raise (Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
+                                printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
+                                value = numpy.interp(output_coordinates.__getitem__(coordinate,False), ods_coordinates.__getitem__(coordinate,False), value)
+                            else:
+                                printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                         else:
                             printd('Getting `%s` without knowing some of the coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
+
+                    elif o2u(location) in omas_coordinates(self.imas_version) and location in output_coordinates:
+                        value = output_coordinates.__getitem__(location, False)
 
                 # handle units (Python pint package)
                 if pint is not None and 'units' in info and self.unitsio:
@@ -638,7 +639,7 @@ class ODS(MutableMapping):
         for k in key:
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
-                h = h[k]
+                h = h.__getitem__(k,False)
                 continue  # continue to the next key
             else:
                 return False
