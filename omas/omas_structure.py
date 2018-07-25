@@ -143,6 +143,8 @@ def create_json_structure(imas_version=default_imas_version):
         if '@units' in me:
             if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
                 me['@units'] = '-'
+            if fname in ['equilibrium.time_slice[:].profiles_1d.geometric_axis.r','equilibrium.time_slice[:].profiles_1d.geometric_axis.z']:
+                me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
             if me['@units'] in ['as_parent', 'as parent']:
                 me['@units'] = parent['units']
             parent['units'] = me['@units']
