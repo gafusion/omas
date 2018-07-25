@@ -358,7 +358,7 @@ def cocos_transform(cocosin_index, cocosout_index):
     transforms['BP'] = transforms['POL']
     transforms[None] = 1
 
-    printd(transforms,topic='cocos')
+    printd(transforms, topic='cocos')
 
     return transforms
 
@@ -383,9 +383,10 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
 
     if isinstance(coordsio, dict):
         from omas import ODS
-        tmp = ODS()
+        tmp = ODS(cocos=ods.cocos)
         tmp.dynamic_path_creation='dynamic_array_structures'
-        tmp.update(coordsio)
+        with omas_environment(tmp, cocosio=cocosio):
+            tmp.update(coordsio)
         coordsio = tmp
 
     if cocosio is not None and not isinstance(cocosio,int):
@@ -405,7 +406,11 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
         bkp_args[item] = getattr(ods, item)
         setattr(ods, item, kw[item])
     try:
-        yield ods
+        if coordsio is not None:
+            with omas_environment(coordsio, cocosio=cocosio):
+                yield ods
+        else:
+                yield ods
     finally:
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio

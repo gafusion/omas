@@ -523,7 +523,10 @@ class ODS(MutableMapping):
         if len(key) > 1:
             # if the user has entered path rather than a single key
             try:
-                return self.omas_data[key[0]].__getitem__(l2o(key[1:]),consistency_check)
+                if isinstance(self.omas_data[key[0]],ODS):
+                    return self.omas_data[key[0]].__getitem__(l2o(key[1:]),consistency_check)
+                else:
+                    return self.omas_data[key[0]][l2o(key[1:])]
             except ValueError:
                 if dynamically_created:
                     del self[key[0]]

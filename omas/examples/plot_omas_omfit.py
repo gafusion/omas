@@ -12,7 +12,7 @@ from __future__ import print_function, division, unicode_literals
 from matplotlib.pyplot import show
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
-from omfit.classes.omfit_gacode import OMFITgacode, OMFITsrc
+from omfit.classes.omfit_gacode import OMFITgacode
 from omas import *
 
 # =====================

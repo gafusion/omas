@@ -196,18 +196,18 @@ class TestOmasPhysics(unittest.TestCase):
         xh = numpy.linspace(0.1, 1, 21)
         yh = numpy.linspace(-1, 1, 21)
 
-        ods = ODS(cocos=11)
+        ods = ODS()
         with omas_environment(ods, cocosio=2):
             ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
             assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
         assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*2*numpy.pi))
 
         with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi':xh}):
-            ods['equilibrium.time_slice.0.profiles_1d.pressure'] = yh
-            print(ods['equilibrium.time_slice.0.profiles_1d.pressure'])
+            ods['equilibrium.time_slice.0.profiles_1d.phi'] = yh
+            assert (len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(yh))
             assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], xh))
-        print(ods['equilibrium.time_slice.0.profiles_1d.pressure'])
         assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*2*numpy.pi))
+        assert (len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(y))
 
     @unittest.skipUnless(not failed_PINT, str(failed_PINT))
     def test_handle_units(self):
@@ -222,5 +222,4 @@ class TestOmasPhysics(unittest.TestCase):
             assert(tmp.units=='second')
 
 if __name__ == '__main__':
-    #unittest.main()
-    TestOmasPhysics().test_coordsio_cocosio()
+    unittest.main()
