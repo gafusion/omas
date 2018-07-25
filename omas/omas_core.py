@@ -459,7 +459,7 @@ class ODS(MutableMapping):
                         printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
                 elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
-                    value = ods_coordinates.__getitem__(location,False)
+                    value = ods_coordinates.__getitem__(location, None)
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -537,7 +537,7 @@ class ODS(MutableMapping):
             location = l2o([self.location, key[0]])
             ulocation = o2u(location)
 
-            if self.consistency_check and not isinstance(value, ODS):
+            if consistency_check is not None and self.consistency_check and not isinstance(value, ODS):
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[ulocation]]
@@ -569,7 +569,7 @@ class ODS(MutableMapping):
                                 if len(ods_coordinates.__getitem__(coordinate,False)) != len(value):
                                     raise (Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
                                 printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
-                                value = numpy.interp(output_coordinates.__getitem__(coordinate,False), ods_coordinates.__getitem__(coordinate,False), value)
+                                value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
                             else:
                                 printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                         else:
