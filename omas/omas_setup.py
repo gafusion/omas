@@ -54,8 +54,6 @@ else:
         return _orig_pickle_load(*args,**kw)
     pickle.load=_pickle_load_python2compatible
 
-separator = '.'
-
 # --------------------------------------------
 # rcparams
 # --------------------------------------------
@@ -93,7 +91,7 @@ def rcparams_environment(**kw):
 # --------------------------------------------
 imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
 
-imas_versions = list(map(lambda x:re.sub('_', '.',os.path.basename(x)),sorted(glob.glob(imas_json_dir + os.sep + '*'))))
+imas_versions = list(map(lambda x:os.path.basename(x).replace('_', '.'),sorted(glob.glob(imas_json_dir + os.sep + '*'))))
 
 if 'OMAS_IMAS_VERSION' in os.environ:
     default_imas_version = os.environ['OMAS_IMAS_VERSION']

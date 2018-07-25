@@ -356,7 +356,7 @@ def list_structures(imas_version):
 
     :return: list with names of structures in imas version
     '''
-    json_filenames = glob.glob( imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
+    json_filenames = glob.glob( imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*' + '.json')
     json_filenames = filter(lambda x:os.path.basename(x)[0]!='_', json_filenames)
     structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],json_filenames)))
     if not len(structures):
@@ -372,7 +372,7 @@ def dict_structures(imas_version):
 
     :return: dictionary maps structure names to json  filenames
     '''
-    paths = glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*' + '.json')
+    paths = glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*' + '.json')
     if not len(paths):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
     return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
@@ -405,7 +405,7 @@ def load_structure(filename, imas_version=None):
         _structures_dict[id] = {}
         for item in _structures[id]:
             h = _structures_dict[id]
-            for step in i2o(item).split(separator):
+            for step in i2o(item).split('.'):
                 if step not in h:
                     h[step] = {}
                 h = h[step]
@@ -423,11 +423,49 @@ def omas_coordinates(imas_version=default_imas_version):
     '''
     # caching
     if imas_version not in _coordinates:
-        filename = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '_coordinates.json'
+        filename = imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '_coordinates.json'
         with open(filename,'r') as f:
             _coordinates[imas_version] = json.loads(f.read(), object_pairs_hook=json_loader)
     return _coordinates[imas_version]
 
+# class LRU_Cache(object):
+#
+#     def __init__(self, original_function, maxsize=1000):
+#         self.original_function = original_function
+#         self.maxsize = maxsize
+#         self.mapping = {}
+#
+#         PREV, NEXT, KEY, VALUE = 0, 1, 2, 3         # link fields
+#         self.head = [None, None, None, None]        # oldest
+#         self.tail = [self.head, None, None, None]   # newest
+#         self.head[NEXT] = self.tail
+#
+#     def __call__(self, *key):
+#         PREV, NEXT = 0, 1
+#         mapping, head, tail = self.mapping, self.head, self.tail
+#
+#         link = mapping.get(key, head)
+#         if link is head:
+#             value = self.original_function(*key)
+#             if len(mapping) >= self.maxsize:
+#                 old_prev, old_next, old_key, old_value = head[NEXT]
+#                 head[NEXT] = old_next
+#                 old_next[PREV] = head
+#                 del mapping[old_key]
+#             last = tail[PREV]
+#             link = [last, tail, key, value]
+#             mapping[key] = last[NEXT] = tail[PREV] = link
+#         else:
+#             link_prev, link_next, key, value = link
+#             link_prev[NEXT] = link_next
+#             link_next[PREV] = link_prev
+#             last = tail[PREV]
+#             last[NEXT] = tail[PREV] = link
+#             link[PREV] = last
+#             link[NEXT] = tail
+#         return value
+
+_p2l_cache={}
 
 def p2l(key):
     """
@@ -437,13 +475,19 @@ def p2l(key):
 
     :return: list of keys that make the ods path
     """
+    if isinstance(key, int):
+        return [key]
+
+    key0 = tuple(key)
+    if key0 in _p2l_cache:
+        return _p2l_cache[key0]
+
     if not isinstance(key, (list, tuple)):
-        key = str(key)
-        key = re.sub('\]', '', re.sub('\[', separator, key)).split(separator)
+        key = str(key).replace('[','.').replace(']','').split('.')
     else:
         tmp=[]
         for item in key:
-            tmp.extend(str(item).split(separator))
+            tmp.extend(str(item).split('.'))
         key = tmp
     key = list(filter(None,key))
     for k,item in enumerate(key):
@@ -451,6 +495,9 @@ def p2l(key):
             key[k] = int(item)
         except ValueError:
             pass
+
+    _p2l_cache[key0]=key
+
     return key
 
 
@@ -480,7 +527,7 @@ def l2u(path):
 
     :return: universal ODS path format
     """
-    location = separator.join(filter(None, map(str, path)))
+    location = '.'.join(filter(None, map(str, path)))
     return o2u(location)
 
 
@@ -492,9 +539,7 @@ def l2o(path):
 
     :return: ODS path format
     """
-    location = separator.join(filter(None, map(str, path)))
-    location = re.sub('\.([0-9:]+)', r'.\1', str(location))
-    return location
+    return '.'.join(filter(None, map(str, path)))
 
 
 def o2u(path):
@@ -637,12 +682,12 @@ def omas_info(structures, imas_version=default_imas_version):
                     continue
                 parent = False
                 for item1 in lst[k + 1:]:
-                    if l2u(item1.split(separator)[:-1]).rstrip('[:]') == item:
+                    if l2u(item1.split('.')[:-1]).rstrip('[:]') == item:
                         parent = True
                         break
                 if parent:
                     continue
-                ods[re.sub(':', '0', item)] = tmp[item]
+                ods[item.replace(':','0')] = tmp[item]
 
     return copy.deepcopy(ods)
 
@@ -658,9 +703,6 @@ def omas_info_node(key, imas_version=default_imas_version):
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     '''
     try:
-        key = p2l(key)
-        key = [':' if isinstance(item, int) else item for item in key]
-        tmp = load_structure(key[0], imas_version)[0]
-        return tmp[l2i(key)]
+        return load_structure(key.split('.')[0], imas_version)[0][o2i(key)]
     except KeyError:
         return {}

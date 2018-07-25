@@ -115,7 +115,7 @@ class ODS(MutableMapping):
         # this ODS has a children with 'time' information
         if isinstance(tmp.omas_data, dict):
             if 'time' in tmp:
-                extra_info['location'] = self.location + separator + 'time'
+                extra_info['location'] = self.location + '.time'
                 return add_is_homogeneous_info(tmp['time'])
             # this node should have time filled, but the user did not do their job
             elif 'time' in tmp.structure:
@@ -166,7 +166,7 @@ class ODS(MutableMapping):
                 time_index = numpy.where(self['time'] == time)[0]
             else:
                 raise (ValueError(
-                    'time info is defined both in %s as well as upstream' % (self.location + separator + 'time')))
+                    'time info is defined both in %s as well as upstream' % (self.location + '.time')))
 
         # loop over items
         for item in self.keys():
@@ -175,8 +175,8 @@ class ODS(MutableMapping):
                 continue
 
             # identify time-dependent data
-            info = omas_info_node(self.ulocation + separator + item)
-            if 'coordinates' in info and any([k.endswith(separator + 'time') for k in info['coordinates']]):
+            info = omas_info_node(self.ulocation + '.' + item)
+            if 'coordinates' in info and any([k.endswith('.time') for k in info['coordinates']]):
 
                 # time-dependent arrays
                 if not isinstance(self[item], ODS):
@@ -322,7 +322,7 @@ class ODS(MutableMapping):
         :param structure: reference structure
         """
         for key in value.keys():
-            structure_key = re.sub('^[0-9:]+$', ':', str(key))
+            structure_key = o2u(key)
             if isinstance(value[key], ODS) and value[key].consistency_check:
                 value._validate(value[key], structure[structure_key])
             else:
@@ -342,6 +342,7 @@ class ODS(MutableMapping):
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
+        ulocation = o2u(location)
 
         if self.consistency_check:
             # perform consistency check with IMAS structure
@@ -400,11 +401,11 @@ class ODS(MutableMapping):
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
             # handle cocos transformations coming in
-            if self.cocosio and self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals and not isinstance(value, ODS):
-                value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[o2u(location)]]
+            if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
+                value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
 
             # get node information
-            info = omas_info_node(o2u(location))
+            info = omas_info_node(ulocation)
 
             # handle units (Python pint package)
             if pint is not None:
@@ -457,7 +458,7 @@ class ODS(MutableMapping):
                     else:
                         printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                elif o2u(location) in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                     value = ods_coordinates.__getitem__(location,False)
 
         # if the user has entered a path rather than a single key
@@ -520,28 +521,29 @@ class ODS(MutableMapping):
                 location = l2o([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
 
+        value = self.omas_data[key[0]]
         if len(key) > 1:
             # if the user has entered path rather than a single key
             try:
-                if isinstance(self.omas_data[key[0]],ODS):
-                    return self.omas_data[key[0]].__getitem__(l2o(key[1:]),consistency_check)
+                if isinstance(value,ODS):
+                    return value.__getitem__(l2o(key[1:]),consistency_check)
                 else:
-                    return self.omas_data[key[0]][l2o(key[1:])]
+                    return value[l2o(key[1:])]
             except ValueError:
                 if dynamically_created:
                     del self[key[0]]
                 raise
         else:
             location = l2o([self.location, key[0]])
-            value = self.omas_data[key[0]]
+            ulocation = o2u(location)
 
             if self.consistency_check and not isinstance(value, ODS):
                 # handle cocos transformations going out
-                if self.cocosio and self.cocosio != self.cocos and separator in location and o2u(location) in omas_physics.cocos_signals:
-                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[o2u(location)]]
+                if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
+                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[ulocation]]
 
                 # get node information
-                info = omas_info_node(o2u(location))
+                info = omas_info_node(ulocation)
 
                 # coordinates interpolation
                 ods_coordinates, output_coordinates = self.coordsio
@@ -573,7 +575,7 @@ class ODS(MutableMapping):
                         else:
                             printd('Getting `%s` without knowing some of the coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                    elif o2u(location) in omas_coordinates(self.imas_version) and location in output_coordinates:
+                    elif ulocation in omas_coordinates(self.imas_version) and location in output_coordinates:
                         value = output_coordinates.__getitem__(location, False)
 
                 # handle units (Python pint package)
@@ -766,7 +768,7 @@ class ODS(MutableMapping):
         key = p2l(key)
 
         orig_value = []
-        if key in self:
+        if key in self.keys():
             orig_value = numpy.atleast_1d(self[key]).tolist()
 
         # substitute
@@ -804,7 +806,7 @@ class ODS(MutableMapping):
         :param ods2: This is the dictionary to be added into the ods
         '''
         if isinstance(ods2, ODS):
-            for item in ods2.flat().keys():
+            for item in ods2.paths():
                 self[item] = ods2[item]
         else:
             for item in ods2.keys():

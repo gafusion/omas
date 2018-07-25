@@ -17,7 +17,7 @@ if generate_IDSDef_xml:
 imas_versions = sorted(map(lambda x: os.path.split(x)[-1], glob.glob(imas_json_dir + os.sep + '*')))
 for imas_version in imas_versions:
 
-    print('Processing IMAS data structures v%s' % re.sub('_', '.', imas_version))
+    print('Processing IMAS data structures v%s' % imas_version.replace('_','.'))
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_version, 'omas_doc.html']))
 
     if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and imas_version==imas_versions[-1]):

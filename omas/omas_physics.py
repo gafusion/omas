@@ -13,7 +13,6 @@ def add_to__ODS__(f):
 class constants(object):
     e = 1.6021766208e-19
 
-
 @add_to__ODS__
 def core_profiles_pressures(ods, update=True):
     '''
@@ -127,7 +126,6 @@ def core_profiles_pressures(ods, update=True):
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
 
     return ods_p
-
 
 @add_to__ODS__
 def core_profiles_densities(ods, update=True):
@@ -308,7 +306,6 @@ def define_cocos(cocos_ind):
 
     return cocos
 
-
 def cocos_transform(cocosin_index, cocosout_index):
     """
     Returns a dictionary with coefficients for how various quantities should get multiplied in order to go from cocosin_index to cocosout_index
@@ -361,7 +358,6 @@ def cocos_transform(cocosin_index, cocosout_index):
     printd(transforms, topic='cocos')
 
     return transforms
-
 
 @contextmanager
 def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
@@ -441,7 +437,7 @@ def generate_cocos_signals(structures=[], threshold=0):
     # make sure to keep around structures that are already in omas_cocos.py
     cocos_structures = []
     for item in _cocos_signals:
-        structure_name = item.split(separator)[0]
+        structure_name = item.split('.')[0]
         if structure_name not in cocos_structures:
             cocos_structures.append(structure_name)
 
@@ -510,7 +506,7 @@ def generate_cocos_signals(structures=[], threshold=0):
                 elif any([k in documentation for k in ['always positive']]):
                     out[structure].setdefault(-1, []).append((item, documentation))
                     continue
-                n = item.count(separator)
+                n = item.count('.')
                 for pnt, key in enumerate(p2l(item)):
                     pnt = pnt / float(n)
                     for k in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:

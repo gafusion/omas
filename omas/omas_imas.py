@@ -165,7 +165,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if not isinstance(value, (basestring, numpy.ndarray)):
         value=numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %s)"%(path[-1],re.sub('\\n','\n',repr(value))),topic='imas_code')
+    printd("setattr(out, %r, %s)"%(path[-1],repr(value).replace('\\n','\n')),topic='imas_code')
 
     # return path
     return [DS] + path
@@ -285,7 +285,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_version.replace('.','_'))])
         printe('Overloaded save_omas_imas: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
@@ -371,7 +371,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, re.sub('\.', '_', imas_version))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_version.replace('.','_'))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -408,8 +408,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                     for jpath, path in zip(joined_paths, paths):
                         if path[0] != ds:
                             continue
-                        jpath = re.sub('\.', '\\.', jpath)
-                        jpath = '^' + re.sub('.:', '.[0-9]+', jpath) + '.*'
+                        jpath = jpath.replace('.','\.')
+                        jpath = '^'+jpath.replace('.:', '.[0-9]+') + '.*'
                         for japath, apath in zip(joined_available_paths, available_paths):
                             if re.match(jpath, japath):
                                 fetch_paths.append(apath)

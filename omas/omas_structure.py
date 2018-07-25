@@ -44,7 +44,7 @@ def generate_xml_schemas():
 
     # loop over tags and generate IDSDef.xml files
     for tag in tags:
-        _tag = re.sub('\.', '_', tag)
+        _tag = tag.replace('.', '_')
         if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])):
             subprocess.Popen("""
                 export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
@@ -92,15 +92,15 @@ add_datastructures['info'] = {
 def create_json_structure(imas_version=default_imas_version):
 
     import xmltodict
-    file = imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + 'IDSDef.xml'
+    file = imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + 'IDSDef.xml'
     tmp = xmltodict.parse(open(file).read())
 
-    for file in glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*.json'):
+    for file in glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*.json'):
         print('Remove '+file)
         os.remove(file)
 
     def process_path(inv):
-        inv = re.sub(r'/', '.', inv)
+        inv = inv.replace(r'/','.')
         inv = inv.split(' OR ')[0]
         inv = remove_parentheses(inv, '[:]')
         inv = re.sub('\[:\]$', '', inv)
@@ -218,35 +218,35 @@ def create_json_structure(imas_version=default_imas_version):
     for item in sorted(fout):
         #    if re.findall('(_error_upper|_error_lower|_error_index)$', item):
         #        continue
-        ds = item.split(separator)[0]
+        ds = item.split('.')[0]
         hout.setdefault(ds, {})[item] = fout[item]
 
     # additional data structures
     hout.update(add_datastructures)
 
     # prepare directory structure
-    if not os.path.exists(imas_json_dir + os.sep + re.sub('\.', '_', imas_version)):
+    if not os.path.exists(imas_json_dir + os.sep + imas_version.replace('.', '_')):
         os.makedirs(imas_json_dir + os.sep + re.sub('\.', '_', imas_version))
-    for item in glob.glob(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '*.json'):
+    for item in glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*.json'):
         os.remove(item)
 
     # deploy imas structures as json
     for structure in sorted(hout):
         if structure=='time':
             continue
-        print(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json')
+        print(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + structure + '.json')
         dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
         #dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
-        open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
+        open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + structure + '.json', 'w').write(dump_string)
 
     # generate coordinates cache file
     coords = extract_coordinates()
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
-    open(imas_json_dir + os.sep + re.sub('\.', '_', imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
+    open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '_coordinates.json', 'w').write(dump_string)
 
 
 def create_html_documentation(imas_version=default_imas_version):
-    filename = os.path.abspath(os.sep.join([imas_json_dir, re.sub('\.', '_', imas_version), 'omas_doc.html']))
+    filename = os.path.abspath(os.sep.join([imas_json_dir, imas_version.replace('.', '_'), 'omas_doc.html']))
 
     table_header = "<table border=1, width='100%'>"
     sub_table_header = '<tr>' \
