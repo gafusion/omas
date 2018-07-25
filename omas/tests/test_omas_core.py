@@ -23,9 +23,6 @@ class TestOmasCore(unittest.TestCase):
     # Flags to edit while testing
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
-    # Sample data for use in tests
-    ods = ODS()
-
     # Utilities for this test
     def printv(self, *arg):
         """Utility for tests to use"""
