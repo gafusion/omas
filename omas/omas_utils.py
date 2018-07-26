@@ -428,42 +428,6 @@ def omas_coordinates(imas_version=default_imas_version):
             _coordinates[imas_version] = json.loads(f.read(), object_pairs_hook=json_loader)
     return _coordinates[imas_version]
 
-# class LRU_Cache(object):
-#
-#     def __init__(self, original_function, maxsize=1000):
-#         self.original_function = original_function
-#         self.maxsize = maxsize
-#         self.mapping = {}
-#
-#         PREV, NEXT, KEY, VALUE = 0, 1, 2, 3         # link fields
-#         self.head = [None, None, None, None]        # oldest
-#         self.tail = [self.head, None, None, None]   # newest
-#         self.head[NEXT] = self.tail
-#
-#     def __call__(self, *key):
-#         PREV, NEXT = 0, 1
-#         mapping, head, tail = self.mapping, self.head, self.tail
-#
-#         link = mapping.get(key, head)
-#         if link is head:
-#             value = self.original_function(*key)
-#             if len(mapping) >= self.maxsize:
-#                 old_prev, old_next, old_key, old_value = head[NEXT]
-#                 head[NEXT] = old_next
-#                 old_next[PREV] = head
-#                 del mapping[old_key]
-#             last = tail[PREV]
-#             link = [last, tail, key, value]
-#             mapping[key] = last[NEXT] = tail[PREV] = link
-#         else:
-#             link_prev, link_next, key, value = link
-#             link_prev[NEXT] = link_next
-#             link_next[PREV] = link_prev
-#             last = tail[PREV]
-#             last[NEXT] = tail[PREV] = link
-#             link[PREV] = last
-#             link[NEXT] = tail
-#         return value
 
 _p2l_cache={}
 
@@ -475,7 +439,16 @@ def p2l(key):
 
     :return: list of keys that make the ods path
     """
+    if isinstance(key, list):
+        return key
+
+    if isinstance(key, tuple):
+        return list(key)
+
     if isinstance(key, int):
+        return [key]
+
+    if isinstance(key, basestring) and '.' not in key:
         return [key]
 
     key0 = tuple(key)
@@ -484,11 +457,7 @@ def p2l(key):
 
     if not isinstance(key, (list, tuple)):
         key = str(key).replace('[','.').replace(']','').split('.')
-    else:
-        tmp=[]
-        for item in key:
-            tmp.extend(str(item).split('.'))
-        key = tmp
+
     key = list(filter(None,key))
     for k,item in enumerate(key):
         try:
@@ -542,6 +511,7 @@ def l2o(path):
     return '.'.join(filter(None, map(str, path)))
 
 
+_o2u_pattern=re.compile('\.[0-9:]+')
 def o2u(path):
     '''
     Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
@@ -550,9 +520,10 @@ def o2u(path):
 
     :return: universal ODS path format
     '''
-    return re.sub('\.[0-9:]+', '.:', str(path))
+    return re.sub(_o2u_pattern, '.:', str(path))
 
 
+_i2o_pattern=re.compile('\[([:0-9]+)\]')
 def i2o(path):
     """
     Formats a IMAS path ('bla[0].bla') format into an ODS path ('bla.0.bla')
@@ -561,9 +532,10 @@ def i2o(path):
 
     :return: ODS path format
     """
-    return re.sub('\[([:0-9]+)\]', r'.\1', path)
+    return re.sub(_i2o_pattern, r'.\1', path)
 
 
+_o2i_pattern=re.compile('\.([:0-9]+)')
 def o2i(path):
     """
     Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
@@ -572,7 +544,7 @@ def o2i(path):
 
     :return: IMAS path format
     """
-    return re.sub('\.([:0-9]+)', r'[\1]', path)
+    return re.sub(_o2i_pattern, r'[\1]', path)
 
 
 def u2o(upath, path):

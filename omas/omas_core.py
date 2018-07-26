@@ -347,14 +347,14 @@ class ODS(MutableMapping):
         if self.consistency_check:
             # perform consistency check with IMAS structure
             structure = {}
-            structure_key = list(map(lambda x: re.sub('^[0-9:]+$', ':', str(x)), key))
+            structure_key = key[0] if not isinstance(key[0],int) else ':'
             try:
                 if isinstance(value, ODS):
                     if not self.structure:
                         # load the json structure file
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
-                        structure = self.structure[structure_key[0]]
+                        structure = self.structure[structure_key]
                         if not len(structure):
                             raise(ValueError('`%s` has no data'%location))
                     # check that tha data will go in the right place
@@ -363,7 +363,7 @@ class ODS(MutableMapping):
                     value.structure = structure
                     value.location = location
                 else:
-                    self.structure[structure_key[0]]
+                    self.structure[structure_key]
 
             except (LookupError, TypeError):
                 if self.consistency_check=='warn':
@@ -378,7 +378,7 @@ class ODS(MutableMapping):
                         options = 'Did you mean: %s' % options
                     spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
                     raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
-                        spaces + '^' * len(structure_key[0]) + '\n' + '%s' % options)
+                        spaces + '^' * len(structure_key) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
         if isinstance(key[0], int) and not isinstance(self.omas_data, list):
@@ -391,12 +391,6 @@ class ODS(MutableMapping):
                 self.omas_data = {}
             else:
                 raise (Exception('Cannot convert from list to dict once ODS has data'))
-
-        # non-scalar data is saved as numpy arrays
-        if isinstance(value, list):
-            value = numpy.array(value)
-        elif isinstance(value,numpy.ndarray) and not(len(value.shape)):
-            value = value.item()
 
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
@@ -440,7 +434,7 @@ class ODS(MutableMapping):
                     # if all coordinates information is present
                     if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
                         # if there is any coordinate that does not match
-                        if any([len(input_coordinates.__getitem__(coord,False)) != len(ods_coordinates.__getitem__(coord,False)) or
+                        if any([len(input_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
                                 (not numpy.allclose(input_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
 
                             # for the time being omas interpolates only 1D quantities
@@ -449,7 +443,7 @@ class ODS(MutableMapping):
 
                             # if the (first) coordinate is in input_coordinates
                             coordinate = coordinates[0]
-                            if len(input_coordinates.__getitem__(coordinate,False)) != len(value):
+                            if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
                                 raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
                             printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
                             value = numpy.interp(ods_coordinates.__getitem__(coordinate,False),input_coordinates.__getitem__(coordinate,False), value)
@@ -460,6 +454,16 @@ class ODS(MutableMapping):
 
                 elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                     value = ods_coordinates.__getitem__(location, None)
+
+        # non-scalar data is saved as numpy arrays
+        if isinstance(value, list):
+            value = numpy.array(value)
+        elif isinstance(value, numpy.ndarray) and not (len(value.shape)):
+            value = numpy.asscalar(value)
+        elif isinstance(value, float):
+            value = float(value)
+        elif isinstance(value, int):
+            value = int(value)
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
@@ -479,7 +483,7 @@ class ODS(MutableMapping):
                     else:
                         raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
             try:
-                self[key[0]][l2o(key[1:])] = pass_on_value
+                self[key[0]][key[1:]] = pass_on_value
             except LookupError:
                 if dynamically_created:
                     del self[key[0]]
@@ -506,13 +510,13 @@ class ODS(MutableMapping):
         if key[0] == ':':
             data = []
             for k in self.keys():
-                data.append(self[l2o([k] + key[1:])])
+                data.append(self[[k] + key[1:]])
             return numpy.array(data)
 
         # dynamic path creation
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
-                dynamically_created=True
+                dynamically_created = True
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
                                               consistency_check=self.consistency_check,
                                               dynamic_path_creation=self.dynamic_path_creation,
@@ -526,7 +530,7 @@ class ODS(MutableMapping):
             # if the user has entered path rather than a single key
             try:
                 if isinstance(value,ODS):
-                    return value.__getitem__(l2o(key[1:]),consistency_check)
+                    return value.__getitem__(key[1:],consistency_check)
                 else:
                     return value[l2o(key[1:])]
             except ValueError:
@@ -534,10 +538,12 @@ class ODS(MutableMapping):
                     del self[key[0]]
                 raise
         else:
-            location = l2o([self.location, key[0]])
-            ulocation = o2u(location)
 
             if consistency_check is not None and self.consistency_check and not isinstance(value, ODS):
+
+                location = l2o([self.location, key[0]])
+                ulocation = o2u(location)
+
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[ulocation]]
@@ -557,7 +563,7 @@ class ODS(MutableMapping):
                         # if all coordinates information is present
                         if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(output_coordinates.__getitem__(coord,False)) != len(ods_coordinates.__getitem__(coord,False)) or
+                            if any([len(output_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
                                     (not numpy.allclose(output_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
 
                                 # for the time being omas interpolates only 1D quantities
@@ -566,7 +572,7 @@ class ODS(MutableMapping):
 
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
-                                if len(ods_coordinates.__getitem__(coordinate,False)) != len(value):
+                                if len(ods_coordinates.__getitem__(coordinate,None)) != len(value):
                                     raise (Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
                                 printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
                                 value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
@@ -589,7 +595,7 @@ class ODS(MutableMapping):
         key = p2l(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            del self[key[0]][l2o(key[1:])]
+            del self[key[0]][key[1:]]
         else:
             return self.omas_data.__delitem__(key[0])
 
@@ -614,9 +620,8 @@ class ODS(MutableMapping):
 
         :return: list of paths that have data
         """
-        paths = self.paths()
         location = p2l(self.location)
-        return [location + path for path in paths]
+        return [location + path for path in self.paths()]
 
     def flat(self):
         """
@@ -792,8 +797,8 @@ class ODS(MutableMapping):
 
         :return: dictionary with coordinates
         '''
-        n=len(self.location)
-        coords={}
+        n = len(self.location)
+        coords = {}
         for full_path in self.full_paths():
             if l2u(full_path) in omas_coordinates(self.imas_version):
                 coords[l2o(full_path)] = self[l2o(full_path)[n:]]

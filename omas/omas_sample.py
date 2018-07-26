@@ -89,7 +89,7 @@ def misc(ods):
     # check different ways of addressing data
     for item in [ods2['equilibrium.time_slice']['1.global_quantities'],
                  ods2[['equilibrium', 'time_slice', 1, 'global_quantities']],
-                 ods2[('equilibrium', 'time_slice', '1', 'global_quantities')],
+                 ods2[('equilibrium', 'time_slice', 1, 'global_quantities')],
                  ods2['equilibrium.time_slice.1.global_quantities'],
                  ods2['equilibrium.time_slice[1].global_quantities']]:
         assert item.ulocation=='equilibrium.time_slice.:.global_quantities'

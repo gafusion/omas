@@ -46,12 +46,8 @@ def load_omas_json(filename, **kw):
         return tmp
 
     tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
-
-    tmp1 = ODS()
-    for item in tmp.flat():
-        tmp1[item] = tmp[item]
-
-    return tmp1
+    tmp.consistency_check=True
+    return tmp
 
 
 def through_omas_json(ods):

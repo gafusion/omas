@@ -49,8 +49,8 @@ ods[['equilibrium', 'time_slice', 3, 'time']] = 4000.
 assert (ods[['equilibrium', 'time_slice', 3, 'time']] == 4000.)
 
 # access data with mix and match approach
-ods['equilibrium]']['time_slice.4.time'] = 5000.
-assert (ods['equilibrium]']['time_slice.4.time'] == 5000.)
+ods['equilibrium']['time_slice.4.time'] = 5000.
+assert (ods['equilibrium']['time_slice.4.time'] == 5000.)
 
 #=============
 # Data slicing
