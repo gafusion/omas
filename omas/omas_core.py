@@ -403,18 +403,8 @@ class ODS(MutableMapping):
 
             # handle units (Python pint package)
             if pint is not None:
-                if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
+                if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value.shape) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
                     value = value.to(info['units']).magnitude
-
-            # check consistency for scalar entries
-            if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                printe('%s must be a scalar of type %s' % (location, info['data_type']))
-            # check consistency for number of dimensions
-            elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                # may want to raise a ValueError in the future
-                printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
-            elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
             # coordinates interpolation
             ods_coordinates, input_coordinates = self.coordsio
@@ -455,7 +445,7 @@ class ODS(MutableMapping):
                 elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                     value = ods_coordinates.__getitem__(location, None)
 
-        # non-scalar data is saved as numpy arrays
+        # lists are saved as numpy arrays, and 0D numpy arrays as scalars
         if isinstance(value, list):
             value = numpy.array(value)
         elif isinstance(value, numpy.ndarray) and not (len(value.shape)):
@@ -464,6 +454,17 @@ class ODS(MutableMapping):
             value = float(value)
         elif isinstance(value, int):
             value = int(value)
+
+        if self.consistency_check and not isinstance(value, ODS):
+            # check consistency for scalar entries
+            if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+                printe('%s must be a scalar of type %s' % (location, info['data_type']))
+            # check consistency for number of dimensions
+            elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+                # may want to raise a ValueError in the future
+                printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
+            elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
+                printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
