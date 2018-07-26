@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 import sys
-if True:# or sys.version_info.major==2:
+if False:# or sys.version_info.major==2:
     from test_omas_core import *
     from test_omas_physics import *
     from test_omas_plot import *
