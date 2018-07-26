@@ -429,7 +429,7 @@ def omas_coordinates(imas_version=default_imas_version):
     return _coordinates[imas_version]
 
 
-_p2l_cache={}
+_p2l_cache = {}
 
 def p2l(key):
     """
@@ -451,21 +451,23 @@ def p2l(key):
     if isinstance(key, basestring) and '.' not in key:
         return [key]
 
-    key0 = tuple(key)
+    key0 = ''.join(key)
     if key0 in _p2l_cache:
         return _p2l_cache[key0]
 
     if not isinstance(key, (list, tuple)):
-        key = str(key).replace('[','.').replace(']','').split('.')
+        key = str(key).replace('[', '.').replace(']', '').split('.')
 
-    key = list(filter(None,key))
-    for k,item in enumerate(key):
+    key = list(filter(None, key))
+    for k, item in enumerate(key):
         try:
             key[k] = int(item)
         except ValueError:
             pass
 
-    _p2l_cache[key0]=key
+    if len(_p2l_cache) > 1000:
+        _p2l_cache.clear()
+    _p2l_cache[key0] = key
 
     return key
 
