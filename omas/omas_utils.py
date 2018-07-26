@@ -512,8 +512,8 @@ def l2o(path):
     """
     return '.'.join(filter(None, map(str, path)))
 
-
-_o2u_pattern=re.compile('\.[0-9:]+')
+_o2u_pattern = re.compile('\.[0-9:]+')
+_o2u_pattern_no_split = re.compile('^[0-9:]+')
 def o2u(path):
     '''
     Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
@@ -522,7 +522,11 @@ def o2u(path):
 
     :return: universal ODS path format
     '''
-    return re.sub(_o2u_pattern, '.:', str(path))
+    path = str(path)
+    if '.' in path:
+        return re.sub(_o2u_pattern, '.:', path)
+    else:
+        return re.sub(_o2u_pattern_no_split, ':', path)
 
 
 _i2o_pattern=re.compile('\[([:0-9]+)\]')
