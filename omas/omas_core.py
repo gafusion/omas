@@ -774,7 +774,7 @@ class ODS(MutableMapping):
         key = p2l(key)
 
         orig_value = []
-        if key in self.keys():
+        if key in self:
             orig_value = numpy.atleast_1d(self[key]).tolist()
 
         # substitute
@@ -784,7 +784,7 @@ class ODS(MutableMapping):
         elif time_index == len(orig_value):
             orig_value = orig_value + [value]
         else:
-            raise (IndexError('%s has length and time_index %d is bejond range' % (l2o(key), len(orig_value), time_index)))
+            raise (IndexError('%s has length %d and time_index %d is bejond current range' % (l2o(key), len(orig_value), time_index)))
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value

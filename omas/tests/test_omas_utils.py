@@ -158,5 +158,10 @@ class TestOmasUtils(unittest.TestCase):
         assert o2u('equilibrium')=='equilibrium'
         assert o2u('equilibrium.2')=='equilibrium.:'
 
+    def test_set_time_array(self):
+        ods=ODS()
+        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0',0,0.1)
+        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0',1,0.2)
+
 if __name__ == '__main__':
     unittest.main()
