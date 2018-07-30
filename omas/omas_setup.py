@@ -8,7 +8,7 @@ import sys
 import glob
 import json
 import copy
-from collections import OrderedDict
+from collections import MutableMapping, OrderedDict
 import re
 import numpy
 from pprint import pprint

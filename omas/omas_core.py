@@ -1,7 +1,5 @@
 from __future__ import print_function, division, unicode_literals
 
-from collections import MutableMapping
-
 from .omas_utils import *
 
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
@@ -436,7 +434,7 @@ class ODS(MutableMapping):
                             if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
                                 raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
                             printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
-                            value = numpy.interp(ods_coordinates.__getitem__(coordinate,False),input_coordinates.__getitem__(coordinate,False), value)
+                            value = numpy.interp(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
                         else:
                             printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                     else:
@@ -565,7 +563,7 @@ class ODS(MutableMapping):
                         if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
                             if any([len(output_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
-                                    (not numpy.allclose(output_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
+                                    (not numpy.allclose(output_coordinates.__getitem__(coord,None), ods_coordinates.__getitem__(coord,None))) for coord in coordinates]):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
