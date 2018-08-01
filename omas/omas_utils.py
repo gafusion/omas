@@ -449,7 +449,10 @@ def p2l(key):
         return [key]
 
     if isinstance(key, basestring) and '.' not in key:
-        return [key]
+        if len(key):
+            return [key]
+        else:
+            return []
 
     key0 = ''.join(key)
     if key0 in _p2l_cache:
