@@ -128,6 +128,8 @@ class ODS(MutableMapping):
             times = []
             for item in tmp:
                 times.append(tmp[item].time(extra_info=extra_info))
+            if 'location' in extra_info:
+                extra_info['location']=o2u(extra_info['location'])
             # if any time information was found, return it
             if len(list(filter(None, times))):
                 return add_is_homogeneous_info(numpy.array(times))
