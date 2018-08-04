@@ -454,6 +454,9 @@ def p2l(key):
         else:
             return []
 
+    if key is None:
+        raise(TypeError('OMAS key cannot be None'))
+
     key0 = ''.join(key)
     if key0 in _p2l_cache:
         return _p2l_cache[key0]
