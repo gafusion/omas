@@ -33,6 +33,7 @@ class ODS(MutableMapping):
                  cocos=omas_rcparams['cocos'],
                  cocosio=omas_rcparams['cocosio'],
                  coordsio=omas_rcparams['coordsio'],
+                 unitsio=omas_rcparams['unitsio'],
                  structure=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -49,6 +50,8 @@ class ODS(MutableMapping):
 
         :param coordsio: ODS with coordinates to use for the data that is read/written from/to the ODS
 
+        :param unitsio: ODS will return data with units if True
+
         :param structure: IMAS schema to use
         """
         self.omas_data = None
@@ -59,6 +62,7 @@ class ODS(MutableMapping):
         self._cocos = cocos
         self.cocosio = cocosio
         self.coordsio = coordsio
+        self.unitsio = unitsio
         if structure is None:
             structure = {}
         self.structure = structure
