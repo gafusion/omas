@@ -176,8 +176,8 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
 
     :param update: operate in place
 
-    :param use_electrons_density: 
-            denominator core_profiles.profiles_1d.:.electrons.density 
+    :param use_electrons_density:
+            denominator core_profiles.profiles_1d.:.electrons.density
             instead of sum Z*n_i
 
     :return: updated ods
@@ -202,6 +202,56 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
             else:
                 prof1d_z['zeff'] = Z2n/Zn
     return ods_z
+
+
+def transform_current(rho, JtoR=None, JparB=None,
+                      equilibrium=None, includes_bootstrap=False):
+    """
+    Given <Jt/R> returns <J.B>, or vice versa
+    Transformation obeys <J.B> = (1/f)*(<B^2>/<1/R^2>)*(<Jt/R> + dp/dpsi*(1 - f^2*<1/R^2>/<B^2>))
+    N.B. input current must be in the same COCOS as equilibrium.cocosio
+
+    :param rho: normalized rho grid for input JtoR or JparB
+
+    :param JtoR: input <Jt/R> profile (cannot be set along with JparB)
+
+    :param JparB: input <J.B> profile (cannot be set along with JtoR)
+
+    :param equilibrium: equilibrium.time_slice[:] ODS containing quanities needed for transformation
+
+    :param includes_bootstrap: set to True if input current includes bootstrap
+
+    :return: <Jt/R> if JparB set or <J.B> if JtoR set
+
+    Example: given total <Jt/R> on rho grid with an existing ods, return <J.B>
+             JparB = transform_current(rho, JtoR=JtoR,
+                                       equilibrium=ods['equilibrium']['time_slice'][0],
+                                       includes_bootstrap=True)
+    """
+
+    if (JtoR is not None) and (JparB is not None):
+        raise RuntimeError("JtoR and JparB cannot both be set")
+    if equilibrium is None:
+        raise ValueError("equilibrium ODS must be provided, specifically equilibrium.time_slice[:]")
+
+    cocos = define_cocos(equilibrium.cocosio)
+    rho_eq = equilibrium['profiles_1d.rho_tor_norm']
+    fsa_B2    = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm5'])
+    fsa_invR2 = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm1'])
+    f         = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.f'])
+    dpdpsi    = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
+
+    # diamagnetic term to get included with bootstrap currrent
+    JtoR_dia = dpdpsi*(1. - fsa_invR2*f**2/fsa_B2)
+    JtoR_dia *= cocos['sigma_Bp']*(2.*numpy.pi)**cocos['exp_Bp']
+
+    if JtoR is not None:
+        Jout = fsa_B2*(JtoR + includes_bootstrap*JtoR_dia)/(f*fsa_invR2)
+    elif JparB is not None:
+        Jout = f*fsa_invR2*JparB/fsa_B2 - includes_bootstrap*JtoR_dia
+
+    return Jout
+
 
 def define_cocos(cocos_ind):
     """
