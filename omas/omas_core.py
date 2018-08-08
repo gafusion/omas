@@ -15,7 +15,7 @@ __all__ = [
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'default_imas_version', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
-    'cocos_transform', 'define_cocos',
+    'cocos_transform', 'define_cocos', 'transform_current',
     'omas_environment', 'cocos_environment', 'coords_environment',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
@@ -839,7 +839,7 @@ except ImportError as _excp:
 # --------------------------------------------
 try:
     from . import omas_physics
-    from .omas_physics import cocos_transform, define_cocos
+    from .omas_physics import cocos_transform, define_cocos, transform_current
     from .omas_physics import omas_environment, cocos_environment, coords_environment
     __all__.append('omas_physics')
     for item in omas_physics.__all__:
