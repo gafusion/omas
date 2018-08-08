@@ -209,21 +209,30 @@ def transform_current(rho, JtoR=None, JparB=None,
     """
     Given <Jt/R> returns <J.B>, or vice versa
     Transformation obeys <J.B> = (1/f)*(<B^2>/<1/R^2>)*(<Jt/R> + dp/dpsi*(1 - f^2*<1/R^2>/<B^2>))
+    N.B. input current must be in the same COCOS as equilibrium.cocosio
 
     :param rho: normalized rho grid for input JtoR or JparB
 
-    :param JtoR: input <Jt/R> profile (cannot be set with JparB)
+    :param JtoR: input <Jt/R> profile (cannot be set along with JparB)
 
-    :param JparB: input <J.B> profile (cannot be set with JtoR)
+    :param JparB: input <J.B> profile (cannot be set along with JtoR)
 
-    :param equilibrium: equilibrium ODS containing quanities needed for transformation
+    :param equilibrium: equilibrium.time_slice[:] ODS containing quanities needed for transformation
 
     :param includes_bootstrap: set to True if input current includes bootstrap
 
+    :return: <Jt/R> if JparB set or <J.B> if JtoR set
+
+    Example: given total <Jt/R> on rho grid with an existing ods, return <J.B>
+             JparB = transform_current(rho, JtoR=JtoR,
+                                       equilibrium=ods['equilibrium']['time_slice'][0],
+                                       includes_bootstrap=True)
     """
 
     if (JtoR is not None) and (JparB is not None):
         raise RuntimeError("JtoR and JparB cannot both be set")
+    if equilibrium is None:
+        raise ValueError("equilibrium ODS must be provided, specifically equilibrium.time_slice[:]")
 
     cocos = define_cocos(equilibrium.cocosio)
     rho_eq = equilibrium['profiles_1d.rho_tor_norm']
