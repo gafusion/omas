@@ -285,19 +285,32 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
     if 'core_profiles.vacuum_toroidal_field.b0' in ods:
         B0 = ods['core_profiles']['vacuum_toroidal_field']['b0'][time_index]
     elif 'equilibrium.vacuum_toroidal_field.b0' in ods:
+        R0 = ods['equilibrium']['vacuum_toroidal_field']['r0']
         B0 = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index]
+        ods['core_profiles']['vacuum_toroidal_field']['r0'] = R0
+        ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, B0)
     rho = prof1d['grid']['rho_tor_norm']
+    fsa_invR = numpy.interp(rho, eq['profiles_1d']['rho_tor_norm'],
+                            eq['profiles_1d']['gm9'])
 
     # Total toroidal current
     if j_tor is not None:
         # use the provided current
         prof1d['j_tor'] = j_tor
+
+        if j_total is None:
+            JtoR_tot = j_tor*fsa_invR
+            JparB_tot = transform_current(rho, JtoR=JtoR_tot,
+                                          equilibrium=eq,
+                                          includes_bootstrap=True)
+            prof1d['j_total'] = JparB_tot/B0
+
     elif 'j_total' in prof1d:
         # update toroidal current using transformation
         JparB_tot = prof1d['j_total']*B0
         JtoR_tot = transform_current(rho, JparB=JparB_tot,
-                                     equilibrium=eq, includes_bootstrap=True)
-        fsa_invR = numpy.interp(rho, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
+                                     equilibrium=eq,
+                                     includes_bootstrap=True)
         prof1d['j_tor'] = JtoR_tot/fsa_invR
 
 
@@ -314,18 +327,19 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
                     ('j_tor', 'ip', False)]
 
         for Jname, Iname, transform in currents:
-            J = prof1d[Jname]
-            if transform:
-                # transform <J.B>/B0 to <Jt/R>
-                J = transform_current(rho_eq, JparB=J*B0,
-                                      equilibrium=eq, includes_bootstrap=True)
-            else:
-                # already <Jt/R>/<1/R>
-                J *= fsa_invR
-
-            ods.set_time_array('core_profiles.global_quantities.%s'%Iname,time_index,
-                               cumtrapz(vp*J,psi)[-1]/(2.*numpy.pi))
-
+            try:
+                J = prof1d[Jname]
+                if transform:
+                    # transform <J.B>/B0 to <Jt/R>
+                    J = transform_current(rho_eq, JparB=J*B0,
+                                          equilibrium=eq, includes_bootstrap=True)
+                else:
+                    # already <Jt/R>/<1/R>
+                    J *= fsa_invR
+                ods.set_time_array('core_profiles.global_quantities.%s'%Iname,time_index,
+                                   cumtrapz(vp*J,psi)[-1]/(2.*numpy.pi))
+            except ValueError:
+                pass
 
     return
 
