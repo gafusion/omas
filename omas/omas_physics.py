@@ -14,6 +14,31 @@ class constants(object):
     e = 1.6021766208e-19
 
 @add_to__ODS__
+def core_profiles_consistent(ods, update=True, use_electrons_density=False):
+    '''
+    Calls all core_profiles consistency functions including
+      - core_profiles_pressures
+      - core_profiles_densities
+      - core_profiles_zeff
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :param use_electrons_density:
+            denominator is core_profiles.profiles_1d.:.electrons.density
+            instead of sum Z*n_i in Z_eff calculation
+
+    :return: updated ods
+    '''
+
+    ods_2 = core_profiles_pressures(ods, update=update)
+    ods_2 = core_profiles_densities(ods_2, update=update)
+    ods_2 = core_profiles_zeff(ods_2, update=update,
+                               use_electrons_density=use_electrons_density)
+    return ods_2
+
+@add_to__ODS__
 def core_profiles_pressures(ods, update=True):
     '''
     calculates individual ions pressures
