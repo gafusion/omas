@@ -229,6 +229,48 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     return ods_z
 
 @add_to__ODS__
+def current_from_eq(ods, time_index, set_as='j_ohmic'):
+    """
+    This function sets the currents in ods['core_profiles']['profiles_1d'][time_index]
+    using ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor']
+
+    :param ods: ODS to update in-place
+
+    :param time_index: ODS time index to updated
+
+    :param set_as: which current to set the equilibrium current as
+                   should be 'j_ohmic', j_bootstrap', or 'j_non_inductive'
+
+    """
+
+    rho = ods['equilibrium.time_slice'][time_index]['profiles_1d.rho_tor_norm']
+
+    with omas_environment(ods,
+                          coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm'%time_index:rho}):
+        # call all current ohmic to start
+        fsa_invR = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['gm9']
+        JtoR_tot = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor']*fsa_invR
+        if 'core_profiles.vacuum_toroidal_field.b0' in ods:
+            B0 = ods['core_profiles']['vacuum_toroidal_field']['b0'][time_index]
+        elif 'equilibrium.vacuum_toroidal_field.b0' in ods:
+            R0 = ods['equilibrium']['vacuum_toroidal_field']['r0']
+            B0 = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index]
+            ods['core_profiles']['vacuum_toroidal_field']['r0'] = R0
+            ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, B0)
+
+        JparB_tot = transform_current(rho, JtoR=JtoR_tot,
+                                      equilibrium=ods['equilibrium']['time_slice'][time_index],
+                                      includes_bootstrap=True)
+
+        update_current(ods, time_index,
+                       j_ohmic = (set_as=='j_ohmic')*JparB_tot/B0,
+                       j_bootstrap = (set_as=='j_bootstrap')*JparB_tot/B0,
+                       j_non_inductive = (set_as in ['j_bootstrap','j_non_inductive'])*JparB_tot/B0,
+                       j_total = JparB_tot/B0)
+
+    return
+
+@add_to__ODS__
 def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
                    j_non_inductive=None, j_total = None, j_tor = None):
     """
