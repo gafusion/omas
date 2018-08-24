@@ -418,14 +418,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                 else:
                     if verbose: print('- ', ds)
 #            joined_fetch_paths=map(o2i, fetch_paths)
-#            joined_fetch_paths=map(l2i, fetch_paths)
-#            pprint(joined_paths[:10])
-#            pprint(joined_available_paths[:10])
-#            pprint(joined_fetch_paths[:10])
-#            asdasd
-            fetch_paths=available_paths
-            joined_fetch_paths=joined_available_paths
-            
+            joined_fetch_paths=map(l2i, fetch_paths)
 
             # build omas data structure
             ods = ODS()
