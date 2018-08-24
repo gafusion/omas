@@ -63,7 +63,7 @@ def printd(*objects, **kw):
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
         printe(*objects, **kw)
         if dump:
-            fb = StringIO.StringIO()
+            fb = StringIO()
             print(*objects[1:], file=fb)
             with open('omas_dump.txt', 'a') as f:
                 f.write(fb.getvalue())

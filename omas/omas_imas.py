@@ -382,9 +382,11 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
                 paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-                if verbose is None:
-                    verbose=True
-            joined_paths = map(o2i, paths)
+            if verbose is None:
+                verbose=True
+#            joined_paths = map(o2i, paths)
+            joined_paths = map(l2i, paths)
+            print(joined_paths)
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
@@ -404,7 +406,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                 if len(getattr(ids, ds).time):
                     if verbose: print('* ', ds)
                     available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
-                    joined_available_paths = map(o2i, available_paths)
+#                    joined_available_paths = map(o2i, available_paths)
+                    joined_available_paths = map(l2i, available_paths)
                     for jpath, path in zip(joined_paths, paths):
                         if path[0] != ds:
                             continue
@@ -415,7 +418,15 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                                 fetch_paths.append(apath)
                 else:
                     if verbose: print('- ', ds)
-            joined_fetch_paths=map(o2i, fetch_paths)
+#            joined_fetch_paths=map(o2i, fetch_paths)
+#            joined_fetch_paths=map(l2i, fetch_paths)
+#            pprint(joined_paths[:10])
+#            pprint(joined_available_paths[:10])
+#            pprint(joined_fetch_paths[:10])
+#            asdasd
+            fetch_paths=available_paths
+            joined_fetch_paths=joined_available_paths
+            
 
             # build omas data structure
             ods = ODS()
