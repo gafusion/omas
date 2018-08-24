@@ -382,11 +382,10 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
                 paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-            if verbose is None:
-                verbose=True
+                if verbose is None:
+                    verbose=True
 #            joined_paths = map(o2i, paths)
             joined_paths = map(l2i, paths)
-            print(joined_paths)
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
