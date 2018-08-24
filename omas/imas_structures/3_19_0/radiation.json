@@ -11,18 +11,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "radiation/code",
+  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "radiation.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/code/commit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "radiation/code/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.code.output_flag": {
@@ -32,60 +35,70 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "radiation/code/output_flag(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "radiation/code/parameters",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "radiation/code/repository",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "radiation/code/version",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "radiation/ids_properties",
+  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "radiation.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "radiation/ids_properties/comment",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "radiation/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "radiation/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "radiation/ids_properties/provider",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "radiation/ids_properties/source",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process": {
@@ -95,6 +108,7 @@
   "data_type": "struct_array",
   "documentation": "Set of emission processes. The radiation characteristics are described at the level of the originating entity:\n1/ line radiation from neutrals under neutral 2/ line and recombination radiation under ion 3/ bremsstrahlung radiation under neutral and ion 4/ possibly recombination and bremsstrahlung under ion",
   "full_path": "radiation/process(i1)",
+  "lifecycle_status": "alpha",
   "maxoccur": "20",
   "structure_reference": "radiation_process"
  },
@@ -105,6 +119,7 @@
   "data_type": "struct_array",
   "documentation": "Scalar volume integrated quantities",
   "full_path": "radiation/process(i1)/global_quantities(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_global",
   "type": "dynamic"
@@ -113,12 +128,14 @@
   "data_type": "structure",
   "documentation": "Emissions from the core plasma, inside the last closed flux surface",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs",
+  "lifecycle_status": "alpha",
   "structure_reference": "radiation_process_global_volume"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs.power": {
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -126,6 +143,7 @@
   "data_type": "FLT_0D",
   "documentation": "Power emitted by electrons",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_electrons",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -133,12 +151,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_electrons_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs.power_electrons_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_electrons_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -146,6 +166,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_electrons_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -153,12 +174,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs.power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -166,6 +189,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -173,6 +197,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all ion species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_ion_total",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -180,12 +205,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_ion_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs.power_ion_total_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_ion_total_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -193,6 +220,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_ion_total_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -200,6 +228,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all neutral species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_neutral_total",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -207,12 +236,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_neutral_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs.power_neutral_total_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_neutral_total_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -220,6 +251,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_lcfs/power_neutral_total_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -227,12 +259,14 @@
   "data_type": "structure",
   "documentation": "Total emissions inside the vacuum vessel",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel",
+  "lifecycle_status": "alpha",
   "structure_reference": "radiation_process_global_volume"
  },
  "radiation.process[:].global_quantities[:].inside_vessel.power": {
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -240,6 +274,7 @@
   "data_type": "FLT_0D",
   "documentation": "Power emitted by electrons",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_electrons",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -247,12 +282,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_electrons_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_vessel.power_electrons_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_electrons_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -260,6 +297,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_electrons\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_electrons_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -267,12 +305,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_vessel.power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -280,6 +320,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -287,6 +328,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all ion species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_ion_total",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -294,12 +336,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_ion_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_vessel.power_ion_total_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_ion_total_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -307,6 +351,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_ion_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_ion_total_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -314,6 +359,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power emitted by all neutral species",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_neutral_total",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -321,12 +367,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_neutral_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].global_quantities[:].inside_vessel.power_neutral_total_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_neutral_total_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -334,6 +382,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power_neutral_total\"",
   "full_path": "radiation/process(i1)/global_quantities(itime)/inside_vessel/power_neutral_total_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -341,6 +390,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "radiation/process(i1)/global_quantities(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -349,24 +399,28 @@
   "doc_identifier": "radiation/radiation_identifier.xml",
   "documentation": "Process identifier",
   "full_path": "radiation/process(i1)/identifier",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "radiation.process[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "radiation/process(i1)/identifier/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "radiation/process(i1)/identifier/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "radiation/process(i1)/identifier/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d": {
@@ -376,6 +430,7 @@
   "data_type": "struct_array",
   "documentation": "Emissivity radial profiles for various time slices",
   "full_path": "radiation/process(i1)/profiles_1d(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d",
   "type": "dynamic"
@@ -384,6 +439,7 @@
   "data_type": "structure",
   "documentation": "Processs terms related to electrons",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons",
+  "lifecycle_status": "alpha",
   "structure_reference": "radiation_process_profiles_1d_electrons"
  },
  "radiation.process[:].profiles_1d[:].electrons.emissivity": {
@@ -393,6 +449,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity from this species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/emissivity(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -400,6 +457,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/emissivity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].electrons.emissivity_error_lower": {
@@ -409,6 +467,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/emissivity_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -419,6 +478,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/emissivity_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -429,6 +489,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/power_inside(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -436,6 +497,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/power_inside_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].electrons.power_inside_error_lower": {
@@ -445,6 +507,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/power_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -455,6 +518,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/electrons/power_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -465,6 +529,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity (summed over ion  species)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_ion_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -472,6 +537,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_ion_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].emissivity_ion_total_error_lower": {
@@ -481,6 +547,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_ion_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -491,6 +558,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_ion_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -501,6 +569,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity (summed over neutral  species)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_neutral_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -508,6 +577,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_neutral_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].emissivity_neutral_total_error_lower": {
@@ -517,6 +587,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_neutral_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -527,6 +598,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/emissivity_neutral_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -534,6 +606,7 @@
   "data_type": "structure",
   "documentation": "Radial grid",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid",
+  "lifecycle_status": "alpha",
   "structure_reference": "core_radial_grid"
  },
  "radiation.process[:].profiles_1d[:].grid.area": {
@@ -543,6 +616,7 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/area(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -550,6 +624,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/area_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].grid.area_error_lower": {
@@ -559,6 +634,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/area_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -569,6 +645,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/area_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -579,6 +656,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/psi(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -586,6 +664,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/psi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].grid.psi_error_lower": {
@@ -595,6 +674,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/psi_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -605,6 +685,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/psi_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -615,6 +696,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -622,6 +704,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].grid.rho_tor_error_lower": {
@@ -631,6 +714,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -641,6 +725,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -651,6 +736,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -658,6 +744,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -667,6 +754,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -677,6 +765,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -687,6 +776,7 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/volume(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -694,6 +784,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/volume_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].grid.volume_error_lower": {
@@ -703,6 +794,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/volume_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -713,6 +805,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/volume_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -723,6 +816,7 @@
   "data_type": "struct_array",
   "documentation": "Process terms related to the different ions species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d_ions"
  },
@@ -733,6 +827,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -740,6 +835,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -747,12 +843,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -760,6 +858,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -767,6 +866,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -783,6 +883,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -807,6 +908,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -814,12 +916,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -827,6 +931,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -837,6 +942,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity from this species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/emissivity(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -844,6 +950,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/emissivity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].emissivity_error_lower": {
@@ -853,6 +960,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/emissivity_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -863,6 +971,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/emissivity_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -870,18 +979,21 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/neutral_index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].ion[:].power_inside": {
@@ -891,6 +1003,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/power_inside(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -898,6 +1011,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].power_inside_error_lower": {
@@ -907,6 +1021,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -917,6 +1032,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -927,6 +1043,7 @@
   "data_type": "struct_array",
   "documentation": "Process terms related to the different charge states of the species (ionisation, energy, excitation, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d_ions_charge_states"
  },
@@ -934,6 +1051,7 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/electron_configuration",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].emissivity": {
@@ -943,6 +1061,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity from this species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/emissivity(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -950,6 +1069,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/emissivity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].emissivity_error_lower": {
@@ -959,6 +1079,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/emissivity_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -969,6 +1090,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/emissivity_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -976,6 +1098,7 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].power_inside": {
@@ -985,6 +1108,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -992,6 +1116,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].power_inside_error_lower": {
@@ -1001,6 +1126,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1011,6 +1137,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1018,6 +1145,7 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1025,12 +1153,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1038,6 +1168,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1045,12 +1176,14 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_mode",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1058,12 +1191,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1071,6 +1206,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1078,6 +1214,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1085,12 +1222,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].state[:].z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1098,6 +1237,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1105,6 +1245,7 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/z_ion",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1112,12 +1253,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].ion[:].z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1125,6 +1268,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1135,6 +1279,7 @@
   "data_type": "struct_array",
   "documentation": "Process terms related to the different neutral species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d_neutral"
  },
@@ -1145,6 +1290,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -1152,6 +1298,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1159,12 +1306,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1172,6 +1321,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -1179,6 +1329,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1195,6 +1346,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -1219,6 +1371,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1226,12 +1379,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1239,6 +1394,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1249,6 +1405,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity from this species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/emissivity(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1256,6 +1413,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/emissivity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].emissivity_error_lower": {
@@ -1265,6 +1423,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/emissivity_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1275,6 +1434,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/emissivity_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1282,18 +1442,21 @@
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding ion species in the ../../ion array",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/ion_index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].label": {
   "data_type": "STR_0D",
   "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].power_inside": {
@@ -1303,6 +1466,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/power_inside(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1310,6 +1474,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/power_inside_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].power_inside_error_lower": {
@@ -1319,6 +1484,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/power_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1329,6 +1495,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/power_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1339,6 +1506,7 @@
   "data_type": "struct_array",
   "documentation": "Process terms related to the different charge states of the species (energy, excitation, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d_neutral_state"
  },
@@ -1346,6 +1514,7 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/electron_configuration",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].emissivity": {
@@ -1355,6 +1524,7 @@
   "data_type": "FLT_1D",
   "documentation": "Emissivity from this species",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/emissivity(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1362,6 +1532,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/emissivity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].emissivity_error_lower": {
@@ -1371,6 +1542,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/emissivity_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1381,6 +1553,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"emissivity\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/emissivity_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1388,6 +1561,7 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].neutral_type": {
@@ -1395,24 +1569,28 @@
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].power_inside": {
@@ -1422,6 +1600,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radiated power from inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/power_inside(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1429,6 +1608,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/power_inside_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].power_inside_error_lower": {
@@ -1438,6 +1618,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/power_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1448,6 +1629,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/power_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1455,6 +1637,7 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1462,12 +1645,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1475,6 +1660,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1482,6 +1668,7 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_mode",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].power_inside_ion_total": {
@@ -1491,6 +1678,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total power from ion species (summed over ion  species) inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_ion_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1498,6 +1686,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_ion_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].power_inside_ion_total_error_lower": {
@@ -1507,6 +1696,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_ion_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1517,6 +1707,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside_ion_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_ion_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1527,6 +1718,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total power from ion species (summed over neutral species) inside the flux surface (volume integral of the emissivity inside the flux surface)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_neutral_total(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1534,6 +1726,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_neutral_total_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.process[:].profiles_1d[:].power_inside_neutral_total_error_lower": {
@@ -1543,6 +1736,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_neutral_total_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1553,6 +1747,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside_neutral_total\"",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/power_inside_neutral_total_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -1560,6 +1755,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1570,12 +1766,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "radiation/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "radiation.vacuum_toroidal_field": {
   "data_type": "structure",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "radiation/vacuum_toroidal_field",
+  "lifecycle_status": "alpha",
   "structure_reference": "b_tor_vacuum_1"
  },
  "radiation.vacuum_toroidal_field.b0": {
@@ -1585,6 +1783,7 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "radiation/vacuum_toroidal_field/b0(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1592,6 +1791,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "radiation/vacuum_toroidal_field/b0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.vacuum_toroidal_field.b0_error_lower": {
@@ -1601,6 +1801,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "full_path": "radiation/vacuum_toroidal_field/b0_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1611,6 +1812,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "full_path": "radiation/vacuum_toroidal_field/b0_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -1618,6 +1820,7 @@
   "data_type": "FLT_0D",
   "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
   "full_path": "radiation/vacuum_toroidal_field/r0",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1625,12 +1828,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "radiation/vacuum_toroidal_field/r0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "radiation.vacuum_toroidal_field.r0_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r0\"",
   "full_path": "radiation/vacuum_toroidal_field/r0_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -1638,6 +1843,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r0\"",
   "full_path": "radiation/vacuum_toroidal_field/r0_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  }

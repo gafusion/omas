@@ -14,6 +14,7 @@
   "data_type": "struct_array",
   "documentation": "Set of channels (lines-of-sight)",
   "full_path": "interferometer/channel(i1)",
+  "lifecycle_status": "alpha",
   "maxoccur": "15",
   "structure_reference": "interferometer_channel"
  },
@@ -21,24 +22,28 @@
   "data_type": "STR_0D",
   "documentation": "ID of the channel",
   "full_path": "interferometer/channel(i1)/identifier",
+  "lifecycle_status": "alpha",
   "type": "static"
  },
  "interferometer.channel[:].line_of_sight": {
   "data_type": "structure",
   "documentation": "Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
   "full_path": "interferometer/channel(i1)/line_of_sight",
+  "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_3points"
  },
  "interferometer.channel[:].line_of_sight.first_point": {
   "data_type": "structure",
   "documentation": "Position of the first point",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point",
+  "lifecycle_status": "alpha",
   "structure_reference": "rzphi0d_static"
  },
  "interferometer.channel[:].line_of_sight.first_point.phi": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -46,12 +51,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.first_point.phi_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -59,6 +66,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/phi_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -66,6 +74,7 @@
   "data_type": "FLT_0D",
   "documentation": "Major radius",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -73,12 +82,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.first_point.r_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -86,6 +97,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/r_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -93,6 +105,7 @@
   "data_type": "FLT_0D",
   "documentation": "Height",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -100,12 +113,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.first_point.z_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -113,6 +128,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/first_point/z_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -120,12 +136,14 @@
   "data_type": "structure",
   "documentation": "Position of the second point",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point",
+  "lifecycle_status": "alpha",
   "structure_reference": "rzphi0d_static"
  },
  "interferometer.channel[:].line_of_sight.second_point.phi": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -133,12 +151,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.second_point.phi_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -146,6 +166,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/phi_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -153,6 +174,7 @@
   "data_type": "FLT_0D",
   "documentation": "Major radius",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -160,12 +182,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.second_point.r_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -173,6 +197,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/r_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -180,6 +205,7 @@
   "data_type": "FLT_0D",
   "documentation": "Height",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -187,12 +213,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.second_point.z_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -200,6 +228,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/second_point/z_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -207,12 +236,14 @@
   "data_type": "structure",
   "documentation": "Position of the third point",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point",
+  "lifecycle_status": "alpha",
   "structure_reference": "rzphi0d_static"
  },
  "interferometer.channel[:].line_of_sight.third_point.phi": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -220,12 +251,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.third_point.phi_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -233,6 +266,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phi\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/phi_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "rad"
  },
@@ -240,6 +274,7 @@
   "data_type": "FLT_0D",
   "documentation": "Major radius",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -247,12 +282,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.third_point.r_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -260,6 +297,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/r_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -267,6 +305,7 @@
   "data_type": "FLT_0D",
   "documentation": "Height",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -274,12 +313,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].line_of_sight.third_point.z_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -287,6 +328,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "interferometer/channel(i1)/line_of_sight/third_point/z_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -294,6 +336,7 @@
   "data_type": "structure",
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
   "full_path": "interferometer/channel(i1)/n_e_line",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "interferometer.channel[:].n_e_line.data": {
@@ -303,6 +346,7 @@
   "data_type": "FLT_1D",
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
   "full_path": "interferometer/channel(i1)/n_e_line/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -310,6 +354,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].n_e_line.data_error_lower": {
@@ -319,6 +364,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -329,6 +375,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -339,12 +386,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/channel(i1)/n_e_line/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.channel[:].n_e_line_average": {
   "data_type": "structure",
   "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "full_path": "interferometer/channel(i1)/n_e_line_average",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "interferometer.channel[:].n_e_line_average.data": {
@@ -354,6 +403,7 @@
   "data_type": "FLT_1D",
   "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -361,6 +411,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].n_e_line_average.data_error_lower": {
@@ -370,6 +421,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -380,6 +432,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -390,30 +443,35 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/channel(i1)/n_e_line_average/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.channel[:].n_e_line_average_validity": {
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the n_e_line_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
   "full_path": "interferometer/channel(i1)/n_e_line_average_validity",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].n_e_line_validity": {
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the n_e_line data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
   "full_path": "interferometer/channel(i1)/n_e_line_validity",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of the channel",
   "full_path": "interferometer/channel(i1)/name",
+  "lifecycle_status": "alpha",
   "type": "static"
  },
  "interferometer.channel[:].path_length_variation": {
   "data_type": "structure",
   "documentation": "Optical path length variation due to the plasma",
   "full_path": "interferometer/channel(i1)/path_length_variation",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "interferometer.channel[:].path_length_variation.data": {
@@ -423,6 +481,7 @@
   "data_type": "FLT_1D",
   "documentation": "Optical path length variation due to the plasma",
   "full_path": "interferometer/channel(i1)/path_length_variation/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -430,6 +489,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "interferometer/channel(i1)/path_length_variation/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].path_length_variation.data_error_lower": {
@@ -439,6 +499,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/path_length_variation/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -449,6 +510,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/path_length_variation/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -459,6 +521,7 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/channel(i1)/path_length_variation/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.channel[:].wavelength": {
@@ -468,6 +531,7 @@
   "data_type": "struct_array",
   "documentation": "Set of wavelengths used for interferometry",
   "full_path": "interferometer/channel(i1)/wavelength(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "2",
   "structure_reference": "interferometer_channel_wavelength_interf"
  },
@@ -478,6 +542,7 @@
   "data_type": "INT_1D",
   "documentation": "Signed number of 2pi phase corrections applied to remove a fringe jump, for each time slice on which a correction has been made ",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/fringe_jump_correction(:)",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].wavelength[:].fringe_jump_correction_times": {
@@ -487,6 +552,7 @@
   "data_type": "FLT_1D",
   "documentation": "List of time slices of the pulse on which a fringe jump correction has been made ",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/fringe_jump_correction_times(:)",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "s"
  },
@@ -494,6 +560,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"fringe_jump_correction_times\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/fringe_jump_correction_times_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].wavelength[:].fringe_jump_correction_times_error_lower": {
@@ -503,6 +570,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"fringe_jump_correction_times\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/fringe_jump_correction_times_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "s"
  },
@@ -513,6 +581,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"fringe_jump_correction_times\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/fringe_jump_correction_times_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "s"
  },
@@ -520,6 +589,7 @@
   "data_type": "structure",
   "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "interferometer.channel[:].wavelength[:].phase_corrected.data": {
@@ -529,6 +599,7 @@
   "data_type": "FLT_1D",
   "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -536,6 +607,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].wavelength[:].phase_corrected.data_error_lower": {
@@ -545,6 +617,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -555,6 +628,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "rad"
  },
@@ -565,12 +639,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.channel[:].wavelength[:].phase_to_n_e_line": {
   "data_type": "FLT_0D",
   "documentation": "Conversion factor to be used to convert phase into line density for this wavelength",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m^-2.rad^-1"
  },
@@ -578,12 +654,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"phase_to_n_e_line\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].wavelength[:].phase_to_n_e_line_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"phase_to_n_e_line\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m^-2.rad^-1"
  },
@@ -591,6 +669,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"phase_to_n_e_line\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_to_n_e_line_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m^-2.rad^-1"
  },
@@ -598,6 +677,7 @@
   "data_type": "FLT_0D",
   "documentation": "Wavelength value",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/value",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -605,12 +685,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.channel[:].wavelength[:].value_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"value\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -618,6 +700,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"value\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/value_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -625,18 +708,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "interferometer/code",
+  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "interferometer.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/code/commit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "interferometer/code/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.code.output_flag": {
@@ -646,66 +732,77 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "interferometer/code/output_flag(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "interferometer/code/parameters",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "interferometer/code/repository",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "interferometer/code/version",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "interferometer/ids_properties",
+  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "interferometer.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "interferometer/ids_properties/comment",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "interferometer/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "interferometer/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "interferometer/ids_properties/provider",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "interferometer/ids_properties/source",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.n_e_volume_average": {
   "data_type": "structure",
   "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
   "full_path": "interferometer/n_e_volume_average",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "interferometer.n_e_volume_average.data": {
@@ -715,6 +812,7 @@
   "data_type": "FLT_1D",
   "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
   "full_path": "interferometer/n_e_volume_average/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -722,6 +820,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "interferometer/n_e_volume_average/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.n_e_volume_average.data_error_lower": {
@@ -731,6 +830,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/n_e_volume_average/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -741,6 +841,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/n_e_volume_average/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -751,12 +852,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/n_e_volume_average/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "interferometer.n_e_volume_average_validity": {
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the n_e_volume_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
   "full_path": "interferometer/n_e_volume_average_validity",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "interferometer.time": {
@@ -766,6 +869,7 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "interferometer/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  }
 }

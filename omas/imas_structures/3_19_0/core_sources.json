@@ -11,18 +11,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "core_sources/code",
+  "lifecycle_status": "active",
   "structure_reference": "code"
  },
  "core_sources.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_sources/code/commit",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "core_sources/code/name",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.code.output_flag": {
@@ -32,60 +35,70 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "core_sources/code/output_flag(:)",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "core_sources/code/parameters",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "core_sources/code/repository",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "core_sources/code/version",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "core_sources/ids_properties",
+  "lifecycle_status": "active",
   "structure_reference": "ids_properties"
  },
  "core_sources.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "core_sources/ids_properties/comment",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "core_sources/ids_properties/creation_date",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "core_sources/ids_properties/homogeneous_time",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "core_sources/ids_properties/provider",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "core_sources/ids_properties/source",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source": {
@@ -95,6 +108,7 @@
   "data_type": "struct_array",
   "documentation": "Set of source terms",
   "full_path": "core_sources/source(i1)",
+  "lifecycle_status": "active",
   "maxoccur": "80",
   "structure_reference": "core_sources_source"
  },
@@ -105,6 +119,7 @@
   "data_type": "struct_array",
   "documentation": "Total source quantities integrated over the plasma volume or surface",
   "full_path": "core_sources/source(i1)/global_quantities(itime)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_global",
   "type": "dynamic"
@@ -113,6 +128,7 @@
   "data_type": "FLT_0D",
   "documentation": "Parallel current driven",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m"
  },
@@ -120,12 +136,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"current_parallel\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].current_parallel_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"current_parallel\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m"
  },
@@ -133,6 +151,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"current_parallel\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m"
  },
@@ -140,12 +159,14 @@
   "data_type": "structure",
   "documentation": "Sources for electrons",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_global_electrons"
  },
  "core_sources.source[:].global_quantities[:].electrons.particles": {
   "data_type": "FLT_0D",
   "documentation": "Electron particle source",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -153,12 +174,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].electrons.particles_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -166,6 +189,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -173,6 +197,7 @@
   "data_type": "FLT_0D",
   "documentation": "Power coupled to electrons",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -180,12 +205,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].electrons.power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -193,6 +220,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -200,6 +228,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power coupled to the plasma",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -207,12 +236,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -220,6 +251,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -227,6 +259,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/time",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s"
  },
@@ -234,6 +267,7 @@
   "data_type": "FLT_0D",
   "documentation": "Toroidal torque",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -241,12 +275,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].torque_tor_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -254,6 +290,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -261,6 +298,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power coupled to ion species (summed over ion  species)",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -268,12 +306,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"total_ion_power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].global_quantities[:].total_ion_power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"total_ion_power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -281,6 +321,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"total_ion_power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -289,24 +330,28 @@
   "doc_identifier": "core_sources/core_source_identifier.xml",
   "documentation": "Source term identifier (process causing this source term)",
   "full_path": "core_sources/source(i1)/identifier",
+  "lifecycle_status": "active",
   "structure_reference": "identifier"
  },
  "core_sources.source[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "core_sources/source(i1)/identifier/description",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "core_sources/source(i1)/identifier/index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "core_sources/source(i1)/identifier/name",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d": {
@@ -316,6 +361,7 @@
   "data_type": "struct_array",
   "documentation": "Source profiles for various time slices. Source terms are positive (resp. negative) when there is a gain (resp. a loss) to the considered channel.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_profiles_1d",
   "type": "dynamic"
@@ -327,6 +373,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel conductivity due to this source",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -334,6 +381,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].conductivity_parallel_error_lower": {
@@ -343,6 +391,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"conductivity_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -353,6 +402,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"conductivity_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -363,6 +413,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel current driven inside the flux surface. Cumulative surface integral of j_parallel",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A"
  },
@@ -370,6 +421,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"current_parallel_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].current_parallel_inside_error_lower": {
@@ -379,6 +431,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_parallel_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A"
  },
@@ -389,6 +442,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_parallel_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A"
  },
@@ -396,6 +450,7 @@
   "data_type": "structure",
   "documentation": "Sources for electrons",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_electrons"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy": {
@@ -405,6 +460,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the electron energy equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -412,6 +468,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for electron energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_energy_decomposed_3"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.explicit_part": {
@@ -421,6 +478,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -428,6 +486,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.explicit_part_error_lower": {
@@ -437,6 +496,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -447,6 +507,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -457,6 +518,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -464,6 +526,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.implicit_part_error_lower": {
@@ -473,6 +536,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -483,6 +547,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -490,6 +555,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_error_lower": {
@@ -499,6 +565,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -509,6 +576,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -519,6 +587,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for electron density equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -526,6 +595,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for electron density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_particles_decomposed_3"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.explicit_part": {
@@ -535,6 +605,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -542,6 +613,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.explicit_part_error_lower": {
@@ -551,6 +623,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -561,6 +634,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -571,6 +645,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -578,6 +653,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.implicit_part_error_lower": {
@@ -587,6 +663,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -597,6 +674,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -604,6 +682,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_error_lower": {
@@ -613,6 +692,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -623,6 +703,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -633,6 +714,7 @@
   "data_type": "FLT_1D",
   "documentation": "Electron source inside the flux surface. Cumulative volume integral of the source term for the electron density equation.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -640,6 +722,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_inside_error_lower": {
@@ -649,6 +732,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -659,6 +743,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -669,6 +754,7 @@
   "data_type": "FLT_1D",
   "documentation": "Power coupled to electrons inside the flux surface. Cumulative volume integral of the source term for the electron energy equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -676,6 +762,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].electrons.power_inside_error_lower": {
@@ -685,6 +772,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -695,6 +783,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -702,6 +791,7 @@
   "data_type": "structure",
   "documentation": "Radial grid",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid",
+  "lifecycle_status": "active",
   "structure_reference": "core_radial_grid"
  },
  "core_sources.source[:].profiles_1d[:].grid.area": {
@@ -711,6 +801,7 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -718,6 +809,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].grid.area_error_lower": {
@@ -727,6 +819,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -737,6 +830,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -747,6 +841,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -754,6 +849,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_error_lower": {
@@ -763,6 +859,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -773,6 +870,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -783,6 +881,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m"
  },
@@ -790,6 +889,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_error_lower": {
@@ -799,6 +899,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m"
  },
@@ -809,6 +910,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m"
  },
@@ -819,6 +921,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
  },
@@ -826,6 +929,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -835,6 +939,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
  },
@@ -845,6 +950,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
  },
@@ -855,6 +961,7 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -862,6 +969,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].grid.volume_error_lower": {
@@ -871,6 +979,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -881,6 +990,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -891,6 +1001,7 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different ions species",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_profiles_1d_ions"
  },
@@ -901,6 +1012,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -908,6 +1020,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -915,12 +1028,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -928,6 +1043,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -935,6 +1051,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -951,6 +1068,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -975,6 +1093,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -982,12 +1101,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -995,6 +1116,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1005,6 +1127,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the ion energy transport equation.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1012,6 +1135,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for ion energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_energy_decomposed_3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.explicit_part": {
@@ -1021,6 +1145,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1028,6 +1153,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.explicit_part_error_lower": {
@@ -1037,6 +1163,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1047,6 +1174,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1057,6 +1185,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1064,6 +1193,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.implicit_part_error_lower": {
@@ -1073,6 +1203,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1083,6 +1214,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1090,6 +1222,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_error_lower": {
@@ -1099,6 +1232,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1109,6 +1243,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1116,12 +1251,14 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum": {
   "data_type": "structure",
   "documentation": "Source term for the ion momentum transport equations along various components (directions)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_components_2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.diamagnetic": {
@@ -1131,6 +1268,7 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1138,6 +1276,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.diamagnetic_error_lower": {
@@ -1147,6 +1286,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1157,6 +1297,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1167,6 +1308,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1174,6 +1316,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.parallel_error_lower": {
@@ -1183,6 +1326,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1193,6 +1337,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1203,6 +1348,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1210,6 +1356,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.poloidal_error_lower": {
@@ -1219,6 +1366,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1229,6 +1377,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1239,6 +1388,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1246,6 +1396,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.radial_error_lower": {
@@ -1255,6 +1406,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1265,6 +1417,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1275,6 +1428,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1282,6 +1436,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for ion toroidal momentum equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_energy_decomposed_4"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.explicit_part": {
@@ -1291,6 +1446,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1298,6 +1454,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.explicit_part_error_lower": {
@@ -1307,6 +1464,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1317,6 +1475,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1327,6 +1486,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1334,6 +1494,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.implicit_part_error_lower": {
@@ -1343,6 +1504,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1353,6 +1515,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1360,6 +1523,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_error_lower": {
@@ -1369,6 +1533,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1379,6 +1544,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1386,12 +1552,14 @@
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/neutral_index",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles": {
@@ -1401,6 +1569,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for ion density equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1408,6 +1577,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for ion density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_particles_decomposed_3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.explicit_part": {
@@ -1417,6 +1587,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1424,6 +1595,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.explicit_part_error_lower": {
@@ -1433,6 +1605,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1443,6 +1616,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1453,6 +1627,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1460,6 +1635,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.implicit_part_error_lower": {
@@ -1469,6 +1645,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1479,6 +1656,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1486,6 +1664,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_error_lower": {
@@ -1495,6 +1674,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1505,6 +1685,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1515,6 +1696,7 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different charge states of the species (ionisation, energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_profiles_1d_ions_charge_states"
  },
@@ -1522,6 +1704,7 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/electron_configuration",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy": {
@@ -1531,6 +1714,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source terms for the charge state energy transport equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1538,6 +1722,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for state energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_energy_decomposed_4"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.explicit_part": {
@@ -1547,6 +1732,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1554,6 +1740,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.explicit_part_error_lower": {
@@ -1563,6 +1750,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1573,6 +1761,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1583,6 +1772,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1590,6 +1780,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.implicit_part_error_lower": {
@@ -1599,6 +1790,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1609,6 +1801,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1616,6 +1809,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_error_lower": {
@@ -1625,6 +1819,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1635,6 +1830,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1650,6 +1846,7 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].neutral_type": {
@@ -1664,18 +1861,21 @@
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/neutral_type/description",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/neutral_type/index",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/neutral_type/name",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles": {
@@ -1685,6 +1885,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the charge state density transport equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1692,6 +1893,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for state density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_particles_decomposed_4"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.explicit_part": {
@@ -1701,6 +1903,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1708,6 +1911,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.explicit_part_error_lower": {
@@ -1717,6 +1921,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1727,6 +1932,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^-3.s^-1"
  },
@@ -1737,6 +1943,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1744,6 +1951,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.implicit_part_error_lower": {
@@ -1753,6 +1961,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1763,6 +1972,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -1770,6 +1980,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_error_lower": {
@@ -1779,6 +1990,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1789,6 +2001,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1796,6 +2009,7 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1803,12 +2017,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1816,6 +2032,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -1823,12 +2040,14 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_mode",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1836,12 +2055,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1849,6 +2070,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1856,6 +2078,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1863,12 +2086,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1876,6 +2101,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1883,6 +2109,7 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1890,12 +2117,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1903,6 +2132,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1913,6 +2143,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel current density source, average(J.B) / B0, where B0 = core_sources/vacuum_toroidal_field/b0 ",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1920,6 +2151,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].j_parallel_error_lower": {
@@ -1929,6 +2161,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1939,6 +2172,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1949,6 +2183,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for total toroidal momentum equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1956,6 +2191,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].momentum_tor_error_lower": {
@@ -1965,6 +2201,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1975,6 +2212,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -1985,6 +2223,7 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different neutral species",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_profiles_1d_neutral"
  },
@@ -1995,6 +2234,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_composition_neutral_element"
  },
@@ -2002,6 +2242,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -2009,12 +2250,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -2022,6 +2265,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Atomic Mass Unit"
  },
@@ -2029,6 +2273,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2045,6 +2290,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -2069,6 +2315,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2076,12 +2323,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2089,6 +2338,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2099,6 +2349,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the neutral energy transport equation.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2106,6 +2357,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].energy_error_lower": {
@@ -2115,6 +2367,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2125,6 +2378,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2132,18 +2386,21 @@
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding ion species in the ../../ion array",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/ion_index",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].label": {
   "data_type": "STR_0D",
   "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].particles": {
@@ -2153,6 +2410,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for neutral density equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2160,6 +2418,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].particles_error_lower": {
@@ -2169,6 +2428,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2179,6 +2439,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2189,6 +2450,7 @@
   "data_type": "struct_array",
   "documentation": "Source terms related to the different charge states of the species (energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)",
+  "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_sources_source_profiles_1d_neutral_state"
  },
@@ -2196,6 +2458,7 @@
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/electron_configuration",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].energy": {
@@ -2205,6 +2468,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source terms for the state energy transport equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2212,6 +2476,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].energy_error_lower": {
@@ -2221,6 +2486,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2231,6 +2497,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2238,6 +2505,7 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].neutral_type": {
@@ -2245,24 +2513,28 @@
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type",
+  "lifecycle_status": "active",
   "structure_reference": "identifier"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/description",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type/name",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].particles": {
@@ -2272,6 +2544,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the state density transport equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2279,6 +2552,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].particles_error_lower": {
@@ -2288,6 +2562,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2298,6 +2573,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -2305,6 +2581,7 @@
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2312,12 +2589,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_lower",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2325,6 +2604,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_upper",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
@@ -2332,12 +2612,14 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_mode",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].time": {
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/time",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s"
  },
@@ -2348,6 +2630,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal torque inside the flux surface. Cumulative volume integral of the source term for the total toroidal momentum equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -2355,6 +2638,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"torque_tor_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].torque_tor_inside_error_lower": {
@@ -2364,6 +2648,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"torque_tor_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -2374,6 +2659,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"torque_tor_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^2.s^-2"
  },
@@ -2384,6 +2670,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the total (summed over ion  species) energy equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2391,6 +2678,7 @@
   "data_type": "structure",
   "documentation": "Decomposition of the source term for total ion energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed",
+  "lifecycle_status": "active",
   "structure_reference": "core_sources_source_profiles_1d_energy_decomposed_3"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.explicit_part": {
@@ -2400,6 +2688,7 @@
   "data_type": "FLT_1D",
   "documentation": "Explicit part of the source term",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2407,6 +2696,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.explicit_part_error_lower": {
@@ -2416,6 +2706,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2426,6 +2717,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2436,6 +2728,7 @@
   "data_type": "FLT_1D",
   "documentation": "Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -2443,6 +2736,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.implicit_part_error_lower": {
@@ -2452,6 +2746,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -2462,6 +2757,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -2469,6 +2765,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"total_ion_energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_error_lower": {
@@ -2478,6 +2775,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"total_ion_energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2488,6 +2786,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"total_ion_energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -2498,6 +2797,7 @@
   "data_type": "FLT_1D",
   "documentation": "Total power coupled to ion species (summed over ion  species) inside the flux surface. Cumulative volume integral of the source term for the total ion energy equation",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -2505,6 +2805,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"total_ion_power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_power_inside_error_lower": {
@@ -2514,6 +2815,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"total_ion_power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -2524,6 +2826,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"total_ion_power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "W"
  },
@@ -2531,12 +2834,14 @@
   "data_type": "structure",
   "documentation": "Species causing this source term (if relevant, e.g. a particular ion or neutral state in case of line radiation)",
   "full_path": "core_sources/source(i1)/species",
+  "lifecycle_status": "active",
   "structure_reference": "distribution_species"
  },
  "core_sources.source[:].species.ion": {
   "data_type": "structure",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "core_sources/source(i1)/species/ion",
+  "lifecycle_status": "active",
   "structure_reference": "plasma_composition_ions_constant"
  },
  "core_sources.source[:].species.ion.element": {
@@ -2546,6 +2851,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)",
+  "lifecycle_status": "active",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -2553,6 +2859,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2560,12 +2867,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2573,6 +2882,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2580,6 +2890,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/atoms_n",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2596,6 +2907,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].multiplicity_error_lower": {
@@ -2620,6 +2932,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2627,12 +2940,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2640,6 +2955,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2647,30 +2963,35 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "core_sources/source(i1)/species/ion/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state": {
   "data_type": "structure",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/species/ion/state",
+  "lifecycle_status": "active",
   "structure_reference": "plasma_composition_ion_state_constant"
  },
  "core_sources.source[:].species.ion.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "core_sources/source(i1)/species/ion/state/electron_configuration",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "core_sources/source(i1)/species/ion/state/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2678,12 +2999,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2691,6 +3014,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2698,12 +3022,14 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_mode",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle (equal to z_min if no bundle)",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2711,12 +3037,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2724,6 +3052,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2731,6 +3060,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2738,12 +3068,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2751,6 +3083,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2758,6 +3091,7 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "core_sources/source(i1)/species/ion/z_ion",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2765,12 +3099,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/species/ion/z_ion_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "core_sources/source(i1)/species/ion/z_ion_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2778,6 +3114,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "core_sources/source(i1)/species/ion/z_ion_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2785,6 +3122,7 @@
   "data_type": "structure",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "core_sources/source(i1)/species/neutral",
+  "lifecycle_status": "active",
   "structure_reference": "plasma_composition_neutral_constant"
  },
  "core_sources.source[:].species.neutral.element": {
@@ -2794,6 +3132,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)",
+  "lifecycle_status": "active",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -2801,6 +3140,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2808,12 +3148,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2821,6 +3163,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -2828,6 +3171,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/atoms_n",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2844,6 +3188,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].multiplicity_error_lower": {
@@ -2868,6 +3213,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2875,12 +3221,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2888,6 +3236,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2895,24 +3244,28 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "core_sources/source(i1)/species/neutral/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state": {
   "data_type": "structure",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/species/neutral/state",
+  "lifecycle_status": "active",
   "structure_reference": "plasma_composition_neutral_state_constant"
  },
  "core_sources.source[:].species.neutral.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "core_sources/source(i1)/species/neutral/state/electron_configuration",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying neutral state ",
   "full_path": "core_sources/source(i1)/species/neutral/state/label",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.neutral_type": {
@@ -2920,30 +3273,35 @@
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "core_sources/source(i1)/species/neutral/state/neutral_type",
+  "lifecycle_status": "active",
   "structure_reference": "identifier"
  },
  "core_sources.source[:].species.neutral.state.neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "core_sources/source(i1)/species/neutral/state/neutral_type/description",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "core_sources/source(i1)/species/neutral/state/neutral_type/index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "core_sources/source(i1)/species/neutral/state/neutral_type/name",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2951,12 +3309,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2964,6 +3324,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -2971,6 +3332,7 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_mode",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.type": {
@@ -2978,24 +3340,28 @@
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon",
   "full_path": "core_sources/source(i1)/species/type",
+  "lifecycle_status": "active",
   "structure_reference": "identifier"
  },
  "core_sources.source[:].species.type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "core_sources/source(i1)/species/type/description",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "core_sources/source(i1)/species/type/index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.source[:].species.type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "core_sources/source(i1)/species/type/name",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.time": {
@@ -3005,12 +3371,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "core_sources/time(:)",
+  "lifecycle_status": "active",
   "type": "dynamic"
  },
  "core_sources.vacuum_toroidal_field": {
   "data_type": "structure",
   "documentation": "Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)",
   "full_path": "core_sources/vacuum_toroidal_field",
+  "lifecycle_status": "active",
   "structure_reference": "b_tor_vacuum_1"
  },
  "core_sources.vacuum_toroidal_field.b0": {
@@ -3020,6 +3388,7 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "core_sources/vacuum_toroidal_field/b0(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "T"
  },
@@ -3027,6 +3396,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_sources/vacuum_toroidal_field/b0_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.vacuum_toroidal_field.b0_error_lower": {
@@ -3036,6 +3406,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "full_path": "core_sources/vacuum_toroidal_field/b0_error_lower(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "T"
  },
@@ -3046,6 +3417,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "full_path": "core_sources/vacuum_toroidal_field/b0_error_upper(:)",
+  "lifecycle_status": "active",
   "type": "dynamic",
   "units": "T"
  },
@@ -3053,6 +3425,7 @@
   "data_type": "FLT_0D",
   "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
   "full_path": "core_sources/vacuum_toroidal_field/r0",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "m"
  },
@@ -3060,12 +3433,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_sources/vacuum_toroidal_field/r0_error_index",
+  "lifecycle_status": "active",
   "type": "constant"
  },
  "core_sources.vacuum_toroidal_field.r0_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r0\"",
   "full_path": "core_sources/vacuum_toroidal_field/r0_error_lower",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "m"
  },
@@ -3073,6 +3448,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r0\"",
   "full_path": "core_sources/vacuum_toroidal_field/r0_error_upper",
+  "lifecycle_status": "active",
   "type": "constant",
   "units": "m"
  }

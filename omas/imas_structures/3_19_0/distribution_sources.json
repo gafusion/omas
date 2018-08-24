@@ -11,18 +11,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "distribution_sources/code",
+  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "distribution_sources.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/code/commit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "distribution_sources/code/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.code.output_flag": {
@@ -32,66 +35,77 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "distribution_sources/code/output_flag(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "distribution_sources/code/parameters",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "distribution_sources/code/repository",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "distribution_sources/code/version",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "distribution_sources/ids_properties",
+  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "distribution_sources.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "distribution_sources/ids_properties/comment",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "distribution_sources/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "distribution_sources/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "distribution_sources/ids_properties/provider",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "distribution_sources/ids_properties/source",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.magnetic_axis": {
   "data_type": "structure",
   "documentation": "Magnetic axis position (used to define a poloidal angle for the 2D profiles)",
   "full_path": "distribution_sources/magnetic_axis",
+  "lifecycle_status": "alpha",
   "structure_reference": "rz1d_dynamic_1"
  },
  "distribution_sources.magnetic_axis.r": {
@@ -101,6 +115,7 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "full_path": "distribution_sources/magnetic_axis/r(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -108,6 +123,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "distribution_sources/magnetic_axis/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.magnetic_axis.r_error_lower": {
@@ -117,6 +133,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "full_path": "distribution_sources/magnetic_axis/r_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -127,6 +144,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "full_path": "distribution_sources/magnetic_axis/r_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -137,6 +155,7 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "full_path": "distribution_sources/magnetic_axis/z(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -144,6 +163,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "distribution_sources/magnetic_axis/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.magnetic_axis.z_error_lower": {
@@ -153,6 +173,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "full_path": "distribution_sources/magnetic_axis/z_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -163,6 +184,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "full_path": "distribution_sources/magnetic_axis/z_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -173,6 +195,7 @@
   "data_type": "struct_array",
   "documentation": "Set of source/sink terms. A source/sink term corresponds to the particle source due to an NBI injection unit, a nuclear reaction or any combination of them (described in \"identifier\")",
   "full_path": "distribution_sources/source(i1)",
+  "lifecycle_status": "alpha",
   "maxoccur": "33",
   "structure_reference": "distribution_sources_source"
  },
@@ -183,6 +206,7 @@
   "data_type": "struct_array",
   "documentation": "Source terms in phase space (real space, velocity space, spin state), represented using the ggd, for various time slices",
   "full_path": "distribution_sources/source(i1)/ggd(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_ggd",
   "type": "dynamic"
@@ -194,12 +218,14 @@
   "data_type": "INT_1D",
   "documentation": "List of indices of grid spaces (refers to ../grid/space) for which the source is discretely distributed. For example consider a source of 3.5 MeV alpha particles provided on a grid with two coordinates (spaces); rho_tor and energy. To specify that the source is given at energies exactly equal to 3.5 MeV, let discret have length 1 and set discrete(1)=2 since energy is dimension number 2. The source is then proportional to delta( 1 - energy / 3.5MeV ), where delta is the direct delta distribution. Discrete dimensions can only be used when the grid is rectangular.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/discrete(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid": {
   "data_type": "structure",
   "documentation": "Grid description",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid",
+  "lifecycle_status": "alpha",
   "structure_reference": "generic_grid_dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset": {
@@ -209,6 +235,7 @@
   "data_type": "struct_array",
   "documentation": "Grid subsets",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset"
  },
@@ -219,6 +246,7 @@
   "data_type": "struct_array",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_metric"
  },
@@ -229,6 +257,7 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -236,6 +265,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].jacobian_error_lower": {
@@ -245,6 +275,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -255,6 +286,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -267,6 +299,7 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -274,6 +307,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_lower": {
@@ -285,6 +319,7 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -297,6 +332,7 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -309,6 +345,7 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -316,6 +353,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_lower": {
@@ -327,6 +365,7 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -339,6 +378,7 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -346,6 +386,7 @@
   "data_type": "INT_0D",
   "documentation": "Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/dimension",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element": {
@@ -355,6 +396,7 @@
   "data_type": "struct_array",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_element"
  },
@@ -365,6 +407,7 @@
   "data_type": "struct_array",
   "documentation": "Set of objects defining the element",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_grid_subset_element_object"
  },
@@ -372,48 +415,56 @@
   "data_type": "INT_0D",
   "documentation": "Dimension of the object",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)/dimension",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element[:].object[:].index": {
   "data_type": "INT_0D",
   "documentation": "Object index",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element[:].object[:].space": {
   "data_type": "INT_0D",
   "documentation": "Index of the space from which that object is taken",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)/space",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier": {
   "data_type": "structure",
   "documentation": "Grid subset identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier/description",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier/name",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric": {
   "data_type": "structure",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric",
+  "lifecycle_status": "alpha",
   "structure_reference": "generic_grid_dynamic_grid_subset_metric"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.jacobian": {
@@ -423,6 +474,7 @@
   "data_type": "FLT_1D",
   "documentation": "Metric Jacobian",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -430,6 +482,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.jacobian_error_lower": {
@@ -439,6 +492,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -449,6 +503,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -461,6 +516,7 @@
   "data_type": "FLT_3D",
   "documentation": "Contravariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -468,6 +524,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_lower": {
@@ -479,6 +536,7 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -491,6 +549,7 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -503,6 +562,7 @@
   "data_type": "FLT_3D",
   "documentation": "Covariant metric tensor, given on each element of the subgrid (first dimension)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -510,6 +570,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_lower": {
@@ -521,6 +582,7 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -533,6 +595,7 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -540,24 +603,28 @@
   "data_type": "structure",
   "documentation": "Grid identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/identifier",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "distribution_sources.source[:].ggd[:].grid.identifier.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/identifier/description",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.identifier.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/identifier/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.identifier.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/identifier/name",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space": {
@@ -567,6 +634,7 @@
   "data_type": "struct_array",
   "documentation": "Set of grid spaces",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space"
  },
@@ -577,30 +645,35 @@
   "data_type": "INT_1D",
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/coordinates_type(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].geometry_type": {
   "data_type": "structure",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/geometry_type",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].geometry_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/geometry_type/description",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].geometry_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/geometry_type/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].geometry_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/geometry_type/name",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension": {
@@ -610,6 +683,7 @@
   "data_type": "struct_array",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension"
  },
@@ -620,6 +694,7 @@
   "data_type": "struct_array",
   "documentation": "Set of objects for a given dimension",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension_object"
  },
@@ -630,6 +705,7 @@
   "data_type": "struct_array",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_dynamic_space_dimension_object_boundary"
  },
@@ -637,6 +713,7 @@
   "data_type": "INT_0D",
   "documentation": "Index of this (n-1)-dimensional boundary object",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].boundary[:].neighbours": {
@@ -646,6 +723,7 @@
   "data_type": "INT_1D",
   "documentation": "List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)/neighbours(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry": {
@@ -655,6 +733,7 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -662,6 +741,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_lower": {
@@ -671,6 +751,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"geometry\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -681,6 +762,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"geometry\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -688,6 +770,7 @@
   "data_type": "FLT_0D",
   "documentation": "Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -695,12 +778,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measure\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -708,6 +793,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measure\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^dimension"
  },
@@ -718,6 +804,7 @@
   "data_type": "INT_1D",
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/nodes(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].particles": {
@@ -727,6 +814,7 @@
   "data_type": "struct_array",
   "documentation": "Source density of particles in phase space, for various grid subsets",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
@@ -739,6 +827,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -746,6 +835,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/coefficients_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].particles[:].coefficients_error_lower": {
@@ -756,6 +846,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -767,6 +858,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -774,12 +866,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/grid_index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].particles[:].values": {
@@ -789,6 +883,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/values(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -796,6 +891,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/values_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].ggd[:].particles[:].values_error_lower": {
@@ -805,6 +901,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -815,6 +912,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
@@ -822,6 +920,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -832,6 +931,7 @@
   "data_type": "struct_array",
   "documentation": "Global quantities for various time slices",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_global_quantities",
   "type": "dynamic"
@@ -840,6 +940,7 @@
   "data_type": "FLT_0D",
   "documentation": "Particle source rate",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/particles",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -847,12 +948,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/particles_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].particles_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/particles_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -860,6 +963,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/particles_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -867,6 +971,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total power of the source",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/power",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -874,12 +979,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/power_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/power_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -887,6 +994,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/power_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -894,12 +1002,14 @@
   "data_type": "structure",
   "documentation": "Shinethrough losses",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough",
+  "lifecycle_status": "alpha",
   "structure_reference": "distribution_sources_source_global_shinethrough"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.particles": {
   "data_type": "FLT_0D",
   "documentation": "Particle losses due to shinethrough",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/particles",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -907,12 +1017,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/particles_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.particles_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/particles_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -920,6 +1032,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/particles_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -927,6 +1040,7 @@
   "data_type": "FLT_0D",
   "documentation": "Power losses due to shinethrough",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/power",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -934,12 +1048,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/power_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.power_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/power_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -947,6 +1063,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/power_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W"
  },
@@ -954,6 +1071,7 @@
   "data_type": "FLT_0D",
   "documentation": "Toroidal torque losses due to shinethrough",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -961,12 +1079,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.torque_tor_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -974,6 +1094,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -981,6 +1102,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -988,6 +1110,7 @@
   "data_type": "FLT_0D",
   "documentation": "Total toroidal torque of the source",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -995,12 +1118,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].global_quantities[:].torque_tor_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_lower",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1008,6 +1133,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_upper",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1015,6 +1141,7 @@
   "data_type": "INT_0D",
   "documentation": "Defines how to interpret the spatial coordinates: 1 = given at the actual particle birth point; 2 =given at the gyro centre of the birth point",
   "full_path": "distribution_sources/source(i1)/gyro_type",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].markers": {
@@ -1024,6 +1151,7 @@
   "data_type": "struct_array",
   "documentation": "Source given as a group of markers (test particles) born per second, for various time slices",
   "full_path": "distribution_sources/source(i1)/markers(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_markers",
   "type": "dynamic"
@@ -1036,6 +1164,7 @@
   "doc_identifier": "utilities/coordinate_identifier.xml",
   "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "identifier_dynamic_aos3",
   "units": "W.m^-3"
@@ -1044,18 +1173,21 @@
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)/description",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].markers[:].coordinate_identifier[:].index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)/index",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].markers[:].coordinate_identifier[:].name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)/name",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.source[:].markers[:].positions": {
@@ -1066,6 +1198,7 @@
   "data_type": "FLT_2D",
   "documentation": "Position of the markers in the set of coordinates. The first dimension corresponds to the number of markers, the second dimension to the set of coordinates",
   "full_path": "distribution_sources/source(i1)/markers(itime)/positions(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1073,6 +1206,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"positions\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/positions_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].markers[:].positions_error_lower": {
@@ -1083,6 +1217,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"positions\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/positions_error_lower(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1094,6 +1229,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"positions\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/positions_error_upper(:,:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1101,6 +1237,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/markers(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1111,6 +1248,7 @@
   "data_type": "FLT_1D",
   "documentation": "Weight of the markers, i.e. number of real particles represented by each marker. The dimension of the vector correspond to the number of markers",
   "full_path": "distribution_sources/source(i1)/markers(itime)/weights(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1118,6 +1256,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"weights\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/weights_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].markers[:].weights_error_lower": {
@@ -1127,6 +1266,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"weights\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/weights_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1137,6 +1277,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"weights\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/weights_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1147,6 +1288,7 @@
   "data_type": "struct_array",
   "documentation": "Set of processes (NBI units, fusion reactions, ...) that provide the source.",
   "full_path": "distribution_sources/source(i1)/process(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "32",
   "structure_reference": "distribution_process_identifier"
  },
@@ -1154,60 +1296,70 @@
   "data_type": "INT_0D",
   "documentation": "Index of the NBI beamlets group considered. Refers to the \"unit/beamlets_group\" array of the NBI IDS. 0 means sum over all beamlets groups.",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_beamlets_group",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].nbi_energy": {
   "data_type": "structure",
   "documentation": "For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_energy",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "distribution_sources.source[:].process[:].nbi_energy.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_energy/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].nbi_energy.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_energy/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].nbi_energy.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_energy/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].nbi_unit": {
   "data_type": "INT_0D",
   "documentation": "Index of the NBI unit considered. Refers to the \"unit\" array of the NBI IDS. 0 means sum over all NBI units.",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_unit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].reactant_energy": {
   "data_type": "structure",
   "documentation": "For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal",
   "full_path": "distribution_sources/source(i1)/process(i2)/reactant_energy",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "distribution_sources.source[:].process[:].reactant_energy.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/process(i2)/reactant_energy/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].reactant_energy.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/process(i2)/reactant_energy/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].reactant_energy.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/process(i2)/reactant_energy/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].type": {
@@ -1215,24 +1367,28 @@
   "doc_identifier": "utilities/distribution_source_identifier.xml",
   "documentation": "Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes",
   "full_path": "distribution_sources/source(i1)/process(i2)/type",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "distribution_sources.source[:].process[:].type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/process(i2)/type/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/process(i2)/type/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/process(i2)/type/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d": {
@@ -1242,6 +1398,7 @@
   "data_type": "struct_array",
   "documentation": "Source radial profiles (flux surface averaged quantities) for various time slices",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)",
+  "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_profiles_1d",
   "type": "dynamic"
@@ -1253,6 +1410,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the energy transport equation",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/energy(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1260,6 +1418,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/energy_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].energy_error_lower": {
@@ -1269,6 +1428,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"energy\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/energy_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1279,6 +1439,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"energy\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/energy_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -1286,6 +1447,7 @@
   "data_type": "structure",
   "documentation": "Radial grid",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid",
+  "lifecycle_status": "alpha",
   "structure_reference": "core_radial_grid"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.area": {
@@ -1295,6 +1457,7 @@
   "data_type": "FLT_1D",
   "documentation": "Cross-sectional area of the flux surface",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/area(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -1302,6 +1465,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/area_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.area_error_lower": {
@@ -1311,6 +1475,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"area\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/area_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -1321,6 +1486,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"area\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/area_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^2"
  },
@@ -1331,6 +1497,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal magnetic flux",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/psi(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1338,6 +1505,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/psi_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.psi_error_lower": {
@@ -1347,6 +1515,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"psi\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/psi_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1357,6 +1526,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"psi\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/psi_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -1367,6 +1537,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1374,6 +1545,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_error_lower": {
@@ -1383,6 +1555,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1393,6 +1566,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
  },
@@ -1403,6 +1577,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1410,6 +1585,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -1419,6 +1595,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1429,6 +1606,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
  },
@@ -1439,6 +1617,7 @@
   "data_type": "FLT_1D",
   "documentation": "Volume enclosed inside the magnetic surface",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/volume(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -1446,6 +1625,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/volume_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.volume_error_lower": {
@@ -1455,6 +1635,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"volume\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/volume_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -1465,6 +1646,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"volume\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/volume_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m^3"
  },
@@ -1475,6 +1657,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the toroidal momentum equation",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -1482,6 +1665,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].momentum_tor_error_lower": {
@@ -1491,6 +1675,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -1501,6 +1686,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -1511,6 +1697,7 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the density transport equation",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/particles(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1518,6 +1705,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/particles_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].profiles_1d[:].particles_error_lower": {
@@ -1527,6 +1715,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/particles_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1537,6 +1726,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"particles\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/particles_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
@@ -1544,6 +1734,7 @@
   "data_type": "flt_type",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -1551,12 +1742,14 @@
   "data_type": "structure",
   "documentation": "Species injected or consumed by this source/sink",
   "full_path": "distribution_sources/source(i1)/species",
+  "lifecycle_status": "alpha",
   "structure_reference": "distribution_species"
  },
  "distribution_sources.source[:].species.ion": {
   "data_type": "structure",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "distribution_sources/source(i1)/species/ion",
+  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_ions_constant"
  },
  "distribution_sources.source[:].species.ion.element": {
@@ -1566,6 +1759,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -1573,6 +1767,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/a",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1580,12 +1775,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/a_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/a_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1593,6 +1790,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/a_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1600,6 +1798,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/atoms_n",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1616,6 +1815,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.element[:].multiplicity_error_lower": {
@@ -1640,6 +1840,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/z_n",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1647,12 +1848,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/z_n_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1660,6 +1863,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/z_n_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1667,30 +1871,35 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state": {
   "data_type": "structure",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/state",
+  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_ion_state_constant"
  },
  "distribution_sources.source[:].species.ion.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "distribution_sources/source(i1)/species/ion/state/electron_configuration",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_level",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1698,12 +1907,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_level_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_level_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1711,6 +1922,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_level_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1718,12 +1930,14 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_mode",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.z_max": {
   "data_type": "FLT_0D",
   "documentation": "Maximum Z of the charge state bundle (equal to z_min if no bundle)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_max",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1731,12 +1945,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_max_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.z_max_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_max\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_max_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1744,6 +1960,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_max\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_max_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1751,6 +1968,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_min",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1758,12 +1976,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_min_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state.z_min_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_min\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_min_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1771,6 +1991,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_min\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_min_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1778,6 +1999,7 @@
   "data_type": "FLT_0D",
   "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed)",
   "full_path": "distribution_sources/source(i1)/species/ion/z_ion",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1785,12 +2007,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distribution_sources/source(i1)/species/ion/z_ion_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.z_ion_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_ion\"",
   "full_path": "distribution_sources/source(i1)/species/ion/z_ion_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1798,6 +2022,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_ion\"",
   "full_path": "distribution_sources/source(i1)/species/ion/z_ion_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1805,6 +2030,7 @@
   "data_type": "structure",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "distribution_sources/source(i1)/species/neutral",
+  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_neutral_constant"
  },
  "distribution_sources.source[:].species.neutral.element": {
@@ -1814,6 +2040,7 @@
   "data_type": "struct_array",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)",
+  "lifecycle_status": "alpha",
   "maxoccur": "5",
   "structure_reference": "plasma_composition_neutral_element_constant"
  },
@@ -1821,6 +2048,7 @@
   "data_type": "FLT_0D",
   "documentation": "Mass of atom",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/a",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1828,12 +2056,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/a_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.element[:].a_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/a_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1841,6 +2071,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/a_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Atomic Mass Unit"
  },
@@ -1848,6 +2079,7 @@
   "data_type": "INT_0D",
   "documentation": "Number of atoms of this element in the molecule",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/atoms_n",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1864,6 +2096,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.element[:].multiplicity_error_lower": {
@@ -1888,6 +2121,7 @@
   "data_type": "FLT_0D",
   "documentation": "Nuclear charge",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/z_n",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1895,12 +2129,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.element[:].z_n_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/z_n_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1908,6 +2144,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/z_n_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1915,24 +2152,28 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "distribution_sources/source(i1)/species/neutral/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state": {
   "data_type": "structure",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "distribution_sources/source(i1)/species/neutral/state",
+  "lifecycle_status": "alpha",
   "structure_reference": "plasma_composition_neutral_state_constant"
  },
  "distribution_sources.source[:].species.neutral.state.electron_configuration": {
   "data_type": "STR_0D",
   "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/electron_configuration",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.label": {
   "data_type": "STR_0D",
   "documentation": "String identifying neutral state ",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/label",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.neutral_type": {
@@ -1940,30 +2181,35 @@
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/neutral_type",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "distribution_sources.source[:].species.neutral.state.neutral_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/neutral_type/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.neutral_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/neutral_type/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.neutral_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/neutral_type/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.vibrational_level": {
   "data_type": "FLT_0D",
   "documentation": "Vibrational level (can be bundled)",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_level",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1971,12 +2217,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.vibrational_level_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_level_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1984,6 +2232,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_level_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
@@ -1991,6 +2240,7 @@
   "data_type": "STR_0D",
   "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_mode",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.type": {
@@ -1998,24 +2248,28 @@
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon",
   "full_path": "distribution_sources/source(i1)/species/type",
+  "lifecycle_status": "alpha",
   "structure_reference": "identifier"
  },
  "distribution_sources.source[:].species.type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "distribution_sources/source(i1)/species/type/description",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list)",
   "full_path": "distribution_sources/source(i1)/species/type/index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.source[:].species.type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "distribution_sources/source(i1)/species/type/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.time": {
@@ -2025,12 +2279,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "distribution_sources/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.vacuum_toroidal_field": {
   "data_type": "structure",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "distribution_sources/vacuum_toroidal_field",
+  "lifecycle_status": "alpha",
   "structure_reference": "b_tor_vacuum_1"
  },
  "distribution_sources.vacuum_toroidal_field.b0": {
@@ -2040,6 +2296,7 @@
   "data_type": "FLT_1D",
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "distribution_sources/vacuum_toroidal_field/b0(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -2047,6 +2304,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/b0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.vacuum_toroidal_field.b0_error_lower": {
@@ -2056,6 +2314,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/b0_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -2066,6 +2325,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/b0_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -2073,6 +2333,7 @@
   "data_type": "FLT_0D",
   "documentation": "Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)",
   "full_path": "distribution_sources/vacuum_toroidal_field/r0",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -2080,12 +2341,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/r0_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "distribution_sources.vacuum_toroidal_field.r0_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/r0_error_lower",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  },
@@ -2093,6 +2356,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/r0_error_upper",
+  "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
  }

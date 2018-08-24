@@ -11,18 +11,21 @@
   "data_type": "structure",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "iron_core/code",
+  "lifecycle_status": "alpha",
   "structure_reference": "code"
  },
  "iron_core.code.commit": {
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "iron_core/code/commit",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
   "full_path": "iron_core/code/name",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.code.output_flag": {
@@ -32,60 +35,70 @@
   "data_type": "INT_1D",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "iron_core/code/output_flag(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "iron_core.code.parameters": {
   "data_type": "STR_0D",
   "documentation": "List of the code specific parameters in XML format",
   "full_path": "iron_core/code/parameters",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.code.repository": {
   "data_type": "STR_0D",
   "documentation": "URL of software repository",
   "full_path": "iron_core/code/repository",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.code.version": {
   "data_type": "STR_0D",
   "documentation": "Unique version (tag) of software",
   "full_path": "iron_core/code/version",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "iron_core/ids_properties",
+  "lifecycle_status": "alpha",
   "structure_reference": "ids_properties"
  },
  "iron_core.ids_properties.comment": {
   "data_type": "STR_0D",
   "documentation": "Any comment describing the content of this IDS",
   "full_path": "iron_core/ids_properties/comment",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.ids_properties.creation_date": {
   "data_type": "STR_0D",
   "documentation": "Date at which this data has been produced",
   "full_path": "iron_core/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
   "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
   "full_path": "iron_core/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
   "full_path": "iron_core/ids_properties/provider",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.ids_properties.source": {
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "iron_core/ids_properties/source",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment": {
@@ -95,6 +108,7 @@
   "data_type": "struct_array",
   "documentation": "The iron core is describred as a set of segments",
   "full_path": "iron_core/segment(i1)",
+  "lifecycle_status": "alpha",
   "maxoccur": "33",
   "structure_reference": "iron_core_segment"
  },
@@ -105,6 +119,7 @@
   "data_type": "FLT_1D",
   "documentation": "Array of magnetic field values, for each of which the relative permeability is given",
   "full_path": "iron_core/segment(i1)/b_field(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "T"
  },
@@ -112,6 +127,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"b_field\"",
   "full_path": "iron_core/segment(i1)/b_field_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].b_field_error_lower": {
@@ -121,6 +137,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field\"",
   "full_path": "iron_core/segment(i1)/b_field_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "T"
  },
@@ -131,6 +148,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field\"",
   "full_path": "iron_core/segment(i1)/b_field_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "T"
  },
@@ -138,12 +156,14 @@
   "data_type": "structure",
   "documentation": "Cross-sectional shape of the segment",
   "full_path": "iron_core/segment(i1)/geometry",
+  "lifecycle_status": "alpha",
   "structure_reference": "outline_2d_geometry_static"
  },
  "iron_core.segment[:].geometry.arcs_of_circle": {
   "data_type": "structure",
   "documentation": "Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle",
+  "lifecycle_status": "alpha",
   "structure_reference": "arcs_of_circle_static"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.curvature_radii": {
@@ -153,6 +173,7 @@
   "data_type": "FLT_1D",
   "documentation": "Curvature radius of each arc of circle",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/curvature_radii(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -160,6 +181,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"curvature_radii\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/curvature_radii_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.curvature_radii_error_lower": {
@@ -169,6 +191,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"curvature_radii\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/curvature_radii_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -179,6 +202,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"curvature_radii\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/curvature_radii_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -189,6 +213,7 @@
   "data_type": "FLT_1D",
   "documentation": "Major radii of the start point of each arc of circle",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/r(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -196,6 +221,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.r_error_lower": {
@@ -205,6 +231,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/r_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -215,6 +242,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/r_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -225,6 +253,7 @@
   "data_type": "FLT_1D",
   "documentation": "Height of the start point of each arc of circle",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/z(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -232,6 +261,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.z_error_lower": {
@@ -241,6 +271,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/z_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -251,6 +282,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/z_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -258,18 +290,21 @@
   "data_type": "INT_0D",
   "documentation": "Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle') ",
   "full_path": "iron_core/segment(i1)/geometry/geometry_type",
+  "lifecycle_status": "alpha",
   "type": "static"
  },
  "iron_core.segment[:].geometry.oblique": {
   "data_type": "structure",
   "documentation": "Trapezoidal description of the element",
   "full_path": "iron_core/segment(i1)/geometry/oblique",
+  "lifecycle_status": "alpha",
   "structure_reference": "oblique_static"
  },
  "iron_core.segment[:].geometry.oblique.alpha": {
   "data_type": "FLT_0D",
   "documentation": "Inclination of first angle TBD",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -277,12 +312,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.alpha_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"alpha\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -290,6 +327,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"alpha\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -297,6 +335,7 @@
   "data_type": "FLT_0D",
   "documentation": "Inclination of second angle TBD",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -304,12 +343,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.beta_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"beta\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -317,6 +358,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"beta\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -324,6 +366,7 @@
   "data_type": "FLT_0D",
   "documentation": "Length",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -331,12 +374,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.length_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"length\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -344,6 +389,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"length\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -351,6 +397,7 @@
   "data_type": "FLT_0D",
   "documentation": "Geometric centre R",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -358,12 +405,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.r_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -371,6 +420,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -378,6 +428,7 @@
   "data_type": "FLT_0D",
   "documentation": "Thickness",
   "full_path": "iron_core/segment(i1)/geometry/oblique/thickness",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -385,12 +436,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.thickness_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"thickness\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -398,6 +451,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"thickness\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -405,6 +459,7 @@
   "data_type": "FLT_0D",
   "documentation": "Geometric centre Z",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -412,12 +467,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.z_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -425,6 +482,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -432,6 +490,7 @@
   "data_type": "structure",
   "documentation": "Irregular outline of the element",
   "full_path": "iron_core/segment(i1)/geometry/outline",
+  "lifecycle_status": "alpha",
   "structure_reference": "rz1d_static"
  },
  "iron_core.segment[:].geometry.outline.r": {
@@ -441,6 +500,7 @@
   "data_type": "FLT_1D",
   "documentation": "Major radius",
   "full_path": "iron_core/segment(i1)/geometry/outline/r(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -448,6 +508,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.outline.r_error_lower": {
@@ -457,6 +518,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/r_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -467,6 +529,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/r_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -477,6 +540,7 @@
   "data_type": "FLT_1D",
   "documentation": "Height",
   "full_path": "iron_core/segment(i1)/geometry/outline/z(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -484,6 +548,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.outline.z_error_lower": {
@@ -493,6 +558,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/z_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -503,6 +569,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/z_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -510,12 +577,14 @@
   "data_type": "structure",
   "documentation": "Rectangular description of the element",
   "full_path": "iron_core/segment(i1)/geometry/rectangle",
+  "lifecycle_status": "alpha",
   "structure_reference": "rectangle_static"
  },
  "iron_core.segment[:].geometry.rectangle.height": {
   "data_type": "FLT_0D",
   "documentation": "Vertical full height",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/height",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -523,12 +592,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/height_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.height_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"height\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/height_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -536,6 +607,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"height\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/height_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -543,6 +615,7 @@
   "data_type": "FLT_0D",
   "documentation": "Geometric centre R",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/r",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -550,12 +623,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/r_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.r_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/r_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -563,6 +638,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/r_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -570,6 +646,7 @@
   "data_type": "FLT_0D",
   "documentation": "Horizontal full width",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/width",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -577,12 +654,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/width_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.width_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"width\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/width_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -590,6 +669,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"width\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/width_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -597,6 +677,7 @@
   "data_type": "FLT_0D",
   "documentation": "Geometric centre Z",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/z",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -604,12 +685,14 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/z_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.z_error_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/z_error_lower",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -617,6 +700,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/z_error_upper",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
@@ -624,12 +708,14 @@
   "data_type": "STR_0D",
   "documentation": "ID of the segment",
   "full_path": "iron_core/segment(i1)/identifier",
+  "lifecycle_status": "alpha",
   "type": "static"
  },
  "iron_core.segment[:].magnetisation_r": {
   "data_type": "structure",
   "documentation": "Magnetisation M of the iron segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "full_path": "iron_core/segment(i1)/magnetisation_r",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "iron_core.segment[:].magnetisation_r.data": {
@@ -639,6 +725,7 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetisation M of the iron segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "full_path": "iron_core/segment(i1)/magnetisation_r/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -646,6 +733,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_r/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].magnetisation_r.data_error_lower": {
@@ -655,6 +743,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_r/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -665,6 +754,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_r/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -675,12 +765,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "iron_core/segment(i1)/magnetisation_r/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "iron_core.segment[:].magnetisation_z": {
   "data_type": "structure",
   "documentation": "Magnetisation M of the iron segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "full_path": "iron_core/segment(i1)/magnetisation_z",
+  "lifecycle_status": "alpha",
   "structure_reference": ""
  },
  "iron_core.segment[:].magnetisation_z.data": {
@@ -690,6 +782,7 @@
   "data_type": "FLT_1D",
   "documentation": "Magnetisation M of the iron segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;",
   "full_path": "iron_core/segment(i1)/magnetisation_z/data(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -697,6 +790,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_z/data_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].magnetisation_z.data_error_lower": {
@@ -706,6 +800,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_z/data_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -716,6 +811,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_z/data_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
  },
@@ -726,12 +822,14 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "iron_core/segment(i1)/magnetisation_z/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "iron_core.segment[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of the segment",
   "full_path": "iron_core/segment(i1)/name",
+  "lifecycle_status": "alpha",
   "type": "static"
  },
  "iron_core.segment[:].permeability_relative": {
@@ -741,6 +839,7 @@
   "data_type": "FLT_1D",
   "documentation": "Relative permeability of the iron segment",
   "full_path": "iron_core/segment(i1)/permeability_relative(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
  },
@@ -748,6 +847,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"permeability_relative\"",
   "full_path": "iron_core/segment(i1)/permeability_relative_error_index",
+  "lifecycle_status": "alpha",
   "type": "constant"
  },
  "iron_core.segment[:].permeability_relative_error_lower": {
@@ -757,6 +857,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"permeability_relative\"",
   "full_path": "iron_core/segment(i1)/permeability_relative_error_lower(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
  },
@@ -767,6 +868,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"permeability_relative\"",
   "full_path": "iron_core/segment(i1)/permeability_relative_error_upper(:)",
+  "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
  },
@@ -777,6 +879,7 @@
   "data_type": "flt_1d_type",
   "documentation": "Generic time [s]",
   "full_path": "iron_core/time(:)",
+  "lifecycle_status": "alpha",
   "type": "dynamic"
  }
 }
