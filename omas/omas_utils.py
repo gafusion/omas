@@ -459,7 +459,7 @@ def p2l(key):
 
     key0 = ''.join(key)
     if key0 in _p2l_cache:
-        return _p2l_cache[key0]
+        return copy.deepcopy(_p2l_cache[key0])
 
     if not isinstance(key, (list, tuple)):
         key = str(key).replace('[', '.').replace(']', '').split('.')
@@ -473,7 +473,7 @@ def p2l(key):
 
     if len(_p2l_cache) > 1000:
         _p2l_cache.clear()
-    _p2l_cache[key0] = key
+    _p2l_cache[key0] = copy.deepcopy(key)
 
     return key
 
