@@ -33,9 +33,9 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     '''
 
     ods_2 = core_profiles_pressures(ods, update=update)
-    ods_2 = core_profiles_densities(ods_2, update=update)
-    ods_2 = core_profiles_zeff(ods_2, update=update,
-                               use_electrons_density=use_electrons_density)
+    core_profiles_densities(ods_2, update=True)
+    core_profiles_zeff(ods_2, update=True,
+                       use_electrons_density=use_electrons_density)
     return ods_2
 
 @add_to__ODS__
