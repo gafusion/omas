@@ -172,10 +172,9 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
 
 
 @add_to_ODS
-def profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
+def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
     """
-    Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
-    roughly resemble something similar to a real plasma a little bit.
+    Add sample core_profiles data.
 
     :param ods: ODS instance
 

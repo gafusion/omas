@@ -37,6 +37,7 @@ class TestOmasPlot(unittest.TestCase):
     # Sample data for use in tests
     ods = ODS()
     ods.sample_equilibrium()
+    ods.sample_core_profiles()
 
     x = numpy.linspace(0, 1.6, 25)
     xe = (x[1]-x[0])*0.75 + x * 0
@@ -136,7 +137,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
-        ods2.sample_profiles()
+        ods2.sample_core_profiles()
         ods2.plot_core_profiles_summary(fig=plt.gcf())
         ods2.plot_core_profiles_summary(
             fig=plt.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
@@ -149,10 +150,10 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
-        ods2.sample_profiles()
+        ods2.sample_core_profiles()
         ods2.plot_core_profiles_pressures()
         ods3 = copy.deepcopy(self.ods)
-        ods3.sample_profiles(add_junk_ion=True)
+        ods3.sample_core_profiles(add_junk_ion=True)
         ods3.plot_core_profiles_pressures()
 
     # PF active overlay

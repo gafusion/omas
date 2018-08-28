@@ -55,14 +55,14 @@ class TestOmasPhysics(unittest.TestCase):
 
     def test_core_profiles_pressures(self):
         ods = ODS()
-        ods.sample_profiles(include_pressure=False)
+        ods.sample_core_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=True)
 
         diff = different_ods(ods, ods2)
         assert (not diff)
 
         ods = ODS()
-        ods.sample_profiles(include_pressure=False)
+        ods.sample_core_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=False)
         ods.update(ods2)
 
