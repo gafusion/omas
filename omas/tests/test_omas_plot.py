@@ -122,15 +122,15 @@ class TestOmasPlot(unittest.TestCase):
     # Equilibrium plots
     def test_eqcx(self):
         self.ods.plot_equilibrium_CX()
-        ods2 = ODS().sample_equilibrium(include_phi=True)
+        ods2 = ODS().sample_equilibrium(include_profiles=False, include_phi=True, include_wall=False)
         ods2.plot_equilibrium_CX()  # Should be vs. rho this time
-        ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        ods2.sample_equilibrium(time_index=1, include_profiles=False, include_phi=False, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
         plt.figure('TestOmasPlot.test_eqcx missing wall')
-        ODS().sample_equilibrium(include_wall=False).plot_equilibrium_CX()  # No wall
+        ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()  # No wall
 
     def test_eq_summary(self):
-        ods2 = ODS().sample_equilibrium(include_profiles=True)
-        ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=True)
+        ods2 = ODS().sample_equilibrium(include_phi=False)
+        ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)
         ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
         ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
 
