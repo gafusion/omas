@@ -214,11 +214,22 @@ class ODS(MutableMapping):
         return self._consistency_check
 
     @consistency_check.setter
-    def consistency_check(self, value):
-        self._consistency_check = value
+    def consistency_check(self, consistency_value):
+        self._consistency_check = consistency_value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].consistency_check = value
+                if consistency_value:
+                    structure_key = item if not isinstance(item, int) else ':'
+                    if not self.structure:
+                        # load the json structure file
+                        structure = load_structure(item, imas_version=self.imas_version)[1][item]
+                    else:
+                        structure = self.structure[structure_key]
+                    # assign structure and location information
+                    self[item].structure = structure
+                    self[item].location=l2o([self.location]+[item])
+
+                self[item].consistency_check = consistency_value
 
     @property
     def cocos(self):
@@ -233,7 +244,7 @@ class ODS(MutableMapping):
         return self._cocos
 
     @cocos.setter
-    def cocos(self, value):
+    def cocos(self, cocos_value):
         raise(AttributeError('cocos parameter is readonly!'))
 
     @property
@@ -248,11 +259,11 @@ class ODS(MutableMapping):
         return self._cocosio
 
     @cocosio.setter
-    def cocosio(self, value):
-        self._cocosio = value
+    def cocosio(self, cocosio_value):
+        self._cocosio = cocosio_value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].cocosio = value
+                self[item].cocosio = cocosio_value
 
     @property
     def unitsio(self):
@@ -266,11 +277,11 @@ class ODS(MutableMapping):
         return self._unitsio
 
     @unitsio.setter
-    def unitsio(self, value):
-        self._unitsio = value
+    def unitsio(self, unitsio_value):
+        self._unitsio = unitsio_value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].unitsio = value
+                self[item].unitsio = unitsio_value
 
     @property
     def coordsio(self):
@@ -284,13 +295,13 @@ class ODS(MutableMapping):
         return self._coordsio
 
     @coordsio.setter
-    def coordsio(self, value):
-        if not isinstance(value, (list, tuple)):
-            value = (self, value)
-        self._coordsio = value
+    def coordsio(self, coordsio_value):
+        if not isinstance(coordsio_value, (list, tuple)):
+            coordsio_value = (self, coordsio_value)
+        self._coordsio = coordsio_value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].coordsio = value
+                self[item].coordsio = coordsio_value
 
     @property
     def dynamic_path_creation(self):
@@ -311,11 +322,11 @@ class ODS(MutableMapping):
         return o2u(self.location)
 
     @dynamic_path_creation.setter
-    def dynamic_path_creation(self, value):
-        self._dynamic_path_creation = value
+    def dynamic_path_creation(self, dynamic_path_value):
+        self._dynamic_path_creation = dynamic_path_value
         for item in self.keys():
             if isinstance(self[item], ODS):
-                self[item].dynamic_path_creation = value
+                self[item].dynamic_path_creation = dynamic_path_value
 
     def _validate(self, value, structure):
         """
