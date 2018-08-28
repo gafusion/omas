@@ -357,7 +357,6 @@ class ODS(MutableMapping):
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
-        ulocation = o2u(location)
 
         if self.consistency_check:
             # perform consistency check with IMAS structure
@@ -409,6 +408,7 @@ class ODS(MutableMapping):
 
         # now that all checks are completed we can assign the structure information
         if self.consistency_check and not isinstance(value, ODS):
+            ulocation = o2u(location)
             # handle cocos transformations coming in
             if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
                 value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
