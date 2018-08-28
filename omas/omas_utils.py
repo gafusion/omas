@@ -167,7 +167,12 @@ def json_loader(object_pairs, cls=dict):
 
     :return: ojbect
     """
-    object_pairs = list(map(lambda o: (o[0], o[1]), object_pairs))
+    def convert_int(key):
+        try:
+            return int(key)
+        except ValueError:
+            return key
+    object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
     dct = cls()
     for x, y in object_pairs:
         dct[x] = y
