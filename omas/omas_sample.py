@@ -127,9 +127,7 @@ def misc(ods):
 @add_to_ODS
 def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
     """
-    Expands an ODS by adding a (heavily down-sampled) equilibrium.
-    This function can overwrite existing data if you're not careful.
-    The original is modified, so deepcopy first if you want different ODSs.
+    Add sample equilibrium data.
 
     :param ods: ODS instance
 
@@ -150,7 +148,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
-    eq = load_omas_json(imas_json_dir + '/../samples/sample_eq_ods.json')
+    eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json')
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
     if not include_profiles:
