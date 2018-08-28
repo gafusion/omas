@@ -63,7 +63,7 @@ def printd(*objects, **kw):
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
         printe(*objects, **kw)
         if dump:
-            fb = StringIO.StringIO()
+            fb = StringIO()
             print(*objects[1:], file=fb)
             with open('omas_dump.txt', 'a') as f:
                 f.write(fb.getvalue())
@@ -464,7 +464,7 @@ def p2l(key):
 
     key0 = ''.join(key)
     if key0 in _p2l_cache:
-        return _p2l_cache[key0]
+        return copy.deepcopy(_p2l_cache[key0])
 
     if not isinstance(key, (list, tuple)):
         key = str(key).replace('[', '.').replace(']', '').split('.')
@@ -478,7 +478,7 @@ def p2l(key):
 
     if len(_p2l_cache) > 1000:
         _p2l_cache.clear()
-    _p2l_cache[key0] = key
+    _p2l_cache[key0] = copy.deepcopy(key)
 
     return key
 

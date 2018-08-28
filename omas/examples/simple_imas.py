@@ -6,6 +6,10 @@ Simple IMAS
 Simple script showcasing OMAS writing minimal amount of data to IMAS.
 Also, this script shows the use of 'imas_code_dump' as an `OMAS_DEBUG_TOPIC`,
 which can be useful for debugging purposes.
+
+Prior running this script, the following commands must most likely be typed at the teriminal
+> import imas
+> imasdb ITER
 """
 
 from __future__ import print_function, division, unicode_literals
@@ -30,9 +34,18 @@ ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
 ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3], [4, 5, 6]]
 
 # Save to IMAS
-paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
+print('='*20)
+print(' Writing data to IMAS')
+print('='*20)
+paths = save_omas_imas(ods, machine='ITER', shot=1, new=True, imas_version=os.environ['IMAS_VERSION'])
+
+print(paths)
+
 # Load from IMAS
-ods1 = load_omas_imas(machine='ITER', shot=1)#, paths=paths)
+print('='*20)
+print(' Reading data from IMAS')
+print('='*20)
+ods1 = load_omas_imas(machine='ITER', shot=1, imas_version=os.environ['IMAS_VERSION'], paths=[['equilibrium']])
 
 # check data
 check = different_ods(ods, ods1)

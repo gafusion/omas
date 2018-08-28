@@ -35,10 +35,10 @@ eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
 ods = eq.to_omas()
 
 # save OMAS data structure to IMAS
-paths = save_omas_imas(ods, machine='DIII-D', shot=133221, new=True)
+paths = save_omas_imas(ods, machine='DIII-D', shot=133221, new=True, imas_version=os.environ['IMAS_VERSION'])
 
 # load OMAS data structure from IMAS
-ods1 = load_omas_imas(machine='DIII-D', shot=133221, paths=paths)
+ods1 = load_omas_imas(machine='DIII-D', shot=133221, imas_version=os.environ['IMAS_VERSION'])
 
 # generate gEQDSK file from OMAS data structure
 eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)
