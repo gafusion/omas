@@ -489,11 +489,11 @@ class ODS(MutableMapping):
                 if isinstance(self.omas_data, dict):
                     self.omas_data[key[0]] = value
                 else:
-                    if key[0] >= len(self.omas_data) and self.dynamic_path_creation=='dynamic_array_structures':
+                    if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
                         for item in range(len(self.omas_data), key[0]):
                             ods = ODS()
                             ods.copy_attrs_from(self)
-                            self.omas_data.append(ods)
+                            self[item] = ods
                     if key[0] == len(self.omas_data):
                         self.omas_data.append(value)
                     else:
@@ -830,8 +830,13 @@ class ODS(MutableMapping):
             for item in ods2.paths():
                 self[item] = ods2[item]
         else:
-            for item in ods2.keys():
-                self[item] = ods2[item]
+            try:
+                bkp_dynamic_path_creation = self.dynamic_path_creation
+                self.dynamic_path_creation = 'dynamic_array_structures'
+                for item in ods2.keys():
+                    self[item] = ods2[item]
+            finally:
+                self.dynamic_path_creation = bkp_dynamic_path_creation
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
