@@ -193,50 +193,23 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json')
 
-    ee = constants.e
-
-    prof1d = ods['core_profiles.profiles_1d'][time_index]
-    x = prof1d['grid.rho_tor_norm'] = numpy.linspace(0, 1, nx)
-    prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
-    prof1d['electrons.density_thermal'] = prof1d['electrons.density']
-    prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
-    if include_pressure:
-        prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
-        prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
-
-    prof1d['ion.0.label'] = 'D+'
-    prof1d['ion.0.element.0.z_n'] = 1.0
-    prof1d['ion.0.element.0.atoms_n'] = 1.0
-    prof1d['ion.0.element.0.a'] = 2.
-    prof1d['ion.0.density'] = prof1d['electrons.density'] * 0.6 / prof1d['ion.0.element.0.z_n']
-    prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
-    prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
-    prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
-    if include_pressure:
-        prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
-        prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
-
-    prof1d['ion.1.label'] = 'C+6'
-    prof1d['ion.1.element.0.z_n'] = 6.0
-    prof1d['ion.1.element.0.atoms_n'] = 1.0
-    prof1d['ion.1.element.0.a'] = 12.
-    prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
-    prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
-    prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
-    if include_pressure:
-        prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
-        prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
+    ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d'][0])
+    ods['core_profiles.vacuum_toroidal_field.r0'] = pr['core_profiles.vacuum_toroidal_field.r0']
+    ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, pr['core_profiles.vacuum_toroidal_field.b0'][0])
 
     if add_junk_ion:
-        junki = prof1d['ion.2']
-        junki['density'] = x*0
-        junki['temperature'] = x*0
+        ions = ods['core_profiles.profiles_1d'][time_index]['ion']
+        ions[len(ions)] = copy.deepcopy(ions[len(ions) - 1])
+        for item in ions[len(ions) - 1].flat():
+            ions[len(ions) - 1][item] *= 0
 
-        junkn = prof1d['neutral.0']
-        if include_pressure:
-            junki['pressure'] = x*0
-            junkn['pressure'] = x*0
+    if not include_pressure:
+        for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
+            if 'pres' in item and item in ods:
+                del ods[item]
 
     return ods
 
