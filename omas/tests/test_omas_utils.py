@@ -72,7 +72,7 @@ class TestOmasUtils(unittest.TestCase):
         assert isinstance(diff_prof2, basestring)
         assert 'core_profiles' in diff_prof2
         ods2.sample_core_profiles()
-        ods2['core_profiles.profiles_1d.0.electrons.density'][0] = 1.5212
+        ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
         diff_prof3 = different_ods(ods2, ods3)
         self.printv('  diff_prof3 = {}'.format(diff_prof3))
         assert isinstance(diff_prof3, basestring)
@@ -80,9 +80,8 @@ class TestOmasUtils(unittest.TestCase):
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.ion.0.element.0.a'] = 9.
         diff_prof4 = different_ods(ods2, ods3)
-        self.printv('  diff_prof4 = {}'.format(diff_prof4))
         assert isinstance(diff_prof4, basestring)
-        assert 'value' in diff_prof4
+        assert 'type' in diff_prof4
         ods2.sample_core_profiles()
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
@@ -108,7 +107,7 @@ class TestOmasUtils(unittest.TestCase):
         assert is_numeric(None) is False
 
     def test_remove_parentheses(self):
-        assert remove_parentheses('zoom(blah)what', replace_with='|') == 'zoom|what'
+        assert remove_parentheses('zoom(b(la)h)what', replace_with='|') == 'zoom|what'
 
     def test_closest_index(self):
         # Basic tests
