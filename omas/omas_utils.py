@@ -353,6 +353,22 @@ _info_structures = {}
 
 _coordinates = {}
 
+# extra structures that python modules using omas can define
+# by setting omas.omas_utils._extra_structures equal to a
+# dictionary with the definitions of the quantities that are
+# not (yet) available in IMAS. For example:
+#   omas.omas_utils._extra_structures = {
+#       'equilibrium': {
+#           'equilibrium.time_slice.:.profiles_1d.centroid.r_max': {
+#               "full_path": "equilibrium/time_slices(itime)/profiles_1d/centroid.r_max(:)",
+#               "coordinates": ['equilibrium.time_slice[:].profiles_1d.psi'],
+#               "data_type": "FLT_1D",
+#               "description": "centroid r max",
+#               "units":'m'
+#           }
+#    }
+_extra_structures = {}
+
 def list_structures(imas_version):
     '''
     list names of structures in imas version
@@ -383,11 +399,11 @@ def dict_structures(imas_version):
     return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
 
 
-def load_structure(filename, imas_version=None):
+def load_structure(filename, imas_version):
     """
-    load omas structure from given json filename or
+    load omas structure from given json filename or IDS name
 
-    :param filename: full path or IDS string
+    :param filename: full path to json file or IDS name
 
     :param imas_version: imas version to load the data schema of (optional if filename is a full path)
 
@@ -405,8 +421,18 @@ def load_structure(filename, imas_version=None):
     if filename not in _structures:
         with open(filename, 'r') as f:
             dump_string = f.read()
+        # load flat definitions from json file
         _structures[id] = json.loads(dump_string, object_pairs_hook=json_loader)
         # _structures[id] = pickle.loads(dump_string)
+
+        # add _extra_structures definitions
+        structure_name = os.path.splitext(os.path.split(filename)[1])[0]
+        if structure_name in _extra_structures:
+            for item in _extra_structures[structure_name]:
+                if item not in _structures[id]:
+                    _structures[id][item] = _extra_structures[structure_name][item]
+
+        # generate hierarchical structure
         _structures_dict[id] = {}
         for item in _structures[id]:
             h = _structures_dict[id]
