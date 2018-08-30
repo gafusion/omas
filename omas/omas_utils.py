@@ -350,7 +350,7 @@ _structures = {}
 _structures_dict = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
-
+# dictionary that contains all the coordinates defined within the data dictionary
 _coordinates = {}
 
 # extra structures that python modules using omas can define
