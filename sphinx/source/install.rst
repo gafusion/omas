@@ -3,15 +3,17 @@ Installation
 
 The OMAS library runs on **Python2** and **Python3**.
 
-To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_::
+To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_ (for users)::
 
         sudo pip install omas
 
-To install `OMAS from GitHub <https://github.com/gafusion/omas>`_::
+To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers)::
 
         git clone git@github.com:gafusion/omas.git
         cd omas
-        sudo pip install -e .        # add this `omas` directory to your $PYTHONPATH
+        sudo pip install -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
+                                                                          # [build_structures,build_documentation] options
+                                                                          # install extra packages for development purposes
 
 Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
 
