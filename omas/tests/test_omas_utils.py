@@ -33,7 +33,6 @@ class TestOmasUtils(unittest.TestCase):
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
-    ods = ODS()
     specific_test_version = '3.18.0'
 
     # Utilities for this test
@@ -52,39 +51,38 @@ class TestOmasUtils(unittest.TestCase):
         self.printv('    {} done.'.format(test_name))
 
     def test_different_ods(self):
-        assert different_ods(self.ods, self.ods) is False
+        ods = ODS()
         ods2 = ODS()
         ods2.sample_equilibrium()
-        diff_eq = different_ods(self.ods, ods2)
+        diff_eq = different_ods(ods, ods2)
         self.printv('  diff_eq = {}'.format(diff_eq))
         assert isinstance(diff_eq, basestring)
         assert ('equilibrium' in diff_eq) or ('wall' in diff_eq)
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
-        ods3.sample_profiles()
+        ods3.sample_core_profiles()
         diff_prof = different_ods(ods2, ods3)
         self.printv('  diff_prof = {}'.format(diff_prof))
         assert isinstance(diff_prof, basestring)
         assert isinstance(different_ods(ods3, ods2), basestring)
         assert 'core_profiles' in diff_prof
-        ods2.sample_profiles(include_pressure=False)
+        ods2.sample_core_profiles(include_pressure=False)
         diff_prof2 = different_ods(ods3, ods2)
         self.printv('  diff_prof2 = {}'.format(diff_prof2))
         assert isinstance(diff_prof2, basestring)
         assert 'core_profiles' in diff_prof2
-        ods2.sample_profiles()
-        ods2['core_profiles.profiles_1d.0.electrons.density'][0] = 1.5212
+        ods2.sample_core_profiles()
+        ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
         diff_prof3 = different_ods(ods2, ods3)
         self.printv('  diff_prof3 = {}'.format(diff_prof3))
         assert isinstance(diff_prof3, basestring)
         assert 'value' in diff_prof3
-        ods2.sample_profiles()
+        ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.ion.0.element.0.a'] = 9.
         diff_prof4 = different_ods(ods2, ods3)
-        self.printv('  diff_prof4 = {}'.format(diff_prof4))
         assert isinstance(diff_prof4, basestring)
-        assert 'value' in diff_prof4
-        ods2.sample_profiles()
+        assert 'type' in diff_prof4
+        ods2.sample_core_profiles()
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
         diff_prof5 = different_ods(ods2, ods3)
@@ -109,7 +107,7 @@ class TestOmasUtils(unittest.TestCase):
         assert is_numeric(None) is False
 
     def test_remove_parentheses(self):
-        assert remove_parentheses('zoom(blah)what', replace_with='|') == 'zoom|what'
+        assert remove_parentheses('zoom(b(la)h)what', replace_with='|') == 'zoom|what'
 
     def test_closest_index(self):
         # Basic tests

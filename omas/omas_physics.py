@@ -14,6 +14,31 @@ class constants(object):
     e = 1.6021766208e-19
 
 @add_to__ODS__
+def core_profiles_consistent(ods, update=True, use_electrons_density=False):
+    '''
+    Calls all core_profiles consistency functions including
+      - core_profiles_pressures
+      - core_profiles_densities
+      - core_profiles_zeff
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :param use_electrons_density:
+            denominator is core_profiles.profiles_1d.:.electrons.density
+            instead of sum Z*n_i in Z_eff calculation
+
+    :return: updated ods
+    '''
+
+    ods_2 = core_profiles_pressures(ods, update=update)
+    core_profiles_densities(ods_2, update=True)
+    core_profiles_zeff(ods_2, update=True,
+                       use_electrons_density=use_electrons_density)
+    return ods_2
+
+@add_to__ODS__
 def core_profiles_pressures(ods, update=True):
     '''
     calculates individual ions pressures
@@ -204,13 +229,58 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     return ods_z
 
 @add_to__ODS__
-def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
-                   j_non_inductive=None, j_total = None, j_tor = None):
+def current_from_eq(ods, time_index, set_as='j_ohmic'):
+    """
+    This function sets the currents in ods['core_profiles']['profiles_1d'][time_index]
+    using ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor']
+
+    :param ods: ODS to update in-place
+
+    :param time_index: ODS time index to updated
+
+    :param set_as: which current to set the equilibrium current as
+                   should be 'j_ohmic', j_bootstrap', or 'j_non_inductive'
+
+    """
+
+    rho = ods['equilibrium.time_slice'][time_index]['profiles_1d.rho_tor_norm']
+
+    with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho}):
+        # call all current ohmic to start
+        fsa_invR = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['gm9']
+        JtoR_tot = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor'] * fsa_invR
+        if 'core_profiles.vacuum_toroidal_field.b0' in ods:
+            B0 = ods['core_profiles']['vacuum_toroidal_field']['b0'][time_index]
+        elif 'equilibrium.vacuum_toroidal_field.b0' in ods:
+            R0 = ods['equilibrium']['vacuum_toroidal_field']['r0']
+            B0 = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index]
+            ods['core_profiles']['vacuum_toroidal_field']['r0'] = R0
+            ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, B0)
+
+        JparB_tot = transform_current(rho, JtoR=JtoR_tot,
+                                      equilibrium=ods['equilibrium']['time_slice'][time_index],
+                                      includes_bootstrap=True)
+
+        core_profiles_currents(ods, time_index,
+                               j_ohmic=(set_as == 'j_ohmic') * JparB_tot / B0,
+                               j_bootstrap=(set_as == 'j_bootstrap') * JparB_tot / B0,
+                               j_non_inductive=(set_as in ['j_bootstrap', 'j_non_inductive']) * JparB_tot / B0,
+                               j_total=JparB_tot / B0)
+
+    return
+
+@add_to__ODS__
+def core_profiles_currents(ods, time_index, j_ohmic=None, j_bootstrap=None,
+                                  j_non_inductive=None, j_total = None, j_tor = None):
     """
     This function:
         - Sets the given currents in ods['core_profiles']['profiles_1d'][time_index]
+
         - Updates j_non_inductive, j_total, and/or j_tor if they are not
-            explicitly provided and sufficient information is in the ODS.
+            explicitly provided and either sufficient information is
+            in the ODS or set equal to 'update'
+            (NOTE: `equilibrium` IDS is required for evaluating j_tor)
+
         - Updates integrated currents in ods['core_profiles']['global_quantities']
 
     :param ods: ODS to update in-place
@@ -225,9 +295,11 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
 
     :param j_non_inductive: Non-inductive component of <J.B>/B0
                             Set to ods['core_profiles']['profiles_1d'][time_index]['j_non_inductive']
+                            'update' forces j_non_inductive to be updated with new bootstrap current
 
     :param j_total: Total <J.B>/B0
                     Set to ods['core_profiles']['profiles_1d'][time_index]['j_total']
+                    'update' forces 'j_total' to be updated with new ohmic or non_inductive currents
 
     :param j_tor: Total <Jt/R>/<1/R>
                   Set to ods['core_profiles']['profiles_1d'][time_index]['j_tor']
@@ -245,28 +317,29 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
             j_old[j] = copy.deepcopy(prof1d[j])
 
     # Ohmic current
-    if j_ohmic is not None:
+    if isinstance(j_ohmic, numpy.ndarray):
         prof1d['j_ohmic'] = j_ohmic
 
     # Bootstrap current
-    if j_bootstrap is not None:
+    if isinstance(j_bootstrap, numpy.ndarray):
         prof1d['j_bootstrap'] = j_bootstrap
 
     # Total non-inductive current
-    if j_non_inductive is not None:
+    if isinstance(j_non_inductive, numpy.ndarray):
         # use the provided current
         prof1d['j_non_inductive'] = j_non_inductive
     elif 'j_bootstrap' in prof1d:
         # update j_non_inductive with latest bootstrap current
         if 'j_non_inductive' in prof1d:
-            prof1d['j_non_inductive'] += prof1d['j_bootstrap']
+            if ('j_bootstrap' in j_old) or (j_non_inductive=='update'):
+                prof1d['j_non_inductive'] += prof1d['j_bootstrap']
             if 'j_bootstrap' in j_old:
                 prof1d['j_non_inductive'] -= j_old['j_bootstrap']
         else:
             prof1d['j_non_inductive'] = prof1d['j_bootstrap']
 
     # Total parallel current
-    if j_total is not None:
+    if isinstance(j_total, numpy.ndarray):
         # use the provided current
         prof1d['j_total'] = j_total
     else:
@@ -274,7 +347,8 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
         for j in ['j_ohmic', 'j_non_inductive']:
             if j in prof1d:
                 if 'j_total' in prof1d:
-                    prof1d['j_total'] += prof1d[j]
+                    if (j in j_old) or (j_total == 'update'):
+                        prof1d['j_total'] += prof1d[j]
                     if j in j_old:
                         prof1d['j_total'] -= j_old[j]
                 else:
@@ -285,52 +359,56 @@ def update_current(ods, time_index, j_ohmic=None, j_bootstrap=None,
     if 'core_profiles.vacuum_toroidal_field.b0' in ods:
         B0 = ods['core_profiles']['vacuum_toroidal_field']['b0'][time_index]
     elif 'equilibrium.vacuum_toroidal_field.b0' in ods:
+        R0 = ods['equilibrium']['vacuum_toroidal_field']['r0']
         B0 = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index]
+        ods['core_profiles']['vacuum_toroidal_field']['r0'] = R0
+        ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, B0)
     rho = prof1d['grid']['rho_tor_norm']
+    fsa_invR = numpy.interp(rho, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
 
     # Total toroidal current
-    if j_tor is not None:
+    if isinstance(j_tor, numpy.ndarray):
         # use the provided current
         prof1d['j_tor'] = j_tor
+        if j_total is None:
+            JtoR_tot = j_tor * fsa_invR
+            JparB_tot = transform_current(rho, JtoR=JtoR_tot, equilibrium=eq, includes_bootstrap=True)
+            prof1d['j_total'] = JparB_tot / B0
+
     elif 'j_total' in prof1d:
         # update toroidal current using transformation
-        JparB_tot = prof1d['j_total']*B0
-        JtoR_tot = transform_current(rho, JparB=JparB_tot,
-                                     equilibrium=eq, includes_bootstrap=True)
-        fsa_invR = numpy.interp(rho, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
-        prof1d['j_tor'] = JtoR_tot/fsa_invR
-
+        JparB_tot = prof1d['j_total'] * B0
+        JtoR_tot = transform_current(rho, JparB=JparB_tot, equilibrium=eq, includes_bootstrap=True)
+        prof1d['j_tor'] = JtoR_tot / fsa_invR
 
     # Calculate integrated currents
-    rho_eq   = eq['profiles_1d']['rho_tor_norm']
-    vp       = eq['profiles_1d']['dvolume_dpsi']
-    psi      = eq['profiles_1d']['psi']
+    rho_eq = eq['profiles_1d']['rho_tor_norm']
+    vp = eq['profiles_1d']['dvolume_dpsi']
+    psi = eq['profiles_1d']['psi']
     fsa_invR = eq['profiles_1d']['gm9']
-    with omas_environment(ods,
-                          coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm'%time_index:rho_eq}):
+    with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_eq}):
 
         currents = [('j_bootstrap', 'current_bootstrap', True),
                     ('j_non_inductive', 'current_non_inductive', True),
                     ('j_tor', 'ip', False)]
 
         for Jname, Iname, transform in currents:
-            J = prof1d[Jname]
+            if Jname in prof1d:
+                J = prof1d[Jname]
+            else:
+                J = 0. * rho_eq
             if transform:
                 # transform <J.B>/B0 to <Jt/R>
-                J = transform_current(rho_eq, JparB=J*B0,
-                                      equilibrium=eq, includes_bootstrap=True)
+                J = transform_current(rho_eq, JparB=J * B0, equilibrium=eq, includes_bootstrap=True)
             else:
                 # already <Jt/R>/<1/R>
                 J *= fsa_invR
-
-            ods.set_time_array('core_profiles.global_quantities.%s'%Iname,time_index,
-                               cumtrapz(vp*J,psi)[-1]/(2.*numpy.pi))
-
+            ods.set_time_array('core_profiles.global_quantities.%s' % Iname, time_index,
+                               cumtrapz(vp * J, psi)[-1] / (2. * numpy.pi))
 
     return
 
-def transform_current(rho, JtoR=None, JparB=None,
-                      equilibrium=None, includes_bootstrap=False):
+def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
     """
     Given <Jt/R> returns <J.B>, or vice versa
     Transformation obeys <J.B> = (1/f)*(<B^2>/<1/R^2>)*(<Jt/R> + dp/dpsi*(1 - f^2*<1/R^2>/<B^2>))
@@ -361,19 +439,19 @@ def transform_current(rho, JtoR=None, JparB=None,
 
     cocos = define_cocos(equilibrium.cocosio)
     rho_eq = equilibrium['profiles_1d.rho_tor_norm']
-    fsa_B2    = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm5'])
+    fsa_B2 = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm5'])
     fsa_invR2 = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm1'])
-    f         = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.f'])
-    dpdpsi    = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
+    f = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.f'])
+    dpdpsi = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
 
     # diamagnetic term to get included with bootstrap currrent
-    JtoR_dia = dpdpsi*(1. - fsa_invR2*f**2/fsa_B2)
-    JtoR_dia *= cocos['sigma_Bp']*(2.*numpy.pi)**cocos['exp_Bp']
+    JtoR_dia = dpdpsi * (1. - fsa_invR2 * f ** 2 / fsa_B2)
+    JtoR_dia *= cocos['sigma_Bp'] * (2. * numpy.pi) ** cocos['exp_Bp']
 
     if JtoR is not None:
-        Jout = fsa_B2*(JtoR + includes_bootstrap*JtoR_dia)/(f*fsa_invR2)
+        Jout = fsa_B2 * (JtoR + includes_bootstrap * JtoR_dia) / (f * fsa_invR2)
     elif JparB is not None:
-        Jout = f*fsa_invR2*JparB/fsa_B2 - includes_bootstrap*JtoR_dia
+        Jout = f * fsa_invR2 * JparB / fsa_B2 - includes_bootstrap * JtoR_dia
 
     return Jout
 

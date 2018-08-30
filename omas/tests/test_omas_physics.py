@@ -55,19 +55,17 @@ class TestOmasPhysics(unittest.TestCase):
 
     def test_core_profiles_pressures(self):
         ods = ODS()
-        ods.sample_profiles(include_pressure=False)
+        ods.sample_core_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=True)
-
         diff = different_ods(ods, ods2)
         assert (not diff)
 
-        ods = ODS()
-        ods.sample_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=False)
-        ods.update(ods2)
+        assert(all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')]))
 
-        diff = different_ods(ods, ods2)
-        assert (diff)
+    def test_core_profiles_currents(self):
+        ods = ods_sample()
+        ods.physics_core_profiles_currents(0)
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)

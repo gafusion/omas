@@ -125,10 +125,9 @@ def misc(ods):
 
 
 @add_to_ODS
-def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, include_wall=True):
+def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
     """
-    Expands an ODS by adding a (heavily down-sampled) psi map to it with low precision. This function can overwrite
-    existing data if you're not careful. The original is modified, so deepcopy first if you want different ODSs.
+    Add sample equilibrium data.
 
     :param ods: ODS instance
 
@@ -148,84 +147,34 @@ def equilibrium(ods, time_index=0, include_profiles=False, include_phi=False, in
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
+    from omas import load_omas_json
+    eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json')
 
-    # These arrays were decimated to make them smaller; we don't need something nice looking for these tests and we
-    # don't want to take up space storing huge arrays when little ones will do. Data originally from shot 173225.
-    psi_small = numpy.array([
-        [0.37, 0.22, 0.07, 0.07, 0.17, 0.15, 0.32, 0.63, 0.81, 1.01, 1.13],
-        [0.29, 0.22, 0.24, 0.22, 0.25, 0.33, 0.49, 0.77, 1.08, 1.59, 1.83],
-        [0.53, 0.43, 0.35, 0.26, 0.25, 0.3, 0.44, 0.74, 1.08, 1.72, 2.02],
-        [0.75, 0.56, 0.35, 0.16, 0.03, -0.02, 0.09, 0.36, 0.74, 1.22, 1.69],
-        [0.7, 0.51, 0.24, -0.06, -0.34, -0.53, -0.53, -0.26, 0.21, 0.84, 1.55],
-        [0.72, 0.48, 0.14, -0.26, -0.67, -0.99, -1.08, -0.82, -0.31, 0.42, 1.02],
-        [0.71, 0.47, 0.13, -0.27, -0.68, -1., -1.1, -0.85, -0.35, 0.35, 0.97],
-        [0.62, 0.45, 0.21, -0.07, -0.33, -0.51, -0.52, -0.29, 0.14, 0.7, 1.31],
-        [0.59, 0.48, 0.34, 0.2, 0.09, 0.05, 0.13, 0.38, 0.71, 1.17, 1.5],
-        [0.48, 0.44, 0.43, 0.4, 0.42, 0.46, 0.58, 0.82, 1.11, 1.67, 1.9],
-        [0.46, 0.44, 0.5, 0.55, 0.57, 0.61, 0.72, 0.9, 1.11, 1.46, 1.6],
-    ])
-    grid1_small = numpy.array([0.83, 0.99, 1.15, 1.3, 1.46, 1.62, 1.77, 1.94, 2.09, 2.25, 2.4])
-    grid2_small = numpy.array([-1.58, -1.29, -0.99, -0.69, -0.39, -0.1, 0.2, 0.5, 0.79, 1.1, 1.38])
-    bdry_r_small = numpy.array([1.08, 1.12, 1.27, 1.54, 1.82, 2.03, 2.2, 2.22, 2.07, 1.9, 1.68, 1.45, 1.29, 1.16, 1.1])
-    bdry_z_small = numpy.array([1.00e-03, 5.24e-01, 8.36e-01, 9.42e-01, 8.37e-01, 6.49e-01, 3.46e-01, -9.38e-02,
-                                -4.57e-01, -6.89e-01, -8.93e-01, -1.07e+00, -9.24e-01, -5.16e-01, -1.00e-01])
-    wall_r_small = numpy.array([1.01, 1., 1.01, 1.09, 1.17, 1.2, 1.23, 1.31, 1.37, 1.36, 1.42, 1.5, 1.46, 1.54, 2.05,
-                                2.41, 2.2, 1.64, 1.1, 1.03])
-    wall_z_small = numpy.array([-0., 1.21, 1.12, 1.17, 1.19, 1.17, 1.29, 1.31, 1.32, 1.16, 1.18, 1.23, 1.1, 1.14, 0.81,
-                                0.09, -0.59, -1.27, -1.3, -0.38])
+    phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
+    if not include_profiles:
+        del eq['equilibrium.time_slice.0.profiles_1d']
 
-    ods['equilibrium.time_slice'][time_index]['profiles_1d.psi'] = numpy.linspace(0, 1, 11)
-    ods['equilibrium.time_slice'][time_index]['profiles_1d.pressure'] = (1-numpy.linspace(0, 1, 11))**2
-    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.psi'] = psi_small
-    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim1'] = grid1_small
-    ods['equilibrium.time_slice'][time_index]['profiles_2d.0.grid.dim2'] = grid2_small
-    ods['equilibrium.time_slice'][time_index]['boundary.outline.r'] = bdry_r_small
-    ods['equilibrium.time_slice'][time_index]['boundary.outline.z'] = bdry_z_small
-    ods['equilibrium.time_slice'][time_index]['time'] = 2.0
+    if not include_phi:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0']:
+            del eq['equilibrium.time_slice.0.profiles_1d.phi']
+        del eq['equilibrium.time_slice.0.profiles_2d.0.phi']
+    else:
+        eq['equilibrium.time_slice.0.profiles_1d.phi'] = phi
 
-    ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.r'] = 1.77
-    ods['equilibrium.time_slice'][time_index]['global_quantities.magnetic_axis.z'] = 0.05
+    if not include_wall:
+        del eq['wall']
 
-    if include_profiles:
-        ods['equilibrium.time_slice'][time_index]['profiles_1d.pressure'] = numpy.array([
-            102419.25, 86877.77, 72251.59, 59232.62, 47208.7, 36590.41, 27260.38, 18938.6, 12319.77, 6356.33, 2239.37])
-        ods['equilibrium.time_slice'][time_index]['profiles_1d.q'] = numpy.array([
-            -0.92, -1.08, -1.08, -1.26, -1.32, -1.42, -1.75, -1.68, -2.43, -2.28, -3.75])
-        ods['equilibrium.time_slice'][time_index]['profiles_1d.dpressure_dpsi'] = numpy.array([
-            -89728.68, -82951.89, -75891.34, -69131.76, -62145.72, -55283.47, -48456.6, -41369.76, -34742.06, -27488.37,
-            -20863.08])
-        ods['equilibrium.time_slice'][time_index]['profiles_1d.f_df_dpsi'] = numpy.array([
-            -0.31, -0.27, -0.23, -0.19, -0.15, -0.12, -0.09, -0.07, -0.05, -0.03, -0.02])
-
-    if include_phi:
-        ods['equilibrium.time_slice'][time_index]['profiles_1d.phi'] = numpy.array([
-            1.11e-05, -1.77e-01, -3.77e-01, -5.85e-01, -8.19e-01, -1.07e+00, -1.36e+00, -1.68e+00, -2.05e+00, -2.48e+00,
-            -3.03e+00])
-        ods['equilibrium.time_slice'][time_index]['profiles_2d.0.phi'] = numpy.array([
-            [-4.09, -2.65, -1.87, -1.86, -2.54, -2.63, -4.17, -7.24, -9.35, -11.34, -12.54],
-            [-4.48, -3.37, -3.14, -2.92, -3.3, -4.16, -5.91, -8.89, -12.19, -17.83, -20.1],
-            [-5.97, -5., -4.21, -3.34, -3.42, -4.04, -5.57, -8.7, -12.09, -18.82, -21.72],
-            [-7.06, -5.69, -4., -2.73, -2.19, -2.14, -2.78, -4.74, -7.78, -11.38, -14.28],
-            [-7.25, -5.49, -3.21, -1.79, -1.12, -0.7, -0.76, -1.32, -3.1, -6.86, -11.06],
-            [-7.24, -5.16, -2.74, -1.31, -0.6, -0.06, -0.03, -0.51, -1.16, -4.18, -8.06],
-            [-7.06, -5.12, -2.79, -1.37, -0.65, -0.09, -0.03, -0.45, -1.21, -4.16, -8.42],
-            [-7.17, -5.71, -3.67, -2.17, -1.44, -1.03, -1.07, -1.65, -3.41, -7.17, -11.55],
-            [-7.23, -6.16, -4.88, -3.68, -3., -2.83, -3.31, -4.91, -7.35, -10.69, -13.04],
-            [-6.16, -5.8, -5.57, -5.14, -5.11, -5.38, -6.24, -8.08, -10.29, -14.48, -16.14],
-            [-5.85, -5.73, -5.81, -5.8, -5.95, -6.2, -7., -8.46, -10.1, -12.77, -13.89]])
-
-    if include_wall:
-        ods['wall.description_2d.0.limiter.unit.0.outline.r'] = wall_r_small
-        ods['wall.description_2d.0.limiter.unit.0.outline.z'] = wall_z_small
+    ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
+    ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
+    ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
 
     return ods
 
 
 @add_to_ODS
-def profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
+def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
     """
-    Add made up sample profiles to an ODS. Although made up, the profiles satisfy quasi-neutrality and should very
-    roughly resemble something similar to a real plasma a little bit.
+    Add sample core_profiles data.
 
     :param ods: ODS instance
 
@@ -244,50 +193,23 @@ def profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json')
 
-    ee = constants.e
-
-    prof1d = ods['core_profiles.profiles_1d'][time_index]
-    x = prof1d['grid.rho_tor_norm'] = numpy.linspace(0, 1, nx)
-    prof1d['electrons.density'] = 1e19 * (6.5 - 1.9*x - 4.5*x**7)  # m^-3
-    prof1d['electrons.density_thermal'] = prof1d['electrons.density']
-    prof1d['electrons.temperature'] = 1000 * (4 - 3*x - 0.9*x**9)  # eV
-    if include_pressure:
-        prof1d['electrons.pressure'] = prof1d['electrons.density'] * prof1d['electrons.temperature'] * ee
-        prof1d['electrons.pressure_thermal'] = prof1d['electrons.density_thermal'] * prof1d['electrons.temperature'] * ee
-
-    prof1d['ion.0.label'] = 'D+'
-    prof1d['ion.0.element.0.z_n'] = 1.0
-    prof1d['ion.0.element.0.atoms_n'] = 1.0
-    prof1d['ion.0.element.0.a'] = 2.
-    prof1d['ion.0.density'] = prof1d['electrons.density'] * 0.6 / prof1d['ion.0.element.0.z_n']
-    prof1d['ion.0.density_fast'] = prof1d['ion.0.density'].max() * 0.32 * numpy.exp(-(x**2)/0.3**2/2.)
-    prof1d['ion.0.density_thermal'] = prof1d['ion.0.density'] - prof1d['ion.0.density_fast']
-    prof1d['ion.0.temperature'] = prof1d['electrons.temperature'] * 1.1
-    if include_pressure:
-        prof1d['ion.0.pressure'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density'] * ee
-        prof1d['ion.0.pressure_thermal'] = prof1d['ion.0.temperature'] * prof1d['ion.0.density_thermal'] * ee
-
-    prof1d['ion.1.label'] = 'C+6'
-    prof1d['ion.1.element.0.z_n'] = 6.0
-    prof1d['ion.1.element.0.atoms_n'] = 1.0
-    prof1d['ion.1.element.0.a'] = 12.
-    prof1d['ion.1.density'] = (prof1d['electrons.density'] - prof1d['ion.0.density']) / prof1d['ion.1.element.0.z_n']
-    prof1d['ion.1.density_thermal'] = prof1d['ion.1.density']
-    prof1d['ion.1.temperature'] = prof1d['ion.0.temperature']*0.98
-    if include_pressure:
-        prof1d['ion.1.pressure'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density'] * ee
-        prof1d['ion.1.pressure_thermal'] = prof1d['ion.1.temperature'] * prof1d['ion.1.density_thermal'] * ee
+    ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d'][0])
+    ods['core_profiles.vacuum_toroidal_field.r0'] = pr['core_profiles.vacuum_toroidal_field.r0']
+    ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, pr['core_profiles.vacuum_toroidal_field.b0'][0])
 
     if add_junk_ion:
-        junki = prof1d['ion.2']
-        junki['density'] = x*0
-        junki['temperature'] = x*0
+        ions = ods['core_profiles.profiles_1d'][time_index]['ion']
+        ions[len(ions)] = copy.deepcopy(ions[len(ions) - 1])
+        for item in ions[len(ions) - 1].flat():
+            ions[len(ions) - 1][item] *= 0
 
-        junkn = prof1d['neutral.0']
-        if include_pressure:
-            junki['pressure'] = x*0
-            junkn['pressure'] = x*0
+    if not include_pressure:
+        for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
+            if 'pres' in item and item in ods:
+                del ods[item]
 
     return ods
 

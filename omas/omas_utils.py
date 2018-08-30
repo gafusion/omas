@@ -34,10 +34,10 @@ def different_ods(ods1, ods2):
         elif type(ods1[k]) != type(ods2[k]):
             return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k])) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k])):
+            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
                 return 'DIFF: `%s` differ in value' % k
         else:
-            if not numpy.allclose(ods1[k], ods2[k]):
+            if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
                 return 'DIFF: `%s` differ in value' % k
     return False
 
@@ -167,7 +167,12 @@ def json_loader(object_pairs, cls=dict):
 
     :return: ojbect
     """
-    object_pairs = list(map(lambda o: (o[0], o[1]), object_pairs))
+    def convert_int(key):
+        try:
+            return int(key)
+        except ValueError:
+            return key
+    object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
     dct = cls()
     for x, y in object_pairs:
         dct[x] = y
