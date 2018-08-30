@@ -403,7 +403,8 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                 paths = [[structure] for structure in list_structures(itm_version=itm_version)]
                 if verbose is None:
                     verbose=True
-            joined_paths = map(o2i, paths)
+#            joined_paths = map(o2i, paths)
+            joined_paths = map(l2i, paths)
 
             # fetch relevant CPOs and find available signals
             fetch_paths = []
@@ -423,7 +424,8 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                 if len(getattr(cpo, ds).time):
                     if verbose: print('* ', ds)
                     available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
-                    joined_available_paths = map(o2i, available_paths)
+#                    joined_available_paths = map(o2i, available_paths)
+                    joined_available_paths = map(l2i, available_paths)
                     for jpath, path in zip(joined_paths, paths):
                         if path[0] != ds:
                             continue
@@ -434,7 +436,8 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                                 fetch_paths.append(apath)
                 else:
                     if verbose: print('- ', ds)
-            joined_fetch_paths=map(o2i, fetch_paths)
+#            joined_fetch_paths=map(o2i, fetch_paths)
+            joined_fetch_paths=map(l2i, fetch_paths)
 
             # build omas data structure
             ods = ODS()
