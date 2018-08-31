@@ -258,7 +258,14 @@ def current_from_eq(ods, time_index):
                                       equilibrium=ods['equilibrium']['time_slice'][time_index],
                                       includes_bootstrap=True)
 
-        core_profiles_currents(ods, time_index, j_total=JparB_tot / B0)
+    try:
+        core_profiles_currents(ods, time_index, rho, j_total=JparB_tot / B0)
+    except AssertionError:
+        # redo but wipe out old current components since we can't make it consistent
+        core_profiles_currents(ods, time_index, rho,
+                               j_actuator=None, j_bootstrap=None,
+                               j_ohmic=None, j_non_inductive=None,
+                               j_total=JparB_tot / B0)
 
     return
 
