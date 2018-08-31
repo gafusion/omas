@@ -295,6 +295,9 @@ html_theme_options = {
     # Choose Bootstrap version.
     # Values: "4" or "3" or "2"
     'bootstrap_version': "3",
+
+    # Disable showing the sidebar. Defaults to 'false'
+    'nosidebar': True,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
