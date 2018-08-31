@@ -315,16 +315,23 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
 
     # SETUP DEFAULTS
-    with omas_environment(ods,
-                          coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
+    data = {}
+    with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
         for j in ['j_actuator', 'j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total']:
-            if eval(j) == 'default':
+            if isinstance(eval(j), basestring) and eval(j) == 'default':
                 if j in prof1d:
-                    exec (j + "= copy.deepcopy(prof1d[j])")
+                    data[j] = copy.deepcopy(prof1d[j])
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
-                    j_actuator = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
+                    data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
-                    exec (j + "= None")
+                    data[j] = None
+            else:
+                data[j] = eval(j)
+    j_actuator = data['j_actuator']
+    j_bootstrap = data['j_bootstrap']
+    j_ohmic = data['j_ohmic']
+    j_non_inductive = data['j_non_inductive']
+    j_total = data['j_total']
 
     # =================
     # UPDATE FORWARD
@@ -354,9 +361,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     else:
         # can't do any computations with the equilibrium
         if warn:
-            printe("Warning: ods['equilibrium'] does not exist"
-                   "         Can't convert between j_total and j_tor"
-                   "         or calculate integrated currents")
+            printe("Warning: ods['equilibrium'] does not exist: Can't convert between j_total and j_tor or calculate integrated currents")
         eq = None
 
     # j_tor

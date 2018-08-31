@@ -107,9 +107,9 @@ class TestOmasPhysics(unittest.TestCase):
                 kw = copy.deepcopy(jdef)
                 kw[J1] = Jval
                 kw[J2] = Jval
-                should_RE = ((kw['j_actuator'] != 'default') and
-                             (kw['j_bootstrap'] == 'default') and
-                             (kw['j_non_inductive'] == 'default'))
+                should_RE = ((not isinstance(kw['j_actuator'],basestring) or kw['j_actuator'] != 'default') and
+                             (isinstance(kw['j_bootstrap'],basestring) and kw['j_bootstrap'] == 'default') and
+                             (isinstance(kw['j_non_inductive'],basestring) and kw['j_non_inductive'] == 'default'))
                 CPC(ODS(), kw=kw, should_RE=should_RE)
 
         # Try setting three
