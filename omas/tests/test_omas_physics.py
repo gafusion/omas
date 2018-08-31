@@ -14,6 +14,7 @@ import unittest
 import numpy
 import warnings
 import copy
+import itertools
 
 # Plot imports
 import matplotlib as mpl
@@ -64,8 +65,124 @@ class TestOmasPhysics(unittest.TestCase):
         assert(all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')]))
 
     def test_core_profiles_currents(self):
-        ods = ods_sample()
-        ods.physics_core_profiles_currents(0)
+
+        rho = numpy.linspace(0.,1.,4)
+        Jval = 1e5*numpy.ones(4)
+        jdef = {}
+        Js = ['j_actuator', 'j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total']
+        for j in Js:
+            jdef[j] = 'default'
+
+        def CPC(ods, kw=jdef, should_RE=False, should_AE=False, warn=False):
+
+             try:
+                 core_profiles_currents(ods, 0, rho, warn=warn, **kw)
+             except RuntimeError as err:
+                 if should_RE:
+                     pass
+                 else:
+                     print(repr(kw))
+                     raise err
+             except AssertionError as err:
+                 if should_AE:
+                     pass
+                 else:
+                     print(repr(kw))
+                     raise err
+             else:
+                 if should_RE:
+                     raise RuntimeError("Should have raised RuntimeError but didn't: "+repr(kw))
+                 elif should_AE:
+                     raise AssertionError("Should have raised AssertionError but didn't: "+repr(kw))
+             return
+
+        # Try just setting one
+        for i, J1 in enumerate(Js):
+            kw = copy.deepcopy(jdef)
+            kw[J1] = Jval
+            CPC(ODS(), kw=kw, should_RE=(J1=='j_actuator'))
+
+            # Now try setting two
+            for J2 in Js[i+1:]:
+                kw = copy.deepcopy(jdef)
+                kw[J1] = Jval
+                kw[J2] = Jval
+                should_RE = ((not isinstance(kw['j_actuator'],basestring) or kw['j_actuator'] != 'default') and
+                             (isinstance(kw['j_bootstrap'],basestring) and kw['j_bootstrap'] == 'default') and
+                             (isinstance(kw['j_non_inductive'],basestring) and kw['j_non_inductive'] == 'default'))
+                CPC(ODS(), kw=kw, should_RE=should_RE)
+
+        # Try setting three
+        for keys in list(itertools.combinations(Js,3)):
+            kw = copy.deepcopy(jdef)
+            for key in keys:
+                kw[key] = Jval
+            if (('j_actuator' in keys) and
+                ('j_bootstrap' in keys) and
+                ('j_non_inductive' in keys)):
+                CPC(ODS(), kw=kw, should_AE=True)
+                kw['j_non_inductive'] = 2*Jval
+            elif (('j_non_inductive' in keys) and
+                ('j_ohmic' in keys) and
+                ('j_total' in keys)):
+                CPC(ODS(), kw=kw, should_AE=True)
+                kw['j_total'] = 2*Jval
+            CPC(ODS(), kw=kw)
+
+
+        # Try setting four
+        for dkey, rkey, factor in [('j_total','j_non_inductive',2),
+                                  ('j_ohmic','j_non_inductive',2),
+                                  ('j_non_inductive','j_total',3),
+                                  ('j_bootstrap','j_total',2),
+                                  ('j_actuator','j_total',2)]:
+            kw = copy.deepcopy(jdef)
+            for key in kw.keys():
+                if key != dkey:
+                    kw[key] = Jval
+            CPC(ODS(), kw=kw, should_AE=True)
+            kw[rkey] = factor*Jval
+            CPC(ODS(), kw=kw)
+
+        # Try all 5
+        kw = copy.deepcopy(jdef)
+        for key in Js:
+            kw[key] = Jval
+        CPC(ODS(), kw=kw, should_AE=True)
+        kw['j_non_inductive'] = 2*Jval
+        CPC(ODS(), kw=kw, should_AE=True)
+        kw['j_total'] = 3*Jval
+        CPC(ODS(), kw=kw, warn=True) # just to cover the warn sections
+
+        # Now test with equilibrium and existing quantities
+        ods = ODS().sample_equilibrium()
+        kw = {'j_actuator':Jval,
+              'j_bootstrap':Jval}
+        CPC(ods, kw=kw) #j_ni = 2
+        kw = {'j_bootstrap':2*Jval}
+        CPC(ods, kw=kw, should_AE=True)
+        kw = {'j_bootstrap':2*Jval, 'j_non_inductive':None}
+        CPC(ods, kw=kw)  #j_ni = 3
+        kw = {'j_actuator':1.5*Jval,
+              'j_bootstrap':1.5*Jval}
+        CPC(ods, kw=kw)
+        kw = {'j_bootstrap':2*Jval, 'j_actuator':None}
+        CPC(ods, kw=kw)
+
+        kw = {'j_ohmic':Jval}
+        CPC(ods, kw=kw) # j_total is 4
+        kw = {'j_ohmic':2*Jval}
+        CPC(ods, kw=kw, should_AE=True)
+        kw = {'j_ohmic':2*Jval, 'j_total':None}
+        CPC(ods, kw=kw) # j_total is 5
+        kw = {'j_ohmic':Jval, 'j_non_inductive':None}
+        CPC(ods, kw=kw, should_AE=True)
+        kw = {'j_ohmic':Jval, 'j_non_inductive':None, 'j_actuator':None}
+        CPC(ods, kw=kw) # j_ni is 4
+
+    def test_current_from_eq(self):
+        ods = ODS().sample_equilibrium()
+        current_from_eq(ods, 0)
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
