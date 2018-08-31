@@ -306,7 +306,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
     :param j_total: Total <J.B>/B0
                     Consistency requires j_total = j_ohmic + j_non_inductive
-                      either as explicitly provided or as computed from other components
+                    either as explicitly provided or as computed from other components
 
     """
 
@@ -320,15 +320,15 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
         for j in ['j_actuator', 'j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total']:
             if eval(j) == 'default':
                 if j in prof1d:
-                    exec(j + "= copy.deepcopy(prof1d[j])")
-                elif (j=='j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
+                    exec (j + "= copy.deepcopy(prof1d[j])")
+                elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     j_actuator = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
-                    exec(j + "= None")
+                    exec (j + "= None")
 
-    #=================
+    # =================
     # UPDATE FORWARD
-    #=================
+    # =================
 
     # j_non_inductive
     if (j_actuator is not None) and (j_bootstrap is not None):
@@ -341,7 +341,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
             j_total = j_ohmic + j_non_inductive
 
     # get some quantities we'll use below
-    if 'equilibrium.time_slice.%d'%time_index in ods:
+    if 'equilibrium.time_slice.%d' % time_index in ods:
         eq = ods['equilibrium']['time_slice'][time_index]
         if 'core_profiles.vacuum_toroidal_field.b0' in ods:
             B0 = ods['core_profiles']['vacuum_toroidal_field']['b0'][time_index]
@@ -354,23 +354,22 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     else:
         # can't do any computations with the equilibrium
         if warn:
-            printe("Warning: ods['equilibrium'] does not exist")
-            printe("         Can't convert between j_total and j_tor")
-            printe("         or calculate integrated currents")
+            printe("Warning: ods['equilibrium'] does not exist"
+                   "         Can't convert between j_total and j_tor"
+                   "         or calculate integrated currents")
         eq = None
 
     # j_tor
     if (j_total is not None) and (eq is not None):
         JparB_tot = j_total * B0
-        JtoR_tot = transform_current(rho_tor_norm, JparB=JparB_tot,
-                                     equilibrium=eq, includes_bootstrap=True)
+        JtoR_tot = transform_current(rho_tor_norm, JparB=JparB_tot, equilibrium=eq, includes_bootstrap=True)
         j_tor = JtoR_tot / fsa_invR
     else:
         j_tor = None
 
-    #=================
+    # =================
     # UPDATE BACKWARD
-    #=================
+    # =================
 
     if j_total is not None:
 
@@ -392,58 +391,50 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
         if (j_bootstrap is None) and (j_actuator is not None):
             j_bootstrap = j_non_inductive - j_actuator
 
-
-    #===============
+    # ===============
     # CONSISTENCY?
-    #===============
+    # ===============
 
     if (j_actuator is not None) and (j_bootstrap is None):
         err = "Cannot set j_actuator without j_bootstrap provided or calculable"
         raise RuntimeError(err)
 
-
     # j_non_inductive
     err = 'j_non_inductive inconsistent with j_actuator and j_bootstrap'
-    if (    (j_non_inductive is not None)
-        and ((j_actuator is not None) or (j_bootstrap is not None))):
-        assert numpy.allclose(j_non_inductive,
-                              j_actuator + j_bootstrap), err
+    if ((j_non_inductive is not None) and ((j_actuator is not None) or (j_bootstrap is not None))):
+        assert numpy.allclose(j_non_inductive, j_actuator + j_bootstrap), err
 
     # j_total
     err = 'j_total inconsistent with j_ohmic and j_non_inductive'
-    if (    (j_total is not None)
-        and ((j_ohmic is not None) or (j_non_inductive is not None))):
-        assert numpy.allclose(j_total,
-                              j_ohmic + j_non_inductive), err
+    if ((j_total is not None) and ((j_ohmic is not None) or (j_non_inductive is not None))):
+        assert numpy.allclose(j_total, j_ohmic + j_non_inductive), err
 
     # j_tor
     err = 'j_tor inconsistent with j_total'
     if (j_total is not None) and (j_tor is not None):
         if eq is not None:
             JparB_tot = j_total * B0
-            JtoR_tot = transform_current(rho_tor_norm, JparB=JparB_tot,
-                                         equilibrium=eq, includes_bootstrap=True)
-            assert numpy.allclose(j_tor, JtoR_tot/fsa_invR), err
+            JtoR_tot = transform_current(rho_tor_norm, JparB=JparB_tot, equilibrium=eq, includes_bootstrap=True)
+            assert numpy.allclose(j_tor, JtoR_tot / fsa_invR), err
         else:
             if warn:
                 printe("Warning: ods['equilibrium'] does not exist")
-                printe("         can't determine if "+err)
+                printe("         can't determine if " + err)
 
-    #=============
+    # =============
     # UPDATE ODS
-    #=============
+    # =============
 
-    with omas_environment(ods,
-                          coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
+    with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
         for j in ['j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total', 'j_tor']:
             if eval(j) is not None:
                 prof1d[j] = eval(j)
             elif j in prof1d:
                 del prof1d[j]
 
-    #======================
+    # ======================
     # INTEGRATED CURRENTS
-    #======================
+    # ======================
 
     if eq is None:
         # can't integrate currents without the equilibrium
