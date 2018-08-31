@@ -273,7 +273,7 @@ def current_from_eq(ods, time_index):
 def core_profiles_currents(ods, time_index, rho_tor_norm,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
-                           j_total='default'):
+                           j_total='default', warn=True):
     """
     This function sets currents in ods['core_profiles']['profiles_1d'][time_index]
     If provided currents are inconsistent with each other or ods,
@@ -353,9 +353,10 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
         fsa_invR = numpy.interp(rho_tor_norm, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
     else:
         # can't do any computations with the equilibrium
-        printe("Warning: ods['equilibrium'] does not exist")
-        printe("         Can't convert between j_total and j_tor")
-        printe("         or calculate integrated currents")
+        if warn:
+            printe("Warning: ods['equilibrium'] does not exist")
+            printe("         Can't convert between j_total and j_tor")
+            printe("         or calculate integrated currents")
         eq = None
 
     # j_tor
@@ -424,8 +425,9 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
                                          equilibrium=eq, includes_bootstrap=True)
             assert numpy.allclose(j_tor, JtoR_tot/fsa_invR), err
         else:
-            printe("Warning: ods['equilibrium'] does not exist")
-            printe("         can't determine if "+err)
+            if warn:
+                printe("Warning: ods['equilibrium'] does not exist")
+                printe("         can't determine if "+err)
 
     #=============
     # UPDATE ODS
