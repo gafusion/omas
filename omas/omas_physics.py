@@ -41,7 +41,8 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 @add_to__ODS__
 def core_profiles_pressures(ods, update=True):
     '''
-    calculates individual ions pressures
+    Calculates individual ions pressures
+
         `core_profiles.profiles_1d.:.ion.:.pressure_thermal` #Pressure (thermal) associated with random motion ~average((v-average(v))^2)
         `core_profiles.profiles_1d.:.ion.:.pressure`         #Pressure (thermal+non-thermal)
 
@@ -53,6 +54,7 @@ def core_profiles_pressures(ods, update=True):
         `core_profiles.profiles_1d.:.pressure_parallel`      #Total parallel pressure (electrons+ions, thermal+non-thermal)
 
     NOTE: the fast particles ion pressures are read, not set by this function:
+
         `core_profiles.profiles_1d.:.ion.:.pressure_fast_parallel`      #Pressure (thermal) associated with random motion ~average((v-average(v))^2)
         `core_profiles.profiles_1d.:.ion.:.pressure_fast_perpendicular` #Pressure (thermal+non-thermal)
 
@@ -276,8 +278,9 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
                            j_total='default', warn=True):
     """
     This function sets currents in ods['core_profiles']['profiles_1d'][time_index]
-    If provided currents are inconsistent with each other or ods,
-       ods is not updated and an error is thrown
+
+    If provided currents are inconsistent with each other or ods, ods is not updated and an error is thrown.
+
     Updates integrated currents in ods['core_profiles']['global_quantities']
     (N.B.: `equilibrium` IDS is required for evaluating j_tor and integrated currents)
 
@@ -293,21 +296,19 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
       - None: try to calculate from currents; delete from ods if you can't
 
     :param j_actuator: Non-inductive, non-bootstrap current <J.B>/B0
-                       N.B.: used for calculating other currents and consistency,
-                             but not set in ods
+        N.B.: used for calculating other currents and consistency, but not set in ods
 
     :param j_bootstrap: Bootstrap component of <J.B>/B0
 
     :param j_ohmic: Ohmic component of <J.B>/B0
 
     :param j_non_inductive: Non-inductive component of <J.B>/B0
-                            Consistency requires j_non_inductive = j_actuator + j_bootstrap
-                              either as explicitly provided or as computed from other components
+        Consistency requires j_non_inductive = j_actuator + j_bootstrap, either
+        as explicitly provided or as computed from other components.
 
     :param j_total: Total <J.B>/B0
-                    Consistency requires j_total = j_ohmic + j_non_inductive
-                    either as explicitly provided or as computed from other components
-
+        Consistency requires j_total = j_ohmic + j_non_inductive either as
+        explicitly provided or as computed from other components.
     """
 
     from scipy.integrate import cumtrapz

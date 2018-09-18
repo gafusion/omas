@@ -807,9 +807,9 @@ class ODS(MutableMapping):
     def coordinates(self):
         '''
         return dictionary with coordinates in a given ODS
+
         NOTE: this needs to be a dictionary and not an ODS since a given coordinates may be
-            present only at certain indexes of an arrays of strucutures and an ODS cannot
-            represent that.
+        present only at certain indexes of an arrays of strucutures and an ODS cannot represent that.
 
         :return: dictionary with coordinates
         '''
