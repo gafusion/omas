@@ -12,6 +12,7 @@ scipy                    # required
 Sphinx                   # build_documentation
 sphinx-bootstrap-theme   # build_documentation
 sphinx-gallery           # build_documentation
+Pillow                   # build_documentation
 #pyhdc                   # hdc
 #pyual                   # ual
 #imas                    # imas
