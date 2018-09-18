@@ -354,7 +354,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
 def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                  itm_version=default_itm_version, verbose=None):
+                   itm_version=default_itm_version, verbose=None):
     """
     load OMAS data set from ITM
 
