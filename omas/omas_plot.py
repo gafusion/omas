@@ -701,16 +701,17 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     :param debug_all_plots: bool
         Individual hardware systems are on by default instead of off by default.
 
-    :param \**kw: select plots by setting their names to True; e.g.: if you want the gas_injection plot,
-        set gas_injection=True as a keyword. If debug_all_plots is True, then you can turn off individual plots by,
-        for example, set_gas_injection=False.
+    :param \**kw: additional keywords for selecting plots.
 
-        Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
-        method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
-        to plot, so you can set linestyle, color, etc.
+        - Select plots by setting their names to True; e.g.: if you want the gas_injection plot, set gas_injection=True
+          as a keyword.
+          If debug_all_plots is True, then you can turn off individual plots by, for example, set_gas_injection=False.
 
-        Overlay functions accept these standard keywords:
+        - Instead of True to simply turn on an overlay, you can pass a dict of keywords to pass to a particular overlay
+          method, as in thomson={'labelevery': 5}. After an overlay pops off its keywords, remaining keywords are passed
+          to plot, so you can set linestyle, color, etc.
 
+        - Overlay functions accept these standard keywords:
             * mask: bool array
                 Set of flags for switching plot elements on/off. Must be equal to the number of channels or items to be
                 plotted.
@@ -761,10 +762,12 @@ def gas_injection_overlay(
 
     :param which_gas: string or list
         Filter for selecting which gas valves to display.
-        If string: get a preset group, like 'all'.
-        If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
-            GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
-            RF_ on DIII-D, for example.
+
+        - If string: get a preset group, like 'all'.
+
+        - If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
+          GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
+          RF_ on DIII-D, for example.
 
     :param simple_labels: bool
         Simplify labels by removing suffix after the last underscore.

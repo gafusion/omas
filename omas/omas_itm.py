@@ -261,8 +261,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
     :param new: whether the open should create a new ITM tree
 
     :param itm_version: ITM version
-                         (reads ods['info.itm_version'] if itm_version is None
-                          and finally fallsback on itm version of current system)
+        (reads ods['info.itm_version'] if itm_version is None and finally fallsback on itm version of current system)
 
     :return: paths that have been written to ITM
     """
@@ -370,8 +369,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
     :param paths: paths that have been written to ITM
 
     :param itm_version: ITM version
-                         (reads ods['info.itm_version'] if itm_version is None
-                          and finally fallsback on itm version of current system)
+        (reads ods['info.itm_version'] if itm_version is None and finally fallsback on itm version of current system)
 
     :return: OMAS data set
     """
