@@ -40,7 +40,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
 
     else:
         os.environ['OMAS_DEBUG_TOPIC'] = '*'
-        printd('OMAS is using IMAS data structure version `%s` as default' % default_imas_version, topic='*')
+        printd('OMAS is using IMAS data structure version `%s` as default' % omas_rcparams['default_imas_version'], topic='*')
 
         print('=' * 20)
 

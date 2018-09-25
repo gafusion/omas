@@ -7,7 +7,7 @@ from .omas_core import ODS
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, shot, run, new=False, imas_version=default_imas_version):
+def imas_open(user, machine, shot, run, new=False, imas_version=omas_rcparams['default_imas_version']):
     """
     function to open an IMAS
 
@@ -228,7 +228,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # --------------------------------------------
 # save and load OMAS to IMAS
 # --------------------------------------------
-def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False, imas_version=default_imas_version):
+def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False, imas_version=omas_rcparams['default_imas_version']):
     """
     save OMAS data set to IMAS
 
@@ -284,7 +284,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_version.replace('.','_'))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version,imas_version))])
         printe('Overloaded save_omas_imas: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
@@ -335,7 +335,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     return set_paths
 
 def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                   imas_version=default_imas_version, verbose=None):
+                   imas_version=omas_rcparams['default_imas_version'], verbose=None):
     """
     load OMAS data set from IMAS
 
@@ -369,7 +369,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_imas_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_version.replace('.','_'))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version,imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)

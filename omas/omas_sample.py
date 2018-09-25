@@ -54,7 +54,7 @@ def misc(ods):
 
     # info ODS is used for keeping track of IMAS metadata
     ods['info.machine'] = 'ITER'
-    ods['info.imas_version'] = default_imas_version
+    ods['info.imas_version'] = omas_rcparams['default_imas_version']
     ods['info.shot'] = 1
     ods['info.run'] = 0
 

@@ -34,7 +34,7 @@ def generate_xml_schemas():
 
     # find IMAS data-dictionary tags
     result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
-    tags = filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split())
+    tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
 
     # fetch data structure updates
     subprocess.Popen("""
@@ -42,9 +42,13 @@ def generate_xml_schemas():
     git fetch
     """.format(dd_folder=dd_folder), shell=True).communicate()
 
+    # add development branch to list of tags
+    tags.append('develop/3')
+
     # loop over tags and generate IDSDef.xml files
     for tag in tags:
         _tag = tag.replace('.', '_')
+        _tag = _tag.replace('/', '_')
         if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])):
             subprocess.Popen("""
                 export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
@@ -89,13 +93,13 @@ add_datastructures['info'] = {
 }
 
 
-def create_json_structure(imas_version=default_imas_version):
+def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
 
     import xmltodict
-    file = imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + 'IDSDef.xml'
+    file = imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + 'IDSDef.xml'
     tmp = xmltodict.parse(open(file).read())
 
-    for file in glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*.json'):
+    for file in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*.json'):
         print('Remove '+file)
         os.remove(file)
 
@@ -227,28 +231,28 @@ def create_json_structure(imas_version=default_imas_version):
     hout.update(add_datastructures)
 
     # prepare directory structure
-    if not os.path.exists(imas_json_dir + os.sep + imas_version.replace('.', '_')):
-        os.makedirs(imas_json_dir + os.sep + re.sub('\.', '_', imas_version))
-    for item in glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*.json'):
+    if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version)):
+        os.makedirs(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version))
+    for item in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*.json'):
         os.remove(item)
 
     # deploy imas structures as json
     for structure in sorted(hout):
         if structure=='time':
             continue
-        print(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + structure + '.json')
+        print(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + structure + '.json')
         dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
         #dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
-        open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + structure + '.json', 'w').write(dump_string)
+        open(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
 
     # generate coordinates cache file
     coords = extract_coordinates(imas_version=imas_version)
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
-    open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '_coordinates.json', 'w').write(dump_string)
+    open(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
 
 
-def create_html_documentation(imas_version=default_imas_version):
-    filename = os.path.abspath(os.sep.join([imas_json_dir, imas_version.replace('.', '_'), 'omas_doc.html']))
+def create_html_documentation(imas_version=omas_rcparams['default_imas_version']):
+    filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version,imas_version), 'omas_doc.html']))
 
     table_header = "<table border=1, width='100%'>"
     sub_table_header = '<tr>' \
@@ -321,7 +325,7 @@ def create_html_documentation(imas_version=default_imas_version):
             f.write('\n'.join(lines))
 
 
-def extract_coordinates(imas_version=default_imas_version):
+def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
     '''
     return list of strings with coordinates across all structures
 

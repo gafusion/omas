@@ -342,7 +342,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
 
 
-def geo_type_lookup(geometry_type, subsys, imas_version=default_imas_version, reverse=False):
+def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_imas_version'], reverse=False):
     """
     Given a geometry type code
 

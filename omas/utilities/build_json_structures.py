@@ -14,13 +14,12 @@ if generate_IDSDef_xml:
     generate_xml_schemas()
 
 # loops over the available IDSDef.xml files and generates .json and omas_doc.html files
-imas_versions = sorted(map(lambda x: os.path.split(x)[-1], glob.glob(imas_json_dir + os.sep + '*')))
 for imas_version in imas_versions:
+    print('Processing IMAS data structures `%s`' % imas_version)
 
-    print('Processing IMAS data structures v%s' % imas_version.replace('_','.'))
+    imas_version = imas_versions.get(imas_version,imas_version)
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_version, 'omas_doc.html']))
 
-    if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and imas_version==imas_versions[-1]):
+    if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and imas_version==list(imas_versions.values())[-1]):
         create_json_structure(imas_version=imas_version)
         create_html_documentation(imas_version=imas_version)
-

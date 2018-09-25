@@ -124,13 +124,13 @@ class TestOmasUtils(unittest.TestCase):
         self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
 
     def test_list_structures(self):  # Also tests dict_structures
-        struct_list = list_structures(default_imas_version)
+        struct_list = list_structures(omas_rcparams['default_imas_version'])
         struct_list2 = list_structures(self.specific_test_version)
         assert isinstance(struct_list, list)
         assert isinstance(struct_list2, list)
         assert isinstance(struct_list[0], basestring)
         assert 'pf_active' in struct_list2
-        struct_dict = dict_structures(default_imas_version)
+        struct_dict = dict_structures(omas_rcparams['default_imas_version'])
         struct_dict2 = dict_structures(self.specific_test_version)
         assert isinstance(struct_dict, dict)
         assert isinstance(struct_dict2, dict)

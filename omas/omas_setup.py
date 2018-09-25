@@ -55,6 +55,34 @@ else:
     pickle.load=_pickle_load_python2compatible
 
 # --------------------------------------------
+# configuration of directories and IMAS infos
+# --------------------------------------------
+imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
+
+imas_versions = OrderedDict()
+imas_versions['develop/3'] = 'develop_3'
+for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
+    if not _item.startswith('develop'):
+        imas_versions[_item.replace('_', '.')] = _item
+
+if 'OMAS_IMAS_VERSION' in os.environ:
+    _default_imas_version = os.environ['OMAS_IMAS_VERSION']
+else:
+    try:
+        _default_imas_version = list(imas_versions.keys())[-1]
+    except IndexError:
+        # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
+        _default_imas_version = ''
+
+# --------------------------------------------
+# configuration of directories and ITM infos
+# --------------------------------------------
+if 'OMAS_DATAVERSION_TAG' in os.environ:
+    _default_itm_version = os.environ['OMAS_DATAVERSION_TAG']
+else:
+    _default_itm_version = '4.10b_rc'
+
+# --------------------------------------------
 # rcparams
 # --------------------------------------------
 omas_rcparams = {
@@ -74,7 +102,9 @@ omas_rcparams = {
     'fake_itm_dir': os.environ.get('OMAS_FAKE_ITM_DIR',
                                     os.sep.join(
                                         [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_ITM_DIR'])),
-    'allow_fake_itm_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_ITM_FALLBACK', '0')))
+    'allow_fake_itm_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_ITM_FALLBACK', '0'))),
+    'default_imas_version':_default_imas_version,
+    'default_itm_version': _default_itm_version
 }
 
 @contextmanager
@@ -85,27 +115,3 @@ def rcparams_environment(**kw):
         yield omas_rcparams
     finally:
         omas_rcparams.update(old_omas_rcparams)
-
-# --------------------------------------------
-# configuration of directories and IMAS infos
-# --------------------------------------------
-imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
-
-imas_versions = list(map(lambda x:os.path.basename(x).replace('_', '.'),sorted(glob.glob(imas_json_dir + os.sep + '*'))))
-
-if 'OMAS_IMAS_VERSION' in os.environ:
-    default_imas_version = os.environ['OMAS_IMAS_VERSION']
-else:
-    try:
-        default_imas_version = imas_versions[-1]
-    except IndexError:
-        # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
-        default_imas_version = ''
-
-# --------------------------------------------
-# configuration of directories and ITM infos
-# --------------------------------------------
-if 'OMAS_DATAVERSION_TAG' in os.environ:
-    default_itm_version = os.environ['OMAS_DATAVERSION_TAG']
-else:
-    default_itm_version = '4.10b_rc'

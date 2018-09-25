@@ -377,11 +377,11 @@ def list_structures(imas_version):
 
     :return: list with names of structures in imas version
     '''
-    json_filenames = glob.glob( imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*' + '.json')
+    json_filenames = glob.glob( imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*' + '.json')
     json_filenames = filter(lambda x:os.path.basename(x)[0]!='_', json_filenames)
     structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],json_filenames)))
     if not len(structures):
-        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
+        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
     return structures
 
 
@@ -393,9 +393,9 @@ def dict_structures(imas_version):
 
     :return: dictionary maps structure names to json  filenames
     '''
-    paths = glob.glob(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '*' + '.json')
+    paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*' + '.json')
     if not len(paths):
-        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions)))
+        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
     return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
 
 
@@ -444,7 +444,7 @@ def load_structure(filename, imas_version):
     return _structures[id], _structures_dict[id]
 
 
-def omas_coordinates(imas_version=default_imas_version):
+def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
     '''
     return list of coordinates
 
@@ -454,7 +454,7 @@ def omas_coordinates(imas_version=default_imas_version):
     '''
     # caching
     if imas_version not in _coordinates:
-        filename = imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '_coordinates.json'
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '_coordinates.json'
         with open(filename,'r') as f:
             _coordinates[imas_version] = json.loads(f.read(), object_pairs_hook=json_loader)
     return _coordinates[imas_version]
@@ -670,7 +670,7 @@ def ids_cpo_mapper(ids, cpo=None):
     return cpo
 
 
-def omas_info(structures, imas_version=default_imas_version):
+def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
     '''
     This function returns an ods with the leaf nodes filled with their property informations
 
@@ -707,7 +707,7 @@ def omas_info(structures, imas_version=default_imas_version):
     return copy.deepcopy(ods)
 
 
-def omas_info_node(key, imas_version=default_imas_version):
+def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     '''
     return information about a given node
 

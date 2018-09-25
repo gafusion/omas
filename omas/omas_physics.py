@@ -794,7 +794,7 @@ def generate_cocos_signals(structures=[], threshold=0):
 
         out[structure] = {}
         ods[structure]
-        d = dict_structures(imas_version=default_imas_version)
+        d = dict_structures(imas_version=omas_rcparams['default_imas_version'])
         m = 0
         # generate score and add reason for scoring
         for item in sorted(list(list(_structures[d[structure]].keys()))):

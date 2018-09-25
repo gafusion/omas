@@ -14,7 +14,7 @@ from .omas_core import ODS
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def itm_open(user, machine, shot, run, new=False, itm_version=default_itm_version):
+def itm_open(user, machine, shot, run, new=False, itm_version=omas_rcparams['default_itm_version']):
     """
     function to open an ITM
 
@@ -244,7 +244,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, itm_version=default_itm_version):
+def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, itm_version=omas_rcparams['default_itm_version']):
     """
     save OMAS data set to ITM
 
@@ -300,7 +300,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_itm_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_version.replace('.','_'))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version,itm_version))])
         printe('Overloaded save_omas_itm: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_itm_dir']):
@@ -354,7 +354,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
 def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                   itm_version=default_itm_version, verbose=None):
+                   itm_version=omas_rcparams['default_itm_version'], verbose=None):
     """
     load OMAS data set from ITM
 
@@ -388,7 +388,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
             raise
         filename = os.sep.join(
             [omas_rcparams['fake_itm_dir'],
-             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_version.replace('.','_'))])
+             '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version,itm_version))])
         printe('Overloaded load_omas_itm: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
