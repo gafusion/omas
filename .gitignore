@@ -6,6 +6,7 @@ __pycache__/
 /asd.py
 .\#*
 \#*
+build/
 
 omas_doc.html
 
