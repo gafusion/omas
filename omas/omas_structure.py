@@ -242,7 +242,7 @@ def create_json_structure(imas_version=default_imas_version):
         open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + structure + '.json', 'w').write(dump_string)
 
     # generate coordinates cache file
-    coords = extract_coordinates()
+    coords = extract_coordinates(imas_version=imas_version)
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
     open(imas_json_dir + os.sep + imas_version.replace('.', '_') + os.sep + '_coordinates.json', 'w').write(dump_string)
 
