@@ -245,8 +245,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     :param new: whether the open should create a new IMAS tree
 
     :param imas_version: IMAS version
-                         (reads ods['info.imas_version'] if imas_version is None
-                          and finally fallsback on imas version of current system)
+        (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
 
     :return: paths that have been written to IMAS
     """
@@ -351,8 +350,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
     :param paths: paths that have been written to IMAS
 
     :param imas_version: IMAS version
-                         (reads ods['info.imas_version'] if imas_version is None
-                          and finally fallsback on imas version of current system)
+        (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
 
     :return: OMAS data set
     """
