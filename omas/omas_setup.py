@@ -60,10 +60,11 @@ else:
 imas_json_dir = os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/')
 
 imas_versions = OrderedDict()
-imas_versions['develop/3'] = 'develop_3'
 for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
-    if not _item.startswith('develop'):
+    if _item.startswith('3'):
         imas_versions[_item.replace('_', '.')] = _item
+    else:
+        imas_versions[_item.replace('_', '/')] = _item
 
 if 'OMAS_IMAS_VERSION' in os.environ:
     _default_imas_version = os.environ['OMAS_IMAS_VERSION']

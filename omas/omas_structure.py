@@ -49,11 +49,12 @@ def generate_xml_schemas():
     for tag in tags:
         _tag = tag.replace('.', '_')
         _tag = _tag.replace('/', '_')
-        if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])):
+        if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])) or tag=='develop/3':
             subprocess.Popen("""
                 export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
                 cd {dd_folder}
                 git checkout {tag}
+                git pull
                 make clean
                 make
                 mkdir {imas_json_dir}/{_tag}/
