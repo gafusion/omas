@@ -345,6 +345,22 @@ class ODS(MutableMapping):
         # handle individual keys as well as full paths
         key = p2l(key)
 
+        if not len(key):
+            return self
+
+        # negative numbers are used to address arrays of structures from the end
+        if isinstance(key[0], int) and key[0] < 0:
+            if self.omas_data is None:
+                key[0] = 0
+            elif isinstance(self.omas_data, list):
+                key[0] = len(self.omas_data) + key[0]
+        # '+' is used to append new entry in array structure
+        elif key[0] == '+':
+            if self.omas_data is None:
+                key[0] = 0
+            elif isinstance(self.omas_data, list):
+                key[0] = len(self.omas_data)
+
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
@@ -509,7 +525,7 @@ class ODS(MutableMapping):
         elif key[0] == len(self.omas_data):
             self.omas_data.append(value)
         else:
-            raise IndexError('%s[:] index is at %d' % (self.location, len(self.omas_data) - 1))
+            raise IndexError('requested `%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
     def __getitem__(self, key, consistency_check=True):
         # handle individual keys as well as full paths
@@ -517,6 +533,13 @@ class ODS(MutableMapping):
 
         if not len(key):
             return self
+
+        # negative numbers are used to address arrays of structures from the end
+        if isinstance(key[0], int) and key[0] < 0:
+            if self.omas_data is None:
+                key[0] = 0
+            elif isinstance(self.omas_data, list):
+                key[0] = len(self.omas_data) + key[0]
 
         dynamically_created = False
 

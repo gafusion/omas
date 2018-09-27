@@ -96,5 +96,23 @@ class TestOmasCore(unittest.TestCase):
         ods1 = ods['equilibrium'].slice_at_time(101)
         numpy.allclose(ods.time('equilibrium'),[101])
 
+    def test_address_structures(self):
+        ods = ODS()
+        # append elements by using `+`
+        for k in range(10):
+            ods['equilibrium.time_slice.+.global_quantities.ip'] = k
+        assert len(ods['equilibrium.time_slice']) == 10
+        assert (ods['equilibrium.time_slice'][9]['global_quantities.ip'] == 9)
+
+        # access element by using negative indices
+        assert (ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == 9)
+        assert (ods['equilibrium.time_slice.-10.global_quantities.ip'] == 0)
+
+        # set element by using negative indices
+        ods['equilibrium.time_slice.-1.global_quantities.ip'] = -99
+        ods['equilibrium.time_slice'][-10]['global_quantities.ip'] = -100
+        assert (ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == -99)
+        assert (ods['equilibrium.time_slice'][-10]['global_quantities.ip'] == -100)
+
 if __name__ == '__main__':
     unittest.main()
