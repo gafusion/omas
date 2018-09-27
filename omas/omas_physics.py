@@ -1,6 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
+from .omas_core import ODS
 
 __all__ = []
 __ods__ = []
@@ -532,7 +533,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
     return Jout
 
 @add_to__ALL__
-def search_ion(ion_ods, label=None, Z=None, A=None):
+def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True, multiple_matches_raise_error=True):
     '''
     utility function used to identify the ion number and element numbers given the ion label and or their Z and/or A
 
@@ -544,17 +545,20 @@ def search_ion(ion_ods, label=None, Z=None, A=None):
 
     :param A: ion element mass
 
+    :parame no_matches_raise_error: whether to raise a IndexError when no ion matches are found
+
+    :parame multiple_matches_raise_error: whether to raise a IndexError when multiple ion matches are found
+
     :return: dictionary with matching ions labels, each with list of matching ion elements
     '''
     if not ion_ods.location.endswith('.ion'):
-        raise (ValueError('Must pass an ods location that ends with `.ion`'))
+        raise (ValueError('ods location must end with `.ion`'))
     match = {}
     for ki in ion_ods:
         if label is None or (label is not None and 'label' in ion_ods[ki] and ion_ods[ki]['label'] == label):
             if A is not None or Z is not None and 'element' in ion_ods[ki]:
                 for ke in ion_ods[ki]['element']:
-                    if A is not None and A == ion_ods[ki]['element'][ke]['a'] and Z is not None and Z == \
-                            ion_ods[ki]['element'][ke]['z_n']:
+                    if A is not None and A == ion_ods[ki]['element'][ke]['a'] and Z is not None and Z == ion_ods[ki]['element'][ke]['z_n']:
                         match.setdefault(ki, []).append(ke)
                     elif A is not None and A == ion_ods[ki]['element'][ke]['a']:
                         match.setdefault(ki, []).append(ke)
@@ -563,7 +567,11 @@ def search_ion(ion_ods, label=None, Z=None, A=None):
             elif 'element' in ion_ods[ki] and len(ion_ods[ki]['element']):
                 match.setdefault(ki, []).extend(range(len(ion_ods[ki]['element'])))
             else:
-                match[ki] = None
+                match[ki] = []
+    if multiple_matches_raise_error and (len(match) > 1 or len(match) == 1 and len(match.values()[0]) > 1):
+        raise (IndexError('Multiple ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
+    if no_matches_raise_error and len(match) == 0:
+        raise (IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
     return match
 
 @add_to__ALL__

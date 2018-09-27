@@ -339,12 +339,30 @@ class TestOmasPhysics(unittest.TestCase):
     def test_search_ion(self):
         ods = ODS()
         ods.sample_core_profiles(include_pressure=False)
+
         tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], 'D')
         assert repr(tmp) == '{0: [0]}'
-        tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"])
+
+        tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], multiple_matches_raise_error=False)
         assert repr(tmp) == '{0: [0], 1: [0]}'
+
+        try:
+            tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"])
+            raise(AssertError('multiple_matches_raise_error'))
+        except IndexError:
+            pass
+
         tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], A=12)
         assert repr(tmp) == '{1: [0]}'
+
+        tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], 'W', no_matches_raise_error=False)
+        assert repr(tmp) == '{}'
+
+        try:
+            tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], 'W')
+            raise(AssertError('no_matches_raise_error failed'))
+        except IndexError:
+            pass
 
 if __name__ == '__main__':
     unittest.main()
