@@ -6,9 +6,13 @@ from .omas_physics import constants
 from .omas_plot import geo_type_lookup
 
 __all__ = []
-
+__ods__ = []
 
 def add_to_ODS(f):
+    '''
+    anything wrapped here will be available as a ODS method with name 'sample_'+f.__name__
+    '''
+    __ods__.append(f.__name__)
     __all__.append(f.__name__)
     return f
 

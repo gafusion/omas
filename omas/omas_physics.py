@@ -3,11 +3,19 @@ from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 
 __all__ = []
+__ods__ = []
 
 def add_to__ODS__(f):
+    '''
+    anything wrapped here will be available as a ODS method with name 'physics_'+f.__name__
+    '''
+    __ods__.append(f.__name__)
     __all__.append(f.__name__)
     return f
 
+def add_to__ALL__(f):
+    __all__.append(f.__name__)
+    return f
 
 # constants class that mimics scipy.constants
 class constants(object):
@@ -475,7 +483,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
     return
 
-
+@add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
     """
     Given <Jt/R> returns <J.B>, or vice versa
@@ -627,6 +635,7 @@ def define_cocos(cocos_ind):
 
     return cocos
 
+@add_to__ALL__
 def cocos_transform(cocosin_index, cocosout_index):
     """
     Returns a dictionary with coefficients for how various quantities should get multiplied in order to go from cocosin_index to cocosout_index
@@ -680,6 +689,7 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     return transforms
 
+@add_to__ALL__
 @contextmanager
 def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
     '''
@@ -893,7 +903,6 @@ def generate_cocos_signals(structures=[], threshold=0):
 # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
 from .omas_cocos import cocos_signals as _cocos_signals
 
-
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
 class CocosSignals(dict):
@@ -906,41 +915,3 @@ class CocosSignals(dict):
 # cocos_signals is the actual dictionary
 cocos_signals = CocosSignals()
 cocos_signals.update(_cocos_signals)
-
-#=======================
-# BACKWARD COMPATIBILITY
-#=======================
-
-@contextmanager
-def coords_environment(ods, coordsio=None):
-    '''
-    DEPRECATED: use omas_environment(ods, coordsio=...) instead
-
-    Provides OMAS environment within wich coordinates are interpolated
-
-    :param ods: ODS on which to operate
-
-    :param coordsio: dictionary of coordinates
-
-    :return: ODS with coordinate interpolations set
-    '''
-    warnings.warn('coords_environment is deprecated. Use omas_environment(ods, coordsio=...) instead.')
-    with omas_environment(ods, coordsio=coordsio):
-        yield ods
-
-@contextmanager
-def cocos_environment(ods, cocosio=None):
-    '''
-    DEPRECATED: use omas_environment(ods, cocosio=...) instead
-
-    Provides OMAS environment within wich a certain COCOS convention is defined
-
-    :param ods: ODS on which to operate
-
-    :param cocosio: input/output COCOS convention
-
-    :return: ODS with COCOS convention set
-    '''
-    warnings.warn('cocos_environment is deprecated. Use omas_environment(ods, cocosio=...) instead.')
-    with omas_environment(ods, cocosio=cocosio):
-        yield ods

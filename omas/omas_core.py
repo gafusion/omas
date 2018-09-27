@@ -15,8 +15,6 @@ __all__ = [
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
-    'cocos_transform', 'define_cocos', 'transform_current',
-    'omas_environment', 'cocos_environment', 'coords_environment',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
@@ -690,7 +688,7 @@ class ODS(MutableMapping):
         return str(self.omas_data)
 
     def __repr__(self):
-        return repr(self.omas_data)
+        return self.location
 
     def get(self, key, default=None):
         """
@@ -845,7 +843,7 @@ try:
     from . import omas_sample
     from .omas_sample import ods_sample
     __all__.append('omas_sample')
-    for item in omas_sample.__all__:
+    for item in omas_sample.__ods__:
         setattr(ODS, 'sample_' + item, getattr(omas_sample, item))
 except ImportError as _excp:
     printe('OMAS sample function are not available: ' + repr(_excp))
@@ -855,10 +853,10 @@ except ImportError as _excp:
 # --------------------------------------------
 try:
     from . import omas_physics
-    from .omas_physics import cocos_transform, define_cocos, transform_current
-    from .omas_physics import omas_environment, cocos_environment, coords_environment
+    from .omas_physics import *
     __all__.append('omas_physics')
-    for item in omas_physics.__all__:
+    __all__.extend(omas_physics.__all__)
+    for item in omas_physics.__ods__:
         setattr(ODS, 'physics_' + item, getattr(omas_physics, item))
 except ImportError as _excp:
     printe('OMAS physics function are not available: ' + repr(_excp))
@@ -866,11 +864,11 @@ except ImportError as _excp:
 
 # --------------------------------------------
 # import plotting functions and add them as ODS methods
-# --------------------------------------------
 try:
+    # --------------------------------------------
     from . import omas_plot
     __all__.append('omas_plot')
-    for item in omas_plot.__all__:
+    for item in omas_plot.__ods__:
         setattr(ODS, 'plot_' + item, getattr(omas_plot, item))
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
