@@ -389,6 +389,12 @@ class ODS(MutableMapping):
                     self._validate(value, structure)
                     # assign structure and location information
                     value.structure = structure
+                    # determine if entry is a list of structures or just a structure
+                    if value.omas_data is None:
+                        if ':' in value.structure.keys():
+                            value.omas_data = []
+                        elif len(value.structure.keys()):
+                            value.omas_data = {}
                     value.location = location
                 else:
                     self.structure[structure_key]

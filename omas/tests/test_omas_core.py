@@ -98,6 +98,11 @@ class TestOmasCore(unittest.TestCase):
 
     def test_address_structures(self):
         ods = ODS()
+
+        # make sure data structure is of the right type
+        assert isinstance(ods['core_transport'].omas_data,dict)
+        assert isinstance(ods['core_transport.model'].omas_data,list)
+
         # append elements by using `+`
         for k in range(10):
             ods['equilibrium.time_slice.+.global_quantities.ip'] = k
