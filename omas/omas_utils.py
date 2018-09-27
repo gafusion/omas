@@ -509,6 +509,9 @@ def p2l(key):
     if key is None:
         raise(TypeError('OMAS key cannot be None'))
 
+    if isinstance(key, dict):
+        raise(TypeError('OMAS key cannot be of type dictionary'))
+
     key0 = ''.join(key)
     if key0 in _p2l_cache:
         return copy.deepcopy(_p2l_cache[key0])
