@@ -708,10 +708,10 @@ class ODS(MutableMapping):
         return [self[item] for item in self.keys()]
 
     def __str__(self):
-        return str(self.omas_data)
+        return self.location
 
     def __repr__(self):
-        return self.location
+        return repr(self.omas_data)
 
     def get(self, key, default=None):
         """
