@@ -37,15 +37,15 @@ def load_omas_json(filename, **kw):
 
     printd('Loading OMAS data to Json: %s' % filename, topic='json')
 
-    if isinstance(filename, basestring):
-        filename = open(filename, 'r')
-
     def cls():
         tmp = ODS()
         tmp.consistency_check = False
         return tmp
 
-    tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
+    if isinstance(filename, basestring):
+        filename = open(filename, 'r')
+    with filename:
+        tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
     tmp.consistency_check=True
     return tmp
 
