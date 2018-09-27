@@ -531,7 +531,42 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     return Jout
 
+@add_to__ALL__
+def search_ion(ion_ods, label=None, Z=None, A=None):
+    '''
+    utility function used to identify the ion number and element numbers given the ion label and or their Z and/or A
 
+    :param ion_ods: ODS location that ends with .ion
+
+    :param label: ion label
+
+    :param Z: ion element charge
+
+    :param A: ion element mass
+
+    :return: dictionary with matching ions labels, each with list of matching ion elements
+    '''
+    if not ion_ods.location.endswith('.ion'):
+        raise (ValueError('Must pass an ods location that ends with `.ion`'))
+    match = {}
+    for ki in ion_ods:
+        if label is None or (label is not None and 'label' in ion_ods[ki] and ion_ods[ki]['label'] == label):
+            if A is not None or Z is not None and 'element' in ion_ods[ki]:
+                for ke in ion_ods[ki]['element']:
+                    if A is not None and A == ion_ods[ki]['element'][ke]['a'] and Z is not None and Z == \
+                            ion_ods[ki]['element'][ke]['z_n']:
+                        match.setdefault(ki, []).append(ke)
+                    elif A is not None and A == ion_ods[ki]['element'][ke]['a']:
+                        match.setdefault(ki, []).append(ke)
+                    elif Z is not None and Z == ion_ods[ki]['element'][ke]['z_n']:
+                        match.setdefault(ki, []).append(ke)
+            elif 'element' in ion_ods[ki] and len(ion_ods[ki]['element']):
+                match.setdefault(ki, []).extend(range(len(ion_ods[ki]['element'])))
+            else:
+                match[ki] = None
+    return match
+
+@add_to__ALL__
 def define_cocos(cocos_ind):
     """
     Returns dictionary with COCOS coefficients given a COCOS index
