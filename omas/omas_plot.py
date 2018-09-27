@@ -18,27 +18,6 @@ def add_to__ODS__(f):
 # ================================
 # plotting helper functions
 # ================================
-def sanitize_version_number(version):
-    """Removes common non-numerical characters from version numbers obtained from git tags, such as '_rc', etc."""
-    if version.startswith('.'):
-        version = '-1' + version
-    version = version.replace('_rc', '.')
-    return version
-
-
-def compare_version(version1, version2):
-    """Returns 1 if version1 > version2, -1 if version1 < version2, or 0 if version1 == version2."""
-    version1 = sanitize_version_number(version1)
-    version2 = sanitize_version_number(version2)
-
-    def normalize(v):
-        if 'r' in v:
-            v = v.split('r')[0]
-        return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
-
-    return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
-
-
 def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1):
     """
     :param x: 1D x coordinate
