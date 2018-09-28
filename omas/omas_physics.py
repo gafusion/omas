@@ -1,5 +1,6 @@
-from __future__ import print_function, division, unicode_literals
+'''physics-based ODS methods and utilities'''
 
+from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 from .omas_core import ODS
 

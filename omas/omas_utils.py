@@ -1,3 +1,5 @@
+'''naming convention translation and misc utilities'''
+
 from __future__ import print_function, division, unicode_literals
 
 from .omas_setup import *
@@ -432,7 +434,7 @@ def load_structure(filename, imas_version):
     """
 
     filename0 = filename
-    id=(filename0,imas_version)
+    id=(filename0, imas_version)
     if id in _structures and id in _structures_dict:
         return _structures[id], _structures_dict[id]
 

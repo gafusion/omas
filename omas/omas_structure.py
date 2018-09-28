@@ -1,3 +1,5 @@
+'''functions for handling IMAS XML data dictionaries'''
+
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
