@@ -40,12 +40,10 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 
     :return: updated ods
     '''
-
-    ods_2 = core_profiles_pressures(ods, update=update)
-    core_profiles_densities(ods_2, update=True)
-    core_profiles_zeff(ods_2, update=True,
-                       use_electrons_density=use_electrons_density)
-    return ods_2
+    ods = core_profiles_pressures(ods, update=update)
+    core_profiles_densities(ods, update=True)
+    core_profiles_zeff(ods, update=True, use_electrons_density=use_electrons_density)
+    return ods
 
 @add_to__ODS__
 def core_profiles_pressures(ods, update=True):
@@ -572,6 +570,50 @@ def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True,
         raise (IndexError('Multiple ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
     if no_matches_raise_error and len(match) == 0:
         raise (IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
+    return match
+
+@add_to__ALL__
+def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_raise_error=False, multiple_matches_raise_error=True):
+    '''
+    search for the index in an array structure that matches some conditions
+
+    :param ods: ODS location that is an array of structures
+
+    :param conditions: dictionary (or ODS) whith entries that must match and their values
+
+    :param no_matches_return: what index to return if no matches are found
+
+    :param no_matches_raise_error: wheter to raise an error in no matches are found
+
+    :param multiple_matches_raise_error: whater to raise an error if multiple matches are found
+
+    :return: list with indeces matching conditions
+    '''
+
+    if ods.omas_data is not None and not isinstance(ods.omas_data, list):
+        raise (Exception('ods location must be an array of structures'))
+
+    if isinstance(conditions, ODS):
+        conditions = conditions.flat()
+
+    match = []
+    for k in ods:
+        k_match = True
+        for key in conditions:
+            if ods[k][key] != conditions[key]:
+                k_match = False
+                break
+        if k_match:
+            match.append(k)
+
+    if not len(match):
+        if no_matches_raise_error:
+            raise (IndexError('no matches for conditions: %s' % conditions))
+        match = [no_matches_return]
+
+    if multiple_matches_raise_error and len(match) > 1:
+        raise (IndexError('multiple matches for conditions: %s' % conditions))
+
     return match
 
 @add_to__ALL__

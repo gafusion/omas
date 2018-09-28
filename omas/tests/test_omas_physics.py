@@ -364,5 +364,29 @@ class TestOmasPhysics(unittest.TestCase):
         except IndexError:
             pass
 
+    def test_search_in_array_structure(self):
+        ods = ODS()
+
+        tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro'}, no_matches_return=0)[0]
+        assert tmp == 0
+
+        ods['core_transport.model.+.identifier.name'] = 'omas_tgyro'
+        ods['core_transport.model.+.identifier.name'] = 'test1'
+        ods['core_transport.model.+.identifier.name'] = 'omas_tgyro'
+        ods['core_transport.model.-1.identifier.description'] = 'bla bla'
+        ods['core_transport.model.+.identifier.name'] = 'test2'
+
+        try:
+            search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro'})
+            raise(AssertError('multiple_matches_raise_error failed'))
+        except IndexError:
+            pass
+
+        tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro'}, multiple_matches_raise_error=False)
+        assert tmp[0] == 0 and tmp[1] == 2
+
+        tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro', 'identifier.description': 'bla bla'})
+        assert tmp[0] == 2
+
 if __name__ == '__main__':
     unittest.main()
