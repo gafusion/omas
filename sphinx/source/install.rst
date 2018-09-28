@@ -3,17 +3,21 @@ Installation
 
 The OMAS library runs on **Python2** and **Python3**.
 
-To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_ (for users)::
+To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_ (for users):
 
-        sudo pip install omas
+.. code-block:: none
 
-To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers)::
+    sudo pip install omas
 
-        git clone git@github.com:gafusion/omas.git
-        cd omas
-        sudo pip install -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
-                                                                          # [build_structures,build_documentation] options
-                                                                          # install extra packages for development purposes
+To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers):
+
+.. code-block:: none
+
+    git clone git@github.com:gafusion/omas.git
+    cd omas
+    sudo pip install -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
+                                                                      # [build_structures,build_documentation] options
+                                                                      # install extra packages for development purposes
 
 Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
 
@@ -25,13 +29,5 @@ The OMAS installation can be tested by running the regression tests:
 
 .. code-block:: none
 
-    cd omas
-    python omas/tests/test_omas_plot.py
-    python omas/tests/test_omas_suite.py
+    python -m unittest discover --pattern="*.py" -s omas/tests/ -v
 
-A summary of the storage systems
-
-.. code-block:: none
-
-    cd omas
-    python omas/examples/save_load_all.py
