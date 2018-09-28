@@ -378,7 +378,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         try:
             search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro'})
-            raise(AssertError('multiple_matches_raise_error failed'))
+            raise(AssertionError('multiple_matches_raise_error failed'))
         except IndexError:
             pass
 

@@ -566,7 +566,7 @@ def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True,
                 match.setdefault(ki, []).extend(range(len(ion_ods[ki]['element'])))
             else:
                 match[ki] = []
-    if multiple_matches_raise_error and (len(match) > 1 or len(match) == 1 and len(match.values()[0]) > 1):
+    if multiple_matches_raise_error and (len(match) > 1 or len(match) == 1 and len(list(match.values())[0]) > 1):
         raise (IndexError('Multiple ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
     if no_matches_raise_error and len(match) == 0:
         raise (IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
@@ -600,7 +600,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     for k in ods:
         k_match = True
         for key in conditions:
-            if ods[k][key] != conditions[key]:
+            if key not in ods[k] or ods[k][key] != conditions[key]:
                 k_match = False
                 break
         if k_match:
