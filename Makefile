@@ -4,13 +4,14 @@ all:
 	@echo ' - make tests2       : run all regression tests with Python2'
 	@echo ' - make tests3       : run all regression tests with Python3'
 	@echo ' - make requirements : build requirements.txt'
-	@echo ' - make docs         : generate sphyix documentation and pushes it online'
 	@echo ' - make json         : generate IMAS json structure files'
 	@echo ' - make itm          : generate omas_itm.py from omas_imas.py'
+	@echo ' - make docs         : generate sphyix documentation and pushes it online'
 	@echo ' - make git          : push to github repo'
 	@echo ' - make pipy         : upload to pipy'
 	@echo ' - make release      : all of the above, in order'
 	@echo ' - make html         : generate sphyix documentation'
+	@echo ' - make cocos        : generate list of COCOS transformations'
 	@echo ''
 
 tests: tests2 tests3
@@ -37,11 +38,14 @@ json:
 itm:
 	cd omas/utilities && python generate_itm_interface.py
 
+cocos:
+	cd omas/utilities && python generate_cocos_signals.py
+
 git:
 	git push
 
 pipy:
 	python setup.py sdist upload
 
-release: tests2 tests3 requirements json docs itm git pipy
+release: tests2 tests3 requirements json itm cocos docs git pipy
 	@echo 'Done!'
