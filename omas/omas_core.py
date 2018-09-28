@@ -353,7 +353,10 @@ class ODS(MutableMapping):
             if self.omas_data is None:
                 key[0] = 0
             elif isinstance(self.omas_data, list):
-                key[0] = len(self.omas_data) + key[0]
+                if not len(self.omas_data):
+                    key[0] = 0
+                else:
+                    key[0] = len(self.omas_data) + key[0]
         # '+' is used to append new entry in array structure
         elif key[0] == '+':
             if self.omas_data is None:
@@ -517,7 +520,7 @@ class ODS(MutableMapping):
                     if key[0] == len(self.omas_data):
                         self.omas_data.append(value)
                     else:
-                        raise (IndexError('%s[:] index is at %d' % (self.location, len(self) - 1)))
+                        raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
             try:
                 self[key[0]][key[1:]] = pass_on_value
             except LookupError:
@@ -531,7 +534,10 @@ class ODS(MutableMapping):
         elif key[0] == len(self.omas_data):
             self.omas_data.append(value)
         else:
-            raise IndexError('requested `%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+            if not len(self.omas_data):
+                IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
+            else:
+                raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
     def __getitem__(self, key, consistency_check=True):
         # handle individual keys as well as full paths
@@ -545,7 +551,10 @@ class ODS(MutableMapping):
             if self.omas_data is None:
                 key[0] = 0
             elif isinstance(self.omas_data, list):
-                key[0] = len(self.omas_data) + key[0]
+                if not len(self.omas_data):
+                    key[0] = 0
+                else:
+                    key[0] = len(self.omas_data) + key[0]
 
         dynamically_created = False
 
