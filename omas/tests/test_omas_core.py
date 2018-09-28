@@ -3,8 +3,12 @@
 
 """
 Test script for omas/omas_core.py
-python -m unittest test_omas_core (from omas/omas/tests)
-python -m unittest discover omas (from omas top level; runs all tests)
+
+.. code-block:: none
+
+   python -m unittest omas/tests/test_omas_core
+
+-------
 """
 
 # Basic imports

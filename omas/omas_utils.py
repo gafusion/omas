@@ -1,4 +1,7 @@
-'''naming convention translation and misc utilities'''
+'''naming convention translation and misc utilities
+
+-------
+'''
 
 from __future__ import print_function, division, unicode_literals
 

@@ -1,4 +1,7 @@
-'''pypi setup file'''
+'''pypi setup file
+
+-------
+'''
 
 from __future__ import print_function, division, unicode_literals
 

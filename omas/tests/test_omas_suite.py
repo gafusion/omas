@@ -1,6 +1,16 @@
 #!/usr/bin/env python
 # # -*- coding: utf-8 -*-
 
+"""
+Test script for omas saving/loading data in different formats
+
+.. code-block:: none
+
+   python -m unittest omas/tests/test_omas_suite
+
+-------
+"""
+
 from __future__ import print_function, division, unicode_literals
 import unittest
 
