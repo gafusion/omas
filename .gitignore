@@ -16,6 +16,7 @@ omas/imas_structures/*/*.html
 omas/imas_structures/*/*.xml
 
 sphinx/build/
+sphinx/source/code/
 sphinx/source/data.rst
 sphinx/source/code.rst
 sphinx/source/usage.rst
