@@ -32,6 +32,7 @@ from omas import *
 from matplotlib import pyplot
 pyplot.switch_backend('agg')
 import time
+from collections import OrderedDict
 
 sys.path.insert(0, os.path.abspath('../../'))
 
@@ -95,8 +96,13 @@ print('latest data structure version: '+omas_rcparams['default_imas_version'])
 # API
 # ==============
 import omas
-import omas.tests
-members={'omas':map(lambda k:'omas.'+k,sorted(omas.__all__))}
+tp_mapper=OrderedDict((('ABCMeta','OMAS data class'),('function','Functions'),('Misc','Misc'),('module','Modules')))
+members={}
+for item in omas.__all__:
+    tp=tp_mapper.get(type(getattr(omas,item)).__name__,'Misc')
+    if tp not in members:
+        members[tp]=[]
+    members[tp].append('omas.'+item)
 if os.path.exists('../source/code'):
     shutil.rmtree('../source/code')
 with open('../source/code.rst', 'w') as f:
@@ -109,11 +115,18 @@ OMAS users API documentation
 
 Following are the classes/routines that are directly available to users within the `omas` library namespace 
 
+""")
+    for tp in tp_mapper.values():
+        f.write("""
+%s
+%s
+
 .. autosummary::
    :toctree: code
 
+
    %s
-""" % ('   ' + '\n   '.join(members['omas'])))
+""" % (tp,'-'*len(tp),'   ' + '\n   '.join(sorted(members[tp]))))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
