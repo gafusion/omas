@@ -910,6 +910,39 @@ class ODS(MutableMapping):
             raise (ValueError('Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches))))
         return matches
 
+    def xarray(self, key):
+        '''
+        Returns data of an ODS location and correspondnig coordinates as an xarray dataset
+        Note that the Dataset and the DataArrays have their attributes set with the ODSs structure info
+
+        :param key: ODS location
+
+        :return: xarray dataset
+        '''
+        import xarray
+        key = p2l(key)
+
+        info = omas_info_node(l2u(key))
+        coords = self.coordinates(key)
+
+        short_coords = OrderedDict()
+        for coord in coords:
+            short_coords[p2l(coord)[-1]] = coords[coord]
+
+        ds = xarray.Dataset()
+        ds[key[-1]] = xarray.DataArray(self[key], coords=short_coords, dims=short_coords.keys(), attrs=info)
+        ds.attrs['y'] = key[-1]
+        ds.attrs['y_full'] = l2o(key)
+
+        ds.attrs['x'] = []
+        ds.attrs['x_full'] = []
+        for coord in coords:
+            info = omas_info_node(o2u(coord))
+            ds[p2l(coord)[-1]] = xarray.DataArray(coords[coord], dims=p2l(coord)[-1], attrs=info)
+            ds.attrs['x'].append(p2l(coord)[-1])
+            ds.attrs['x_full'].append(coord)
+        return ds
+
 # --------------------------------------------
 # import sample functions and add them as ODS methods
 # --------------------------------------------

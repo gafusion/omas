@@ -21,10 +21,12 @@ from io import StringIO
 from contextlib import contextmanager
 import tempfile
 import warnings
+
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
     formatwarning_orig(message, category, filename, lineno, line='')
-# Pint
+
+# pint
 try:
     import pint
     from pint import UnitRegistry
@@ -33,11 +35,15 @@ except ImportError:
     pint = None
     ureg = None
     warnings.warn('pint Python library not found')
-# Uncertainties
+
+# uncertainties
 import uncertainties
 import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
+
+# xarrays
+import xarray
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):

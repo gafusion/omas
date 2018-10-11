@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 import glob
 
-install_requires = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy']
+install_requires = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'xarray']
 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
