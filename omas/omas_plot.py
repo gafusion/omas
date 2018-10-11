@@ -1269,10 +1269,10 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
     Provides convenient way to plot 1D quantities in ODS
 
     For example:
-        >>> ods.plot_quantity('core.*elec.*dens', '$n_e$', lw=2)
-        >>> ods.plot_quantity('core.*ion.0.*dens.*th', '$n_D$', lw=2)
-        >>> ods.plot_quantity('core.*ion.1.*dens.*th', '$n_C$', lw=2)
-    
+        >>> ods.plot_quantity('@core.*elec.*dens', '$n_e$', lw=2)
+        >>> ods.plot_quantity('@core.*ion.0.*dens.*th', '$n_D$', lw=2)
+        >>> ods.plot_quantity('@core.*ion.1.*dens.*th', '$n_C$', lw=2)
+
     :param ods: ODS instance
 
     :param key: ODS location or search pattern
@@ -1294,8 +1294,8 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
     :return: axes instance
 
     '''
-    if '*' in key:
-        key = ods.search_paths(key, n=1)[0]
+    # handle regular expressions
+    key = ods.search_paths(key, 1, '@')[0]
 
     if ax is None:
         ax = pyplot.gca()
@@ -1306,13 +1306,16 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
 
     if yname is None:
         yname = latexit.get(ds.attrs['y'], ds.attrs['y'])
+
     if xname is None:
         xname = latexit.get(ds.attrs['x'][0], ds.attrs['x'][0])
 
-    yunits = "[%s]" % latexit.get(y.attrs.get('units', '-'))
-    yunits = yunits if yunits != '[-]' else ''
+    yunits = y.attrs.get('units', '-')
+    yunits = "[%s]" % latexit.get(yunits, yunits)
+    yunits = yunits if yunits not in ['[-]', '[None]'] else ''
 
-    xunits = "[%s]" % latexit.get(x.attrs.get('units', '-'))
+    xunits = x.attrs.get('units', '-')
+    xunits = "[%s]" % latexit.get(xunits, xunits)
     xunits = xunits if xunits not in ['[-]', '[None]'] else ''
 
     if label is None:
@@ -1321,6 +1324,7 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
 
     if ylabel is None:
         ylabel = yunits
+
     if xlabel is None:
         xlabel = ' '.join(filter(None, [xname, xunits]))
 

@@ -39,17 +39,7 @@ class TestOmasPlot(unittest.TestCase):
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
-    ods = ODS()
-    ods.sample_equilibrium()
-    ods.sample_core_profiles()
-
-    x = numpy.linspace(0, 1.6, 25)
-    xe = (x[1]-x[0])*0.75 + x * 0
-    ux = unumpy.uarray(x, xe)
-
-    y = 2*x**2
-    e = 0.1 + y*0.01 + x*0.01
-    u = unumpy.uarray(y, e)
+    ods=ods_sample()
 
     # Utilities for this test
     def printv(self, *arg):
@@ -76,13 +66,18 @@ class TestOmasPlot(unittest.TestCase):
             plt.show()
 
     def test_quantity(self):
-        self.ods.plot_quantity('core.*elec.*dens', '$n_e$', lw=2)
+        self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal', '$n_e$', lw=2)
+        self.ods.plot_quantity('@core.*elec.*dens', '$n_e$', lw=2)
         try:
-            self.ods.plot_quantity('core.*')
+            self.ods.plot_quantity('@core.*')
         except ValueError:
             pass
-        omas_plot.quantity(self.ods, 'core.*ion.0.*dens.*th','$n_D$')
-        omas_plot.quantity(self.ods, 'core.*ion.1.*dens.*th','$n_C$')
+        try:
+            self.ods.plot_quantity('core.*')
+        except LookupError:
+            pass
+        omas_plot.quantity(self.ods, '@core.*ion.0.*dens.*th','$n_D$')
+        omas_plot.quantity(self.ods, '@core.*ion.1.*dens.*th','$n_C$')
 
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
@@ -110,12 +105,21 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_uband(self):
         from omas.omas_plot import uband
+
+        x = numpy.linspace(0, 1.6, 25)
+        xe = (x[1] - x[0]) * 0.75 + x * 0
+        ux = unumpy.uarray(x, xe)
+
+        y = 2 * x ** 2
+        e = 0.1 + y * 0.01 + x * 0.01
+        u = unumpy.uarray(y, e)
+
         ax = plt.gca()
-        ub1 = uband(self.x, self.u, ax)
-        ub2 = uband(self.x, -self.u, fill_kw=dict(alpha=0.15, color='k'), color='r')
+        ub1 = uband(x, u, ax)
+        ub2 = uband(x, -u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
-        ub3 = uband(self.ux, self.u)
-        ub4 = uband(self.ux, self.y)
+        ub3 = uband(ux, u)
+        ub4 = uband(ux, y)
         assert ub3 != ub4
         assert ub1 != ub3
 

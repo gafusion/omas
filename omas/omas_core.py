@@ -863,35 +863,44 @@ class ODS(MutableMapping):
             finally:
                 self.dynamic_path_creation = bkp_dynamic_path_creation
 
-    def coordinates(self, key=None):
+    def list_coordinates(self):
         '''
         return dictionary with coordinates in a given ODS
 
-        :param key: ODS location to return the coordinates of
-                    if key is None, then all the coordinates in the ODS are returned
-
-        :return: OrderedDict with coordinates
+        :return: dictionary with coordinates (keys are absolute location, values are relative locations)
         '''
-        coords = OrderedDict()
+        coords = {}
 
-        if key is None:
-            n = len(self.location)
-            for full_path in self.full_paths():
-                if l2u(full_path) in omas_coordinates(self.imas_version):
-                    coords[l2o(full_path)] = self[l2o(full_path)[n:]]
-
-        else:
-            info = omas_info_node(l2u(p2l(key)))
-            coordinates = map(lambda x: u2o(x, key), info['coordinates'])
-            for coord in coordinates:
-                if coord in self:
-                    coords[coord] = self[coord]
-                else:
-                    raise KeyError('Coordinate `%s` is empty' % coord)
+        n = len(self.location)
+        for full_path in self.full_paths():
+            if l2u(full_path) in omas_coordinates(self.imas_version):
+                coords[l2o(full_path)] = self[l2o(full_path)[n:]]
 
         return coords
 
-    def search_paths(self, search_pattern, n=None):
+    def coordinates(self, key):
+        '''
+        return dictionary with coordinates of a given ODS location
+
+        :param key: ODS location to return the coordinates of
+                    Note: both the key location and coordinates must have data
+
+        :return: OrderedDict with coordinates of a given ODS location
+        '''
+        coords = OrderedDict()
+
+        self[key]  # raise appropriate error if data is not there
+        ulocation = l2u(p2l(key))
+        info = omas_info_node(ulocation)
+        if 'coordinates' not in info:
+            raise ValueError('ODS location `%s` has no coordinates information' % ulocation)
+        coordinates = map(lambda x: u2o(x, key), info['coordinates'])
+        for coord in coordinates:
+            coords[coord] = self[coord] #this will raise the appropriate error if the coordinates data is not there
+
+        return coords
+
+    def search_paths(self, search_pattern, n=None, regular_expression_startswith=''):
         '''
         Find ODS locations that match a pattern
 
@@ -899,8 +908,22 @@ class ODS(MutableMapping):
 
         :param n: raise an error if a numbe of occurrences different from n is found
 
+        :param regular_expression_startswith: indicates that use of regular expressions
+               in the search_pattern is preceeded by certain characters.
+               This is used internally by some methods of the ODS to force users
+               to use '@' to indicate access to a path by regular expression.
+
         :return: list of ODS locations matching search_pattern pattern
         '''
+        if not isinstance(search_pattern, basestring):
+            return [search_pattern]
+
+        elif regular_expression_startswith:
+            if not search_pattern.startswith(regular_expression_startswith):
+                return [search_pattern]
+            else:
+                search_pattern = search_pattern[len(regular_expression_startswith):]
+
         search = re.compile(search_pattern)
         matches = []
         for path in map(l2o, self.full_paths()):
@@ -919,6 +942,8 @@ class ODS(MutableMapping):
 
         :return: xarray dataset
         '''
+        key = self.search_paths(key, 1, '@')[0]
+
         import xarray
         key = p2l(key)
 
