@@ -818,7 +818,7 @@ class ODS(MutableMapping):
         '''
         Convenience function for setting time dependent arrays
 
-        :param key: ods location to edit
+        :param key: ODS location to edit
 
         :param time_index: time index of the value to set
 
@@ -845,27 +845,11 @@ class ODS(MutableMapping):
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value
 
-    def coordinates(self):
-        '''
-        return dictionary with coordinates in a given ODS
-
-        NOTE: this needs to be a dictionary and not an ODS since a given coordinates may be
-        present only at certain indexes of an arrays of strucutures and an ODS cannot represent that.
-
-        :return: dictionary with coordinates
-        '''
-        n = len(self.location)
-        coords = {}
-        for full_path in self.full_paths():
-            if l2u(full_path) in omas_coordinates(self.imas_version):
-                coords[l2o(full_path)] = self[l2o(full_path)[n:]]
-        return coords
-
     def update(self, ods2):
         '''
-        Adds dictionary ods2's key-values pairs in to the ods
+        Adds ods2's key-values pairs to the ods
 
-        :param ods2: This is the dictionary to be added into the ods
+        :param ods2: dictionary or ODS to be added into the ODS
         '''
         if isinstance(ods2, ODS):
             for item in ods2.paths():
@@ -878,6 +862,34 @@ class ODS(MutableMapping):
                     self[item] = ods2[item]
             finally:
                 self.dynamic_path_creation = bkp_dynamic_path_creation
+
+    def coordinates(self, key=None):
+        '''
+        return dictionary with coordinates in a given ODS
+
+        :param key: ODS location to return the coordinates of
+                    if key is None, then all the coordinates in the ODS are returned
+
+        :return: OrderedDict with coordinates
+        '''
+        coords = OrderedDict()
+
+        if key is None:
+            n = len(self.location)
+            for full_path in self.full_paths():
+                if l2u(full_path) in omas_coordinates(self.imas_version):
+                    coords[l2o(full_path)] = self[l2o(full_path)[n:]]
+
+        else:
+            info = omas_info_node(l2u(p2l(key)))
+            coordinates = map(lambda x: u2o(x, key), info['coordinates'])
+            for coord in coordinates:
+                if coord in self:
+                    coords[coord] = self[coord]
+                else:
+                    raise KeyError('Coordinate `%s` is empty' % coord)
+
+        return coords
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
