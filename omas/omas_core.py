@@ -891,6 +891,25 @@ class ODS(MutableMapping):
 
         return coords
 
+    def search_paths(self, search_pattern, n=None):
+        '''
+        Find ODS locations that match a pattern
+
+        :param search_pattern: regular expression ODS location string
+
+        :param n: raise an error if a numbe of occurrences different from n is found
+
+        :return: list of ODS locations matching search_pattern pattern
+        '''
+        search = re.compile(search_pattern)
+        matches = []
+        for path in map(l2o, self.full_paths()):
+            if re.match(search, path):
+                matches.append(path)
+        if n is not None and len(matches) != n:
+            raise (ValueError('Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches))))
+        return matches
+
 # --------------------------------------------
 # import sample functions and add them as ODS methods
 # --------------------------------------------
