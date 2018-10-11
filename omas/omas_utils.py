@@ -746,7 +746,9 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
 
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     '''
+    tmp = {}
     try:
-        return load_structure(key.split('.')[0], imas_version)[0][o2i(key)]
+        tmp.update(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
     except KeyError:
-        return {}
+        pass
+    return tmp
