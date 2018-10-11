@@ -2,7 +2,7 @@
  "tf": {
   "documentation": "Toroidal field coils",
   "full_path": "tf",
-  "lifecycle_last_change": "3.12.1",
+  "lifecycle_last_change": "3.20.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -951,6 +951,20 @@
   "full_path": "tf/coil(i1)/current/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
+ },
+ "tf.coil[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Alphanumeric identifier of coil used for convenience",
+  "full_path": "tf/coil(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "tf.coil[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the coil",
+  "full_path": "tf/coil(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "tf.coil[:].resistance": {
   "data_type": "FLT_0D",

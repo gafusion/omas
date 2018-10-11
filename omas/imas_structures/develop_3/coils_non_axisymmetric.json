@@ -2,7 +2,7 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.19.1",
+  "lifecycle_last_change": "3.20.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "2"
@@ -894,6 +894,20 @@
   "full_path": "coils_non_axisymmetric/coil(i1)/current/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
+ },
+ "coils_non_axisymmetric.coil[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Alphanumeric identifier of coil",
+  "full_path": "coils_non_axisymmetric/coil(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "coils_non_axisymmetric.coil[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the coil",
+  "full_path": "coils_non_axisymmetric/coil(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "coils_non_axisymmetric.coil[:].resistance": {
   "data_type": "FLT_0D",

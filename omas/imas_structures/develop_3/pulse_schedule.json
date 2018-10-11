@@ -1298,7 +1298,7 @@
   "documentation": "List of events, either predefined triggers  or events recorded during the pulse",
   "full_path": "pulse_schedule/event(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "50",
+  "maxoccur": "130",
   "structure_reference": "pulse_schedule_event"
  },
  "pulse_schedule.event[:].acquisition_state": {

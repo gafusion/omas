@@ -1461,7 +1461,8 @@
   "data_type": "structure",
   "documentation": "Velocity",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.21.0",
   "structure_reference": "core_profiles_vector_components_2",
   "units": "m.s^-1"
  },
@@ -1472,7 +1473,7 @@
   "data_type": "FLT_1D",
   "documentation": "Diamagnetic component",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/diamagnetic(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1480,7 +1481,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_instant_changes.change[:].profiles_1d[:].electrons.velocity.diamagnetic_error_lower": {
@@ -1490,7 +1491,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"diamagnetic\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/diamagnetic_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1501,7 +1502,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"diamagnetic\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/diamagnetic_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1512,7 +1513,7 @@
   "data_type": "FLT_1D",
   "documentation": "Parallel component",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/parallel(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1520,7 +1521,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_instant_changes.change[:].profiles_1d[:].electrons.velocity.parallel_error_lower": {
@@ -1530,7 +1531,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"parallel\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/parallel_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1541,7 +1542,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/parallel_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1552,7 +1553,7 @@
   "data_type": "FLT_1D",
   "documentation": "Poloidal component",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/poloidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1560,7 +1561,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_instant_changes.change[:].profiles_1d[:].electrons.velocity.poloidal_error_lower": {
@@ -1570,7 +1571,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"poloidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/poloidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1581,7 +1582,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/poloidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1592,7 +1593,7 @@
   "data_type": "FLT_1D",
   "documentation": "Radial component",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/radial(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1600,7 +1601,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_instant_changes.change[:].profiles_1d[:].electrons.velocity.radial_error_lower": {
@@ -1610,7 +1611,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"radial\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/radial_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1621,7 +1622,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"radial\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/radial_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1632,7 +1633,7 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1640,7 +1641,7 @@
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "core_instant_changes.change[:].profiles_1d[:].electrons.velocity.toroidal_error_lower": {
@@ -1650,7 +1651,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1661,7 +1662,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/electrons/velocity/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
