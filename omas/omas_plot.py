@@ -162,7 +162,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     :param y: array of values with uncertainties, for which shaded error band is plotted
 
-    :param ax: The axes instance into which to plot (default: gca())
+    :param ax: axes instance into which to plot (default: gca())
 
     :param fill_kw: dict. Passed to pyplot.fill_between
 
@@ -287,7 +287,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     :param snap_to: float
         Snap direction angle to nearest value. Set snap to pi/4 to snap to 0, pi/4, pi/2, 3pi/4, etc. No in-between.
 
-    :param ax: Axes instance to plot on
+    :param ax: axes instance into which to plot (default: gca())
 
     :param color: matplotlib color specification
 
@@ -680,7 +680,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance or None
+    :param ax: axes instance into which to plot (default: gca())
 
     :param allow_autoscale: bool
         Certain overlays will be allowed to unlock xlim and ylim, assuming that they have been locked by equilibrium_CX.
@@ -742,7 +742,7 @@ def gas_injection_overlay(
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param angle_not_in_pipe_name: bool
         Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
@@ -856,7 +856,7 @@ def pf_active_overlay(ods, ax=None, **kw):
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param \**kw: Additional keywords
         scalex, scaley: passed to ax.autoscale_view() call at the end
@@ -945,7 +945,7 @@ def magnetics_overlay(
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param show_bpol_probe: bool
         Turn display of B_pol probes on/off
@@ -1015,7 +1015,7 @@ def interferometer_overlay(ods, ax=None, **kw):
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param \**kw: Additional keywords
 
@@ -1059,7 +1059,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param \**kw: Additional keywords for Thomson plot:
 
@@ -1101,7 +1101,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     :param ods: OMAS ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param which_pos: string
         'all': plot all valid positions this channel uses. This can vary in time depending on which beams are on.
@@ -1198,7 +1198,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     :param ods: ODS instance
 
-    :param ax: Axes instance
+    :param ax: axes instance into which to plot (default: gca())
 
     :param reset_fan_color: bool
         At the start of each bolometer fan (group of channels), set color to None to let a new one be picked by the
@@ -1256,3 +1256,76 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
                     ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
+
+latexit = {}
+latexit['rho_tor_norm'] = '$\\rho$'
+latexit['zeff'] = '$Z_{\\rm eff}$'
+latexit['m^-3'] = '$m^{-3}$'
+latexit['psi'] = '$\\psi$'
+
+@add_to__ODS__
+def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=None, ax=None, **kw):
+    '''
+    Provides convenient way to plot 1D quantities in ODS
+
+    For example:
+        >>> ods.plot_quantity('core.*elec.*dens', '$n_e$', lw=2)
+        >>> ods.plot_quantity('core.*ion.0.*dens.*th', '$n_D$', lw=2)
+        >>> ods.plot_quantity('core.*ion.1.*dens.*th', '$n_C$', lw=2)
+    
+    :param ods: ODS instance
+
+    :param key: ODS location or search pattern
+
+    :param yname: name of the y quantity
+
+    :param xname: name of the x quantity
+
+    :param ylabel: plot ylabel
+
+    :param xlabel: plot xlabel
+
+    :param label: label for the legend
+
+    :param ax: axes instance into which to plot (default: gca())
+
+    :param \**kw: extra arguments are passed to the plot function
+
+    :return: axes instance
+
+    '''
+    if '*' in key:
+        key = ods.search_paths(key, n=1)[0]
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    ds = ods.xarray(key)
+    x = ds[ds.attrs['x'][0]]
+    y = ds[ds.attrs['y']]
+
+    if yname is None:
+        yname = latexit.get(ds.attrs['y'], ds.attrs['y'])
+    if xname is None:
+        xname = latexit.get(ds.attrs['x'][0], ds.attrs['x'][0])
+
+    yunits = "[%s]" % latexit.get(y.attrs.get('units', '-'))
+    yunits = yunits if yunits != '[-]' else ''
+
+    xunits = "[%s]" % latexit.get(x.attrs.get('units', '-'))
+    xunits = xunits if xunits not in ['[-]', '[None]'] else ''
+
+    if label is None:
+        label = yname
+    kw['label'] = label
+
+    if ylabel is None:
+        ylabel = yunits
+    if xlabel is None:
+        xlabel = ' '.join(filter(None, [xname, xunits]))
+
+    ax.plot(x, y, **kw)
+
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    return ax

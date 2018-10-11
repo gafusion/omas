@@ -57,6 +57,33 @@ class TestOmasPlot(unittest.TestCase):
         if self.verbose:
             print(*arg)
 
+    def setUp(self):
+        test_id = self.id()
+        test_name = '.'.join(test_id.split('.')[-2:])
+        if test_name not in ['TestOmasPlot.test_ch_count']:
+            self.fig = plt.figure(test_name)
+        self.printv('{}...'.format(test_name))
+
+    def tearDown(self):
+        test_name = '.'.join(self.id().split('.')[-2:])
+        self.printv('    {} done.'.format(test_name))
+        if not self.keep_plots_open:
+            plt.close()
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.show_plots:
+            plt.show()
+
+    def test_quantity(self):
+        self.ods.plot_quantity('core.*elec.*dens', '$n_e$', lw=2)
+        try:
+            self.ods.plot_quantity('core.*')
+        except ValueError:
+            pass
+        omas_plot.quantity(self.ods, 'core.*ion.0.*dens.*th','$n_D$')
+        omas_plot.quantity(self.ods, 'core.*ion.1.*dens.*th','$n_C$')
+
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
         nc = 10
@@ -301,24 +328,6 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        if test_name not in ['TestOmasPlot.test_ch_count']:
-            self.fig = plt.figure(test_name)
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
-        if not self.keep_plots_open:
-            plt.close()
-
-    @classmethod
-    def tearDownClass(cls):
-        if cls.show_plots:
-            plt.show()
 
 
 if __name__ == '__main__':
