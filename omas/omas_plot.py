@@ -1264,7 +1264,12 @@ latexit['m^-3'] = '$m^{-3}$'
 latexit['psi'] = '$\\psi$'
 
 @add_to__ODS__
-def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=None, ax=None, **kw):
+def quantity(ods, key,
+             yname=None, xname=None,
+             yunits=None, xunits=None,
+             ylabel=None, xlabel=None, label=None,
+             xnorm=1.0, ynorm=1.0,
+             ax=None, **kw):
     '''
     Provides convenient way to plot 1D quantities in ODS
 
@@ -1281,9 +1286,17 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
 
     :param xname: name of the x quantity
 
+    :param yunits: units of the y quantity
+
+    :param xunits: units of the x quantity
+
     :param ylabel: plot ylabel
 
     :param xlabel: plot xlabel
+
+    :param ynorm: normalization factor for y
+
+    :param xnorm: normalization factor for x
 
     :param label: label for the legend
 
@@ -1310,11 +1323,13 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
     if xname is None:
         xname = latexit.get(ds.attrs['x'][0], ds.attrs['x'][0])
 
-    yunits = y.attrs.get('units', '-')
+    if yunits is None:
+        yunits = y.attrs.get('units', '-')
     yunits = "[%s]" % latexit.get(yunits, yunits)
     yunits = yunits if yunits not in ['[-]', '[None]'] else ''
 
-    xunits = x.attrs.get('units', '-')
+    if xunits is None:
+        xunits = x.attrs.get('units', '-')
     xunits = "[%s]" % latexit.get(xunits, xunits)
     xunits = xunits if xunits not in ['[-]', '[None]'] else ''
 
@@ -1328,7 +1343,7 @@ def quantity(ods, key, yname=None, xname=None, ylabel=None, xlabel=None, label=N
     if xlabel is None:
         xlabel = ' '.join(filter(None, [xname, xunits]))
 
-    ax.plot(x, y, **kw)
+    ax.plot(x * xnorm, y * ynorm, **kw)
 
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
