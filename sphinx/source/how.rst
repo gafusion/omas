@@ -63,11 +63,23 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     ods.physics_core_profiles_pressures()
 
-12. **Predefined set of plots**::
+12. **Get data as multidimensional array structures** in `xarray <http://xarray.pydata.org/en/stable/>`_ format::
+
+    ods['core_profiles.profiles_1d.0.electrons.density_thermal'].xarray()
+
+13. Conveniently **plot individual quantities**::
+
+    ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
+
+14. **Use regular expressions** for plotting and accessing data with xarrays::
+
+    ods.plot_quantity('@core.*0.elect.*dens.*th')
+
+15. **Predefined set of plots** available::
 
     ods.plot_core_profiles_summary()
 
-13. Save/load ODSs to/from **different storage systems**:
+16. Save/load ODSs to/from **different storage systems**:
 
 .. _omas_formats:
 

@@ -39,23 +39,45 @@ class TestOmasPlot(unittest.TestCase):
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
-    ods = ODS()
-    ods.sample_equilibrium()
-    ods.sample_core_profiles()
-
-    x = numpy.linspace(0, 1.6, 25)
-    xe = (x[1]-x[0])*0.75 + x * 0
-    ux = unumpy.uarray(x, xe)
-
-    y = 2*x**2
-    e = 0.1 + y*0.01 + x*0.01
-    u = unumpy.uarray(y, e)
+    ods=ods_sample()
 
     # Utilities for this test
     def printv(self, *arg):
         """Utility for tests to use"""
         if self.verbose:
             print(*arg)
+
+    def setUp(self):
+        test_id = self.id()
+        test_name = '.'.join(test_id.split('.')[-2:])
+        if test_name not in ['TestOmasPlot.test_ch_count']:
+            self.fig = plt.figure(test_name)
+        self.printv('{}...'.format(test_name))
+
+    def tearDown(self):
+        test_name = '.'.join(self.id().split('.')[-2:])
+        self.printv('    {} done.'.format(test_name))
+        if not self.keep_plots_open:
+            plt.close()
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.show_plots:
+            plt.show()
+
+    def test_quantity(self):
+        self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal', '$n_e$', lw=2)
+        self.ods.plot_quantity('@core.*elec.*dens', '$n_e$', lw=2)
+        try:
+            self.ods.plot_quantity('@core.*')
+        except ValueError:
+            pass
+        try:
+            self.ods.plot_quantity('core.*')
+        except LookupError:
+            pass
+        omas_plot.quantity(self.ods, '@core.*ion.0.*dens.*th','$n_D$')
+        omas_plot.quantity(self.ods, '@core.*ion.1.*dens.*th','$n_C$')
 
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
@@ -83,12 +105,21 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_uband(self):
         from omas.omas_plot import uband
+
+        x = numpy.linspace(0, 1.6, 25)
+        xe = (x[1] - x[0]) * 0.75 + x * 0
+        ux = unumpy.uarray(x, xe)
+
+        y = 2 * x ** 2
+        e = 0.1 + y * 0.01 + x * 0.01
+        u = unumpy.uarray(y, e)
+
         ax = plt.gca()
-        ub1 = uband(self.x, self.u, ax)
-        ub2 = uband(self.x, -self.u, fill_kw=dict(alpha=0.15, color='k'), color='r')
+        ub1 = uband(x, u, ax)
+        ub2 = uband(x, -u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
-        ub3 = uband(self.ux, self.u)
-        ub4 = uband(self.ux, self.y)
+        ub3 = uband(ux, u)
+        ub4 = uband(ux, y)
         assert ub3 != ub4
         assert ub1 != ub3
 
@@ -301,24 +332,6 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        if test_name not in ['TestOmasPlot.test_ch_count']:
-            self.fig = plt.figure(test_name)
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
-        if not self.keep_plots_open:
-            plt.close()
-
-    @classmethod
-    def tearDownClass(cls):
-        if cls.show_plots:
-            plt.show()
 
 
 if __name__ == '__main__':

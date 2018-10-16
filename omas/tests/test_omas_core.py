@@ -45,8 +45,8 @@ class TestOmasCore(unittest.TestCase):
 
     def test_coordinates(self):
         ods = ods_sample()
-        assert (len(ods.coordinates()) > 0)
-        assert (len(ods['equilibrium'].coordinates()) > 0)
+        assert (len(ods.list_coordinates()) > 0)
+        assert (len(ods['equilibrium'].list_coordinates()) > 0)
 
     def test_time(self):
         # test generation of a sample ods

@@ -239,9 +239,9 @@ class TestOmasPhysics(unittest.TestCase):
             ods2['equilibrium.time_slice[0].profiles_1d.pressure'] = data5
         assert (len(ods2['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
 
-        # coordinates can be easily copied over from existing ODSs with .coordinates() method
+        # coordinates can be easily copied over from existing ODSs with .list_coordinates() method
         ods3 = ODS()
-        ods3.update(ods1.coordinates())
+        ods3.update(ods1.list_coordinates())
         with omas_environment(ods3, coordsio=ods1):
             ods3['equilibrium.time_slice[0].profiles_1d.f'] = ods1['equilibrium.time_slice[0].profiles_1d.f']
         with omas_environment(ods3, coordsio=ods2):
