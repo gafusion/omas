@@ -130,6 +130,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
             path_propagate.append(name)
             hout_propagate = {}
             hout[name] = hout_propagate
+            # paths
             if '@path_doc' in me:
                 fname = path_propagate[0] + '/' + me['@path_doc']
                 me['@full_path'] = path_propagate[0] + '/' + me['@path_doc']
@@ -139,9 +140,19 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                 me['@full_path'] = path_propagate[0]
             if '@path' in me:
                 del me['@path']
+            # coordinates
             for coord in [c for c in me if c.startswith('@coordinate')]:
                 if '...' not in me[coord]:
                     me[coord] = path_propagate[0] + '/' + me[coord]
+            # identifiers documentation
+            if '@doc_identifier' in me:
+                doc_id = xmltodict.parse(open(imas_json_dir + '/../data-dictionary/' + me['@doc_identifier']).read())
+                hlp = doc_id['constants']['int']
+                doc = []
+                for row in hlp:
+                    doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
+                me['@documentation'] = me['@documentation'].strip() + '\n' + '\n'.join(doc)
+
             fname = process_path(fname)
             fout[fname] = {}
 
@@ -314,7 +325,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                                 list(map(str, structure[item].get('coordinates', ''))))))),
                             data_type=structure[item].get('data_type', '') + is_uncertain,
                             units=structure[item].get('units', ''),
-                            description=structure[item].get('documentation', ''),
+                            description=re.sub('\n','<br>',structure[item].get('documentation', '')),
                             status=status,
                             column_style=column_style
                         ))

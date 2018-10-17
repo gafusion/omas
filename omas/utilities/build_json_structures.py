@@ -19,6 +19,6 @@ for imas_version in imas_versions:
 
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version,imas_version), 'omas_doc.html']))
 
-    if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and (imas_version==list(imas_versions.values())[-1]) or imas_version=='develop/3'):
+    if not os.path.exists(filename) or force_build_json is True or (force_build_json=='last' and (imas_version==list(imas_versions.keys())[-1]) or imas_version=='develop/3'):
         create_json_structure(imas_version=imas_version)
         create_html_documentation(imas_version=imas_version)
