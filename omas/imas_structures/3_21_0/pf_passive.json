@@ -1,0 +1,680 @@
+{
+ "pf_passive": {
+  "documentation": "Description of the axisymmetric passive conductors, currents flowing in them",
+  "full_path": "pf_passive",
+  "lifecycle_last_change": "3.11.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.0",
+  "maxoccur": "3"
+ },
+ "pf_passive.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "pf_passive/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "pf_passive.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "pf_passive/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "pf_passive/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.code.output_flag": {
+  "coordinates": [
+   "pf_passive.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "pf_passive/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "pf_passive.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "pf_passive/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "pf_passive/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "pf_passive/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "pf_passive/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "pf_passive.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "pf_passive/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "pf_passive/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "pf_passive/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "pf_passive/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "pf_passive/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.",
+  "full_path": "pf_passive/loop(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "300",
+  "structure_reference": "pf_passive_loops"
+ },
+ "pf_passive.loop[:].current": {
+  "coordinates": [
+   "pf_passive.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Passive loop current",
+  "full_path": "pf_passive/loop(i1)/current(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "pf_passive.loop[:].current_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"current\"",
+  "full_path": "pf_passive/loop(i1)/current_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].current_error_lower": {
+  "coordinates": [
+   "pf_passive.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current\"",
+  "full_path": "pf_passive/loop(i1)/current_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "pf_passive.loop[:].current_error_upper": {
+  "coordinates": [
+   "pf_passive.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current\"",
+  "full_path": "pf_passive/loop(i1)/current_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "pf_passive.loop[:].element": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Each loop is comprised of a number of cross-section elements described  individually",
+  "full_path": "pf_passive/loop(i1)/element(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "pf_coils_elements"
+ },
+ "pf_passive.loop[:].element[:].area": {
+  "data_type": "FLT_0D",
+  "documentation": "Cross-sectional areas of the element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "pf_passive.loop[:].element[:].area_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"area\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/area_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"area\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "pf_passive.loop[:].element[:].area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"area\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "pf_passive.loop[:].element[:].geometry": {
+  "data_type": "structure",
+  "documentation": "Cross-sectional shape of the element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry",
+  "lifecycle_status": "alpha",
+  "structure_reference": "outline_2d_geometry_static"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle": {
+  "data_type": "structure",
+  "documentation": "Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "arcs_of_circle_static"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.curvature_radii": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Curvature radius of each arc of circle",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.curvature_radii_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"curvature_radii\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.curvature_radii_error_lower": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"curvature_radii\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.curvature_radii_error_upper": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"curvature_radii\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radii of the start point of each arc of circle",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.z": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height of the start point of each arc of circle",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.z_error_lower": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.arcs_of_circle.z_error_upper": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.geometry_type": {
+  "data_type": "INT_0D",
+  "documentation": "Type used to describe the element shape (1:'outline', 2:'rectangle', 4:'arcs of circle') ",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/geometry_type",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline": {
+  "data_type": "structure",
+  "documentation": "Irregular outline of the element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rz1d_static"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.z": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.z_error_lower": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.outline.z_error_upper": {
+  "coordinates": [
+   "pf_passive.loop[:].element[:].geometry.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle": {
+  "data_type": "structure",
+  "documentation": "Rectangular description of the element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rectangle_static"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.height": {
+  "data_type": "FLT_0D",
+  "documentation": "Vertical full height",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/height",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.height_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"height\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/height_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.height_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"height\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/height_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.height_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"height\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/height_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Geometric centre R",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.width": {
+  "data_type": "FLT_0D",
+  "documentation": "Horizontal full width",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.width_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"width\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/width_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"width\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"width\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Geometric centre Z",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.rectangle.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Identifier of this element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "pf_passive.loop[:].element[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of this element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "pf_passive.loop[:].element[:].turns_with_sign": {
+  "data_type": "FLT_0D",
+  "documentation": "Number of effective turns in the element for calculating magnetic fields of the coil/loop; includes the sign of the number of turns (positive means current is counter-clockwise when seen from above)",
+  "full_path": "pf_passive/loop(i1)/element(i2)/turns_with_sign",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_passive.loop[:].element[:].turns_with_sign_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"turns_with_sign\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/turns_with_sign_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].turns_with_sign_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"turns_with_sign\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/turns_with_sign_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_passive.loop[:].element[:].turns_with_sign_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"turns_with_sign\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/turns_with_sign_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_passive.loop[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the loop",
+  "full_path": "pf_passive/loop(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "pf_passive.loop[:].resistance": {
+  "data_type": "FLT_0D",
+  "documentation": "Passive loop resistance",
+  "full_path": "pf_passive/loop(i1)/resistance",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "pf_passive.loop[:].resistance_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"resistance\"",
+  "full_path": "pf_passive/loop(i1)/resistance_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].resistance_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"resistance\"",
+  "full_path": "pf_passive/loop(i1)/resistance_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "pf_passive.loop[:].resistance_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"resistance\"",
+  "full_path": "pf_passive/loop(i1)/resistance_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "pf_passive.loop[:].resistivity": {
+  "data_type": "FLT_0D",
+  "documentation": "Passive loop resistivity",
+  "full_path": "pf_passive/loop(i1)/resistivity",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm.m"
+ },
+ "pf_passive.loop[:].resistivity_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"resistivity\"",
+  "full_path": "pf_passive/loop(i1)/resistivity_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].resistivity_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"resistivity\"",
+  "full_path": "pf_passive/loop(i1)/resistivity_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm.m"
+ },
+ "pf_passive.loop[:].resistivity_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"resistivity\"",
+  "full_path": "pf_passive/loop(i1)/resistivity_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Ohm.m"
+ },
+ "pf_passive.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time [s]",
+  "full_path": "pf_passive/time(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ }
+}
