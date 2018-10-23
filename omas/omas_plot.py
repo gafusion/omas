@@ -426,7 +426,7 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
 
     # contours
     line = numpy.array([numpy.nan, numpy.nan])
-    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D,
+    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D.T,
                               levels, smooth_factor=contour_smooth):
         for item in item1:
             line = numpy.vstack((line, item.vertices, numpy.array([numpy.nan, numpy.nan])))
