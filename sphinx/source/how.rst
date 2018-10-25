@@ -73,7 +73,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
 14. **Use regular expressions** for plotting and accessing data with xarrays::
 
-    ods.plot_quantity('@core.*0.elect.*dens.*th')
+    ods.plot_quantity('\@core.*0.elect.*dens.*th')
 
 15. **Predefined set of plots** available::
 
