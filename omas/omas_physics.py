@@ -584,6 +584,10 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     :param ods: ODS location that is an array of structures
 
     :param conditions: dictionary (or ODS) whith entries that must match and their values
+                       * condition['name']=value  : check value
+                       * condition['name']=True   : check existance
+                       * condition['name']=False  : check not existance
+                       NOTE: True/False as flags for (not)existance is not an issue since IMAS does not support booleans
 
     :param no_matches_return: what index to return if no matches are found
 
@@ -604,7 +608,15 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     for k in ods:
         k_match = True
         for key in conditions:
-            if key not in ods[k] or ods[k][key] != conditions[key]:
+            if conditions[key] is False:
+                if key in ods[k]:
+                    k_match = False
+                    break
+            elif conditions[key] is True:
+                if key not in ods[k]:
+                    k_match = False
+                    break
+            elif key not in ods[k] or ods[k][key] != conditions[key]:
                 k_match = False
                 break
         if k_match:
