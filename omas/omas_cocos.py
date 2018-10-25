@@ -72,6 +72,8 @@ cocos_signals['core_instant_changes.change.:.profiles_1d.:.e_field.poloidal']='?
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.e_field.toroidal']='?'                                                  #[ADD?]# 2.833333 # e_field  length_  [V.m^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.current_parallel_inside']='?'                                           #[ADD?]# 2.000000 # current  [A]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.grid.psi']='?'                                                          #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 2.000000 # length_  [rad.s^-1]
+cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 2.000000 # length_  [rad.s^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_bootstrap']='?'                                                       #[ADD?]# 2.000000 # psi_norm  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_non_inductive']='?'                                                   #[ADD?]# 2.000000 # psi_norm  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_ohmic']='?'                                                           #[ADD?]# 2.000000 # psi_norm  [A/m^2]
@@ -117,6 +119,8 @@ cocos_signals['core_profiles.global_quantities.ip']='TOR'                       
 cocos_signals['core_profiles.global_quantities.v_loop']='TOR'                                                             # 2.000000 # psi_norm  [V]
 cocos_signals['core_profiles.profiles_1d.:.current_parallel_inside']='TOR'                                                # 2.000000 # current  [A]
 cocos_signals['core_profiles.profiles_1d.:.grid.psi']='PSI'                                                               # 2.000000 # psi  [Wb]
+cocos_signals['core_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 2.000000 # length_  [rad.s^-1]
+cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 2.000000 # length_  [rad.s^-1]
 cocos_signals['core_profiles.profiles_1d.:.j_bootstrap']='TOR'                                                            # 2.000000 # psi_norm  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_non_inductive']='TOR'                                                        # 2.000000 # psi_norm  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_ohmic']='TOR'                                                                # 2.000000 # psi_norm  [A/m^2]
@@ -337,6 +341,8 @@ cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.poloidal']='?'         
 cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.toroidal']='?'                                              #[ADD?]# 2.600000 # psi_norm  length_  [A.m^-2]
 cocos_signals['edge_profiles.profiles_1d.:.current_parallel_inside']='?'                                             #[ADD?]# 2.000000 # current  [A]
 cocos_signals['edge_profiles.profiles_1d.:.grid.psi']='?'                                                            #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['edge_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                        #[ADD?]# 2.000000 # length_  [rad.s^-1]
+cocos_signals['edge_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                                #[ADD?]# 2.000000 # length_  [rad.s^-1]
 cocos_signals['edge_profiles.profiles_1d.:.j_bootstrap']='?'                                                         #[ADD?]# 2.000000 # psi_norm  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_non_inductive']='?'                                                     #[ADD?]# 2.000000 # psi_norm  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_ohmic']='?'                                                             #[ADD?]# 2.000000 # psi_norm  [A/m^2]
@@ -472,9 +478,14 @@ cocos_signals['gas_injection.pipe.:.exit_position.phi']='TOR'                   
 cocos_signals['gas_injection.pipe.:.second_point.phi']='?'                                   #[ADD?]# 2.000000 # phi  [rad]
 
 # IC_ANTENNAS
-cocos_signals['ic_antennas.antenna.:.strap.:.outline.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['ic_antennas.antenna.:.strap.:.current.data']='?'                                      #[ADD?]# 1.833333 # current  [A]
-cocos_signals['ic_antennas.antenna.:.surface_current.:.spectrum']='?'                                #[ADD?]# 1.600000 # current  [A]
+cocos_signals['ic_antennas.antenna.:.module.:.current.:.position.phi']='?'                                    #[ADD?]# 2.625000 # current  phi  [rad]
+cocos_signals['ic_antennas.antenna.:.module.:.pressure.:.position.phi']='?'                                   #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['ic_antennas.antenna.:.module.:.strap.:.outline.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['ic_antennas.antenna.:.module.:.voltage.:.position.phi']='?'                                    #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['ic_antennas.antenna.:.module.:.strap.:.current.data']='?'                                      #[ADD?]# 1.875000 # current  [A]
+cocos_signals['ic_antennas.antenna.:.module.:.current.:.amplitude.data']='?'                                  #[ADD?]# 1.625000 # current  [A]
+cocos_signals['ic_antennas.antenna.:.module.:.current.:.phase.data']='?'                                      #[ADD?]# 1.625000 # current  [rad]
+cocos_signals['ic_antennas.antenna.:.surface_current.:.spectrum']='?'                                         #[ADD?]# 1.600000 # current  [A]
 
 # INFO
 
@@ -649,10 +660,10 @@ cocos_signals['sawteeth.vacuum_toroidal_field.b0']='TOR'                        
 # SDN
 
 # SOFT_X_RAYS
-cocos_signals['soft_x_rays.channel.:.aperture.:.centre.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['soft_x_rays.channel.:.detector.centre.phi']='?'                      #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['soft_x_rays.channel.:.line_of_sight.first_point.phi']='?'            #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['soft_x_rays.channel.:.line_of_sight.second_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['soft_x_rays.channel.:.aperture.:.centre.phi']='?'                        #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['soft_x_rays.channel.:.detector.centre.phi']='?'                          #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['soft_x_rays.channel.:.line_of_sight.first_point.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['soft_x_rays.channel.:.line_of_sight.second_point.phi']='?'               #[ADD?]# 2.000000 # phi  [rad]
 
 # SPECTROMETER_VISIBLE
 cocos_signals['spectrometer_visible.channel.:.active_spatial_resolution.:.centre.phi']='?'                             #[ADD?]# 2.000000 # phi  [rad]
