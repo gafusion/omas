@@ -58,6 +58,7 @@ docs: html
 
 json:
 	cd omas/utilities && python build_json_structures.py
+	make cocos
 
 itm:
 	cd omas/utilities && python generate_itm_interface.py
@@ -71,5 +72,5 @@ git:
 pipy:
 	python setup.py sdist upload
 
-release: tests2 tests3 requirements json itm cocos docs git pipy
+release: tests2 tests3 requirements json itm docs git pipy
 	@echo 'Done!'
