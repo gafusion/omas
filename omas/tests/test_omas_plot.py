@@ -335,4 +335,5 @@ class TestOmasPlot(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPlot)
+    unittest.TextTestRunner(verbosity=2).run(suite)

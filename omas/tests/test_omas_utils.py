@@ -166,4 +166,5 @@ class TestOmasUtils(unittest.TestCase):
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0',1,0.2)
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasUtils)
+    unittest.TextTestRunner(verbosity=2).run(suite)

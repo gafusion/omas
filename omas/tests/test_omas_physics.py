@@ -393,4 +393,5 @@ class TestOmasPhysics(unittest.TestCase):
         assert tmp[0] == 2
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPhysics)
+    unittest.TextTestRunner(verbosity=2).run(suite)

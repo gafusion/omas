@@ -127,4 +127,5 @@ class TestOmasCore(unittest.TestCase):
         assert (ods['@eq.*1.*.ip'] == 1)
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
+    unittest.TextTestRunner(verbosity=2).run(suite)

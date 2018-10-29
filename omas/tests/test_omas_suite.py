@@ -79,4 +79,5 @@ class TestOmasSuite(unittest.TestCase):
         through_omas_itm(ods)
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasSuite)
+    unittest.TextTestRunner(verbosity=2).run(suite)
