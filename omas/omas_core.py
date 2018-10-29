@@ -545,6 +545,11 @@ class ODS(MutableMapping):
                 raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
     def __getitem__(self, key, consistency_check=True):
+
+        # handle pattern match
+        if isinstance(key, basestring) and key.startswith('@'):
+            key = self.search_paths(key, 1, '@')[0]
+
         # handle individual keys as well as full paths
         key = p2l(key)
 

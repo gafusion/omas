@@ -123,5 +123,8 @@ class TestOmasCore(unittest.TestCase):
         assert (ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == -99)
         assert (ods['equilibrium.time_slice'][-10]['global_quantities.ip'] == -100)
 
+        # access by pattern
+        assert (ods['@eq.*1.*.ip'] == 1)
+
 if __name__ == '__main__':
     unittest.main()
