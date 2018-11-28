@@ -434,80 +434,85 @@ class ODS(MutableMapping):
             else:
                 raise (Exception('Cannot convert from list to dict once ODS has data'))
 
-        # now that all checks are completed we can assign the structure information
-        if self.consistency_check and not isinstance(value, ODS):
-            ulocation = o2u(location)
-            # handle cocos transformations coming in
-            if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
-                value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
+        # if the value is not an ODS strucutre
+        if not isinstance(value, ODS):
 
-            # get node information
-            info = omas_info_node(ulocation)
+            # now that all checks are completed we can assign the structure information
+            if self.consistency_check:
+                ulocation = o2u(location)
+                # handle cocos transformations coming in
+                if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
+                    value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
 
-            # handle units (Python pint package)
-            if pint is not None:
-                if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value.shape) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
-                    value = value.to(info['units']).magnitude
+                # get node information
+                info = omas_info_node(ulocation)
 
-            # coordinates interpolation
-            ods_coordinates, input_coordinates = self.coordsio
-            if input_coordinates:
-                all_coordinates = []
-                coordinates = []
-                if len(input_coordinates) and 'coordinates' in info:
-                    all_coordinates = list(map(lambda x: u2o(x, self.location), info['coordinates']))
-                    coordinates = list(filter(lambda coord: not coord.startswith('1...'), all_coordinates))
-                if len(coordinates):
-                    # add any missing coordinate that were input
-                    for coordinate in coordinates:
-                        if coordinate not in ods_coordinates and coordinate in input_coordinates:
-                            printd('Adding %s coordinate to ods' % (coordinate), topic='coordsio')
-                            ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate,False)
+                # handle units (Python pint package)
+                if pint is not None:
+                    if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value.shape) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
+                        value = value.to(info['units']).magnitude
 
-                    # if all coordinates information is present
-                    if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
-                        # if there is any coordinate that does not match
-                        if any([len(input_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
-                                (not numpy.allclose(input_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
+                # coordinates interpolation
+                ods_coordinates, input_coordinates = self.coordsio
+                if input_coordinates:
+                    all_coordinates = []
+                    coordinates = []
+                    if len(input_coordinates) and 'coordinates' in info:
+                        all_coordinates = list(map(lambda x: u2o(x, self.location), info['coordinates']))
+                        coordinates = list(filter(lambda coord: not coord.startswith('1...'), all_coordinates))
+                    if len(coordinates):
+                        # add any missing coordinate that were input
+                        for coordinate in coordinates:
+                            if coordinate not in ods_coordinates and coordinate in input_coordinates:
+                                printd('Adding %s coordinate to ods' % (coordinate), topic='coordsio')
+                                ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate,False)
 
-                            # for the time being omas interpolates only 1D quantities
-                            if len(info['coordinates']) > 1:
-                                raise (Exception('coordio does not support multi-dimentional interpolation just yet'))
+                        # if all coordinates information is present
+                        if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
+                            # if there is any coordinate that does not match
+                            if any([len(input_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
+                                    (not numpy.allclose(input_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
 
-                            # if the (first) coordinate is in input_coordinates
-                            coordinate = coordinates[0]
-                            if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
-                                raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
-                            printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
-                            value = numpy.interp(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
+                                # for the time being omas interpolates only 1D quantities
+                                if len(info['coordinates']) > 1:
+                                    raise (Exception('coordio does not support multi-dimentional interpolation just yet'))
+
+                                # if the (first) coordinate is in input_coordinates
+                                coordinate = coordinates[0]
+                                if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
+                                    raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
+                                printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
+                                value = numpy.interp(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
+                            else:
+                                printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                         else:
-                            printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
-                    else:
-                        printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
+                            printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
-                    value = ods_coordinates.__getitem__(location, None)
+                    elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                        value = ods_coordinates.__getitem__(location, None)
 
-        # lists are saved as numpy arrays, and 0D numpy arrays as scalars
-        if isinstance(value, list):
-            value = numpy.array(value)
-        elif isinstance(value, numpy.ndarray) and not (len(value.shape)):
-            value = numpy.asscalar(value)
-        elif isinstance(value, float):
-            value = float(value)
-        elif isinstance(value, int):
-            value = int(value)
+            # lists are saved as numpy arrays, and 0D numpy arrays as scalars
+            if isinstance(value, list):
+                value = numpy.array(value)
+            if isinstance(value, numpy.ndarray) and not (len(value.shape)):
+                value = numpy.asscalar(value)
+            if isinstance(value, float):
+                value = float(value)
+            elif isinstance(value, int):
+                value = int(value)
+            elif not isinstance(value,(unicode,str,numpy.ndarray)):
+                raise(ValueError('trying to write %s in %s\nSupported types are: string, float, int, array'%(type(value),location)))
 
-        if self.consistency_check and not isinstance(value, ODS):
-            # check consistency for scalar entries
-            if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                printe('%s must be a scalar of type %s' % (location, info['data_type']))
-            # check consistency for number of dimensions
-            elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                # may want to raise a ValueError in the future
-                printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
-            elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+            if self.consistency_check:
+                # check consistency for scalar entries
+                if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+                    printe('%s must be a scalar of type %s' % (location, info['data_type']))
+                # check consistency for number of dimensions
+                elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+                    # may want to raise a ValueError in the future
+                    printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
+                elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
+                    printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
         # if the user has entered a path rather than a single key
         if len(key) > 1:
