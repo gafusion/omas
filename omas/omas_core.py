@@ -181,7 +181,7 @@ class ODS(MutableMapping):
                 continue
 
             # identify time-dependent data
-            info = omas_info_node(self.ulocation + '.' + item)
+            info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
             if 'coordinates' in info and any([k.endswith('.time') for k in info['coordinates']]):
 
                 # time-dependent arrays
@@ -190,9 +190,11 @@ class ODS(MutableMapping):
 
                 # time-depentend list of ODSs
                 elif isinstance(self[item].omas_data, list) and len(self[item]) and 'time' in self[item][0]:
-                    for k in self[item].keys()[::-1]:
-                        if k != time_index:
-                            del self[item][k]
+                    if time_index is None:
+                        raise (ValueError('`time` array is not set for `%s` ODS'%self.ulocation))
+                    tmp = self[item][time_index]
+                    self[item].clear()
+                    self[item][0]=tmp
 
             # go deeper inside ODSs that do not have time info
             elif isinstance(self[item], ODS):
