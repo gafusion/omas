@@ -170,10 +170,9 @@ class ODS(MutableMapping):
         # set time_index for parent and children
         if 'time' in self:
             if time_index is None:
-                time_index = numpy.where(self['time'] == time)[0]
+                time_index = numpy.where(self['time'] == time)[0][0]
             else:
-                raise (ValueError(
-                    'time info is defined both in %s as well as upstream' % (self.location + '.time')))
+                raise (ValueError('time info is defined both in %s as well as upstream' % (self.location + '.time')))
 
         # loop over items
         for item in self.keys():
