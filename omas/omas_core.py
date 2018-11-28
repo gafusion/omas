@@ -501,8 +501,8 @@ class ODS(MutableMapping):
                 value = float(value)
             elif isinstance(value, int):
                 value = int(value)
-            elif not isinstance(value,(unicode,str,numpy.ndarray)):
-                raise(ValueError('trying to write %s in %s\nSupported types are: string, float, int, array'%(type(value),location)))
+            elif not (isinstance(value, (unicode, str, numpy.ndarray)) or value is None):
+                raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)))
 
             if self.consistency_check:
                 # check consistency for scalar entries
