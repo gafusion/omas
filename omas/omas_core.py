@@ -347,6 +347,12 @@ class ODS(MutableMapping):
             else:
                 structure[structure_key]
 
+    def set_child_locations(self):
+        for item in self.keys():
+            if isinstance(self[item],ODS):
+                self[item].location=l2o([self.location,item])
+                self[item].set_child_locations()
+
     def __setitem__(self, key, value):
         # handle individual keys as well as full paths
         key = p2l(key)
@@ -549,6 +555,11 @@ class ODS(MutableMapping):
                 IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
             else:
                 raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+
+        # if the value is an ODS strucutre
+        if isinstance(value, ODS) and len(value):
+            # make sure entries have the right location
+            self.set_child_locations()
 
     def __getitem__(self, key, consistency_check=True):
 
