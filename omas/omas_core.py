@@ -503,14 +503,17 @@ class ODS(MutableMapping):
                 value = numpy.array(value)
             if isinstance(value, numpy.ndarray) and not (len(value.shape)):
                 value = numpy.asscalar(value)
-            if isinstance(value, float):
+            if isinstance(value, (float, numpy.floating)):
                 value = float(value)
-            elif isinstance(value, int):
+            elif isinstance(value, (int, numpy.integer)):
                 value = int(value)
-            elif not (isinstance(value, (unicode, str, numpy.ndarray)) or value is None):
-                raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)))
 
             if self.consistency_check:
+                # check type
+                if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
+                    raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (
+                    type(value), location)))
+
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
                     printe('%s must be a scalar of type %s' % (location, info['data_type']))
@@ -557,7 +560,7 @@ class ODS(MutableMapping):
                 raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
         # if the value is an ODS strucutre
-        if isinstance(value, ODS) and len(value):
+        if isinstance(value, ODS) and value.omas_data is not None and len(value):
             # make sure entries have the right location
             self.set_child_locations()
 

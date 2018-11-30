@@ -502,8 +502,8 @@ def p2l(key):
     if isinstance(key, tuple):
         return list(key)
 
-    if isinstance(key, int):
-        return [key]
+    if isinstance(key, (int,numpy.integer)):
+        return [int(key)]
 
     if isinstance(key, basestring) and '.' not in key:
         if len(key):
@@ -716,6 +716,7 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
         from omas import ODS
         _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
     ods = _info_structures[imas_version]
+    ods.consistency_check=False
 
     for structure in structures:
         if structure not in ods:

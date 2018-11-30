@@ -17,7 +17,7 @@ all:
 tests: tests2 tests3
 
 tests2:
-	python -m unittest discover --pattern="*.py" -s omas/tests/ -v
+	python2 -m unittest discover --pattern="*.py" -s omas/tests/ -v
 
 tests3:
 	python3 -m unittest discover --pattern="*.py" -s omas/tests/ -v
