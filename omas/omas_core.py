@@ -657,7 +657,13 @@ class ODS(MutableMapping):
                                 if len(ods_coordinates.__getitem__(coordinate,None)) != len(value):
                                     raise (Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
                                 printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
-                                value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
+                                try:
+                                    value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
+                                except TypeError:
+                                    if numpy.atleast_1d(is_uncertain(value)).any():
+                                        v = numpy.interp(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), nominal_values(value))
+                                        s = numpy.interp(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), std_devs(value))
+                                        value = unumpy.uarray(v, s)
                             else:
                                 printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                         else:
