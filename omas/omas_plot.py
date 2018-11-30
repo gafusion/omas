@@ -1343,7 +1343,7 @@ def quantity(ods, key,
     if xlabel is None:
         xlabel = ' '.join(filter(None, [xname, xunits]))
 
-    ax.plot(x * xnorm, y * ynorm, **kw)
+    uband(x * xnorm, y * ynorm, ax=ax, **kw)
 
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
