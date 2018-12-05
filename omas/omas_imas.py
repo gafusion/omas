@@ -424,7 +424,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             joined_fetch_paths=map(l2i, fetch_paths)
 
             # build omas data structure
-            ods = ODS()
+            ods = ODS(imas_version=imas_version)
             for path in fetch_paths:
                 if len(path)==2 and path[-1]=='time':
                     data = imas_get(ids, path, None)

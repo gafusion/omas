@@ -126,6 +126,17 @@ class TestOmasCore(unittest.TestCase):
         # access by pattern
         assert (ods['@eq.*1.*.ip'] == 1)
 
+    def test_version(self):
+        ods = ODS(imas_version='3.20.0')
+        ods['ec_antennas.antenna.0.power'] = 1.0
+
+        try:
+            ods = ODS(imas_version='3.21.0')
+            ods['ec_antennas.antenna.0.power'] = 1.0
+            raise AssertionError('3.21.0 should not have `ec_antennas.antenna.0.power`')
+        except LookupError:
+            pass
+
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
     unittest.TextTestRunner(verbosity=2).run(suite)
