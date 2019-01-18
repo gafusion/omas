@@ -35,7 +35,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     ods['equilibrium.time_slice.:.global_quantities.ip']
 
-6. Automatic **COCOS transformations** [`read the COCOS cheatsheat <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
+6. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
 
     with omas_environment(ods, cocosio=2):
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
