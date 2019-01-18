@@ -1010,6 +1010,7 @@ try:
         setattr(ODS, 'sample_' + item, getattr(omas_sample, item))
 except ImportError as _excp:
     printe('OMAS sample function are not available: ' + repr(_excp))
+    raise
 
 # --------------------------------------------
 # import physics functions and add them as ODS methods

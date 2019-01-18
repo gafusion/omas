@@ -425,7 +425,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 
             # build omas data structure
             ods = ODS(imas_version=imas_version)
-            for path in fetch_paths:
+            for k,path in enumerate(fetch_paths):
                 if len(path)==2 and path[-1]=='time':
                     data = imas_get(ids, path, None)
                     if data[0]==-1:
@@ -454,7 +454,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                         continue
                     else:
                         data = uarray(data,stdata)
-                #print(path,data)
+                if verbose: print('Loading data: {0:3.3f}%'.format(100*float(k)/len(fetch_paths)))#,end='')
                 h = ods
                 for step in path[:-1]:
                     h = h[step]
