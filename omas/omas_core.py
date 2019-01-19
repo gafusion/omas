@@ -70,17 +70,24 @@ class ODS(MutableMapping):
             structure = {}
         self.structure = structure
 
-    def homogeneous_time(self, key=''):
+    def homogeneous_time(self, key='', default=True):
         '''
-        return whether time is homogeneous or not
+        dynamically evaluate whether time is homogeneous or not
+        NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
 
-        :param key: ods location
+        :param default: what to return in case no time basis is defined or there is only one element in the time basis
 
-        :return:
+        :return: True/False or default value (None) if no time basis is defined or there is only one element in the time basis
         '''
-        extra_info={}
-        self.time(key=key,extra_info=extra_info)
-        return extra_info['homogeneous_time']
+        if not len(self.location) and not len(key):
+            raise(ValueError('homogeneous_time() can not be called on a top-level ODS'))
+        extra_info = {}
+        self.time(key=key, extra_info=extra_info)
+        homogeneous_time = extra_info['homogeneous_time']
+        if homogeneous_time is None:
+            return default
+        else:
+            return homogeneous_time
 
     def time(self, key='', extra_info=None):
         """
