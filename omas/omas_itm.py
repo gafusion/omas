@@ -473,8 +473,9 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                     elif isinstance(stdata, unicode) and not len(stdata):
                         continue
                     else:
-                        data = uarray(data, stdata)
-                # print(path,data)
+                        data = uarray(data,stdata)
+                if verbose:
+                    print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
                 h = ods
                 for step in path[:-1]:
                     h = h[step]
