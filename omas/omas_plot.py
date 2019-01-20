@@ -5,12 +5,15 @@
 
 from __future__ import print_function, division, unicode_literals
 
-import matplotlib
-from matplotlib import pyplot
-
 import inspect
 from .omas_utils import *
 from .omas_physics import cocos_transform
+
+try:
+    import matplotlib
+    from matplotlib import pyplot
+except ImportError as _excp:
+    printe('OMAS plotting will not work! Error loading maplotlib: '+repr(_excp))
 
 __all__ = []
 __ods__ = []
