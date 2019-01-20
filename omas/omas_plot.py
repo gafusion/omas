@@ -27,6 +27,11 @@ def add_to__ODS__(f):
     return f
 
 
+def add_to__ALL__(f):
+    __all__.append(f.__name__)
+    return f
+
+
 # ================================
 # plotting helper functions
 # ================================
@@ -212,7 +217,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
     return result
 
 
-@add_to__ODS__
+@add_to__ALL__
 def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
     """
     Utility function for CX hardware overlays.

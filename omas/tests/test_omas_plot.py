@@ -81,25 +81,26 @@ class TestOmasPlot(unittest.TestCase):
 
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
+        from omas.omas_plot import get_channel_count
         nc = 10
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering(nc=nc)
-        nc_ts = ts_ods.plot_get_channel_count('thomson_scattering')
+        nc_ts = get_channel_count(ts_ods, 'thomson_scattering')
         assert nc_ts == nc
 
         empty_ods = ODS()
-        nc_empty = empty_ods.plot_get_channel_count('thomson_scattering')
+        nc_empty = get_channel_count(empty_ods, 'thomson_scattering')
         assert nc_empty == 0
 
-        nc_ts_check_pass = ts_ods.plot_get_channel_count(
+        nc_ts_check_pass = get_channel_count(ts_ods,
             'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
         assert nc_ts_check_pass == nc
 
-        nc_ts_check_fail = ts_ods.plot_get_channel_count(
+        nc_ts_check_fail = get_channel_count(ts_ods,
             'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
         assert nc_ts_check_fail == 0
 
-        nc_ts_check_fail2 = ts_ods.plot_get_channel_count(
+        nc_ts_check_fail2 = get_channel_count(ts_ods,
             'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
         assert nc_ts_check_fail2 == 0
 
@@ -236,9 +237,10 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=True)
 
     def test_ts_overlay_mask(self):
+        from omas.omas_plot import get_channel_count
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
-        nc = ts_ods.plot_get_channel_count('thomson_scattering')
+        nc = get_channel_count(ts_ods, 'thomson_scattering')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
         markers *= int(numpy.ceil(float(nc)/len(markers)))
@@ -296,9 +298,10 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, bolometer=True)
 
     def test_bolo_overlay_mask(self):
+        from omas.omas_plot import get_channel_count
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods = bolo_ods.sample_bolometer()
-        nc = bolo_ods.plot_get_channel_count('bolometer')
+        nc = get_channel_count(bolo_ods, 'bolometer')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
         markers *= int(numpy.ceil(float(nc) / len(markers)))

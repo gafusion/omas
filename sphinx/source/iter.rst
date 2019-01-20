@@ -43,4 +43,4 @@ Accessing IMAS data at ITER with OMAS
        save_omas_pkl(ods, 'iter_scenario_131034.pk')
 
    For more information on how to manipulate OMAS data see the :ref:`high-level OMAS overview page <concept>`
-   and the extensive list of :ref:`OMAS examples <general_examples>`.
+   and the extensive :ref:`list of OMAS examples <general_examples>`.
