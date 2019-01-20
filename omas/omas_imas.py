@@ -476,7 +476,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 if 'imas' != 'itm':
     def load_omas_iter_scenario(shot, run=0, paths=None,
                                 imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                                verbose=None)
+                                verbose=True):
         """
         Load OMAS data set from ITER IMAS scenario database
     
@@ -494,19 +494,21 @@ if 'imas' != 'itm':
         """
         # set MDSPLUS_TREE_BASE_? environment variables as per
         # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
-        bkp_imas_environment = {}
-        for k in range(10):
-            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
-                bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
+        try:
+            bkp_imas_environment = {}
+            for k in range(10):
+                if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
+                    bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
+                os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
 
-        # load data from imas
-        ods = load_omas_imas(user=None, machine=None, shot=shot, run=shot, paths=paths, imas_version=imas_version, verbose=verbose)
+            # load data from imas
+            ods = load_omas_imas(user=None, machine=None, shot=shot, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
-        # restore existing IMAS environment
-        for k in range(10):
-            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
-        os.environ.update(bkp_imas_environment)
+        finally:
+            # restore existing IMAS environment
+            for k in range(10):
+                del os.environ['MDSPLUS_TREE_BASE_%d' % k]
+                os.environ.update(bkp_imas_environment)
 
         return ods
 

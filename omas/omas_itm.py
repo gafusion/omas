@@ -495,7 +495,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
 if 'itm' != 'itm':
     def load_omas_iter_scenario(shot, run=0, paths=None,
                                 itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']),
-                                verbose=None)
+                                verbose=True):
         """
         Load OMAS data set from ITER ITM scenario database
     
@@ -513,19 +513,21 @@ if 'itm' != 'itm':
         """
         # set MDSPLUS_TREE_BASE_? environment variables as per
         # itmdb /work/itm/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
-        bkp_itm_environment = {}
-        for k in range(10):
-            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
-                bkp_itm_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/itm/shared/iterdb/3/%d' % k
+        try:
+            bkp_itm_environment = {}
+            for k in range(10):
+                if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
+                    bkp_itm_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
+                os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/itm/shared/iterdb/3/%d' % k
 
-        # load data from itm
-        ods = load_omas_itm(user=None, machine=None, shot=shot, run=shot, paths=paths, itm_version=itm_version, verbose=verbose)
+            # load data from itm
+            ods = load_omas_itm(user=None, machine=None, shot=shot, run=run, paths=paths, itm_version=itm_version, verbose=verbose)
 
-        # restore existing ITM environment
-        for k in range(10):
-            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
-        os.environ.update(bkp_itm_environment)
+        finally:
+            # restore existing ITM environment
+            for k in range(10):
+                del os.environ['MDSPLUS_TREE_BASE_%d' % k]
+                os.environ.update(bkp_itm_environment)
 
         return ods
 
