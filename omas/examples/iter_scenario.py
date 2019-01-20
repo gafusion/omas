@@ -17,15 +17,14 @@ import os
 from omas import *
 
 process_existing = False
-save_local = False
+save_local = True
 s3_username = os.environ['USER']
 
 os.environ['OMAS_DEBUG_TOPIC'] = 's3'
 
 # parse scenario_summary output
 what=['machine', 'shot','run','ref_name','ip','b0','fuelling','confinement','workflow']
-tmp = subprocess.Popen('scenario_summary -c ' + ','.join(what), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                       shell=True).communicate()
+tmp = subprocess.Popen('scenario_summary -c ' + ','.join(what), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
 if 'command not found' in tmp[1].decode("utf-8"):
     raise(Exception(tmp[1].decode("utf-8")))
 scenario_summary=tmp[0].decode("utf-8").split('\n')
@@ -37,14 +36,6 @@ for line in scenario_summary:
     elif ksep == 2:
         items = line.strip().split()
         scenarios.append(dict(zip(what, items)))
-
-# setup environmental variables
-tmp = subprocess.Popen('imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE', stdout=subprocess.PIPE,
-                       shell=True).communicate()[0].split('\n')
-for line in tmp:
-    if 'MDSPLUS_TREE_BASE' in line:
-        env, value = re.sub(';', '', re.sub('export', '', line)).strip().split('=')
-        os.environ[env] = value
 
 # find out existing scenarios
 if save_local:
@@ -61,7 +52,7 @@ for scenario in scenarios:
 
     # fetch data
     print('Fetching scenario: {machine} {shot} {run}'.format(**scenario))
-    complete_ods = load_omas_imas(user=None, shot=int(scenario['shot']), run=int(scenario['run']), paths=None)
+    complete_ods = load_omas_iter_scenario(shot=int(scenario['shot']), run=int(scenario['run']))
 
     # save data as complete ods (locally and remotely) as well as individual odss (locally only)
     if save_local:
