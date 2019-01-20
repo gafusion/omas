@@ -256,6 +256,7 @@ html_theme_options = {
         ("Concept", "how"),
         ("Examples", "auto_examples/index"),
         ("Installation", "install"),
+        ("ITER", "iter"),
         ("Data schema", "schema"),
         ("API", "code"),
         # ("Team", "contributors"),
