@@ -1,5 +1,6 @@
 Concept
 =======
+.. _concept:
 
 The hierarchical IMAS data model is represented in OMAS as a set of nested `ODS` objects (OMAS Data Structure).
 The `ODS` class extends native Python dictionary and list classes with:

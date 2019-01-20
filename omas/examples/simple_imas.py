@@ -7,15 +7,19 @@ Simple script showcasing OMAS writing minimal amount of data to IMAS.
 Also, this script shows the use of 'imas_code_dump' as an `OMAS_DEBUG_TOPIC`,
 which can be useful for debugging purposes.
 
-Prior running this script, the following commands must most likely be typed at the teriminal
-> import imas
+Prior running this script, the following commands must be typed at the teriminal
+> import IMAS
 > imasdb ITER
 """
 
 from __future__ import print_function, division, unicode_literals
 
 import os
+from pprint import pprint
 from omas import *
+
+# enable fake IMAS support in case IMAS is not present on current system
+#omas_rcparams['allow_fake_imas_fallback'] = True
 
 # set OMAS debugging topic
 # NOTE: appending '_dump' to a debug topic will write a omas.dump file in the working directory
@@ -37,17 +41,20 @@ ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3
 print('='*20)
 print(' Writing data to IMAS')
 print('='*20)
-paths = save_omas_imas(ods, machine='ITER', shot=1, new=True, imas_version=os.environ['IMAS_VERSION'])
-
-print(paths)
+paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
+pprint(ods.pretty_paths())
 
 # Load from IMAS
 print('='*20)
 print(' Reading data from IMAS')
 print('='*20)
-ods1 = load_omas_imas(machine='ITER', shot=1, imas_version=os.environ['IMAS_VERSION'], paths=[['equilibrium']])
+ods1 = load_omas_imas(machine='ITER', shot=1, paths=[['equilibrium']])
+pprint(ods1.pretty_paths())
 
 # check data
+print('='*20)
+print(' Compared saved/loaded data')
+print('='*20)
 check = different_ods(ods, ods1)
 if not check:
     print('OMAS data got saved and loaded correctly')

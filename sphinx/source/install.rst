@@ -1,5 +1,6 @@
 Installation
 ============
+.. _install:
 
 The OMAS library runs on **Python2** and **Python3**.
 

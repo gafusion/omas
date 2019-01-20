@@ -8,6 +8,10 @@ The gEQKDS file is then save to IMAS and loaded back.
 
 This example only works with python 2.7 since OMFIT is only Python 2.7 compatible
 
+Prior running this script, the following commands must be typed at the teriminal
+> import IMAS
+> imasdb ITER
+
 .. figure:: ../images/eq_omas_omfit.png
   :align: center
   :width: 75%
@@ -24,6 +28,8 @@ from matplotlib import pyplot
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 
+imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
+
 # settings
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 omas_rcparams['allow_fake_imas_fallback'] = True
@@ -35,10 +41,10 @@ eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
 ods = eq.to_omas()
 
 # save OMAS data structure to IMAS
-paths = save_omas_imas(ods, machine='DIII-D', shot=133221, new=True, imas_version=os.environ['IMAS_VERSION'])
+paths = save_omas_imas(ods, machine='DIII-D', shot=133221, new=True)
 
 # load OMAS data structure from IMAS
-ods1 = load_omas_imas(machine='DIII-D', shot=133221, imas_version=os.environ['IMAS_VERSION'])
+ods1 = load_omas_imas(machine='DIII-D', shot=133221)
 
 # generate gEQDSK file from OMAS data structure
 eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)

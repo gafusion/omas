@@ -147,3 +147,36 @@ def rcparams_environment(**kw):
         yield omas_rcparams
     finally:
         omas_rcparams.update(old_omas_rcparams)
+
+# --------------------------------------------
+# additional data structures
+# --------------------------------------------
+add_datastructures = {}
+# info data structure carries shot/run/version/machine/user info through different save formats
+add_datastructures['info'] = {
+    "info.shot": {
+        "full_path": "info.shot",
+        "data_type": "INT_0D",
+        "description": "shot number"
+    },
+    "info.imas_version": {
+        "full_path": "info.imas_version",
+        "data_type": "STR_0D",
+        "description": "imas version"
+    },
+    "info.machine": {
+        "full_path": "info.machine",
+        "data_type": "STR_0D",
+        "description": "machine name"
+    },
+    "info.user": {
+        "full_path": "info.user",
+        "data_type": "STR_0D",
+        "description": "user name"
+    },
+    "info.run": {
+        "full_path": "info.run",
+        "data_type": "INT_0D",
+        "description": "run number"
+    }
+}

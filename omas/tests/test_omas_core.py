@@ -63,6 +63,7 @@ class TestOmasCore(unittest.TestCase):
         assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info),[100, 200, 300])
         assert extra_info['location']=='equilibrium.time_slice.:.time'
         assert extra_info['homogeneous_time'] is True
+        assert ods['equilibrium'].homogeneous_time() is True
 
         # time arrays can be set using `set_time_array` function
         # this simplifies the logic in the code since one does not
@@ -80,21 +81,28 @@ class TestOmasCore(unittest.TestCase):
         extra_info = {}
         assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info),[101, 201, 302])
         assert extra_info['homogeneous_time'] is False
+        assert ods['equilibrium'].homogeneous_time() is False
 
-        # get time value from item in array of structures
+        # get time value from a single item in array of structures
         extra_info = {}
         assert ods['equilibrium.time_slice'][0].time(extra_info=extra_info)==101
         assert extra_info['homogeneous_time'] is None
+        tmp=ods['equilibrium']
+        assert tmp.homogeneous_time('time_slice.0') is True
+        assert ods['equilibrium'].homogeneous_time('time_slice.0', default=False) is False
 
         # get time array from array of structures
         extra_info = {}
         assert numpy.allclose(ods['equilibrium.time_slice'].time(extra_info=extra_info),[101, 201, 302])
         assert extra_info['homogeneous_time'] is False
+        assert ods['equilibrium'].homogeneous_time() is False
 
         # get time from parent
         extra_info = {}
         assert ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info)==101
         assert extra_info['homogeneous_time'] is None
+        assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip') is True
+        assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip', default=False) is False
 
         # slice at time
         ods1 = ods['equilibrium'].slice_at_time(101)

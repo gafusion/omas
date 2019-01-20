@@ -15,7 +15,7 @@ __all__ = [
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
     'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
-    'save_omas_imas', 'load_omas_imas', 'through_omas_imas',
+    'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario',
     'save_omas_itm',  'load_omas_itm',  'through_omas_itm',
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
@@ -70,17 +70,24 @@ class ODS(MutableMapping):
             structure = {}
         self.structure = structure
 
-    def homogeneous_time(self, key=''):
+    def homogeneous_time(self, key='', default=True):
         '''
-        return whether time is homogeneous or not
+        dynamically evaluate whether time is homogeneous or not
+        NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
 
-        :param key: ods location
+        :param default: what to return in case no time basis is defined or there is only one element in the time basis
 
-        :return:
+        :return: True/False or default value (None) if no time basis is defined or there is only one element in the time basis
         '''
-        extra_info={}
-        self.time(key=key,extra_info=extra_info)
-        return extra_info['homogeneous_time']
+        if not len(self.location) and not len(key):
+            raise(ValueError('homogeneous_time() can not be called on a top-level ODS'))
+        extra_info = {}
+        self.time(key=key, extra_info=extra_info)
+        homogeneous_time = extra_info['homogeneous_time']
+        if homogeneous_time is None:
+            return default
+        else:
+            return homogeneous_time
 
     def time(self, key='', extra_info=None):
         """
@@ -348,9 +355,12 @@ class ODS(MutableMapping):
                 structure[structure_key]
 
     def set_child_locations(self):
+        '''
+        traverse ODSs and set .location attribute
+        '''
         for item in self.keys():
-            if isinstance(self[item],ODS):
-                self[item].location=l2o([self.location,item])
+            if isinstance(self[item], ODS):
+                self[item].location = l2o([self.location, item])
                 self[item].set_child_locations()
 
     def __setitem__(self, key, value):
@@ -687,6 +697,14 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
+    def pretty_paths(self):
+        """
+        Traverse the ods and return paths that have data formatted nicely
+
+        :return: list of paths that have data formatted nicely
+        """
+        return list(map(l2i,self.paths()))
+
     def paths(self, **kw):
         """
         Traverse the ods and return paths that have data
@@ -998,6 +1016,14 @@ class ODS(MutableMapping):
             ds.attrs['x'].append(p2l(coord)[-1])
             ds.attrs['x_full'].append(coord)
         return ds
+
+    def satisfy_imas_requirements(self):
+        '''
+        assign .time and .ids_properties.homogeneous_time info for top-level structures
+        these are required for writing an IDS to IMAS
+        '''
+        self['time'] = self.time()
+        self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
