@@ -355,9 +355,12 @@ class ODS(MutableMapping):
                 structure[structure_key]
 
     def set_child_locations(self):
+        '''
+        traverse ODSs and set .location attribute
+        '''
         for item in self.keys():
-            if isinstance(self[item],ODS):
-                self[item].location=l2o([self.location,item])
+            if isinstance(self[item], ODS):
+                self[item].location = l2o([self.location, item])
                 self[item].set_child_locations()
 
     def __setitem__(self, key, value):
@@ -1005,6 +1008,14 @@ class ODS(MutableMapping):
             ds.attrs['x'].append(p2l(coord)[-1])
             ds.attrs['x_full'].append(coord)
         return ds
+
+    def satisfy_imas_requirements(self):
+        '''
+        assign .time and .ids_properties.homogeneous_time info for top-level structures
+        these are required for writing an IDS to IMAS
+        '''
+        self['time'] = self.time()
+        self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods

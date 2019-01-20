@@ -273,6 +273,11 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
         printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (
             shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
+    # ensure requirements for writing data to IMAS are satisfied
+    if 'imas' != 'itm':
+        for ds in ods.keys():
+            ods[ds].satisfy_imas_requirements()
+
     # get the list of paths from ODS
     paths = set_paths = ods.paths()
 
@@ -309,22 +314,10 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
                 set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
             set_paths = filter(None, set_paths)
 
-            # first assign time information
+            # assign the data
             for path in set_paths:
-                if path[-1] == 'time':
-                    printd('writing %s' % l2i(path))
-                    imas_set(ids, path, ods[path], True)
-
-            # then assign homogeneous time info for top-level structures
-            for ds in ods.keys():
-                if ds not in add_datastructures.keys():
-                    imas_set(ids, [ds, 'ids_properties', 'homogeneous_time'], ods[ds].homogeneous_time(), False)
-
-            # then assign the rest
-            for path in set_paths:
-                if path[-1] != 'time':
-                    printd('writing %s' % l2i(path))
-                    imas_set(ids, path, ods[path], True)
+                printd('writing %s' % l2i(path))
+                imas_set(ids, path, ods[path], True)
 
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
