@@ -237,7 +237,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
-    save OMAS data set to IMAS
+    Save OMAS data to IMAS
 
     :param ods: OMAS data set
 
@@ -252,7 +252,6 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     :param new: whether the open should create a new IMAS tree
 
     :param imas_version: IMAS version
-        (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
 
     :return: paths that have been written to IMAS
     """
@@ -335,23 +334,28 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
 
     return set_paths
 
+
 def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=None):
+                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True):
     """
-    load OMAS data set from IMAS
+    Load OMAS data from IMAS
 
-    :param user: IMAS username (default is os.environ['USER'])
+    NOTE: Either specify all or none of `user`, `machine`, `imas_version`
+    If none of them are specified then use `imasdb` command to set the `MDSPLUS_TREE_BASE_?` environmental variables
 
-    :param machine: IMAS machine (reads ods['info.machine'] if machine is None)
+    :param user: IMAS username
 
-    :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
+    :param machine: IMAS machine
 
-    :param run: IMAS run (reads ods['info.run'] if run is None and finally fallsback on 0)
+    :param shot: IMAS shot
 
-    :param paths: paths that have been written to IMAS
+    :param run: IMAS run
+
+    :param paths: list of paths to load from IMAS
 
     :param imas_version: IMAS version
-        (reads ods['info.imas_version'] if imas_version is None and finally fallsback on imas version of current system)
+
+    :param verbose: print loading progress
 
     :return: OMAS data set
     """
@@ -378,8 +382,6 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
                 paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-                if verbose is None:
-                    verbose = True
             # joined_paths = map(o2i, paths)
             joined_paths = map(l2i, paths)
 
@@ -391,7 +393,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                 if ds in add_datastructures.keys():
                     continue
                 if not hasattr(ids, ds):
-                    if verbose: print('| ', ds)
+                    if verbose:
+                        print('| ', ds)
                     continue
                 # ids fetching
                 if not len(getattr(ids, ds).time):
@@ -399,7 +402,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                     getattr(ids, ds).get()
                 # ids discovery
                 if len(getattr(ids, ds).time):
-                    if verbose: print('* ', ds)
+                    if verbose:
+                        print('* ', ds)
                     available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
                     # joined_available_paths = map(o2i, available_paths)
                     joined_available_paths = map(l2i, available_paths)
@@ -412,7 +416,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                             if re.match(jpath, japath):
                                 fetch_paths.append(apath)
                 else:
-                    if verbose: print('- ', ds)
+                    if verbose:
+                        print('- ', ds)
             # joined_fetch_paths=map(o2i, fetch_paths)
             joined_fetch_paths = map(l2i, fetch_paths)
 
@@ -466,6 +471,44 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
     ods['info.imas_version'] = unicode(imas_version)
 
     return ods
+
+
+if 'imas' != 'itm':
+    def load_omas_iter_scenario(shot, run=0, paths=None,
+                                imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
+                                verbose=None)
+        """
+        Load OMAS data set from ITER IMAS scenario database
+    
+        :param shot: IMAS shot
+    
+        :param run: IMAS run
+    
+        :param paths: list of paths to load from IMAS
+    
+        :param imas_version: IMAS version
+    
+        :return: OMAS data set
+    
+        :param verbose: print loading progress
+        """
+        # set MDSPLUS_TREE_BASE_? environment variables as per
+        # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
+        bkp_imas_environment = {}
+        for k in range(10):
+            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
+                bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
+            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
+
+        # load data from imas
+        ods = load_omas_imas(user=None, machine=None, shot=shot, run=shot, paths=paths, imas_version=imas_version, verbose=verbose)
+
+        # restore existing IMAS environment
+        for k in range(10):
+            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
+        os.environ.update(bkp_imas_environment)
+
+        return ods
 
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None):

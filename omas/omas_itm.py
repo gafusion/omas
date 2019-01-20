@@ -19,7 +19,8 @@ from .omas_core import ODS
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def itm_open(user, machine, shot, run, new=False, itm_version=omas_rcparams['default_itm_version']):
+def itm_open(user, machine, shot, run, new=False,
+              itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version'])):
     """
     function to open an ITM
 
@@ -107,9 +108,9 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     :return: path if set was done, otherwise None
     """
     if numpy.atleast_1d(is_uncertain(value)).any():
-        path=copy.deepcopy(path)
-        tmp=itm_set(cpo, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
-        path[-1]=path[-1]+'_error_upper'
+        path = copy.deepcopy(path)
+        tmp = itm_set(cpo, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        path[-1] = path[-1] + '_error_upper'
         itm_set(cpo, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         return tmp
 
@@ -123,18 +124,18 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         return
 
     # for ITM we have to append Array to the name of the data structure
-    DS=ds
-    if 'itm'=='itm':
-        ds=ds+'Array'
+    DS = ds
+    if 'itm' == 'itm':
+        ds = ds + 'Array'
 
     # identify data dictionary to use, from this point on `m` points to the CPO
     if hasattr(cpo, ds):
-        printd("",topic='itm_code')
-        printd("m = getattr(cpo, %r)"%ds,topic='itm_code')
+        printd("", topic='itm_code')
+        printd("m = getattr(cpo, %r)" % ds, topic='itm_code')
         m = getattr(cpo, ds)
-        if hasattr(m,'time') and not isinstance(m.time,float) and not m.time.size:
+        if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
-            m.time[0]=-1.0
+            m.time[0] = -1.0
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of ITM structure' % l2i([ds] + path))
@@ -143,14 +144,14 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path)))
 
     # traverse ITM structure until reaching the leaf
-    printd("out = m",topic='itm_code')
+    printd("out = m", topic='itm_code')
     out = m
     for kp, p in enumerate(path):
-        location=l2i([ds] + path[:kp+1])
+        location = l2i([ds] + path[:kp + 1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %r)"%p,topic='itm_code')
+                    printd("out = getattr(out, %r)" % p, topic='itm_code')
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -161,14 +162,14 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         else:
             try:
                 out = out[p]
-                printd("out = out[%s]"%p,topic='itm_code')
-            except (AttributeError,IndexError): # AttributeError is for ITM
+                printd("out = out[%s]" % p, topic='itm_code')
+            except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
-                printd('resizing  : %s'%location, topic='itm')
-                printd("out.resize(%d)"%(p+1),topic='itm_code')
+                printd('resizing  : %s' % location, topic='itm')
+                printd("out.resize(%d)" % (p + 1), topic='itm_code')
                 out.resize(p + 1)
-                printd("out = out[%s]"%p,topic='itm_code')
+                printd("out = out[%s]" % p, topic='itm_code')
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -176,11 +177,11 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         return [DS] + path
 
     # assign data to leaf node
-    printd('setting  : %s'%location, topic='itm')
+    printd('setting  : %s' % location, topic='itm')
     if not isinstance(value, (basestring, numpy.ndarray)):
-        value=numpy.array(value)
+        value = numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %s)"%(path[-1],repr(value).replace('\\n','\n')),topic='itm_code')
+    printd("setattr(out, %r, %s)" % (path[-1], repr(value).replace('\\n', '\n')), topic='itm_code')
 
     # return path
     return [DS] + path
@@ -209,11 +210,11 @@ def itm_get(cpo, path, skip_missing_nodes=False):
     path = path[1:]
 
     # for ITM we have to append Array to the name of the data structure
-    if 'itm'=='itm':
-        ds=ds+'Array'
+    if 'itm' == 'itm':
+        ds = ds + 'Array'
 
     if hasattr(cpo, ds):
-        printd("m = getattr(cpo, %s)"%repr(ds),topic='itm_code')
+        printd("m = getattr(cpo, %s)" % repr(ds), topic='itm_code')
         m = getattr(cpo, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -227,7 +228,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
-                printd("out = getattr(out, %s)"%repr(p),topic='itm_code')
+                printd("out = getattr(out, %s)" % repr(p), topic='itm_code')
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -237,7 +238,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
             else:
                 raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path[:kp + 1])))
         else:
-            printd("out = out[%s]"%p,topic='itm_code')
+            printd("out = out[%s]" % p, topic='itm_code')
             out = out[p]
 
     return out
@@ -249,9 +250,10 @@ def itm_get(cpo, path, skip_missing_nodes=False):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, itm_version=omas_rcparams['default_itm_version']):
+def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
+                   itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version'])):
     """
-    save OMAS data set to ITM
+    Save OMAS data to ITM
 
     :param ods: OMAS data set
 
@@ -266,7 +268,6 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
     :param new: whether the open should create a new ITM tree
 
     :param itm_version: ITM version
-        (reads ods['info.itm_version'] if itm_version is None and finally fallsback on itm version of current system)
 
     :return: paths that have been written to ITM
     """
@@ -283,11 +284,14 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
         run = ods.get('info.run', 0)
 
     if user is not None and machine is not None:
-        printd('Saving to ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (
-            user, machine, shot, run, itm_version), topic='itm')
+        printd('Saving to ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (user, machine, shot, run, itm_version), topic='itm')
     elif user is None and machine is None:
-        printd('Saving to ITM (shot:%d run:%d, DB:%s)' % (
-            shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='itm')
+        printd('Saving to ITM (shot:%d run:%d, DB:%s)' % (shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='itm')
+
+    # ensure requirements for writing data to ITM are satisfied
+    if 'itm' != 'itm':
+        for ds in ods.keys():
+            ods[ds].satisfy_itm_requirements()
 
     # get the list of paths from ODS
     paths = set_paths = ods.paths()
@@ -325,22 +329,10 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
                 set_paths.append(itm_set(cpo, path, ods[path], None, allocate=True))
             set_paths = filter(None, set_paths)
 
-            # first assign time information
+            # assign the data
             for path in set_paths:
-                if path[-1] == 'time':
-                    printd('writing %s' % l2i(path))
-                    itm_set(cpo, path, ods[path], True)
-
-            # then assign homogeneous time info for top-level structures
-            for ds in ods.keys():
-                if ds not in add_datastructures.keys():
-                    itm_set(cpo, [ds, 'cpo_properties', 'homogeneous_time'], ods[ds].homogeneous_time(), False)
-
-            # then assign the rest
-            for path in set_paths:
-                if path[-1] != 'time':
-                    printd('writing %s' % l2i(path))
-                    itm_set(cpo, path, ods[path], True)
+                printd('writing %s' % l2i(path))
+                itm_set(cpo, path, ods[path], True)
 
             # actual write of CPO data to ITM database
             for ds in ods.keys():
@@ -359,25 +351,30 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False, 
     return set_paths
 
 
+
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
 def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                   itm_version=omas_rcparams['default_itm_version'], verbose=None):
+                   itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']), verbose=True):
     """
-    load OMAS data set from ITM
+    Load OMAS data from ITM
 
-    :param user: ITM username (default is os.environ['USER'])
+    NOTE: Either specify all or none of `user`, `machine`, `itm_version`
+    If none of them are specified then use `itmdb` command to set the `MDSPLUS_TREE_BASE_?` environmental variables
 
-    :param machine: ITM machine (reads ods['info.machine'] if machine is None)
+    :param user: ITM username
 
-    :param shot: ITM shot (reads ods['info.shot'] if shot is None)
+    :param machine: ITM machine
 
-    :param run: ITM run (reads ods['info.run'] if run is None and finally fallsback on 0)
+    :param shot: ITM shot
 
-    :param paths: paths that have been written to ITM
+    :param run: ITM run
+
+    :param paths: list of paths to load from ITM
 
     :param itm_version: ITM version
-        (reads ods['info.itm_version'] if itm_version is None and finally fallsback on itm version of current system)
+
+    :param verbose: print loading progress
 
     :return: OMAS data set
     """
@@ -385,8 +382,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
     if shot is None or run is None:
         raise (Exception('`shot` and `run` must be specified'))
 
-    printd('Loading from ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (
-        user, machine, shot, run, itm_version), topic='itm')
+    printd('Loading from ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (user, machine, shot, run, itm_version), topic='itm')
 
     try:
         cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=False, itm_version=itm_version)
@@ -405,8 +401,6 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
             # if paths is None then figure out what CPO are available and get ready to retrieve everything
             if paths is None:
                 paths = [[structure] for structure in list_structures(itm_version=itm_version)]
-                if verbose is None:
-                    verbose = True
             # joined_paths = map(o2i, paths)
             joined_paths = map(l2i, paths)
 
@@ -418,7 +412,8 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                 if ds in add_datastructures.keys():
                     continue
                 if not hasattr(cpo, ds):
-                    if verbose: print('| ', ds)
+                    if verbose:
+                        print('| ', ds)
                     continue
                 # cpo fetching
                 if not len(getattr(cpo, ds).time):
@@ -426,7 +421,8 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                     getattr(cpo, ds).get()
                 # cpo discovery
                 if len(getattr(cpo, ds).time):
-                    if verbose: print('* ', ds)
+                    if verbose:
+                        print('* ', ds)
                     available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
                     # joined_available_paths = map(o2i, available_paths)
                     joined_available_paths = map(l2i, available_paths)
@@ -439,13 +435,14 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                             if re.match(jpath, japath):
                                 fetch_paths.append(apath)
                 else:
-                    if verbose: print('- ', ds)
+                    if verbose:
+                        print('- ', ds)
             # joined_fetch_paths=map(o2i, fetch_paths)
             joined_fetch_paths = map(l2i, fetch_paths)
 
             # build omas data structure
             ods = ODS(itm_version=itm_version)
-            for path in fetch_paths:
+            for k, path in enumerate(fetch_paths):
                 if len(path) == 2 and path[-1] == 'time':
                     data = itm_get(cpo, path, None)
                     if data[0] == -1:
@@ -495,6 +492,44 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
     return ods
 
 
+if 'itm' != 'itm':
+    def load_omas_iter_scenario(shot, run=0, paths=None,
+                                itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']),
+                                verbose=None)
+        """
+        Load OMAS data set from ITER ITM scenario database
+    
+        :param shot: ITM shot
+    
+        :param run: ITM run
+    
+        :param paths: list of paths to load from ITM
+    
+        :param itm_version: ITM version
+    
+        :return: OMAS data set
+    
+        :param verbose: print loading progress
+        """
+        # set MDSPLUS_TREE_BASE_? environment variables as per
+        # itmdb /work/itm/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
+        bkp_itm_environment = {}
+        for k in range(10):
+            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
+                bkp_itm_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
+            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/itm/shared/iterdb/3/%d' % k
+
+        # load data from itm
+        ods = load_omas_itm(user=None, machine=None, shot=shot, run=shot, paths=paths, itm_version=itm_version, verbose=verbose)
+
+        # restore existing ITM environment
+        for k in range(10):
+            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
+        os.environ.update(bkp_itm_environment)
+
+        return ods
+
+
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
@@ -514,7 +549,7 @@ def filled_paths_in_cpo(cpo, ds, path=None, paths=None):
         paths = []
     if not len(ds):
         paths.append(path)
-        #print(paths[-1])
+        # print(paths[-1])
         return paths
     keys = ds.keys()
     if keys[0] == ':':
