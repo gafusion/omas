@@ -697,6 +697,14 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
+    def pretty_paths(self):
+        """
+        Traverse the ods and return paths that have data formatted nicely
+
+        :return: list of paths that have data formatted nicely
+        """
+        return list(map(l2i,self.paths()))
+
     def paths(self, **kw):
         """
         Traverse the ods and return paths that have data
