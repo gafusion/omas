@@ -12,7 +12,8 @@ from .omas_core import ODS
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, shot, run, new=False, imas_version=omas_rcparams['default_imas_version']):
+def imas_open(user, machine, shot, run, new=False,
+              imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
     function to open an IMAS
 
@@ -97,9 +98,9 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     :return: path if set was done, otherwise None
     """
     if numpy.atleast_1d(is_uncertain(value)).any():
-        path=copy.deepcopy(path)
-        tmp=imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
-        path[-1]=path[-1]+'_error_upper'
+        path = copy.deepcopy(path)
+        tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        path[-1] = path[-1] + '_error_upper'
         imas_set(ids, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         return tmp
 
@@ -113,18 +114,18 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         return
 
     # for ITM we have to append Array to the name of the data structure
-    DS=ds
-    if 'imas'=='itm':
-        ds=ds+'Array'
+    DS = ds
+    if 'imas' == 'itm':
+        ds = ds + 'Array'
 
     # identify data dictionary to use, from this point on `m` points to the IDS
     if hasattr(ids, ds):
-        printd("",topic='imas_code')
-        printd("m = getattr(ids, %r)"%ds,topic='imas_code')
+        printd("", topic='imas_code')
+        printd("m = getattr(ids, %r)" % ds, topic='imas_code')
         m = getattr(ids, ds)
-        if hasattr(m,'time') and not isinstance(m.time,float) and not m.time.size:
+        if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
-            m.time[0]=-1.0
+            m.time[0] = -1.0
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
@@ -133,14 +134,14 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
 
     # traverse IMAS structure until reaching the leaf
-    printd("out = m",topic='imas_code')
+    printd("out = m", topic='imas_code')
     out = m
     for kp, p in enumerate(path):
-        location=l2i([ds] + path[:kp+1])
+        location = l2i([ds] + path[:kp + 1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %r)"%p,topic='imas_code')
+                    printd("out = getattr(out, %r)" % p, topic='imas_code')
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -151,14 +152,14 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         else:
             try:
                 out = out[p]
-                printd("out = out[%s]"%p,topic='imas_code')
-            except (AttributeError,IndexError): # AttributeError is for ITM
+                printd("out = out[%s]" % p, topic='imas_code')
+            except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
-                printd('resizing  : %s'%location, topic='imas')
-                printd("out.resize(%d)"%(p+1),topic='imas_code')
+                printd('resizing  : %s' % location, topic='imas')
+                printd("out.resize(%d)" % (p + 1), topic='imas_code')
                 out.resize(p + 1)
-                printd("out = out[%s]"%p,topic='imas_code')
+                printd("out = out[%s]" % p, topic='imas_code')
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -166,11 +167,11 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         return [DS] + path
 
     # assign data to leaf node
-    printd('setting  : %s'%location, topic='imas')
+    printd('setting  : %s' % location, topic='imas')
     if not isinstance(value, (basestring, numpy.ndarray)):
-        value=numpy.array(value)
+        value = numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %s)"%(path[-1],repr(value).replace('\\n','\n')),topic='imas_code')
+    printd("setattr(out, %r, %s)" % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
 
     # return path
     return [DS] + path
@@ -196,11 +197,11 @@ def imas_get(ids, path, skip_missing_nodes=False):
     path = path[1:]
 
     # for ITM we have to append Array to the name of the data structure
-    if 'imas'=='itm':
-        ds=ds+'Array'
+    if 'imas' == 'itm':
+        ds = ds + 'Array'
 
     if hasattr(ids, ds):
-        printd("m = getattr(ids, %s)"%repr(ds),topic='imas_code')
+        printd("m = getattr(ids, %s)" % repr(ds), topic='imas_code')
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -214,7 +215,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
-                printd("out = getattr(out, %s)"%repr(p),topic='imas_code')
+                printd("out = getattr(out, %s)" % repr(p), topic='imas_code')
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -224,7 +225,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
             else:
                 raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1])))
         else:
-            printd("out = out[%s]"%p,topic='imas_code')
+            printd("out = out[%s]" % p, topic='imas_code')
             out = out[p]
 
     return out
@@ -233,7 +234,8 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # --------------------------------------------
 # save and load OMAS to IMAS
 # --------------------------------------------
-def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False, imas_version=omas_rcparams['default_imas_version']):
+def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
+                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
     save OMAS data set to IMAS
 
@@ -267,11 +269,9 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
         run = ods.get('info.run', 0)
 
     if user is not None and machine is not None:
-        printd('Saving to IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (
-            user, machine, shot, run, imas_version), topic='imas')
+        printd('Saving to IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (user, machine, shot, run, imas_version), topic='imas')
     elif user is None and machine is None:
-        printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (
-            shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
+        printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
     if 'imas' != 'itm':
@@ -336,7 +336,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     return set_paths
 
 def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
-                   imas_version=omas_rcparams['default_imas_version'], verbose=None):
+                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=None):
     """
     load OMAS data set from IMAS
 
@@ -359,8 +359,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
     if shot is None or run is None:
         raise (Exception('`shot` and `run` must be specified'))
 
-    printd('Loading from IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (
-        user, machine, shot, run, imas_version), topic='imas')
+    printd('Loading from IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (user, machine, shot, run, imas_version), topic='imas')
 
     try:
         ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=False, imas_version=imas_version)
@@ -485,7 +484,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None):
         paths = []
     if not len(ds):
         paths.append(path)
-        #print(paths[-1])
+        # print(paths[-1])
         return paths
     keys = ds.keys()
     if keys[0] == ':':
