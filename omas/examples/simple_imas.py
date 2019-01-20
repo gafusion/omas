@@ -19,8 +19,7 @@ from pprint import pprint
 from omas import *
 
 # enable fake IMAS support in case IMAS is not present on current system
-#
-omas_rcparams['allow_fake_imas_fallback'] = True
+#omas_rcparams['allow_fake_imas_fallback'] = True
 
 # set OMAS debugging topic
 # NOTE: appending '_dump' to a debug topic will write a omas.dump file in the working directory

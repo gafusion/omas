@@ -7,8 +7,8 @@ install_requires = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matpl
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
                   'ual': ['pyual'],
-                  'build_structures': ['xmltodict','bs4'],
-                  'build_documentation': ['Sphinx','sphinx-bootstrap-theme','sphinx-gallery','Pillow']}
+                  'build_structures': ['xmltodict', 'bs4'],
+                  'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow']}
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep
@@ -23,18 +23,16 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             f.write(item.ljust(25) + '# required\n')
         for requirement in extras_require:
             for item in extras_require[requirement]:
-                if requirement in ['imas','hdc','ual','build_structures']:
-                    item='#'+item
+                if requirement in ['imas', 'hdc', 'ual', 'build_structures']:
+                    item = '#' + item
                 f.write(item.ljust(25) + '# %s\n' % requirement)
 
-
-packages = ['omas','omas.tests']
-package_data = {'omas': ['*.py', 'version'],'omas.tests':['*.py']}
+packages = ['omas', 'omas.tests']
+package_data = {'omas': ['*.py', 'version'], 'omas.tests': ['*.py']}
 for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
     print(item)
     packages.append('omas.imas_structures.' + os.path.split(item)[1])
     package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
-
 
 setup(
     name='omas',

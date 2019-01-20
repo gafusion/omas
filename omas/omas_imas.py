@@ -418,7 +418,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 
             # build omas data structure
             ods = ODS(imas_version=imas_version)
-            for path in fetch_paths:
+            for k, path in enumerate(fetch_paths):
                 if len(path) == 2 and path[-1] == 'time':
                     data = imas_get(ids, path, None)
                     if data[0] == -1:
