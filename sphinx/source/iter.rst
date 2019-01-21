@@ -1,15 +1,18 @@
-Accessing IMAS data at ITER with OMAS
-=====================================
+To install OMAS on your account at ITER:
 
-1. Login to the `hpc-login.iter.org` server (use the X2GO for interactive/graphical session)
+1. SSH to the ``hpc-login.iter.org`` server (use the X2GO for interactive/graphical session)
 
-2. install OMAS in your ITER account::
+2. Install OMAS in your ITER account::
 
        >> pip install --user --upgrade omas
 
+   where ``--upgrade`` is used to update the omas installation to the latest version.
    for more installation instructions read :ref:`the OMAS install page <install>`.
 
-3. Find what is available in the ITER IMAS database
+Access IMAS data at ITER with OMAS
+==================================
+
+1. Find what is available in the ITER IMAS database
    First one needs to load the IMAS unix module::
 
        >> module load IMAS
@@ -25,7 +28,7 @@ Accessing IMAS data at ITER with OMAS
 
    A list of scenarios will then be printed on screen
 
-4. Access ITER scenario database via OMAS::
+2. Access ITER scenario database via OMAS::
 
        >> python
 
@@ -44,3 +47,19 @@ Accessing IMAS data at ITER with OMAS
 
    For more information on how to manipulate OMAS data see the :ref:`high-level OMAS overview page <concept>`
    and the extensive :ref:`list of OMAS examples <general_examples>`.
+
+Remotely access ITER data with OMAS and OMFIT
+=============================================
+OMFIT adds remote access capability to the ``load_omas_imas``, ``save_omas_imas`` and ``load_omas_iter_scenario`` OMAS functions
+(``load_omas_imas_remote``, ``save_omas_imas_remote`` and ``load_omas_iter_scenario_remote`` functions, respectively).
+In addition the ``iter_scenario_summary_remote`` allows querying for the ITER scenario database remotely from within OMFIT.
+
+1. Set the ``MainSettings['SERVER']['ITER_username']`` to your ITER username
+
+2. Remotely query ITER scenario database::
+
+    OMFIT['iter_scenarios'] = iter_scenario_summary_remote()
+
+3. Access ITER scenario database remotely from within OMFIT::
+
+   OMFIT['ods'] = load_omas_iter_scenario_remote(shot=131034, run=0)

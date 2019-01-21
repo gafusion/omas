@@ -8,7 +8,9 @@ To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_ (for users):
 
 .. code-block:: none
 
-    sudo pip install omas
+    sudo pip install --upgrade omas
+
+where ``--upgrade`` is used to update the omas installation to the latest version.
 
 To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers):
 
@@ -16,7 +18,7 @@ To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developer
 
     git clone git@github.com:gafusion/omas.git
     cd omas
-    sudo pip install -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
+    sudo pip install --upgrade -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
                                                                       # [build_structures,build_documentation] options
                                                                       # install extra packages for development purposes
 
@@ -30,5 +32,6 @@ The OMAS installation can be tested by running the regression tests:
 
 .. code-block:: none
 
-    python -m unittest discover --pattern="*.py" -s omas/tests/ -v
-
+    cd omas
+    make tests2  # run tests witht the `python2` executable
+    make tests3  # run tests witht the `python3` executable
