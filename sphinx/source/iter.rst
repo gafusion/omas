@@ -9,8 +9,8 @@ To install OMAS on your account at ITER:
    where ``--upgrade`` is used to update the omas installation to the latest version.
    for more installation instructions read :ref:`the OMAS install page <install>`.
 
-Access IMAS data at ITER with OMAS
-==================================
+Access data at ITER with OMAS
+=============================
 1. First one needs to load the IMAS unix module::
 
        >> module load IMAS
@@ -23,8 +23,6 @@ Access IMAS data at ITER with OMAS
 
        >> pip install --user --upgrade pyyaml     # (this needs to be done only once)
        >> scenario_summary
-
-   A list of scenarios will then be printed on screen
 
 3. Access ITER scenario database via OMAS from ``python``:
 
@@ -48,9 +46,8 @@ Access IMAS data at ITER with OMAS
 
 Remotely access ITER data with OMAS and OMFIT
 =============================================
-OMFIT adds remote access capability to the ``load_omas_imas``, ``save_omas_imas`` and ``load_omas_iter_scenario`` OMAS functions
-(``load_omas_imas_remote``, ``save_omas_imas_remote`` and ``load_omas_iter_scenario_remote`` functions, respectively).
-In addition the ``iter_scenario_summary_remote`` allows querying for the ITER scenario database remotely from within OMFIT.
+OMFIT adds remote access capability to the IMAS functions within OMAS (``load_omas_imas_remote``, ``save_omas_imas_remote`` and ``load_omas_iter_scenario_remote`` functions, respectively).
+In addition, the ``iter_scenario_summary_remote`` allows querying for the ITER scenario database remotely from within OMFIT.
 
 1. Set the ``MainSettings['SERVER']['ITER_username']`` to your ITER username
 
