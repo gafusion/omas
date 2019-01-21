@@ -611,7 +611,7 @@ cocos_signals['pf_active.coil.:.current_limit_max']='?'                         
 cocos_signals['pf_active.supply.:.current_limit_max']='?'                                         #[ADD?]# 2.000000 # current  [A]
 cocos_signals['pf_active.supply.:.current_limit_min']='?'                                         #[ADD?]# 2.000000 # current  [A]
 cocos_signals['pf_active.supply.:.current_limiter_gain']='?'                                      #[ADD?]# 2.000000 # current  [V]
-cocos_signals['pf_active.circuit.:.current.data']='?'                                             #[ADD?]# 1.750000 # current  [V]
+cocos_signals['pf_active.circuit.:.current.data']='?'                                             #[ADD?]# 1.750000 # current  [A]
 cocos_signals['pf_active.coil.:.current.data']='?'                                                #[ADD?]# 1.750000 # current  [A]
 cocos_signals['pf_active.supply.:.current.data']='?'                                              #[ADD?]# 1.750000 # current  [A]
 

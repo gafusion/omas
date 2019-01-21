@@ -1,0 +1,809 @@
+{
+ "magnetics": {
+  "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
+  "full_path": "magnetics",
+  "lifecycle_last_change": "3.21.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.0",
+  "maxoccur": "3"
+ },
+ "magnetics.bpol_probe": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Poloidal field probes",
+  "full_path": "magnetics/bpol_probe(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "200",
+  "structure_reference": "magnetics_bpol_probe"
+ },
+ "magnetics.bpol_probe[:].area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of each turn of the coil",
+  "full_path": "magnetics/bpol_probe(i1)/area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "magnetics.bpol_probe[:].area_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"area\"",
+  "full_path": "magnetics/bpol_probe(i1)/area_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"area\"",
+  "full_path": "magnetics/bpol_probe(i1)/area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "magnetics.bpol_probe[:].area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"area\"",
+  "full_path": "magnetics/bpol_probe(i1)/area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "magnetics.bpol_probe[:].field": {
+  "data_type": "structure",
+  "documentation": "Measured magnetic field",
+  "full_path": "magnetics/bpol_probe(i1)/field",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "T"
+ },
+ "magnetics.bpol_probe[:].field.data": {
+  "coordinates": [
+   "magnetics.bpol_probe[:].field.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/bpol_probe(i1)/field/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "magnetics.bpol_probe[:].field.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/bpol_probe(i1)/field/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].field.data_error_lower": {
+  "coordinates": [
+   "magnetics.bpol_probe[:].field.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/bpol_probe(i1)/field/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "magnetics.bpol_probe[:].field.data_error_upper": {
+  "coordinates": [
+   "magnetics.bpol_probe[:].field.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/bpol_probe(i1)/field/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "magnetics.bpol_probe[:].field.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "magnetics/bpol_probe(i1)/field/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.bpol_probe[:].field.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/bpol_probe(i1)/field/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].field.validity_timed": {
+  "coordinates": [
+   "magnetics.bpol_probe[:].field.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/bpol_probe(i1)/field/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic"
+ },
+ "magnetics.bpol_probe[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the probe",
+  "full_path": "magnetics/bpol_probe(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.bpol_probe[:].length": {
+  "data_type": "FLT_0D",
+  "documentation": "Length of the coil",
+  "full_path": "magnetics/bpol_probe(i1)/length",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].length_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"length\"",
+  "full_path": "magnetics/bpol_probe(i1)/length_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].length_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length\"",
+  "full_path": "magnetics/bpol_probe(i1)/length_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].length_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length\"",
+  "full_path": "magnetics/bpol_probe(i1)/length_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the probe",
+  "full_path": "magnetics/bpol_probe(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.bpol_probe[:].poloidal_angle": {
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal angle of the coil orientation",
+  "full_path": "magnetics/bpol_probe(i1)/poloidal_angle",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].poloidal_angle_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"poloidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].poloidal_angle_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"poloidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].poloidal_angle_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"poloidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].position": {
+  "data_type": "structure",
+  "documentation": "R, Z, Phi position of the coil centre",
+  "full_path": "magnetics/bpol_probe(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "magnetics.bpol_probe[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "magnetics/bpol_probe(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].position.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "magnetics/bpol_probe(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].position.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "magnetics/bpol_probe(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].position.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "magnetics/bpol_probe(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.bpol_probe[:].toroidal_angle": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle of coil orientation (0 if fully in the poloidal plane) ",
+  "full_path": "magnetics/bpol_probe(i1)/toroidal_angle",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].toroidal_angle_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"toroidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.bpol_probe[:].toroidal_angle_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"toroidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].toroidal_angle_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"toroidal_angle\"",
+  "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.bpol_probe[:].turns": {
+  "data_type": "INT_0D",
+  "documentation": "Turns in the coil, including sign",
+  "full_path": "magnetics/bpol_probe(i1)/turns",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "magnetics/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "magnetics.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "magnetics/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "magnetics/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.code.output_flag": {
+  "coordinates": [
+   "magnetics.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "magnetics/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "magnetics.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "magnetics/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "magnetics/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "magnetics/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Flux loops; partial flux loops can be described",
+  "full_path": "magnetics/flux_loop(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "200",
+  "structure_reference": "magnetics_flux_loop"
+ },
+ "magnetics.flux_loop[:].flux": {
+  "data_type": "structure",
+  "documentation": "Measured flux",
+  "full_path": "magnetics/flux_loop(i1)/flux",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "Wb"
+ },
+ "magnetics.flux_loop[:].flux.data": {
+  "coordinates": [
+   "magnetics.flux_loop[:].flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/flux_loop(i1)/flux/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.flux_loop[:].flux.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/flux/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].flux.data_error_lower": {
+  "coordinates": [
+   "magnetics.flux_loop[:].flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/flux/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.flux_loop[:].flux.data_error_upper": {
+  "coordinates": [
+   "magnetics.flux_loop[:].flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/flux/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.flux_loop[:].flux.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "magnetics/flux_loop(i1)/flux/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.flux_loop[:].flux.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/flux/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].flux.validity_timed": {
+  "coordinates": [
+   "magnetics.flux_loop[:].flux.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/flux/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic"
+ },
+ "magnetics.flux_loop[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the flux loop",
+  "full_path": "magnetics/flux_loop(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.flux_loop[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the flux loop",
+  "full_path": "magnetics/flux_loop(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.flux_loop[:].position": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "rzphi0d_static",
+  "type": "static"
+ },
+ "magnetics.flux_loop[:].position[:].phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.flux_loop[:].position[:].phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].position[:].phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.flux_loop[:].position[:].phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "magnetics.flux_loop[:].position[:].r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.flux_loop[:].position[:].r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].position[:].r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.flux_loop[:].position[:].r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.flux_loop[:].position[:].z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.flux_loop[:].position[:].z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].position[:].z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.flux_loop[:].position[:].z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "magnetics/flux_loop(i1)/position(i2)/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "magnetics/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "magnetics.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "magnetics/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "magnetics/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "magnetics/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "magnetics/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "magnetics/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.method": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "A method generating processed quantities derived from the magnetic measurements",
+  "full_path": "magnetics/method(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "magnetics_method"
+ },
+ "magnetics.method[:].diamagnetic_flux": {
+  "data_type": "structure",
+  "documentation": "Diamagnetic flux",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "Wb"
+ },
+ "magnetics.method[:].diamagnetic_flux.data": {
+  "coordinates": [
+   "magnetics.method[:].diamagnetic_flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.method[:].diamagnetic_flux.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.method[:].diamagnetic_flux.data_error_lower": {
+  "coordinates": [
+   "magnetics.method[:].diamagnetic_flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.method[:].diamagnetic_flux.data_error_upper": {
+  "coordinates": [
+   "magnetics.method[:].diamagnetic_flux.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.method[:].diamagnetic_flux.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "magnetics/method(i1)/diamagnetic_flux/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.method[:].ip": {
+  "data_type": "structure",
+  "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above.",
+  "full_path": "magnetics/method(i1)/ip",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "magnetics.method[:].ip.data": {
+  "coordinates": [
+   "magnetics.method[:].ip.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/method(i1)/ip/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.method[:].ip.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/method(i1)/ip/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.method[:].ip.data_error_lower": {
+  "coordinates": [
+   "magnetics.method[:].ip.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/method(i1)/ip/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.method[:].ip.data_error_upper": {
+  "coordinates": [
+   "magnetics.method[:].ip.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/method(i1)/ip/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.method[:].ip.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "magnetics/method(i1)/ip/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.method[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the data processing method",
+  "full_path": "magnetics/method(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "magnetics.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "magnetics/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

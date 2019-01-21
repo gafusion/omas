@@ -1,0 +1,260 @@
+{
+ "sdn": {
+  "documentation": "Description of the Synchronous Data Network parameters and the signals on it",
+  "full_path": "sdn",
+  "lifecycle_last_change": "3.8.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.0",
+  "maxoccur": "3"
+ },
+ "sdn.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "sdn/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "sdn.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "sdn/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "sdn/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.code.output_flag": {
+  "coordinates": [
+   "sdn.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "sdn/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "sdn.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "sdn/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "sdn/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "sdn/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "sdn/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "sdn.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "sdn/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "sdn/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "sdn/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "sdn/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "sdn/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "sdn/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "sdn.topic": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of topics. SDN signals are grouped by topic",
+  "full_path": "sdn/topic(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "sdn_topic"
+ },
+ "sdn.topic[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Topic name",
+  "full_path": "sdn/topic(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.topic[:].signal": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of signals which can be allocated to the SDN",
+  "full_path": "sdn/topic(i1)/signal(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "100",
+  "structure_reference": "sdn_allocatable_signals"
+ },
+ "sdn.topic[:].signal[:].allocated_position": {
+  "data_type": "INT_0D",
+  "documentation": "Allocation of signal to a position in the SDN (1..N); this will be implementation specific",
+  "full_path": "sdn/topic(i1)/signal(i2)/allocated_position",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.topic[:].signal[:].definition": {
+  "data_type": "STR_0D",
+  "documentation": "Signal definition",
+  "full_path": "sdn/topic(i1)/signal(i2)/definition",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.topic[:].signal[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Signal name",
+  "full_path": "sdn/topic(i1)/signal(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.topic[:].signal[:].quality": {
+  "data_type": "structure",
+  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "full_path": "sdn/topic(i1)/signal(i2)/quality",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_1d"
+ },
+ "sdn.topic[:].signal[:].quality.data": {
+  "coordinates": [
+   "sdn.topic[:].signal[:].quality.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Data",
+  "full_path": "sdn/topic(i1)/signal(i2)/quality/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "quality/time",
+  "type": "dynamic"
+ },
+ "sdn.topic[:].signal[:].quality.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "sdn/topic(i1)/signal(i2)/quality/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "quality/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "sdn.topic[:].signal[:].value": {
+  "data_type": "structure",
+  "documentation": "Signal value",
+  "full_path": "sdn/topic(i1)/signal(i2)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
+ },
+ "sdn.topic[:].signal[:].value.data": {
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "sdn.topic[:].signal[:].value.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.topic[:].signal[:].value.data_error_lower": {
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "sdn.topic[:].signal[:].value.data_error_upper": {
+  "coordinates": [
+   "sdn.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "sdn.topic[:].signal[:].value.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "sdn/topic(i1)/signal(i2)/value/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

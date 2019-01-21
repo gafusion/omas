@@ -1,0 +1,927 @@
+{
+ "gas_injection": {
+  "documentation": "Gas injection by a system of pipes and valves",
+  "full_path": "gas_injection",
+  "lifecycle_last_change": "3.19.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.10.2",
+  "maxoccur": "2"
+ },
+ "gas_injection.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "gas_injection/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "gas_injection.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gas_injection/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "gas_injection/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.output_flag": {
+  "coordinates": [
+   "gas_injection.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "gas_injection/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "gas_injection.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "gas_injection/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gas_injection/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gas_injection/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "gas_injection/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "gas_injection.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "gas_injection/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "gas_injection/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "gas_injection/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "gas_injection/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "gas_injection/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of gas injection pipes",
+  "full_path": "gas_injection/pipe(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "gas_injection_pipe"
+ },
+ "gas_injection.pipe[:].exit_position": {
+  "data_type": "structure",
+  "documentation": "Exit position of the pipe in the vaccum vessel",
+  "full_path": "gas_injection/pipe(i1)/exit_position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "gas_injection.pipe[:].exit_position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "gas_injection/pipe(i1)/exit_position/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].exit_position.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].exit_position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].exit_position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].exit_position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "gas_injection/pipe(i1)/exit_position/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].exit_position.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].exit_position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].exit_position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].exit_position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "gas_injection/pipe(i1)/exit_position/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].exit_position.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].exit_position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].exit_position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/exit_position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].flow_rate": {
+  "data_type": "structure",
+  "documentation": "Flow rate at the exit of the pipe",
+  "full_path": "gas_injection/pipe(i1)/flow_rate",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].flow_rate.data": {
+  "coordinates": [
+   "gas_injection.pipe[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "gas_injection/pipe(i1)/flow_rate/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].flow_rate.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].flow_rate.data_error_lower": {
+  "coordinates": [
+   "gas_injection.pipe[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].flow_rate.data_error_upper": {
+  "coordinates": [
+   "gas_injection.pipe[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].flow_rate.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "gas_injection/pipe(i1)/flow_rate/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "gas_injection.pipe[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the injection pipe",
+  "full_path": "gas_injection/pipe(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "gas_injection.pipe[:].length": {
+  "data_type": "FLT_0D",
+  "documentation": "Pipe length",
+  "full_path": "gas_injection/pipe(i1)/length",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].length_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"length\"",
+  "full_path": "gas_injection/pipe(i1)/length_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].length_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length\"",
+  "full_path": "gas_injection/pipe(i1)/length_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].length_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length\"",
+  "full_path": "gas_injection/pipe(i1)/length_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the injection pipe",
+  "full_path": "gas_injection/pipe(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "gas_injection.pipe[:].second_point": {
+  "data_type": "structure",
+  "documentation": "Second point indicating (combined with the exit_position) the direction of the gas injection towards the plasma",
+  "full_path": "gas_injection/pipe(i1)/second_point",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "gas_injection.pipe[:].second_point.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "gas_injection/pipe(i1)/second_point/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].second_point.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].second_point.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].second_point.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "gas_injection.pipe[:].second_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "gas_injection/pipe(i1)/second_point/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].second_point.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].second_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].second_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].second_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "gas_injection/pipe(i1)/second_point/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].second_point.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].second_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].second_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "gas_injection/pipe(i1)/second_point/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "gas_injection.pipe[:].species": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Species injected by the pipe (may be more than one in case the valve injects a gas mixture)",
+  "full_path": "gas_injection/pipe(i1)/species(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "gas_mixture_constant"
+ },
+ "gas_injection.pipe[:].species[:].element": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of elements forming the atom or molecule",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "5",
+  "structure_reference": "plasma_composition_neutral_element_constant"
+ },
+ "gas_injection.pipe[:].species[:].element[:].a": {
+  "data_type": "FLT_0D",
+  "documentation": "Mass of atom",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/a",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].a_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].species[:].element[:].a_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].a_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].atoms_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of atoms of this element in the molecule",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].species[:].element[:].multiplicity": {
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/multiplicity",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].multiplicity_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].species[:].element[:].multiplicity_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/multiplicity_error_lower",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].multiplicity_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/multiplicity_error_upper",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].z_n": {
+  "data_type": "FLT_0D",
+  "documentation": "Nuclear charge",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/z_n",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].z_n_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].species[:].element[:].z_n_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].element[:].z_n_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].species[:].fraction": {
+  "data_type": "INT_0D",
+  "documentation": "Relative fraction of this species (in molecules) in the gas mixture",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/fraction",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].species[:].label": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "gas_injection/pipe(i1)/species(i2)/label",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of valves connecting a gas bottle the the pipe",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "gas_injection_pipe_valve"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate": {
+  "data_type": "structure",
+  "documentation": "Number of electrons injected per second",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate.data": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].electron_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate.data_error_lower": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].electron_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate.data_error_upper": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].electron_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].electron_rate.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate": {
+  "data_type": "structure",
+  "documentation": "Flow rate at the exit of the valve",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate.data": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate.data_error_lower": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate.data_error_upper": {
+  "coordinates": [
+   "gas_injection.pipe[:].valve[:].flow_rate.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_max": {
+  "data_type": "FLT_0D",
+  "documentation": "Maximum flow rate of the valve",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_max",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_max_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"flow_rate_max\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_max_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_max_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"flow_rate_max\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_max_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_max_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"flow_rate_max\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_max_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_min": {
+  "data_type": "FLT_0D",
+  "documentation": "Minimum flow rate of the valve",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_min",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_min_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"flow_rate_min\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_min_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_min_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"flow_rate_min\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_min_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].flow_rate_min_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"flow_rate_min\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate_min_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa.m^3.s^-1"
+ },
+ "gas_injection.pipe[:].valve[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the valve",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "gas_injection.pipe[:].valve[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the valve",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "gas_injection.pipe[:].valve[:].species": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Species injected by the valve (may be more than one in case the valve injects a gas mixture)",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "gas_mixture_constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of elements forming the atom or molecule",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "5",
+  "structure_reference": "plasma_composition_neutral_element_constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].a": {
+  "data_type": "FLT_0D",
+  "documentation": "Mass of atom",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/a",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].a_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/a_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].a_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/a_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].a_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/a_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].atoms_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of atoms of this element in the molecule",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/atoms_n",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].multiplicity": {
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/multiplicity",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].multiplicity_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].multiplicity_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/multiplicity_error_lower",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].multiplicity_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/multiplicity_error_upper",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].z_n": {
+  "data_type": "FLT_0D",
+  "documentation": "Nuclear charge",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/z_n",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].z_n_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/z_n_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].z_n_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/z_n_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].element[:].z_n_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_n\"",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/element(i4)/z_n_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].fraction": {
+  "data_type": "INT_0D",
+  "documentation": "Relative fraction of this species (in molecules) in the gas mixture",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/fraction",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.pipe[:].valve[:].species[:].label": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "gas_injection/pipe(i1)/valve(i2)/species(i3)/label",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "gas_injection/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
