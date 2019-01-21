@@ -21,27 +21,27 @@ Access IMAS data at ITER with OMAS
 
 2. Find what is available in the ITER IMAS database::
 
-       >> pip install --user --upgrade pyyaml # (this needs to be done only once)
+       >> pip install --user --upgrade pyyaml     # (this needs to be done only once)
        >> scenario_summary
 
    A list of scenarios will then be printed on screen
 
-3. Access ITER scenario database via OMAS::
+3. Access ITER scenario database via OMAS from ``python``:
 
-       >> python
+   .. code-block:: python
 
-       # load OMAS package
-       from omas import *
+      # load OMAS package
+      from omas import *
 
-       # load data from a shot chosen from the ITER scenario database
-       ods = load_omas_iter_scenario(shot=131034, run=0)
+      # load data from a shot chosen from the ITER scenario database
+      ods = load_omas_iter_scenario(shot=131034, run=0)
 
-       # print nodes with data
-       from pprint import pprint
-       pprint(ods.pretty_paths())
+      # print nodes with data
+      from pprint import pprint
+      pprint(ods.pretty_paths())
 
-       # save data in different format (eg. pickle file)
-       save_omas_pkl(ods, 'iter_scenario_131034.pk')
+      # save data in different format (eg. pickle file)
+      save_omas_pkl(ods, 'iter_scenario_131034.pk')
 
    For more information on how to manipulate OMAS data see the :ref:`high-level OMAS overview page <concept>`
    and the extensive :ref:`list of OMAS examples <general_examples>`.
@@ -54,10 +54,15 @@ In addition the ``iter_scenario_summary_remote`` allows querying for the ITER sc
 
 1. Set the ``MainSettings['SERVER']['ITER_username']`` to your ITER username
 
-2. Remotely query ITER scenario database::
+2. Remotely query ITER scenario database:
 
-    OMFIT['iter_scenarios'] = iter_scenario_summary_remote()
+   .. code-block:: python
 
-3. Access ITER scenario database remotely from within OMFIT::
+       OMFIT['iter_scenarios'] = iter_scenario_summary_remote()
 
-   OMFIT['ods'] = load_omas_iter_scenario_remote(shot=131034, run=0)
+3. Access ITER scenario database remotely from within OMFIT:
+
+   .. code-block:: python
+
+       OMFIT['ods'] = load_omas_iter_scenario_remote(shot=131034, run=0)
+
