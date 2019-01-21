@@ -11,9 +11,7 @@ To install OMAS on your account at ITER:
 
 Access IMAS data at ITER with OMAS
 ==================================
-
-1. Find what is available in the ITER IMAS database
-   First one needs to load the IMAS unix module::
+1. First one needs to load the IMAS unix module::
 
        >> module load IMAS
 
@@ -21,14 +19,14 @@ Access IMAS data at ITER with OMAS
      On the ITER clusters the IMAS environment is loaded with ``module load IMAS`` instead of the ``module load imas`` that is commonly used elsewhere.
      The ``module load imas`` will still execute on the ITER clusters, but the environment itself will not work properly!
 
-   To browse the ITER scenario database::
+2. Find what is available in the ITER IMAS database::
 
        >> pip install --user --upgrade pyyaml # (this needs to be done only once)
        >> scenario_summary
 
    A list of scenarios will then be printed on screen
 
-2. Access ITER scenario database via OMAS::
+3. Access ITER scenario database via OMAS::
 
        >> python
 
