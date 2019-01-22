@@ -3,6 +3,7 @@ Concept
 .. _concept:
 
 The hierarchical IMAS data model is represented in OMAS as a set of nested `ODS` objects (OMAS Data Structure).
+
 The `ODS` class extends native Python dictionary and list classes with:
 
 1. On-the-fly check for **compliance with IMAS data model**
@@ -21,64 +22,90 @@ The `ODS` class extends native Python dictionary and list classes with:
                                            ^^^^^^^^^^^^^^
     Did you mean: ['coordinate_system', 'profiles_1d', 'profiles_2d', 'ggd', 'time', 'convergence', 'boundary', 'global_quantities', 'constraints']
 
-3. **Dynamic creation of the tree hierarchy** as items they are accessed with support for **different syntaxes**::
+3. **Dynamic creation of the tree hierarchy** as items they are accessed with support for **different syntaxes**:
 
-    ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary format
-    ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree format
-    ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
-    ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
+   .. code-block:: python
 
-4. **Extract sigle time slice** from whole data structure::
+       ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary format
+       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree format
+       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
+       ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
 
-    ods.slice_at_time(1000.)
+4. **Extract sigle time slice** from whole data structure:
 
-5. **Collect data across array of structures** (not only in time) with `:` construct::
+   .. code-block:: python
 
-    ods['equilibrium.time_slice.:.global_quantities.ip']
+       ods.slice_at_time(1000.)
 
-6. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]::
+5. **Collect data across array of structures** (not only in time) with `:` construct:
 
-    with omas_environment(ods, cocosio=2):
-        ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
+   .. code-block:: python
 
-7. Automatic **coordinate interpolations**::
+       ods['equilibrium.time_slice.:.global_quantities.ip']
 
-    with omas_environment(ods, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
-        ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
+6. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]:
 
-8. Automatic **units conversions** via `pint Python package <http://pint.readthedocs.io/en/latest/>`_::
+   .. code-block:: python
 
-    ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * milliseconds
+       with omas_environment(ods, cocosio=2):
+           ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
-9. Unified interface for **querying about time** dimension::
+7. Automatic **coordinate interpolations**:
 
-    ods.time('equilibrium')                                     # will return an array of times
-    ods.time('equilibrium.time_slice')                          # will return an array of times
-    ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
+   .. code-block:: python
 
-10. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_::
+       with omas_environment(ods, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
+           ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
 
-    ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
+8. Automatic **units conversions** via `pint Python package <http://pint.readthedocs.io/en/latest/>`_:
 
-11. Evaluate **derived quantities** from more fundamental ones::
+   .. code-block:: python
 
-    ods.physics_core_profiles_pressures()
+       ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * milliseconds
 
-12. **Get data as multidimensional array structures** in `xarray <http://xarray.pydata.org/en/stable/>`_ format::
+9. Unified interface for **querying about time** dimension:
 
-    ods['core_profiles.profiles_1d.0.electrons.density_thermal'].xarray()
+   .. code-block:: python
 
-13. Conveniently **plot individual quantities**::
+       ods.time('equilibrium')                                     # will return an array of times
+       ods.time('equilibrium.time_slice')                          # will return an array of times
+       ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
-    ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
+10. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_:
 
-14. **Use regular expressions** for plotting and accessing data with xarrays::
+    .. code-block:: python
 
-    ods.plot_quantity('\@core.*0.elect.*dens.*th')
+        ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
 
-15. **Predefined set of plots** available::
+11. Evaluate **derived quantities** from more fundamental ones:
 
-    ods.plot_core_profiles_summary()
+    .. code-block:: python
+
+        ods.physics_core_profiles_pressures()
+
+12. **Get data as multidimensional array structures** in `xarray <http://xarray.pydata.org/en/stable/>`_ format:
+
+    .. code-block:: python
+
+        ods['core_profiles.profiles_1d.0.electrons.density_thermal'].xarray()
+
+13. Conveniently **plot individual quantities**:
+
+    .. code-block:: python
+
+        ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
+
+14. **Use regular expressions** for plotting and accessing data with xarrays:
+
+    .. code-block:: python
+
+        ods.plot_quantity('\@core.*0.elect.*dens.*th')
+
+15. **Predefined set of plots** available:
+
+    .. code-block:: python
+    
+        ods.plot_core_profiles_summary()
 
 16. Save/load ODSs to/from **different storage systems**:
 
