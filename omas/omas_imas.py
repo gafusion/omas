@@ -478,39 +478,55 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 if 'imas' != 'itm':
     def browse_imas(user=os.environ['USER'], pretty=True, quiet=False):
         '''
-        return dictionary structure with available IMAS data (machine/shot/run) for given user
+        Browse available IMAS data (machine/shot/run) for given user
 
         :param user: user to browse
 
         :param pretty: express size in MB and time in human readeable format
 
         :param quiet: print database to screen
+
+        :return: hierarchical dictionary with database of available IMAS data (machine/shot/run) for given user
         '''
+        # use `imasdb` command to figure out where IMAS users data is generally stored
         import subprocess
-        tmp=subprocess.Popen('imasdb',stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()[1]
-        tmp=os.path.commonprefix(filter(lambda x:os.environ['USER']+os.sep in x,tmp.split('\n')))
-        imasdbdir=tmp.replace('/%s/'%os.environ['USER'],'/%s/'%user).strip()
-        files=list(recursive_glob('*datafile',imasdbdir))
-        imasdb={}
+        tmp = subprocess.Popen('imasdb', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()[1]
+        tmp = os.path.commonprefix(filter(lambda x: os.environ['USER'] + os.sep in x, tmp.split('\n')))
+        imasdbdir = tmp.replace('/%s/' % os.environ['USER'], '/%s/' % user).strip()
+
+        # find MDS+ datafiles
+        files = list(recursive_glob('*datafile', imasdbdir))
+
+        # extract machine/shot/run from filename of MDS+ datafiles
+        imasdb = {}
         for file in files:
-            tmp=file.split(os.sep)
-            shot_run=tmp[-1].split('.')[0].split('_')[1]
-            shot=int(shot_run[:-4])
-            run=int(shot_run[-4:])
-            device=tmp[-4]
+            tmp = file.split(os.sep)
+            shot_run = tmp[-1].split('.')[0].split('_')[1]
+            shot = int(shot_run[:-4])
+            run = int(shot_run[-4:])
+            machine = tmp[-4]
+
+            # size and data
             st = os.stat(file)
-            size=st.st_size
-            date=st.st_mtime
+            size = st.st_size
+            date = st.st_mtime
             if pretty:
                 import time
-                size='%d Mb'%(int(size/1024/1024))
-                date=time.ctime(date)
-            if device not in imasdb:
-                imasdb[device]={}
-            imasdb[device][shot,run]={'file':file,'size':size,'date':date}
+                size = '%d Mb' % (int(size / 1024 / 1024))
+                date = time.ctime(date)
+
+            # build database
+            if machine not in imasdb:
+                imasdb[machine] = {}
+            imasdb[machine][shot, run] = {'file': file, 'size': size, 'date': date}
+
+        # print if not quiet
         if not quiet:
             pprint(imasdb)
+
+        # return database
         return imasdb
+
 
     def load_omas_iter_scenario(shot, run=0, paths=None,
                                 imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),

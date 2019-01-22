@@ -77,7 +77,9 @@ def itm_open(user, machine, shot, run, new=False,
                 cpo.open_env(user, machine, itm_version)
             except Exception as _excp:
                 if 'Error opening itm shot' in str(_excp):
-                    raise(IOError('Error opening itm shot %d run %d'%(shot,run)))
+                    raise(IOError('Error opening itm shot '
+                             '(user:%s machine:%s shot:%s run:%s, itm_version:%s)' %
+                                  (user, machine, shot, run, itm_version)))
         if not cpo.isConnected():
             raise (Exception('Failed to establish connection to ITM database '
                              '(user:%s machine:%s shot:%s run:%s, itm_version:%s)' %
@@ -493,6 +495,58 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
 
 
 if 'itm' != 'itm':
+    def browse_itm(user=os.environ['USER'], pretty=True, quiet=False):
+        '''
+        Browse available ITM data (machine/shot/run) for given user
+
+        :param user: user to browse
+
+        :param pretty: express size in MB and time in human readeable format
+
+        :param quiet: print database to screen
+
+        :return: hierarchical dictionary with database of available ITM data (machine/shot/run) for given user
+        '''
+        # use `itmdb` command to figure out where ITM users data is generally stored
+        import subprocess
+        tmp = subprocess.Popen('itmdb', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()[1]
+        tmp = os.path.commonprefix(filter(lambda x: os.environ['USER'] + os.sep in x, tmp.split('\n')))
+        itmdbdir = tmp.replace('/%s/' % os.environ['USER'], '/%s/' % user).strip()
+
+        # find MDS+ datafiles
+        files = list(recursive_glob('*datafile', itmdbdir))
+
+        # extract machine/shot/run from filename of MDS+ datafiles
+        itmdb = {}
+        for file in files:
+            tmp = file.split(os.sep)
+            shot_run = tmp[-1].split('.')[0].split('_')[1]
+            shot = int(shot_run[:-4])
+            run = int(shot_run[-4:])
+            machine = tmp[-4]
+
+            # size and data
+            st = os.stat(file)
+            size = st.st_size
+            date = st.st_mtime
+            if pretty:
+                import time
+                size = '%d Mb' % (int(size / 1024 / 1024))
+                date = time.ctime(date)
+
+            # build database
+            if machine not in itmdb:
+                itmdb[machine] = {}
+            itmdb[machine][shot, run] = {'file': file, 'size': size, 'date': date}
+
+        # print if not quiet
+        if not quiet:
+            pprint(itmdb)
+
+        # return database
+        return itmdb
+
+
     def load_omas_iter_scenario(shot, run=0, paths=None,
                                 itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']),
                                 verbose=True):
