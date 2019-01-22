@@ -21,8 +21,7 @@ Access data at ITER with OMAS
 
 2. Find what is available in the ITER IMAS database::
 
-       >> pip install --user --upgrade pyyaml     # (this needs to be done only once)
-       >> scenario_summary
+       >> scenario_summary.sh
 
 3. Access ITER scenario database via OMAS from ``python``:
 
