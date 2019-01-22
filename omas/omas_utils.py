@@ -200,6 +200,22 @@ def json_loader(object_pairs, cls=dict):
     return dct
 
 
+def recursive_glob(pattern='*',rootdir='.'):
+    """
+    Search recursively for files matching a specified pattern within a rootdir
+
+    :param pattern: glob pattern to match
+
+    :param rootdir: top level directory to search under
+    """
+    import fnmatch
+    matches = []
+    for root, dirnames, filenames in os.walk(rootdir):
+        for filename in fnmatch.filter(filenames, pattern):
+            matches.append(os.path.join(root, filename))
+    return matches
+
+
 def remote_uri(uri, filename, action):
     """
     :param uri: uri of the container of the file
