@@ -476,12 +476,12 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 
 
 if 'imas' != 'itm':
-    def browse_imas(users=os.environ['USER'], pretty=True, quiet=False,
-                    user_imasdbdir=os.sep.join([os.environ['HOME'],'public','imasdb'])):
+    def browse_imas(user=os.environ['USER'], pretty=True, quiet=False,
+                    user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
         '''
         Browse available IMAS data (machine/shot/run) for given user
 
-        :param users: list of users (or single user) to browse. Browse all users if None.
+        :param user: user (of list of users) to browse. Browses all users if None.
 
         :param pretty: express size in MB and time in human readeable format
 
@@ -491,26 +491,26 @@ if 'imas' != 'itm':
 
         :return: hierarchical dictionary with database of available IMAS data (machine/shot/run) for given user
         '''
-        # find all users
-        if users is None:
-            users=glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
-            users=map(lambda x:x.split(os.sep)[-3],users)
-        elif isinstance(users, basestring):
-            users=[users]
+        # if no users are specified, find all users
+        if user is None:
+            user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+            user = map(lambda x: x.split(os.sep)[-3], user)
+        elif isinstance(user, basestring):
+            user = [user]
 
         # build database for each user
         imasdb = {}
-        for user in users:
-            imasdb[user]={}
-            imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % user).strip()
+        for username in user:
+            imasdb[username] = {}
+            imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
 
             # find MDS+ datafiles
             files = list(recursive_glob('*datafile', imasdbdir))
-            
+
             # extract machine/shot/run from filename of MDS+ datafiles
             for file in files:
                 tmp = file.split(os.sep)
-                if not re.match('ids_[0-9]{5,}.datafile',tmp[-1]):
+                if not re.match('ids_[0-9]{5,}.datafile', tmp[-1]):
                     continue
                 shot_run = tmp[-1].split('.')[0].split('_')[1]
                 shot = int(shot_run[:-4])
@@ -524,12 +524,12 @@ if 'imas' != 'itm':
                 if pretty:
                     import time
                     size = '%d Mb' % (int(size / 1024 / 1024))
-                    date = time.strftime('%d/%m/%y - %H:%M',time.localtime(date))
+                    date = time.strftime('%d/%m/%y - %H:%M', time.localtime(date))
 
                 # build database
-                if machine not in imasdb[user]:
-                    imasdb[user][machine] = {}
-                imasdb[user][machine][shot, run] = {'size': size, 'date': date}
+                if machine not in imasdb[username]:
+                    imasdb[username][machine] = {}
+                imasdb[username][machine][shot, run] = {'size': size, 'date': date}
 
         # print if not quiet
         if not quiet:
