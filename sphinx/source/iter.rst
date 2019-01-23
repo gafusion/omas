@@ -1,30 +1,21 @@
-To install OMAS on your account at ITER:
-
-1. SSH to the ``hpc-login.iter.org`` server (use the X2GO for interactive/graphical session)
-
-2. Install OMAS in your ITER account::
-
-       >> pip install --user --upgrade omas
-
-   where ``--upgrade`` is used to update the omas installation to the latest version.
-   for more installation instructions read :ref:`the OMAS install page <install>`.
-
 Access data at ITER with OMAS
 =============================
-1. First one needs to load the IMAS unix module::
+1. SSH to the ``hpc-login.iter.org`` server (use the X2GO for interactive/graphical session)
 
-       >> module load IMAS
+2. Load the IMAS and OMAS unix modules::
+
+       >> module load IMAS OMAS
 
    .. warning::
      On the ITER clusters the IMAS environment is loaded with ``module load IMAS`` instead of the ``module load imas`` that is commonly used elsewhere.
      The ``module load imas`` will still execute on the ITER clusters, but the environment itself will not work properly!
+     For consistency, on the ITER cluster, the OMAS module follows the same convention as the IMAS module.
 
-2. Find what is available in the ITER IMAS database::
+3. Find what is available in the ITER IMAS database::
 
-       >> pip install --user --upgrade pyyaml     # (this needs to be done only once)
        >> scenario_summary
 
-3. Access ITER scenario database via OMAS from ``python``:
+4. Access ITER scenario database via OMAS from ``python``:
 
    .. code-block:: python
 
