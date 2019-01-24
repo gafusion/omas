@@ -194,10 +194,10 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     # plot each (x,y) and collect the lines/bands into a single object
     for xi, yi in zip(x, y):
-        xnom = numpy.atleast_1d(numpy.squeeze(uncertainties.unumpy.nominal_values(xi)))
-        xerr = numpy.atleast_1d(numpy.squeeze(uncertainties.unumpy.std_devs(xi)))
-        ynom = numpy.atleast_1d(numpy.squeeze(uncertainties.unumpy.nominal_values(yi)))
-        yerr = numpy.atleast_1d(numpy.squeeze(uncertainties.unumpy.std_devs(yi)))
+        xnom = numpy.atleast_1d(numpy.squeeze(nominal_values(xi)))
+        xerr = numpy.atleast_1d(numpy.squeeze(std_devs(xi)))
+        ynom = numpy.atleast_1d(numpy.squeeze(nominal_values(yi)))
+        yerr = numpy.atleast_1d(numpy.squeeze(std_devs(yi)))
 
         l, = ax.plot(xnom, ynom, **kw)
 

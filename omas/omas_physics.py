@@ -99,9 +99,9 @@ def core_profiles_pressures(ods, update=True):
 
         __p__ = None
         if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
-            __p__ = prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e
+            __p__ = nominal_values(prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e)
         elif 'pressure_thermal' in prof1d['electrons']:
-            __p__ = prof1d['electrons']['pressure_thermal']
+            __p__ = nominal_values(prof1d['electrons']['pressure_thermal'])
 
         if __p__ is not None:
             prof1d_p['electrons']['pressure_thermal'] = __p__
@@ -111,14 +111,14 @@ def core_profiles_pressures(ods, update=True):
             prof1d_p['pressure_parallel']      += __p__ / 3.
 
         if 'pressure_fast_perpendicular' in prof1d['electrons']:
-            __p__ = prof1d['electrons']['pressure_fast_perpendicular']
+            __p__ = nominal_values(prof1d['electrons']['pressure_fast_perpendicular'])
             if not update:
                 prof1d_p['electrons']['pressure_fast_perpendicular'] = __p__
             prof1d_p['electrons']['pressure']  += 2. * __p__
             prof1d_p['pressure_perpendicular'] += __p__
 
         if 'pressure_fast_parallel' in prof1d['electrons']:
-            __p__ = prof1d['electrons']['pressure_fast_parallel']
+            __p__ = nominal_values(prof1d['electrons']['pressure_fast_parallel'])
             if not update:
                 prof1d_p['electrons']['pressure_fast_parallel'] = __p__
             prof1d_p['electrons']['pressure'] += __p__
@@ -131,9 +131,9 @@ def core_profiles_pressures(ods, update=True):
 
             __p__ = None
             if 'density_thermal' in prof1d['ion'][k] and 'temperature' in prof1d['ion'][k]:
-                __p__ = prof1d['ion'][k]['density_thermal'] * prof1d['ion'][k]['temperature'] * constants.e
+                __p__ = nominal_values(prof1d['ion'][k]['density_thermal'] * prof1d['ion'][k]['temperature'] * constants.e)
             elif 'pressure_thermal' in prof1d['ion'][k]:
-                __p__ = prof1d['ion'][k]['pressure_thermal']
+                __p__ = nominal_values(prof1d['ion'][k]['pressure_thermal'])
 
             if __p__ is not None:
                 prof1d_p['ion'][k]['pressure_thermal'] = __p__
@@ -144,14 +144,14 @@ def core_profiles_pressures(ods, update=True):
                 prof1d_p['pressure_ion_total']     += __p__
 
             if 'pressure_fast_perpendicular' in prof1d['ion'][k]:
-                __p__ = prof1d['ion'][k]['pressure_fast_perpendicular']
+                __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_perpendicular'])
                 if not update:
                     prof1d_p['ion'][k]['pressure_fast_perpendicular'] = __p__
                 prof1d_p['ion'][k]['pressure']     += 2. * __p__
                 prof1d_p['pressure_perpendicular'] += __p__
 
             if 'pressure_fast_parallel' in prof1d['ion'][k]:
-                __p__ = prof1d['ion'][k]['pressure_fast_parallel']
+                __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_parallel'])
                 if not update:
                     prof1d_p['ion'][k]['pressure_fast_parallel'] = __p__
                 prof1d_p['ion'][k]['pressure'] +=  __p__
@@ -164,6 +164,7 @@ def core_profiles_pressures(ods, update=True):
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
 
     return ods_p
+
 
 @add_to__ODS__
 def core_profiles_densities(ods, update=True):

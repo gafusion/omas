@@ -495,49 +495,60 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
 
 
 if 'itm' != 'itm':
-    def browse_itm(user=os.environ['USER'], pretty=True, quiet=False):
+    def browse_itm(user=os.environ['USER'], pretty=True, quiet=False,
+                    user_itmdbdir=os.sep.join([os.environ['HOME'], 'public', 'itmdb'])):
         '''
         Browse available ITM data (machine/shot/run) for given user
 
-        :param user: user to browse
+        :param user: user (of list of users) to browse. Browses all users if None.
 
         :param pretty: express size in MB and time in human readeable format
 
         :param quiet: print database to screen
 
+        :param user_itmdbdir: directory where itmdb is located for current user (typically $HOME/public/itmdb/)
+
         :return: hierarchical dictionary with database of available ITM data (machine/shot/run) for given user
         '''
-        # use `itmdb` command to figure out where ITM users data is generally stored
-        import subprocess
-        tmp = subprocess.Popen('itmdb', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()[1]
-        tmp = os.path.commonprefix(filter(lambda x: os.environ['USER'] + os.sep in x, tmp.split('\n')))
-        itmdbdir = tmp.replace('/%s/' % os.environ['USER'], '/%s/' % user).strip()
+        # if no users are specified, find all users
+        if user is None:
+            user = glob.glob(user_itmdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+            user = map(lambda x: x.split(os.sep)[-3], user)
+        elif isinstance(user, basestring):
+            user = [user]
 
-        # find MDS+ datafiles
-        files = list(recursive_glob('*datafile', itmdbdir))
-
-        # extract machine/shot/run from filename of MDS+ datafiles
+        # build database for each user
         itmdb = {}
-        for file in files:
-            tmp = file.split(os.sep)
-            shot_run = tmp[-1].split('.')[0].split('_')[1]
-            shot = int(shot_run[:-4])
-            run = int(shot_run[-4:])
-            machine = tmp[-4]
+        for username in user:
+            itmdb[username] = {}
+            itmdbdir = user_itmdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
 
-            # size and data
-            st = os.stat(file)
-            size = st.st_size
-            date = st.st_mtime
-            if pretty:
-                import time
-                size = '%d Mb' % (int(size / 1024 / 1024))
-                date = time.ctime(date)
+            # find MDS+ datafiles
+            files = list(recursive_glob('*datafile', itmdbdir))
 
-            # build database
-            if machine not in itmdb:
-                itmdb[machine] = {}
-            itmdb[machine][shot, run] = {'file': file, 'size': size, 'date': date}
+            # extract machine/shot/run from filename of MDS+ datafiles
+            for file in files:
+                tmp = file.split(os.sep)
+                if not re.match('cpo_[0-9]{5,}.datafile', tmp[-1]):
+                    continue
+                shot_run = tmp[-1].split('.')[0].split('_')[1]
+                shot = int(shot_run[:-4])
+                run = int(shot_run[-4:])
+                machine = tmp[-4]
+
+                # size and data
+                st = os.stat(file)
+                size = st.st_size
+                date = st.st_mtime
+                if pretty:
+                    import time
+                    size = '%d Mb' % (int(size / 1024 / 1024))
+                    date = time.strftime('%d/%m/%y - %H:%M', time.localtime(date))
+
+                # build database
+                if machine not in itmdb[username]:
+                    itmdb[username][machine] = {}
+                itmdb[username][machine][shot, run] = {'size': size, 'date': date}
 
         # print if not quiet
         if not quiet:
