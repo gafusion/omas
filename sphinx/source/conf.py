@@ -147,7 +147,8 @@ sphinx_gallery_conf = {
      # path where to save gallery generated examples
      'gallery_dirs': 'auto_examples',
      'download_all_examples': False,
-     'min_reported_time':1000}
+     'min_reported_time':1000,
+     'default_thumb_file': os.path.split(__file__)[0]+'/images/sphx_default_thumb.png'}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

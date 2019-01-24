@@ -11,6 +11,7 @@ all:
 	@echo ' - make pipy         : upload to pipy'
 	@echo ' - make release      : all of the above, in order'
 	@echo ' - make html         : generate sphyix documentation'
+	@echo ' - make examples     : generate sphyix documentation with examples'
 	@echo ' - make cocos        : generate list of COCOS transformations'
 	@echo ''
 
@@ -52,6 +53,9 @@ requirements:
 
 html:
 	cd sphinx && make html
+
+examples:
+	cd sphinx && make examples
 
 docs: html
 	cd sphinx && make commit && make push

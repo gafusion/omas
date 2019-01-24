@@ -60,9 +60,19 @@ push:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+.PHONY: clean_examples
+clean_examples:
+	rm -rf $(BUILDDIR)/../source/auto_examples
+
+.PHONY: examples
+examples: html clean_examples clean
+	@echo "Examples have been updated"
+
 .PHONY: html
 html: clean
+	rm -f $(BUILDDIR)/../source/auto_examples/iter_scenario.*
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	cp $(BUILDDIR)/../source/images/imas_logo_thumb.png $(BUILDDIR)/html/_images/sphx_glr_iter_scenario_thumb.png
 	@echo 'google-site-verification: googleb0a3b5f53d7d9d8d.html' > $(BUILDDIR)/html/googleb0a3b5f53d7d9d8d.html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
