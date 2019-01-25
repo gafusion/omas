@@ -18,9 +18,9 @@ To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developer
 
     git clone git@github.com:gafusion/omas.git
     cd omas
-    sudo pip install --upgrade -e .[build_structures,build_documentation]       # add this `omas` directory to your $PYTHONPATH
-                                                                      # [build_structures,build_documentation] options
-                                                                      # install extra packages for development purposes
+    sudo pip install --upgrade -e .[build_structures, build_documentation]      # Add this `omas` directory to your $PYTHONPATH
+                                                                                # The [build_structures,build_documentation] options
+                                                                                # install packages required for extra development purposes
 
 Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
 
