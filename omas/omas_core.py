@@ -1022,8 +1022,16 @@ class ODS(MutableMapping):
         assign .time and .ids_properties.homogeneous_time info for top-level structures
         these are required for writing an IDS to IMAS
         '''
-        self['time'] = self.time()
-        self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+        if not len(self.location):
+            for ds in self.keys():
+                self[ds].satisfy_imas_requirements()
+        elif p2l(self.location)[0] not in add_datastructures:
+            time = self.time()
+            if time is not None and len(time):
+                self['time'] = time
+                self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+            else:
+                raise (ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.'))
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
