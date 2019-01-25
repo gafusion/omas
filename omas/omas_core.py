@@ -89,7 +89,7 @@ class ODS(MutableMapping):
         else:
             return homogeneous_time
 
-    def time(self, key='', extra_info=None):
+    def time(self, key='', extra_info=None, skip=None):
         """
         Return the time information for a given ODS location
 
@@ -133,6 +133,8 @@ class ODS(MutableMapping):
             elif 'time' in tmp.structure:
                 # try to assemble time information by looking in the children
                 for item in tmp.structure:
+                    if item == skip:
+                        continue
                     if item in tmp and ':' in tmp.structure[item] and 'time' in tmp.structure[item][':']:
                         return add_is_homogeneous_info(tmp.time(item, extra_info=extra_info))
 
@@ -154,8 +156,9 @@ class ODS(MutableMapping):
 
         # traverse tree upstream looking for the first parent that has time information
         while len(key):
-            key.pop()
-            time = self.time(key, extra_info=extra_info)
+            # make sure .time() does not traverse this children since we already know there is no time information in it
+            skip = key.pop()
+            time = self.time(key, extra_info=extra_info, skip=skip)
             if time is not None:
                 # if the parent with time information is an array of structures
                 # then return the time of the element that we are asking for

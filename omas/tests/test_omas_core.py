@@ -145,6 +145,29 @@ class TestOmasCore(unittest.TestCase):
         except LookupError:
             pass
 
+    def test_satisfy_imas_requirements(self):
+        ods = ods_sample()
+
+        # check if data structures satisfy IMAS requirements (this should Fail)
+        try:
+            ods.satisfy_imas_requirements()
+            raise (ValueError('It is expected that not all the sample structures have the .time array set'))
+        except ValueError as _excp:
+            pass
+
+        # add .time information for all data structures
+        while True:
+            try:
+                ods.satisfy_imas_requirements()
+            except ValueError as _excp:
+                # print(str(_excp).split()[0])
+                ods[str(_excp).split()[0]] = [100]
+            else:
+                break
+
+        # re-check if data structures satisfy IMAS requirements (this should pass)
+        ods.satisfy_imas_requirements()
+
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
     unittest.TextTestRunner(verbosity=2).run(suite)
