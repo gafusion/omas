@@ -8,7 +8,7 @@ all:
 	@echo ' - make itm          : generate omas_itm.py from omas_imas.py'
 	@echo ' - make docs         : generate sphyix documentation and pushes it online'
 	@echo ' - make git          : push to github repo'
-	@echo ' - make pipy         : upload to pipy'
+	@echo ' - make pypi         : upload to pypi'
 	@echo ' - make release      : all of the above, in order'
 	@echo ' - make html         : generate sphyix documentation'
 	@echo ' - make examples     : generate sphyix documentation with examples'
@@ -73,8 +73,8 @@ cocos:
 git:
 	git push
 
-pipy:
+pypi:
 	python setup.py sdist upload
 
-release: tests2 tests3 requirements json itm docs git pipy
+release: tests2 tests3 requirements json itm docs git pypi
 	@echo 'Done!'
