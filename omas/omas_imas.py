@@ -121,9 +121,9 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         ds = ds + 'Array'
 
     # identify data dictionary to use, from this point on `m` points to the IDS
+    debug_path=''
     if hasattr(ids, ds):
-        printd("", topic='imas_code')
-        printd("m = getattr(ids, %r)" % ds, topic='imas_code')
+        debug_path+='ids.%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -133,35 +133,35 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
         return
     else:
+        printd(debug_path, topic='imas_code')
         raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
 
     # traverse IMAS structure until reaching the leaf
-    printd("out = m", topic='imas_code')
     out = m
     for kp, p in enumerate(path):
         location = l2i([ds] + path[:kp + 1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %r)" % p, topic='imas_code')
+                    debug_path+='.'+p
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of IMAS structure' % location)
                 return
             else:
+                printd(debug_path, topic='imas_code')
                 raise (AttributeError('%s is not part of IMAS structure' % location))
         else:
             try:
                 out = out[p]
-                printd("out = out[%s]" % p, topic='imas_code')
+                debug_path+='[%d]'%p
             except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
-                printd('resizing  : %s' % location, topic='imas')
-                printd("out.resize(%d)" % (p + 1), topic='imas_code')
+                printd(debug_path+".resize(%d)" % (p + 1), topic='imas_code')
                 out.resize(p + 1)
-                printd("out = out[%s]" % p, topic='imas_code')
+                debug_path+='[%d]'%p
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -173,7 +173,8 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if not isinstance(value, (basestring, numpy.ndarray)):
         value = numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %s)" % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
+    if 'imas_code' in os.environ.get('OMAS_DEBUG_TOPIC', ''): #use if statement here to avoid unecessary repr(value) when not debugging
+        printd(debug_path+'.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
 
     # return path
     return [DS] + path
@@ -202,14 +203,16 @@ def imas_get(ids, path, skip_missing_nodes=False):
     if 'imas' == 'itm':
         ds = ds + 'Array'
 
+    debug_path = ''
     if hasattr(ids, ds):
-        printd("m = getattr(ids, %s)" % repr(ds), topic='imas_code')
+        debug_path+='ids.%s'%ds
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
         return None
     else:
+        printd(debug_path, topic='imas_code')
         raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
 
     # traverse the IDS to get the data
@@ -217,7 +220,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
-                printd("out = getattr(out, %s)" % repr(p), topic='imas_code')
+                debug_path+='.%s'%p
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -225,11 +228,13 @@ def imas_get(ids, path, skip_missing_nodes=False):
                     printe(out.__dict__.keys())
                 return None
             else:
+                printd(debug_path, topic='imas_code')
                 raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1])))
         else:
-            printd("out = out[%s]" % p, topic='imas_code')
+            debug_path+='[%s]'%p
             out = out[p]
-
+    
+    printd(debug_path, topic='imas_code')
     return out
 
 
@@ -426,14 +431,13 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             # build omas data structure
             ods = ODS(imas_version=imas_version)
             for k, path in enumerate(fetch_paths):
-                if len(path) == 2 and path[-1] == 'time':
-                    data = imas_get(ids, path, None)
-                    if data[0] == -1:
-                        continue
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                     continue
                 # get data from ids
                 data = imas_get(ids, path, None)
+                if len(path) == 2 and path[-1] == 'time':
+                    if data[0] == -1:
+                        continue
                 # skip empty arrays
                 if isinstance(data, numpy.ndarray) and not data.size:
                     continue
