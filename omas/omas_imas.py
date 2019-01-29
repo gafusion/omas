@@ -32,8 +32,8 @@ def imas_open(user, machine, shot, run, new=False,
     :return: IMAS ids
     """
     import imas
-    printd("ids = imas.ids(%d,%d)"%(shot,run),topic='imas_code')
-    ids = imas.ids(shot,run)
+    printd("ids = imas.ids(%d,%d)" % (shot, run), topic='imas_code')
+    ids = imas.ids(shot, run)
 
     if user is None and machine is None:
         pass
@@ -46,37 +46,32 @@ def imas_open(user, machine, shot, run, new=False,
 
     if user is None and machine is None:
         if new:
-            printd("ids.create()",topic='imas_code')
+            printd("ids.create()", topic='imas_code')
             ids.create()
         else:
-            printd("ids.open()",topic='imas_code')
+            printd("ids.open()", topic='imas_code')
             try:
                 ids.open()
             except Exception as _excp:
                 if 'Error opening imas shot' in str(_excp):
-                    raise(IOError('Error opening imas shot %d run %d'%(shot,run)))
+                    raise (IOError('Error opening imas shot %d run %d' % (shot, run)))
         if not ids.isConnected():
             raise (Exception('Failed to establish connection to IMAS database '
-                             '(shot:{shot} run:{run}, DB:{db})'.format(
-                             shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+                             '(shot:{shot} run:{run}, DB:{db})'.format(shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
         if new:
-            printd("ids.create_env(%s, %s, %s)"%(repr(user),repr(machine),repr(imas_version)),topic='imas_code')
+            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_version)), topic='imas_code')
             ids.create_env(user, machine, imas_version)
         else:
-            printd("ids.open_env(%s, %s, %s)"%(repr(user),repr(machine),repr(imas_version)),topic='imas_code')
+            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_version)), topic='imas_code')
             try:
                 ids.open_env(user, machine, imas_version)
             except Exception as _excp:
                 if 'Error opening imas shot' in str(_excp):
-                    raise(IOError('Error opening imas shot '
-                             '(user:%s machine:%s shot:%s run:%s, imas_version:%s)' %
-                                  (user, machine, shot, run, imas_version)))
+                    raise (IOError('Error opening imas shot (user:%s machine:%s shot:%s run:%s, imas_version:%s)' % (user, machine, shot, run, imas_version)))
         if not ids.isConnected():
-            raise (Exception('Failed to establish connection to IMAS database '
-                             '(user:%s machine:%s shot:%s run:%s, imas_version:%s)' %
-                             (user, machine, shot, run, imas_version)))
+            raise (Exception('Failed to establish connection to IMAS database (user:%s machine:%s shot:%s run:%s, imas_version:%s)' % (user, machine, shot, run, imas_version)))
     return ids
 
 
@@ -121,9 +116,9 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         ds = ds + 'Array'
 
     # identify data dictionary to use, from this point on `m` points to the IDS
-    debug_path=''
+    debug_path = ''
     if hasattr(ids, ds):
-        debug_path+='ids.%s' % ds
+        debug_path += 'ids.%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -143,7 +138,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    debug_path+='.'+p
+                    debug_path += '.' + p
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -155,13 +150,13 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         else:
             try:
                 out = out[p]
-                debug_path+='[%d]'%p
+                debug_path += '[%d]' % p
             except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
-                printd(debug_path+".resize(%d)" % (p + 1), topic='imas_code')
+                printd(debug_path + ".resize(%d)" % (p + 1), topic='imas_code')
                 out.resize(p + 1)
-                debug_path+='[%d]'%p
+                debug_path += '[%d]' % p
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -173,8 +168,8 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if not isinstance(value, (basestring, numpy.ndarray)):
         value = numpy.array(value)
     setattr(out, path[-1], value)
-    if 'imas_code' in os.environ.get('OMAS_DEBUG_TOPIC', ''): #use if statement here to avoid unecessary repr(value) when not debugging
-        printd(debug_path+'.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
+    if 'imas_code' in os.environ.get('OMAS_DEBUG_TOPIC', ''):  # use if statement here to avoid unecessary repr(value) when not debugging
+        printd(debug_path + '.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
 
     # return path
     return [DS] + path
@@ -205,7 +200,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path+='ids.%s'%ds
+        debug_path += 'ids.%s' % ds
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -220,7 +215,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
-                debug_path+='.%s'%p
+                debug_path += '.%s' % p
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -231,9 +226,9 @@ def imas_get(ids, path, skip_missing_nodes=False):
                 printd(debug_path, topic='imas_code')
                 raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1])))
         else:
-            debug_path+='[%s]'%p
+            debug_path += '[%s]' % p
             out = out[p]
-    
+
     printd(debug_path, topic='imas_code')
     return out
 
@@ -292,13 +287,13 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
         ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=new, imas_version=imas_version)
 
     except IOError as _excp:
-        raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
+        raise (IOError(str(_excp) + '\nIf this is a new shot/run then set `new=True`'))
 
     except ImportError:
         # fallback on saving IMAS as NC file if IMAS is not installed
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version,imas_version))])
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded save_omas_imas: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
@@ -378,7 +373,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version,imas_version))])
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -457,7 +452,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
                     elif isinstance(stdata, unicode) and not len(stdata):
                         continue
                     else:
-                        data = uarray(data,stdata)
+                        data = uarray(data, stdata)
                 if verbose:
                     print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
                 h = ods

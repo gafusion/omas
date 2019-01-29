@@ -39,8 +39,8 @@ def itm_open(user, machine, shot, run, new=False,
     :return: ITM cpo
     """
     import ual
-    printd("cpo = ual.itm(%d,%d)"%(shot,run),topic='itm_code')
-    cpo = ual.itm(shot,run)
+    printd("cpo = ual.itm(%d,%d)" % (shot, run), topic='itm_code')
+    cpo = ual.itm(shot, run)
 
     if user is None and machine is None:
         pass
@@ -53,37 +53,32 @@ def itm_open(user, machine, shot, run, new=False,
 
     if user is None and machine is None:
         if new:
-            printd("cpo.create()",topic='itm_code')
+            printd("cpo.create()", topic='itm_code')
             cpo.create()
         else:
-            printd("cpo.open()",topic='itm_code')
+            printd("cpo.open()", topic='itm_code')
             try:
                 cpo.open()
             except Exception as _excp:
                 if 'Error opening itm shot' in str(_excp):
-                    raise(IOError('Error opening itm shot %d run %d'%(shot,run)))
+                    raise (IOError('Error opening itm shot %d run %d' % (shot, run)))
         if not cpo.isConnected():
             raise (Exception('Failed to establish connection to ITM database '
-                             '(shot:{shot} run:{run}, DB:{db})'.format(
-                             shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+                             '(shot:{shot} run:{run}, DB:{db})'.format(shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
         if new:
-            printd("cpo.create_env(%s, %s, %s)"%(repr(user),repr(machine),repr(itm_version)),topic='itm_code')
+            printd("cpo.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(itm_version)), topic='itm_code')
             cpo.create_env(user, machine, itm_version)
         else:
-            printd("cpo.open_env(%s, %s, %s)"%(repr(user),repr(machine),repr(itm_version)),topic='itm_code')
+            printd("cpo.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(itm_version)), topic='itm_code')
             try:
                 cpo.open_env(user, machine, itm_version)
             except Exception as _excp:
                 if 'Error opening itm shot' in str(_excp):
-                    raise(IOError('Error opening itm shot '
-                             '(user:%s machine:%s shot:%s run:%s, itm_version:%s)' %
-                                  (user, machine, shot, run, itm_version)))
+                    raise (IOError('Error opening itm shot (user:%s machine:%s shot:%s run:%s, itm_version:%s)' % (user, machine, shot, run, itm_version)))
         if not cpo.isConnected():
-            raise (Exception('Failed to establish connection to ITM database '
-                             '(user:%s machine:%s shot:%s run:%s, itm_version:%s)' %
-                             (user, machine, shot, run, itm_version)))
+            raise (Exception('Failed to establish connection to ITM database (user:%s machine:%s shot:%s run:%s, itm_version:%s)' % (user, machine, shot, run, itm_version)))
     return cpo
 
 
@@ -131,9 +126,9 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         ds = ds + 'Array'
 
     # identify data dictionary to use, from this point on `m` points to the CPO
+    debug_path = ''
     if hasattr(cpo, ds):
-        printd("", topic='itm_code')
-        printd("m = getattr(cpo, %r)" % ds, topic='itm_code')
+        debug_path += 'cpo.%s' % ds
         m = getattr(cpo, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -143,35 +138,35 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
             printe('WARNING: %s is not part of ITM structure' % l2i([ds] + path))
         return
     else:
+        printd(debug_path, topic='itm_code')
         raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path)))
 
     # traverse ITM structure until reaching the leaf
-    printd("out = m", topic='itm_code')
     out = m
     for kp, p in enumerate(path):
         location = l2i([ds] + path[:kp + 1])
         if isinstance(p, basestring):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
-                    printd("out = getattr(out, %r)" % p, topic='itm_code')
+                    debug_path += '.' + p
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of ITM structure' % location)
                 return
             else:
+                printd(debug_path, topic='itm_code')
                 raise (AttributeError('%s is not part of ITM structure' % location))
         else:
             try:
                 out = out[p]
-                printd("out = out[%s]" % p, topic='itm_code')
+                debug_path += '[%d]' % p
             except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
                     raise (IndexError('%s structure array exceed allocation' % location))
-                printd('resizing  : %s' % location, topic='itm')
-                printd("out.resize(%d)" % (p + 1), topic='itm_code')
+                printd(debug_path + ".resize(%d)" % (p + 1), topic='itm_code')
                 out.resize(p + 1)
-                printd("out = out[%s]" % p, topic='itm_code')
+                debug_path += '[%d]' % p
                 out = out[p]
 
     # if we are allocating data, simply stop here
@@ -183,7 +178,8 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     if not isinstance(value, (basestring, numpy.ndarray)):
         value = numpy.array(value)
     setattr(out, path[-1], value)
-    printd("setattr(out, %r, %s)" % (path[-1], repr(value).replace('\\n', '\n')), topic='itm_code')
+    if 'itm_code' in os.environ.get('OMAS_DEBUG_TOPIC', ''):  # use if statement here to avoid unecessary repr(value) when not debugging
+        printd(debug_path + '.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='itm_code')
 
     # return path
     return [DS] + path
@@ -215,14 +211,16 @@ def itm_get(cpo, path, skip_missing_nodes=False):
     if 'itm' == 'itm':
         ds = ds + 'Array'
 
+    debug_path = ''
     if hasattr(cpo, ds):
-        printd("m = getattr(cpo, %s)" % repr(ds), topic='itm_code')
+        debug_path += 'cpo.%s' % ds
         m = getattr(cpo, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of ITM structure' % l2i([ds] + path))
         return None
     else:
+        printd(debug_path, topic='itm_code')
         raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path)))
 
     # traverse the CPO to get the data
@@ -230,7 +228,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
     for kp, p in enumerate(path):
         if isinstance(p, basestring):
             if hasattr(out, p):
-                printd("out = getattr(out, %s)" % repr(p), topic='itm_code')
+                debug_path += '.%s' % p
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
@@ -238,11 +236,13 @@ def itm_get(cpo, path, skip_missing_nodes=False):
                     printe(out.__dict__.keys())
                 return None
             else:
+                printd(debug_path, topic='itm_code')
                 raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path[:kp + 1])))
         else:
-            printd("out = out[%s]" % p, topic='itm_code')
+            debug_path += '[%s]' % p
             out = out[p]
 
+    printd(debug_path, topic='itm_code')
     return out
 
 
@@ -303,13 +303,13 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
         cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=new, itm_version=itm_version)
 
     except IOError as _excp:
-        raise(IOError(str(_excp)+'\nIf this is a new shot/run then set `new=True`'))
+        raise (IOError(str(_excp) + '\nIf this is a new shot/run then set `new=True`'))
 
     except ImportError:
         # fallback on saving ITM as NC file if ITM is not installed
         if not omas_rcparams['allow_fake_itm_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version,itm_version))])
+        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version, itm_version))])
         printe('Overloaded save_omas_itm: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_itm_dir']):
@@ -392,7 +392,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
     except ImportError:
         if not omas_rcparams['allow_fake_itm_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version,itm_version))])
+        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version, itm_version))])
         printe('Overloaded load_omas_itm: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -445,14 +445,13 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
             # build omas data structure
             ods = ODS(itm_version=itm_version)
             for k, path in enumerate(fetch_paths):
-                if len(path) == 2 and path[-1] == 'time':
-                    data = itm_get(cpo, path, None)
-                    if data[0] == -1:
-                        continue
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                     continue
                 # get data from cpo
                 data = itm_get(cpo, path, None)
+                if len(path) == 2 and path[-1] == 'time':
+                    if data[0] == -1:
+                        continue
                 # skip empty arrays
                 if isinstance(data, numpy.ndarray) and not data.size:
                     continue
@@ -472,7 +471,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                     elif isinstance(stdata, unicode) and not len(stdata):
                         continue
                     else:
-                        data = uarray(data,stdata)
+                        data = uarray(data, stdata)
                 if verbose:
                     print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
                 h = ods
