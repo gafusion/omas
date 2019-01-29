@@ -7,6 +7,7 @@ __pycache__/
 .\#*
 \#*
 build/
+.DS_Store
 
 omas_doc.html
 
