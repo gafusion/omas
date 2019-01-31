@@ -28,7 +28,6 @@ ods['edge_profiles.ggd[0].electrons.density[9].values'] = linspace(0, 1, 10)
 
 # save updated ODS to our personal IMAS database
 save_omas_imas(ods,
-               user=os.environ['USER'],
                machine='ITER',
                shot=102292,
                run=11,
@@ -36,8 +35,7 @@ save_omas_imas(ods,
                imas_version=omas_rcparams['default_imas_version'])
 
 # re-load data from our personal IMAS database
-ods1 = load_omas_imas(user=os.environ['USER'],
-                      machine='ITER',
+ods1 = load_omas_imas(machine='ITER',
                       shot=102292,
                       run=11,
                       imas_version=omas_rcparams['default_imas_version'])
