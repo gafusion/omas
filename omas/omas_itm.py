@@ -471,7 +471,10 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
                     elif isinstance(stdata, unicode) and not len(stdata):
                         continue
                     else:
-                        data = uarray(data, stdata)
+                        try:
+                            data = uarray(data, stdata)
+                        except uncertainties.core.NegativeStdDev as _excp:
+                            printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
                 if verbose:
                     print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
                 h = ods
