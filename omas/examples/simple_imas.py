@@ -8,7 +8,7 @@ Also, this script shows the use of 'imas_code_dump' as an `OMAS_DEBUG_TOPIC`,
 which can be useful for debugging purposes.
 
 Prior running this script, the following commands must be typed at the teriminal
-> import IMAS
+> import IMAS OMAS
 > imasdb ITER
 """
 

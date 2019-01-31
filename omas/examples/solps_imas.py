@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Simple IMAS
-===========
+SOLPS and IMAS
+==============
 Using OMAS to load data from a SOLPS simulation stored in the ITER scenario database
 
 Prior running this script, the following commands must be typed at the teriminal
@@ -17,14 +17,14 @@ from pprint import pprint
 from numpy import *
 from omas import *
 
-# load ITER scenario that has SOLPS data in an ODS
+# load an ITER scenario that has SOLPS data in an ODS
 ods = load_omas_iter_scenario(shot=102292, run=1, verbose=False)
 
 # print paths
 pprint(ods.pretty_paths())
 
 # add some arbitrary data to an entry in the tree
-ods['edge_profiles.ggd[0].electrons.density[9].values'] = linspace(0,1,10)
+ods['edge_profiles.ggd[0].electrons.density[9].values'] = linspace(0, 1, 10)
 
 # save updated ODS to our personal IMAS database
 save_omas_imas(ods,
