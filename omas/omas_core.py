@@ -469,7 +469,7 @@ class ODS(MutableMapping):
 
                 # handle units (Python pint package)
                 if pint is not None:
-                    if 'units' in info and isinstance(value,pint.quantity._Quantity) or (isinstance(value,numpy.ndarray) and len(value.shape) and isinstance(value.flatten()[0],pint.quantity._Quantity)):
+                    if 'units' in info and isinstance(value, pint.quantity._Quantity) or (isinstance(value, numpy.ndarray) and value.size and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)):
                         value = value.to(info['units']).magnitude
 
                 # coordinates interpolation
