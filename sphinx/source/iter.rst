@@ -30,8 +30,8 @@ Although ITER experimental data is yet to be produced, OMAS can already be used 
       # load OMAS package
       from omas import *
 
-      # load data from a shot chosen from the ITER scenario database
-      ods = load_omas_iter_scenario(shot=131034, run=0)
+      # load data from a pulse chosen from the ITER scenario database
+      ods = load_omas_iter_scenario(pulse=131034, run=0)
 
       # print nodes with data
       from pprint import pprint
@@ -62,5 +62,5 @@ In addition, the ``iter_scenario_summary_remote`` allows querying for the ITER s
 
    .. code-block:: python
 
-       OMFIT['ods'] = load_omas_iter_scenario_remote(shot=131034, run=0)
+       OMFIT['ods'] = load_omas_iter_scenario_remote(pulse=131034, run=0)
 
