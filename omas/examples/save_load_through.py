@@ -46,8 +46,8 @@ ods = load_omas_s3(filename)
 
 # save/load IMAS
 omas_rcparams['allow_fake_imas_fallback']=True
-paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
-ods_end = load_omas_imas(machine='ITER', shot=1, paths=paths)
+paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
+ods_end = load_omas_imas(machine='ITER', pulse=1, paths=paths)
 
 # check data
 check = different_ods(ods_start, ods_end)

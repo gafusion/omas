@@ -37,4 +37,4 @@ cpo = ids_cpo_mapper(ids)
 
 # save CPO to ITM data system
 with rcparams_environment(allow_fake_itm_fallback=True):
-    save_omas_itm(cpo, machine='jet', shot=1, new=True)
+    save_omas_itm(cpo, machine='jet', pulse=1, new=True)

@@ -44,10 +44,10 @@ def misc(ods):
     #check effect of disabling dynamic path creation
     try:
         ods.dynamic_path_creation = False
-        ods['info.user']
+        ods['dataset_description.data_entry.user']
     except LookupError:
-        ods['info'] = ODS()
-        ods['info.user'] = unicode(os.environ['USER'])
+        ods['dataset_description'] = ODS()
+        ods['dataset_description.data_entry.user'] = unicode(os.environ['USER'])
     else:
         raise(Exception('OMAS error handling dynamic_path_creation=False'))
     finally:
@@ -55,21 +55,21 @@ def misc(ods):
 
     #check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
     try:
-        ods['info.machine']
+        ods['dataset_description.data_entry.machine']
     except ValueError:
         pass
     else:
         raise(Exception('OMAS error querying leaf that has not been set'))
 
     # info ODS is used for keeping track of IMAS metadata
-    ods['info.machine'] = 'ITER'
-    ods['info.imas_version'] = omas_rcparams['default_imas_version']
-    ods['info.shot'] = 1
-    ods['info.run'] = 0
+    ods['dataset_description.data_entry.machine'] = 'ITER'
+    ods['dataset_description.imas_version'] = omas_rcparams['default_imas_version']
+    ods['dataset_description.data_entry.pulse'] = 1
+    ods['dataset_description.data_entry.run'] = 0
 
     # check .get() method
-    assert (ods.get('info.shot') == ods['info.shot'])
-    assert (ods.get('info.bad', None) is None)
+    assert (ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse'])
+    assert (ods.get('dataset_description.bad', None) is None)
 
     # check that keys is an iterable (so that Python 2/3 work the same way)
     keys = ods.keys()

@@ -19,7 +19,7 @@ from .omas_core import ODS
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def itm_open(user, machine, shot, run, new=False,
+def itm_open(user, machine, pulse, run, new=False,
               itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version'])):
     """
     function to open an ITM
@@ -28,7 +28,7 @@ def itm_open(user, machine, shot, run, new=False,
 
     :param machine: ITM machine
 
-    :param shot: ITM shot
+    :param pulse: ITM pulse
 
     :param run: ITM run id
 
@@ -39,8 +39,8 @@ def itm_open(user, machine, shot, run, new=False,
     :return: ITM cpo
     """
     import ual
-    printd("cpo = ual.itm(%d,%d)" % (shot, run), topic='itm_code')
-    cpo = ual.itm(shot, run)
+    printd("cpo = ual.itm(%d,%d)" % (pulse, run), topic='itm_code')
+    cpo = ual.itm(pulse, run)
 
     if user is None and machine is None:
         pass
@@ -48,7 +48,7 @@ def itm_open(user, machine, shot, run, new=False,
         raise (Exception('user={user}, machine={machine}, itm_version={itm_version}\n'
                          'Either specify all or none of `user`, `machine`, `itm_version`\n'
                          'If none of them are specified then use `itmdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, shot=shot,
+                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
                                                                               run=run, itm_version=itm_version)))
 
     if user is None and machine is None:
@@ -60,11 +60,11 @@ def itm_open(user, machine, shot, run, new=False,
             try:
                 cpo.open()
             except Exception as _excp:
-                if 'Error opening itm shot' in str(_excp):
-                    raise (IOError('Error opening itm shot %d run %d' % (shot, run)))
+                if 'Error opening itm pulse' in str(_excp):
+                    raise (IOError('Error opening itm pulse %d run %d' % (pulse, run)))
         if not cpo.isConnected():
             raise (Exception('Failed to establish connection to ITM database '
-                             '(shot:{shot} run:{run}, DB:{db})'.format(shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
         if new:
@@ -75,10 +75,10 @@ def itm_open(user, machine, shot, run, new=False,
             try:
                 cpo.open_env(user, machine, itm_version)
             except Exception as _excp:
-                if 'Error opening itm shot' in str(_excp):
-                    raise (IOError('Error opening itm shot (user:%s machine:%s shot:%s run:%s, itm_version:%s)' % (user, machine, shot, run, itm_version)))
+                if 'Error opening itm pulse' in str(_excp):
+                    raise (IOError('Error opening itm pulse (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version)))
         if not cpo.isConnected():
-            raise (Exception('Failed to establish connection to ITM database (user:%s machine:%s shot:%s run:%s, itm_version:%s)' % (user, machine, shot, run, itm_version)))
+            raise (Exception('Failed to establish connection to ITM database (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version)))
     return cpo
 
 
@@ -114,7 +114,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` CPO is used by OMAS to hold user, machine, shot, run, itm_version
+    # `info` CPO is used by OMAS to hold user, machine, pulse, run, itm_version
     # for saving methods that do not carry that information. ITM does not store
     # this information as part of the data dictionary.
     if ds in add_datastructures.keys():
@@ -252,20 +252,20 @@ def itm_get(cpo, path, skip_missing_nodes=False):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
+def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
                    itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version'])):
     """
     Save OMAS data to ITM
 
     :param ods: OMAS data set
 
-    :param user: ITM username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
+    :param user: ITM username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param machine: ITM machine (reads ods['info.machine'] if machine is None)
+    :param machine: ITM machine (reads ods['dataset_description.data_entry.machine'] if machine is None)
 
-    :param shot: ITM shot (reads ods['info.shot'] if shot is None)
+    :param pulse: ITM pulse (reads ods['dataset_description.data_entry.pulse'] if pulse is None)
 
-    :param run: ITM run (reads ods['info.run'] if run is None and finally fallsback on 0)
+    :param run: ITM run (reads ods['dataset_description.data_entry.run'] if run is None and finally fallsback on 0)
 
     :param new: whether the open should create a new ITM tree
 
@@ -274,21 +274,21 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
     :return: paths that have been written to ITM
     """
 
-    # handle default values for user, machine, shot, run, itm_version
+    # handle default values for user, machine, pulse, run, itm_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('info.user', os.environ['USER'])
+        user = ods.get('dataset_description.data_entry.user', os.environ['USER'])
     if machine is None:
-        machine = ods.get('info.machine', None)
-    if shot is None:
-        shot = ods.get('info.shot', None)
+        machine = ods.get('dataset_description.data_entry.machine', None)
+    if pulse is None:
+        pulse = ods.get('dataset_description.data_entry.pulse', None)
     if run is None:
-        run = ods.get('info.run', 0)
+        run = ods.get('dataset_description.data_entry.run', 0)
 
     if user is not None and machine is not None:
-        printd('Saving to ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (user, machine, shot, run, itm_version), topic='itm')
+        printd('Saving to ITM (user:%s machine:%s pulse:%d run:%d, itm_version:%s)' % (user, machine, pulse, run, itm_version), topic='itm')
     elif user is None and machine is None:
-        printd('Saving to ITM (shot:%d run:%d, DB:%s)' % (shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='itm')
+        printd('Saving to ITM (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='itm')
 
     # ensure requirements for writing data to ITM are satisfied
     if 'itm' != 'itm':
@@ -300,25 +300,25 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
 
     try:
         # open ITM tree
-        cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=new, itm_version=itm_version)
+        cpo = itm_open(user=user, machine=machine, pulse=pulse, run=run, new=new, itm_version=itm_version)
 
     except IOError as _excp:
-        raise (IOError(str(_excp) + '\nIf this is a new shot/run then set `new=True`'))
+        raise (IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`'))
 
     except ImportError:
         # fallback on saving ITM as NC file if ITM is not installed
         if not omas_rcparams['allow_fake_itm_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version, itm_version))])
+        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, itm_versions.get(itm_version, itm_version))])
         printe('Overloaded save_omas_itm: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_itm_dir']):
             os.makedirs(omas_rcparams['fake_itm_dir'])
-        ods['info.user'] = unicode(user)
-        ods['info.machine'] = unicode(machine)
-        ods['info.shot'] = int(shot)
-        ods['info.run'] = int(run)
-        ods['info.itm_version'] = unicode(itm_version)
+        ods['dataset_description.data_entry.user'] = unicode(user)
+        ods['dataset_description.data_entry.machine'] = unicode(machine)
+        ods['dataset_description.data_entry.pulse'] = int(pulse)
+        ods['dataset_description.data_entry.run'] = int(run)
+        ods['dataset_description.itm_version'] = unicode(itm_version)
         save_omas_pkl(ods, filename)
 
     else:
@@ -356,7 +356,7 @@ def save_omas_itm(ods, user=None, machine=None, shot=None, run=None, new=False,
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
+def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
                    itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']), verbose=True):
     """
     Load OMAS data from ITM
@@ -368,7 +368,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
 
     :param machine: ITM machine
 
-    :param shot: ITM shot
+    :param pulse: ITM pulse
 
     :param run: ITM run
 
@@ -381,18 +381,18 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
     :return: OMAS data set
     """
 
-    if shot is None or run is None:
-        raise (Exception('`shot` and `run` must be specified'))
+    if pulse is None or run is None:
+        raise (Exception('`pulse` and `run` must be specified'))
 
-    printd('Loading from ITM (user:%s machine:%s shot:%d run:%d, itm_version:%s)' % (user, machine, shot, run, itm_version), topic='itm')
+    printd('Loading from ITM (user:%s machine:%s pulse:%d run:%d, itm_version:%s)' % (user, machine, pulse, run, itm_version), topic='itm')
 
     try:
-        cpo = itm_open(user=user, machine=machine, shot=shot, run=run, new=False, itm_version=itm_version)
+        cpo = itm_open(user=user, machine=machine, pulse=pulse, run=run, new=False, itm_version=itm_version)
 
     except ImportError:
         if not omas_rcparams['allow_fake_itm_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, itm_versions.get(itm_version, itm_version))])
+        filename = os.sep.join([omas_rcparams['fake_itm_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, itm_versions.get(itm_version, itm_version))])
         printe('Overloaded load_omas_itm: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -487,11 +487,11 @@ def load_omas_itm(user=os.environ['USER'], machine=None, shot=None, run=0, paths
             printd("cpo.close()", topic='itm_code')
             cpo.close()
 
-    ods['info.user'] = unicode(user)
-    ods['info.machine'] = unicode(machine)
-    ods['info.shot'] = int(shot)
-    ods['info.run'] = int(run)
-    ods['info.itm_version'] = unicode(itm_version)
+    ods['dataset_description.data_entry.user'] = unicode(user)
+    ods['dataset_description.data_entry.machine'] = unicode(machine)
+    ods['dataset_description.data_entry.pulse'] = int(pulse)
+    ods['dataset_description.data_entry.run'] = int(run)
+    ods['dataset_description.itm_version'] = unicode(itm_version)
 
     return ods
 
@@ -500,7 +500,7 @@ if 'itm' != 'itm':
     def browse_itm(user=os.environ['USER'], pretty=True, quiet=False,
                     user_itmdbdir=os.sep.join([os.environ['HOME'], 'public', 'itmdb'])):
         '''
-        Browse available ITM data (machine/shot/run) for given user
+        Browse available ITM data (machine/pulse/run) for given user
 
         :param user: user (of list of users) to browse. Browses all users if None.
 
@@ -510,7 +510,7 @@ if 'itm' != 'itm':
 
         :param user_itmdbdir: directory where itmdb is located for current user (typically $HOME/public/itmdb/)
 
-        :return: hierarchical dictionary with database of available ITM data (machine/shot/run) for given user
+        :return: hierarchical dictionary with database of available ITM data (machine/pulse/run) for given user
         '''
         # if no users are specified, find all users
         if user is None:
@@ -528,14 +528,14 @@ if 'itm' != 'itm':
             # find MDS+ datafiles
             files = list(recursive_glob('*datafile', itmdbdir))
 
-            # extract machine/shot/run from filename of MDS+ datafiles
+            # extract machine/pulse/run from filename of MDS+ datafiles
             for file in files:
                 tmp = file.split(os.sep)
                 if not re.match('cpo_[0-9]{5,}.datafile', tmp[-1]):
                     continue
-                shot_run = tmp[-1].split('.')[0].split('_')[1]
-                shot = int(shot_run[:-4])
-                run = int(shot_run[-4:])
+                pulse_run = tmp[-1].split('.')[0].split('_')[1]
+                pulse = int(pulse_run[:-4])
+                run = int(pulse_run[-4:])
                 machine = tmp[-4]
 
                 # size and data
@@ -550,7 +550,7 @@ if 'itm' != 'itm':
                 # build database
                 if machine not in itmdb[username]:
                     itmdb[username][machine] = {}
-                itmdb[username][machine][shot, run] = {'size': size, 'date': date}
+                itmdb[username][machine][pulse, run] = {'size': size, 'date': date}
 
         # print if not quiet
         if not quiet:
@@ -560,13 +560,13 @@ if 'itm' != 'itm':
         return itmdb
 
 
-    def load_omas_iter_scenario(shot, run=0, paths=None,
+    def load_omas_iter_scenario(pulse, run=0, paths=None,
                                 itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']),
                                 verbose=True):
         """
         Load OMAS data set from ITER ITM scenario database
     
-        :param shot: ITM shot
+        :param pulse: ITM pulse
     
         :param run: ITM run
     
@@ -588,7 +588,7 @@ if 'itm' != 'itm':
                 os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/itm/shared/iterdb/3/%d' % k
 
             # load data from itm
-            ods = load_omas_itm(user=None, machine=None, shot=shot, run=run, paths=paths, itm_version=itm_version, verbose=verbose)
+            ods = load_omas_itm(user=None, machine=None, pulse=pulse, run=run, paths=paths, itm_version=itm_version, verbose=verbose)
 
         finally:
             # restore existing ITM environment
@@ -646,9 +646,9 @@ def through_omas_itm(ods):
     """
     user = os.environ['USER']
     machine = 'ITER'
-    shot = 1
+    pulse = 1
     run = 0
 
-    paths = save_omas_itm(ods, user=user, machine=machine, shot=shot, run=run, new=True)
-    ods1 = load_omas_itm(user=user, machine=machine, shot=shot, run=run, paths=paths)
+    paths = save_omas_itm(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
+    ods1 = load_omas_itm(user=user, machine=machine, pulse=pulse, run=run, paths=paths)
     return ods1

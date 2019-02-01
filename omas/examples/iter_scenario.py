@@ -11,8 +11,8 @@ Please refer to the :ref:`ITER page: <iter>`.
 # load OMAS package
 from omas import *
 
-# load data from a shot chosen from the ITER scenario database
-ods = load_omas_iter_scenario(shot=131034, run=0)
+# load data from a pulse chosen from the ITER scenario database
+ods = load_omas_iter_scenario(pulse=131034, run=0)
 
 # print nodes with data
 from pprint import pprint

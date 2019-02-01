@@ -41,14 +41,14 @@ ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3
 print('='*20)
 print(' Writing data to IMAS')
 print('='*20)
-paths = save_omas_imas(ods, machine='ITER', shot=1, new=True)
+paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
 pprint(ods.pretty_paths())
 
 # Load from IMAS
 print('='*20)
 print(' Reading data from IMAS')
 print('='*20)
-ods1 = load_omas_imas(machine='ITER', shot=1, paths=[['equilibrium']])
+ods1 = load_omas_imas(machine='ITER', pulse=1, paths=[['equilibrium']])
 pprint(ods1.pretty_paths())
 
 # check data

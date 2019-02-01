@@ -12,7 +12,7 @@ from .omas_core import ODS
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, shot, run, new=False,
+def imas_open(user, machine, pulse, run, new=False,
               imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
     function to open an IMAS
@@ -21,7 +21,7 @@ def imas_open(user, machine, shot, run, new=False,
 
     :param machine: IMAS machine
 
-    :param shot: IMAS shot
+    :param pulse: IMAS pulse
 
     :param run: IMAS run id
 
@@ -32,8 +32,8 @@ def imas_open(user, machine, shot, run, new=False,
     :return: IMAS ids
     """
     import imas
-    printd("ids = imas.ids(%d,%d)" % (shot, run), topic='imas_code')
-    ids = imas.ids(shot, run)
+    printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
+    ids = imas.ids(pulse, run)
 
     if user is None and machine is None:
         pass
@@ -41,7 +41,7 @@ def imas_open(user, machine, shot, run, new=False,
         raise (Exception('user={user}, machine={machine}, imas_version={imas_version}\n'
                          'Either specify all or none of `user`, `machine`, `imas_version`\n'
                          'If none of them are specified then use `imasdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, shot=shot,
+                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
                                                                               run=run, imas_version=imas_version)))
 
     if user is None and machine is None:
@@ -53,11 +53,11 @@ def imas_open(user, machine, shot, run, new=False,
             try:
                 ids.open()
             except Exception as _excp:
-                if 'Error opening imas shot' in str(_excp):
-                    raise (IOError('Error opening imas shot %d run %d' % (shot, run)))
+                if 'Error opening imas pulse' in str(_excp):
+                    raise (IOError('Error opening imas pulse %d run %d' % (pulse, run)))
         if not ids.isConnected():
             raise (Exception('Failed to establish connection to IMAS database '
-                             '(shot:{shot} run:{run}, DB:{db})'.format(shot=shot, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
 
     else:
         if new:
@@ -68,10 +68,10 @@ def imas_open(user, machine, shot, run, new=False,
             try:
                 ids.open_env(user, machine, imas_version)
             except Exception as _excp:
-                if 'Error opening imas shot' in str(_excp):
-                    raise (IOError('Error opening imas shot (user:%s machine:%s shot:%s run:%s, imas_version:%s)' % (user, machine, shot, run, imas_version)))
+                if 'Error opening imas pulse' in str(_excp):
+                    raise (IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version)))
         if not ids.isConnected():
-            raise (Exception('Failed to establish connection to IMAS database (user:%s machine:%s shot:%s run:%s, imas_version:%s)' % (user, machine, shot, run, imas_version)))
+            raise (Exception('Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version)))
     return ids
 
 
@@ -104,7 +104,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` IDS is used by OMAS to hold user, machine, shot, run, imas_version
+    # `info` IDS is used by OMAS to hold user, machine, pulse, run, imas_version
     # for saving methods that do not carry that information. IMAS does not store
     # this information as part of the data dictionary.
     if ds in add_datastructures.keys():
@@ -236,20 +236,20 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # --------------------------------------------
 # save and load OMAS to IMAS
 # --------------------------------------------
-def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
     Save OMAS data to IMAS
 
     :param ods: OMAS data set
 
-    :param user: IMAS username (reads ods['info.user'] if user is None and finally fallsback on os.environ['USER'])
+    :param user: IMAS username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ['USER'])
 
-    :param machine: IMAS machine (reads ods['info.machine'] if machine is None)
+    :param machine: IMAS machine (reads ods['dataset_description.data_entry.machine'] if machine is None)
 
-    :param shot: IMAS shot (reads ods['info.shot'] if shot is None)
+    :param pulse: IMAS pulse (reads ods['dataset_description.data_entry.pulse'] if pulse is None)
 
-    :param run: IMAS run (reads ods['info.run'] if run is None and finally fallsback on 0)
+    :param run: IMAS run (reads ods['dataset_description.data_entry.run'] if run is None and finally fallsback on 0)
 
     :param new: whether the open should create a new IMAS tree
 
@@ -258,21 +258,21 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     :return: paths that have been written to IMAS
     """
 
-    # handle default values for user, machine, shot, run, imas_version
+    # handle default values for user, machine, pulse, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('info.user', os.environ['USER'])
+        user = ods.get('dataset_description.data_entry.user', os.environ['USER'])
     if machine is None:
-        machine = ods.get('info.machine', None)
-    if shot is None:
-        shot = ods.get('info.shot', None)
+        machine = ods.get('dataset_description.data_entry.machine', None)
+    if pulse is None:
+        pulse = ods.get('dataset_description.data_entry.pulse', None)
     if run is None:
-        run = ods.get('info.run', 0)
+        run = ods.get('dataset_description.data_entry.run', 0)
 
     if user is not None and machine is not None:
-        printd('Saving to IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (user, machine, shot, run, imas_version), topic='imas')
+        printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
     elif user is None and machine is None:
-        printd('Saving to IMAS (shot:%d run:%d, DB:%s)' % (shot, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
+        printd('Saving to IMAS (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
     if 'imas' != 'itm':
@@ -284,25 +284,25 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=new, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, imas_version=imas_version)
 
     except IOError as _excp:
-        raise (IOError(str(_excp) + '\nIf this is a new shot/run then set `new=True`'))
+        raise (IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`'))
 
     except ImportError:
         # fallback on saving IMAS as NC file if IMAS is not installed
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version, imas_version))])
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded save_omas_imas: %s' % filename)
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
-        ods['info.user'] = unicode(user)
-        ods['info.machine'] = unicode(machine)
-        ods['info.shot'] = int(shot)
-        ods['info.run'] = int(run)
-        ods['info.imas_version'] = unicode(imas_version)
+        ods['dataset_description.data_entry.user'] = unicode(user)
+        ods['dataset_description.data_entry.machine'] = unicode(machine)
+        ods['dataset_description.data_entry.pulse'] = int(pulse)
+        ods['dataset_description.data_entry.run'] = int(run)
+        ods['dataset_description.imas_version'] = unicode(imas_version)
         save_omas_pkl(ods, filename)
 
     else:
@@ -337,7 +337,7 @@ def save_omas_imas(ods, user=None, machine=None, shot=None, run=None, new=False,
     return set_paths
 
 
-def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, paths=None,
+def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True):
     """
     Load OMAS data from IMAS
@@ -349,7 +349,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
 
     :param machine: IMAS machine
 
-    :param shot: IMAS shot
+    :param pulse: IMAS pulse
 
     :param run: IMAS run
 
@@ -362,18 +362,18 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
     :return: OMAS data set
     """
 
-    if shot is None or run is None:
-        raise (Exception('`shot` and `run` must be specified'))
+    if pulse is None or run is None:
+        raise (Exception('`pulse` and `run` must be specified'))
 
-    printd('Loading from IMAS (user:%s machine:%s shot:%d run:%d, imas_version:%s)' % (user, machine, shot, run, imas_version), topic='imas')
+    printd('Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
 
     try:
-        ids = imas_open(user=user, machine=machine, shot=shot, run=run, new=False, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, imas_version=imas_version)
 
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
-        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, shot, run, imas_versions.get(imas_version, imas_version))])
+        filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
         ods = load_omas_pkl(filename)
@@ -468,11 +468,11 @@ def load_omas_imas(user=os.environ['USER'], machine=None, shot=None, run=0, path
             printd("ids.close()", topic='imas_code')
             ids.close()
 
-    ods['info.user'] = unicode(user)
-    ods['info.machine'] = unicode(machine)
-    ods['info.shot'] = int(shot)
-    ods['info.run'] = int(run)
-    ods['info.imas_version'] = unicode(imas_version)
+    ods['dataset_description.data_entry.user'] = unicode(user)
+    ods['dataset_description.data_entry.machine'] = unicode(machine)
+    ods['dataset_description.data_entry.pulse'] = int(pulse)
+    ods['dataset_description.data_entry.run'] = int(run)
+    ods['dataset_description.imas_version'] = unicode(imas_version)
 
     return ods
 
@@ -481,7 +481,7 @@ if 'imas' != 'itm':
     def browse_imas(user=os.environ['USER'], pretty=True, quiet=False,
                     user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
         '''
-        Browse available IMAS data (machine/shot/run) for given user
+        Browse available IMAS data (machine/pulse/run) for given user
 
         :param user: user (of list of users) to browse. Browses all users if None.
 
@@ -491,7 +491,7 @@ if 'imas' != 'itm':
 
         :param user_imasdbdir: directory where imasdb is located for current user (typically $HOME/public/imasdb/)
 
-        :return: hierarchical dictionary with database of available IMAS data (machine/shot/run) for given user
+        :return: hierarchical dictionary with database of available IMAS data (machine/pulse/run) for given user
         '''
         # if no users are specified, find all users
         if user is None:
@@ -509,14 +509,14 @@ if 'imas' != 'itm':
             # find MDS+ datafiles
             files = list(recursive_glob('*datafile', imasdbdir))
 
-            # extract machine/shot/run from filename of MDS+ datafiles
+            # extract machine/pulse/run from filename of MDS+ datafiles
             for file in files:
                 tmp = file.split(os.sep)
                 if not re.match('ids_[0-9]{5,}.datafile', tmp[-1]):
                     continue
-                shot_run = tmp[-1].split('.')[0].split('_')[1]
-                shot = int(shot_run[:-4])
-                run = int(shot_run[-4:])
+                pulse_run = tmp[-1].split('.')[0].split('_')[1]
+                pulse = int(pulse_run[:-4])
+                run = int(pulse_run[-4:])
                 machine = tmp[-4]
 
                 # size and data
@@ -531,7 +531,7 @@ if 'imas' != 'itm':
                 # build database
                 if machine not in imasdb[username]:
                     imasdb[username][machine] = {}
-                imasdb[username][machine][shot, run] = {'size': size, 'date': date}
+                imasdb[username][machine][pulse, run] = {'size': size, 'date': date}
 
         # print if not quiet
         if not quiet:
@@ -541,13 +541,13 @@ if 'imas' != 'itm':
         return imasdb
 
 
-    def load_omas_iter_scenario(shot, run=0, paths=None,
+    def load_omas_iter_scenario(pulse, run=0, paths=None,
                                 imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
                                 verbose=True):
         """
         Load OMAS data set from ITER IMAS scenario database
     
-        :param shot: IMAS shot
+        :param pulse: IMAS pulse
     
         :param run: IMAS run
     
@@ -569,7 +569,7 @@ if 'imas' != 'itm':
                 os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
 
             # load data from imas
-            ods = load_omas_imas(user=None, machine=None, shot=shot, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
+            ods = load_omas_imas(user=None, machine=None, pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
         finally:
             # restore existing IMAS environment
@@ -621,9 +621,9 @@ def through_omas_imas(ods):
     """
     user = os.environ['USER']
     machine = 'ITER'
-    shot = 1
+    pulse = 1
     run = 0
 
-    paths = save_omas_imas(ods, user=user, machine=machine, shot=shot, run=run, new=True)
-    ods1 = load_omas_imas(user=user, machine=machine, shot=shot, run=run, paths=paths)
+    paths = save_omas_imas(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
+    ods1 = load_omas_imas(user=user, machine=machine, pulse=pulse, run=run, paths=paths)
     return ods1
