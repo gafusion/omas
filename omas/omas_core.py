@@ -462,7 +462,10 @@ class ODS(MutableMapping):
                 ulocation = o2u(location)
                 # handle cocos transformations coming in
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
-                    value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[omas_physics.cocos_signals[ulocation]]
+                    transform = omas_physics.cocos_signals[ulocation]
+                    if transform == '?':
+                        raise ValueError('%s COCOS translation has not been setup' % ulocation)
+                    value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
 
                 # get node information
                 info = omas_info_node(ulocation)
@@ -500,7 +503,7 @@ class ODS(MutableMapping):
                                 # if the (first) coordinate is in input_coordinates
                                 coordinate = coordinates[0]
                                 if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
-                                    raise (Exception('coordsio %s.shape=%d does not match %s.shape=%d' % (coordinate, input_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
+                                    raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, input_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
                                 printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
                                 value = numpy.interp(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
                             else:
@@ -641,7 +644,10 @@ class ODS(MutableMapping):
 
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
-                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[omas_physics.cocos_signals[ulocation]]
+                    transform = omas_physics.cocos_signals[ulocation]
+                    if transform == '?':
+                        raise ValueError('%s COCOS translation has not been setup' % ulocation)
+                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
 
                 # get node information
                 info = omas_info_node(ulocation)
@@ -668,7 +674,7 @@ class ODS(MutableMapping):
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
                                 if len(ods_coordinates.__getitem__(coordinate,None)) != len(value):
-                                    raise (Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate,False).shape, location, value.shape)))
+                                    raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
                                 printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
                                 try:
                                     value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
