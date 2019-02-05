@@ -45,10 +45,7 @@ Although ITER experimental data is yet to be produced, OMAS can already be used 
 
 Remotely access ITER data with OMFIT
 ====================================
-The public installation of OMAS at ITER provides the necessary environment for the OMFIT framework to access ITER data.
-
-Importantly, OMFIT adds remote access capability to the IMAS functions within OMAS (``load_omas_imas_remote``, ``save_omas_imas_remote`` and ``load_omas_iter_scenario_remote`` functions, respectively).
-In addition, the ``iter_scenario_summary_remote`` allows querying for the ITER scenario database remotely from within OMFIT.
+`OMFIT adds remote access capability to the IMAS functions within OMAS <http://gafusion.github.io/OMFIT-source/code.html#module-classes.omfit_omas>`_
 
 1. Set the ``MainSettings['SERVER']['ITER_username']`` to your ITER username
 
