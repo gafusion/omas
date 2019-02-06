@@ -258,6 +258,7 @@ html_theme_options = {
         ("Examples", "auto_examples/index"),
         ("Installation", "install"),
         ("ITER", "iter"),
+        ("OMFIT", "omfit"),
         ("Data schema", "schema"),
         ("API", "code"),
         # ("Team", "contributors"),

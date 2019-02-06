@@ -60,4 +60,3 @@ Remotely access ITER data with OMFIT
    .. code-block:: python
 
        OMFIT['ods'] = load_omas_iter_scenario_remote(pulse=131034, run=0)
-
