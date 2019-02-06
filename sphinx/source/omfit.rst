@@ -1,3 +1,7 @@
+OMAS provides the backbone infrastructure that enables centralized data exchange among different physics components
+within the `OMFIT <http://gafusion.github.io/OMFIT-source>`_ framework, as embodied in the
+`STEP module <http://gafusion.github.io/OMFIT-source/modules/mod_STEP.html#step>`_.
+
 Remotely access IMAS data with OMFIT
 ====================================
 OMFIT adds remote access capability to the IMAS functions within OMAS:
@@ -38,7 +42,7 @@ Some ITER specific IMAS utiliities available via OMFIT:
 Translating between legacy formats and IMAS
 ===========================================
 
-`OMFIT framework <http://gafusion.github.io/OMFIT-source>`_ provides an effective way to translate between legacy and IMAS via OMAS
+OMFIT provides an effective way to translate between legacy and IMAS via OMAS
 
 .. figure:: images/eq_omas_omfit.png
   :align: center
