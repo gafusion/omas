@@ -370,7 +370,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
             B0 = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index]
             ods['core_profiles']['vacuum_toroidal_field']['r0'] = R0
             ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, B0)
-        fsa_invR = numpy.interp(rho_tor_norm, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
+        fsa_invR = omas_interp1d(rho_tor_norm, eq['profiles_1d']['rho_tor_norm'], eq['profiles_1d']['gm9'])
     else:
         # can't do any computations with the equilibrium
         if warn:
@@ -519,10 +519,10 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     cocos = define_cocos(equilibrium.cocosio)
     rho_eq = equilibrium['profiles_1d.rho_tor_norm']
-    fsa_B2 = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm5'])
-    fsa_invR2 = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.gm1'])
-    f = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.f'])
-    dpdpsi = numpy.interp(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
+    fsa_B2 = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.gm5'])
+    fsa_invR2 = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.gm1'])
+    f = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.f'])
+    dpdpsi = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
 
     # diamagnetic term to get included with bootstrap currrent
     JtoR_dia = dpdpsi * (1. - fsa_invR2 * f ** 2 / fsa_B2)
@@ -805,47 +805,56 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
 
     :param unitsio: True/False whether data read from OMAS should have units
 
-    :param kw: extra keywords set attributes of the ods (eg. 'consistency_check','dynamic_path_creation','imas_version')
+    :param kw: extra keywords set attributes of the ods (eg. 'consistency_check', 'dynamic_path_creation', 'imas_version')
 
-    :return: ODS with environmen set
+    :return: ODS with environment set
     '''
 
+    # turn simple coordsio dictionary into an ODS
     if isinstance(coordsio, dict):
         from omas import ODS
         tmp = ODS(cocos=ods.cocos)
-        tmp.dynamic_path_creation='dynamic_array_structures'
+        tmp.dynamic_path_creation = 'dynamic_array_structures'
         with omas_environment(tmp, cocosio=cocosio):
             tmp.update(coordsio)
         coordsio = tmp
 
-    if cocosio is not None and not isinstance(cocosio,int):
-        raise(ValueError('cocosio can only be an integer'))
+    if cocosio is not None and not isinstance(cocosio, int):
+        raise (ValueError('cocosio can only be an integer'))
 
-    bkp_coordsio = ods.coordsio
+    # backup attributes
     bkp_cocosio = ods.cocosio
+    bkp_coordsio = ods.coordsio
     bkp_unitsio = ods.unitsio
+    bkp_args = {}
+    for item in kw:
+        bkp_args[item] = getattr(ods, item)
+
+    # set attributes
+    for item in kw:
+        setattr(ods, item, kw[item])
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
         ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
-    bkp_args = {}
-    for item in kw:
-        bkp_args[item] = getattr(ods, item)
-        setattr(ods, item, kw[item])
+
     try:
         if coordsio is not None:
             with omas_environment(coordsio, cocosio=cocosio):
                 yield ods
         else:
-                yield ods
+            yield ods
+
     finally:
+        # restore attributes
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio
         for item in kw:
             setattr(ods, item, bkp_args[item])
+
 
 def generate_cocos_signals(structures=[], threshold=0):
     """

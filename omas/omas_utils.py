@@ -122,6 +122,19 @@ def is_numeric(value):
         return False
 
 
+def omas_interp1d(x, xp, fp, left=None, right=None, period=None):
+    '''
+    If xp is not increasing, the results are numpy.interp1d nonsense.
+    This function wraps numpy.interp1d but makes sure that the x-coordinate sequence xp is increasing.
+
+    '''
+    if not numpy.all(numpy.diff(xp) > 0):
+        index = numpy.argsort(xp)
+        return numpy.interp(x, xp[index], fp[index], left=left, right=right, period=period)
+    return numpy.interp(x, xp, fp, left=left, right=right, period=period)
+omas_interp1d.__doc__ += numpy.interp.__doc__
+
+
 def json_dumper(obj):
     """
     function used to dump objects to json format

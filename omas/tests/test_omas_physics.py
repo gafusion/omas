@@ -328,17 +328,61 @@ class TestOmasPhysics(unittest.TestCase):
         assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*2*numpy.pi))
         assert (len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(y))
 
+        ods = ODS()
+
+        p = 1 - numpy.linspace(0, 1, 10)
+        psi2 = numpy.linspace(0, 1, 10) ** 2
+        psi11 = -psi2 * (2 * numpy.pi)
+
+        psi2_ = numpy.linspace(0, 1, 10)
+        psi11_ = -psi2_ * (2 * numpy.pi)
+
+        with omas_environment(ods, cocosio=2):
+            ods['equilibrium.time_slice.0.profiles_1d.psi'] = psi2
+            assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi2)
+        assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi11)
+
+        with omas_environment(ods, cocosio=2):
+            assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi2)
+        assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi11)
+
+        with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi2}):
+            assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi2), '2'
+        assert all(ods['equilibrium.time_slice.0.profiles_1d.psi'] == psi11), '11'
+
+        with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi2}):
+            ods['equilibrium.time_slice.0.profiles_1d.pressure'] = p
+            assert all(ods['equilibrium.time_slice.0.profiles_1d.pressure'] == p), 'p2'
+        assert all(ods['equilibrium.time_slice.0.profiles_1d.pressure'] == p), 'p11'
+
+        psi2_ = numpy.linspace(0, 1, 10)
+        psi11_ = -psi2_ * (2 * numpy.pi)
+
+        with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi2_}):
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], psi2_)
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi2_, psi2, p))
+            index = numpy.argsort(psi11_)
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11_, psi11[index], p[index]))
+
+        psi2__ = numpy.linspace(0, 1, 100)
+        psi11__ = -psi2__ * (2 * numpy.pi)
+
+        with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi2__}):
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi2__, psi2, p))
+            index = numpy.argsort(psi11)
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
+
     @unittest.skipUnless(not failed_PINT, str(failed_PINT))
     def test_handle_units(self):
-        ods=ODS()
+        ods = ODS()
 
         ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
-        assert(ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']==0.008)
+        assert (ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] == 0.008)
 
         with omas_environment(ods, unitsio=True):
-            tmp=ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
-            assert(tmp.magnitude==0.008)
-            assert(tmp.units=='second')
+            tmp = ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
+            assert (tmp.magnitude == 0.008)
+            assert (tmp.units == 'second')
 
     def test_search_ion(self):
         ods = ODS()

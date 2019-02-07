@@ -460,6 +460,7 @@ class ODS(MutableMapping):
             # now that all checks are completed we can assign the structure information
             if self.consistency_check:
                 ulocation = o2u(location)
+
                 # handle cocos transformations coming in
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
                     transform = omas_physics.cocos_signals[ulocation]
@@ -505,7 +506,7 @@ class ODS(MutableMapping):
                                 if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
                                     raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, input_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
                                 printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
-                                value = numpy.interp(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
+                                value = omas_interp1d(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
                             else:
                                 printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
                         else:
@@ -677,11 +678,11 @@ class ODS(MutableMapping):
                                     raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
                                 printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
                                 try:
-                                    value = numpy.interp(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
+                                    value = omas_interp1d(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
                                 except TypeError:
                                     if numpy.atleast_1d(is_uncertain(value)).any():
-                                        v = numpy.interp(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), nominal_values(value))
-                                        s = numpy.interp(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), std_devs(value))
+                                        v = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), nominal_values(value))
+                                        s = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), std_devs(value))
                                         value = unumpy.uarray(v, s)
                             else:
                                 printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
