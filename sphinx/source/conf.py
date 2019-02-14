@@ -89,6 +89,13 @@ Alternatively, each of the %d individual Interface Data Structure (IDS) can be v
     :glob:
 
     schema/schema*
+
+Generalised Grid Description (GGD)
+==================================
+Scrape Off Layer data is stored in IMAS according to the
+`Generalised Grid Description (GGD) <https://confluence.iter.org/pages/viewpage.action?pageId=178133297>`_
+format (link requires ITER account).
+
 """ % (omas_rcparams['default_imas_version'], len(glob.glob('../source/schema/schema_*.rst'))))
 print('latest data structure version: '+omas_rcparams['default_imas_version'])
 
