@@ -20,7 +20,7 @@ __all__ = [
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
-    'omas_rcparams', 'rcparams_environment', '__version__'
+    'omas_rcparams', 'rcparams_environment',
 ]
 
 class ODS(MutableMapping):
