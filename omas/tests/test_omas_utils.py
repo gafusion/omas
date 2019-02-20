@@ -154,16 +154,17 @@ class TestOmasUtils(unittest.TestCase):
         assert all([item in ods_info_list for item in get_list])
 
     def test_o2u(self):
-        assert o2u('equilibrium.time_slice.0.global_quantities.ip')=='equilibrium.time_slice.:.global_quantities.ip'
-        assert o2u('equilibrium.time_slice.:.global_quantities.ip')=='equilibrium.time_slice.:.global_quantities.ip'
-        assert o2u('2')==':'
-        assert o2u('equilibrium')=='equilibrium'
-        assert o2u('equilibrium.2')=='equilibrium.:'
+        assert o2u('equilibrium.time_slice.0.global_quantities.ip') == 'equilibrium.time_slice.:.global_quantities.ip'
+        assert o2u('equilibrium.time_slice.:.global_quantities.ip') == 'equilibrium.time_slice.:.global_quantities.ip'
+        assert o2u('2') == ':'
+        assert o2u('equilibrium') == 'equilibrium'
+        assert o2u('equilibrium.2') == 'equilibrium.:'
 
     def test_set_time_array(self):
-        ods=ODS()
-        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0',0,0.1)
-        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0',1,0.2)
+        ods = ODS()
+        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 0, 0.1)
+        ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 1, 0.2)
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasUtils)

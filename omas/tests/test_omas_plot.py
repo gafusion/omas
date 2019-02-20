@@ -39,7 +39,7 @@ class TestOmasPlot(unittest.TestCase):
     verbose = False  # Spammy, but occasionally useful for debugging a weird problem
 
     # Sample data for use in tests
-    ods=ods_sample()
+    ods = ods_sample()
 
     # Utilities for this test
     def printv(self, *arg):
@@ -76,8 +76,8 @@ class TestOmasPlot(unittest.TestCase):
             self.ods.plot_quantity('core.*')
         except LookupError:
             pass
-        omas_plot.quantity(self.ods, '@core.*ion.0.*dens.*th','$n_D$')
-        omas_plot.quantity(self.ods, '@core.*ion.1.*dens.*th','$n_C$')
+        omas_plot.quantity(self.ods, '@core.*ion.0.*dens.*th', '$n_D$')
+        omas_plot.quantity(self.ods, '@core.*ion.1.*dens.*th', '$n_C$')
 
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
@@ -92,16 +92,13 @@ class TestOmasPlot(unittest.TestCase):
         nc_empty = get_channel_count(empty_ods, 'thomson_scattering')
         assert nc_empty == 0
 
-        nc_ts_check_pass = get_channel_count(ts_ods,
-            'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        nc_ts_check_pass = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
         assert nc_ts_check_pass == nc
 
-        nc_ts_check_fail = get_channel_count(ts_ods,
-            'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
+        nc_ts_check_fail = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
         assert nc_ts_check_fail == 0
 
-        nc_ts_check_fail2 = get_channel_count(ts_ods,
-            'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
+        nc_ts_check_fail2 = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
         assert nc_ts_check_fail2 == 0
 
     def test_uband(self):
@@ -139,8 +136,8 @@ class TestOmasPlot(unittest.TestCase):
         self.printv('  gas_arrow ods.cocos = {}'.format(self.ods.cocos))
         # Explicitly test the direction keyword
         gas_arrow(self.ods, 1.5, 0.0, direction=0, color='k')
-        gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi/2, color='gray')
-        gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi/4.5, color='m')
+        gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi / 2, color='gray')
+        gas_arrow(self.ods, 1.5, 0.0, direction=-numpy.pi / 4.5, color='m')
 
     def test_geo_type_lookup(self):
         from omas.omas_plot import geo_type_lookup
@@ -243,17 +240,17 @@ class TestOmasPlot(unittest.TestCase):
         nc = get_channel_count(ts_ods, 'thomson_scattering')
         mask0 = numpy.ones(nc, bool)
         markers = ['.', '^', '>', 'v', '<', 'o', 'd', '*', 's', '|', '_', 'x']
-        markers *= int(numpy.ceil(float(nc)/len(markers)))
+        markers *= int(numpy.ceil(float(nc) / len(markers)))
         for i in range(nc):
             mask = copy.copy(mask0)
             mask[i] = False
-            ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i)))
+            ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i)))
 
     def test_ts_overlay_labels(self):
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
-            ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10+i*2+lab, color='k'))
+            ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10 + i * 2 + lab, color='k'))
 
     # Charge exchange overlay
     def test_cer_overlay(self):
@@ -310,7 +307,7 @@ class TestOmasPlot(unittest.TestCase):
             mask[i] = False
             bolo_ods.plot_overlay(
                 thomson_scattering=False,
-                bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3*(nc-i), lw=0.5*(nc-i)))
+                bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i)))
 
     # Gas injection overlay
     def test_gas_overlay(self):

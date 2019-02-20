@@ -21,6 +21,7 @@ from pprint import pprint
 from omas import *
 from omas.omas_setup import *
 
+
 class TestOmasCore(unittest.TestCase):
     """
     Test suite for omas_physics.py
@@ -149,17 +150,17 @@ class TestOmasCore(unittest.TestCase):
 
         # get time information from children
         extra_info = {}
-        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info),[100, 200, 300])
-        assert extra_info['location']=='equilibrium.time_slice.:.time'
+        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info), [100, 200, 300])
+        assert extra_info['location'] == 'equilibrium.time_slice.:.time'
         assert extra_info['homogeneous_time'] is True
         assert ods['equilibrium'].homogeneous_time() is True
 
         # time arrays can be set using `set_time_array` function
         # this simplifies the logic in the code since one does not
         # have to check if the array was already there or not
-        ods.set_time_array('equilibrium.time',0,101)
-        ods.set_time_array('equilibrium.time',1,201)
-        ods.set_time_array('equilibrium.time',2,302)
+        ods.set_time_array('equilibrium.time', 0, 101)
+        ods.set_time_array('equilibrium.time', 1, 201)
+        ods.set_time_array('equilibrium.time', 2, 302)
 
         # the make the timeslices consistent
         ods['equilibrium.time_slice'][0]['time'] = 101
@@ -168,41 +169,41 @@ class TestOmasCore(unittest.TestCase):
 
         # get time information from explicitly set time array
         extra_info = {}
-        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info),[101, 201, 302])
+        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info), [101, 201, 302])
         assert extra_info['homogeneous_time'] is False
         assert ods['equilibrium'].homogeneous_time() is False
 
         # get time value from a single item in array of structures
         extra_info = {}
-        assert ods['equilibrium.time_slice'][0].time(extra_info=extra_info)==101
+        assert ods['equilibrium.time_slice'][0].time(extra_info=extra_info) == 101
         assert extra_info['homogeneous_time'] is None
-        tmp=ods['equilibrium']
+        tmp = ods['equilibrium']
         assert tmp.homogeneous_time('time_slice.0') is True
         assert ods['equilibrium'].homogeneous_time('time_slice.0', default=False) is False
 
         # get time array from array of structures
         extra_info = {}
-        assert numpy.allclose(ods['equilibrium.time_slice'].time(extra_info=extra_info),[101, 201, 302])
+        assert numpy.allclose(ods['equilibrium.time_slice'].time(extra_info=extra_info), [101, 201, 302])
         assert extra_info['homogeneous_time'] is False
         assert ods['equilibrium'].homogeneous_time() is False
 
         # get time from parent
         extra_info = {}
-        assert ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info)==101
+        assert ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info) == 101
         assert extra_info['homogeneous_time'] is None
         assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip') is True
         assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip', default=False) is False
 
         # slice at time
         ods1 = ods['equilibrium'].slice_at_time(101)
-        numpy.allclose(ods.time('equilibrium'),[101])
+        numpy.allclose(ods.time('equilibrium'), [101])
 
     def test_address_structures(self):
         ods = ODS()
 
         # make sure data structure is of the right type
-        assert isinstance(ods['core_transport'].omas_data,dict)
-        assert isinstance(ods['core_transport.model'].omas_data,list)
+        assert isinstance(ods['core_transport'].omas_data, dict)
+        assert isinstance(ods['core_transport.model'].omas_data, list)
 
         # append elements by using `+`
         for k in range(10):
@@ -256,6 +257,7 @@ class TestOmasCore(unittest.TestCase):
 
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
