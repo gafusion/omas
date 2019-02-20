@@ -19,6 +19,7 @@ from pprint import pprint
 
 # OMAS imports
 from omas import *
+from omas.omas_setup import *
 
 class TestOmasCore(unittest.TestCase):
     """
@@ -42,6 +43,94 @@ class TestOmasCore(unittest.TestCase):
     def tearDown(self):
         test_name = '.'.join(self.id().split('.')[-2:])
         self.printv('    {} done.'.format(test_name))
+
+    def test_misc(self):
+        ods = ODS()
+        # check effect of disabling dynamic path creation
+        try:
+            ods.dynamic_path_creation = False
+            ods['dataset_description.data_entry.user']
+        except LookupError:
+            ods['dataset_description'] = ODS()
+            ods['dataset_description.data_entry.user'] = os.environ['USER']
+        else:
+            raise (Exception('OMAS error handling dynamic_path_creation=False'))
+        finally:
+            ods.dynamic_path_creation = True
+
+        # check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
+        try:
+            ods['dataset_description.data_entry.machine']
+        except ValueError:
+            pass
+        else:
+            raise (Exception('OMAS error querying leaf that has not been set'))
+
+        # info ODS is used for keeping track of IMAS metadata
+        ods['dataset_description.data_entry.machine'] = 'ITER'
+        ods['dataset_description.imas_version'] = omas_rcparams['default_imas_version']
+        ods['dataset_description.data_entry.pulse'] = 1
+        ods['dataset_description.data_entry.run'] = 0
+
+        # check .get() method
+        assert (ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse'])
+        assert (ods.get('dataset_description.bad', None) is None)
+
+        # check that keys is an iterable (so that Python 2/3 work the same way)
+        keys = ods.keys()
+        keys[0]
+
+        # check that dynamic path creation during __getitem__ does not leave empty fields behind
+        try:
+            print(ods['wall.description_2d.0.limiter.unit.0.outline.r'])
+        except ValueError:
+            assert 'wall.description_2d.0.limiter.unit.0.outline' not in ods
+
+        ods['equilibrium']['time_slice'][0]['time'] = 1000.
+        ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
+
+        ods2 = copy.deepcopy(ods)
+        ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
+        ods2['equilibrium.time_slice.1.time'] = 2000.
+
+        ods2['equilibrium']['time_slice'][2] = copy.deepcopy(ods['equilibrium']['time_slice'][0])
+        ods2['equilibrium.time_slice[2].time'] = 3000.
+
+        assert (ods2['equilibrium']['time_slice'][0]['global_quantities'].ulocation == ods2['equilibrium']['time_slice'][2]['global_quantities'].ulocation)
+
+        ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
+
+        # check different ways of addressing data
+        for item in [ods2['equilibrium.time_slice']['1.global_quantities'],
+                     ods2[['equilibrium', 'time_slice', 1, 'global_quantities']],
+                     ods2[('equilibrium', 'time_slice', 1, 'global_quantities')],
+                     ods2['equilibrium.time_slice.1.global_quantities'],
+                     ods2['equilibrium.time_slice[1].global_quantities']]:
+            assert item.ulocation == 'equilibrium.time_slice.:.global_quantities'
+
+        ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
+
+        # check data slicing
+        assert numpy.all(ods2['equilibrium.time_slice[:].global_quantities.ip'] == numpy.array([1.5, 2.0, 1.5]))
+
+        # uncertain scalar
+        ods2['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3, 0.1)
+
+        # uncertain array
+        ods2['equilibrium.time_slice[2].profiles_1d.q'] = uarray([0., 1., 2., 3.], [0, .1, .2, .3])
+
+        ckbkp = ods.consistency_check
+        tmp = pickle.dumps(ods2)
+        ods2 = pickle.loads(tmp)
+        if ods2.consistency_check != ckbkp:
+            raise (Exception('consistency_check attribute changed'))
+
+        # check flattening
+        tmp = ods2.flat()
+        # pprint(tmp)
+
+        # check deepcopy
+        ods3 = ods2.copy()
 
     def test_coordinates(self):
         ods = ods_sample()
