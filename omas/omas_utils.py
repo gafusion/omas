@@ -26,25 +26,29 @@ def different_ods(ods1, ods2):
 
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
+    differences = []
     for k in k1.difference(k2):
         if not k.startswith('info.'):
-            return 'DIFF: key `%s` missing in 2nd ods' % k
+            differences.append( 'DIFF: key `%s` missing in 2nd ods' % k )
     for k in k2.difference(k1):
         if not k.startswith('info.'):
-            return 'DIFF: key `%s` missing in 1st ods' % k
+            differences.append( 'DIFF: key `%s` missing in 1st ods' % k )
     for k in k1.intersection(k2):
         if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
-                return 'DIFF: `%s` differ in value' % k
+                differences.append( 'DIFF: `%s` differ in value' % k )
         elif type(ods1[k]) != type(ods2[k]):
-            return 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k]))
+            differences.append( 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k])) )
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
             if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
-                return 'DIFF: `%s` differ in value' % k
+                differences.append( 'DIFF: `%s` differ in value' % k )
         else:
             if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                return 'DIFF: `%s` differ in value' % k
-    return False
+                differences.append( 'DIFF: `%s` differ in value' % k )
+    if len(differences):
+        return differences
+    else:
+        return False
 
 
 # --------------------------

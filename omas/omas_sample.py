@@ -29,13 +29,15 @@ def ods_sample():
     :return: sample ods
     '''
     ods = ODS()
-    for item in __all__:
-        printd('Adding %s sample data to ods' % item, topic='sample')
-        ods = eval(item)(ods)
+    for ds in __all__:
+        printd('Adding %s sample data to ods' % ds, topic='sample')
+        ods = eval(ds)(ods)
+        # if necessary add dummy time information to make sure data can be written to IMAS
+        if ods[ds].time() is None:
+            ods[ds]['time'] = [0]
     return ods
 
 
-@add_to_ODS
 def misc(ods):
     """
     create sample ODS data

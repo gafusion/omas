@@ -60,43 +60,43 @@ class TestOmasUtils(unittest.TestCase):
         ods2.sample_equilibrium()
         diff_eq = different_ods(ods, ods2)
         self.printv('  diff_eq = {}'.format(diff_eq))
-        assert isinstance(diff_eq, basestring)
-        assert ('equilibrium' in diff_eq) or ('wall' in diff_eq)
+        assert isinstance(diff_eq, list)
+        assert ('equilibrium' in ' '.join(diff_eq)) or ('wall' in ' '.join(diff_eq))
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
         ods3.sample_core_profiles()
         diff_prof = different_ods(ods2, ods3)
         self.printv('  diff_prof = {}'.format(diff_prof))
-        assert isinstance(diff_prof, basestring)
-        assert isinstance(different_ods(ods3, ods2), basestring)
-        assert 'core_profiles' in diff_prof
+        assert isinstance(diff_prof, list)
+        assert isinstance(different_ods(ods3, ods2), list)
+        assert 'core_profiles' in ' '.join(diff_prof)
         ods2.sample_core_profiles(include_pressure=False)
         diff_prof2 = different_ods(ods3, ods2)
         self.printv('  diff_prof2 = {}'.format(diff_prof2))
-        assert isinstance(diff_prof2, basestring)
-        assert 'core_profiles' in diff_prof2
+        assert isinstance(diff_prof2, list)
+        assert 'core_profiles' in ' '.join(diff_prof2)
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
         diff_prof3 = different_ods(ods2, ods3)
         self.printv('  diff_prof3 = {}'.format(diff_prof3))
-        assert isinstance(diff_prof3, basestring)
-        assert 'value' in diff_prof3
+        assert isinstance(diff_prof3, list)
+        assert 'value' in ' '.join(diff_prof3)
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.ion.0.element.0.a'] = 9.
         diff_prof4 = different_ods(ods2, ods3)
-        assert isinstance(diff_prof4, basestring)
-        assert 'type' in diff_prof4
+        assert isinstance(diff_prof4, list)
+        assert 'type' in ' '.join(diff_prof4)
         ods2.sample_core_profiles()
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
         diff_prof5 = different_ods(ods2, ods3)
         self.printv('  diff_prof5 = {}'.format(diff_prof5))
-        assert isinstance(diff_prof5, basestring)
-        assert 'name' in diff_prof5
+        assert isinstance(diff_prof5, list)
+        assert 'name' in ' '.join(diff_prof5)
         ods3['core_profiles.code.name'] = numpy.array([2, 3, 4])
-        assert isinstance(different_ods(ods2, ods3), basestring)
+        assert isinstance(different_ods(ods2, ods3), list)
         ods2['core_profiles.code.name'] = uarray(numpy.array([2, 3, 4]), numpy.array([1, 1, 1]))
-        assert isinstance(different_ods(ods2, ods3), basestring)
+        assert isinstance(different_ods(ods2, ods3), list)
 
     def test_printe(self):
         printe('printe_test,', end='')

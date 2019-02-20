@@ -36,7 +36,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
         if not check:
             print('OMAS data got saved and loaded correctly')
         else:
-            print(check)
+            pprint(check)
 
     else:
         os.environ['OMAS_DEBUG_TOPIC'] = '*'

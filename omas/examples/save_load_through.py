@@ -54,4 +54,4 @@ check = different_ods(ods_start, ods_end)
 if not check:
     print('OMAS data got saved and loaded correctly throughout')
 else:
-    print(check)
+    pprint(check)

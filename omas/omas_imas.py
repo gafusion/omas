@@ -229,8 +229,22 @@ def imas_get(ids, path, skip_missing_nodes=False):
             debug_path += '[%s]' % p
             out = out[p]
 
+    # handle missing data
+    data = out
+    if len(path) == 2 and path[-1] == 'time' and data[0] < 0:
+        data = None
+    # skip empty arrays
+    elif isinstance(data, numpy.ndarray) and not data.size:
+        data = None
+    # skip missing floats and integers
+    elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
+        data = None
+    # skip empty strings
+    elif isinstance(data, unicode) and not len(data):
+        data = None
+
     printd(debug_path, topic='imas_code')
-    return out
+    return data
 
 
 # --------------------------------------------
@@ -268,6 +282,18 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         pulse = ods.get('dataset_description.data_entry.pulse', None)
     if run is None:
         run = ods.get('dataset_description.data_entry.run', 0)
+
+    # set dataset_description entries that were empty
+    if user is not None and 'dataset_description.data_entry.user' not in ods:
+        ods['dataset_description.data_entry.user'] = user
+    if machine is not None and 'dataset_description.data_entry.machine' not in ods:
+        ods['dataset_description.data_entry.machine'] = machine
+    if pulse is not None and 'dataset_description.data_entry.pulse' not in ods:
+        ods['dataset_description.data_entry.pulse'] = pulse
+    if run is not None and 'dataset_description.data_entry.run' not in ods:
+        ods['dataset_description.data_entry.run'] = run
+    if imas_version is not None and 'dataset_description.imas_version' not in ods:
+        ods['dataset_description.imas_version'] = imas_version
 
     if user is not None and machine is not None:
         printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
@@ -432,36 +458,22 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                     continue
+                if verbose:
+                    print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
                 # get data from ids
                 data = imas_get(ids, path, None)
-                if len(path) == 2 and path[-1] == 'time':
-                    if data[0] == -1:
-                        continue
-                # skip empty arrays
-                if isinstance(data, numpy.ndarray) and not data.size:
-                    continue
-                # skip missing floats and integers
-                elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
-                    continue
-                # skip empty strings
-                elif isinstance(data, unicode) and not len(data):
+                # continue for empty data
+                if data is None:
                     continue
                 # add uncertainty
                 if l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
                     stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
-                    if isinstance(stdata, numpy.ndarray) and not stdata.size:
-                        pass
-                    elif (isinstance(stdata, float) and stdata == -9E40) or (isinstance(stdata, int) and stdata == -999999999):
-                        pass
-                    elif isinstance(stdata, unicode) and not len(stdata):
-                        continue
-                    else:
+                    if stdata is not None:
                         try:
                             data = uarray(data, stdata)
                         except uncertainties.core.NegativeStdDev as _excp:
                             printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
-                if verbose:
-                    print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
+                # assign data to ODS
                 h = ods
                 for step in path[:-1]:
                     h = h[step]
@@ -586,7 +598,7 @@ if 'imas' != 'itm':
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_structures=False):
     """
-    List paths in an IDS that have data in its leaves
+    Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
     :param ids: input ids
 
@@ -605,25 +617,28 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
     # leaf
     if not len(ds):
         paths.append(path)
-        # print(paths[-1])
+        #print(paths[-1])
         return paths
 
+    # keys
     keys = ds.keys()
     if keys[0] == ':':
         keys = range(len(ids))
         if len(keys) and assume_uniform_array_structures:
             keys = [0]
 
+    # traverse
     for kid in keys:
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
         if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], assume_uniform_array_structures)
         else:
-            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], assume_uniform_array_structures)
         paths += subtree_paths
 
-        if assume_uniform_array_structures:
+        # assume_uniform_array_structures
+        if keys[0]==0 and assume_uniform_array_structures:
             zero_paths = subtree_paths
             for key in range(1, len(ids)):
                 subtree_paths = copy.deepcopy(zero_paths)

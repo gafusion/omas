@@ -29,13 +29,22 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'imas_code_dump'
 
 ods = ODS()
 
+# first time-slice
 # 0D data
 ods['equilibrium']['time_slice'][0]['time'] = 1000.
 ods['equilibrium']['time_slice'][0]['global_quantities.ip'] = 1.E6
 # 1D data
 ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
+
+# second time-slice
+# 0D data
+ods['equilibrium']['time_slice'][1]['time'] = 1200.
+ods['equilibrium']['time_slice'][1]['global_quantities.ip'] = 1.E6
+# 1D data
+ods['equilibrium']['time_slice'][1]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
-ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3], [4, 5, 6]]
+ods['equilibrium']['time_slice'][1]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3], [4, 5, 6]]
+
 
 # Save to IMAS
 print('='*20)
@@ -59,4 +68,4 @@ check = different_ods(ods, ods1)
 if not check:
     print('OMAS data got saved and loaded correctly')
 else:
-    print(check)
+    pprint(check)
