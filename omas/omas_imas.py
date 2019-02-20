@@ -384,8 +384,9 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
                 paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-            # joined_paths = map(o2i, paths)
-            joined_paths = map(l2i, paths)
+                joined_paths = None # joined_paths==None means take everything, no need to filter out what is available based on what was requested
+            else:
+                joined_paths = map(l2i, paths)
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
@@ -407,20 +408,23 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                     if verbose:
                         print('* ', ds)
                     available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
-                    # joined_available_paths = map(o2i, available_paths)
-                    joined_available_paths = map(l2i, available_paths)
-                    for jpath, path in zip(joined_paths, paths):
-                        if path[0] != ds:
-                            continue
-                        jpath = jpath.replace('.', '\.')
-                        jpath = '^' + jpath.replace('.:', '.[0-9]+') + '.*'
-                        for japath, apath in zip(joined_available_paths, available_paths):
-                            if re.match(jpath, japath):
-                                fetch_paths.append(apath)
+                    if joined_paths is None:
+                        # if joined_paths is None, this means the user requested everything
+                        fetch_paths = available_paths
+                    else:
+                        # intersect between what was requested and what is available
+                        joined_available_paths = map(l2i, available_paths)
+                        for jpath, path in zip(joined_paths, paths):
+                            if path[0] != ds:
+                                continue
+                            jpath = jpath.replace('.', '\.')
+                            jpath = '^' + jpath.replace('.:', '.[0-9]+') + '.*'
+                            for japath, apath in zip(joined_available_paths, available_paths):
+                                if re.match(jpath, japath):
+                                    fetch_paths.append(apath)
                 else:
                     if verbose:
                         print('- ', ds)
-            # joined_fetch_paths=map(o2i, fetch_paths)
             joined_fetch_paths = map(l2i, fetch_paths)
 
             # build omas data structure
@@ -580,34 +584,53 @@ if 'imas' != 'itm':
         return ods
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_structures=False):
     """
-    list paths in an IDS that are filled
+    List paths in an IDS that have data in its leaves
 
     :param ids: input ids
 
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
+    :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
+
     :return: returns list of paths in an IDS that are filled
     """
     if path is None:
         path = []
+
     if paths is None:
         paths = []
+
+    # leaf
     if not len(ds):
         paths.append(path)
         # print(paths[-1])
         return paths
+
     keys = ds.keys()
     if keys[0] == ':':
         keys = range(len(ids))
+        if len(keys) and assume_uniform_array_structures:
+            keys = [0]
+
     for kid in keys:
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
         if isinstance(kid, basestring):
-            paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, paths)
+            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], uniform_array_structures)
         else:
-            paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, paths)
+            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], uniform_array_structures)
+        paths += subtree_paths
+
+        if assume_uniform_array_structures:
+            zero_paths = subtree_paths
+            for key in range(1, len(ids)):
+                subtree_paths = copy.deepcopy(zero_paths)
+                for p in subtree_paths:
+                    p[len(path)] = key
+                paths += subtree_paths
+
     return paths
 
 
