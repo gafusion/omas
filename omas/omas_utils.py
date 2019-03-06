@@ -416,17 +416,19 @@ _coordinates = {}
 # by setting omas.omas_utils._extra_structures equal to a
 # dictionary with the definitions of the quantities that are
 # not (yet) available in IMAS. For example:
-#   omas.omas_utils._extra_structures = {
-#       'equilibrium': {
-#           'equilibrium.time_slice.:.profiles_1d.centroid.r_max': {
-#               "full_path": "equilibrium/time_slices(itime)/profiles_1d/centroid.r_max(:)",
-#               "coordinates": ['equilibrium.time_slice[:].profiles_1d.psi'],
-#               "data_type": "FLT_1D",
-#               "description": "centroid r max",
-#               "units":'m',
-#               "cocos_signal":'?' # optional
-#           }
-#    }
+#
+# omas.omas_utils._extra_structures = {
+#     'equilibrium': {
+#         'equilibrium.time_slice.:.profiles_1d.centroid.r_max': {
+#             "full_path": "equilibrium/time_slices(itime)/profiles_1d/centroid.r_max(:)",
+#             "coordinates": ['equilibrium.time_slice[:].profiles_1d.psi'],
+#             "data_type": "FLT_1D",
+#             "description": "centroid r max",
+#             "units": 'm',
+#             "cocos_signal": '?'  # optional
+#         }
+#     }
+# }
 _extra_structures = {}
 
 def list_structures(imas_version):
