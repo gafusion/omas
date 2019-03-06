@@ -423,7 +423,8 @@ _coordinates = {}
 #               "coordinates": ['equilibrium.time_slice[:].profiles_1d.psi'],
 #               "data_type": "FLT_1D",
 #               "description": "centroid r max",
-#               "units":'m'
+#               "units":'m',
+#               "cocos_signal":'?' # optional
 #           }
 #    }
 _extra_structures = {}
@@ -469,6 +470,8 @@ def load_structure(filename, imas_version):
     :return: tuple with structure, hashing mapper, and ods
     """
 
+    from .omas_physics import cocos_signals
+
     filename0 = filename
     id=(filename0, imas_version)
     if id in _structures and id in _structures_dict:
@@ -489,7 +492,10 @@ def load_structure(filename, imas_version):
         if structure_name in _extra_structures:
             for item in _extra_structures[structure_name]:
                 if item not in _structures[id]:
+                    cs = _extra_structures[structure_name][item].pop('cocos_signal',None)
                     _structures[id][item] = _extra_structures[structure_name][item]
+                    if cs is not None:
+                        cocos_signals[i2o(item)] = cs
 
         # generate hierarchical structure
         _structures_dict[id] = {}
