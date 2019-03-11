@@ -792,6 +792,16 @@ class ODS(MutableMapping):
     def __repr__(self):
         return repr(self.omas_data)
 
+    def __tree_repr__(self):
+        '''
+        OMFIT tree representation
+        '''
+        if 'dataset_description' not in self or 'data_entry' not in self['dataset_description']:
+            return self,[]
+        s = ' '.join(['%s:%s'%(k,v) for k,v in self['dataset_description']['data_entry'].items()  if v!='None'])
+        s = '--{%d}-- '%len(self)+s
+        return s,[]
+
     def get(self, key, default=None):
         """
         Check if key is present and if not return default value without creating value in omas data structure

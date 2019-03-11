@@ -44,7 +44,10 @@ help:
 	@echo "  coverage   to run coverage check of the documentation (if enabled)"
 	@echo "  dummy      to check syntax errors of document sources"
 
-commit:
+$(BUILDDIR)/html:
+	mkdir -p $(BUILDDIR)/html
+
+commit: $(BUILDDIR)/html
 	cd $(BUILDDIR)/html; git init
 	cd $(BUILDDIR)/html; git remote add origin git@github.com:gafusion/omas.git
 	cd $(BUILDDIR)/html; git remote -v
