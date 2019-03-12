@@ -545,8 +545,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True,
-                          show_total_density=False, **kw):
+def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True, show_total_density=True, **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -597,7 +596,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
             density = item + '.density' + therm_fast
             if item + '.density' + therm_fast in prof1d:
                 if combine_dens_temps:
-                    if k == 0:
+                    if ax0 is None:
                         ax = ax0 = pyplot.subplot(1, 2, 1)
                 else:
                     ax = ax0 = pyplot.subplot(r, 2, (2 * k) + 1, sharex=ax)
