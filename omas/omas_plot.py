@@ -613,7 +613,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         # temperatures
         if item + '.temperature' in prof1d:
             if combine_dens_temps:
-                if k == 0:
+                if ax1 is None:
                     ax = ax1 = pyplot.subplot(1, 2, 2, sharex=ax)
             else:
                 ax = ax1 = pyplot.subplot(r, 2, (2 * k) + 2, sharex=ax)
