@@ -832,11 +832,11 @@ class ODS(MutableMapping):
         return self[key]
 
     def __getstate__(self):
-        tmp=copy.copy(self.__dict__)
-        for item in list(tmp.keys()):
-            if item not in omas_dictstate:
-                del tmp[item]
-        return tmp
+        state = {}
+        for item in omas_dictstate:
+            if item in self.__dict__:
+                state[item] = self.__dict__[item]
+        return state
 
     def copy(self):
         '''
@@ -1096,10 +1096,10 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs=['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio']
-omas_dictstate=dir(ODS)
-omas_dictstate.extend(['omas_data']+omas_ods_attrs)
-omas_dictstate=sorted(list(set(omas_dictstate)))
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', 'imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
+omas_dictstate = dir(ODS)
+omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
+omas_dictstate = sorted(list(set(omas_dictstate)))
 
 # --------------------------------------------
 # save and load OMAS with Python pickle

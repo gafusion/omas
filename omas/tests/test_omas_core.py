@@ -258,6 +258,32 @@ class TestOmasCore(unittest.TestCase):
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
 
+    def test_deepcopy(self):
+        ods = ods_sample()
+
+        #inject non-consistent data
+        ods.consistency_check = False
+        ods['bla'] = 1
+        ods.consistency_check = True
+
+        # deepcopy should not raise a consistency_check error
+        # since we are directly manipulating the __dict__ attributes
+        import copy
+        ods1 = copy.deepcopy(ods)
+
+        # make sure non-consistent data got also copied over
+        assert ods1['bla']==ods['bla']
+
+        # make sure the deepcopy is not shallow
+        ods1['equilibrium.vacuum_toroidal_field.r0'] += 1
+        assert ods['equilibrium.vacuum_toroidal_field.r0'] + 1 == ods1['equilibrium.vacuum_toroidal_field.r0']
+
+        # deepcopy using .copy() method
+        ods2 = ods.copy()
+
+        # make sure the deepcopy is not shallow
+        ods2['equilibrium.vacuum_toroidal_field.r0'] += 1
+        assert ods['equilibrium.vacuum_toroidal_field.r0'] + 1 == ods2['equilibrium.vacuum_toroidal_field.r0']
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
