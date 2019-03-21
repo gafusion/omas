@@ -60,6 +60,8 @@ class ODS(MutableMapping):
         self.omas_data = None
         self._consistency_check = consistency_check
         self._dynamic_path_creation = dynamic_path_creation
+        if consistency_check and imas_version not in imas_versions:
+            raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
         self.imas_version = imas_version
         self.location = location
         self._cocos = cocos

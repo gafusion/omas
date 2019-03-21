@@ -235,6 +235,14 @@ class TestOmasCore(unittest.TestCase):
         except LookupError:
             pass
 
+        # check support for development version is there
+        ODS(imas_version='develop.3')
+
+        try:
+            tmp = ODS(imas_version='does_not_exist')
+        except ValueError:
+            pass
+
     def test_satisfy_imas_requirements(self):
         ods = ods_sample()
 
@@ -263,7 +271,8 @@ class TestOmasCore(unittest.TestCase):
 
         #inject non-consistent data
         ods.consistency_check = False
-        ods['bla'] = 1
+        ods['bla'] = ODS(consistency_check=False)
+        ods['bla.tra'] = 1
         ods.consistency_check = True
 
         # deepcopy should not raise a consistency_check error
