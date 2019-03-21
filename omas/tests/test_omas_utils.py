@@ -165,6 +165,9 @@ class TestOmasUtils(unittest.TestCase):
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 0, 0.1)
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 1, 0.2)
 
+    def test_info(self):
+        omas_info('equilibrium')
+        omas_info(None)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasUtils)
