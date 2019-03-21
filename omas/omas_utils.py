@@ -744,11 +744,14 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
     This function returns an ods with the leaf nodes filled with their property informations
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
+                       if not structures, then all structures are returned (slow and big)
 
     :return: ods
     '''
 
-    if isinstance(structures, basestring):
+    if not structures:
+        structures = sorted(list(dict_structures(imas_version).keys()))
+    elif isinstance(structures, basestring):
         structures = [structures]
 
     # caching
