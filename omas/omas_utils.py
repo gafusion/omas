@@ -446,20 +446,19 @@ def list_structures(imas_version):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
     return structures
 
-
 def dict_structures(imas_version):
     '''
     maps structure names to json filenames
 
     :param imas_version: imas version
 
-    :return: dictionary maps structure names to json  filenames
+    :return: dictionary maps structure names to json filenames
     '''
-    paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*' + '.json')
+    paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
     if not len(paths):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
-    return dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
-
+    structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
+    return {structure: structures[structure] for structure in structures if not structure.startswith('_')}
 
 def load_structure(filename, imas_version):
     """
