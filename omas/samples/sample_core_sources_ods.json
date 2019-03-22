@@ -1,16 +1,15 @@
 {
 "core_sources": {
-"source": {
-"0": {
+"source": [
+{
 "identifier": {
 "description": "(electron) ohmic power density, watts/meter^3",
 "name": "qohm"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 5509.731339466628,
 6137.279348014229,
 15092.817980373125,
@@ -22,16 +21,10 @@
 24572.423110792857,
 6011.293223885114,
 92.70973680798834
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -44,13 +37,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -62,26 +49,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"1": {
+{
 "identifier": {
 "description": "Source of energy to electrons due to collisional energy exchange with thermal ions",
 "name": "qdelt"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 -6968.886814136994,
 8926.8695990931,
 47037.6278162693,
@@ -93,16 +74,10 @@
 148092.75905363745,
 167912.55382814878,
 534578.1867419949
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -115,13 +90,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -133,15 +102,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 6968.886814136994,
 -8926.8695990931,
 -47037.6278162693,
@@ -153,25 +116,19 @@
 -148092.75905363745,
 -167912.55382814878,
 -534578.1867419949
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"2": {
+{
 "identifier": {
 "description": "radiated power density, watts/meter^3",
 "name": "qrad"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 -13353.893306117703,
 -12976.598883877876,
 -12223.493432716348,
@@ -183,16 +140,10 @@
 -6672.587623521864,
 -6759.521366039036,
 -7383.2149607389765
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -205,13 +156,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -223,26 +168,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"3": {
+{
 "identifier": {
 "description": "qione, electron power density due to  recombination and impact ionization, watts/meter^3",
 "name": "qione"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 -225.75853069239577,
 -219.3805632260581,
 -208.35120784843915,
@@ -254,16 +193,10 @@
 -212.57423439764045,
 -342.87705210189716,
 -4815.391842706546
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -276,13 +209,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -294,26 +221,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"4": {
+{
 "identifier": {
 "description": "power to elec. from beam, watts/meter^3",
 "name": "qbeame"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 189240.57641996714,
 197990.7034701921,
 181172.90776198456,
@@ -325,16 +246,10 @@
 55222.975284887696,
 28736.88658913345,
 11135.308221168072
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -347,13 +262,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -365,26 +274,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"5": {
+{
 "identifier": {
 "description": "qrfe, RF electron heating, watts/meter^3",
 "name": "qrfe"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 0.0,
 0.0,
 0.0,
@@ -396,16 +299,10 @@
 0.0,
 0.0,
 0.0
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -418,13 +315,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -436,26 +327,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"6": {
+{
 "identifier": {
 "description": "total fusion electron heating, watts/meter^3",
 "name": "qfuse"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"energy": {
-"__ndarray_tolist__": [
+"energy": [
 0.0,
 0.0,
 0.0,
@@ -467,16 +352,10 @@
 0.0,
 0.0,
 0.0
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -489,13 +368,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -507,26 +380,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"7": {
+{
 "identifier": {
 "description": "qioni, ion power density due to  recombination and impact ionization, watts/meter^3",
 "name": "qioni"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -539,13 +406,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -557,15 +418,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 45217.17633014259,
 44120.98445692259,
 41251.87011922954,
@@ -577,25 +432,19 @@
 32405.308314308022,
 47455.72230104476,
 37742.007013708426
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"8": {
+{
 "identifier": {
 "description": "qcx, ion power density due to neutral-ion charge exchange, watts/meter^3",
 "name": "qcx"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -608,13 +457,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -626,15 +469,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 -55165.59700295127,
 -58639.22130991881,
 -60321.7909113539,
@@ -646,25 +483,19 @@
 -12004.954249130706,
 -31359.492418887083,
 -915714.7609459203
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"9": {
+{
 "identifier": {
 "description": "power to ions  from beam, watts/meter^3",
 "name": "qbeami"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -677,13 +508,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -695,15 +520,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 955611.3439333364,
 956791.5063421445,
 817111.7572935959,
@@ -715,25 +534,19 @@
 101962.12509610971,
 43690.71372712309,
 341.7517110235058
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"10": {
+{
 "identifier": {
 "description": "qrfi, RF electron heating, watts/meter^3",
 "name": "qrfi"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -746,13 +559,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -764,15 +571,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 0.0,
 0.0,
 0.0,
@@ -784,25 +585,19 @@
 0.0,
 0.0,
 0.0
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"11": {
+{
 "identifier": {
 "description": "total fusion ion heating, watts/meter^3",
 "name": "qfusi"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -815,13 +610,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -833,15 +622,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"total_ion_energy": {
-"__ndarray_tolist__": [
+"total_ion_energy": [
 0.0,
 0.0,
 0.0,
@@ -853,25 +636,19 @@
 0.0,
 0.0,
 0.0
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
-}
-}
+]
 },
-"12": {
+{
 "identifier": {
 "description": "Source of electrons due to electron impact ionization of thermal neutrals",
 "name": "sion_thermal_e"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"particles": {
-"__ndarray_tolist__": [
+"particles": [
 4.477110883984294e+19,
 4.3248731666344e+19,
 3.9842932608912966e+19,
@@ -883,16 +660,10 @@
 5.640349430959581e+19,
 1.0992503978943884e+20,
 2.1421947543988535e+21
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -905,13 +676,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -923,26 +688,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"13": {
+{
 "identifier": {
 "description": "sbeame : beam electron source,#/(meter^3*second)",
 "name": "sbeame"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"particles": {
-"__ndarray_tolist__": [
+"particles": [
 7.140541085233428e+19,
 7.270928190588509e+19,
 6.297045047589982e+19,
@@ -954,16 +713,10 @@
 1.1978084277550096e+19,
 6.130909319533545e+18,
 3.503388319977474e+18
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -976,13 +729,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -994,26 +741,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"14": {
+{
 "identifier": {
 "description": "Source of electrons due to recombination",
 "name": "srecom_e"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "electrons": {
-"particles": {
-"__ndarray_tolist__": [
+"particles": [
 -1.1644465188842592e+17,
 -1.1704342660600482e+17,
 -1.2254947848327728e+17,
@@ -1025,16 +766,10 @@
 -2.1642852409291917e+17,
 -2.8573439808782323e+17,
 -2.8166991433995142e+17
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -1047,13 +782,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -1065,26 +794,20 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
 }
-}
-}
+]
 },
-"15": {
+{
 "identifier": {
 "description": "Torque due to beams (sprbeame+sprbeami+ssprcxl)",
 "name": "storqueb"
 },
-"profiles_1d": {
-"0": {
+"profiles_1d": [
+{
 "grid": {
-"rho_tor_norm": {
-"__ndarray_tolist__": [
+"rho_tor_norm": [
 0.0,
 0.1,
 0.2,
@@ -1097,13 +820,7 @@
 0.9,
 1.0
 ],
-"dtype": "float64",
-"shape": [
-11
-]
-},
-"volume": {
-"__ndarray_tolist__": [
+"volume": [
 0.0,
 0.21876830936726266,
 0.8674879371933459,
@@ -1115,15 +832,9 @@
 12.557875943425726,
 15.473526678155647,
 18.453459507134216
-],
-"dtype": "float64",
-"shape": [
-11
 ]
-}
 },
-"momentum_tor": {
-"__ndarray_tolist__": [
+"momentum_tor": [
 0.805929601077563,
 0.8193277162088857,
 0.7165073926101994,
@@ -1135,15 +846,10 @@
 0.12380569199470857,
 0.05709167206405006,
 0.005426072830569617
-],
-"dtype": "float64",
-"shape": [
-11
 ]
 }
+]
 }
-}
-}
-}
+]
 }
 }
