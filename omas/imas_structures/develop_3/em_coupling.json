@@ -46,6 +46,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "em_coupling/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "em_coupling.code.parameters": {
@@ -257,6 +258,34 @@
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "em_coupling/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "em_coupling.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -672,9 +701,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "em_coupling/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

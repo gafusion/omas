@@ -2,7 +2,7 @@
  "charge_exchange": {
   "documentation": "Charge exchange spectroscopy diagnostic",
   "full_path": "charge_exchange",
-  "lifecycle_last_change": "3.19.2",
+  "lifecycle_last_change": "3.21.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "4"
@@ -238,6 +238,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "charge_exchange.aperture.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "charge_exchange/aperture/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "charge_exchange.aperture.surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "charge_exchange/aperture/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.aperture.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "charge_exchange/aperture/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "charge_exchange.aperture.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "charge_exchange/aperture/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "charge_exchange.aperture.x1_unit_vector": {
   "data_type": "structure",
@@ -593,16 +624,18 @@
   "documentation": "Doppler shift due to the diagnostic neutral beam particle velocity",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].bes.doppler_shift.data": {
   "coordinates": [
    "charge_exchange.channel[:].bes.doppler_shift.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Doppler shift due to the diagnostic neutral beam particle velocity",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/doppler_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -621,6 +654,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/doppler_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -632,6 +666,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/doppler_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -640,10 +675,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "bes/doppler_shift/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].bes.label": {
   "data_type": "STR_0D",
@@ -657,16 +694,18 @@
   "documentation": "Lorentz shift due to the Lorentz electric field (vxB) in the frame of the diagnostic neutral beam particles moving with a velocity v across the magnetic field B",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].bes.lorentz_shift.data": {
   "coordinates": [
    "charge_exchange.channel[:].bes.lorentz_shift.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lorentz shift due to the Lorentz electric field (vxB) in the frame of the diagnostic neutral beam particles moving with a velocity v across the magnetic field B",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/lorentz_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -685,6 +724,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/lorentz_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -696,6 +736,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/lorentz_shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -704,27 +745,35 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "bes/lorentz_shift/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].bes.radiances": {
-  "data_type": "structure",
-  "documentation": "Calibrated intensities of the 9 splitted lines (Stark effect due to Lorentz electric field). Note: radiances are integrated over the sightline crossing the neutral beam",
-  "full_path": "charge_exchange/channel(i1)/bes/radiances",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "charge_exchange.channel[:].bes.radiances.data": {
   "coordinates": [
    "1...9",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Calibrated intensities of the 9 splitted lines (Stark effect due to Lorentz electric field). Note: radiances are integrated over the sightline crossing the neutral beam",
+  "full_path": "charge_exchange/channel(i1)/bes/radiances",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "(photons) m^-2.s^-1.sr^-1"
+ },
+ "charge_exchange.channel[:].bes.radiances.data": {
+  "coordinates": [
+   "1...N",
+   "charge_exchange.channel[:].bes.radiances.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/bes/radiances/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/radiances/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
@@ -737,25 +786,27 @@
  },
  "charge_exchange.channel[:].bes.radiances.data_error_lower": {
   "coordinates": [
-   "1...9",
+   "1...N",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/radiances/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/radiances/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
  "charge_exchange.channel[:].bes.radiances.data_error_upper": {
   "coordinates": [
-   "1...9",
+   "1...N",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/radiances/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "bes/radiances/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
@@ -764,10 +815,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/bes/radiances/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "bes/radiances/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].bes.transition_wavelength": {
   "data_type": "FLT_0D",
@@ -923,16 +976,18 @@
   "documentation": "Ion concentration (ratio of the ion density over the electron density) at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "-"
  },
  "charge_exchange.channel[:].ion[:].n_i_over_n_e.data": {
   "coordinates": [
    "charge_exchange.channel[:].ion[:].n_i_over_n_e.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Ion concentration (ratio of the ion density over the electron density) at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_i_over_n_e/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -951,6 +1006,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_i_over_n_e/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -962,6 +1018,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_i_over_n_e/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -970,10 +1027,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "n_i_over_n_e/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].ion[:].n_i_over_n_e_method": {
   "data_type": "structure",
@@ -1008,16 +1067,18 @@
   "documentation": "Ion temperature at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "eV"
  },
  "charge_exchange.channel[:].ion[:].t_i.data": {
   "coordinates": [
    "charge_exchange.channel[:].ion[:].t_i.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Ion temperature at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1036,6 +1097,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1047,6 +1109,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1055,10 +1118,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "t_i/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].ion[:].t_i_method": {
   "data_type": "structure",
@@ -1093,16 +1158,18 @@
   "documentation": "Poloidal velocity of the ion (oriented clockwise when seen from front on the right side of the tokamak axi-symmetry axis) at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m.s^-1"
  },
  "charge_exchange.channel[:].ion[:].velocity_pol.data": {
   "coordinates": [
    "charge_exchange.channel[:].ion[:].velocity_pol.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Poloidal velocity of the ion (oriented clockwise when seen from front on the right side of the tokamak axi-symmetry axis) at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_pol/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1121,6 +1188,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_pol/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1132,6 +1200,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_pol/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1140,10 +1209,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "velocity_pol/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].ion[:].velocity_pol_method": {
   "data_type": "structure",
@@ -1178,16 +1249,18 @@
   "documentation": "Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m.s^-1"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor.data": {
   "coordinates": [
    "charge_exchange.channel[:].ion[:].velocity_tor.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1206,6 +1279,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1217,6 +1291,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -1225,10 +1300,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "velocity_tor/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor_method": {
   "data_type": "structure",
@@ -1374,16 +1451,18 @@
   "documentation": "Calibrated radiance of the fast ion charge exchange spectrum assuming the shape is pre-defined (e.g. by the Fokker-Planck slowing-down function). Note: radiance is integrated over the sightline crossing the neutral beam",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "(photons) m^-2.s^-1.sr^-1"
  },
  "charge_exchange.channel[:].ion_fast[:].radiance.data": {
   "coordinates": [
    "charge_exchange.channel[:].ion_fast[:].radiance.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Calibrated radiance of the fast ion charge exchange spectrum assuming the shape is pre-defined (e.g. by the Fokker-Planck slowing-down function). Note: radiance is integrated over the sightline crossing the neutral beam",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
@@ -1402,6 +1481,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
@@ -1413,6 +1493,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1"
  },
@@ -1421,10 +1502,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "radiance/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].ion_fast[:].radiance_spectral_method": {
   "data_type": "structure",
@@ -1552,16 +1635,18 @@
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/momentum_tor",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "kg.m^-1.s^-1"
  },
  "charge_exchange.channel[:].momentum_tor.data": {
   "coordinates": [
    "charge_exchange.channel[:].momentum_tor.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -1580,6 +1665,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -1591,6 +1677,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -1599,10 +1686,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "momentum_tor/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].momentum_tor_method": {
   "data_type": "structure",
@@ -1651,16 +1740,18 @@
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "charge_exchange/channel(i1)/position/phi",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
  },
  "charge_exchange.channel[:].position.phi.data": {
   "coordinates": [
    "charge_exchange.channel[:].position.phi.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/position/phi/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1679,6 +1770,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/phi/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1690,6 +1782,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/phi/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1698,26 +1791,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/position/phi/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/phi/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].position.r": {
   "data_type": "structure",
   "documentation": "Major radius",
   "full_path": "charge_exchange/channel(i1)/position/r",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].position.r.data": {
   "coordinates": [
    "charge_exchange.channel[:].position.r.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Major radius",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/position/r/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1736,6 +1833,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/r/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1747,6 +1845,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/r/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1755,26 +1854,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/position/r/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/r/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].position.z": {
   "data_type": "structure",
   "documentation": "Height",
   "full_path": "charge_exchange/channel(i1)/position/z",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].position.z.data": {
   "coordinates": [
    "charge_exchange.channel[:].position.z.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Height",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/position/z/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1793,6 +1896,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/z/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1804,6 +1908,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/z/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -1812,10 +1917,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/position/z/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/z/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum": {
   "coordinates": [
@@ -1934,21 +2041,27 @@
   "units": "m"
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum": {
-  "data_type": "structure",
-  "documentation": "Intensity spectrum (not calibrated), i.e. number of photoelectrons detected by unit time by a wavelength pixel of the channel, taking into account electronic gain compensation and channels relative calibration",
-  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Intensity spectrum (not calibrated), i.e. number of photoelectrons detected by unit time by a wavelength pixel of the channel, taking into account electronic gain compensation and channels relative calibration",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "(photoelectrons).s^-1"
+ },
+ "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data": {
+  "coordinates": [
+   "1...N",
+   "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity_spectrum/time",
   "type": "dynamic",
   "units": "(photoelectrons).s^-1"
  },
@@ -1961,25 +2074,27 @@
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data_error_lower": {
   "coordinates": [
-   "charge_exchange.channel[:].spectrum[:].wavelengths",
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity_spectrum/time",
   "type": "dynamic",
   "units": "(photoelectrons).s^-1"
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data_error_upper": {
   "coordinates": [
-   "charge_exchange.channel[:].spectrum[:].wavelengths",
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity_spectrum/time",
   "type": "dynamic",
   "units": "(photoelectrons).s^-1"
  },
@@ -1988,10 +2103,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "intensity_spectrum/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line": {
   "coordinates": [
@@ -2009,16 +2126,18 @@
   "documentation": "Non-calibrated intensity (integrated over the spectrum for this line), i.e. number of photoelectrons detected by unit time, taking into account electronic gain compensation and channels relative calibration",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "(photonelectrons).s^-1"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].intensity.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].processed_line[:].intensity.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Non-calibrated intensity (integrated over the spectrum for this line), i.e. number of photoelectrons detected by unit time, taking into account electronic gain compensation and channels relative calibration",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "(photonelectrons).s^-1"
  },
@@ -2037,6 +2156,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "(photonelectrons).s^-1"
  },
@@ -2048,6 +2168,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "(photonelectrons).s^-1"
  },
@@ -2056,10 +2177,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "intensity/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].label": {
   "data_type": "STR_0D",
@@ -2073,16 +2196,18 @@
   "documentation": "Calibrated, background subtracted radiance (integrated over the spectrum for this line)",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m^-2.s^-1.sr^-1"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].radiance.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].processed_line[:].radiance.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Calibrated, background subtracted radiance (integrated over the spectrum for this line)",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
@@ -2101,6 +2226,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
@@ -2112,6 +2238,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
@@ -2120,26 +2247,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "radiance/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].shift": {
   "data_type": "structure",
   "documentation": "Shift of the emission line wavelength with respected to the unshifted cental wavelength (e.g. Doppler shift)",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].shift.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].processed_line[:].shift.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Shift of the emission line wavelength with respected to the unshifted cental wavelength (e.g. Doppler shift)",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2158,6 +2289,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2169,6 +2301,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "shift/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2177,10 +2310,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "shift/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].wavelength_central": {
   "data_type": "FLT_0D",
@@ -2218,16 +2353,18 @@
   "documentation": "Full width at Half Maximum (FWHM) of the emission line",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].width.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].processed_line[:].width.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Full width at Half Maximum (FWHM) of the emission line",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "width/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2246,6 +2383,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "width/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2257,6 +2395,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "width/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -2265,10 +2404,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "width/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_calibration": {
   "coordinates": [
@@ -2318,22 +2459,29 @@
   "units": "m^-3.sr^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum": {
+  "coordinates": [
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
+   "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
+  ],
   "data_type": "structure",
   "documentation": "Calibrated continuum intensity  in the middle of the spectrum per unit wavelength",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "m^-2.s^-1.sr^-1.m^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data": {
   "coordinates": [
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
-  "data_type": "FLT_1D",
-  "documentation": "Calibrated continuum intensity  in the middle of the spectrum per unit wavelength",
-  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data(:)",
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_continuum/time",
   "type": "dynamic",
-  "units": "m^-3.s^-1.sr^-1"
+  "units": "m^-2.s^-1.sr^-1.m^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_index": {
   "data_type": "int_type",
@@ -2344,52 +2492,64 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_lower": {
   "coordinates": [
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
-  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data_error_lower(:)",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_continuum/time",
   "type": "dynamic",
-  "units": "m^-3.s^-1.sr^-1"
+  "units": "m^-2.s^-1.sr^-1.m^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_upper": {
   "coordinates": [
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
-  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data_error_upper(:)",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_continuum/time",
   "type": "dynamic",
-  "units": "m^-3.s^-1.sr^-1"
+  "units": "m^-2.s^-1.sr^-1.m^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "radiance_continuum/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral": {
-  "data_type": "structure",
-  "documentation": "Calibrated spectral radiance (radiance per unit wavelength)",
-  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "charge_exchange.channel[:].spectrum[:].radiance_spectral.data": {
   "coordinates": [
    "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Calibrated spectral radiance (radiance per unit wavelength)",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "(photons) m^-2.s^-1.sr^-1.m^-1"
+ },
+ "charge_exchange.channel[:].spectrum[:].radiance_spectral.data": {
+  "coordinates": [
+   "1...N",
+   "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_spectral/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1.m^-1"
  },
@@ -2402,25 +2562,27 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data_error_lower": {
   "coordinates": [
-   "charge_exchange.channel[:].spectrum[:].wavelengths",
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_spectral/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1.m^-1"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data_error_upper": {
   "coordinates": [
-   "charge_exchange.channel[:].spectrum[:].wavelengths",
+   "1...N",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "radiance_spectral/time",
   "type": "dynamic",
   "units": "(photons) m^-2.s^-1.sr^-1.m^-1"
  },
@@ -2429,10 +2591,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "radiance_spectral/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].spectrum[:].slit_width": {
   "data_type": "FLT_0D",
@@ -2517,16 +2681,18 @@
   "documentation": "Ion temperature (averaged on charge states and ion species) at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/t_i_average",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "eV"
  },
  "charge_exchange.channel[:].t_i_average.data": {
   "coordinates": [
    "charge_exchange.channel[:].t_i_average.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Ion temperature (averaged on charge states and ion species) at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/t_i_average/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i_average/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -2545,6 +2711,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/t_i_average/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i_average/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -2556,6 +2723,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/t_i_average/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "t_i_average/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -2564,10 +2732,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/t_i_average/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "t_i_average/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].t_i_average_method": {
   "data_type": "structure",
@@ -2602,16 +2772,18 @@
   "documentation": "Local ionic effective charge at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/zeff",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "-"
  },
  "charge_exchange.channel[:].zeff.data": {
   "coordinates": [
    "charge_exchange.channel[:].zeff.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Local ionic effective charge at the channel measurement point",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/zeff/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2630,6 +2802,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2641,6 +2814,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2649,26 +2823,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/zeff/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "zeff/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].zeff_line_average": {
   "data_type": "structure",
   "documentation": "Ionic effective charge, line average along the channel line-of-sight",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "-"
  },
  "charge_exchange.channel[:].zeff_line_average.data": {
   "coordinates": [
    "charge_exchange.channel[:].zeff_line_average.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Ionic effective charge, line average along the channel line-of-sight",
+  "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff_line_average/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2687,6 +2865,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff_line_average/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2698,6 +2877,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "zeff_line_average/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2706,10 +2886,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "zeff_line_average/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "charge_exchange.channel[:].zeff_line_average_method": {
   "data_type": "structure",
@@ -2796,6 +2978,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "charge_exchange/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "charge_exchange.code.parameters": {
@@ -2818,6 +3001,65 @@
   "full_path": "charge_exchange/code/version",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "charge_exchange.etendue": {
+  "data_type": "FLT_0D",
+  "documentation": "Etendue (geometric extent) of the optical system",
+  "full_path": "charge_exchange/etendue",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "charge_exchange.etendue_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"etendue\"",
+  "full_path": "charge_exchange/etendue_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.etendue_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"etendue\"",
+  "full_path": "charge_exchange/etendue_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "charge_exchange.etendue_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"etendue\"",
+  "full_path": "charge_exchange/etendue_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "charge_exchange.etendue_method": {
+  "data_type": "structure",
+  "documentation": "Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods",
+  "full_path": "charge_exchange/etendue_method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "charge_exchange.etendue_method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "charge_exchange/etendue_method/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "charge_exchange.etendue_method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "charge_exchange/etendue_method/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "charge_exchange.etendue_method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "charge_exchange/etendue_method/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "charge_exchange.ids_properties": {
   "data_type": "structure",
@@ -2861,14 +3103,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "charge_exchange/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "charge_exchange.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "charge_exchange/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "charge_exchange/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "charge_exchange/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "charge_exchange/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

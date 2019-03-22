@@ -272,6 +272,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "neutron_diagnostic/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "neutron_diagnostic.code.parameters": {
@@ -439,16 +440,18 @@
   "documentation": "Processed peak amplitude of the measured signal",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].amplitude_peak.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].amplitude_peak.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Processed peak amplitude of the measured signal",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_peak/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -467,6 +470,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_peak/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -478,6 +482,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_peak/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -486,26 +491,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "amplitude_peak/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].amplitude_raw": {
   "data_type": "structure",
   "documentation": "Raw amplitude of the measured signal",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].amplitude_raw.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].amplitude_raw.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Raw amplitude of the measured signal",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_raw/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -524,6 +533,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_raw/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -535,6 +545,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "amplitude_raw/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -543,10 +554,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "amplitude_raw/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].aperture": {
   "coordinates": [
@@ -783,6 +796,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "neutron_diagnostic.detectors[:].aperture[:].surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "neutron_diagnostic.detectors[:].aperture[:].surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.detectors[:].aperture[:].surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "neutron_diagnostic.detectors[:].aperture[:].surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_unit_vector": {
   "data_type": "structure",
@@ -1096,16 +1140,18 @@
   "documentation": "Generated signal amplitude",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.amplitude.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].b_field_sensor.amplitude.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal amplitude",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1124,6 +1170,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1135,6 +1182,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1143,10 +1191,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "b_field_sensor/amplitude/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.fall_time": {
   "data_type": "FLT_0D",
@@ -1184,16 +1234,18 @@
   "documentation": "Generated signal frequency",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Hz"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.frequency.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].b_field_sensor.frequency.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal frequency",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -1212,6 +1264,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -1223,6 +1276,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "b_field_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -1231,10 +1285,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "b_field_sensor/frequency/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.power_switch": {
   "data_type": "INT_0D",
@@ -1533,6 +1589,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "neutron_diagnostic.detectors[:].detector.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "neutron_diagnostic/detectors(i1)/detector/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "neutron_diagnostic.detectors[:].detector.surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/detector/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.detectors[:].detector.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/detector/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "neutron_diagnostic.detectors[:].detector.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/detector/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "neutron_diagnostic.detectors[:].detector.x1_unit_vector": {
   "data_type": "structure",
@@ -1876,6 +1963,86 @@
   "maxoccur": "8",
   "structure_reference": "detector_energy_band"
  },
+ "neutron_diagnostic.detectors[:].energy_band[:].detection_efficiency": {
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Probability of detection of a photon impacting the detector as a function of its energy ",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/detection_efficiency(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].detection_efficiency_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"detection_efficiency\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/detection_efficiency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].detection_efficiency_error_lower": {
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"detection_efficiency\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/detection_efficiency_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].detection_efficiency_error_upper": {
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"detection_efficiency\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/detection_efficiency_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].energies": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of discrete energy values inside the band",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/energies(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].energies_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"energies\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/energies_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].energies_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"energies\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/energies_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
+ "neutron_diagnostic.detectors[:].energy_band[:].energies_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"energies\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/energies_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
  "neutron_diagnostic.detectors[:].energy_band[:].lower_bound": {
   "data_type": "FLT_0D",
   "documentation": "Lower bound of the energy band",
@@ -1955,16 +2122,18 @@
   "documentation": "Counting in Measuring Mode in Dynamic",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "cps"
  },
  "neutron_diagnostic.detectors[:].mode[:].counting.data": {
   "coordinates": [
-   "neutron_diagnostic.time"
+   "neutron_diagnostic.detectors[:].mode[:].counting.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Counting in Measuring Mode in Dynamic",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "counting/time",
   "type": "dynamic",
   "units": "cps"
  },
@@ -1977,23 +2146,25 @@
  },
  "neutron_diagnostic.detectors[:].mode[:].counting.data_error_lower": {
   "coordinates": [
-   "neutron_diagnostic.time"
+   "neutron_diagnostic.detectors[:].mode[:].counting.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "counting/time",
   "type": "dynamic",
   "units": "cps"
  },
  "neutron_diagnostic.detectors[:].mode[:].counting.data_error_upper": {
   "coordinates": [
-   "neutron_diagnostic.time"
+   "neutron_diagnostic.detectors[:].mode[:].counting.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "counting/time",
   "type": "dynamic",
   "units": "cps"
  },
@@ -2002,10 +2173,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "counting/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].mode[:].name": {
   "data_type": "STR_0D",
@@ -2178,6 +2351,7 @@
   "documentation": "Temperature of detector's converter",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "K"
  },
@@ -2196,6 +2370,7 @@
   "documentation": "Lower error for \"converter_temperature\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "K"
  },
@@ -2207,6 +2382,7 @@
   "documentation": "Upper error for \"converter_temperature\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "K"
  },
@@ -2249,21 +2425,26 @@
   "type": "static"
  },
  "neutron_diagnostic.detectors[:].spectrum": {
-  "data_type": "structure",
-  "documentation": "Detected count per energy channel as a function of time",
-  "full_path": "neutron_diagnostic/detectors(i1)/spectrum",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "neutron_diagnostic.detectors[:].spectrum.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].energy_band",
    "neutron_diagnostic.detectors[:].spectrum.time"
   ],
-  "data_type": "INT_2D",
+  "data_type": "structure",
   "documentation": "Detected count per energy channel as a function of time",
+  "full_path": "neutron_diagnostic/detectors(i1)/spectrum",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_2d"
+ },
+ "neutron_diagnostic.detectors[:].spectrum.data": {
+  "coordinates": [
+   "neutron_diagnostic.detectors[:].spectrum.data.as_parent",
+   "neutron_diagnostic.detectors[:].spectrum.time"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/spectrum/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "spectrum/time",
   "type": "dynamic"
  },
  "neutron_diagnostic.detectors[:].spectrum.time": {
@@ -2271,10 +2452,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/spectrum/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "spectrum/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].spectrum_sampling_time": {
   "data_type": "FLT_0D",
@@ -2367,16 +2550,18 @@
   "documentation": "Voltage at the supply output",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_out.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_out.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage at the supply output",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2395,6 +2580,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2406,6 +2592,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2414,26 +2601,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "supply_high_voltage/voltage_out/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_set": {
   "data_type": "structure",
   "documentation": "Voltage set",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_set.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_set.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage set",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2452,6 +2643,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2463,6 +2655,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_high_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2471,10 +2664,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "supply_high_voltage/voltage_set/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage": {
   "data_type": "structure",
@@ -2495,16 +2690,18 @@
   "documentation": "Voltage at the supply output",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_out.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_out.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage at the supply output",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2523,6 +2720,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2534,6 +2732,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_out/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2542,26 +2741,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "supply_low_voltage/voltage_out/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_set": {
   "data_type": "structure",
   "documentation": "Voltage set",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_set.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_set.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage set",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2580,6 +2783,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2591,6 +2795,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "supply_low_voltage/voltage_set/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2599,10 +2804,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "supply_low_voltage/voltage_set/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor": {
   "data_type": "structure",
@@ -2616,16 +2823,18 @@
   "documentation": "Generated signal amplitude",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.amplitude.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].temperature_sensor.amplitude.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal amplitude",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2644,6 +2853,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2655,6 +2865,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2663,10 +2874,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "temperature_sensor/amplitude/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.fall_time": {
   "data_type": "FLT_0D",
@@ -2704,16 +2917,18 @@
   "documentation": "Generated signal frequency",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Hz"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.frequency.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].temperature_sensor.frequency.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal frequency",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2732,6 +2947,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2743,6 +2959,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "temperature_sensor/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2751,10 +2968,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "temperature_sensor/frequency/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.power_switch": {
   "data_type": "INT_0D",
@@ -2834,16 +3053,18 @@
   "documentation": "Generated signal amplitude",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "neutron_diagnostic.detectors[:].test_generator.amplitude.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].test_generator.amplitude.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal amplitude",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2862,6 +3083,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2873,6 +3095,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/amplitude/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -2881,10 +3104,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "test_generator/amplitude/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].test_generator.fall_time": {
   "data_type": "FLT_0D",
@@ -2922,16 +3147,18 @@
   "documentation": "Generated signal frequency",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Hz"
  },
  "neutron_diagnostic.detectors[:].test_generator.frequency.data": {
   "coordinates": [
    "neutron_diagnostic.detectors[:].test_generator.frequency.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Generated signal frequency",
+  "documentation": "Data",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2950,6 +3177,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2961,6 +3189,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "test_generator/frequency/time",
   "type": "dynamic",
   "units": "Hz"
  },
@@ -2969,10 +3198,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "test_generator/frequency/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.detectors[:].test_generator.power_switch": {
   "data_type": "INT_0D",
@@ -3082,6 +3313,34 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "neutron_diagnostic/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "neutron_diagnostic.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "neutron_diagnostic/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "neutron_diagnostic/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "neutron_diagnostic/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "neutron_diagnostic.synthetic_signals": {
   "data_type": "structure",
   "documentation": "Output Data from Neutron Diagnostic's Module",
@@ -3097,6 +3356,7 @@
   "documentation": "Fusion Power",
   "full_path": "neutron_diagnostic/synthetic_signals/fusion_power(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -3115,6 +3375,7 @@
   "documentation": "Lower error for \"fusion_power\"",
   "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -3126,6 +3387,7 @@
   "documentation": "Upper error for \"fusion_power\"",
   "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -3137,6 +3399,7 @@
   "documentation": "Total Neutron Flux in Dynamic",
   "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -3155,6 +3418,7 @@
   "documentation": "Lower error for \"total_neutron_flux\"",
   "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -3166,6 +3430,7 @@
   "documentation": "Upper error for \"total_neutron_flux\"",
   "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -3174,10 +3439,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "neutron_diagnostic/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "neutron_diagnostic.unit_source": {
   "coordinates": [

@@ -2,7 +2,7 @@
  "magnetics": {
   "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
   "full_path": "magnetics",
-  "lifecycle_last_change": "3.17.2",
+  "lifecycle_last_change": "3.21.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -54,16 +54,18 @@
   "documentation": "Measured magnetic field",
   "full_path": "magnetics/bpol_probe(i1)/field",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "T"
  },
  "magnetics.bpol_probe[:].field.data": {
   "coordinates": [
    "magnetics.bpol_probe[:].field.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Measured magnetic field",
+  "documentation": "Data",
   "full_path": "magnetics/bpol_probe(i1)/field/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
   "type": "dynamic",
   "units": "T"
  },
@@ -82,6 +84,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "magnetics/bpol_probe(i1)/field/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
   "type": "dynamic",
   "units": "T"
  },
@@ -93,6 +96,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "magnetics/bpol_probe(i1)/field/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
   "type": "dynamic",
   "units": "T"
  },
@@ -101,17 +105,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "magnetics/bpol_probe(i1)/field/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "field/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "magnetics.bpol_probe[:].field_validity": {
+ "magnetics.bpol_probe[:].field.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the field data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "magnetics/bpol_probe(i1)/field_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/bpol_probe(i1)/field/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "magnetics.bpol_probe[:].field.validity_timed": {
+  "coordinates": [
+   "magnetics.bpol_probe[:].field.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/bpol_probe(i1)/field/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "field/time",
+  "type": "dynamic"
  },
  "magnetics.bpol_probe[:].identifier": {
   "data_type": "STR_0D",
@@ -356,6 +373,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "magnetics/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "magnetics.code.parameters": {
@@ -395,16 +413,18 @@
   "documentation": "Measured flux",
   "full_path": "magnetics/flux_loop(i1)/flux",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "Wb"
  },
  "magnetics.flux_loop[:].flux.data": {
   "coordinates": [
    "magnetics.flux_loop[:].flux.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Measured flux",
+  "documentation": "Data",
   "full_path": "magnetics/flux_loop(i1)/flux/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -423,6 +443,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "magnetics/flux_loop(i1)/flux/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -434,6 +455,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "magnetics/flux_loop(i1)/flux/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -442,17 +464,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "magnetics/flux_loop(i1)/flux/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "flux/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "magnetics.flux_loop[:].flux_validity": {
+ "magnetics.flux_loop[:].flux.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the flux data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "magnetics/flux_loop(i1)/flux_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/flux/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "magnetics.flux_loop[:].flux.validity_timed": {
+  "coordinates": [
+   "magnetics.flux_loop[:].flux.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/flux/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "flux/time",
+  "type": "dynamic"
  },
  "magnetics.flux_loop[:].identifier": {
   "data_type": "STR_0D",
@@ -615,6 +650,34 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "magnetics.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "magnetics/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "magnetics.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "magnetics/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "magnetics/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "magnetics.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "magnetics/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "magnetics.method": {
   "coordinates": [
    "1...N"
@@ -631,16 +694,18 @@
   "documentation": "Diamagnetic flux",
   "full_path": "magnetics/method(i1)/diamagnetic_flux",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Wb"
  },
  "magnetics.method[:].diamagnetic_flux.data": {
   "coordinates": [
    "magnetics.method[:].diamagnetic_flux.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Diamagnetic flux",
+  "documentation": "Data",
   "full_path": "magnetics/method(i1)/diamagnetic_flux/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -659,6 +724,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -670,6 +736,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "diamagnetic_flux/time",
   "type": "dynamic",
   "units": "Wb"
  },
@@ -678,26 +745,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "magnetics/method(i1)/diamagnetic_flux/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "diamagnetic_flux/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "magnetics.method[:].ip": {
   "data_type": "structure",
   "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above.",
   "full_path": "magnetics/method(i1)/ip",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
  },
  "magnetics.method[:].ip.data": {
   "coordinates": [
    "magnetics.method[:].ip.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above.",
+  "documentation": "Data",
   "full_path": "magnetics/method(i1)/ip/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -716,6 +787,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -727,6 +799,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -735,10 +808,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "magnetics/method(i1)/ip/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "ip/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "magnetics.method[:].name": {
   "data_type": "STR_0D",
@@ -752,9 +827,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "magnetics/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

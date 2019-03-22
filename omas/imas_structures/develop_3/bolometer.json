@@ -2,7 +2,7 @@
  "bolometer": {
   "documentation": "Bolometer diagnostic",
   "full_path": "bolometer",
-  "lifecycle_last_change": "3.12.1",
+  "lifecycle_last_change": "3.21.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.4",
   "maxoccur": "2"
@@ -253,6 +253,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "bolometer.channel[:].aperture[:].surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "bolometer.channel[:].aperture[:].surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "bolometer.channel[:].aperture[:].surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "bolometer.channel[:].aperture[:].surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "bolometer/channel(i1)/aperture(i2)/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "bolometer.channel[:].aperture[:].x1_unit_vector": {
   "data_type": "structure",
@@ -786,6 +817,37 @@
   "type": "static",
   "units": "m"
  },
+ "bolometer.channel[:].detector.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "bolometer/channel(i1)/detector/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "bolometer.channel[:].detector.surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "bolometer/channel(i1)/detector/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "bolometer.channel[:].detector.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "bolometer/channel(i1)/detector/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "bolometer.channel[:].detector.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "bolometer/channel(i1)/detector/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
  "bolometer.channel[:].detector.x1_unit_vector": {
   "data_type": "structure",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). ",
@@ -1085,6 +1147,65 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "bolometer.channel[:].etendue": {
+  "data_type": "FLT_0D",
+  "documentation": "Etendue (geometric extent) of the channel's optical system",
+  "full_path": "bolometer/channel(i1)/etendue",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "bolometer.channel[:].etendue_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"etendue\"",
+  "full_path": "bolometer/channel(i1)/etendue_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "bolometer.channel[:].etendue_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"etendue\"",
+  "full_path": "bolometer/channel(i1)/etendue_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "bolometer.channel[:].etendue_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"etendue\"",
+  "full_path": "bolometer/channel(i1)/etendue_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "bolometer.channel[:].etendue_method": {
+  "data_type": "structure",
+  "documentation": "Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods",
+  "full_path": "bolometer/channel(i1)/etendue_method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "bolometer.channel[:].etendue_method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "bolometer/channel(i1)/etendue_method/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "bolometer.channel[:].etendue_method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "bolometer/channel(i1)/etendue_method/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "bolometer.channel[:].etendue_method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "bolometer/channel(i1)/etendue_method/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "bolometer.channel[:].identifier": {
   "data_type": "STR_0D",
@@ -1412,16 +1533,18 @@
   "documentation": "Power received on the detector",
   "full_path": "bolometer/channel(i1)/power",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "W"
  },
  "bolometer.channel[:].power.data": {
   "coordinates": [
    "bolometer.channel[:].power.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Power received on the detector",
+  "documentation": "Data",
   "full_path": "bolometer/channel(i1)/power/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1440,6 +1563,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "bolometer/channel(i1)/power/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1451,6 +1575,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "bolometer/channel(i1)/power/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1459,10 +1584,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "bolometer/channel(i1)/power/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "power/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "bolometer.channel[:].validity": {
   "data_type": "INT_0D",
@@ -1476,16 +1603,17 @@
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "full_path": "bolometer/channel(i1)/validity_timed",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_int_1d"
  },
  "bolometer.channel[:].validity_timed.data": {
   "coordinates": [
    "bolometer.channel[:].validity_timed.time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "documentation": "Data",
   "full_path": "bolometer/channel(i1)/validity_timed/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "validity_timed/time",
   "type": "dynamic"
  },
  "bolometer.channel[:].validity_timed.time": {
@@ -1493,10 +1621,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "bolometer/channel(i1)/validity_timed/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "validity_timed/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "bolometer.code": {
   "data_type": "structure",
@@ -1527,6 +1657,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "bolometer/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "bolometer.code.parameters": {
@@ -1592,6 +1723,34 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "bolometer.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "bolometer/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "bolometer.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "bolometer/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "bolometer.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "bolometer/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "bolometer.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "bolometer/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "bolometer.power_radiated_inside_lcfs": {
   "coordinates": [
    "bolometer.time"
@@ -1600,6 +1759,7 @@
   "documentation": "Radiated power from the plasma inside the Last Closed Flux Surface, reconstructed from bolometry data",
   "full_path": "bolometer/power_radiated_inside_lcfs(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1618,6 +1778,7 @@
   "documentation": "Lower error for \"power_radiated_inside_lcfs\"",
   "full_path": "bolometer/power_radiated_inside_lcfs_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1629,6 +1790,7 @@
   "documentation": "Upper error for \"power_radiated_inside_lcfs\"",
   "full_path": "bolometer/power_radiated_inside_lcfs_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1640,6 +1802,7 @@
   "documentation": "Total radiated power reconstructed from bolometry data",
   "full_path": "bolometer/power_radiated_total(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1658,6 +1821,7 @@
   "documentation": "Lower error for \"power_radiated_total\"",
   "full_path": "bolometer/power_radiated_total_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1669,6 +1833,7 @@
   "documentation": "Upper error for \"power_radiated_total\"",
   "full_path": "bolometer/power_radiated_total_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1680,6 +1845,7 @@
   "documentation": "Validity flag related to the radiated power reconstructions",
   "full_path": "bolometer/power_radiated_validity(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "bolometer.time": {
@@ -1687,9 +1853,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "bolometer/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

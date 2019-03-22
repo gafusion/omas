@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "temporary/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "temporary.code.parameters": {
@@ -985,16 +986,18 @@
   "documentation": "Value",
   "full_path": "temporary/dynamic_float1d(i1)/value",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
  },
  "temporary.dynamic_float1d[:].value.data": {
   "coordinates": [
    "temporary.dynamic_float1d[:].value.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Value",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float1d(i1)/value/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1013,6 +1016,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float1d(i1)/value/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1024,6 +1028,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float1d(i1)/value/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1032,10 +1037,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float1d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_float2d": {
   "coordinates": [
@@ -1077,11 +1084,16 @@
   "type": "constant"
  },
  "temporary.dynamic_float2d[:].value": {
+  "coordinates": [
+   "1...N",
+   "temporary.dynamic_float2d[:].value.time"
+  ],
   "data_type": "structure",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float2d(i1)/value",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "mixed"
  },
  "temporary.dynamic_float2d[:].value.data": {
   "coordinates": [
@@ -1089,9 +1101,10 @@
    "temporary.dynamic_float2d[:].value.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Value",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float2d(i1)/value/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1111,6 +1124,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float2d(i1)/value/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1123,6 +1137,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float2d(i1)/value/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1131,10 +1146,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float2d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_float3d": {
   "coordinates": [
@@ -1176,22 +1193,29 @@
   "type": "constant"
  },
  "temporary.dynamic_float3d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_float3d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_float3d[:].value.data": {
   "coordinates": [
    "1...N",
    "1...N",
    "temporary.dynamic_float3d[:].value.time"
   ],
-  "data_type": "FLT_3D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_float3d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_3d",
+  "units": "mixed"
+ },
+ "temporary.dynamic_float3d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_float3d[:].value.data.as_parent",
+   "temporary.dynamic_float3d[:].value.data.as_parent",
+   "temporary.dynamic_float3d[:].value.time"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float3d(i1)/value/data(:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1204,27 +1228,29 @@
  },
  "temporary.dynamic_float3d[:].value.data_error_lower": {
   "coordinates": [
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float3d[:].value.data.as_parent",
+   "temporary.dynamic_float3d[:].value.data.as_parent",
    "temporary.dynamic_float3d[:].value.time"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float3d(i1)/value/data_error_lower(:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
  "temporary.dynamic_float3d[:].value.data_error_upper": {
   "coordinates": [
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float3d[:].value.data.as_parent",
+   "temporary.dynamic_float3d[:].value.data.as_parent",
    "temporary.dynamic_float3d[:].value.time"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float3d(i1)/value/data_error_upper(:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1233,10 +1259,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float3d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_float4d": {
   "coordinates": [
@@ -1278,23 +1306,31 @@
   "type": "constant"
  },
  "temporary.dynamic_float4d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_float4d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_float4d[:].value.data": {
   "coordinates": [
    "1...N",
    "1...N",
    "1...N",
    "temporary.dynamic_float4d[:].value.time"
   ],
-  "data_type": "FLT_4D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_float4d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_4d",
+  "units": "mixed"
+ },
+ "temporary.dynamic_float4d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.time"
+  ],
+  "data_type": "FLT_4D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float4d(i1)/value/data(:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1307,29 +1343,31 @@
  },
  "temporary.dynamic_float4d[:].value.data_error_lower": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
    "temporary.dynamic_float4d[:].value.time"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float4d(i1)/value/data_error_lower(:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
  "temporary.dynamic_float4d[:].value.data_error_upper": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
+   "temporary.dynamic_float4d[:].value.data.as_parent",
    "temporary.dynamic_float4d[:].value.time"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float4d(i1)/value/data_error_upper(:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1338,10 +1376,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float4d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_float5d": {
   "coordinates": [
@@ -1383,13 +1423,6 @@
   "type": "constant"
  },
  "temporary.dynamic_float5d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_float5d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_float5d[:].value.data": {
   "coordinates": [
    "1...N",
    "1...N",
@@ -1397,10 +1430,26 @@
    "1...N",
    "temporary.dynamic_float5d[:].value.time"
   ],
-  "data_type": "FLT_5D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_float5d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_5d",
+  "units": "mixed"
+ },
+ "temporary.dynamic_float5d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.time"
+  ],
+  "data_type": "FLT_5D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float5d(i1)/value/data(:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1413,31 +1462,33 @@
  },
  "temporary.dynamic_float5d[:].value.data_error_lower": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
    "temporary.dynamic_float5d[:].value.time"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float5d(i1)/value/data_error_lower(:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
  "temporary.dynamic_float5d[:].value.data_error_upper": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
+   "temporary.dynamic_float5d[:].value.data.as_parent",
    "temporary.dynamic_float5d[:].value.time"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float5d(i1)/value/data_error_upper(:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1446,10 +1497,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float5d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_float6d": {
   "coordinates": [
@@ -1491,13 +1544,6 @@
   "type": "constant"
  },
  "temporary.dynamic_float6d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_float6d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_float6d[:].value.data": {
   "coordinates": [
    "1...N",
    "1...N",
@@ -1506,10 +1552,27 @@
    "1...N",
    "temporary.dynamic_float6d[:].value.time"
   ],
-  "data_type": "FLT_6D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_float6d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_6d",
+  "units": "mixed"
+ },
+ "temporary.dynamic_float6d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.time"
+  ],
+  "data_type": "FLT_6D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_float6d(i1)/value/data(:,:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1522,33 +1585,35 @@
  },
  "temporary.dynamic_float6d[:].value.data_error_lower": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
    "temporary.dynamic_float6d[:].value.time"
   ],
   "data_type": "FLT_6D",
   "documentation": "Lower error for \"data\"",
   "full_path": "temporary/dynamic_float6d(i1)/value/data_error_lower(:,:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
  "temporary.dynamic_float6d[:].value.data_error_upper": {
   "coordinates": [
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
-   "1...N",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
+   "temporary.dynamic_float6d[:].value.data.as_parent",
    "temporary.dynamic_float6d[:].value.time"
   ],
   "data_type": "FLT_6D",
   "documentation": "Upper error for \"data\"",
   "full_path": "temporary/dynamic_float6d(i1)/value/data_error_upper(:,:,:,:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -1557,10 +1622,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_float6d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_integer1d": {
   "coordinates": [
@@ -1606,16 +1673,17 @@
   "documentation": "Value",
   "full_path": "temporary/dynamic_integer1d(i1)/value",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_int_1d"
  },
  "temporary.dynamic_integer1d[:].value.data": {
   "coordinates": [
    "temporary.dynamic_integer1d[:].value.time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Value",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_integer1d(i1)/value/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic"
  },
  "temporary.dynamic_integer1d[:].value.time": {
@@ -1623,10 +1691,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_integer1d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_integer2d": {
   "coordinates": [
@@ -1668,21 +1738,26 @@
   "type": "constant"
  },
  "temporary.dynamic_integer2d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_integer2d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_integer2d[:].value.data": {
   "coordinates": [
    "1...N",
    "temporary.dynamic_integer2d[:].value.time"
   ],
-  "data_type": "INT_2D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_integer2d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_2d"
+ },
+ "temporary.dynamic_integer2d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_integer2d[:].value.data.as_parent",
+   "temporary.dynamic_integer2d[:].value.time"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_integer2d(i1)/value/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic"
  },
  "temporary.dynamic_integer2d[:].value.time": {
@@ -1690,10 +1765,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_integer2d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.dynamic_integer3d": {
   "coordinates": [
@@ -1735,22 +1812,28 @@
   "type": "constant"
  },
  "temporary.dynamic_integer3d[:].value": {
-  "data_type": "structure",
-  "documentation": "Value",
-  "full_path": "temporary/dynamic_integer3d(i1)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "temporary.dynamic_integer3d[:].value.data": {
   "coordinates": [
    "1...N",
    "1...N",
    "temporary.dynamic_integer3d[:].value.time"
   ],
-  "data_type": "INT_3D",
+  "data_type": "structure",
   "documentation": "Value",
+  "full_path": "temporary/dynamic_integer3d(i1)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_3d"
+ },
+ "temporary.dynamic_integer3d[:].value.data": {
+  "coordinates": [
+   "temporary.dynamic_integer3d[:].value.data.as_parent",
+   "temporary.dynamic_integer3d[:].value.data.as_parent",
+   "temporary.dynamic_integer3d[:].value.time"
+  ],
+  "data_type": "INT_3D",
+  "documentation": "Data",
   "full_path": "temporary/dynamic_integer3d(i1)/value/data(:,:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic"
  },
  "temporary.dynamic_integer3d[:].value.time": {
@@ -1758,10 +1841,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "temporary/dynamic_integer3d(i1)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "temporary.ids_properties": {
   "data_type": "structure",
@@ -1805,14 +1890,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "temporary.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "temporary/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "temporary.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "temporary/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "temporary.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "temporary/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "temporary.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "temporary/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "temporary.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "temporary/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

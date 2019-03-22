@@ -2,7 +2,7 @@
  "mse": {
   "documentation": "Motional Stark Effect diagnostic",
   "full_path": "mse",
-  "lifecycle_last_change": "3.16.0",
+  "lifecycle_last_change": "3.21.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.16.0",
   "maxoccur": "2"
@@ -50,7 +50,7 @@
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.phi_error_lower": {
   "data_type": "FLT_0D",
@@ -81,7 +81,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.r_error_lower": {
   "data_type": "FLT_0D",
@@ -112,7 +112,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.z_error_lower": {
   "data_type": "FLT_0D",
@@ -146,7 +146,7 @@
   "documentation": "Index in the error_description list for \"geometric_coefficients\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_lower": {
   "coordinates": [
@@ -198,7 +198,7 @@
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.phi_error_lower": {
   "data_type": "FLT_0D",
@@ -229,7 +229,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.r_error_lower": {
   "data_type": "FLT_0D",
@@ -260,7 +260,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.z_error_lower": {
   "data_type": "FLT_0D",
@@ -513,6 +513,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "mse.channel[:].aperture[:].surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "mse/channel(i1)/aperture(i2)/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "mse.channel[:].aperture[:].surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "mse/channel(i1)/aperture(i2)/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mse.channel[:].aperture[:].surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "mse/channel(i1)/aperture(i2)/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "mse.channel[:].aperture[:].surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "mse/channel(i1)/aperture(i2)/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "mse.channel[:].aperture[:].x1_unit_vector": {
   "data_type": "structure",
@@ -1046,6 +1077,37 @@
   "type": "static",
   "units": "m"
  },
+ "mse.channel[:].detector.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "mse/channel(i1)/detector/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "mse.channel[:].detector.surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "mse/channel(i1)/detector/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mse.channel[:].detector.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "mse/channel(i1)/detector/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "mse.channel[:].detector.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "mse/channel(i1)/detector/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
  "mse.channel[:].detector.x1_unit_vector": {
   "data_type": "structure",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). ",
@@ -1565,16 +1627,18 @@
   "documentation": "MSE polarisation angle",
   "full_path": "mse/channel(i1)/polarisation_angle",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "rad"
  },
  "mse.channel[:].polarisation_angle.data": {
   "coordinates": [
    "mse.channel[:].polarisation_angle.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "MSE polarisation angle",
+  "documentation": "Data",
   "full_path": "mse/channel(i1)/polarisation_angle/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "polarisation_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1593,6 +1657,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "mse/channel(i1)/polarisation_angle/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "polarisation_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1604,6 +1669,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "mse/channel(i1)/polarisation_angle/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "polarisation_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -1612,17 +1678,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "mse/channel(i1)/polarisation_angle/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "polarisation_angle/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "mse.channel[:].polarisation_angle_validity": {
+ "mse.channel[:].polarisation_angle.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the polarisation_angle data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "mse/channel(i1)/polarisation_angle_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "mse/channel(i1)/polarisation_angle/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "mse.channel[:].polarisation_angle.validity_timed": {
+  "coordinates": [
+   "mse.channel[:].polarisation_angle.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "mse/channel(i1)/polarisation_angle/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarisation_angle/time",
+  "type": "dynamic"
  },
  "mse.code": {
   "data_type": "structure",
@@ -1653,6 +1732,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "mse/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "mse.code.parameters": {
@@ -1718,14 +1798,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mse.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "mse/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "mse.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "mse/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mse.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "mse/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mse.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "mse/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "mse.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "mse/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

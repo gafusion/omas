@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "nbi/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "nbi.code.parameters": {
@@ -101,15 +102,45 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "nbi.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "nbi/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "nbi.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "nbi/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "nbi/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "nbi/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "nbi.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "nbi/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "nbi.unit": {
   "coordinates": [
@@ -123,21 +154,27 @@
   "structure_reference": "nbi_unit"
  },
  "nbi.unit[:].beam_current_fraction": {
-  "data_type": "structure",
-  "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
-  "full_path": "nbi/unit(i1)/beam_current_fraction",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "nbi.unit[:].beam_current_fraction.data": {
   "coordinates": [
    "1...3",
    "nbi.unit[:].beam_current_fraction.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "full_path": "nbi/unit(i1)/beam_current_fraction",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "-"
+ },
+ "nbi.unit[:].beam_current_fraction.data": {
+  "coordinates": [
+   "1...N",
+   "nbi.unit[:].beam_current_fraction.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "nbi/unit(i1)/beam_current_fraction/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_current_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -150,25 +187,27 @@
  },
  "nbi.unit[:].beam_current_fraction.data_error_lower": {
   "coordinates": [
-   "1...3",
+   "1...N",
    "nbi.unit[:].beam_current_fraction.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_current_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
  "nbi.unit[:].beam_current_fraction.data_error_upper": {
   "coordinates": [
-   "1...3",
+   "1...N",
    "nbi.unit[:].beam_current_fraction.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_current_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -177,27 +216,35 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "nbi/unit(i1)/beam_current_fraction/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "beam_current_fraction/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "nbi.unit[:].beam_power_fraction": {
-  "data_type": "structure",
-  "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
-  "full_path": "nbi/unit(i1)/beam_power_fraction",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "nbi.unit[:].beam_power_fraction.data": {
   "coordinates": [
    "1...3",
    "nbi.unit[:].beam_power_fraction.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
+  "full_path": "nbi/unit(i1)/beam_power_fraction",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "-"
+ },
+ "nbi.unit[:].beam_power_fraction.data": {
+  "coordinates": [
+   "1...N",
+   "nbi.unit[:].beam_power_fraction.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "nbi/unit(i1)/beam_power_fraction/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_power_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -210,25 +257,27 @@
  },
  "nbi.unit[:].beam_power_fraction.data_error_lower": {
   "coordinates": [
-   "1...3",
+   "1...N",
    "nbi.unit[:].beam_power_fraction.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_power_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
  "nbi.unit[:].beam_power_fraction.data_error_upper": {
   "coordinates": [
-   "1...3",
+   "1...N",
    "nbi.unit[:].beam_power_fraction.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "beam_power_fraction/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -237,10 +286,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "nbi/unit(i1)/beam_power_fraction/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "beam_power_fraction/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "nbi.unit[:].beamlets_group": {
   "coordinates": [
@@ -936,7 +987,7 @@
   "documentation": "Index in the error_description list for \"delta_angle\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle_error_lower": {
   "data_type": "FLT_0D",
@@ -974,7 +1025,7 @@
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi_error_lower": {
   "data_type": "FLT_0D",
@@ -1005,7 +1056,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r_error_lower": {
   "data_type": "FLT_0D",
@@ -1036,7 +1087,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z_error_lower": {
   "data_type": "FLT_0D",
@@ -1067,7 +1118,7 @@
   "documentation": "Index in the error_description list for \"delta_tangency_radius\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius_error_lower": {
   "data_type": "FLT_0D",
@@ -1160,16 +1211,18 @@
   "documentation": "Full energy of the injected species (acceleration of a single atom)",
   "full_path": "nbi/unit(i1)/energy",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "eV"
  },
  "nbi.unit[:].energy.data": {
   "coordinates": [
    "nbi.unit[:].energy.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Full energy of the injected species (acceleration of a single atom)",
+  "documentation": "Data",
   "full_path": "nbi/unit(i1)/energy/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "energy/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1188,6 +1241,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "nbi/unit(i1)/energy/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "energy/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1199,6 +1253,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "nbi/unit(i1)/energy/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "energy/time",
   "type": "dynamic",
   "units": "eV"
  },
@@ -1207,10 +1262,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "nbi/unit(i1)/energy/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "energy/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "nbi.unit[:].identifier": {
   "data_type": "STR_0D",
@@ -1231,16 +1288,18 @@
   "documentation": "Power launched from this unit into the vacuum vessel",
   "full_path": "nbi/unit(i1)/power_launched",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "W"
  },
  "nbi.unit[:].power_launched.data": {
   "coordinates": [
    "nbi.unit[:].power_launched.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Power launched from this unit into the vacuum vessel",
+  "documentation": "Data",
   "full_path": "nbi/unit(i1)/power_launched/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1259,6 +1318,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "nbi/unit(i1)/power_launched/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1270,6 +1330,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "nbi/unit(i1)/power_launched/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
   "type": "dynamic",
   "units": "W"
  },
@@ -1278,10 +1339,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "nbi/unit(i1)/power_launched/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "nbi.unit[:].species": {
   "data_type": "structure",

@@ -487,11 +487,16 @@
   "type": "static"
  },
  "reflectometer_profile.channel[:].n_e": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].n_e.time"
+  ],
   "data_type": "structure",
   "documentation": "Electron density",
   "full_path": "reflectometer_profile/channel(i1)/n_e",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "m^-3"
  },
  "reflectometer_profile.channel[:].n_e.data": {
   "coordinates": [
@@ -499,9 +504,10 @@
    "reflectometer_profile.channel[:].n_e.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Electron density",
+  "documentation": "Data",
   "full_path": "reflectometer_profile/channel(i1)/n_e/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -521,6 +527,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -533,6 +540,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -541,10 +549,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/n_e/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.channel[:].name": {
   "data_type": "STR_0D",
@@ -554,21 +564,27 @@
   "type": "static"
  },
  "reflectometer_profile.channel[:].phase": {
-  "data_type": "structure",
-  "documentation": "Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch",
-  "full_path": "reflectometer_profile/channel(i1)/phase",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "reflectometer_profile.channel[:].phase.data": {
   "coordinates": [
    "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].phase.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch",
+  "full_path": "reflectometer_profile/channel(i1)/phase",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "rad"
+ },
+ "reflectometer_profile.channel[:].phase.data": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].phase.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "reflectometer_profile/channel(i1)/phase/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -581,25 +597,27 @@
  },
  "reflectometer_profile.channel[:].phase.data_error_lower": {
   "coordinates": [
-   "reflectometer_profile.channel[:].frequencies",
+   "1...N",
    "reflectometer_profile.channel[:].phase.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/phase/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase/time",
   "type": "dynamic",
   "units": "rad"
  },
  "reflectometer_profile.channel[:].phase.data_error_upper": {
   "coordinates": [
-   "reflectometer_profile.channel[:].frequencies",
+   "1...N",
    "reflectometer_profile.channel[:].phase.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/phase/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -608,10 +626,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/phase/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "phase/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.channel[:].position": {
   "data_type": "structure",
@@ -621,11 +641,16 @@
   "structure_reference": "rzphi2d_dynamic_aos1"
  },
  "reflectometer_profile.channel[:].position.phi": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.phi.time"
+  ],
   "data_type": "structure",
   "documentation": "Toroidal angle",
   "full_path": "reflectometer_profile/channel(i1)/position/phi",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "rad"
  },
  "reflectometer_profile.channel[:].position.phi.data": {
   "coordinates": [
@@ -633,9 +658,10 @@
    "reflectometer_profile.channel[:].position.phi.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Toroidal angle",
+  "documentation": "Data",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -655,6 +681,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -667,6 +694,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/phi/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -675,17 +703,24 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/phi/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.channel[:].position.r": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.r.time"
+  ],
   "data_type": "structure",
   "documentation": "Major radius",
   "full_path": "reflectometer_profile/channel(i1)/position/r",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "m"
  },
  "reflectometer_profile.channel[:].position.r.data": {
   "coordinates": [
@@ -693,9 +728,10 @@
    "reflectometer_profile.channel[:].position.r.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Major radius",
+  "documentation": "Data",
   "full_path": "reflectometer_profile/channel(i1)/position/r/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -715,6 +751,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -727,6 +764,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/r/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -735,17 +773,24 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/r/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/r/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.channel[:].position.z": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].position.z.time"
+  ],
   "data_type": "structure",
   "documentation": "Height",
   "full_path": "reflectometer_profile/channel(i1)/position/z",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_2d",
+  "units": "m"
  },
  "reflectometer_profile.channel[:].position.z.data": {
   "coordinates": [
@@ -753,9 +798,10 @@
    "reflectometer_profile.channel[:].position.z.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Height",
+  "documentation": "Data",
   "full_path": "reflectometer_profile/channel(i1)/position/z/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -775,6 +821,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -787,6 +834,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "position/z/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -795,10 +843,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/z/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "position/z/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.channel[:].sweep_time": {
   "data_type": "FLT_0D",
@@ -860,6 +910,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "reflectometer_profile/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "reflectometer_profile.code.parameters": {
@@ -925,15 +976,45 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "reflectometer_profile.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "reflectometer_profile/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "reflectometer_profile.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "reflectometer_profile/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "reflectometer_profile/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "reflectometer_profile/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "reflectometer_profile.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "reflectometer_profile/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "reflectometer_profile.type": {
   "data_type": "STR_0D",

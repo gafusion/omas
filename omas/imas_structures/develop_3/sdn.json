@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "sdn/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "sdn.code.parameters": {
@@ -101,15 +102,45 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "sdn.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "sdn/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "sdn.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "sdn/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "sdn/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "sdn.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "sdn/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "sdn.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "sdn/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "sdn.topic": {
   "coordinates": [
@@ -166,16 +197,17 @@
   "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
   "full_path": "sdn/topic(i1)/signal(i2)/quality",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_int_1d"
  },
  "sdn.topic[:].signal[:].quality.data": {
   "coordinates": [
    "sdn.topic[:].signal[:].quality.time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "documentation": "Data",
   "full_path": "sdn/topic(i1)/signal(i2)/quality/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "quality/time",
   "type": "dynamic"
  },
  "sdn.topic[:].signal[:].quality.time": {
@@ -183,26 +215,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "sdn/topic(i1)/signal(i2)/quality/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "quality/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "sdn.topic[:].signal[:].value": {
   "data_type": "structure",
   "documentation": "Signal value",
   "full_path": "sdn/topic(i1)/signal(i2)/value",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
  },
  "sdn.topic[:].signal[:].value.data": {
   "coordinates": [
    "sdn.topic[:].signal[:].value.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Signal value",
+  "documentation": "Data",
   "full_path": "sdn/topic(i1)/signal(i2)/value/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -221,6 +257,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -232,6 +269,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
   "type": "dynamic",
   "units": "mixed"
  },
@@ -240,9 +278,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "sdn/topic(i1)/signal(i2)/value/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

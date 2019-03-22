@@ -2,7 +2,7 @@
  "interferometer": {
   "documentation": "Interferometer diagnostic",
   "full_path": "interferometer",
-  "lifecycle_last_change": "3.19.1",
+  "lifecycle_last_change": "3.21.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.15.0",
   "maxoccur": "2"
@@ -337,16 +337,18 @@
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
   "full_path": "interferometer/channel(i1)/n_e_line",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "m^-2"
  },
  "interferometer.channel[:].n_e_line.data": {
   "coordinates": [
    "interferometer.channel[:].n_e_line.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
+  "documentation": "Data",
   "full_path": "interferometer/channel(i1)/n_e_line/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line/time",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -365,6 +367,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line/time",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -376,6 +379,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line/time",
   "type": "dynamic",
   "units": "m^-2"
  },
@@ -384,9 +388,29 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/channel(i1)/n_e_line/time(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "interferometer.channel[:].n_e_line.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/channel(i1)/n_e_line/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e_line.validity_timed": {
+  "coordinates": [
+   "interferometer.channel[:].n_e_line.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/channel(i1)/n_e_line/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line/time",
   "type": "dynamic"
  },
  "interferometer.channel[:].n_e_line_average": {
@@ -394,16 +418,18 @@
   "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "full_path": "interferometer/channel(i1)/n_e_line_average",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "m^-3"
  },
  "interferometer.channel[:].n_e_line_average.data": {
   "coordinates": [
    "interferometer.channel[:].n_e_line_average.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
+  "documentation": "Data",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -422,6 +448,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -433,6 +460,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/n_e_line_average/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -441,24 +469,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/channel(i1)/n_e_line_average/time(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line_average/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "interferometer.channel[:].n_e_line_average.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e_line_average.validity_timed": {
+  "coordinates": [
+   "interferometer.channel[:].n_e_line_average.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/channel(i1)/n_e_line_average/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e_line_average/time",
   "type": "dynamic"
- },
- "interferometer.channel[:].n_e_line_average_validity": {
-  "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the n_e_line_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "interferometer/channel(i1)/n_e_line_average_validity",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "interferometer.channel[:].n_e_line_validity": {
-  "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the n_e_line data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "interferometer/channel(i1)/n_e_line_validity",
-  "lifecycle_status": "alpha",
-  "type": "constant"
  },
  "interferometer.channel[:].name": {
   "data_type": "STR_0D",
@@ -472,16 +506,18 @@
   "documentation": "Optical path length variation due to the plasma",
   "full_path": "interferometer/channel(i1)/path_length_variation",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
  },
  "interferometer.channel[:].path_length_variation.data": {
   "coordinates": [
    "interferometer.channel[:].path_length_variation.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Optical path length variation due to the plasma",
+  "documentation": "Data",
   "full_path": "interferometer/channel(i1)/path_length_variation/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "path_length_variation/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -500,6 +536,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/path_length_variation/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "path_length_variation/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -511,6 +548,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/path_length_variation/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "path_length_variation/time",
   "type": "dynamic",
   "units": "m"
  },
@@ -519,10 +557,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/channel(i1)/path_length_variation/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "path_length_variation/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "interferometer.channel[:].wavelength": {
   "coordinates": [
@@ -590,16 +630,18 @@
   "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
  },
  "interferometer.channel[:].wavelength[:].phase_corrected.data": {
   "coordinates": [
    "interferometer.channel[:].wavelength[:].phase_corrected.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Phase measured for this wavelength, corrected from fringe jumps",
+  "documentation": "Data",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase_corrected/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -618,6 +660,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase_corrected/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -629,6 +672,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "phase_corrected/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -637,10 +681,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/channel(i1)/wavelength(i2)/phase_corrected/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "phase_corrected/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "interferometer.channel[:].wavelength[:].phase_to_n_e_line": {
   "data_type": "FLT_0D",
@@ -733,6 +779,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "interferometer/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "interferometer.code.parameters": {
@@ -761,16 +808,18 @@
   "documentation": "Total number of electrons in the plasma, estimated from the line densities measured by the various channels",
   "full_path": "interferometer/electrons_n",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "-"
  },
  "interferometer.electrons_n.data": {
   "coordinates": [
    "interferometer.electrons_n.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Total number of electrons in the plasma, estimated from the line densities measured by the various channels",
+  "documentation": "Data",
   "full_path": "interferometer/electrons_n/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electrons_n/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -789,6 +838,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/electrons_n/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electrons_n/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -800,6 +850,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/electrons_n/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electrons_n/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -808,17 +859,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/electrons_n/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "electrons_n/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "interferometer.electrons_n_validity": {
+ "interferometer.electrons_n.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the electrons_n data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "interferometer/electrons_n_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/electrons_n/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "interferometer.electrons_n.validity_timed": {
+  "coordinates": [
+   "interferometer.electrons_n.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/electrons_n/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "electrons_n/time",
+  "type": "dynamic"
  },
  "interferometer.ids_properties": {
   "data_type": "structure",
@@ -862,21 +926,51 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "interferometer.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "interferometer/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "interferometer.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "interferometer/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "interferometer/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "interferometer/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "interferometer.n_e_volume_average": {
   "data_type": "structure",
   "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
   "full_path": "interferometer/n_e_volume_average",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "m^-3"
  },
  "interferometer.n_e_volume_average.data": {
   "coordinates": [
    "interferometer.n_e_volume_average.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Volume average plasma density estimated from the line densities measured by the various channels",
+  "documentation": "Data",
   "full_path": "interferometer/n_e_volume_average/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_volume_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -895,6 +989,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "interferometer/n_e_volume_average/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_volume_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -906,6 +1001,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "interferometer/n_e_volume_average/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "n_e_volume_average/time",
   "type": "dynamic",
   "units": "m^-3"
  },
@@ -914,26 +1010,41 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "interferometer/n_e_volume_average/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "n_e_volume_average/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "interferometer.n_e_volume_average_validity": {
+ "interferometer.n_e_volume_average.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the n_e_volume_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "interferometer/n_e_volume_average_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/n_e_volume_average/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "interferometer.n_e_volume_average.validity_timed": {
+  "coordinates": [
+   "interferometer.n_e_volume_average.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "interferometer/n_e_volume_average/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e_volume_average/time",
+  "type": "dynamic"
  },
  "interferometer.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "interferometer/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

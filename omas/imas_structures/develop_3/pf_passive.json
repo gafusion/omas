@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "pf_passive/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "pf_passive.code.parameters": {
@@ -101,6 +102,34 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_passive.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "pf_passive/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "pf_passive.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "pf_passive/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "pf_passive/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "pf_passive/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "pf_passive.loop": {
   "coordinates": [
    "1...N"
@@ -120,6 +149,7 @@
   "documentation": "Passive loop current",
   "full_path": "pf_passive/loop(i1)/current(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -138,6 +168,7 @@
   "documentation": "Lower error for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -149,6 +180,7 @@
   "documentation": "Upper error for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -330,10 +362,203 @@
  },
  "pf_passive.loop[:].element[:].geometry.geometry_type": {
   "data_type": "INT_0D",
-  "documentation": "Type used to describe the element shape (1:'outline', 2:'rectangle', 4:'arcs of circle') ",
+  "documentation": "Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle') ",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/geometry_type",
   "lifecycle_status": "alpha",
   "type": "static"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique": {
+  "data_type": "structure",
+  "documentation": "Trapezoidal description of the element",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique",
+  "lifecycle_status": "alpha",
+  "structure_reference": "oblique_static"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.alpha": {
+  "data_type": "FLT_0D",
+  "documentation": "Inclination of first angle TBD",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.beta": {
+  "data_type": "FLT_0D",
+  "documentation": "Inclination of second angle TBD",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.beta_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.beta_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.beta_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length": {
+  "data_type": "FLT_0D",
+  "documentation": "Length",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"length\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Geometric centre R",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.thickness": {
+  "data_type": "FLT_0D",
+  "documentation": "Thickness",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"thickness\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"thickness\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"thickness\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Geometric centre Z",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "pf_passive.loop[:].element[:].geometry.outline": {
   "data_type": "structure",
@@ -672,9 +897,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "pf_passive/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

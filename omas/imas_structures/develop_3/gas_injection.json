@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "gas_injection/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "gas_injection.code.parameters": {
@@ -98,6 +99,34 @@
   "data_type": "STR_0D",
   "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
   "full_path": "gas_injection/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "gas_injection/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "gas_injection.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "gas_injection/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "gas_injection/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "gas_injection/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -217,16 +246,18 @@
   "documentation": "Flow rate at the exit of the pipe",
   "full_path": "gas_injection/pipe(i1)/flow_rate",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa.m^3.s^-1"
  },
  "gas_injection.pipe[:].flow_rate.data": {
   "coordinates": [
    "gas_injection.pipe[:].flow_rate.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flow rate at the exit of the pipe",
+  "documentation": "Data",
   "full_path": "gas_injection/pipe(i1)/flow_rate/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -245,6 +276,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -256,6 +288,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -264,10 +297,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "gas_injection/pipe(i1)/flow_rate/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "gas_injection.pipe[:].identifier": {
   "data_type": "STR_0D",
@@ -569,16 +604,18 @@
   "documentation": "Number of electrons injected per second",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "s^-1"
  },
  "gas_injection.pipe[:].valve[:].electron_rate.data": {
   "coordinates": [
    "gas_injection.pipe[:].valve[:].electron_rate.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Number of electrons injected per second",
+  "documentation": "Data",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -597,6 +634,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -608,6 +646,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "electron_rate/time",
   "type": "dynamic",
   "units": "s^-1"
  },
@@ -616,26 +655,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/electron_rate/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "electron_rate/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "gas_injection.pipe[:].valve[:].flow_rate": {
   "data_type": "structure",
   "documentation": "Flow rate at the exit of the valve",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa.m^3.s^-1"
  },
  "gas_injection.pipe[:].valve[:].flow_rate.data": {
   "coordinates": [
    "gas_injection.pipe[:].valve[:].flow_rate.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flow rate at the exit of the valve",
+  "documentation": "Data",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -654,6 +697,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -665,6 +709,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "flow_rate/time",
   "type": "dynamic",
   "units": "Pa.m^3.s^-1"
  },
@@ -673,10 +718,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "gas_injection/pipe(i1)/valve(i2)/flow_rate/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "flow_rate/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "gas_injection.pipe[:].valve[:].flow_rate_max": {
   "data_type": "FLT_0D",
@@ -898,9 +945,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "gas_injection/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "barometry/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "barometry.code.parameters": {
@@ -213,16 +214,18 @@
   "documentation": "Pressure",
   "full_path": "barometry/gauge(i1)/pressure",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa"
  },
  "barometry.gauge[:].pressure.data": {
   "coordinates": [
    "barometry.gauge[:].pressure.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Pressure",
+  "documentation": "Data",
   "full_path": "barometry/gauge(i1)/pressure/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -241,6 +244,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "barometry/gauge(i1)/pressure/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -252,6 +256,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "barometry/gauge(i1)/pressure/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
   "type": "dynamic",
   "units": "Pa"
  },
@@ -260,10 +265,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "barometry/gauge(i1)/pressure/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "pressure/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "barometry.gauge[:].type": {
   "data_type": "structure",
@@ -335,14 +342,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "barometry.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "barometry.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "barometry.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "barometry/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

@@ -2,7 +2,7 @@
  "polarimeter": {
   "documentation": "Polarimeter diagnostic",
   "full_path": "polarimeter",
-  "lifecycle_last_change": "3.15.0",
+  "lifecycle_last_change": "3.21.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.15.0",
   "maxoccur": "2"
@@ -23,16 +23,18 @@
   "documentation": "Ellipticity",
   "full_path": "polarimeter/channel(i1)/ellipticity",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "-"
  },
  "polarimeter.channel[:].ellipticity.data": {
   "coordinates": [
    "polarimeter.channel[:].ellipticity.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Ellipticity",
+  "documentation": "Data",
   "full_path": "polarimeter/channel(i1)/ellipticity/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ellipticity/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -51,6 +53,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "polarimeter/channel(i1)/ellipticity/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ellipticity/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -62,6 +65,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "polarimeter/channel(i1)/ellipticity/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ellipticity/time",
   "type": "dynamic",
   "units": "-"
  },
@@ -70,9 +74,29 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "polarimeter/channel(i1)/ellipticity/time(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "ellipticity/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "polarimeter.channel[:].ellipticity.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "polarimeter/channel(i1)/ellipticity/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "polarimeter.channel[:].ellipticity.validity_timed": {
+  "coordinates": [
+   "polarimeter.channel[:].ellipticity.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "polarimeter/channel(i1)/ellipticity/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "ellipticity/time",
   "type": "dynamic"
  },
  "polarimeter.channel[:].ellipticity_initial": {
@@ -106,28 +130,23 @@
   "type": "static",
   "units": "m"
  },
- "polarimeter.channel[:].ellipticity_validity": {
-  "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the ellipticity data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "polarimeter/channel(i1)/ellipticity_validity",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
  "polarimeter.channel[:].faraday_angle": {
   "data_type": "structure",
   "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
   "full_path": "polarimeter/channel(i1)/faraday_angle",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "rad"
  },
  "polarimeter.channel[:].faraday_angle.data": {
   "coordinates": [
    "polarimeter.channel[:].faraday_angle.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
+  "documentation": "Data",
   "full_path": "polarimeter/channel(i1)/faraday_angle/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "faraday_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -146,6 +165,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "faraday_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -157,6 +177,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "faraday_angle/time",
   "type": "dynamic",
   "units": "rad"
  },
@@ -165,17 +186,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "polarimeter/channel(i1)/faraday_angle/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "faraday_angle/time",
+  "type": "dynamic",
+  "units": "s"
  },
- "polarimeter.channel[:].faraday_angle_validity": {
+ "polarimeter.channel[:].faraday_angle.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the faraday_angle data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used",
-  "full_path": "polarimeter/channel(i1)/faraday_angle_validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/validity",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "polarimeter.channel[:].faraday_angle.validity_timed": {
+  "coordinates": [
+   "polarimeter.channel[:].faraday_angle.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "polarimeter/channel(i1)/faraday_angle/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "faraday_angle/time",
+  "type": "dynamic"
  },
  "polarimeter.channel[:].identifier": {
   "data_type": "STR_0D",
@@ -589,6 +623,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "polarimeter/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "polarimeter.code.parameters": {
@@ -654,14 +689,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "polarimeter.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "polarimeter/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "polarimeter.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "polarimeter/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "polarimeter.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "polarimeter/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "polarimeter.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "polarimeter/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "polarimeter.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "polarimeter/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

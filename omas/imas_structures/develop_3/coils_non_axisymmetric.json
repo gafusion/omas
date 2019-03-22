@@ -2,10 +2,10 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.20.1",
+  "lifecycle_last_change": "3.22.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
-  "maxoccur": "2"
+  "maxoccur": "5"
  },
  "coils_non_axisymmetric.coil": {
   "coordinates": [
@@ -160,19 +160,21 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].current": {
   "data_type": "structure",
-  "documentation": "Current in the conductor",
+  "documentation": "Current in the conductor (positive when it flows from the first to the last element)",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].current.data": {
   "coordinates": [
    "coils_non_axisymmetric.coil[:].conductor[:].current.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Current in the conductor",
+  "documentation": "Data",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -191,6 +193,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -202,6 +205,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -210,10 +214,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "current/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements": {
   "data_type": "structure",
@@ -786,16 +792,18 @@
   "documentation": "Voltage on the conductor terminals",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].voltage.data": {
   "coordinates": [
    "coils_non_axisymmetric.coil[:].conductor[:].voltage.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage on the conductor terminals",
+  "documentation": "Data",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -814,6 +822,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -825,6 +834,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -833,26 +843,30 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "coils_non_axisymmetric.coil[:].current": {
   "data_type": "structure",
   "documentation": "Current in the coil",
   "full_path": "coils_non_axisymmetric/coil(i1)/current",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
  },
  "coils_non_axisymmetric.coil[:].current.data": {
   "coordinates": [
    "coils_non_axisymmetric.coil[:].current.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Current in the coil",
+  "documentation": "Data",
   "full_path": "coils_non_axisymmetric/coil(i1)/current/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -871,6 +885,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/current/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -882,6 +897,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/current/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "current/time",
   "type": "dynamic",
   "units": "A"
  },
@@ -890,10 +906,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "coils_non_axisymmetric/coil(i1)/current/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "current/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "coils_non_axisymmetric.coil[:].identifier": {
   "data_type": "STR_0D",
@@ -976,16 +994,18 @@
   "documentation": "Voltage on the coil terminals",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
  },
  "coils_non_axisymmetric.coil[:].voltage.data": {
   "coordinates": [
    "coils_non_axisymmetric.coil[:].voltage.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Voltage on the coil terminals",
+  "documentation": "Data",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1004,6 +1024,7 @@
   "documentation": "Lower error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage/data_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1015,6 +1036,7 @@
   "documentation": "Upper error for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage/data_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "voltage/time",
   "type": "dynamic",
   "units": "V"
  },
@@ -1023,10 +1045,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "coils_non_axisymmetric.coils_n": {
   "data_type": "INT_0D",
@@ -1077,6 +1101,34 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "coils_non_axisymmetric.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "coils_non_axisymmetric/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "coils_non_axisymmetric.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "coils_non_axisymmetric/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "coils_non_axisymmetric/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "coils_non_axisymmetric/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "coils_non_axisymmetric.is_periodic": {
   "data_type": "INT_0D",
   "documentation": "Flag indicating whether coils are described one by one in the coil() structure (flag=0) or whether the coil structure represents only coils having different characteristics (flag = 1, n_coils must be filled in that case). In the latter case, the coil() sequence is repeated periodically around the torus.",
@@ -1089,9 +1141,11 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "coils_non_axisymmetric/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }

@@ -36,6 +36,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "mhd_linear/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "mhd_linear.code.parameters": {
@@ -101,15 +102,45 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd_linear.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "mhd_linear/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "mhd_linear.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "mhd_linear/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd_linear.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "mhd_linear/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd_linear.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "mhd_linear/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "mhd_linear.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "mhd_linear/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "mhd_linear.time_slice": {
   "coordinates": [
@@ -155,7 +186,7 @@
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_lower": {
   "data_type": "FLT_0D",
@@ -186,7 +217,7 @@
   "documentation": "Index in the error_description list for \"growthrate\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_lower": {
   "data_type": "FLT_0D",
@@ -251,7 +282,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_lower": {
   "coordinates": [
@@ -294,7 +325,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_lower": {
   "coordinates": [
@@ -345,7 +376,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_lower": {
   "coordinates": [
@@ -388,7 +419,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_lower": {
   "coordinates": [
@@ -439,7 +470,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_lower": {
   "coordinates": [
@@ -482,7 +513,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_lower": {
   "coordinates": [
@@ -541,7 +572,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_lower": {
   "coordinates": [
@@ -584,7 +615,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_lower": {
   "coordinates": [
@@ -635,7 +666,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_lower": {
   "coordinates": [
@@ -678,7 +709,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_lower": {
   "coordinates": [
@@ -729,7 +760,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_lower": {
   "coordinates": [
@@ -772,7 +803,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_lower": {
   "coordinates": [
@@ -822,7 +853,7 @@
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/jacobian_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.jacobian_error_lower": {
   "coordinates": [
@@ -865,7 +896,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/r_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.r_error_lower": {
   "coordinates": [
@@ -910,7 +941,7 @@
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_contravariant_error_lower": {
   "coordinates": [
@@ -959,7 +990,7 @@
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_covariant_error_lower": {
   "coordinates": [
@@ -1006,7 +1037,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/z_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.z_error_lower": {
   "coordinates": [
@@ -1057,7 +1088,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_lower": {
   "coordinates": [
@@ -1100,7 +1131,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_lower": {
   "coordinates": [
@@ -1151,7 +1182,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_lower": {
   "coordinates": [
@@ -1194,7 +1225,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_lower": {
   "coordinates": [
@@ -1243,7 +1274,7 @@
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_lower": {
   "coordinates": [
@@ -1283,7 +1314,7 @@
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_lower": {
   "coordinates": [
@@ -1324,7 +1355,7 @@
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_lower": {
   "coordinates": [
@@ -1353,31 +1384,31 @@
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
-  "documentation": "Selection of one of a set of grid types",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label and the straight-field line poloidal angle (mod(index,10)=1); could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label and the equal arc poloidal angle (mod(index,10)=2)\n13) inverse_psi_polar : Flux surface type with psi as radial label and the polar poloidal angle (mod(index,10)=3); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label and Fourier modes in the equal arc poloidal angle (mod(index,10)=5)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label and Fourier modes in the polar poloidal angle (mod(index,10)=6); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the straight-field line poloidal angle\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the equal arc poloidal angle\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the polar poloidal angle\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the straight-field line poloidal angle\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the equal arc poloidal angle\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the polar poloidal angle\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] and the straight-field line poloidal angle\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] and the equal arc poloidal angle\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] and the polar poloidal angle\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the straight-field line poloidal angle\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the equal arc poloidal angle\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the polar poloidal angle\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] and the straight-field line poloidal angle\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] and the equal arc poloidal angle\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] and the polar poloidal angle\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the straight-field line poloidal angle\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the equal arc poloidal angle\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the polar poloidal angle\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the straight-field line poloidal angle\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the equal arc poloidal angle\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the polar poloidal angle\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the polar poloidal angle\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type",
   "lifecycle_status": "alpha",
-  "structure_reference": "identifier"
+  "structure_reference": "identifier_dynamic_aos3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/description",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type/name",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed": {
   "data_type": "structure",
@@ -1404,7 +1435,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_lower": {
   "coordinates": [
@@ -1447,7 +1478,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_lower": {
   "coordinates": [
@@ -1498,7 +1529,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_lower": {
   "coordinates": [
@@ -1541,7 +1572,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_lower": {
   "coordinates": [
@@ -1583,7 +1614,7 @@
   "documentation": "Index in the error_description list for \"tau_alfven\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_lower": {
   "coordinates": [
@@ -1623,7 +1654,7 @@
   "documentation": "Index in the error_description list for \"tau_resistive\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_lower": {
   "coordinates": [
@@ -1672,7 +1703,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_lower": {
   "coordinates": [
@@ -1715,7 +1746,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_lower": {
   "coordinates": [
@@ -1774,7 +1805,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_lower": {
   "coordinates": [
@@ -1817,7 +1848,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_lower": {
   "coordinates": [
@@ -1868,7 +1899,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_lower": {
   "coordinates": [
@@ -1911,7 +1942,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_lower": {
   "coordinates": [
@@ -1962,7 +1993,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_lower": {
   "coordinates": [
@@ -2005,7 +2036,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_lower": {
   "coordinates": [
@@ -2071,7 +2102,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_lower": {
   "coordinates": [
@@ -2114,7 +2145,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_lower": {
   "coordinates": [
@@ -2165,7 +2196,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_lower": {
   "coordinates": [
@@ -2208,7 +2239,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_lower": {
   "coordinates": [
@@ -2259,7 +2290,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_lower": {
   "coordinates": [
@@ -2302,7 +2333,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_lower": {
   "coordinates": [
@@ -2361,7 +2392,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_lower": {
   "coordinates": [
@@ -2404,7 +2435,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_lower": {
   "coordinates": [
@@ -2455,7 +2486,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_lower": {
   "coordinates": [
@@ -2498,7 +2529,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_lower": {
   "coordinates": [
@@ -2549,7 +2580,7 @@
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_lower": {
   "coordinates": [
@@ -2592,7 +2623,7 @@
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_lower": {
   "coordinates": [
@@ -2642,7 +2673,7 @@
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/jacobian_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.jacobian_error_lower": {
   "coordinates": [
@@ -2685,7 +2716,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/r_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.r_error_lower": {
   "coordinates": [
@@ -2730,7 +2761,7 @@
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_contravariant_error_lower": {
   "coordinates": [
@@ -2779,7 +2810,7 @@
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_covariant_error_lower": {
   "coordinates": [
@@ -2826,7 +2857,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/z_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.z_error_lower": {
   "coordinates": [
@@ -2875,7 +2906,7 @@
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_lower": {
   "coordinates": [
@@ -2915,7 +2946,7 @@
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_lower": {
   "coordinates": [
@@ -2956,7 +2987,7 @@
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_lower": {
   "coordinates": [
@@ -2985,31 +3016,31 @@
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
-  "documentation": "Selection of one of a set of grid types",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label and the straight-field line poloidal angle (mod(index,10)=1); could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label and the equal arc poloidal angle (mod(index,10)=2)\n13) inverse_psi_polar : Flux surface type with psi as radial label and the polar poloidal angle (mod(index,10)=3); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label and Fourier modes in the equal arc poloidal angle (mod(index,10)=5)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label and Fourier modes in the polar poloidal angle (mod(index,10)=6); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the straight-field line poloidal angle\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the equal arc poloidal angle\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the polar poloidal angle\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the straight-field line poloidal angle\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the equal arc poloidal angle\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the polar poloidal angle\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] and the straight-field line poloidal angle\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] and the equal arc poloidal angle\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] and the polar poloidal angle\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the straight-field line poloidal angle\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the equal arc poloidal angle\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the polar poloidal angle\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] and the straight-field line poloidal angle\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] and the equal arc poloidal angle\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] and the polar poloidal angle\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the straight-field line poloidal angle\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the equal arc poloidal angle\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the polar poloidal angle\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the straight-field line poloidal angle\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the equal arc poloidal angle\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the polar poloidal angle\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the polar poloidal angle\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type",
   "lifecycle_status": "alpha",
-  "structure_reference": "identifier"
+  "structure_reference": "identifier_dynamic_aos3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/description",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/index",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type/name",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "dynamic"
  },
  "mhd_linear.vacuum_toroidal_field": {
   "data_type": "structure",
@@ -3026,6 +3057,7 @@
   "documentation": "Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewing from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "mhd_linear/vacuum_toroidal_field/b0(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "T"
  },
@@ -3044,6 +3076,7 @@
   "documentation": "Lower error for \"b0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_lower(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "T"
  },
@@ -3055,6 +3088,7 @@
   "documentation": "Upper error for \"b0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_upper(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic",
   "units": "T"
  },

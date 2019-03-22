@@ -2,7 +2,7 @@
  "soft_x_rays": {
   "documentation": "Soft X-rays tomography diagnostic",
   "full_path": "soft_x_rays",
-  "lifecycle_last_change": "3.10.2",
+  "lifecycle_last_change": "3.21.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.10.2",
   "maxoccur": "1"
@@ -253,6 +253,37 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
+ },
+ "soft_x_rays.channel[:].aperture[:].surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "soft_x_rays.channel[:].aperture[:].surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.channel[:].aperture[:].surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "soft_x_rays.channel[:].aperture[:].surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/aperture(i2)/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "soft_x_rays.channel[:].aperture[:].x1_unit_vector": {
   "data_type": "structure",
@@ -786,6 +817,37 @@
   "type": "static",
   "units": "m"
  },
+ "soft_x_rays.channel[:].detector.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "soft_x_rays/channel(i1)/detector/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "soft_x_rays.channel[:].detector.surface_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/detector/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.channel[:].detector.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/detector/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "soft_x_rays.channel[:].detector.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "soft_x_rays/channel(i1)/detector/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
  "soft_x_rays.channel[:].detector.x1_unit_vector": {
   "data_type": "structure",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). ",
@@ -1097,6 +1159,86 @@
   "maxoccur": "8",
   "structure_reference": "detector_energy_band"
  },
+ "soft_x_rays.channel[:].energy_band[:].detection_efficiency": {
+  "coordinates": [
+   "soft_x_rays.channel[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Probability of detection of a photon impacting the detector as a function of its energy ",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/detection_efficiency(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "soft_x_rays.channel[:].energy_band[:].detection_efficiency_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"detection_efficiency\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/detection_efficiency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.channel[:].energy_band[:].detection_efficiency_error_lower": {
+  "coordinates": [
+   "soft_x_rays.channel[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"detection_efficiency\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/detection_efficiency_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "soft_x_rays.channel[:].energy_band[:].detection_efficiency_error_upper": {
+  "coordinates": [
+   "soft_x_rays.channel[:].energy_band[:].energies"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"detection_efficiency\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/detection_efficiency_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "soft_x_rays.channel[:].energy_band[:].energies": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of discrete energy values inside the band",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/energies(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
+ "soft_x_rays.channel[:].energy_band[:].energies_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"energies\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/energies_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.channel[:].energy_band[:].energies_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"energies\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/energies_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
+ "soft_x_rays.channel[:].energy_band[:].energies_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"energies\"",
+  "full_path": "soft_x_rays/channel(i1)/energy_band(i2)/energies_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV"
+ },
  "soft_x_rays.channel[:].energy_band[:].lower_bound": {
   "data_type": "FLT_0D",
   "documentation": "Lower bound of the energy band",
@@ -1159,6 +1301,65 @@
   "type": "static",
   "units": "eV"
  },
+ "soft_x_rays.channel[:].etendue": {
+  "data_type": "FLT_0D",
+  "documentation": "Etendue (geometric extent) of the channel's optical system",
+  "full_path": "soft_x_rays/channel(i1)/etendue",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "soft_x_rays.channel[:].etendue_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"etendue\"",
+  "full_path": "soft_x_rays/channel(i1)/etendue_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.channel[:].etendue_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"etendue\"",
+  "full_path": "soft_x_rays/channel(i1)/etendue_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "soft_x_rays.channel[:].etendue_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"etendue\"",
+  "full_path": "soft_x_rays/channel(i1)/etendue_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2.str"
+ },
+ "soft_x_rays.channel[:].etendue_method": {
+  "data_type": "structure",
+  "documentation": "Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods",
+  "full_path": "soft_x_rays/channel(i1)/etendue_method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "soft_x_rays.channel[:].etendue_method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "soft_x_rays/channel(i1)/etendue_method/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "soft_x_rays.channel[:].etendue_method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "soft_x_rays/channel(i1)/etendue_method/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "soft_x_rays.channel[:].etendue_method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "soft_x_rays/channel(i1)/etendue_method/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
  "soft_x_rays.channel[:].identifier": {
   "data_type": "STR_0D",
   "documentation": "ID of the channel",
@@ -1167,21 +1368,27 @@
   "type": "static"
  },
  "soft_x_rays.channel[:].intensity": {
-  "data_type": "structure",
-  "documentation": "Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector",
-  "full_path": "soft_x_rays/channel(i1)/intensity",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "soft_x_rays.channel[:].intensity.data": {
   "coordinates": [
    "soft_x_rays.channel[:].energy_band",
    "soft_x_rays.channel[:].intensity.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector",
+  "full_path": "soft_x_rays/channel(i1)/intensity",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "m^-2.s^-1.sr^-1"
+ },
+ "soft_x_rays.channel[:].intensity.data": {
+  "coordinates": [
+   "1...N",
+   "soft_x_rays.channel[:].intensity.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "soft_x_rays/channel(i1)/intensity/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
@@ -1194,25 +1401,27 @@
  },
  "soft_x_rays.channel[:].intensity.data_error_lower": {
   "coordinates": [
-   "soft_x_rays.channel[:].energy_band",
+   "1...N",
    "soft_x_rays.channel[:].intensity.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "soft_x_rays/channel(i1)/intensity/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
  "soft_x_rays.channel[:].intensity.data_error_upper": {
   "coordinates": [
-   "soft_x_rays.channel[:].energy_band",
+   "1...N",
    "soft_x_rays.channel[:].intensity.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "soft_x_rays/channel(i1)/intensity/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "intensity/time",
   "type": "dynamic",
   "units": "m^-2.s^-1.sr^-1"
  },
@@ -1221,10 +1430,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "soft_x_rays/channel(i1)/intensity/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "intensity/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "soft_x_rays.channel[:].line_of_sight": {
   "data_type": "structure",
@@ -1441,21 +1652,27 @@
   "type": "static"
  },
  "soft_x_rays.channel[:].power_density": {
-  "data_type": "structure",
-  "documentation": "Power received on the detector per unit surface, in multiple energy bands if available from the detector",
-  "full_path": "soft_x_rays/channel(i1)/power_density",
-  "lifecycle_status": "alpha",
-  "structure_reference": ""
- },
- "soft_x_rays.channel[:].power_density.data": {
   "coordinates": [
    "soft_x_rays.channel[:].energy_band",
    "soft_x_rays.channel[:].power_density.time"
   ],
-  "data_type": "FLT_2D",
+  "data_type": "structure",
   "documentation": "Power received on the detector per unit surface, in multiple energy bands if available from the detector",
+  "full_path": "soft_x_rays/channel(i1)/power_density",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "W.m^-2"
+ },
+ "soft_x_rays.channel[:].power_density.data": {
+  "coordinates": [
+   "1...N",
+   "soft_x_rays.channel[:].power_density.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
   "full_path": "soft_x_rays/channel(i1)/power_density/data(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_density/time",
   "type": "dynamic",
   "units": "W.m^-2"
  },
@@ -1468,25 +1685,27 @@
  },
  "soft_x_rays.channel[:].power_density.data_error_lower": {
   "coordinates": [
-   "soft_x_rays.channel[:].energy_band",
+   "1...N",
    "soft_x_rays.channel[:].power_density.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
   "full_path": "soft_x_rays/channel(i1)/power_density/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_density/time",
   "type": "dynamic",
   "units": "W.m^-2"
  },
  "soft_x_rays.channel[:].power_density.data_error_upper": {
   "coordinates": [
-   "soft_x_rays.channel[:].energy_band",
+   "1...N",
    "soft_x_rays.channel[:].power_density.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
   "full_path": "soft_x_rays/channel(i1)/power_density/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "power_density/time",
   "type": "dynamic",
   "units": "W.m^-2"
  },
@@ -1495,10 +1714,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "soft_x_rays/channel(i1)/power_density/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "power_density/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "soft_x_rays.channel[:].validity": {
   "data_type": "INT_0D",
@@ -1512,16 +1733,17 @@
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "full_path": "soft_x_rays/channel(i1)/validity_timed",
   "lifecycle_status": "alpha",
-  "structure_reference": ""
+  "structure_reference": "signal_int_1d"
  },
  "soft_x_rays.channel[:].validity_timed.data": {
   "coordinates": [
    "soft_x_rays.channel[:].validity_timed.time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
+  "documentation": "Data",
   "full_path": "soft_x_rays/channel(i1)/validity_timed/data(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "validity_timed/time",
   "type": "dynamic"
  },
  "soft_x_rays.channel[:].validity_timed.time": {
@@ -1529,10 +1751,12 @@
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Time",
   "full_path": "soft_x_rays/channel(i1)/validity_timed/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "validity_timed/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "soft_x_rays.code": {
   "data_type": "structure",
@@ -1563,6 +1787,7 @@
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "soft_x_rays/code/output_flag(:)",
   "lifecycle_status": "alpha",
+  "timebasepath": "/time",
   "type": "dynamic"
  },
  "soft_x_rays.code.parameters": {
@@ -1628,14 +1853,44 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "soft_x_rays.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "soft_x_rays/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "soft_x_rays.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "soft_x_rays/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "soft_x_rays/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "soft_x_rays.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "soft_x_rays/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "soft_x_rays.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
-  "documentation": "Generic time [s]",
+  "documentation": "Generic time",
   "full_path": "soft_x_rays/time(:)",
   "lifecycle_status": "alpha",
-  "type": "dynamic"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  }
 }
