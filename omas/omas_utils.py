@@ -166,13 +166,13 @@ def json_dumper(obj, objects_encode=True):
             return obj.toJSON()
 
     else:
-        tmp=is_uncertain(obj)
+        tmp = is_uncertain(obj)
         if numpy.any(numpy.atleast_1d(tmp)):
             if not len(numpy.array(tmp).shape):
                 return dict(__ufloat__=nominal_values(obj),
                             __ufloat_std__=std_devs(obj))
             else:
-                nomv=nominal_values(obj)
+                nomv = nominal_values(obj)
                 return dict(__udarray_tolist_avg__=nomv.tolist(),
                             __udarray_tolist_std__=std_devs(obj).tolist(),
                             dtype=str(nomv.dtype),
@@ -194,6 +194,8 @@ def json_dumper(obj, objects_encode=True):
             return numpy.asscalar(obj)
         elif isinstance(obj, complex):
             return dict(__complex__=True, real=obj.real, imag=obj.imag)
+        elif isinstance(obj, bytes):
+            return obj.decode('utf-8')
         else:
             return obj.toJSON()
 
@@ -477,6 +479,7 @@ def list_structures(imas_version):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
     return structures
 
+
 def dict_structures(imas_version):
     '''
     maps structure names to json filenames
@@ -490,6 +493,7 @@ def dict_structures(imas_version):
         raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
     structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
     return {structure: structures[structure] for structure in structures if not structure.startswith('_')}
+
 
 def load_structure(filename, imas_version):
     """
@@ -558,6 +562,7 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
 
 
 _p2l_cache = {}
+
 
 def p2l(key):
     """
