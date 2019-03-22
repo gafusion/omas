@@ -29,11 +29,13 @@ def save_omas_json(ods, filename, **kw):
     open(filename, 'w').write(json_string)
 
 
-def load_omas_json(filename, **kw):
+def load_omas_json(filename, consistency_check=True, **kw):
     """
     Load an OMAS data set from Json
 
     :param filename: filename to load from
+
+    :param consistency_check: verify that data is consistent with IMAS schema
 
     :param kw: arguments passed to the json.loads mehtod
 
@@ -51,7 +53,7 @@ def load_omas_json(filename, **kw):
         filename = open(filename, 'r')
     with filename:
         tmp = json.loads(filename.read(), object_pairs_hook=lambda x: json_loader(x, cls), **kw)
-    tmp.consistency_check=True
+    tmp.consistency_check = consistency_check
     return tmp
 
 

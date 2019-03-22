@@ -46,34 +46,36 @@ def save_omas_nc(ods, filename, **kw):
                 dataset.createVariable(item+'_error_upper', data.dtype, dims)[:] = std
 
 
-def load_omas_nc(filename):
+def load_omas_nc(filename, consistency_check=True, ):
     """
     Load an OMAS data set from Amazon S3 server
 
     :param filename: filename to load from
+
+    :param consistency_check: verify that data is consistent with IMAS schema
 
     :return: OMAS data set
     """
     printd('Loading from %s' % filename, topic='nc')
 
     from netCDF4 import Dataset
-    ods = ODS()
+    ods = ODS(consistency_check=False)
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):
                 continue
             if dataset.variables[item].shape:
                 # arrays
-                if item+'_error_upper' in dataset.variables.keys():
+                if item + '_error_upper' in dataset.variables.keys():
                     ods[item] = uarray(numpy.array(dataset.variables[item]),
-                                       numpy.array(dataset.variables[item+'_error_upper']))
+                                       numpy.array(dataset.variables[item + '_error_upper']))
                 else:
                     ods[item] = numpy.array(dataset.variables[item])
             else:
                 # uncertain scalars
-                if item+'_error_upper' in dataset.variables.keys():
+                if item + '_error_upper' in dataset.variables.keys():
                     ods[item] = ufloat(numpy.asscalar(dataset.variables[item][0]),
-                                       numpy.asscalar(dataset.variables[item+'_error_upper'][0]))
+                                       numpy.asscalar(dataset.variables[item + '_error_upper'][0]))
                 else:
                     try:
                         # scalars
@@ -81,6 +83,7 @@ def load_omas_nc(filename):
                     except AttributeError:
                         # strings
                         ods[item] = dataset.variables[item][0]
+    ods.consistency_check = consistency_check
     return ods
 
 

@@ -50,10 +50,12 @@ def save_omas_hdc(ods):
     return hdc
 
 
-def load_omas_hdc(hdc):
+def load_omas_hdc(hdc, consistency_check=True):
     """Convert OMAS data structure to HDC
 
     :param ods: input data structure
+
+    :param consistency_check: verify that data is consistent with IMAS schema
 
     :return: HDC container
     """
@@ -65,23 +67,25 @@ def load_omas_hdc(hdc):
             # list type
             ods = ODS(consistency_check=False)
             for i in range(hdc.shape[0]):
-                ods[i] = load_omas_hdc(hdc[i])
+                ods[i] = load_omas_hdc(hdc[i], consistency_check=None)
         elif hdc.get_type_str() == 'struct':
             # mapping type
             ods = ODS(consistency_check=False)
             for key in hdc.keys():
-                ods[key] = load_omas_hdc(hdc[key])
+                ods[key] = load_omas_hdc(hdc[key], consistency_check=None)
         elif hdc.get_type_str() == 'null':
-            # mapping type
+            # null type
             ods = ODS(consistency_check=False)
         elif hdc.get_type_str() == 'string':
-            # mapping type
+            # string type
             ods = str(hdc)
         else:
+            # numeric type
             ods = numpy.asarray(hdc)
             if numpy.isscalar(ods) or ods.size == 1:
                 ods = numpy.asscalar(ods)
-
+    if consistency_check is not None:
+        ods.consistency_check = consistency_check
     return ods
 
 
