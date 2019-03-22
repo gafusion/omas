@@ -231,21 +231,36 @@ class ODS(MutableMapping):
 
     @consistency_check.setter
     def consistency_check(self, consistency_value):
-        self._consistency_check = consistency_value
-        for item in self.keys():
-            if isinstance(self[item], ODS):
-                if consistency_value:
-                    structure_key = item if not isinstance(item, int) else ':'
-                    if not self.structure:
-                        # load the json structure file
-                        structure = load_structure(item, imas_version=self.imas_version)[1][item]
-                    else:
-                        structure = self.structure[structure_key]
-                    # assign structure and location information
-                    self[item].structure = structure
-                    self[item].location=l2o([self.location]+[item])
+        old_consistency_check = self._consistency_check
+        try:
+            # set .consistency_check for this ODS
+            self._consistency_check = consistency_value
+            # set .consistency_check and assign the .structure attribute to the underlying ODSs
+            for item in self.keys():
+                if isinstance(self[item], ODS):
+                    if consistency_value:
+                        if not self.structure:
+                            if not self.location:
+                                # load the json structure file
+                                structure = load_structure(item, imas_version=self.imas_version)[1][item]
+                            else:
+                                raise (RuntimeError('when switching from False to True .consistency_check must be called from the top-level ODS'))
+                        else:
+                            structure_key = item if not isinstance(item, int) else ':'
+                            structure = self.structure[structure_key]
+                        # assign structure and location information
+                        self[item].structure = structure
+                        self[item].location = l2o([self.location] + [item])
 
-                self[item].consistency_check = consistency_value
+                    self[item].consistency_check = consistency_value
+        except Exception as _excp:
+            # restore existing consistency_check value in case of error
+            if old_consistency_check != consistency_value:
+                for item in self.keys():
+                    if isinstance(self[item], ODS):
+                        self[item].consistency_check = old_consistency_check
+                self.consistency_check = old_consistency_check
+            raise (LookupError('Consistency check failed: %s' % repr(_excp)))
 
     @property
     def cocos(self):

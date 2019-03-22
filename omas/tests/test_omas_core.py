@@ -21,7 +21,6 @@ from pprint import pprint
 from omas import *
 from omas.omas_setup import *
 
-
 class TestOmasCore(unittest.TestCase):
     """
     Test suite for omas_physics.py
@@ -269,11 +268,15 @@ class TestOmasCore(unittest.TestCase):
     def test_deepcopy(self):
         ods = ods_sample()
 
-        #inject non-consistent data
+        # inject non-consistent data
         ods.consistency_check = False
         ods['bla'] = ODS(consistency_check=False)
         ods['bla.tra'] = 1
-        ods.consistency_check = True
+        try:
+            # this should fail
+            ods.consistency_check = True
+        except LookupError:
+            assert not ods.consistency_check
 
         # deepcopy should not raise a consistency_check error
         # since we are directly manipulating the __dict__ attributes
@@ -281,7 +284,7 @@ class TestOmasCore(unittest.TestCase):
         ods1 = copy.deepcopy(ods)
 
         # make sure non-consistent data got also copied over
-        assert ods1['bla']==ods['bla']
+        assert ods1['bla'] == ods['bla']
 
         # make sure the deepcopy is not shallow
         ods1['equilibrium.vacuum_toroidal_field.r0'] += 1
