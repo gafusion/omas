@@ -55,17 +55,19 @@ def generate_xml_schemas():
         _tag = tag.replace('.', '_')
         _tag = _tag.replace('/', '_')
         if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])) or tag=='develop/3':
-            subprocess.Popen("""
-                export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
-                cd {dd_folder}
-                git checkout {tag}
-                git pull
-                make clean
-                make
-                mkdir {imas_json_dir}/{_tag}/
-                cp IDSDef.xml {imas_json_dir}/{_tag}/
-                """.format(tag=tag, _tag=_tag, imas_json_dir=imas_json_dir,
-                           dd_folder=dd_folder), shell=True).communicate()
+            executable="""
+export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
+cd {dd_folder}
+git checkout {tag}
+git pull
+export JAVA_HOME=$(dirname $(dirname `which java`))
+make clean
+make
+mkdir {imas_json_dir}/{_tag}/
+cp IDSDef.xml {imas_json_dir}/{_tag}/
+""".format(tag=tag, _tag=_tag, imas_json_dir=imas_json_dir, dd_folder=dd_folder)
+            print(executable)
+            subprocess.Popen(executable, shell=True).communicate()
 
 
 def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
