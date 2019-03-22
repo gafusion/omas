@@ -12,7 +12,7 @@ from .omas_core import ODS
 # ---------------------------
 # save and load OMAS to Json
 # ---------------------------
-def save_omas_json(ods, filename, strict_json=True, **kw):
+def save_omas_json(ods, filename, objects_encode=None, **kw):
     """
     Save an OMAS data set to Json
 
@@ -20,7 +20,10 @@ def save_omas_json(ods, filename, strict_json=True, **kw):
 
     :param filename: filename or file descriptor to save to
 
-    :param strict_json: if true it does not encode complex/uncertain objects
+    :param objects_encode: how to handle non-standard JSON objects
+        * True: encode numpy arrays, complex, and uncertain
+        * None: numpy arrays as lists, encode complex, and uncertain
+        * False: numpy arrays as lists, fail on complex, and uncertain
 
     :param kw: arguments passed to the json.dumps method
     """
@@ -31,11 +34,7 @@ def save_omas_json(ods, filename, strict_json=True, **kw):
     kw.setdefault('separators', (',', ': '))
     kw.setdefault('sort_keys', True)
 
-    dumper = json_dumper
-    if strict_json:
-        dumper = strict_json_dumper
-
-    json_string = json.dumps(ods, default=dumper, **kw)
+    json_string = json.dumps(ods, default=lambda x:json_dumper(x,objects_encode), **kw)
 
     if isinstance(filename, basestring):
         with open(filename, 'w') as f:
@@ -45,15 +44,13 @@ def save_omas_json(ods, filename, strict_json=True, **kw):
         f.write(json_string)
 
 
-def load_omas_json(filename, consistency_check=True, strict_json=True, **kw):
+def load_omas_json(filename, consistency_check=True, **kw):
     """
     Load an OMAS data set from Json
 
     :param filename: filename or file descriptor to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
-
-    :param strict_json: if true it does not dencode complex/uncertain objects
 
     :param kw: arguments passed to the json.loads mehtod
 
@@ -67,10 +64,6 @@ def load_omas_json(filename, consistency_check=True, strict_json=True, **kw):
         tmp.consistency_check = False
         return tmp
 
-    loader = json_loader
-    if strict_json:
-        loader = strict_json_loader
-
     if isinstance(filename, basestring):
         with open(filename, 'r') as f:
             json_string = f.read()
@@ -78,7 +71,7 @@ def load_omas_json(filename, consistency_check=True, strict_json=True, **kw):
         f = filename
         json_string = f.read()
 
-    tmp = json.loads(json_string, object_pairs_hook=lambda x: loader(x, cls), **kw)
+    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls), **kw)
     tmp.consistency_check = consistency_check
     return tmp
 
