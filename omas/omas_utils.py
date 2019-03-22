@@ -220,7 +220,7 @@ def json_loader(object_pairs, cls=dict):
     dct = cls()
     for x, y in object_pairs:
         if isinstance(y, list):
-            if isinstance(y[0], (dict, ODS)):
+            if len(y) and isinstance(y[0], (dict, ODS)):
                 dct[x] = cls()
                 for k in range(len(y)):
                     dct[x][k] = y[k]
