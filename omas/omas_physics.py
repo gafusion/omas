@@ -953,30 +953,29 @@ def generate_cocos_signals(structures=[], threshold=0):
                 n = item.count('.')
                 for pnt, key in enumerate(p2l(item)):
                     pnt = pnt / float(n)
-                    for k in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
-                        if key == k:
-                            rationale += [k]
+                    for case in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
+                        if key == case:
+                            rationale += [case]
                             score += pnt
                             break
-                    for k in ['q', 'j', 'phi', 'psi', 'ip', 'b', 'f', 'v', 'f_df']:
-                        if key.startswith('%s_' % k) and not any([key.startswith(k) for k in ['psi_norm']]):
-                            rationale += [k]
+                    for case in ['q', 'j', 'phi', 'psi', 'ip', 'b', 'f', 'v', 'f_df']:
+                        if key.startswith('%s_' % case) and not any([key.startswith(k) for k in ['psi_norm']]):
+                            rationale += [case]
                             score += pnt
                             break
-                    for k in ['velocity', 'current', 'b_field', 'e_field', 'torque', 'momentum']:
-                        if k in key and key not in ['heating_current_drive']:
-                            rationale += [k]
+                    for case in ['velocity', 'current', 'b_field', 'e_field', 'torque', 'momentum']:
+                        if case in key and key not in ['heating_current_drive']:
+                            rationale += [case]
                             score += pnt
                             break
-                    for k in ['_dpsi']:
-                        if k in key and k + '_norm' not in key:
-                            rationale += [k]
+                    for case in ['_dpsi']:
+                        if case in key and case + '_norm' not in key:
+                            rationale += [case]
                             score += pnt
                             break
-                    for k in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
-                        if ((key.endswith(k) or key.startswith(k)) and not
-                            any([key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']])):
-                            rationale += [k]
+                    for case in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
+                        if ((key.endswith(case) or key.startswith(case)) and not any([key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']])):
+                            rationale += [case]
                             score += pnt
                             break
                 if units in cocos_units:
