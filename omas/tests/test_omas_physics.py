@@ -437,6 +437,11 @@ class TestOmasPhysics(unittest.TestCase):
         tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro', 'identifier.description': 'bla bla'})
         assert tmp[0] == 2
 
+    def test_latest_cocos(self):
+        from omas.omas_utils import list_structures, omas_rcparams
+        from omas.omas_physics import generate_cocos_signals
+
+        generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPhysics)
