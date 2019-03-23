@@ -71,8 +71,8 @@ cocos:
 	cd omas/utilities && python generate_cocos_signals.py
 
 tag:
-    git tag -a v$(cat omas/version) $(git log --pretty=format:"%h" --grep="^version $(cat omas/version)") -m "version $(cat omas/version)"
-    git push
+	git tag -a v$(cat omas/version) $(git log --pretty=format:"%h" --grep="^version $(cat omas/version)") -m "version $(cat omas/version)"
+	git push
 
 pypi:
 	python setup.py sdist upload
