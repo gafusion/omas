@@ -1,3 +1,6 @@
+Installation
+============
+
 .. _install:
 
 OMAS runs both with *Python2* and *Python3*.
