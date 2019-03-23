@@ -37,7 +37,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
        ods.slice_at_time(1000.)
 
-5. **Collect data across array of structures** (not only in time) with `:` construct:
+5. **Collect data across array of structures** (not only in time) with ``:`` construct:
 
    .. code-block:: python
 
@@ -62,6 +62,7 @@ The `ODS` class extends native Python dictionary and list classes with:
    .. code-block:: python
 
        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * milliseconds
+       ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] # will return 0.008
 
 9. Unified interface for **querying about time** dimension:
 
@@ -75,7 +76,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     .. code-block:: python
 
-        ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value,std_dev)
+        ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value, std_dev)
 
 11. Evaluate **derived quantities** from more fundamental ones:
 
@@ -95,11 +96,11 @@ The `ODS` class extends native Python dictionary and list classes with:
 
         ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
 
-14. **Use regular expressions** for plotting and accessing data with xarrays:
+14. **Use regular expressions** with ``@`` construct for plotting and accessing data with xarrays:
 
     .. code-block:: python
 
-        ods.plot_quantity('\@core.*0.elect.*dens.*th')
+        ods.plot_quantity('@core.*0.elect.*dens.*th')
 
 15. **Predefined set of plots** available:
 
