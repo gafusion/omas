@@ -1,18 +1,23 @@
-Installation
-============
 .. _install:
 
-The OMAS library runs on **Python2** and **Python3**.
+OMAS runs both with *Python2* and *Python3*.
 
-To install `OMAS from pip <https://pypi.python.org/pypi/omas/>`_ (for users):
+**Pypi**: To install `OMAS with pip <https://pypi.python.org/pypi/omas/>`_ (for users):
 
 .. code-block:: none
 
-    sudo pip install --upgrade omas
+    pip install --upgrade omas
 
-where ``--upgrade`` is used to update the omas installation to the latest version.
+where `upgrade` is used to update the omas installation to the latest version.
 
-To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers):
+**Conda**: To install `OMAS with conda <https://anaconda.org/conda-forge/omas>`_ (for users):
+
+.. code-block:: none
+
+    conda install -c conda-forge omas
+    conda update  -c conda-forge omas
+
+**GitHub** To clone `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developers):
 
 .. code-block:: none
 
@@ -24,9 +29,8 @@ To install `OMAS from GitHub <https://github.com/gafusion/omas>`_ (for developer
 
 Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
 
---------------------
 Testing installation
---------------------
+====================
 
 The OMAS installation can be tested by running the regression tests:
 
