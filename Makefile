@@ -7,7 +7,7 @@ all:
 	@echo ' - make json         : generate IMAS json structure files'
 	@echo ' - make itm          : generate omas_itm.py from omas_imas.py'
 	@echo ' - make docs         : generate sphinx documentation and pushes it online'
-	@echo ' - make git          : push to github repo'
+	@echo ' - make tag          : tag git repository with omas/version and push'
 	@echo ' - make pypi         : upload to pypi'
 	@echo ' - make release      : all of the above, in order'
 	@echo ' - make html         : generate sphinx documentation'
@@ -70,11 +70,12 @@ itm:
 cocos:
 	cd omas/utilities && python generate_cocos_signals.py
 
-git:
-	git push
+tag:
+    git tag -a v$(cat omas/version) $(git log --pretty=format:"%h" --grep="^version $(cat omas/version)") -m "version $(cat omas/version)"
+    git push
 
 pypi:
 	python setup.py sdist upload
 
-release: tests2 tests3 requirements json itm docs git pypi
+release: tests2 tests3 requirements json itm docs tag pypi
 	@echo 'Done!'
