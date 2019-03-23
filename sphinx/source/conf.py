@@ -496,7 +496,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'OMAS', 'OMAS documentation',
-     author, 'OMAS', 'Ordered Multidimensional Array Structure',
+     author, 'OMAS', 'Ordered Multidimensional Array Structures',
      'Miscellaneous'),
 ]
 

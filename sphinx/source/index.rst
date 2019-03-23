@@ -1,5 +1,5 @@
-OMAS: Ordered Multidimensional Array Structure
-==============================================
+OMAS: Ordered Multidimensional Array Structures
+===============================================
 
 .. figure:: images/omas_concept.png
   :align: center

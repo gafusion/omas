@@ -48,7 +48,7 @@ Mapping the physics codes I/O to the IMAS data model is done in third party Pyth
 setup(
     name='omas',
     version=open(here + 'omas/version', 'r').read().strip(),
-    description='Ordered Multidimensional Array Structure',
+    description='Ordered Multidimensional Array Structures',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
     license='MIT',
