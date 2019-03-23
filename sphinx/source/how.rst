@@ -96,10 +96,11 @@ The `ODS` class extends native Python dictionary and list classes with:
 
         ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
 
-14. **Use regular expressions** with ``@`` construct for plotting and accessing data with xarrays:
+14. **Use regular expressions** with ``@`` construct for accessing data and plotting:
 
     .. code-block:: python
 
+        ods['@core.*0.elect.*dens.*th']
         ods.plot_quantity('@core.*0.elect.*dens.*th')
 
 15. **Predefined set of plots** available:
