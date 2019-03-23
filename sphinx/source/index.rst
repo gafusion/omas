@@ -5,6 +5,7 @@ OMAS: Ordered Multidimensional Array Structure
   :align: center
   :width: 95%
   :alt: OMAS simplifies the interface between third-party codes with ITER IMAS
+  :target: http://gafusion.github.io/OMFIT-source/
 
 OMAS is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_).
 
@@ -15,3 +16,25 @@ OMAS is a Python library designed to simplify the interface of third-party codes
 * in a form that is **always compatible with the IMAS data model**
 
 Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.
+
+---------------------------------
+
+.. image:: https://img.shields.io/conda/vn/conda-forge/omas.svg?color=blue&label=version
+  :target: https://github.com/gafusion/omas
+
+.. image:: https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue
+  :target: https://github.com/gafusion/omas
+
+.. image:: https://img.shields.io/travis/gafusion/omas.svg
+  :target: https://travis-ci.org/gafusion/omas
+
+.. image:: https://img.shields.io/codecov/c/github/gafusion/omas.svg
+  :target: https://codecov.io/gh/gafusion/omas
+
+.. image:: https://img.shields.io/conda/dn/conda-forge/omas.svg?color=purple&label=conda%20downloads
+  :target: https://github.com/conda-forge/omas-feedstock
+
+.. image:: https://img.shields.io/pypi/dm/omas.svg?color=purple&label=pypi%20downloads
+  :target: https://pypi.org/project/omas/#history
+
+---------------------------------

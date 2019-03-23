@@ -30,13 +30,24 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 packages = ['omas', 'omas.tests']
 package_data = {'omas': ['*.py', 'version'], 'omas.tests': ['*.py']}
 for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
-    print(item)
     packages.append('omas.imas_structures.' + os.path.split(item)[1])
     package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
 
+long_description = '''
+OMAS is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_).
+
+* It provides a **convenient Python API**
+
+* capable of storing data with **different file/database formats**
+
+* in a form that is **always compatible with the IMAS data model**
+
+Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.
+'''
+
 setup(
     name='omas',
-    version=open('omas/version', 'r').read().strip(),
+    version=open(here + 'omas/version', 'r').read().strip(),
     description='Ordered Multidimensional Array Structure',
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
@@ -44,14 +55,11 @@ setup(
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3'
     ],
     keywords='integrated modeling OMFIT IMAS ITER',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     packages=packages,
     package_data=package_data,
     install_requires=install_requires,
