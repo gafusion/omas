@@ -1,4 +1,11 @@
-[![Build Status](https://travis-ci.org/gafusion/omas.svg?branch=master)](https://travis-ci.org/gafusion/omas) [![codecov](https://codecov.io/gh/gafusion/omas/branch/master/graph/badge.svg)](https://codecov.io/gh/gafusion/omas)
+![Version](https://img.shields.io/conda/vn/conda-forge/omas.svg?color=blue&label=version)
+![GitHub repo size](https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue)
+
+[![Build Status](https://travis-ci.org/gafusion/omas.svg?branch=master)](https://travis-ci.org/gafusion/omas)
+[![codecov](https://codecov.io/gh/gafusion/omas/branch/master/graph/badge.svg)](https://codecov.io/gh/gafusion/omas)
+
+![Conda](https://img.shields.io/conda/dn/conda-forge/omas.svg?color=purple&label=conda%20downloads)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/omas.svg?color=purple&label=pip%20downloads)
 
 # **OMAS** (**O**rdered **M**ultidimensional **A**rray **S**tructure)
 
