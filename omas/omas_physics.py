@@ -165,7 +165,6 @@ def core_profiles_pressures(ods, update=True):
 
     return ods_p
 
-
 @add_to__ODS__
 def core_profiles_densities(ods, update=True):
     '''
@@ -521,7 +520,7 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
             if ods['equilibrium.time_slice'][time_index]['profiles_2d'][grid]['grid_type.index'] == 1:
                 eq2D = ods['equilibrium.time_slice'][time_index]['profiles_2d'][grid]
                 for item in eq2D:
-                    if isinstance(eq2D[item], ndarray) and len(eq2D[item].shape) == 2:
+                    if isinstance(eq2D[item], numpy.ndarray) and len(eq2D[item].shape) == 2:
                         eq2D[item] = eq2D[item].T
 
                 if flip_dims:

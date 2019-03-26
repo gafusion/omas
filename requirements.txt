@@ -10,6 +10,7 @@ boto3                    # required
 matplotlib               # required
 scipy                    # required
 xarray                   # required
+mendeleev                # required
 Sphinx                   # build_documentation
 sphinx-bootstrap-theme   # build_documentation
 sphinx-gallery           # build_documentation
