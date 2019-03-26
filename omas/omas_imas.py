@@ -231,16 +231,14 @@ def imas_get(ids, path, skip_missing_nodes=False):
 
     # handle missing data
     data = out
-    if len(path) == 2 and path[-1] == 'time' and data[0] < 0:
+    # empty arrays
+    if isinstance(data, numpy.ndarray) and not data.size:
         data = None
-    # skip empty arrays
-    elif isinstance(data, numpy.ndarray) and not data.size:
-        data = None
-    # skip missing floats and integers
+    # missing floats and integers
     elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
         data = None
-    # skip empty strings
-    elif isinstance(data, unicode) and not len(data):
+    # empty strings
+    elif isinstance(data, basestring) and not len(data):
         data = None
 
     printd(debug_path, topic='imas_code')
@@ -454,13 +452,13 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             joined_fetch_paths = map(l2i, fetch_paths)
 
             # build omas data structure
-            ods = ODS(imas_version=imas_version)
+            ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                     continue
-                if verbose:
-                    print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
-                # get data from ids
+                if verbose and k%1000==0:
+                    print('Loading {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))#,l2o(path)))
+                # get data from IDS
                 data = imas_get(ids, path, None)
                 # continue for empty data
                 if data is None:
@@ -489,6 +487,11 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     ods['dataset_description.data_entry.pulse'] = int(pulse)
     ods['dataset_description.data_entry.run'] = int(run)
     ods['dataset_description.imas_version'] = unicode(imas_version)
+
+    try:
+        ods.consistency_check = True
+    except LookupError as _excp:
+        printe(repr(excp))
 
     return ods
 
