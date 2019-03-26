@@ -505,6 +505,31 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
     return
 
+@add_to__ODS__
+def equilibrium_transpose_RZ(ods, flip_dims=False):
+    '''
+    Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.
+
+    :param ods: ODS to update in-place
+
+    :param flip_dims: whether to switch the equilibrium.time_slice.:.profiles_2d.:.grid.dim1 and dim1
+
+    :return: updated ods
+    '''
+    for time_index in ods['equilibrium.time_slice']:
+        for grid in ods['equilibrium.time_slice'][time_index]['profiles_2d']:
+            if ods['equilibrium.time_slice'][time_index]['profiles_2d'][grid]['grid_type.index'] == 1:
+                eq2D = ods['equilibrium.time_slice'][time_index]['profiles_2d'][grid]
+                for item in eq2D:
+                    if isinstance(eq2D[item], ndarray) and len(eq2D[item].shape) == 2:
+                        eq2D[item] = eq2D[item].T
+
+                if flip_dims:
+                    tmp = eq2D['grid.dim1']
+                    eq2D['grid.dim1'] = ed2D['grid.dim2']
+                    eq2D['grid.dim1'] = tmp
+    return ods
+
 @add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
     """
