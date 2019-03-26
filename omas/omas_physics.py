@@ -169,7 +169,7 @@ def core_profiles_pressures(ods, update=True):
 @add_to__ODS__
 def core_profiles_densities(ods, update=True):
     '''
-    calculates density from density_thermal and density_fast
+    Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent
 
     :param ods: input ods
 
@@ -183,6 +183,29 @@ def core_profiles_densities(ods, update=True):
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
+    def consistent_density(loc):
+        if 'density' in loc:
+
+            # if there is no thermal nor fast, assume it is thermal
+            if 'density_thermal' not in loc and 'density_fast' not in loc:
+                loc['density_thermal'] = loc['density']
+
+            # if there is no thermal calculate it
+            elif 'density_thermal' not in loc and 'density_fast' in loc:
+                loc['density_thermal'] = loc['density'] - loc['density_fast']
+
+            # if there is no fast calculate it
+            elif 'density_thermal' in loc and 'density_fast' not in loc:
+                loc['density_fast'] = loc['density'] - loc['density_thermal']
+
+        # enforce self-consistency
+        loc['density'] = copy.deepcopy(__zeros__)
+        for density in ['density_thermal', 'density_fast']:
+            if density in loc:
+                loc['density'] += loc[density]
+            else:
+                loc[density] = copy.deepcopy(__zeros__)
+
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
         prof1d_n = ods_n['core_profiles']['profiles_1d'][time_index]
@@ -190,20 +213,15 @@ def core_profiles_densities(ods, update=True):
         if not update:
             prof1d_n['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
 
-        __zeros__ = 0.*prof1d['grid']['rho_tor_norm']
+        __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
         # electrons
-        prof1d_n['electrons']['density'] = copy.deepcopy(__zeros__)
-        for density in ['density_thermal','density_fast']:
-            if density in prof1d['electrons']:
-                 prof1d_n['electrons']['density'] += prof1d['electrons'][density]
+        consistent_density(prof1d_n['electrons'])
 
         # ions
         for k in range(len(prof1d['ion'])):
-            prof1d_n['ion'][k]['density'] = copy.deepcopy(__zeros__)
-            for density in ['density_thermal','density_fast']:
-                if density in prof1d['ion'][k]:
-                    prof1d_n['ion'][k]['density'] += prof1d['ion'][k][density]
+            consistent_density(prof1d_n['ion'][k])
+
     return ods_n
 
 @add_to__ODS__
