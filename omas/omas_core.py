@@ -235,7 +235,7 @@ class ODS(MutableMapping):
         try:
             # set .consistency_check for this ODS
             self._consistency_check = consistency_value
-            # set .consistency_check and assign the .structure attribute to the underlying ODSs
+            # set .consistency_check and assign the .structure/.location attributes to the underlying ODSs
             for item in self.keys():
                 if isinstance(self[item], ODS):
                     if consistency_value:
@@ -244,15 +244,15 @@ class ODS(MutableMapping):
                                 # load the json structure file
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
                             else:
-                                raise (RuntimeError('when switching from False to True .consistency_check must be called from the top-level ODS'))
+                                raise (RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS'))
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
                             structure = self.structure[structure_key]
                         # assign structure and location information
                         self[item].structure = structure
                         self[item].location = l2o([self.location] + [item])
-
                     self[item].consistency_check = consistency_value
+
         except Exception as _excp:
             # restore existing consistency_check value in case of error
             if old_consistency_check != consistency_value:
@@ -361,7 +361,7 @@ class ODS(MutableMapping):
 
     def _validate(self, value, structure):
         """
-        validate that the value is consistent with the provided structure field
+        Validate that the value is consistent with the provided structure field
 
         :param value: sub-tree to be checked
 
@@ -482,8 +482,14 @@ class ODS(MutableMapping):
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
-                        raise ValueError('%s COCOS translation has not been setup' % ulocation)
-                    value = value * omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
+                        if self.consistency_check=='warn':
+                            printe('COCOS translation has not been setup: %s' % ulocation)
+                            norm = 1.0
+                        else:
+                            raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+                    else:
+                        norm = omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
+                    value = value * norm
 
                 # get node information
                 info = omas_info_node(ulocation)
@@ -664,8 +670,14 @@ class ODS(MutableMapping):
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
-                        raise ValueError('%s COCOS translation has not been setup' % ulocation)
-                    value = value * omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
+                        if self.consistency_check == 'warn':
+                            printe('COCOS translation has not been setup: %s' % ulocation)
+                            norm = 1.0
+                        else:
+                            raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+                    else:
+                        norm = omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
+                    value = value * norm
 
                 # get node information
                 info = omas_info_node(ulocation)
