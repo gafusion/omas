@@ -1,3 +1,4 @@
+
 '''List of automatic COCOS transformations
 
 -------
@@ -12,8 +13,29 @@
 # 1. Edit transformations in this file (if a signal is missing, it can be added here)
 # 2. Run `utilities/generate_cocos_signals.py` (which will update this same file)
 # 3. Commit changes
-
+#
+# Valid transformations are defined in the `cocos_transform()` function and they are:
+#
+#        transforms = {}
+#        transforms['1/PSI'] = sigma_Ip_eff * sigma_Bp_eff / (2 * numpy.pi) ** exp_Bp_eff
+#        transforms['invPSI'] = transforms['1/PSI']
+#        transforms['dPSI'] = transforms['1/PSI']
+#        transforms['F_FPRIME'] = transforms['dPSI']
+#        transforms['PPRIME'] = transforms['dPSI']
+#        transforms['PSI'] = sigma_Ip_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
+#        transforms['Q'] = sigma_Ip_eff * sigma_B0_eff * sigma_rhotp_eff
+#        transforms['TOR'] = sigma_B0_eff
+#        transforms['BT'] = transforms['TOR']
+#        transforms['IP'] = transforms['TOR']
+#        transforms['F'] = transforms['TOR']
+#        transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
+#        transforms['BP'] = transforms['POL']
+#        transforms[None] = 1
+#
+                
 cocos_signals = {}
+
+
 
 # AMNS_DATA
 
@@ -72,8 +94,6 @@ cocos_signals['core_instant_changes.change.:.profiles_1d.:.e_field.poloidal']='?
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.e_field.toroidal']='?'                                                  #[ADD?]# 2.833333 # e_field  toroidal  [V.m^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.current_parallel_inside']='?'                                           #[ADD?]# 2.000000 # current  [A]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.grid.psi']='?'                                                          #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 2.000000 # _tor  [rad.s^-1]
-cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 2.000000 # _tor  [rad.s^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_bootstrap']='?'                                                       #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_non_inductive']='?'                                                   #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_ohmic']='?'                                                           #[ADD?]# 2.000000 # j  [A/m^2]
@@ -86,6 +106,8 @@ cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.velocity.diamag
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.neutral.:.velocity.diamagnetic']='?'                                    #[ADD?]# 1.875000 # velocity  [m.s^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.electrons.velocity.diamagnetic']='?'                                    #[ADD?]# 1.857143 # velocity  [m.s^-1]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.e_field.diamagnetic']='?'                                               #[ADD?]# 1.833333 # e_field  [V.m^-1]
+cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 1.000000 # _tor
+cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 1.000000 # _tor
 
 # CORE_PROFILES
 cocos_signals['core_profiles.profiles_1d.:.e_field_parallel']='TOR'                                                       # 3.000000 # e_field  parallel  [V.m^-1]
@@ -119,8 +141,6 @@ cocos_signals['core_profiles.global_quantities.ip']='TOR'                       
 cocos_signals['core_profiles.global_quantities.v_loop']='TOR'                                                             # 2.000000 # v  [V]
 cocos_signals['core_profiles.profiles_1d.:.current_parallel_inside']='TOR'                                                # 2.000000 # current  [A]
 cocos_signals['core_profiles.profiles_1d.:.grid.psi']='PSI'                                                               # 2.000000 # psi  [Wb]
-cocos_signals['core_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 2.000000 # _tor  [rad.s^-1]
-cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 2.000000 # _tor  [rad.s^-1]
 cocos_signals['core_profiles.profiles_1d.:.j_bootstrap']='TOR'                                                            # 2.000000 # j  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_non_inductive']='TOR'                                                        # 2.000000 # j  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_ohmic']='TOR'                                                                # 2.000000 # j  [A/m^2]
@@ -133,6 +153,8 @@ cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.diamagnetic']='TOR'   
 cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.diamagnetic']='TOR'                                         # 1.833333 # velocity  [m.s^-1]
 cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.diamagnetic']='TOR'                                         # 1.800000 # velocity  [m.s^-1]
 cocos_signals['core_profiles.profiles_1d.:.e_field.diamagnetic']='TOR'                                                    # 1.750000 # e_field  [V.m^-1]
+cocos_signals['core_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                      #[ADD?]# 1.000000 # _tor
+cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                              #[ADD?]# 1.000000 # _tor
 
 # CORE_SOURCES
 cocos_signals['core_sources.source.:.global_quantities.:.current_parallel']='TOR'                                          # 3.000000 # current  parallel  [A.m]
@@ -143,12 +165,12 @@ cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.parallel']='?'
 cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.poloidal']='?'                                    #[ADD?]# 2.875000 # momentum  poloidal  [kg.m^-1.s^-2]
 cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal']='?'                                    #[ADD?]# 2.875000 # momentum  toroidal  [kg.m^-1.s^-2]
 cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.explicit_part']='?'           #[ADD?]# 2.666667 # momentum  toroidal  [kg.m^2.s^-2]
-cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.implicit_part']='?'           #[ADD?]# 2.666667 # momentum  toroidal  [s^-1]
 cocos_signals['core_sources.source.:.profiles_1d.:.current_parallel_inside']='TOR'                                         # 2.000000 # current  [A]
 cocos_signals['core_sources.source.:.profiles_1d.:.grid.psi']='PSI'                                                        # 2.000000 # psi  [Wb]
 cocos_signals['core_sources.source.:.profiles_1d.:.torque_tor_inside']='TOR'                                               # 2.000000 # torque  [kg.m^2.s^-2]
 cocos_signals['core_sources.vacuum_toroidal_field.b0']='TOR'                                                               # 2.000000 # b0  [T]
 cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.diamagnetic']='?'                                 #[ADD?]# 1.875000 # momentum  [kg.m^-1.s^-2]
+cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.implicit_part']='?'           #[ADD?]# 1.666667 # momentum  toroidal
 
 # CORE_TRANSPORT
 cocos_signals['core_transport.model.:.profiles_1d.:.grid_d.psi']='?'                                                     #[ADD?]# 2.000000 # psi  [Wb]
@@ -159,94 +181,94 @@ cocos_signals['core_transport.vacuum_toroidal_field.b0']='TOR'                  
 # DATASET_DESCRIPTION
 
 # DISTRIBUTION_SOURCES
-cocos_signals['distribution_sources.source.:.global_quantities.:.shinethrough.torque_tor']='?'                             #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distribution_sources.source.:.global_quantities.:.torque_tor']='?'                                          #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distribution_sources.source.:.profiles_1d.:.momentum_tor']='?'                                              #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
+cocos_signals['distribution_sources.source.:.global_quantities.:.shinethrough.torque_tor']='?'                             #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distribution_sources.source.:.global_quantities.:.torque_tor']='?'                                          #[ADD?]# 2.000000 # torque  _tor
 cocos_signals['distribution_sources.source.:.profiles_1d.:.grid.psi']='?'                                                  #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['distribution_sources.source.:.profiles_1d.:.momentum_tor']='?'                                              #[ADD?]# 2.000000 # momentum  _tor
 cocos_signals['distribution_sources.vacuum_toroidal_field.b0']='TOR'                                                              # 2.000000 # b0  [T]
 
 # DISTRIBUTIONS
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.electrons.torque_fast_tor']='?'                            #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.electrons.torque_thermal_tor']='?'                         #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.state.:.torque_fast_tor']='?'                        #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                     #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.torque_fast_tor']='?'                                #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.torque_thermal_tor']='?'                             #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.current_tor']='?'                                                     #[ADD?]# 3.000000 # current  _tor  [N.m]
-cocos_signals['distributions.distribution.:.global_quantities.:.source.:.torque_tor']='?'                                             #[ADD?]# 3.000000 # torque  _tor  [N.m]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.electrons.torque_fast_tor']='?'                       #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.electrons.torque_thermal_tor']='?'                    #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.state.:.torque_fast_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'                #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.torque_fast_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.torque_thermal_tor']='?'                        #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.current_fast_tor']='?'                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.current_tor']='?'                                                #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.source.:.momentum_tor']='?'                                      #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.electrons.torque_fast_tor']='?'                                  #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.electrons.torque_thermal_tor']='?'                               #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.state.:.torque_fast_tor']='?'                              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.torque_fast_tor']='?'                                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.torque_thermal_tor']='?'                                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.electrons.torque_fast_tor']='?'                  #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.electrons.torque_thermal_tor']='?'               #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.state.:.torque_fast_tor']='?'              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.torque_fast_tor']='?'                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.torque_thermal_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.current_fast_tor']='?'                                      #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.current_tor']='?'                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.source.:.momentum_tor']='?'                                 #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.current_fast_tor']='?'                                                      #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.current_tor']='?'                                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.source.:.momentum_tor']='?'                                                 #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.thermalisation.momentum_tor']='?'                                           #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.electrons.torque_fast_tor']='?'                          #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.electrons.torque_thermal_tor']='?'                       #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.state.:.torque_fast_tor']='?'                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.state.:.torque_thermal_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.torque_fast_tor']='?'                              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.torque_thermal_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.current_fast_tor']='?'                                              #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.current_tor']='?'                                                   #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.source.:.momentum_tor']='?'                                         #[ADD?]# 3.000000 # momentum  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.electrons.torque_fast_tor']='?'                       #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.electrons.torque_thermal_tor']='?'                    #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.state.:.torque_fast_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'                #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.torque_fast_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.torque_thermal_tor']='?'                        #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.current_fast_tor']='?'                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.current_tor']='?'                                                #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.electrons.torque_fast_tor']='?'                                  #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.electrons.torque_thermal_tor']='?'                               #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.state.:.torque_fast_tor']='?'                              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.torque_fast_tor']='?'                                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.torque_thermal_tor']='?'                                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.electrons.torque_fast_tor']='?'                  #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.electrons.torque_thermal_tor']='?'               #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.state.:.torque_fast_tor']='?'              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.torque_fast_tor']='?'                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.torque_thermal_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.current_fast_tor']='?'                                      #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.current_tor']='?'                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.current_fast_tor']='?'                                                      #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.current_tor']='?'                                                           #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.electrons.torque_fast_tor']='?'                          #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.electrons.torque_thermal_tor']='?'                       #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.state.:.torque_fast_tor']='?'                      #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.state.:.torque_thermal_tor']='?'                   #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.torque_fast_tor']='?'                              #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
-cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.torque_thermal_tor']='?'                           #[ADD?]# 3.000000 # torque  _tor  [N.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.current_fast_tor']='?'                                              #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
 cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.current_tor']='?'                                                   #[ADD?]# 3.000000 # current  _tor  [A.m^-2]
-cocos_signals['distributions.distribution.:.global_quantities.:.energy_fast_parallel']='?'                                            #[ADD?]# 2.000000 # parallel  [J]
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.electrons.torque_fast_tor']='?'                            #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.electrons.torque_thermal_tor']='?'                         #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.state.:.torque_fast_tor']='?'                        #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                     #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.torque_fast_tor']='?'                                #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.collisions.ion.:.torque_thermal_tor']='?'                             #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.current_tor']='?'                                                     #[ADD?]# 2.000000 # current  _tor
+cocos_signals['distributions.distribution.:.global_quantities.:.source.:.torque_tor']='?'                                             #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.electrons.torque_fast_tor']='?'                       #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.electrons.torque_thermal_tor']='?'                    #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.state.:.torque_fast_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'                #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.torque_fast_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.collisions.ion.:.torque_thermal_tor']='?'                        #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.co_passing.source.:.momentum_tor']='?'                                      #[ADD?]# 2.000000 # momentum  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.electrons.torque_fast_tor']='?'                                  #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.electrons.torque_thermal_tor']='?'                               #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.state.:.torque_fast_tor']='?'                              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.torque_fast_tor']='?'                                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.collisions.ion.:.torque_thermal_tor']='?'                                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.electrons.torque_fast_tor']='?'                  #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.electrons.torque_thermal_tor']='?'               #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.state.:.torque_fast_tor']='?'              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.torque_fast_tor']='?'                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.collisions.ion.:.torque_thermal_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.counter_passing.source.:.momentum_tor']='?'                                 #[ADD?]# 2.000000 # momentum  _tor
 cocos_signals['distributions.distribution.:.profiles_1d.:.grid.psi']='?'                                                              #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['distributions.distribution.:.profiles_1d.:.source.:.momentum_tor']='?'                                                 #[ADD?]# 2.000000 # momentum  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.thermalisation.momentum_tor']='?'                                           #[ADD?]# 2.000000 # momentum  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.electrons.torque_fast_tor']='?'                          #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.electrons.torque_thermal_tor']='?'                       #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.state.:.torque_fast_tor']='?'                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.state.:.torque_thermal_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.torque_fast_tor']='?'                              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.collisions.ion.:.torque_thermal_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_1d.:.trapped.source.:.momentum_tor']='?'                                         #[ADD?]# 2.000000 # momentum  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.electrons.torque_fast_tor']='?'                       #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.electrons.torque_thermal_tor']='?'                    #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.state.:.torque_fast_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'                #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.torque_fast_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.co_passing.collisions.ion.:.torque_thermal_tor']='?'                        #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.electrons.torque_fast_tor']='?'                                  #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.electrons.torque_thermal_tor']='?'                               #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.state.:.torque_fast_tor']='?'                              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.state.:.torque_thermal_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.torque_fast_tor']='?'                                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.collisions.ion.:.torque_thermal_tor']='?'                                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.electrons.torque_fast_tor']='?'                  #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.electrons.torque_thermal_tor']='?'               #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.state.:.torque_fast_tor']='?'              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.state.:.torque_thermal_tor']='?'           #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.torque_fast_tor']='?'                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.counter_passing.collisions.ion.:.torque_thermal_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
 cocos_signals['distributions.distribution.:.profiles_2d.:.grid.psi']='?'                                                              #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.electrons.torque_fast_tor']='?'                          #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.electrons.torque_thermal_tor']='?'                       #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.state.:.torque_fast_tor']='?'                      #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.state.:.torque_thermal_tor']='?'                   #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.torque_fast_tor']='?'                              #[ADD?]# 2.000000 # torque  _tor
+cocos_signals['distributions.distribution.:.profiles_2d.:.trapped.collisions.ion.:.torque_thermal_tor']='?'                           #[ADD?]# 2.000000 # torque  _tor
 cocos_signals['distributions.vacuum_toroidal_field.b0']='TOR'                                                                                # 2.000000 # b0  [T]
+cocos_signals['distributions.distribution.:.global_quantities.:.energy_fast_parallel']='?'                                            #[ADD?]# 1.000000 # parallel
 
 # EC_ANTENNAS
 cocos_signals['ec_antennas.antenna.:.launching_position.phi.data']='?'           #[ADD?]# 1.800000 # phi  [rad]
@@ -257,7 +279,7 @@ cocos_signals['ec_antennas.antenna.:.launching_angle_tor.data']='?'             
 cocos_signals['ece.line_of_sight.first_point.phi']='?'                  #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['ece.line_of_sight.second_point.phi']='?'                 #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['ece.channel.:.position.phi.data']='?'                    #[ADD?]# 1.800000 # phi  [rad]
-cocos_signals['ece.channel.:.position.psi.data']='?'                    #[ADD?]# 1.800000 # psi  [W]
+cocos_signals['ece.channel.:.position.psi.data']='?'                    #[ADD?]# 0.800000 # psi
 
 # EDGE_PROFILES
 cocos_signals['edge_profiles.profiles_1d.:.e_field_parallel']='?'                                                    #[ADD?]# 3.000000 # e_field  parallel  [V.m^-1]
@@ -341,8 +363,6 @@ cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.poloidal']='?'         
 cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.toroidal']='?'                                              #[ADD?]# 2.600000 # j  toroidal  [A.m^-2]
 cocos_signals['edge_profiles.profiles_1d.:.current_parallel_inside']='?'                                             #[ADD?]# 2.000000 # current  [A]
 cocos_signals['edge_profiles.profiles_1d.:.grid.psi']='?'                                                            #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['edge_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                        #[ADD?]# 2.000000 # _tor  [rad.s^-1]
-cocos_signals['edge_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                                #[ADD?]# 2.000000 # _tor  [rad.s^-1]
 cocos_signals['edge_profiles.profiles_1d.:.j_bootstrap']='?'                                                         #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_non_inductive']='?'                                                     #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_ohmic']='?'                                                             #[ADD?]# 2.000000 # j  [A/m^2]
@@ -374,6 +394,8 @@ cocos_signals['edge_profiles.ggd.:.j_parallel_viscosity.:.diamagnetic']='?'     
 cocos_signals['edge_profiles.ggd.:.j_perpendicular_viscosity.:.diamagnetic']='?'                                     #[ADD?]# 1.600000 # j  [A.m^-2]
 cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.diamagnetic']='?'                                           #[ADD?]# 1.600000 # j  [A.m^-2]
 cocos_signals['edge_profiles.ggd.:.phi_potential.:.values']='?'                                                      #[ADD?]# 1.600000 # phi  [V]
+cocos_signals['edge_profiles.profiles_1d.:.ion.:.rotation_frequency_tor']='?'                                        #[ADD?]# 1.000000 # _tor
+cocos_signals['edge_profiles.profiles_1d.:.ion.:.state.:.rotation_frequency_tor']='?'                                #[ADD?]# 1.000000 # _tor
 
 # EDGE_SOURCES
 cocos_signals['edge_sources.source.:.ggd.:.ion.:.state.:.momentum.:.parallel']='?'                               #[ADD?]# 2.818182 # momentum  parallel  [kg.m^-1.s^-2]
@@ -414,14 +436,14 @@ cocos_signals['edge_transport.model.:.ggd.:.neutral.:.momentum.flux_limiter.:.to
 cocos_signals['edge_transport.model.:.ggd.:.momentum.flux_limiter.:.parallel']='?'                                             #[ADD?]# 2.625000 # momentum  parallel  [-]
 cocos_signals['edge_transport.model.:.ggd.:.momentum.flux_limiter.:.poloidal']='?'                                             #[ADD?]# 2.625000 # momentum  poloidal  [-]
 cocos_signals['edge_transport.model.:.ggd.:.momentum.flux_limiter.:.toroidal']='?'                                             #[ADD?]# 2.625000 # momentum  toroidal  [-]
-cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.parallel']='?'                                                      #[ADD?]# 2.000000 # parallel  [ohm^-1.m^-1]
-cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.poloidal']='?'                                                      #[ADD?]# 2.000000 # poloidal  [ohm^-1.m^-1]
-cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.toroidal']='?'                                                      #[ADD?]# 2.000000 # toroidal  [ohm^-1.m^-1]
 cocos_signals['edge_transport.model.:.ggd.:.ion.:.state.:.momentum.flux_limiter.:.diamagnetic']='?'                            #[ADD?]# 1.750000 # momentum  [-]
 cocos_signals['edge_transport.model.:.ggd.:.neutral.:.state.:.momentum.flux_limiter.:.diamagnetic']='?'                        #[ADD?]# 1.750000 # momentum  [-]
 cocos_signals['edge_transport.model.:.ggd.:.ion.:.momentum.flux_limiter.:.diamagnetic']='?'                                    #[ADD?]# 1.700000 # momentum  [-]
 cocos_signals['edge_transport.model.:.ggd.:.neutral.:.momentum.flux_limiter.:.diamagnetic']='?'                                #[ADD?]# 1.700000 # momentum  [-]
 cocos_signals['edge_transport.model.:.ggd.:.momentum.flux_limiter.:.diamagnetic']='?'                                          #[ADD?]# 1.625000 # momentum  [-]
+cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.parallel']='?'                                                      #[ADD?]# 1.000000 # parallel
+cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.poloidal']='?'                                                      #[ADD?]# 1.000000 # poloidal
+cocos_signals['edge_transport.model.:.ggd.:.conductivity.:.toroidal']='?'                                                      #[ADD?]# 1.000000 # toroidal
 
 # EM_COUPLING
 
@@ -529,37 +551,7 @@ cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.b_field_perturbed.
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.b_field_perturbed.coordinate2.real']='?'                 #[ADD?]# 2.875000 # toroidal  b  b_field  [T]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.b_field_perturbed.coordinate3.imaginary']='?'            #[ADD?]# 2.875000 # toroidal  b  b_field  [T]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.b_field_perturbed.coordinate3.real']='?'                 #[ADD?]# 2.875000 # toroidal  b  b_field  [T]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_parallel.imaginary']='?'                    #[ADD?]# 2.285714 # toroidal  parallel  [m]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_parallel.real']='?'                         #[ADD?]# 2.285714 # toroidal  parallel  [m]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate1.imaginary']='?'           #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate1.real']='?'                #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate2.imaginary']='?'           #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate2.real']='?'                #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.imaginary']='?'           #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.real']='?'                #[ADD?]# 2.125000 # toroidal  velocity  [m/s]
 cocos_signals['mhd_linear.vacuum_toroidal_field.b0']='TOR'                                                                    # 2.000000 # b0  [T]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.frequency']='?'                                                 #[ADD?]# 1.600000 # toroidal  [Hz]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']='?'                                                #[ADD?]# 1.600000 # toroidal  [Hz]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.jacobian']='?'                         #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_contravariant']='?'             #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_covariant']='?'                 #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_perpendicular.imaginary']='?'               #[ADD?]# 1.428571 # toroidal  [m]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_perpendicular.real']='?'                    #[ADD?]# 1.428571 # toroidal  [m]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.dim1']='?'                                          #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.dim2']='?'                                          #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.volume_element']='?'                                #[ADD?]# 1.428571 # toroidal  [m^3]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.imaginary']='?'                   #[ADD?]# 1.428571 # toroidal  [kg.m^-3]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.real']='?'                        #[ADD?]# 1.428571 # toroidal  [kg.m^-3]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.imaginary']='?'                       #[ADD?]# 1.428571 # toroidal  [Pa]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.real']='?'                            #[ADD?]# 1.428571 # toroidal  [Pa]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.imaginary']='?'                    #[ADD?]# 1.428571 # toroidal  [eV]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.real']='?'                         #[ADD?]# 1.428571 # toroidal  [eV]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.jacobian']='?'                         #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.tensor_contravariant']='?'             #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.tensor_covariant']='?'                 #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim1']='?'                                          #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim2']='?'                                          #[ADD?]# 1.428571 # toroidal  [mixed]
-cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.volume_element']='?'                                #[ADD?]# 1.428571 # toroidal  [m^3]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate1.imaginary']='?'            #[ADD?]# 1.375000 # toroidal  [T.m]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate1.real']='?'                 #[ADD?]# 1.375000 # toroidal  [T.m]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate2.imaginary']='?'            #[ADD?]# 1.375000 # toroidal  [T.m]
@@ -572,6 +564,36 @@ cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate2.real']='?'                 #[ADD?]# 1.375000 # toroidal  [T.m]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate3.imaginary']='?'            #[ADD?]# 1.375000 # toroidal  [T.m]
 cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate3.real']='?'                 #[ADD?]# 1.375000 # toroidal  [T.m]
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_parallel.imaginary']='?'                    #[ADD?]# 1.285714 # toroidal  parallel
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_parallel.real']='?'                         #[ADD?]# 1.285714 # toroidal  parallel
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate1.imaginary']='?'           #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate1.real']='?'                #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate2.imaginary']='?'           #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate2.real']='?'                #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.imaginary']='?'           #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.real']='?'                #[ADD?]# 1.125000 # toroidal  velocity
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.frequency']='?'                                                 #[ADD?]# 0.600000 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']='?'                                                #[ADD?]# 0.600000 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.jacobian']='?'                         #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_contravariant']='?'             #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_covariant']='?'                 #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_perpendicular.imaginary']='?'               #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.displacement_perpendicular.real']='?'                    #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.dim1']='?'                                          #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.dim2']='?'                                          #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.grid.volume_element']='?'                                #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.imaginary']='?'                   #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.real']='?'                        #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.imaginary']='?'                       #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.real']='?'                            #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.imaginary']='?'                    #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.real']='?'                         #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.jacobian']='?'                         #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.tensor_contravariant']='?'             #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.tensor_covariant']='?'                 #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim1']='?'                                          #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim2']='?'                                          #[ADD?]# 0.428571 # toroidal
+cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.volume_element']='?'                                #[ADD?]# 0.428571 # toroidal
 
 # MSE
 cocos_signals['mse.channel.:.active_spatial_resolution.:.centre.phi']='?'                       #[ADD?]# 2.000000 # phi  [rad]
@@ -588,10 +610,10 @@ cocos_signals['nbi.unit.:.beamlets_group.:.tilting.:.delta_position.phi']='?'   
 
 # NEUTRON_DIAGNOSTIC
 cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.amplitude.data']='?'                    #[ADD?]# 2.200000 # b  b_field  [V]
-cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?'                    #[ADD?]# 2.200000 # b  b_field  [Hz]
 cocos_signals['neutron_diagnostic.detectors.:.aperture.:.centre.phi']='?'                            #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['neutron_diagnostic.detectors.:.detector.centre.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['neutron_diagnostic.detectors.:.position.phi']='?'                                     #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?'                    #[ADD?]# 1.200000 # b  b_field
 
 # NTMS
 cocos_signals['ntms.vacuum_toroidal_field.b0']='TOR'                                             # 2.000000 # b0  [T]
@@ -624,10 +646,10 @@ cocos_signals['polarimeter.channel.:.line_of_sight.second_point.phi']='?'       
 cocos_signals['polarimeter.channel.:.line_of_sight.third_point.phi']='?'            #[ADD?]# 2.000000 # phi  [rad]
 
 # PULSE_SCHEDULE
-cocos_signals['pulse_schedule.tf.b_field_tor_vacuum_r.reference.data']='?'                             #[ADD?]# 2.000000 # b  b_field  [mixed]
-cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_pol.reference.data']='?'                    #[ADD?]# 1.666667 # _pol  [mixed]
-cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_tor.reference.data']='?'                    #[ADD?]# 1.666667 # _tor  [mixed]
-cocos_signals['pulse_schedule.lh.antenna.:.n_parallel.reference.data']='?'                             #[ADD?]# 1.666667 # parallel  [mixed]
+cocos_signals['pulse_schedule.tf.b_field_tor_vacuum_r.reference.data']='?'                             #[ADD?]# 1.000000 # b  b_field
+cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_pol.reference.data']='?'                    #[ADD?]# 0.666667 # _pol
+cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_tor.reference.data']='?'                    #[ADD?]# 0.666667 # _tor
+cocos_signals['pulse_schedule.lh.antenna.:.n_parallel.reference.data']='?'                             #[ADD?]# 0.666667 # parallel
 
 # RADIATION
 cocos_signals['radiation.process.:.profiles_1d.:.grid.psi']='?'                                          #[ADD?]# 2.000000 # psi  [Wb]
@@ -643,19 +665,19 @@ cocos_signals['reflectometer_profile.channel.:.position.phi.data']='?'          
 # SAWTEETH
 cocos_signals['sawteeth.profiles_1d.:.e_field_parallel']='?'                       #[ADD?]# 3.000000 # e_field  parallel  [V.m^-1]
 cocos_signals['sawteeth.profiles_1d.:.j_tor']='?'                                  #[ADD?]# 3.000000 # j  _tor  [A/m^2]
-cocos_signals['sawteeth.profiles_1d.:.momentum_tor']='?'                           #[ADD?]# 3.000000 # momentum  _tor  [kg.m/s]
 cocos_signals['sawteeth.profiles_1d.:.grid.psi']='?'                               #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['sawteeth.profiles_1d.:.j_bootstrap']='?'                            #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['sawteeth.profiles_1d.:.j_non_inductive']='?'                        #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['sawteeth.profiles_1d.:.j_ohmic']='?'                                #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['sawteeth.profiles_1d.:.j_total']='?'                                #[ADD?]# 2.000000 # j  [A/m^2]
-cocos_signals['sawteeth.profiles_1d.:.p_e_fast_parallel']='?'                      #[ADD?]# 2.000000 # parallel  [Pa]
-cocos_signals['sawteeth.profiles_1d.:.p_i_total_fast_parallel']='?'                #[ADD?]# 2.000000 # parallel  [Pa]
+cocos_signals['sawteeth.profiles_1d.:.momentum_tor']='?'                           #[ADD?]# 2.000000 # momentum  _tor
 cocos_signals['sawteeth.profiles_1d.:.phi']='?'                                    #[ADD?]# 2.000000 # phi  [Wb]
 cocos_signals['sawteeth.profiles_1d.:.psi_star_post_crash']='?'                    #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['sawteeth.profiles_1d.:.psi_star_pre_crash']='?'                     #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['sawteeth.profiles_1d.:.q']='?'                                      #[ADD?]# 2.000000 # q  [-]
 cocos_signals['sawteeth.vacuum_toroidal_field.b0']='TOR'                                  # 2.000000 # b0  [T]
+cocos_signals['sawteeth.profiles_1d.:.p_e_fast_parallel']='?'                      #[ADD?]# 1.000000 # parallel
+cocos_signals['sawteeth.profiles_1d.:.p_i_total_fast_parallel']='?'                #[ADD?]# 1.000000 # parallel
 
 # SDN
 
@@ -677,11 +699,7 @@ cocos_signals['spectrometer_visible.channel.:.line_of_sight.first_point.phi']='?
 cocos_signals['spectrometer_visible.channel.:.line_of_sight.second_point.phi']='?'                                     #[ADD?]# 2.000000 # phi  [rad]
 
 # SUMMARY
-cocos_signals['summary.local.itb.momentum_tor.value']='?'                                                                     #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 cocos_signals['summary.local.magnetic_axis.b_field.value']='?'                                                                #[ADD?]# 2.500000 # b  b_field  [T]
-cocos_signals['summary.local.magnetic_axis.momentum_tor.value']='?'                                                           #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
-cocos_signals['summary.local.pedestal.momentum_tor.value']='?'                                                                #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
-cocos_signals['summary.local.separatrix.momentum_tor.value']='?'                                                              #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 cocos_signals['summary.pedestal_fits.linear.b_field_pedestal_top_hfs.value']='?'                                              #[ADD?]# 2.500000 # b  b_field  [T]
 cocos_signals['summary.pedestal_fits.linear.b_field_pedestal_top_lfs.value']='?'                                              #[ADD?]# 2.500000 # b  b_field  [T]
 cocos_signals['summary.pedestal_fits.linear.b_field_pol_pedestal_top_average.value']='?'                                      #[ADD?]# 2.500000 # b  b_field  [T]
@@ -696,63 +714,6 @@ cocos_signals['summary.pedestal_fits.mtanh.b_field_pol_pedestal_top_hfs.value']=
 cocos_signals['summary.pedestal_fits.mtanh.b_field_pol_pedestal_top_lfs.value']='?'                                           #[ADD?]# 2.500000 # b  b_field  [T]
 cocos_signals['summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_hfs.value']='?'                                           #[ADD?]# 2.500000 # b  b_field  [T]
 cocos_signals['summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_lfs.value']='?'                                           #[ADD?]# 2.500000 # b  b_field  [T]
-cocos_signals['summary.global_quantities.energy_b_field_pol.value']='?'                                                       #[ADD?]# 2.333333 # b_field  _pol  [J]
-cocos_signals['summary.local.itb.velocity_tor.argon.value']='?'                                                               #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.beryllium.value']='?'                                                           #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.carbon.value']='?'                                                              #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.deuterium.value']='?'                                                           #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.helium_3.value']='?'                                                            #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.helium_4.value']='?'                                                            #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.hydrogen.value']='?'                                                            #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.lithium.value']='?'                                                             #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.neon.value']='?'                                                                #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.nitrogen.value']='?'                                                            #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.oxygen.value']='?'                                                              #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.tritium.value']='?'                                                             #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.tungsten.value']='?'                                                            #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.itb.velocity_tor.xenon.value']='?'                                                               #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.argon.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.beryllium.value']='?'                                                 #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.carbon.value']='?'                                                    #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.deuterium.value']='?'                                                 #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.helium_3.value']='?'                                                  #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.helium_4.value']='?'                                                  #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.hydrogen.value']='?'                                                  #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.lithium.value']='?'                                                   #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.neon.value']='?'                                                      #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.nitrogen.value']='?'                                                  #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.oxygen.value']='?'                                                    #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.tritium.value']='?'                                                   #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.tungsten.value']='?'                                                  #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.magnetic_axis.velocity_tor.xenon.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.argon.value']='?'                                                          #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.beryllium.value']='?'                                                      #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.carbon.value']='?'                                                         #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.deuterium.value']='?'                                                      #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.helium_3.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.helium_4.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.hydrogen.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.lithium.value']='?'                                                        #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.neon.value']='?'                                                           #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.nitrogen.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.oxygen.value']='?'                                                         #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.tritium.value']='?'                                                        #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.tungsten.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.pedestal.velocity_tor.xenon.value']='?'                                                          #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.argon.value']='?'                                                        #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.beryllium.value']='?'                                                    #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.carbon.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.deuterium.value']='?'                                                    #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.helium_3.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.helium_4.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.hydrogen.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.lithium.value']='?'                                                      #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.neon.value']='?'                                                         #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.nitrogen.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.oxygen.value']='?'                                                       #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.tritium.value']='?'                                                      #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.tungsten.value']='?'                                                     #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
-cocos_signals['summary.local.separatrix.velocity_tor.xenon.value']='?'                                                        #[ADD?]# 2.200000 # velocity  _tor  [as_parent_level_2]
 cocos_signals['summary.local.itb.position.psi']='?'                                                                           #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['summary.local.magnetic_axis.position.psi']='?'                                                                 #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['summary.local.pedestal.position.psi']='?'                                                                      #[ADD?]# 2.000000 # psi  [Wb]
@@ -775,15 +736,76 @@ cocos_signals['summary.global_quantities.current_alignment.value']='?'          
 cocos_signals['summary.global_quantities.current_bootstrap.value']='?'                                                        #[ADD?]# 1.666667 # current  [A]
 cocos_signals['summary.global_quantities.current_non_inductive.value']='?'                                                    #[ADD?]# 1.666667 # current  [A]
 cocos_signals['summary.global_quantities.current_ohm.value']='?'                                                              #[ADD?]# 1.666667 # current  [A]
-cocos_signals['summary.global_quantities.energy_fast_parallel.value']='?'                                                     #[ADD?]# 1.666667 # parallel  [J]
 cocos_signals['summary.global_quantities.ip.value']='TOR'                                                                            # 1.666667 # ip  [A]
 cocos_signals['summary.global_quantities.q_95.value']='?'                                                                     #[ADD?]# 1.666667 # q  [-]
 cocos_signals['summary.global_quantities.v_loop.value']='TOR'                                                                        # 1.666667 # v  [V]
 cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_hager.alpha_critical.value']='?'                       #[ADD?]# 1.666667 # current  [-]
-cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_hager.t_e_pedestal_top_critical.value']='?'            #[ADD?]# 1.666667 # current  [eV]
 cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_sauter.alpha_critical.value']='?'                      #[ADD?]# 1.666667 # current  [-]
-cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_sauter.t_e_pedestal_top_critical.value']='?'           #[ADD?]# 1.666667 # current  [eV]
 cocos_signals['summary.runaways.current.value']='?'                                                                           #[ADD?]# 1.666667 # current  [A]
+cocos_signals['summary.local.itb.momentum_tor.value']='?'                                                                     #[ADD?]# 1.500000 # momentum  _tor
+cocos_signals['summary.local.magnetic_axis.momentum_tor.value']='?'                                                           #[ADD?]# 1.500000 # momentum  _tor
+cocos_signals['summary.local.pedestal.momentum_tor.value']='?'                                                                #[ADD?]# 1.500000 # momentum  _tor
+cocos_signals['summary.local.separatrix.momentum_tor.value']='?'                                                              #[ADD?]# 1.500000 # momentum  _tor
+cocos_signals['summary.global_quantities.energy_b_field_pol.value']='?'                                                       #[ADD?]# 1.333333 # b_field  _pol
+cocos_signals['summary.local.itb.velocity_tor.argon.value']='?'                                                               #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.beryllium.value']='?'                                                           #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.carbon.value']='?'                                                              #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.deuterium.value']='?'                                                           #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.helium_3.value']='?'                                                            #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.helium_4.value']='?'                                                            #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.hydrogen.value']='?'                                                            #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.lithium.value']='?'                                                             #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.neon.value']='?'                                                                #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.nitrogen.value']='?'                                                            #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.oxygen.value']='?'                                                              #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.tritium.value']='?'                                                             #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.tungsten.value']='?'                                                            #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.itb.velocity_tor.xenon.value']='?'                                                               #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.argon.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.beryllium.value']='?'                                                 #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.carbon.value']='?'                                                    #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.deuterium.value']='?'                                                 #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.helium_3.value']='?'                                                  #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.helium_4.value']='?'                                                  #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.hydrogen.value']='?'                                                  #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.lithium.value']='?'                                                   #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.neon.value']='?'                                                      #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.nitrogen.value']='?'                                                  #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.oxygen.value']='?'                                                    #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.tritium.value']='?'                                                   #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.tungsten.value']='?'                                                  #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.magnetic_axis.velocity_tor.xenon.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.argon.value']='?'                                                          #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.beryllium.value']='?'                                                      #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.carbon.value']='?'                                                         #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.deuterium.value']='?'                                                      #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.helium_3.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.helium_4.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.hydrogen.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.lithium.value']='?'                                                        #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.neon.value']='?'                                                           #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.nitrogen.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.oxygen.value']='?'                                                         #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.tritium.value']='?'                                                        #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.tungsten.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.pedestal.velocity_tor.xenon.value']='?'                                                          #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.argon.value']='?'                                                        #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.beryllium.value']='?'                                                    #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.carbon.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.deuterium.value']='?'                                                    #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.helium_3.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.helium_4.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.hydrogen.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.lithium.value']='?'                                                      #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.neon.value']='?'                                                         #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.nitrogen.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.oxygen.value']='?'                                                       #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.tritium.value']='?'                                                      #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.tungsten.value']='?'                                                     #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.local.separatrix.velocity_tor.xenon.value']='?'                                                        #[ADD?]# 1.200000 # velocity  _tor
+cocos_signals['summary.global_quantities.energy_fast_parallel.value']='?'                                                     #[ADD?]# 0.666667 # parallel
+cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_hager.t_e_pedestal_top_critical.value']='?'            #[ADD?]# 0.666667 # current
+cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_sauter.t_e_pedestal_top_critical.value']='?'           #[ADD?]# 0.666667 # current
 
 # TEMPORARY
 
@@ -819,13 +841,13 @@ cocos_signals['transport_solver_numerics.derivatives_1d.:.ion.:.state.:.d_drho_t
 cocos_signals['transport_solver_numerics.derivatives_1d.:.ion.:.state.:.d_drho_tor_norm.velocity_tor']='?'                                 #[ADD?]# 3.000000 # velocity  _tor  [m.s^-1]
 cocos_signals['transport_solver_numerics.derivatives_1d.:.ion.:.state.:.d_dt.velocity_pol']='?'                                            #[ADD?]# 3.000000 # velocity  _pol  [m.s^-1]
 cocos_signals['transport_solver_numerics.derivatives_1d.:.ion.:.state.:.d_dt.velocity_tor']='?'                                            #[ADD?]# 3.000000 # velocity  _tor  [m.s^-1]
-cocos_signals['transport_solver_numerics.boundary_conditions_1d.:.momentum_tor.value']='?'                                                 #[ADD?]# 2.500000 # momentum  _tor  [mixed]
-cocos_signals['transport_solver_numerics.derivatives_1d.:.dpsi_drho_tor']='?'                                                              #[ADD?]# 2.000000 # _tor  [Wb.m^-1]
 cocos_signals['transport_solver_numerics.derivatives_1d.:.grid.psi']='?'                                                                   #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['transport_solver_numerics.solver_1d.:.grid.psi']='?'                                                                        #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['transport_solver_numerics.vacuum_toroidal_field.b0']='TOR'                                                                         # 2.000000 # b0  [T]
-cocos_signals['transport_solver_numerics.boundary_conditions_1d.:.current.value']='?'                                                      #[ADD?]# 1.750000 # current  [mixed]
-cocos_signals['transport_solver_numerics.boundary_conditions_ggd.:.current.:.values']='?'                                                  #[ADD?]# 1.600000 # current  [mixed]
+cocos_signals['transport_solver_numerics.boundary_conditions_1d.:.momentum_tor.value']='?'                                                 #[ADD?]# 1.500000 # momentum  _tor
+cocos_signals['transport_solver_numerics.derivatives_1d.:.dpsi_drho_tor']='?'                                                              #[ADD?]# 1.000000 # _tor
+cocos_signals['transport_solver_numerics.boundary_conditions_1d.:.current.value']='?'                                                      #[ADD?]# 0.750000 # current
+cocos_signals['transport_solver_numerics.boundary_conditions_ggd.:.current.:.values']='?'                                                  #[ADD?]# 0.600000 # current
 
 # TURBULENCE
 
@@ -858,40 +880,11 @@ cocos_signals['waves.coherent_wave.:.profiles_2d.:.e_field_n_tor.:.plus.phase']=
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.position.phi']='?'                                            #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.position.psi']='?'                                            #[ADD?]# 2.000000 # psi  [Wb]
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.power_flow_norm.parallel']='?'                                #[ADD?]# 2.000000 # parallel  [-]
-cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.wave_vector.k_tor']='?'                                       #[ADD?]# 2.000000 # _tor  [m^-1]
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.wave_vector.n_parallel']='?'                                  #[ADD?]# 2.000000 # parallel  [-]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.electrons.power_fast_n_tor']='?'                                #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.electrons.power_thermal_n_tor']='?'                             #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.power_fast_n_tor']='?'                                    #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.power_thermal_n_tor']='?'                                 #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.state.:.power_fast_n_tor']='?'                            #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.state.:.power_thermal_n_tor']='?'                         #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.global_quantities.:.power_n_tor']='?'                                               #[ADD?]# 2.000000 # _tor  [W]
 cocos_signals['waves.coherent_wave.:.profiles_1d.:.current_parallel_density']='?'                                        #[ADD?]# 2.000000 # current  [A.m^-2]
 cocos_signals['waves.coherent_wave.:.profiles_1d.:.current_tor_inside']='?'                                              #[ADD?]# 2.000000 # current  [A]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_density_fast_n_tor']='?'                              #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_density_thermal_n_tor']='?'                           #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_inside_fast_n_tor']='?'                               #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_inside_thermal_n_tor']='?'                            #[ADD?]# 2.000000 # _tor  [W]
 cocos_signals['waves.coherent_wave.:.profiles_1d.:.grid.psi']='?'                                                        #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_density_fast_n_tor']='?'                                  #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_density_thermal_n_tor']='?'                               #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_inside_fast_n_tor']='?'                                   #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_inside_thermal_n_tor']='?'                                #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_density_fast_n_tor']='?'                          #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_density_thermal_n_tor']='?'                       #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_inside_fast_n_tor']='?'                           #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_inside_thermal_n_tor']='?'                        #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.power_density_n_tor']='?'                                             #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_1d.:.power_inside_n_tor']='?'                                              #[ADD?]# 2.000000 # _tor  [W]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.electrons.power_density_fast_n_tor']='?'                              #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.electrons.power_density_thermal_n_tor']='?'                           #[ADD?]# 2.000000 # _tor  [W.m^-3]
 cocos_signals['waves.coherent_wave.:.profiles_2d.:.grid.psi']='?'                                                        #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.power_density_fast_n_tor']='?'                                  #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.power_density_thermal_n_tor']='?'                               #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_fast_n_tor']='?'                          #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_thermal_n_tor']='?'                       #[ADD?]# 2.000000 # _tor  [W.m^-3]
-cocos_signals['waves.coherent_wave.:.profiles_2d.:.power_density_n_tor']='?'                                             #[ADD?]# 2.000000 # _tor  [W.m^-3]
 cocos_signals['waves.vacuum_toroidal_field.b0']='TOR'                                                                           # 2.000000 # b0  [T]
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.e_field.minus.imaginary']='?'                                 #[ADD?]# 1.777778 # e_field  [V.m^-1]
 cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.e_field.minus.real']='?'                                      #[ADD?]# 1.777778 # e_field  [V.m^-1]
@@ -901,3 +894,32 @@ cocos_signals['waves.coherent_wave.:.full_wave.:.e_field.bi_normal.:.values']='?
 cocos_signals['waves.coherent_wave.:.full_wave.:.e_field.minus.:.values']='?'                                            #[ADD?]# 1.625000 # e_field  [V.m^-1]
 cocos_signals['waves.coherent_wave.:.full_wave.:.e_field.normal.:.values']='?'                                           #[ADD?]# 1.625000 # e_field  [V.m^-1]
 cocos_signals['waves.coherent_wave.:.full_wave.:.e_field.plus.:.values']='?'                                             #[ADD?]# 1.625000 # e_field  [V.m^-1]
+cocos_signals['waves.coherent_wave.:.beam_tracing.:.beam.:.wave_vector.k_tor']='?'                                       #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.electrons.power_fast_n_tor']='?'                                #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.electrons.power_thermal_n_tor']='?'                             #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.power_fast_n_tor']='?'                                    #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.power_thermal_n_tor']='?'                                 #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.state.:.power_fast_n_tor']='?'                            #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.ion.:.state.:.power_thermal_n_tor']='?'                         #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.global_quantities.:.power_n_tor']='?'                                               #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_density_fast_n_tor']='?'                              #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_density_thermal_n_tor']='?'                           #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_inside_fast_n_tor']='?'                               #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.electrons.power_inside_thermal_n_tor']='?'                            #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_density_fast_n_tor']='?'                                  #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_density_thermal_n_tor']='?'                               #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_inside_fast_n_tor']='?'                                   #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.power_inside_thermal_n_tor']='?'                                #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_density_fast_n_tor']='?'                          #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_density_thermal_n_tor']='?'                       #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_inside_fast_n_tor']='?'                           #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.ion.:.state.:.power_inside_thermal_n_tor']='?'                        #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.power_density_n_tor']='?'                                             #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_1d.:.power_inside_n_tor']='?'                                              #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.electrons.power_density_fast_n_tor']='?'                              #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.electrons.power_density_thermal_n_tor']='?'                           #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.power_density_fast_n_tor']='?'                                  #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.power_density_thermal_n_tor']='?'                               #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_fast_n_tor']='?'                          #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_thermal_n_tor']='?'                       #[ADD?]# 1.000000 # _tor
+cocos_signals['waves.coherent_wave.:.profiles_2d.:.power_density_n_tor']='?'                                             #[ADD?]# 1.000000 # _tor
