@@ -1071,7 +1071,7 @@ cocos_signals = {}
                 elif score < 0:
                     message = '#[DEL?]'
 
-                txt = ("cocos_signals['%s']='%s'" % (item, cocos_signals.get(item, '?'))).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
+                txt = ("cocos_signals['%s']=%s" % (item, repr(cocos_signals.get(item, '?')))).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
                 text.append(txt)
                 if score > threshold or (item in cocos_signals and cocos_signals[item] != '?'):
                     csig.append(txt)
