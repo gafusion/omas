@@ -629,16 +629,16 @@ cocos_signals['pellets.time_slice.:.pellet.:.path_profiles.velocity']='?'       
 cocos_signals['pellets.time_slice.:.pellet.:.velocity_initial']='?'                           #[ADD?]# 2.000000 # velocity  [m.s^-1]
 
 # PF_ACTIVE
-cocos_signals['pf_active.coil.:.current_limit_max']='?'                                           #[ADD?]# 2.000000 # current  [A]
-cocos_signals['pf_active.supply.:.current_limit_max']='?'                                         #[ADD?]# 2.000000 # current  [A]
-cocos_signals['pf_active.supply.:.current_limit_min']='?'                                         #[ADD?]# 2.000000 # current  [A]
-cocos_signals['pf_active.supply.:.current_limiter_gain']='?'                                      #[ADD?]# 2.000000 # current  [V]
-cocos_signals['pf_active.circuit.:.current.data']='?'                                             #[ADD?]# 1.750000 # current  [A]
-cocos_signals['pf_active.coil.:.current.data']='?'                                                #[ADD?]# 1.750000 # current  [A]
-cocos_signals['pf_active.supply.:.current.data']='?'                                              #[ADD?]# 1.750000 # current  [A]
+cocos_signals['pf_active.coil.:.current_limit_max']=None                                                 # 2.000000 # current  [A]
+cocos_signals['pf_active.supply.:.current_limit_max']=None                                               # 2.000000 # current  [A]
+cocos_signals['pf_active.supply.:.current_limit_min']=None                                               # 2.000000 # current  [A]
+cocos_signals['pf_active.supply.:.current_limiter_gain']=None                                            # 2.000000 # current  [V]
+cocos_signals['pf_active.circuit.:.current.data']='TOR'                                                  # 1.750000 # current  [A]
+cocos_signals['pf_active.coil.:.current.data']='TOR'                                                     # 1.750000 # current  [A]
+cocos_signals['pf_active.supply.:.current.data']='TOR'                                                   # 1.750000 # current  [A]
 
 # PF_PASSIVE
-cocos_signals['pf_passive.loop.:.current']='?'                                                     #[ADD?]# 2.000000 # current  [A]
+cocos_signals['pf_passive.loop.:.current']='TOR'                                                          # 2.000000 # current  [A]
 
 # POLARIMETER
 cocos_signals['polarimeter.channel.:.line_of_sight.first_point.phi']='TOR'                 # 2.000000 # phi  [rad]
