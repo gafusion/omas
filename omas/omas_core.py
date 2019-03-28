@@ -180,11 +180,14 @@ class ODS(MutableMapping):
         '''
 
         # set time_index for parent and children
-        if 'time' in self:
+        if 'time' in self and isinstance(self['time'], numpy.ndarray):
             if time_index is None:
-                time_index = numpy.where(self['time'] == time)[0][0]
-            else:
-                raise ValueError('time info is defined both in %s as well as upstream' % (self.location + '.time'))
+                time_index = numpy.argmin(abs(self['time'] - time))
+                if (time - self['time'][time_index]) != 0.0:
+                    printe('%s sliced at %s instead of requested time %s' % (self.location, self['time'][time_index], time))
+                time = self['time'][time_index]
+            if time is None:
+                time = self['time'][time_index]
 
         # loop over items
         for item in self.keys():
