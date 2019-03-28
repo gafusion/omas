@@ -113,49 +113,34 @@ class Uband(object):
     This class wraps the line and PollyCollection(s) associated with a banded
     errorbar plot for use in the uband function.
 
-    It's methods are Line2D methods distributed to both the line and bands if
-    applicable, or just to the line alone otherwise.
-
     """
 
     def __init__(self, line, bands):
         """
         :param line: Line2D
             A line of the x,y nominal values
+
         :param bands: list of PolyCollections
-            The fill_between and/or fill_betweenx PollyCollections spanning the
-            std_devs of the x,y data.
+            The fill_between and/or fill_betweenx PollyCollections spanning the std_devs of the x,y data
 
         """
         self.line = line  # matplotlib.lines.Line2D
-        self.bands = list(matplotlib.cbook.flatten([bands]))  # matplotlib.collections.PolyCollection(s)
+        self.bands = list(flatten([bands]))  # matplotlib.collections.PolyCollection(s)
 
+    def __getattr__(self, attr):
+        if attr in ['set_color', 'set_lw', 'set_linewidth', 'set_dashes', 'set_linestyle']:
+            def _band_line_method(self, method, *args, **kw):
+                """
+                Call the same method for line and band.
+                Returns Line2D method call result.
+                """
+                for band in self.bands:
+                    getattr(band, method)(*args, **kw)
+                return getattr(self.line, method)(*args, **kw)
 
-def _method_factory(self, key, bands=True):
-    """Add a method that calls the same method for line and band
-    or just for the line"""
-    if bands:
-        def method(self, *args, **kw):
-            """
-            Call the same method for line and band.
-            Returns Line2D method call result.
-            """
-            for band in self.bands:
-                getattr(band, key)(*args, **kw)
-            return getattr(self.line, key)(*args, **kw)
-    else:
-        def method(self, *args, **kw):
-            """Call the line method"""
-            return getattr(self.line, key)(*args, **kw)
-    return method
-
-
-for _name, _method in inspect.getmembers(matplotlib.lines.Line2D, predicate=inspect.ismethod):
-    if _name.startswith('_'):
-        continue
-    setattr(Uband, _name, _method_factory(Uband, _name,
-                                          bands=_name in ['set_color', 'set_lw', 'set_linewidth', 'set_dashes',
-                                                          'set_linestyle']))
+            return lambda method=attr, *args, **kw: _band_line_method(method, *args, **kw)
+        else:
+            return getattr(self.line, attr)
 
 
 def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
