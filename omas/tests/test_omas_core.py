@@ -54,7 +54,7 @@ class TestOmasCore(unittest.TestCase):
             ods['dataset_description'] = ODS()
             ods['dataset_description.data_entry.user'] = os.environ['USER']
         else:
-            raise (Exception('OMAS error handling dynamic_path_creation=False'))
+            raise Exception('OMAS error handling dynamic_path_creation=False')
         finally:
             ods.dynamic_path_creation = True
 
@@ -64,7 +64,7 @@ class TestOmasCore(unittest.TestCase):
         except ValueError:
             pass
         else:
-            raise (Exception('OMAS error querying leaf that has not been set'))
+            raise Exception('OMAS error querying leaf that has not been set')
 
         # info ODS is used for keeping track of IMAS metadata
         ods['dataset_description.data_entry.machine'] = 'ITER'
@@ -123,7 +123,7 @@ class TestOmasCore(unittest.TestCase):
         tmp = pickle.dumps(ods2)
         ods2 = pickle.loads(tmp)
         if ods2.consistency_check != ckbkp:
-            raise (Exception('consistency_check attribute changed'))
+            raise Exception('consistency_check attribute changed')
 
         # check flattening
         tmp = ods2.flat()
@@ -248,7 +248,7 @@ class TestOmasCore(unittest.TestCase):
         # check if data structures satisfy IMAS requirements (this should Fail)
         try:
             ods.satisfy_imas_requirements()
-            raise (ValueError('It is expected that not all the sample structures have the .time array set'))
+            raise ValueError('It is expected that not all the sample structures have the .time array set')
         except ValueError as _excp:
             pass
 

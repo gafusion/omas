@@ -597,7 +597,7 @@ def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True,
     :return: dictionary with matching ions labels, each with list of matching ion elements
     '''
     if not ion_ods.location.endswith('.ion'):
-        raise (ValueError('ods location must end with `.ion`'))
+        raise ValueError('ods location must end with `.ion`')
     match = {}
     for ki in ion_ods:
         if label is None or (label is not None and 'label' in ion_ods[ki] and ion_ods[ki]['label'] == label):
@@ -614,9 +614,9 @@ def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True,
             else:
                 match[ki] = []
     if multiple_matches_raise_error and (len(match) > 1 or len(match) == 1 and len(list(match.values())[0]) > 1):
-        raise (IndexError('Multiple ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
+        raise IndexError('Multiple ion match query: label=%s  Z=%s  A=%s' % (label, Z, A))
     if no_matches_raise_error and len(match) == 0:
-        raise (IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A)))
+        raise IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A))
     return match
 
 @add_to__ALL__
@@ -642,7 +642,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     '''
 
     if ods.omas_data is not None and not isinstance(ods.omas_data, list):
-        raise (Exception('ods location must be an array of structures'))
+        raise Exception('ods location must be an array of structures')
 
     if isinstance(conditions, ODS):
         conditions = conditions.flat()
@@ -667,11 +667,11 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
 
     if not len(match):
         if no_matches_raise_error:
-            raise (IndexError('no matches for conditions: %s' % conditions))
+            raise IndexError('no matches for conditions: %s' % conditions)
         match = [no_matches_return]
 
     if multiple_matches_raise_error and len(match) > 1:
-        raise (IndexError('multiple matches for conditions: %s' % conditions))
+        raise IndexError('multiple matches for conditions: %s' % conditions)
 
     return match
 
@@ -862,7 +862,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
         coordsio = tmp
 
     if cocosio is not None and not isinstance(cocosio, int):
-        raise (ValueError('cocosio can only be an integer'))
+        raise ValueError('cocosio can only be an integer')
 
     # backup attributes
     bkp_cocosio = ods.cocosio

@@ -282,7 +282,7 @@ def remote_uri(uri, filename, action):
     location = '://'.join(tmp[1:])
 
     if action not in ['down', 'up', 'list', 'del']:
-        raise (AttributeError('remote_uri action attribute must be one of [`up`, `down`, `list`, `del`]'))
+        raise AttributeError('remote_uri action attribute must be one of [`up`, `down`, `list`, `del`]')
 
     if system == 's3':
         import boto3
@@ -476,7 +476,7 @@ def list_structures(imas_version):
     json_filenames = filter(lambda x:os.path.basename(x)[0]!='_', json_filenames)
     structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],json_filenames)))
     if not len(structures):
-        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
+        raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
     return structures
 
 
@@ -490,7 +490,7 @@ def dict_structures(imas_version):
     '''
     paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
     if not len(paths):
-        raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
+        raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
     structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
     return {structure: structures[structure] for structure in structures if not structure.startswith('_')}
 
@@ -588,10 +588,10 @@ def p2l(key):
             return []
 
     if key is None:
-        raise(TypeError('OMAS key cannot be None'))
+        raise TypeError('OMAS key cannot be None')
 
     if isinstance(key, dict):
-        raise(TypeError('OMAS key cannot be of type dictionary'))
+        raise TypeError('OMAS key cannot be of type dictionary')
 
     key0 = ''.join(key)
     if key0 in _p2l_cache:

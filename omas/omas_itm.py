@@ -45,11 +45,11 @@ def itm_open(user, machine, pulse, run, new=False,
     if user is None and machine is None:
         pass
     elif user is None or machine is None:
-        raise (Exception('user={user}, machine={machine}, itm_version={itm_version}\n'
-                         'Either specify all or none of `user`, `machine`, `itm_version`\n'
-                         'If none of them are specified then use `itmdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
-                                                                              run=run, itm_version=itm_version)))
+        raise Exception('user={user}, machine={machine}, itm_version={itm_version}\n'
+                        'Either specify all or none of `user`, `machine`, `itm_version`\n'
+                        'If none of them are specified then use `itmdb` command to set '
+                        'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
+                                                                             run=run, itm_version=itm_version))
 
     if user is None and machine is None:
         if new:
@@ -61,10 +61,10 @@ def itm_open(user, machine, pulse, run, new=False,
                 cpo.open()
             except Exception as _excp:
                 if 'Error opening itm pulse' in str(_excp):
-                    raise (IOError('Error opening itm pulse %d run %d' % (pulse, run)))
+                    raise IOError('Error opening itm pulse %d run %d' % (pulse, run))
         if not cpo.isConnected():
-            raise (Exception('Failed to establish connection to ITM database '
-                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+            raise Exception('Failed to establish connection to ITM database '
+                            '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]))
 
     else:
         if new:
@@ -76,9 +76,9 @@ def itm_open(user, machine, pulse, run, new=False,
                 cpo.open_env(user, machine, itm_version)
             except Exception as _excp:
                 if 'Error opening itm pulse' in str(_excp):
-                    raise (IOError('Error opening itm pulse (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version)))
+                    raise IOError('Error opening itm pulse (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version))
         if not cpo.isConnected():
-            raise (Exception('Failed to establish connection to ITM database (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version)))
+            raise Exception('Failed to establish connection to ITM database (user:%s machine:%s pulse:%s run:%s, itm_version:%s)' % (user, machine, pulse, run, itm_version))
     return cpo
 
 
@@ -139,7 +139,7 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
         return
     else:
         printd(debug_path, topic='itm_code')
-        raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path)))
+        raise AttributeError('%s is not part of ITM structure' % l2i([ds] + path))
 
     # traverse ITM structure until reaching the leaf
     out = m
@@ -156,14 +156,14 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
                 return
             else:
                 printd(debug_path, topic='itm_code')
-                raise (AttributeError('%s is not part of ITM structure' % location))
+                raise AttributeError('%s is not part of ITM structure' % location)
         else:
             try:
                 out = out[p]
                 debug_path += '[%d]' % p
             except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
-                    raise (IndexError('%s structure array exceed allocation' % location))
+                    raise IndexError('%s structure array exceed allocation' % location)
                 printd(debug_path + ".resize(%d)" % (p + 1), topic='itm_code')
                 out.resize(p + 1)
                 debug_path += '[%d]' % p
@@ -221,7 +221,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
         return None
     else:
         printd(debug_path, topic='itm_code')
-        raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path)))
+        raise AttributeError('%s is not part of ITM structure' % l2i([ds] + path))
 
     # traverse the CPO to get the data
     out = m
@@ -237,23 +237,21 @@ def itm_get(cpo, path, skip_missing_nodes=False):
                 return None
             else:
                 printd(debug_path, topic='itm_code')
-                raise (AttributeError('%s is not part of ITM structure' % l2i([ds] + path[:kp + 1])))
+                raise AttributeError('%s is not part of ITM structure' % l2i([ds] + path[:kp + 1]))
         else:
             debug_path += '[%s]' % p
             out = out[p]
 
     # handle missing data
     data = out
-    if len(path) == 2 and path[-1] == 'time' and data[0] < 0:
+    # empty arrays
+    if isinstance(data, numpy.ndarray) and not data.size:
         data = None
-    # skip empty arrays
-    elif isinstance(data, numpy.ndarray) and not data.size:
-        data = None
-    # skip missing floats and integers
+    # missing floats and integers
     elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
         data = None
-    # skip empty strings
-    elif isinstance(data, unicode) and not len(data):
+    # empty strings
+    elif isinstance(data, basestring) and not len(data):
         data = None
 
     printd(debug_path, topic='itm_code')
@@ -329,7 +327,7 @@ def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
         cpo = itm_open(user=user, machine=machine, pulse=pulse, run=run, new=new, itm_version=itm_version)
 
     except IOError as _excp:
-        raise (IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`'))
+        raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
 
     except ImportError:
         # fallback on saving ITM as NC file if ITM is not installed
@@ -408,7 +406,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
     """
 
     if pulse is None or run is None:
-        raise (Exception('`pulse` and `run` must be specified'))
+        raise Exception('`pulse` and `run` must be specified')
 
     printd('Loading from ITM (user:%s machine:%s pulse:%d run:%d, itm_version:%s)' % (user, machine, pulse, run, itm_version), topic='itm')
 
@@ -473,13 +471,13 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
             joined_fetch_paths = map(l2i, fetch_paths)
 
             # build omas data structure
-            ods = ODS(itm_version=itm_version)
+            ods = ODS(itm_version=itm_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
                     continue
-                if verbose:
-                    print('Loading data: {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))
-                # get data from cpo
+                if verbose and k%1000==0:
+                    print('Loading {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))#,l2o(path)))
+                # get data from CPO
                 data = itm_get(cpo, path, None)
                 # continue for empty data
                 if data is None:
@@ -508,6 +506,11 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
     ods['dataset_description.data_entry.pulse'] = int(pulse)
     ods['dataset_description.data_entry.run'] = int(run)
     ods['dataset_description.itm_version'] = unicode(itm_version)
+
+    try:
+        ods.consistency_check = True
+    except LookupError as _excp:
+        printe(repr(excp))
 
     return ods
 

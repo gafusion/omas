@@ -38,11 +38,11 @@ def imas_open(user, machine, pulse, run, new=False,
     if user is None and machine is None:
         pass
     elif user is None or machine is None:
-        raise (Exception('user={user}, machine={machine}, imas_version={imas_version}\n'
-                         'Either specify all or none of `user`, `machine`, `imas_version`\n'
-                         'If none of them are specified then use `imasdb` command to set '
-                         'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
-                                                                              run=run, imas_version=imas_version)))
+        raise Exception('user={user}, machine={machine}, imas_version={imas_version}\n'
+                        'Either specify all or none of `user`, `machine`, `imas_version`\n'
+                        'If none of them are specified then use `imasdb` command to set '
+                        'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
+                                                                             run=run, imas_version=imas_version))
 
     if user is None and machine is None:
         if new:
@@ -54,10 +54,10 @@ def imas_open(user, machine, pulse, run, new=False,
                 ids.open()
             except Exception as _excp:
                 if 'Error opening imas pulse' in str(_excp):
-                    raise (IOError('Error opening imas pulse %d run %d' % (pulse, run)))
+                    raise IOError('Error opening imas pulse %d run %d' % (pulse, run))
         if not ids.isConnected():
-            raise (Exception('Failed to establish connection to IMAS database '
-                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])))
+            raise Exception('Failed to establish connection to IMAS database '
+                            '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]))
 
     else:
         if new:
@@ -69,9 +69,9 @@ def imas_open(user, machine, pulse, run, new=False,
                 ids.open_env(user, machine, imas_version)
             except Exception as _excp:
                 if 'Error opening imas pulse' in str(_excp):
-                    raise (IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version)))
+                    raise IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version))
         if not ids.isConnected():
-            raise (Exception('Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version)))
+            raise Exception('Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version))
     return ids
 
 
@@ -129,7 +129,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         return
     else:
         printd(debug_path, topic='imas_code')
-        raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
+        raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path))
 
     # traverse IMAS structure until reaching the leaf
     out = m
@@ -146,14 +146,14 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                 return
             else:
                 printd(debug_path, topic='imas_code')
-                raise (AttributeError('%s is not part of IMAS structure' % location))
+                raise AttributeError('%s is not part of IMAS structure' % location)
         else:
             try:
                 out = out[p]
                 debug_path += '[%d]' % p
             except (AttributeError, IndexError):  # AttributeError is for ITM
                 if not allocate:
-                    raise (IndexError('%s structure array exceed allocation' % location))
+                    raise IndexError('%s structure array exceed allocation' % location)
                 printd(debug_path + ".resize(%d)" % (p + 1), topic='imas_code')
                 out.resize(p + 1)
                 debug_path += '[%d]' % p
@@ -208,7 +208,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
         return None
     else:
         printd(debug_path, topic='imas_code')
-        raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path)))
+        raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path))
 
     # traverse the IDS to get the data
     out = m
@@ -224,7 +224,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
                 return None
             else:
                 printd(debug_path, topic='imas_code')
-                raise (AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1])))
+                raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1]))
         else:
             debug_path += '[%s]' % p
             out = out[p]
@@ -311,7 +311,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, imas_version=imas_version)
 
     except IOError as _excp:
-        raise (IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`'))
+        raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
 
     except ImportError:
         # fallback on saving IMAS as NC file if IMAS is not installed
@@ -387,7 +387,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     """
 
     if pulse is None or run is None:
-        raise (Exception('`pulse` and `run` must be specified'))
+        raise Exception('`pulse` and `run` must be specified')
 
     printd('Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
 

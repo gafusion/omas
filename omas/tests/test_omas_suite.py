@@ -43,7 +43,7 @@ try:
     import boto3
 
     if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
-        raise (RuntimeError('Missing AWS configuration file ~/.aws/config'))
+        raise RuntimeError('Missing AWS configuration file ~/.aws/config')
     failed_S3 = False
 except RuntimeError as _excp:
     failed_S3 = _excp

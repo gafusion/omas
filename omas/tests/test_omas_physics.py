@@ -397,7 +397,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         try:
             tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"])
-            raise (AssertError('multiple_matches_raise_error'))
+            raise AssertError('multiple_matches_raise_error')
         except IndexError:
             pass
 
@@ -409,7 +409,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         try:
             tmp = search_ion(ods["core_profiles.profiles_1d.0.ion"], 'W')
-            raise (AssertError('no_matches_raise_error failed'))
+            raise AssertError('no_matches_raise_error failed')
         except IndexError:
             pass
 
@@ -427,7 +427,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         try:
             search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro'})
-            raise (AssertionError('multiple_matches_raise_error failed'))
+            raise AssertionError('multiple_matches_raise_error failed')
         except IndexError:
             pass
 

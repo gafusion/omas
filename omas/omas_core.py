@@ -61,7 +61,7 @@ class ODS(MutableMapping):
         self._consistency_check = consistency_check
         self._dynamic_path_creation = dynamic_path_creation
         if consistency_check and imas_version not in imas_versions:
-            raise (ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys())))
+            raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         self.imas_version = imas_version
         self.location = location
         self._cocos = cocos
@@ -82,7 +82,7 @@ class ODS(MutableMapping):
         :return: True/False or default value (None) if no time basis is defined or there is only one element in the time basis
         '''
         if not len(self.location) and not len(key):
-            raise(ValueError('homogeneous_time() can not be called on a top-level ODS'))
+            raise ValueError('homogeneous_time() can not be called on a top-level ODS')
         extra_info = {}
         self.time(key=key, extra_info=extra_info)
         homogeneous_time = extra_info['homogeneous_time']
@@ -184,7 +184,7 @@ class ODS(MutableMapping):
             if time_index is None:
                 time_index = numpy.where(self['time'] == time)[0][0]
             else:
-                raise (ValueError('time info is defined both in %s as well as upstream' % (self.location + '.time')))
+                raise ValueError('time info is defined both in %s as well as upstream' % (self.location + '.time'))
 
         # loop over items
         for item in self.keys():
@@ -203,7 +203,7 @@ class ODS(MutableMapping):
                 # time-depentend list of ODSs
                 elif isinstance(self[item].omas_data, list) and len(self[item]) and 'time' in self[item][0]:
                     if time_index is None:
-                        raise (ValueError('`time` array is not set for `%s` ODS'%self.ulocation))
+                        raise ValueError('`time` array is not set for `%s` ODS'%self.ulocation)
                     tmp = self[item][time_index]
                     self.getraw(item).clear()
                     self.getraw(item)[0]=tmp
@@ -244,7 +244,7 @@ class ODS(MutableMapping):
                                 # load the json structure file
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
                             else:
-                                raise (RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS'))
+                                raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
                             structure = self.structure[structure_key]
@@ -276,7 +276,7 @@ class ODS(MutableMapping):
 
     @cocos.setter
     def cocos(self, cocos_value):
-        raise(AttributeError('cocos parameter is readonly!'))
+        raise AttributeError('cocos parameter is readonly!')
 
     @property
     def cocosio(self):
@@ -429,7 +429,7 @@ class ODS(MutableMapping):
                     else:
                         structure = self.structure[structure_key]
                         if not len(structure):
-                            raise(ValueError('`%s` has no data'%location))
+                            raise ValueError('`%s` has no data'%location)
                     # check that tha data will go in the right place
                     self._validate(value, structure)
                     # assign structure and location information
@@ -464,12 +464,12 @@ class ODS(MutableMapping):
             if not self.omas_data or not len(self.omas_data):
                 self.omas_data = []
             else:
-                raise (Exception('Cannot convert from dict to list once ODS has data'))
+                raise Exception('Cannot convert from dict to list once ODS has data')
         if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
             if not self.omas_data or not len(self.omas_data):
                 self.omas_data = {}
             else:
-                raise (Exception('Cannot convert from list to dict once ODS has data'))
+                raise Exception('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
         if not isinstance(value, ODS):
@@ -522,7 +522,7 @@ class ODS(MutableMapping):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
-                                    raise (Exception('coordio does not support multi-dimentional interpolation just yet'))
+                                    raise Exception('coordio does not support multi-dimentional interpolation just yet')
 
                                 # if the (first) coordinate is in input_coordinates
                                 coordinate = coordinates[0]
@@ -551,7 +551,7 @@ class ODS(MutableMapping):
             if self.consistency_check:
                 # check type
                 if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
-                    raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)))
+                    raise ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location))
 
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
@@ -674,7 +674,7 @@ class ODS(MutableMapping):
                                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
             else:
                 location = l2o([self.location, key[0]])
-                raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
+                raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
 
         value = self.omas_data[key[0]]
         if len(key) > 1:
@@ -728,7 +728,7 @@ class ODS(MutableMapping):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
-                                    raise (Exception('coordio does not support multi-dimentional interpolation just yet'))
+                                    raise Exception('coordio does not support multi-dimentional interpolation just yet')
 
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
@@ -967,7 +967,7 @@ class ODS(MutableMapping):
         elif time_index == len(orig_value):
             orig_value = orig_value + [value]
         else:
-            raise (IndexError('%s has length %d and time_index %d is bejond current range' % (l2o(key), len(orig_value), time_index)))
+            raise IndexError('%s has length %d and time_index %d is bejond current range' % (l2o(key), len(orig_value), time_index))
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value
@@ -1057,7 +1057,7 @@ class ODS(MutableMapping):
             if re.match(search, path):
                 matches.append(path)
         if n is not None and len(matches) != n:
-            raise (ValueError('Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches))))
+            raise ValueError('Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches)))
         return matches
 
     def xarray(self, key):
@@ -1114,7 +1114,7 @@ class ODS(MutableMapping):
                     self['time'] = [0]
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
                 else:
-                    raise (ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.'))
+                    raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
