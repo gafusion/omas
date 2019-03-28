@@ -121,10 +121,10 @@ class ODS(MutableMapping):
 
         # process the key
         key = p2l(key)
-        tmp = self[key]
+        tmp = self.__getitem__(key, False)
         if not isinstance(tmp, ODS):
             key = key[:-1]
-            tmp = self[key]
+            tmp = self.__getitem__(key, False)
 
         # this ODS has a children with 'time' information
         if isinstance(tmp.omas_data, dict):
@@ -197,7 +197,7 @@ class ODS(MutableMapping):
             if 'coordinates' in info and any([k.endswith('.time') for k in info['coordinates']]):
 
                 # time-dependent arrays
-                if not isinstance(self[item], ODS):
+                if not isinstance(self.getraw(item), ODS):
                     self[item] = numpy.atleast_1d(self[item][time_index])
 
                 # time-depentend list of ODSs
@@ -205,12 +205,12 @@ class ODS(MutableMapping):
                     if time_index is None:
                         raise (ValueError('`time` array is not set for `%s` ODS'%self.ulocation))
                     tmp = self[item][time_index]
-                    self[item].clear()
-                    self[item][0]=tmp
+                    self.getraw(item).clear()
+                    self.getraw(item)[0]=tmp
 
             # go deeper inside ODSs that do not have time info
-            elif isinstance(self[item], ODS):
-                self[item].slice_at_time(time=time, time_index=time_index)
+            elif isinstance(self.getraw(item), ODS):
+                self.getraw(item).slice_at_time(time=time, time_index=time_index)
 
         # treat time
         if 'time' in self:
@@ -225,8 +225,8 @@ class ODS(MutableMapping):
 
         :return: True/False
         """
-        if not hasattr(self,'_consistency_check'):
-            self._consistency_check=omas_rcparams['consistency_check']
+        if not hasattr(self, '_consistency_check'):
+            self._consistency_check = omas_rcparams['consistency_check']
         return self._consistency_check
 
     @consistency_check.setter
@@ -237,7 +237,7 @@ class ODS(MutableMapping):
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure/.location attributes to the underlying ODSs
             for item in self.keys():
-                if isinstance(self[item], ODS):
+                if isinstance(self.getraw(item), ODS):
                     if consistency_value:
                         if not self.structure:
                             if not self.location:
@@ -249,18 +249,18 @@ class ODS(MutableMapping):
                             structure_key = item if not isinstance(item, int) else ':'
                             structure = self.structure[structure_key]
                         # assign structure and location information
-                        self[item].structure = structure
-                        self[item].location = l2o([self.location] + [item])
-                    self[item].consistency_check = consistency_value
+                        self.getraw(item).structure = structure
+                        self.getraw(item).location = l2o([self.location] + [item])
+                    self.getraw(item).consistency_check = consistency_value
 
         except Exception as _excp:
             # restore existing consistency_check value in case of error
             if old_consistency_check != consistency_value:
                 for item in self.keys():
-                    if isinstance(self[item], ODS):
-                        self[item].consistency_check = old_consistency_check
+                    if isinstance(self.getraw(item), ODS):
+                        self.getraw(item).consistency_check = old_consistency_check
                 self.consistency_check = old_consistency_check
-            raise (LookupError('Consistency check failed: %s' % repr(_excp)))
+            raise# (LookupError('Consistency check failed: %s' % repr(_excp)))
 
     @property
     def cocos(self):
@@ -293,8 +293,8 @@ class ODS(MutableMapping):
     def cocosio(self, cocosio_value):
         self._cocosio = cocosio_value
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].cocosio = cocosio_value
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).cocosio = cocosio_value
 
     @property
     def unitsio(self):
@@ -311,8 +311,8 @@ class ODS(MutableMapping):
     def unitsio(self, unitsio_value):
         self._unitsio = unitsio_value
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].unitsio = unitsio_value
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).unitsio = unitsio_value
 
     @property
     def coordsio(self):
@@ -331,8 +331,8 @@ class ODS(MutableMapping):
             coordsio_value = (self, coordsio_value)
         self._coordsio = coordsio_value
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].coordsio = coordsio_value
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).coordsio = coordsio_value
 
     @property
     def dynamic_path_creation(self):
@@ -356,8 +356,8 @@ class ODS(MutableMapping):
     def dynamic_path_creation(self, dynamic_path_value):
         self._dynamic_path_creation = dynamic_path_value
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].dynamic_path_creation = dynamic_path_value
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).dynamic_path_creation = dynamic_path_value
 
     def _validate(self, value, structure):
         """
@@ -379,9 +379,9 @@ class ODS(MutableMapping):
         traverse ODSs and set .location attribute
         '''
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                self[item].location = l2o([self.location, item])
-                self[item].set_child_locations()
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).location = l2o([self.location, item])
+                self.getraw(item).set_child_locations()
 
     def __setitem__(self, key, value):
         # handle individual keys as well as full paths
@@ -445,19 +445,19 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
-                if self.consistency_check=='warn':
+                if self.consistency_check == 'warn':
                     printe('`%s` is not a valid IMAS %s location' % (location, self.imas_version))
-                    if isinstance(value,ODS):
-                        value.consistency_check=False
+                    if isinstance(value, ODS):
+                        value.consistency_check = False
                 elif self.consistency_check:
                     options = list(self.structure.keys())
                     if len(options) == 1 and options[0] == ':':
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    spaces = ' '*len('LookupError')+'  '+' ' * (len(self.location) + 2)
+                    spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
                     raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
-                        spaces + '^' * len(structure_key) + '\n' + '%s' % options)
+                                      spaces + '^' * len(structure_key) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
         if isinstance(key[0], int) and not isinstance(self.omas_data, list):
@@ -482,7 +482,7 @@ class ODS(MutableMapping):
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
-                        if self.consistency_check=='warn':
+                        if self.consistency_check == 'warn':
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
@@ -512,13 +512,13 @@ class ODS(MutableMapping):
                         for coordinate in coordinates:
                             if coordinate not in ods_coordinates and coordinate in input_coordinates:
                                 printd('Adding %s coordinate to ods' % (coordinate), topic='coordsio')
-                                ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate,False)
+                                ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate, False)
 
                         # if all coordinates information is present
                         if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(input_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
-                                    (not numpy.allclose(input_coordinates.__getitem__(coord,False), ods_coordinates.__getitem__(coord,False))) for coord in coordinates]):
+                            if any([len(input_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None)) or
+                                    (not numpy.allclose(input_coordinates.__getitem__(coord, False), ods_coordinates.__getitem__(coord, False))) for coord in coordinates]):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
@@ -526,12 +526,12 @@ class ODS(MutableMapping):
 
                                 # if the (first) coordinate is in input_coordinates
                                 coordinate = coordinates[0]
-                                if len(input_coordinates.__getitem__(coordinate,None)) != len(value):
+                                if len(input_coordinates.__getitem__(coordinate, None)) != len(value):
                                     raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, input_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
-                                printd('Adding %s interpolated to input %s coordinate'%(self.location, coordinate), topic='coordsio')
-                                value = omas_interp1d(ods_coordinates.__getitem__(coordinate,None),input_coordinates.__getitem__(coordinate,None), value)
+                                printd('Adding %s interpolated to input %s coordinate' % (self.location, coordinate), topic='coordsio')
+                                value = omas_interp1d(ods_coordinates.__getitem__(coordinate, None), input_coordinates.__getitem__(coordinate, None), value)
                             else:
-                                printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
+                                printd('%s ods and coordsio match' % (coordinates), topic='coordsio')
                         else:
                             printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
@@ -551,8 +551,7 @@ class ODS(MutableMapping):
             if self.consistency_check:
                 # check type
                 if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
-                    raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (
-                    type(value), location)))
+                    raise (ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)))
 
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
@@ -582,7 +581,7 @@ class ODS(MutableMapping):
                     else:
                         raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
             try:
-                self[key[0]][key[1:]] = pass_on_value
+                self.getraw(key[0])[key[1:]] = pass_on_value
             except LookupError:
                 if dynamically_created:
                     del self[key[0]]
@@ -604,7 +603,37 @@ class ODS(MutableMapping):
             # make sure entries have the right location
             self.set_child_locations()
 
-    def __getitem__(self, key, consistency_check=True):
+    def getraw(self, key):
+        '''
+        Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__()
+        Effectively behaves like a normal dictionary/list __getitem__.
+        This method is mostly meant to be used in the inner workings of the ODS class.
+        NOTE: ODS.__getitem__(key, False) can be used to access items in the ODS with disabled cocos and coordinates processing but with support for different syntaxes to access data
+
+        :param key: string or integer
+
+        :return: ODS value
+        '''
+
+        return self.omas_data[key]
+
+    def __getitem__(self, key, cocos_and_coords=True):
+        '''
+        ODS getitem method allows support for different syntaxes to access data
+
+        :param key: different syntaxes to access data, for example:
+              * ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary syntax
+              * ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
+              * ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string syntax
+              * ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes syntax
+
+        :param cocos_and_coords: processing of cocos transforms and coordinates interpolations [True/False/None]
+              * True: enabled COCOS and enabled interpolation
+              * False: enabled COCOS and disabled interpolation
+              * None: disabled COCOS and disabled interpolation
+
+        :return: ODS value
+        '''
 
         # handle pattern match
         if isinstance(key, basestring) and key.startswith('@'):
@@ -640,9 +669,9 @@ class ODS(MutableMapping):
             if self.dynamic_path_creation:
                 dynamically_created = True
                 self.__setitem__(key[0], ODS(imas_version=self.imas_version,
-                                              consistency_check=self.consistency_check,
-                                              dynamic_path_creation=self.dynamic_path_creation,
-                                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
+                                             consistency_check=self.consistency_check,
+                                             dynamic_path_creation=self.dynamic_path_creation,
+                                             cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
             else:
                 location = l2o([self.location, key[0]])
                 raise(LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created'%location))
@@ -651,8 +680,8 @@ class ODS(MutableMapping):
         if len(key) > 1:
             # if the user has entered path rather than a single key
             try:
-                if isinstance(value,ODS):
-                    return value.__getitem__(key[1:],consistency_check)
+                if isinstance(value, ODS):
+                    return value.__getitem__(key[1:], cocos_and_coords)
                 else:
                     return value[l2o(key[1:])]
             except ValueError:
@@ -661,7 +690,7 @@ class ODS(MutableMapping):
                 raise
         else:
 
-            if consistency_check is not None and self.consistency_check and not isinstance(value, ODS):
+            if cocos_and_coords is not None and self.consistency_check and not isinstance(value, ODS):
 
                 location = l2o([self.location, key[0]])
                 ulocation = o2u(location)
@@ -684,7 +713,7 @@ class ODS(MutableMapping):
 
                 # coordinates interpolation
                 ods_coordinates, output_coordinates = self.coordsio
-                if consistency_check and output_coordinates:
+                if cocos_and_coords and output_coordinates:
                     all_coordinates = []
                     coordinates = []
                     if len(output_coordinates) and 'coordinates' in info:
@@ -694,8 +723,8 @@ class ODS(MutableMapping):
                         # if all coordinates information is present
                         if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(output_coordinates.__getitem__(coord,None)) != len(ods_coordinates.__getitem__(coord,None)) or
-                                    (not numpy.allclose(output_coordinates.__getitem__(coord,None), ods_coordinates.__getitem__(coord,None))) for coord in coordinates]):
+                            if any([len(output_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None)) or
+                                    (not numpy.allclose(output_coordinates.__getitem__(coord, None), ods_coordinates.__getitem__(coord, None))) for coord in coordinates]):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
@@ -703,18 +732,18 @@ class ODS(MutableMapping):
 
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
-                                if len(ods_coordinates.__getitem__(coordinate,None)) != len(value):
+                                if len(ods_coordinates.__getitem__(coordinate, None)) != len(value):
                                     raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
-                                printd('Returning %s interpolated to output %s coordinate'%(location, coordinate), topic='coordsio')
+                                printd('Returning %s interpolated to output %s coordinate' % (location, coordinate), topic='coordsio')
                                 try:
-                                    value = omas_interp1d(output_coordinates.__getitem__(coordinate,None), ods_coordinates.__getitem__(coordinate,None), value)
+                                    value = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), value)
                                 except TypeError:
                                     if numpy.atleast_1d(is_uncertain(value)).any():
                                         v = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), nominal_values(value))
                                         s = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), std_devs(value))
                                         value = unumpy.uarray(v, s)
                             else:
-                                printd('%s ods and coordsio match'%(coordinates), topic='coordsio')
+                                printd('%s ods and coordsio match' % (coordinates), topic='coordsio')
                         else:
                             printd('Getting `%s` without knowing some of the coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
@@ -732,7 +761,7 @@ class ODS(MutableMapping):
         key = p2l(key)
         if len(key) > 1:
             # if the user has entered path rather than a single key
-            del self[key[0]][key[1:]]
+            del self.getraw(key[0])[key[1:]]
         else:
             return self.omas_data.__delitem__(key[0])
 
@@ -753,8 +782,8 @@ class ODS(MutableMapping):
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
-            if isinstance(self[kid], ODS):
-                self[kid].paths(paths=paths, path=path + [kid])
+            if isinstance(self.getraw(kid), ODS):
+                self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
         return paths
@@ -903,12 +932,12 @@ class ODS(MutableMapping):
 
         :return: number of branches that were pruned
         '''
-        n=0
+        n = 0
         for item in self.keys():
-            if isinstance(self[item], ODS):
-                n+=self[item].prune()
-                if not len(self[item].keys()):
-                    n+=1
+            if isinstance(self.getraw(item), ODS):
+                n += self.getraw(item).prune()
+                if not len(self.getraw(item).keys()):
+                    n += 1
                     del self[item]
         return n
 
@@ -987,7 +1016,7 @@ class ODS(MutableMapping):
         '''
         coords = OrderedDict()
 
-        self[key]  # raise appropriate error if data is not there
+        self.__getitem__(key, False)  # raise appropriate error if data is not there
         ulocation = l2u(p2l(key))
         info = omas_info_node(ulocation)
         if 'coordinates' not in info:
@@ -1073,7 +1102,7 @@ class ODS(MutableMapping):
         '''
         if not len(self.location):
             for ds in self.keys():
-                self[ds].satisfy_imas_requirements()
+                self.getraw(ds).satisfy_imas_requirements()
         else:
             ds = p2l(self.location)[0]
             if ds not in add_datastructures:

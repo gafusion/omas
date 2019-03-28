@@ -26,10 +26,10 @@ The `ODS` class extends native Python dictionary and list classes with:
 
    .. code-block:: python
 
-       ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary format
-       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree format
-       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string format
-       ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes format
+       ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary syntax
+       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
+       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string syntax
+       ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes syntax
 
 4. **Extract sigle time slice** from whole data structure:
 
