@@ -124,6 +124,7 @@ class Uband(object):
             The fill_between and/or fill_betweenx PollyCollections spanning the std_devs of the x,y data
 
         """
+        from matplotlib.cbook import flatten
         self.line = line  # matplotlib.lines.Line2D
         self.bands = list(flatten([bands]))  # matplotlib.collections.PolyCollection(s)
 
