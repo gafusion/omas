@@ -2,7 +2,7 @@
  "core_profiles": {
   "documentation": "Core plasma radial profiles",
   "full_path": "core_profiles",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.22.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "15"
@@ -499,6 +499,49 @@
   "timebasepath": "time",
   "type": "dynamic",
   "units": "V"
+ },
+ "core_profiles.global_quantities.z_eff_resistive": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Volume average plasma effective charge, estimated from the flux consumption in the ohmic phase",
+  "full_path": "core_profiles/global_quantities/z_eff_resistive(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.z_eff_resistive_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z_eff_resistive\"",
+  "full_path": "core_profiles/global_quantities/z_eff_resistive_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.global_quantities.z_eff_resistive_error_lower": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z_eff_resistive\"",
+  "full_path": "core_profiles/global_quantities/z_eff_resistive_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.z_eff_resistive_error_upper": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z_eff_resistive\"",
+  "full_path": "core_profiles/global_quantities/z_eff_resistive_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
  },
  "core_profiles.ids_properties": {
   "data_type": "structure",

@@ -61,6 +61,7 @@
   "type": "constant"
  },
  "waves.coherent_wave": {
+  "appendable_by_appender_actor": "yes",
   "coordinates": [
    "1...N"
   ],

@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.22.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -2828,6 +2828,534 @@
   "type": "constant",
   "units": "m"
  },
+ "spectrometer_visible.channel[:].isotope_ratios": {
+  "data_type": "structure",
+  "documentation": "Isotope ratios and related information",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_channel_isotopes"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of isotopes",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "spectro_vis_channel_isotopes_isotope"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Fraction of cold neutrals for this isotope (n_cold_neutrals/(n_cold_neutrals+n_hot_neutrals))",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"cold_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"cold_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"cold_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Temperature of cold neutrals for this isotope",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"cold_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"cold_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"cold_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ratio of the density of neutrals of this isotope over the summed neutral densities of all other isotopes described in the ../isotope array",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"density_ratio\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"density_ratio\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"density_ratio\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "List of elements forming the atom or molecule",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "5",
+  "structure_reference": "plasma_composition_neutral_element_constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a": {
+  "data_type": "FLT_0D",
+  "documentation": "Mass of atom",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].atoms_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of atoms of this element in the molecule",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/atoms_n",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity": {
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity_error_lower",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity_error_upper",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n": {
+  "data_type": "FLT_0D",
+  "documentation": "Nuclear charge",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_n\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_n\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Elementary Charge Unit"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Fraction of hot neutrals for this isotope (n_hot_neutrals/(n_cold_neutrals+n_hot_neutrals))",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"hot_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"hot_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"hot_neutrals_fraction\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Temperature of hot neutrals for this isotope",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"hot_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"hot_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"hot_neutrals_temperature\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].label": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (H, D, T, He3, He4)",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/label",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Timebase for dynamic quantities at this level of the data structure",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/time(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/time_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/time_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "1...N",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].time_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/time_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "1...N",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.method": {
+  "data_type": "structure",
+  "doc_identifier": "spectrometer_visible/spectrometer_visible_method_identifier.xml",
+  "documentation": "Fitting method used to calculate isotope ratios\n1) multi_gaussian : Multi-gaussian fitting\n2) exp_times_multi_gaussian : Experimental signal multiplied by multi-gaussian ratio",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/method/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/method/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/method/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Log10 of the ratio of the powers in two bands, one with the spectral lines of interest (signal) the other without spectral lines (noise).",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "isotope_ratios/time",
+  "type": "dynamic",
+  "units": "dB"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"signal_to_noise\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"signal_to_noise\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "isotope_ratios/time",
+  "type": "dynamic",
+  "units": "dB"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"signal_to_noise\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "isotope_ratios/time",
+  "type": "dynamic",
+  "units": "dB"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Timebase for dynamic quantities at this level of the data structure",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/time(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.time_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/time_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.time_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/time_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "1...N",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.time_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time\"",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/time_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "1...N",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the isotope ratios for the whole acquisition period (0 means valid, negative values mean non-valid)",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/validity",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.validity_timed": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].isotope_ratios.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the isotope ratios as a function of time (0 means valid, negative values mean non-valid)",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "isotope_ratios/time",
+  "type": "dynamic"
+ },
  "spectrometer_visible.channel[:].light_collection_efficiencies": {
   "data_type": "structure",
   "documentation": "Light collection efficiencies (fraction of the local emission detected by the optical system) for a list of points defining regions of interest. To be used for non-pinhole optics.",
@@ -3213,6 +3741,13 @@
   "data_type": "STR_0D",
   "documentation": "Name of the channel",
   "full_path": "spectrometer_visible/channel(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].object_observed": {
+  "data_type": "STR_0D",
+  "documentation": "Main object observed by the channel",
+  "full_path": "spectrometer_visible/channel(i1)/object_observed",
   "lifecycle_status": "alpha",
   "type": "static"
  },

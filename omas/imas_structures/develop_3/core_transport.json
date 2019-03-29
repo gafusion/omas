@@ -131,8 +131,9 @@
   "type": "constant"
  },
  "core_transport.model": {
+  "appendable_by_appender_actor": "yes",
   "coordinates": [
-   "1...N_Models"
+   "1...N"
   ],
   "data_type": "struct_array",
   "documentation": "Transport is described by a combination of various transport models",

@@ -8,6 +8,7 @@
   "maxoccur": "3"
  },
  "core_instant_changes.change": {
+  "appendable_by_appender_actor": "yes",
   "coordinates": [
    "1...N"
   ],

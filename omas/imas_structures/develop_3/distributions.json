@@ -61,6 +61,7 @@
   "type": "constant"
  },
  "distributions.distribution": {
+  "appendable_by_appender_actor": "yes",
   "coordinates": [
    "1...N"
   ],

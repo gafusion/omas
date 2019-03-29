@@ -224,6 +224,7 @@
   "units": "m"
  },
  "distribution_sources.source": {
+  "appendable_by_appender_actor": "yes",
   "coordinates": [
    "1...N"
   ],

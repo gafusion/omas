@@ -8155,34 +8155,6 @@
   "maxoccur": "unbounded",
   "structure_reference": "numerics_solver_1d_equation_bc"
  },
- "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].identifier": {
-  "data_type": "structure",
-  "documentation": "Identifier of the boundary condition",
-  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/identifier",
-  "lifecycle_status": "alpha",
-  "structure_reference": "identifier_dynamic_aos3"
- },
- "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].identifier.description": {
-  "data_type": "STR_0D",
-  "documentation": "Verbose description",
-  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/identifier/description",
-  "lifecycle_status": "alpha",
-  "type": "dynamic"
- },
- "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].identifier.index": {
-  "data_type": "INT_0D",
-  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
-  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/identifier/index",
-  "lifecycle_status": "alpha",
-  "type": "dynamic"
- },
- "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].identifier.name": {
-  "data_type": "STR_0D",
-  "documentation": "Short string identifier",
-  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/identifier/name",
-  "lifecycle_status": "alpha",
-  "type": "dynamic"
- },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].position": {
   "data_type": "FLT_0D",
   "documentation": "Position, in terms of the primary coordinate, at which the boundary condition is imposed. Outside this position, the value of the data are considered to be prescribed (in case of a single boundary condition).",
@@ -8216,7 +8188,7 @@
  },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].type": {
   "data_type": "structure",
-  "doc_identifier": "transport_solver_numerics/transport_solver_numerics_bc_identifier.xml",
+  "doc_identifier": "transport_solver_numerics/transport_solver_numerics_bc_type.xml",
   "documentation": "Boundary condition type\n0) not_solved : Equation is not solved\n1) value : Boundary condition is the value of the equations primary quantity\n2) derivative_or_ip : Boundary condition is the radial derivative of the equations primary quantity, or the plasma current for the current diffusion equation\n3) e_folding_length_or_vloop : Boundary condition is the e-folding length of the equations primary quantity, or the loop voltage for the current diffusion equation\n4) flux : Boundary condition is the flux of the equations primary quantity\n5) combination : Boundary condition is a linear combination of radial derivative and value of the flux of the equations primary quantity, in the form a1.y-prime + a2.y = a3",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/type",
   "lifecycle_status": "alpha",
@@ -8333,6 +8305,35 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "mixed"
+ },
+ "transport_solver_numerics.solver_1d[:].equation[:].computation_mode": {
+  "data_type": "structure",
+  "doc_identifier": "transport_solver_numerics/transport_solver_numerics_computation_mode.xml",
+  "documentation": "Computation mode for this equation\n0) static : Equation is not solved, no profile evolution\n1) interpretative : Equation is not solved, profile is evolved by interpolating from input objects\n2) predictive : Equation is solved, profile evolves",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/computation_mode",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "transport_solver_numerics.solver_1d[:].equation[:].computation_mode.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/computation_mode/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "transport_solver_numerics.solver_1d[:].equation[:].computation_mode.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/computation_mode/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "transport_solver_numerics.solver_1d[:].equation[:].computation_mode.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/computation_mode/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].convergence": {
   "data_type": "structure",

@@ -627,6 +627,8 @@
  "spectrometer_visible.channel.:.grating_spectrometer.processed_line.:.radiance.time",
  "spectrometer_visible.channel.:.grating_spectrometer.radiance_spectral.time",
  "spectrometer_visible.channel.:.grating_spectrometer.wavelengths",
+ "spectrometer_visible.channel.:.isotope_ratios.isotope.:.time",
+ "spectrometer_visible.channel.:.isotope_ratios.time",
  "spectrometer_visible.channel.:.light_collection_efficiencies.positions.r",
  "spectrometer_visible.channel.:.validity_timed.time",
  "spectrometer_visible.time",
