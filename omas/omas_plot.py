@@ -481,7 +481,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     if fig is None:
         fig = pyplot.figure()
 
-    ax = pyplot.subplot(1, 3, 1)
+    ax = fig.add_subplot(1, 3, 1)
     ax = equilibrium_CX(ods, time_index=time_index, ax=ax, **kw)
     eq = ods['equilibrium']['time_slice'][time_index]
 
@@ -495,7 +495,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     x = (x - min(x)) / (max(x) - min(x))
 
     # pressure
-    ax = pyplot.subplot(2, 3, 2)
+    ax = fig.add_subplot(2, 3, 2)
     ax.plot(x, eq['profiles_1d']['pressure'], **kw)
     kw.setdefault('color', ax.lines[-1].get_color())
     ax.set_title('$\,$ Pressure')
@@ -583,9 +583,9 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
             if item + '.density' + therm_fast in prof1d:
                 if combine_dens_temps:
                     if ax0 is None:
-                        ax = ax0 = pyplot.subplot(1, 2, 1)
+                        ax = ax0 = fig.add_subplot(1, 2, 1)
                 else:
-                    ax = ax0 = pyplot.subplot(r, 2, (2 * k) + 1, sharex=ax)
+                    ax = ax0 = fig.add_subplot(r, 2, (2 * k) + 1, sharex=ax)
                 uband(x, prof1d[density], label=names[k] + therm_fast_name, ax=ax0, **kw)
                 if k == len(prof1d['ion']):
                     ax0.set_xlabel('$\\rho$')
@@ -600,9 +600,9 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         if item + '.temperature' in prof1d:
             if combine_dens_temps:
                 if ax1 is None:
-                    ax = ax1 = pyplot.subplot(1, 2, 2, sharex=ax)
+                    ax = ax1 = fig.add_subplot(1, 2, 2, sharex=ax)
             else:
-                ax = ax1 = pyplot.subplot(r, 2, (2 * k) + 2, sharex=ax)
+                ax = ax1 = fig.add_subplot(r, 2, (2 * k) + 2, sharex=ax)
             uband(x, prof1d[item + '.temperature'], label=names[k], ax=ax1, **kw)
             if k == len(prof1d['ion']):
                 ax1.set_xlabel('$\\rho$')
@@ -1249,6 +1249,45 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
                     ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
+
+
+@add_to__ODS__
+def summary(ods, fig=None, quantity=None):
+    '''
+    Plot summary time traces. Internally makes use of plot_quantity method.
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param quantity: if None plot all time-dependent global_quantities. Else a list of strings with global quantities to plot
+
+    :return: figure handler
+    '''
+    if fig is None:
+        fig = pyplot.figure()
+    if quantity is None:
+        quantity = ods['summary.global_quantities']
+
+    # two passes, one for counting number of plots the second for actual plotting
+    n = 0
+    for step in ['count', 'plot']:
+        k = 0
+        for q in quantity:
+            if 'value' in ods['summary.global_quantities'][q] and isinstance(ods['summary.global_quantities'][q]['value'], ndarray):
+                if step == 'count':
+                    n += 1
+                k += 1
+                if step == 'plot':
+                    r = int(numpy.sqrt(n + 1))
+                    c = int(numpy.ceil(n / numpy.sqrt(n)))
+                    if k == 1:
+                        ax = ax0 = fig.add_subplot(r, c, k)
+                    else:
+                        ax = fig.add_subplot(r, c, k, sharex=ax0)
+                    ax.set_title(q)
+                    ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
+    return fig
 
 latexit = {}
 latexit['rho_tor_norm'] = '$\\rho$'
