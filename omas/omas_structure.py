@@ -12,7 +12,7 @@ from .omas_utils import *
 # generation of the imas structure json files
 # IDS's XML documentation can be found where IMAS is installed at: $IMAS_PREFIX/share/doc/imas/html_documentation.html
 # --------------------------------------------
-def generate_xml_schemas():
+def generate_xml_schemas(imas_version=None):
     """
     Generate IMAS IDSDef.xml files by:
      1. clone the IMAS data-dictionary repository (access to git.iter.org required)
@@ -37,25 +37,26 @@ def generate_xml_schemas():
         unzip -d SaxonHE9-6-0-10J SaxonHE9-6-0-10J.zip
         rm SaxonHE9-6-0-10J.zip""" % os.sep.join([imas_json_dir, '..']), shell=True).communicate()
 
-    # find IMAS data-dictionary tags
-    result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
-    tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
-
     # fetch data structure updates
     subprocess.Popen("""
     cd {dd_folder}
     git fetch
     """.format(dd_folder=dd_folder), shell=True).communicate()
 
-    # add development branch to list of tags
-    tags.append('develop/3')
+    # find IMAS data-dictionary tags
+    result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
+    tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
+    # add development branch at the beginning of list of tags
+    tags.insert(0, 'develop/3')
+    imas_versions = OrderedDict()
+    for item in tags:
+        imas_versions[item] = item.replace('.', '_').replace('/', '_')
+    if imas_version is None:
+        return imas_versions
 
-    # loop over tags and generate IDSDef.xml files
-    for tag in tags:
-        _tag = tag.replace('.', '_')
-        _tag = _tag.replace('/', '_')
-        if not os.path.exists(os.sep.join([imas_json_dir, _tag, 'IDSDef.xml'])) or tag=='develop/3':
-            executable="""
+    # generate IDSDef.xml files for given imas_version
+    _imas_version = imas_versions[imas_version]
+    executable = """
 export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
 cd {dd_folder}
 git checkout {tag}
@@ -63,11 +64,12 @@ git pull
 export JAVA_HOME=$(dirname $(dirname `which java`))
 make clean
 make
-mkdir {imas_json_dir}/{_tag}/
-cp IDSDef.xml {imas_json_dir}/{_tag}/
-""".format(tag=tag, _tag=_tag, imas_json_dir=imas_json_dir, dd_folder=dd_folder)
-            print(executable)
-            subprocess.Popen(executable, shell=True).communicate()
+rm -rf {imas_json_dir}/{_imas_version}/
+mkdir {imas_json_dir}/{_imas_version}/
+cp IDSDef.xml {imas_json_dir}/{_imas_version}/
+""".format(tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder)
+    print(executable)
+    subprocess.Popen(executable, shell=True).communicate()
 
 
 def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
