@@ -608,8 +608,8 @@ class ODS(MutableMapping):
 
     def getraw(self, key):
         '''
-        Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__()
-        Effectively behaves like a normal dictionary/list __getitem__.
+        Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__(key)
+        Effectively behaves like a pure Python dictionary/list __getitem__.
         This method is mostly meant to be used in the inner workings of the ODS class.
         NOTE: ODS.__getitem__(key, False) can be used to access items in the ODS with disabled cocos and coordinates processing but with support for different syntaxes to access data
 
@@ -619,6 +619,22 @@ class ODS(MutableMapping):
         '''
 
         return self.omas_data[key]
+
+    def setraw(self, key, value):
+        '''
+        Method to assign data to an ODS with no processing of the key, and it is thus faster than the ODS.__setitem__(key, value)
+        Effectively behaves like a pure Python dictionary/list __setitem__.
+        This method is mostly meant to be used in the inner workings of the ODS class.
+
+        :param key: string or integer
+
+        :param value: value to assign
+
+        :return: value
+        '''
+
+        self.omas_data[key] = value
+        return value
 
     def __getitem__(self, key, cocos_and_coords=True):
         '''
