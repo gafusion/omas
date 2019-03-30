@@ -545,7 +545,7 @@ class ODS(MutableMapping):
             if isinstance(value, list):
                 value = numpy.array(value)
             if isinstance(value, numpy.ndarray) and not (len(value.shape)):
-                value = numpy.asscalar(value)
+                value = numpy.item(value)
             if isinstance(value, (float, numpy.floating)):
                 value = float(value)
             elif isinstance(value, (int, numpy.integer)):

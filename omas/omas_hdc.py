@@ -83,7 +83,7 @@ def load_omas_hdc(hdc, consistency_check=True):
             # numeric type
             ods = numpy.asarray(hdc)
             if numpy.isscalar(ods) or ods.size == 1:
-                ods = numpy.asscalar(ods)
+                ods = numpy.item(ods)
     if consistency_check is not None:
         ods.consistency_check = consistency_check
     return ods
