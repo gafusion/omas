@@ -578,7 +578,7 @@ def p2l(key):
     if isinstance(key, tuple):
         return list(key)
 
-    if isinstance(key, (int,numpy.integer)):
+    if isinstance(key, (int, numpy.integer)):
         return [int(key)]
 
     if isinstance(key, basestring) and '.' not in key:
@@ -600,7 +600,7 @@ def p2l(key):
     if not isinstance(key, (list, tuple)):
         key = str(key).replace('[', '.').replace(']', '').split('.')
 
-    key = list(filter(None, key))
+    key = [k for k in key if k]
     for k, item in enumerate(key):
         try:
             key[k] = int(item)
@@ -640,8 +640,7 @@ def l2u(path):
 
     :return: universal ODS path format
     """
-    location = '.'.join(filter(None, map(str, path)))
-    return o2u(location)
+    return o2u(l2o(path))
 
 
 def l2o(path):
