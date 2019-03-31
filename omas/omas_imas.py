@@ -175,6 +175,28 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     return [DS] + path
 
 
+def imas_empty(value):
+    '''
+    Check if value is an IMAS empty
+        * array with no size
+        * float of value -9E40
+        * integer of value -999999999
+        * empty string
+
+    :param value: value to check
+
+    :return: None if value is an IMAS empty
+    '''
+    if isinstance(value, numpy.ndarray) and not value.size:
+        value = None
+    # missing floats and integers
+    elif (isinstance(value, float) and value == -9E40) or (isinstance(value, int) and value == -999999999):
+        value = None
+    # empty strings
+    elif isinstance(value, basestring) and not len(value):
+        value = None
+    return value
+
 def imas_get(ids, path, skip_missing_nodes=False):
     """
     read the value of a path in an open IMAS ids
@@ -230,16 +252,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
             out = out[p]
 
     # handle missing data
-    data = out
-    # empty arrays
-    if isinstance(data, numpy.ndarray) and not data.size:
-        data = None
-    # missing floats and integers
-    elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
-        data = None
-    # empty strings
-    elif isinstance(data, basestring) and not len(data):
-        data = None
+    data = imas_empty(out)
 
     printd(debug_path, topic='imas_code')
     return data
@@ -619,7 +632,9 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
 
     # leaf
     if not len(ds):
-        paths.append(path)
+        # append path if it has data
+        if imas_empty(ids) is not None:
+            paths.append(path)
         return paths
 
     # keys
