@@ -74,12 +74,12 @@ def load_omas_nc(filename, consistency_check=True, ):
             else:
                 # uncertain scalars
                 if item + '_error_upper' in dataset.variables.keys():
-                    ods[item] = ufloat(numpy.item(dataset.variables[item][0]),
-                                       numpy.item(dataset.variables[item + '_error_upper'][0]))
+                    ods[item] = ufloat(dataset.variables[item][0].item(),
+                                       dataset.variables[item + '_error_upper'][0].item())
                 else:
                     try:
                         # scalars
-                        ods[item] = numpy.item(dataset.variables[item][0])
+                        ods[item] = dataset.variables[item][0].item()
                     except AttributeError:
                         # strings
                         ods[item] = dataset.variables[item][0]

@@ -161,7 +161,7 @@ def json_dumper(obj, objects_encode=True):
         if isinstance(obj, numpy.ndarray):
             return obj.tolist()
         elif isinstance(obj, numpy.generic):
-            return numpy.item(obj)
+            return obj.item()
         else:
             return obj.toJSON()
 
@@ -191,7 +191,7 @@ def json_dumper(obj, objects_encode=True):
                                 dtype=str(obj.dtype),
                                 shape=obj.shape)
         elif isinstance(obj, numpy.generic):
-            return numpy.item(obj)
+            return obj.item()
         elif isinstance(obj, complex):
             return dict(__complex__=True, real=obj.real, imag=obj.imag)
         elif isinstance(obj, bytes):
