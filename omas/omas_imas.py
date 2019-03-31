@@ -423,16 +423,13 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
         try:
             # if paths is None then figure out what IDS are available and get ready to retrieve everything
             if paths is None:
-                paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-                joined_paths = None # joined_paths==None means take everything, no need to filter out what is available based on what was requested
+                requested_paths = [[structure] for structure in list_structures(imas_version=imas_version)]
             else:
-                joined_paths = map(l2i, paths)
+                requested_paths = map(p2l, paths)
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
-            for path in paths:
-                ds = path[0]
-                path = path[1:]
+            for ds in numpy.unique([p[0] for p in requested_paths]):
                 if ds in add_datastructures.keys():
                     continue
                 if not hasattr(ids, ds):
@@ -447,21 +444,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                 if len(getattr(ids, ds).time):
                     if verbose:
                         print('* ', ds)
-                    available_paths = filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [])
-                    if joined_paths is None:
-                        # if joined_paths is None, this means the user requested everything
-                        fetch_paths = available_paths
-                    else:
-                        # intersect between what was requested and what is available
-                        joined_available_paths = map(l2i, available_paths)
-                        for jpath, path in zip(joined_paths, paths):
-                            if path[0] != ds:
-                                continue
-                            jpath = jpath.replace('.', '\.')
-                            jpath = '^' + jpath.replace('.:', '.[0-9]+') + '.*'
-                            for japath, apath in zip(joined_available_paths, available_paths):
-                                if re.match(jpath, japath):
-                                    fetch_paths.append(apath)
+                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
                 else:
                     if verbose:
                         print('- ', ds)
@@ -470,10 +453,10 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
-                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower')or path[-1].endswith('_error_index'):
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and k%1000==0:
-                    print('Loading {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))#,l2o(path)))
+                if verbose and (k % 100 == 0 or k==len(fetch_paths)-1):
+                    print('Loading {0:3.3f}%'.format(100 * float(k) / (len(fetch_paths)-1)))
                 # get data from IDS
                 data = imas_get(ids, path, None)
                 # continue for empty data
@@ -495,11 +478,12 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             printd("ids.close()", topic='imas_code')
             ids.close()
 
-    ods['dataset_description.data_entry.user'] = unicode(user)
-    ods['dataset_description.data_entry.machine'] = unicode(machine)
-    ods['dataset_description.data_entry.pulse'] = int(pulse)
-    ods['dataset_description.data_entry.run'] = int(run)
-    ods['dataset_description.imas_version'] = unicode(imas_version)
+    if paths is None:
+        ods.setdefault('dataset_description.data_entry.user', unicode(user))
+        ods.setdefault('dataset_description.data_entry.machine', unicode(machine))
+        ods.setdefault('dataset_description.data_entry.pulse', int(pulse))
+        ods.setdefault('dataset_description.data_entry.run', int(run))
+        ods.setdefault('dataset_description.imas_version', unicode(imas_version))
 
     try:
         ods.consistency_check = True
@@ -612,7 +596,7 @@ if 'imas' != 'itm':
         return ods
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_structures=False):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -630,6 +614,9 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
     if paths is None:
         paths = []
 
+    if requested_paths is None:
+        requested_paths = []
+
     # leaf
     if not len(ds):
         # append path if it has data
@@ -644,14 +631,26 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
         if len(keys) and assume_uniform_array_structures:
             keys = [0]
 
+    # kid must be part of this list
+    if len(requested_paths):
+        request_check = [p[0] for p in requested_paths]
+
     # traverse
     for kid in keys:
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
+
+        propagate_requested_paths = requested_paths
+        if len(requested_paths):
+            if kid in request_check or (isinstance(kid, int) and ':' in request_check):
+                propagate_requested_paths = [p[1:] for p in requested_paths if len(p)>1 and (kid == p[0] or p[0]==':')]
+            else:
+                continue
+
         if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures)
         else:
-            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures)
         paths += subtree_paths
 
         # assume_uniform_array_structures

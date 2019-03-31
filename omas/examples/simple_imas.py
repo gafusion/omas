@@ -12,7 +12,7 @@ Prior running this script, the following commands must be typed at the teriminal
 > imasdb ITER
 """
 
-from __future__ import print_function, division, unicode_literals
+from __future__ import print_function, division#, unicode_literals
 
 import os
 from pprint import pprint
@@ -45,6 +45,9 @@ ods['equilibrium']['time_slice'][1]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
 ods['equilibrium']['time_slice'][1]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3], [4, 5, 6]]
 
+# different ODS
+# 0D data
+ods['core_profiles']['time'] = [1000.]
 
 # Save to IMAS
 print('='*20)
@@ -57,7 +60,9 @@ pprint(ods.pretty_paths())
 print('='*20)
 print(' Reading data from IMAS')
 print('='*20)
-ods1 = load_omas_imas(machine='ITER', pulse=1, paths=[['equilibrium']])
+
+# explicitly specify paths to collect
+ods1 = load_omas_imas(machine='ITER', pulse=1, paths=paths)
 pprint(ods1.pretty_paths())
 
 # check data
@@ -69,3 +74,11 @@ if not check:
     print('OMAS data got saved and loaded correctly')
 else:
     pprint(check)
+
+# automatic paths discovery
+#ods1 = load_omas_imas(machine='ITER', pulse=1)
+#pprint(ods1.pretty_paths())
+
+# subpath selection
+#ods1 = load_omas_imas(machine='ITER', pulse=1, paths=['equilibrium.time_slice.0.time', 'equilibrium.time_slice.:.global_quantities.ip'])
+#pprint(ods1.pretty_paths())
