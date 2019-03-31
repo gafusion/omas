@@ -500,9 +500,6 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].energy": {
-  "coordinates": [
-   "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
-  ],
   "data_type": "structure",
   "documentation": "Boundary condition for the ion energy equation (temperature if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/energy",
@@ -625,9 +622,6 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].particles": {
-  "coordinates": [
-   "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
-  ],
   "data_type": "structure",
   "documentation": "Boundary condition for the ion density equation (density if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/particles",
@@ -1327,15 +1321,11 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].current[:].identifier": {
-  "coordinates": [
-   "transport_solver_numerics.grid.rho_tor_norm"
-  ],
   "data_type": "structure",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/current(i1)/identifier",
   "lifecycle_status": "alpha",
-  "structure_reference": "identifier_dynamic_aos3",
-  "units": "eV"
+  "structure_reference": "identifier_dynamic_aos3"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].current[:].identifier.description": {
   "data_type": "STR_0D",
@@ -3260,9 +3250,6 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].energy": {
-  "coordinates": [
-   "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
-  ],
   "data_type": "structure",
   "documentation": "Convergence details of the ion energy equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/energy",
@@ -3337,9 +3324,6 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].particles": {
-  "coordinates": [
-   "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
-  ],
   "data_type": "structure",
   "documentation": "Convergence details of the  ion density equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/particles",

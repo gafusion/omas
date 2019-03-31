@@ -2107,7 +2107,7 @@
  },
  "neutron_diagnostic.detectors[:].mode": {
   "coordinates": [
-   "neutron_diagnostic.detectors[:].mode[:].index"
+   "1...N"
   ],
   "data_type": "struct_array",
   "documentation": "Measuring Mode Properties and Data",

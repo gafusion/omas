@@ -6404,7 +6404,7 @@
  },
  "equilibrium.time_slice[:].ggd": {
   "coordinates": [
-   "equilibrium.grids_ggd.grid"
+   "equilibrium.grids_ggd[:].grid"
   ],
   "data_type": "struct_array",
   "documentation": "Set of equilibrium representations using the generic grid description",
