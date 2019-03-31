@@ -457,7 +457,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
-                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower')or path[-1].endswith('_error_index'):
                     continue
                 if verbose and k%1000==0:
                     print('Loading {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))#,l2o(path)))
@@ -620,7 +620,6 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
     # leaf
     if not len(ds):
         paths.append(path)
-        #print(paths[-1])
         return paths
 
     # keys
@@ -641,7 +640,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, assume_uniform_array_str
         paths += subtree_paths
 
         # assume_uniform_array_structures
-        if keys[0]==0 and assume_uniform_array_structures:
+        if assume_uniform_array_structures and keys[0] == 0:
             zero_paths = subtree_paths
             for key in range(1, len(ids)):
                 subtree_paths = copy.deepcopy(zero_paths)
