@@ -362,7 +362,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
 
 def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
-                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True):
+                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
+                   skip_uncertainties=False, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -380,6 +381,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     :param paths: list of paths to load from IMAS
 
     :param imas_version: IMAS version
+
+    :param skip_uncertainties: do not load uncertain data
 
     :param verbose: print loading progress
 
@@ -464,7 +467,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                 if data is None:
                     continue
                 # add uncertainty
-                if l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
+                if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
                     stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
                     if stdata is not None:
                         try:
@@ -472,10 +475,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                         except uncertainties.core.NegativeStdDev as _excp:
                             printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
                 # assign data to ODS
-                h = ods
-                for step in path[:-1]:
-                    h = h[step]
-                h[path[-1]] = data
+                ods[path] = data
 
         finally:
             # close connection to IMAS database
