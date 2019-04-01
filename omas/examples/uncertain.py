@@ -43,6 +43,6 @@ print(ods)
 # save/load from imas
 print('== IMAS ==')
 omas_rcparams['allow_fake_imas_fallback']=True
-save_omas_imas(ods, user=os.environ.get('USER','dummy_user'),machine='test', pulse=10, run=1, new=True)
-ods = load_omas_imas(user=os.environ.get('USER','dummy_user'),machine='test', pulse=10, run=1, verbose=False)
+save_omas_imas(ods, user=os.environ.get('USER', 'dummy_user'),machine='test', pulse=10, run=1, new=True)
+ods = load_omas_imas(user=os.environ.get('USER', 'dummy_user'),machine='test', pulse=10, run=1, verbose=False)
 print(ods)

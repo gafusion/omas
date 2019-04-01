@@ -52,7 +52,7 @@ class TestOmasCore(unittest.TestCase):
             ods['dataset_description.data_entry.user']
         except LookupError:
             ods['dataset_description'] = ODS()
-            ods['dataset_description.data_entry.user'] = os.environ.get('USER','dummy_user')
+            ods['dataset_description.data_entry.user'] = os.environ.get('USER', 'dummy_user')
         else:
             raise Exception('OMAS error handling dynamic_path_creation=False')
         finally:

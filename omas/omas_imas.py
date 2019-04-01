@@ -268,7 +268,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     :param ods: OMAS data set
 
-    :param user: IMAS username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ.get('USER','dummy_user'))
+    :param user: IMAS username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ.get('USER', 'dummy_user'))
 
     :param machine: IMAS machine (reads ods['dataset_description.data_entry.machine'] if machine is None)
 
@@ -286,7 +286,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     # handle default values for user, machine, pulse, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('dataset_description.data_entry.user', os.environ.get('USER','dummy_user'))
+        user = ods.get('dataset_description.data_entry.user', os.environ.get('USER', 'dummy_user'))
     if machine is None:
         machine = ods.get('dataset_description.data_entry.machine', None)
     if pulse is None:
@@ -374,7 +374,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def load_omas_imas(user=os.environ.get('USER','dummy_user'), machine=None, pulse=None, run=0, paths=None,
+def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
                    skip_uncertainties=False, skip_ggd=False, verbose=True):
     """
@@ -496,7 +496,7 @@ def load_omas_imas(user=os.environ.get('USER','dummy_user'), machine=None, pulse
 
 
 if 'imas' != 'itm':
-    def browse_imas(user=os.environ.get('USER','dummy_user'), pretty=True, quiet=False,
+    def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
                     user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
         '''
         Browse available IMAS data (machine/pulse/run) for given user
@@ -513,7 +513,7 @@ if 'imas' != 'itm':
         '''
         # if no users are specified, find all users
         if user is None:
-            user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ.get('USER','dummy_user'), '/*/'))
+            user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'dummy_user'), '/*/'))
             user = map(lambda x: x.split(os.sep)[-3], user)
         elif isinstance(user, basestring):
             user = [user]
@@ -522,7 +522,7 @@ if 'imas' != 'itm':
         imasdb = {}
         for username in user:
             imasdb[username] = {}
-            imasdbdir = user_imasdbdir.replace('/%s/' % os.environ.get('USER','dummy_user'), '/%s/' % username).strip()
+            imasdbdir = user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'dummy_user'), '/%s/' % username).strip()
 
             # find MDS+ datafiles
             files = list(recursive_glob('*datafile', imasdbdir))
@@ -684,7 +684,7 @@ def through_omas_imas(ods):
 
     :return: ods
     """
-    user = os.environ.get('USER','dummy_user')
+    user = os.environ.get('USER', 'dummy_user')
     machine = 'ITER'
     pulse = 1
     run = 0

@@ -14,7 +14,7 @@ def _base_S3_uri(user):
 # --------------------------------------------
 # save and load OMAS with S3
 # --------------------------------------------
-def save_omas_s3(ods, filename, user=os.environ.get('USER','dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir'], **kw):
+def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir'], **kw):
     """
     Save an OMAS object to pickle and upload it to S3
 
@@ -35,7 +35,7 @@ def save_omas_s3(ods, filename, user=os.environ.get('USER','dummy_user'), tmp_di
     save_omas_pkl(ods, os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], **kw)
     return remote_uri(_base_S3_uri(user), os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], 'up')
 
-def load_omas_s3(filename, user=os.environ.get('USER','dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir']):
+def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir']):
     """
     Download an OMAS object from S3 and read it as pickle
 
@@ -65,7 +65,7 @@ def list_omas_s3(user=''):
     """
     return remote_uri(_base_S3_uri(user), None, 'list')
 
-def del_omas_s3(filename, user=os.environ.get('USER','dummy_user')):
+def del_omas_s3(filename, user=os.environ.get('USER', 'dummy_user')):
     """
     Delete an OMAS object from S3
 
