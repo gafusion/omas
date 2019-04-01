@@ -167,7 +167,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         printd(debug_path + '.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
 
     # return path
-    return [DS] + path
+    return [ds] + path
 
 
 def imas_empty(value):
