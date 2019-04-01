@@ -64,9 +64,6 @@ json:
 	cd omas/utilities && python build_json_structures.py
 	make cocos
 
-itm:
-	cd omas/utilities && python generate_itm_interface.py
-
 cocos:
 	cd omas/utilities && python generate_cocos_signals.py
 

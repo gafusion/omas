@@ -16,7 +16,6 @@ __all__ = [
     'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
     'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
-    'save_omas_itm',  'load_omas_itm',  'through_omas_itm',
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
@@ -1236,5 +1235,15 @@ from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
-from .omas_itm import *
 from .omas_hdc import *
+
+# --------------------------------------------
+# backward compatibility
+# --------------------------------------------
+def save_omas_itm(*args, **kw):
+    '''
+    Dummy function to avoid older versions of OMFIT not to start with latest OMAS
+    '''
+    raise NotImplementedError('omas itm functions are deprecated')
+load_omas_itm = through_omas_itm = save_omas_itm
+__all__.extend(['save_omas_itm', 'load_omas_itm', 'through_omas_itm'])

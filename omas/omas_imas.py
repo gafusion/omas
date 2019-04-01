@@ -110,11 +110,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if ds in add_datastructures.keys():
         return
 
-    # for ITM we have to append Array to the name of the data structure
-    DS = ds
-    if 'imas' == 'itm':
-        ds = ds + 'Array'
-
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
@@ -151,7 +146,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             try:
                 out = out[p]
                 debug_path += '[%d]' % p
-            except (AttributeError, IndexError):  # AttributeError is for ITM
+            except IndexError:
                 if not allocate:
                     raise IndexError('%s structure array exceed allocation' % location)
                 printd(debug_path + ".resize(%d)" % (p + 1), topic='imas_code')
@@ -161,7 +156,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # if we are allocating data, simply stop here
     if allocate:
-        return [DS] + path
+        return [ds] + path
 
     # assign data to leaf node
     printd('setting  : %s' % location, topic='imas')
@@ -215,10 +210,6 @@ def imas_get(ids, path, skip_missing_nodes=False):
     printd('fetching: %s' % l2i(path), topic='imas')
     ds = path[0]
     path = path[1:]
-
-    # for ITM we have to append Array to the name of the data structure
-    if 'imas' == 'itm':
-        ds = ds + 'Array'
 
     debug_path = ''
     if hasattr(ids, ds):
@@ -312,9 +303,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         printd('Saving to IMAS (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
-    if 'imas' != 'itm':
-        for ds in ods.keys():
-            ods[ds].satisfy_imas_requirements()
+    for ds in ods.keys():
+        ods[ds].satisfy_imas_requirements()
 
     # get the list of paths from ODS
     paths = set_paths = ods.paths()
@@ -361,8 +351,6 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
             for ds in ods.keys():
                 if ds in add_datastructures.keys():
                     continue
-                if 'imas' == 'itm':
-                    ds = ds + 'Array'
                 printd("ids.%s.put(0)" % ds, topic='imas_code')
                 getattr(ids, ds).put(0)
 
@@ -495,107 +483,106 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     return ods
 
 
-if 'imas' != 'itm':
-    def browse_imas(user=os.environ['USER'], pretty=True, quiet=False,
-                    user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
-        '''
-        Browse available IMAS data (machine/pulse/run) for given user
+def browse_imas(user=os.environ['USER'], pretty=True, quiet=False,
+                user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
+    '''
+    Browse available IMAS data (machine/pulse/run) for given user
 
-        :param user: user (of list of users) to browse. Browses all users if None.
+    :param user: user (of list of users) to browse. Browses all users if None.
 
-        :param pretty: express size in MB and time in human readeable format
+    :param pretty: express size in MB and time in human readeable format
 
-        :param quiet: print database to screen
+    :param quiet: print database to screen
 
-        :param user_imasdbdir: directory where imasdb is located for current user (typically $HOME/public/imasdb/)
+    :param user_imasdbdir: directory where imasdb is located for current user (typically $HOME/public/imasdb/)
 
-        :return: hierarchical dictionary with database of available IMAS data (machine/pulse/run) for given user
-        '''
-        # if no users are specified, find all users
-        if user is None:
-            user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
-            user = map(lambda x: x.split(os.sep)[-3], user)
-        elif isinstance(user, basestring):
-            user = [user]
+    :return: hierarchical dictionary with database of available IMAS data (machine/pulse/run) for given user
+    '''
+    # if no users are specified, find all users
+    if user is None:
+        user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+        user = map(lambda x: x.split(os.sep)[-3], user)
+    elif isinstance(user, basestring):
+        user = [user]
 
-        # build database for each user
-        imasdb = {}
-        for username in user:
-            imasdb[username] = {}
-            imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
+    # build database for each user
+    imasdb = {}
+    for username in user:
+        imasdb[username] = {}
+        imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
 
-            # find MDS+ datafiles
-            files = list(recursive_glob('*datafile', imasdbdir))
+        # find MDS+ datafiles
+        files = list(recursive_glob('*datafile', imasdbdir))
 
-            # extract machine/pulse/run from filename of MDS+ datafiles
-            for file in files:
-                tmp = file.split(os.sep)
-                if not re.match('ids_[0-9]{5,}.datafile', tmp[-1]):
-                    continue
-                pulse_run = tmp[-1].split('.')[0].split('_')[1]
-                pulse = int(pulse_run[:-4])
-                run = int(pulse_run[-4:])
-                machine = tmp[-4]
+        # extract machine/pulse/run from filename of MDS+ datafiles
+        for file in files:
+            tmp = file.split(os.sep)
+            if not re.match('ids_[0-9]{5,}.datafile', tmp[-1]):
+                continue
+            pulse_run = tmp[-1].split('.')[0].split('_')[1]
+            pulse = int(pulse_run[:-4])
+            run = int(pulse_run[-4:])
+            machine = tmp[-4]
 
-                # size and data
-                st = os.stat(file)
-                size = st.st_size
-                date = st.st_mtime
-                if pretty:
-                    import time
-                    size = '%d Mb' % (int(size / 1024 / 1024))
-                    date = time.strftime('%d/%m/%y - %H:%M', time.localtime(date))
+            # size and data
+            st = os.stat(file)
+            size = st.st_size
+            date = st.st_mtime
+            if pretty:
+                import time
+                size = '%d Mb' % (int(size / 1024 / 1024))
+                date = time.strftime('%d/%m/%y - %H:%M', time.localtime(date))
 
-                # build database
-                if machine not in imasdb[username]:
-                    imasdb[username][machine] = {}
-                imasdb[username][machine][pulse, run] = {'size': size, 'date': date}
+            # build database
+            if machine not in imasdb[username]:
+                imasdb[username][machine] = {}
+            imasdb[username][machine][pulse, run] = {'size': size, 'date': date}
 
-        # print if not quiet
-        if not quiet:
-            pprint(imasdb)
+    # print if not quiet
+    if not quiet:
+        pprint(imasdb)
 
-        # return database
-        return imasdb
+    # return database
+    return imasdb
 
 
-    def load_omas_iter_scenario(pulse, run=0, paths=None,
-                                imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                                verbose=True):
-        """
-        Load OMAS data set from ITER IMAS scenario database
-    
-        :param pulse: IMAS pulse
-    
-        :param run: IMAS run
-    
-        :param paths: list of paths to load from IMAS
-    
-        :param imas_version: IMAS version
-    
-        :return: OMAS data set
-    
-        :param verbose: print loading progress
-        """
-        # set MDSPLUS_TREE_BASE_? environment variables as per
-        # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
-        try:
-            bkp_imas_environment = {}
-            for k in range(10):
-                if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
-                    bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
-                os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
+def load_omas_iter_scenario(pulse, run=0, paths=None,
+                            imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
+                            verbose=True):
+    """
+    Load OMAS data set from ITER IMAS scenario database
 
-            # load data from imas
-            ods = load_omas_imas(user=None, machine=None, pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
+    :param pulse: IMAS pulse
 
-        finally:
-            # restore existing IMAS environment
-            for k in range(10):
-                del os.environ['MDSPLUS_TREE_BASE_%d' % k]
-                os.environ.update(bkp_imas_environment)
+    :param run: IMAS run
 
-        return ods
+    :param paths: list of paths to load from IMAS
+
+    :param imas_version: IMAS version
+
+    :return: OMAS data set
+
+    :param verbose: print loading progress
+    """
+    # set MDSPLUS_TREE_BASE_? environment variables as per
+    # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
+    try:
+        bkp_imas_environment = {}
+        for k in range(10):
+            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
+                bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
+            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
+
+        # load data from imas
+        ods = load_omas_imas(user=None, machine=None, pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
+
+    finally:
+        # restore existing IMAS environment
+        for k in range(10):
+            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
+            os.environ.update(bkp_imas_environment)
+
+    return ods
 
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=False):

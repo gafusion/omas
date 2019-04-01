@@ -100,14 +100,6 @@ else:
         _default_imas_version = ''
 
 # --------------------------------------------
-# configuration of directories and ITM infos
-# --------------------------------------------
-if 'OMAS_DATAVERSION_TAG' in os.environ:
-    _default_itm_version = os.environ['OMAS_DATAVERSION_TAG']
-else:
-    _default_itm_version = '4.10b_rc'
-
-# --------------------------------------------
 # rcparams
 # --------------------------------------------
 class OMAS_rc_params(dict):
@@ -131,12 +123,7 @@ omas_rcparams.update({
                                     os.sep.join(
                                         [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
-    'fake_itm_dir': os.environ.get('OMAS_FAKE_ITM_DIR',
-                                   os.sep.join(
-                                       [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_ITM_DIR'])),
-    'allow_fake_itm_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_ITM_FALLBACK', '0'))),
-    'default_imas_version': _default_imas_version,
-    'default_itm_version': _default_itm_version
+    'default_imas_version': _default_imas_version
 })
 
 @contextmanager

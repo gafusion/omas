@@ -33,13 +33,6 @@ except ImportError as _excp:
     failed_HDC = _excp
 
 try:
-    import ual
-
-    failed_ITM = False
-except ImportError as _excp:
-    failed_ITM = _excp
-
-try:
     import boto3
 
     if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
@@ -77,11 +70,6 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_hdc(self):
         ods = ods_sample()
         through_omas_hdc(ods)
-
-    @unittest.skipUnless(not failed_ITM, str(failed_ITM))
-    def test_omas_itm(self):
-        ods = ods_sample()
-        through_omas_itm(ods)
 
 
 if __name__ == '__main__':

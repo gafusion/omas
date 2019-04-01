@@ -126,9 +126,5 @@ The `ODS` class extends native Python dictionary and list classes with:
 +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
 | **HDC**       | Hierarchical Dynamic Containers                             | Memory                 |       no       |         pyhdc         |
 +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **ITM**  (*)  | ITM data storage system                                     | ITM Database           |       no       |         itm           |
-+---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
 | **IMAS**      | ITER data storage system                                    | IMAS Database          |       no       |         imas          |
 +---------------+-------------------------------------------------------------+------------------------+----------------+-----------------------+
-
-(\*) NOTE: In addition to the IMAS data model, OMAS can support any other hierarchical data representation where the data is stored in the leafs of the data structure. For example, ITM is a hierarchical data organization that is used by the `European Integrated Modeling Tokamak <http://iopscience.iop.org/article/10.1088/0029-5515/54/4/043018/meta>`_ effort and shares many similarities with IMAS. Writing data to ITM is supported by OMAS.
