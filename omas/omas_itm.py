@@ -654,7 +654,7 @@ def filled_paths_in_cpo(cpo, ds, path=None, paths=None, requested_paths=None, as
         return paths
 
     # keys
-    keys = ds.keys()
+    keys = list(ds.keys())
     if keys[0] == ':':
         keys = range(len(cpo))
         if len(keys) and assume_uniform_array_structures:
