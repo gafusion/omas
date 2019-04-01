@@ -376,7 +376,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
 def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                   skip_uncertainties=False, verbose=True):
+                   skip_uncertainties=False, skip_ggd=False, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -396,6 +396,8 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     :param imas_version: IMAS version
 
     :param skip_uncertainties: do not load uncertain data
+
+    :param skip_ggd: do not load ggd structure
 
     :param verbose: print loading progress
 
@@ -444,7 +446,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                 if len(getattr(ids, ds).time):
                     if verbose:
                         print('* ', ds)
-                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
+                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd)
                 else:
                     if verbose:
                         print('- ', ds)
@@ -596,7 +598,7 @@ if 'imas' != 'itm':
         return ods
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=False):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -605,6 +607,8 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
+
+    :param skip_ggd: do not traverse ggd structures
 
     :return: returns list of paths in an IDS that are filled
     """
@@ -640,6 +644,11 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
 
+        # skip ggd structures
+        if skip_ggd and kid in ['ggd', 'grids_ggd']:
+            continue
+
+        # generate requested_paths one level deeper
         propagate_requested_paths = requested_paths
         if len(requested_paths):
             if kid in request_check or (isinstance(kid, int) and ':' in request_check):
@@ -647,6 +656,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
             else:
                 continue
 
+        # recursive call
         if isinstance(kid, basestring):
             subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures)
         else:
