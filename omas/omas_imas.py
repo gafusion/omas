@@ -446,7 +446,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
                 if len(getattr(ids, ds).time):
                     if verbose:
                         print('* ', ds)
-                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd)
+                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
                 else:
                     if verbose:
                         print('- ', ds)
@@ -641,12 +641,13 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
     # traverse
     for kid in keys:
-        propagate_path = copy.copy(path)
-        propagate_path.append(kid)
 
         # skip ggd structures
         if skip_ggd and kid in ['ggd', 'grids_ggd']:
             continue
+
+        propagate_path = copy.copy(path)
+        propagate_path.append(kid)
 
         # generate requested_paths one level deeper
         propagate_requested_paths = requested_paths
@@ -658,9 +659,9 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
         # recursive call
         if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
         else:
-            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
         paths += subtree_paths
 
         # assume_uniform_array_structures
