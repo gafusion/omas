@@ -629,7 +629,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         return paths
 
     # keys
-    keys = ds.keys()
+    keys = list(ds.keys())
     if keys[0] == ':':
         keys = range(len(ids))
         if len(keys) and assume_uniform_array_structures:

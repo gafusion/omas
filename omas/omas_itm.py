@@ -188,6 +188,31 @@ def itm_set(cpo, path, value, skip_missing_nodes=False, allocate=False):
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
+def itm_empty(value):
+    '''
+    Check if value is an ITM empty
+        * array with no size
+        * float of value -9E40
+        * integer of value -999999999
+        * empty string
+
+    :param value: value to check
+
+    :return: None if value is an ITM empty
+    '''
+    if isinstance(value, numpy.ndarray) and not value.size:
+        value = None
+    # missing floats and integers
+    elif (isinstance(value, float) and value == -9E40) or (isinstance(value, int) and value == -999999999):
+        value = None
+    # empty strings
+    elif isinstance(value, basestring) and not len(value):
+        value = None
+    return value
+
+
+# AUTOMATICALLY GENERATED FILE - DO NOT EDIT
+
 def itm_get(cpo, path, skip_missing_nodes=False):
     """
     read the value of a path in an open ITM cpo
@@ -243,16 +268,7 @@ def itm_get(cpo, path, skip_missing_nodes=False):
             out = out[p]
 
     # handle missing data
-    data = out
-    # empty arrays
-    if isinstance(data, numpy.ndarray) and not data.size:
-        data = None
-    # missing floats and integers
-    elif (isinstance(data, float) and data == -9E40) or (isinstance(data, int) and data == -999999999):
-        data = None
-    # empty strings
-    elif isinstance(data, basestring) and not len(data):
-        data = None
+    data = itm_empty(out)
 
     printd(debug_path, topic='itm_code')
     return data
@@ -381,7 +397,8 @@ def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
 def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
-                   itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']), verbose=True):
+                   itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']),
+                   skip_uncertainties=False, skip_ggd=False, verbose=True):
     """
     Load OMAS data from ITM
 
@@ -399,6 +416,10 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
     :param paths: list of paths to load from ITM
 
     :param itm_version: ITM version
+
+    :param skip_uncertainties: do not load uncertain data
+
+    :param skip_ggd: do not load ggd structure
 
     :param verbose: print loading progress
 
@@ -426,16 +447,13 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
         try:
             # if paths is None then figure out what CPO are available and get ready to retrieve everything
             if paths is None:
-                paths = [[structure] for structure in list_structures(itm_version=itm_version)]
-                joined_paths = None # joined_paths==None means take everything, no need to filter out what is available based on what was requested
+                requested_paths = [[structure] for structure in list_structures(itm_version=itm_version)]
             else:
-                joined_paths = map(l2i, paths)
+                requested_paths = map(p2l, paths)
 
             # fetch relevant CPOs and find available signals
             fetch_paths = []
-            for path in paths:
-                ds = path[0]
-                path = path[1:]
+            for ds in numpy.unique([p[0] for p in requested_paths]):
                 if ds in add_datastructures.keys():
                     continue
                 if not hasattr(cpo, ds):
@@ -450,21 +468,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
                 if len(getattr(cpo, ds).time):
                     if verbose:
                         print('* ', ds)
-                    available_paths = filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [])
-                    if joined_paths is None:
-                        # if joined_paths is None, this means the user requested everything
-                        fetch_paths = available_paths
-                    else:
-                        # intersect between what was requested and what is available
-                        joined_available_paths = map(l2i, available_paths)
-                        for jpath, path in zip(joined_paths, paths):
-                            if path[0] != ds:
-                                continue
-                            jpath = jpath.replace('.', '\.')
-                            jpath = '^' + jpath.replace('.:', '.[0-9]+') + '.*'
-                            for japath, apath in zip(joined_available_paths, available_paths):
-                                if re.match(jpath, japath):
-                                    fetch_paths.append(apath)
+                    fetch_paths += filled_paths_in_cpo(cpo, load_structure(ds, itm_version=itm_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
                 else:
                     if verbose:
                         print('- ', ds)
@@ -473,17 +477,17 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
             # build omas data structure
             ods = ODS(itm_version=itm_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
-                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower'):
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and k%1000==0:
-                    print('Loading {0:3.3f}%'.format(100 * float(k) / len(fetch_paths)))#,l2o(path)))
+                if verbose and (k % 100 == 0 or k==len(fetch_paths)-1):
+                    print('Loading {0:3.3f}%'.format(100 * float(k) / (len(fetch_paths)-1)))
                 # get data from CPO
                 data = itm_get(cpo, path, None)
                 # continue for empty data
                 if data is None:
                     continue
                 # add uncertainty
-                if l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
+                if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
                     stdata = itm_get(cpo, path[:-1] + [path[-1] + '_error_upper'], None)
                     if stdata is not None:
                         try:
@@ -491,21 +495,19 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
                         except uncertainties.core.NegativeStdDev as _excp:
                             printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
                 # assign data to ODS
-                h = ods
-                for step in path[:-1]:
-                    h = h[step]
-                h[path[-1]] = data
+                ods[path] = data
 
         finally:
             # close connection to ITM database
             printd("cpo.close()", topic='itm_code')
             cpo.close()
 
-    ods['dataset_description.data_entry.user'] = unicode(user)
-    ods['dataset_description.data_entry.machine'] = unicode(machine)
-    ods['dataset_description.data_entry.pulse'] = int(pulse)
-    ods['dataset_description.data_entry.run'] = int(run)
-    ods['dataset_description.itm_version'] = unicode(itm_version)
+    if paths is None:
+        ods.setdefault('dataset_description.data_entry.user', unicode(user))
+        ods.setdefault('dataset_description.data_entry.machine', unicode(machine))
+        ods.setdefault('dataset_description.data_entry.pulse', int(pulse))
+        ods.setdefault('dataset_description.data_entry.run', int(run))
+        ods.setdefault('dataset_description.itm_version', unicode(itm_version))
 
     try:
         ods.consistency_check = True
@@ -621,7 +623,7 @@ if 'itm' != 'itm':
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def filled_paths_in_cpo(cpo, ds, path=None, paths=None, assume_uniform_array_structures=False):
+def filled_paths_in_cpo(cpo, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=False):
     """
     Taverse an CPO and list leaf paths (with proper sizing for arrays of structures)
 
@@ -631,6 +633,8 @@ def filled_paths_in_cpo(cpo, ds, path=None, paths=None, assume_uniform_array_str
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
+    :param skip_ggd: do not traverse ggd structures
+
     :return: returns list of paths in an CPO that are filled
     """
     if path is None:
@@ -639,31 +643,54 @@ def filled_paths_in_cpo(cpo, ds, path=None, paths=None, assume_uniform_array_str
     if paths is None:
         paths = []
 
+    if requested_paths is None:
+        requested_paths = []
+
     # leaf
     if not len(ds):
-        paths.append(path)
-        #print(paths[-1])
+        # append path if it has data
+        if itm_empty(cpo) is not None:
+            paths.append(path)
         return paths
 
     # keys
-    keys = ds.keys()
+    keys = list(ds.keys())
     if keys[0] == ':':
         keys = range(len(cpo))
         if len(keys) and assume_uniform_array_structures:
             keys = [0]
 
+    # kid must be part of this list
+    if len(requested_paths):
+        request_check = [p[0] for p in requested_paths]
+
     # traverse
     for kid in keys:
+
+        # skip ggd structures
+        if skip_ggd and kid in ['ggd', 'grcpo_ggd']:
+            continue
+
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
+
+        # generate requested_paths one level deeper
+        propagate_requested_paths = requested_paths
+        if len(requested_paths):
+            if kid in request_check or (isinstance(kid, int) and ':' in request_check):
+                propagate_requested_paths = [p[1:] for p in requested_paths if len(p)>1 and (kid == p[0] or p[0]==':')]
+            else:
+                continue
+
+        # recursive call
         if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_cpo(getattr(cpo, kid), ds[kid], propagate_path, [], assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_cpo(getattr(cpo, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
         else:
-            subtree_paths = filled_paths_in_cpo(cpo[kid], ds[':'], propagate_path, [], assume_uniform_array_structures)
+            subtree_paths = filled_paths_in_cpo(cpo[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
         paths += subtree_paths
 
         # assume_uniform_array_structures
-        if keys[0]==0 and assume_uniform_array_structures:
+        if assume_uniform_array_structures and keys[0] == 0:
             zero_paths = subtree_paths
             for key in range(1, len(cpo)):
                 subtree_paths = copy.deepcopy(zero_paths)
