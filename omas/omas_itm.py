@@ -271,7 +271,7 @@ def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
 
     :param ods: OMAS data set
 
-    :param user: ITM username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ['USER'])
+    :param user: ITM username (reads ods['dataset_description.data_entry.user'] if user is None and finally fallsback on os.environ.get('USER','dummy_user'))
 
     :param machine: ITM machine (reads ods['dataset_description.data_entry.machine'] if machine is None)
 
@@ -289,7 +289,7 @@ def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
     # handle default values for user, machine, pulse, run, itm_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('dataset_description.data_entry.user', os.environ['USER'])
+        user = ods.get('dataset_description.data_entry.user', os.environ.get('USER','dummy_user'))
     if machine is None:
         machine = ods.get('dataset_description.data_entry.machine', None)
     if pulse is None:
@@ -380,7 +380,7 @@ def save_omas_itm(ods, user=None, machine=None, pulse=None, run=None, new=False,
 
 # AUTOMATICALLY GENERATED FILE - DO NOT EDIT
 
-def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
+def load_omas_itm(user=os.environ.get('USER','dummy_user'), machine=None, pulse=None, run=0, paths=None,
                    itm_version=os.environ.get('ITM_VERSION', omas_rcparams['default_itm_version']), verbose=True):
     """
     Load OMAS data from ITM
@@ -516,7 +516,7 @@ def load_omas_itm(user=os.environ['USER'], machine=None, pulse=None, run=0, path
 
 
 if 'itm' != 'itm':
-    def browse_itm(user=os.environ['USER'], pretty=True, quiet=False,
+    def browse_itm(user=os.environ.get('USER','dummy_user'), pretty=True, quiet=False,
                     user_itmdbdir=os.sep.join([os.environ['HOME'], 'public', 'itmdb'])):
         '''
         Browse available ITM data (machine/pulse/run) for given user
@@ -533,7 +533,7 @@ if 'itm' != 'itm':
         '''
         # if no users are specified, find all users
         if user is None:
-            user = glob.glob(user_itmdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+            user = glob.glob(user_itmdbdir.replace('/%s/' % os.environ.get('USER','dummy_user'), '/*/'))
             user = map(lambda x: x.split(os.sep)[-3], user)
         elif isinstance(user, basestring):
             user = [user]
@@ -542,7 +542,7 @@ if 'itm' != 'itm':
         itmdb = {}
         for username in user:
             itmdb[username] = {}
-            itmdbdir = user_itmdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
+            itmdbdir = user_itmdbdir.replace('/%s/' % os.environ.get('USER','dummy_user'), '/%s/' % username).strip()
 
             # find MDS+ datafiles
             files = list(recursive_glob('*datafile', itmdbdir))
@@ -685,7 +685,7 @@ def through_omas_itm(ods):
 
     :return: ods
     """
-    user = os.environ['USER']
+    user = os.environ.get('USER','dummy_user')
     machine = 'ITER'
     pulse = 1
     run = 0
