@@ -303,8 +303,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         printd('Saving to IMAS (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
-    for ds in ods.keys():
-        ods[ds].satisfy_imas_requirements()
+    ods.satisfy_imas_requirements()
 
     # get the list of paths from ODS
     paths = set_paths = ods.paths()

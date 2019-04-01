@@ -1127,7 +1127,7 @@ class ODS(MutableMapping):
                 if time is not None and len(time):
                     self['time'] = time
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                elif ds in ['dataset_description']:
+                elif ds in ['dataset_description', 'wall']:
                     self['time'] = [0]
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
                 else:
