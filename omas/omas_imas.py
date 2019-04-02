@@ -559,9 +559,9 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
 
     :param imas_version: IMAS version
 
-    :return: OMAS data set
-
     :param verbose: print loading progress
+
+    :return: OMAS data set
     """
     # set MDSPLUS_TREE_BASE_? environment variables as per
     # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE

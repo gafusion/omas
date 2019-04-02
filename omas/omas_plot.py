@@ -1312,7 +1312,7 @@ def summary(ods, fig=None, quantity=None):
     for step in ['count', 'plot']:
         k = 0
         for q in quantity:
-            if 'value' in ods['summary.global_quantities'][q] and isinstance(ods['summary.global_quantities'][q]['value'], ndarray):
+            if 'value' in ods['summary.global_quantities'][q] and isinstance(ods['summary.global_quantities'][q]['value'], numpy.ndarray):
                 if step == 'count':
                     n += 1
                 k += 1
