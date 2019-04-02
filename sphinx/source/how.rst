@@ -37,11 +37,14 @@ The `ODS` class extends native Python dictionary and list classes with:
 
        ods.slice_at_time(1000.)
 
-5. **Collect data across array of structures** (not only in time) with ``:`` construct:
+5. **Simplified handling of array of structures**
 
    .. code-block:: python
 
-       ods['equilibrium.time_slice.:.global_quantities.ip']
+       ods['wall.description_2d.3.limiter.type.name']      # use `#` to access entries as in a list
+       ods['wall.description_2d.-1.limiter.type.name']      # use `-#` to access entries from the end of the list
+       ods['equilibrium.time_slice.:.global_quantities.ip'] # use `:` to collect quantities across list of structures
+       ods['wall.description_2d.+.limiter.type.name']       # use `+` to append entries to a list of structures
 
 6. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]:
 
