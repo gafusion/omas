@@ -5,14 +5,13 @@ all:
 	@echo ' - make tests3       : run all regression tests with Python3'
 	@echo ' - make requirements : build requirements.txt'
 	@echo ' - make json         : generate IMAS json structure files'
-	@echo ' - make itm          : generate omas_itm.py from omas_imas.py'
 	@echo ' - make docs         : generate sphinx documentation and pushes it online'
 	@echo ' - make tag          : tag git repository with omas/version and push'
-	@echo ' - make pypi         : upload to pypi'
+	@echo ' - make cocos        : generate list of COCOS transformations'
 	@echo ' - make release      : all of the above, in order'
+	@echo ' - make pypi         : upload to pypi'
 	@echo ' - make html         : generate sphinx documentation'
 	@echo ' - make examples     : generate sphinx documentation with examples'
-	@echo ' - make cocos        : generate list of COCOS transformations'
 	@echo ''
 
 tests: tests2 tests3
@@ -74,5 +73,5 @@ tag:
 pypi:
 	python setup.py sdist upload
 
-release: tests2 tests3 requirements json itm docs tag pypi
-	@echo 'Done!'
+release: tests2 tests3 requirements json cocos docs tag
+	@echo 'Make release done'
