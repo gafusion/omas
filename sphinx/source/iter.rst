@@ -53,7 +53,23 @@ Remotely access ITER data with OMFIT
 
    .. code-block:: python
 
+       # get the iter scenario data in OMFIT
        OMFIT['iter_scenarios'] = iter_scenario_summary_remote()
+
+       # filter based on some criterion
+       OMFIT['filter'] = OMFIT['iter_scenarios'].filter(
+           {'List of IDSs': ['equilibrium',
+                             'core_profiles',
+                             'core_sources',
+                             'summary'],
+            'Workflow': 'CORSICA',
+            'Fuelling': 'D-T'})
+
+       # sort based on a column
+       OMFIT['filter'].sort('Ip[MA]')
+
+       # display filtered and sorted table
+       print(OMFIT['filter'])
 
 3. Access ITER scenario database remotely from within OMFIT:
 
