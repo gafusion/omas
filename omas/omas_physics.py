@@ -505,6 +505,45 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     return
 
 @add_to__ODS__
+def add_wall(ods, machine=None):
+    '''
+    Add wall information to the ODS
+
+    :param ods: ODS to update in-place
+
+    :param machine: machine of which to load the wall (if None it is taken from ods['dataset_description.data_entry.machine'])
+    '''
+    if machine is None and 'machine' in ods['dataset_description.data_entry']:
+        machine = ods['dataset_description.data_entry.machine']
+
+    machine = machine.lower()
+
+    walls = {}
+    walls['iter'] = {'RLIM': [6.267, 7.283, 7.899, 8.306, 8.395, 8.27, 7.904, 7.4,
+                           6.587, 5.753, 4.904, 4.311, 4.126, 4.076, 4.046, 4.046,
+                           4.067, 4.097, 4.178, 3.9579, 4.0034, 4.1742, 4.3257, 4.4408,
+                           4.5066, 4.5157, 4.467, 4.4064, 4.4062, 4.3773, 4.3115, 4.2457,
+                           4.1799, 4.4918, 4.5687, 4.6456, 4.8215, 4.9982, 5.1496, 5.2529,
+                           5.2628, 5.2727, 5.565, 5.565, 5.565, 5.565, 5.572, 5.572,
+                           5.572, 5.572, 5.6008, 5.6842, 5.815, 5.9821, 6.171, 6.3655,
+                           6.267],
+                     'ZLIM': [-3.036, -2.247, -1.332, -0.411, 0.643, 1.691, 2.474,
+                           3.189, 3.904, 4.542, 4.722, 4.334, 3.592, 2.576,
+                           1.559, 0.543, -0.474, -1.49, -2.496, -2.5284, -2.5284,
+                           -2.5574, -2.6414, -2.7708, -2.931, -3.1039, -3.2701, -3.3943,
+                           -3.3948, -3.4699, -3.6048, -3.7397, -3.8747, -3.8992, -3.8176,
+                           -3.736, -3.699, -3.7314, -3.8282, -3.9752, -4.1144, -4.2536,
+                           -4.5459, -4.3926, -4.2394, -4.0862, -3.9861, -3.9856, -3.886,
+                           -3.885, -3.6924, -3.5165, -3.3723, -3.2722, -3.225, -3.2346,
+                           -3.036]}
+
+    ods['wall.description_2d.+.limiter.type.name'] = 'first_wall'
+    ods['wall.description_2d.-1.limiter.type.index'] = 0
+    ods['wall.description_2d.-1.limiter.type.description'] = 'first wall'
+    ods['wall.description_2d.-1.limiter.unit.0.outline.r'] = walls[machine]['RLIM']
+    ods['wall.description_2d.-1.limiter.unit.0.outline.z'] = walls[machine]['ZLIM']
+
+@add_to__ODS__
 def equilibrium_transpose_RZ(ods, flip_dims=False):
     '''
     Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.
