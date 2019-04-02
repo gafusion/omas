@@ -5,15 +5,8 @@
 
 from __future__ import print_function, division, unicode_literals
 
-import inspect
 from .omas_utils import *
 from .omas_physics import cocos_transform
-
-try:
-    import matplotlib
-    from matplotlib import pyplot
-except ImportError as _excp:
-    printe('OMAS plotting will not work! Error loading maplotlib: '+repr(_excp))
 
 __all__ = []
 __ods__ = []
@@ -166,6 +159,8 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     '''
 
+    from matplotlib import pyplot
+
     result = []
     if ax is None:
         ax = pyplot.gca()
@@ -289,6 +284,8 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
         Padding between arrow tip and specified (r,z)
     """
 
+    from matplotlib import pyplot
+
     def pick_direction():
         """Guesses the direction for the arrow (from injector toward machine) in case you don't know"""
         dr = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['r'] - r
@@ -395,6 +392,10 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
 
     :return: axes
     """
+
+    import matplotlib
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -478,6 +479,9 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
 
     :return: figure handler
     """
+
+    from matplotlib import pyplot
+
     if fig is None:
         fig = pyplot.figure()
 
@@ -554,6 +558,9 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
 
     :return: figure handler
     """
+
+    from matplotlib import pyplot
+
     if fig is None:
         fig = pyplot.figure()
 
@@ -632,6 +639,9 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
 
     :return: axes handler
     """
+
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -706,6 +716,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
             * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
     """
+
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -772,6 +785,9 @@ def gas_injection_overlay(
         * Remaining keywords are passed to plot call for drawing markers at the gas locations.
 
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     npipes = get_channel_count(
         ods, 'gas_injection', check_loc='gas_injection.pipe.0.exit_position.r', test_checker='checker > 0',
@@ -860,6 +876,10 @@ def pf_active_overlay(ods, ax=None, **kw):
             Hint: you may want to set facecolor instead of just color
     """
     # Make sure there is something to plot or else just give up and return
+
+    import matplotlib
+    from matplotlib import pyplot
+
     nc = get_channel_count(
         ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.geometry_type', channels_name='coil',
         test_checker='checker > -1')
@@ -960,6 +980,9 @@ def magnetics_overlay(
 
         * Remaining keywords are passed to plot call
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     nbp = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe',
@@ -1016,6 +1039,9 @@ def interferometer_overlay(ods, ax=None, **kw):
 
         * Remaining keywords are passed to plot call
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
@@ -1060,6 +1086,9 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
         * Remaining keywords are passed to plot call
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
@@ -1117,6 +1146,9 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
         * Remaining keywords are passed to plot call
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(checker > 0)')
@@ -1205,6 +1237,9 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
         * Remaining keywords are passed to plot call for drawing markers at the gas locations.
     """
+
+    from matplotlib import pyplot
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='checker > 0')
@@ -1264,6 +1299,9 @@ def summary(ods, fig=None, quantity=None):
 
     :return: figure handler
     '''
+
+    from matplotlib import pyplot
+
     if fig is None:
         fig = pyplot.figure()
     if quantity is None:
@@ -1339,6 +1377,9 @@ def quantity(ods, key,
     :return: axes instance
 
     '''
+
+    from matplotlib import pyplot
+
     # handle regular expressions
     key = ods.search_paths(key, 1, '@')[0]
 
@@ -1380,3 +1421,7 @@ def quantity(ods, key,
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     return ax
+
+# this test is here to prevent
+if 'matplotlib' in locals() or 'pyplot' in locals() or 'plt' in locals():
+    raise Exception('Do not import matplotlib at the top level of %s'%os.path.split(__file__)[1])
