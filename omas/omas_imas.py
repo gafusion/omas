@@ -361,7 +361,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, paths=None,
+def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
                    skip_uncertainties=False, skip_ggd=False, verbose=True):
     """
@@ -482,7 +482,7 @@ def load_omas_imas(user=os.environ['USER'], machine=None, pulse=None, run=0, pat
     return ods
 
 
-def browse_imas(user=os.environ['USER'], pretty=True, quiet=False,
+def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
                 user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
     '''
     Browse available IMAS data (machine/pulse/run) for given user
