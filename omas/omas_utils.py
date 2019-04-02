@@ -70,7 +70,10 @@ def printd(*objects, **kw):
         dump = True
         topic_selected = re.sub('_dump$', '', topic_selected)
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
-        printe(*objects, **kw)
+        if eval(os.environ.get('OMAS_DEBUG_STDOUT','1')):
+            print(*objects, **kw)
+        else:
+            printe(*objects, **kw)
         if dump:
             fb = StringIO()
             print(*objects[1:], file=fb)
