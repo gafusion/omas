@@ -14,7 +14,7 @@ from .omas_core import ODS
 # --------------------------------------------
 def save_omas_nc(ods, filename, **kw):
     """
-    Save an OMAS data set to on Amazon S3 server
+    Save an OMAS data set to NetCDF file
 
     :param ods: OMAS data set
 
@@ -48,7 +48,7 @@ def save_omas_nc(ods, filename, **kw):
 
 def load_omas_nc(filename, consistency_check=True, ):
     """
-    Load an OMAS data set from Amazon S3 server
+    Load an OMAS data set from NetCDF file
 
     :param filename: filename to load from
 
