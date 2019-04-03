@@ -116,12 +116,12 @@ omas_rcparams.update({
     'consistency_check': True,
     'dynamic_path_creation': True,
     'unitsio': False,
-    'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR',
-                                   os.sep.join(
-                                       [tempfile.gettempdir(), 'OMAS_TMP_DIR'])),
-    'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR',
-                                    os.sep.join(
-                                        [os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])),
+    'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(),
+                                                                os.environ.get('USER', 'dummy_user'),
+                                                                'OMAS_TMP_DIR'])),
+    'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR', os.sep.join([os.environ.get('HOME', tempfile.gettempdir()),
+                                                                       'tmp',
+                                                                       'OMAS_FAKE_IMAS_DIR'])),
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
     'default_imas_version': _default_imas_version
 })
