@@ -1112,26 +1112,32 @@ class ODS(MutableMapping):
             ds.attrs['x_full'].append(coord)
         return ds
 
-    def satisfy_imas_requirements(self):
+    def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
         '''
         Assign .time and .ids_properties.homogeneous_time info for top-level structures
         since these are required for writing an IDS to IMAS
         '''
         if not len(self.location):
+            ds_times = {}
             for ds in self.keys():
-                self.getraw(ds).satisfy_imas_requirements()
+                self.getraw(ds).satisfy_imas_requirements(attempt_fix=False)
         else:
             ds = p2l(self.location)[0]
+
             if ds not in add_datastructures:
                 time = self.time()
                 if time is not None and len(time):
                     self['time'] = time
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                elif ds in ['dataset_description', 'wall']:
-                    self['time'] = [0]
+                    ds_times[ds] = time
+                elif attempt_fix and ds in ['dataset_description', 'wall']:
+                    self['time'] = [0.0]
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                else:
+                elif raise_errors:
                     raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+                else:
+                    return False
+            return True
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
