@@ -28,79 +28,6 @@ def add_to__ALL__(f):
 # ================================
 # plotting helper functions
 # ================================
-def contourPaths(x, y, Z, levels, remove_boundary_points=False, smooth_factor=1):
-    """
-    :param x: 1D x coordinate
-
-    :param y: 1D y coordinate
-
-    :param Z: 2D data
-
-    :param levels: levels to trace
-
-    :param remove_boundary_points: remove traces at the boundary
-
-    :param smooth_factor: smooth contours by cranking up grid resolution. Requires scipy.
-
-    :return: list of segments
-    """
-    import matplotlib
-    try:
-        from scipy import ndimage
-    except ImportError:
-        printd('Warning: failed to import scipy in contourPaths. smoothing disabled.')
-        ndimage = None
-    if compare_version(matplotlib.__version__, '2.1') >= 0:
-        import matplotlib._contour as _contour
-    else:
-        from matplotlib import _cntr
-
-    sf = int(round(smooth_factor))
-    if sf > 1 and ndimage is not None:
-        x = ndimage.zoom(x, sf)
-        y = ndimage.zoom(y, sf)
-        Z = ndimage.zoom(Z, sf)
-
-    [X, Y] = numpy.meshgrid(x, y)
-    if compare_version(matplotlib.__version__, '2.1') >= 0:
-        contour_generator = _contour.QuadContourGenerator(X, Y, Z, None, True, 0)
-    else:
-        Cntr = matplotlib._cntr.Cntr(X, Y, Z)
-
-    allsegs = []
-    for level in levels:
-        if compare_version(matplotlib.__version__, '2.1') >= 0:
-            segs = contour_generator.create_contour(level)
-        else:
-            nlist = Cntr.trace(level)
-            nseg = len(nlist) // 2
-            segs = nlist[:nseg]
-        if not remove_boundary_points:
-            segs_ = segs
-        else:
-            segs_ = []
-            for segarray in segs:
-                x_ = segarray[:, 0]
-                y_ = segarray[:, 1]
-                valid = []
-                for i in range(len(x_) - 1):
-                    if numpy.isclose(x_[i], x_[i + 1]) and (
-                            numpy.isclose(x_[i], max(x)) or numpy.isclose(x_[i], min(x))):
-                        continue
-                    if numpy.isclose(y_[i], y_[i + 1]) and (
-                            numpy.isclose(y_[i], max(y)) or numpy.isclose(y_[i], min(y))):
-                        continue
-                    valid.append((x_[i], y_[i]))
-                    if i == len(x_):
-                        valid.append(x_[i + 1], y_[i + 1])
-                if len(valid):
-                    segs_.append(numpy.array(valid))
-
-        segs = map(matplotlib.path.Path, segs_)
-        allsegs.append(segs)
-    return allsegs
-
-
 class Uband(object):
     """
     This class wraps the line and PollyCollection(s) associated with a banded
@@ -373,7 +300,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0.1], ax=None, **kw):
+def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw):
     """
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -381,8 +308,6 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
     :param ods: input ods
 
     :param time_index: time slice to plot
-
-    :param contour_smooth: Provides smoother contours by up-sampling first if >= 1 after rounding to nearest int.
 
     :param levels: list of sorted numeric values to pass to 2D plot as contour levels
 
@@ -399,9 +324,6 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
     if ax is None:
         ax = pyplot.gca()
 
-    label = kw.pop('label', '')  # Withhold this from all plots except the boundary to avoid spamming legend
-    kw.setdefault('linewidth', 1)
-
     wall = None
     eq = ods['equilibrium']['time_slice'][time_index]
     if 'wall' in ods:
@@ -409,6 +331,20 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
             wall = ods['wall']['description_2d'][time_index]['limiter']['unit']
         elif 0 in ods['wall']['description_2d']:
             wall = ods['wall']['description_2d'][0]['limiter']['unit']
+
+    # plotting style
+    kw.setdefault('linewidth', 1)
+    label = kw.pop('label', '')
+    kw1 = copy.deepcopy(kw)
+    kw1['linewidth'] = kw['linewidth'] + 1
+
+    # boundary
+    ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], label=label, **kw1)
+    kw1.setdefault('color', ax.lines[-1].get_color())
+
+    # axis
+    if 'global_quantities.magnetic_axis.r' in eq and 'global_quantities.magnetic_axis.z':
+        ax.plot(eq['global_quantities']['magnetic_axis']['r'], eq['global_quantities']['magnetic_axis']['z'], '+', **kw1)
 
     # first try to plot as function of `rho` and fallback on `psi`
     if 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']:
@@ -419,33 +355,28 @@ def equilibrium_CX(ods, time_index=0, contour_smooth=3, levels=numpy.r_[0.1:10:0
         value1D = eq['profiles_1d']['psi']
     value2D = (value2D - min(value1D)) / (max(value1D) - min(value1D))
 
+    # wall clipping
+    if wall is not None:
+        path = matplotlib.path.Path(numpy.transpose(numpy.array([wall[0]['outline']['r'], wall[0]['outline']['z']])))
+        wall_path = matplotlib.patches.PathPatch(path, facecolor='none')
+        ax.add_patch(wall_path)
+
     # contours
-    line = numpy.array([numpy.nan, numpy.nan])
-    for item1 in contourPaths(eq['profiles_2d'][0]['grid']['dim1'], eq['profiles_2d'][0]['grid']['dim2'], value2D.T,
-                              levels, smooth_factor=contour_smooth):
-        for item in item1:
-            line = numpy.vstack((line, item.vertices, numpy.array([numpy.nan, numpy.nan])))
+    if 'r' in eq['profiles_2d'][0] and 'z' in eq['profiles_2d'][0]:
+        R = eq['profiles_2d'][0]['r']
+        Z = eq['profiles_2d'][0]['z']
+    else:
+        Z,R = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
+    kw.setdefault('colors', kw1['color'])
+    kw['linewidths'] = kw.pop('linewidth')
+    CS = ax.contour(R, Z, value2D, levels, **kw)
 
     # internal flux surfaces w/ or w/o masking
     if wall is not None:
-        path = matplotlib.path.Path(numpy.transpose(numpy.array([wall[0]['outline']['r'], wall[0]['outline']['z']])))
-        patch = matplotlib.patches.PathPatch(path, facecolor='none')
-        ax.add_patch(patch)
-        pyplot.plot(line[:, 0], line[:, 1], **kw)
-        ax.lines[-1].set_clip_path(patch)
-    else:
-        pyplot.plot(line[:, 0], line[:, 1], **kw)
+        for collection in CS.collections:
+            collection.set_clip_path(wall_path)
 
-    # plotting style
-    kw1 = copy.deepcopy(kw)
-    kw1['linewidth'] = kw['linewidth'] + 1
-    kw1.setdefault('color', ax.lines[-1].get_color())
 
-    # boundary
-    ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], label=label, **kw1)
-
-    # axis
-    ax.plot(eq['global_quantities']['magnetic_axis']['r'], eq['global_quantities']['magnetic_axis']['z'], '+', **kw1)
 
     # wall
     if wall is not None:
