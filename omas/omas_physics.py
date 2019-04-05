@@ -505,7 +505,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     return
 
 @add_to__ODS__
-def add_wall(ods, machine=None):
+def wall_add(ods, machine=None):
     '''
     Add wall information to the ODS
 
@@ -542,6 +542,30 @@ def add_wall(ods, machine=None):
     ods['wall.description_2d.-1.limiter.type.description'] = 'first wall'
     ods['wall.description_2d.-1.limiter.unit.0.outline.r'] = walls[machine]['RLIM']
     ods['wall.description_2d.-1.limiter.unit.0.outline.z'] = walls[machine]['ZLIM']
+
+@add_to__ODS__
+def equilibrium_consistent(ods):
+    for time_index in ods['equilibrium.time_slice']:
+        eq = ods['equilibrium.time_slice'][time_index]
+        eq1d = ods['equilibrium.time_slice'][time_index]['profiles_1d']
+
+        psi = eq1d['psi']
+        psi_norm = abs(psi - psi[0]) / abs(psi[-1] - psi[0])
+        psirz = eq['profiles_2d.0.psi']
+        psirz_norm = abs(psirz - psi[0]) / abs(psi[-1] - psi[0])
+        fpol = eq1d['f']
+
+        # extend functions in PSI to be clamped at edge value when outside of PSI range (i.e. outside of LCFS)
+        ext_psi_norm_mesh = numpy.hstack((psi_norm[0] - 1E6, psi_norm, psi_norm[-1] + 1E6))
+
+        def ext_arr(inv):
+            return numpy.hstack((inv[0], inv, inv[-1]))
+
+        fpol = omas_interp1d(psirz_norm, ext_psi_norm_mesh, ext_arr(fpol))
+        Z, R = numpy.meshgrid(eq['profiles_2d.0.grid.dim2'], eq['profiles_2d.0.grid.dim1'])
+        eq['profiles_2d.0.r'] = R
+        eq['profiles_2d.0.z'] = Z
+        eq['profiles_2d.0.b_field_tor'] = fpol / R
 
 @add_to__ODS__
 def equilibrium_transpose_RZ(ods, flip_dims=False):
