@@ -30,7 +30,7 @@ where `upgrade` is used to update the omas installation to the latest version.
                                                                                 # The [build_structures,build_documentation] options
                                                                                 # install packages required for extra development purposes
 
-Different `Python packages are required <_static/requirements.txt>`_ depending on the :ref:`data storage systems <omas_formats>`
+List of `Python 2 <_static/requirements_python2.txt>`_ or `Python 3 <_static/requirements_python3.txt>`_ package requirements.
 
 Testing installation
 ====================

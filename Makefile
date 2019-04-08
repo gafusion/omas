@@ -47,7 +47,8 @@ tests3_utils:
 	python3 -m unittest discover --pattern="*_utils.py" -s omas/tests -v
 
 requirements:
-	rm requirements.txt
+	rm -f requirements_python2.txt
+	rm -f requirements_python3.txt
 	python setup.py --name
 
 html:
