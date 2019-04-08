@@ -53,9 +53,7 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     else:
         requested_paths = map(p2l, paths)
 
-    ods = ODS()
-
-    fetch_paths = []
+    available_ds=[]
     for ds in numpy.unique([p[0] for p in requested_paths]):
         if ds in add_datastructures.keys():
             continue
@@ -66,8 +64,11 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
             continue
         if verbose:
             print('* ', ds)
+        available_ds.append(ds)
 
-        fetch_paths += filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
+    ods = ODS()
+    for ds in available_ds:
+        filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
 
     return ods
 
@@ -100,6 +101,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path=None, paths=None, requ
         # append path if it has data
         data = uda_get(client, path, pulse, run)
         if data is not None:
+            print(l2o(path))
             ods[path] = data
             paths.append(path)
         return paths
@@ -154,20 +156,19 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path=None, paths=None, requ
 
     return paths
 
-def offset(path, off):
-    return [p if isinstance(p,basestring) else p+off for p in path]
 
 def uda_get_shape(client, path, pulse, run):
-    tmp =  uda_get(client, path+['Shape_of'], pulse, run)
-    print(tmp)
-    return tmp
+    return uda_get(client, path+['Shape_of'], pulse, run)
+
+
+def offset(path, off):
+    return [p if isinstance(p,basestring) else p+off for p in path]
 
 
 def uda_get(client, path, pulse, run):
     try:
         location = l2o(offset(path,+1)).replace('.', '/')
         tmp=client.get(location, pulse)
-        print(location)
         if isinstance(tmp,pyuda._string.String):
             return tmp.str
         else:
