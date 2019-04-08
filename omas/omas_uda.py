@@ -22,15 +22,31 @@ except ImportError as _excp:
             raise _pyuda_import_excp
 
 def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
-                  imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                  verbose=True, assume_uniform_array_structures=False, skip_ggd=True):
-    """Load pyuda data to OMAS
+                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
+                   skip_uncertainties=False, skip_ggd=True, verbose=True):
+    '''
+    Load UDA data to OMAS
 
+    :param server: UDA server
 
-    .....
+    :param port: UDA port
 
-    :return: populated ODS
-    """
+    :param pulse: UDA pulse
+
+    :param run: UDA run
+
+    :param paths: list of paths to load from IMAS
+
+    :param imas_version: IMAS version
+
+    :param skip_uncertainties: do not load uncertain data
+
+    :param skip_ggd: do not load ggd structure
+
+    :param verbose: print loading progress
+
+    :return: OMAS data set
+    '''
 
     if pulse is None or run is None:
         raise Exception('`pulse` and `run` must be specified')
@@ -53,12 +69,12 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     else:
         requested_paths = map(p2l, paths)
 
-    available_ds=[]
+    available_ds = []
     for ds in numpy.unique([p[0] for p in requested_paths]):
         if ds in add_datastructures.keys():
             continue
 
-        if uda_get(client, [ds,'ids_properties','homogeneous_time'], pulse, run) is None:
+        if uda_get(client, [ds, 'ids_properties', 'homogeneous_time'], pulse, run) is None:
             if verbose:
                 print('- ', ds)
             continue
@@ -68,34 +84,41 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
 
     ods = ODS()
     for ds in available_ds:
-        filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
+        filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1],
+                            path=[], paths=[], requested_paths=requested_paths,
+                            skip_uncertainties=skip_uncertainties, skip_ggd=skip_ggd)
 
     return ods
 
 
-def filled_paths_in_uda(ods, client, pulse, run, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=False):
-    """
-    Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
+def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd):
+    '''
+    Recursively traverse ODS and populate it with data from UDA
 
-    ....
+    :param ods: ODS to be filled
+
+    :param client: UDA client
+
+    :param pulse: UDA pulse
+
+    :param run: UDA run
 
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
+    :param path: []
+
+    :param paths: []
+
+    :param requested_paths: list of paths that are requested
+
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
-    :param skip_ggd: do not traverse ggd structures
+    :param skip_uncertainties: do not load uncertain data
 
-    :return: returns list of paths in an IDS that are filled
-    """
-    if path is None:
-        path = []
+    :param skip_ggd: do not load ggd structure
 
-    if paths is None:
-        paths = []
-
-    if requested_paths is None:
-        requested_paths = []
-
+    :return: filled ODS
+    '''
     # leaf
     if not len(ds):
         # append path if it has data
@@ -134,15 +157,15 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path=None, paths=None, requ
         propagate_requested_paths = requested_paths
         if len(requested_paths):
             if kid in request_check or (isinstance(kid, int) and ':' in request_check):
-                propagate_requested_paths = [p[1:] for p in requested_paths if len(p)>1 and (kid == p[0] or p[0]==':')]
+                propagate_requested_paths = [p[1:] for p in requested_paths if len(p) > 1 and (kid == p[0] or p[0] == ':')]
             else:
                 continue
 
         # recursive call
         if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
+            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd)
         else:
-            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
+            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd)
         paths += subtree_paths
 
         # assume_uniform_array_structures
@@ -154,22 +177,64 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path=None, paths=None, requ
                     p[len(path)] = key
                 paths += subtree_paths
 
+    # generate uncertain data
+    if isinsstance(ods.omas_data,dict):
+        for kid in list(ods.keys()):
+            if kid.endswith('_error_upper') and kid[:-len('_error_upper')] in ods:
+                ods[kid[:-len('_error_upper')]] = uarray(ods[kid[:-len('_error_upper')]], ods[kid])
+                del ods[kid]
+
     return paths
 
 
 def uda_get_shape(client, path, pulse, run):
-    return uda_get(client, path+['Shape_of'], pulse, run)
+    '''
+    Get the number of elements in a structure of arrays
+
+    :param client: pyuda.Client class
+
+    :param path: ODS path expressed as list
+
+    :param pulse: UDA pulse
+
+    :param run: UDA run
+
+    :return: integer
+    '''
+    return uda_get(client, path + ['Shape_of'], pulse, run)
 
 
 def offset(path, off):
-    return [p if isinstance(p,basestring) else p+off for p in path]
+    '''
+    IMAS UDA indexing starts from one
+
+    :param path: ODS path expressed as list
+
+    :param off: offset to apply
+
+    :return: path with applied offset
+    '''
+    return [p if isinstance(p, basestring) else p + off for p in path]
 
 
 def uda_get(client, path, pulse, run):
+    '''
+    Get the data from UDA
+
+    :param client: pyuda.Client class
+
+    :param path: ODS path expressed as list
+
+    :param pulse: UDA pulse
+
+    :param run: UDA run
+
+    :return: data
+    '''
     try:
-        location = l2o(offset(path,+1)).replace('.', '/')
-        tmp=client.get(location, pulse)
-        if isinstance(tmp,pyuda._string.String):
+        location = l2o(offset(path, +1)).replace('.', '/')
+        tmp = client.get(location, pulse)
+        if isinstance(tmp, pyuda._string.String):
             return tmp.str
         else:
             return tmp.data

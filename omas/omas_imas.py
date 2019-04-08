@@ -364,7 +364,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                   skip_uncertainties=False, skip_ggd=False, verbose=True):
+                   skip_uncertainties=False, skip_ggd=True, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -585,13 +585,15 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return ods
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=False):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
     :param ids: input ids
 
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
+
+    :param requested_paths: list of paths that are requested
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
@@ -640,7 +642,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         propagate_requested_paths = requested_paths
         if len(requested_paths):
             if kid in request_check or (isinstance(kid, int) and ':' in request_check):
-                propagate_requested_paths = [p[1:] for p in requested_paths if len(p)>1 and (kid == p[0] or p[0]==':')]
+                propagate_requested_paths = [p[1:] for p in requested_paths if len(p) > 1 and (kid == p[0] or p[0] == ':')]
             else:
                 continue
 
