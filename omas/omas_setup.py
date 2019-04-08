@@ -34,7 +34,7 @@ try:
 except ImportError:
     pint = None
     ureg = None
-    warnings.warn('pint Python library not found')
+    warnings.warn('pint Python library not found: units support disabled in omas')
 
 # uncertainties
 import uncertainties
@@ -43,7 +43,13 @@ from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 
 # xarrays
-import xarray
+try:
+    xarray = None
+    import xarray
+except ImportError:
+    warnings.warn('xarary Python library not found: xarray support disabled in omas')
+except Exception as _excp:
+    warnings.warn('xarary Python library error: ' + repr(_excp))
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
