@@ -31,10 +31,4 @@ Mapping the physics codes I/O to the IMAS data model is done in third party Pyth
 .. image:: https://img.shields.io/codecov/c/github/gafusion/omas.svg
   :target: https://codecov.io/gh/gafusion/omas
 
-.. image:: https://img.shields.io/conda/dn/conda-forge/omas.svg?color=purple&label=conda%20downloads
-  :target: https://github.com/conda-forge/omas-feedstock
-
-.. image:: https://img.shields.io/pypi/dm/omas.svg?color=purple&label=pypi%20downloads
-  :target: https://pypi.org/project/omas/#history
-
 ---------------------------------

@@ -192,6 +192,7 @@ def imas_empty(value):
         value = None
     return value
 
+
 def imas_get(ids, path, skip_missing_nodes=False):
     """
     read the value of a path in an open IMAS ids
