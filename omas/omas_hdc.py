@@ -51,13 +51,13 @@ def save_omas_hdc(ods):
 
 
 def load_omas_hdc(hdc, consistency_check=True):
-    """Convert OMAS data structure to HDC
+    """Convert HDC data structure to OMAS
 
-    :param ods: input data structure
+    :param hdc: input data structure
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
-    :return: HDC container
+    :return: populated ODS
     """
     # recurrent function - check types
     if not isinstance(hdc, HDC):
