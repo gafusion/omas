@@ -14,6 +14,7 @@ __all__ = [
     'save_omas_pkl',  'load_omas_pkl',  'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
+    'load_omas_uda',
     'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
@@ -1240,6 +1241,7 @@ from .omas_nc import *
 from .omas_json import *
 from .omas_structure import *
 from .omas_hdc import *
+from .omas_uda import *
 
 # --------------------------------------------
 # backward compatibility
