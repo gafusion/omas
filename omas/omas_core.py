@@ -1118,7 +1118,6 @@ class ODS(MutableMapping):
         since these are required for writing an IDS to IMAS
         '''
         if not len(self.location):
-            ds_times = {}
             for ds in self.keys():
                 self.getraw(ds).satisfy_imas_requirements(attempt_fix=False)
         else:
@@ -1129,7 +1128,6 @@ class ODS(MutableMapping):
                 if time is not None and len(time):
                     self['time'] = time
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                    ds_times[ds] = time
                 elif attempt_fix and ds in ['dataset_description', 'wall']:
                     self['time'] = [0.0]
                     self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
