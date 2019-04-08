@@ -82,16 +82,16 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
             print('* ', ds)
         available_ds.append(ds)
 
-    ods = ODS()
+    ods = ODS(consistency_check=False)
     for ds in available_ds:
         filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1],
                             path=[], paths=[], requested_paths=requested_paths,
                             skip_uncertainties=skip_uncertainties, skip_ggd=skip_ggd)
-
+    ods.consistency_check=True
     return ods
 
 
-def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd):
+def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, skip_uncertainties, skip_ggd):
     '''
     Recursively traverse ODS and populate it with data from UDA
 
@@ -111,8 +111,6 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
 
     :param requested_paths: list of paths that are requested
 
-    :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
-
     :param skip_uncertainties: do not load uncertain data
 
     :param skip_ggd: do not load ggd structure
@@ -121,12 +119,6 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
     '''
     # leaf
     if not len(ds):
-        # append path if it has data
-        data = uda_get(client, path, pulse, run)
-        if data is not None:
-            print(l2o(path))
-            ods[path] = data
-            paths.append(path)
         return paths
 
     # keys
@@ -136,8 +128,6 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         if n is None:
             return paths
         keys = range(n)
-        if len(keys) and assume_uniform_array_structures:
-            keys = [0]
 
     # kid must be part of this list
     if len(requested_paths):
@@ -149,6 +139,24 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         # skip ggd structures
         if skip_ggd and kid in ['ggd', 'grids_ggd']:
             continue
+
+        if isinstance(kid, basestring):
+            if skip_uncertainties and kid.endswith('_error_upper'):
+                continue
+            if kid.endswith('_error_lower') or kid.endswith('_error_index'):
+                continue
+            kkid=kid
+        else:
+            kkid=':'
+
+        # leaf
+        if not len(ds[kkid]):
+            # append path if it has data
+            data = uda_get(client, path+[kid], pulse, run)
+            if data is not None:
+                #print(l2o(path))
+                ods[kid] = data
+                paths.append(path+[kid])
 
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
@@ -162,25 +170,12 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
                 continue
 
         # recursive call
-        if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd)
-        else:
-            subtree_paths = filled_paths_in_uda(ods, client, pulse, run, ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_uncertainties, skip_ggd)
-        paths += subtree_paths
-
-        # assume_uniform_array_structures
-        if assume_uniform_array_structures and keys[0] == 0:
-            zero_paths = subtree_paths
-            for key in range(1, len(ids)):
-                subtree_paths = copy.deepcopy(zero_paths)
-                for p in subtree_paths:
-                    p[len(path)] = key
-                paths += subtree_paths
+        paths = filled_paths_in_uda(ods[kid], client, pulse, run, ds[kkid], propagate_path, [], propagate_requested_paths, skip_uncertainties, skip_ggd)
 
     # generate uncertain data
-    if isinsstance(ods.omas_data,dict):
-        for kid in list(ods.keys()):
-            if kid.endswith('_error_upper') and kid[:-len('_error_upper')] in ods:
+    if not skip_uncertainties and isinstance(ods.omas_data, dict):
+        for kid in list(ods.omas_data.keys()):
+            if kid.endswith('_error_upper') and kid[:-len('_error_upper')] in ods.omas_data:
                 ods[kid[:-len('_error_upper')]] = uarray(ods[kid[:-len('_error_upper')]], ods[kid])
                 del ods[kid]
 
