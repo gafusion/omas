@@ -1,0 +1,903 @@
+{
+ "ec_antennas": {
+  "documentation": "Antenna systems for heating and current drive in the electron cyclotron (EC) frequencies.",
+  "full_path": "ec_antennas",
+  "lifecycle_last_change": "3.21.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.7.0",
+  "maxoccur": "2"
+ },
+ "ec_antennas.antenna": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of Electron Cyclotron antennas",
+  "full_path": "ec_antennas/antenna(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "ec_antennas_antenna"
+ },
+ "ec_antennas.antenna[:].beam": {
+  "data_type": "structure",
+  "documentation": "Beam characteristics",
+  "full_path": "ec_antennas/antenna(i1)/beam",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ec_antennas_beam"
+ },
+ "ec_antennas.antenna[:].beam.phase": {
+  "data_type": "structure",
+  "documentation": "Phase ellipse characteristics",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ec_antennas_beam_phase"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle": {
+  "data_type": "structure",
+  "documentation": "Rotation angle for the phase ellipse",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.phase.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.phase.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.phase.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.phase.angle.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/angle/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/angle/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature": {
+  "coordinates": [
+   "1...2",
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
+  ],
+  "data_type": "structure",
+  "documentation": "Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "m^-1"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature.data": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/curvature/time",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature.data_error_lower": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/curvature/time",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature.data_error_upper": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.phase.curvature.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/curvature/time",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ec_antennas.antenna[:].beam.phase.curvature.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/beam/phase/curvature/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/phase/curvature/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].beam.spot": {
+  "data_type": "structure",
+  "documentation": "Spot ellipse characteristics",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ec_antennas_beam_spot"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle": {
+  "data_type": "structure",
+  "documentation": "Rotation angle for the spot ellipse",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.spot.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.spot.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].beam.spot.angle.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/angle/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].beam.spot.angle.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/angle/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/angle/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].beam.spot.size": {
+  "coordinates": [
+   "1...2",
+   "ec_antennas.antenna[:].beam.spot.size.time"
+  ],
+  "data_type": "structure",
+  "documentation": "Size of the spot ellipse",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].beam.spot.size.data": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.spot.size.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/size/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].beam.spot.size.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].beam.spot.size.data_error_lower": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.spot.size.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/size/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].beam.spot.size.data_error_upper": {
+  "coordinates": [
+   "1...N",
+   "ec_antennas.antenna[:].beam.spot.size.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/size/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].beam.spot.size.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/beam/spot/size/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "beam/spot/size/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].frequency": {
+  "data_type": "FLT_0D",
+  "documentation": "Frequency",
+  "full_path": "ec_antennas/antenna(i1)/frequency",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Hz"
+ },
+ "ec_antennas.antenna[:].frequency_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"frequency\"",
+  "full_path": "ec_antennas/antenna(i1)/frequency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].frequency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"frequency\"",
+  "full_path": "ec_antennas/antenna(i1)/frequency_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Hz"
+ },
+ "ec_antennas.antenna[:].frequency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"frequency\"",
+  "full_path": "ec_antennas/antenna(i1)/frequency_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Hz"
+ },
+ "ec_antennas.antenna[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Identifier of the antenna (unique within the set of all antennas of the experiment)",
+  "full_path": "ec_antennas/antenna(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol": {
+  "data_type": "structure",
+  "documentation": "Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_pol.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_pol/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_pol.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_pol/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_pol.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_pol/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_pol.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_pol/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_pol/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor": {
+  "data_type": "structure",
+  "documentation": "Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_tor.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_tor/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_tor.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_tor/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_angle_tor.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_tor/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_angle_tor.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/launching_angle_tor/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_angle_tor/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].launching_position": {
+  "data_type": "structure",
+  "documentation": "Launching position of the beam",
+  "full_path": "ec_antennas/antenna(i1)/launching_position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_dynamic_aos1"
+ },
+ "ec_antennas.antenna[:].launching_position.phi": {
+  "data_type": "structure",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_position.phi.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/phi/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_position.phi.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].launching_position.phi.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/phi/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_position.phi.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/phi/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ec_antennas.antenna[:].launching_position.phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].launching_position.r": {
+  "data_type": "structure",
+  "documentation": "Major radius",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.r.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/r/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.r.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].launching_position.r.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/r/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.r.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/r/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.r.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/r/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/r/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].launching_position.z": {
+  "data_type": "structure",
+  "documentation": "Height",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.z.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.z.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/z/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.z.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].launching_position.z.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.z.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/z/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.z.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].launching_position.z.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/z/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ec_antennas.antenna[:].launching_position.z.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/launching_position/z/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "launching_position/z/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].mode": {
+  "data_type": "structure",
+  "documentation": "Incoming wave mode (+ or -1 for O/X mode)",
+  "full_path": "ec_antennas/antenna(i1)/mode",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_1d"
+ },
+ "ec_antennas.antenna[:].mode.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].mode.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/mode/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "mode/time",
+  "type": "dynamic"
+ },
+ "ec_antennas.antenna[:].mode.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/mode/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "mode/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.antenna[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the antenna (unique within the set of all antennas of the experiment)",
+  "full_path": "ec_antennas/antenna(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "ec_antennas.antenna[:].power_launched": {
+  "data_type": "structure",
+  "documentation": "Power launched from this antenna into the vacuum vessel",
+  "full_path": "ec_antennas/antenna(i1)/power_launched",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "W"
+ },
+ "ec_antennas.antenna[:].power_launched.data": {
+  "coordinates": [
+   "ec_antennas.antenna[:].power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ec_antennas/antenna(i1)/power_launched/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ec_antennas.antenna[:].power_launched.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/power_launched/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.antenna[:].power_launched.data_error_lower": {
+  "coordinates": [
+   "ec_antennas.antenna[:].power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/power_launched/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ec_antennas.antenna[:].power_launched.data_error_upper": {
+  "coordinates": [
+   "ec_antennas.antenna[:].power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ec_antennas/antenna(i1)/power_launched/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ec_antennas.antenna[:].power_launched.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "ec_antennas/antenna(i1)/power_launched/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ec_antennas.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "ec_antennas/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "ec_antennas.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "ec_antennas/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "ec_antennas/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.code.output_flag": {
+  "coordinates": [
+   "ec_antennas.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "ec_antennas/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "ec_antennas.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "ec_antennas/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "ec_antennas/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "ec_antennas/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "ec_antennas/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "ec_antennas.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "ec_antennas/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "ec_antennas/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "ec_antennas/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "ec_antennas/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "ec_antennas/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "ec_antennas/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "ec_antennas.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "ec_antennas/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "ec_antennas/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "ec_antennas/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_antennas.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "ec_antennas/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
