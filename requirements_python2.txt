@@ -13,7 +13,7 @@ xarray<=0.11.0           # required
 
 #pyhdc                   # hdc
 #imas                    # imas
-#pyual                   # ual
+#pyuda                   # uda
 #xmltodict               # build_structures
 #bs4                     # build_structures
 Sphinx                   # build_documentation

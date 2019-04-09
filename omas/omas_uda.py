@@ -61,6 +61,9 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     elif not os.environ['UDA_PORT']:
         raise pyuda.UDAException('Must set UDA_PORT environmental variable')
 
+    # set this to get pyuda metadata (maybe of interest for future use):
+    # pyuda.Client.set_property(pyuda.Properties.PROP_META, True)
+
     client = pyuda.Client()
 
     # if paths is None then figure out what IDS are available and get ready to retrieve everything
@@ -187,7 +190,7 @@ def uda_get_shape(client, path, pulse, run):
     '''
     Get the number of elements in a structure of arrays
 
-    :param client: pyuda.Client class
+    :param client: pyuda.Client object
 
     :param path: ODS path expressed as list
 
@@ -217,7 +220,7 @@ def uda_get(client, path, pulse, run):
     '''
     Get the data from UDA
 
-    :param client: pyuda.Client class
+    :param client: pyuda.Client object
 
     :param path: ODS path expressed as list
 

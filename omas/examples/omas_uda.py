@@ -1,12 +1,24 @@
-import os
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+UDA Universal Data Access
+=========================
+This example illustrates how OMAS can load machines
+experimental data stored in IMAS format via UDA
+"""
+
 from omas import *
 from pprint import pprint
 
-server='idam0.mast.ccfe.ac.uk'
-port=56563
+# MAST UDA server (restricted access)
+server = 'idam0.mast.ccfe.ac.uk'
+port = 56563
 
-tmp = load_omas_uda(server=server, port=port, pulse=30420, run=0, paths=None,#paths=['magnetics'],
-                  imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                  verbose=True)
+pulse = 30420
 
-pprint(tmp)
+ods = load_omas_uda(server=server,
+                    port=port,
+                    pulse=pulse,
+                    paths=['magnetics'])
+
+pprint(ods.pretty_paths())

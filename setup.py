@@ -11,7 +11,7 @@ install_requires[3] = all_install_require + ['xarray']
 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
-                  'ual': ['pyual'],
+                  'uda': ['pyuda'],
                   'build_structures': ['xmltodict', 'bs4'],
                   'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow']}
 
@@ -30,7 +30,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             f.write('\n')
             for requirement in extras_require:
                 for item in extras_require[requirement]:
-                    if requirement in ['imas', 'hdc', 'ual', 'build_structures']:
+                    if requirement in ['imas', 'hdc', 'uda', 'build_structures']:
                         item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)
 
