@@ -88,6 +88,7 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
                             path=[], paths=[], requested_paths=requested_paths,
                             skip_uncertainties=skip_uncertainties, skip_ggd=skip_ggd)
     ods.consistency_check=True
+    ods.prune()
     return ods
 
 
