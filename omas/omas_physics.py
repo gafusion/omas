@@ -513,10 +513,11 @@ def wall_add(ods, machine=None):
 
     :param machine: machine of which to load the wall (if None it is taken from ods['dataset_description.data_entry.machine'])
     '''
-    if machine is None and 'machine' in ods['dataset_description.data_entry']:
-        machine = ods['dataset_description.data_entry.machine']
-
-    machine = machine.lower()
+    if machine is None:
+        if 'machine' in ods['dataset_description.data_entry']:
+            machine = ods['dataset_description.data_entry.machine']
+        else:
+            raise LookupError('Could not figure out what machine wall to use: dataset_description.data_entry.machine is not set')
 
     walls = {}
     walls['iter'] = {'RLIM': [6.267, 7.283, 7.899, 8.306, 8.395, 8.27, 7.904, 7.4,
@@ -537,11 +538,14 @@ def wall_add(ods, machine=None):
                            -3.885, -3.6924, -3.5165, -3.3723, -3.2722, -3.225, -3.2346,
                            -3.036]}
 
+    if machine.lower() not in walls:
+        raise LookupError('OMAS wall information only available for: %s'%walls.keys())
+
     ods['wall.description_2d.+.limiter.type.name'] = 'first_wall'
     ods['wall.description_2d.-1.limiter.type.index'] = 0
     ods['wall.description_2d.-1.limiter.type.description'] = 'first wall'
-    ods['wall.description_2d.-1.limiter.unit.0.outline.r'] = walls[machine]['RLIM']
-    ods['wall.description_2d.-1.limiter.unit.0.outline.z'] = walls[machine]['ZLIM']
+    ods['wall.description_2d.-1.limiter.unit.0.outline.r'] = walls[machine.lower()]['RLIM']
+    ods['wall.description_2d.-1.limiter.unit.0.outline.z'] = walls[machine.lower()]['ZLIM']
 
 @add_to__ODS__
 def equilibrium_consistent(ods):
