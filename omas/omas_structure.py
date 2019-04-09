@@ -44,7 +44,7 @@ def generate_xml_schemas(imas_version=None):
     """.format(dd_folder=dd_folder), shell=True).communicate()
 
     # find IMAS data-dictionary tags
-    result = subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0]
+    result = b2s(subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0])
     tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
     # add development branch at the beginning of list of tags
     tags.insert(0, 'develop/3')

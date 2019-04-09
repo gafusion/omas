@@ -54,6 +54,10 @@ except Exception as _excp:
 # Python3/2 import differences
 if sys.version_info < (3, 0):
     import cPickle as pickle
+
+    def b2s(string):
+        return string
+
 else:
     basestring = str
     unicode = str
@@ -70,6 +74,9 @@ else:
         kw.setdefault('encoding','latin1')
         return _orig_pickle_load(*args,**kw)
     pickle.load=_pickle_load_python2compatible
+
+    def b2s(bytes):
+        return bytes.decode("utf-8")
 
 # --------------------------------------------
 # configuration of directories and IMAS infos

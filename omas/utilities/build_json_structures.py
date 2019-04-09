@@ -1,6 +1,7 @@
 from __future__ import print_function, division, unicode_literals
 
 import os, re, glob
+from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
@@ -11,6 +12,7 @@ force_build_json = 'last'
 # get the tags of the data-dictionary repository
 imas_versions.clear()
 imas_versions.update(generate_xml_schemas())
+pprint(imas_versions.keys())
 
 # loops over the available IDSDef.xml files and generates .json and omas_doc.html files
 for imas_version in imas_versions:
