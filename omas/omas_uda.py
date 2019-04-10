@@ -180,9 +180,16 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
     if not skip_uncertainties and isinstance(ods.omas_data, dict):
         for kid in list(ods.omas_data.keys()):
             if kid.endswith('_error_upper') and kid[:-len('_error_upper')] in ods.omas_data:
-                ods[kid[:-len('_error_upper')]] = uarray(ods[kid[:-len('_error_upper')]], ods[kid])
-                del ods[kid]
-
+                try:
+                    if isinstance(ods[kid], ODS):
+                        pass
+                    elif isinstance(ods[kid], float):
+                        ods[kid[:-len('_error_upper')]] = ufloat(ods[kid[:-len('_error_upper')]], ods[kid])
+                    else:
+                        ods[kid[:-len('_error_upper')]] = uarray(ods[kid[:-len('_error_upper')]], ods[kid])
+                    del ods[kid]
+                except Exception as _excp:
+                    printe('Error loading uncertain data: %s'% kid)
     return paths
 
 
