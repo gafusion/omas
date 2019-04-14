@@ -14,6 +14,73 @@ def _base_S3_uri(user):
 # --------------------------------------------
 # save and load OMAS with S3
 # --------------------------------------------
+def remote_uri(uri, filename, action):
+    """
+    :param uri: uri of the container of the file
+
+    :param filename: filename to act on
+
+    :param action: must be one of [`up`, `down`, `list`, `del`]
+    """
+    if not re.match('\w+://\w+.*', uri):
+        return uri
+
+    tmp = uri.split('://')
+    system = tmp[0]
+    location = '://'.join(tmp[1:])
+
+    if action not in ['down', 'up', 'list', 'del']:
+        raise AttributeError('remote_uri action attribute must be one of [`up`, `down`, `list`, `del`]')
+
+    if system == 's3':
+        import boto3
+        from boto3.s3.transfer import TransferConfig
+        s3bucket = location.split('/')[0]
+        s3connection = boto3.resource('s3')
+        s3filename = '/'.join(location.split('/')[1:])
+
+        if action == 'list':
+            printd('Listing %s' % (uri), topic='s3')
+            files = list(map(lambda x: x.key, s3connection.Bucket(s3bucket).objects.all()))
+            s3filename = s3filename.strip('/')
+            if s3filename:
+                files = filter(lambda x: x.startswith(s3filename), files)
+            return files
+
+        if action == 'del':
+            if filename is None:
+                filename = s3filename.split('/')[-1]
+            printd('Deleting %s' % uri, topic='s3')
+            s3connection.Object(s3bucket, s3filename).delete()
+
+        elif action == 'down':
+            if filename is None:
+                filename = s3filename.split('/')[-1]
+            printd('Downloading %s to %s' % (uri, filename), topic='s3')
+            obj = s3connection.Object(s3bucket, s3filename)
+            if not os.path.exists(os.path.abspath(os.path.split(filename)[0])):
+                os.makedirs(os.path.abspath(os.path.split(filename)[0]))
+            obj.download_file(filename, Config=TransferConfig(use_threads=False))
+
+        elif action == 'up':
+            printd('Uploading %s to %s' % (filename, uri), topic='s3')
+            from botocore.exceptions import ClientError
+            if s3filename.endswith('/'):
+                s3filename += filename.split('/')[-1]
+            try:
+                s3connection.meta.client.head_bucket(Bucket=s3bucket)
+            except ClientError as _excp:
+                # If a client error is thrown, then check that it was a 404 error.
+                # If it was a 404 error, then the bucket does not exist.
+                error_code = int(_excp.response['Error']['Code'])
+                if error_code == 404:
+                    s3connection.create_bucket(Bucket=s3bucket)
+                else:
+                    raise
+            bucket = s3connection.Bucket(s3bucket)
+            with open(filename, 'rb') as data:
+                bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
+
 def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir'], **kw):
     """
     Save an OMAS object to pickle and upload it to S3
