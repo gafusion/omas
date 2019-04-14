@@ -26,15 +26,13 @@ formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
     formatwarning_orig(message, category, filename, lineno, line='')
 
-# pint
-try:
+# pint: avoid loading pint upfront since it can be slow and it is not always used
+ureg = []
+if False:
     import pint
-    from pint import UnitRegistry
-    ureg = UnitRegistry()
-except ImportError:
-    pint = None
-    ureg = None
-    warnings.warn('pint Python library not found: units support disabled in omas')
+    ureg.append(pint.UnitRegistry())
+else:
+    ureg.append(None)
 
 # uncertainties
 import uncertainties
@@ -42,14 +40,9 @@ import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 
-# xarrays
-try:
-    xarray = None
+# xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
+if False:
     import xarray
-except ImportError:
-    warnings.warn('xarary Python library not found: xarray support disabled in omas')
-except Exception as _excp:
-    warnings.warn('xarary Python library error: ' + repr(_excp))
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):

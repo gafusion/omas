@@ -375,8 +375,10 @@ class TestOmasPhysics(unittest.TestCase):
 
     @unittest.skipUnless(not failed_PINT, str(failed_PINT))
     def test_handle_units(self):
-        ods = ODS()
+        import pint
+        ureg = pint.UnitRegistry()
 
+        ods = ODS()
         ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
         assert (ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] == 0.008)
 

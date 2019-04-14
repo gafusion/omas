@@ -11,9 +11,8 @@ from __future__ import print_function, division, unicode_literals
 from omas import *
 
 import pint
-from pint import UnitRegistry
 
-ureg = UnitRegistry()
+ureg = pint.UnitRegistry()
 
 ods = ODS()
 

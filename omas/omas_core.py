@@ -498,7 +498,8 @@ class ODS(MutableMapping):
                 info = omas_info_node(ulocation)
 
                 # handle units (Python pint package)
-                if pint is not None:
+                if str(value.__class__).startswith("<class 'pint."):
+                    import pint
                     if 'units' in info and isinstance(value, pint.quantity._Quantity) or (isinstance(value, numpy.ndarray) and value.size and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)):
                         value = value.to(info['units']).magnitude
 
@@ -770,8 +771,13 @@ class ODS(MutableMapping):
                         value = output_coordinates.__getitem__(location, False)
 
                 # handle units (Python pint package)
-                if pint is not None and 'units' in info and self.unitsio:
-                    value = value * getattr(ureg, info['units'])
+                if 'units' in info and self.unitsio:
+                    import pint
+                    from .omas_setup import ureg
+                    if ureg[0] is None:
+                        import pint
+                        ureg[0] = pint.UnitRegistry()
+                    value = value * getattr(ureg[0], info['units'])
 
             return value
 
