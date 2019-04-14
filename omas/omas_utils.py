@@ -8,6 +8,7 @@ from __future__ import print_function, division, unicode_literals
 from .omas_setup import *
 import sys
 
+
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
@@ -29,22 +30,22 @@ def different_ods(ods1, ods2):
     differences = []
     for k in k1.difference(k2):
         if not k.startswith('info.'):
-            differences.append( 'DIFF: key `%s` missing in 2nd ods' % k )
+            differences.append('DIFF: key `%s` missing in 2nd ods' % k)
     for k in k2.difference(k1):
         if not k.startswith('info.'):
-            differences.append( 'DIFF: key `%s` missing in 1st ods' % k )
+            differences.append('DIFF: key `%s` missing in 1st ods' % k)
     for k in k1.intersection(k2):
         if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
-                differences.append( 'DIFF: `%s` differ in value' % k )
+                differences.append('DIFF: `%s` differ in value' % k)
         elif type(ods1[k]) != type(ods2[k]):
-            differences.append( 'DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k])) )
+            differences.append('DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k])))
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
             if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
-                differences.append( 'DIFF: `%s` differ in value' % k )
+                differences.append('DIFF: `%s` differ in value' % k)
         else:
             if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                differences.append( 'DIFF: `%s` differ in value' % k )
+                differences.append('DIFF: `%s` differ in value' % k)
     if len(differences):
         return differences
     else:
@@ -70,7 +71,7 @@ def printd(*objects, **kw):
         dump = True
         topic_selected = re.sub('_dump$', '', topic_selected)
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
-        if eval(os.environ.get('OMAS_DEBUG_STDOUT','1')):
+        if eval(os.environ.get('OMAS_DEBUG_STDOUT', '1')):
             print(*objects, **kw)
         else:
             printe(*objects, **kw)
@@ -101,15 +102,16 @@ def is_uncertain(var):
     :return: True if variable is instance of uncertainties or
              array of shape var with elements indicating uncertainty
     '''
+
     def _uncertain_check(x):
         return isinstance(x, uncertainties.core.AffineScalarFunc)
 
-    if isinstance(var,basestring):
+    if isinstance(var, basestring):
         return False
     elif numpy.iterable(var):
-        tmp=numpy.array(var).flat
-        tmp=numpy.array(list(map(_uncertain_check, tmp)))
-        return numpy.reshape(tmp,numpy.array(var).shape)
+        tmp = numpy.array(var).flat
+        tmp = numpy.array(list(map(_uncertain_check, tmp)))
+        return numpy.reshape(tmp, numpy.array(var).shape)
     else:
         return _uncertain_check(var)
 
@@ -123,7 +125,7 @@ def is_numeric(value):
     :return: True/False
     """
     try:
-        0+value
+        0 + value
         return True
     except TypeError:
         return False
@@ -139,6 +141,8 @@ def omas_interp1d(x, xp, fp, left=None, right=None, period=None):
         index = numpy.argsort(xp)
         return numpy.interp(x, xp[index], fp[index], left=left, right=right, period=period)
     return numpy.interp(x, xp, fp, left=left, right=right, period=period)
+
+
 omas_interp1d.__doc__ += numpy.interp.__doc__
 
 
@@ -243,7 +247,7 @@ def json_loader(object_pairs, cls=dict):
         return uarray(numpy.array(dct['__udarray_tolist_avg__'], dtype=dct['dtype']).reshape(dct['shape']),
                       numpy.array(dct['__udarray_tolist_std__'], dtype=dct['dtype']).reshape(dct['shape']))
     elif '__ufloat__' in dct and '__ufloat_std__' in dct:
-        return ufloat(dct['__ufloat__'],dct['__ufloat_std__'])
+        return ufloat(dct['__ufloat__'], dct['__ufloat_std__'])
     elif '__ndarray__' in dct:
         import base64
         data = base64.b64decode(dct['__ndarray__'])
@@ -253,7 +257,7 @@ def json_loader(object_pairs, cls=dict):
     return dct
 
 
-def recursive_glob(pattern='*',rootdir='.'):
+def recursive_glob(pattern='*', rootdir='.'):
     """
     Search recursively for files matching a specified pattern within a rootdir
 
@@ -296,10 +300,10 @@ def remote_uri(uri, filename, action):
 
         if action == 'list':
             printd('Listing %s' % (uri), topic='s3')
-            files=list(map(lambda x:x.key,s3connection.Bucket(s3bucket).objects.all()))
-            s3filename=s3filename.strip('/')
+            files = list(map(lambda x: x.key, s3connection.Bucket(s3bucket).objects.all()))
+            s3filename = s3filename.strip('/')
             if s3filename:
-                files=filter(lambda x:x.startswith(s3filename),files)
+                files = filter(lambda x: x.startswith(s3filename), files)
             return files
 
         if action == 'del':
@@ -315,7 +319,7 @@ def remote_uri(uri, filename, action):
             obj = s3connection.Object(s3bucket, s3filename)
             if not os.path.exists(os.path.abspath(os.path.split(filename)[0])):
                 os.makedirs(os.path.abspath(os.path.split(filename)[0]))
-            obj.download_file(filename,Config=TransferConfig(use_threads=False))
+            obj.download_file(filename, Config=TransferConfig(use_threads=False))
 
         elif action == 'up':
             printd('Uploading %s to %s' % (filename, uri), topic='s3')
@@ -402,13 +406,13 @@ def closest_index(my_list, my_number=0):
     if pos == 0:
         return 0
     if pos == len(my_list):
-        return pos-1
+        return pos - 1
     before = pos - 1
     after = pos
     if my_list[after] - my_number < my_number - my_list[before]:
         return pos
     else:
-        return pos-1
+        return pos - 1
 
 
 def sanitize_version_number(version):
@@ -467,6 +471,7 @@ _coordinates = {}
 # }
 _extra_structures = {}
 
+
 def list_structures(imas_version):
     '''
     list names of structures in imas version
@@ -475,9 +480,9 @@ def list_structures(imas_version):
 
     :return: list with names of structures in imas version
     '''
-    json_filenames = glob.glob( imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*' + '.json')
-    json_filenames = filter(lambda x:os.path.basename(x)[0]!='_', json_filenames)
-    structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0],json_filenames)))
+    json_filenames = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
+    json_filenames = filter(lambda x: os.path.basename(x)[0] != '_', json_filenames)
+    structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], json_filenames)))
     if not len(structures):
         raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
     return structures
@@ -512,7 +517,7 @@ def load_structure(filename, imas_version):
     from .omas_physics import cocos_signals
 
     filename0 = filename
-    id=(filename0, imas_version)
+    id = (filename0, imas_version)
     if id in _structures and id in _structures_dict:
         return _structures[id], _structures_dict[id]
 
@@ -530,7 +535,7 @@ def load_structure(filename, imas_version):
         if structure_name in _extra_structures:
             for item in _extra_structures[structure_name]:
                 if item not in _structures[id]:
-                    cs = _extra_structures[structure_name][item].pop('cocos_signal',None)
+                    cs = _extra_structures[structure_name][item].pop('cocos_signal', None)
                     _structures[id][item] = _extra_structures[structure_name][item]
                     if cs is not None:
                         cocos_signals[i2o(item)] = cs
@@ -557,8 +562,8 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
     '''
     # caching
     if imas_version not in _coordinates:
-        filename = imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '_coordinates.json'
-        with open(filename,'r') as f:
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json'
+        with open(filename, 'r') as f:
             _coordinates[imas_version] = json.load(f)
     return _coordinates[imas_version]
 
@@ -626,7 +631,7 @@ def l2i(path):
     """
     ipath = path[0]
     for step in path[1:]:
-        if isinstance(step, int) or step==':':
+        if isinstance(step, int) or step == ':':
             ipath += "[%s]" % step
         else:
             ipath += '.%s' % step
@@ -655,8 +660,13 @@ def l2o(path):
     """
     return '.'.join(filter(None, map(str, path)))
 
+
 _o2u_pattern = re.compile('\.[0-9:]+')
 _o2u_pattern_no_split = re.compile('^[0-9:]+')
+_i2o_pattern = re.compile('\[([:0-9]+)\]')
+_o2i_pattern = re.compile('\.([:0-9]+)')
+
+
 def o2u(path):
     '''
     Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
@@ -672,7 +682,6 @@ def o2u(path):
         return re.sub(_o2u_pattern_no_split, ':', path)
 
 
-_i2o_pattern=re.compile('\[([:0-9]+)\]')
 def i2o(path):
     """
     Formats a IMAS path ('bla[0].bla') format into an ODS path ('bla.0.bla')
@@ -684,7 +693,6 @@ def i2o(path):
     return re.sub(_i2o_pattern, r'.\1', path)
 
 
-_o2i_pattern=re.compile('\.([:0-9]+)')
 def o2i(path):
     """
     Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
@@ -796,7 +804,7 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
         from omas import ODS
         _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
     ods = _info_structures[imas_version]
-    ods.consistency_check=False
+    ods.consistency_check = False
 
     for structure in structures:
         if structure not in ods:
@@ -812,7 +820,7 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
                         break
                 if parent:
                     continue
-                ods[item.replace(':','0')] = tmp[item]
+                ods[item.replace(':', '0')] = tmp[item]
 
     return copy.deepcopy(ods)
 
