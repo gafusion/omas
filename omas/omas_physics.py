@@ -1170,7 +1170,7 @@ class CocosSignals(dict):
     def __getitem__(self, key):
         value = dict.__getitem__(self, key)
         if value == '?':
-            warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py')
+            warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py' % key)
         return value
 
 # cocos_signals is the actual dictionary

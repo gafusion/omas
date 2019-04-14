@@ -443,7 +443,9 @@ class TestOmasPhysics(unittest.TestCase):
         from omas.omas_utils import list_structures, omas_rcparams
         from omas.omas_physics import generate_cocos_signals
 
-        generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", message=".*defining its COCOS transform.*")
+            generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPhysics)
