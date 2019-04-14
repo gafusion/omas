@@ -523,8 +523,7 @@ def load_structure(filename, imas_version):
         with open(filename, 'r') as f:
             dump_string = f.read()
         # load flat definitions from json file
-        _structures[id] = json.loads(dump_string, object_pairs_hook=json_loader)
-        # _structures[id] = pickle.loads(dump_string)
+        _structures[id] = json.loads(dump_string)
 
         # add _extra_structures definitions
         structure_name = os.path.splitext(os.path.split(filename)[1])[0]
@@ -560,7 +559,7 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
     if imas_version not in _coordinates:
         filename = imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '_coordinates.json'
         with open(filename,'r') as f:
-            _coordinates[imas_version] = json.loads(f.read(), object_pairs_hook=json_loader)
+            _coordinates[imas_version] = json.load(f)
     return _coordinates[imas_version]
 
 
