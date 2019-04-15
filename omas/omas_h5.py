@@ -11,7 +11,7 @@ from .omas_core import ODS
 
 def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None):
     '''
-    Save hierarchy of dictionaries containing numpy-compatible objects to hdf5 file
+    Utility function to save hierarchy of dictionaries containing numpy-compatible objects to hdf5 file
 
     :param filename: hdf5 file to save to
 
@@ -44,8 +44,6 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
     for key, item in list(dictin.items()):
 
-        print(key)
-
         if isinstance(item, ODS):
             item = item.omas_data
 
@@ -77,5 +75,53 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     return g
 
 
-def save_omas_h5(ods, filename, **kw):
+def save_omas_h5(ods, filename):
+    """
+    Save an OMAS data set to HDF5
+
+    :param ods: OMAS data set
+
+    :param filename: filename or file descriptor to save to
+    """
     return dict2hdf5(filename, ods, lists_as_dicts=True)
+
+
+def convertDataset(ods, data):
+    '''
+    Recursive utility function to map HDF5 structure to ODS
+
+    :param ods: input ODS to be populated
+
+    :param data: HDF5 dataset of group
+    '''
+    import h5py
+    for item in data:
+        if item.endswith('_error_upper'):
+            continue
+        if isinstance(data[item], h5py.Dataset):
+            ods[item] = data[item][()]
+            if item + '_error_upper' in data:
+                ods[item] = uarray(ods[item], data[item + '_error_upper'][()])
+        elif isinstance(data[item], h5py.Group):
+            try:
+                oitem = int(item)
+            except (ValueError, AttributeError):
+                oitem = item
+            convertDataset(ods[oitem], data[item])
+
+
+def load_omas_h5(filename, consistency_check=True):
+    """
+    Load OMAS data set from HDF5
+
+    :param filename: filename or file descriptor to load from
+
+    :param consistency_check: verify that data is consistent with IMAS schema
+
+    :return: OMAS data set
+    """
+    import h5py
+    ods = ODS(consistency_check=consistency_check)
+    with h5py.File(filename, 'r') as data:
+        convertDataset(ods, data)
+    return ods
