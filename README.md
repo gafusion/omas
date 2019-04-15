@@ -4,9 +4,6 @@
 [![Build Status](https://travis-ci.org/gafusion/omas.svg?branch=master)](https://travis-ci.org/gafusion/omas)
 [![Codecov](https://codecov.io/gh/gafusion/omas/branch/master/graph/badge.svg)](https://codecov.io/gh/gafusion/omas)
 
-[![Conda - Downloads](https://img.shields.io/conda/dn/conda-forge/omas.svg?color=purple&label=conda%20downloads)](https://github.com/conda-forge/omas-feedstock)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/omas.svg?color=purple&label=pip%20downloads)](https://pypi.org/project/omas/#history)
-
 # **OMAS** (**O**rdered **M**ultidimensional **A**rray **S**tructure)
 
 OMAS is a Python library designed to simplify the interface of third-party codes with the [ITER](http://iter.org) Integrated Modeling and Analysis Suite ([IMAS](https://confluence.iter.org/display/IMP)).
