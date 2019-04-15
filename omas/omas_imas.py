@@ -667,7 +667,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
 def through_omas_imas(ods):
     """
-    test save and load OMAS IMAS
+    Test save and load OMAS IMAS
 
     :param ods: ods
 

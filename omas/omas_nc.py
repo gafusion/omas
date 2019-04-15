@@ -89,7 +89,7 @@ def load_omas_nc(filename, consistency_check=True, ):
 
 def through_omas_nc(ods):
     """
-    test save and load NetCDF
+    Test save and load NetCDF
 
     :param ods: ods
 

@@ -39,6 +39,11 @@ filename = 'test.nc'
 save_omas_nc(ods, filename)
 ods = load_omas_nc(filename)
 
+# save/load HDF5
+filename = 'test.h5'
+save_omas_h5(ods, filename)
+ods = load_omas_h5(filename)
+
 # remote save/load S3
 filename = 'test.s3'
 save_omas_s3(ods, filename)

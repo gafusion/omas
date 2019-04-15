@@ -14,7 +14,7 @@ import numpy
 from omas import *
 from omas.omas_utils import printd
 
-_tests = ['pkl', 'json', 'nc', 's3', 'imas', 'hdc']
+_tests = ['pkl', 'json', 'nc', 's3', 'h5', 'imas', 'hdc']
 
 
 def through_omas_suite(ods=None, test_type=None, do_raise=False):

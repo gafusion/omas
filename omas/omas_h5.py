@@ -95,7 +95,13 @@ def convertDataset(ods, data):
     :param data: HDF5 dataset of group
     '''
     import h5py
-    for item in data:
+    keys = data.keys()
+    try:
+        keys = sorted(list(map(int, keys)))
+    except ValueError:
+        pass
+    for oitem in keys:
+        item = str(oitem)
         if item.endswith('_error_upper'):
             continue
         if isinstance(data[item], h5py.Dataset):
@@ -103,10 +109,6 @@ def convertDataset(ods, data):
             if item + '_error_upper' in data:
                 ods[item] = uarray(ods[item], data[item + '_error_upper'][()])
         elif isinstance(data[item], h5py.Group):
-            try:
-                oitem = int(item)
-            except (ValueError, AttributeError):
-                oitem = item
             convertDataset(ods[oitem], data[item])
 
 
@@ -125,3 +127,19 @@ def load_omas_h5(filename, consistency_check=True):
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)
     return ods
+
+
+def through_omas_h5(ods):
+    """
+    Test save and load OMAS HDF5
+
+    :param ods: ods
+
+    :return: ods
+    """
+    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
+        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
+    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.h5'
+    save_omas_h5(ods, filename)
+    ods1 = load_omas_h5(filename)
+    return ods1

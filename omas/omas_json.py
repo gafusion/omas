@@ -78,7 +78,7 @@ def load_omas_json(filename, consistency_check=True, **kw):
 
 def through_omas_json(ods):
     """
-    test save and load OMAS Json
+    Test save and load OMAS Json
 
     :param ods: ods
 

@@ -144,7 +144,7 @@ def del_omas_s3(filename, user=os.environ.get('USER', 'dummy_user')):
 
 def through_omas_s3(ods):
     """
-    test save and load S3
+    Test save and load S3
 
     :param ods: ods
 

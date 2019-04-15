@@ -56,6 +56,10 @@ class TestOmasSuite(unittest.TestCase):
         ods = ods_sample()
         through_omas_nc(ods)
 
+    def test_omas_h5(self):
+        ods = ods_sample()
+        through_omas_h5(ods)
+
     @unittest.skipUnless(not failed_S3, str(failed_S3))
     def test_omas_s3(self):
         ods = ods_sample()

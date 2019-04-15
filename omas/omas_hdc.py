@@ -91,7 +91,7 @@ def load_omas_hdc(hdc, consistency_check=True):
 
 def through_omas_hdc(ods):
     '''
-    test save and load HDC
+    Test save and load HDC
 
     :param ods: ods
 

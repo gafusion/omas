@@ -9,6 +9,7 @@ netCDF4                  # required
 boto3                    # required
 matplotlib               # required
 scipy                    # required
+h5py                     # required
 xarray                   # required
 
 #pyhdc                   # hdc
