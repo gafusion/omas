@@ -552,6 +552,8 @@ class ODS(MutableMapping):
                 value = float(value)
             elif isinstance(value, (int, numpy.integer)):
                 value = int(value)
+            elif isinstance(value, basestring):
+                pass
             elif isinstance(value, bytes):
                 value = value.tolist().decode('utf-8', errors='ignore')
 
