@@ -64,8 +64,11 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
             if tmp.dtype.name.lower().startswith('u'):
                 tmp = tmp.astype('S')
             elif tmp.dtype.name.lower().startswith('o'):
-                printw('Could not save `%s` to h5 file' % key)
-                continue
+                if numpy.atleast_1d(is_uncertain(tmp)).any():
+                    g.create_dataset(key + '_error_upper', std_devs(tmp).shape, dtype=std_devs(tmp).dtype, compression=compression)[...] = std_devs(tmp)
+                    tmp = nominal_values(tmp)
+                else:
+                    continue
             if tmp.shape == ():
                 g.create_dataset(key, tmp.shape, dtype=tmp.dtype)[...] = tmp
             else:
@@ -74,6 +77,5 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     return g
 
 
-
 def save_omas_h5(ods, filename, **kw):
-    return dict2hdf5(filename, ods, lists_as_dicts = True)
+    return dict2hdf5(filename, ods, lists_as_dicts=True)
