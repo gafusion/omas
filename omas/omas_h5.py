@@ -59,7 +59,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
             if item is None:
                 item = '_None'
             tmp = numpy.array(item)
-            if tmp.dtype.name.lower().startswith('u'):
+            if tmp.dtype.name.lower().startswith('u') or tmp.dtype.name.lower().startswith('s'):
                 tmp = tmp.astype('S')
             elif tmp.dtype.name.lower().startswith('o'):
                 if numpy.atleast_1d(is_uncertain(tmp)).any():
