@@ -16,6 +16,7 @@ __all__ = [
     'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
     'load_omas_uda',
     'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
+    'save_omas_h5',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
@@ -1248,6 +1249,7 @@ from .omas_json import *
 from .omas_structure import *
 from .omas_hdc import *
 from .omas_uda import *
+from .omas_h5 import *
 
 # --------------------------------------------
 # backward compatibility
