@@ -132,6 +132,9 @@ class TestOmasCore(unittest.TestCase):
         # check deepcopy
         ods3 = ods2.copy()
 
+        # check writing setting an xarray.DataArray
+        ods2['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(uarray([0., 1., 2., 3.], [0, .1, .2, .3]), coords={'x': [1, 2, 3, 4]}, dims=['x'])
+
     def test_coordinates(self):
         ods = ods_sample()
         assert (len(ods.list_coordinates()) > 0)

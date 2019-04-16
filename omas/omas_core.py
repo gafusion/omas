@@ -546,6 +546,8 @@ class ODS(MutableMapping):
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
             if isinstance(value, list):
                 value = numpy.array(value)
+            if isinstance(value, xarray.DataArray):
+                value = value.values
             if isinstance(value, numpy.ndarray) and not (len(value.shape)):
                 value = value.item()
             if isinstance(value, (float, numpy.floating)):

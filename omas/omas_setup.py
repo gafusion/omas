@@ -41,8 +41,7 @@ from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 
 # xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
-if False:
-    import xarray
+import xarray
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
