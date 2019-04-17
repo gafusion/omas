@@ -1140,10 +1140,15 @@ class ODS(MutableMapping):
 
         # if called at top level, loop over all data structures
         if not len(self.location):
-            out = True
+            out = []
             for ds in self.keys():
-                out &= self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors)
-            return out
+                out.append(self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors))
+            if any([k is False for k in out]):
+                return False
+            elif any([k is None for k in out]):
+                return None
+            else:
+                return True
 
         ds = p2l(self.location)[0]
 

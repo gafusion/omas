@@ -93,7 +93,8 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
                             perc=[float(k)/len(available_ds)*100,float(k+1)/len(available_ds)*100,float(k)/len(available_ds)*100])
     ods.consistency_check=True
     ods.prune()
-    print()
+    if verbose:
+        print()
     return ods
 
 
