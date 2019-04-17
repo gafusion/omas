@@ -13,6 +13,12 @@ OMAS runs both with *Python2* and *Python3*.
 
 where `upgrade` is used to update the omas installation to the latest version.
 
+The development version of omas can also be installed with pip:
+
+.. code-block:: none
+
+    pip install --upgrade -e git+git@github.com:gafusion/omas#egg=omas
+
 **Conda**: To install `OMAS with conda <https://anaconda.org/conda-forge/omas>`_ (for users):
 
 .. code-block:: none
