@@ -1127,29 +1127,42 @@ class ODS(MutableMapping):
         return ds
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
-        '''
+        """
         Assign .time and .ids_properties.homogeneous_time info for top-level structures
         since these are required for writing an IDS to IMAS
-        '''
-        if not len(self.location):
-            for ds in self.keys():
-                self.getraw(ds).satisfy_imas_requirements(attempt_fix=False)
-        else:
-            ds = p2l(self.location)[0]
 
-            if ds not in add_datastructures:
-                time = self.time()
-                if time is not None and len(time):
-                    self['time'] = time
-                    self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                elif attempt_fix and ds in ['dataset_description', 'wall']:
-                    self['time'] = [0.0]
-                    self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
-                elif raise_errors:
-                    raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
-                else:
-                    return False
+        :param attempt_fix: fix dataset_description and wall IDS to have 0 times if none is set
+
+        :param raise_errors: raise errors if could not satisfy IMAS requirements
+
+        :return: `True` if all is good, `False` if requirements are not satisfied, `None` if fixes were applied
+        """
+
+        # if called at top level, loop over all data structures
+        if not len(self.location):
+            out = True
+            for ds in self.keys():
+                out &= self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors)
+            return out
+
+        ds = p2l(self.location)[0]
+
+        if ds in add_datastructures:
             return True
+
+        time = self.time()
+        if time is not None and len(time):
+            self['time'] = time
+            self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+        elif attempt_fix and ds in ['dataset_description', 'wall']:
+            self['time'] = [0.0]
+            self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+            return None
+        elif raise_errors:
+            raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+        else:
+            return False
+        return True
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
