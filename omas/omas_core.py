@@ -899,10 +899,13 @@ class ODS(MutableMapping):
         '''
         OMFIT tree representation
         '''
-        if 'dataset_description' not in self or 'data_entry' not in self['dataset_description']:
+        if not self.location:
             return self, []
-        s = ' '.join(['%s:%s' % (k, v) for k, v in self['dataset_description']['data_entry'].items() if v != 'None'])
-        s = '--{%d}-- ' % len(self) + s
+        s = '--{%d}--' % len(self)
+        if 'dataset_description.data_entry' in self:
+            s += ' ' + ' '.join(['%s:%s' % (k, v) for k, v in self['dataset_description']['data_entry'].items() if v not in ['None', None]])
+        if 'summary.ids_properties.comment' in self:
+            s += ' ' + repr(self['summary.ids_properties.comment'])
         return s, []
 
     def get(self, key, default=None):
