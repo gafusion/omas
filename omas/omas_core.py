@@ -833,7 +833,7 @@ class ODS(MutableMapping):
                 paths.append(path + [kid])
         return paths
 
-    def full_paths(self, **kw):
+    def full_paths(self):
         """
         Traverse the ods and return paths from root of ODS that have data
 
@@ -1060,14 +1060,14 @@ class ODS(MutableMapping):
         '''
         coords = OrderedDict()
 
-        self.__getitem__(key, False)  # raise appropriate error if data is not there
+        self.__getitem__(key, False)  # raise an error if data is not there
         ulocation = l2u(p2l(key))
         info = omas_info_node(ulocation)
         if 'coordinates' not in info:
             raise ValueError('ODS location `%s` has no coordinates information' % ulocation)
         coordinates = map(lambda x: u2o(x, key), info['coordinates'])
         for coord in coordinates:
-            coords[coord] = self[coord] #this will raise the appropriate error if the coordinates data is not there
+            coords[coord] = self[coord] #this will raise an error if the coordinates data is not there
 
         return coords
 

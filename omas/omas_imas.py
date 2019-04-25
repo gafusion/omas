@@ -120,11 +120,11 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
             m.time[0] = -1.0
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
-            printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
+            printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
         return
     else:
         printd(debug_path, topic='imas_code')
-        raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path))
+        raise AttributeError('%s is not part of IMAS' % l2i([ds] + path))
 
     # traverse IMAS structure until reaching the leaf
     out = m
@@ -137,11 +137,11 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                     out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
-                    printe('WARNING: %s is not part of IMAS structure' % location)
+                    printe('WARNING: %s is not part of IMAS' % location)
                 return
             else:
                 printd(debug_path, topic='imas_code')
-                raise AttributeError('%s is not part of IMAS structure' % location)
+                raise AttributeError('%s is not part of IMAS' % location)
         else:
             try:
                 out = out[p]
@@ -218,11 +218,11 @@ def imas_get(ids, path, skip_missing_nodes=False):
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
-            printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path))
+            printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
         return None
     else:
         printd(debug_path, topic='imas_code')
-        raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path))
+        raise AttributeError('%s is not part of IMAS' % l2i([ds] + path))
 
     # traverse the IDS to get the data
     out = m
@@ -233,12 +233,12 @@ def imas_get(ids, path, skip_missing_nodes=False):
                 out = getattr(out, p)
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
-                    printe('WARNING: %s is not part of IMAS structure' % l2i([ds] + path[:kp + 1]))
+                    printe('WARNING: %s is not part of IMAS' % l2i([ds] + path[:kp + 1]))
                     printe(out.__dict__.keys())
                 return None
             else:
                 printd(debug_path, topic='imas_code')
-                raise AttributeError('%s is not part of IMAS structure' % l2i([ds] + path[:kp + 1]))
+                raise AttributeError('%s is not part of IMAS' % l2i([ds] + path[:kp + 1]))
         else:
             debug_path += '[%s]' % p
             out = out[p]
