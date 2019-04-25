@@ -1142,6 +1142,57 @@ class ODS(MutableMapping):
             ds.attrs['x_full'].append(coord)
         return ds
 
+    def dataset(self):
+        '''
+        Return xarray.Dataset representation of a whole ODS
+
+        To form the N-D labeled arrays (tensors) that are at the base of xarrays,
+        this method operates under the assumption that the number of elements
+        in the arrays do not change across the arrays of data structures.
+
+        :return: xarray.Dataset
+        '''
+        import xarray
+
+        def arraystruct_indexnames(key):
+            '''
+            return list of strings with a name for each of the arrays of structures indeces
+
+            :param key: ods location
+
+            :return: list of strings
+            '''
+            base = key.split('.')[0]
+            coordinates = []
+            for c in [':'.join(key.split(':')[:k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
+                info = omas_info_node(c)
+                if 'coordinates' in info:
+                    for infoc in info['coordinates']:
+                        if infoc == '1...N':
+                            infoc = c
+                        coordinates.append('_'.join([base, infoc.split('.')[-1], 'index']))
+            return coordinates
+
+        DS = xarray.Dataset()
+        data = {}
+        coordinates = {}
+        paths = numpy.unique(map(l2u, self.paths()))
+        fpaths = paths
+        if self.location:
+            fpaths = list(map(lambda key: self.location + '.' + key, paths))
+        for fkey, key in zip(fpaths, paths):
+            coordinates[fkey] = arraystruct_indexnames(fkey)
+            data[fkey] = self[key]  # OMAS data slicing at work
+        for fkey in fpaths:
+            if not len(omas_info_node(fkey)):
+                printe('WARNING: %s is not part of IMAS' % o2i(fkey))
+                continue
+            for k, c in enumerate(coordinates[fkey]):
+                if c not in DS:
+                    DS[c] = xarray.DataArray(numpy.arange(data[fkey].shape[k]), dims=c)
+            DS[fkey] = xarray.DataArray(data[fkey], dims=coordinates[fkey])
+        return DS
+
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
         """
         Assign .time and .ids_properties.homogeneous_time info for top-level structures
