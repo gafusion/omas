@@ -687,8 +687,21 @@ class ODS(MutableMapping):
         # data slicing
         if key[0] == ':':
             data = []
-            for k in self.keys():
-                data.append(self[[k] + key[1:]])
+            for k, item in enumerate(self.keys()):
+                try:
+                    data.append(self[[item] + key[1:]])
+                except ValueError:
+                    data.append([])
+            # handle missing data by filling out with NaNs
+            valid = _empty = []
+            for k, item in enumerate(data):
+                if (isinstance(item, list) and not len(item)) or (isinstance(item, numpy.ndarray) and not item.size):
+                    _empty.append(k)
+                else:
+                    valid = item
+            if valid is not _empty and len(_empty):
+                for k in _empty:
+                    data[k] = valid * numpy.nan
             return numpy.array(data)
 
         # dynamic path creation
