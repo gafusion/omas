@@ -1173,24 +1173,29 @@ class ODS(MutableMapping):
                         coordinates.append('_'.join([base, infoc.split('.')[-1], 'index']))
             return coordinates
 
-        DS = xarray.Dataset()
-        data = {}
-        coordinates = {}
-        paths = numpy.unique(map(l2u, self.paths()))
-        fpaths = paths
+        paths = self.paths()
+        upaths = numpy.unique(map(l2u, paths))
+
+        fupaths = upaths
         if self.location:
-            fpaths = list(map(lambda key: self.location + '.' + key, paths))
-        for fkey, key in zip(fpaths, paths):
-            coordinates[fkey] = arraystruct_indexnames(fkey)
-            data[fkey] = self[key]  # OMAS data slicing at work
-        for fkey in fpaths:
-            if not len(omas_info_node(fkey)):
-                printe('WARNING: %s is not part of IMAS' % o2i(fkey))
+            fupaths = list(map(lambda key: self.location + '.' + key, upaths))
+
+        # figure out coodrdinates
+        coordinates = {}
+        for fukey, ukey in zip(fupaths, upaths):
+            coordinates[fukey] = arraystruct_indexnames(fukey)
+
+        # generate dataset
+        DS = xarray.Dataset()
+        for fukey, ukey in zip(fupaths, upaths):
+            if not len(omas_info_node(fukey)):
+                printe('WARNING: %s is not part of IMAS' % o2i(fukey))
                 continue
-            for k, c in enumerate(coordinates[fkey]):
+            data = self[ukey] # OMAS data slicing at work
+            for k, c in enumerate(coordinates[fukey]):
                 if c not in DS:
-                    DS[c] = xarray.DataArray(numpy.arange(data[fkey].shape[k]), dims=c)
-            DS[fkey] = xarray.DataArray(data[fkey], dims=coordinates[fkey])
+                    DS[c] = xarray.DataArray(numpy.arange(data.shape[k]), dims=c)
+            DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
         return DS
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
