@@ -1142,13 +1142,17 @@ class ODS(MutableMapping):
             ds.attrs['x_full'].append(coord)
         return ds
 
-    def dataset(self):
+    def dataset(self, homogeneous=['time', 'full'][0]):
         '''
         Return xarray.Dataset representation of a whole ODS
 
-        To form the N-D labeled arrays (tensors) that are at the base of xarrays,
-        this method operates under the assumption that the number of elements
-        in the arrays do not change across the arrays of data structures.
+        Forming the N-D labeled arrays (tensors) that are at the base of xarrays,
+        requires that the number of elements in the arrays do not change across
+        the arrays of data structures.
+
+        :param homogeneous: * 'time': collect arrays of structures only along the time dimension
+                                      (this will always succeed if homogeneous_time=True)
+                            * 'full': collect arrays of structures along all dimensions
 
         :return: xarray.Dataset
         '''
@@ -1165,7 +1169,7 @@ class ODS(MutableMapping):
             base = key.split('.')[0]
             coordinates = []
             for c in [':'.join(key.split(':')[:k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
-                info = omas_info_node(c)
+                info = omas_info_node(o2u(c))
                 if 'coordinates' in info:
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
@@ -1174,13 +1178,15 @@ class ODS(MutableMapping):
             return coordinates
 
         paths = self.paths()
-        upaths = numpy.unique(map(l2u, paths))
-
+        if homogeneous == 'time':
+            upaths = numpy.unique(map(l2ut, paths))
+        else:
+            upaths = numpy.unique(map(l2u, paths))
         fupaths = upaths
         if self.location:
             fupaths = list(map(lambda key: self.location + '.' + key, upaths))
 
-        # figure out coodrdinates
+        # figure out coordinates
         coordinates = {}
         for fukey, ukey in zip(fupaths, upaths):
             coordinates[fukey] = arraystruct_indexnames(fukey)
@@ -1188,7 +1194,7 @@ class ODS(MutableMapping):
         # generate dataset
         DS = xarray.Dataset()
         for fukey, ukey in zip(fupaths, upaths):
-            if not len(omas_info_node(fukey)):
+            if not len(omas_info_node(o2u(fukey))):
                 printe('WARNING: %s is not part of IMAS' % o2i(fukey))
                 continue
             data = self[ukey] # OMAS data slicing at work
