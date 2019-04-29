@@ -1142,7 +1142,7 @@ class ODS(MutableMapping):
             ds.attrs['x_full'].append(coord)
         return ds
 
-    def dataset(self, homogeneous=['time', 'full'][0]):
+    def dataset(self, homogeneous=[False, 'time', 'full', None][-1]):
         '''
         Return xarray.Dataset representation of a whole ODS
 
@@ -1150,9 +1150,15 @@ class ODS(MutableMapping):
         requires that the number of elements in the arrays do not change across
         the arrays of data structures.
 
-        :param homogeneous: * 'time': collect arrays of structures only along the time dimension
-                                      (this will always succeed if homogeneous_time=True)
+        :param homogeneous: * False: flat representation of the ODS
+                                      (data is not collected across arrays of structures)
+                            * 'time': collect arrays of structures only along the time dimension
+                                      (always valid for homogeneous_time=True)
                             * 'full': collect arrays of structures along all dimensions
+                                      (may be valid in many situations, especially related to
+                                       simulation data with homogeneous_time=True and where
+                                       for example number of ions, sources, etc. do not vary)
+                            * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
 
         :return: xarray.Dataset
         '''
@@ -1177,27 +1183,38 @@ class ODS(MutableMapping):
                         coordinates.append('_'.join([base, infoc.split('.')[-1], 'index']))
             return coordinates
 
+        # Generate paths with ':' for the arrays of structures
+        # that we want to collect across
         paths = self.paths()
-        if homogeneous == 'time':
+        if homogeneous is None:
+            homogeneous = 'time' if self.homogeneous_time() else False
+        if not homogeneous:
+            upaths = map(l2o, paths)
+        elif homogeneous == 'time':
             upaths = numpy.unique(map(l2ut, paths))
-        else:
+        elif homogeneous == 'full':
             upaths = numpy.unique(map(l2u, paths))
+        else:
+            raise ValueError('OMAS dataset homogeneous attribute can only be False')
         fupaths = upaths
         if self.location:
             fupaths = list(map(lambda key: self.location + '.' + key, upaths))
 
-        # figure out coordinates
+        # Figure out coordinate indexes
+        # NOTE: We use coordinates indexes instead of proper coordinates
+        #       since in IMAS these are time dependent quantities
+        #       Eg. 'equilibrium.time_slice[:].profiles_1d.psi'
         coordinates = {}
         for fukey, ukey in zip(fupaths, upaths):
             coordinates[fukey] = arraystruct_indexnames(fukey)
 
-        # generate dataset
+        # Generate dataset
         DS = xarray.Dataset()
         for fukey, ukey in zip(fupaths, upaths):
             if not len(omas_info_node(o2u(fukey))):
                 printe('WARNING: %s is not part of IMAS' % o2i(fukey))
                 continue
-            data = self[ukey] # OMAS data slicing at work
+            data = self[ukey]  # OMAS data slicing at work
             for k, c in enumerate(coordinates[fukey]):
                 if c not in DS:
                     DS[c] = xarray.DataArray(numpy.arange(data.shape[k]), dims=c)
