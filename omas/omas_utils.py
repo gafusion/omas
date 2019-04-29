@@ -582,6 +582,29 @@ def l2u(path):
     return o2u(l2o(path))
 
 
+def l2ut(path):
+    """
+    Formats IMAS time lists (['bla',0,'time_slice',5,'quantity']) with universal ODS path ('bla.0.time_slice.:.quantity')
+
+    :param path: list of strings and integers
+
+    :return: ODS path format with time lists in universal format
+    """
+    lpath = p2l(path)
+    opath = l2o(lpath)
+    upath = o2u(path)
+    for k, key in enumerate(lpath):
+        if not isinstance(key, int):
+            continue
+        key = lpath[:k]
+        info = omas_info_node(l2u(key))
+        if 'coordinates' in info:
+            for infoc in info['coordinates']:
+                if infoc.endswith('.time'):
+                    lpath[k] = ':'
+    return l2o(lpath)
+
+
 def l2o(path):
     """
     Formats a list (['bla',0,'bla']) into an ODS path format ('bla.0.bla')
