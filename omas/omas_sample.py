@@ -41,7 +41,7 @@ def ods_sample():
 @add_to_ODS
 def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
     """
-    Add sample equilibrium data.
+    Add sample equilibrium data
 
     :param ods: ODS instance
 
@@ -88,7 +88,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
 @add_to_ODS
 def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
     """
-    Add sample core_profiles data.
+    Add sample core_profiles data
 
     :param ods: ODS instance
 

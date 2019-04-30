@@ -1164,6 +1164,12 @@ class ODS(MutableMapping):
         '''
         import xarray
 
+        if not self.location:
+            DS = xarray.Dataset()
+            for ds in self:
+                DS.update( self[ds].dataset(homogeneous=homogeneous) )
+            return DS
+
         def arraystruct_indexnames(key):
             '''
             return list of strings with a name for each of the arrays of structures indeces
@@ -1186,19 +1192,23 @@ class ODS(MutableMapping):
         # Generate paths with ':' for the arrays of structures
         # that we want to collect across
         paths = self.paths()
+        if self.location:
+            fpaths = list(map(lambda key: [self.location] + key, paths))
+
         if homogeneous is None:
             homogeneous = 'time' if self.homogeneous_time() else False
         if not homogeneous:
-            upaths = map(l2o, paths)
+            fupaths = list(map(l2o, fpaths))
         elif homogeneous == 'time':
-            upaths = numpy.unique(map(l2ut, paths))
+            fupaths = numpy.unique(list(map(l2ut, fpaths)))
         elif homogeneous == 'full':
-            upaths = numpy.unique(map(l2u, paths))
+            fupaths = numpy.unique(list(map(l2u, fpaths)))
         else:
             raise ValueError('OMAS dataset homogeneous attribute can only be False')
-        fupaths = upaths
+        upaths = fupaths
         if self.location:
-            fupaths = list(map(lambda key: self.location + '.' + key, upaths))
+            n = len(self.location)
+            upaths = list(map(lambda key: key[n:], fupaths))
 
         # Figure out coordinate indexes
         # NOTE: We use coordinates indexes instead of proper coordinates
