@@ -140,6 +140,25 @@ class TestOmasCore(unittest.TestCase):
         assert (len(ods.list_coordinates()) > 0)
         assert (len(ods['equilibrium'].list_coordinates()) > 0)
 
+    def test_dataset(self):
+        ods = ODS()
+
+        ods.sample_equilibrium(time_index=0)
+        ods.sample_equilibrium(time_index=1)
+
+        ods.sample_core_profiles(time_index=0)
+        ods.sample_core_profiles(time_index=1)
+
+        n = 1E10
+        sizes={}
+        for homogeneous in [False, 'time', None, 'full']:
+            DS = ods.dataset(homogeneous=homogeneous)
+            print(homogeneous, len(DS.variables))
+            sizes[homogeneous] = len(DS.variables)
+            if homogeneous is not None:
+                assert n >= sizes[homogeneous], 'homogeneity setting does not match structure reduction expectation'
+                n = sizes[homogeneous]
+        assert sizes[None]==sizes['time'], 'sample equilibrium and core_profiles should be homogeneous'
     def test_time(self):
         # test generation of a sample ods
         ods = ODS()

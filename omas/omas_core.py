@@ -75,7 +75,7 @@ class ODS(MutableMapping):
 
     def homogeneous_time(self, key='', default=True):
         '''
-        dynamically evaluate whether time is homogeneous or not
+        Dynamically evaluate whether time is homogeneous or not
         NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
 
         :param default: what to return in case no time basis is defined or there is only one element in the time basis
