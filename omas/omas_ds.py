@@ -10,6 +10,44 @@ from .omas_core import ODS
 import itertools
 
 
+class ODX(MutableMapping):
+    """
+    OMAX Data Structure class
+    """
+    def __init__(self, DS):
+        self.omas_data = DS
+
+    def __delitem__(self, key):
+        pass
+
+    def __getitem__(self, key):
+        if key in self.omas_data:
+            return self.omas_data[key].values
+
+        ukey = None
+        for k in self.omas_data.data_vars:
+            if u2o(key, k) == k:
+                ukey = k
+                break
+
+        tmp = self.omas_data[ukey].values
+        for uk, k in zip(p2l(ukey), p2l(key)):
+            if uk == ':' and isinstance(k, int):
+                tmp = tmp[k]
+
+        return tmp
+
+    def __iter__(self):
+        pass
+
+    def __len__(self):
+        return None
+
+    def __setitem__(self, key, value):
+        if key in self.omas_data.data_vars:
+            self.omas_data[key].values[:] = value
+
+
 def save_omas_ds(ods, filename):
     """
     Save an OMAS data set to xarray dataset
@@ -20,6 +58,22 @@ def save_omas_ds(ods, filename):
     """
     DS = ods.dataset()
     return DS.to_netcdf(filename)
+
+
+def load_omas_dx(filename, consistency_check=True):
+    """
+    Load OMAS data set from xarray dataset
+
+    :param filename: filename or file descriptor to load from
+
+    :param consistency_check: verify that data is consistent with IMAS schema
+
+    :return: OMAS data set
+    """
+    DS = xarray.open_dataset(filename)
+    DS.load()
+    DS.close()
+    return ODX(DS)
 
 
 def load_omas_ds(filename, consistency_check=True):
