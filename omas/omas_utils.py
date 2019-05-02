@@ -661,8 +661,8 @@ def o2i(path):
 
 def u2o(upath, path):
     '''
-    Fills in `:` in a universal ODS path with integers from a ODS path.
-    e.g. uo2('bla.:.hello.:.bla','bla.1.hello.2.ddd')) becomes ('bla.1.hello.2.bla')
+    Replaces `:` and integers in `upath` with ':' and integers from in `path`
+    e.g. uo2('a.:.b.:.c.1.d.1.e','f.:.g.1.h.1.i.:.k')) becomes ('bla.1.hello.2.bla')
 
     :param upath: universal ODS path
 
@@ -672,10 +672,10 @@ def u2o(upath, path):
     '''
     if upath.startswith('1...'):
         return upath
-    ol = p2l(path)
     ul = p2l(upath)
+    ol = p2l(path)
     for k in range(min([len(ul), len(ol)])):
-        if ul[k] == ':' and isinstance(ol[k], int):
+        if (ul[k] == ':' or isinstance(ul[k], int)) and (ol[k] == ':' or isinstance(ol[k], int)):
             ul[k] = ol[k]
         elif ul[k] == ol[k]:
             continue
