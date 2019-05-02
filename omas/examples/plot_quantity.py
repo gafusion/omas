@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-rapidly plot individual ODS quantities
-======================================
+Rapid plot
+==========
 This example shows how to use the .plot_quantity() method to
 conveniently and rapidly plot individual ODS quantities
 """

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Sample OMAS data structure
-==========================
+Sample OMAS data
+================
 OMAS provides a way to populate ODSs with sample data.
 This is often useful for testing/debugging purposes.
 """

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-COCOS
-=====
+COCOS transformations
+=====================
 OMAS can seamlessly handle coordinates convention translations
 """
 
