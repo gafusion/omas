@@ -32,9 +32,6 @@ def ods_sample():
     for ds in __all__:
         printd('Adding %s sample data to ods' % ds, topic='sample')
         ods = eval(ds)(ods)
-        # if necessary add dummy time information to make sure data can be written to IMAS
-        if ods[ds].time() is None:
-            ods[ds]['time'] = [0]
     return ods
 
 
@@ -78,7 +75,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     if not include_wall:
         del eq['wall']
 
-    ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
+    ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
     ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
 
@@ -124,6 +121,8 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
         for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
             if 'pres' in item and item in ods:
                 del ods[item]
+
+    ods['core_profiles.profiles_1d'][time_index]['time'] = float(time_index)
 
     return ods
 
@@ -242,6 +241,8 @@ def magnetics(ods):
         ods['magnetics.flux_loop'][i]['position.0.r'] = rf[i]
         ods['magnetics.flux_loop'][i]['position.0.z'] = zf[i]
 
+    ods['magnetics.time'] = [0]
+
     return ods
 
 
@@ -267,6 +268,8 @@ def thomson_scattering(ods, nc=10):
         ch['position.phi'] = 6.5  # This angle in rad should look bad to someone who doesn't notice the Fake labels
         ch['position.r'] = r[i]
         ch['position.z'] = z[i]
+
+    ods['thomson_scattering.time'] = [0]
 
     return ods
 
@@ -327,6 +330,8 @@ def interferometer(ods):
         ch = ods['interferometer.channel'][j]
         ch['line_of_sight.third_point'] = copy.deepcopy(ch['line_of_sight.first_point'])
 
+    ods['interferometer.time'] = [0]
+
     return ods
 
 
@@ -359,6 +364,8 @@ def bolometer(ods, nc=10):
 
     ods['bolometer.channel'][nc-1]['identifier'] = 'bolo fan 2 fake'  # This tests separate colors per fan in overlay
 
+    ods['bolometer.time'] = [0]
+
     return ods
 
 
@@ -373,6 +380,8 @@ def gas_injection(ods):
 
     :return: ODS instance with FAKE GAS INJECTION HARDWARE INFORMATION added.
     """
+
+    ods['gas_injection.time'] = [0]
 
     ods['gas_injection.pipe.0.name'] = 'FAKE_GAS_A'
     ods['gas_injection.pipe.0.exit_position.r'] = 2.25

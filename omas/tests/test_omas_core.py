@@ -159,6 +159,14 @@ class TestOmasCore(unittest.TestCase):
                 assert n >= sizes[homogeneous], 'homogeneity setting does not match structure reduction expectation'
                 n = sizes[homogeneous]
         assert sizes[None]==sizes['time'], 'sample equilibrium and core_profiles should be homogeneous'
+
+        ods.sample_pf_active()
+        try:
+            DS = ods.dataset(homogeneous='time')
+            raise AssertionError('sample pf_active data should not be able to collect in time because not time homogeneous')
+        except ValueError:
+            pass
+
     def test_time(self):
         # test generation of a sample ods
         ods = ODS()
@@ -171,9 +179,7 @@ class TestOmasCore(unittest.TestCase):
 
         # get time information from children
         extra_info = {}
-        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info), [100, 200, 300])
-        assert extra_info['location'] == 'equilibrium.time_slice.:.time'
-        assert extra_info['homogeneous_time'] is True
+        assert numpy.allclose(ods.time('equilibrium'), [100, 200, 300])
         assert ods['equilibrium'].homogeneous_time() is True
 
         # time arrays can be set using `set_time_array` function
@@ -190,34 +196,18 @@ class TestOmasCore(unittest.TestCase):
 
         # get time information from explicitly set time array
         extra_info = {}
-        assert numpy.allclose(ods.time('equilibrium', extra_info=extra_info), [101, 201, 302])
-        assert extra_info['homogeneous_time'] is False
-        assert ods['equilibrium'].homogeneous_time() is False
+        assert numpy.allclose(ods.time('equilibrium'), [101, 201, 302])
+        assert ods['equilibrium'].homogeneous_time() is True
 
         # get time value from a single item in array of structures
         extra_info = {}
-        assert ods['equilibrium.time_slice'][0].time(extra_info=extra_info) == 101
-        assert extra_info['homogeneous_time'] is None
-        tmp = ods['equilibrium']
-        assert tmp.homogeneous_time('time_slice.0') is True
-        assert ods['equilibrium'].homogeneous_time('time_slice.0', default=False) is False
+        assert ods['equilibrium.time_slice'][0].time() == 101
+        assert ods['equilibrium.time_slice'][0].homogeneous_time() is True
 
-        # get time array from array of structures
-        extra_info = {}
-        assert numpy.allclose(ods['equilibrium.time_slice'].time(extra_info=extra_info), [101, 201, 302])
-        assert extra_info['homogeneous_time'] is False
-        assert ods['equilibrium'].homogeneous_time() is False
-
-        # get time from parent
-        extra_info = {}
-        assert ods.time('equilibrium.time_slice.0.global_quantities.ip', extra_info=extra_info) == 101
-        assert extra_info['homogeneous_time'] is None
-        assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip') is True
-        assert ods.homogeneous_time('equilibrium.time_slice.0.global_quantities.ip', default=False) is False
-
-        # slice at time
-        ods1 = ods['equilibrium'].slice_at_time(101)
-        numpy.allclose(ods.time('equilibrium'), [101])
+        # sample pf_active data has non-homogeneous times
+        ods.sample_pf_active()
+        assert ods['pf_active'].homogeneous_time() is False, 'sample pf_active data should have non-homogeneous time'
+        assert ods['pf_active.coil'][0]['current'].homogeneous_time() is True
 
     def test_address_structures(self):
         ods = ODS()
@@ -265,8 +255,8 @@ class TestOmasCore(unittest.TestCase):
             pass
 
     def test_satisfy_imas_requirements(self):
-        ods = ods_sample()
-
+        ods = ODS()
+        ods['equilibrium.time_slice.0.global_quantities.ip'] = 0.0
         # check if data structures satisfy IMAS requirements (this should Fail)
         try:
             ods.satisfy_imas_requirements()
@@ -274,15 +264,7 @@ class TestOmasCore(unittest.TestCase):
         except ValueError as _excp:
             pass
 
-        # add .time information for all data structures
-        while True:
-            try:
-                ods.satisfy_imas_requirements()
-            except ValueError as _excp:
-                # print(str(_excp).split()[0])
-                ods[str(_excp).split()[0]] = [100]
-            else:
-                break
+        ods = ods_sample()
 
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
