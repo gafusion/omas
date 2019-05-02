@@ -199,7 +199,7 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
     for i in range(nc_reg):
         n = (1 + i) * 10
         outline = ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
-        outline = ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
+        outline = ods['pf_active.coil'][i]['current.time'] = numpy.linspace(0, 1, n)
 
     return ods
 

@@ -78,9 +78,9 @@ class ODS(MutableMapping):
         Dynamically evaluate whether time is homogeneous or not
         NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
 
-        :param default: what to return in case no time basis is defined or there is only one element in the time basis
+        :param default: what to return in case no time basis is defined
 
-        :return: True/False or default value (None) if no time basis is defined or there is only one element in the time basis
+        :return: True/False or default value (True) if no time basis is defined
         '''
         if not len(self.location) and not len(key):
             raise ValueError('homogeneous_time() can not be called on a top-level ODS')
@@ -103,71 +103,61 @@ class ODS(MutableMapping):
         :return: time information for a given ODS location (scalar or array)
         """
 
-        def add_is_homogeneous_info(time):
-            if time is None:
-                extra_info['homogeneous_time'] = None
-            elif len(numpy.atleast_1d(time)) <= 2:
-                extra_info['homogeneous_time'] = None
-            else:
-                tmp = numpy.diff(time)
-                if numpy.sum(numpy.abs(tmp - tmp[0])) < 1E-6:
-                    extra_info['homogeneous_time'] = True
-                else:
-                    extra_info['homogeneous_time'] = False
-            return time
-
-        # extra
         if extra_info is None:
             extra_info = {}
 
-        # process the key
-        key = p2l(key)
-        tmp = self.__getitem__(key, False)
-        if not isinstance(tmp, ODS):
-            key = key[:-1]
-            tmp = self.__getitem__(key, False)
+        # subselect on requested key
+        subtree = p2l(self.location + '.' + key)
 
-        # this ODS has a children with 'time' information
-        if isinstance(tmp.omas_data, dict):
-            if 'time' in tmp:
-                extra_info['location'] = self.location + '.time'
-                return add_is_homogeneous_info(tmp['time'])
-            # this node should have time filled, but the user did not do their job
-            elif 'time' in tmp.structure:
-                # try to assemble time information by looking in the children
-                for item in tmp.structure:
-                    if item == skip:
-                        continue
-                    if item in tmp and ':' in tmp.structure[item] and 'time' in tmp.structure[item][':']:
-                        return add_is_homogeneous_info(tmp.time(item, extra_info=extra_info))
+        # get time nodes from data structure definitions
+        loc = p2l(subtree)
+        flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
+        times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
 
-        # this ODS is an array of structures (which may or may not have time information)
-        elif isinstance(tmp.omas_data, list):
-            # assemble time array information from the children
-            times = []
-            for item in tmp:
-                times.append(tmp[item].time(extra_info=extra_info))
-            if 'location' in extra_info:
-                extra_info['location']=o2u(extra_info['location'])
-            # if any time information was found, return it
-            if len(list(filter(None, times))):
-                return add_is_homogeneous_info(numpy.array(times))
+        # traverse ODS upstream until time information is found
+        time = {}
+        for sub in [subtree[:k] for k in range(len(subtree),0,-1)]:
+            times_sub_ds = [k for k in times_ds if k.startswith(l2u(sub))]
+            subtree = l2o(sub)
 
-        # ODS not yet assigned
-        else:
-            return add_is_homogeneous_info(None)
+            # get time data from ods
+            times = {}
+            n = len(self.location)
+            for item in times_sub_ds:
+                try:
+                    time = self.__getitem__(u2o(item, subtree)[n:], None)  # traverse ODS
+                    if isinstance(time, numpy.ndarray):
+                        if time.size == 0:
+                            continue
+                        elif len(time.shape) > 1:
+                            time = numpy.atleast_1d(numpy.squeeze(time))
+                    times[item] = time
+                except IndexError:
+                    pass
+                except ValueError as _excp:
+                    if 'has no data' in repr(_excp):
+                        pass
+                    else:
+                        # return False if time is not homogeneous
+                        extra_info['homogeneous_time'] = False
+                        return None
+            times_values = list(times.values())
 
-        # traverse tree upstream looking for the first parent that has time information
-        while len(key):
-            # make sure .time() does not traverse this children since we already know there is no time information in it
-            skip = key.pop()
-            time = self.time(key, extra_info=extra_info, skip=skip)
-            if time is not None:
-                # if the parent with time information is an array of structures
-                # then return the time of the element that we are asking for
-                if isinstance(time, numpy.ndarray):
-                    time = time[key[-1]]
-                return add_is_homogeneous_info(time)
+            extra_info['location'] = times.keys()
+            # no time data defined
+            if not len(times_values):
+                time = None
+                extra_info['homogeneous_time'] = None
+            # if there is a single time entry, or there are multiple time entries that are all consistent with one another
+            elif len(times) == 1 or all([times_values[0].shape==time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
+                time = times_values[0]
+                extra_info['homogeneous_time'] = True
+                return time
+            # there are inconsistencies with different ways of specifying times in the IDS
+            else:
+                raise ValueError('Inconsistent time definitions in %s' % times.keys())
+
+        return None
 
     def slice_at_time(self, time=None, time_index=None):
         '''
@@ -207,10 +197,10 @@ class ODS(MutableMapping):
                 # time-depentend list of ODSs
                 elif isinstance(self[item].omas_data, list) and len(self[item]) and 'time' in self[item][0]:
                     if time_index is None:
-                        raise ValueError('`time` array is not set for `%s` ODS'%self.ulocation)
+                        raise ValueError('`time` array is not set for `%s` ODS' % self.ulocation)
                     tmp = self[item][time_index]
                     self.getraw(item).clear()
-                    self.getraw(item)[0]=tmp
+                    self.getraw(item)[0] = tmp
 
             # go deeper inside ODSs that do not have time info
             elif isinstance(self.getraw(item), ODS):
@@ -1172,7 +1162,7 @@ class ODS(MutableMapping):
 
         def arraystruct_indexnames(key):
             '''
-            return list of strings with a name for each of the arrays of structures indeces
+            return list of strings with a name for each of the arrays of structures indexes
 
             :param key: ods location
 
