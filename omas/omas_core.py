@@ -486,7 +486,7 @@ class ODS(MutableMapping):
                     value = value * norm
 
                 # get node information
-                info = omas_info_node(ulocation)
+                info = omas_info_node(ulocation, imas_version=self.imas_version)
 
                 # handle units (Python pint package)
                 if str(value.__class__).startswith("<class 'pint."):
@@ -741,7 +741,7 @@ class ODS(MutableMapping):
                     value = value * norm
 
                 # get node information
-                info = omas_info_node(ulocation)
+                info = omas_info_node(ulocation, imas_version=self.imas_version)
 
                 # coordinates interpolation
                 ods_coordinates, output_coordinates = self.coordsio

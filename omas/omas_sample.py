@@ -59,7 +59,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
-    eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json')
+    eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
     if not include_profiles:
@@ -106,7 +106,7 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json')
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json', consistency_check=False)
 
     ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d.0'])
     ods['core_profiles.vacuum_toroidal_field.r0'] = pr['core_profiles.vacuum_toroidal_field.r0']
