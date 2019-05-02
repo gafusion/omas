@@ -679,7 +679,7 @@ class ODS(MutableMapping):
             data = []
             for k, item in enumerate(self.keys()):
                 try:
-                    data.append(self[[item] + key[1:]])
+                    data.append(self.__getitem__([item] + key[1:], cocos_and_coords))
                 except ValueError:
                     data.append([])
             # handle missing data by filling out with NaNs
@@ -692,7 +692,9 @@ class ODS(MutableMapping):
             if valid is not _empty and len(_empty):
                 for k in _empty:
                     data[k] = valid * numpy.nan
-            return numpy.array(data)
+            # force dtype to avoid obtaining arrays of objects in case
+            # the shape of the concatenated arrays do not match
+            return numpy.array(data, dtype=numpy.array(data[0]).dtype)
 
         # dynamic path creation
         elif key[0] not in self.keys():
