@@ -75,6 +75,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     if not include_wall:
         del eq['wall']
 
+    ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
     ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
@@ -107,7 +108,7 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
     from omas import load_omas_json
     pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json')
 
-    ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d'][0])
+    ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d.0'])
     ods['core_profiles.vacuum_toroidal_field.r0'] = pr['core_profiles.vacuum_toroidal_field.r0']
     ods.set_time_array('core_profiles.vacuum_toroidal_field.b0', time_index, pr['core_profiles.vacuum_toroidal_field.b0'][0])
 
