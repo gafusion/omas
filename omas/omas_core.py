@@ -11,18 +11,19 @@ __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 've
 
 __all__ = [
     'ODS', 'ods_sample', 'different_ods',
-    'save_omas_pkl',  'load_omas_pkl',  'through_omas_pkl',
+    'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
-    'save_omas_hdc',  'load_omas_hdc',  'through_omas_hdc',
+    'save_omas_hdc', 'load_omas_hdc', 'through_omas_hdc',
     'load_omas_uda',
-    'save_omas_nc',   'load_omas_nc',   'through_omas_nc',
-    'save_omas_h5',   'load_omas_h5',   'through_omas_h5',
+    'save_omas_nc', 'load_omas_nc', 'through_omas_nc',
+    'save_omas_h5', 'load_omas_h5', 'through_omas_h5',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
-    'save_omas_s3',   'load_omas_s3',   'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation',
     'imas_json_dir', 'imas_versions', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
+
 
 class ODS(MutableMapping):
     """
@@ -116,7 +117,7 @@ class ODS(MutableMapping):
 
         # traverse ODS upstream until time information is found
         time = {}
-        for sub in [subtree[:k] for k in range(len(subtree),0,-1)]:
+        for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
             times_sub_ds = [k for k in times_ds if k.startswith(l2u(sub))]
             subtree = l2o(sub)
 
@@ -149,7 +150,7 @@ class ODS(MutableMapping):
                 time = None
                 extra_info['homogeneous_time'] = None
             # if there is a single time entry, or there are multiple time entries that are all consistent with one another
-            elif len(times) == 1 or all([times_values[0].shape==time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
+            elif len(times) == 1 or all([times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
                 return time
@@ -254,7 +255,7 @@ class ODS(MutableMapping):
                     if isinstance(self.getraw(item), ODS):
                         self.getraw(item).consistency_check = old_consistency_check
                 self.consistency_check = old_consistency_check
-            raise# (LookupError('Consistency check failed: %s' % repr(_excp)))
+            raise  # (LookupError('Consistency check failed: %s' % repr(_excp)))
 
     @property
     def cocos(self):
@@ -264,8 +265,8 @@ class ODS(MutableMapping):
 
         :return: cocos value
         """
-        if not hasattr(self,'_cocos'):
-            self._cocos=omas_rcparams['cocos']
+        if not hasattr(self, '_cocos'):
+            self._cocos = omas_rcparams['cocos']
         return self._cocos
 
     @cocos.setter
@@ -335,8 +336,8 @@ class ODS(MutableMapping):
 
         :return: True/False
         """
-        if not hasattr(self,'_dynamic_path_creation'):
-            self._dynamic_path_creation=True
+        if not hasattr(self, '_dynamic_path_creation'):
+            self._dynamic_path_creation = True
         return self._dynamic_path_creation
 
     @property
@@ -414,7 +415,7 @@ class ODS(MutableMapping):
         if self.consistency_check:
             # perform consistency check with IMAS structure
             structure = {}
-            structure_key = key[0] if not isinstance(key[0],int) else ':'
+            structure_key = key[0] if not isinstance(key[0], int) else ':'
             try:
                 if isinstance(value, ODS):
                     if not self.structure:
@@ -423,7 +424,7 @@ class ODS(MutableMapping):
                     else:
                         structure = self.structure[structure_key]
                         if not len(structure):
-                            raise ValueError('`%s` has no data'%location)
+                            raise ValueError('`%s` has no data' % location)
                     # check that tha data will go in the right place
                     self._validate(value, structure)
                     # assign structure and location information
@@ -808,7 +809,7 @@ class ODS(MutableMapping):
 
         :return: list of paths that have data formatted nicely
         """
-        return list(map(l2i,self.paths()))
+        return list(map(l2i, self.paths()))
 
     def paths(self, **kw):
         """
@@ -846,7 +847,7 @@ class ODS(MutableMapping):
     def __getnewargs__(self):
         # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
         # back from that string will use omas.__new__ with consistency_check=False and dynamic_path_creation=True
-        return (False,True)
+        return (False, True)
 
     def __len__(self):
         return len(self.omas_data)
@@ -860,7 +861,7 @@ class ODS(MutableMapping):
         for k in key:
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
-                h = h.__getitem__(k,False)
+                h = h.__getitem__(k, False)
                 continue  # continue to the next key
             else:
                 return False
@@ -872,7 +873,7 @@ class ODS(MutableMapping):
     def keys(self):
         if isinstance(self.omas_data, dict):
             # map keys with str to get strings and not unicode when working with Python 2.7
-            return list(map(str,self.omas_data.keys()))
+            return list(map(str, self.omas_data.keys()))
         elif isinstance(self.omas_data, list):
             return range(len(self.omas_data))
         else:
@@ -951,7 +952,7 @@ class ODS(MutableMapping):
         if isinstance(self.omas_data, dict):
             self.omas_data.clear()
         elif isinstance(self.omas_data, list):
-            self.omas_data[:]=[]
+            self.omas_data[:] = []
         return self
 
     def copy_attrs_from(self, ods):
@@ -963,7 +964,7 @@ class ODS(MutableMapping):
         :return: self
         '''
         for item in omas_ods_attrs:
-            setattr(self,item,getattr(ods,item))
+            setattr(self, item, getattr(ods, item))
         return self
 
     def prune(self):
@@ -1062,7 +1063,7 @@ class ODS(MutableMapping):
             raise ValueError('ODS location `%s` has no coordinates information' % ulocation)
         coordinates = map(lambda x: u2o(x, key), info['coordinates'])
         for coord in coordinates:
-            coords[coord] = self[coord] #this will raise an error if the coordinates data is not there
+            coords[coord] = self[coord]  # this will raise an error if the coordinates data is not there
 
         return coords
 
@@ -1159,7 +1160,7 @@ class ODS(MutableMapping):
         if not self.location:
             DS = xarray.Dataset()
             for ds in self:
-                DS.update( self[ds].dataset(homogeneous=homogeneous) )
+                DS.update(self[ds].dataset(homogeneous=homogeneous))
             return DS
 
         def arraystruct_indexnames(key):
@@ -1269,12 +1270,14 @@ class ODS(MutableMapping):
             return False
         return True
 
+
 # --------------------------------------------
 # import sample functions and add them as ODS methods
 # --------------------------------------------
 try:
     from . import omas_sample
     from .omas_sample import ods_sample
+
     __all__.append('omas_sample')
     for item in omas_sample.__ods__:
         setattr(ODS, 'sample_' + item, getattr(omas_sample, item))
@@ -1288,6 +1291,7 @@ except ImportError as _excp:
 try:
     from . import omas_physics
     from .omas_physics import *
+
     __all__.append('omas_physics')
     __all__.extend(omas_physics.__all__)
     for item in omas_physics.__ods__:
@@ -1295,12 +1299,12 @@ try:
 except ImportError as _excp:
     printe('OMAS physics function are not available: ' + repr(_excp))
 
-
 # --------------------------------------------
 # import plotting functions and add them as ODS methods
 try:
     # --------------------------------------------
     from . import omas_plot
+
     __all__.append('omas_plot')
     for item in omas_plot.__ods__:
         setattr(ODS, 'plot_' + item, getattr(omas_plot, item))
@@ -1311,6 +1315,7 @@ omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', 'imas_version'
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
+
 
 # --------------------------------------------
 # save and load OMAS with Python pickle
@@ -1355,9 +1360,9 @@ def through_omas_pkl(ods):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir()+'/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir()+'/OMAS_TESTS/')
-    filename = tempfile.gettempdir()+'/OMAS_TESTS/test.pkl'
+    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
+        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
+    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
     return ods1
@@ -1375,6 +1380,7 @@ from .omas_hdc import *
 from .omas_uda import *
 from .omas_h5 import *
 
+
 # --------------------------------------------
 # backward compatibility
 # --------------------------------------------
@@ -1383,5 +1389,7 @@ def save_omas_itm(*args, **kw):
     Dummy function to avoid older versions of OMFIT not to start with latest OMAS
     '''
     raise NotImplementedError('omas itm functions are deprecated')
+
+
 load_omas_itm = through_omas_itm = save_omas_itm
 __all__.extend(['save_omas_itm', 'load_omas_itm', 'through_omas_itm'])

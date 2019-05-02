@@ -447,6 +447,7 @@ class TestOmasPhysics(unittest.TestCase):
             warnings.filterwarnings("ignore", message=".*defining its COCOS transform.*")
             generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
 
+
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPhysics)
     unittest.TextTestRunner(verbosity=2).run(suite)

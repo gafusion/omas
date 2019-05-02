@@ -13,7 +13,6 @@ from matplotlib import pyplot
 import os
 from omas import *
 
-
 ods = ods_sample()
 
 kw = {}

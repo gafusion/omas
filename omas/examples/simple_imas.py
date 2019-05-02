@@ -12,14 +12,14 @@ Prior running this script, the following commands must be typed at the teriminal
 > imasdb ITER
 """
 
-from __future__ import print_function, division#, unicode_literals
+from __future__ import print_function, division  # , unicode_literals
 
 import os
 from pprint import pprint
 from omas import *
 
 # enable fake IMAS support in case IMAS is not present on current system
-#omas_rcparams['allow_fake_imas_fallback'] = True
+# omas_rcparams['allow_fake_imas_fallback'] = True
 
 # set OMAS debugging topic
 # NOTE: appending '_dump' to a debug topic will write a omas.dump file in the working directory
@@ -50,25 +50,25 @@ ods['equilibrium']['time_slice'][1]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3
 ods['core_profiles']['time'] = [1000.]
 
 # Save to IMAS
-print('='*20)
+print('=' * 20)
 print(' Writing data to IMAS')
-print('='*20)
+print('=' * 20)
 paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
 pprint(ods.pretty_paths())
 
 # Load from IMAS
-print('='*20)
+print('=' * 20)
 print(' Reading data from IMAS')
-print('='*20)
+print('=' * 20)
 
 # explicitly specify paths to collect
 ods1 = load_omas_imas(machine='ITER', pulse=1, paths=paths)
 pprint(ods1.pretty_paths())
 
 # check data
-print('='*20)
+print('=' * 20)
 print(' Compared saved/loaded data')
-print('='*20)
+print('=' * 20)
 check = different_ods(ods, ods1)
 if not check:
     print('OMAS data got saved and loaded correctly')
@@ -76,9 +76,9 @@ else:
     pprint(check)
 
 # automatic paths discovery
-#ods1 = load_omas_imas(machine='ITER', pulse=1)
-#pprint(ods1.pretty_paths())
+# ods1 = load_omas_imas(machine='ITER', pulse=1)
+# pprint(ods1.pretty_paths())
 
 # subpath selection
-#ods1 = load_omas_imas(machine='ITER', pulse=1, paths=['equilibrium.time_slice.0.time', 'equilibrium.time_slice.:.global_quantities.ip'])
-#pprint(ods1.pretty_paths())
+# ods1 = load_omas_imas(machine='ITER', pulse=1, paths=['equilibrium.time_slice.0.time', 'equilibrium.time_slice.:.global_quantities.ip'])
+# pprint(ods1.pretty_paths())

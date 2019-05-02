@@ -8,8 +8,10 @@ from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 from .omas_core import save_omas_pkl, load_omas_pkl
 
+
 def _base_S3_uri(user):
     return 's3://omas3/{user}/'.format(user=user)
+
 
 # --------------------------------------------
 # save and load OMAS with S3
@@ -81,6 +83,7 @@ def remote_uri(uri, filename, action):
             with open(filename, 'rb') as data:
                 bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
 
+
 def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir'], **kw):
     """
     Save an OMAS object to pickle and upload it to S3
@@ -102,6 +105,7 @@ def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_d
     save_omas_pkl(ods, os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], **kw)
     return remote_uri(_base_S3_uri(user), os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], 'up')
 
+
 def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir']):
     """
     Download an OMAS object from S3 and read it as pickle
@@ -122,6 +126,7 @@ def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=om
                'down')
     return load_omas_pkl(os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1])
 
+
 def list_omas_s3(user=''):
     """
     List S3 content
@@ -132,6 +137,7 @@ def list_omas_s3(user=''):
     """
     return remote_uri(_base_S3_uri(user), None, 'list')
 
+
 def del_omas_s3(filename, user=os.environ.get('USER', 'dummy_user')):
     """
     Delete an OMAS object from S3
@@ -141,6 +147,7 @@ def del_omas_s3(filename, user=os.environ.get('USER', 'dummy_user')):
     :return: OMAS data set
     """
     remote_uri(_base_S3_uri(user) + filename, None, 'del')
+
 
 def through_omas_s3(ods):
     """

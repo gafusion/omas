@@ -52,9 +52,9 @@ assert (ods[['equilibrium', 'time_slice', 3, 'time']] == 4000.)
 ods['equilibrium']['time_slice.4.time'] = 5000.
 assert (ods['equilibrium']['time_slice.4.time'] == 5000.)
 
-#=============
+# =============
 # Data slicing
-#=============
+# =============
 
 # classic ways to access data across an array of structures
 data = []
@@ -67,9 +67,9 @@ assert (numpy.all(data == numpy.array([1000., 2000., 3000., 4000., 5000.])))
 data = ods['equilibrium.time_slice.:.time']
 assert (numpy.all(data == numpy.array([1000., 2000., 3000., 4000., 5000.])))
 
-#=========================
+# =========================
 # .setdefault() and .get()
-#=========================
+# =========================
 
 # like for Python dictionaries .setdefault() will set an entry with its
 # default value (second argument) only if that entry does not exists already
@@ -87,9 +87,9 @@ ods = ODS()
 ods.get('equilibrium.time_slice.0.global_quantities.ip', 5)
 assert ('equilibrium.time_slice.0.global_quantities.ip' not in ods)
 
-#========
+# ========
 # Cleanup
-#========
+# ========
 
 # Dynamic path creation can leave empty trees behind in case of bad IMAS location is entered.
 # This is inevitable when splitting the path in individual pieces.

@@ -73,17 +73,16 @@ cp IDSDef.xml {imas_json_dir}/{_imas_version}/
 
 
 def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
-
     import xmltodict
-    file = imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + 'IDSDef.xml'
+    file = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + 'IDSDef.xml'
     tmp = xmltodict.parse(open(file).read())
 
-    for file in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*.json'):
-        print('Remove '+file)
+    for file in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*.json'):
+        print('Remove ' + file)
         os.remove(file)
 
     def process_path(inv):
-        inv = inv.replace(r'/','.')
+        inv = inv.replace(r'/', '.')
         inv = inv.split(' OR ')[0]
         inv = remove_parentheses(inv, '[:]')
         inv = re.sub('\[:\]$', '', inv)
@@ -93,9 +92,9 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         me = copy.copy(me)
         hout_propagate = hout
         path_propagate = copy.deepcopy(path)
-        parent=copy.deepcopy(parent)
+        parent = copy.deepcopy(parent)
 
-        if '@structure_reference' in me and me['@structure_reference']=='self':
+        if '@structure_reference' in me and me['@structure_reference'] == 'self':
             return hout, fout
 
         if '@name' in me:
@@ -137,7 +136,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         if '@units' in me:
             if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
                 me['@units'] = '-'
-            if fname in ['equilibrium.time_slice[:].profiles_1d.geometric_axis.r','equilibrium.time_slice[:].profiles_1d.geometric_axis.z']:
+            if fname in ['equilibrium.time_slice[:].profiles_1d.geometric_axis.r', 'equilibrium.time_slice[:].profiles_1d.geometric_axis.z']:
                 me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
             if me['@units'] in ['as_parent', 'as parent']:
                 me['@units'] = parent['units']
@@ -164,9 +163,9 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
 
         return hout, fout
 
-    parent={}
-    parent['units']='?'
-    parent['lifecycle_status']=''
+    parent = {}
+    parent['units'] = '?'
+    parent['lifecycle_status'] = ''
     hout, fout = traverse(me=tmp, hout={}, path=[], fout={}, parent=parent)
 
     # format conversions
@@ -221,28 +220,28 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     hout.update(add_datastructures)
 
     # prepare directory structure
-    if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version)):
-        os.makedirs(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version))
-    for item in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '*.json'):
+    if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version)):
+        os.makedirs(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version))
+    for item in glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*.json'):
         os.remove(item)
 
     # deploy imas structures as json
     for structure in sorted(hout):
-        if structure=='time':
+        if structure == 'time':
             continue
-        print(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + structure + '.json')
+        print(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + structure + '.json')
         dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
-        #dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
-        open(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
+        # dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
+        open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
 
     # generate coordinates cache file
     coords = extract_coordinates(imas_version=imas_version)
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
-    open(imas_json_dir + os.sep + imas_versions.get(imas_version,imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
+    open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
 
 
 def create_html_documentation(imas_version=omas_rcparams['default_imas_version']):
-    filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version,imas_version), 'omas_doc.html']))
+    filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version, imas_version), 'omas_doc.html']))
 
     table_header = "<table border=1, width='100%'>"
     sub_table_header = '<tr>' \
@@ -253,7 +252,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                        '<th>Description</th>' \
                        '</tr>'
 
-    column_style='style="word-wrap:break-word;word-break:break-all"'
+    column_style = 'style="word-wrap:break-word;word-break:break-all"'
     lines = []
     for structure_file in list_structures(imas_version=imas_version):
         print('Adding to html documentation: ' + structure_file)
@@ -278,12 +277,12 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                 # lifecycle status
                 status = ''
                 if 'lifecycle_status' in structure[item] and structure[item]['lifecycle_status'] not in ['active']:
-                    color_mapper={'alpha':'blue','obsolescent':'red'}
-                    status = '</p><p><font color="%s">(%s)</font>'%(color_mapper.get(structure[item]['lifecycle_status'],'orange'),structure[item]['lifecycle_status'])
+                    color_mapper = {'alpha': 'blue', 'obsolescent': 'red'}
+                    status = '</p><p><font color="%s">(%s)</font>' % (color_mapper.get(structure[item]['lifecycle_status'], 'orange'), structure[item]['lifecycle_status'])
                 # highlight entries that are a coordinate
                 item_with_coordinate_highlight = item
                 if item in coords:
-                    item_with_coordinate_highlight='<strong>%s</strong>'%item
+                    item_with_coordinate_highlight = '<strong>%s</strong>' % item
                 try:
                     lines.append(
                         '<tr>'
@@ -298,7 +297,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                                 list(map(str, structure[item].get('coordinates', ''))))))),
                             data_type=structure[item].get('data_type', '') + is_uncertain,
                             units=structure[item].get('units', ''),
-                            description=re.sub('\n','<br>',structure[item].get('documentation', '')),
+                            description=re.sub('\n', '<br>', structure[item].get('documentation', '')),
                             status=status,
                             column_style=column_style
                         ))
@@ -326,13 +325,13 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
-    omas_coordinates=set()
+    omas_coordinates = set()
     for structure in list_structures(imas_version=imas_version):
         tmp = load_structure(structure, imas_version)[0]
         coords = []
         for item in tmp:
             if 'coordinates' in tmp[item]:
-                coords.extend(map(i2o,tmp[item]['coordinates']))
+                coords.extend(map(i2o, tmp[item]['coordinates']))
         coords = list(filter(lambda x: '...' not in x, set(coords)))
         omas_coordinates.update(coords)
 

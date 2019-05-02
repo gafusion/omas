@@ -30,6 +30,7 @@ warnings.formatwarning = lambda message, category, filename, lineno, line=None: 
 ureg = []
 if False:
     import pint
+
     ureg.append(pint.UnitRegistry())
 else:
     ureg.append(None)
@@ -47,6 +48,7 @@ import xarray
 if sys.version_info < (3, 0):
     import cPickle as pickle
 
+
     def b2s(string):
         return string
 
@@ -55,20 +57,30 @@ else:
     unicode = str
     import pickle
 
-    _orig_pickle_loads=pickle.loads
-    def _pickle_loads_python2compatible(*args,**kw):
-        kw.setdefault('encoding','latin1')
-        return _orig_pickle_loads(*args,**kw)
-    pickle.loads=_pickle_loads_python2compatible
+    _orig_pickle_loads = pickle.loads
 
-    _orig_pickle_load=pickle.load
-    def _pickle_load_python2compatible(*args,**kw):
-        kw.setdefault('encoding','latin1')
-        return _orig_pickle_load(*args,**kw)
-    pickle.load=_pickle_load_python2compatible
+
+    def _pickle_loads_python2compatible(*args, **kw):
+        kw.setdefault('encoding', 'latin1')
+        return _orig_pickle_loads(*args, **kw)
+
+
+    pickle.loads = _pickle_loads_python2compatible
+
+    _orig_pickle_load = pickle.load
+
+
+    def _pickle_load_python2compatible(*args, **kw):
+        kw.setdefault('encoding', 'latin1')
+        return _orig_pickle_load(*args, **kw)
+
+
+    pickle.load = _pickle_load_python2compatible
+
 
     def b2s(bytes):
         return bytes.decode("utf-8")
+
 
 # --------------------------------------------
 # configuration of directories and IMAS infos
@@ -78,13 +90,18 @@ class IMAS_json_dir(unicode):
     directory where the JSON data structures for the different versions of IMAS are stored
     '''
     pass
+
+
 imas_json_dir = IMAS_json_dir(os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/'))
+
 
 class IMAS_versions(OrderedDict):
     '''
     dictionary with list of IMAS version and their sub-folder name in the imas_json_dir
     '''
     pass
+
+
 imas_versions = IMAS_versions()
 # first `develop/3` and other branches
 for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
@@ -104,6 +121,7 @@ else:
         # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
         _default_imas_version = ''
 
+
 # --------------------------------------------
 # rcparams
 # --------------------------------------------
@@ -112,6 +130,7 @@ class OMAS_rc_params(dict):
     dictionary of parameters that control how OMAS operates
     '''
     pass
+
 
 omas_rcparams = OMAS_rc_params()
 omas_rcparams.update({
@@ -131,14 +150,16 @@ omas_rcparams.update({
     'default_imas_version': _default_imas_version
 })
 
+
 @contextmanager
 def rcparams_environment(**kw):
-    old_omas_rcparams=omas_rcparams.copy()
+    old_omas_rcparams = omas_rcparams.copy()
     omas_rcparams.update(kw)
     try:
         yield omas_rcparams
     finally:
         omas_rcparams.update(old_omas_rcparams)
+
 
 # --------------------------------------------
 # additional data structures

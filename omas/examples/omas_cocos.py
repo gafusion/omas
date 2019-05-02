@@ -50,7 +50,7 @@ print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 ods = ODS(cocosio=2)
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
 with omas_environment(ods, cocosio=11):
-    assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x*(2*numpy.pi)))
+    assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * (2 * numpy.pi)))
     print(ods['equilibrium.time_slice.0.profiles_1d.psi'])
 
 ods['equilibrium.time_slice.0.profiles_1d.psi'] = x

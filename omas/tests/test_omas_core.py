@@ -21,6 +21,7 @@ from pprint import pprint
 from omas import *
 from omas.omas_setup import *
 
+
 class TestOmasCore(unittest.TestCase):
     """
     Test suite for omas_physics.py
@@ -150,7 +151,7 @@ class TestOmasCore(unittest.TestCase):
         ods.sample_core_profiles(time_index=1)
 
         n = 1E10
-        sizes={}
+        sizes = {}
         for homogeneous in [False, 'time', None, 'full']:
             DS = ods.dataset(homogeneous=homogeneous)
             print(homogeneous, len(DS.variables))
@@ -158,7 +159,7 @@ class TestOmasCore(unittest.TestCase):
             if homogeneous is not None:
                 assert n >= sizes[homogeneous], 'homogeneity setting does not match structure reduction expectation'
                 n = sizes[homogeneous]
-        assert sizes[None]==sizes['time'], 'sample equilibrium and core_profiles should be homogeneous'
+        assert sizes[None] == sizes['time'], 'sample equilibrium and core_profiles should be homogeneous'
 
         ods.sample_pf_active()
         try:
@@ -300,6 +301,7 @@ class TestOmasCore(unittest.TestCase):
         # make sure the deepcopy is not shallow
         ods2['equilibrium.vacuum_toroidal_field.r0'] += 1
         assert ods['equilibrium.vacuum_toroidal_field.r0'] + 1 == ods2['equilibrium.vacuum_toroidal_field.r0']
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

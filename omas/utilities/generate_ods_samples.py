@@ -25,14 +25,14 @@ state.load()
 ods = state.to_omas()
 
 # subsample core_profiles and core_sources
-coordsio={}
-coordsio['core_profiles.profiles_1d.0.grid.rho_tor_norm']=numpy.linspace(0,1,11)
+coordsio = {}
+coordsio['core_profiles.profiles_1d.0.grid.rho_tor_norm'] = numpy.linspace(0, 1, 11)
 for k in ods['core_sources.source']:
-    coordsio['core_sources.source.%d.profiles_1d.0.grid.rho_tor_norm'%k]=numpy.linspace(0,1,11)
+    coordsio['core_sources.source.%d.profiles_1d.0.grid.rho_tor_norm' % k] = numpy.linspace(0, 1, 11)
 
 # write ccore_profiles and core_sources sample
-for what in ['core_sources','core_profiles']:
-    ods_subsampled=ODS()
+for what in ['core_sources', 'core_profiles']:
+    ods_subsampled = ODS()
     with omas_environment(ods, coordsio=coordsio):
         ods_subsampled[what].update(ods[what])
-    save_omas_json(ods_subsampled, imas_json_dir + '/../samples/sample_%s_ods.json'%what)
+    save_omas_json(ods_subsampled, imas_json_dir + '/../samples/sample_%s_ods.json' % what)

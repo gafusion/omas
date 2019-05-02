@@ -15,6 +15,7 @@ try:
 except ImportError as _excp:
     _pyhdc_import_excp = _excp
 
+
     # replace HDC class by a simple exception throwing class
     class HDC(object):
         """Import error HDC class"""

@@ -34,7 +34,7 @@ def save_omas_json(ods, filename, objects_encode=None, **kw):
     kw.setdefault('separators', (',', ': '))
     kw.setdefault('sort_keys', True)
 
-    json_string = json.dumps(ods, default=lambda x:json_dumper(x,objects_encode), **kw)
+    json_string = json.dumps(ods, default=lambda x: json_dumper(x, objects_encode), **kw)
 
     if isinstance(filename, basestring):
         with open(filename, 'w') as f:

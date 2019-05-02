@@ -169,6 +169,7 @@ class TestOmasUtils(unittest.TestCase):
         omas_info('equilibrium')
         omas_info(None)
 
+
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasUtils)
     unittest.TextTestRunner(verbosity=2).run(suite)

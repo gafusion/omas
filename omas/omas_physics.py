@@ -10,6 +10,7 @@ from .omas_core import ODS
 __all__ = []
 __ods__ = []
 
+
 def add_to__ODS__(f):
     '''
     anything wrapped here will be available as a ODS method with name 'physics_'+f.__name__
@@ -18,13 +19,16 @@ def add_to__ODS__(f):
     __all__.append(f.__name__)
     return f
 
+
 def add_to__ALL__(f):
     __all__.append(f.__name__)
     return f
 
+
 # constants class that mimics scipy.constants
 class constants(object):
     e = 1.6021766208e-19
+
 
 @add_to__ODS__
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
@@ -48,6 +52,7 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     core_profiles_densities(ods, update=True)
     core_profiles_zeff(ods, update=True, use_electrons_density=use_electrons_density)
     return ods
+
 
 @add_to__ODS__
 def core_profiles_pressures(ods, update=True):
@@ -87,12 +92,12 @@ def core_profiles_pressures(ods, update=True):
         if not update:
             prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
 
-        __zeros__ = 0.*prof1d['grid']['rho_tor_norm']
+        __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
-        prof1d_p['pressure_thermal']       = copy.deepcopy(__zeros__)
-        prof1d_p['pressure_ion_total']     = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_thermal'] = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_ion_total'] = copy.deepcopy(__zeros__)
         prof1d_p['pressure_perpendicular'] = copy.deepcopy(__zeros__)
-        prof1d_p['pressure_parallel']      = copy.deepcopy(__zeros__)
+        prof1d_p['pressure_parallel'] = copy.deepcopy(__zeros__)
 
         # electrons
         prof1d_p['electrons']['pressure'] = copy.deepcopy(__zeros__)
@@ -105,16 +110,16 @@ def core_profiles_pressures(ods, update=True):
 
         if __p__ is not None:
             prof1d_p['electrons']['pressure_thermal'] = __p__
-            prof1d_p['electrons']['pressure']  += __p__
-            prof1d_p['pressure_thermal']       += __p__
+            prof1d_p['electrons']['pressure'] += __p__
+            prof1d_p['pressure_thermal'] += __p__
             prof1d_p['pressure_perpendicular'] += __p__ / 3.
-            prof1d_p['pressure_parallel']      += __p__ / 3.
+            prof1d_p['pressure_parallel'] += __p__ / 3.
 
         if 'pressure_fast_perpendicular' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_fast_perpendicular'])
             if not update:
                 prof1d_p['electrons']['pressure_fast_perpendicular'] = __p__
-            prof1d_p['electrons']['pressure']  += 2. * __p__
+            prof1d_p['electrons']['pressure'] += 2. * __p__
             prof1d_p['pressure_perpendicular'] += __p__
 
         if 'pressure_fast_parallel' in prof1d['electrons']:
@@ -122,9 +127,9 @@ def core_profiles_pressures(ods, update=True):
             if not update:
                 prof1d_p['electrons']['pressure_fast_parallel'] = __p__
             prof1d_p['electrons']['pressure'] += __p__
-            prof1d_p['pressure_parallel']     += __p__
+            prof1d_p['pressure_parallel'] += __p__
 
-        #ions
+        # ions
         for k in range(len(prof1d['ion'])):
 
             prof1d_p['ion'][k]['pressure'] = copy.deepcopy(__zeros__)
@@ -137,33 +142,34 @@ def core_profiles_pressures(ods, update=True):
 
             if __p__ is not None:
                 prof1d_p['ion'][k]['pressure_thermal'] = __p__
-                prof1d_p['ion'][k]['pressure']     += __p__
-                prof1d_p['pressure_thermal']       += __p__
+                prof1d_p['ion'][k]['pressure'] += __p__
+                prof1d_p['pressure_thermal'] += __p__
                 prof1d_p['pressure_perpendicular'] += __p__ / 3.
-                prof1d_p['pressure_parallel']      += __p__ / 3.
-                prof1d_p['pressure_ion_total']     += __p__
+                prof1d_p['pressure_parallel'] += __p__ / 3.
+                prof1d_p['pressure_ion_total'] += __p__
 
             if 'pressure_fast_perpendicular' in prof1d['ion'][k]:
                 __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_perpendicular'])
                 if not update:
                     prof1d_p['ion'][k]['pressure_fast_perpendicular'] = __p__
-                prof1d_p['ion'][k]['pressure']     += 2. * __p__
+                prof1d_p['ion'][k]['pressure'] += 2. * __p__
                 prof1d_p['pressure_perpendicular'] += __p__
 
             if 'pressure_fast_parallel' in prof1d['ion'][k]:
                 __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_parallel'])
                 if not update:
                     prof1d_p['ion'][k]['pressure_fast_parallel'] = __p__
-                prof1d_p['ion'][k]['pressure'] +=  __p__
-                prof1d_p['pressure_parallel']  += __p__
+                prof1d_p['ion'][k]['pressure'] += __p__
+                prof1d_p['pressure_parallel'] += __p__
 
-        #extra pressure information that is not within IMAS structure is set only if consistency_check is not True
+        # extra pressure information that is not within IMAS structure is set only if consistency_check is not True
         if ods_p.consistency_check is not True:
             prof1d_p['pressure'] = prof1d_p['pressure_perpendicular'] * 2 + prof1d_p['pressure_parallel']
             prof1d_p['pressure_electron_total'] = prof1d_p['pressure_thermal'] - prof1d_p['pressure_ion_total']
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
 
     return ods_p
+
 
 @add_to__ODS__
 def core_profiles_densities(ods, update=True):
@@ -223,6 +229,7 @@ def core_profiles_densities(ods, update=True):
 
     return ods_n
 
+
 @add_to__ODS__
 def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     '''
@@ -239,25 +246,26 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     :return: updated ods
     '''
 
-    ods_z = core_profiles_densities(ods,update=update)
+    ods_z = core_profiles_densities(ods, update=update)
 
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
         prof1d_z = ods_z['core_profiles']['profiles_1d'][time_index]
 
-        Z2n = 0.*prof1d_z['grid']['rho_tor_norm']
-        Zn  = 0.*prof1d_z['grid']['rho_tor_norm']
+        Z2n = 0. * prof1d_z['grid']['rho_tor_norm']
+        Zn = 0. * prof1d_z['grid']['rho_tor_norm']
 
         for k in range(len(prof1d['ion'])):
-            Z = prof1d['ion'][k]['element'][0]['z_n'] # from old ODS
-            n = prof1d_z['ion'][k]['density']         # from new ODS
-            Z2n += n*Z**2
-            Zn  += n*Z
+            Z = prof1d['ion'][k]['element'][0]['z_n']  # from old ODS
+            n = prof1d_z['ion'][k]['density']  # from new ODS
+            Z2n += n * Z ** 2
+            Zn += n * Z
             if use_electrons_density:
-                prof1d_z['zeff'] = Z2n/prof1d_z['electrons']['density']
+                prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
             else:
-                prof1d_z['zeff'] = Z2n/Zn
+                prof1d_z['zeff'] = Z2n / Zn
     return ods_z
+
 
 @add_to__ODS__
 def current_from_eq(ods, time_index):
@@ -299,6 +307,7 @@ def current_from_eq(ods, time_index):
                                j_total=JparB_tot / B0)
 
     return
+
 
 @add_to__ODS__
 def core_profiles_currents(ods, time_index, rho_tor_norm,
@@ -504,6 +513,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
     return
 
+
 @add_to__ODS__
 def wall_add(ods, machine=None):
     '''
@@ -521,31 +531,32 @@ def wall_add(ods, machine=None):
 
     walls = {}
     walls['iter'] = {'RLIM': [6.267, 7.283, 7.899, 8.306, 8.395, 8.27, 7.904, 7.4,
-                           6.587, 5.753, 4.904, 4.311, 4.126, 4.076, 4.046, 4.046,
-                           4.067, 4.097, 4.178, 3.9579, 4.0034, 4.1742, 4.3257, 4.4408,
-                           4.5066, 4.5157, 4.467, 4.4064, 4.4062, 4.3773, 4.3115, 4.2457,
-                           4.1799, 4.4918, 4.5687, 4.6456, 4.8215, 4.9982, 5.1496, 5.2529,
-                           5.2628, 5.2727, 5.565, 5.565, 5.565, 5.565, 5.572, 5.572,
-                           5.572, 5.572, 5.6008, 5.6842, 5.815, 5.9821, 6.171, 6.3655,
-                           6.267],
+                              6.587, 5.753, 4.904, 4.311, 4.126, 4.076, 4.046, 4.046,
+                              4.067, 4.097, 4.178, 3.9579, 4.0034, 4.1742, 4.3257, 4.4408,
+                              4.5066, 4.5157, 4.467, 4.4064, 4.4062, 4.3773, 4.3115, 4.2457,
+                              4.1799, 4.4918, 4.5687, 4.6456, 4.8215, 4.9982, 5.1496, 5.2529,
+                              5.2628, 5.2727, 5.565, 5.565, 5.565, 5.565, 5.572, 5.572,
+                              5.572, 5.572, 5.6008, 5.6842, 5.815, 5.9821, 6.171, 6.3655,
+                              6.267],
                      'ZLIM': [-3.036, -2.247, -1.332, -0.411, 0.643, 1.691, 2.474,
-                           3.189, 3.904, 4.542, 4.722, 4.334, 3.592, 2.576,
-                           1.559, 0.543, -0.474, -1.49, -2.496, -2.5284, -2.5284,
-                           -2.5574, -2.6414, -2.7708, -2.931, -3.1039, -3.2701, -3.3943,
-                           -3.3948, -3.4699, -3.6048, -3.7397, -3.8747, -3.8992, -3.8176,
-                           -3.736, -3.699, -3.7314, -3.8282, -3.9752, -4.1144, -4.2536,
-                           -4.5459, -4.3926, -4.2394, -4.0862, -3.9861, -3.9856, -3.886,
-                           -3.885, -3.6924, -3.5165, -3.3723, -3.2722, -3.225, -3.2346,
-                           -3.036]}
+                              3.189, 3.904, 4.542, 4.722, 4.334, 3.592, 2.576,
+                              1.559, 0.543, -0.474, -1.49, -2.496, -2.5284, -2.5284,
+                              -2.5574, -2.6414, -2.7708, -2.931, -3.1039, -3.2701, -3.3943,
+                              -3.3948, -3.4699, -3.6048, -3.7397, -3.8747, -3.8992, -3.8176,
+                              -3.736, -3.699, -3.7314, -3.8282, -3.9752, -4.1144, -4.2536,
+                              -4.5459, -4.3926, -4.2394, -4.0862, -3.9861, -3.9856, -3.886,
+                              -3.885, -3.6924, -3.5165, -3.3723, -3.2722, -3.225, -3.2346,
+                              -3.036]}
 
     if machine.lower() not in walls:
-        raise LookupError('OMAS wall information only available for: %s'%walls.keys())
+        raise LookupError('OMAS wall information only available for: %s' % walls.keys())
 
     ods['wall.description_2d.+.limiter.type.name'] = 'first_wall'
     ods['wall.description_2d.-1.limiter.type.index'] = 0
     ods['wall.description_2d.-1.limiter.type.description'] = 'first wall'
     ods['wall.description_2d.-1.limiter.unit.0.outline.r'] = walls[machine.lower()]['RLIM']
     ods['wall.description_2d.-1.limiter.unit.0.outline.z'] = walls[machine.lower()]['ZLIM']
+
 
 @add_to__ODS__
 def equilibrium_consistent(ods):
@@ -571,6 +582,7 @@ def equilibrium_consistent(ods):
         eq['profiles_2d.0.z'] = Z
         eq['profiles_2d.0.b_field_tor'] = fpol / R
 
+
 @add_to__ODS__
 def equilibrium_transpose_RZ(ods, flip_dims=False):
     '''
@@ -595,6 +607,7 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
                     eq2D['grid.dim1'] = ed2D['grid.dim2']
                     eq2D['grid.dim1'] = tmp
     return ods
+
 
 @add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
@@ -644,6 +657,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     return Jout
 
+
 @add_to__ALL__
 def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True, multiple_matches_raise_error=True):
     '''
@@ -685,6 +699,7 @@ def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True,
     if no_matches_raise_error and len(match) == 0:
         raise IndexError('No ion match query: label=%s  Z=%s  A=%s' % (label, Z, A))
     return match
+
 
 @add_to__ALL__
 def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_raise_error=False, multiple_matches_raise_error=True):
@@ -742,6 +757,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
 
     return match
 
+
 @add_to__ALL__
 def define_cocos(cocos_ind):
     """
@@ -754,97 +770,98 @@ def define_cocos(cocos_ind):
     :return: dictionary with COCOS coefficients
     """
 
-    cocos=dict.fromkeys(['sigma_Bp', 'sigma_RpZ', 'sigma_rhotp', 'sign_q_pos', 'sign_pprime_pos', 'exp_Bp'])
+    cocos = dict.fromkeys(['sigma_Bp', 'sigma_RpZ', 'sigma_rhotp', 'sign_q_pos', 'sign_pprime_pos', 'exp_Bp'])
 
     # all multipliers shouldn't change input values if cocos_ind is None
     if cocos_ind is None:
-        cocos['exp_Bp']          = 0
-        cocos['sigma_Bp']        = +1
-        cocos['sigma_RpZ']       = +1
-        cocos['sigma_rhotp']     = +1
-        cocos['sign_q_pos']      = 0
+        cocos['exp_Bp'] = 0
+        cocos['sigma_Bp'] = +1
+        cocos['sigma_RpZ'] = +1
+        cocos['sigma_rhotp'] = +1
+        cocos['sign_q_pos'] = 0
         cocos['sign_pprime_pos'] = 0
         return cocos
 
     # if COCOS>=10, this should be 1
     cocos['exp_Bp'] = 0
-    if cocos_ind>=10:
+    if cocos_ind >= 10:
         cocos['exp_Bp'] = +1
 
-    if cocos_ind in [1,11]:
+    if cocos_ind in [1, 11]:
         # These cocos are for
         # (1)  psitbx(various options), Toray-GA
         # (11) ITER, Boozer
-        cocos['sigma_Bp']        = +1
-        cocos['sigma_RpZ']       = +1
-        cocos['sigma_rhotp']     = +1
-        cocos['sign_q_pos']      = +1
+        cocos['sigma_Bp'] = +1
+        cocos['sigma_RpZ'] = +1
+        cocos['sigma_rhotp'] = +1
+        cocos['sign_q_pos'] = +1
         cocos['sign_pprime_pos'] = -1
 
-    elif cocos_ind in [2,12,-12]:
+    elif cocos_ind in [2, 12, -12]:
         # These cocos are for
         # (2)  CHEASE, ONETWO, HintonHazeltine, LION, XTOR, MEUDAS, MARS, MARS-F
         # (12) GENE
         # (-12) ASTRA
-        cocos['sigma_Bp']        = +1
-        cocos['sigma_RpZ']       = -1
-        cocos['sigma_rhotp']     = +1
-        cocos['sign_q_pos']      = +1
+        cocos['sigma_Bp'] = +1
+        cocos['sigma_RpZ'] = -1
+        cocos['sigma_rhotp'] = +1
+        cocos['sign_q_pos'] = +1
         cocos['sign_pprime_pos'] = -1
 
-    elif cocos_ind in [3,13]:
+    elif cocos_ind in [3, 13]:
         # These cocos are for
         # (3) Freidberg*, CAXE and KINX*, GRAY, CQL3D^, CarMa, EFIT* with : ORB5, GBSwith : GT5D
         # (13) 	CLISTE, EQUAL, GEC, HELENA, EU ITM-TF up to end of 2011
-        cocos['sigma_Bp']        = -1
-        cocos['sigma_RpZ']       = +1
-        cocos['sigma_rhotp']     = -1
-        cocos['sign_q_pos']      = -1
+        cocos['sigma_Bp'] = -1
+        cocos['sigma_RpZ'] = +1
+        cocos['sigma_rhotp'] = -1
+        cocos['sign_q_pos'] = -1
         cocos['sign_pprime_pos'] = +1
 
-    elif cocos_ind in [4,14]:
-        #These cocos are for
-        cocos['sigma_Bp']        = -1
-        cocos['sigma_RpZ']       = -1
-        cocos['sigma_rhotp']     = -1
-        cocos['sign_q_pos']      = -1
+    elif cocos_ind in [4, 14]:
+        # These cocos are for
+        cocos['sigma_Bp'] = -1
+        cocos['sigma_RpZ'] = -1
+        cocos['sigma_rhotp'] = -1
+        cocos['sign_q_pos'] = -1
         cocos['sign_pprime_pos'] = +1
 
-    elif cocos_ind in [5,15]:
+    elif cocos_ind in [5, 15]:
         # These cocos are for
         # (5) TORBEAM, GENRAY^
-        cocos['sigma_Bp']        = +1
-        cocos['sigma_RpZ']       = +1
-        cocos['sigma_rhotp']     = -1
-        cocos['sign_q_pos']      = -1
+        cocos['sigma_Bp'] = +1
+        cocos['sigma_RpZ'] = +1
+        cocos['sigma_rhotp'] = -1
+        cocos['sign_q_pos'] = -1
         cocos['sign_pprime_pos'] = -1
 
-    elif cocos_ind in [6,16]:
-        #These cocos are for
-        cocos['sigma_Bp']        = +1
-        cocos['sigma_RpZ']       = -1
-        cocos['sigma_rhotp']     = -1
-        cocos['sign_q_pos']      = -1
+    elif cocos_ind in [6, 16]:
+        # These cocos are for
+        cocos['sigma_Bp'] = +1
+        cocos['sigma_RpZ'] = -1
+        cocos['sigma_rhotp'] = -1
+        cocos['sign_q_pos'] = -1
         cocos['sign_pprime_pos'] = -1
 
-    elif cocos_ind in [7,17]:
-        #These cocos are for
+    elif cocos_ind in [7, 17]:
+        # These cocos are for
         # (17) LIUQE*, psitbx(TCV standard output)
-        cocos['sigma_Bp']        = -1
-        cocos['sigma_RpZ']       = +1
-        cocos['sigma_rhotp']     = +1
-        cocos['sign_q_pos']      = +1
+        cocos['sigma_Bp'] = -1
+        cocos['sigma_RpZ'] = +1
+        cocos['sigma_rhotp'] = +1
+        cocos['sign_q_pos'] = +1
         cocos['sign_pprime_pos'] = +1
 
-    elif cocos_ind in [8,18]:
-        #These cocos are for
-        cocos['sigma_Bp']        = -1
-        cocos['sigma_RpZ']       = -1
-        cocos['sigma_rhotp']     = +1
-        cocos['sign_q_pos']      = +1
+    elif cocos_ind in [8, 18]:
+        # These cocos are for
+        cocos['sigma_Bp'] = -1
+        cocos['sigma_RpZ'] = -1
+        cocos['sigma_rhotp'] = +1
+        cocos['sign_q_pos'] = +1
         cocos['sign_pprime_pos'] = +1
 
     return cocos
+
 
 @add_to__ALL__
 def cocos_transform(cocosin_index, cocosout_index):
@@ -862,21 +879,21 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     # Don't transform if either cocos is undefined
     if (cocosin_index is None) or (cocosout_index is None):
-        printd("No COCOS tranformation for "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
-        sigma_Ip_eff    = 1
-        sigma_B0_eff    = 1
-        sigma_Bp_eff    = 1
-        exp_Bp_eff      = 0
+        printd("No COCOS tranformation for " + str(cocosin_index) + " to " + str(cocosout_index), topic='cocos')
+        sigma_Ip_eff = 1
+        sigma_B0_eff = 1
+        sigma_Bp_eff = 1
+        exp_Bp_eff = 0
         sigma_rhotp_eff = 1
     else:
-        printd("COCOS tranformation from "+str(cocosin_index)+" to "+str(cocosout_index),topic='cocos')
+        printd("COCOS tranformation from " + str(cocosin_index) + " to " + str(cocosout_index), topic='cocos')
         cocosin = define_cocos(cocosin_index)
         cocosout = define_cocos(cocosout_index)
 
-        sigma_Ip_eff    = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
-        sigma_B0_eff    = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
-        sigma_Bp_eff    = cocosin['sigma_Bp'] * cocosout['sigma_Bp']
-        exp_Bp_eff      = cocosout['exp_Bp'] - cocosin['exp_Bp']
+        sigma_Ip_eff = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
+        sigma_B0_eff = cocosin['sigma_RpZ'] * cocosout['sigma_RpZ']
+        sigma_Bp_eff = cocosin['sigma_Bp'] * cocosout['sigma_Bp']
+        exp_Bp_eff = cocosout['exp_Bp'] - cocosin['exp_Bp']
         sigma_rhotp_eff = cocosin['sigma_rhotp'] * cocosout['sigma_rhotp']
 
     # Transform
@@ -899,6 +916,7 @@ def cocos_transform(cocosin_index, cocosout_index):
     printd(transforms, topic='cocos')
 
     return transforms
+
 
 @add_to__ALL__
 @contextmanager
@@ -984,7 +1002,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
     # units of entries currently in cocos_singals
     cocos_units = []
     for item in cocos_signals:
-        if cocos_signals[item]=='?':
+        if cocos_signals[item] == '?':
             continue
         info = omas_info_node(item)
         if len(info):  # info may have no length if nodes are deleted between IMAS versions
@@ -1011,8 +1029,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
     ods = ODS()
     out = {}
     text = []
-    csig = [
-"""
+    csig = ["""
 '''List of automatic COCOS transformations
 
 -------
@@ -1048,7 +1065,6 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
 #
                 
 cocos_signals = {}
-
 """]
 
     # loop over structures
@@ -1161,8 +1177,10 @@ cocos_signals = {}
 
     return out
 
+
 # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
 from .omas_cocos import cocos_signals as _cocos_signals
+
 
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
@@ -1172,6 +1190,7 @@ class CocosSignals(dict):
         if value == '?':
             warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py' % key)
         return value
+
 
 # cocos_signals is the actual dictionary
 cocos_signals = CocosSignals()

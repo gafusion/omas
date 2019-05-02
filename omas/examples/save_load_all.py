@@ -78,6 +78,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
         print(results.astype(int))
         print('=' * 20)
 
+
 through_omas_suite(ods=None, test_type=None, do_raise=False)
 
 ###################################

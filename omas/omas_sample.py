@@ -13,6 +13,7 @@ from .omas_plot import geo_type_lookup
 __all__ = []
 __ods__ = []
 
+
 def add_to_ODS(f):
     '''
     anything wrapped here will be available as a ODS method with name 'sample_'+f.__name__
@@ -223,11 +224,11 @@ def magnetics(ods):
     abp = 0.8
     afl = 1.0
 
-    angle_bp = numpy.linspace(0, 2*numpy.pi, nbp+1)[:-1]
+    angle_bp = numpy.linspace(0, 2 * numpy.pi, nbp + 1)[:-1]
     rp = r0 + abp * numpy.cos(angle_bp)
     zp = z0 + abp * numpy.sin(angle_bp)
 
-    angle_fl = numpy.linspace(0, 2*numpy.pi, nfl + 1)[:-1]
+    angle_fl = numpy.linspace(0, 2 * numpy.pi, nfl + 1)[:-1]
     rf = r0 + afl * numpy.cos(angle_fl)
     zf = z0 + afl * numpy.sin(angle_fl)
 
@@ -349,7 +350,7 @@ def bolometer(ods, nc=10):
     :return: ODS instance with FAKE BOLOMETER HARDWARE INFORMATION added.
     """
 
-    angles = numpy.pi + numpy.linspace(-numpy.pi/4.0, numpy.pi/4.0, nc)
+    angles = numpy.pi + numpy.linspace(-numpy.pi / 4.0, numpy.pi / 4.0, nc)
 
     # FAKE origin for the FAKE bolometer fan
     r0 = 2.5
@@ -363,7 +364,7 @@ def bolometer(ods, nc=10):
         ch['second_point.z'] = ch['first_point.z'] + numpy.sin(angles[i])
         ods['bolometer.channel'][i]['identifier'] = 'fake bolo {}'.format(i)
 
-    ods['bolometer.channel'][nc-1]['identifier'] = 'bolo fan 2 fake'  # This tests separate colors per fan in overlay
+    ods['bolometer.channel'][nc - 1]['identifier'] = 'bolo fan 2 fake'  # This tests separate colors per fan in overlay
 
     ods['bolometer.time'] = [0]
 
@@ -403,4 +404,3 @@ def gas_injection(ods):
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
 
     return ods
-

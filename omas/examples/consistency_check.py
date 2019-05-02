@@ -25,9 +25,9 @@ print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = False
 # add entry with wrong dimensions
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
 # add entry that is obsolescent
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
 # add entry that does not exist in IMAS
 ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
 
@@ -37,9 +37,9 @@ print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = 'warn'
 # add entry with wrong dimensions
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
 # add entry that is obsolescent
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
 # add entry that does not exist in IMAS
 ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
 
@@ -53,11 +53,11 @@ print('*' * 20)
 print("consistency_check = True")
 print('*' * 20)
 ods = ods_sample()
-ods.consistency_check = True # this is the default
+ods.consistency_check = True  # this is the default
 # add entry with wrong dimensions
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=1
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
 # add entry that is obsolescent
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor']=[[1,1],[1,1]]
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
 # add entry that does not exist in IMAS
 ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
 

@@ -33,9 +33,9 @@ print(ods.homogeneous_time('equilibrium'))
 # time arrays can be set using `set_time_array` function
 # this simplifies the logic in the code since one does not
 # have to check if the array was already there or not
-ods.set_time_array('equilibrium.time',0,101)
-ods.set_time_array('equilibrium.time',1,201)
-ods.set_time_array('equilibrium.time',2,302)
+ods.set_time_array('equilibrium.time', 0, 101)
+ods.set_time_array('equilibrium.time', 1, 201)
+ods.set_time_array('equilibrium.time', 2, 302)
 
 # the make the timeslices consistent
 ods['equilibrium.time_slice'][0]['time'] = 101
@@ -47,21 +47,21 @@ extra_info = {}
 print(ods.time('equilibrium', extra_info=extra_info))
 # >>  [101 201 301]
 print(extra_info)
-# >>  {'location': '.time', 'homogeneous_time': False}
+# >>  {'location': '.time', 'homogeneous_time': True}
 
 # get time value from item in array of structures
 extra_info = {}
 print(ods['equilibrium.time_slice'][0].time(extra_info=extra_info))
 # >>  101
 print(extra_info)
-# >>  {'location': 'equilibrium.time_slice.0.time', 'homogeneous_time': None}
+# >>  {'location': 'equilibrium.time_slice.0.time', 'homogeneous_time': True}
 
 # get time array from array of structures
 extra_info = {}
 print(ods['equilibrium.time_slice'].time(extra_info=extra_info))
 # >>  [101 201 302]
 print(extra_info)
-# >>  {'location': 'equilibrium.time_slice.:.time', 'homogeneous_time': False}
+# >>  {'location': 'equilibrium.time_slice.:.time', 'homogeneous_time': True}
 
 # get time from parent
 extra_info = {}

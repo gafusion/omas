@@ -92,13 +92,13 @@ class TestOmasPlot(unittest.TestCase):
         nc_empty = get_channel_count(empty_ods, 'thomson_scattering')
         assert nc_empty == 0
 
-        nc_ts_check_pass = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        nc_ts_check_pass = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
         assert nc_ts_check_pass == nc
 
-        nc_ts_check_fail = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
+        nc_ts_check_fail = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
         assert nc_ts_check_fail == 0
 
-        nc_ts_check_fail2 = get_channel_count(ts_ods,'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
+        nc_ts_check_fail2 = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
         assert nc_ts_check_fail2 == 0
 
     def test_uband(self):

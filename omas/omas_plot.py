@@ -11,6 +11,7 @@ from .omas_physics import cocos_transform
 __all__ = []
 __ods__ = []
 
+
 def add_to__ODS__(f):
     '''
     anything wrapped here will be available as a ODS method with name 'plot_'+f.__name__
@@ -186,7 +187,7 @@ def gas_filter(label, which_gas):
     return include
 
 
-def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=None, pad=1.0, **kw):
+def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi / 4.0, ax=None, color=None, pad=1.0, **kw):
     """
     Draws an arrow pointing in from the gas valve
     :param ods: ODS instance
@@ -219,7 +220,7 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
         dz = ods['equilibrium']['time_slice'][0]['global_quantities']['magnetic_axis']['z'] - z
         theta = numpy.arctan2(dz, -dr)
         if snap_to > 0:
-            theta = snap_to * round(theta/snap_to)
+            theta = snap_to * round(theta / snap_to)
         return theta
 
     if direction is None:
@@ -230,22 +231,22 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi/4.0, ax=None, color=No
     if ax is None:
         ax = pyplot.gca()
 
-    shaft_len = 3.5 * (1+pad)/2.
+    shaft_len = 3.5 * (1 + pad) / 2.
 
-    da = numpy.pi/10  # Angular half width of the arrow head
+    da = numpy.pi / 10  # Angular half width of the arrow head
     x0 = numpy.cos(-direction) * pad
     y0 = numpy.sin(-direction) * pad
     head_mark = [
         (x0, y0),
-        (x0+numpy.cos(-direction+da), y0+numpy.sin(-direction+da)),
-        (x0+numpy.cos(-direction), y0+numpy.sin(-direction)),
-        (x0+shaft_len*numpy.cos(-direction), y0+shaft_len*numpy.sin(-direction)),
-        (x0+numpy.cos(-direction), y0+numpy.sin(-direction)),
-        (x0+numpy.cos(-direction-da), y0+numpy.sin(-direction-da)),
+        (x0 + numpy.cos(-direction + da), y0 + numpy.sin(-direction + da)),
+        (x0 + numpy.cos(-direction), y0 + numpy.sin(-direction)),
+        (x0 + shaft_len * numpy.cos(-direction), y0 + shaft_len * numpy.sin(-direction)),
+        (x0 + numpy.cos(-direction), y0 + numpy.sin(-direction)),
+        (x0 + numpy.cos(-direction - da), y0 + numpy.sin(-direction - da)),
     ]
 
     kw.pop('marker', None)  # Ignore this
-    return ax.plot(r, z, marker=head_mark, color=color, markersize=100*(pad+shaft_len)/5, **kw)
+    return ax.plot(r, z, marker=head_mark, color=color, markersize=100 * (pad + shaft_len) / 5, **kw)
 
 
 def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_imas_version'], reverse=False):
@@ -366,7 +367,7 @@ def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw
         R = eq['profiles_2d'][0]['r']
         Z = eq['profiles_2d'][0]['z']
     else:
-        Z,R = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
+        Z, R = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
     kw.setdefault('colors', kw1['color'])
     kw['linewidths'] = kw.pop('linewidth')
     CS = ax.contour(R, Z, value2D, levels, **kw)
@@ -375,8 +376,6 @@ def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw
     if wall is not None:
         for collection in CS.collections:
             collection.set_clip_path(wall_path)
-
-
 
     # wall
     if wall is not None:
@@ -753,7 +752,7 @@ def gas_injection_overlay(
 
             if angle_not_in_pipe_name:
                 try:
-                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi']*180/numpy.pi)))
+                    label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi'] * 180 / numpy.pi)))
                 except (TypeError, ValueError):
                     pass
     try:
@@ -773,7 +772,7 @@ def gas_injection_overlay(
     colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
-        label = '{spacer:}\n{spacer:}'.format(spacer=' '*label_spacer).join([''] + locations[loc] + [''])
+        label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + locations[loc] + [''])
         if draw_arrow:
             kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
             gas_mark = gas_arrow(ods, r, z, ax=ax, color=colors[i], **kw)
@@ -782,7 +781,7 @@ def gas_injection_overlay(
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
             va = ['top', 'bottom'][int(z > 0)]
-            label = '\n'*label_spacer + label if va == 'top' else label + '\n'*label_spacer
+            label = '\n' * label_spacer + label if va == 'top' else label + '\n' * label_spacer
             ax.text(r, z, label, color=gas_mark[0].get_color(),
                     va=va, ha=['left', 'right'][int(r < rsplit)], fontsize=notesize)
     return
@@ -933,7 +932,7 @@ def magnetics_overlay(
     kw.pop('marker', None)
     kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 0)
-    mask = kw.pop('mask', numpy.ones(nbp+nfl, bool))
+    mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
 
     def show_mag(n, topname, posroot, label, color_, marker, mask_):
@@ -1190,7 +1189,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     ncm = len(r1)
 
     if colors is None:
-        colors = [kw.pop('color', None)]*nc
+        colors = [kw.pop('color', None)] * nc
     else:
         colors *= nc  # Just make sure that this will always be long enough.
     ci = 0
@@ -1200,7 +1199,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
     for i in range(ncm):
-        if (i > 0) and (bolo_id[i][0] != bolo_id[i-1][0]) and reset_fan_color:
+        if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
             color = colors[ci]  # Allow color to reset when changing fans
             new_label = True
@@ -1258,11 +1257,13 @@ def summary(ods, fig=None, quantity=None):
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
     return fig
 
+
 latexit = {}
 latexit['rho_tor_norm'] = '$\\rho$'
 latexit['zeff'] = '$Z_{\\rm eff}$'
 latexit['m^-3'] = '$m^{-3}$'
 latexit['psi'] = '$\\psi$'
+
 
 @add_to__ODS__
 def quantity(ods, key,
@@ -1353,6 +1354,7 @@ def quantity(ods, key,
     ax.set_ylabel(ylabel)
     return ax
 
+
 # this test is here to prevent
 if 'matplotlib' in locals() or 'pyplot' in locals() or 'plt' in locals():
-    raise Exception('Do not import matplotlib at the top level of %s'%os.path.split(__file__)[1])
+    raise Exception('Do not import matplotlib at the top level of %s' % os.path.split(__file__)[1])
