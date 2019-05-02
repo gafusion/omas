@@ -1250,13 +1250,16 @@ class ODS(MutableMapping):
         if ds in add_datastructures:
             return True
 
-        time = self.time()
-        if time is not None and len(time):
+        extra_info = {}
+        time = self.time(extra_info=extra_info)
+        if extra_info['homogeneous_time'] is False:
+            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        elif time is not None and len(time):
             self['time'] = time
-            self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
         elif attempt_fix and ds in ['dataset_description', 'wall']:
             self['time'] = [0.0]
-            self['ids_properties']['homogeneous_time'] = self.homogeneous_time()
+            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
             return None
         elif raise_errors:
             raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
