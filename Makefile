@@ -16,35 +16,37 @@ all:
 
 tests: tests2 tests3
 
+TEST_FLAGS=-s omas/tests -v -f
+
 tests2:
-	python2 -m unittest discover --pattern="*.py" -s omas/tests -v
+	python2 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
 tests3:
-	python3 -m unittest discover --pattern="*.py" -s omas/tests -v
+	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
 tests_plot: tests2_plot tests3_plot
 
 tests2_plot:
-	python2 -m unittest discover --pattern="*_plot.py" -s omas/tests -v
+	python2 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
 tests3_plot:
-	python3 -m unittest discover --pattern="*_plot.py" -s omas/tests -v
+	python3 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
 tests_physics: tests2_physics tests3_physics
 
 tests2_physics:
-	python2 -m unittest discover --pattern="*_physics.py" -s omas/tests -v
+	python2 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
 tests3_physics:
-	python3 -m unittest discover --pattern="*_physics.py" -s omas/tests -v
+	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
 tests_utils: tests2_utils tests3_utils
 
 tests2_utils:
-	python2 -m unittest discover --pattern="*_utils.py" -s omas/tests -v
+	python2 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
 tests3_utils:
-	python3 -m unittest discover --pattern="*_utils.py" -s omas/tests -v
+	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
 requirements:
 	rm -f requirements_python2.txt
