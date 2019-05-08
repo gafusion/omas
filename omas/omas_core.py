@@ -48,6 +48,9 @@ class ODS(MutableMapping):
         :param consistency_check: whether to enforce consistency with IMAS schema
 
         :param dynamic_path_creation: whether to dynamically create the path when setting an item
+                                      * False: raise an error when trying to access a structure element that does not exists
+                                      * True (default): arrays of structures can be incrementally extended by accessing at the next element in the array
+                                      * 'dynamic_array_structures': arrays of structures can be dynamically extended
 
         :param location: string with location of this object relative to IMAS schema in ODS path format
 

@@ -99,6 +99,7 @@ def load_omas_ds(filename, consistency_check=True):
 
     # map xarray dataset to ODS
     ods = ODS(consistency_check=False)
+    ods.dynamic_path_creation = 'dynamic_array_structures'
     for uitem in DS.data_vars:
         depth = uitem.count(':')
         value = DS[uitem].values
@@ -113,6 +114,7 @@ def load_omas_ds(filename, consistency_check=True):
                 tmp = tmp[k]
             ods[item] = tmp
     ods.consistency_check = consistency_check
+    ods.dynamic_path_creation = True
     return ods
 
 
