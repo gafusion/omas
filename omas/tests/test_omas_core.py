@@ -163,8 +163,8 @@ class TestOmasCore(unittest.TestCase):
 
         ods.sample_pf_active()
         try:
-            DS = ods.dataset(homogeneous='time')
-            raise AssertionError('sample pf_active data should not be able to collect in time because not time homogeneous')
+            DS = ods.dataset(homogeneous='full')
+            raise AssertionError('sample pf_active data should not be able to collect across channels because their time arrays are not homogeneous')
         except ValueError:
             pass
 

@@ -1184,7 +1184,7 @@ class ODS(MutableMapping):
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
                             infoc = c
-                        coordinates.append('_'.join([base, infoc.split('.')[-1], 'index']))
+                        coordinates.append('_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index']))
             return coordinates
 
         # Generate paths with ':' for the arrays of structures
@@ -1202,11 +1202,11 @@ class ODS(MutableMapping):
         elif homogeneous == 'full':
             fupaths = numpy.unique(list(map(l2u, fpaths)))
         else:
-            raise ValueError('OMAS dataset homogeneous attribute can only be False')
+            raise ValueError("OMAS dataset homogeneous attribute can only be [False, None, 'time', 'full']")
         upaths = fupaths
         if self.location:
             n = len(self.location)
-            upaths = list(map(lambda key: key[n:], fupaths))
+            upaths = list(map(lambda key: key[n + 1:], fupaths))
 
         # Figure out coordinate indexes
         # NOTE: We use coordinates indexes instead of proper coordinates
