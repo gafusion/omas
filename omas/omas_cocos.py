@@ -103,6 +103,7 @@ cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_bootstrap']='?'    
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_non_inductive']='?'                                                   #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_ohmic']='?'                                                           #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.j_total']='?'                                                           #[ADD?]# 2.000000 # j  [A/m^2]
+cocos_signals['core_instant_changes.change.:.profiles_1d.:.phi_potential']='?'                                                     #[ADD?]# 2.000000 # phi  [V]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.q']='?'                                                                 #[ADD?]# 2.000000 # q  [-]
 cocos_signals['core_instant_changes.vacuum_toroidal_field.b0']='TOR'                                                                      # 2.000000 # b0  [T]
 cocos_signals['core_instant_changes.change.:.profiles_1d.:.ion.:.state.:.velocity.diamagnetic']='?'                                #[ADD?]# 1.900000 # velocity  [m.s^-1]
@@ -150,6 +151,7 @@ cocos_signals['core_profiles.profiles_1d.:.j_bootstrap']='TOR'                  
 cocos_signals['core_profiles.profiles_1d.:.j_non_inductive']='TOR'                                                        # 2.000000 # j  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_ohmic']='TOR'                                                                # 2.000000 # j  [A/m^2]
 cocos_signals['core_profiles.profiles_1d.:.j_total']='TOR'                                                                # 2.000000 # j  [A/m^2]
+cocos_signals['core_profiles.profiles_1d.:.phi_potential']='?'                                                     #[ADD?]# 2.000000 # phi  [V]
 cocos_signals['core_profiles.profiles_1d.:.q']='Q'                                                                        # 2.000000 # q  [-]
 cocos_signals['core_profiles.vacuum_toroidal_field.b0']='TOR'                                                             # 2.000000 # b0  [T]
 cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.diamagnetic']='TOR'                                     # 1.875000 # velocity  [m.s^-1]
@@ -372,6 +374,7 @@ cocos_signals['edge_profiles.profiles_1d.:.j_bootstrap']='?'                    
 cocos_signals['edge_profiles.profiles_1d.:.j_non_inductive']='?'                                                     #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_ohmic']='?'                                                             #[ADD?]# 2.000000 # j  [A/m^2]
 cocos_signals['edge_profiles.profiles_1d.:.j_total']='?'                                                             #[ADD?]# 2.000000 # j  [A/m^2]
+cocos_signals['edge_profiles.profiles_1d.:.phi_potential']='?'                                                       #[ADD?]# 2.000000 # phi  [V]
 cocos_signals['edge_profiles.profiles_1d.:.q']='?'                                                                   #[ADD?]# 2.000000 # q  [-]
 cocos_signals['edge_profiles.vacuum_toroidal_field.b0']='TOR'                                                               # 2.000000 # b0  [T]
 cocos_signals['edge_profiles.profiles_1d.:.ion.:.state.:.velocity.diamagnetic']='?'                                  #[ADD?]# 1.875000 # velocity  [m.s^-1]
@@ -957,6 +960,8 @@ cocos_signals['transport_solver_numerics.boundary_conditions_ggd.:.current.:.val
 
 # WALL
 cocos_signals['wall.description_2d.:.vessel.unit.:.element.:.j_tor.data']='?'                                       #[ADD?]# 2.777778 # j  _tor  [A]
+cocos_signals['wall.description_2d.:.limiter.unit.:.phi_extensions']='?'                                            #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['wall.description_2d.:.mobile.unit.:.phi_extensions']='?'                                             #[ADD?]# 2.000000 # phi  [rad]
 
 # WAVES
 cocos_signals['waves.coherent_wave.:.profiles_1d.:.e_field_n_tor.:.parallel.amplitude']='?'                              #[ADD?]# 3.125000 # e_field  _tor  parallel  [V.m^-1]

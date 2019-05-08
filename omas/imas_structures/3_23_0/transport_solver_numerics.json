@@ -1976,7 +1976,7 @@
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.identifier": {
   "data_type": "structure",
   "doc_identifier": "utilities/ggd_identifier.xml",
-  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylinder\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) stellerator_island : Stellarator island geometry",
+  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylinder\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular domain",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/identifier",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
