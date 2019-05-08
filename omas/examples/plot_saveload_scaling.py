@@ -122,8 +122,7 @@ pyplot.legend()
 # data access scaling
 pyplot.figure()
 for item in ['ods_slice_access', 'odx_slice_access', 'ods_bulk_access', 'odx_bulk_access']:
-    pyplot.plot(samples, numpy.array(times[item]) * 1E6, label='OMAS ' + item.replace('_', ' '), lw=1.5, ls=['-', '--']['slice' in item])
-pyplot.gca().set_xscale('log')
+    pyplot.loglog(samples, numpy.array(times[item]) * 1E6, label='OMAS ' + item.replace('_', ' '), lw=1.5, ls=['-', '--']['slice' in item])
 pyplot.xlabel('# of Equilibrium Time Slices')
 pyplot.ylabel('Time Per Read [$\mu$s]')
 pyplot.legend()
