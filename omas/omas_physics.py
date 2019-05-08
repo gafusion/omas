@@ -1173,7 +1173,7 @@ cocos_signals = {}
         with open(filename, 'r') as f:
             tmp = str(f.read())
         tmp1 = str('\n'.join(csig))
-        assert tmp == tmp1
+        assert tmp == tmp1, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.'
 
     return out
 
