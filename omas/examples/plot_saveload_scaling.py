@@ -18,9 +18,11 @@ from matplotlib import pyplot
 ods = ODS()
 ods.sample_equilibrium()
 
-max_t_wait = 5
-max_n = 3
-samples = numpy.unique(list(map(int, numpy.logspace(0, max_n, 10 + 1)))).tolist()
+max_t_wait = 2
+max_n = 2
+max_samples = 11
+stats_reps = 100
+samples = numpy.unique(list(map(int, numpy.logspace(0, max_n, max_samples)))).tolist()
 
 times = {}
 times['h5_save'] = []
@@ -52,16 +54,15 @@ for n in samples:
         times['h5_load'].append(time.time() - t0)
 
         t0 = time.time()
-        for kk in range(n):
-            for k in range(10):
+        for k in range(stats_reps):
+            for kk in range(n):
                 ods['equilibrium.time_slice.%d.profiles_1d.psi' % kk]
-        times['ods_slice_access'].append((time.time() - t0) / n / 10.)
+        times['ods_slice_access'].append((time.time() - t0) / n / float(stats_reps))
 
         t0 = time.time()
-        for kk in range(n):
-            for k in range(10):
-                ods['equilibrium.time_slice.:.profiles_1d.psi']
-        times['ods_bulk_access'].append((time.time() - t0) / n / 10.)
+        for k in range(stats_reps):
+            ods['equilibrium.time_slice.:.profiles_1d.psi']
+        times['ods_bulk_access'].append((time.time() - t0) / float(stats_reps))
 
     else:
         times['h5_save'].append(numpy.nan)
@@ -80,21 +81,20 @@ for n in samples:
         times['ds_load'].append(time.time() - t0)
 
         t0 = time.time()
-        for k in range(10):
+        for k in range(stats_reps):
             odx = load_omas_dx(tempfile.gettempdir() + os.sep + 'tmp.ds')
-        times['dx_load'].append((time.time() - t0) / 10.)
+        times['dx_load'].append((time.time() - t0) / float(stats_reps))
 
         t0 = time.time()
-        for kk in range(n):
-            for k in range(10):
+        for k in range(stats_reps):
+            for kk in range(n):
                 odx['equilibrium.time_slice.%d.profiles_1d.psi' % kk]
-        times['odx_slice_access'].append((time.time() - t0) / n / 10.)
+        times['odx_slice_access'].append((time.time() - t0) / n / float(stats_reps))
 
         t0 = time.time()
-        for kk in range(n):
-            for k in range(10):
-                odx['equilibrium.time_slice.:.profiles_1d.psi']
-        times['odx_bulk_access'].append((time.time() - t0) / n / 10.)
+        for k in range(stats_reps):
+            odx['equilibrium.time_slice.:.profiles_1d.psi']
+        times['odx_bulk_access'].append((time.time() - t0) / float(stats_reps))
 
     else:
         times['ds_save'].append(numpy.nan)
