@@ -26,6 +26,11 @@ __all__ = [
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
+# List of functions that can be added by third-party Python
+# packages for processing input data that will go in an ODS
+# This is necessary because ODSs should only contain [int (arrays), floats (arrays), strings]
+# It is used for example by OMFIT to process OMFITexpressions
+input_data_process_functions = []
 
 class ODS(MutableMapping):
     """
@@ -540,6 +545,8 @@ class ODS(MutableMapping):
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
+            for function in input_data_process_functions:
+                value = function(value)
             if isinstance(value, list):
                 value = numpy.array(value)
             if isinstance(value, xarray.DataArray):
@@ -558,7 +565,7 @@ class ODS(MutableMapping):
             if self.consistency_check:
                 # check type
                 if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
-                    raise ValueError('trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location))
+                    raise ValueError('Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location))
 
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
