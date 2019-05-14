@@ -138,7 +138,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                 me['@units'] = '-'
             if fname in ['equilibrium.time_slice[:].profiles_1d.geometric_axis.r', 'equilibrium.time_slice[:].profiles_1d.geometric_axis.z']:
                 me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
-            if me['@units'] in ['as_parent', 'as parent']:
+            if me['@units'] in ['as_parent', 'as parent', 'as_parent_level_2']:
                 me['@units'] = parent['units']
             parent['units'] = me['@units']
 
