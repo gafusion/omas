@@ -37,6 +37,12 @@ def ods_sample():
 
 
 @add_to_ODS
+def dataset_description(ods):
+    ods['dataset_description.data_entry.machine'] = 'test'
+    ods['dataset_description.data_entry.pulse'] = 100
+    return ods
+
+@add_to_ODS
 def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
     """
     Add sample equilibrium data

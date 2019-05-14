@@ -210,6 +210,10 @@ class TestOmasCore(unittest.TestCase):
         assert ods['pf_active'].homogeneous_time() is False, 'sample pf_active data should have non-homogeneous time'
         assert ods['pf_active.coil'][0]['current'].homogeneous_time() is True
 
+        ods.sample_dataset_description()
+        ods['dataset_description'].satisfy_imas_requirements()
+        assert ods['dataset_description.ids_properties.homogeneous_time'] is not None
+
     def test_address_structures(self):
         ods = ODS()
 

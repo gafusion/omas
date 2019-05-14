@@ -1274,6 +1274,7 @@ class ODS(MutableMapping):
             self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
         elif attempt_fix and ds in ['dataset_description', 'wall']:
             self['time'] = [0.0]
+            extra_info['homogeneous_time'] = True
             self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
             return None
         elif raise_errors:
