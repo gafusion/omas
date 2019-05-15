@@ -12,13 +12,14 @@ import itertools
 
 class ODX(MutableMapping):
     """
-    OMAX Data Structure class
+    OMAS data xarray class
     """
+
     def __init__(self, DS):
         self.omas_data = DS
         self.ucache = {}
         for k in self.omas_data.data_vars:
-            self.ucache.setdefault(o2u(k),[]).append(k)
+            self.ucache.setdefault(o2u(k), []).append(k)
 
     def __delitem__(self, key):
         pass
@@ -57,7 +58,7 @@ class ODX(MutableMapping):
 
 def save_omas_ds(ods, filename):
     """
-    Save an OMAS data set to xarray dataset
+    Save an ODS to xarray dataset
 
     :param ods: OMAS data set
 
@@ -69,13 +70,13 @@ def save_omas_ds(ods, filename):
 
 def load_omas_dx(filename, consistency_check=True):
     """
-    Load OMAS data set from xarray dataset
+    Load ODX from xarray dataset
 
     :param filename: filename or file descriptor to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
-    :return: OMAS data set
+    :return: OMAS data xarray
     """
     DS = xarray.open_dataset(filename)
     DS.load()
@@ -83,21 +84,39 @@ def load_omas_dx(filename, consistency_check=True):
     return ODX(DS)
 
 
-def load_omas_ds(filename, consistency_check=True):
+def save_omas_dx(odx, filename):
     """
-    Load OMAS data set from xarray dataset
+    Save an ODX to xarray dataset
 
-    :param filename: filename or file descriptor to load from
+    :param odx: OMAS data xarray
+
+    :param filename: filename or file descriptor to save to
+    """
+    return odx.omas_data.to_netcdf(filename)
+
+
+def ods_2_odx(ods):
+    '''
+    Map ODS to an ODX
+
+    :param ods: OMAS data set
+
+    :return: OMAS data xarray
+    '''
+    return ODX(ods.dataset())
+
+
+def odx_2_ods(odx, consistency_check=True):
+    '''
+    Map ODX to ODS
+
+    :param odx: OMAS data xarray
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :return: OMAS data set
-    """
-    DS = xarray.open_dataset(filename)
-    DS.load()
-    DS.close()
-
-    # map xarray dataset to ODS
+    '''
+    DS = odx.omas_data
     ods = ODS(consistency_check=False)
     ods.dynamic_path_creation = 'dynamic_array_structures'
     for uitem in DS.data_vars:
@@ -118,13 +137,31 @@ def load_omas_ds(filename, consistency_check=True):
     return ods
 
 
+def load_omas_ds(filename, consistency_check=True):
+    """
+    Load ODS from xarray dataset
+
+    :param filename: filename or file descriptor to load from
+
+    :param consistency_check: verify that data is consistent with IMAS schema
+
+    :return: OMAS data set
+    """
+    DS = xarray.open_dataset(filename)
+    DS.load()
+    DS.close()
+    odx = ODX(DS)
+    ods = odx_2_ods(odx, consistency_check=consistency_check)
+    return ods
+
+
 def through_omas_ds(ods):
     """
-    Test save and load OMAS HDF5
+    Test save and load OMAS data set via xarray file format
 
-    :param ods: ods
+    :param ods: OMAS data set
 
-    :return: ods
+    :return: OMAS data set
     """
     if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
         os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
@@ -132,3 +169,18 @@ def through_omas_ds(ods):
     save_omas_ds(ods, filename)
     ods1 = load_omas_ds(filename)
     return ods1
+
+def through_omas_dx(odx):
+    """
+    Test save and load OMAS data xarray via xarray file format
+
+    :param ods: OMAS data xarray
+
+    :return: OMAS data xarray
+    """
+    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
+        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
+    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.xr'
+    save_omas_dx(odx, filename)
+    odx1 = load_omas_dx(filename)
+    return odx1
