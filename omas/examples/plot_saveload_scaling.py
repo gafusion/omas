@@ -26,10 +26,10 @@ OMAS can seamlessly use either hierarchical or tensor representations as the bac
   :target: /.._images/odx_flow.png
 
 We note that the OMAS implementation is generic and can handle nested hierarchical list of structures (not only in time).
-Also OMAS can automatically determine which data can be collected across the hierarchical structure, and which cannot, and seamlessly handle both at the same time.
+Also OMAS can automatically determine which data can be collected across the hierarchical structure, which cannot, and seamlessly handle both at the same time.
 
-Benchmarks show that storing data in this form can be several orders of magnitude faster than done previously, even for datasets of modest size.
-The favorable scaling that is observed when representing IMAS data as a list of tensors makes a strong case for adopting this convention.
+Benchmarks show that storing data as a list of tensors can be several orders of magnitude faster than done previously, even for datasets of modest size.
+The favorable scaling that is observed when representing IMAS data in tensor form makes a strong case for adopting it.
 Implementing the same system as part of the IMAS backend storage of data and in memory representation would likely greatly benefit IMAS performance in many real-world applications.
 Furthermore, being able to directly access the IMAS data as tensors would simplify integration with a broad range of tools and numerical libraries that are commonly used across many fields of science.
 
