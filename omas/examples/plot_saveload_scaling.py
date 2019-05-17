@@ -9,7 +9,7 @@ The **hierarchical organization of the IMAS data** structure can in some situati
 This contrasts to the **multidimensional arrays (ie. tensors)** approach that is commonly used in computer science for high-performance numerical calculations.
 
 Based on this observation OMAS implements a transformation that casts the data that is contained in the IMAS hierarchical structure as a list of tensors, by taking advantage of the homogeneity of grid sizes that is commonly found across arrays of structures.
-Such transformation is illustrated here for an hypothetical IDS:
+Such transformation is illustrated here for an hypothetical IDS that has data organized as a series of time-slices:
 
 .. figure:: ../images/odx_concept.png
   :align: center
@@ -24,6 +24,9 @@ OMAS can seamlessly use either hierarchical or tensor representations as backed 
   :width: 50%
   :alt: OMAS can seamlessly use either hierarchical or tensor representations as backed for storing data both in memory and on file, and transform from one format to the other
   :target: /.._images/odx_flow.png
+
+We note that the OMAS implementation is generic and can handle nested hierarchical list of structures (not only in time).
+Also OMAS can automatically determine which data can be collected across the hierarchical structure, and which cannot, and seamlessly handle both at the same time.
 
 Benchmarks show that storing data in this form can be several orders of magnitude faster than done previously, even for datasets of modest size.
 The favorable scaling that is observed when representing IMAS data as a list of tensors makes a strong case for adopting this convention.
