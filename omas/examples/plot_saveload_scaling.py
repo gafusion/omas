@@ -17,7 +17,7 @@ Such transformation is illustrated here for an hypothetical IDS:
   :alt: OMAS implements a transformation that casts the data that is contained in the IMAS hierarchical structure as a list of tensors
   :target: /.._images/odx_concept.png
 
-OMAS can seamlessly use either hierarchical or tensor representations as backed for storing data both in memory and on file, and transform from one format to the other:
+OMAS can seamlessly use either hierarchical or tensor representations as the backend for storing data both in memory and on file, and transform from one format to the other:
 
 .. figure:: ../images/odx_flow.png
   :align: center
