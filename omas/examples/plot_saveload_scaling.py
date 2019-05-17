@@ -3,7 +3,7 @@
 """
 Storage performance scaling
 ===========================
-This example shows a scaling performance study for manipulating OMAS data in hieararchical or tensor format.
+This example shows a scaling performance study for manipulating OMAS data in hierarchical or tensor format.
 
 The **hierarchical organization of the IMAS data** structure can in some situations hinder IMAS's ability to efficiently manipulate large data sets.
 This contrasts to the **multidimensional arrays (ie. tensors)** approach that is commonly used in computer science for high-performance numerical calculations.
@@ -17,7 +17,7 @@ Such transformation is illustrated here for an hypothetical IDS that has data or
   :alt: OMAS implements a transformation that casts the data that is contained in the IMAS hierarchical structure as a list of tensors
   :target: /.._images/odx_concept.png
 
-OMAS can seamlessly use either hierarchical or tensor representations as backed for storing data both in memory and on file, and transform from one format to the other:
+OMAS can seamlessly use either hierarchical or tensor representations as the backend for storing data both in memory and on file, and transform from one format to the other:
 
 .. figure:: ../images/odx_flow.png
   :align: center
@@ -30,7 +30,7 @@ Also OMAS can automatically determine which data can be collected across the hie
 
 Benchmarks show that storing data in this form can be several orders of magnitude faster than done previously, even for datasets of modest size.
 The favorable scaling that is observed when representing IMAS data as a list of tensors makes a strong case for adopting this convention.
-Implementing the she same system as part of the IMAS backend storage of data and in memory representation would likely greatly benefit the IMAS performance in many real-world applications.
+Implementing the same system as part of the IMAS backend storage of data and in memory representation would likely greatly benefit IMAS performance in many real-world applications.
 Furthermore, being able to directly access the IMAS data as tensors would simplify integration with a broad range of tools and numerical libraries that are commonly used across many fields of science.
 
 """
