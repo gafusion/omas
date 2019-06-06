@@ -1,23 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Storage performance scaling
-===========================
+Scaling IMAS performance
+========================
 This example shows a scaling performance study for manipulating OMAS data in hierarchical or tensor format.
 
 The **hierarchical organization of the IMAS data** structure can in some situations hinder IMAS's ability to efficiently manipulate large data sets.
 This contrasts to the **multidimensional arrays (ie. tensors)** approach that is commonly used in computer science for high-performance numerical calculations.
 
 Based on this observation OMAS implements a transformation that casts the data that is contained in the IMAS hierarchical structure as a list of tensors, by taking advantage of the homogeneity of grid sizes that is commonly found across arrays of structures.
-Such transformation is illustrated here for an hypothetical IDS that has data organized as a series of time-slices:
+Such transformation and a summary of the scaling results are illustrated here for an hypothetical IDS that has data organized as a series of time-slices:
 
 .. figure:: ../images/odx_concept.png
   :align: center
-  :width: 33%
+  :width: 100%
   :alt: OMAS implements a transformation that casts the data that is contained in the IMAS hierarchical structure as a list of tensors
   :target: /.._images/odx_concept.png
 
-OMAS can seamlessly use either hierarchical or tensor representations as the backend for storing data both in memory and on file, and transform from one format to the other:
+The favorable scaling that is observed when representing IMAS data in tensor form makes a strong case for adopting it.
+Implementing the same system as part of the IMAS backend storage of data and in memory representation would likely greatly benefit IMAS performance in many real-world applications.
+
+The new tensors representation would also greatly simplify the integration of IMAS with a broad range of tools and numerical libraries that are commonly used across many fields of science.
+
+Finally, the addition of an extra dimension to the tensors could be used to efficiently store multiple realizations of signals from a distribution function of uncertain quantities.
+Such feature would enable support of uncertainty quantification workflows and Bayesian integrated data analyses within IMAS.
+
+Scaling study in detail
+-----------------------
+
+OMAS can seamlessly use either hierarchical or tensor representations as the backend for storing data both in memory and on file, and transform from one format to the other.
+The mapping function is generic and can handle nested hierarchical list of structures (not only in time).
+Also OMAS can automatically determine which data can be collected across the hierarchical structure, which cannot, and seamlessly handle both at the same time.
+
+The following diagram summarizes the tests performed in this scaling study.
+Benchmarks show that most operations stemming from the hierarchical representation of the data scale linearly with with the number of time-slices in the sample IDS (**red markers** in the diagram), whereas operations that make only use of the tensor representation show little to no dependency on the dataset size (**green markers** in the diagram).
+As a result the tensors representation can be several orders of magnitude faster than a hierarchical organization, even for datasets of modest size.
 
 .. figure:: ../images/odx_flow.png
   :align: center
@@ -25,13 +42,7 @@ OMAS can seamlessly use either hierarchical or tensor representations as the bac
   :alt: OMAS can seamlessly use either hierarchical or tensor representations as backed for storing data both in memory and on file, and transform from one format to the other
   :target: /.._images/odx_flow.png
 
-We note that the OMAS implementation is generic and can handle nested hierarchical list of structures (not only in time).
-Also OMAS can automatically determine which data can be collected across the hierarchical structure, which cannot, and seamlessly handle both at the same time.
-
-Benchmarks show that storing data as a list of tensors can be several orders of magnitude faster than done previously, even for datasets of modest size.
-The favorable scaling that is observed when representing IMAS data in tensor form makes a strong case for adopting it.
-Implementing the same system as part of the IMAS backend storage of data and in memory representation would likely greatly benefit IMAS performance in many real-world applications.
-Furthermore, being able to directly access the IMAS data as tensors would simplify integration with a broad range of tools and numerical libraries that are commonly used across many fields of science.
+Scaling plots and code used for the benchmark follow:
 
 """
 
