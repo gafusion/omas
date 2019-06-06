@@ -560,6 +560,13 @@ def wall_add(ods, machine=None):
 
 @add_to__ODS__
 def equilibrium_consistent(ods):
+    '''
+    Calculate missing derived quantities for equilibrium IDS
+
+    :param ods: ODS to update in-place
+
+    :return: updated ods
+    '''
     for time_index in ods['equilibrium.time_slice']:
         eq = ods['equilibrium.time_slice'][time_index]
         eq1d = ods['equilibrium.time_slice'][time_index]['profiles_1d']
@@ -582,6 +589,7 @@ def equilibrium_consistent(ods):
         eq['profiles_2d.0.z'] = Z
         eq['profiles_2d.0.b_field_tor'] = fpol / R
 
+    return ods
 
 @add_to__ODS__
 def equilibrium_transpose_RZ(ods, flip_dims=False):
