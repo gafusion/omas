@@ -1,0 +1,389 @@
+{
+ "dataset_description": {
+  "documentation": "General description of the dataset (collection of all IDSs within the given database entry). Main description text to be put in ids_properties/comment",
+  "full_path": "dataset_description",
+  "lifecycle_last_change": "3.0.4",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.4",
+  "maxoccur": "1"
+ },
+ "dataset_description.data_entry": {
+  "data_type": "structure",
+  "documentation": "Definition of this data entry",
+  "full_path": "dataset_description/data_entry",
+  "lifecycle_status": "alpha",
+  "structure_reference": "data_entry"
+ },
+ "dataset_description.data_entry.machine": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the experimental device to which this data is related",
+  "full_path": "dataset_description/data_entry/machine",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.data_entry.pulse": {
+  "data_type": "INT_0D",
+  "documentation": "Pulse number",
+  "full_path": "dataset_description/data_entry/pulse",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "data_type": "STR_0D",
+  "documentation": "Type of the data entry, e.g. \"pulse\", \"simulation\", ...",
+  "full_path": "dataset_description/data_entry/pulse_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.data_entry.run": {
+  "data_type": "INT_0D",
+  "documentation": "Run number",
+  "full_path": "dataset_description/data_entry/run",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.data_entry.user": {
+  "data_type": "STR_0D",
+  "documentation": "Username",
+  "full_path": "dataset_description/data_entry/user",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.dd_version": {
+  "data_type": "STR_0D",
+  "documentation": "Version of the physics data dictionary of this dataset",
+  "full_path": "dataset_description/dd_version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "dataset_description/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "dataset_description.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "dataset_description/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "dataset_description/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "dataset_description/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "dataset_description/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "dataset_description/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "dataset_description/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "dataset_description.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "dataset_description/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "dataset_description/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "dataset_description/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.imas_version": {
+  "data_type": "STR_0D",
+  "documentation": "Version of the IMAS infrastructure used to produce this data entry. Refers to the global IMAS repository which links to versions of every infrastructure tools",
+  "full_path": "dataset_description/imas_version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.parent_entry": {
+  "data_type": "structure",
+  "documentation": "Definition of the parent data entry, if the present data entry has been generated by applying a given workflow to a unique parent entry",
+  "full_path": "dataset_description/parent_entry",
+  "lifecycle_status": "alpha",
+  "structure_reference": "data_entry"
+ },
+ "dataset_description.parent_entry.machine": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the experimental device to which this data is related",
+  "full_path": "dataset_description/parent_entry/machine",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.parent_entry.pulse": {
+  "data_type": "INT_0D",
+  "documentation": "Pulse number",
+  "full_path": "dataset_description/parent_entry/pulse",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.parent_entry.pulse_type": {
+  "data_type": "STR_0D",
+  "documentation": "Type of the data entry, e.g. \"pulse\", \"simulation\", ...",
+  "full_path": "dataset_description/parent_entry/pulse_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.parent_entry.run": {
+  "data_type": "INT_0D",
+  "documentation": "Run number",
+  "full_path": "dataset_description/parent_entry/run",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.parent_entry.user": {
+  "data_type": "STR_0D",
+  "documentation": "Username",
+  "full_path": "dataset_description/parent_entry/user",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation": {
+  "data_type": "structure",
+  "documentation": "Description of the general simulation characteristics, if this data entry has been produced by a simulation. Several nodes describe typical time-dependent simulation with a time evolution as the main loop",
+  "full_path": "dataset_description/simulation",
+  "lifecycle_status": "alpha",
+  "structure_reference": "dataset_description_simulation"
+ },
+ "dataset_description.simulation.comment_after": {
+  "data_type": "STR_0D",
+  "documentation": "Comment made at the end of a simulation",
+  "full_path": "dataset_description/simulation/comment_after",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.comment_before": {
+  "data_type": "STR_0D",
+  "documentation": "Comment made when launching a simulation",
+  "full_path": "dataset_description/simulation/comment_before",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_begin": {
+  "data_type": "FLT_0D",
+  "documentation": "Start time",
+  "full_path": "dataset_description/simulation/time_begin",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_begin_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_begin\"",
+  "full_path": "dataset_description/simulation/time_begin_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_begin_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_begin\"",
+  "full_path": "dataset_description/simulation/time_begin_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_begin_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_begin\"",
+  "full_path": "dataset_description/simulation/time_begin_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_begun": {
+  "data_type": "STR_0D",
+  "documentation": "Actual wall-clock time simulation started",
+  "full_path": "dataset_description/simulation/time_begun",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "UTC"
+ },
+ "dataset_description.simulation.time_current": {
+  "data_type": "FLT_0D",
+  "documentation": "Current time of the simulation",
+  "full_path": "dataset_description/simulation/time_current",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_current_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_current\"",
+  "full_path": "dataset_description/simulation/time_current_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_current_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_current\"",
+  "full_path": "dataset_description/simulation/time_current_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_current_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_current\"",
+  "full_path": "dataset_description/simulation/time_current_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_end": {
+  "data_type": "FLT_0D",
+  "documentation": "Stop time",
+  "full_path": "dataset_description/simulation/time_end",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_end_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_end\"",
+  "full_path": "dataset_description/simulation/time_end_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_end_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_end\"",
+  "full_path": "dataset_description/simulation/time_end_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_end_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_end\"",
+  "full_path": "dataset_description/simulation/time_end_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_ended": {
+  "data_type": "STR_0D",
+  "documentation": "Actual wall-clock time simulation finished",
+  "full_path": "dataset_description/simulation/time_ended",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "UTC"
+ },
+ "dataset_description.simulation.time_restart": {
+  "data_type": "FLT_0D",
+  "documentation": "Time of the last restart done during the simulation",
+  "full_path": "dataset_description/simulation/time_restart",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_restart_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_restart\"",
+  "full_path": "dataset_description/simulation/time_restart_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_restart_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_restart\"",
+  "full_path": "dataset_description/simulation/time_restart_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_restart_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_restart\"",
+  "full_path": "dataset_description/simulation/time_restart_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_step": {
+  "data_type": "FLT_0D",
+  "documentation": "Time interval between main steps, e.g. storage step (if relevant and constant)",
+  "full_path": "dataset_description/simulation/time_step",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_step_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_step\"",
+  "full_path": "dataset_description/simulation/time_step_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.simulation.time_step_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_step\"",
+  "full_path": "dataset_description/simulation/time_step_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.time_step_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_step\"",
+  "full_path": "dataset_description/simulation/time_step_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "s"
+ },
+ "dataset_description.simulation.workflow": {
+  "data_type": "STR_0D",
+  "documentation": "Description of the workflow which has been used to produce this data entry (e.g. copy of the Kepler MOML if using Kepler)",
+  "full_path": "dataset_description/simulation/workflow",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_description.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "dataset_description/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
