@@ -160,8 +160,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # assign data to leaf node
     printd('setting  : %s' % location, topic='imas')
-    if not isinstance(value, (basestring, numpy.ndarray)):
-        value = numpy.array(value)
     setattr(out, path[-1], value)
     if 'imas_code' in os.environ.get('OMAS_DEBUG_TOPIC', ''):  # use if statement here to avoid unecessary repr(value) when not debugging
         printd(debug_path + '.%s=%s' % (path[-1], repr(value).replace('\\n', '\n')), topic='imas_code')
