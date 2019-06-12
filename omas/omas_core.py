@@ -551,9 +551,11 @@ class ODS(MutableMapping):
                 value = numpy.array(value)
             if isinstance(value, xarray.DataArray):
                 value = value.values
-            if isinstance(value, numpy.ndarray) and not (len(value.shape)):
+            if isinstance(value, numpy.ndarray) and not len(value.shape):
                 value = value.item()
-            if isinstance(value, (float, numpy.floating)):
+            if isinstance(value, (numpy.string_,numpy.unicode_,numpy.str_)):
+                value = value.item()
+            elif isinstance(value, (float, numpy.floating)):
                 value = float(value)
             elif isinstance(value, (int, numpy.integer)):
                 value = int(value)
