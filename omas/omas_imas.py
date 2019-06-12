@@ -478,7 +478,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     try:
         ods.consistency_check = True
     except LookupError as _excp:
-        printe(repr(excp))
+        printe(repr(_excp))
 
     return ods
 
