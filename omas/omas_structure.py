@@ -231,7 +231,6 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
             continue
         print(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + structure + '.json')
         dump_string = json.dumps(hout[structure], default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
-        # dump_string = pickle.dumps(hout[structure],protocol=pickle.HIGHEST_PROTOCOL)
         open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + structure + '.json', 'w').write(dump_string)
 
     # generate coordinates cache file
