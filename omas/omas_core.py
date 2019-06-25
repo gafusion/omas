@@ -565,17 +565,28 @@ class ODS(MutableMapping):
                 value = value.decode('utf-8', errors='ignore')
 
             if self.consistency_check:
+                # force type consistent with data dictionary
+                if numpy.atleast_1d(is_uncertain(value)).any():
+                    pass
+                elif isinstance(value, numpy.ndarray):
+                    if 'FLT' in info['data_type']:
+                        value = value.astype(float)
+                    elif 'INT' in info['data_type']:
+                        value = value.astype(int)
+                elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
+                    if 'FLT' in info['data_type']:
+                        value = float(value)
+                    elif 'INT' in info['data_type']:
+                        value = int(value)
                 # check type
                 if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
                     raise ValueError('Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location))
-
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    printe('%s must be a scalar of type %s' % (location, info['data_type']))
+                    raise ValueError('%s must be a scalar of type %s' % (location, info['data_type']))
                 # check consistency for number of dimensions
                 elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                    # may want to raise a ValueError in the future
-                    printe('%s must be an array with dimensions: %s' % (location, info['coordinates']))
+                    raise ValueError('%s must be an array with dimensions: %s' % (location, info['coordinates']))
                 elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
                     printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 

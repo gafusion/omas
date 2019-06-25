@@ -82,10 +82,9 @@ class TestOmasUtils(unittest.TestCase):
         assert isinstance(diff_prof3, list)
         assert 'value' in ' '.join(diff_prof3)
         ods2.sample_core_profiles()
-        ods2['core_profiles.profiles_1d.0.ion.0.element.0.a'] = 9.
+        ods2['core_profiles.profiles_1d.0.ion.0.element.0.a'] = 2
         diff_prof4 = different_ods(ods2, ods3)
-        assert isinstance(diff_prof4, list)
-        assert 'type' in ' '.join(diff_prof4)
+        assert not diff_prof4
         ods2.sample_core_profiles()
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
@@ -93,10 +92,6 @@ class TestOmasUtils(unittest.TestCase):
         self.printv('  diff_prof5 = {}'.format(diff_prof5))
         assert isinstance(diff_prof5, list)
         assert 'name' in ' '.join(diff_prof5)
-        ods3['core_profiles.code.name'] = numpy.array([2, 3, 4])
-        assert isinstance(different_ods(ods2, ods3), list)
-        ods2['core_profiles.code.name'] = uarray(numpy.array([2, 3, 4]), numpy.array([1, 1, 1]))
-        assert isinstance(different_ods(ods2, ods3), list)
 
     def test_printe(self):
         printe('printe_test,', end='')

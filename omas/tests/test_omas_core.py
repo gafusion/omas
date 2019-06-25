@@ -214,6 +214,11 @@ class TestOmasCore(unittest.TestCase):
         ods['dataset_description'].satisfy_imas_requirements()
         assert ods['dataset_description.ids_properties.homogeneous_time'] is not None
 
+    def test_force_type(self):
+        ods = ODS()
+        ods['core_profiles.profiles_1d'][0]['ion'][0]['z_ion'] = 1
+        assert isinstance(ods['core_profiles.profiles_1d'][0]['ion'][0]['z_ion'], float)
+
     def test_address_structures(self):
         ods = ODS()
 
