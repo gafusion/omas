@@ -442,7 +442,12 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     ax.set_title('$q$ Safety factor')
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
-        ax.legend(loc=0).draggable(True)
+        leg = ax.legend(loc=0)
+        import matplotlib
+        if compare_version(matplotlib.__version__, '3.1.0') >= 0:
+            leg.set_draggable(True)
+        else:
+            leg.draggable(True)
     pyplot.setp(ax.get_xticklabels(), visible=False)
 
     # dP_dpsi
@@ -527,7 +532,12 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                 if k == len(prof1d['ion']):
                     ax0.set_xlabel('$\\rho$')
                     if combine_dens_temps:
-                        ax0.legend(loc=0).draggable(True)
+                        leg = ax0.legend(loc=0)
+                        import matplotlib
+                        if compare_version(matplotlib.__version__, '3.1.0') >= 0:
+                            leg.set_draggable(True)
+                        else:
+                            leg.draggable(True)
                 if k == 0:
                     ax0.set_title('Density [m$^{-3}$]')
                 if not combine_dens_temps:
@@ -599,7 +609,12 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     ax.set_xlim([0, 1])
     ax.set_ylabel('Pressure (Pa)')
     ax.set_xlabel('$\\rho_N$')
-    ax.legend(loc=0).draggable(True)
+    leg = ax.legend(loc=0)
+    import matplotlib
+    if compare_version(matplotlib.__version__, '3.1.0') >= 0:
+        leg.set_draggable(True)
+    else:
+        leg.draggable(True)
     return ax
 
 
