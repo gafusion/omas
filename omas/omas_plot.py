@@ -951,6 +951,23 @@ def pf_active_overlay(ods, ax=None, **kw):
 
 
 @add_to__ODS__
+def nbi_summary(ods, ax=None):
+    if ax is None:
+        ax = gca()
+    time = ods['nbi.time']
+    nbi = ods['nbi.unit']
+    tmp = []
+    for beam in nbi:
+        tmp.append(nbi[beam]['power_launched.data'])
+        ax.plot(time, tmp[-1], label=nbi[beam]['identifier'])
+    ax.plot(time, numpy.sum(tmp, 0), 'k', lw=2, label='Total')
+    ax.set_title('Neutral Beam Injectors power')
+    ax.set_xlabel('Time [s]')
+    ax.set_ylabel('Power [W]')
+    ax.legend()
+
+
+@add_to__ODS__
 def magnetics_overlay(
         ods, ax=None, show_bpol_probe=True, show_flux_loop=True, bpol_probe_color=None, flux_loop_color=None,
         bpol_probe_marker='s', flux_loop_marker='o', **kw):
