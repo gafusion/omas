@@ -543,6 +543,12 @@ cocos_signals['gyrokinetics.wavevector.:.eigenmode.:.phi_potential_perturbed_nor
 cocos_signals['gyrokinetics.wavevector.:.eigenmode.:.phi_potential_perturbed_parity']='?'                                                                          #[ADD?]# 2.000000 # phi  [-]
 cocos_signals['gyrokinetics.wavevector.:.eigenmode.:.poloidal_angle']='?'                                                                                          #[ADD?]# 2.000000 # poloidal  [-]
 
+# HARD_X_RAYS
+cocos_signals['hard_x_rays.channel.:.aperture.:.centre.phi']=u'?'                       #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['hard_x_rays.channel.:.detector.centre.phi']=u'?'                         #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['hard_x_rays.channel.:.line_of_sight.first_point.phi']=u'?'               #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['hard_x_rays.channel.:.line_of_sight.second_point.phi']=u'?'              #[ADD?]# 2.000000 # phi  [rad]
+
 # IC_ANTENNAS
 cocos_signals['ic_antennas.antenna.:.module.:.current.:.position.phi']='TOR'                                         # 2.625000 # current  phi  [rad]
 cocos_signals['ic_antennas.antenna.:.module.:.pressure.:.position.phi']='TOR'                                        # 2.000000 # phi  [rad]
@@ -766,7 +772,8 @@ cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.first_poi
 cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.second_point.phi']='TOR'                # 2.000000 # phi  [rad]
 cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.first_point.phi']='TOR'                  # 2.000000 # phi  [rad]
 cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.second_point.phi']='TOR'                 # 2.000000 # phi  [rad]
-cocos_signals['reflectometer_profile.channel.:.position.phi.data']='?'                                  #[ADD?]# 1.800000 # phi  [rad]
+cocos_signals['reflectometer_profile.channel.:.position.phi']=u'?'                                      #[ADD?]# 1.000000 # phi
+cocos_signals['reflectometer_profile.channel.:.position.psi']=u'?'                                      #[ADD?]# 1.000000 # psi
 
 # SAWTEETH
 cocos_signals['sawteeth.profiles_1d.:.e_field_parallel']='?'                       #[ADD?]# 3.000000 # e_field  parallel  [V.m^-1]

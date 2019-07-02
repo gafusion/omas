@@ -1,0 +1,964 @@
+{
+ "langmuir_probes": {
+  "documentation": "Langmuir probes",
+  "full_path": "langmuir_probes",
+  "lifecycle_last_change": "3.22.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.22.0",
+  "maxoccur": "3"
+ },
+ "langmuir_probes.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "langmuir_probes/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "langmuir_probes.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "langmuir_probes/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "langmuir_probes/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.output_flag": {
+  "coordinates": [
+   "langmuir_probes.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "langmuir_probes/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "langmuir_probes.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "langmuir_probes/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "langmuir_probes/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "langmuir_probes/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "langmuir_probes/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "langmuir_probes.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "langmuir_probes/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "langmuir_probes/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "langmuir_probes/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "langmuir_probes/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "langmuir_probes/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "langmuir_probes.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of probes or probe pins",
+  "full_path": "langmuir_probes/probe(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "150",
+  "structure_reference": "langmuir_probes_probe"
+ },
+ "langmuir_probes.probe[:].b_field_angle": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Incident angle of the magnetic field with respect to PFC surface",
+  "full_path": "langmuir_probes/probe(i1)/b_field_angle(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].b_field_angle_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"b_field_angle\"",
+  "full_path": "langmuir_probes/probe(i1)/b_field_angle_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].b_field_angle_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"b_field_angle\"",
+  "full_path": "langmuir_probes/probe(i1)/b_field_angle_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].b_field_angle_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"b_field_angle\"",
+  "full_path": "langmuir_probes/probe(i1)/b_field_angle_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].heat_flux_parallel": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Parallel heat flux at the probe position",
+  "full_path": "langmuir_probes/probe(i1)/heat_flux_parallel(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.probe[:].heat_flux_parallel_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"heat_flux_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/heat_flux_parallel_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].heat_flux_parallel_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"heat_flux_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/heat_flux_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.probe[:].heat_flux_parallel_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"heat_flux_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/heat_flux_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.probe[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the probe",
+  "full_path": "langmuir_probes/probe(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.probe[:].j_ion_parallel": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion parallel current density at the probe position",
+  "full_path": "langmuir_probes/probe(i1)/j_ion_parallel(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.probe[:].j_ion_parallel_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"j_ion_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/j_ion_parallel_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].j_ion_parallel_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_ion_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/j_ion_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.probe[:].j_ion_parallel_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_ion_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/j_ion_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.probe[:].mach_number_parallel": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Parallel Mach number (only for reciprocating probies)",
+  "full_path": "langmuir_probes/probe(i1)/mach_number_parallel(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.probe[:].mach_number_parallel_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mach_number_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/mach_number_parallel_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].mach_number_parallel_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"mach_number_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/mach_number_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.probe[:].mach_number_parallel_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"mach_number_parallel\"",
+  "full_path": "langmuir_probes/probe(i1)/mach_number_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of temperatures describing the electron and ion distribution functions in case of multi-temperature fits",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2",
+  "structure_reference": "langmuir_probes_multi_temperature"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_e": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Electron temperature",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_e(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_e_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_e_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_e_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_e_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_e_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_e_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_i": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion temperature",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_i(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_i_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_i_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_i_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_i_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].t_i_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_i_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].multi_temperature_fits[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Timebase for the multi-temperature fits",
+  "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.probe[:].n_e": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Electron density",
+  "full_path": "langmuir_probes/probe(i1)/n_e(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.probe[:].n_e_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"n_e\"",
+  "full_path": "langmuir_probes/probe(i1)/n_e_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].n_e_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"n_e\"",
+  "full_path": "langmuir_probes/probe(i1)/n_e_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.probe[:].n_e_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"n_e\"",
+  "full_path": "langmuir_probes/probe(i1)/n_e_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.probe[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the probe",
+  "full_path": "langmuir_probes/probe(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.probe[:].position_reciprocating": {
+  "data_type": "structure",
+  "documentation": "Position of the measurements in case of reciprocating probe",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_position_reciprocating"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.phi": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.phi_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.phi_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.r": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/r(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.r_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.r_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.z": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/z(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.z_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_reciprocating.z_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_reciprocating/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static": {
+  "data_type": "structure",
+  "documentation": "Position of the measurements in case of fixed probe",
+  "full_path": "langmuir_probes/probe(i1)/position_static",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "langmuir_probes.probe[:].position_static.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "langmuir_probes/probe(i1)/position_static/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_static.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_static.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_static.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.probe[:].position_static.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "langmuir_probes/probe(i1)/position_static/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_static.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "langmuir_probes/probe(i1)/position_static/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].position_static.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].position_static.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "langmuir_probes/probe(i1)/position_static/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.probe[:].potential_floating": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Floating potential",
+  "full_path": "langmuir_probes/probe(i1)/potential_floating(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].potential_floating_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"potential_floating\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_floating_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].potential_floating_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"potential_floating\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_floating_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].potential_floating_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"potential_floating\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_floating_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].potential_plasma": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Plasma potential",
+  "full_path": "langmuir_probes/probe(i1)/potential_plasma(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].potential_plasma_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"potential_plasma\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_plasma_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].potential_plasma_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"potential_plasma\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_plasma_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].potential_plasma_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"potential_plasma\"",
+  "full_path": "langmuir_probes/probe(i1)/potential_plasma_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.probe[:].reciprocating": {
+  "data_type": "INT_0D",
+  "documentation": "Flag telling whether the probe is reciprocating (1) or fixed (0)",
+  "full_path": "langmuir_probes/probe(i1)/reciprocating",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.probe[:].saturation_current_ion": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion saturation current measured by the probe",
+  "full_path": "langmuir_probes/probe(i1)/saturation_current_ion(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.probe[:].saturation_current_ion_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"saturation_current_ion\"",
+  "full_path": "langmuir_probes/probe(i1)/saturation_current_ion_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].saturation_current_ion_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"saturation_current_ion\"",
+  "full_path": "langmuir_probes/probe(i1)/saturation_current_ion_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.probe[:].saturation_current_ion_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"saturation_current_ion\"",
+  "full_path": "langmuir_probes/probe(i1)/saturation_current_ion_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.probe[:].t_e": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Electron temperature",
+  "full_path": "langmuir_probes/probe(i1)/t_e(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].t_e_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/t_e_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].t_e_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/t_e_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].t_e_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_e\"",
+  "full_path": "langmuir_probes/probe(i1)/t_e_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].t_i": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion temperature",
+  "full_path": "langmuir_probes/probe(i1)/t_i(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].t_i_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/t_i_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.probe[:].t_i_error_lower": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/t_i_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].t_i_error_upper": {
+  "coordinates": [
+   "langmuir_probes.probe[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_i\"",
+  "full_path": "langmuir_probes/probe(i1)/t_i_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.probe[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Timebase for the dynamic nodes of this probe located at this level of the IDS structure",
+  "full_path": "langmuir_probes/probe(i1)/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "langmuir_probes/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

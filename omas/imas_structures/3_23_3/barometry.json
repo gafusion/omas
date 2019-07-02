@@ -1,0 +1,385 @@
+{
+ "barometry": {
+  "documentation": "Pressure measurements in the vacuum vessel. NB will need to change the type of the pressure node to signal_1d when moving to the new LL.",
+  "full_path": "barometry",
+  "lifecycle_last_change": "3.17.2",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.17.2",
+  "maxoccur": "2"
+ },
+ "barometry.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "barometry/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "barometry.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "barometry/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "barometry/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.code.output_flag": {
+  "coordinates": [
+   "barometry.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "barometry/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "barometry.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "barometry/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "barometry/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "barometry/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of gauges",
+  "full_path": "barometry/gauge(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "barometry_gauge"
+ },
+ "barometry.gauge[:].calibration_coefficient": {
+  "data_type": "FLT_0D",
+  "documentation": "Coefficient used for converting raw signal into absolute pressure",
+  "full_path": "barometry/gauge(i1)/calibration_coefficient",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].calibration_coefficient_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"calibration_coefficient\"",
+  "full_path": "barometry/gauge(i1)/calibration_coefficient_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge[:].calibration_coefficient_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"calibration_coefficient\"",
+  "full_path": "barometry/gauge(i1)/calibration_coefficient_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].calibration_coefficient_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"calibration_coefficient\"",
+  "full_path": "barometry/gauge(i1)/calibration_coefficient_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the gauge",
+  "full_path": "barometry/gauge(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "barometry.gauge[:].position": {
+  "data_type": "structure",
+  "documentation": "Position of the measurements",
+  "full_path": "barometry/gauge(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "barometry.gauge[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "barometry/gauge(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "barometry.gauge[:].position.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "barometry/gauge(i1)/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "barometry/gauge(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "barometry.gauge[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "barometry/gauge(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "barometry.gauge[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "barometry/gauge(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].position.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "barometry/gauge(i1)/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "barometry/gauge(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "barometry/gauge(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "barometry/gauge(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].position.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "barometry/gauge(i1)/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "barometry/gauge(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "barometry/gauge(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "barometry.gauge[:].pressure": {
+  "data_type": "structure",
+  "documentation": "Pressure",
+  "full_path": "barometry/gauge(i1)/pressure",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].pressure.data": {
+  "coordinates": [
+   "barometry.gauge[:].pressure.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "barometry/gauge(i1)/pressure/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].pressure.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "barometry/gauge(i1)/pressure/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.gauge[:].pressure.data_error_lower": {
+  "coordinates": [
+   "barometry.gauge[:].pressure.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "barometry/gauge(i1)/pressure/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].pressure.data_error_upper": {
+  "coordinates": [
+   "barometry.gauge[:].pressure.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "barometry/gauge(i1)/pressure/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "barometry.gauge[:].pressure.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "barometry/gauge(i1)/pressure/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressure/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "barometry.gauge[:].type": {
+  "data_type": "structure",
+  "documentation": "Type of the gauge (index = 1: Penning; index = 2: Baratron)",
+  "full_path": "barometry/gauge(i1)/type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static_1d"
+ },
+ "barometry.gauge[:].type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "barometry/gauge(i1)/type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "barometry.gauge[:].type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "barometry/gauge(i1)/type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "barometry.gauge[:].type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "barometry/gauge(i1)/type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "barometry.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "barometry/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "barometry.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "barometry/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "barometry/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "barometry/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "barometry/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "barometry/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "barometry.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "barometry/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "barometry.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "barometry/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
