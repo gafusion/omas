@@ -29,6 +29,53 @@ def add_to__ALL__(f):
 # ================================
 # plotting helper functions
 # ================================
+
+def uerrorbar(x, y, ax=None, **kwargs):
+    """
+    Given arguments y or x,y where x and/or y have uncertainties, feed the
+    appropriate terms to matplotlib's errorbar function.
+
+    If y or x is more than 1D, it is flattened along every dimension but the last.
+
+    :param x: array of independent axis values
+
+    :param y: array of values with uncertainties, for which shaded error band is plotted
+
+    :param ax: The axes instance into which to plot (default: gca())
+
+    :param \**kwargs: Passed to ax.errorbar
+
+    :return: list. A list of ErrorbarContainer objects containing the line, bars, and caps of each (x,y) along the last dimension.
+    """
+    result = []
+
+    # set default key word arguments
+    if ax is None:
+        ax = gca()
+    kwargs.setdefault('marker', 'o')
+    if 'linestyle' not in kwargs and 'ls' not in kwargs:
+        kwargs['linestyle'] = ''
+    if np.all(std_devs(y) == 0) and np.all(std_devs(x) == 0):
+        kwargs.setdefault('capsize', 0)
+
+    # enable combinations of 1D and 2D x's and y's
+    y = np.array(y)
+    y = y.reshape(-1, y.shape[-1])
+    x = np.array(x)
+    x = x.reshape(-1, x.shape[-1])
+    if x.shape[0] == 1 and y.shape[0] > 1:  # one x for all y's
+        x = np.tile(x[0, :], y.shape[0]).reshape(-1, x.shape[-1])
+
+    # plot each (x,y) and collect container objects
+    for xi, yi in zip(x, y):
+        tmp = ax.errorbar(nominal_values(xi),
+                          nominal_values(yi), xerr=std_devs(xi),
+                          yerr=std_devs(yi), **kwargs)
+        result.append(tmp)
+
+    return result
+
+
 class Uband(object):
     """
     This class wraps the line and PollyCollection(s) associated with a banded
@@ -522,12 +569,14 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                 '_fast': ' (fast)',
             }[therm_fast]
             density = item + '.density' + therm_fast
+            # generate axes
+            if combine_dens_temps:
+                if ax0 is None:
+                    ax = ax0 = fig.add_subplot(1, 2, 1)
+            else:
+                ax = ax0 = fig.add_subplot(r, 2, (2 * k) + 1, sharex=ax)
+            # plot if data is present
             if item + '.density' + therm_fast in prof1d:
-                if combine_dens_temps:
-                    if ax0 is None:
-                        ax = ax0 = fig.add_subplot(1, 2, 1)
-                else:
-                    ax = ax0 = fig.add_subplot(r, 2, (2 * k) + 1, sharex=ax)
                 uband(x, prof1d[density], label=names[k] + therm_fast_name, ax=ax0, **kw)
                 if k == len(prof1d['ion']):
                     ax0.set_xlabel('$\\rho$')
@@ -542,19 +591,26 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
                     ax0.set_title('Density [m$^{-3}$]')
                 if not combine_dens_temps:
                     ax0.set_ylabel(names[k])
+            # add plot of measurements
+            if density + '_fit.measured' in prof1d and density + '_fit.rho_tor_norm' in prof1d:
+                uerrorbar(prof1d[density + '_fit.rho_tor_norm'], prof1d[density + '_fit.measured'], ax=ax)
 
         # temperatures
+        if combine_dens_temps:
+            if ax1 is None:
+                ax = ax1 = fig.add_subplot(1, 2, 2, sharex=ax)
+        else:
+            ax = ax1 = fig.add_subplot(r, 2, (2 * k) + 2, sharex=ax)
+        # plot if data is present
         if item + '.temperature' in prof1d:
-            if combine_dens_temps:
-                if ax1 is None:
-                    ax = ax1 = fig.add_subplot(1, 2, 2, sharex=ax)
-            else:
-                ax = ax1 = fig.add_subplot(r, 2, (2 * k) + 2, sharex=ax)
             uband(x, prof1d[item + '.temperature'], label=names[k], ax=ax1, **kw)
             if k == len(prof1d['ion']):
                 ax1.set_xlabel('$\\rho$')
             if k == 0:
                 ax1.set_title('Temperature [eV]')
+            # add plot of measurements
+            if item + '.temperature_fit.measured' in prof1d and item + '.temperature_fit.rho_tor_norm' in prof1d:
+                uerrorbar(prof1d[item + '.temperature_fit.rho_tor_norm'], prof1d[item + '.temperature_fit.measured'], ax=ax)
 
     ax.set_xlim([0, 1])
     if ax0 is not None:
