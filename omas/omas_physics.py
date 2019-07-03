@@ -591,6 +591,7 @@ def equilibrium_consistent(ods):
 
     return ods
 
+
 @add_to__ODS__
 def equilibrium_transpose_RZ(ods, flip_dims=False):
     '''
@@ -1162,7 +1163,9 @@ cocos_signals = {}
                 elif score < 0:
                     message = '#[DEL?]'
 
-                txt = ("cocos_signals['%s']=%s" % (item, repr(cocos_signals.get(item, '?')))).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
+                transform = cocos_signals.get(item, '?')
+                transform = None if transform is None else "'%s'" % transform
+                txt = ("cocos_signals['%s']=%s" % (item, transform)).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
                 text.append(txt)
                 if score > threshold or (item in cocos_signals and cocos_signals[item] != '?'):
                     csig.append(txt)
@@ -1179,9 +1182,11 @@ cocos_signals = {}
     else:
         # check that omas_cocos.py file is up-to-date
         with open(filename, 'r') as f:
-            tmp = str(f.read())
-        tmp1 = str('\n'.join(csig))
-        assert tmp == tmp1, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.'
+            original = str(f.read())
+        new = str('\n'.join(csig))
+        import difflib
+        diff = difflib.unified_diff(original, new)
+        assert original == new, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.\n' + ''.join(diff)
 
     return out
 
