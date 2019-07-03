@@ -305,8 +305,8 @@ def remove_parentheses(inv, replace_with=''):
 
 def closest_index(my_list, my_number=0):
     """
-    Given a SORTED iterable (a numeric array or list of numbers) and a numeric scalar my_number, find the index of the
-    number in the list that is closest to my_number
+    Given a SORTED iterable (a numeric array or list of numbers) and a numeric scalar my_number,
+    find the index of the number in the list that is closest to my_number
 
     :param my_list: Sorted iterable (list or array) to search for number closest to my_number
 
@@ -316,24 +316,12 @@ def closest_index(my_list, my_number=0):
 
     :note: If two numbers are equally close, returns the index of the smallest number.
     """
-    import bisect
-
     if not hasattr(my_list, '__iter__'):
-        raise TypeError("closestIndex() in utils_math.py requires an iterable as the first argument. Got "
-                        "instead: {:}".format(my_list))
-
+        raise TypeError("closestIndex() requires an iterable as the first argument. Got instead: {:}".format(my_list))
     if not is_numeric(my_number):
-        if hasattr(my_number, '__iter__') and len(my_number) == 1 and is_numeric(my_number[0]):
-            printw('Warning: closestIndex got a len()=1 iterable instead of a scalar for my_number. my_number[0] will '
-                   'be used, but please input a scalar next time.')
-            # Before, the function would run without an error if given a one element array, but it would not return the
-            # correct answer.
-            my_number = my_number[0]
-            printd('my_number is now {:}'.format(my_number))
-        else:
-            raise TypeError("closestIndex() in utils_math.py requires a numeric scalar as the second argument. Got "
-                            "instead: {:}".format(my_number))
+        raise TypeError("closestIndex() requires a numeric scalar as the second argument. Got instead: {:}".format(my_number))
 
+    import bisect
     pos = bisect.bisect_left(my_list, my_number)
     if pos == 0:
         return 0

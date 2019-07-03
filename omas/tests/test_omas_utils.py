@@ -119,7 +119,6 @@ class TestOmasUtils(unittest.TestCase):
         # Exception handling and coping with problems
         self.assertRaises(TypeError, closest_index, 5, 5)  # First arg is not a list --> TypeError
         self.assertRaises(TypeError, closest_index, [1, 2, 3], 'string_not_number')
-        assert closest_index([1, 2, 3], [3]) == 2  # Should use first element of second arg if it's not a scalar
         self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
 
     def test_list_structures(self):  # Also tests dict_structures
