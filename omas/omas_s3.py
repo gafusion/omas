@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import save_omas_pkl, load_omas_pkl
+from .omas_core import save_omas_pkl, load_omas_pkl, ODS
 
 
 def _base_S3_uri(user):
@@ -149,7 +149,7 @@ def del_omas_s3(filename, user=os.environ.get('USER', 'dummy_user')):
     remote_uri(_base_S3_uri(user) + filename, None, 'del')
 
 
-def through_omas_s3(ods):
+def through_omas_s3(ods, method=['function', 'class_method'][1]):
     """
     Test save and load S3
 
@@ -158,6 +158,12 @@ def through_omas_s3(ods):
     :return: ods
     """
     filename = 'test.pkl'
-    save_omas_s3(ods, filename, user='omas_test')
-    ods1 = load_omas_s3(filename, user='omas_test')
+
+    if method == 'function':
+        save_omas_s3(ods, filename, user='omas_test')
+        ods1 = load_omas_s3(filename, user='omas_test')
+    else:
+        ods.save('s3', filename=filename, user='omas_test')
+        ods1 = ODS().load('s3', filename=filename, user='omas_test')
+
     return ods1

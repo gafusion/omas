@@ -129,7 +129,7 @@ def load_omas_h5(filename, consistency_check=True):
     return ods
 
 
-def through_omas_h5(ods):
+def through_omas_h5(ods, method=['function', 'class_method'][1]):
     """
     Test save and load OMAS HDF5
 
@@ -140,6 +140,10 @@ def through_omas_h5(ods):
     if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
         os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
     filename = tempfile.gettempdir() + '/OMAS_TESTS/test.h5'
-    save_omas_h5(ods, filename)
-    ods1 = load_omas_h5(filename)
+    if method == 'function':
+        save_omas_h5(ods, filename)
+        ods1 = load_omas_h5(filename)
+    else:
+        ods.save(filename)
+        ods1 = ODS().load(filename)
     return ods1

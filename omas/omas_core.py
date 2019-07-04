@@ -32,6 +32,7 @@ __all__ = [
 # It is used for example by OMFIT to process OMFITexpressions
 input_data_process_functions = []
 
+
 class ODS(MutableMapping):
     """
     OMAS Data Structure class
@@ -553,7 +554,7 @@ class ODS(MutableMapping):
                 value = value.values
             if isinstance(value, numpy.ndarray) and not len(value.shape):
                 value = value.item()
-            if isinstance(value, (numpy.string_,numpy.unicode_,numpy.str_)):
+            if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
                 value = value.item()
             elif isinstance(value, (float, numpy.floating)):
                 value = float(value)
@@ -1295,6 +1296,48 @@ class ODS(MutableMapping):
         else:
             return False
         return True
+
+    def save(self, *args, **kw):
+        '''
+        Save OMAS data
+
+        :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds')
+                         set to `imas`, `s3`, `hdc` for load methods that do not have a filename with extension
+
+        :param \*args: extra arguments passed to save_omas_XXX() method
+
+        :param \**kw: extra keywords passed to save_omas_XXX() method
+
+        :return: return from save_omas_XXX() method
+        '''
+        if '.' not in args[0]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+        return eval('save_omas_' + ext)(self, *args, **kw)
+
+    def load(self, *args, **kw):
+        '''
+        Load OMAS data
+
+        :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
+                         set to `imas`, `s3`, `hdc` for save methods that do not have a filename with extension
+
+        :param \*args: extra arguments passed to load_omas_XXX() method
+
+        :param \**kw: extra keywords passed to load_omas_XXX() method
+
+        :return: ODS with loaded data
+        '''
+        if '.' not in args[0]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+        ods = eval('load_omas_' + ext)(*args, **kw)
+        self.omas_data = ods.omas_data
+        return self
 
 
 # --------------------------------------------

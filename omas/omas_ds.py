@@ -15,11 +15,12 @@ class ODX(MutableMapping):
     OMAS data xarray class
     """
 
-    def __init__(self, DS):
+    def __init__(self, DS=None):
         self.omas_data = DS
         self.ucache = {}
-        for k in self.omas_data.data_vars:
-            self.ucache.setdefault(o2u(k), []).append(k)
+        if DS is not None:
+            for k in self.omas_data.data_vars:
+                self.ucache.setdefault(o2u(k), []).append(k)
 
     def __delitem__(self, key):
         pass
@@ -55,6 +56,13 @@ class ODX(MutableMapping):
         if key in self.omas_data.data_vars:
             self.omas_data[key].values[:] = value
 
+    def save(self, *args, **kw):
+        return save_omas_dx(self, *args, **kw)
+
+    def load(self, *args, **kw):
+        ods = load_omas_dx(*args, **kw)
+        self.omas_data = ods.omas_data
+        return self
 
 def save_omas_ds(ods, filename):
     """
@@ -155,7 +163,7 @@ def load_omas_ds(filename, consistency_check=True):
     return ods
 
 
-def through_omas_ds(ods):
+def through_omas_ds(ods, method=['function', 'class_method'][1]):
     """
     Test save and load OMAS data set via xarray file format
 
@@ -165,12 +173,18 @@ def through_omas_ds(ods):
     """
     if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
         os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.xr'
-    save_omas_ds(ods, filename)
-    ods1 = load_omas_ds(filename)
+    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.ds'
+
+    if method == 'function':
+        save_omas_ds(ods, filename)
+        ods1 = load_omas_ds(filename)
+    else:
+        ods.save(filename)
+        ods1 = ODS().load(filename)
     return ods1
 
-def through_omas_dx(odx):
+
+def through_omas_dx(odx, method=['function', 'class_method'][1]):
     """
     Test save and load OMAS data xarray via xarray file format
 
@@ -180,7 +194,13 @@ def through_omas_dx(odx):
     """
     if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
         os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.xr'
-    save_omas_dx(odx, filename)
-    odx1 = load_omas_dx(filename)
+    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.dx'
+
+    if method == 'function':
+        save_omas_dx(odx, filename)
+        odx1 = load_omas_dx(filename)
+    else:
+        odx.save(filename)
+        odx1 = ODX().load(filename)
+
     return odx1

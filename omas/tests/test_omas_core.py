@@ -311,6 +311,10 @@ class TestOmasCore(unittest.TestCase):
         ods2['equilibrium.vacuum_toroidal_field.r0'] += 1
         assert ods['equilibrium.vacuum_toroidal_field.r0'] + 1 == ods2['equilibrium.vacuum_toroidal_field.r0']
 
+    def test_saveload(self):
+        ods = ODS()
+        ods.sample_equilibrium()
+        ods.save('test.pkl')
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

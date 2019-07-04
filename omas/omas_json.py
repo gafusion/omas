@@ -78,7 +78,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
     return tmp
 
 
-def through_omas_json(ods):
+def through_omas_json(ods, method=['function', 'class_method'][1]):
     """
     Test save and load OMAS Json
 
@@ -89,6 +89,11 @@ def through_omas_json(ods):
     if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
         os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
     filename = tempfile.gettempdir() + '/OMAS_TESTS/test.json'
-    save_omas_json(ods, filename)
-    ods1 = load_omas_json(filename)
+
+    if method == 'function':
+        save_omas_json(ods, filename)
+        ods1 = load_omas_json(filename)
+    else:
+        ods.save(filename)
+        ods1 = ODS().load(filename)
     return ods1

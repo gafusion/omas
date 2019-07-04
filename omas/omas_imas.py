@@ -663,7 +663,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     return paths
 
 
-def through_omas_imas(ods):
+def through_omas_imas(ods, method=['function', 'class_method'][1]):
     """
     Test save and load OMAS IMAS
 
@@ -676,6 +676,10 @@ def through_omas_imas(ods):
     pulse = 1
     run = 0
 
-    paths = save_omas_imas(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
-    ods1 = load_omas_imas(user=user, machine=machine, pulse=pulse, run=run, paths=paths)
+    if method == 'function':
+        paths = save_omas_imas(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
+        ods1 = load_omas_imas(user=user, machine=machine, pulse=pulse, run=run, paths=paths)
+    else:
+        paths = ods.save('imas', user=user, machine=machine, pulse=pulse, run=run, new=True)
+        ods1 = ODS().load('imas', user=user, machine=machine, pulse=pulse, run=run, paths=paths)
     return ods1

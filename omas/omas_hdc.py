@@ -90,7 +90,7 @@ def load_omas_hdc(hdc, consistency_check=True):
     return ods
 
 
-def through_omas_hdc(ods):
+def through_omas_hdc(ods, method=['function', 'class_method'][1]):
     '''
     Test save and load HDC
 
@@ -98,6 +98,10 @@ def through_omas_hdc(ods):
 
     :return: ods
     '''
-    hdc = save_omas_hdc(ods)
-    ods1 = load_omas_hdc(hdc)
+    if method == 'function':
+        hdc = save_omas_hdc(ods)
+        ods1 = load_omas_hdc(hdc)
+    else:
+        hdc = ods.save('hdc')
+        ods1 = ODS().load('hdc', hdc=hdc)
     return ods1
