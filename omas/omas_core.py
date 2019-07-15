@@ -622,7 +622,7 @@ class ODS(MutableMapping):
             self.omas_data.append(value)
         else:
             if not len(self.omas_data):
-                IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
+                raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
             else:
                 raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
