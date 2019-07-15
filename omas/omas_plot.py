@@ -55,16 +55,16 @@ def uerrorbar(x, y, ax=None, **kwargs):
     kwargs.setdefault('marker', 'o')
     if 'linestyle' not in kwargs and 'ls' not in kwargs:
         kwargs['linestyle'] = ''
-    if np.all(std_devs(y) == 0) and np.all(std_devs(x) == 0):
+    if numpy.all(std_devs(y) == 0) and numpy.all(std_devs(x) == 0):
         kwargs.setdefault('capsize', 0)
 
     # enable combinations of 1D and 2D x's and y's
-    y = np.array(y)
+    y = numpy.array(y)
     y = y.reshape(-1, y.shape[-1])
-    x = np.array(x)
+    x = numpy.array(x)
     x = x.reshape(-1, x.shape[-1])
     if x.shape[0] == 1 and y.shape[0] > 1:  # one x for all y's
-        x = np.tile(x[0, :], y.shape[0]).reshape(-1, x.shape[-1])
+        x = numpy.tile(x[0, :], y.shape[0]).reshape(-1, x.shape[-1])
 
     # plot each (x,y) and collect container objects
     for xi, yi in zip(x, y):
