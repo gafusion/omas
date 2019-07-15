@@ -214,6 +214,15 @@ class TestOmasCore(unittest.TestCase):
         ods['dataset_description'].satisfy_imas_requirements()
         assert ods['dataset_description.ids_properties.homogeneous_time'] is not None
 
+    def test_dynamic_set_existing_list_nonzero_array_index(self):
+        ods = ODS()
+        ods.consistency_check = False
+        ods.dynamic_path_creation = True
+        ods['something.[0]'] = 5
+        ods['something.[7]'] = 10
+        assert ods['something.[7]'] == 10
+
+
     def test_force_type(self):
         ods = ODS()
         ods['core_profiles.profiles_1d'][0]['ion'][0]['z_ion'] = 1
