@@ -222,6 +222,11 @@ class TestOmasCore(unittest.TestCase):
         ods['something.[7]'] = 10
         assert ods['something.[7]'] == 10
 
+    def test_set_nonexisting_array_index(self):
+        ods = ODS()
+        ods.consistency_check = False
+        ods.dynamic_path_creation = False
+        self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
 
     def test_force_type(self):
         ods = ODS()
