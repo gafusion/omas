@@ -508,7 +508,7 @@ def p2l(key):
     if isinstance(key, (int, numpy.integer)):
         return [int(key)]
 
-    if isinstance(key, basestring) and '.' not in key:
+    if isinstance(key, basestring) and not ('.' in key or '[' in key):
         if len(key):
             return [key]
         else:
