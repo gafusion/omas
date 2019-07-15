@@ -607,24 +607,27 @@ class ODS(MutableMapping):
                     if key[0] == len(self.omas_data):
                         self.omas_data.append(value)
                     else:
-                        raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+                        raise IndexError('`%s[%d]` but maximum index is %d' % (self.location, key[0], len(self.omas_data) - 1))
             try:
                 self.getraw(key[0])[key[1:]] = pass_on_value
             except LookupError:
                 if dynamically_created:
                     del self[key[0]]
                 raise
+        elif isinstance(key[0], int):
+            if key[0] >= len(self.omas_data) and self.dynamic_path_creation:
+                for item in range(len(self.omas_data), key[0]):
+                    ods = ODS()
+                    ods.copy_attrs_from(self)
+                    self[item] = ods
+            if key[0] == len(self.omas_data):
+                self.omas_data.append(value)
+            else:
+                raise IndexError('`%s[%d]` but maximum index is %d' % (self.location, key[0], len(self.omas_data) - 1))
         elif isinstance(self.omas_data, dict):
             self.omas_data[key[0]] = value
         elif key[0] in self.omas_data:
             self.omas_data[key[0]] = value
-        elif key[0] == len(self.omas_data):
-            self.omas_data.append(value)
-        else:
-            if not len(self.omas_data):
-                IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
-            else:
-                raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
         # if the value is an ODS strucutre
         if isinstance(value, ODS) and value.omas_data is not None and len(value):
