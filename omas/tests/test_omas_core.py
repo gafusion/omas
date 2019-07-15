@@ -140,7 +140,7 @@ class TestOmasCore(unittest.TestCase):
         ods = ODS()
         ods.consistency_check = False
         ods.dynamic_path_creation = True
-        self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
+        self.assertRaises(IndexError, ods.__setitem__, 'something[10]', 5)
 
     def test_coordinates(self):
         ods = ods_sample()
@@ -219,6 +219,21 @@ class TestOmasCore(unittest.TestCase):
         ods.sample_dataset_description()
         ods['dataset_description'].satisfy_imas_requirements()
         assert ods['dataset_description.ids_properties.homogeneous_time'] is not None
+
+    def test_dynamic_set_existing_list_nonzero_array_index(self):
+        ods = ODS()
+        ods.consistency_check = False
+        ods.dynamic_path_creation = 'dynamic_array_structures'
+        ods['something[0]'] = 5
+        ods['something[7]'] = 10
+        assert ods['something[0]'] == 5
+        assert ods['something[7]'] == 10
+
+    def test_set_nonexisting_array_index(self):
+        ods = ODS()
+        ods.consistency_check = False
+        ods.dynamic_path_creation = False
+        self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
 
     def test_force_type(self):
         ods = ODS()
@@ -321,6 +336,7 @@ class TestOmasCore(unittest.TestCase):
         ods = ODS()
         ods.sample_equilibrium()
         ods.save('test.pkl')
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

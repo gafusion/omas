@@ -591,40 +591,46 @@ class ODS(MutableMapping):
                 elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
                     printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
-        # if the user has entered a path rather than a single key
-        if len(key) > 1:
-            dynamically_created = False
-            if key[0] not in self.keys():
-                dynamically_created = True
-                if isinstance(self.omas_data, dict):
+        # check if the branch/node was dynamically created
+        dynamically_created = False
+        if key[0] not in self.keys() and len(key) > 1:
+            dynamically_created = True
+
+        # assign values to this ODS
+        if key[0] not in self.keys() or len(key) == 1:
+            # structure
+            if isinstance(key[0], basestring):
+                self.omas_data[key[0]] = value
+            # arrays of structures
+            else:
+                # dynamic array structure creation
+                if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
+                    for item in range(len(self.omas_data), key[0]):
+                        ods = ODS()
+                        ods.copy_attrs_from(self)
+                        self[item] = ods
+                # index exists
+                if key[0] < len(self.omas_data):
                     self.omas_data[key[0]] = value
+                # next index creation
+                elif key[0] == len(self.omas_data) and self.dynamic_path_creation:
+                    self.omas_data.append(value)
+                # missing index
                 else:
-                    if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
-                        for item in range(len(self.omas_data), key[0]):
-                            ods = ODS()
-                            ods.copy_attrs_from(self)
-                            self[item] = ods
-                    if key[0] == len(self.omas_data):
-                        self.omas_data.append(value)
+                    if not len(self.omas_data):
+                        raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
                     else:
                         raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+
+        # pass the value one level deeper
+        # and cleanup dynamically created branches if necessary (eg. if consistency check fails)
+        if len(key) > 1:
             try:
                 self.getraw(key[0])[key[1:]] = pass_on_value
             except LookupError:
                 if dynamically_created:
                     del self[key[0]]
                 raise
-        elif isinstance(self.omas_data, dict):
-            self.omas_data[key[0]] = value
-        elif key[0] in self.omas_data:
-            self.omas_data[key[0]] = value
-        elif key[0] == len(self.omas_data):
-            self.omas_data.append(value)
-        else:
-            if not len(self.omas_data):
-                raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
-            else:
-                raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
 
         # if the value is an ODS strucutre
         if isinstance(value, ODS) and value.omas_data is not None and len(value):
