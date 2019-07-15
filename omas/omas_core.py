@@ -599,7 +599,7 @@ class ODS(MutableMapping):
                 if isinstance(self.omas_data, dict):
                     self.omas_data[key[0]] = value
                 else:
-                    if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
+                    if key[0] >= len(self.omas_data) and self.dynamic_path_creation:
                         for item in range(len(self.omas_data), key[0]):
                             ods = ODS()
                             ods.copy_attrs_from(self)
