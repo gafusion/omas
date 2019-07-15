@@ -136,6 +136,12 @@ class TestOmasCore(unittest.TestCase):
         # check writing setting an xarray.DataArray
         ods2['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(uarray([0., 1., 2., 3.], [0, .1, .2, .3]), coords={'x': [1, 2, 3, 4]}, dims=['x'])
 
+    def test_dynamic_set_nonzero_array_index(self):
+        ods = ODS()
+        ods.consistency_check = False
+        ods.dynamic_path_creation = True
+        self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
+
     def test_coordinates(self):
         ods = ods_sample()
         assert (len(ods.list_coordinates()) > 0)
