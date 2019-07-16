@@ -337,6 +337,23 @@ class TestOmasCore(unittest.TestCase):
         ods.sample_equilibrium()
         ods.save('test.pkl')
 
+    def test_input_data_process_functions(self):
+        def robust_eval(string):
+            import ast
+            try:
+                return ast.literal_eval(string)
+            except:
+                return string
+
+        ods = ODS(consistency_check=False)
+        with omas_environment(ods, input_data_process_functions=[robust_eval]):
+            ods['int'] = '1'
+            ods['float'] = '1.0'
+            ods['basestring'] = 'bla'
+            ods['complex'] = '2+1j'
+        for item in ods:
+            assert isinstance(ods[item], eval(item))
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

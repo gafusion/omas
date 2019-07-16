@@ -929,7 +929,7 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 @add_to__ALL__
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
+def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, **kw):
     '''
     Provides environment for data input/output to/from OMAS
 
@@ -976,6 +976,12 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
     if unitsio is not None:
         ods.unitsio = unitsio
 
+    # set input_data_process_functions
+    if input_data_process_functions is not None:
+        import omas_core
+        bkp_input_data_process_functions = copy.copy(omas_core.input_data_process_functions)
+        omas_core.input_data_process_functions[:] = input_data_process_functions
+
     try:
         if coordsio is not None:
             with omas_environment(coordsio, cocosio=cocosio):
@@ -990,7 +996,9 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, **kw):
         ods.unitsio = bkp_unitsio
         for item in kw:
             setattr(ods, item, bkp_args[item])
-
+        # restore input_data_process_functions
+        if input_data_process_functions is not None:
+            omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
 
 def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True):
     """
