@@ -978,7 +978,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
 
     # set input_data_process_functions
     if input_data_process_functions is not None:
-        import omas_core
+        from . import omas_core
         bkp_input_data_process_functions = copy.copy(omas_core.input_data_process_functions)
         omas_core.input_data_process_functions[:] = input_data_process_functions
 

@@ -23,7 +23,7 @@ ods = ODS(consistency_check=False)
 with omas_environment(ods, input_data_process_functions=[robust_eval]):
     ods['int'] = '1'
     ods['float'] = '1.0'
-    ods['basestring'] = 'bla'
+    ods['str'] = 'bla'
     ods['complex'] = '2+1j'
 
 # test
