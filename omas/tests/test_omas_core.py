@@ -354,6 +354,23 @@ class TestOmasCore(unittest.TestCase):
         for item in ods:
             assert isinstance(ods[item], eval(item))
 
+    def test_conversion_after_assignement(self):
+        ods = ODS(consistency_check=False)
+        ods['bla'] = 5
+        try:
+            ods[0] = 4
+            raise AssertionError('Convertion of dict to list should not be allowed')
+        except TypeError:
+            pass
+
+        del ods['bla']
+        ods[0] = 4
+        try:
+            ods['bla'] = 5
+            raise AssertionError('Convertion of list to dict should not be allowed')
+        except TypeError:
+            pass
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

@@ -466,16 +466,17 @@ class ODS(MutableMapping):
                                       spaces + '^' * len(structure_key) + '\n' + '%s' % options)
 
         # check what container type is required and if necessary switch it
-        if isinstance(key[0], int) and not isinstance(self.omas_data, list):
-            if not self.omas_data or not len(self.omas_data):
-                self.omas_data = []
+        if not self.omas_data or not len(self.omas_data):
+            if isinstance(key[0], int):
+                if not isinstance(self.omas_data, list):
+                    self.omas_data = []
             else:
-                raise Exception('Cannot convert from dict to list once ODS has data')
-        if not isinstance(key[0], int) and not isinstance(self.omas_data, dict):
-            if not self.omas_data or not len(self.omas_data):
-                self.omas_data = {}
-            else:
-                raise Exception('Cannot convert from list to dict once ODS has data')
+                if not isinstance(self.omas_data, dict):
+                    self.omas_data = {}
+        elif isinstance(key[0], int) and not isinstance(self.omas_data, list):
+            raise TypeError('Cannot convert from dict to list once ODS has data')
+        elif isinstance(key[0], basestring) and not isinstance(self.omas_data, dict):
+            raise TypeError('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
         if not isinstance(value, ODS):
