@@ -22,7 +22,7 @@ for k in range(5):
 print(master_ods[':.:.data'])
 
 ###################################
-# This will return
+# This will return::
 #
 #     [[0 0 0]
 #      [1 1 1]
