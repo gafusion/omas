@@ -76,8 +76,8 @@ tag:
 sdist:
 	python setup.py sdist
 
-pypi: sdist
-	python setup.py upload
+pypi:
+	python setup.py sdist upload
 
 release: tests2 tests3 requirements json cocos docs tag
 	@echo 'Make release done'
