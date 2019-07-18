@@ -1,4 +1,3 @@
-from setuptools import setup
 import sys
 import os
 import glob
@@ -34,11 +33,23 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
                         item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)
 
-packages = ['omas', 'omas.tests']
-package_data = {'omas': ['*.py', 'version'], 'omas.tests': ['*.py']}
-for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
-    packages.append('omas.imas_structures.' + os.path.split(item)[1])
-    package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
+if os.path.exists('.git'):
+    print('==GIT DIRECTORY FOUND==')
+    import commands
+    status, files = commands.getstatusoutput("git ls-files --exclude-standard [^sphinx]*")
+    files = files.strip().split('\n')
+else:
+    files = []
+    path = os.path.dirname(os.path.abspath(__file__)) + '/'
+    for r, d, f in os.walk(path):
+        if [r[len(path):].startswith(exclude) for exclude in ['.git', '.idea']]:
+            continue
+        for file in f:
+            files.append(os.path.join(r[len(path):], file))
+dirs = sorted(list(set([os.path.dirname(file) for file in files])))
+dirs = [dir for dir in dirs if dir]
+packages = [dir.replace('/', '.') for dir in dirs if dir]
+package_data = {dir.replace('/', '.'): [os.path.basename(file) for file in files if os.path.dirname(file) == dir] for dir in dirs if dir}
 
 long_description = '''
 OMAS is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_).
@@ -51,6 +62,8 @@ OMAS is a Python library designed to simplify the interface of third-party codes
 
 Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.
 '''
+
+from setuptools import setup
 
 setup(
     name='omas',

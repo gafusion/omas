@@ -73,8 +73,11 @@ tag:
 	git tag -a v$$(cat omas/version) $$(git log --pretty=format:"%h" --grep="^version $$(cat omas/version)") -m "version $$(cat omas/version)"
 	git push --tags
 
-pypi:
-	python setup.py sdist upload
+sdist:
+	python setup.py sdist
+
+pypi: sdist
+	python setup.py upload
 
 release: tests2 tests3 requirements json cocos docs tag
 	@echo 'Make release done'
