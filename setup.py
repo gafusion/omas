@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 import glob
+import subprocess
 
 all_install_require = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py']
 install_requires = {}
@@ -35,9 +36,9 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 
 if os.path.exists('.git'):
     print('==GIT DIRECTORY FOUND==')
-    import commands
-    status, files = commands.getstatusoutput("git ls-files --exclude-standard [^sphinx]*")
-    files = files.strip().split('\n')
+    p = subprocess.Popen("git ls-files --exclude-standard [^sphinx]*", shell=True, stdout=subprocess.PIPE)
+    std_out, std_err = p.communicate()
+    files = str(std_out).strip().split('\n')
 else:
     files = []
     path = os.path.dirname(os.path.abspath(__file__)) + '/'
