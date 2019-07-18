@@ -38,7 +38,10 @@ if os.path.exists('.git'):
     print('==GIT DIRECTORY FOUND==')
     p = subprocess.Popen("git ls-files --exclude-standard [^sphinx]*", shell=True, stdout=subprocess.PIPE)
     std_out, std_err = p.communicate()
-    files = str(std_out).strip().split('\n')
+    if sys.version_info < (3, 0):
+        files = std_out.strip().split('\n')
+    else:
+        files = std_out.decode("utf-8").strip().split('\n')
 else:
     files = []
     path = os.path.dirname(os.path.abspath(__file__)) + '/'
