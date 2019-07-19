@@ -34,25 +34,19 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
                         item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)
 
-if os.path.exists('.git'):
-    print('==GIT DIRECTORY FOUND==')
-    p = subprocess.Popen("git ls-files --exclude-standard [^sphinx]*", shell=True, stdout=subprocess.PIPE)
-    std_out, std_err = p.communicate()
-    if sys.version_info < (3, 0):
-        files = std_out.strip().split('\n')
-    else:
-        files = std_out.decode("utf-8").strip().split('\n')
-else:
-    files = []
-    for r, d, f in os.walk(here):
-        if any([r[len(here):].startswith(exclude) for exclude in ['.git', '.idea', 'sphinx']]):
-            continue
-        for file in f:
-            files.append(os.path.join(r[len(here):], file))
-dirs = sorted(list(set([os.path.dirname(file) for file in files])))
-dirs = [dir for dir in dirs if dir]
-packages = [dir.replace('/', '.') for dir in dirs if dir]
-package_data = {dir.replace('/', '.'): [os.path.basename(file) for file in files if os.path.dirname(file) == dir] for dir in dirs if dir}
+packages = ['omas',
+            'omas.examples',
+            'omas.samples',
+            'omas.tests',
+            'omas.utilities']
+package_data = {'omas': ['*.py', 'version'],
+                'omas.examples': ['*.py'],
+                'omas.samples': ['*'],
+                'omas.tests': ['*.py'],
+                'omas.utilities': ['*.py']}
+for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
+    packages.append('omas.imas_structures.' + os.path.split(item)[1])
+    package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
 
 long_description = '''
 OMAS is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_).
