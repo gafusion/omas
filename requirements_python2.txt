@@ -12,12 +12,12 @@ scipy                    # required
 h5py                     # required
 xarray<=0.11.0           # required
 
+#pyhdc                   # hdc
+#imas                    # imas
+#pyuda                   # uda
+#xmltodict               # build_structures
+#bs4                     # build_structures
 Sphinx                   # build_documentation
 sphinx-bootstrap-theme   # build_documentation
 sphinx-gallery           # build_documentation
 Pillow                   # build_documentation
-#pyuda                   # uda
-#pyhdc                   # hdc
-#xmltodict               # build_structures
-#bs4                     # build_structures
-#imas                    # imas

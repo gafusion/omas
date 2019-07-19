@@ -44,12 +44,11 @@ if os.path.exists('.git'):
         files = std_out.decode("utf-8").strip().split('\n')
 else:
     files = []
-    path = os.path.dirname(os.path.abspath(__file__)) + '/'
-    for r, d, f in os.walk(path):
-        if [r[len(path):].startswith(exclude) for exclude in ['.git', '.idea']]:
+    for r, d, f in os.walk(here):
+        if any([r[len(here):].startswith(exclude) for exclude in ['.git', '.idea', 'sphinx']]):
             continue
         for file in f:
-            files.append(os.path.join(r[len(path):], file))
+            files.append(os.path.join(r[len(here):], file))
 dirs = sorted(list(set([os.path.dirname(file) for file in files])))
 dirs = [dir for dir in dirs if dir]
 packages = [dir.replace('/', '.') for dir in dirs if dir]
