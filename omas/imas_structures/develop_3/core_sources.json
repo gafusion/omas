@@ -2,7 +2,7 @@
  "core_sources": {
   "documentation": "Core plasma thermal source terms (for the transport equations of the thermal species). Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)",
   "full_path": "core_sources",
-  "lifecycle_last_change": "3.19.0",
+  "lifecycle_last_change": "3.23.4",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "15"
@@ -160,7 +160,7 @@
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A.m"
+  "units": "A"
  },
  "core_sources.source[:].global_quantities[:].current_parallel_error_index": {
   "data_type": "int_type",
@@ -175,7 +175,7 @@
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_lower",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A.m"
+  "units": "A"
  },
  "core_sources.source[:].global_quantities[:].current_parallel_error_upper": {
   "data_type": "FLT_0D",
@@ -183,7 +183,7 @@
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_upper",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A.m"
+  "units": "A"
  },
  "core_sources.source[:].global_quantities[:].electrons": {
   "data_type": "structure",
@@ -358,7 +358,7 @@
  "core_sources.source[:].identifier": {
   "data_type": "structure",
   "doc_identifier": "core_sources/core_source_identifier.xml",
-  "documentation": "Source term identifier (process causing this source term)\n0) unspecified : Unspecified source type\n1) total : Total source; combines all sources\n2) nbi : Source from Neutral Beam Injection\n3) ec : Sources from electron cyclotron heating and current drive\n4) lh : Sources from lower hybrid heating and current drive\n5) ic : Sources from heating at the ion cyclotron range of frequencies\n6) fusion : Sources from fusion reactions, e.g. alpha particle heating\n7) ohmic : Source from ohmic heating\n8) bremsstrahlung : Source from bremsstrahlung; radiation losses are negative sources\n9) synchrotron_radiation : Source from synchrotron radiation; radiation losses are negative sources\n10) line_radiation : Source from line radiation; radiation losses are negative sources\n11) collisional_equipartition : Collisional equipartition\n12) cold_neutrals : Source of cold neutrals\n13) bootstrap_current : Bootstrap current\n14) pellet : Sources from injection\n100) auxiliary : Source from auxiliary systems, e.g. heating and current drive systems\n101) ic_nbi : A combination of the ic and nbi sources\n102) ic_fusion : A combination of the ic and fusion sources\n103) ic_nbi_fusion : A combination of the ic and fusion sources\n104) ec_lh : A combination of the ec and lh sources\n105) ec_ic : A combination of the ec and ic sources\n106) lh_ic : A combination of the lh and ic sources\n107) ec_lh_ic : A combination of the ec, lh and ic sources\n108) gas_puff : Gas puff\n109) killer_gas_puff : Killer gas puff\n200) radiation : Total radiation source; radiation losses are negative sources\n201) cyclotron_radiation : Source from cyclotron radiation; radiation losses are negative sources\n202) cyclotron_synchrotron_radiation : Source from combined cyclotron and synchrotron radiation; radiation losses are negative sources\n203) impurity_radiation : Line radiation and Bremsstrahlung source; radiation losses are negative sources.\n303) particles_to_wall : Particle pumping by the wall; negative source for plasma and positive source for the wall\n304) particles_to_pump : Particle pumping by external pump; negative source for plasma and positive source for the pump\n305) charge_exchange : Source from charge exchange. Charge exchange losses are negative sources\n400) transport : Source term related to transport processes\n401) neoclassical : Source term related to neoclassical processes\n402) equipartition : Equipartition due to collisions and turbulence\n403) turbulent_equipartition : Turbulent equipartition\n501) runaways : Source from run-away processes; includes both electron and ion run-away\n801) database : Source from database entry\n802) gaussian : Artificial source with a gaussian profile\n901) custom_1 : Custom source terms 1; content to be decided by data provided\n902) custom_2 : Custom source terms 2; content to be decided by data provided\n903) custom_3 : Custom source terms 3; content to be decided by data provided\n904) custom_4 : Custom source terms 4; content to be decided by data provided\n905) custom_5 : Custom source terms 5; content to be decided by data provided\n906) custom_6 : Custom source terms 6; content to be decided by data provided\n907) custom_7 : Custom source terms 7; content to be decided by data provided\n908) custom_8 : Custom source terms 8; content to be decided by data provided\n909) custom_9 : Custom source terms 9; content to be decided by data provided",
+  "documentation": "Source term identifier (process causing this source term)\n0) unspecified : Unspecified source type\n1) total : Total source; combines all sources\n2) nbi : Source from Neutral Beam Injection\n3) ec : Sources from electron cyclotron heating and current drive\n4) lh : Sources from lower hybrid heating and current drive\n5) ic : Sources from heating at the ion cyclotron range of frequencies\n6) fusion : Sources from fusion reactions, e.g. alpha particle heating\n7) ohmic : Source from ohmic heating\n8) bremsstrahlung : Source from bremsstrahlung; radiation losses are negative sources\n9) synchrotron_radiation : Source from synchrotron radiation; radiation losses are negative sources\n10) line_radiation : Source from line radiation; radiation losses are negative sources\n11) collisional_equipartition : Collisional equipartition\n12) cold_neutrals : Source of cold neutrals\n13) bootstrap_current : Bootstrap current\n14) pellet : Sources from injection\n100) auxiliary : Source from auxiliary systems, e.g. heating and current drive systems\n101) ic_nbi : A combination of the ic and nbi sources\n102) ic_fusion : A combination of the ic and fusion sources\n103) ic_nbi_fusion : A combination of the ic and fusion sources\n104) ec_lh : A combination of the ec and lh sources\n105) ec_ic : A combination of the ec and ic sources\n106) lh_ic : A combination of the lh and ic sources\n107) ec_lh_ic : A combination of the ec, lh and ic sources\n108) gas_puff : Gas puff\n109) killer_gas_puff : Killer gas puff\n200) radiation : Total radiation source; radiation losses are negative sources\n201) cyclotron_radiation : Source from cyclotron radiation; radiation losses are negative sources\n202) cyclotron_synchrotron_radiation : Source from combined cyclotron and synchrotron radiation; radiation losses are negative sources\n203) impurity_radiation : Line radiation and Bremsstrahlung source; radiation losses are negative sources.\n303) particles_to_wall : Particle pumping by the wall; negative source for plasma and positive source for the wall\n304) particles_to_pump : Particle pumping by external pump; negative source for plasma and positive source for the pump\n305) charge_exchange : Source from charge exchange. Charge exchange losses are negative sources\n400) transport : Source term related to transport processes\n401) neoclassical : Source term related to neoclassical processes\n402) equipartition : Equipartition due to collisions and turbulence\n403) turbulent_equipartition : Turbulent equipartition\n501) runaways : Source from run-away processes; includes both electron and ion run-away\n601) ionisation : Source from ionisation processes (not accounting for charge exchange)\n602) recombination : Source from recombination processes (not accounting for charge exchange)\n603) excitation : Source from excitation processes\n801) database : Source from database entry\n802) gaussian : Artificial source with a gaussian profile\n901) custom_1 : Custom source terms 1; content to be decided by data provided\n902) custom_2 : Custom source terms 2; content to be decided by data provided\n903) custom_3 : Custom source terms 3; content to be decided by data provided\n904) custom_4 : Custom source terms 4; content to be decided by data provided\n905) custom_5 : Custom source terms 5; content to be decided by data provided\n906) custom_6 : Custom source terms 6; content to be decided by data provided\n907) custom_7 : Custom source terms 7; content to be decided by data provided\n908) custom_8 : Custom source terms 8; content to be decided by data provided\n909) custom_9 : Custom source terms 9; content to be decided by data provided",
   "full_path": "core_sources/source(i1)/identifier",
   "lifecycle_status": "active",
   "structure_reference": "identifier"

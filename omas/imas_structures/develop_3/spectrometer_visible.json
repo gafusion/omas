@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.23.0",
+  "lifecycle_last_change": "3.23.4",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -2466,7 +2466,7 @@
   "documentation": "Set of processed spectral lines",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)",
   "lifecycle_status": "alpha",
-  "maxoccur": "10",
+  "maxoccur": "20",
   "structure_reference": "spectro_vis_channel_processed_line"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].intensity": {
@@ -2534,7 +2534,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].label": {
   "data_type": "STR_0D",
-  "documentation": "String identifying the processed line (e.g. WI, OI, DI)",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/label",
   "lifecycle_status": "alpha",
   "type": "constant"
@@ -2777,6 +2777,75 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"slit_width\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/slit_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration": {
+  "data_type": "structure",
+  "documentation": "Wavelength calibration data. The wavelength is obtained from the pixel index k by: wavelength =  k * gain + offset. k is starting from 1.",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_channel_wavelength_calibration"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain": {
+  "data_type": "FLT_0D",
+  "documentation": "Gain",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"gain\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"gain\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"gain\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset": {
+  "data_type": "FLT_0D",
+  "documentation": "Offset",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"offset\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"offset\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"offset\"",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"

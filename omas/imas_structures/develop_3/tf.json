@@ -1122,6 +1122,69 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
+ "tf.delta_b_field_tor_vacuum_r": {
+  "data_type": "structure",
+  "documentation": "Variation of (vacuum field times major radius in the toroidal field magnet) from the start of the plasma.",
+  "full_path": "tf/delta_b_field_tor_vacuum_r",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_tor_vacuum_r.data": {
+  "coordinates": [
+   "tf.delta_b_field_tor_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "tf/delta_b_field_tor_vacuum_r/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_tor_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_tor_vacuum_r.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "tf/delta_b_field_tor_vacuum_r/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.delta_b_field_tor_vacuum_r.data_error_lower": {
+  "coordinates": [
+   "tf.delta_b_field_tor_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "tf/delta_b_field_tor_vacuum_r/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_tor_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_tor_vacuum_r.data_error_upper": {
+  "coordinates": [
+   "tf.delta_b_field_tor_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "tf/delta_b_field_tor_vacuum_r/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_tor_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_tor_vacuum_r.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "tf/delta_b_field_tor_vacuum_r/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_tor_vacuum_r/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "tf.field_map": {
   "coordinates": [
    "tf.field_map[:].time"

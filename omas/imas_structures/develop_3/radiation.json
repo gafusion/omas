@@ -2,7 +2,7 @@
  "radiation": {
   "documentation": "Radiation emitted by the plasma and neutrals",
   "full_path": "radiation",
-  "lifecycle_last_change": "3.22.0",
+  "lifecycle_last_change": "3.23.4",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.17.1",
   "maxoccur": "2"
@@ -765,7 +765,7 @@
    "1...N"
   ],
   "data_type": "struct_array",
-  "documentation": "Set of emission processes. The radiation characteristics are described at the level of the originating entity:\n1/ line radiation from neutrals under neutral 2/ line and recombination radiation under ion 3/ bremsstrahlung radiation under neutral and ion 4/ possibly recombination and bremsstrahlung under ion",
+  "documentation": "Set of emission processes. The radiation characteristics are described at the level of the originating entity: 1/ line radiation from neutrals under neutral 2/ line and recombination radiation under ion 3/ bremsstrahlung radiation under neutral and ion 4/ possibly recombination and bremsstrahlung under ion",
   "full_path": "radiation/process(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",

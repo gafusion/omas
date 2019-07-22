@@ -912,7 +912,7 @@
  },
  "amns_data.process[:].products[:].metastable_label": {
   "data_type": "STR_0D",
-  "documentation": "Label identifying in text form the metastable\n",
+  "documentation": "Label identifying in text form the metastable",
   "full_path": "amns_data/process(i1)/products(i2)/metastable_label",
   "lifecycle_status": "alpha",
   "type": "static"
@@ -1196,7 +1196,7 @@
  },
  "amns_data.process[:].reactants[:].metastable_label": {
   "data_type": "STR_0D",
-  "documentation": "Label identifying in text form the metastable\n",
+  "documentation": "Label identifying in text form the metastable",
   "full_path": "amns_data/process(i1)/reactants(i2)/metastable_label",
   "lifecycle_status": "alpha",
   "type": "static"

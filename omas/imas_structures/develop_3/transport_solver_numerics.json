@@ -8587,7 +8587,7 @@
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.identifier": {
   "data_type": "structure",
-  "documentation": "Identifier of the primary quantity of the transport equation. The description node contains the path to the quantity in the physics IDS (example:\ncore_profiles/profiles_1d/ion(1)/density)",
+  "documentation": "Identifier of the primary quantity of the transport equation. The description node contains the path to the quantity in the physics IDS (example: core_profiles/profiles_1d/ion(1)/density)",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/identifier",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
