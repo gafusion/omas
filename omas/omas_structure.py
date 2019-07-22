@@ -338,3 +338,55 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
         omas_coordinates.update(coords)
 
     return sorted(list(omas_coordinates))
+
+
+def symlink_imas_structure_versions(test=True, verbose=True):
+    '''
+    Generate symbolic links in imas_structures so that no files are added when there are no changes between IDSs
+
+    :param test: whether to actually apply symlink commands
+
+    :param verbose: wheter to print to screen structures strides
+
+    :returns: dictionary with structure stides per IDS
+    '''
+    from omas.omas_setup import IMAS_versions
+    from omas.omas_utils import dict_structures, imas_json_dir
+    imas_versions = IMAS_versions('tagged')
+    from pprint import pprint
+
+    # check if two files are identical
+    def same_ds(a, b):
+        with open(a) as a:
+            with open(b) as b:
+                return a.read() == b.read()
+
+    # see when DS files have changed
+    structures_strides = {}
+    previous_tag_structures = {}
+    for version in list(imas_versions.keys()):
+        this_tag_structures = dict_structures(version)
+        for ds in this_tag_structures:
+            if ds not in structures_strides:
+                structures_strides[ds] = [[version]]
+            elif ds in previous_tag_structures:
+                if same_ds(previous_tag_structures[ds], this_tag_structures[ds]):
+                    structures_strides[ds][-1].append(version)
+                else:
+                    structures_strides[ds].append([version])
+        previous_tag_structures = this_tag_structures
+    if verbose:
+        pprint(structures_strides)
+
+    if not test:
+        for ds in structures_strides:
+            for stride in structures_strides[ds]:
+                if len(stride) > 1:
+                    for version in stride[:-1]:
+                        dir = imas_json_dir + '/'
+                        this = dict_structures(stride[-1])[ds][len(dir):]
+                        prev = dict_structures(version)[ds]
+                        command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
+                        print(command)
+                        subprocess.Popen(command, shell=True).communicate()
+    return structures_strides
