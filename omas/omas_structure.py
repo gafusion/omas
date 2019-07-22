@@ -21,6 +21,9 @@ def generate_xml_schemas(imas_version=None):
     """
     import subprocess
 
+    saxon_version = 'SaxonHE9-9-1-4J'
+    saxon_major_version = '9.' + saxon_version.split('-')[1]
+
     # clone the IMAS data-dictionary repository
     dd_folder = os.sep.join([imas_json_dir, '..', 'data-dictionary'])
     if not os.path.exists(dd_folder):
@@ -29,13 +32,13 @@ def generate_xml_schemas(imas_version=None):
             stdout=subprocess.PIPE, shell=True).communicate()[0]
 
     # download Saxon
-    sax_folder = os.sep.join([imas_json_dir, '..', 'SaxonHE9-6-0-10J'])
+    sax_folder = os.sep.join([imas_json_dir, '..', saxon_version])
     if not os.path.exists(sax_folder):
         subprocess.Popen("""
-        cd %s
-        curl https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/9.6/SaxonHE9-6-0-10J.zip > SaxonHE9-6-0-10J.zip
-        unzip -d SaxonHE9-6-0-10J SaxonHE9-6-0-10J.zip
-        rm SaxonHE9-6-0-10J.zip""" % os.sep.join([imas_json_dir, '..']), shell=True).communicate()
+        cd {install_dir}
+        curl https://iweb.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
+        unzip -d {saxon_version} {saxon_version}.zip
+        rm {saxon_version}.zip""".format(install_dir=os.sep.join([imas_json_dir, '..']), saxon_major_version=saxon_major_version, saxon_version=saxon_version), shell=True).communicate()
 
     # fetch data structure updates
     subprocess.Popen("""
@@ -57,7 +60,7 @@ def generate_xml_schemas(imas_version=None):
     # generate IDSDef.xml files for given imas_version
     _imas_version = imas_versions[imas_version]
     executable = """
-export CLASSPATH={imas_json_dir}/../SaxonHE9-6-0-10J/saxon9he.jar;
+export CLASSPATH={imas_json_dir}/../{saxon_version}/saxon9he.jar;
 cd {dd_folder}
 git checkout {tag}
 git pull
@@ -67,7 +70,7 @@ make
 rm -rf {imas_json_dir}/{_imas_version}/
 mkdir {imas_json_dir}/{_imas_version}/
 cp IDSDef.xml {imas_json_dir}/{_imas_version}/
-""".format(tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder)
+""".format(tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder, saxon_version=saxon_version)
     print(executable)
     subprocess.Popen(executable, shell=True).communicate()
 
