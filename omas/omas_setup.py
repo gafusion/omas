@@ -99,18 +99,22 @@ class IMAS_versions(OrderedDict):
     '''
     dictionary with list of IMAS version and their sub-folder name in the imas_json_dir
     '''
-    pass
+
+    def __init__(self, mode='all'):
+        OrderedDict.__init__(self)
+        if mode in ['all', 'named']:
+            # first `develop/3` and other branches
+            for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
+                if not _item.startswith('3'):
+                    self[_item.replace('_', '.')] = _item
+        if mode in ['all', 'tagged']:
+            # next all tagged versions sorted by version number
+            for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
+                if _item.startswith('3'):
+                    self[_item.replace('_', '.')] = _item
 
 
 imas_versions = IMAS_versions()
-# first `develop/3` and other branches
-for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
-    if not _item.startswith('3'):
-        imas_versions[_item.replace('_', '.')] = _item
-# next all tagged versions sorted by version number
-for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
-    if _item.startswith('3'):
-        imas_versions[_item.replace('_', '.')] = _item
 
 if 'OMAS_IMAS_VERSION' in os.environ:
     _default_imas_version = os.environ['OMAS_IMAS_VERSION']
@@ -148,7 +152,7 @@ omas_rcparams.update({
                                                                        'OMAS_FAKE_IMAS_DIR'])),
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
     'default_imas_version': _default_imas_version,
-    'pickle_protocol':2 # pickle.HIGHEST_PROTOCOL (`2` is used to ensure Python 3-->2 compatibility)
+    'pickle_protocol': 2  # pickle.HIGHEST_PROTOCOL (`2` is used to ensure Python 3-->2 compatibility)
 })
 
 
