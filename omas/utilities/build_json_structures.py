@@ -24,3 +24,6 @@ for imas_version in imas_versions:
         generate_xml_schemas(imas_version=imas_version)
         create_json_structure(imas_version=imas_version)
         create_html_documentation(imas_version=imas_version)
+
+# generate symlinks between imas versions
+symlink_imas_structure_versions(test=False)
