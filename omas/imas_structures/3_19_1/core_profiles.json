@@ -4303,7 +4303,7 @@
  "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/neutrals_identifier.xml",
-  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type",
   "lifecycle_status": "active",
   "structure_reference": "identifier"

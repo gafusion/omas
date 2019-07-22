@@ -4381,7 +4381,7 @@
   "full_path": "summary/line_average/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -4399,7 +4399,7 @@
   "full_path": "summary/line_average/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -4410,7 +4410,7 @@
   "full_path": "summary/line_average/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.berylium": {
   "data_type": "structure",
@@ -4434,7 +4434,7 @@
   "full_path": "summary/line_average/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -4452,7 +4452,7 @@
   "full_path": "summary/line_average/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -4463,7 +4463,7 @@
   "full_path": "summary/line_average/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.carbon": {
   "data_type": "structure",
@@ -4487,7 +4487,7 @@
   "full_path": "summary/line_average/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -4505,7 +4505,7 @@
   "full_path": "summary/line_average/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -4516,7 +4516,7 @@
   "full_path": "summary/line_average/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.deuterium": {
   "data_type": "structure",
@@ -4540,7 +4540,7 @@
   "full_path": "summary/line_average/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -4558,7 +4558,7 @@
   "full_path": "summary/line_average/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -4569,7 +4569,7 @@
   "full_path": "summary/line_average/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_3": {
   "data_type": "structure",
@@ -4593,7 +4593,7 @@
   "full_path": "summary/line_average/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -4611,7 +4611,7 @@
   "full_path": "summary/line_average/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -4622,7 +4622,7 @@
   "full_path": "summary/line_average/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_4": {
   "data_type": "structure",
@@ -4646,7 +4646,7 @@
   "full_path": "summary/line_average/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -4664,7 +4664,7 @@
   "full_path": "summary/line_average/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -4675,7 +4675,7 @@
   "full_path": "summary/line_average/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.hydrogen": {
   "data_type": "structure",
@@ -4699,7 +4699,7 @@
   "full_path": "summary/line_average/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -4717,7 +4717,7 @@
   "full_path": "summary/line_average/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -4728,7 +4728,7 @@
   "full_path": "summary/line_average/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.lithium": {
   "data_type": "structure",
@@ -4752,7 +4752,7 @@
   "full_path": "summary/line_average/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -4770,7 +4770,7 @@
   "full_path": "summary/line_average/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -4781,7 +4781,7 @@
   "full_path": "summary/line_average/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.neon": {
   "data_type": "structure",
@@ -4805,7 +4805,7 @@
   "full_path": "summary/line_average/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -4823,7 +4823,7 @@
   "full_path": "summary/line_average/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -4834,7 +4834,7 @@
   "full_path": "summary/line_average/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.nitrogen": {
   "data_type": "structure",
@@ -4858,7 +4858,7 @@
   "full_path": "summary/line_average/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -4876,7 +4876,7 @@
   "full_path": "summary/line_average/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -4887,7 +4887,7 @@
   "full_path": "summary/line_average/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.oxygen": {
   "data_type": "structure",
@@ -4911,7 +4911,7 @@
   "full_path": "summary/line_average/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -4929,7 +4929,7 @@
   "full_path": "summary/line_average/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -4940,7 +4940,7 @@
   "full_path": "summary/line_average/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tritium": {
   "data_type": "structure",
@@ -4964,7 +4964,7 @@
   "full_path": "summary/line_average/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -4982,7 +4982,7 @@
   "full_path": "summary/line_average/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -4993,7 +4993,7 @@
   "full_path": "summary/line_average/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tungsten": {
   "data_type": "structure",
@@ -5017,7 +5017,7 @@
   "full_path": "summary/line_average/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -5035,7 +5035,7 @@
   "full_path": "summary/line_average/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -5046,7 +5046,7 @@
   "full_path": "summary/line_average/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.xenon": {
   "data_type": "structure",
@@ -5070,7 +5070,7 @@
   "full_path": "summary/line_average/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -5088,7 +5088,7 @@
   "full_path": "summary/line_average/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -5099,7 +5099,7 @@
   "full_path": "summary/line_average/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.line_average.n_i_total": {
   "data_type": "structure",
@@ -5471,7 +5471,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -5489,7 +5489,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.argon.value_error_upper": {
   "coordinates": [
@@ -5500,7 +5500,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.berylium": {
   "data_type": "structure",
@@ -5524,7 +5524,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -5542,7 +5542,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -5553,7 +5553,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.carbon": {
   "data_type": "structure",
@@ -5577,7 +5577,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -5595,7 +5595,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -5606,7 +5606,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.deuterium": {
   "data_type": "structure",
@@ -5630,7 +5630,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -5648,7 +5648,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -5659,7 +5659,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_3": {
   "data_type": "structure",
@@ -5683,7 +5683,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -5701,7 +5701,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -5712,7 +5712,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_4": {
   "data_type": "structure",
@@ -5736,7 +5736,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -5754,7 +5754,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -5765,7 +5765,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.hydrogen": {
   "data_type": "structure",
@@ -5789,7 +5789,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -5807,7 +5807,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -5818,7 +5818,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.lithium": {
   "data_type": "structure",
@@ -5842,7 +5842,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -5860,7 +5860,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -5871,7 +5871,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.neon": {
   "data_type": "structure",
@@ -5895,7 +5895,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -5913,7 +5913,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.neon.value_error_upper": {
   "coordinates": [
@@ -5924,7 +5924,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.nitrogen": {
   "data_type": "structure",
@@ -5948,7 +5948,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -5966,7 +5966,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -5977,7 +5977,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.oxygen": {
   "data_type": "structure",
@@ -6001,7 +6001,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -6019,7 +6019,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -6030,7 +6030,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tritium": {
   "data_type": "structure",
@@ -6054,7 +6054,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -6072,7 +6072,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -6083,7 +6083,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tungsten": {
   "data_type": "structure",
@@ -6107,7 +6107,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -6125,7 +6125,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -6136,7 +6136,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.xenon": {
   "data_type": "structure",
@@ -6160,7 +6160,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -6178,7 +6178,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -6189,7 +6189,7 @@
   "full_path": "summary/local/divertor_plate(i1)/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.divertor_plate[:].n_i_total": {
   "data_type": "structure",
@@ -6605,7 +6605,7 @@
   "full_path": "summary/local/edge/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -6623,7 +6623,7 @@
   "full_path": "summary/local/edge/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -6634,7 +6634,7 @@
   "full_path": "summary/local/edge/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.berylium": {
   "data_type": "structure",
@@ -6658,7 +6658,7 @@
   "full_path": "summary/local/edge/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -6676,7 +6676,7 @@
   "full_path": "summary/local/edge/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -6687,7 +6687,7 @@
   "full_path": "summary/local/edge/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.carbon": {
   "data_type": "structure",
@@ -6711,7 +6711,7 @@
   "full_path": "summary/local/edge/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -6729,7 +6729,7 @@
   "full_path": "summary/local/edge/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -6740,7 +6740,7 @@
   "full_path": "summary/local/edge/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.deuterium": {
   "data_type": "structure",
@@ -6764,7 +6764,7 @@
   "full_path": "summary/local/edge/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -6782,7 +6782,7 @@
   "full_path": "summary/local/edge/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -6793,7 +6793,7 @@
   "full_path": "summary/local/edge/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_3": {
   "data_type": "structure",
@@ -6817,7 +6817,7 @@
   "full_path": "summary/local/edge/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -6835,7 +6835,7 @@
   "full_path": "summary/local/edge/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -6846,7 +6846,7 @@
   "full_path": "summary/local/edge/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_4": {
   "data_type": "structure",
@@ -6870,7 +6870,7 @@
   "full_path": "summary/local/edge/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -6888,7 +6888,7 @@
   "full_path": "summary/local/edge/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -6899,7 +6899,7 @@
   "full_path": "summary/local/edge/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.hydrogen": {
   "data_type": "structure",
@@ -6923,7 +6923,7 @@
   "full_path": "summary/local/edge/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -6941,7 +6941,7 @@
   "full_path": "summary/local/edge/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -6952,7 +6952,7 @@
   "full_path": "summary/local/edge/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.lithium": {
   "data_type": "structure",
@@ -6976,7 +6976,7 @@
   "full_path": "summary/local/edge/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -6994,7 +6994,7 @@
   "full_path": "summary/local/edge/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -7005,7 +7005,7 @@
   "full_path": "summary/local/edge/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.neon": {
   "data_type": "structure",
@@ -7029,7 +7029,7 @@
   "full_path": "summary/local/edge/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -7047,7 +7047,7 @@
   "full_path": "summary/local/edge/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -7058,7 +7058,7 @@
   "full_path": "summary/local/edge/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.nitrogen": {
   "data_type": "structure",
@@ -7082,7 +7082,7 @@
   "full_path": "summary/local/edge/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -7100,7 +7100,7 @@
   "full_path": "summary/local/edge/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -7111,7 +7111,7 @@
   "full_path": "summary/local/edge/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.oxygen": {
   "data_type": "structure",
@@ -7135,7 +7135,7 @@
   "full_path": "summary/local/edge/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -7153,7 +7153,7 @@
   "full_path": "summary/local/edge/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -7164,7 +7164,7 @@
   "full_path": "summary/local/edge/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tritium": {
   "data_type": "structure",
@@ -7188,7 +7188,7 @@
   "full_path": "summary/local/edge/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -7206,7 +7206,7 @@
   "full_path": "summary/local/edge/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -7217,7 +7217,7 @@
   "full_path": "summary/local/edge/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tungsten": {
   "data_type": "structure",
@@ -7241,7 +7241,7 @@
   "full_path": "summary/local/edge/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -7259,7 +7259,7 @@
   "full_path": "summary/local/edge/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -7270,7 +7270,7 @@
   "full_path": "summary/local/edge/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.xenon": {
   "data_type": "structure",
@@ -7294,7 +7294,7 @@
   "full_path": "summary/local/edge/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -7312,7 +7312,7 @@
   "full_path": "summary/local/edge/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -7323,7 +7323,7 @@
   "full_path": "summary/local/edge/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.edge.n_i_total": {
   "data_type": "structure",
@@ -7696,7 +7696,7 @@
   "full_path": "summary/local/edge/velocity_tor/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.argon.value_error_index": {
   "data_type": "int_type",
@@ -7714,7 +7714,7 @@
   "full_path": "summary/local/edge/velocity_tor/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.argon.value_error_upper": {
   "coordinates": [
@@ -7725,7 +7725,7 @@
   "full_path": "summary/local/edge/velocity_tor/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.berylium": {
   "data_type": "structure",
@@ -7749,7 +7749,7 @@
   "full_path": "summary/local/edge/velocity_tor/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.berylium.value_error_index": {
   "data_type": "int_type",
@@ -7767,7 +7767,7 @@
   "full_path": "summary/local/edge/velocity_tor/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.berylium.value_error_upper": {
   "coordinates": [
@@ -7778,7 +7778,7 @@
   "full_path": "summary/local/edge/velocity_tor/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.carbon": {
   "data_type": "structure",
@@ -7802,7 +7802,7 @@
   "full_path": "summary/local/edge/velocity_tor/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.carbon.value_error_index": {
   "data_type": "int_type",
@@ -7820,7 +7820,7 @@
   "full_path": "summary/local/edge/velocity_tor/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.carbon.value_error_upper": {
   "coordinates": [
@@ -7831,7 +7831,7 @@
   "full_path": "summary/local/edge/velocity_tor/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.deuterium": {
   "data_type": "structure",
@@ -7855,7 +7855,7 @@
   "full_path": "summary/local/edge/velocity_tor/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -7873,7 +7873,7 @@
   "full_path": "summary/local/edge/velocity_tor/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.deuterium.value_error_upper": {
   "coordinates": [
@@ -7884,7 +7884,7 @@
   "full_path": "summary/local/edge/velocity_tor/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_3": {
   "data_type": "structure",
@@ -7908,7 +7908,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -7926,7 +7926,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_3.value_error_upper": {
   "coordinates": [
@@ -7937,7 +7937,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_4": {
   "data_type": "structure",
@@ -7961,7 +7961,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -7979,7 +7979,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.helium_4.value_error_upper": {
   "coordinates": [
@@ -7990,7 +7990,7 @@
   "full_path": "summary/local/edge/velocity_tor/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.hydrogen": {
   "data_type": "structure",
@@ -8014,7 +8014,7 @@
   "full_path": "summary/local/edge/velocity_tor/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -8032,7 +8032,7 @@
   "full_path": "summary/local/edge/velocity_tor/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.hydrogen.value_error_upper": {
   "coordinates": [
@@ -8043,7 +8043,7 @@
   "full_path": "summary/local/edge/velocity_tor/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.lithium": {
   "data_type": "structure",
@@ -8067,7 +8067,7 @@
   "full_path": "summary/local/edge/velocity_tor/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.lithium.value_error_index": {
   "data_type": "int_type",
@@ -8085,7 +8085,7 @@
   "full_path": "summary/local/edge/velocity_tor/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.lithium.value_error_upper": {
   "coordinates": [
@@ -8096,7 +8096,7 @@
   "full_path": "summary/local/edge/velocity_tor/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.neon": {
   "data_type": "structure",
@@ -8120,7 +8120,7 @@
   "full_path": "summary/local/edge/velocity_tor/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.neon.value_error_index": {
   "data_type": "int_type",
@@ -8138,7 +8138,7 @@
   "full_path": "summary/local/edge/velocity_tor/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.neon.value_error_upper": {
   "coordinates": [
@@ -8149,7 +8149,7 @@
   "full_path": "summary/local/edge/velocity_tor/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.nitrogen": {
   "data_type": "structure",
@@ -8173,7 +8173,7 @@
   "full_path": "summary/local/edge/velocity_tor/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -8191,7 +8191,7 @@
   "full_path": "summary/local/edge/velocity_tor/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.nitrogen.value_error_upper": {
   "coordinates": [
@@ -8202,7 +8202,7 @@
   "full_path": "summary/local/edge/velocity_tor/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.oxygen": {
   "data_type": "structure",
@@ -8226,7 +8226,7 @@
   "full_path": "summary/local/edge/velocity_tor/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -8244,7 +8244,7 @@
   "full_path": "summary/local/edge/velocity_tor/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.oxygen.value_error_upper": {
   "coordinates": [
@@ -8255,7 +8255,7 @@
   "full_path": "summary/local/edge/velocity_tor/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tritium": {
   "data_type": "structure",
@@ -8279,7 +8279,7 @@
   "full_path": "summary/local/edge/velocity_tor/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tritium.value_error_index": {
   "data_type": "int_type",
@@ -8297,7 +8297,7 @@
   "full_path": "summary/local/edge/velocity_tor/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tritium.value_error_upper": {
   "coordinates": [
@@ -8308,7 +8308,7 @@
   "full_path": "summary/local/edge/velocity_tor/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tungsten": {
   "data_type": "structure",
@@ -8332,7 +8332,7 @@
   "full_path": "summary/local/edge/velocity_tor/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -8350,7 +8350,7 @@
   "full_path": "summary/local/edge/velocity_tor/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.tungsten.value_error_upper": {
   "coordinates": [
@@ -8361,7 +8361,7 @@
   "full_path": "summary/local/edge/velocity_tor/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.xenon": {
   "data_type": "structure",
@@ -8385,7 +8385,7 @@
   "full_path": "summary/local/edge/velocity_tor/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.xenon.value_error_index": {
   "data_type": "int_type",
@@ -8403,7 +8403,7 @@
   "full_path": "summary/local/edge/velocity_tor/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.velocity_tor.xenon.value_error_upper": {
   "coordinates": [
@@ -8414,7 +8414,7 @@
   "full_path": "summary/local/edge/velocity_tor/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.edge.zeff": {
   "data_type": "structure",
@@ -8668,7 +8668,7 @@
   "full_path": "summary/local/itb/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -8686,7 +8686,7 @@
   "full_path": "summary/local/itb/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -8697,7 +8697,7 @@
   "full_path": "summary/local/itb/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.berylium": {
   "data_type": "structure",
@@ -8721,7 +8721,7 @@
   "full_path": "summary/local/itb/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -8739,7 +8739,7 @@
   "full_path": "summary/local/itb/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -8750,7 +8750,7 @@
   "full_path": "summary/local/itb/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.carbon": {
   "data_type": "structure",
@@ -8774,7 +8774,7 @@
   "full_path": "summary/local/itb/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -8792,7 +8792,7 @@
   "full_path": "summary/local/itb/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -8803,7 +8803,7 @@
   "full_path": "summary/local/itb/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.deuterium": {
   "data_type": "structure",
@@ -8827,7 +8827,7 @@
   "full_path": "summary/local/itb/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -8845,7 +8845,7 @@
   "full_path": "summary/local/itb/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -8856,7 +8856,7 @@
   "full_path": "summary/local/itb/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_3": {
   "data_type": "structure",
@@ -8880,7 +8880,7 @@
   "full_path": "summary/local/itb/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -8898,7 +8898,7 @@
   "full_path": "summary/local/itb/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -8909,7 +8909,7 @@
   "full_path": "summary/local/itb/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_4": {
   "data_type": "structure",
@@ -8933,7 +8933,7 @@
   "full_path": "summary/local/itb/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -8951,7 +8951,7 @@
   "full_path": "summary/local/itb/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -8962,7 +8962,7 @@
   "full_path": "summary/local/itb/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.hydrogen": {
   "data_type": "structure",
@@ -8986,7 +8986,7 @@
   "full_path": "summary/local/itb/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -9004,7 +9004,7 @@
   "full_path": "summary/local/itb/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -9015,7 +9015,7 @@
   "full_path": "summary/local/itb/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.lithium": {
   "data_type": "structure",
@@ -9039,7 +9039,7 @@
   "full_path": "summary/local/itb/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -9057,7 +9057,7 @@
   "full_path": "summary/local/itb/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -9068,7 +9068,7 @@
   "full_path": "summary/local/itb/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.neon": {
   "data_type": "structure",
@@ -9092,7 +9092,7 @@
   "full_path": "summary/local/itb/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -9110,7 +9110,7 @@
   "full_path": "summary/local/itb/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -9121,7 +9121,7 @@
   "full_path": "summary/local/itb/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.nitrogen": {
   "data_type": "structure",
@@ -9145,7 +9145,7 @@
   "full_path": "summary/local/itb/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -9163,7 +9163,7 @@
   "full_path": "summary/local/itb/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -9174,7 +9174,7 @@
   "full_path": "summary/local/itb/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.oxygen": {
   "data_type": "structure",
@@ -9198,7 +9198,7 @@
   "full_path": "summary/local/itb/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -9216,7 +9216,7 @@
   "full_path": "summary/local/itb/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -9227,7 +9227,7 @@
   "full_path": "summary/local/itb/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tritium": {
   "data_type": "structure",
@@ -9251,7 +9251,7 @@
   "full_path": "summary/local/itb/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -9269,7 +9269,7 @@
   "full_path": "summary/local/itb/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -9280,7 +9280,7 @@
   "full_path": "summary/local/itb/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tungsten": {
   "data_type": "structure",
@@ -9304,7 +9304,7 @@
   "full_path": "summary/local/itb/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -9322,7 +9322,7 @@
   "full_path": "summary/local/itb/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -9333,7 +9333,7 @@
   "full_path": "summary/local/itb/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.xenon": {
   "data_type": "structure",
@@ -9357,7 +9357,7 @@
   "full_path": "summary/local/itb/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -9375,7 +9375,7 @@
   "full_path": "summary/local/itb/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -9386,7 +9386,7 @@
   "full_path": "summary/local/itb/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.itb.n_i_total": {
   "data_type": "structure",
@@ -9759,7 +9759,7 @@
   "full_path": "summary/local/itb/velocity_tor/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.argon.value_error_index": {
   "data_type": "int_type",
@@ -9777,7 +9777,7 @@
   "full_path": "summary/local/itb/velocity_tor/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.argon.value_error_upper": {
   "coordinates": [
@@ -9788,7 +9788,7 @@
   "full_path": "summary/local/itb/velocity_tor/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.berylium": {
   "data_type": "structure",
@@ -9812,7 +9812,7 @@
   "full_path": "summary/local/itb/velocity_tor/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.berylium.value_error_index": {
   "data_type": "int_type",
@@ -9830,7 +9830,7 @@
   "full_path": "summary/local/itb/velocity_tor/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.berylium.value_error_upper": {
   "coordinates": [
@@ -9841,7 +9841,7 @@
   "full_path": "summary/local/itb/velocity_tor/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.carbon": {
   "data_type": "structure",
@@ -9865,7 +9865,7 @@
   "full_path": "summary/local/itb/velocity_tor/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.carbon.value_error_index": {
   "data_type": "int_type",
@@ -9883,7 +9883,7 @@
   "full_path": "summary/local/itb/velocity_tor/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.carbon.value_error_upper": {
   "coordinates": [
@@ -9894,7 +9894,7 @@
   "full_path": "summary/local/itb/velocity_tor/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.deuterium": {
   "data_type": "structure",
@@ -9918,7 +9918,7 @@
   "full_path": "summary/local/itb/velocity_tor/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -9936,7 +9936,7 @@
   "full_path": "summary/local/itb/velocity_tor/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.deuterium.value_error_upper": {
   "coordinates": [
@@ -9947,7 +9947,7 @@
   "full_path": "summary/local/itb/velocity_tor/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_3": {
   "data_type": "structure",
@@ -9971,7 +9971,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -9989,7 +9989,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_3.value_error_upper": {
   "coordinates": [
@@ -10000,7 +10000,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_4": {
   "data_type": "structure",
@@ -10024,7 +10024,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -10042,7 +10042,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_4.value_error_upper": {
   "coordinates": [
@@ -10053,7 +10053,7 @@
   "full_path": "summary/local/itb/velocity_tor/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.hydrogen": {
   "data_type": "structure",
@@ -10077,7 +10077,7 @@
   "full_path": "summary/local/itb/velocity_tor/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -10095,7 +10095,7 @@
   "full_path": "summary/local/itb/velocity_tor/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.hydrogen.value_error_upper": {
   "coordinates": [
@@ -10106,7 +10106,7 @@
   "full_path": "summary/local/itb/velocity_tor/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.lithium": {
   "data_type": "structure",
@@ -10130,7 +10130,7 @@
   "full_path": "summary/local/itb/velocity_tor/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.lithium.value_error_index": {
   "data_type": "int_type",
@@ -10148,7 +10148,7 @@
   "full_path": "summary/local/itb/velocity_tor/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.lithium.value_error_upper": {
   "coordinates": [
@@ -10159,7 +10159,7 @@
   "full_path": "summary/local/itb/velocity_tor/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.neon": {
   "data_type": "structure",
@@ -10183,7 +10183,7 @@
   "full_path": "summary/local/itb/velocity_tor/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.neon.value_error_index": {
   "data_type": "int_type",
@@ -10201,7 +10201,7 @@
   "full_path": "summary/local/itb/velocity_tor/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.neon.value_error_upper": {
   "coordinates": [
@@ -10212,7 +10212,7 @@
   "full_path": "summary/local/itb/velocity_tor/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.nitrogen": {
   "data_type": "structure",
@@ -10236,7 +10236,7 @@
   "full_path": "summary/local/itb/velocity_tor/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -10254,7 +10254,7 @@
   "full_path": "summary/local/itb/velocity_tor/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.nitrogen.value_error_upper": {
   "coordinates": [
@@ -10265,7 +10265,7 @@
   "full_path": "summary/local/itb/velocity_tor/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.oxygen": {
   "data_type": "structure",
@@ -10289,7 +10289,7 @@
   "full_path": "summary/local/itb/velocity_tor/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -10307,7 +10307,7 @@
   "full_path": "summary/local/itb/velocity_tor/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.oxygen.value_error_upper": {
   "coordinates": [
@@ -10318,7 +10318,7 @@
   "full_path": "summary/local/itb/velocity_tor/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tritium": {
   "data_type": "structure",
@@ -10342,7 +10342,7 @@
   "full_path": "summary/local/itb/velocity_tor/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tritium.value_error_index": {
   "data_type": "int_type",
@@ -10360,7 +10360,7 @@
   "full_path": "summary/local/itb/velocity_tor/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tritium.value_error_upper": {
   "coordinates": [
@@ -10371,7 +10371,7 @@
   "full_path": "summary/local/itb/velocity_tor/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tungsten": {
   "data_type": "structure",
@@ -10395,7 +10395,7 @@
   "full_path": "summary/local/itb/velocity_tor/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -10413,7 +10413,7 @@
   "full_path": "summary/local/itb/velocity_tor/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tungsten.value_error_upper": {
   "coordinates": [
@@ -10424,7 +10424,7 @@
   "full_path": "summary/local/itb/velocity_tor/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.xenon": {
   "data_type": "structure",
@@ -10448,7 +10448,7 @@
   "full_path": "summary/local/itb/velocity_tor/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.xenon.value_error_index": {
   "data_type": "int_type",
@@ -10466,7 +10466,7 @@
   "full_path": "summary/local/itb/velocity_tor/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.xenon.value_error_upper": {
   "coordinates": [
@@ -10477,7 +10477,7 @@
   "full_path": "summary/local/itb/velocity_tor/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.itb.zeff": {
   "data_type": "structure",
@@ -10677,7 +10677,7 @@
   "full_path": "summary/local/limiter/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -10695,7 +10695,7 @@
   "full_path": "summary/local/limiter/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -10706,7 +10706,7 @@
   "full_path": "summary/local/limiter/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.berylium": {
   "data_type": "structure",
@@ -10730,7 +10730,7 @@
   "full_path": "summary/local/limiter/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -10748,7 +10748,7 @@
   "full_path": "summary/local/limiter/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -10759,7 +10759,7 @@
   "full_path": "summary/local/limiter/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.carbon": {
   "data_type": "structure",
@@ -10783,7 +10783,7 @@
   "full_path": "summary/local/limiter/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -10801,7 +10801,7 @@
   "full_path": "summary/local/limiter/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -10812,7 +10812,7 @@
   "full_path": "summary/local/limiter/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.deuterium": {
   "data_type": "structure",
@@ -10836,7 +10836,7 @@
   "full_path": "summary/local/limiter/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -10854,7 +10854,7 @@
   "full_path": "summary/local/limiter/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -10865,7 +10865,7 @@
   "full_path": "summary/local/limiter/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_3": {
   "data_type": "structure",
@@ -10889,7 +10889,7 @@
   "full_path": "summary/local/limiter/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -10907,7 +10907,7 @@
   "full_path": "summary/local/limiter/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -10918,7 +10918,7 @@
   "full_path": "summary/local/limiter/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_4": {
   "data_type": "structure",
@@ -10942,7 +10942,7 @@
   "full_path": "summary/local/limiter/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -10960,7 +10960,7 @@
   "full_path": "summary/local/limiter/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -10971,7 +10971,7 @@
   "full_path": "summary/local/limiter/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.hydrogen": {
   "data_type": "structure",
@@ -10995,7 +10995,7 @@
   "full_path": "summary/local/limiter/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -11013,7 +11013,7 @@
   "full_path": "summary/local/limiter/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -11024,7 +11024,7 @@
   "full_path": "summary/local/limiter/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.lithium": {
   "data_type": "structure",
@@ -11048,7 +11048,7 @@
   "full_path": "summary/local/limiter/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -11066,7 +11066,7 @@
   "full_path": "summary/local/limiter/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -11077,7 +11077,7 @@
   "full_path": "summary/local/limiter/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.neon": {
   "data_type": "structure",
@@ -11101,7 +11101,7 @@
   "full_path": "summary/local/limiter/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -11119,7 +11119,7 @@
   "full_path": "summary/local/limiter/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -11130,7 +11130,7 @@
   "full_path": "summary/local/limiter/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.nitrogen": {
   "data_type": "structure",
@@ -11154,7 +11154,7 @@
   "full_path": "summary/local/limiter/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -11172,7 +11172,7 @@
   "full_path": "summary/local/limiter/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -11183,7 +11183,7 @@
   "full_path": "summary/local/limiter/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.oxygen": {
   "data_type": "structure",
@@ -11207,7 +11207,7 @@
   "full_path": "summary/local/limiter/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -11225,7 +11225,7 @@
   "full_path": "summary/local/limiter/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -11236,7 +11236,7 @@
   "full_path": "summary/local/limiter/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tritium": {
   "data_type": "structure",
@@ -11260,7 +11260,7 @@
   "full_path": "summary/local/limiter/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -11278,7 +11278,7 @@
   "full_path": "summary/local/limiter/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -11289,7 +11289,7 @@
   "full_path": "summary/local/limiter/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tungsten": {
   "data_type": "structure",
@@ -11313,7 +11313,7 @@
   "full_path": "summary/local/limiter/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -11331,7 +11331,7 @@
   "full_path": "summary/local/limiter/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -11342,7 +11342,7 @@
   "full_path": "summary/local/limiter/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.xenon": {
   "data_type": "structure",
@@ -11366,7 +11366,7 @@
   "full_path": "summary/local/limiter/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -11384,7 +11384,7 @@
   "full_path": "summary/local/limiter/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -11395,7 +11395,7 @@
   "full_path": "summary/local/limiter/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.limiter.n_i_total": {
   "data_type": "structure",
@@ -11811,7 +11811,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -11829,7 +11829,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -11840,7 +11840,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.berylium": {
   "data_type": "structure",
@@ -11864,7 +11864,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -11882,7 +11882,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -11893,7 +11893,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.carbon": {
   "data_type": "structure",
@@ -11917,7 +11917,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -11935,7 +11935,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -11946,7 +11946,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.deuterium": {
   "data_type": "structure",
@@ -11970,7 +11970,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -11988,7 +11988,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -11999,7 +11999,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_3": {
   "data_type": "structure",
@@ -12023,7 +12023,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -12041,7 +12041,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -12052,7 +12052,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_4": {
   "data_type": "structure",
@@ -12076,7 +12076,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -12094,7 +12094,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -12105,7 +12105,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.hydrogen": {
   "data_type": "structure",
@@ -12129,7 +12129,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -12147,7 +12147,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -12158,7 +12158,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.lithium": {
   "data_type": "structure",
@@ -12182,7 +12182,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -12200,7 +12200,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -12211,7 +12211,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.neon": {
   "data_type": "structure",
@@ -12235,7 +12235,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -12253,7 +12253,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -12264,7 +12264,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.nitrogen": {
   "data_type": "structure",
@@ -12288,7 +12288,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -12306,7 +12306,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -12317,7 +12317,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.oxygen": {
   "data_type": "structure",
@@ -12341,7 +12341,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -12359,7 +12359,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -12370,7 +12370,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tritium": {
   "data_type": "structure",
@@ -12394,7 +12394,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -12412,7 +12412,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -12423,7 +12423,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tungsten": {
   "data_type": "structure",
@@ -12447,7 +12447,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -12465,7 +12465,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -12476,7 +12476,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.xenon": {
   "data_type": "structure",
@@ -12500,7 +12500,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -12518,7 +12518,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -12529,7 +12529,7 @@
   "full_path": "summary/local/magnetic_axis/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.magnetic_axis.n_i_total": {
   "data_type": "structure",
@@ -12982,7 +12982,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.argon.value_error_index": {
   "data_type": "int_type",
@@ -13000,7 +13000,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.argon.value_error_upper": {
   "coordinates": [
@@ -13011,7 +13011,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.berylium": {
   "data_type": "structure",
@@ -13035,7 +13035,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.berylium.value_error_index": {
   "data_type": "int_type",
@@ -13053,7 +13053,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.berylium.value_error_upper": {
   "coordinates": [
@@ -13064,7 +13064,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.carbon": {
   "data_type": "structure",
@@ -13088,7 +13088,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.carbon.value_error_index": {
   "data_type": "int_type",
@@ -13106,7 +13106,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.carbon.value_error_upper": {
   "coordinates": [
@@ -13117,7 +13117,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.deuterium": {
   "data_type": "structure",
@@ -13141,7 +13141,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -13159,7 +13159,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.deuterium.value_error_upper": {
   "coordinates": [
@@ -13170,7 +13170,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_3": {
   "data_type": "structure",
@@ -13194,7 +13194,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -13212,7 +13212,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_3.value_error_upper": {
   "coordinates": [
@@ -13223,7 +13223,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_4": {
   "data_type": "structure",
@@ -13247,7 +13247,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -13265,7 +13265,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_4.value_error_upper": {
   "coordinates": [
@@ -13276,7 +13276,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.hydrogen": {
   "data_type": "structure",
@@ -13300,7 +13300,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -13318,7 +13318,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.hydrogen.value_error_upper": {
   "coordinates": [
@@ -13329,7 +13329,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.lithium": {
   "data_type": "structure",
@@ -13353,7 +13353,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.lithium.value_error_index": {
   "data_type": "int_type",
@@ -13371,7 +13371,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.lithium.value_error_upper": {
   "coordinates": [
@@ -13382,7 +13382,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.neon": {
   "data_type": "structure",
@@ -13406,7 +13406,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.neon.value_error_index": {
   "data_type": "int_type",
@@ -13424,7 +13424,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.neon.value_error_upper": {
   "coordinates": [
@@ -13435,7 +13435,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.nitrogen": {
   "data_type": "structure",
@@ -13459,7 +13459,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -13477,7 +13477,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.nitrogen.value_error_upper": {
   "coordinates": [
@@ -13488,7 +13488,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.oxygen": {
   "data_type": "structure",
@@ -13512,7 +13512,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -13530,7 +13530,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.oxygen.value_error_upper": {
   "coordinates": [
@@ -13541,7 +13541,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tritium": {
   "data_type": "structure",
@@ -13565,7 +13565,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tritium.value_error_index": {
   "data_type": "int_type",
@@ -13583,7 +13583,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tritium.value_error_upper": {
   "coordinates": [
@@ -13594,7 +13594,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tungsten": {
   "data_type": "structure",
@@ -13618,7 +13618,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -13636,7 +13636,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tungsten.value_error_upper": {
   "coordinates": [
@@ -13647,7 +13647,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.xenon": {
   "data_type": "structure",
@@ -13671,7 +13671,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.xenon.value_error_index": {
   "data_type": "int_type",
@@ -13689,7 +13689,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.xenon.value_error_upper": {
   "coordinates": [
@@ -13700,7 +13700,7 @@
   "full_path": "summary/local/magnetic_axis/velocity_tor/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.zeff": {
   "data_type": "structure",
@@ -13954,7 +13954,7 @@
   "full_path": "summary/local/pedestal/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -13972,7 +13972,7 @@
   "full_path": "summary/local/pedestal/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -13983,7 +13983,7 @@
   "full_path": "summary/local/pedestal/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.berylium": {
   "data_type": "structure",
@@ -14007,7 +14007,7 @@
   "full_path": "summary/local/pedestal/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -14025,7 +14025,7 @@
   "full_path": "summary/local/pedestal/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -14036,7 +14036,7 @@
   "full_path": "summary/local/pedestal/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.carbon": {
   "data_type": "structure",
@@ -14060,7 +14060,7 @@
   "full_path": "summary/local/pedestal/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -14078,7 +14078,7 @@
   "full_path": "summary/local/pedestal/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -14089,7 +14089,7 @@
   "full_path": "summary/local/pedestal/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.deuterium": {
   "data_type": "structure",
@@ -14113,7 +14113,7 @@
   "full_path": "summary/local/pedestal/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -14131,7 +14131,7 @@
   "full_path": "summary/local/pedestal/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -14142,7 +14142,7 @@
   "full_path": "summary/local/pedestal/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_3": {
   "data_type": "structure",
@@ -14166,7 +14166,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -14184,7 +14184,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -14195,7 +14195,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_4": {
   "data_type": "structure",
@@ -14219,7 +14219,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -14237,7 +14237,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -14248,7 +14248,7 @@
   "full_path": "summary/local/pedestal/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.hydrogen": {
   "data_type": "structure",
@@ -14272,7 +14272,7 @@
   "full_path": "summary/local/pedestal/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -14290,7 +14290,7 @@
   "full_path": "summary/local/pedestal/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -14301,7 +14301,7 @@
   "full_path": "summary/local/pedestal/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.lithium": {
   "data_type": "structure",
@@ -14325,7 +14325,7 @@
   "full_path": "summary/local/pedestal/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -14343,7 +14343,7 @@
   "full_path": "summary/local/pedestal/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -14354,7 +14354,7 @@
   "full_path": "summary/local/pedestal/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.neon": {
   "data_type": "structure",
@@ -14378,7 +14378,7 @@
   "full_path": "summary/local/pedestal/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -14396,7 +14396,7 @@
   "full_path": "summary/local/pedestal/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -14407,7 +14407,7 @@
   "full_path": "summary/local/pedestal/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.nitrogen": {
   "data_type": "structure",
@@ -14431,7 +14431,7 @@
   "full_path": "summary/local/pedestal/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -14449,7 +14449,7 @@
   "full_path": "summary/local/pedestal/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -14460,7 +14460,7 @@
   "full_path": "summary/local/pedestal/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.oxygen": {
   "data_type": "structure",
@@ -14484,7 +14484,7 @@
   "full_path": "summary/local/pedestal/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -14502,7 +14502,7 @@
   "full_path": "summary/local/pedestal/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -14513,7 +14513,7 @@
   "full_path": "summary/local/pedestal/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tritium": {
   "data_type": "structure",
@@ -14537,7 +14537,7 @@
   "full_path": "summary/local/pedestal/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -14555,7 +14555,7 @@
   "full_path": "summary/local/pedestal/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -14566,7 +14566,7 @@
   "full_path": "summary/local/pedestal/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tungsten": {
   "data_type": "structure",
@@ -14590,7 +14590,7 @@
   "full_path": "summary/local/pedestal/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -14608,7 +14608,7 @@
   "full_path": "summary/local/pedestal/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -14619,7 +14619,7 @@
   "full_path": "summary/local/pedestal/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.xenon": {
   "data_type": "structure",
@@ -14643,7 +14643,7 @@
   "full_path": "summary/local/pedestal/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -14661,7 +14661,7 @@
   "full_path": "summary/local/pedestal/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -14672,7 +14672,7 @@
   "full_path": "summary/local/pedestal/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.local.pedestal.n_i_total": {
   "data_type": "structure",
@@ -15045,7 +15045,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.argon.value_error_index": {
   "data_type": "int_type",
@@ -15063,7 +15063,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.argon.value_error_upper": {
   "coordinates": [
@@ -15074,7 +15074,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.berylium": {
   "data_type": "structure",
@@ -15098,7 +15098,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.berylium.value_error_index": {
   "data_type": "int_type",
@@ -15116,7 +15116,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.berylium.value_error_upper": {
   "coordinates": [
@@ -15127,7 +15127,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.carbon": {
   "data_type": "structure",
@@ -15151,7 +15151,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.carbon.value_error_index": {
   "data_type": "int_type",
@@ -15169,7 +15169,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.carbon.value_error_upper": {
   "coordinates": [
@@ -15180,7 +15180,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.deuterium": {
   "data_type": "structure",
@@ -15204,7 +15204,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -15222,7 +15222,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.deuterium.value_error_upper": {
   "coordinates": [
@@ -15233,7 +15233,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_3": {
   "data_type": "structure",
@@ -15257,7 +15257,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -15275,7 +15275,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_3.value_error_upper": {
   "coordinates": [
@@ -15286,7 +15286,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_4": {
   "data_type": "structure",
@@ -15310,7 +15310,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -15328,7 +15328,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_4.value_error_upper": {
   "coordinates": [
@@ -15339,7 +15339,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.hydrogen": {
   "data_type": "structure",
@@ -15363,7 +15363,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -15381,7 +15381,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.hydrogen.value_error_upper": {
   "coordinates": [
@@ -15392,7 +15392,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.lithium": {
   "data_type": "structure",
@@ -15416,7 +15416,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.lithium.value_error_index": {
   "data_type": "int_type",
@@ -15434,7 +15434,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.lithium.value_error_upper": {
   "coordinates": [
@@ -15445,7 +15445,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.neon": {
   "data_type": "structure",
@@ -15469,7 +15469,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.neon.value_error_index": {
   "data_type": "int_type",
@@ -15487,7 +15487,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.neon.value_error_upper": {
   "coordinates": [
@@ -15498,7 +15498,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.nitrogen": {
   "data_type": "structure",
@@ -15522,7 +15522,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -15540,7 +15540,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.nitrogen.value_error_upper": {
   "coordinates": [
@@ -15551,7 +15551,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.oxygen": {
   "data_type": "structure",
@@ -15575,7 +15575,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -15593,7 +15593,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.oxygen.value_error_upper": {
   "coordinates": [
@@ -15604,7 +15604,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tritium": {
   "data_type": "structure",
@@ -15628,7 +15628,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tritium.value_error_index": {
   "data_type": "int_type",
@@ -15646,7 +15646,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tritium.value_error_upper": {
   "coordinates": [
@@ -15657,7 +15657,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tungsten": {
   "data_type": "structure",
@@ -15681,7 +15681,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -15699,7 +15699,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tungsten.value_error_upper": {
   "coordinates": [
@@ -15710,7 +15710,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.xenon": {
   "data_type": "structure",
@@ -15734,7 +15734,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.xenon.value_error_index": {
   "data_type": "int_type",
@@ -15752,7 +15752,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.xenon.value_error_upper": {
   "coordinates": [
@@ -15763,7 +15763,7 @@
   "full_path": "summary/local/pedestal/velocity_tor/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m.s^-1"
  },
  "summary.local.pedestal.zeff": {
   "data_type": "structure",
@@ -16510,7 +16510,7 @@
   "full_path": "summary/volume_average/n_i/argon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.argon.value_error_index": {
   "data_type": "int_type",
@@ -16528,7 +16528,7 @@
   "full_path": "summary/volume_average/n_i/argon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.argon.value_error_upper": {
   "coordinates": [
@@ -16539,7 +16539,7 @@
   "full_path": "summary/volume_average/n_i/argon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.berylium": {
   "data_type": "structure",
@@ -16563,7 +16563,7 @@
   "full_path": "summary/volume_average/n_i/berylium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.berylium.value_error_index": {
   "data_type": "int_type",
@@ -16581,7 +16581,7 @@
   "full_path": "summary/volume_average/n_i/berylium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.berylium.value_error_upper": {
   "coordinates": [
@@ -16592,7 +16592,7 @@
   "full_path": "summary/volume_average/n_i/berylium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.carbon": {
   "data_type": "structure",
@@ -16616,7 +16616,7 @@
   "full_path": "summary/volume_average/n_i/carbon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.carbon.value_error_index": {
   "data_type": "int_type",
@@ -16634,7 +16634,7 @@
   "full_path": "summary/volume_average/n_i/carbon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.carbon.value_error_upper": {
   "coordinates": [
@@ -16645,7 +16645,7 @@
   "full_path": "summary/volume_average/n_i/carbon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.deuterium": {
   "data_type": "structure",
@@ -16669,7 +16669,7 @@
   "full_path": "summary/volume_average/n_i/deuterium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.deuterium.value_error_index": {
   "data_type": "int_type",
@@ -16687,7 +16687,7 @@
   "full_path": "summary/volume_average/n_i/deuterium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.deuterium.value_error_upper": {
   "coordinates": [
@@ -16698,7 +16698,7 @@
   "full_path": "summary/volume_average/n_i/deuterium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_3": {
   "data_type": "structure",
@@ -16722,7 +16722,7 @@
   "full_path": "summary/volume_average/n_i/helium_3/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_3.value_error_index": {
   "data_type": "int_type",
@@ -16740,7 +16740,7 @@
   "full_path": "summary/volume_average/n_i/helium_3/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_3.value_error_upper": {
   "coordinates": [
@@ -16751,7 +16751,7 @@
   "full_path": "summary/volume_average/n_i/helium_3/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_4": {
   "data_type": "structure",
@@ -16775,7 +16775,7 @@
   "full_path": "summary/volume_average/n_i/helium_4/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_4.value_error_index": {
   "data_type": "int_type",
@@ -16793,7 +16793,7 @@
   "full_path": "summary/volume_average/n_i/helium_4/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.helium_4.value_error_upper": {
   "coordinates": [
@@ -16804,7 +16804,7 @@
   "full_path": "summary/volume_average/n_i/helium_4/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.hydrogen": {
   "data_type": "structure",
@@ -16828,7 +16828,7 @@
   "full_path": "summary/volume_average/n_i/hydrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.hydrogen.value_error_index": {
   "data_type": "int_type",
@@ -16846,7 +16846,7 @@
   "full_path": "summary/volume_average/n_i/hydrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.hydrogen.value_error_upper": {
   "coordinates": [
@@ -16857,7 +16857,7 @@
   "full_path": "summary/volume_average/n_i/hydrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.lithium": {
   "data_type": "structure",
@@ -16881,7 +16881,7 @@
   "full_path": "summary/volume_average/n_i/lithium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.lithium.value_error_index": {
   "data_type": "int_type",
@@ -16899,7 +16899,7 @@
   "full_path": "summary/volume_average/n_i/lithium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.lithium.value_error_upper": {
   "coordinates": [
@@ -16910,7 +16910,7 @@
   "full_path": "summary/volume_average/n_i/lithium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.neon": {
   "data_type": "structure",
@@ -16934,7 +16934,7 @@
   "full_path": "summary/volume_average/n_i/neon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.neon.value_error_index": {
   "data_type": "int_type",
@@ -16952,7 +16952,7 @@
   "full_path": "summary/volume_average/n_i/neon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.neon.value_error_upper": {
   "coordinates": [
@@ -16963,7 +16963,7 @@
   "full_path": "summary/volume_average/n_i/neon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.nitrogen": {
   "data_type": "structure",
@@ -16987,7 +16987,7 @@
   "full_path": "summary/volume_average/n_i/nitrogen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.nitrogen.value_error_index": {
   "data_type": "int_type",
@@ -17005,7 +17005,7 @@
   "full_path": "summary/volume_average/n_i/nitrogen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.nitrogen.value_error_upper": {
   "coordinates": [
@@ -17016,7 +17016,7 @@
   "full_path": "summary/volume_average/n_i/nitrogen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.oxygen": {
   "data_type": "structure",
@@ -17040,7 +17040,7 @@
   "full_path": "summary/volume_average/n_i/oxygen/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.oxygen.value_error_index": {
   "data_type": "int_type",
@@ -17058,7 +17058,7 @@
   "full_path": "summary/volume_average/n_i/oxygen/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.oxygen.value_error_upper": {
   "coordinates": [
@@ -17069,7 +17069,7 @@
   "full_path": "summary/volume_average/n_i/oxygen/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tritium": {
   "data_type": "structure",
@@ -17093,7 +17093,7 @@
   "full_path": "summary/volume_average/n_i/tritium/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tritium.value_error_index": {
   "data_type": "int_type",
@@ -17111,7 +17111,7 @@
   "full_path": "summary/volume_average/n_i/tritium/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tritium.value_error_upper": {
   "coordinates": [
@@ -17122,7 +17122,7 @@
   "full_path": "summary/volume_average/n_i/tritium/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tungsten": {
   "data_type": "structure",
@@ -17146,7 +17146,7 @@
   "full_path": "summary/volume_average/n_i/tungsten/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tungsten.value_error_index": {
   "data_type": "int_type",
@@ -17164,7 +17164,7 @@
   "full_path": "summary/volume_average/n_i/tungsten/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.tungsten.value_error_upper": {
   "coordinates": [
@@ -17175,7 +17175,7 @@
   "full_path": "summary/volume_average/n_i/tungsten/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.xenon": {
   "data_type": "structure",
@@ -17199,7 +17199,7 @@
   "full_path": "summary/volume_average/n_i/xenon/value",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.xenon.value_error_index": {
   "data_type": "int_type",
@@ -17217,7 +17217,7 @@
   "full_path": "summary/volume_average/n_i/xenon/value_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i.xenon.value_error_upper": {
   "coordinates": [
@@ -17228,7 +17228,7 @@
   "full_path": "summary/volume_average/n_i/xenon/value_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "as_parent_level_2"
+  "units": "m^-3"
  },
  "summary.volume_average.n_i_total": {
   "data_type": "structure",

@@ -397,7 +397,7 @@
  "radiation.process[:].identifier": {
   "data_type": "structure",
   "doc_identifier": "radiation/radiation_identifier.xml",
-  "documentation": "Process identifier",
+  "documentation": "Process identifier\n0) unspecified : Unspecified emission process\n6) nuclear_decay : Emission from nuclear decay\n8) bremsstrahlung : Emission from bremsstrahlung\n9) synchrotron_radiation : Emission from synchrotron radiation\n10) line_radiation : Emission from line radiation\n11) recombination : Emission from recombination\n501) runaways : Emission from run-away processes; includes both electron and ion run-away\n901) custom_1 : Custom emission 1; content to be decided by data provided\n902) custom_2 : Custom emission 2; content to be decided by data provided\n903) custom_3 : Custom emission 3; content to be decided by data provided\n904) custom_4 : Custom emission 4; content to be decided by data provided\n905) custom_5 : Custom emission 5; content to be decided by data provided\n906) custom_6 : Custom emission 6; content to be decided by data provided\n907) custom_7 : Custom emission 7; content to be decided by data provided\n908) custom_8 : Custom emission 8; content to be decided by data provided\n909) custom_9 : Custom emission 9; content to be decided by data provided",
   "full_path": "radiation/process(i1)/identifier",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier"
@@ -1604,7 +1604,7 @@
  "radiation.process[:].profiles_1d[:].neutral[:].state[:].neutral_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/neutrals_identifier.xml",
-  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier"

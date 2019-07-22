@@ -7759,7 +7759,7 @@
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].type": {
   "data_type": "structure",
   "doc_identifier": "transport_solver_numerics/transport_solver_numerics_bc_identifier.xml",
-  "documentation": "Boundary condition type",
+  "documentation": "Boundary condition type\n0) not_solved : Equation is not solved\n1) value : Boundary condition is the value of the equations primary quantity\n2) derivative_or_ip : Boundary condition is the radial derivative of the equations primary quantity, or the plasma current for the current diffusion equation\n3) e_folding_length_or_vloop : Boundary condition is the e-folding length of the equations primary quantity, or the loop voltage for the current diffusion equation\n4) flux : Boundary condition is the flux of the equations primary quantity\n5) combination : Boundary condition is a linear combination of radial derivative and value of the flux of the equations primary quantity, in the form a1.y-prime + a2.y = a3",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/type",
   "lifecycle_status": "alpha",
   "type": "dynamic"

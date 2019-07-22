@@ -5509,7 +5509,7 @@
  "edge_sources.source[:].species.neutral.state.neutral_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/neutrals_identifier.xml",
-  "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "edge_sources/source(i1)/species/neutral/state/neutral_type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier"
@@ -5576,7 +5576,7 @@
  "edge_sources.source[:].species.type": {
   "data_type": "structure",
   "doc_identifier": "utilities/species_reference_identifier.xml",
-  "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon",
+  "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon\n0) unspecified : unspecified\n1) electron : Electron\n2) ion : Ion species in a single/average state; refer to ion-structure\n3) ion_state : Ion species in a particular state; refer to ion/state-structure\n4) neutral : Neutral species in a single/average state; refer to neutral-structure\n5) neutral_state : Neutral species in a particular state; refer to neutral/state-structure\n6) neutron : Neutron\n7) photon : Photon",
   "full_path": "edge_sources/source(i1)/species/type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier"

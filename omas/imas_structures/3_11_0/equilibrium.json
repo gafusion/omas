@@ -6242,7 +6242,7 @@
  "equilibrium.time_slice[:].profiles_2d[:].grid_type": {
   "data_type": "structure",
   "doc_identifier": "equilibrium/equilibrium_profiles_2d_identifier.xml",
-  "documentation": "Selection of one of a set of grid types",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Regular grid in (R,Z). In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Regular grid in (psi, theta). 'flux surface grid'.",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/grid_type",
   "lifecycle_status": "active"
  },

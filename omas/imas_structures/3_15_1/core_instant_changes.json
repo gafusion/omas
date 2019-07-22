@@ -20,7 +20,7 @@
  "core_instant_changes.change[:].identifier": {
   "data_type": "structure",
   "doc_identifier": "core_instant_changes/core_instant_changes_identifier.xml",
-  "documentation": "Instant change term identifier",
+  "documentation": "Instant change term identifier\n0) unspecified : Unspecified instant changes\n1) total : Total instant changes; combines all types of events\n2) pellet : Instant changes from a pellet\n3) sawtooth : Instant changes from a sawtooth\n4) elm : Instant changes from an edge localised mode",
   "full_path": "core_instant_changes/change(i1)/identifier",
   "lifecycle_status": "active"
  },
@@ -3796,7 +3796,7 @@
  "core_instant_changes.change[:].profiles_1d[:].neutral[:].state[:].neutral_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/neutrals_identifier.xml",
-  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type",
   "lifecycle_status": "active"
  },

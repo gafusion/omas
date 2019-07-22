@@ -1993,7 +1993,7 @@
   ],
   "data_type": "struct_array",
   "doc_identifier": "utilities/coordinate_identifier.xml",
-  "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented",
+  "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented\n0) unspecified : unspecified\n1) x : First cartesian coordinate in the horizontal plane\n2) y : Second cartesian coordinate in the horizontal plane (grad(x) x grad(y) = grad(z))\n3) z : Vertical coordinate z\n4) r : Major radius\n5) phi : Toroidal angle\n10) psi : Poloidal magnetic flux\n11) rho_tor : The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field\n12) rho_tor_norm : The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux\n13) rho_pol : The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux\n14) rho_pol_norm : The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux\n20) theta : Geometrical poloidal angle around the magnetic axis\n21) theta_straight : Straight field line poloidal angle\n22) theta_equal_arc : Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane.\n100) velocity : Total velocity; modulus of the velocity vector\n101) velocity_x : Velocity component in the x-direction\n102) velocity_y : Velocity component in the z-direction\n103) velocity_z : Velocity component in the z-direction\n104) velocity_phi : Velocity component in the toroidal direction\n105) velocity_parallel : Velocity component parallel to the magnetic field\n106) velocity_perpendicular : Velocity perpendicular to the magnetic field\n107) velocity_thermal : Velocity normalised to the local thermal velocity of the thermal ions (of the relevant species)\n200) momentum : Modulus of the relativistic momentum vector\n201) momentum_parallel : Component of the relativistic momentum vector parallel to the magnetic field\n202) momentum_perpendicular : Component of the relativistic momentum vector perpendicular to the magnetic field\n203) canonical_momentum_phi : Canonical toroidal angular momentum\n300) energy_hamiltonian : Hamiltonian energy, including both kinetic and potential energy\n301) energy_kinetic : Kinetic energy\n302) magnetic_moment : magnetic moment\n400) lambda : Ratio, magnetic moment over hamiltonian energy\n402) pitch_angle : Angle between the magnetic field and the velocity vector\n403) pitch : Ratio, parallel velocity over total velocity\n404) pitch_at_min_b : Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit",
   "full_path": "distributions/distribution(i1)/markers(itime)/coordinate_identifier(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
@@ -2192,7 +2192,7 @@
  "distributions.distribution[:].process[:].type": {
   "data_type": "structure",
   "doc_identifier": "utilities/distribution_source_identifier.xml",
-  "documentation": "Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes",
+  "documentation": "Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes\n0) unspecified : unspecified\n1) NBI : Source from neutral beam injection\n100) nuclear : Source from nuclear reaction (reaction type unspecified)\n101) H_H_to_D_positron_nu : Source from nuclear reaction: H+H->D+positron+neutrino\n102) H_D_to_He3_gamma : Source from nuclear reaction: H+D->He3+gamma\n103) H_T_to_He3_n : Source from nuclear reaction: H+T->He3+neutron\n104) H_He3_to_He4_positron_nu : Source from nuclear reaction: H+He3->He4+positron+neutrino\n105) D_D_to_T_H : Source from nuclear reaction: D+D->T+H\n106) D_D_to_He3_n : Source from nuclear reaction: D+D->He3+neutron\n107) D_T_to_He4_n : Source from nuclear reaction: T+D->He4+neutron\n108) D_He3_to_He4_positron : Source from nuclear reaction: He3+D->He4+positron\n109) T_T_to_He4_n_n : Source from nuclear reaction: T+T->He4+neutron+neutron\n110) T_He3_to_He4_H_n : Source from nuclear reaction: He3+T->He4+H+neutron\n111) He3_He3_to_He4_H_H : Source from nuclear reaction: He3+He3->He4+neutron+neutron\n112) He3_He4_to_Be7_gamma : Source from nuclear reaction: He3+He4->Be7+gamma\n113) Li6_n_to_He4_T : Source from nuclear reaction: Li6+n->He4+T\n114) Li7_n_to_He4_T_n : Source from nuclear reaction: Li7+n->He4+T+n\n1000) runaway : Source from runaway processes",
   "full_path": "distributions/distribution(i1)/process(i2)/type",
   "lifecycle_status": "alpha"
  },
@@ -13299,7 +13299,7 @@
  "distributions.distribution[:].species.neutral.state.neutral_type": {
   "data_type": "structure",
   "doc_identifier": "utilities/neutrals_identifier.xml",
-  "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
+  "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "distributions/distribution(i1)/species/neutral/state/neutral_type",
   "lifecycle_status": "alpha"
  },
@@ -13365,7 +13365,7 @@
  "distributions.distribution[:].species.type": {
   "data_type": "structure",
   "doc_identifier": "utilities/species_reference_identifier.xml",
-  "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon",
+  "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon\n0) unspecified : unspecified\n1) electron : Electron\n2) ion : Ion species in a single/average state; refer to ion-structure\n3) ion_state : Ion species in a particular state; refer to ion/state-structure\n4) neutral : Neutral species in a single/average state; refer to neutral-structure\n5) neutral_state : Neutral species in a particular state; refer to neutral/state-structure\n6) neutron : Neutron\n7) photon : Photon",
   "full_path": "distributions/distribution(i1)/species/type",
   "lifecycle_status": "alpha"
  },
@@ -13417,7 +13417,7 @@
  "distributions.distribution[:].wave[:].type": {
   "data_type": "structure",
   "doc_identifier": "utilities/wave_identifier.xml",
-  "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH",
+  "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH\n0) unspecified : unspecified\n1) EC : Wave field for electron cyclotron heating and current drive\n2) LH : Wave field for lower hybrid heating and current drive\n3) IC : Wave field for ion cyclotron frequency heating and current drive",
   "full_path": "distributions/distribution(i1)/wave(i2)/type",
   "lifecycle_status": "alpha"
  },

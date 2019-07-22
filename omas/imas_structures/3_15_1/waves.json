@@ -3909,7 +3909,7 @@
  "waves.coherent_wave[:].identifier.type": {
   "data_type": "structure",
   "doc_identifier": "utilities/wave_identifier.xml",
-  "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH",
+  "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH\n0) unspecified : unspecified\n1) EC : Wave field for electron cyclotron heating and current drive\n2) LH : Wave field for lower hybrid heating and current drive\n3) IC : Wave field for ion cyclotron frequency heating and current drive",
   "full_path": "waves/coherent_wave(i1)/identifier/type",
   "lifecycle_status": "alpha"
  },
