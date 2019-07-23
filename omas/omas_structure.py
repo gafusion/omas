@@ -350,10 +350,13 @@ def symlink_imas_structure_versions(test=True, verbose=True):
 
     :returns: dictionary with structure stides per IDS
     '''
+
+    import subprocess
+    from pprint import pprint
     from omas.omas_setup import IMAS_versions
     from omas.omas_utils import dict_structures, imas_json_dir
+
     imas_versions = IMAS_versions('tagged')
-    from pprint import pprint
 
     # check if two files are identical
     def same_ds(a, b):
