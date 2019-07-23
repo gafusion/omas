@@ -74,10 +74,16 @@ tag:
 	git push --tags
 
 sdist:
+	rm -rf dist
 	python setup.py sdist
 
-pypi:
-	python setup.py sdist upload
+pypi: sdist
+	python -m twine upload --repository pypi dist/*
+
+testpypi:
+	python -m twine upload --repository testpypi dist/*
+	@echo install with:
+	@echo pip install --index-url https://test.pypi.org/simple/ omas
 
 release: tests2 tests3 requirements json cocos docs tag
 	@echo 'Make release done'
