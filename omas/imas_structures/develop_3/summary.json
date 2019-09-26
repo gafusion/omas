@@ -2,7 +2,7 @@
  "summary": {
   "documentation": "Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the \"time\" vector) or time-averaged over an interval (in such case the \"time_width\" of the interval is indicated and the \"time\" vector represents the end of each time interval).",
   "full_path": "summary",
-  "lifecycle_last_change": "3.20.0",
+  "lifecycle_last_change": "3.25.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "1"
@@ -3993,6 +3993,64 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "full_path": "summary/global_quantities/beta_tor/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.beta_tor_mhd": {
+  "data_type": "structure",
+  "documentation": "Toroidal beta, using the pressure determined by an equilibrium reconstruction code",
+  "full_path": "summary/global_quantities/beta_tor_mhd",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "-"
+ },
+ "summary.global_quantities.beta_tor_mhd.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/beta_tor_mhd/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.beta_tor_mhd.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/beta_tor_mhd/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.beta_tor_mhd.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/beta_tor_mhd/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.beta_tor_mhd.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/beta_tor_mhd/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.beta_tor_mhd.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/beta_tor_mhd/value_error_upper(:)",
   "lifecycle_status": "active",
   "timebasepath": "/time",
   "type": "dynamic",
@@ -8865,7 +8923,7 @@
  },
  "summary.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
-  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
   "full_path": "summary/ids_properties/homogeneous_time",
   "lifecycle_status": "active",
   "type": "constant"
@@ -11455,6 +11513,64 @@
   "full_path": "summary/local/itb",
   "lifecycle_status": "active",
   "structure_reference": "summary_local_quantities"
+ },
+ "summary.local.itb.e_field_parallel": {
+  "data_type": "structure",
+  "documentation": "Component of electric field parallel to magnetic field",
+  "full_path": "summary/local/itb/e_field_parallel",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "V.m^-1"
+ },
+ "summary.local.itb.e_field_parallel.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/itb/e_field_parallel/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.itb.e_field_parallel.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/itb/e_field_parallel/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.itb.e_field_parallel.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/itb/e_field_parallel/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.itb.e_field_parallel.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/itb/e_field_parallel/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.itb.e_field_parallel.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/itb/e_field_parallel/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
  },
  "summary.local.itb.magnetic_shear": {
   "data_type": "structure",
@@ -14917,6 +15033,64 @@
   "type": "dynamic",
   "units": "T"
  },
+ "summary.local.magnetic_axis.e_field_parallel": {
+  "data_type": "structure",
+  "documentation": "Component of electric field parallel to magnetic field",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "V.m^-1"
+ },
+ "summary.local.magnetic_axis.e_field_parallel.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.magnetic_axis.e_field_parallel.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.magnetic_axis.e_field_parallel.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.magnetic_axis.e_field_parallel.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.magnetic_axis.e_field_parallel.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/magnetic_axis/e_field_parallel/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
  "summary.local.magnetic_axis.magnetic_shear": {
   "data_type": "structure",
   "documentation": "Magnetic shear, defined as rho_tor/q . dq/drho_tor",
@@ -17222,6 +17396,64 @@
   "full_path": "summary/local/pedestal",
   "lifecycle_status": "active",
   "structure_reference": "summary_local_quantities"
+ },
+ "summary.local.pedestal.e_field_parallel": {
+  "data_type": "structure",
+  "documentation": "Component of electric field parallel to magnetic field",
+  "full_path": "summary/local/pedestal/e_field_parallel",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "V.m^-1"
+ },
+ "summary.local.pedestal.e_field_parallel.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/pedestal/e_field_parallel/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.pedestal.e_field_parallel.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/pedestal/e_field_parallel/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.pedestal.e_field_parallel.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/pedestal/e_field_parallel/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.pedestal.e_field_parallel.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/pedestal/e_field_parallel/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.pedestal.e_field_parallel.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/pedestal/e_field_parallel/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
  },
  "summary.local.pedestal.magnetic_shear": {
   "data_type": "structure",
@@ -19623,6 +19855,64 @@
   "full_path": "summary/local/separatrix",
   "lifecycle_status": "active",
   "structure_reference": "summary_local_quantities"
+ },
+ "summary.local.separatrix.e_field_parallel": {
+  "data_type": "structure",
+  "documentation": "Component of electric field parallel to magnetic field",
+  "full_path": "summary/local/separatrix/e_field_parallel",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "V.m^-1"
+ },
+ "summary.local.separatrix.e_field_parallel.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/separatrix/e_field_parallel/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.separatrix.e_field_parallel.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/separatrix/e_field_parallel/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.separatrix.e_field_parallel.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/separatrix/e_field_parallel/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.separatrix.e_field_parallel.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/separatrix/e_field_parallel/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "summary.local.separatrix.e_field_parallel.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/separatrix/e_field_parallel/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
  },
  "summary.local.separatrix.magnetic_shear": {
   "data_type": "structure",

@@ -1,0 +1,245 @@
+{
+ "camera_ir": {
+  "documentation": "Infrared camera for monitoring of Plasma Facing Components",
+  "full_path": "camera_ir",
+  "lifecycle_last_change": "3.23.4",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.23.4",
+  "maxoccur": "10"
+ },
+ "camera_ir.calibration": {
+  "data_type": "structure",
+  "documentation": "Calibration data",
+  "full_path": "camera_ir/calibration",
+  "lifecycle_status": "alpha",
+  "structure_reference": "camera_ir_calibration"
+ },
+ "camera_ir.calibration.luminance_to_temperature": {
+  "coordinates": [
+   "1...N",
+   "1...2"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Luminance to temperature conversion table",
+  "full_path": "camera_ir/calibration/luminance_to_temperature(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.calibration.optical_temperature": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Temperature of the optical components (digital levels)",
+  "full_path": "camera_ir/calibration/optical_temperature(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.calibration.transmission_barrel": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Transmission of the optical barrel",
+  "full_path": "camera_ir/calibration/transmission_barrel(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.calibration.transmission_mirror": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Transmission of the mirror",
+  "full_path": "camera_ir/calibration/transmission_mirror(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.calibration.transmission_window": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Transmission of the window",
+  "full_path": "camera_ir/calibration/transmission_window(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "camera_ir/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "camera_ir.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "camera_ir/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "camera_ir/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.code.output_flag": {
+  "coordinates": [
+   "camera_ir.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "camera_ir/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "camera_ir.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "camera_ir/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "camera_ir/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "camera_ir/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.frame": {
+  "coordinates": [
+   "camera_ir.frame[:].time"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Set of frames",
+  "full_path": "camera_ir/frame(itime)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "camera_ir_frame",
+  "type": "dynamic"
+ },
+ "camera_ir.frame[:].image_raw": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Raw image (unprocessed) (digital levels). First dimension : line index (horizontal axis). Second dimension: column index (vertical axis).",
+  "full_path": "camera_ir/frame(itime)/image_raw(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_ir.frame[:].time": {
+  "data_type": "flt_type",
+  "documentation": "Time",
+  "full_path": "camera_ir/frame(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "camera_ir.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "camera_ir/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "camera_ir.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "camera_ir/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "camera_ir/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "camera_ir/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "camera_ir/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "camera_ir/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "camera_ir/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "camera_ir.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "camera_ir/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "camera_ir/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "camera_ir/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the camera",
+  "full_path": "camera_ir/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "camera_ir/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

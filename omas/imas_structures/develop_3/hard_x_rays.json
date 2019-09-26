@@ -2,7 +2,7 @@
  "hard_x_rays": {
   "documentation": "Hard X-rays tomography diagnostic",
   "full_path": "hard_x_rays",
-  "lifecycle_last_change": "3.23.3",
+  "lifecycle_last_change": "3.24.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.23.3",
   "maxoccur": "2"
@@ -584,76 +584,6 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
- },
- "hard_x_rays.channel[:].brightness": {
-  "coordinates": [
-   "hard_x_rays.channel[:].energy_band",
-   "hard_x_rays.channel[:].brightness.time"
-  ],
-  "data_type": "structure",
-  "documentation": "Power flux received by the detector, per unit solid angle and per unit area (i.e. power divided by the etendue), in multiple energy bands if available from the detector",
-  "full_path": "hard_x_rays/channel(i1)/brightness",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_2d",
-  "units": "W.m^-2.sr^-1"
- },
- "hard_x_rays.channel[:].brightness.data": {
-  "coordinates": [
-   "1...N",
-   "hard_x_rays.channel[:].brightness.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Data",
-  "full_path": "hard_x_rays/channel(i1)/brightness/data(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "brightness/time",
-  "type": "dynamic",
-  "units": "W.m^-2.sr^-1"
- },
- "hard_x_rays.channel[:].brightness.data_error_index": {
-  "data_type": "int_type",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/brightness/data_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "hard_x_rays.channel[:].brightness.data_error_lower": {
-  "coordinates": [
-   "1...N",
-   "hard_x_rays.channel[:].brightness.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/brightness/data_error_lower(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "brightness/time",
-  "type": "dynamic",
-  "units": "W.m^-2.sr^-1"
- },
- "hard_x_rays.channel[:].brightness.data_error_upper": {
-  "coordinates": [
-   "1...N",
-   "hard_x_rays.channel[:].brightness.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/brightness/data_error_upper(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "brightness/time",
-  "type": "dynamic",
-  "units": "W.m^-2.sr^-1"
- },
- "hard_x_rays.channel[:].brightness.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "hard_x_rays/channel(i1)/brightness/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "brightness/time",
-  "type": "dynamic",
-  "units": "s"
  },
  "hard_x_rays.channel[:].detector": {
   "data_type": "structure",
@@ -1651,112 +1581,93 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "hard_x_rays.channel[:].power": {
+ "hard_x_rays.channel[:].radiance": {
   "coordinates": [
    "hard_x_rays.channel[:].energy_band",
-   "hard_x_rays.channel[:].power.time"
+   "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "structure",
-  "documentation": "Power received on the detector, in multiple energy bands if available from the detector",
-  "full_path": "hard_x_rays/channel(i1)/power",
+  "documentation": "Photons received by the detector per unit time, per unit solid angle and per unit area (i.e. photon flux divided by the etendue), in multiple energy bands if available from the detector",
+  "full_path": "hard_x_rays/channel(i1)/radiance",
   "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_2d",
-  "units": "W"
+  "structure_reference": "signal_flt_2d_validity",
+  "units": "(photons).s^-1.m^-2.sr^-1"
  },
- "hard_x_rays.channel[:].power.data": {
+ "hard_x_rays.channel[:].radiance.data": {
   "coordinates": [
    "1...N",
-   "hard_x_rays.channel[:].power.time"
+   "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Data",
-  "full_path": "hard_x_rays/channel(i1)/power/data(:,:)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/data(:,:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "power/time",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
-  "units": "W"
+  "units": "(photons).s^-1.m^-2.sr^-1"
  },
- "hard_x_rays.channel[:].power.data_error_index": {
+ "hard_x_rays.channel[:].radiance.data_error_index": {
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/power/data_error_index",
+  "full_path": "hard_x_rays/channel(i1)/radiance/data_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "hard_x_rays.channel[:].power.data_error_lower": {
+ "hard_x_rays.channel[:].radiance.data_error_lower": {
   "coordinates": [
    "1...N",
-   "hard_x_rays.channel[:].power.time"
+   "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/power/data_error_lower(:,:)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/data_error_lower(:,:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "power/time",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
-  "units": "W"
+  "units": "(photons).s^-1.m^-2.sr^-1"
  },
- "hard_x_rays.channel[:].power.data_error_upper": {
+ "hard_x_rays.channel[:].radiance.data_error_upper": {
   "coordinates": [
    "1...N",
-   "hard_x_rays.channel[:].power.time"
+   "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"data\"",
-  "full_path": "hard_x_rays/channel(i1)/power/data_error_upper(:,:)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/data_error_upper(:,:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "power/time",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
-  "units": "W"
+  "units": "(photons).s^-1.m^-2.sr^-1"
  },
- "hard_x_rays.channel[:].power.time": {
+ "hard_x_rays.channel[:].radiance.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
   "documentation": "Time",
-  "full_path": "hard_x_rays/channel(i1)/power/time(:)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/time(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "power/time",
+  "timebasepath": "radiance/time",
   "type": "dynamic",
   "units": "s"
  },
- "hard_x_rays.channel[:].validity": {
+ "hard_x_rays.channel[:].radiance.validity": {
   "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)",
-  "full_path": "hard_x_rays/channel(i1)/validity",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/validity",
   "lifecycle_status": "alpha",
-  "type": "static"
+  "type": "constant"
  },
- "hard_x_rays.channel[:].validity_timed": {
-  "data_type": "structure",
-  "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
-  "full_path": "hard_x_rays/channel(i1)/validity_timed",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_int_1d"
- },
- "hard_x_rays.channel[:].validity_timed.data": {
+ "hard_x_rays.channel[:].radiance.validity_timed": {
   "coordinates": [
-   "hard_x_rays.channel[:].validity_timed.time"
+   "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Data",
-  "full_path": "hard_x_rays/channel(i1)/validity_timed/data(:)",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "hard_x_rays/channel(i1)/radiance/validity_timed(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "validity_timed/time",
+  "timebasepath": "radiance/time",
   "type": "dynamic"
- },
- "hard_x_rays.channel[:].validity_timed.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "hard_x_rays/channel(i1)/validity_timed/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "validity_timed/time",
-  "type": "dynamic",
-  "units": "s"
  },
  "hard_x_rays.code": {
   "data_type": "structure",
@@ -1870,13 +1781,13 @@
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_external": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "External (towards separatrix) half width of the emissivity peak (in normalised toroidal flux)",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_external(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
@@ -1889,37 +1800,37 @@
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_external_error_lower": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"half_width_external\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_external_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_external_error_upper": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"half_width_external\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_external_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_internal": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Internal (towards magnetic axis) half width of the emissivity peak (in normalised toroidal flux)",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_internal(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
@@ -1932,25 +1843,25 @@
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_internal_error_lower": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"half_width_internal\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_internal_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_internal_error_upper": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"half_width_internal\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_internal_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
@@ -1987,13 +1898,13 @@
  },
  "hard_x_rays.emissivity_profile_1d[:].peak_position": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate position at which the emissivity peaks",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/peak_position(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2006,25 +1917,25 @@
  },
  "hard_x_rays.emissivity_profile_1d[:].peak_position_error_lower": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"peak_position\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/peak_position_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].peak_position_error_upper": {
   "coordinates": [
-   "hard_x_rays..time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"peak_position\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/peak_position_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": ".time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "-"
  },
@@ -2112,34 +2023,15 @@
   "units": "eV"
  },
  "hard_x_rays.emissivity_profile_1d[:].validity_timed": {
-  "data_type": "structure",
-  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
-  "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_int_1d"
- },
- "hard_x_rays.emissivity_profile_1d[:].validity_timed.data": {
   "coordinates": [
-   "hard_x_rays.emissivity_profile_1d[:].validity_timed.time"
+   "hard_x_rays.emissivity_profile_1d[:].time"
   ],
   "data_type": "INT_1D",
-  "documentation": "Data",
-  "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed/data(:)",
+  "documentation": "Indicator of the validity of the emissivity profile data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "validity_timed/time",
+  "timebasepath": "time",
   "type": "dynamic"
- },
- "hard_x_rays.emissivity_profile_1d[:].validity_timed.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "validity_timed/time",
-  "type": "dynamic",
-  "units": "s"
  },
  "hard_x_rays.ids_properties": {
   "data_type": "structure",
@@ -2164,7 +2056,7 @@
  },
  "hard_x_rays.ids_properties.homogeneous_time": {
   "data_type": "INT_0D",
-  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
   "full_path": "hard_x_rays/ids_properties/homogeneous_time",
   "lifecycle_status": "alpha",
   "type": "constant"

@@ -1,0 +1,711 @@
+{
+ "em_coupling": {
+  "documentation": "Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source",
+  "full_path": "em_coupling",
+  "lifecycle_last_change": "3.0.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.0",
+  "maxoccur": "3"
+ },
+ "em_coupling.active_coils": {
+  "coordinates": [
+   "pf_active.coil"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the names of the active PF+CS coils",
+  "full_path": "em_coupling/active_coils(:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "em_coupling.code": {
+  "data_type": "structure",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "em_coupling/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "em_coupling.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "em_coupling/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "em_coupling/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.code.output_flag": {
+  "coordinates": [
+   "em_coupling.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "em_coupling/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "em_coupling.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "em_coupling/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "em_coupling/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "em_coupling/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.field_probes_active": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal field coupling from active coils to poloidal field probes",
+  "full_path": "em_coupling/field_probes_active(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_active_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"field_probes_active\"",
+  "full_path": "em_coupling/field_probes_active_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.field_probes_active_error_lower": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"field_probes_active\"",
+  "full_path": "em_coupling/field_probes_active_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_active_error_upper": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"field_probes_active\"",
+  "full_path": "em_coupling/field_probes_active_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_grid": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal field coupling from equilibrium grid to poloidal field probes",
+  "full_path": "em_coupling/field_probes_grid(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_grid_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"field_probes_grid\"",
+  "full_path": "em_coupling/field_probes_grid_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.field_probes_grid_error_lower": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"field_probes_grid\"",
+  "full_path": "em_coupling/field_probes_grid_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_grid_error_upper": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"field_probes_grid\"",
+  "full_path": "em_coupling/field_probes_grid_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_passive": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal field coupling from passive loops to poloidal field probes",
+  "full_path": "em_coupling/field_probes_passive(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_passive_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"field_probes_passive\"",
+  "full_path": "em_coupling/field_probes_passive_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.field_probes_passive_error_lower": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"field_probes_passive\"",
+  "full_path": "em_coupling/field_probes_passive_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.field_probes_passive_error_upper": {
+  "coordinates": [
+   "em_coupling.poloidal_probes",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"field_probes_passive\"",
+  "full_path": "em_coupling/field_probes_passive_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "T/A"
+ },
+ "em_coupling.flux_loops": {
+  "coordinates": [
+   "magnetics.flux_loop"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the names of the axisymmetric flux loops",
+  "full_path": "em_coupling/flux_loops(:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "em_coupling.grid_points": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the names of the plasma region grid points",
+  "full_path": "em_coupling/grid_points(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "em_coupling/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "em_coupling.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "em_coupling/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "em_coupling/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0 or 1) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, this node must still be filled, and set to 1 (by convention).",
+  "full_path": "em_coupling/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "em_coupling/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "em_coupling/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "em_coupling.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "em_coupling/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_active_active": {
+  "coordinates": [
+   "em_coupling.active_coils",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from active coils to active coils",
+  "full_path": "em_coupling/mutual_active_active(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_active_active_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_active_active\"",
+  "full_path": "em_coupling/mutual_active_active_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_active_active_error_lower": {
+  "coordinates": [
+   "em_coupling.active_coils",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_active_active\"",
+  "full_path": "em_coupling/mutual_active_active_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_active_active_error_upper": {
+  "coordinates": [
+   "em_coupling.active_coils",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_active_active\"",
+  "full_path": "em_coupling/mutual_active_active_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_active": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from active coils to equilibrium grid  ",
+  "full_path": "em_coupling/mutual_grid_active(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_active_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_grid_active\"",
+  "full_path": "em_coupling/mutual_grid_active_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_grid_active_error_lower": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_grid_active\"",
+  "full_path": "em_coupling/mutual_grid_active_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_active_error_upper": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_grid_active\"",
+  "full_path": "em_coupling/mutual_grid_active_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_grid": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance from equilibrium grid to itself",
+  "full_path": "em_coupling/mutual_grid_grid(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_grid_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_grid_grid\"",
+  "full_path": "em_coupling/mutual_grid_grid_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_grid_grid_error_lower": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_grid_grid\"",
+  "full_path": "em_coupling/mutual_grid_grid_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_grid_error_upper": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_grid_grid\"",
+  "full_path": "em_coupling/mutual_grid_grid_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_passive": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from passive loops to equilibrium grid",
+  "full_path": "em_coupling/mutual_grid_passive(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_passive_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_grid_passive\"",
+  "full_path": "em_coupling/mutual_grid_passive_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_grid_passive_error_lower": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_grid_passive\"",
+  "full_path": "em_coupling/mutual_grid_passive_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_grid_passive_error_upper": {
+  "coordinates": [
+   "em_coupling.grid_points",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_grid_passive\"",
+  "full_path": "em_coupling/mutual_grid_passive_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_active": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from active coils to poloidal flux loops",
+  "full_path": "em_coupling/mutual_loops_active(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_active_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_loops_active\"",
+  "full_path": "em_coupling/mutual_loops_active_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_loops_active_error_lower": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_loops_active\"",
+  "full_path": "em_coupling/mutual_loops_active_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_active_error_upper": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_loops_active\"",
+  "full_path": "em_coupling/mutual_loops_active_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_grid": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance from equilibrium grid to poloidal flux loops ",
+  "full_path": "em_coupling/mutual_loops_grid(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_grid_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_loops_grid\"",
+  "full_path": "em_coupling/mutual_loops_grid_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_loops_grid_error_lower": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_loops_grid\"",
+  "full_path": "em_coupling/mutual_loops_grid_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_grid_error_upper": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.grid_points"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_loops_grid\"",
+  "full_path": "em_coupling/mutual_loops_grid_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_passive": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual  inductance coupling from passive  loops to poloidal flux loops",
+  "full_path": "em_coupling/mutual_loops_passive(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_passive_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_loops_passive\"",
+  "full_path": "em_coupling/mutual_loops_passive_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_loops_passive_error_lower": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_loops_passive\"",
+  "full_path": "em_coupling/mutual_loops_passive_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_loops_passive_error_upper": {
+  "coordinates": [
+   "em_coupling.flux_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_loops_passive\"",
+  "full_path": "em_coupling/mutual_loops_passive_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_active": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from active coils to passive loops",
+  "full_path": "em_coupling/mutual_passive_active(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_active_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_passive_active\"",
+  "full_path": "em_coupling/mutual_passive_active_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_passive_active_error_lower": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_passive_active\"",
+  "full_path": "em_coupling/mutual_passive_active_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_active_error_upper": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.active_coils"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_passive_active\"",
+  "full_path": "em_coupling/mutual_passive_active_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_passive": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Mutual inductance coupling from passive loops to passive loops",
+  "full_path": "em_coupling/mutual_passive_passive(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_passive_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"mutual_passive_passive\"",
+  "full_path": "em_coupling/mutual_passive_passive_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "em_coupling.mutual_passive_passive_error_lower": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"mutual_passive_passive\"",
+  "full_path": "em_coupling/mutual_passive_passive_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.mutual_passive_passive_error_upper": {
+  "coordinates": [
+   "em_coupling.passive_loops",
+   "em_coupling.passive_loops"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"mutual_passive_passive\"",
+  "full_path": "em_coupling/mutual_passive_passive_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "H"
+ },
+ "em_coupling.passive_loops": {
+  "coordinates": [
+   "pf_passive.loop"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the names of the passive loops",
+  "full_path": "em_coupling/passive_loops(:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "em_coupling.poloidal_probes": {
+  "coordinates": [
+   "magnetics.bpol_probe"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the names of poloidal field probes",
+  "full_path": "em_coupling/poloidal_probes(:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "em_coupling.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "em_coupling/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
