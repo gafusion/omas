@@ -27,6 +27,7 @@
 # needs_sphinx = '1.0'
 
 import os, sys, shutil, glob, re
+sys.path.insert(0,os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
 import sphinx_bootstrap_theme
 from omas import *
 from matplotlib import pyplot
