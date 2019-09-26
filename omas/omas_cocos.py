@@ -52,6 +52,10 @@ cocos_signals['bolometer.channel.:.line_of_sight.third_point.phi']='TOR'        
 cocos_signals['bremsstrahlung_visible.channel.:.line_of_sight.first_point.phi']='?'            #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['bremsstrahlung_visible.channel.:.line_of_sight.second_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
 
+# CALORIMETRY
+
+# CAMERA_IR
+
 # CHARGE_EXCHANGE
 cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='?'                                  #[ADD?]# 2.666667 # velocity  _pol  [m.s^-1]
 cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='?'                                  #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
@@ -162,7 +166,7 @@ cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.diamagnetic']='TOR
 cocos_signals['core_profiles.profiles_1d.:.e_field.diamagnetic']='TOR'                                                    # 1.750000 # e_field  [V.m^-1]
 
 # CORE_SOURCES
-cocos_signals['core_sources.source.:.global_quantities.:.current_parallel']='TOR'                                          # 3.000000 # current  parallel  [A.m]
+cocos_signals['core_sources.source.:.global_quantities.:.current_parallel']='TOR'                                          # 3.000000 # current  parallel  [A]
 cocos_signals['core_sources.source.:.global_quantities.:.torque_tor']='TOR'                                                # 3.000000 # torque  _tor  [kg.m^2.s^-2]
 cocos_signals['core_sources.source.:.profiles_1d.:.j_parallel']='TOR'                                                      # 3.000000 # j  parallel  [A.m^-2]
 cocos_signals['core_sources.source.:.profiles_1d.:.momentum_tor']='TOR'                                                    # 3.000000 # momentum  _tor  [kg.m^-1.s^-2]
@@ -570,23 +574,51 @@ cocos_signals['interferometer.channel.:.line_of_sight.third_point.phi']='TOR'   
 cocos_signals['iron_core.segment.:.b_field']='?'                                           #[ADD?]# 3.000000 # b  b_field  [T]
 
 # LANGMUIR_PROBES
-cocos_signals['langmuir_probes.probe.:.b_field_angle']='?'                          #[ADD?]# 3.000000 # b  b_field  [rad]
-cocos_signals['langmuir_probes.probe.:.j_ion_parallel']='?'                         #[ADD?]# 3.000000 # j  parallel  [A.m^-2]
-cocos_signals['langmuir_probes.probe.:.mach_number_parallel']='?'                   #[ADD?]# 2.000000 # parallel  [-]
-cocos_signals['langmuir_probes.probe.:.position_reciprocating.phi']='?'             #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['langmuir_probes.probe.:.position_static.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
-cocos_signals['langmuir_probes.probe.:.saturation_current_ion']='?'                 #[ADD?]# 2.000000 # current  [A]
-cocos_signals['langmuir_probes.probe.:.heat_flux_parallel']='?'                     #[ADD?]# 1.000000 # parallel
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.b_field_angle.data']='?'                    #[ADD?]# 2.666667 # b  b_field  [rad]
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.j_ion_parallel.data']='?'                   #[ADD?]# 2.666667 # j  parallel  [A.m^-2]
+cocos_signals['langmuir_probes.embedded.:.b_field_angle.data']='?'                                  #[ADD?]# 2.500000 # b  b_field  [rad]
+cocos_signals['langmuir_probes.embedded.:.j_ion_parallel.data']='?'                                 #[ADD?]# 2.500000 # j  parallel  [A.m^-2]
+cocos_signals['langmuir_probes.embedded.:.position.phi']='?'                                        #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.position.phi']='?'                          #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.mach_number_parallel.data']='?'             #[ADD?]# 1.833333 # parallel  [-]
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.saturation_current_ion.data']='?'           #[ADD?]# 1.833333 # current  [A]
+cocos_signals['langmuir_probes.embedded.:.saturation_current_ion.data']='?'                         #[ADD?]# 1.750000 # current  [A]
+cocos_signals['langmuir_probes.reciprocating.:.plunge.:.heat_flux_parallel.data']='?'               #[ADD?]# 0.833333 # parallel
+cocos_signals['langmuir_probes.embedded.:.heat_flux_parallel.data']='?'                             #[ADD?]# 0.750000 # parallel
 
 # LH_ANTENNAS
 cocos_signals['lh_antennas.antenna.:.position.phi.data']='?'                              #[ADD?]# 1.800000 # phi  [rad]
 
 # MAGNETICS
-cocos_signals['magnetics.bpol_probe.:.poloidal_angle']='?'                    #[ADD?]# 2.000000 # poloidal  [rad]
-cocos_signals['magnetics.bpol_probe.:.position.phi']='TOR'                           # 2.000000 # phi  [rad]
-cocos_signals['magnetics.bpol_probe.:.toroidal_angle']='?'                    #[ADD?]# 2.000000 # toroidal  [rad]
-cocos_signals['magnetics.flux_loop.:.position.:.phi']='TOR'                          # 2.000000 # phi  [rad]
-cocos_signals['magnetics.method.:.ip.data']='TOR'                                    # 1.750000 # ip  [A]
+cocos_signals['magnetics.b_field_pol_probe.:.non_linear_response.b_field_linear']='?'               #[ADD?]# 3.500000 # b  b_field  b  b_field  [T]
+cocos_signals['magnetics.b_field_pol_probe.:.non_linear_response.b_field_non_linear']='?'           #[ADD?]# 3.500000 # b  b_field  b  b_field  [T]
+cocos_signals['magnetics.b_field_tor_probe.:.non_linear_response.b_field_linear']='?'               #[ADD?]# 3.500000 # b  b_field  b  b_field  [T]
+cocos_signals['magnetics.b_field_tor_probe.:.non_linear_response.b_field_non_linear']='?'           #[ADD?]# 3.500000 # b  b_field  b  b_field  [T]
+cocos_signals['magnetics.bpol_probe.:.non_linear_response.b_field_linear']='?'                      #[ADD?]# 3.000000 # b  b_field  [T]
+cocos_signals['magnetics.bpol_probe.:.non_linear_response.b_field_non_linear']='?'                  #[ADD?]# 3.000000 # b  b_field  [T]
+cocos_signals['magnetics.b_field_pol_probe.:.poloidal_angle']='?'                                   #[ADD?]# 2.666667 # b  b_field  poloidal  [rad]
+cocos_signals['magnetics.b_field_pol_probe.:.toroidal_angle']='?'                                   #[ADD?]# 2.666667 # b  b_field  toroidal  [rad]
+cocos_signals['magnetics.b_field_tor_probe.:.poloidal_angle']='?'                                   #[ADD?]# 2.666667 # b  b_field  poloidal  [rad]
+cocos_signals['magnetics.b_field_tor_probe.:.toroidal_angle']='?'                                   #[ADD?]# 2.666667 # b  b_field  toroidal  [rad]
+cocos_signals['magnetics.b_field_pol_probe.:.position.phi']='?'                                     #[ADD?]# 2.500000 # b  b_field  phi  [rad]
+cocos_signals['magnetics.b_field_tor_probe.:.position.phi']='?'                                     #[ADD?]# 2.500000 # b  b_field  phi  [rad]
+cocos_signals['magnetics.bpol_probe.:.poloidal_angle']='?'                                          #[ADD?]# 2.000000 # poloidal  [rad]
+cocos_signals['magnetics.bpol_probe.:.position.phi']='TOR'                                                 # 2.000000 # phi  [rad]
+cocos_signals['magnetics.bpol_probe.:.toroidal_angle']='?'                                          #[ADD?]# 2.000000 # toroidal  [rad]
+cocos_signals['magnetics.flux_loop.:.position.:.phi']='TOR'                                                # 2.000000 # phi  [rad]
+cocos_signals['magnetics.rogowski_coil.:.position.:.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['magnetics.method.:.ip.data']='TOR'                                                          # 1.750000 # ip  [A]
+cocos_signals['magnetics.rogowski_coil.:.current.data']='?'                                         #[ADD?]# 1.750000 # current  [A]
+cocos_signals['magnetics.b_field_pol_probe.:.field.data']='?'                                       #[ADD?]# 1.500000 # b  b_field  [T]
+cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='?'                                     #[ADD?]# 1.500000 # b  b_field  [V]
+cocos_signals['magnetics.b_field_tor_probe.:.field.data']='?'                                       #[ADD?]# 1.500000 # b  b_field  [T]
+cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='?'                                     #[ADD?]# 1.500000 # b  b_field  [V]
+cocos_signals['magnetics.b_field_pol_probe.:.area']='?'                                             #[ADD?]# 0.666667 # b  b_field
+cocos_signals['magnetics.b_field_pol_probe.:.bandwidth_3db']='?'                                    #[ADD?]# 0.666667 # b  b_field
+cocos_signals['magnetics.b_field_pol_probe.:.length']='?'                                           #[ADD?]# 0.666667 # b  b_field
+cocos_signals['magnetics.b_field_tor_probe.:.area']='?'                                             #[ADD?]# 0.666667 # b  b_field
+cocos_signals['magnetics.b_field_tor_probe.:.bandwidth_3db']='?'                                    #[ADD?]# 0.666667 # b  b_field
+cocos_signals['magnetics.b_field_tor_probe.:.length']='?'                                           #[ADD?]# 0.666667 # b  b_field
 
 # MHD
 cocos_signals['mhd.ggd.:.b_field_tor.:.values']='?'                                              #[ADD?]# 2.800000 # b  b_field  _tor  [T]
