@@ -1348,6 +1348,15 @@ class ODS(MutableMapping):
         self.omas_data = ods.omas_data
         return self
 
+    def diff(self, ods):
+        '''
+        return differences between this ODS and the one passed
+
+        :param ods: ODS to compare against
+
+        :return: dictionary with differences
+        '''
+        return different_ods(self, ods)
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
