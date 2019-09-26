@@ -1,10 +1,11 @@
 from __future__ import print_function, division, unicode_literals
 
-import os, re, glob
+import os, sys, re, glob
 from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
+sys.path.insert(0,os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
 from omas import *
 
 force_build_json = 'last'
