@@ -1342,6 +1342,8 @@ class ODS(MutableMapping):
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+        if self.location:
+            kw['consistency_check'] = False
         ods = eval('load_omas_' + ext)(*args, **kw)
         self.omas_data = ods.omas_data
         return self
