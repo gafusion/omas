@@ -35,7 +35,9 @@ def different_ods(ods1, ods2):
         if not k.startswith('info.'):
             differences.append('DIFF: key `%s` missing in 1st ods' % k)
     for k in k1.intersection(k2):
-        if isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
+        if ods1[k] is None and ods2[k] is None:
+            pass
+        elif isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
                 differences.append('DIFF: `%s` differ in value' % k)
         elif type(ods1[k]) != type(ods2[k]):
