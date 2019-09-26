@@ -47,35 +47,35 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_pkl(self):
         ods = ods_sample()
         ods1 = through_omas_pkl(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('pkl through difference: %s' % diff)
 
     def test_omas_json(self):
         ods = ods_sample()
         ods1 = through_omas_json(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('json through difference: %s' % diff)
 
     def test_omas_nc(self):
         ods = ods_sample()
         ods1 = through_omas_nc(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('nc through difference: %s' % diff)
 
     def test_omas_h5(self):
         ods = ods_sample()
         ods1 = through_omas_h5(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('h5 through difference: %s' % diff)
 
     def test_omas_ds(self):
         ods = ods_sample()
         ods1 = through_omas_ds(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('ds through difference: %s' % diff)
 
@@ -84,7 +84,7 @@ class TestOmasSuite(unittest.TestCase):
         odx = ods_2_odx(ods)
         odx1 = through_omas_dx(odx)
         ods1 = odx_2_ods(odx1)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('dx through difference: %s' % diff)
 
@@ -92,7 +92,7 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_s3(self):
         ods = ods_sample()
         ods1 = through_omas_s3(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('s3 through difference: %s' % diff)
 
@@ -100,7 +100,7 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_imas(self):
         ods = ods_sample()
         ods1 = through_omas_imas(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('hdc through difference: %s' % diff)
 
@@ -108,7 +108,7 @@ class TestOmasSuite(unittest.TestCase):
     def test_omas_hdc(self):
         ods = ods_sample()
         ods1 = through_omas_hdc(ods)
-        diff = different_ods(ods, ods1)
+        diff = ods.diff(ods1)
         if diff:
             raise AssertionError('hdc through difference: %s' % diff)
 

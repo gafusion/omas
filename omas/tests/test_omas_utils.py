@@ -65,7 +65,7 @@ class TestOmasUtils(unittest.TestCase):
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
         ods3.sample_core_profiles()
-        diff_prof = different_ods(ods2, ods3)
+        diff_prof = ods2.diff(ods3)
         self.printv('  diff_prof = {}'.format(diff_prof))
         assert isinstance(diff_prof, list)
         assert isinstance(different_ods(ods3, ods2), list)
@@ -77,7 +77,7 @@ class TestOmasUtils(unittest.TestCase):
         assert 'core_profiles' in ' '.join(diff_prof2)
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
-        diff_prof3 = different_ods(ods2, ods3)
+        diff_prof3 = ods2.diff(ods3)
         self.printv('  diff_prof3 = {}'.format(diff_prof3))
         assert isinstance(diff_prof3, list)
         assert 'value' in ' '.join(diff_prof3)
