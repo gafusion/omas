@@ -35,6 +35,7 @@ g133221*
 *.pkl
 scenario_summary.txt
 omas_dump.txt
+omas/examples/gkdb
 
 .coverage
 
