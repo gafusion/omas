@@ -13,9 +13,11 @@ from pprint import pprint
 import tempfile
 import sys
 
+sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
+
 ods = ODS()
 # load a sample GKDB sample json file
-ods['gyrokinetics'].load(imas_json_dir + '/../samples/gkdb_linear_initialvalue.json')
+ods['gyrokinetics'].load(sample_filename)
 
 # show content
 pprint(ods.pretty_paths())
@@ -28,10 +30,11 @@ ods['gyrokinetics'].save(filename)
 ods1 = ODS()
 ods1['gyrokinetics'].load(filename)
 
-# print differences between original and
+# look for differences between original GKDB json and OMAS json
 if not ods.diff(ods1):
     print('\nPrint no differences found: save/load of GKDB json file worked\n')
 
+# raise error if trying to run GKDB under Python2x
 try:
     if sys.version_info < (3, 0):
         raise ImportError('gkdb library is only Python 3 compatible')
@@ -39,6 +42,11 @@ try:
 except ImportError as _excp:
     print('Could not import gkdb library: %s' % repr(_excp))
 else:
+    # Check that GKDB file written by OMAS is valid also according to GKDB
     if gkdb.core.ids_checks.check_json(filename, only_input=False):
         print('json file saved via OMAS is valid for gkdb')
-    gkdb.core.model.Ids_properties.from_json(filename)
+
+    # This requires an account on the GKDB server
+    if False:
+        gkdb.core.model.connect_to_gkdb()
+        gkdb.core.model.Ids_properties.from_json(filename)

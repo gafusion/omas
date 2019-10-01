@@ -741,9 +741,8 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
 
 @add_to__ODS__
-def gas_injection_overlay(
-        ods, ax=None, angle_not_in_pipe_name=False, which_gas='all', simple_labels=False, label_spacer=0, colors=None,
-        draw_arrow=True, **kw):
+def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all',
+                          simple_labels=False, label_spacer=0, colors=None, draw_arrow=True, **kw):
     """
     Plots overlays of gas injectors
 
