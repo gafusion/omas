@@ -152,7 +152,7 @@ omas_rcparams.update({
                                                                        'OMAS_FAKE_IMAS_DIR'])),
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
     'default_imas_version': _default_imas_version,
-    'default_mongo_server': 'mongodb://localhost:27017/'
+    'default_mongo_server': 'mongodb+srv://omas_test:omas_test@omasdb-xymmt.mongodb.net',
     'pickle_protocol': 2  # pickle.HIGHEST_PROTOCOL (`2` is used to ensure Python 3-->2 compatibility)
 })
 
