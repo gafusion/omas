@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# # -*- coding: utf-8 -*-
+"""
+MongoDB storage and discovery
+=============================
+OMAS can store/load its data in a MongoDB server.
+MongoDB is a document-oriented database program that uses JSON-like documents with schema
+and supports field, range query, and regular expression searches.
+
+As an example we illustrate storage of GKDB data in this format.
+"""
+
 from pprint import *
 from omas import *
 
@@ -21,9 +33,9 @@ odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt':
 # https://docs.mongodb.com/manual/tutorial/query-arrays/
 odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, table='test')
 
-# ==============================================
+# =============================================
 # showcase use of MongoDB storage for GKDB data
-# ==============================================
+# =============================================
 # load a sample GKDB sample json file
 # note use of `consistency_check='warn'` is necessary since GKDB json is in fact not yet 100% compatible with IMAS
 sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
