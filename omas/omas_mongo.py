@@ -35,21 +35,22 @@ def save_omas_mongo(ods, collection, database='OMAS', server=omas_rcparams['defa
     # importing module
     from pymongo import MongoClient
 
-    # Connect with the portnumber and host
+    # connect
     client = MongoClient(server)
 
-    # Access database
-    mydatabase = client[database]
+    # access database
+    db = client[database]
 
-    # Access collection of the database
-    mycollection = mydatabase[collection]
+    # access collection
+    coll = db[collection]
 
-    # cheap way to encode data
+    # a cheap way to encode data
     kw = {'indent': 0, 'separators': (',', ': '), 'sort_keys': True}
     json_string = json.dumps(ods, default=lambda x: json_dumper(x, None), **kw)
     jj = json.loads(json_string)
 
-    _id = mydatabase.myTable.insert(jj)
+    # insert record
+    _id = coll.insert(jj)
     return str(_id)
 
 
@@ -85,17 +86,18 @@ def load_omas_mongo(find, collection, database='OMAS', server=omas_rcparams['def
 
     printd('Loading OMAS data from MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
 
-    # Connect with the portnumber and host
+    # connect
     client = MongoClient(server)
 
-    # Access database
-    mydatabase = client[database]
+    # access database
+    db = client[database]
 
-    # Access collection of the database
-    mycollection = mydatabase[collection]
+    # access collection
+    coll = db[collection]
 
+    # find all the matching records
     results = {}
-    for record in mydatabase.myTable.find(find):
+    for record in coll.find(find):
         ods = ODS(consistency_check=consistency_check, imas_version=imas_version)
         _id = record['_id']
         del record['_id']
@@ -114,13 +116,13 @@ def through_omas_mongo(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     if method == 'function':
-        _id = save_omas_mongo(ods, 'test')
-        results = load_omas_mongo({'_id': _id}, 'test')
+        _id = save_omas_mongo(ods, collection='test', database='test')
+        results = load_omas_mongo({'_id': _id}, collection='test', database='test')
         if len(results) != 1:
             raise Exception('through_omas_mongo failed')
         ods1 = list(results.values())[0]
         return ods1
     else:
-        _id = ods.save('mongo', 'test')
+        _id = ods.save('mongo', collection='test', database='test')
         ods1 = ODS().load('mongo', {'_id': _id}, 'test')
         return ods1
