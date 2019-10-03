@@ -12,7 +12,7 @@ import sys
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
-def different_ods(ods1, ods2):
+def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False):
     """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
@@ -20,8 +20,14 @@ def different_ods(ods1, ods2):
 
     :param ods2: second ods to check
 
+    :param ignore_type: ignore object type differences
+
+    :param ignore_empty: ignore emptry nodes
+
     :return: string with reason for difference, or False otherwise
     """
+    from omas import ODS
+
     ods1 = ods1.flat()
     ods2 = ods2.flat()
 
@@ -29,10 +35,10 @@ def different_ods(ods1, ods2):
     k2 = set(ods2.keys())
     differences = []
     for k in k1.difference(k2):
-        if not k.startswith('info.'):
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])):
             differences.append('DIFF: key `%s` missing in 2nd ods' % k)
     for k in k2.difference(k1):
-        if not k.startswith('info.'):
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
             differences.append('DIFF: key `%s` missing in 1st ods' % k)
     for k in k1.intersection(k2):
         if ods1[k] is None and ods2[k] is None:
@@ -40,7 +46,7 @@ def different_ods(ods1, ods2):
         elif isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
                 differences.append('DIFF: `%s` differ in value' % k)
-        elif type(ods1[k]) != type(ods2[k]):
+        elif not ignore_type and type(ods1[k]) != type(ods2[k]):
             differences.append('DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k])))
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
             if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):

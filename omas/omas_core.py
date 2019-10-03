@@ -1379,15 +1379,19 @@ class ODS(MutableMapping):
         self.consistency_check = consistency_check
         return self
 
-    def diff(self, ods):
+    def diff(self, ods, ignore_type=False, ignore_empty=False):
         '''
         return differences between this ODS and the one passed
 
         :param ods: ODS to compare against
 
+        :param ignore_type: ignore object type differences
+
+        :param ignore_empty: ignore empty nodes
+
         :return: dictionary with differences
         '''
-        return different_ods(self, ods)
+        return different_ods(self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty)
 
     def from_structure(self, structure):
         '''
