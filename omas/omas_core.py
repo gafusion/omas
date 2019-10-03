@@ -424,7 +424,7 @@ class ODS(MutableMapping):
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
 
-        if self.consistency_check:
+        if self.consistency_check and '.code.parameters.' not in location:
             # perform consistency check with IMAS structure
             structure = {}
             structure_key = key[0] if not isinstance(key[0], int) else ':'
@@ -435,7 +435,7 @@ class ODS(MutableMapping):
                         structure = load_structure(key[0], imas_version=self.imas_version)[1][key[0]]
                     else:
                         structure = self.structure[structure_key]
-                        if not len(structure):
+                        if not len(structure) and '.code.parameters' not in location:
                             raise ValueError('`%s` has no data' % location)
                     # check that tha data will go in the right place
                     self._validate(value, structure)
@@ -462,7 +462,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    spaces = ' ' * len('LookupError') + ' ' + ' ' * (len(self.location) + 2)
+                    spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
                     raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
                                       spaces + '^' * len(structure_key) + '\n' + '%s' % options)
 
@@ -483,7 +483,7 @@ class ODS(MutableMapping):
         if not isinstance(value, ODS):
 
             # now that all checks are completed we can assign the structure information
-            if self.consistency_check:
+            if self.consistency_check and '.code.parameters.' not in location:
                 ulocation = o2u(location)
 
                 # handle cocos transformations coming in
@@ -567,7 +567,7 @@ class ODS(MutableMapping):
             elif isinstance(value, bytes):
                 value = value.decode('utf-8', errors='ignore')
 
-            if self.consistency_check:
+            if self.consistency_check and '.code.parameters.' not in location:
                 # force type consistent with data dictionary
                 if numpy.atleast_1d(is_uncertain(value)).any():
                     pass
