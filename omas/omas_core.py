@@ -1358,6 +1358,37 @@ class ODS(MutableMapping):
         '''
         return different_ods(self, ods)
 
+    def from_structure(self, structure):
+        '''
+        Generate an ODS starting from a hierarchical structure made of dictionaries and lists
+
+        :param structure: input structure
+
+        :return: ODS
+        '''
+        if isinstance(structure, dict):
+            keys = list(map(str, structure.keys()))
+        elif isinstance(structure, list):
+            keys = list(range(len(structure)))
+        else:
+            raise ValueError('from_structure must be fed either a structure made of dictionaries and lists')
+
+        for item in keys:
+            if isinstance(structure[item], dict):
+                self[item].from_structure(structure[item])
+            elif isinstance(structure[item], list):
+                # identify if this is a leaf
+                if len(structure[item]) and not isinstance(structure[item][0], dict):
+                    self[item] = numpy.array(structure[item])
+                # or a node in the IMAS tree
+                else:
+                    self[item].from_structure(structure[item])
+            else:
+                self[item] = copy.deepcopy(structure[item])
+
+        return self
+
+
 # --------------------------------------------
 # import sample functions and add them as ODS methods
 # --------------------------------------------

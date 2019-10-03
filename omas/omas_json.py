@@ -59,7 +59,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
     :return: OMAS data set
     """
 
-    printd('Loading OMAS data to Json: %s' % filename, topic='json')
+    printd('Loading OMAS data from Json: %s' % filename, topic='json')
 
     def cls():
         tmp = ODS(imas_version=imas_version)
