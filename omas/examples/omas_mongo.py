@@ -17,21 +17,21 @@ ods = ODS().sample_equilibrium()
 ods['equilibrium.code.name'] = 'test_code'
 
 # write entry to the database
-_id = save_omas_mongo(ods, table='test')
+_id = save_omas_mongo(ods, collection='test')
 
 # retrieve exact entry using `_id`
-ods = ODS().load('mongo', {'_id': _id}, table='test')
+ods = ODS().load('mongo', {'_id': _id}, collection='test')
 
 # find entries that satisfy the query by matching strings
-odss = load_omas_mongo({'equilibrium.code.name': 'test_code'}, table='test')
+odss = load_omas_mongo({'equilibrium.code.name': 'test_code'}, collection='test')
 
 # navigate through dictionaries and arrays of structures
 # https://docs.mongodb.com/manual/tutorial/query-embedded-documents/
-odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt': 0}}, table='test')
+odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt': 0}}, collection='test')
 
 # find entries based on conditions on array elements
 # https://docs.mongodb.com/manual/tutorial/query-arrays/
-odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, table='test')
+odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, collection='test')
 
 # =============================================
 # showcase use of MongoDB storage for GKDB data
@@ -47,7 +47,7 @@ _id = ods.save('mongo', 'gkdb')
 
 # reload GKDB entry
 ods1 = ODS(consistency_check='warn')
-ods1.load('mongo', {'_id': _id}, table='test')
+ods1.load('mongo', {'_id': _id}, collection='test')
 
 # look for differences between original GKDB json and MongoDB entry
 differences = ods.diff(ods1, ignore_type=True)

@@ -15,22 +15,22 @@ from .omas_core import ODS
 # -----------------------------
 # save and load OMAS to MongoDB
 # -----------------------------
-def save_omas_mongo(ods, table, database='OMAS', server="mongodb://localhost:27017/"):
+def save_omas_mongo(ods, collection, database='OMAS', server=omas_rcparams['default_mongo_server']):
     """
     Save an OMAS data set to MongoDB
 
     :param ods: OMAS data set
 
-    :param table:
+    :param collection: collection name in the database
 
-    :param database:
+    :param database: database name on the server
 
-    :param server:
+    :param server: server name
 
-    :return: unique `_id` identifier on server
+    :return: unique `_id` identifier of the record
     """
 
-    printd('Saving OMAS data to MongoDB: table=%s database=%s  server=%s' % (table, database, server), topic=['MongoDB'])
+    printd('Saving OMAS data to MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
 
     # importing module
     from pymongo import MongoClient
@@ -42,7 +42,7 @@ def save_omas_mongo(ods, table, database='OMAS', server="mongodb://localhost:270
     mydatabase = client[database]
 
     # Access collection of the database
-    mycollection = mydatabase[table]
+    mycollection = mydatabase[collection]
 
     # cheap way to encode data
     kw = {'indent': 0, 'separators': (',', ': '), 'sort_keys': True}
@@ -53,13 +53,13 @@ def save_omas_mongo(ods, table, database='OMAS', server="mongodb://localhost:270
     return str(_id)
 
 
-def load_omas_mongo(find, table, database='OMAS', server="mongodb://localhost:27017/", consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
+def load_omas_mongo(find, collection, database='OMAS', server=omas_rcparams['default_mongo_server'], consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
     """
     Load an OMAS data set from MongoDB
 
     :param find: dictionary to find data in the database
 
-    :param table: table name in the database
+    :param collection: collection name in the database
 
     :param database: database name on the server
 
@@ -83,7 +83,7 @@ def load_omas_mongo(find, table, database='OMAS', server="mongodb://localhost:27
         find = copy.deepcopy(find)
         find['_id'] = ObjectId(find['_id'])
 
-    printd('Loading OMAS data from MongoDB: table=%s database=%s  server=%s' % (table, database, server), topic=['MongoDB'])
+    printd('Loading OMAS data from MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
 
     # Connect with the portnumber and host
     client = MongoClient(server)
@@ -92,7 +92,7 @@ def load_omas_mongo(find, table, database='OMAS', server="mongodb://localhost:27
     mydatabase = client[database]
 
     # Access collection of the database
-    mycollection = mydatabase[table]
+    mycollection = mydatabase[collection]
 
     results = {}
     for record in mydatabase.myTable.find(find):
