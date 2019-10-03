@@ -240,11 +240,12 @@ class ODS(MutableMapping):
     def consistency_check(self, consistency_value):
         old_consistency_check = self._consistency_check
         try:
-            # set .consistency_check for this ODS
+            # set ._consistency_check for this ODS
             self._consistency_check = consistency_value
-            # set .consistency_check and assign the .structure/.location attributes to the underlying ODSs
+            # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
                 if isinstance(self.getraw(item), ODS):
+                    consistency_value_propagate = consistency_value
                     if consistency_value:
                         if not self.structure:
                             if not self.location:
@@ -254,22 +255,26 @@ class ODS(MutableMapping):
                                 raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
-                            location = self.location + '.' + structure_key
-                            try:
+                            if structure_key in self.structure:
                                 structure = self.structure[structure_key]
-                            except KeyError:
+                            else:
                                 options = list(self.structure.keys())
                                 if len(options) == 1 and options[0] == ':':
                                     options = 'A numerical index is needed with n>=0'
                                 else:
                                     options = 'Did you mean: %s' % options
                                 spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
-                                raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
-                                                  spaces + '^' * len(structure_key) + '\n' + '%s' % options)
+                                if consistency_value == 'warn':
+                                    printe('`%s` is not a valid IMAS %s location' % (self.location + '.' + structure_key, self.imas_version))
+                                    structure = {}
+                                    consistency_value_propagate = False
+                                else:
+                                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (self.location + '.' + structure_key, self.imas_version) +
+                                                      spaces + '^' * len(structure_key) + '\n' + '%s' % options)
                         # assign structure and location information
                         self.getraw(item).structure = structure
                         self.getraw(item).location = l2o([self.location] + [item])
-                    self.getraw(item).consistency_check = consistency_value
+                    self.getraw(item).consistency_check = consistency_value_propagate
 
         except Exception as _excp:
             # restore existing consistency_check value in case of error
