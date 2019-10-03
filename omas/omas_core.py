@@ -13,6 +13,7 @@ __all__ = [
     'ODS', 'ods_sample', 'different_ods',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
+    'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
     'save_omas_hdc', 'load_omas_hdc', 'through_omas_hdc',
     'load_omas_uda',
     'save_omas_nc', 'load_omas_nc', 'through_omas_nc',
@@ -1329,7 +1330,7 @@ class ODS(MutableMapping):
         Load OMAS data
 
         :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
-                         set to `imas`, `s3`, `hdc` for save methods that do not have a filename with extension
+                         set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
 
         :param \*args: extra arguments passed to load_omas_XXX() method
 
@@ -1344,8 +1345,16 @@ class ODS(MutableMapping):
             ext = os.path.splitext(args[0])[-1].strip('.')
         if self.location:
             kw['consistency_check'] = False
-        ods = eval('load_omas_' + ext)(*args, **kw)
-        self.omas_data = ods.omas_data
+        results = eval('load_omas_' + ext)(*args, **kw)
+        if ext in ['mongo']:
+            if not len(results):
+                raise RuntimeError(ext + ' query returned no result!')
+            elif len(results) > 1:
+                raise RuntimeError(ext + ' query returned more than one result!')
+            else:
+                self.omas_data = list(results.values())[0].omas_data
+        else:
+            self.omas_data = results.omas_data
         return self
 
     def diff(self, ods):
@@ -1498,6 +1507,7 @@ from .omas_hdc import *
 from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
+from .omas_mongo import *
 
 
 # --------------------------------------------

@@ -41,6 +41,14 @@ try:
 except RuntimeError as _excp:
     failed_S3 = _excp
 
+try:
+    from pymongo import MongoClient
+
+    client = MongoClient("mongodb://localhost:27017/")
+    failed_mongo = False
+except ImportError as _excp:
+    failed_mongo = _excp
+
 
 class TestOmasSuite(unittest.TestCase):
 
@@ -87,6 +95,14 @@ class TestOmasSuite(unittest.TestCase):
         diff = ods.diff(ods1)
         if diff:
             raise AssertionError('dx through difference: %s' % diff)
+
+    @unittest.skipUnless(not failed_mongo, str(failed_mongo))
+    def test_omas_mongo(self):
+        ods = ods_sample()
+        ods1 = through_omas_mongo(ods)
+        diff = ods.diff(ods1)
+        if diff:
+            raise AssertionError('mongo through difference: %s' % diff)
 
     @unittest.skipUnless(not failed_S3, str(failed_S3))
     def test_omas_s3(self):
