@@ -45,7 +45,7 @@ try:
     from pymongo import MongoClient
     from pymongo.errors import ServerSelectionTimeoutError
 
-    client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=1000)
+    client = MongoClient(omas_rcparams['default_mongo_server'], serverSelectionTimeoutMS=1000)
     client.server_info()
     failed_mongo = False
 except ServerSelectionTimeoutError as _excp:

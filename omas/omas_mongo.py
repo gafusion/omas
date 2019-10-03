@@ -124,5 +124,5 @@ def through_omas_mongo(ods, method=['function', 'class_method'][1]):
         return ods1
     else:
         _id = ods.save('mongo', collection='test', database='test')
-        ods1 = ODS().load('mongo', {'_id': _id}, 'test')
+        ods1 = ODS().load('mongo', {'_id': _id}, collection='test', database='test')
         return ods1
