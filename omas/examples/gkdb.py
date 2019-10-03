@@ -15,8 +15,9 @@ import sys
 
 sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
 
-ods = ODS()
+ods = ODS(consistency_check='warn')
 # load a sample GKDB sample json file
+# note use of `consistency_check='warn'` is necessary since GKDB json is in fact not yet 100% compatible with IMAS
 ods['gyrokinetics'].load(sample_filename)
 
 # show content
@@ -28,7 +29,7 @@ ods['gyrokinetics'].save(filename)
 
 # load the newly saved copy
 ods1 = ODS()
-ods1['gyrokinetics'].load(filename)
+ods1['gyrokinetics'].load(filename, consistency_check='warn')
 
 # look for differences between original GKDB json and OMAS json
 if not ods.diff(ods1):
