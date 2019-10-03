@@ -43,10 +43,12 @@ except RuntimeError as _excp:
 
 try:
     from pymongo import MongoClient
+    from pymongo.errors import ServerSelectionTimeoutError
 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=1000)
+    client.server_info()
     failed_mongo = False
-except ImportError as _excp:
+except ServerSelectionTimeoutError as _excp:
     failed_mongo = _excp
 
 
