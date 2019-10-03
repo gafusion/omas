@@ -20,3 +20,27 @@ odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt':
 # find entries based on conditions on array elements
 # https://docs.mongodb.com/manual/tutorial/query-arrays/
 odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, table='test')
+
+# ==============================================
+# showcase use of MongoDB storage for GKDB data
+# ==============================================
+# load a sample GKDB sample json file
+# note use of `consistency_check='warn'` is necessary since GKDB json is in fact not yet 100% compatible with IMAS
+sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
+ods = ODS(consistency_check='warn')
+ods['gyrokinetics'].load(sample_filename)
+
+# write GKDB entry to the database
+_id = ods.save('mongo', 'gkdb')
+
+# reload GKDB entry
+ods1 = ODS(consistency_check='warn')
+ods1.load('mongo', {'_id': _id}, table='test')
+
+# look for differences between original GKDB json and MongoDB entry
+differences = ods.diff(ods1, ignore_type=True)
+if not differences:
+    print('\nPrint no differences found: save/load of GKDB on MongoDB worked\n')
+else:
+    pprint(differences)
+    raise RuntimeError('Save/Load of GKDB  on MongoDB failed')

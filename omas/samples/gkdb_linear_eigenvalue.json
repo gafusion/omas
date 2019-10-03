@@ -485,6 +485,5 @@
                             "energy_b_field_parallel": 0
                         }                    ]
                 }            ]
-        }    ],
-    "fluxes_integrated_norm": []
+        }    ]
 }
