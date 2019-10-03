@@ -254,7 +254,18 @@ class ODS(MutableMapping):
                                 raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
-                            structure = self.structure[structure_key]
+                            location = self.location + '.' + structure_key
+                            try:
+                                structure = self.structure[structure_key]
+                            except KeyError:
+                                options = list(self.structure.keys())
+                                if len(options) == 1 and options[0] == ':':
+                                    options = 'A numerical index is needed with n>=0'
+                                else:
+                                    options = 'Did you mean: %s' % options
+                                spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
+                                raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
+                                                  spaces + '^' * len(structure_key) + '\n' + '%s' % options)
                         # assign structure and location information
                         self.getraw(item).structure = structure
                         self.getraw(item).location = l2o([self.location] + [item])
