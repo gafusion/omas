@@ -598,13 +598,25 @@ class ODS(MutableMapping):
                         value = int(value)
                 # check type
                 if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
-                    raise ValueError('Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location))
+                    text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
+                    if self.consistency_check == 'warn':
+                        printe(text)
+                    else:
+                        raise ValueError(text)
                 # check consistency for scalar entries
                 if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    raise ValueError('%s must be a scalar of type %s' % (location, info['data_type']))
+                    text = '%s must be a scalar of type %s' % (location, info['data_type'])
+                    if self.consistency_check == 'warn':
+                        printe(text)
+                    else:
+                        raise ValueError(text)
                 # check consistency for number of dimensions
                 elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                    raise ValueError('%s must be an array with dimensions: %s' % (location, info['coordinates']))
+                    text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
+                    if self.consistency_check == 'warn':
+                        printe(text)
+                    else:
+                        raise ValueError(text)
                 elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
                     printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
 
