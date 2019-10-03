@@ -461,7 +461,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
+                    spaces = ' ' * len('LookupError') + ' ' + ' ' * (len(self.location) + 2)
                     raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
                                       spaces + '^' * len(structure_key) + '\n' + '%s' % options)
 
