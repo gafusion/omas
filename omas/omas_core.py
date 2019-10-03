@@ -264,13 +264,13 @@ class ODS(MutableMapping):
                                 else:
                                     options = 'Did you mean: %s' % options
                                 spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
+                                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
                                 if consistency_value == 'warn':
-                                    printe('`%s` is not a valid IMAS %s location' % (self.location + '.' + structure_key, self.imas_version))
+                                    printe(text)
                                     structure = {}
                                     consistency_value_propagate = False
                                 else:
-                                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (self.location + '.' + structure_key, self.imas_version) +
-                                                      spaces + '^' * len(structure_key) + '\n' + '%s' % options)
+                                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
                         # assign structure and location information
                         self.getraw(item).structure = structure
                         self.getraw(item).location = l2o([self.location] + [item])
@@ -468,8 +468,9 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
+                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if self.consistency_check == 'warn':
-                    printe('`%s` is not a valid IMAS %s location' % (location, self.imas_version))
+                    printe(text)
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
@@ -478,9 +479,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
-                    raise LookupError('`%s` is not a valid IMAS %s location\n' % (location, self.imas_version) +
-                                      spaces + '^' * len(structure_key) + '\n' + '%s' % options)
+                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
         if not self.omas_data or not len(self.omas_data):

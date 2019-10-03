@@ -84,8 +84,8 @@ through_omas_suite(ods=None, test_type=None, do_raise=False)
 ###################################
 # In the above example `consistency_check = True` result in the following error::
 #
-#     LookupError: `equilibrium.time_slice.:.does_not_exist` is not a valid IMAS 3.18.0 location
-#                                            ^^^^^^^^^^^^^^
+#     LookupError: Not a valid IMAS 3.18.0 location: `equilibrium.time_slice.:.does_not_exist`
+#                                                                              ^^^^^^^^^^^^^^
 #     Did you mean: ['profiles_2d', 'ggd', 'boundary', 'profiles_1d', 'constraints', 'global_quantities', 'coordinate_system', 'boundary_separatrix', 'time', 'convergence']
 
 #################################################

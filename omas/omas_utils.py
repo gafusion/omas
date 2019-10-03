@@ -358,6 +358,23 @@ def compare_version(version1, version2):
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
 
+def underline_last(text, offset=0):
+    '''
+    Utility function to underline the last part of a path
+
+    :param text: text to underline
+
+    :param offset: add offset to underling
+
+    :return: original text with underline on a new line
+    '''
+    index = [i for i, x in enumerate(text) if x in ['.', ' ']][-1]
+    if text[index] == '.':
+        index += 1
+    underline = ' ' * (index + offset) + '^' * (len(text) - index)
+    return text + '\n' + underline
+
+
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
