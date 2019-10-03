@@ -15,7 +15,7 @@ from .omas_core import ODS
 # -----------------------------
 # save and load OMAS to MongoDB
 # -----------------------------
-def save_omas_mongo(ods, collection, database='OMAS', server=omas_rcparams['default_mongo_server']):
+def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['default_mongo_server']):
     """
     Save an OMAS data set to MongoDB
 
@@ -54,7 +54,7 @@ def save_omas_mongo(ods, collection, database='OMAS', server=omas_rcparams['defa
     return str(_id)
 
 
-def load_omas_mongo(find, collection, database='OMAS', server=omas_rcparams['default_mongo_server'], consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
+def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['default_mongo_server'], consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
     """
     Load an OMAS data set from MongoDB
 
