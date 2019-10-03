@@ -239,10 +239,10 @@ def magnetics(ods):
     zf = z0 + afl * numpy.sin(angle_fl)
 
     for i in range(nbp):
-        ods['magnetics.bpol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
-        ods['magnetics.bpol_probe'][i]['position.r'] = rp[i]
-        ods['magnetics.bpol_probe'][i]['position.z'] = zp[i]
-        ods['magnetics.bpol_probe'][i]['position.phi'] = 6.5
+        ods['magnetics.b_field_pol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
+        ods['magnetics.b_field_pol_probe'][i]['position.r'] = rp[i]
+        ods['magnetics.b_field_pol_probe'][i]['position.z'] = zp[i]
+        ods['magnetics.b_field_pol_probe'][i]['position.phi'] = 6.5
 
     for i in range(nfl):
         ods['magnetics.flux_loop'][i]['identifier'] = 'FAKE flux loop {}'.format(i)

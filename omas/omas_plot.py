@@ -1002,7 +1002,7 @@ def magnetics_overlay(
 
     # Make sure there is something to plot or else just give up and return
     nbp = get_channel_count(
-        ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe',
+        ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
         test_checker='checker > 0')
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
@@ -1033,7 +1033,7 @@ def magnetics_overlay(
 
     if show_bpol_probe:
         show_mag(
-            nbp, 'magnetics.bpol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker,
+            nbp, 'magnetics.b_field_pol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker,
             mask[:nbp])
     if show_flux_loop:
         show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
