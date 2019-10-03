@@ -1343,8 +1343,14 @@ class ODS(MutableMapping):
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+        if 'consistency_check' in kw:
+            consistency_check = kw['consistency_check']
+        else:
+            consistency_check = self.consistency_check
         if self.location:
             kw['consistency_check'] = False
+        else:
+            kw['consistency_check'] = consistency_check
         results = eval('load_omas_' + ext)(*args, **kw)
         if ext in ['mongo']:
             if not len(results):
@@ -1355,6 +1361,7 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
+        self.consistency_check = consistency_check
         return self
 
     def diff(self, ods):
