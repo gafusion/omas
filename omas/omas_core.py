@@ -1491,18 +1491,27 @@ def save_omas_pkl(ods, filename, **kw):
         pickle.dump(ods, f, **kw)
 
 
-def load_omas_pkl(filename):
+def load_omas_pkl(filename, consistency_check=None, imas_version=None):
     """
     Load OMAS data set from Python pickle
 
     :param filename: filename to save to
+
+    :param consistency_check: verify that data is consistent with IMAS schema (skip if None)
+
+    :param imas_version: imas version to use for consistency check (leave original if None)
 
     :returns: ods OMAS data set
     """
     printd('Loading from %s' % filename, topic='pkl')
 
     with open(filename, 'rb') as f:
-        return pickle.load(f)
+        tmp = pickle.load(f)
+    if imas_version is not None:
+        tmp.imas_version = imas_version
+    if consistency_check is not None:
+        tmp.consistency_check = consistency_check
+    return tmp
 
 
 def through_omas_pkl(ods):

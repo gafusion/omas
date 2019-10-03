@@ -106,13 +106,17 @@ def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_d
     return remote_uri(_base_S3_uri(user), os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], 'up')
 
 
-def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir']):
+def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), consistency_check=None, imas_version=None, tmp_dir=omas_rcparams['tmp_imas_dir']):
     """
     Download an OMAS object from S3 and read it as pickle
 
     :param filename: filename to load from
 
     :param user: username where to look for the file
+
+    :param consistency_check: verify that data is consistent with IMAS schema (skip if None)
+
+    :param imas_version: imas version to use for consistency check (leave original if None)
 
     :param tmp_dir: temporary folder for storing S3 file on local workstation
 
@@ -122,9 +126,8 @@ def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=om
 
     if not os.path.exists(os.path.abspath(tmp_dir)):
         os.makedirs(os.path.abspath(tmp_dir))
-    remote_uri(_base_S3_uri(user) + filename, os.path.abspath(tmp_dir) + os.sep + os.sep + os.path.split(filename)[1],
-               'down')
-    return load_omas_pkl(os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1])
+    remote_uri(_base_S3_uri(user) + filename, os.path.abspath(tmp_dir) + os.sep + os.sep + os.path.split(filename)[1], 'down')
+    return load_omas_pkl(os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], consistency_check=consistency_check, imas_version=imas_version)
 
 
 def list_omas_s3(user=''):
