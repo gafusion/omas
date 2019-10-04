@@ -107,7 +107,7 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
     return results
 
 
-def get_mongo_credentials(server, database, collection):
+def get_mongo_credentials(server='', database='', collection=''):
     '''
     Users can specify their credentials in a `~/.omas/mongo_credentials` json file
     formatted like this:
