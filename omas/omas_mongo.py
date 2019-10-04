@@ -36,7 +36,7 @@ def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['defa
     from pymongo import MongoClient
 
     # connect
-    client = MongoClient(server)
+    client = MongoClient(server.format(**get_mongo_credentials(server, database, collection)))
 
     # access database
     db = client[database]
@@ -87,7 +87,7 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
     printd('Loading OMAS data from MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
 
     # connect
-    client = MongoClient(server)
+    client = MongoClient(server.format(**get_mongo_credentials(server, database, collection)))
 
     # access database
     db = client[database]
@@ -105,6 +105,52 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
         results[_id] = ods
 
     return results
+
+
+def get_mongo_credentials(server, database, collection):
+    '''
+    Users can specify their credentials in a `~/.omas/mongo_credentials` json file
+    formatted like this:
+
+    >> {"default": {"user": "mydefaultuser",
+    >>              "pass": "mydefaultpass"},
+    >>              "omasdb-xymmt.mongodb.net": {"user": "myuser1"
+    >>                                           "pass": "mypass1",
+    >>                                           "specific_database": {"user": "myuser2",
+    >>                                                                 "pass": "mypass2",
+    >>                                                                 "specific_collection": {"user": "myuser3",
+    >>                                                                                         "pass": "mypass3"}
+    >> }}}
+
+    if no `~/.omas/mongo_credentials` file is found: {'user': 'omas_test', 'pass': 'omas_test'}
+
+    if no matching server is found, the `default` is returned
+
+    :param server: server to look credentials for
+        * server can have `{user}:{pass}` placeholders: mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net
+
+    :param database: database name in server to look credentials for
+
+    :param collection: collection name in database to look credentials for
+
+    :return: dictionary with 'user' and 'pass' keys
+    '''
+    server = server.split('@')[-1]
+    up = {'user': 'omas_test', 'pass': 'omas_test'}
+    config = {}
+    filename = os.environ['HOME'] + '/.omas/mongo_credentials'
+    if os.path.exists(filename):
+        with open(filename) as f:
+            config = json.loads(f.read())
+    if 'default' in config:
+        up = config['default']
+    if server in config:
+        up = config[server]
+        if database in config[server]:
+            up = config[server][database]
+            if collection in config[server][collection]:
+                up = config[server][database][collection]
+    return up
 
 
 def through_omas_mongo(ods, method=['function', 'class_method'][1]):
