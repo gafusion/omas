@@ -11,6 +11,7 @@ matplotlib               # required
 scipy                    # required
 h5py                     # required
 pymongo                  # required
+dnspython                # required
 xarray<=0.11.0           # required
 
 Sphinx                   # build_documentation
