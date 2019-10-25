@@ -47,11 +47,14 @@ def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['defa
     # a cheap way to encode data
     kw = {'indent': 0, 'separators': (',', ': '), 'sort_keys': True}
     json_string = json.dumps(ods, default=lambda x: json_dumper(x, None), **kw)
-    jj = json.loads(json_string)
+    data = json.loads(json_string)
+
+    # avoid insert_one() to modify data
+    data = copy.copy(data)
 
     # insert record
-    _id = coll.insert(jj)
-    return str(_id)
+    res = coll.insert_one(data)
+    return str(res.inserted_id)
 
 
 def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['default_mongo_server'], consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
