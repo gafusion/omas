@@ -38,6 +38,34 @@ The development version of omas can also be installed with pip:
 
 List of `Python 2 <_static/requirements_python2.txt>`_ or `Python 3 <_static/requirements_python3.txt>`_ package requirements.
 
+Installation with IMAS
+======================
+
+Different IMAS versions require different Python installations, each of which may not have the Python packages that are needed to run OMAS.
+One may ask the maintainers of the IMAS installation to
+The simplest way to ensure that the `omas` dependencies are always available and up-to-date, is to setup all of the Python packages that `omas` depends on in a standalone folder:
+
+.. code-block:: none
+
+    cd path_to_omas_installation
+    git clone git@github.com:gafusion/omas.git
+    cd omas
+    pip install --target ./site-packages -r requirements_python2.txt
+
+Then update the `omas` UNIX module to include the `omas` and the `omas/site-packages` folders to the $PYTHONPATH environmental variable:
+
+.. code-block:: none
+
+    prepend-path     PYTHONPATH path_to_omas_installation/omas
+    prepend-path     PYTHONPATH path_to_omas_installation/omas/site-packages
+
+Loading the `imas` module followed by the `omas` module should then give you a fully functional IMAS + OMAS environment:
+
+.. code-block:: none
+
+    module load imas # NOTE: the name of the IMAS module may change on different systems
+    module load omas # NOTE: the name of the OMAS module may change on different systems
+
 Testing installation
 ====================
 
