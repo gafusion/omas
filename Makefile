@@ -89,8 +89,10 @@ testpypi:
 release: tests2 tests3 requirements json cocos docs tag
 	@echo 'Make release done'
 
+.PHONY: site-packages
+
 site-packages:
 	# for the time being we use requirements_python2 to allow for python 2 and 3 compatibility
-	pip install --target ./site-packages -r requirements_python2.txt
+	pip install --upgrade --target ./site-packages -r requirements_python2.txt
 	@echo "for TCSH: setenv PYTHONPATH $$PWD/site-packages:\$$PYTHONPATH"
 	@echo "for BASH: export PYTHONPATH=$$PWD/site-packages:\$$PYTHONPATH"
