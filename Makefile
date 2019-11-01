@@ -1,17 +1,18 @@
 all:
 	@echo 'OMAS makefile help'
 	@echo ''
-	@echo ' - make tests2       : run all regression tests with Python2'
-	@echo ' - make tests3       : run all regression tests with Python3'
-	@echo ' - make requirements : build requirements.txt'
-	@echo ' - make json         : generate IMAS json structure files'
-	@echo ' - make docs         : generate sphinx documentation and pushes it online'
-	@echo ' - make tag          : tag git repository with omas/version and push'
-	@echo ' - make cocos        : generate list of COCOS transformations'
-	@echo ' - make release      : all of the above, in order'
-	@echo ' - make pypi         : upload to pypi'
-	@echo ' - make html         : generate sphinx documentation'
-	@echo ' - make examples     : generate sphinx documentation with examples'
+	@echo ' - make tests2        : run all regression tests with Python2'
+	@echo ' - make tests3        : run all regression tests with Python3'
+	@echo ' - make requirements  : build requirements.txt'
+	@echo ' - make json          : generate IMAS json structure files'
+	@echo ' - make docs          : generate sphinx documentation and pushes it online'
+	@echo ' - make tag           : tag git repository with omas/version and push'
+	@echo ' - make cocos         : generate list of COCOS transformations'
+	@echo ' - make release       : all of the above, in order'
+	@echo ' - make pypi          : upload to pypi'
+	@echo ' - make html          : generate sphinx documentation'
+	@echo ' - make examples      : generate sphinx documentation with examples'
+	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
 tests: tests2 tests3
@@ -87,3 +88,9 @@ testpypi:
 
 release: tests2 tests3 requirements json cocos docs tag
 	@echo 'Make release done'
+
+site-packages:
+	# for the time being we use requirements_python2 to allow for python 2 and 3 compatibility
+	pip install --target ./site-packages -r requirements_python2.txt
+	@echo "for TCSH: setenv PYTHONPATH $$PWD/site-packages:\$$PYTHONPATH"
+	@echo "for BASH: export PYTHONPATH=$$PWD/site-packages:\$$PYTHONPATH"
