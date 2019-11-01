@@ -10,11 +10,6 @@ OMAS at ITER
 
        >> module load IMAS OMAS
 
-   .. warning::
-     On the ITER clusters the IMAS environment is loaded with ``module load IMAS`` instead of the ``module load imas`` that is commonly used elsewhere.
-     The ``module load imas`` will still execute on the ITER clusters, but the environment itself will not work properly!
-     For consistency, on the ITER cluster, the OMAS module follows the same convention as the IMAS module.
-
 Access ITER data
 ================
 Although ITER experimental data is yet to be produced, OMAS can already be used to access the database of ITER plasma scenarios that is curated by the ITER IO.
