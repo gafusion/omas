@@ -1337,7 +1337,7 @@ class ODS(MutableMapping):
         Save OMAS data
 
         :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds')
-                         set to `imas`, `s3`, `hdc` for load methods that do not have a filename with extension
+                         set to `imas`, `s3`, `hdc`, `mongo` for load methods that do not have a filename with extension
 
         :param \*args: extra arguments passed to save_omas_XXX() method
 
