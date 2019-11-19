@@ -250,6 +250,8 @@ def json_loader(object_pairs, cls=dict):
         else:
             dct[x] = y
 
+    if "dtype" in dct:  # python2/3 compatibility
+        dct["dtype"] = dct["dtype"].replace('S', 'U')
     if '__ndarray_tolist__' in dct:
         return numpy.array(dct['__ndarray_tolist__'], dtype=dct['dtype']).reshape(dct['shape'])
     elif '__ndarray_tolist_real__' in dct and '__ndarray_tolist_imag__' in dct:
