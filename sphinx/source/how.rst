@@ -46,28 +46,34 @@ The `ODS` class extends native Python dictionary and list classes with:
        ods['equilibrium.time_slice.:.global_quantities.ip'] # use `:` to collect quantities across list of structures
        ods['wall.description_2d.+.limiter.type.name']       # use `+` to append entries to a list of structures
 
-6. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]:
+6. **Automatic handling of XML code.parameters** will show them as dictionaries and save them as XML into IMAS:
+
+    .. code-block:: python
+
+        ods['equilibrium.code.parameters'] = CodeParameters('./parameters.xml')
+
+7. Automatic **COCOS transformations** [`read the COCOS cheatsheet <https://docs.google.com/document/d/1-efimTbI55SjxL_yE_GKSmV4GEvdzai7mAj5UYLLUXw/edit?usp=sharing>`_]:
 
    .. code-block:: python
 
        with omas_environment(ods, cocosio=2):
            ods['equilibrium.time_slice.0.profiles_1d.psi'] = gEQDSK['psi']
 
-7. Automatic **coordinate interpolations**:
+8. Automatic **coordinate interpolations**:
 
    .. code-block:: python
 
        with omas_environment(ods, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': gEQDSK['psi']}):
            ods['equilibrium.time_slice[0].profiles_1d.pressure'] = gEQDSK['pressure']
 
-8. Automatic **units conversions** via `pint Python package <http://pint.readthedocs.io/en/latest/>`_:
+9. Automatic **units conversions** via `pint Python package <http://pint.readthedocs.io/en/latest/>`_:
 
    .. code-block:: python
 
        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * milliseconds
        ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] # will return 0.008
 
-9. Unified interface for **querying about time** dimension:
+10. Unified interface for **querying about time** dimension:
 
    .. code-block:: python
 
@@ -75,44 +81,44 @@ The `ODS` class extends native Python dictionary and list classes with:
        ods.time('equilibrium.time_slice')                          # will return an array of times
        ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
-10. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_:
+11. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_:
 
     .. code-block:: python
 
         ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value, std_dev)
 
-11. Evaluate **derived quantities** from more fundamental ones:
+12. Evaluate **derived quantities** from more fundamental ones:
 
     .. code-block:: python
 
         ods.physics_core_profiles_pressures()
 
-12. **Get data as multidimensional array structures** in `xarray <http://xarray.pydata.org/en/stable/>`_ format:
+13. **Get data as multidimensional array structures** in `xarray <http://xarray.pydata.org/en/stable/>`_ format:
 
     .. code-block:: python
 
         ods['core_profiles.profiles_1d.0.electrons.density_thermal'].xarray()
 
-13. Conveniently **plot individual quantities**:
+14. Conveniently **plot individual quantities**:
 
     .. code-block:: python
 
         ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
 
-14. **Use regular expressions** with ``@`` construct for accessing data and plotting:
+15. **Use regular expressions** with ``@`` construct for accessing data and plotting:
 
     .. code-block:: python
 
         ods['@core.*0.elect.*dens.*th']
         ods.plot_quantity('@core.*0.elect.*dens.*th')
 
-15. **Predefined set of plots** available:
+16. **Predefined set of plots** available:
 
     .. code-block:: python
     
         ods.plot_core_profiles_summary()
 
-16. Save/load ODSs to/from **different storage systems**:
+17. Save/load ODSs to/from **different storage systems**:
 
 .. _omas_formats:
 
