@@ -41,14 +41,14 @@ The `ODS` class extends native Python dictionary and list classes with:
 
    .. code-block:: python
 
-       ods['wall.description_2d.3.limiter.type.name']      # use `#` to access entries as in a list
+       ods['wall.description_2d.3.limiter.type.name']       # use `#` to access entries as in a list
        ods['wall.description_2d.-1.limiter.type.name']      # use `-#` to access entries from the end of the list
        ods['equilibrium.time_slice.:.global_quantities.ip'] # use `:` to collect quantities across list of structures
        ods['wall.description_2d.+.limiter.type.name']       # use `+` to append entries to a list of structures
 
-6. **Automatic handling of XML code.parameters** will show them as dictionaries and save them as XML into IMAS:
+6. Automatic **handling of XML code.parameters** will show them as dictionaries and save them as XML into IMAS:
 
-    .. code-block:: python
+   .. code-block:: python
 
         ods['equilibrium.code.parameters'] = CodeParameters('./parameters.xml')
 
@@ -75,11 +75,11 @@ The `ODS` class extends native Python dictionary and list classes with:
 
 10. Unified interface for **querying about time** dimension:
 
-   .. code-block:: python
+    .. code-block:: python
 
-       ods.time('equilibrium')                                     # will return an array of times
-       ods.time('equilibrium.time_slice')                          # will return an array of times
-       ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
+        ods.time('equilibrium')                                     # will return an array of times
+        ods.time('equilibrium.time_slice')                          # will return an array of times
+        ods.time('equilibrium.time_slice.0.global_quantities.ip')   # will return a scalar time
 
 11. Seamless handling of **uncertain quantities** via `uncertainties Python package <https://github.com/lebigot/uncertainties>`_:
 
