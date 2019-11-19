@@ -3,7 +3,7 @@ import sys
 import glob
 import subprocess
 
-all_install_require = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython']
+all_install_require = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython','xmltodict']
 install_requires = {}
 # https://github.com/pydata/xarray/commit/faacc8da000b7971233142be349ee39c6d088510
 install_requires[2] = all_install_require + ['xarray<=0.11.0']
@@ -12,7 +12,7 @@ install_requires[3] = all_install_require + ['xarray']
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
                   'uda': ['pyuda'],
-                  'build_structures': ['xmltodict', 'bs4'],
+                  'build_structures': ['bs4'],
                   'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow']}
 
 # Add .json IMAS structure files to the package

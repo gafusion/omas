@@ -929,7 +929,7 @@ def cocos_transform(cocosin_index, cocosout_index):
 
 @add_to__ALL__
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, **kw):
+def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, **kw):
     '''
     Provides environment for data input/output to/from OMAS
 
@@ -940,6 +940,8 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
     :param coordsio: dictionary/ODS with coordinates for data interpolation
 
     :param unitsio: True/False whether data read from OMAS should have units
+
+    :param xmlcodeparams: view code.parameters as an XML string while in this environment
 
     :param kw: extra keywords set attributes of the ods (eg. 'consistency_check', 'dynamic_path_creation', 'imas_version')
 
@@ -982,6 +984,10 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         bkp_input_data_process_functions = copy.copy(omas_core.input_data_process_functions)
         omas_core.input_data_process_functions[:] = input_data_process_functions
 
+    # set code.parameters as XML string
+    if xmlcodeparams:
+        ods.codeparams2xml()
+
     try:
         if coordsio is not None:
             with omas_environment(coordsio, cocosio=cocosio):
@@ -990,6 +996,9 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
             yield ods
 
     finally:
+        # restore code.parameters as dictionary
+        if xmlcodeparams:
+            ods.codeparams2dict()
         # restore attributes
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio

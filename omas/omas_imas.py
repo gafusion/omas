@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
 
 
 # --------------------------------------------
@@ -251,6 +251,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # --------------------------------------------
 # save and load OMAS to IMAS
 # --------------------------------------------
+@codeparams_xml_save
 def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
     """
@@ -360,6 +361,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
+@codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
                    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
                    skip_uncertainties=False, skip_ggd=True, verbose=True):

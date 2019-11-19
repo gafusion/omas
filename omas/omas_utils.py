@@ -815,3 +815,66 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     except KeyError:
         pass
     return tmp
+
+
+def recursive_interpreter(me, interpret_method=ast.literal_eval):
+    '''
+    Traverse dictionaries and list to convert strings to int/float when appropriate
+
+    :param me: root of the dictionary to traverse
+
+    :param interpret_method: method used for conversion (ast.literal_eval by default)
+
+    :return: root of the dictionary
+    '''
+    if isinstance(me, list):
+        keys = range(len(me))
+    elif isinstance(me, dict):
+        keys = me.keys()
+
+    for kid in keys:
+        if me[kid] is None:
+            continue
+        elif isinstance(me[kid], (list, dict)):
+            recursive_interpreter(me[kid], interpret_method=interpret_method)
+        else:
+            try:
+                me[kid] = interpret_method(me[kid])
+            except (ValueError, SyntaxError) as _excp:
+                pass
+            if isinstance(me[kid], basestring) and ' ' in me[kid]:
+                try:
+                    values = []
+                    for item in re.split('[ |\t]+', me[kid].strip()):
+                        values.extend(tolist(float(item)))
+                    me[kid] = numpy.array(values)
+                except ValueError:
+                    pass
+
+    return me
+
+
+def recursive_encoder(me):
+    '''
+    Traverse dictionaries and list to convert entries strings as appropriate
+
+    :param me: root of the dictionary to traverse
+
+    :return: root of the dictionary
+    '''
+    if isinstance(me, list):
+        keys = range(len(me))
+    elif isinstance(me, dict):
+        keys = me.keys()
+
+    for kid in keys:
+        if me[kid] is None:
+            continue
+        elif isinstance(me[kid], (list, dict)):
+            recursive_encoder(me[kid])
+        else:
+            if isinstance(me[kid], numpy.ndarray):
+                me[kid] = ' '.join([repr(x) for x in me[kid]])
+            else:
+                me[kid] = str(me[kid])
+    return me

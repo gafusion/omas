@@ -12,6 +12,7 @@ scipy                    # required
 h5py                     # required
 pymongo                  # required
 dnspython                # required
+xmltodict                # required
 xarray                   # required
 
 Sphinx                   # build_documentation
@@ -20,6 +21,5 @@ sphinx-gallery           # build_documentation
 Pillow                   # build_documentation
 #pyuda                   # uda
 #pyhdc                   # hdc
-#xmltodict               # build_structures
 #bs4                     # build_structures
 #imas                    # imas

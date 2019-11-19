@@ -10,7 +10,7 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'ODS', 'ods_sample', 'different_ods',
+    'ODS', 'CodeParameters','codeparams_xml_save', 'codeparams_xml_load', 'ods_sample', 'different_ods',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
@@ -244,7 +244,7 @@ class ODS(MutableMapping):
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
-                if isinstance(self.getraw(item), ODS):
+                if isinstance(self.getraw(item), ODS) and 'code.parameters' not in self.getraw(item).location:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
                         if not self.structure:
@@ -497,6 +497,12 @@ class ODS(MutableMapping):
         # if the value is not an ODS strucutre
         if not isinstance(value, ODS):
 
+            # convert simple dict of code.parameters to CodeParameters instances
+            if '.code.parameters' in location and not isinstance(value, CodeParameters) and isinstance(value, (dict, ODS)):
+                tmp = value
+                value = CodeParameters()
+                value.update(tmp)
+
             # now that all checks are completed we can assign the structure information
             if self.consistency_check and '.code.parameters.' not in location:
                 ulocation = o2u(location)
@@ -597,7 +603,7 @@ class ODS(MutableMapping):
                     elif 'INT' in info['data_type']:
                         value = int(value)
                 # check type
-                if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
+                if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
                     text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
                     if self.consistency_check == 'warn':
                         printe(text)
@@ -1435,6 +1441,104 @@ class ODS(MutableMapping):
 
         return self
 
+    def codeparams2xml(self):
+        '''
+        Convert code.parameters to a XML string
+        '''
+        if not self.location:
+            for item in self:
+                self[item].codeparams2xml()
+            return
+        elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
+            self['code.parameters'] = self['code.parameters'].tostring()
+        elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
+            self['parameters'] = self['parameters'].tostring()
+
+    def codeparams2dict(self):
+        '''
+        Convert code.parameters to a CodeParameters dictionary object
+        '''
+        if not self.location:
+            for item in self:
+                self[item].codeparams2dict()
+            return
+        elif ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
+            self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+        elif ('parameters' in self and isinstance(self['parameters'], basestring)):
+            self['parameters'] = CodeParameters().fromstring(self['parameters'])
+
+
+class CodeParameters(dict):
+    """
+    Class used to interface with IMAS code-parameters XML files
+    """
+    def __init__(self, string=None):
+        if isinstance(string, basestring):
+            if os.path.exists(string):
+                self.fromfile(string)
+            else:
+                self.fromstring(string)
+
+    def fromstring(self, code_params_string):
+        '''
+        Load data from code.parameters XML string
+
+        :param code_params_string: XML string
+
+        :return: self
+        '''
+        import xmltodict
+        self.clear()
+        tmp = xmltodict.parse(code_params_string)['parameters']
+        recursive_interpreter(tmp)
+        self.update(tmp)
+        return self
+
+    def fromfile(self, code_params_file):
+        '''
+        Load data from code.parameters XML file
+
+        :param code_params_file: XML file
+
+        :return: self
+        '''
+        with open(code_params_file, 'r') as f:
+            return self.fromstring(f.read())
+
+    def tostring(self):
+        '''
+        generate an XML string from this dictionary
+
+        :return: XML string
+        '''
+        import xmltodict
+        tmp = {'parameters': OrderedDict()}
+        tmp['parameters'].update(copy.deepcopy(self))
+        recursive_encoder(tmp)
+        return xmltodict.unparse(tmp, pretty=True)
+
+
+def codeparams_xml_save(f):
+    '''
+    Decorator function to be used around the omas_save_XXX methods to enable
+    saving of code.parameters as an XML string
+    '''
+    def wrapper(ods, *args, **kwargs):
+        with omas_environment(ods, xmlcodeparams=True):
+            return f(ods, *args, **kwargs)
+    return wrapper
+
+
+def codeparams_xml_load(f):
+    '''
+    Decorator function to be used around the omas_load_XXX methods to enable
+    loading of code.parameters from an XML string
+    '''
+    def wrapper(*args, **kwargs):
+        ods = f(*args, **kwargs)
+        ods.codeparams2dict()
+        return ods
+    return wrapper
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods

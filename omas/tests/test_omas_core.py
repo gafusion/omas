@@ -371,6 +371,18 @@ class TestOmasCore(unittest.TestCase):
         except TypeError:
             pass
 
+    def test_codeparameters(self):
+        ods = ODS()
+        ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
+
+        tmp={}
+        tmp.update(ods['equilibrium.code.parameters'])
+        ods['equilibrium.code.parameters'] = tmp
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        with omas_environment(ods, xmlcodeparams=True):
+            assert isinstance(ods['equilibrium.code.parameters'],basestring)
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

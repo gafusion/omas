@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./input_gray.xsl" charset="ISO-8859-1"?>
+<parameters>
+  <code_specific>
+    <i_warm> 2 </i_warm>         <!-- 0=beamtr only, 1=weakly rel, 2=relativistic w/ asympt expansion, 3=rel w/ num integration -->
+    <i_larm> 5 </i_larm>         <!-- order of larmor expansion -->
+    <i_eccd> 11 </i_eccd>        <!-- 0=no, 1=yes ECCD calculation -->
+    <i_grad> 1 </i_grad>         <!-- 0=raytracing, 1=gaussian beam -->
+    <n_rad_ray> 1 </n_rad_ray>   <!-- radial # of rays -->
+    <n_ang_ray> 16 </n_ang_ray>  <!-- angular # of rays -->
+    <rho_max> 1.0 </rho_max>     <!-- beam truncation (1=last ray at P=e^-2) -->
+    <ds> 0.2 </ds>               <!-- beamtracing step (cm) -->
+    <n_steps> 8000 </n_steps>    <!-- max # of beamtracing steps -->
+  </code_specific>
+  <output_control>
+    <i_rho> 1 </i_rho>               <!-- 0=dpsi, 1=drhop constant in EC profiles -->
+    <n_proj_ec> 501 </n_proj_ec>     <!-- # of points in EC profiles -->
+    <i_step_proj> 100 </i_step_proj> <!-- beam shape data every i_step_proj points -->
+    <i_step_ray> 5 </i_step_ray>     <!-- ray data every i_step_ray points -->
+  </output_control>
+  <data_adjust>
+    <i_x_pos> 0 </i_x_pos>           <!-- -1=lower, 1=upper, 0=no X-point -->
+    <psi_ne_bnd> 1.01 </psi_ne_bnd>  <!-- density boundary (psi_norm) -->
+    <spline_psi> 0.0001 </spline_psi> <!-- psi smoothing coefficient -->
+  </data_adjust>
+</parameters>
