@@ -427,11 +427,14 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                         print('| ', ds)
                     continue
                 # ids fetching
-                if not len(getattr(ids, ds).time):
-                    printd("ids.%s.get()" % ds, topic='imas_code')
+                printd("ids.%s.get()" % ds, topic='imas_code')
+                try:
                     getattr(ids, ds).get()
-                # ids discovery
-                if len(getattr(ids, ds).time):
+                except ValueError as _excp:
+                    print('x ', ds) # not sure why 
+                    printe(repr(_excp))
+                    continue
+                if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
                     if verbose:
                         print('* ', ds)
                     fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
