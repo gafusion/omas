@@ -431,8 +431,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                 try:
                     getattr(ids, ds).get()
                 except ValueError as _excp:
-                    print('x ', ds) # not sure why 
-                    printe(repr(_excp))
+                    print('x ', ds) # not sure why some IDSs fail on .get()... it's not about them being empty
                     continue
                 if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
                     if verbose:
