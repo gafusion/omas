@@ -3,9 +3,11 @@
 """
 OMAS handling of code parameters
 ==================
+
 This example shows how XML code.parameters are handled withing OMAS
+
 NOTE: OMAS will save code.parameters as XML only when saving to IMAS
-      All other save methods retain the code.parameters tree structure
+All other save methods retain the code.parameters tree structure
 """
 
 from pprint import pprint
@@ -13,7 +15,7 @@ from omas import *
 import tempfile
 import os
 
-# assign code parameters using dictionary approach
+# Assign code parameters using dictionary approach
 ods = ODS()
 ods['equilibrium.code.parameters'] = CodeParameters()
 ods['equilibrium.code.parameters']['test'] = {}
@@ -22,12 +24,12 @@ ods['equilibrium.code.parameters']['test']['parameter2'] = 'hello'
 with omas_environment(ods, xmlcodeparams=True):
     pprint(ods)
 
-# load code parameters XML file from file
+# Load code parameters from XML file
 ods = ODS()
 ods['equilibrium.time'] = [0.0]
 ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
 
-# in OMAS code.parameters are represented as dicts
+# In OMAS code.parameters are represented as dicts
 pprint(ods)
 # the XML representation can be set with an environment
 with omas_environment(ods, xmlcodeparams=True):
