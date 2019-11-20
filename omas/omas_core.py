@@ -10,7 +10,7 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'ODS',
+    'ODS', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
     'ods_sample', 'different_ods',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
