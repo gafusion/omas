@@ -10,7 +10,9 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'ODS', 'CodeParameters','codeparams_xml_save', 'codeparams_xml_load', 'ods_sample', 'different_ods',
+    'ODS',
+    'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
+    'ods_sample', 'different_ods',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
@@ -1462,10 +1464,13 @@ class ODS(MutableMapping):
             for item in self:
                 self[item].codeparams2dict()
             return
-        elif ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
-            self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
-        elif ('parameters' in self and isinstance(self['parameters'], basestring)):
-            self['parameters'] = CodeParameters().fromstring(self['parameters'])
+        try:
+            if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
+                self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+            elif ('parameters' in self and isinstance(self['parameters'], basestring)):
+                self['parameters'] = CodeParameters().fromstring(self['parameters'])
+        except Exception as _excp:
+            printe(repr(_excp))
 
 
 class CodeParameters(dict):
