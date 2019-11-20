@@ -73,6 +73,9 @@ class ODS(MutableMapping):
 
         :param structure: IMAS schema to use
         """
+        if structure is None:
+            structure = {}
+        self.structure = structure
         self.omas_data = None
         self._consistency_check = consistency_check
         self._dynamic_path_creation = dynamic_path_creation
@@ -84,9 +87,6 @@ class ODS(MutableMapping):
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
-        if structure is None:
-            structure = {}
-        self.structure = structure
 
     def homogeneous_time(self, key='', default=True):
         '''
@@ -434,7 +434,7 @@ class ODS(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = ODS(imas_version=self.imas_version,
+            value = self.__class__(imas_version=self.imas_version,
                         consistency_check=self.consistency_check,
                         dynamic_path_creation=self.dynamic_path_creation,
                         cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
@@ -643,7 +643,7 @@ class ODS(MutableMapping):
                 # dynamic array structure creation
                 if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
-                        ods = ODS()
+                        ods = self.__class__()
                         ods.copy_attrs_from(self)
                         self[item] = ods
                 # index exists
@@ -770,7 +770,7 @@ class ODS(MutableMapping):
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
                 dynamically_created = True
-                self.__setitem__(key[0], ODS(imas_version=self.imas_version,
+                self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
                                              consistency_check=self.consistency_check,
                                              dynamic_path_creation=self.dynamic_path_creation,
                                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
