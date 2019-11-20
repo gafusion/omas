@@ -846,7 +846,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval):
                 try:
                     values = []
                     for item in re.split('[ |\t]+', me[kid].strip()):
-                        values.extend(tolist(float(item)))
+                        values.append(float(item))
                     me[kid] = numpy.array(values)
                 except ValueError:
                     pass
