@@ -35,6 +35,87 @@ __all__ = [
 # It is used for example by OMFIT to process OMFITexpressions
 input_data_process_functions = []
 
+def force_imas_type(value):
+    '''
+    IMAS supports (arrays of) integers, floats and strings
+
+    :param value: input value
+
+    :return: input value converted to be IMAS compatible
+    '''
+    # lists are saved as numpy arrays, and 0D numpy arrays as scalars
+    for function in input_data_process_functions:
+        value = function(value)
+    if isinstance(value, list):
+        value = numpy.array(value)
+    if isinstance(value, xarray.DataArray):
+        value = value.values
+    if isinstance(value, numpy.ndarray) and not len(value.shape):
+        value = value.item()
+    if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
+        value = value.item()
+    elif isinstance(value, (float, numpy.floating)):
+        value = float(value)
+    elif isinstance(value, (int, numpy.integer)):
+        value = int(value)
+    if isinstance(value, basestring):
+        pass
+    elif isinstance(value, bytes):
+        value = value.decode('utf-8', errors='ignore')
+    return value
+
+
+def consistency_checker(location, value, info, consistency_check):
+    '''
+    Print warnings or raise errors if object does not satisfy IMAS data dictionary
+    Converts numeric data to INT/FLOAT depending on IMAS specifications
+
+    :param value: value to check consistency of
+
+    :param info: output of omas_info_node
+
+    :param consistency_check: True, False, 'warn'
+
+    :return: value
+    '''
+    # force type consistent with data dictionary
+    if numpy.atleast_1d(is_uncertain(value)).any():
+        pass
+    elif isinstance(value, numpy.ndarray):
+        if 'FLT' in info['data_type']:
+            value = value.astype(float)
+        elif 'INT' in info['data_type']:
+            value = value.astype(int)
+    elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
+        if 'FLT' in info['data_type']:
+            value = float(value)
+        elif 'INT' in info['data_type']:
+            value = int(value)
+    # check type
+    if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
+        text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    # check consistency for scalar entries
+    if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+        text = '%s must be a scalar of type %s' % (location, info['data_type'])
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    # check consistency for number of dimensions
+    elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+        text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
+        printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+    return value
+
 
 class ODS(MutableMapping):
     """
@@ -279,6 +360,12 @@ class ODS(MutableMapping):
                         if isinstance(self.getraw(item), ODS):
                             self.getraw(item).structure = structure
                             self.getraw(item).location = l2o([self.location] + [item])
+                        else:
+                            location = l2o([self.location] + [item])
+                            info = omas_info_node(o2u(location), imas_version=self.imas_version)
+                            value = consistency_checker(location, self.getraw(item), info, consistency_value)
+                            if value is not self.getraw(item):
+                                self.setraw(item, value)
                     # propagate consistency check
                     if isinstance(self.getraw(item), ODS):
                         self.getraw(item).consistency_check = consistency_value_propagate
@@ -576,62 +663,11 @@ class ODS(MutableMapping):
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
-            for function in input_data_process_functions:
-                value = function(value)
-            if isinstance(value, list):
-                value = numpy.array(value)
-            if isinstance(value, xarray.DataArray):
-                value = value.values
-            if isinstance(value, numpy.ndarray) and not len(value.shape):
-                value = value.item()
-            if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
-                value = value.item()
-            elif isinstance(value, (float, numpy.floating)):
-                value = float(value)
-            elif isinstance(value, (int, numpy.integer)):
-                value = int(value)
-            if isinstance(value, basestring):
-                pass
-            elif isinstance(value, bytes):
-                value = value.decode('utf-8', errors='ignore')
+            value = force_imas_type(value)
 
+            # check that dimensions and data types are consistent with IMAS specifications
             if self.consistency_check and '.code.parameters.' not in location:
-                # force type consistent with data dictionary
-                if numpy.atleast_1d(is_uncertain(value)).any():
-                    pass
-                elif isinstance(value, numpy.ndarray):
-                    if 'FLT' in info['data_type']:
-                        value = value.astype(float)
-                    elif 'INT' in info['data_type']:
-                        value = value.astype(int)
-                elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
-                    if 'FLT' in info['data_type']:
-                        value = float(value)
-                    elif 'INT' in info['data_type']:
-                        value = int(value)
-                # check type
-                if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
-                    text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                # check consistency for scalar entries
-                if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    text = '%s must be a scalar of type %s' % (location, info['data_type'])
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                # check consistency for number of dimensions
-                elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                    text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                    printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+                value = consistency_checker(location, value, info, self.consistency_check)
 
         # check if the branch/node was dynamically created
         dynamically_created = False
