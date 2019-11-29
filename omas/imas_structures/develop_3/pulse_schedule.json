@@ -752,610 +752,518 @@
   "lifecycle_status": "alpha",
   "structure_reference": "pulse_schedule_ec"
  },
- "pulse_schedule.ec.antenna": {
+ "pulse_schedule.ec.launcher": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "struct_array",
-  "documentation": "Set of ECRH antennas",
-  "full_path": "pulse_schedule/ec/antenna(i1)",
+  "documentation": "Set of ECRH launchers",
+  "full_path": "pulse_schedule/ec/launcher(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "10",
   "structure_reference": "pulse_schedule_ec_antenna"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm": {
   "data_type": "structure",
   "documentation": "Normalised toroidal flux coordinate at which the main deposition should occur",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm",
   "lifecycle_status": "alpha",
   "structure_reference": "pulse_schedule_reference",
   "units": "-"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.envelope_type": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.envelope_type": {
   "data_type": "INT_0D",
   "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/envelope_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/envelope_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference": {
   "data_type": "structure",
   "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.data": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+   "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference/data(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "deposition_rho_tor_norm/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_index": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.data_error_index": {
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_index",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference/data_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_lower": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.data_error_lower": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+   "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_lower(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference/data_error_lower(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "deposition_rho_tor_norm/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_upper": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.data_error_upper": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time"
+   "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_upper(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference/data_error_upper(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "deposition_rho_tor_norm/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.time": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
   "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/time(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "deposition_rho_tor_norm/reference/time",
   "type": "dynamic",
   "units": "s"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference_name": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference_name": {
   "data_type": "STR_0D",
   "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference_name",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference_name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference_type": {
+ "pulse_schedule.ec.launcher[:].deposition_rho_tor_norm.reference_type": {
   "data_type": "INT_0D",
   "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/deposition_rho_tor_norm/reference_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].frequency": {
+ "pulse_schedule.ec.launcher[:].frequency": {
   "data_type": "structure",
   "documentation": "Frequency",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency",
   "lifecycle_status": "alpha",
   "structure_reference": "pulse_schedule_reference",
   "units": "Hz"
  },
- "pulse_schedule.ec.antenna[:].frequency.envelope_type": {
+ "pulse_schedule.ec.launcher[:].frequency.envelope_type": {
   "data_type": "INT_0D",
   "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/envelope_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/envelope_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference": {
+ "pulse_schedule.ec.launcher[:].frequency.reference": {
   "data_type": "structure",
   "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference.data": {
+ "pulse_schedule.ec.launcher[:].frequency.reference.data": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+   "pulse_schedule.ec.launcher[:].frequency.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference/data(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "frequency/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference.data_error_index": {
+ "pulse_schedule.ec.launcher[:].frequency.reference.data_error_index": {
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_index",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference/data_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference.data_error_lower": {
+ "pulse_schedule.ec.launcher[:].frequency.reference.data_error_lower": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+   "pulse_schedule.ec.launcher[:].frequency.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_lower(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference/data_error_lower(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "frequency/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference.data_error_upper": {
+ "pulse_schedule.ec.launcher[:].frequency.reference.data_error_upper": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].frequency.reference.time"
+   "pulse_schedule.ec.launcher[:].frequency.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_upper(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference/data_error_upper(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "frequency/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference.time": {
+ "pulse_schedule.ec.launcher[:].frequency.reference.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
   "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/time(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "frequency/reference/time",
   "type": "dynamic",
   "units": "s"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference_name": {
+ "pulse_schedule.ec.launcher[:].frequency.reference_name": {
   "data_type": "STR_0D",
   "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference_name",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference_name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].frequency.reference_type": {
+ "pulse_schedule.ec.launcher[:].frequency.reference_type": {
   "data_type": "INT_0D",
   "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/frequency/reference_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].identifier": {
+ "pulse_schedule.ec.launcher[:].identifier": {
   "data_type": "STR_0D",
-  "documentation": "Identifier of the antenna",
-  "full_path": "pulse_schedule/ec/antenna(i1)/identifier",
+  "documentation": "Identifier of the launcher",
+  "full_path": "pulse_schedule/ec/launcher(i1)/identifier",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "pulse_schedule.ec.antenna[:].launching_angle_pol": {
-  "data_type": "structure",
-  "documentation": "Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R. Positive means wave launched downwards, negative means wave launched upwards",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol",
-  "lifecycle_status": "alpha",
-  "structure_reference": "pulse_schedule_reference",
-  "units": "rad"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.envelope_type": {
-  "data_type": "INT_0D",
-  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/envelope_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference": {
-  "data_type": "structure",
-  "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_pol/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_index": {
-  "data_type": "int_type",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_lower": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_pol/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_upper": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_pol/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_pol/reference/time",
-  "type": "dynamic",
-  "units": "s"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference_name": {
+ "pulse_schedule.ec.launcher[:].name": {
   "data_type": "STR_0D",
-  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference_name",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_pol.reference_type": {
-  "data_type": "INT_0D",
-  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor": {
-  "data_type": "structure",
-  "documentation": "Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi. Positive sign means the waves is injected anti-clockwise when viewed from above.",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor",
-  "lifecycle_status": "alpha",
-  "structure_reference": "pulse_schedule_reference",
-  "units": "rad"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.envelope_type": {
-  "data_type": "INT_0D",
-  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/envelope_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference": {
-  "data_type": "structure",
-  "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_tor/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_index": {
-  "data_type": "int_type",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_lower": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_tor/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_upper": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_tor/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_angle_tor/reference/time",
-  "type": "dynamic",
-  "units": "s"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference_name": {
-  "data_type": "STR_0D",
-  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference_name",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].launching_angle_tor.reference_type": {
-  "data_type": "INT_0D",
-  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].name": {
-  "data_type": "STR_0D",
-  "documentation": "Name of the antenna",
-  "full_path": "pulse_schedule/ec/antenna(i1)/name",
+  "documentation": "Name of the launcher",
+  "full_path": "pulse_schedule/ec/launcher(i1)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "pulse_schedule.ec.antenna[:].phase": {
-  "data_type": "structure",
-  "documentation": "Phase",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase",
-  "lifecycle_status": "alpha",
-  "structure_reference": "pulse_schedule_reference",
-  "units": "rad"
- },
- "pulse_schedule.ec.antenna[:].phase.envelope_type": {
-  "data_type": "INT_0D",
-  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/envelope_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].phase.reference": {
-  "data_type": "structure",
-  "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].phase.reference.data": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].phase.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "phase/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].phase.reference.data_error_index": {
-  "data_type": "int_type",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].phase.reference.data_error_lower": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].phase.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "phase/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].phase.reference.data_error_upper": {
-  "coordinates": [
-   "pulse_schedule.ec.antenna[:].phase.reference.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "phase/reference/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "pulse_schedule.ec.antenna[:].phase.reference.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "phase/reference/time",
-  "type": "dynamic",
-  "units": "s"
- },
- "pulse_schedule.ec.antenna[:].phase.reference_name": {
-  "data_type": "STR_0D",
-  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference_name",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].phase.reference_type": {
-  "data_type": "INT_0D",
-  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference_type",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pulse_schedule.ec.antenna[:].power": {
+ "pulse_schedule.ec.launcher[:].power": {
   "data_type": "structure",
   "documentation": "Power",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power",
   "lifecycle_status": "alpha",
   "structure_reference": "pulse_schedule_reference",
   "units": "W"
  },
- "pulse_schedule.ec.antenna[:].power.envelope_type": {
+ "pulse_schedule.ec.launcher[:].power.envelope_type": {
   "data_type": "INT_0D",
   "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/envelope_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/envelope_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].power.reference": {
+ "pulse_schedule.ec.launcher[:].power.reference": {
   "data_type": "structure",
   "documentation": "Reference waveform",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].power.reference.data": {
+ "pulse_schedule.ec.launcher[:].power.reference.data": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].power.reference.time"
+   "pulse_schedule.ec.launcher[:].power.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Data",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference/data(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "power/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].power.reference.data_error_index": {
+ "pulse_schedule.ec.launcher[:].power.reference.data_error_index": {
   "data_type": "int_type",
   "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_index",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference/data_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].power.reference.data_error_lower": {
+ "pulse_schedule.ec.launcher[:].power.reference.data_error_lower": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].power.reference.time"
+   "pulse_schedule.ec.launcher[:].power.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_lower(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference/data_error_lower(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "power/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].power.reference.data_error_upper": {
+ "pulse_schedule.ec.launcher[:].power.reference.data_error_upper": {
   "coordinates": [
-   "pulse_schedule.ec.antenna[:].power.reference.time"
+   "pulse_schedule.ec.launcher[:].power.reference.time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_upper(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference/data_error_upper(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "power/reference/time",
   "type": "dynamic",
   "units": "mixed"
  },
- "pulse_schedule.ec.antenna[:].power.reference.time": {
+ "pulse_schedule.ec.launcher[:].power.reference.time": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "flt_1d_type",
   "documentation": "Time",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/time(:)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "power/reference/time",
   "type": "dynamic",
   "units": "s"
  },
- "pulse_schedule.ec.antenna[:].power.reference_name": {
+ "pulse_schedule.ec.launcher[:].power.reference_name": {
   "data_type": "STR_0D",
   "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference_name",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference_name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].power.reference_type": {
+ "pulse_schedule.ec.launcher[:].power.reference_type": {
   "data_type": "INT_0D",
   "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power/reference_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power/reference_type",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pulse_schedule.ec.antenna[:].power_type": {
+ "pulse_schedule.ec.launcher[:].power_type": {
   "data_type": "structure",
   "documentation": "Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power_type",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power_type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
  },
- "pulse_schedule.ec.antenna[:].power_type.description": {
+ "pulse_schedule.ec.launcher[:].power_type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power_type/description",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power_type/description",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "pulse_schedule.ec.antenna[:].power_type.index": {
+ "pulse_schedule.ec.launcher[:].power_type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power_type/index",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power_type/index",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "pulse_schedule.ec.antenna[:].power_type.name": {
+ "pulse_schedule.ec.launcher[:].power_type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
-  "full_path": "pulse_schedule/ec/antenna(i1)/power_type/name",
+  "full_path": "pulse_schedule/ec/launcher(i1)/power_type/name",
   "lifecycle_status": "alpha",
   "type": "static"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol": {
+  "data_type": "structure",
+  "documentation": "Steering angle of the EC beam in the R,Z plane (from the -R axis towards the -Z axis), angle_pol=atan2(-k_Z,-k_R), where k_Z and k_R are the Z and R components of the mean wave vector in the EC beam",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol",
+  "lifecycle_status": "alpha",
+  "structure_reference": "pulse_schedule_reference",
+  "units": "rad"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.envelope_type": {
+  "data_type": "INT_0D",
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/envelope_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference": {
+  "data_type": "structure",
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.data": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_pol/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.data_error_lower": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_pol/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.data_error_upper": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_pol/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_pol/reference/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference_name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference_name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_pol.reference_type": {
+  "data_type": "INT_0D",
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_pol/reference_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor": {
+  "data_type": "structure",
+  "documentation": "Steering angle of the EC beam away from the poloidal plane that is increasing towards the positive phi axis, angle_tor=arcsin(k_phi/k), where k_phi is the component of the wave vector in the phi direction and k is the length of the wave vector. Here the term wave vector refers to the mean wave vector in the EC beam",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor",
+  "lifecycle_status": "alpha",
+  "structure_reference": "pulse_schedule_reference",
+  "units": "rad"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.envelope_type": {
+  "data_type": "INT_0D",
+  "documentation": "Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes ",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/envelope_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference": {
+  "data_type": "structure",
+  "documentation": "Reference waveform",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.data": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_tor/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.data_error_lower": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_tor/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.data_error_upper": {
+  "coordinates": [
+   "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_tor/reference/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "steering_angle_tor/reference/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference_name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name (e.g. in the native pulse schedule system of the device)",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference_name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.ec.launcher[:].steering_angle_tor.reference_type": {
+  "data_type": "INT_0D",
+  "documentation": "Reference type:  0:relative; 1: absolute; refers to the reference/data node",
+  "full_path": "pulse_schedule/ec/launcher(i1)/steering_angle_tor/reference_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "pulse_schedule.ec.mode": {
   "data_type": "structure",
