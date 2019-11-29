@@ -1242,13 +1242,15 @@ class ODS(MutableMapping):
             '''
             base = key.split('.')[0]
             coordinates = []
+            counter = 0
             for c in [':'.join(key.split(':')[:k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
                 info = omas_info_node(o2u(c))
                 if 'coordinates' in info:
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
                             infoc = c
-                        coordinates.append('_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index']))
+                        coordinates.append('__'+'_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index%d__' % counter]))
+                        counter += 1
             return coordinates
 
         # Generate paths with ':' for the arrays of structures
@@ -1290,7 +1292,11 @@ class ODS(MutableMapping):
             for k, c in enumerate(coordinates[fukey]):
                 if c not in DS:
                     DS[c] = xarray.DataArray(numpy.arange(data.shape[k]), dims=c)
-            DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
+            try:
+                DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
+            except Exception:
+                printe('Error with %s with coordinates %s' % (fukey, coordinates[fukey]))
+                raise
         return DS
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
