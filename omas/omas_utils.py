@@ -739,7 +739,6 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
         from omas import ODS
         _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
     ods = _info_structures[imas_version]
-    ods.consistency_check = False
 
     for structure in structures:
         if structure not in ods:

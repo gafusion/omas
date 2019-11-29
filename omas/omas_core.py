@@ -246,10 +246,12 @@ class ODS(MutableMapping):
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
-                if isinstance(self.getraw(item), ODS) and 'code.parameters' not in self.getraw(item).location:
+                if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
+                    continue
+                else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
-                        if not self.structure:
+                        if isinstance(self.getraw(item), ODS) and not self.structure:
                             if not self.location:
                                 # load the json structure file
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
@@ -274,9 +276,12 @@ class ODS(MutableMapping):
                                 else:
                                     raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
                         # assign structure and location information
-                        self.getraw(item).structure = structure
-                        self.getraw(item).location = l2o([self.location] + [item])
-                    self.getraw(item).consistency_check = consistency_value_propagate
+                        if isinstance(self.getraw(item), ODS):
+                            self.getraw(item).structure = structure
+                            self.getraw(item).location = l2o([self.location] + [item])
+                    # propagate consistency check
+                    if isinstance(self.getraw(item), ODS):
+                        self.getraw(item).consistency_check = consistency_value_propagate
 
         except Exception as _excp:
             # restore existing consistency_check value in case of error

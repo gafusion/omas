@@ -63,7 +63,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
 
     def cls():
         tmp = ODS(imas_version=imas_version)
-        tmp.consistency_check = False
+        tmp._consistency_check = False
         return tmp
 
     if isinstance(filename, basestring):
