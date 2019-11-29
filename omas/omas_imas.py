@@ -60,13 +60,14 @@ def imas_open(user, machine, pulse, run, new=False,
                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]))
 
     else:
+        imas_major_version = '3'
         if new:
-            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_version)), topic='imas_code')
+            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
             ids.create_env(user, machine, imas_version)
         else:
-            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_version)), topic='imas_code')
+            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
             try:
-                ids.open_env(user, machine, imas_version)
+                ids.open_env(user, machine, imas_major_version)
             except Exception as _excp:
                 if 'Error opening imas pulse' in str(_excp):
                     raise IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version))
