@@ -339,7 +339,8 @@ class TestOmasPlot(unittest.TestCase):
     def test_langmuir_probes_embedded_overlay(self):
         """Tests method for plotting overlay of embedded LPs"""
         # Add sample data
-        lp_ods = copy.deepcopy(self.ods)
+        lp_ods = ODS()
+        lp_ods.sample_wall()  # The wall is used to decide label alignment
         lp_ods.sample_langmuir_probes()
 
         # Basic overlay
@@ -349,7 +350,7 @@ class TestOmasPlot(unittest.TestCase):
         lp_ods.plot_langmuir_probes_overlay()
         # Empty ODS / graceful failure
         ODS().plot_langmuir_probes_overlay()
-        # No equilibrium data for helping align labels
+        # No wall data for helping align labels
         ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
         return
 

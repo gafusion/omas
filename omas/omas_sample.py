@@ -456,3 +456,26 @@ def langmuir_probes(ods):
     ods['langmuir_probes.embedded.5.position.phi'] = numpy.NaN
 
     return ods
+
+
+@add_to_ODS
+def wall(ods):
+    """
+    Adds some FAKE wall data to support testing. The wall is approximately DIII-D shaped, but I didn't try very hard.
+
+    :param ods: ODS instance
+
+    :return: ODS instance
+        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    """
+    ods['wall.description_2d[0].limiter.type.description'] = 'first wall'
+    ods['wall.description_2d[0].limiter.type.index'] = 0
+    ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
+    ods['wall.description_2d[0].limiter.unit[0].outline.r'] = [
+        1.0, 1.0, 1.3, 1.4, 1.6, 2.15, 2.35, 2.35, 2.15, 1.800, 1.350, 1.35, 1.10, 1.00, 1.0
+    ]
+    ods['wall.description_2d[0].limiter.unit[0].outline.z'] = [
+        0.0, 1.4, 1.4, 1.3, 1.1, 1.00, 0.50, -0.5, -1.0, -1.25, -1.25, -1.4, -1.4, -1.3, 0.0
+    ]
+
+    return ods
