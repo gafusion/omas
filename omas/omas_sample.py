@@ -85,7 +85,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
         eq['equilibrium.time_slice.0.profiles_1d.phi'] = phi
 
     if not include_psi:
-        if 'profiles_1d' in eq['equilibrium.time_slice.0']:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0'] and 'psi' in eq['equilibrium.time_slice.0.profiles_1d']:
             del eq['equilibrium.time_slice.0.profiles_1d.psi']
         del eq['equilibrium.time_slice.0.profiles_2d.0.psi']
     else:
