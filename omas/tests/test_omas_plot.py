@@ -154,13 +154,41 @@ class TestOmasPlot(unittest.TestCase):
         assert geo_type_lookup(1, 'pf_active', imas_version='99.99.99', reverse=False) is None
 
     # Equilibrium plots
-    def test_eqcx(self):
+    def test_eqcx_basic(self):
+        """Our basic ods comes with eq data, so try to just plot that thing"""
         self.ods.plot_equilibrium_CX()
-        ods2 = ODS().sample_equilibrium(include_profiles=False, include_phi=True, include_wall=False)
-        ods2.plot_equilibrium_CX()  # Should be vs. rho this time
-        ods2.sample_equilibrium(time_index=1, include_profiles=False, include_phi=False, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        return
+
+    def test_eqcx_data_availability_variations(self):
+        """Plot all the equilibrium contour quantity options with all the combinations of available data"""
+        cq_options = ['rho', 'psi', 'phi']
+        for iwall in [True, False]:
+            for ipsi in [True, False]:
+                for iphi in [True, False]:
+                    for iprof in [True, False]:
+                        ods = ODS().sample_equilibrium(
+                            include_profiles=iprof, include_phi=iphi, include_psi=ipsi, include_wall=iwall,
+                        )
+                        for cqo in cq_options:
+                            ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
+
+        # Test for disallowed fallback
+        ods = ODS().sample_equilibrium(include_psi=False)
+        with self.assertRaises(ValueError):
+            ods.plot_equilibrium_CX(contour_quantity='psi', allow_fallback=False)
+        ods = ODS().sample_equilibrium(include_phi=False)
+        with self.assertRaises(ValueError):
+            ods.plot_equilibrium_CX(contour_quantity='phi', allow_fallback=False)
+        return
+
+    def test_eqcx_slices(self):
+        """Test dealing with different time indices, including getting wall from a different slice than the eq"""
+        ods2 = ODS().sample_equilibrium(time_index=1, include_wall=True)
+        ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        # Test for missing wall
         plt.figure('TestOmasPlot.test_eqcx missing wall')
-        ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()  # No wall
+        ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()
+        return
 
     def test_eq_summary(self):
         ods2 = ODS().sample_equilibrium(include_phi=False)

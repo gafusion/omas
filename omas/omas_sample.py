@@ -44,7 +44,7 @@ def dataset_description(ods):
 
 
 @add_to_ODS
-def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
+def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True):
     """
     Add sample equilibrium data
 
@@ -59,6 +59,9 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     :param include_phi: bool
         Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)
 
+    :param include_psi: bool
+        Include 1D and 2D profiles of psi (poloidal flux)
+
     :param include_wall: bool
         Include the first wall
 
@@ -70,6 +73,7 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
+    psi = eq['equilibrium.time_slice.0.profiles_1d.psi']
     if not include_profiles:
         del eq['equilibrium.time_slice.0.profiles_1d']
 
@@ -79,6 +83,13 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
         del eq['equilibrium.time_slice.0.profiles_2d.0.phi']
     else:
         eq['equilibrium.time_slice.0.profiles_1d.phi'] = phi
+
+    if not include_psi:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0']:
+            del eq['equilibrium.time_slice.0.profiles_1d.psi']
+        del eq['equilibrium.time_slice.0.profiles_2d.0.psi']
+    else:
+        eq['equilibrium.time_slice.0.profiles_1d.psi'] = psi
 
     if not include_wall:
         del eq['wall']

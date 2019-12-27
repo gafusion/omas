@@ -348,22 +348,34 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw):
-    """
+def equilibrium_CX(
+    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, **kw
+):
+    r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
 
-    :param ods: input ods
+    :param ods: ODS instance
+        input ods containing equilibrium data
 
-    :param time_index: time slice to plot
+    :param time_index: int
+        time slice to plot
 
-    :param levels: list of sorted numeric values to pass to 2D plot as contour levels
+    :param levels: sorted numeric iterable
+        values to pass to 2D plot as contour levels
 
-    :param ax: axes to plot in (active axes is generated if `ax is None`)
+    :param contour_quantity: string
+        quantity to contour; options: psi (poloidal magnetic flux), rho (sqrt of toroidal flux), phi (toroidal flux)
 
-    :param kw: arguments passed to matplotlib plot statements
+    :param allow_fallback: bool
+        If rho/phi is requested but not available, plot on psi instead if allowed. Otherwise, raise ValueError.
 
-    :return: axes
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: arguments passed to matplotlib plot statements
+
+    :return: Axes instance
     """
 
     import matplotlib
@@ -380,36 +392,58 @@ def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw
         elif 0 in ods['wall']['description_2d']:
             wall = ods['wall']['description_2d'][0]['limiter']['unit']
 
-    # plotting style
+    # Plotting style
     kw.setdefault('linewidth', 1)
     label = kw.pop('label', '')
     kw1 = copy.deepcopy(kw)
     kw1['linewidth'] = kw['linewidth'] + 1
 
-    # boundary
+    # Boundary
     ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], label=label, **kw1)
     kw1.setdefault('color', ax.lines[-1].get_color())
 
-    # axis
+    # Magnetic axis
     if 'global_quantities.magnetic_axis.r' in eq and 'global_quantities.magnetic_axis.z':
         ax.plot(eq['global_quantities']['magnetic_axis']['r'], eq['global_quantities']['magnetic_axis']['z'], '+', **kw1)
 
-    # first try to plot as function of `rho` and fallback on `psi`
-    if 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']:
-        value2D = numpy.sqrt(abs(eq['profiles_2d'][0]['phi']))
-        value1D = numpy.sqrt(abs(eq['profiles_1d']['phi']))
-    else:
-        value2D = eq['profiles_2d'][0]['psi']
-        value1D = eq['profiles_1d']['psi']
-    value2D = (value2D - min(value1D)) / (max(value1D) - min(value1D))
+    # Choose quantity to plot
+    phi_available = 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']
+    psi_available = 'psi' in eq['profiles_2d'][0] and 'psi' in eq['profiles_1d']
 
-    # wall clipping
+    if psi_available and (not phi_available) and (contour_quantity in ['rho', 'phi']):
+        if allow_fallback:
+            contour_quantity = 'psi'
+            printd('phi was requested but not found; falling back to psi contours')
+        else:
+            raise ValueError('phi (toroidal magnetic flux) is not available')
+    elif phi_available and (not psi_available) and (contour_quantity in ['psi']):
+        if allow_fallback:
+            contour_quantity = 'phi'
+            printd('psi was requested but not found; falling back to phi/rho contours')
+        else:
+            raise ValueError('psi (poloidal magnetic flux) is not available')
+
+    # Pull out contour value
+    if contour_quantity == 'rho':
+        value_2d = numpy.sqrt(abs(eq['profiles_2d'][0]['phi']))
+        value_1d = numpy.sqrt(abs(eq['profiles_1d']['phi']))
+    elif contour_quantity == 'phi':
+        value_2d = abs(eq['profiles_2d'][0]['phi'])
+        value_1d = abs(eq['profiles_1d']['phi'])
+    elif contour_quantity == 'psi':
+        value_2d = eq['profiles_2d'][0]['psi']
+        value_1d = eq['profiles_1d']['psi']
+    else:
+        raise ValueError('Unrecognized contour_quantity: {}. Please choose psi, rho, or phi'.format(contour_quantity))
+    value_2d = (value_2d - min(value_1d)) / (max(value_1d) - min(value_1d))
+
+    # Wall clipping
     if wall is not None:
         path = matplotlib.path.Path(numpy.transpose(numpy.array([wall[0]['outline']['r'], wall[0]['outline']['z']])))
         wall_path = matplotlib.patches.PathPatch(path, facecolor='none')
         ax.add_patch(wall_path)
 
-    # contours
+    # Contours
     if 'r' in eq['profiles_2d'][0] and 'z' in eq['profiles_2d'][0]:
         R = eq['profiles_2d'][0]['r']
         Z = eq['profiles_2d'][0]['z']
@@ -417,7 +451,7 @@ def equilibrium_CX(ods, time_index=0, levels=numpy.r_[0.1:10:0.1], ax=None, **kw
         Z, R = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
     kw.setdefault('colors', kw1['color'])
     kw['linewidths'] = kw.pop('linewidth')
-    CS = ax.contour(R, Z, value2D, levels, **kw)
+    CS = ax.contour(R, Z, value_2d, levels, **kw)
 
     # internal flux surfaces w/ or w/o masking
     if wall is not None:
