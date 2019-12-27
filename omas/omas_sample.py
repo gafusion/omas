@@ -42,6 +42,7 @@ def dataset_description(ods):
     ods['dataset_description.data_entry.pulse'] = 100
     return ods
 
+
 @add_to_ODS
 def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
     """
@@ -408,5 +409,48 @@ def gas_injection(ods):
     ods['gas_injection.pipe.2.exit_position.z'] = -0.6
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
+
+    return ods
+
+
+@add_to_ODS
+def langmuir_probes(ods):
+    """
+    Adds some FAKE Langmuir probe locations so the overlay plot will work in tests.
+    :param ods: ODS instance
+
+    :return: ODS instance
+        The data are also written to the original, so you don't have to catch the return
+    """
+
+    ods['lanbmuir_probes.embedded.0.identifier'] = 0
+    ods['lanbmuir_probes.embedded.0.position.r'] = 0.9
+    ods['lanbmuir_probes.embedded.0.position.z'] = 0.1
+    ods['lanbmuir_probes.embedded.0.position.phi'] = 0
+
+    ods['lanbmuir_probes.embedded.1.identifier'] = -1
+    ods['lanbmuir_probes.embedded.1.position.r'] = 0.9
+    ods['lanbmuir_probes.embedded.1.position.z'] = -0.9
+    ods['lanbmuir_probes.embedded.1.position.phi'] = numpy.NaN
+
+    ods['lanbmuir_probes.embedded.2.identifier'] = -2
+    ods['lanbmuir_probes.embedded.2.position.r'] = 1.5
+    ods['lanbmuir_probes.embedded.2.position.z'] = -1.25
+    ods['lanbmuir_probes.embedded.2.position.phi'] = numpy.NaN
+
+    ods['lanbmuir_probes.embedded.3.identifier'] = -3
+    ods['lanbmuir_probes.embedded.3.position.r'] = 1.525
+    ods['lanbmuir_probes.embedded.3.position.z'] = -1.25
+    ods['lanbmuir_probes.embedded.3.position.phi'] = numpy.NaN
+
+    ods['lanbmuir_probes.embedded.4.identifier'] = -4
+    ods['lanbmuir_probes.embedded.4.position.r'] = 1.4
+    ods['lanbmuir_probes.embedded.4.position.z'] = 1.4
+    ods['lanbmuir_probes.embedded.4.position.phi'] = numpy.pi
+
+    ods['lanbmuir_probes.embedded.5.identifier'] = -5
+    ods['lanbmuir_probes.embedded.5.position.r'] = 2.45
+    ods['lanbmuir_probes.embedded.5.position.z'] = 0.25
+    ods['lanbmuir_probes.embedded.5.position.phi'] = numpy.NaN
 
     return ods

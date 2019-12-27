@@ -308,6 +308,7 @@ class TestOmasPlot(unittest.TestCase):
             bolo_ods.plot_overlay(
                 thomson_scattering=False,
                 bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i)))
+        return
 
     # Gas injection overlay
     def test_gas_overlay(self):
@@ -332,6 +333,25 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
+        return
+
+    # Langmuir probes overlays
+    def test_langmuir_probes_embedded_overlay(self):
+        """Tests method for plotting overlay of embedded LPs"""
+        # Add sample data
+        lp_ods = copy.deepcopy(self.ods)
+        lp_ods.sample_langmuir_probes()
+
+        # Basic overlay
+        lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=True)
+
+        # Direct call
+        lp_ods.plot_langmuir_probes_overlay()
+        # Empty ODS / graceful failure
+        ODS().plot_langmuir_probes_overlay()
+        # No equilibrium data for helping align labels
+        ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
+        return
 
 
 if __name__ == '__main__':

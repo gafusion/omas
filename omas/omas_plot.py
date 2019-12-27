@@ -1301,6 +1301,124 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
                     ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
+    return
+
+
+@add_to__ODS__
+def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_reciprocating=False, **kw):
+    r"""
+    Overlays Langmuir probes
+    :param ods: ODS instance
+        Must contain langmuir_probes with embedded position data
+    :param ax: Axes instance
+    :param colors: list of matplotlib color specifications. Do not use a single RGBA style spec.
+    :param show_embedded: bool
+        Recommended: don't enable both embedded and reciprocating plots at the same time; make two calls instead.
+        It will be easier to handle mapping of masks, colors, etc.
+    :param show_reciprocating: bool
+    :param \**kw: Additional keywords for Langmuir probe plot
+    """
+    from matplotlib import pyplot
+
+    # Make sure there is something to plot or else just give up and return
+    if show_embedded:
+        nce = get_channel_count(
+            ods,
+            'langmuir_probes',
+            check_loc='langmuir_probes.embedded.0.position.r',
+            test_checker='checker > 0',
+            channels_name='embedded',
+        )
+    else:
+        nce = 0
+    if show_reciprocating:
+        ncr = get_channel_count(
+            ods,
+            'langmuir_probes',
+            check_loc='langmuir_probes.reciprocating.0.plunge.0.position.r',
+            test_checker='checker > 0',
+            channels_name='reciprocating',
+        )
+    else:
+        ncr = 0
+    if (nce == 0) and (ncr == 0):
+        return
+
+    # Get a handle on the axes
+    if ax is None:
+        ax = pyplot.gca()
+    # Set up masks
+    mask = kw.pop('mask', numpy.ones(nce + ncr, bool))
+    mask_e = mask[:nce]  # For wall-embedded probes
+    # mask_r = mask[nce:]  # For reciprocating probes
+    if ncr > 0:
+        raise NotImplementedError('Reciprocating Langmuir probe overlay plots are not ready yet. Try embedded LPs.')
+
+    # Get embedded data
+    r_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.r'] for i in range(nce)])[mask_e]
+    z_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.z'] for i in range(nce)])[mask_e]
+    lp_id_e = numpy.array([ods['langmuir_probes.embedded'][i]['identifier'] for i in range(nce)])[mask_e]
+    ncem = len(r_e)  # Number of Channels, Embedded, Masked
+
+    # Get reciprocating data
+    ncrm = 0  # Coming soon
+
+    nc = ncem + ncem
+
+    # Handle plot keywords
+    if colors is None:
+        colors = [kw.pop('color', None)] * nc
+    else:
+        colors *= nc  # Just make sure that this will always be long enough.
+    ci = 0
+    color = colors[ci]
+    kw.setdefault('alpha', 0.8)
+    kw.setdefault('marker', '*')
+    kw.setdefault('linestyle', ' ')
+    default_label = kw.pop('label', None)
+    labelevery = kw.pop('labelevery', 2)
+    notesize = kw.pop('notesize', 'xx-small')
+
+    # Decide which side each probe is on, for aligning annotation labels
+    ha = ['center'] * ncem
+    va = ['center'] * ncem
+    try:
+        wall_r = ods['wall.description_2d[0].limiter.unit[0].outline.r']
+        wall_z = ods['wall.description_2d[0].limiter.unit[0].outline.r']
+    except KeyError:
+        va = ['bottom' if z_e[i] < 0 else 'top' for i in range(ncem)]
+    else:
+        wr0 = numpy.min(wall_r)
+        wr1 = numpy.max(wall_r)
+        dr = wr1 - wr0
+        zr0 = numpy.min(wall_z)
+        zr1 = numpy.max(wall_z)
+        dz = zr1 - zr0
+        lr_margin = 0.2
+        tb_margin = 0.2
+        right = wr0 + dr * (1 - lr_margin)
+        left = wr0 + dr * lr_margin
+        top = zr0 + dz * (1 - tb_margin)
+        bottom = zr0 + dz * tb_margin
+        for i in range(ncem):
+            if r_e[i] > right:
+                ha[i] = 'left'
+            elif r_e[i] < left:
+                ha[i] = 'right'
+            if z_e[i] > top:
+                va[i] = 'bottom'
+            elif z_e[i] < bottom:
+                va[i] = 'top'
+
+    # Plot
+    for i in range(ncem):
+        label = 'Embedded Langmuir probes' if default_label is None else default_label
+        lp_mark = ax.plot(r_e[i], z_e[i], color=color, label=label if i == 0 else '', **kw)
+        if color is None:
+            color = lp_mark[0].get_color()  # Make subsequent marks the same color
+        if (labelevery > 0) and ((i % labelevery) == 0):
+            ax.text(r_e[i], z_e[i], '\n{}\n'.format(lp_id_e[i]), color=color, ha=ha[i], va=va[i], fontsize=notesize)
+    return
 
 
 @add_to__ODS__
