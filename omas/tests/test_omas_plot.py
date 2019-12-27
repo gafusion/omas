@@ -190,6 +190,12 @@ class TestOmasPlot(unittest.TestCase):
         ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()
         return
 
+    def test_eqcx_resample(self):
+        """Test the sf (scaling factor) option"""
+        self.ods.plot_equilibrium_CX(sf=1)
+        self.ods.plot_equilibrium_CX(sf=3)
+        return
+
     def test_eq_summary(self):
         ods2 = ODS().sample_equilibrium(include_phi=False)
         ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)

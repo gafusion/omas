@@ -349,7 +349,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
 # ================================
 @add_to__ODS__
 def equilibrium_CX(
-    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, **kw
+    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, **kw
 ):
     r"""
     Plot equilibrium cross-section
@@ -372,6 +372,9 @@ def equilibrium_CX(
 
     :param ax: Axes instance [optional]
         axes to plot in (active axes is generated if `ax is None`)
+
+    :param sf: int
+        Resample scaling factor. For example, set to 3 to resample to 3x higher resolution. Makes contours smoother.
 
     :param \**kw: arguments passed to matplotlib plot statements
 
@@ -445,20 +448,28 @@ def equilibrium_CX(
 
     # Contours
     if 'r' in eq['profiles_2d'][0] and 'z' in eq['profiles_2d'][0]:
-        R = eq['profiles_2d'][0]['r']
-        Z = eq['profiles_2d'][0]['z']
+        r = eq['profiles_2d'][0]['r']
+        z = eq['profiles_2d'][0]['z']
     else:
-        Z, R = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
+        z, r = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
+
+    # Resample
+    if sf > 1:
+        import scipy
+        r = scipy.ndimage.zoom(r, sf)
+        z = scipy.ndimage.zoom(z, sf)
+        value_2d = scipy.ndimage.zoom(value_2d, sf)
+
     kw.setdefault('colors', kw1['color'])
     kw['linewidths'] = kw.pop('linewidth')
-    CS = ax.contour(R, Z, value_2d, levels, **kw)
+    CS = ax.contour(r, z, value_2d, levels, **kw)
 
-    # internal flux surfaces w/ or w/o masking
+    # Internal flux surfaces w/ or w/o masking
     if wall is not None:
         for collection in CS.collections:
             collection.set_clip_path(wall_path)
 
-    # wall
+    # Wall
     if wall is not None:
         ax.plot(wall[0]['outline']['r'], wall[0]['outline']['z'], 'k', linewidth=2)
 
