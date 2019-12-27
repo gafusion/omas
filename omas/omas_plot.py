@@ -1384,31 +1384,31 @@ def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_
     va = ['center'] * ncem
     try:
         wall_r = ods['wall.description_2d[0].limiter.unit[0].outline.r']
-        wall_z = ods['wall.description_2d[0].limiter.unit[0].outline.r']
-    except KeyError:
-        va = ['bottom' if z_e[i] < 0 else 'top' for i in range(ncem)]
+        wall_z = ods['wall.description_2d[0].limiter.unit[0].outline.z']
+    except (KeyError, ValueError):
+        va = ['bottom' if z_e[i] > 0 else 'top' for i in range(ncem)]
     else:
         wr0 = numpy.min(wall_r)
         wr1 = numpy.max(wall_r)
         dr = wr1 - wr0
-        zr0 = numpy.min(wall_z)
-        zr1 = numpy.max(wall_z)
-        dz = zr1 - zr0
+        wz0 = numpy.min(wall_z)
+        wz1 = numpy.max(wall_z)
+        dz = wz1 - wz0
         lr_margin = 0.2
-        tb_margin = 0.2
+        tb_margin = 0.1
         right = wr0 + dr * (1 - lr_margin)
         left = wr0 + dr * lr_margin
-        top = zr0 + dz * (1 - tb_margin)
-        bottom = zr0 + dz * tb_margin
+        top = wz0 + dz * (1 - tb_margin)
+        bottom = wz0 + dz * tb_margin
         for i in range(ncem):
-            if r_e[i] > right:
-                ha[i] = 'left'
-            elif r_e[i] < left:
-                ha[i] = 'right'
             if z_e[i] > top:
                 va[i] = 'bottom'
             elif z_e[i] < bottom:
                 va[i] = 'top'
+            if r_e[i] > right:
+                ha[i] = 'left'
+            elif r_e[i] < left:
+                ha[i] = 'right'
 
     # Plot
     for i in range(ncem):
@@ -1417,7 +1417,7 @@ def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_
         if color is None:
             color = lp_mark[0].get_color()  # Make subsequent marks the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
-            ax.text(r_e[i], z_e[i], '\n{}\n'.format(lp_id_e[i]), color=color, ha=ha[i], va=va[i], fontsize=notesize)
+            ax.text(r_e[i], z_e[i], '\n {} \n'.format(lp_id_e[i]), color=color, ha=ha[i], va=va[i], fontsize=notesize)
     return
 
 
