@@ -31,7 +31,7 @@ def add_to__ALL__(f):
 # ================================
 
 def uerrorbar(x, y, ax=None, **kwargs):
-    """
+    r"""
     Given arguments y or x,y where x and/or y have uncertainties, feed the
     appropriate terms to matplotlib's errorbar function.
 
@@ -113,7 +113,7 @@ class Uband(object):
 
 
 def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
-    '''
+    r"""
     Given arguments x,y where either or both have uncertainties, plot x,y using pyplt.plot
     of the nominal values and surround it with with a shaded error band using matplotlib's
     fill_between and/or fill_betweenx.
@@ -132,7 +132,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     :return: list. A list of Uband objects containing the line and bands of each (x,y) along the last dimension.
 
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -479,7 +479,7 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     ax = fig.add_subplot(2, 3, 2)
     ax.plot(x, eq['profiles_1d']['pressure'], **kw)
     kw.setdefault('color', ax.lines[-1].get_color())
-    ax.set_title('$\,$ Pressure')
+    ax.set_title(r'$\,$ Pressure')
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.setp(ax.get_xticklabels(), visible=False)
 
@@ -500,14 +500,14 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     # dP_dpsi
     ax = fig.add_subplot(2, 3, 5, sharex=ax)
     ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
-    ax.set_title("$P\,^\\prime$ source function")
+    ax.set_title(r"$P\,^\\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
     # FdF_dpsi
     ax = fig.add_subplot(236, sharex=ax)
     ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
-    ax.set_title("$FF\,^\\prime$ source function")
+    ax.set_title(r"$FF\,^\\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
@@ -679,7 +679,7 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
 # ================================
 @add_to__ODS__
 def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
-    """
+    r"""
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
@@ -743,7 +743,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 @add_to__ODS__
 def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all',
                           simple_labels=False, label_spacer=0, colors=None, draw_arrow=True, **kw):
-    """
+    r"""
     Plots overlays of gas injectors
 
     :param ods: OMAS ODS instance
@@ -859,7 +859,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
 
 @add_to__ODS__
 def pf_active_overlay(ods, ax=None, **kw):
-    """
+    r"""
     Plots overlays of active PF coils.
     INCOMPLETE: only the oblique geometry definition is treated so far. More should be added later.
 
@@ -970,7 +970,7 @@ def nbi_summary(ods, ax=None):
 def magnetics_overlay(
         ods, ax=None, show_bpol_probe=True, show_flux_loop=True, bpol_probe_color=None, flux_loop_color=None,
         bpol_probe_marker='s', flux_loop_marker='o', **kw):
-    """
+    r"""
     Plots overlays of magnetics: B_pol probes and flux loops
 
     :param ods: OMAS ODS instance
@@ -1043,7 +1043,7 @@ def magnetics_overlay(
 
 @add_to__ODS__
 def interferometer_overlay(ods, ax=None, **kw):
-    """
+    r"""
     Plots overlays of interferometer chords.
 
     :param ods: OMAS ODS instance
@@ -1090,7 +1090,7 @@ def interferometer_overlay(ods, ax=None, **kw):
 
 @add_to__ODS__
 def thomson_scattering_overlay(ods, ax=None, **kw):
-    """
+    r"""
     Overlays Thomson channel locations
 
     :param ods: OMAS ODS instance
@@ -1135,7 +1135,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
 @add_to__ODS__
 def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
-    """
+    r"""
     Overlays Charge Exchange Recombination (CER) spectroscopy channel locations
 
     :param ods: OMAS ODS instance
@@ -1235,7 +1235,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
 @add_to__ODS__
 def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
-    """
+    r"""
     Overlays bolometer chords
 
     :param ods: ODS instance
@@ -1359,7 +1359,7 @@ def quantity(ods, key,
              ylabel=None, xlabel=None, label=None,
              xnorm=1.0, ynorm=1.0,
              ax=None, **kw):
-    '''
+    r"""
     Provides convenient way to plot 1D quantities in ODS
 
     For example:
@@ -1395,7 +1395,7 @@ def quantity(ods, key,
 
     :return: axes instance
 
-    '''
+    """
 
     from matplotlib import pyplot
 
