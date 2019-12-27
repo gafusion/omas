@@ -173,12 +173,19 @@ class TestOmasPlot(unittest.TestCase):
                             ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
 
         # Test for disallowed fallback
-        ods = ODS().sample_equilibrium(include_psi=False)
+        ods = ODS().sample_equilibrium(include_psi=False, include_phi=True)
         with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no psi, then asked for psi and did not allow fallback
             ods.plot_equilibrium_CX(contour_quantity='psi', allow_fallback=False)
-        ods = ODS().sample_equilibrium(include_phi=False)
+        ods = ODS().sample_equilibrium(include_phi=False, include_psi=True)
         with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no phi, then asked for phi and did not allow fallback
             ods.plot_equilibrium_CX(contour_quantity='phi', allow_fallback=False)
+        ods = ODS().sample_equilibrium(include_phi=False, include_psi=False)
+        with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no 2D equilibrium data at all and did not allow fallback
+            # Fallback in this case would allow an abort without raising an error
+            ods.plot_equilibrium_CX(allow_fallback=False)
         return
 
     def test_eqcx_slices(self):

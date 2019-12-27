@@ -425,6 +425,12 @@ def equilibrium_CX(
             printd('psi was requested but not found; falling back to phi/rho contours')
         else:
             raise ValueError('psi (poloidal magnetic flux) is not available')
+    elif (not phi_available) and (not psi_available):
+        if allow_fallback:
+            print('No equilibrium data to plot. Aborting.')
+            return
+        else:
+            raise ValueError('No equilibrium data to plot. Need either psi or phi.')
 
     # Pull out contour value
     if contour_quantity == 'rho':
