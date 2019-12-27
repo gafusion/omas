@@ -423,6 +423,8 @@ def langmuir_probes(ods):
         The data are also written to the original, so you don't have to catch the return
     """
 
+    ods['langmuir_probes.time'] = numpy.array([0])
+
     ods['langmuir_probes.embedded.0.identifier'] = 0
     ods['langmuir_probes.embedded.0.position.r'] = 0.9
     ods['langmuir_probes.embedded.0.position.z'] = 0.1
