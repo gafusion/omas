@@ -461,7 +461,7 @@ def equilibrium_CX(
 
     # Resample
     if sf > 1:
-        import scipy
+        import scipy.ndimage
         r = scipy.ndimage.zoom(r, sf)
         z = scipy.ndimage.zoom(z, sf)
         value_2d = scipy.ndimage.zoom(value_2d, sf)

@@ -190,7 +190,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_eqcx_slices(self):
         """Test dealing with different time indices, including getting wall from a different slice than the eq"""
-        ods2 = ODS().sample_equilibrium(time_index=1, include_wall=True)
+        ods2 = ODS().sample_equilibrium(time_index=0, include_wall=True)
         ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
         # Test for missing wall
         plt.figure('TestOmasPlot.test_eqcx missing wall')
