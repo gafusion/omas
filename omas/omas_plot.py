@@ -349,7 +349,8 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
 # ================================
 @add_to__ODS__
 def equilibrium_CX(
-    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, **kw
+    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3,
+    label_contours=None, **kw
 ):
     r"""
     Plot equilibrium cross-section
@@ -375,6 +376,10 @@ def equilibrium_CX(
 
     :param sf: int
         Resample scaling factor. For example, set to 3 to resample to 3x higher resolution. Makes contours smoother.
+
+    :param label_contours: bool or None
+        True/False: do(n't) label contours
+        None: only label if contours are of q
 
     :param \**kw: arguments passed to matplotlib plot statements
 
@@ -492,11 +497,14 @@ def equilibrium_CX(
 
     kw.setdefault('colors', kw1['color'])
     kw['linewidths'] = kw.pop('linewidth')
-    CS = ax.contour(r, z, value_2d, levels, **kw)
+    cs = ax.contour(r, z, value_2d, levels, **kw)
+
+    if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
+        matplotlib.pyplot.clabel(cs)
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
-        for collection in CS.collections:
+        for collection in cs.collections:
             collection.set_clip_path(wall_path)
 
     # Wall
