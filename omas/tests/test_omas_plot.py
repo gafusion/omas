@@ -161,7 +161,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_eqcx_data_availability_variations(self):
         """Plot all the equilibrium contour quantity options with all the combinations of available data"""
-        cq_options = ['rho', 'psi', 'phi']
+        cq_options = ['rho', 'psi', 'phi', 'q']
         for iwall in [True, False]:
             for ipsi in [True, False]:
                 for iphi in [True, False]:
@@ -177,15 +177,28 @@ class TestOmasPlot(unittest.TestCase):
         with self.assertRaises(ValueError):
             # Fails because we prepared a sample with no psi, then asked for psi and did not allow fallback
             ods.plot_equilibrium_CX(contour_quantity='psi', allow_fallback=False)
+
         ods = ODS().sample_equilibrium(include_phi=False, include_psi=True)
         with self.assertRaises(ValueError):
             # Fails because we prepared a sample with no phi, then asked for phi and did not allow fallback
             ods.plot_equilibrium_CX(contour_quantity='phi', allow_fallback=False)
-        ods = ODS().sample_equilibrium(include_phi=False, include_psi=False)
+
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=False, include_q=True)
+        with self.assertRaises(ValueError):
+            # Fails because we prepped sample w/ no psi, then asked for q (uses psi for interp) & didn't allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='q', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=False)
+        with self.assertRaises(ValueError):
+            # Fails because we prepped sample w/ no q, then asked for q & didn't allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='q', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=False, include_psi=False, include_q=False)
         with self.assertRaises(ValueError):
             # Fails because we prepared a sample with no 2D equilibrium data at all and did not allow fallback
             # Fallback in this case would allow an abort without raising an error
             ods.plot_equilibrium_CX(allow_fallback=False)
+
         return
 
     def test_eqcx_slices(self):

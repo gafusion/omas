@@ -412,8 +412,21 @@ def equilibrium_CX(
     # Choose quantity to plot
     phi_available = 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']
     psi_available = 'psi' in eq['profiles_2d'][0] and 'psi' in eq['profiles_1d']
+    q_available = 'q' in eq['profiles_1d'] and psi_available  # Use 1d and 2d psi to interpolate to get 2d q
 
-    if psi_available and (not phi_available) and (contour_quantity in ['rho', 'phi']):
+    if psi_available and (not q_available) and (contour_quantity == 'q'):
+        if allow_fallback:
+            contour_quantity = 'psi'
+            printd('q was requested but not found; falling back to psi contours')
+        else:
+            raise ValueError('q (safety factor) is not available')
+    elif phi_available and (not q_available) and (contour_quantity == 'q'):
+        if allow_fallback:
+            contour_quantity = 'rho'
+            printd('q was requested but not found; falling back to rho contours')
+        else:
+            raise ValueError('q (safety factor) is not available')
+    elif psi_available and (not phi_available) and (contour_quantity in ['rho', 'phi']):
         if allow_fallback:
             contour_quantity = 'psi'
             printd('phi was requested but not found; falling back to psi contours')
@@ -421,8 +434,8 @@ def equilibrium_CX(
             raise ValueError('phi (toroidal magnetic flux) is not available')
     elif phi_available and (not psi_available) and (contour_quantity in ['psi']):
         if allow_fallback:
-            contour_quantity = 'phi'
-            printd('psi was requested but not found; falling back to phi/rho contours')
+            contour_quantity = 'rho'
+            printd('psi was requested but not found; falling back to rho contours')
         else:
             raise ValueError('psi (poloidal magnetic flux) is not available')
     elif (not phi_available) and (not psi_available):
@@ -430,7 +443,7 @@ def equilibrium_CX(
             print('No equilibrium data to plot. Aborting.')
             return
         else:
-            raise ValueError('No equilibrium data to plot. Need either psi or phi.')
+            raise ValueError('No equilibrium data to plot. Need either psi, phi, or q.')
 
     # Pull out contour value
     if contour_quantity == 'rho':
@@ -442,9 +455,20 @@ def equilibrium_CX(
     elif contour_quantity == 'psi':
         value_2d = eq['profiles_2d'][0]['psi']
         value_1d = eq['profiles_1d']['psi']
+    elif contour_quantity == 'q':
+        import scipy.interpolate
+        x_value_2d = eq['profiles_2d'][0]['psi']
+        x_value_1d = eq['profiles_1d']['psi']
+        value_1d = eq['profiles_1d']['q']
+        value_2d = scipy.interpolate.interp1d(x_value_1d, value_1d, bounds_error=False, fill_value='extrapolate')(
+            x_value_2d
+        )
     else:
-        raise ValueError('Unrecognized contour_quantity: {}. Please choose psi, rho, or phi'.format(contour_quantity))
-    value_2d = (value_2d - min(value_1d)) / (max(value_1d) - min(value_1d))
+        raise ValueError(
+            'Unrecognized contour_quantity: {}. Please choose psi, rho, phi, or q'.format(contour_quantity)
+        )
+    if contour_quantity != 'q':
+        value_2d = (value_2d - min(value_1d)) / (max(value_1d) - min(value_1d))
 
     # Wall clipping
     if wall is not None:
@@ -482,7 +506,7 @@ def equilibrium_CX(
         ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']), min(wall[0]['outline']['z']),
                  max(wall[0]['outline']['z'])])
 
-    # axes
+    # Axes
     ax.set_aspect('equal')
     ax.set_frame_on(False)
     ax.xaxis.set_ticks_position('bottom')

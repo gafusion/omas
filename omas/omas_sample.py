@@ -44,7 +44,9 @@ def dataset_description(ods):
 
 
 @add_to_ODS
-def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True):
+def equilibrium(
+        ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True, include_q=True
+):
     """
     Add sample equilibrium data
 
@@ -65,6 +67,9 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     :param include_wall: bool
         Include the first wall
 
+    :param include_q: bool
+        Include safety factor
+
     :return: ODS instance with equilibrium data added
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
         some contexts. If you do not want the original to be modified, deepcopy it first.
@@ -74,6 +79,8 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
     psi = eq['equilibrium.time_slice.0.profiles_1d.psi']
+    q = eq['equilibrium.time_slice.0.profiles_1d.q']
+
     if not include_profiles:
         del eq['equilibrium.time_slice.0.profiles_1d']
 
@@ -91,13 +98,21 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     else:
         eq['equilibrium.time_slice.0.profiles_1d.psi'] = psi
 
+    if not include_q:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0'] and 'q' in eq['equilibrium.time_slice.0.profiles_1d']:
+            del eq['equilibrium.time_slice.0.profiles_1d.q']
+    else:
+        eq['equilibrium.time_slice.0.profiles_1d.q'] = q
+
     if not include_wall:
         del eq['wall']
 
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
-    ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
+    ods.set_time_array(
+        'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
+    )
 
     return ods
 
