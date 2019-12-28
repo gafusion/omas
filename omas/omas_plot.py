@@ -500,7 +500,7 @@ def equilibrium_CX(
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
-        matplotlib.pyplot.clabel(cs)
+        ax.clabel(cs)
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
