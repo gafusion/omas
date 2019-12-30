@@ -1335,7 +1335,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
         * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
 
-        * Remaining keywords are passed to plot call for drawing markers at the gas locations.
+        * Remaining keywords are passed to plot call for drawing lines for the bolometer sightlines
     """
 
     from matplotlib import pyplot
