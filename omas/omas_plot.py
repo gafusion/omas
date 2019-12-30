@@ -1388,32 +1388,50 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
 
 @add_to__ODS__
-def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_reciprocating=False, **kw):
+def langmuir_probes_overlay(
+    ods, ax=None, embedded_probes=None, colors=None, show_embedded=True, show_reciprocating=False, **kw
+):
     r"""
     Overlays Langmuir probes
     :param ods: ODS instance
         Must contain langmuir_probes with embedded position data
     :param ax: Axes instance
+    :param embedded_probes: list of strings
+        Specify probe names to use. Only the embedded probes listed will be plotted. Set to None to plot all probes.
+        Probe names are like 'F11' or 'P-6' (the same as appear on the overlay).
     :param colors: list of matplotlib color specifications. Do not use a single RGBA style spec.
     :param show_embedded: bool
         Recommended: don't enable both embedded and reciprocating plots at the same time; make two calls instead.
         It will be easier to handle mapping of masks, colors, etc.
     :param show_reciprocating: bool
-    :param \**kw: Additional keywords for Langmuir probe plot
+    :param \**kw: Additional keywords.
+        Accepts standard keywords mask, labelevery, and notesize.
+        Others will be passed to the plot() call for drawing the probes.
     """
     from matplotlib import pyplot
 
     # Make sure there is something to plot or else just give up and return
     if show_embedded:
-        nce = get_channel_count(
-            ods,
-            'langmuir_probes',
-            check_loc='langmuir_probes.embedded.0.position.r',
-            test_checker='checker > 0',
-            channels_name='embedded',
-        )
+        if embedded_probes is not None:
+            embedded_probes = numpy.atleast_1d(embedded_probes)
+            embedded_indices = []
+
+            for probe in ods['langmuir_probes.embedded']:
+                if ods['langmuir_probes.embedded'][probe]['name'] in embedded_probes:
+                    embedded_indices += [probe]
+            nce = len(embedded_indices)
+        else:
+            nce = get_channel_count(
+                ods,
+                'langmuir_probes',
+                check_loc='langmuir_probes.embedded.0.position.r',
+                test_checker='checker > 0',
+                channels_name='embedded',
+            )
+            embedded_indices = range(nce)
     else:
         nce = 0
+        embedded_indices = []
     if show_reciprocating:
         ncr = get_channel_count(
             ods,
@@ -1438,9 +1456,9 @@ def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_
         raise NotImplementedError('Reciprocating Langmuir probe overlay plots are not ready yet. Try embedded LPs.')
 
     # Get embedded data
-    r_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.r'] for i in range(nce)])[mask_e]
-    z_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.z'] for i in range(nce)])[mask_e]
-    lp_id_e = numpy.array([ods['langmuir_probes.embedded'][i]['name'] for i in range(nce)])[mask_e]
+    r_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.r'] for i in embedded_indices])[mask_e]
+    z_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.z'] for i in embedded_indices])[mask_e]
+    lp_id_e = numpy.array([ods['langmuir_probes.embedded'][i]['name'] for i in embedded_indices])[mask_e]
     ncem = len(r_e)  # Number of Channels, Embedded, Masked
 
     # Get reciprocating data
