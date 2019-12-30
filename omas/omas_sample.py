@@ -452,31 +452,37 @@ def langmuir_probes(ods):
     ods['langmuir_probes.time'] = numpy.array([0])
 
     ods['langmuir_probes.embedded.0.identifier'] = 0
+    ods['langmuir_probes.embedded.0.name'] = 'p1'
     ods['langmuir_probes.embedded.0.position.r'] = 0.9
     ods['langmuir_probes.embedded.0.position.z'] = 0.1
     ods['langmuir_probes.embedded.0.position.phi'] = 0
 
     ods['langmuir_probes.embedded.1.identifier'] = -1
+    ods['langmuir_probes.embedded.1.name'] = 'p23'
     ods['langmuir_probes.embedded.1.position.r'] = 0.9
     ods['langmuir_probes.embedded.1.position.z'] = -0.9
     ods['langmuir_probes.embedded.1.position.phi'] = numpy.NaN
 
     ods['langmuir_probes.embedded.2.identifier'] = -2
+    ods['langmuir_probes.embedded.2.name'] = 'blah'
     ods['langmuir_probes.embedded.2.position.r'] = 1.5
     ods['langmuir_probes.embedded.2.position.z'] = -1.25
     ods['langmuir_probes.embedded.2.position.phi'] = numpy.NaN
 
     ods['langmuir_probes.embedded.3.identifier'] = -3
+    ods['langmuir_probes.embedded.3.name'] = 'donkey!'
     ods['langmuir_probes.embedded.3.position.r'] = 1.525
     ods['langmuir_probes.embedded.3.position.z'] = -1.25
     ods['langmuir_probes.embedded.3.position.phi'] = numpy.NaN
 
     ods['langmuir_probes.embedded.4.identifier'] = -4
+    ods['langmuir_probes.embedded.4.name'] = 'zzz'
     ods['langmuir_probes.embedded.4.position.r'] = 1.4
     ods['langmuir_probes.embedded.4.position.z'] = 1.4
     ods['langmuir_probes.embedded.4.position.phi'] = numpy.pi
 
     ods['langmuir_probes.embedded.5.identifier'] = -5
+    ods['langmuir_probes.embedded.5.name'] = "it's just a test"
     ods['langmuir_probes.embedded.5.position.r'] = 2.45
     ods['langmuir_probes.embedded.5.position.z'] = 0.25
     ods['langmuir_probes.embedded.5.position.phi'] = numpy.NaN
