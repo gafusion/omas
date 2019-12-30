@@ -1440,7 +1440,7 @@ def langmuir_probes_overlay(ods, ax=None, colors=None, show_embedded=True, show_
     # Get embedded data
     r_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.r'] for i in range(nce)])[mask_e]
     z_e = numpy.array([ods['langmuir_probes.embedded'][i]['position.z'] for i in range(nce)])[mask_e]
-    lp_id_e = numpy.array([ods['langmuir_probes.embedded'][i]['identifier'] for i in range(nce)])[mask_e]
+    lp_id_e = numpy.array([ods['langmuir_probes.embedded'][i]['name'] for i in range(nce)])[mask_e]
     ncem = len(r_e)  # Number of Channels, Embedded, Masked
 
     # Get reciprocating data
