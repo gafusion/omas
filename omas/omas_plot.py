@@ -234,7 +234,7 @@ def gas_filter(label, which_gas):
     return include
 
 
-def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi / 4.0, ax=None, color=None, pad=1.0, **kw):
+def gas_arrow(ods, r, z, direction=None, r2=None, z2=None, snap_to=numpy.pi / 4.0, ax=None, color=None, pad=1.0, **kw):
     """
     Draws an arrow pointing in from the gas valve
     :param ods: ODS instance
@@ -244,6 +244,12 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi / 4.0, ax=None, color=
 
     :param z: float
         Z position of gas injector (m)
+
+    :param r2: float [optional]
+        R coordinate of second point, at which the gas injector is aiming inside the vessel
+
+    :param z2: float [optional]
+        Z coordinate of second point, at which the gas injector is aiming inside the vessel
 
     :param direction: float
         Direction of injection (radians, COCOS should match ods.cocos). None = try to guess.
@@ -270,7 +276,9 @@ def gas_arrow(ods, r, z, direction=None, snap_to=numpy.pi / 4.0, ax=None, color=
             theta = snap_to * round(theta / snap_to)
         return theta
 
-    if direction is None:
+    if (r2 is not None) and (z2 is not None):
+        direction = numpy.arctan2(z2 - z, r - r2)
+    elif direction is None:
         direction = pick_direction()
     else:
         direction = cocos_transform(ods.cocos, 11)['BP'] * direction
@@ -908,6 +916,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                     label += ' ({:0d})'.format(int(round(pipe['exit_position']['phi'] * 180 / numpy.pi)))
                 except (TypeError, ValueError):
                     pass
+            try:
+                r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
+            except ValueError:
+                r2 = z2 = None
+            locations[location_name] += [r2, z2]
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
     except ValueError:
@@ -925,10 +938,10 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
-        label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + locations[loc] + [''])
+        label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + [locations[loc][0]] + [''])
         if draw_arrow:
             kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
-            gas_mark = gas_arrow(ods, r, z, ax=ax, color=colors[i], **kw)
+            gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors[i], **kw)
         else:
             gas_mark = ax.plot(r, z, color=colors[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
