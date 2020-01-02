@@ -113,6 +113,7 @@ def equilibrium(
     ods.set_time_array(
         'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
     )
+    ods['equilibrium.time'] = ods['equilibrium.time_slice[:].time']
 
     return ods
 
