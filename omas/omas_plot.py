@@ -806,6 +806,18 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
             * notesize: matplotlib font size specification
                 Applies to annotations drawn on the plot. Examples: 'xx-small', 'medium', 16
 
+            * label_ha: None or string or list of (None or string) instances
+                Descriptions of how labels should be aligned horizontally. Either provide a single specification or a
+                list of specs matching or exceeding the number of labels expected.
+                Each spec should be: 'right', 'left', or 'center'. None (either as a scalar or an item in the list) will
+                give default alignment for the affected item(s).
+
+            * label_va: None or string or list of (None or string) instances
+                Descriptions of how labels should be aligned vertically. Either provide a single specification or a
+                list of specs matching or exceeding the number of labels expected.
+                Each spec should be: 'top', 'bottom', or 'center'. None (either as a scalar or an item in the list) will
+                give default alignment for the affected item(s).
+
             * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
     """
 
@@ -871,10 +883,9 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
 
     :param \**kw: Additional keywords for gas plot:
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call for drawing markers at the gas locations.
-
     """
 
     from matplotlib import pyplot
@@ -931,6 +942,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 1)
     notesize = kw.pop('notesize', 'xx-small')
+    label_ha = numpy.atleast_1d(kw.pop('label_ha', None)).tolist()
+    label_va = numpy.atleast_1d(kw.pop('label_va', None)).tolist()
+    if len(label_ha) == 1:
+        label_ha *= len(locations)
+    if len(label_va) == 1:
+        label_va *= len(locations)
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
@@ -946,10 +963,10 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
             gas_mark = ax.plot(r, z, color=colors[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
-            va = ['top', 'bottom'][int(z > 0)]
+            va = ['top', 'bottom'][int(z > 0)] if label_va[i] is None else label_va[i]
+            ha = ['left', 'right'][int(r < rsplit)] if label_ha[i] is None else label_ha[i]
             label = '\n' * label_spacer + label if va == 'top' else label + '\n' * label_spacer
-            ax.text(r, z, label, color=gas_mark[0].get_color(),
-                    va=va, ha=['left', 'right'][int(r < rsplit)], fontsize=notesize)
+            ax.text(r, z, label, color=gas_mark[0].get_color(), va=va, ha=ha, fontsize=notesize)
     return
 
 
@@ -966,7 +983,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     :param \**kw: Additional keywords
         scalex, scaley: passed to ax.autoscale_view() call at the end
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to matplotlib.patches.Polygon call
             Hint: you may want to set facecolor instead of just color
@@ -993,6 +1010,8 @@ def pf_active_overlay(ods, ax=None, **kw):
     notesize = kw.pop('notesize', 'xx-small')
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
+    label_ha = kw.pop('label_ha', 'center')
+    label_va = kw.pop('label_va', 'center')
 
     def path_rectangle(rectangle):
         """
@@ -1035,7 +1054,7 @@ def pf_active_overlay(ods, ax=None, **kw):
             except ValueError:
                 pf_id = None
             if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
-                ax.text(numpy.mean(xarr), numpy.mean(yarr), pf_id, ha='center', va='center', fontsize=notesize)
+                ax.text(numpy.mean(xarr), numpy.mean(yarr), pf_id, ha=label_ha, va=label_va, fontsize=notesize)
 
     for p in patches:
         ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
@@ -1060,6 +1079,7 @@ def nbi_summary(ods, ax=None):
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Power [W]')
     ax.legend()
+    return
 
 
 @add_to__ODS__
@@ -1089,7 +1109,7 @@ def magnetics_overlay(
 
     :param \**kw: Additional keywords
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call
     """
@@ -1117,6 +1137,8 @@ def magnetics_overlay(
     labelevery = kw.pop('labelevery', 0)
     mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
+    label_ha = kw.pop('label_ha', None)
+    label_va = kw.pop('label_va', None)
 
     def show_mag(n, topname, posroot, label, color_, marker, mask_):
         r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
@@ -1125,7 +1147,10 @@ def magnetics_overlay(
         color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
         for i in range(sum(mask_)):
             if (labelevery > 0) and ((i % labelevery) == 0):
-                ax.text(r[mask_][i], z[mask_][i], ods[topname][i]['identifier'], color=color_, fontsize=notesize)
+                ax.text(
+                    r[mask_][i], z[mask_][i], ods[topname][i]['identifier'],
+                    color=color_, fontsize=notesize, ha=label_ha, va=label_va,
+                )
 
     if show_bpol_probe:
         show_mag(
@@ -1148,7 +1173,7 @@ def interferometer_overlay(ods, ax=None, **kw):
 
     :param \**kw: Additional keywords
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call
     """
@@ -1169,6 +1194,8 @@ def interferometer_overlay(ods, ax=None, **kw):
     labelevery = kw.pop('labelevery', 1)
     mask = kw.pop('mask', numpy.ones(nc, bool))
     notesize = kw.pop('notesize', 'medium')
+    label_ha = kw.pop('label_ha', 'left')
+    label_va = kw.pop('label_va', 'top')
 
     for i in range(nc):
         if mask[i]:
@@ -1179,7 +1206,9 @@ def interferometer_overlay(ods, ax=None, **kw):
             color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    max([r1, r2]), min([z1, z2]), ch['identifier'], color=color, va='top', ha='left', fontsize=notesize)
+                    max([r1, r2]), min([z1, z2]), ch['identifier'],
+                    color=color, va=label_va, ha=label_ha, fontsize=notesize
+                )
 
     return
 
@@ -1195,7 +1224,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     :param \**kw: Additional keywords for Thomson plot:
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call
     """
@@ -1217,6 +1246,8 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     kw.setdefault('marker', '+')
     kw.setdefault('label', 'Thomson scattering')
     kw.setdefault('linestyle', ' ')
+    label_ha = kw.pop('label_ha', None)
+    label_va = kw.pop('label_va', None)
 
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
@@ -1225,7 +1256,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     ts_mark = ax.plot(r, z, **kw)
     for i in range(sum(mask)):
         if (labelevery > 0) and ((i % labelevery) == 0):
-            ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize=notesize)
+            ax.text(r[i], z[i], ts_id[i], color=ts_mark[0].get_color(), fontsize=notesize, ha=label_ha, va=label_va)
     return
 
 
@@ -1255,7 +1286,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
         marker_tangential, marker_vertical, marker_radial: plot symbols to use for T, V, R viewing channels
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call
     """
@@ -1294,6 +1325,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
         'R': kw.pop('marker_radial', '*' if marker is None else marker),
     }
     notesize = kw.pop('notesize', 'xx-small')
+    ha = kw.pop('label_ha', None)
+    va = kw.pop('label_va', None)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
     r = [[numpy.NaN]] * nc
@@ -1325,7 +1358,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
                                label=label_bank.pop(ch_type, ''), **kw)
             colors[ch_type] = color = cer_mark[0].get_color()  # Save color for this view dir in case it was None
             if (labelevery > 0) and ((i % labelevery) == 0):
-                ax.text(numpy.mean(r[i]), numpy.mean(z[i]), cer_id[i], color=color, fontsize=notesize)
+                ax.text(numpy.mean(r[i]), numpy.mean(z[i]), cer_id[i], color=color, fontsize=notesize, ha=ha, va=va)
     return
 
 
@@ -1346,7 +1379,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     :param \**kw: Additional keywords for bolometer plot
 
-        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize
+        * Accepts standard omas_plot overlay keywords: mask, labelevery, notesize, label_ha, label_va
 
         * Remaining keywords are passed to plot call for drawing lines for the bolometer sightlines
     """
@@ -1381,6 +1414,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
+    ha = kw.pop('label_ha', None)
+    va = kw.pop('label_va', 'top')
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
@@ -1396,7 +1431,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(r2[i], z2[i], '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]), color=color,
-                    ha=['right', 'left'][int(z1[i] > 0)], va='top', fontsize=notesize)
+                    ha=['right', 'left'][int(z1[i] > 0)] if ha is None else ha, va=va, fontsize=notesize)
     return
 
 
@@ -1418,7 +1453,7 @@ def langmuir_probes_overlay(
         It will be easier to handle mapping of masks, colors, etc.
     :param show_reciprocating: bool
     :param \**kw: Additional keywords.
-        Accepts standard keywords mask, labelevery, and notesize.
+        Accepts standard keywords mask, labelevery, notesize, label_ha, label_va.
         Others will be passed to the plot() call for drawing the probes.
     """
     from matplotlib import pyplot
@@ -1492,6 +1527,12 @@ def langmuir_probes_overlay(
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
+    ha = numpy.atleast_1d(kw.pop('label_ha', None)).tolist()
+    va = numpy.atleast_1d(kw.pop('label_va', None)).tolist()
+    if len(ha) == 1:
+        ha *= len(locations)
+    if len(va) == 1:
+        va *= len(locations)
 
     # Decide which side each probe is on, for aligning annotation labels
     ha = ['center'] * ncem
@@ -1515,11 +1556,15 @@ def langmuir_probes_overlay(
         top = wz0 + dz * (1 - tb_margin)
         bottom = wz0 + dz * tb_margin
         for i in range(ncem):
-            if z_e[i] > top:
+            if va[i] is not None:
+                pass  # Don't change it if the user specified it
+            elif z_e[i] > top:
                 va[i] = 'bottom'
             elif z_e[i] < bottom:
                 va[i] = 'top'
-            if r_e[i] > right:
+            if ha[i] is not None:
+                pass  # Don't change it if the user specified it
+            elif r_e[i] > right:
                 ha[i] = 'left'
             elif r_e[i] < left:
                 ha[i] = 'right'
