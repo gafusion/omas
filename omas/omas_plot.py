@@ -362,9 +362,10 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
     :param default_va: string or list of n strings
         Default vertical alignment. If one is supplied, it will be copied n times.
     :param kw: keywords caught by overlay method
-    :return: (list of n strings, list of n strings)
+    :return: (list of n strings, list of n strings, kw)
         Horizontal alignment instructions
         Vertical alignment instructions
+        Updated keywords
     """
     label_ha = numpy.atleast_1d(kw.pop('label_ha', None)).tolist()
     label_va = numpy.atleast_1d(kw.pop('label_va', None)).tolist()
@@ -384,7 +385,7 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
         label_ha[i] = default_ha[i] if label_ha[i] is None else label_ha[i]
         label_va[i] = default_va[i] if label_va[i] is None else label_va[i]
 
-    return label_ha, label_va
+    return label_ha, label_va, kw
 
 # ================================
 # ODSs' plotting methods
@@ -979,7 +980,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     default_ha = [['left', 'right'][int(float(loc.split('_')[0]) < rsplit)] for loc in locations]
     default_va = [['top', 'bottom'][int(float(loc.split('_')[1]) > 0)] for loc in locations]
 
-    label_ha, label_va = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
+    label_ha, label_va, kw = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
@@ -1040,7 +1041,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     notesize = kw.pop('notesize', 'xx-small')
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
-    label_ha, label_va = text_alignment_setup(nc, default_ha='center', default_va='center', **kw)
+    label_ha, label_va, kw = text_alignment_setup(nc, default_ha='center', default_va='center', **kw)
 
     def path_rectangle(rectangle):
         """
@@ -1166,7 +1167,7 @@ def magnetics_overlay(
     labelevery = kw.pop('labelevery', 0)
     mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
-    label_ha, label_va = text_alignment_setup(nbp+nfl, **kw)
+    label_ha, label_va, kw = text_alignment_setup(nbp+nfl, **kw)
 
     def show_mag(n, topname, posroot, label, color_, marker, mask_):
         r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
@@ -1222,7 +1223,7 @@ def interferometer_overlay(ods, ax=None, **kw):
     labelevery = kw.pop('labelevery', 1)
     mask = kw.pop('mask', numpy.ones(nc, bool))
     notesize = kw.pop('notesize', 'medium')
-    label_ha, label_va = text_alignment_setup(nc, default_ha='left', default_va='top', **kw)
+    label_ha, label_va, kw = text_alignment_setup(nc, default_ha='left', default_va='top', **kw)
 
     for i in range(nc):
         if mask[i]:
@@ -1273,7 +1274,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     kw.setdefault('marker', '+')
     kw.setdefault('label', 'Thomson scattering')
     kw.setdefault('linestyle', ' ')
-    label_ha, label_va = text_alignment_setup(nc, **kw)
+    label_ha, label_va, kw = text_alignment_setup(nc, **kw)
 
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
@@ -1353,7 +1354,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
         'R': kw.pop('marker_radial', '*' if marker is None else marker),
     }
     notesize = kw.pop('notesize', 'xx-small')
-    ha, va = text_alignment_setup(nc, **kw)
+    ha, va, kw = text_alignment_setup(nc, **kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
     r = [[numpy.NaN]] * nc
@@ -1444,7 +1445,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
     default_ha = [['right', 'left'][int(z1[i] > 0)] for i in range(ncm)]
-    label_ha, label_va = text_alignment_setup(ncm, default_ha=default_ha, default_va='top', **kw)
+    label_ha, label_va, kw = text_alignment_setup(ncm, default_ha=default_ha, default_va='top', **kw)
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
@@ -1594,7 +1595,7 @@ def langmuir_probes_overlay(
             elif r_e[i] < left:
                 ha[i] = 'right'
 
-    ha, va = text_alignment_setup(ncem, default_ha=ha, default_va=va, **kw)
+    ha, va, kw = text_alignment_setup(ncem, default_ha=ha, default_va=va, **kw)
 
     # Plot
     for i in range(ncem):

@@ -305,6 +305,10 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10 + i * 2 + lab, color='k'))
+        ts_ods.plot_overlay(
+            thomson_scattering=dict(labelevery=2, notesize=9, color='b', label_ha='right', label_va='top')
+        )
+        return
 
     # Charge exchange overlay
     def test_cer_overlay(self):
@@ -399,6 +403,9 @@ class TestOmasPlot(unittest.TestCase):
 
         # Basic overlay
         lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=True)
+
+        # Overlay with customizations
+        lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=dict(color='r', label_ha='left', label_va='top'))
 
         # Direct call
         lp_ods.plot_langmuir_probes_overlay()
