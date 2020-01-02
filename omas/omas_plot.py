@@ -976,8 +976,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 1)
     notesize = kw.pop('notesize', 'xx-small')
-    default_ha = [['left', 'right'][int(loc.split('_')[0] < rsplit)] for loc in locations]
-    default_va = [['top', 'bottom'][int(loc.split('_')[1] > 0)] for loc in locations]
+    default_ha = [['left', 'right'][int(loc.split('_')[0]) < rsplit] for loc in locations]
+    default_va = [['top', 'bottom'][int(loc.split('_')[1]) > 0] for loc in locations]
 
     label_ha, label_va = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
 
