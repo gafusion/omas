@@ -976,8 +976,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     kw.setdefault('linestyle', ' ')
     labelevery = kw.pop('labelevery', 1)
     notesize = kw.pop('notesize', 'xx-small')
-    default_ha = [['left', 'right'][int(loc.split('_')[0]) < rsplit] for loc in locations]
-    default_va = [['top', 'bottom'][int(loc.split('_')[1]) > 0] for loc in locations]
+    default_ha = [['left', 'right'][int(float(loc.split('_')[0]) < rsplit)] for loc in locations]
+    default_va = [['top', 'bottom'][int(float(loc.split('_')[1]) > 0)] for loc in locations]
 
     label_ha, label_va = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
 
@@ -995,8 +995,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
             gas_mark = ax.plot(r, z, color=colors[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
-            label = '\n' * label_spacer + label if va == 'top' else label + '\n' * label_spacer
-            ax.text(r, z, label, color=gas_mark[0].get_color(), va=label_va, ha=label_ha, fontsize=notesize)
+            label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
+            ax.text(r, z, label, color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize)
     return
 
 
