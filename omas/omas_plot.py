@@ -1634,15 +1634,11 @@ def langmuir_probes_overlay(
         top = wz0 + dz * (1 - tb_margin)
         bottom = wz0 + dz * tb_margin
         for i in range(ncem):
-            if va[i] is not None:
-                pass  # Don't change it if the user specified it
-            elif z_e[i] > top:
+            if z_e[i] > top:
                 va[i] = 'bottom'
             elif z_e[i] < bottom:
                 va[i] = 'top'
-            if ha[i] is not None:
-                pass  # Don't change it if the user specified it
-            elif r_e[i] > right:
+            if r_e[i] > right:
                 ha[i] = 'left'
             elif r_e[i] < left:
                 ha[i] = 'right'
