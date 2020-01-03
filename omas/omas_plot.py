@@ -1099,8 +1099,8 @@ def pf_active_overlay(ods, ax=None, **kw):
                 pf_id = None
             if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
                 ax.text(
-                    numpy.mean(xarr) + label_dr,
-                    numpy.mean(yarr) + label_dz,
+                    numpy.mean(path[:, 0]) + label_dr,
+                    numpy.mean(path[:, 1]) + label_dz,
                     pf_id,
                     ha=label_ha[i], va=label_va[i], fontsize=notesize,
                 )
