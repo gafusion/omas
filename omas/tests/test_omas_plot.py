@@ -206,8 +206,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=False)
+            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
+            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
         return
 
     def test_eqcx_slices(self):
