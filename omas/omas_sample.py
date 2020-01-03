@@ -430,6 +430,9 @@ def gas_injection(ods):
     ods['gas_injection.pipe.1.exit_position.z'] = 1.1
     ods['gas_injection.pipe.1.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.1.valve.0.identifier'] = 'FAKE_GAS_VALVE_B'
+    ods['gas_injection.pipe.1.second_point.r'] = 1.63
+    ods['gas_injection.pipe.1.second_point.z'] = 1.08
+    ods['gas_injection.pipe.1.second_point.phi'] = 6.5
 
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
     ods['gas_injection.pipe.2.exit_position.r'] = 2.1

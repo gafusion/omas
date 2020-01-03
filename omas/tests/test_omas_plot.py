@@ -166,11 +166,16 @@ class TestOmasPlot(unittest.TestCase):
             for ipsi in [True, False]:
                 for iphi in [True, False]:
                     for iprof in [True, False]:
-                        ods = ODS().sample_equilibrium(
-                            include_profiles=iprof, include_phi=iphi, include_psi=ipsi, include_wall=iwall,
-                        )
-                        for cqo in cq_options:
-                            ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
+                        for iq in [True, False]:
+                            ods = ODS().sample_equilibrium(
+                                include_profiles=iprof,
+                                include_phi=iphi,
+                                include_psi=ipsi,
+                                include_wall=iwall,
+                                include_q=iq,
+                            )
+                            for cqo in cq_options:
+                                ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
 
         # Test for disallowed fallback
         ods = ODS().sample_equilibrium(include_psi=False, include_phi=True)
@@ -199,6 +204,10 @@ class TestOmasPlot(unittest.TestCase):
             # Fallback in this case would allow an abort without raising an error
             ods.plot_equilibrium_CX(allow_fallback=False)
 
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
+        with self.assertRaises(ValueError):
+            # Fails because we ask for junk
+            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=False)
         return
 
     def test_eqcx_slices(self):
@@ -242,6 +251,7 @@ class TestOmasPlot(unittest.TestCase):
         ods3 = copy.deepcopy(self.ods)
         ods3.sample_core_profiles(add_junk_ion=True)
         ods3.plot_core_profiles_pressures()
+        return
 
     # PF active overlay
     def test_pf_active_overlay(self):
@@ -256,6 +266,7 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, pf_active=True)
         ODS().plot_pf_active_overlay()
+        return
 
     # Magnetics overlay
     def test_magnetics_overlay(self):
@@ -275,6 +286,7 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, magnetics=True)
         ODS().plot_magnetics_overlay()
+        return
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
@@ -286,6 +298,7 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods.plot_thomson_scattering_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True)
+        return
 
     def test_ts_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -299,6 +312,7 @@ class TestOmasPlot(unittest.TestCase):
             mask = copy.copy(mask0)
             mask[i] = False
             ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i)))
+        return
 
     def test_ts_overlay_labels(self):
         ts_ods = copy.deepcopy(self.ods)
@@ -327,6 +341,7 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, charge_exchange=True)
+        return
 
     # Inteferometer overlay
     def test_interferometer_overlay(self):
@@ -338,6 +353,7 @@ class TestOmasPlot(unittest.TestCase):
         intf_ods.plot_interferometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, interferometer=True)
+        return
 
     # Bolometer overlay
     def test_bolo_overlay(self):
@@ -351,6 +367,7 @@ class TestOmasPlot(unittest.TestCase):
         bolo_ods.plot_bolometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, bolometer=True)
+        return
 
     def test_bolo_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -405,7 +422,10 @@ class TestOmasPlot(unittest.TestCase):
         lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=True)
 
         # Overlay with customizations
-        lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=dict(color='r', label_ha='left', label_va='top'))
+        lp_ods.plot_overlay(
+            thomson_scattering=False,
+            langmuir_probes=dict(colors='r', label_ha='left', label_va='top', embedded_probes=['donkey!', 'zzz']),
+        )
 
         # Direct call
         lp_ods.plot_langmuir_probes_overlay()
