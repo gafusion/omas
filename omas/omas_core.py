@@ -1388,7 +1388,7 @@ class ODS(MutableMapping):
         return True
 
     def save(self, *args, **kw):
-        '''
+        r"""
         Save OMAS data
 
         :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds')
@@ -1399,7 +1399,7 @@ class ODS(MutableMapping):
         :param \**kw: extra keywords passed to save_omas_XXX() method
 
         :return: return from save_omas_XXX() method
-        '''
+        """
         if '.' not in args[0]:
             ext = args[0]
             args = args[1:]
@@ -1408,7 +1408,7 @@ class ODS(MutableMapping):
         return eval('save_omas_' + ext)(self, *args, **kw)
 
     def load(self, *args, **kw):
-        '''
+        r"""
         Load OMAS data
 
         :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
@@ -1419,7 +1419,7 @@ class ODS(MutableMapping):
         :param \**kw: extra keywords passed to load_omas_XXX() method
 
         :return: ODS with loaded data
-        '''
+        """
         if '.' not in args[0]:
             ext = args[0]
             args = args[1:]

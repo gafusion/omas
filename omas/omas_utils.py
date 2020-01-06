@@ -635,10 +635,10 @@ def l2o(path):
     return '.'.join(filter(None, map(str, path)))
 
 
-_o2u_pattern = re.compile('\.[0-9:]+')
-_o2u_pattern_no_split = re.compile('^[0-9:]+')
-_i2o_pattern = re.compile('\[([:0-9]+)\]')
-_o2i_pattern = re.compile('\.([:0-9]+)')
+_o2u_pattern = re.compile(r'\.[0-9:]+')
+_o2u_pattern_no_split = re.compile(r'^[0-9:]+')
+_i2o_pattern = re.compile(r'\[([:0-9]+)\]')
+_o2i_pattern = re.compile(r'\.([:0-9]+)')
 
 
 def o2u(path):
@@ -805,7 +805,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval):
             if isinstance(me[kid], basestring) and ' ' in me[kid]:
                 try:
                     values = []
-                    for item in re.split('[ |\t]+', me[kid].strip()):
+                    for item in re.split(r'[ |\t]+', me[kid].strip()):
                         values.append(float(item))
                     me[kid] = numpy.array(values)
                 except ValueError:
