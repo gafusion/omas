@@ -79,7 +79,7 @@ def consistency_checker(location, value, info, consistency_check):
     :return: value
     '''
     # force type consistent with data dictionary
-    if numpy.atleast_1d(is_uncertain(value)).any():
+    if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
         pass
     elif isinstance(value, numpy.ndarray):
         if 'FLT' in info['data_type']:
