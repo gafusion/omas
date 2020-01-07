@@ -1004,7 +1004,13 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio
         for item in kw:
-            setattr(ods, item, bkp_args[item])
+            try:
+                setattr(ods, item, bkp_args[item])
+            except Exception as _excp:
+                # Add more user feedback, since use of consistency_check in an omas_environment can be confusing
+                if item == 'consistency_check':
+                    raise _excp.__class__(str(_excp)+'\nThe IMAS consistency was violated getting out of the omas_environment')
+                raise
         # restore input_data_process_functions
         if input_data_process_functions is not None:
             omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
