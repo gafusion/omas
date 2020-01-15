@@ -2,7 +2,7 @@
  "magnetics": {
   "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
   "full_path": "magnetics",
-  "lifecycle_last_change": "3.24.0",
+  "lifecycle_last_change": "3.26.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.24.0",
   "maxoccur": "3"
@@ -2124,6 +2124,87 @@
   "full_path": "magnetics/flux_loop(i1)/type/name",
   "lifecycle_status": "active",
   "type": "static"
+ },
+ "magnetics.flux_loop[:].voltage": {
+  "data_type": "structure",
+  "documentation": "Measured voltage between the loop terminals",
+  "full_path": "magnetics/flux_loop(i1)/voltage",
+  "lifecycle_status": "active",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "V"
+ },
+ "magnetics.flux_loop[:].voltage.data": {
+  "coordinates": [
+   "magnetics.flux_loop[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/flux_loop(i1)/voltage/data(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.flux_loop[:].voltage.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/voltage/data_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].voltage.data_error_lower": {
+  "coordinates": [
+   "magnetics.flux_loop[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/voltage/data_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.flux_loop[:].voltage.data_error_upper": {
+  "coordinates": [
+   "magnetics.flux_loop[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/flux_loop(i1)/voltage/data_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.flux_loop[:].voltage.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "magnetics/flux_loop(i1)/voltage/time(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.flux_loop[:].voltage.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/voltage/validity",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.flux_loop[:].voltage.validity_timed": {
+  "coordinates": [
+   "magnetics.flux_loop[:].voltage.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/flux_loop(i1)/voltage/validity_timed(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic"
  },
  "magnetics.ids_properties": {
   "data_type": "structure",

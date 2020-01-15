@@ -5,7 +5,8 @@
   "lifecycle_last_change": "3.25.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
-  "maxoccur": "10"
+  "maxoccur": "10",
+  "specific_validation_rules": "yes"
  },
  "core_transport.code": {
   "data_type": "structure",

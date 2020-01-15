@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.24.0",
+  "lifecycle_last_change": "3.25.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -2062,6 +2062,16 @@
   "timebasepath": "filter_spectrometer/line_intensities/time",
   "type": "dynamic",
   "units": "s"
+ },
+ "spectrometer_visible.channel[:].filter_spectrometer.line_labels": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].filter_spectrometer.processed_lines"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
+  "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_labels(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_power_radiances": {
   "coordinates": [

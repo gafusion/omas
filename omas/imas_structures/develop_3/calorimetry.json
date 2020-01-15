@@ -2,7 +2,7 @@
  "calorimetry": {
   "documentation": "Calometry measurements on various tokamak subsystems",
   "full_path": "calorimetry",
-  "lifecycle_last_change": "3.24.0",
+  "lifecycle_last_change": "3.25.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.23.4",
   "maxoccur": "2"
@@ -798,6 +798,87 @@
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_out/validity_timed(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "temperature_out/time",
+  "type": "dynamic"
+ },
+ "calorimetry.group[:].component[:].transit_time": {
+  "data_type": "structure",
+  "documentation": "Transit time for the coolant to go from the input to the output of the component",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "s"
+ },
+ "calorimetry.group[:].component[:].transit_time.data": {
+  "coordinates": [
+   "calorimetry.group[:].component[:].transit_time.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "transit_time/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "calorimetry.group[:].component[:].transit_time.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "calorimetry.group[:].component[:].transit_time.data_error_lower": {
+  "coordinates": [
+   "calorimetry.group[:].component[:].transit_time.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "transit_time/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "calorimetry.group[:].component[:].transit_time.data_error_upper": {
+  "coordinates": [
+   "calorimetry.group[:].component[:].transit_time.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "transit_time/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "calorimetry.group[:].component[:].transit_time.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "transit_time/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "calorimetry.group[:].component[:].transit_time.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "calorimetry.group[:].component[:].transit_time.validity_timed": {
+  "coordinates": [
+   "calorimetry.group[:].component[:].transit_time.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "calorimetry/group(i1)/component(i2)/transit_time/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "transit_time/time",
   "type": "dynamic"
  },
  "calorimetry.group[:].identifier": {

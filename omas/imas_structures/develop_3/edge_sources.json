@@ -5,7 +5,8 @@
   "lifecycle_last_change": "3.20.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
-  "maxoccur": "10"
+  "maxoccur": "10",
+  "specific_validation_rules": "yes"
  },
  "edge_sources.code": {
   "data_type": "structure",

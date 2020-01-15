@@ -76,7 +76,7 @@
   "documentation": "Incident angle of the magnetic field with respect to PFC surface",
   "full_path": "langmuir_probes/embedded(i1)/b_field_angle",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "rad"
  },
  "langmuir_probes.embedded[:].b_field_angle.data": {
@@ -145,7 +145,7 @@
   "documentation": "Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)",
   "full_path": "langmuir_probes/embedded(i1)/distance_separatrix",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "m"
  },
  "langmuir_probes.embedded[:].distance_separatrix.data": {
@@ -214,7 +214,7 @@
   "documentation": "Parallel heat flux at the probe position",
   "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "W.m^-2"
  },
  "langmuir_probes.embedded[:].heat_flux_parallel.data": {
@@ -290,7 +290,7 @@
   "documentation": "Ion parallel current density at the probe position",
   "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "A.m^-2"
  },
  "langmuir_probes.embedded[:].j_ion_parallel.data": {
@@ -370,7 +370,7 @@
   "documentation": "Electron temperature",
   "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "eV"
  },
  "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data": {
@@ -439,7 +439,7 @@
   "documentation": "Ion temperature",
   "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "eV"
  },
  "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data": {
@@ -520,7 +520,7 @@
   "documentation": "Electron density",
   "full_path": "langmuir_probes/embedded(i1)/n_e",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "m^-3"
  },
  "langmuir_probes.embedded[:].n_e.data": {
@@ -696,7 +696,7 @@
   "documentation": "Floating potential",
   "full_path": "langmuir_probes/embedded(i1)/potential_floating",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "V"
  },
  "langmuir_probes.embedded[:].potential_floating.data": {
@@ -765,7 +765,7 @@
   "documentation": "Plasma potential",
   "full_path": "langmuir_probes/embedded(i1)/potential_plasma",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "V"
  },
  "langmuir_probes.embedded[:].potential_plasma.data": {
@@ -834,7 +834,7 @@
   "documentation": "Ion saturation current measured by the probe",
   "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "A"
  },
  "langmuir_probes.embedded[:].saturation_current_ion.data": {
@@ -903,7 +903,7 @@
   "documentation": "Electron temperature",
   "full_path": "langmuir_probes/embedded(i1)/t_e",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "eV"
  },
  "langmuir_probes.embedded[:].t_e.data": {
@@ -972,7 +972,7 @@
   "documentation": "Ion temperature",
   "full_path": "langmuir_probes/embedded(i1)/t_i",
   "lifecycle_status": "alpha",
-  "structure_reference": "langmuir_probes_physical_quantity",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "eV"
  },
  "langmuir_probes.embedded[:].t_i.data": {
