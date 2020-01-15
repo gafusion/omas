@@ -838,3 +838,30 @@ def recursive_encoder(me):
             else:
                 me[kid] = str(me[kid])
     return me
+
+
+def get_actor_io_ids(filename):
+    '''
+    Parse IMAS Python actor script and return actor input and output IDSs
+
+    :param filename: filename of the IMAS Python actor
+
+    :return: tuple with list of input IDSs and output IDSs
+    '''
+    import ast
+    with open(filename, 'r') as f:
+        module = ast.parse(f.read())
+    actor = os.path.splitext(os.path.split(filename)[-1])[0]
+    function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
+    docstring = ast.get_docstring([f for f in function_definitions if f.name == actor][0])
+    ids_in = []
+    ids_out = []
+    for line in docstring.split('\n'):
+        if 'codeparams' in line:
+            pass
+        elif line.strip().startswith(':param result:'):
+            ids_out = list(map(lambda x: x.strip()[:-1], line.split(':')[2].strip(', ').split(',')))
+            break
+        elif line.strip().startswith(':param '):
+            ids_in.append(line.split(':')[2].strip())
+    return ids_in, ids_out
