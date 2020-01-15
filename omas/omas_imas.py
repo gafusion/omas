@@ -416,7 +416,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             if paths is None:
                 requested_paths = [[structure] for structure in list_structures(imas_version=imas_version)]
             else:
-                requested_paths = map(p2l, paths)
+                requested_paths = list(map(p2l, paths))
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
@@ -441,7 +441,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                 else:
                     if verbose:
                         print('- ', ds)
-            joined_fetch_paths = map(l2i, fetch_paths)
+            joined_fetch_paths = list(map(l2i, fetch_paths))
 
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
@@ -504,7 +504,7 @@ def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=Fa
     # if no users are specified, find all users
     if user is None:
         user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
-        user = map(lambda x: x.split(os.sep)[-3], user)
+        user = list(map(lambda x: x.split(os.sep)[-3], user))
     elif isinstance(user, basestring):
         user = [user]
 
