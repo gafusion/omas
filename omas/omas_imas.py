@@ -420,27 +420,32 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
             # fetch relevant IDSs and find available signals
             fetch_paths = []
-            for ds in numpy.unique([p[0] for p in requested_paths]):
+            dss = numpy.unique([p[0] for p in requested_paths])
+            ndss = max([len(d) for d in dss])
+            for ds in dss:
                 if ds in add_datastructures.keys():
                     continue
                 if not hasattr(ids, ds):
                     if verbose:
-                        print('| ', ds)
+                        print('| %s IDS of IMAS version %s is unknown'%(ds.ljust(ndss),imas_version))
                     continue
                 # ids fetching
                 printd("ids.%s.get()" % ds, topic='imas_code')
                 try:
                     getattr(ids, ds).get()
                 except ValueError as _excp:
-                    print('x ', ds) # not sure why some IDSs fail on .get()... it's not about them being empty
+                    print('x %s IDS failed on get'%ds.ljust(ndss)) # not sure why some IDSs fail on .get()... it's not about them being empty
                     continue
                 if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
                     if verbose:
-                        print('* ', ds)
+                        try:
+                            print('* %s IDS has data (%d times)'%(ds.ljust(ndss),len(getattr(ids, ds).time)))
+                        except Exception as _excp:
+                            print('* %s IDS'%ds.ljust(ndss))
                     fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
                 else:
                     if verbose:
-                        print('- ', ds)
+                        print('- %s IDS is empty'%ds.ljust(ndss))
             joined_fetch_paths = list(map(l2i, fetch_paths))
 
             # build omas data structure
