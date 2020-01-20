@@ -56,7 +56,7 @@ OMAS is a Python library designed to simplify the interface of third-party codes
 
 * in a form that is **always compatible with the IMAS data model**
 
-Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.
+Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <https://omfit.io>`_.
 '''
 
 print('INFO: run the `imports_check.py` script to quickly verify that all Python dependencies for OMAS are installed\n')
