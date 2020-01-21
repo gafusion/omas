@@ -477,6 +477,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                 raise
 
     except ImportError:
+        if imas_version is None:
+            imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
         filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
