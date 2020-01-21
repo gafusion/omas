@@ -258,7 +258,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None, verbose=True):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None, verbose=False):
     """
     Save OMAS data to IMAS
 
@@ -275,6 +275,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     :param new: whether the open should create a new IMAS tree
 
     :param imas_version: IMAS version
+
+    :param verbose: whether the process should be verbose
 
     :return: paths that have been written to IMAS
     """
