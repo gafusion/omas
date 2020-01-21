@@ -3,6 +3,7 @@ all:
 	@echo ''
 	@echo ' - make tests2        : run all regression tests with Python2'
 	@echo ' - make tests3        : run all regression tests with Python3'
+	@echo ' - make omfit_tests   : run test_omas in OMFIT'
 	@echo ' - make requirements  : build requirements.txt'
 	@echo ' - make json          : generate IMAS json structure files'
 	@echo ' - make docs          : generate sphinx documentation and pushes it online'
@@ -18,6 +19,9 @@ all:
 tests: tests2 tests3
 
 TEST_FLAGS=-s omas/tests -v -f
+
+omfit_tests:
+	omfit test_omas
 
 tests2:
 	python2 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
