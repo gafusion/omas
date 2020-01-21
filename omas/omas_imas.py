@@ -258,7 +258,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None, verbose=True):
     """
     Save OMAS data to IMAS
 
