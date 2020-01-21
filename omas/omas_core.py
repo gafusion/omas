@@ -65,7 +65,10 @@ def force_imas_type(value):
     return value
 
 
-def consistency_checker(location, value, info, consistency_check):
+_consistency_warnings={}
+
+
+def consistency_checker(location, value, info, consistency_check, imas_version):
     '''
     Print warnings or raise errors if object does not satisfy IMAS data dictionary
     Converts numeric data to INT/FLOAT depending on IMAS specifications
@@ -75,6 +78,8 @@ def consistency_checker(location, value, info, consistency_check):
     :param info: output of omas_info_node
 
     :param consistency_check: True, False, 'warn'
+
+    :param imas_version: IMAS version
 
     :return: value
     '''
@@ -113,7 +118,10 @@ def consistency_checker(location, value, info, consistency_check):
         else:
             raise ValueError(text)
     elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-        printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+        txt = '%s is in %s state for IMAS %s' % (o2u(location), info['lifecycle_status'].upper(), imas_version)
+        if imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
+            printe(txt)
+            _consistency_warnings.setdefault(imas_version,[]).append(txt)
     return value
 
 
@@ -363,7 +371,7 @@ class ODS(MutableMapping):
                         else:
                             location = l2o([self.location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
-                            value = consistency_checker(location, self.getraw(item), info, consistency_value)
+                            value = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
                             if value is not self.getraw(item):
                                 self.setraw(item, value)
                     # propagate consistency check
@@ -667,7 +675,7 @@ class ODS(MutableMapping):
 
             # check that dimensions and data types are consistent with IMAS specifications
             if self.consistency_check and '.code.parameters.' not in location:
-                value = consistency_checker(location, value, info, self.consistency_check)
+                value = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
 
         # check if the branch/node was dynamically created
         dynamically_created = False
@@ -1541,9 +1549,10 @@ class CodeParameters(dict):
         '''
         import xmltodict
         self.clear()
-        tmp = xmltodict.parse(code_params_string)['parameters']
-        recursive_interpreter(tmp)
-        self.update(tmp)
+        tmp = xmltodict.parse(code_params_string).get('parameters','')
+        if tmp:
+            recursive_interpreter(tmp)
+            self.update(tmp)
         return self
 
     def fromfile(self, code_params_file):

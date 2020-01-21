@@ -12,8 +12,7 @@ from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False,
-              imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
+def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verbose=True):
     """
     function to open an IMAS
 
@@ -27,10 +26,15 @@ def imas_open(user, machine, pulse, run, new=False,
 
     :param new: whether the open should create a new IMAS tree
 
-    :param imas_version: IMAS version
+    :param imas_major_version: IMAS major version
+
+    :param verbose: print open parameters
 
     :return: IMAS ids
     """
+    if verbose:
+        print('Opening {new} IMAS data for user={user} machine={machine} pulse={pulse} run={run}'.format(new=['existing','new'][int(new)], user=repr(user), machine=repr(machine), pulse=pulse, run=run))
+
     import imas
     printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
     ids = imas.ids(pulse, run)
@@ -38,12 +42,13 @@ def imas_open(user, machine, pulse, run, new=False,
     if user is None and machine is None:
         pass
     elif user is None or machine is None:
-        raise Exception('user={user}, machine={machine}, imas_version={imas_version}\n'
+        raise Exception('user={user}, machine={machine}, imas_major_version={imas_major_version}\n'
                         'Either specify all or none of `user`, `machine`, `imas_version`\n'
                         'If none of them are specified then use `imasdb` command to set '
-                        'MDSPLUS_TREE_BASE_? environmental variables'.format(user=user, machine=machine, pulse=pulse,
-                                                                             run=run, imas_version=imas_version))
+                        'MDSPLUS_TREE_BASE_? environmental variables'.format(user=repr(user), machine=repr(machine), pulse=pulse,
+                                                                             run=run, imas_major_version=imas_major_version))
 
+    # This approach of opening IDSs has been deprecated
     if user is None and machine is None:
         if new:
             printd("ids.create()", topic='imas_code')
@@ -59,20 +64,20 @@ def imas_open(user, machine, pulse, run, new=False,
             raise Exception('Failed to establish connection to IMAS database '
                             '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]))
 
+    # The new approach always requires specifying user and machine
     else:
-        imas_major_version = '3'
         if new:
             printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            ids.create_env(user, machine, imas_version)
+            ids.create_env(user, machine, imas_major_version)
         else:
             printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
             try:
                 ids.open_env(user, machine, imas_major_version)
             except Exception as _excp:
                 if 'Error opening imas pulse' in str(_excp):
-                    raise IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version))
+                    raise IOError('Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)' % (user, machine, pulse, run, imas_major_version))
         if not ids.isConnected():
-            raise Exception('Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_version:%s)' % (user, machine, pulse, run, imas_version))
+            raise Exception('Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)' % (user, machine, pulse, run, imas_major_version))
     return ids
 
 
@@ -253,8 +258,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False,
-                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None):
     """
     Save OMAS data to IMAS
 
@@ -285,6 +289,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         pulse = ods.get('dataset_description.data_entry.pulse', None)
     if run is None:
         run = ods.get('dataset_description.data_entry.run', 0)
+    if imas_version is None:
+        imas_version = ods.imas_version
 
     # set dataset_description entries that were empty
     if user is not None and 'dataset_description.data_entry.user' not in ods:
@@ -296,7 +302,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     if run is not None and 'dataset_description.data_entry.run' not in ods:
         ods['dataset_description.data_entry.run'] = run
     if imas_version is not None and 'dataset_description.imas_version' not in ods:
-        ods['dataset_description.imas_version'] = imas_version
+        ods['dataset_description.imas_version'] = ods.imas_version
 
     if user is not None and machine is not None:
         printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
@@ -311,7 +317,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, verbose=verbose)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -361,15 +367,68 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     return set_paths
 
+def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
+    """
+    Return list of IMAS paths that have data
+
+    :param ids: IMAS ids
+
+    :param paths: list of paths to load from IMAS
+
+    :param imas_version: IMAS version
+
+    :param skip_ggd: do not load ggd structure
+
+    :param skip_ion_state: do not load ion state structure
+
+    :param verbose: print ids infos
+
+    :return: list of paths that have data
+    """
+    # if paths is None then figure out what IDS are available and get ready to retrieve everything
+    if paths is None:
+        requested_paths = [[structure] for structure in list_structures(imas_version=imas_version)]
+    else:
+        requested_paths = list(map(p2l, paths))
+
+    # fetch relevant IDSs and find available signals
+    fetch_paths = []
+    dss = numpy.unique([p[0] for p in requested_paths])
+    ndss = max([len(d) for d in dss])
+    for ds in dss:
+        if ds in add_datastructures.keys():
+            continue
+        if not hasattr(ids, ds):
+            if verbose:
+                print('| %s IDS of IMAS version %s is unknown'%(ds.ljust(ndss),imas_version))
+            continue
+        # ids fetching
+        printd("ids.%s.get()" % ds, topic='imas_code')
+        try:
+            getattr(ids, ds).get()
+        except ValueError as _excp:
+            print('x %s IDS failed on get'%ds.ljust(ndss)) # not sure why some IDSs fail on .get()... it's not about them being empty
+            continue
+        if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
+            if verbose:
+                try:
+                    print('* %s IDS has data (%d times)'%(ds.ljust(ndss),len(getattr(ids, ds).time)))
+                except Exception as _excp:
+                    print('* %s IDS'%ds.ljust(ndss))
+                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+            else:
+                if verbose:
+                    print('- %s IDS is empty'%ds.ljust(ndss))
+    joined_fetch_paths = list(map(l2i, fetch_paths))
+    return fetch_paths, joined_fetch_paths
 
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
-                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                   skip_uncertainties=False, skip_ggd=True, verbose=True):
+                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True):
     """
     Load OMAS data from IMAS
 
-    NOTE: Either specify all or none of `user`, `machine`, `imas_version`
+    NOTE: Either specify both or none of `user` and `machine`
     If none of them are specified then use `imasdb` command to set the `MDSPLUS_TREE_BASE_?` environmental variables
 
     :param user: IMAS username
@@ -382,11 +441,13 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
     :param paths: list of paths to load from IMAS
 
-    :param imas_version: IMAS version
+    :param imas_version: IMAS version (force specific version)
 
     :param skip_uncertainties: do not load uncertain data
 
     :param skip_ggd: do not load ggd structure
+
+    :param skip_ion_state: do not load ion_state structure
 
     :param verbose: print loading progress
 
@@ -399,7 +460,19 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     printd('Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
 
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, imas_version=imas_version)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, verbose=verbose)
+
+        if imas_version is None:
+            try:
+                imas_version = ids.dataset_description.imas_version
+                if not imas_version:
+                    imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
+                    if verbose:
+                        print('dataset_description.imas_version is missing: assuming IMAS version %s'%imas_version)
+                else:
+                    print('%s IMAS version detected'%imas_version)
+            except Exception:
+                raise
 
     except ImportError:
         if not omas_rcparams['allow_fake_imas_fallback']:
@@ -412,49 +485,16 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     else:
 
         try:
-            # if paths is None then figure out what IDS are available and get ready to retrieve everything
-            if paths is None:
-                requested_paths = [[structure] for structure in list_structures(imas_version=imas_version)]
-            else:
-                requested_paths = list(map(p2l, paths))
-
-            # fetch relevant IDSs and find available signals
-            fetch_paths = []
-            dss = numpy.unique([p[0] for p in requested_paths])
-            ndss = max([len(d) for d in dss])
-            for ds in dss:
-                if ds in add_datastructures.keys():
-                    continue
-                if not hasattr(ids, ds):
-                    if verbose:
-                        print('| %s IDS of IMAS version %s is unknown'%(ds.ljust(ndss),imas_version))
-                    continue
-                # ids fetching
-                printd("ids.%s.get()" % ds, topic='imas_code')
-                try:
-                    getattr(ids, ds).get()
-                except ValueError as _excp:
-                    print('x %s IDS failed on get'%ds.ljust(ndss)) # not sure why some IDSs fail on .get()... it's not about them being empty
-                    continue
-                if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
-                    if verbose:
-                        try:
-                            print('* %s IDS has data (%d times)'%(ds.ljust(ndss),len(getattr(ids, ds).time)))
-                        except Exception as _excp:
-                            print('* %s IDS'%ds.ljust(ndss))
-                    fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd)
-                else:
-                    if verbose:
-                        print('- %s IDS is empty'%ds.ljust(ndss))
-            joined_fetch_paths = list(map(l2i, fetch_paths))
+            # see what paths have data
+            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, paths=paths, imas_version=imas_version, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state, verbose=verbose)
 
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and (k % 100 == 0 or k == len(fetch_paths) - 1):
-                    print('Loading {0:3.3f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                if verbose and (k % (len(fetch_paths)//10) == 0 or k == len(fetch_paths) - 1):
+                    print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
                 # get data from IDS
                 data = imas_get(ids, path, None)
                 # continue for empty data
@@ -593,7 +633,7 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return ods
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True, skip_ion_state=True):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -601,11 +641,17 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
     :param ds: hierarchical data schema as returned for example by load_structure('equilibrium')[1]
 
+    :param path: current location
+
+    :param paths: list of paths that are filled
+
     :param requested_paths: list of paths that are requested
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
     :param skip_ggd: do not traverse ggd structures
+
+    :param skip_ion_state: do not traverse ion state
 
     :return: returns list of paths in an IDS that are filled
     """
@@ -643,6 +689,10 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         if skip_ggd and kid in ['ggd', 'grids_ggd']:
             continue
 
+        # skip ion state structures
+        if skip_ion_state and kid in ['state'] and 'ion' in path:
+            continue
+
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
 
@@ -655,10 +705,14 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
                 continue
 
         # recursive call
-        if isinstance(kid, basestring):
-            subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
-        else:
-            subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd)
+        try:
+            if isinstance(kid, basestring):
+                subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+            else:
+                subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+        except Exception:
+            print('Error traversing %s ! Possible IMAS version mismatch!'%l2o(path+[kid]))
+            return paths
         paths += subtree_paths
 
         # assume_uniform_array_structures
