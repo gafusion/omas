@@ -626,14 +626,14 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     # dP_dpsi
     ax = fig.add_subplot(2, 3, 5, sharex=ax)
     ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
-    ax.set_title(r"$P\,^\\prime$ source function")
+    ax.set_title(r"$P\,^\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
     # FdF_dpsi
     ax = fig.add_subplot(236, sharex=ax)
     ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
-    ax.set_title(r"$FF\,^\\prime$ source function")
+    ax.set_title(r"$FF\,^\prime$ source function")
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
