@@ -27,8 +27,8 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             for item in install_requires[version]:
                 f.write(item.ljust(25) + '# required\n')
             f.write('\n')
-            for requirement in extras_require:
-                for item in extras_require[requirement]:
+            for requirement in sorted(list(extras_require.keys()), key=lambda x:x.lower()):
+                for item in sorted(extras_require[requirement], key=lambda x:x.lower()):
                     if requirement in ['imas', 'hdc', 'uda', 'build_structures']:
                         item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)

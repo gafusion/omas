@@ -15,11 +15,11 @@ dnspython                # required
 xmltodict                # required
 xarray                   # required
 
+Pillow                   # build_documentation
 Sphinx                   # build_documentation
 sphinx-bootstrap-theme   # build_documentation
 sphinx-gallery           # build_documentation
-Pillow                   # build_documentation
-#pyuda                   # uda
-#pyhdc                   # hdc
 #bs4                     # build_structures
+#pyhdc                   # hdc
 #imas                    # imas
+#pyuda                   # uda
