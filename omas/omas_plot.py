@@ -51,7 +51,8 @@ def uerrorbar(x, y, ax=None, **kwargs):
 
     # set default key word arguments
     if ax is None:
-        ax = gca()
+        from matplotlib import pyplot
+        ax = pyplot.gca()
     kwargs.setdefault('marker', 'o')
     if 'linestyle' not in kwargs and 'ls' not in kwargs:
         kwargs['linestyle'] = ''
@@ -1223,8 +1224,9 @@ def pf_active_overlay(ods, ax=None, **kw):
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
+    from matplotlib import pyplot
     if ax is None:
-        ax = gca()
+        ax = pyplot.gca()
     time = ods['nbi.time']
     nbi = ods['nbi.unit']
     tmp = []
