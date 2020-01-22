@@ -395,7 +395,7 @@ _stimes = []
 
 def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     r'''
-    Utility function for easing the generation of time dependent plots
+    Utility function for generating time dependent plots
 
     :param ods_plot_function: ods plot function to be called
     this function must accept ax (either a single or a list of axes)
@@ -409,7 +409,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
 
     :param \**kw: extra aruments to passed to ods_plot_function
 
-    :return: list of axes used
+    :return: slider instance and list of axes used
     '''
     from matplotlib import pyplot
     from matplotlib.widgets import Slider
@@ -418,9 +418,11 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     time = time[time_index]
     axs = {}
 
-    def update(time0):
+    def do_clean(time0):
         for ax in axs:
             axs[ax].cla()
+
+    def update(time0):
         if 'ax' in kw:
             ax = kw.pop('ax')
         elif not len(axs):
@@ -436,21 +438,22 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
         else:
             axs[1, 1, 1] = tmp
 
+    stime, axtime = kw.pop('stime', (None, None))
+
     update(time[0])
 
-    timestep = min(numpy.diff(time))
-    axtime = pyplot.axes([0.11, 0.95, 0.8, 0.03])
-    stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=timestep)
-    if stime not in _stimes:
-        _stimes.append(stime)
-        if len(_stimes) > 100:
-            _stimes.pop(0)
-
+    if stime is None:
+        axtime = pyplot.axes([0.1, 0.96, 0.75, 0.03])
+        stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=min(numpy.diff(time)))
+        if stime not in _stimes:
+            _stimes.append(stime)
+            if len(_stimes) > 100:
+                _stimes.pop(0)
+        stime.on_changed(do_clean)
     stime.on_changed(update)
     for time0 in time:
-        axtime.axvline(time0, color='r')
-
-    return axs
+        axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+    return (stime, axtime), axs
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -910,6 +913,65 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 
 
 # ================================
+# Heating and current drive
+# ================================
+@add_to__ODS__
+def waves_beam_CX(ods, time_index=None, ax=None, **kw):
+    """
+    Plot waves beams in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['waves']['time']))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['waves']['time']
+        return ods_time_plot(waves_beam_CX, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    coherent_wave = ods['waves.coherent_wave']
+
+    for cw in coherent_wave:
+        bt = coherent_wave[cw]['beam_tracing'][time_index]
+        for b in bt['beam'].values():
+            ax.plot(b['position.r'], b['position.z'], **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def nbi_summary(ods, ax=None):
+    from matplotlib import pyplot
+    if ax is None:
+        ax = pyplot.gca()
+    time = ods['nbi.time']
+    nbi = ods['nbi.unit']
+    tmp = []
+    for beam in nbi:
+        tmp.append(nbi[beam]['power_launched.data'])
+        ax.plot(time, tmp[-1], label=nbi[beam]['identifier'])
+    ax.plot(time, numpy.sum(tmp, 0), 'k', lw=2, label='Total')
+    ax.set_title('Neutral Beam Injectors power')
+    ax.set_xlabel('Time [s]')
+    ax.set_ylabel('Power [W]')
+    ax.legend()
+    return
+
+
+# ================================
 # Hardware overlays
 # ================================
 @add_to__ODS__
@@ -1219,25 +1281,6 @@ def pf_active_overlay(ods, ax=None, **kw):
 
     ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
 
-    return
-
-
-@add_to__ODS__
-def nbi_summary(ods, ax=None):
-    from matplotlib import pyplot
-    if ax is None:
-        ax = pyplot.gca()
-    time = ods['nbi.time']
-    nbi = ods['nbi.unit']
-    tmp = []
-    for beam in nbi:
-        tmp.append(nbi[beam]['power_launched.data'])
-        ax.plot(time, tmp[-1], label=nbi[beam]['identifier'])
-    ax.plot(time, numpy.sum(tmp, 0), 'k', lw=2, label='Total')
-    ax.set_title('Neutral Beam Injectors power')
-    ax.set_xlabel('Time [s]')
-    ax.set_ylabel('Power [W]')
-    ax.legend()
     return
 
 
