@@ -35,6 +35,7 @@ __all__ = [
 # It is used for example by OMFIT to process OMFITexpressions
 input_data_process_functions = []
 
+
 def force_imas_type(value):
     '''
     IMAS supports (arrays of) integers, floats and strings
@@ -65,7 +66,7 @@ def force_imas_type(value):
     return value
 
 
-_consistency_warnings={}
+_consistency_warnings = {}
 
 
 def consistency_checker(location, value, info, consistency_check, imas_version):
@@ -121,7 +122,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         txt = '%s is in %s state for IMAS %s' % (o2u(location), info['lifecycle_status'].upper(), imas_version)
         if imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
             printe(txt)
-            _consistency_warnings.setdefault(imas_version,[]).append(txt)
+            _consistency_warnings.setdefault(imas_version, []).append(txt)
     return value
 
 
@@ -535,9 +536,9 @@ class ODS(MutableMapping):
         if len(key) > 1:
             pass_on_value = value
             value = self.__class__(imas_version=self.imas_version,
-                        consistency_check=self.consistency_check,
-                        dynamic_path_creation=self.dynamic_path_creation,
-                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+                                   consistency_check=self.consistency_check,
+                                   dynamic_path_creation=self.dynamic_path_creation,
+                                   cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -820,9 +821,9 @@ class ODS(MutableMapping):
             if self.dynamic_path_creation:
                 dynamically_created = True
                 self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
-                                             consistency_check=self.consistency_check,
-                                             dynamic_path_creation=self.dynamic_path_creation,
-                                             cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
+                                                        consistency_check=self.consistency_check,
+                                                        dynamic_path_creation=self.dynamic_path_creation,
+                                                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
@@ -1298,7 +1299,7 @@ class ODS(MutableMapping):
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
                             infoc = c
-                        coordinates.append('__'+'_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index%d__' % counter]))
+                        coordinates.append('__' + '_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index%d__' % counter]))
                         counter += 1
             return coordinates
 
@@ -1532,6 +1533,7 @@ class CodeParameters(dict):
     """
     Class used to interface with IMAS code-parameters XML files
     """
+
     def __init__(self, string=None):
         if isinstance(string, basestring):
             if os.path.exists(string):
@@ -1549,7 +1551,7 @@ class CodeParameters(dict):
         '''
         import xmltodict
         self.clear()
-        tmp = xmltodict.parse(code_params_string).get('parameters','')
+        tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
             recursive_interpreter(tmp)
             self.update(tmp)
@@ -1584,9 +1586,11 @@ def codeparams_xml_save(f):
     Decorator function to be used around the omas_save_XXX methods to enable
     saving of code.parameters as an XML string
     '''
+
     def wrapper(ods, *args, **kwargs):
         with omas_environment(ods, xmlcodeparams=True):
             return f(ods, *args, **kwargs)
+
     return wrapper
 
 
@@ -1595,11 +1599,14 @@ def codeparams_xml_load(f):
     Decorator function to be used around the omas_load_XXX methods to enable
     loading of code.parameters from an XML string
     '''
+
     def wrapper(*args, **kwargs):
         ods = f(*args, **kwargs)
         ods.codeparams2dict()
         return ods
+
     return wrapper
+
 
 # --------------------------------------------
 # import sample functions and add them as ODS methods
