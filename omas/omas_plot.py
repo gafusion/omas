@@ -743,7 +743,7 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True, show_total_density=True, **kw):
+def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True, show_total_density=True, **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -772,6 +772,14 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
     if fig is None:
         fig = pyplot.figure()
 
+    if time_index is None:
+        time_index = ods['equilibrium']['time_slice'].keys()
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium']['time']
+        return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={}, combine_dens_temps=combine_dens_temps, show_thermal_fast_breakdown=show_thermal_fast_breakdown, show_total_density=show_total_density, **kw)
+
+    axs = kw.pop('ax', {})
+
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
     x = prof1d['grid.rho_tor_norm']
 
@@ -798,21 +806,14 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
             # generate axes
             if combine_dens_temps:
                 if ax0 is None:
-                    ax = ax0 = fig.add_subplot(1, 2, 1)
+                    ax = ax0 = cached_add_subplot(fig, axs, 1, 2, 1)
             else:
-                ax = ax0 = fig.add_subplot(r, 2, (2 * k) + 1, sharex=ax)
+                ax = ax0 = cached_add_subplot(fig, axs, r, 2, (2 * k) + 1, sharex=ax, sharey=ax0)
             # plot if data is present
             if item + '.density' + therm_fast in prof1d:
                 uband(x, prof1d[density], label=names[k] + therm_fast_name, ax=ax0, **kw)
                 if k == len(prof1d['ion']):
                     ax0.set_xlabel('$\\rho$')
-                    if combine_dens_temps:
-                        leg = ax0.legend(loc=0)
-                        import matplotlib
-                        if compare_version(matplotlib.__version__, '3.1.0') >= 0:
-                            leg.set_draggable(True)
-                        else:
-                            leg.draggable(True)
                 if k == 0:
                     ax0.set_title('Density [m$^{-3}$]')
                 if not combine_dens_temps:
@@ -824,9 +825,9 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         # temperatures
         if combine_dens_temps:
             if ax1 is None:
-                ax = ax1 = fig.add_subplot(1, 2, 2, sharex=ax)
+                ax = ax1 = cached_add_subplot(fig, axs, 1, 2, 2, sharex=ax)
         else:
-            ax = ax1 = fig.add_subplot(r, 2, (2 * k) + 2, sharex=ax)
+            ax = ax1 = cached_add_subplot(fig, axs, r, 2, (2 * k) + 2, sharex=ax, sharey=ax1)
         # plot if data is present
         if item + '.temperature' in prof1d:
             uband(x, prof1d[item + '.temperature'], label=names[k], ax=ax1, **kw)
@@ -843,7 +844,7 @@ def core_profiles_summary(ods, time_index=0, fig=None, combine_dens_temps=True, 
         ax0.set_ylim([0, ax0.get_ylim()[1]])
     if ax1 is not None:
         ax1.set_ylim([0, ax1.get_ylim()[1]])
-    return fig
+    return axs
 
 
 @add_to__ODS__
