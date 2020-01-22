@@ -438,7 +438,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     update(time[0])
 
     timestep = min(numpy.diff(time))
-    axtime = pyplot.axes([0.1, 0.01, 0.75, 0.03])
+    axtime = pyplot.axes([0.11, 0.95, 0.8, 0.03])
     stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=timestep)
     if stime not in _stimes:
         _stimes.append(stime)
