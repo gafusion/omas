@@ -635,7 +635,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
 
 @add_to__ODS__
-def equilibrium_summary(ods, time_index=0, fig=None, **kw):
+def equilibrium_summary(ods, time_index=None, fig=None, ax=None, **kw):
     """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -656,8 +656,18 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     if fig is None:
         fig = pyplot.figure()
 
-    ax = fig.add_subplot(1, 3, 1)
-    ax = equilibrium_CX(ods, time_index=time_index, ax=ax, **kw)
+    if time_index is None:
+        time_index = ods['equilibrium']['time_slice'].keys()
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium']['time']
+        return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, **kw)
+
+    if ax is None:
+        ax = []
+
+    if not len(ax):
+        ax.append(fig.add_subplot(1, 3, 1))
+    equilibrium_CX(ods, time_index=time_index, ax=ax[0], **kw)
     eq = ods['equilibrium']['time_slice'][time_index]
 
     # x
@@ -670,44 +680,48 @@ def equilibrium_summary(ods, time_index=0, fig=None, **kw):
     x = (x - min(x)) / (max(x) - min(x))
 
     # pressure
-    ax = fig.add_subplot(2, 3, 2)
-    ax.plot(x, eq['profiles_1d']['pressure'], **kw)
-    kw.setdefault('color', ax.lines[-1].get_color())
-    ax.set_title(r'$\,$ Pressure')
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-    pyplot.setp(ax.get_xticklabels(), visible=False)
+    if len(ax) < 2:
+        ax.append(fig.add_subplot(2, 3, 2))
+    ax[1].plot(x, eq['profiles_1d']['pressure'], **kw)
+    kw.setdefault('color', ax[1].lines[-1].get_color())
+    ax[1].set_title(r'$\,$ Pressure')
+    ax[1].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    pyplot.setp(ax[1].get_xticklabels(), visible=False)
 
     # q
-    ax = fig.add_subplot(2, 3, 3, sharex=ax)
-    ax.plot(x, eq['profiles_1d']['q'], **kw)
-    ax.set_title('$q$ Safety factor')
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    if len(ax) < 3:
+        ax.append(fig.add_subplot(2, 3, 3, sharex=ax[1]))
+    ax[2].plot(x, eq['profiles_1d']['q'], **kw)
+    ax[2].set_title('$q$ Safety factor')
+    ax[2].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
-        leg = ax.legend(loc=0)
+        leg = ax[2].legend(loc=0)
         import matplotlib
         if compare_version(matplotlib.__version__, '3.1.0') >= 0:
             leg.set_draggable(True)
         else:
             leg.draggable(True)
-    pyplot.setp(ax.get_xticklabels(), visible=False)
+    pyplot.setp(ax[2].get_xticklabels(), visible=False)
 
     # dP_dpsi
-    ax = fig.add_subplot(2, 3, 5, sharex=ax)
-    ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
-    ax.set_title(r"$P\,^\prime$ source function")
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    if len(ax) < 4:
+        ax.append(fig.add_subplot(2, 3, 5, sharex=ax[1]))
+    ax[3].plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
+    ax[3].set_title(r"$P\,^\prime$ source function")
+    ax[3].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
     # FdF_dpsi
-    ax = fig.add_subplot(236, sharex=ax)
-    ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
-    ax.set_title(r"$FF\,^\prime$ source function")
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    if len(ax) < 5:
+        ax.append(fig.add_subplot(2, 3, 6, sharex=ax[1]))
+    ax[4].plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
+    ax[4].set_title(r"$FF\,^\prime$ source function")
+    ax[4].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
-    ax.set_xlim([0, 1])
+    ax[1].set_xlim([0, 1])
 
-    return fig
+    return ax
 
 
 @add_to__ODS__
@@ -1075,7 +1089,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
             ax.text(
-                r+label_dr, z+label_dz, label,
+                r + label_dr, z + label_dz, label,
                 color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize,
             )
     return
@@ -1254,7 +1268,7 @@ def magnetics_overlay(
     labelevery = kw.pop('labelevery', 0)
     mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
-    label_ha, label_va, kw = text_alignment_setup(nbp+nfl, **kw)
+    label_ha, label_va, kw = text_alignment_setup(nbp + nfl, **kw)
     label_dr = kw.pop('label_r_shift', 0)
     label_dz = kw.pop('label_z_shift', 0)
 
@@ -1579,7 +1593,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
 @add_to__ODS__
 def langmuir_probes_overlay(
-    ods, ax=None, embedded_probes=None, colors=None, show_embedded=True, show_reciprocating=False, **kw
+        ods, ax=None, embedded_probes=None, colors=None, show_embedded=True, show_reciprocating=False, **kw
 ):
     r"""
     Overlays Langmuir probes
