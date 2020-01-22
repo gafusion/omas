@@ -387,6 +387,72 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
 
     return label_ha, label_va, kw
 
+
+# hold last 100 references of matplotlib.widgets.Slider
+_stimes = []
+
+
+def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
+    r'''
+    Utility function for generating time dependent plots
+
+    :param ods_plot_function: ods plot function to be called
+    this function must accept ax (either a single or a list of axes)
+    and must return the axes (or list of axes) it used
+
+    :param time: array of times
+
+    :param ods: ods
+
+    :param time_index: time indexes to be scanned
+
+    :param \**kw: extra aruments to passed to ods_plot_function
+
+    :return: list of axes used
+    '''
+    from matplotlib import pyplot
+    from matplotlib.widgets import Slider
+
+    time_index = numpy.atleast_1d(time_index)
+    time = time[time_index]
+    axs = []
+
+    def update(time0):
+        if len(axs):
+            for ax in axs:
+                ax.cla()
+        if 'ax' in kw:
+            ax = kw.pop('ax')
+        elif not len(axs):
+            ax = None
+        elif len(axs) == 1:
+            ax = axs[0]
+        else:
+            ax = axs
+        time_index0 = time_index[numpy.argmin(abs(time - time0))]
+        tmp = ods_plot_function(ods, time_index0, ax=ax, **kw)
+        if isinstance(tmp, list):
+            axs[:] = tmp
+        else:
+            axs[:] = [tmp]
+
+    update(time[0])
+
+    timestep = min(numpy.diff(time))
+    axtime = pyplot.axes([0.1, 0.01, 0.75, 0.03])
+    stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=timestep)
+    if stime not in _stimes:
+        _stimes.append(stime)
+        if len(_stimes) > 100:
+            _stimes.pop(0)
+
+    stime.on_changed(update)
+    for time0 in time:
+        axtime.axvline(time0, color='r')
+
+    return axs
+
+
 # ================================
 # ODSs' plotting methods
 # ================================
