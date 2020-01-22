@@ -457,10 +457,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(
-    ods, time_index=0, levels=numpy.r_[0.1:10:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3,
-    label_contours=None, **kw
-):
+def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, **kw):
     r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -494,6 +491,11 @@ def equilibrium_CX(
 
     :return: Axes instance
     """
+    if time_index is None:
+        time_index = ods['equilibrium']['time_slice'].keys()
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium']['time']
+        return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -574,13 +576,9 @@ def equilibrium_CX(
         x_value_2d = eq['profiles_2d'][0]['psi']
         x_value_1d = eq['profiles_1d']['psi']
         value_1d = eq['profiles_1d']['q']
-        value_2d = scipy.interpolate.interp1d(x_value_1d, value_1d, bounds_error=False, fill_value='extrapolate')(
-            x_value_2d
-        )
+        value_2d = scipy.interpolate.interp1d(x_value_1d, value_1d, bounds_error=False, fill_value='extrapolate')(x_value_2d)
     else:
-        raise ValueError(
-            'Unrecognized contour_quantity: {}. Please choose psi, rho, phi, or q'.format(contour_quantity)
-        )
+        raise ValueError('Unrecognized contour_quantity: {}. Please choose psi, rho, phi, or q'.format(contour_quantity))
     if contour_quantity != 'q':
         value_2d = (value_2d - min(value_1d)) / (max(value_1d) - min(value_1d))
 
@@ -606,6 +604,10 @@ def equilibrium_CX(
 
     kw.setdefault('colors', kw1['color'])
     kw['linewidths'] = kw.pop('linewidth')
+    value_2d = value_2d.copy()
+    value_2d[:, -1] = value_2d[:, -2]
+    value_2d[-1, :] = value_2d[-2, :]
+    value_2d[-1, -1] = value_2d[-2, -2]
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
