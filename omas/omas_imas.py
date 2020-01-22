@@ -418,9 +418,9 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
                 except Exception as _excp:
                     print('* %s IDS'%ds.ljust(ndss))
                 fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
-            else:
-                if verbose:
-                    print('- %s IDS is empty'%ds.ljust(ndss))
+        else:
+            if verbose:
+                print('- %s IDS is empty' % ds.ljust(ndss))
     joined_fetch_paths = list(map(l2i, fetch_paths))
     return fetch_paths, joined_fetch_paths
 
