@@ -33,7 +33,7 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
     :return: IMAS ids
     """
     if verbose:
-        print('Opening {new} IMAS data for user={user} machine={machine} pulse={pulse} run={run}'.format(new=['existing','new'][int(new)], user=repr(user), machine=repr(machine), pulse=pulse, run=run))
+        print('Opening {new} IMAS data for user={user} machine={machine} pulse={pulse} run={run}'.format(new=['existing', 'new'][int(new)], user=repr(user), machine=repr(machine), pulse=pulse, run=run))
 
     import imas
     printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
@@ -369,6 +369,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     return set_paths
 
+
 def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
     """
     Return list of IMAS paths that have data
@@ -402,27 +403,28 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
             continue
         if not hasattr(ids, ds):
             if verbose:
-                print('| %s IDS of IMAS version %s is unknown'%(ds.ljust(ndss),imas_version))
+                print('| %s IDS of IMAS version %s is unknown' % (ds.ljust(ndss), imas_version))
             continue
         # ids fetching
         printd("ids.%s.get()" % ds, topic='imas_code')
         try:
             getattr(ids, ds).get()
         except ValueError as _excp:
-            print('x %s IDS failed on get'%ds.ljust(ndss)) # not sure why some IDSs fail on .get()... it's not about them being empty
+            print('x %s IDS failed on get' % ds.ljust(ndss))  # not sure why some IDSs fail on .get()... it's not about them being empty
             continue
         if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
             if verbose:
                 try:
-                    print('* %s IDS has data (%d times)'%(ds.ljust(ndss),len(getattr(ids, ds).time)))
+                    print('* %s IDS has data (%d times)' % (ds.ljust(ndss), len(getattr(ids, ds).time)))
                 except Exception as _excp:
-                    print('* %s IDS'%ds.ljust(ndss))
+                    print('* %s IDS' % ds.ljust(ndss))
                 fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
         else:
             if verbose:
                 print('- %s IDS is empty' % ds.ljust(ndss))
     joined_fetch_paths = list(map(l2i, fetch_paths))
     return fetch_paths, joined_fetch_paths
+
 
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
@@ -470,9 +472,9 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                 if not imas_version:
                     imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
                     if verbose:
-                        print('dataset_description.imas_version is missing: assuming IMAS version %s'%imas_version)
+                        print('dataset_description.imas_version is missing: assuming IMAS version %s' % imas_version)
                 else:
-                    print('%s IMAS version detected'%imas_version)
+                    print('%s IMAS version detected' % imas_version)
             except Exception:
                 raise
 
@@ -497,7 +499,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and (k % (len(fetch_paths)//10) == 0 or k == len(fetch_paths) - 1):
+                if verbose and (k % (len(fetch_paths) // 10) == 0 or k == len(fetch_paths) - 1):
                     print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
                 # get data from IDS
                 data = imas_get(ids, path, None)
@@ -715,7 +717,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
             else:
                 subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
         except Exception:
-            print('Error traversing %s ! Possible IMAS version mismatch!'%l2o(path+[kid]))
+            print('Error traversing %s ! Possible IMAS version mismatch!' % l2o(path + [kid]))
             return paths
         paths += subtree_paths
 
