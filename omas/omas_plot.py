@@ -518,10 +518,13 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     :return: Axes instance
     """
     if time_index is None:
-        time_index = ods['equilibrium']['time_slice'].keys()
+        time_index = numpy.arange(len(ods['equilibrium'].time()))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['equilibrium']['time']
-        return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
+        time = ods['equilibrium'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -684,10 +687,13 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = ods['equilibrium']['time_slice'].keys()
+        time_index = numpy.arange(len(ods['equilibrium'].time()))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['equilibrium']['time']
-        return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ax={}, **kw)
+        time = ods['equilibrium'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ax={}, **kw)
 
     axs = kw.pop('ax', {})
 
@@ -777,10 +783,13 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = ods['equilibrium']['time_slice'].keys()
+        time_index = numpy.arange(len(ods['core_profiles'].time()))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['equilibrium']['time']
-        return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={}, combine_dens_temps=combine_dens_temps, show_thermal_fast_breakdown=show_thermal_fast_breakdown, show_total_density=show_total_density, **kw)
+        time = ods['core_profiles'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={}, combine_dens_temps=combine_dens_temps, show_thermal_fast_breakdown=show_thermal_fast_breakdown, show_total_density=show_total_density, **kw)
 
     axs = kw.pop('ax', {})
 
@@ -868,10 +877,13 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     """
 
     if time_index is None:
-        time_index = ods['equilibrium']['time_slice'].keys()
+        time_index = numpy.arange(len(ods['core_profiles'].time()))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['equilibrium']['time']
-        return ods_time_plot(core_profiles_pressures, time, ods, time_index=time_index, ax=ax)
+        time = ods['core_profiles'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(core_profiles_pressures, time, ods, time_index=time_index, ax=ax)
 
     import matplotlib
     from matplotlib import pyplot
@@ -931,10 +943,13 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves']['time']))
+        time_index = numpy.arange(len(ods['waves'].time()))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['waves']['time']
-        return ods_time_plot(waves_beam_CX, time, ods, time_index, ax=ax, **kw)
+        time = ods['waves'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(waves_beam_CX, time, ods, time_index, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
