@@ -848,7 +848,7 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
 
 
 @add_to__ODS__
-def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
+def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     """
     Plot pressures in `ods['core_profiles']['profiles_1d'][time_index]`
 
@@ -863,6 +863,13 @@ def core_profiles_pressures(ods, time_index=0, ax=None, **kw):
     :return: axes handler
     """
 
+    if time_index is None:
+        time_index = ods['equilibrium']['time_slice'].keys()
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium']['time']
+        return ods_time_plot(core_profiles_pressures, time, ods, time_index=time_index, ax=ax)
+
+    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
