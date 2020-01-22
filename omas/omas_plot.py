@@ -394,7 +394,7 @@ _stimes = []
 
 def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     r'''
-    Utility function for generating time dependent plots
+    Utility function for easing the generation of time dependent plots
 
     :param ods_plot_function: ods plot function to be called
     this function must accept ax (either a single or a list of axes)
@@ -415,26 +415,25 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
 
     time_index = numpy.atleast_1d(time_index)
     time = time[time_index]
-    axs = []
+    axs = {}
 
     def update(time0):
-        if len(axs):
-            for ax in axs:
-                ax.cla()
+        for ax in axs:
+            axs[ax].cla()
         if 'ax' in kw:
             ax = kw.pop('ax')
         elif not len(axs):
             ax = None
         elif len(axs) == 1:
-            ax = axs[0]
+            ax = list(axs.values())[0]
         else:
             ax = axs
         time_index0 = time_index[numpy.argmin(abs(time - time0))]
         tmp = ods_plot_function(ods, time_index0, ax=ax, **kw)
-        if isinstance(tmp, list):
-            axs[:] = tmp
+        if isinstance(tmp, dict):
+            axs.update(tmp)
         else:
-            axs[:] = [tmp]
+            axs[1, 1, 1] = tmp
 
     update(time[0])
 
@@ -451,6 +450,29 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
         axtime.axvline(time0, color='r')
 
     return axs
+
+
+def cached_add_subplot(fig, ax_cache, *args, **kw):
+    r'''
+    Utility function that works like matplotlib add_subplot
+    but reuses axes if these were already used before
+
+    :param fig: matplotlib figure
+
+    :param ax_cache: caching dictionary
+
+    :param \*args: arguments passed to matplotlib add_subplot
+
+    :param \**kw: keywords arguments passed to matplotlib add_subplot
+
+    :return: matplotlib axes
+    '''
+    if args in ax_cache:
+        return ax_cache[args]
+    else:
+        ax = fig.add_subplot(*args, **kw)
+        ax_cache[args] = ax
+        return ax
 
 
 # ================================
@@ -608,6 +630,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     value_2d[:, -1] = value_2d[:, -2]
     value_2d[-1, :] = value_2d[-2, :]
     value_2d[-1, -1] = value_2d[-2, -2]
+    levels = numpy.r_[0.1:0.9 + 0.0001:0.1]
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
@@ -635,7 +658,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
 
 @add_to__ODS__
-def equilibrium_summary(ods, time_index=None, fig=None, ax=None, **kw):
+def equilibrium_summary(ods, time_index=None, fig=None, **kw):
     """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -660,14 +683,12 @@ def equilibrium_summary(ods, time_index=None, fig=None, ax=None, **kw):
         time_index = ods['equilibrium']['time_slice'].keys()
     if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium']['time']
-        return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, **kw)
+        return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ax={}, **kw)
 
-    if ax is None:
-        ax = []
+    axs = kw.pop('ax', {})
 
-    if not len(ax):
-        ax.append(fig.add_subplot(1, 3, 1))
-    equilibrium_CX(ods, time_index=time_index, ax=ax[0], **kw)
+    ax = cached_add_subplot(fig, axs, 1, 3, 1)
+    equilibrium_CX(ods, time_index=time_index, ax=ax, **kw)
     eq = ods['equilibrium']['time_slice'][time_index]
 
     # x
@@ -680,48 +701,45 @@ def equilibrium_summary(ods, time_index=None, fig=None, ax=None, **kw):
     x = (x - min(x)) / (max(x) - min(x))
 
     # pressure
-    if len(ax) < 2:
-        ax.append(fig.add_subplot(2, 3, 2))
-    ax[1].plot(x, eq['profiles_1d']['pressure'], **kw)
-    kw.setdefault('color', ax[1].lines[-1].get_color())
-    ax[1].set_title(r'$\,$ Pressure')
-    ax[1].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-    pyplot.setp(ax[1].get_xticklabels(), visible=False)
+
+    ax = cached_add_subplot(fig, axs, 2, 3, 2)
+    ax.plot(x, eq['profiles_1d']['pressure'], **kw)
+    kw.setdefault('color', ax.lines[-1].get_color())
+    ax.set_title(r'$\,$ Pressure')
+    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    pyplot.setp(ax.get_xticklabels(), visible=False)
 
     # q
-    if len(ax) < 3:
-        ax.append(fig.add_subplot(2, 3, 3, sharex=ax[1]))
-    ax[2].plot(x, eq['profiles_1d']['q'], **kw)
-    ax[2].set_title('$q$ Safety factor')
-    ax[2].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+    ax.plot(x, eq['profiles_1d']['q'], **kw)
+    ax.set_title('$q$ Safety factor')
+    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
-        leg = ax[2].legend(loc=0)
+        leg = ax.legend(loc=0)
         import matplotlib
         if compare_version(matplotlib.__version__, '3.1.0') >= 0:
             leg.set_draggable(True)
         else:
             leg.draggable(True)
-    pyplot.setp(ax[2].get_xticklabels(), visible=False)
+    pyplot.setp(ax.get_xticklabels(), visible=False)
 
     # dP_dpsi
-    if len(ax) < 4:
-        ax.append(fig.add_subplot(2, 3, 5, sharex=ax[1]))
-    ax[3].plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
-    ax[3].set_title(r"$P\,^\prime$ source function")
-    ax[3].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
+    ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
+    ax.set_title(r"$P\,^\prime$ source function")
+    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
     # FdF_dpsi
-    if len(ax) < 5:
-        ax.append(fig.add_subplot(2, 3, 6, sharex=ax[1]))
-    ax[4].plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
-    ax[4].set_title(r"$FF\,^\prime$ source function")
-    ax[4].ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
+    ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
+    ax.set_title(r"$FF\,^\prime$ source function")
+    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
-    ax[1].set_xlim([0, 1])
+    ax.set_xlim([0, 1])
 
-    return ax
+    return axs
 
 
 @add_to__ODS__
