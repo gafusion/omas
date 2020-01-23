@@ -632,6 +632,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
         value_2d = scipy.ndimage.zoom(value_2d, sf)
 
     kw.setdefault('colors', kw1['color'])
+    kw.pop('color', '')
     kw['linewidths'] = kw.pop('linewidth')
     value_2d = value_2d.copy()
     value_2d[:, -1] = value_2d[:, -2]
