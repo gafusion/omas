@@ -663,6 +663,89 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
     return ax
 
+@add_to__ODS__
+def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
+    r"""
+    Plot equilibrium cross-section
+    as per `ods['equilibrium']['time_slice'][time_index]`
+
+    :param ods: ODS instance
+        input ods containing equilibrium data
+
+    :param time_index: int
+        time slice to plot
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: arguments passed to matplotlib plot statements
+
+    :return: Axes instance
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['equilibrium'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    wall = None
+    eq = ods['equilibrium']['time_slice'][time_index]
+    if 'wall' in ods:
+        if time_index in ods['wall']['description_2d']:
+            wall = ods['wall']['description_2d'][time_index]['limiter']['unit']
+        elif 0 in ods['wall']['description_2d']:
+            wall = ods['wall']['description_2d'][0]['limiter']['unit']
+
+    # Plotting style
+    kw.setdefault('linewidth', 1)
+    label = kw.pop('label', '')
+    kw1 = copy.deepcopy(kw)
+
+    t_angle = numpy.linspace(0.0, 2.0 * numpy.pi, 100)
+    sint = numpy.sin(t_angle)
+    cost = numpy.cos(t_angle)
+
+    Rout = numpy.max(eq['boundary']['outline']['r'])
+    Rin = numpy.min(eq['boundary']['outline']['r'])
+    Xout = Rout * cost
+    Yout = Rout * sint
+    Xin = Rin * cost
+    Yin = Rin * sint
+
+    ax.plot(Xin, Yin,  **kw1)
+    kw1.setdefault('color', ax.lines[-1].get_color())
+    ax.plot(Xout, Yout, **kw1)
+
+    # Wall
+    if wall is not None:
+
+        Rout = numpy.max(wall[0]['outline']['r'])
+        Rin = numpy.min(wall[0]['outline']['r'])
+        Xout = Rout * cost
+        Yout = Rout * sint
+        Xin = Rin * cost
+        Yin = Rin * sint
+
+        ax.plot(Xin, Yin, 'k', label=label, linewidth=2)
+        ax.plot(Xout, Yout, 'k', label=label, linewidth=2)
+        ax.axis('equal')
+
+    # Axes
+    ax.set_aspect('equal')
+    ax.set_frame_on(False)
+    ax.xaxis.set_ticks_position('bottom')
+    ax.yaxis.set_ticks_position('left')
+
+    return ax
 
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=None, fig=None, **kw):
@@ -750,6 +833,8 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
     ax.set_xlim([0, 1])
 
     return axs
+
+
 
 
 @add_to__ODS__
@@ -921,6 +1006,312 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         leg.set_draggable(True)
     else:
         leg.draggable(True)
+    return ax
+
+# ================================
+# actuator aimings
+# ================================
+
+@add_to__ODS__
+def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
+    """
+    Plot waves beams in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['pellets'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['pellets'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(pellets_trajectory_CX, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    pellets = ods['pellets']['time_slice'][time_index]['pellet']
+    for pellet in pellets:
+        R0 = pellets[pellet]['path_geometry.first_point.r']
+        R1 = pellets[pellet]['path_geometry.second_point.r']
+        Z0 = pellets[pellet]['path_geometry.first_point.z']
+        Z1 = pellets[pellet]['path_geometry.second_point.z']
+        ax.plot([R0, R1], [Z0, Z1], '--', **kw)
+
+    return ax
+
+@add_to__ODS__
+def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
+    """
+    Plot LH antenna position in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['pellets'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['pellets'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(pellets_trajectory_CX_topview, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    pellets = ods['pellets']['time_slice'][time_index]['pellet']
+    for pellet in pellets:
+        R0 = pellets[pellet]['path_geometry.first_point.r']
+        R1 = pellets[pellet]['path_geometry.second_point.r']
+        phi0 = pellets[pellet]['path_geometry.first_point.phi']
+        phi1 = pellets[pellet]['path_geometry.second_point.phi']
+
+        x0 = R0 * numpy.cos(phi0)
+        y0 = R0 * numpy.sin(phi0)
+
+        x1 = R1 * numpy.cos(phi1)
+        y1 = R1 * numpy.sin(phi1)
+        ax.plot([x0, x1], [y0, y1], '--', **kw)
+
+    return ax
+
+@add_to__ODS__
+def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
+    """
+    Plot LH antenna position in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param antenna_plotlength: length of antenna on plot
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['lh_antennas'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['lh_antennas'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']['time_slice'][time_index]
+    antennas = ods['lh_antennas']['antenna']
+
+    if antenna_plotlength is None:
+        antenna_plotlength = 0.1 * equilibrium['global_quantities']['vacuum_toroidal_field.r0']
+
+    for antenna in antennas:
+        R = antennas[antenna]['position.r.data']
+        Z = antennas[antenna]['position.z.data']
+
+        # just point to magnetic axis for now (is there a better way?)
+        Raxis = equilibrium['global_quantities.magnetic_axis.r']
+        Zaxis = equilibrium['global_quantities.magnetic_axis.z']
+
+        Rvec = Raxis - R
+        Zvec = Zaxis - Z
+
+        R1 = Rvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
+        Z1 = Zvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
+
+        ax.plot([R, R1], [Z, Z1], 's-', markerevery=2, **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=None, **kw):
+    """
+    Plot  ec launcher in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param antenna_plotlength: length of antenna on plot
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['lh_antennas'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['lh_antennas'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    antennas = ods['lh_antennas']
+    if antenna_plotlength is None:
+        antenna_plotlength = 0.1 * equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+
+    for antenna in antennas:
+        R = antennas['antenna'][antenna]['position.r.data']
+        phi = antennas['antenna'][antenna][antenna]['position.phi.data']
+
+        x0 = R * cos(phi)
+        y0 = R * sin(phi)
+
+        x1 = (R-antenna_plotlength) * cos(phi)
+        y1 = (R-antenna_plotlength) * sin(phi)
+
+        ax.plot([x0, x1], [y0, y1], 's-', **kw)
+
+    return ax
+
+@add_to__ODS__
+def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
+    """
+    Plot ec launcher in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param launcher_plotlength: length of launcher on plot
+
+    :return: axes handler
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['ec_launchers'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['ec_launchers'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    launchers = ods['ec_launchers.launcher']
+    if launcher_plotlength is None:
+        launcher_plotlength = 0.1 * equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+
+    for launcher in launchers:
+
+        R0 = launchers[launcher]['launching_position.r']
+        Z0 = launchers[launcher]['launching_position.z']
+        ang_pol = launchers[launcher]['steering_angle_pol.data']
+
+        R1 = R - launcher_plotlength * sin(ang_pol)
+        Z1 = Z +  launcher_plotlength * cos(ang_pol)
+
+        ax.plot([R0, R1], [Z0, Z1], 'o-', everymarker=2, **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
+    """
+    Plot waves beams in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param launcher_plotlength: length of launcher on plot
+
+    :return: axes handler
+    """
+
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['ec_launchers'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['ec_launchers'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    launchers = ods['ec_launchers.launcher']
+    if launcher_plotlength is None:
+        launcher_plotlength = 0.1 *  equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+
+    for launcher in launchers:
+        R = launchers[launcher]['launching_position.r']
+        phi = launchers[launcher]['launching_position.phi']
+        ang_tor = launchers[launcher]['steering_angle_tor.data']
+
+        x0 = R * cos(phi)
+        y0 = R * sin(phi)
+
+        x1 = x + launcher*plotlength * cos(ang_tor-phi)
+        y1 = y + launcher*plotlength * sin(ang_tor-phi)
+        ax.plot([x0, x1], [y0, y1], 'o-', everymarker=2, **kw)
+
     return ax
 
 
