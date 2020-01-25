@@ -12,14 +12,14 @@ scipy                    # required
 h5py                     # required
 pymongo                  # required
 dnspython                # required
+xmltodict                # required
 xarray<=0.11.0           # required
 
+Pillow                   # build_documentation
 Sphinx                   # build_documentation
 sphinx-bootstrap-theme   # build_documentation
 sphinx-gallery           # build_documentation
-Pillow                   # build_documentation
-#pyuda                   # uda
-#pyhdc                   # hdc
-#xmltodict               # build_structures
 #bs4                     # build_structures
+#pyhdc                   # hdc
 #imas                    # imas
+#pyuda                   # uda

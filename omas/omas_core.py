@@ -10,7 +10,9 @@ from .omas_utils import *
 __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
 
 __all__ = [
-    'ODS', 'ods_sample', 'different_ods',
+    'ODS', 'ODX',
+    'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
+    'ods_sample', 'different_ods',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
@@ -23,7 +25,7 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation', 'symlink_imas_structure_versions',
-    'imas_json_dir', 'imas_versions', 'IMAS_versions', 'ids_cpo_mapper', 'omas_info', 'omas_info_node',
+    'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', '__version__'
 ]
 
@@ -32,6 +34,96 @@ __all__ = [
 # This is necessary because ODSs should only contain [int (arrays), floats (arrays), strings]
 # It is used for example by OMFIT to process OMFITexpressions
 input_data_process_functions = []
+
+
+def force_imas_type(value):
+    '''
+    IMAS supports (arrays of) integers, floats and strings
+
+    :param value: input value
+
+    :return: input value converted to be IMAS compatible
+    '''
+    # lists are saved as numpy arrays, and 0D numpy arrays as scalars
+    for function in input_data_process_functions:
+        value = function(value)
+    if isinstance(value, list):
+        value = numpy.array(value)
+    if isinstance(value, xarray.DataArray):
+        value = value.values
+    if isinstance(value, numpy.ndarray) and not len(value.shape):
+        value = value.item()
+    if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
+        value = value.item()
+    elif isinstance(value, (float, numpy.floating)):
+        value = float(value)
+    elif isinstance(value, (int, numpy.integer)):
+        value = int(value)
+    if isinstance(value, basestring):
+        pass
+    elif isinstance(value, bytes):
+        value = value.decode('utf-8', errors='ignore')
+    return value
+
+
+_consistency_warnings = {}
+
+
+def consistency_checker(location, value, info, consistency_check, imas_version):
+    '''
+    Print warnings or raise errors if object does not satisfy IMAS data dictionary
+    Converts numeric data to INT/FLOAT depending on IMAS specifications
+
+    :param value: value to check consistency of
+
+    :param info: output of omas_info_node
+
+    :param consistency_check: True, False, 'warn'
+
+    :param imas_version: IMAS version
+
+    :return: value
+    '''
+    # force type consistent with data dictionary
+    if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
+        pass
+    elif isinstance(value, numpy.ndarray):
+        if 'FLT' in info['data_type']:
+            value = value.astype(float)
+        elif 'INT' in info['data_type']:
+            value = value.astype(int)
+    elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
+        if 'FLT' in info['data_type']:
+            value = float(value)
+        elif 'INT' in info['data_type']:
+            value = int(value)
+    # check type
+    if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
+        text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    # check consistency for scalar entries
+    if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+        text = '%s must be a scalar of type %s' % (location, info['data_type'])
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    # check consistency for number of dimensions
+    elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+        text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
+    elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
+        txt = '%s is in %s state for IMAS %s' % (o2u(location), info['lifecycle_status'].upper(), imas_version)
+        if imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
+            printe(txt)
+            _consistency_warnings.setdefault(imas_version, []).append(txt)
+    return value
 
 
 class ODS(MutableMapping):
@@ -71,6 +163,9 @@ class ODS(MutableMapping):
 
         :param structure: IMAS schema to use
         """
+        if structure is None:
+            structure = {}
+        self.structure = structure
         self.omas_data = None
         self._consistency_check = consistency_check
         self._dynamic_path_creation = dynamic_path_creation
@@ -82,9 +177,6 @@ class ODS(MutableMapping):
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
-        if structure is None:
-            structure = {}
-        self.structure = structure
 
     def homogeneous_time(self, key='', default=True):
         '''
@@ -244,10 +336,12 @@ class ODS(MutableMapping):
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
-                if isinstance(self.getraw(item), ODS):
+                if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
+                    continue
+                else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
-                        if not self.structure:
+                        if isinstance(self.getraw(item), ODS) and not self.structure:
                             if not self.location:
                                 # load the json structure file
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
@@ -272,9 +366,18 @@ class ODS(MutableMapping):
                                 else:
                                     raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
                         # assign structure and location information
-                        self.getraw(item).structure = structure
-                        self.getraw(item).location = l2o([self.location] + [item])
-                    self.getraw(item).consistency_check = consistency_value_propagate
+                        if isinstance(self.getraw(item), ODS):
+                            self.getraw(item).structure = structure
+                            self.getraw(item).location = l2o([self.location] + [item])
+                        else:
+                            location = l2o([self.location] + [item])
+                            info = omas_info_node(o2u(location), imas_version=self.imas_version)
+                            value = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            if value is not self.getraw(item):
+                                self.setraw(item, value)
+                    # propagate consistency check
+                    if isinstance(self.getraw(item), ODS):
+                        self.getraw(item).consistency_check = consistency_value_propagate
 
         except Exception as _excp:
             # restore existing consistency_check value in case of error
@@ -432,10 +535,10 @@ class ODS(MutableMapping):
         # if the user has entered path rather than a single key
         if len(key) > 1:
             pass_on_value = value
-            value = ODS(imas_version=self.imas_version,
-                        consistency_check=self.consistency_check,
-                        dynamic_path_creation=self.dynamic_path_creation,
-                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+            value = self.__class__(imas_version=self.imas_version,
+                                   consistency_check=self.consistency_check,
+                                   dynamic_path_creation=self.dynamic_path_creation,
+                                   cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -496,6 +599,12 @@ class ODS(MutableMapping):
 
         # if the value is not an ODS strucutre
         if not isinstance(value, ODS):
+
+            # convert simple dict of code.parameters to CodeParameters instances
+            if '.code.parameters' in location and not isinstance(value, CodeParameters) and isinstance(value, (dict, ODS)):
+                tmp = value
+                value = CodeParameters()
+                value.update(tmp)
 
             # now that all checks are completed we can assign the structure information
             if self.consistency_check and '.code.parameters.' not in location:
@@ -563,62 +672,11 @@ class ODS(MutableMapping):
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
-            for function in input_data_process_functions:
-                value = function(value)
-            if isinstance(value, list):
-                value = numpy.array(value)
-            if isinstance(value, xarray.DataArray):
-                value = value.values
-            if isinstance(value, numpy.ndarray) and not len(value.shape):
-                value = value.item()
-            if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
-                value = value.item()
-            elif isinstance(value, (float, numpy.floating)):
-                value = float(value)
-            elif isinstance(value, (int, numpy.integer)):
-                value = int(value)
-            if isinstance(value, basestring):
-                pass
-            elif isinstance(value, bytes):
-                value = value.decode('utf-8', errors='ignore')
+            value = force_imas_type(value)
 
+            # check that dimensions and data types are consistent with IMAS specifications
             if self.consistency_check and '.code.parameters.' not in location:
-                # force type consistent with data dictionary
-                if numpy.atleast_1d(is_uncertain(value)).any():
-                    pass
-                elif isinstance(value, numpy.ndarray):
-                    if 'FLT' in info['data_type']:
-                        value = value.astype(float)
-                    elif 'INT' in info['data_type']:
-                        value = value.astype(int)
-                elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
-                    if 'FLT' in info['data_type']:
-                        value = float(value)
-                    elif 'INT' in info['data_type']:
-                        value = int(value)
-                # check type
-                if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None):
-                    text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                # check consistency for scalar entries
-                if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-                    text = '%s must be a scalar of type %s' % (location, info['data_type'])
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                # check consistency for number of dimensions
-                elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-                    text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
-                    if self.consistency_check == 'warn':
-                        printe(text)
-                    else:
-                        raise ValueError(text)
-                elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-                    printe('%s is in %s state' % (location, info['lifecycle_status'].upper()))
+                value = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
 
         # check if the branch/node was dynamically created
         dynamically_created = False
@@ -635,7 +693,7 @@ class ODS(MutableMapping):
                 # dynamic array structure creation
                 if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
-                        ods = ODS()
+                        ods = self.__class__()
                         ods.copy_attrs_from(self)
                         self[item] = ods
                 # index exists
@@ -762,10 +820,10 @@ class ODS(MutableMapping):
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
                 dynamically_created = True
-                self.__setitem__(key[0], ODS(imas_version=self.imas_version,
-                                             consistency_check=self.consistency_check,
-                                             dynamic_path_creation=self.dynamic_path_creation,
-                                             cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
+                self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
+                                                        consistency_check=self.consistency_check,
+                                                        dynamic_path_creation=self.dynamic_path_creation,
+                                                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
@@ -1234,13 +1292,15 @@ class ODS(MutableMapping):
             '''
             base = key.split('.')[0]
             coordinates = []
+            counter = 0
             for c in [':'.join(key.split(':')[:k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
                 info = omas_info_node(o2u(c))
                 if 'coordinates' in info:
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
                             infoc = c
-                        coordinates.append('_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index']))
+                        coordinates.append('__' + '_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index%d__' % counter]))
+                        counter += 1
             return coordinates
 
         # Generate paths with ':' for the arrays of structures
@@ -1282,7 +1342,11 @@ class ODS(MutableMapping):
             for k, c in enumerate(coordinates[fukey]):
                 if c not in DS:
                     DS[c] = xarray.DataArray(numpy.arange(data.shape[k]), dims=c)
-            DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
+            try:
+                DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
+            except Exception:
+                printe('Error with %s with coordinates %s' % (fukey, coordinates[fukey]))
+                raise
         return DS
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
@@ -1333,18 +1397,18 @@ class ODS(MutableMapping):
         return True
 
     def save(self, *args, **kw):
-        '''
+        r"""
         Save OMAS data
 
         :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds')
-                         set to `imas`, `s3`, `hdc` for load methods that do not have a filename with extension
+                         set to `imas`, `s3`, `hdc`, `mongo` for load methods that do not have a filename with extension
 
         :param \*args: extra arguments passed to save_omas_XXX() method
 
         :param \**kw: extra keywords passed to save_omas_XXX() method
 
         :return: return from save_omas_XXX() method
-        '''
+        """
         if '.' not in args[0]:
             ext = args[0]
             args = args[1:]
@@ -1353,7 +1417,7 @@ class ODS(MutableMapping):
         return eval('save_omas_' + ext)(self, *args, **kw)
 
     def load(self, *args, **kw):
-        '''
+        r"""
         Load OMAS data
 
         :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
@@ -1364,7 +1428,7 @@ class ODS(MutableMapping):
         :param \**kw: extra keywords passed to load_omas_XXX() method
 
         :return: ODS with loaded data
-        '''
+        """
         if '.' not in args[0]:
             ext = args[0]
             args = args[1:]
@@ -1434,6 +1498,114 @@ class ODS(MutableMapping):
                 self[item] = copy.deepcopy(structure[item])
 
         return self
+
+    def codeparams2xml(self):
+        '''
+        Convert code.parameters to a XML string
+        '''
+        if not self.location:
+            for item in self:
+                self[item].codeparams2xml()
+            return
+        elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
+            self['code.parameters'] = self['code.parameters'].tostring()
+        elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
+            self['parameters'] = self['parameters'].tostring()
+
+    def codeparams2dict(self):
+        '''
+        Convert code.parameters to a CodeParameters dictionary object
+        '''
+        if not self.location:
+            for item in self:
+                self[item].codeparams2dict()
+            return
+        try:
+            if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
+                self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+            elif ('parameters' in self and isinstance(self['parameters'], basestring)):
+                self['parameters'] = CodeParameters().fromstring(self['parameters'])
+        except Exception as _excp:
+            printe(repr(_excp))
+
+
+class CodeParameters(dict):
+    """
+    Class used to interface with IMAS code-parameters XML files
+    """
+
+    def __init__(self, string=None):
+        if isinstance(string, basestring):
+            if os.path.exists(string):
+                self.fromfile(string)
+            else:
+                self.fromstring(string)
+
+    def fromstring(self, code_params_string):
+        '''
+        Load data from code.parameters XML string
+
+        :param code_params_string: XML string
+
+        :return: self
+        '''
+        import xmltodict
+        self.clear()
+        tmp = xmltodict.parse(code_params_string).get('parameters', '')
+        if tmp:
+            recursive_interpreter(tmp)
+            self.update(tmp)
+        return self
+
+    def fromfile(self, code_params_file):
+        '''
+        Load data from code.parameters XML file
+
+        :param code_params_file: XML file
+
+        :return: self
+        '''
+        with open(code_params_file, 'r') as f:
+            return self.fromstring(f.read())
+
+    def tostring(self):
+        '''
+        generate an XML string from this dictionary
+
+        :return: XML string
+        '''
+        import xmltodict
+        tmp = {'parameters': OrderedDict()}
+        tmp['parameters'].update(copy.deepcopy(self))
+        recursive_encoder(tmp)
+        return xmltodict.unparse(tmp, pretty=True)
+
+
+def codeparams_xml_save(f):
+    '''
+    Decorator function to be used around the omas_save_XXX methods to enable
+    saving of code.parameters as an XML string
+    '''
+
+    def wrapper(ods, *args, **kwargs):
+        with omas_environment(ods, xmlcodeparams=True):
+            return f(ods, *args, **kwargs)
+
+    return wrapper
+
+
+def codeparams_xml_load(f):
+    '''
+    Decorator function to be used around the omas_load_XXX methods to enable
+    loading of code.parameters from an XML string
+    '''
+
+    def wrapper(*args, **kwargs):
+        ods = f(*args, **kwargs)
+        ods.codeparams2dict()
+        return ods
+
+    return wrapper
 
 
 # --------------------------------------------

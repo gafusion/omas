@@ -154,13 +154,76 @@ class TestOmasPlot(unittest.TestCase):
         assert geo_type_lookup(1, 'pf_active', imas_version='99.99.99', reverse=False) is None
 
     # Equilibrium plots
-    def test_eqcx(self):
+    def test_eqcx_basic(self):
+        """Our basic ods comes with eq data, so try to just plot that thing"""
         self.ods.plot_equilibrium_CX()
-        ods2 = ODS().sample_equilibrium(include_profiles=False, include_phi=True, include_wall=False)
-        ods2.plot_equilibrium_CX()  # Should be vs. rho this time
-        ods2.sample_equilibrium(time_index=1, include_profiles=False, include_phi=False, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        return
+
+    def test_eqcx_data_availability_variations(self):
+        """Plot all the equilibrium contour quantity options with all the combinations of available data"""
+        cq_options = ['rho', 'psi', 'phi', 'q']
+        for iwall in [True, False]:
+            for ipsi in [True, False]:
+                for iphi in [True, False]:
+                    for iprof in [True, False]:
+                        for iq in [True, False]:
+                            ods = ODS().sample_equilibrium(
+                                include_profiles=iprof,
+                                include_phi=iphi,
+                                include_psi=ipsi,
+                                include_wall=iwall,
+                                include_q=iq,
+                            )
+                            for cqo in cq_options:
+                                ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
+
+        # Test for disallowed fallback
+        ods = ODS().sample_equilibrium(include_psi=False, include_phi=True)
+        with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no psi, then asked for psi and did not allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='psi', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=False, include_psi=True)
+        with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no phi, then asked for phi and did not allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='phi', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=False, include_q=True)
+        with self.assertRaises(ValueError):
+            # Fails because we prepped sample w/ no psi, then asked for q (uses psi for interp) & didn't allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='q', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=False)
+        with self.assertRaises(ValueError):
+            # Fails because we prepped sample w/ no q, then asked for q & didn't allow fallback
+            ods.plot_equilibrium_CX(contour_quantity='q', allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=False, include_psi=False, include_q=False)
+        with self.assertRaises(ValueError):
+            # Fails because we prepared a sample with no 2D equilibrium data at all and did not allow fallback
+            # Fallback in this case would allow an abort without raising an error
+            ods.plot_equilibrium_CX(allow_fallback=False)
+
+        ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
+        with self.assertRaises(ValueError):
+            # Fails because we ask for junk
+            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=False)
+        return
+
+    def test_eqcx_slices(self):
+        """Test dealing with different time indices, including getting wall from a different slice than the eq"""
+        ods2 = ODS().sample_equilibrium(time_index=0, include_wall=True)
+        ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
+        # Test for missing wall
         plt.figure('TestOmasPlot.test_eqcx missing wall')
-        ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()  # No wall
+        ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()
+        return
+
+    def test_eqcx_resample(self):
+        """Test the sf (scaling factor) option"""
+        self.ods.plot_equilibrium_CX(sf=1)
+        self.ods.plot_equilibrium_CX(sf=3)
+        return
 
     def test_eq_summary(self):
         ods2 = ODS().sample_equilibrium(include_phi=False)
@@ -188,6 +251,7 @@ class TestOmasPlot(unittest.TestCase):
         ods3 = copy.deepcopy(self.ods)
         ods3.sample_core_profiles(add_junk_ion=True)
         ods3.plot_core_profiles_pressures()
+        return
 
     # PF active overlay
     def test_pf_active_overlay(self):
@@ -202,6 +266,7 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, pf_active=True)
         ODS().plot_pf_active_overlay()
+        return
 
     # Magnetics overlay
     def test_magnetics_overlay(self):
@@ -221,6 +286,7 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, magnetics=True)
         ODS().plot_magnetics_overlay()
+        return
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
@@ -232,6 +298,7 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods.plot_thomson_scattering_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True)
+        return
 
     def test_ts_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -245,12 +312,17 @@ class TestOmasPlot(unittest.TestCase):
             mask = copy.copy(mask0)
             mask[i] = False
             ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i)))
+        return
 
     def test_ts_overlay_labels(self):
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10 + i * 2 + lab, color='k'))
+        ts_ods.plot_overlay(
+            thomson_scattering=dict(labelevery=2, notesize=9, color='b', label_ha='right', label_va='top')
+        )
+        return
 
     # Charge exchange overlay
     def test_cer_overlay(self):
@@ -269,6 +341,7 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, charge_exchange=True)
+        return
 
     # Inteferometer overlay
     def test_interferometer_overlay(self):
@@ -280,6 +353,7 @@ class TestOmasPlot(unittest.TestCase):
         intf_ods.plot_interferometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, interferometer=True)
+        return
 
     # Bolometer overlay
     def test_bolo_overlay(self):
@@ -293,6 +367,7 @@ class TestOmasPlot(unittest.TestCase):
         bolo_ods.plot_bolometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, bolometer=True)
+        return
 
     def test_bolo_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -308,6 +383,7 @@ class TestOmasPlot(unittest.TestCase):
             bolo_ods.plot_overlay(
                 thomson_scattering=False,
                 bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i)))
+        return
 
     # Gas injection overlay
     def test_gas_overlay(self):
@@ -332,6 +408,32 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
+        return
+
+    # Langmuir probes overlays
+    def test_langmuir_probes_embedded_overlay(self):
+        """Tests method for plotting overlay of embedded LPs"""
+        # Add sample data
+        lp_ods = ODS()
+        lp_ods.sample_wall()  # The wall is used to decide label alignment
+        lp_ods.sample_langmuir_probes()
+
+        # Basic overlay
+        lp_ods.plot_overlay(thomson_scattering=False, langmuir_probes=True)
+
+        # Overlay with customizations
+        lp_ods.plot_overlay(
+            thomson_scattering=False,
+            langmuir_probes=dict(colors='r', label_ha='left', label_va='top', embedded_probes=['donkey!', 'zzz']),
+        )
+
+        # Direct call
+        lp_ods.plot_langmuir_probes_overlay()
+        # Empty ODS / graceful failure
+        ODS().plot_langmuir_probes_overlay()
+        # No wall data for helping align labels
+        ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
+        return
 
 
 if __name__ == '__main__':

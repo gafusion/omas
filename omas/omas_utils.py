@@ -175,6 +175,8 @@ def json_dumper(obj, objects_encode=True):
     if not objects_encode:
         if isinstance(obj, numpy.ndarray):
             return obj.tolist()
+        elif sys.version_info >= (3, 0) and isinstance(obj, range):
+            return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()
         else:
@@ -205,6 +207,8 @@ def json_dumper(obj, objects_encode=True):
                     return dict(__ndarray_tolist__=obj.tolist(),
                                 dtype=str(obj.dtype),
                                 shape=obj.shape)
+        elif sys.version_info >= (3, 0) and isinstance(obj, range):
+            return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()
         elif isinstance(obj, complex):
@@ -246,6 +250,8 @@ def json_loader(object_pairs, cls=dict):
         else:
             dct[x] = y
 
+    if "dtype" in dct:  # python2/3 compatibility
+        dct["dtype"] = dct["dtype"].replace('S', 'U')
     if '__ndarray_tolist__' in dct:
         return numpy.array(dct['__ndarray_tolist__'], dtype=dct['dtype']).reshape(dct['shape'])
     elif '__ndarray_tolist_real__' in dct and '__ndarray_tolist_imag__' in dct:
@@ -629,10 +635,10 @@ def l2o(path):
     return '.'.join(filter(None, map(str, path)))
 
 
-_o2u_pattern = re.compile('\.[0-9:]+')
-_o2u_pattern_no_split = re.compile('^[0-9:]+')
-_i2o_pattern = re.compile('\[([:0-9]+)\]')
-_o2i_pattern = re.compile('\.([:0-9]+)')
+_o2u_pattern = re.compile(r'\.[0-9:]+')
+_o2u_pattern_no_split = re.compile(r'^[0-9:]+')
+_i2o_pattern = re.compile(r'\[([:0-9]+)\]')
+_o2i_pattern = re.compile(r'\.([:0-9]+)')
 
 
 def o2u(path):
@@ -713,45 +719,6 @@ def trim_common_path(p1, p2):
     return p1[both.index(None):], p2[both.index(None):]
 
 
-def ids_cpo_mapper(ids, cpo=None):
-    '''
-    translate (some) IDS fields to CPO
-
-    :param ids: input omas data object (IDS format) to read
-
-    :param cpo: optional omas data object (CPO format) to which to write to
-
-    :return: cpo
-    '''
-    from omas import ODS
-    if cpo is None:
-        cpo = ODS()
-    cpo.consistency_check = False
-
-    for itime in range(len(ids['core_profiles.time'])):
-
-        if 'equilibrium' in ids:
-            cpo['equilibrium'][itime]['time'] = ids['equilibrium.time'][itime]
-            cpo['equilibrium'][itime]['profiles_1d.q'] = ids['equilibrium.time_slice'][itime]['profiles_1d.q']
-            cpo['equilibrium'][itime]['profiles_1d.rho_tor'] = ids['equilibrium.time_slice'][itime]['profiles_1d.rho_tor']
-            for iprof in range(len(ids['equilibrium.time_slice'][itime]['profiles_2d'])):
-                cpo['equilibrium'][itime]['profiles_2d'][iprof]['psi'] = ids['equilibrium.time_slice'][itime]['profiles_2d'][iprof]['psi']
-
-        if 'core_profiles' in ids:
-            cpo['coreprof'][itime]['te.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.temperature']
-            cpo['coreprof'][itime]['ne.value'] = ids['core_profiles.profiles_1d'][itime]['electrons.density']
-            pdim = len(cpo['coreprof'][itime]['te.value'])
-            idim = len(ids['core_profiles.profiles_1d[0].ion'])
-            cpo['coreprof'][itime]['ni.value'] = numpy.zeros((pdim, idim))
-            cpo['coreprof'][itime]['ti.value'] = numpy.zeros((pdim, idim))
-            for iion in range(len(ids['core_profiles.profiles_1d'][itime]['ion'])):
-                if 'density' in ids['core_profiles.profiles_1d'][itime]['ion'][iion]:
-                    cpo['coreprof'][itime]['ni.value'][:, iion] = ids['core_profiles.profiles_1d'][itime]['ion'][iion]['density']
-                cpo['coreprof'][itime]['ti.value'][:, iion] = nominal_values(ids['core_profiles.profiles_1d'][itime]['ion'][iion]['temperature'])
-
-    return cpo
-
-
 def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
     '''
     This function returns an ods with the leaf nodes filled with their property informations
@@ -772,7 +739,6 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
         from omas import ODS
         _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
     ods = _info_structures[imas_version]
-    ods.consistency_check = False
 
     for structure in structures:
         if structure not in ods:
@@ -809,3 +775,93 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     except KeyError:
         pass
     return tmp
+
+
+def recursive_interpreter(me, interpret_method=ast.literal_eval):
+    '''
+    Traverse dictionaries and list to convert strings to int/float when appropriate
+
+    :param me: root of the dictionary to traverse
+
+    :param interpret_method: method used for conversion (ast.literal_eval by default)
+
+    :return: root of the dictionary
+    '''
+    if isinstance(me, list):
+        keys = range(len(me))
+    elif isinstance(me, dict):
+        keys = me.keys()
+
+    for kid in keys:
+        if me[kid] is None:
+            continue
+        elif isinstance(me[kid], (list, dict)):
+            recursive_interpreter(me[kid], interpret_method=interpret_method)
+        else:
+            try:
+                me[kid] = interpret_method(me[kid])
+            except (ValueError, SyntaxError) as _excp:
+                pass
+            if isinstance(me[kid], basestring) and ' ' in me[kid]:
+                try:
+                    values = []
+                    for item in re.split(r'[ |\t]+', me[kid].strip()):
+                        values.append(float(item))
+                    me[kid] = numpy.array(values)
+                except ValueError:
+                    pass
+
+    return me
+
+
+def recursive_encoder(me):
+    '''
+    Traverse dictionaries and list to convert entries strings as appropriate
+
+    :param me: root of the dictionary to traverse
+
+    :return: root of the dictionary
+    '''
+    if isinstance(me, list):
+        keys = range(len(me))
+    elif isinstance(me, dict):
+        keys = me.keys()
+
+    for kid in keys:
+        if me[kid] is None:
+            continue
+        elif isinstance(me[kid], (list, dict)):
+            recursive_encoder(me[kid])
+        else:
+            if isinstance(me[kid], numpy.ndarray):
+                me[kid] = ' '.join([repr(x) for x in me[kid]])
+            else:
+                me[kid] = str(me[kid])
+    return me
+
+
+def get_actor_io_ids(filename):
+    '''
+    Parse IMAS Python actor script and return actor input and output IDSs
+
+    :param filename: filename of the IMAS Python actor
+
+    :return: tuple with list of input IDSs and output IDSs
+    '''
+    import ast
+    with open(filename, 'r') as f:
+        module = ast.parse(f.read())
+    actor = os.path.splitext(os.path.split(filename)[-1])[0]
+    function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
+    docstring = ast.get_docstring([f for f in function_definitions if f.name == actor][0])
+    ids_in = []
+    ids_out = []
+    for line in docstring.split('\n'):
+        if 'codeparams' in line:
+            pass
+        elif line.strip().startswith(':param result:'):
+            ids_out = list(map(lambda x: x.strip()[:-1], line.split(':')[2].strip(', ').split(',')))
+            break
+        elif line.strip().startswith(':param '):
+            ids_in.append(line.split(':')[2].strip())
+    return ids_in, ids_out

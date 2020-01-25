@@ -3,7 +3,7 @@ import sys
 import glob
 import subprocess
 
-all_install_require = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython']
+all_install_require = ['numpy', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython','xmltodict']
 install_requires = {}
 # https://github.com/pydata/xarray/commit/faacc8da000b7971233142be349ee39c6d088510
 install_requires[2] = all_install_require + ['xarray<=0.11.0']
@@ -12,7 +12,7 @@ install_requires[3] = all_install_require + ['xarray']
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],
                   'uda': ['pyuda'],
-                  'build_structures': ['xmltodict', 'bs4'],
+                  'build_structures': ['bs4'],
                   'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow']}
 
 # Add .json IMAS structure files to the package
@@ -27,8 +27,8 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
             for item in install_requires[version]:
                 f.write(item.ljust(25) + '# required\n')
             f.write('\n')
-            for requirement in extras_require:
-                for item in extras_require[requirement]:
+            for requirement in sorted(list(extras_require.keys()), key=lambda x:x.lower()):
+                for item in sorted(extras_require[requirement], key=lambda x:x.lower()):
                     if requirement in ['imas', 'hdc', 'uda', 'build_structures']:
                         item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)
@@ -56,7 +56,7 @@ OMAS is a Python library designed to simplify the interface of third-party codes
 
 * in a form that is **always compatible with the IMAS data model**
 
-Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <http://gafusion.github.io/OMFIT-source>`_.
+Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <https://omfit.io>`_.
 '''
 
 print('INFO: run the `imports_check.py` script to quickly verify that all Python dependencies for OMAS are installed\n')

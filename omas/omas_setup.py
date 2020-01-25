@@ -40,6 +40,7 @@ import uncertainties
 import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
+import ast
 
 # xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
 import xarray

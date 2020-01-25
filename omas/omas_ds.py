@@ -64,6 +64,7 @@ class ODX(MutableMapping):
         self.omas_data = ods.omas_data
         return self
 
+
 def save_omas_ds(ods, filename):
     """
     Save an ODS to xarray dataset

@@ -311,14 +311,14 @@ cocos_signals['ec_launchers.launcher.:.steering_angle_pol.data']='?'            
 cocos_signals['ec_launchers.launcher.:.steering_angle_tor.data']='?'             #[ADD?]# 1.750000 # _tor  [rad]
 
 # ECE
-cocos_signals['ece.line_of_sight.first_point.phi']='TOR'                                          # 2.000000 # phi  [rad]
-cocos_signals['ece.line_of_sight.second_point.phi']='TOR'                                         # 2.000000 # phi  [rad]
-cocos_signals['ece.psi_normalization.psi_boundary']='?'                                    #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['ece.psi_normalization.psi_magnetic_axis']='?'                               #[ADD?]# 2.000000 # psi  [Wb]
-cocos_signals['ece.channel.:.delta_position_suprathermal.phi.data']='?'                    #[ADD?]# 1.800000 # phi  [rad]
-cocos_signals['ece.channel.:.position.phi.data']='?'                                       #[ADD?]# 1.800000 # phi  [rad]
-cocos_signals['ece.channel.:.delta_position_suprathermal.psi.data']='?'                    #[ADD?]# 0.800000 # psi
-cocos_signals['ece.channel.:.position.psi.data']='?'                                       #[ADD?]# 0.800000 # psi
+cocos_signals['ece.channel.:.delta_position_suprathermal.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['ece.channel.:.position.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['ece.line_of_sight.first_point.phi']='TOR'                                     # 2.000000 # phi  [rad]
+cocos_signals['ece.line_of_sight.second_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
+cocos_signals['ece.psi_normalization.psi_boundary']='?'                               #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['ece.psi_normalization.psi_magnetic_axis']='?'                          #[ADD?]# 2.000000 # psi  [Wb]
+cocos_signals['ece.channel.:.delta_position_suprathermal.psi']='?'                    #[ADD?]# 1.000000 # psi
+cocos_signals['ece.channel.:.position.psi']='?'                                       #[ADD?]# 1.000000 # psi
 
 # EDGE_PROFILES
 cocos_signals['edge_profiles.profiles_1d.:.e_field_parallel']='?'                                                    #[ADD?]# 3.000000 # e_field  parallel  [V.m^-1]
@@ -781,9 +781,11 @@ cocos_signals['mse.channel.:.line_of_sight.first_point.phi']='TOR'              
 cocos_signals['mse.channel.:.line_of_sight.second_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
 
 # NBI
+cocos_signals['nbi.unit.:.aperture.:.centre.phi']='?'                                                #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['nbi.unit.:.beamlets_group.:.beamlets.positions.phi']='TOR'                                   # 2.000000 # phi  [rad]
 cocos_signals['nbi.unit.:.beamlets_group.:.position.phi']='TOR'                                             # 2.000000 # phi  [rad]
 cocos_signals['nbi.unit.:.beamlets_group.:.tilting.:.delta_position.phi']='TOR'                             # 2.000000 # phi  [rad]
+cocos_signals['nbi.unit.:.source.centre.phi']='?'                                                    #[ADD?]# 2.000000 # phi  [rad]
 
 # NEUTRON_DIAGNOSTIC
 cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.amplitude.data']='?'                    #[ADD?]# 2.200000 # b  b_field  [V]
@@ -796,6 +798,8 @@ cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?
 cocos_signals['ntms.vacuum_toroidal_field.b0']='TOR'                                             # 2.000000 # b0  [T]
 cocos_signals['ntms.time_slice.:.mode.:.detailed_evolution.torque.:.value']='TOR'                # 1.750000 # torque  [kg.m^2.s^-2]
 cocos_signals['ntms.time_slice.:.mode.:.torque.:.value']='TOR'                                   # 1.714286 # torque  [kg.m^2.s^-2]
+
+# NUMERICS
 
 # PELLETS
 cocos_signals['pellets.time_slice.:.pellet.:.path_geometry.first_point.phi']='TOR'                   # 2.000000 # phi  [rad]
@@ -824,8 +828,8 @@ cocos_signals['polarimeter.channel.:.line_of_sight.third_point.phi']='TOR'      
 
 # PULSE_SCHEDULE
 cocos_signals['pulse_schedule.tf.b_field_tor_vacuum_r.reference.data']='?'                             #[ADD?]# 1.000000 # b  b_field
-cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_pol.reference.data']='?'                    #[ADD?]# 0.666667 # _pol
-cocos_signals['pulse_schedule.ec.antenna.:.launching_angle_tor.reference.data']='?'                    #[ADD?]# 0.666667 # _tor
+cocos_signals['pulse_schedule.ec.launcher.:.steering_angle_pol.reference.data']='?'                    #[ADD?]# 0.666667 # _pol
+cocos_signals['pulse_schedule.ec.launcher.:.steering_angle_tor.reference.data']='?'                    #[ADD?]# 0.666667 # _tor
 cocos_signals['pulse_schedule.lh.antenna.:.n_parallel.reference.data']='?'                             #[ADD?]# 0.666667 # parallel
 
 # RADIATION
@@ -883,7 +887,7 @@ cocos_signals['spectrometer_visible.channel.:.line_of_sight.first_point.phi']='T
 cocos_signals['spectrometer_visible.channel.:.line_of_sight.second_point.phi']='TOR'                                          # 2.000000 # phi  [rad]
 
 # SPECTROMETER_X_RAY_CRYSTAL
-cocos_signals['spectrometer_x_ray_crystal.camera.center.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
+cocos_signals['spectrometer_x_ray_crystal.camera.centre.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['spectrometer_x_ray_crystal.crystal.summit.phi']='?'                             #[ADD?]# 2.000000 # phi  [rad]
 cocos_signals['spectrometer_x_ray_crystal.velocity_tor_proxy.data']='?'                        #[ADD?]# 1.500000 # velocity  [m.s^-1]
 

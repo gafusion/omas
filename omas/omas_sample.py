@@ -42,8 +42,11 @@ def dataset_description(ods):
     ods['dataset_description.data_entry.pulse'] = 100
     return ods
 
+
 @add_to_ODS
-def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, include_wall=True):
+def equilibrium(
+        ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True, include_q=True
+):
     """
     Add sample equilibrium data
 
@@ -58,8 +61,14 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     :param include_phi: bool
         Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)
 
+    :param include_psi: bool
+        Include 1D and 2D profiles of psi (poloidal flux)
+
     :param include_wall: bool
         Include the first wall
+
+    :param include_q: bool
+        Include safety factor
 
     :return: ODS instance with equilibrium data added
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
@@ -69,6 +78,9 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
+    psi = eq['equilibrium.time_slice.0.profiles_1d.psi']
+    q = eq['equilibrium.time_slice.0.profiles_1d.q']
+
     if not include_profiles:
         del eq['equilibrium.time_slice.0.profiles_1d']
 
@@ -79,13 +91,29 @@ def equilibrium(ods, time_index=0, include_profiles=True, include_phi=True, incl
     else:
         eq['equilibrium.time_slice.0.profiles_1d.phi'] = phi
 
+    if not include_psi:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0'] and 'psi' in eq['equilibrium.time_slice.0.profiles_1d']:
+            del eq['equilibrium.time_slice.0.profiles_1d.psi']
+        del eq['equilibrium.time_slice.0.profiles_2d.0.psi']
+    else:
+        eq['equilibrium.time_slice.0.profiles_1d.psi'] = psi
+
+    if not include_q:
+        if 'profiles_1d' in eq['equilibrium.time_slice.0'] and 'q' in eq['equilibrium.time_slice.0.profiles_1d']:
+            del eq['equilibrium.time_slice.0.profiles_1d.q']
+    else:
+        eq['equilibrium.time_slice.0.profiles_1d.q'] = q
+
     if not include_wall:
         del eq['wall']
 
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
-    ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
+    ods.set_time_array(
+        'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
+    )
+    ods['equilibrium.time'] = ods['equilibrium.time_slice[:].time']
 
     return ods
 
@@ -402,11 +430,88 @@ def gas_injection(ods):
     ods['gas_injection.pipe.1.exit_position.z'] = 1.1
     ods['gas_injection.pipe.1.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.1.valve.0.identifier'] = 'FAKE_GAS_VALVE_B'
+    ods['gas_injection.pipe.1.second_point.r'] = 1.63
+    ods['gas_injection.pipe.1.second_point.z'] = 1.08
+    ods['gas_injection.pipe.1.second_point.phi'] = 6.5
 
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
     ods['gas_injection.pipe.2.exit_position.r'] = 2.1
     ods['gas_injection.pipe.2.exit_position.z'] = -0.6
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
+
+    return ods
+
+
+@add_to_ODS
+def langmuir_probes(ods):
+    """
+    Adds some FAKE Langmuir probe locations so the overlay plot will work in tests.
+    :param ods: ODS instance
+
+    :return: ODS instance
+        The data are also written to the original, so you don't have to catch the return
+    """
+
+    ods['langmuir_probes.time'] = numpy.array([0])
+
+    ods['langmuir_probes.embedded.0.identifier'] = 0
+    ods['langmuir_probes.embedded.0.name'] = 'p1'
+    ods['langmuir_probes.embedded.0.position.r'] = 0.9
+    ods['langmuir_probes.embedded.0.position.z'] = 0.1
+    ods['langmuir_probes.embedded.0.position.phi'] = 0
+
+    ods['langmuir_probes.embedded.1.identifier'] = -1
+    ods['langmuir_probes.embedded.1.name'] = 'p23'
+    ods['langmuir_probes.embedded.1.position.r'] = 0.9
+    ods['langmuir_probes.embedded.1.position.z'] = -0.9
+    ods['langmuir_probes.embedded.1.position.phi'] = numpy.NaN
+
+    ods['langmuir_probes.embedded.2.identifier'] = -2
+    ods['langmuir_probes.embedded.2.name'] = 'blah'
+    ods['langmuir_probes.embedded.2.position.r'] = 1.5
+    ods['langmuir_probes.embedded.2.position.z'] = -1.25
+    ods['langmuir_probes.embedded.2.position.phi'] = numpy.NaN
+
+    ods['langmuir_probes.embedded.3.identifier'] = -3
+    ods['langmuir_probes.embedded.3.name'] = 'donkey!'
+    ods['langmuir_probes.embedded.3.position.r'] = 1.525
+    ods['langmuir_probes.embedded.3.position.z'] = -1.25
+    ods['langmuir_probes.embedded.3.position.phi'] = numpy.NaN
+
+    ods['langmuir_probes.embedded.4.identifier'] = -4
+    ods['langmuir_probes.embedded.4.name'] = 'zzz'
+    ods['langmuir_probes.embedded.4.position.r'] = 1.4
+    ods['langmuir_probes.embedded.4.position.z'] = 1.4
+    ods['langmuir_probes.embedded.4.position.phi'] = numpy.pi
+
+    ods['langmuir_probes.embedded.5.identifier'] = -5
+    ods['langmuir_probes.embedded.5.name'] = "it's just a test"
+    ods['langmuir_probes.embedded.5.position.r'] = 2.45
+    ods['langmuir_probes.embedded.5.position.z'] = 0.25
+    ods['langmuir_probes.embedded.5.position.phi'] = numpy.NaN
+
+    return ods
+
+
+@add_to_ODS
+def wall(ods):
+    """
+    Adds some FAKE wall data to support testing. The wall is approximately DIII-D shaped, but I didn't try very hard.
+
+    :param ods: ODS instance
+
+    :return: ODS instance
+        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    """
+    ods['wall.description_2d[0].limiter.type.description'] = 'first wall'
+    ods['wall.description_2d[0].limiter.type.index'] = 0
+    ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
+    ods['wall.description_2d[0].limiter.unit[0].outline.r'] = [
+        1.0, 1.0, 1.3, 1.4, 1.6, 2.15, 2.35, 2.35, 2.15, 1.800, 1.350, 1.35, 1.10, 1.00, 1.0
+    ]
+    ods['wall.description_2d[0].limiter.unit[0].outline.z'] = [
+        0.0, 1.4, 1.4, 1.3, 1.1, 1.00, 0.50, -0.5, -1.0, -1.25, -1.25, -1.4, -1.4, -1.3, 0.0
+    ]
 
     return ods
