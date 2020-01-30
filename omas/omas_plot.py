@@ -632,6 +632,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
         value_2d = scipy.ndimage.zoom(value_2d, sf)
 
     kw.setdefault('colors', kw1['color'])
+    kw.pop('color', '')
     kw['linewidths'] = kw.pop('linewidth')
     value_2d = value_2d.copy()
     value_2d[:, -1] = value_2d[:, -2]
@@ -1354,8 +1355,100 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
         bt = coherent_wave[cw]['beam_tracing'][time_index]
         for b in bt['beam'].values():
             ax.plot(b['position.r'], b['position.z'], **kw)
+            # plotc(b['position.r'], b['position.z'], b['electrons.power']/max(b['electrons.power']), ax=ax, **kw)
 
     return ax
+
+
+@add_to__ODS__
+def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_parallel_density'][0], ax=None, **kw):
+    """
+    Plot 1d profiles of waves beams given quantity
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param quantity: quantity to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['waves'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['waves'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(waves_beam_profile, time, ods, time_index, what=what, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    coherent_wave = ods['waves.coherent_wave']
+
+    for cw in coherent_wave:
+        b = coherent_wave[cw]['profiles_1d'][time_index]
+        ax.plot(b['grid.rho_tor_norm'], b[what], **kw)
+    ax.set_title(what.replace('_', ' ').capitalize())
+    ax.set_ylabel('[%s]' % omas_info_node(b.ulocation + '.' + what)['units'])
+    ax.set_xlabel('rho')
+
+    return ax
+
+
+@add_to__ODS__
+def waves_beam_summary(ods, time_index=None, fig=None, **kw):
+    """
+    Plot waves beam summary: CX, power_density, and current_parallel_density
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: figure handler
+    """
+
+    from matplotlib import pyplot
+
+    if fig is None:
+        fig = pyplot.figure()
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['waves'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['waves'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(waves_beam_summary, time, ods, time_index, fig=fig, ax={}, **kw)
+
+    axs = kw.pop('ax', {})
+
+    ax = cached_add_subplot(fig, axs, 1, 2, 1)
+    waves_beam_CX(ods, time_index=time_index, ax=ax, **kw)
+
+    ax = cached_add_subplot(fig, axs, 2, 2, 2)
+    waves_beam_profile(ods, time_index=time_index, what='power_density', ax=ax, **kw)
+    ax.set_xlabel('')
+
+    ax = cached_add_subplot(fig, axs, 2, 2, 4, sharex=ax)
+    waves_beam_profile(ods, time_index=time_index, what='current_parallel_density', ax=ax, **kw)
+
+    ax.set_xlim([0, 1])
+
+    return axs
 
 
 @add_to__ODS__
