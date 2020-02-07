@@ -1126,7 +1126,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_plotlength= antenna_plotlength, **kw)
 
     import matplotlib
     from matplotlib import pyplot
