@@ -1162,7 +1162,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
 @add_to__ODS__
 def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=None, **kw):
     """
-    Plot  LH antenna in toroidal cross-section
+    Plot LH antenna in toroidal cross-section
 
     :param ods: input ods
 
