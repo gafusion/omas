@@ -1235,7 +1235,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_plotlength= launcher_plotlength, **kw)
 
     import matplotlib
     from matplotlib import pyplot
