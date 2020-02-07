@@ -1101,7 +1101,7 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
     return ax
 
 @add_to__ODS__
-def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
+def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
     """
     Plot LH antenna position in poloidal cross-section
 
@@ -1111,7 +1111,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
-    :param antenna_plotlength: length of antenna on plot
+    :param antenna_trajectory: length of antenna on plot
 
     :param kw: arguments passed to matplotlib plot statements
 
@@ -1126,7 +1126,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_plotlength= antenna_plotlength, **kw)
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory= antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1137,8 +1137,8 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
     equilibrium = ods['equilibrium']['time_slice'][time_index]
     antennas = ods['lh_antennas']['antenna']
 
-    if antenna_plotlength is None:
-        antenna_plotlength = 0.1 * ods['equilibrium']['vacuum_toroidal_field.r0']
+    if antenna_trajectory is None:
+        antenna_trajectory = 0.1 * ods['equilibrium']['vacuum_toroidal_field.r0']
 
     for antenna in antennas:
         R = antennas[antenna]['position.r.data']
@@ -1151,8 +1151,8 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
         Rvec = Raxis - R
         Zvec = Zaxis - Z
 
-        R1 = R + Rvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
-        Z1 = Z + Zvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
+        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec**2+Zvec**2)
+        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec**2+Zvec**2)
 
         ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
@@ -1160,7 +1160,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
 
 
 @add_to__ODS__
-def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=None, **kw):
+def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=None, **kw):
     """
     Plot LH antenna in toroidal cross-section
 
@@ -1172,7 +1172,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param antenna_plotlength: length of antenna on plot
+    :param antenna_trajectory: length of antenna on plot
 
     :return: axes handler
     """
@@ -1183,7 +1183,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_plotlength= antenna_plotlength, **kw)
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory= antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1193,8 +1193,8 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
 
     equilibrium = ods['equilibrium']
     antennas = ods['lh_antennas']['antenna']
-    if antenna_plotlength is None:
-        antenna_plotlength = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    if antenna_trajectory is None:
+        antenna_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for antenna in antennas:
         R = antennas[antenna]['position.r.data']
@@ -1203,15 +1203,15 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
 
-        x1 = (R-antenna_plotlength) * numpy.cos(phi)
-        y1 = (R-antenna_plotlength) * numpy.sin(phi)
+        x1 = (R-antenna_trajectory) * numpy.cos(phi)
+        y1 = (R-antenna_trajectory) * numpy.sin(phi)
 
         ax.plot([x0, x1], [y0, y1], 's-',markevery=2, **kw)
 
     return ax
 
 @add_to__ODS__
-def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
+def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
     """
     Plot EC launchers in poloidal cross-section
 
@@ -1223,11 +1223,11 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_plotlength: length of launcher on plot
+    :param launcher_trajectory: length of launcher on plot
 
     :return: axes handler
     """
-    
+
     if time_index is None:
         time_index = numpy.arange(len(ods['ec_launchers']['time']))
     if isinstance(time_index, (list, numpy.ndarray)):
@@ -1235,7 +1235,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_plotlength= launcher_plotlength, **kw)
+            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory= launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1245,8 +1245,8 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
 
     equilibrium = ods['equilibrium']
     launchers = ods['ec_launchers.launcher']
-    if launcher_plotlength is None:
-        launcher_plotlength = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    if launcher_trajectory is None:
+        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
 
@@ -1254,8 +1254,8 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
         Z0 = launchers[launcher]['launching_position.z']
         ang_pol = launchers[launcher]['steering_angle_pol.data']
 
-        R1 = R0 - launcher_plotlength * numpy.sin(ang_pol)
-        Z1 = Z0 +  launcher_plotlength * numpy.cos(ang_pol)
+        R1 = R0 - launcher_trajectory * numpy.sin(ang_pol)
+        Z1 = Z0 +  launcher_trajectory * numpy.cos(ang_pol)
 
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
@@ -1263,7 +1263,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
 
 
 @add_to__ODS__
-def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
+def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
     """
     Plot EC launchers in toroidal cross-section
 
@@ -1275,7 +1275,7 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_plotlength: length of launcher on plot
+    :param launcher_trajectory: length of launcher on plot
 
     :return: axes handler
     """
@@ -1288,7 +1288,7 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_plotlength= launcher_plotlength, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory= launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1298,8 +1298,8 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
 
     equilibrium = ods['equilibrium']
     launchers = ods['ec_launchers.launcher']
-    if launcher_plotlength is None:
-        launcher_plotlength = 0.1 *  equilibrium['vacuum_toroidal_field.r0']
+    if launcher_trajectory is None:
+        launcher_trajectory = 0.1 *  equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
         R = launchers[launcher]['launching_position.r']
@@ -1309,8 +1309,8 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
 
-        x1 = x0 + launcher_plotlength * numpy.cos(ang_tor+phi)
-        y1 = y0 + launcher_plotlength * numpy.sin(ang_tor+phi)
+        x1 = x0 + launcher_trajectory * numpy.cos(ang_tor+phi)
+        y1 = y0 + launcher_trajectory * numpy.sin(ang_tor+phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return ax
