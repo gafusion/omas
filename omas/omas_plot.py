@@ -1213,7 +1213,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
 @add_to__ODS__
 def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
     """
-    Plot ec launcher in poloidal cross-section
+    Plot EC launchers in poloidal cross-section
 
     :param ods: input ods
 
