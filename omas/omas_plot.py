@@ -1016,7 +1016,7 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 @add_to__ODS__
 def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
     """
-    Plot waves beams in poloidal cross-section
+    Plot pellets trajectory in poloidal cross-section
 
     :param ods: input ods
 
