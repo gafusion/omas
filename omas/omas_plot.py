@@ -1183,7 +1183,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_plotlength= antenna_plotlength, **kw)
 
     import matplotlib
     from matplotlib import pyplot
