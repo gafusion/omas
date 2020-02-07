@@ -1265,7 +1265,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
 @add_to__ODS__
 def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=None, **kw):
     """
-    Plot waves beams in toroidal cross-section
+    Plot EC launchers in toroidal cross-section
 
     :param ods: input ods
 
