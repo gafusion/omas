@@ -667,7 +667,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 @add_to__ODS__
 def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     r"""
-    Plot equilibrium cross-section
+    Plot equilibrium toroidal cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
 
     :param ods: ODS instance
