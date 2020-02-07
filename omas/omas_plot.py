@@ -1057,7 +1057,7 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
 @add_to__ODS__
 def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
     """
-    Plot LH antenna position in toroidal cross-section
+    Plot  pellet trajectory in toroidal cross-section
 
     :param ods: input ods
 
@@ -1138,7 +1138,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
     antennas = ods['lh_antennas']['antenna']
 
     if antenna_plotlength is None:
-        antenna_plotlength = 0.1 * equilibrium['global_quantities']['vacuum_toroidal_field.r0']
+        antenna_plotlength = 0.1 * ods['equilibrium']['vacuum_toroidal_field.r0']
 
     for antenna in antennas:
         R = antennas[antenna]['position.r.data']
@@ -1151,10 +1151,10 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
         Rvec = Raxis - R
         Zvec = Zaxis - Z
 
-        R1 = Rvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
-        Z1 = Zvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
+        R1 = R + Rvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
+        Z1 = Z + Zvec * antenna_plotlength / numpy.sqrt(Rvec**2+Zvec**2)
 
-        ax.plot([R, R1], [Z, Z1], 's-', markerevery=2, **kw)
+        ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
     return ax
 
@@ -1162,7 +1162,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_plotlength=None, **kw):
 @add_to__ODS__
 def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=None, **kw):
     """
-    Plot  ec launcher in toroidal cross-section
+    Plot  LH antenna in toroidal cross-section
 
     :param ods: input ods
 
@@ -1192,21 +1192,21 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_plotlength=Non
         ax = pyplot.gca()
 
     equilibrium = ods['equilibrium']
-    antennas = ods['lh_antennas']
+    antennas = ods['lh_antennas']['antenna']
     if antenna_plotlength is None:
-        antenna_plotlength = 0.1 * equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+        antenna_plotlength = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for antenna in antennas:
-        R = antennas['antenna'][antenna]['position.r.data']
-        phi = antennas['antenna'][antenna][antenna]['position.phi.data']
+        R = antennas[antenna]['position.r.data']
+        phi = antennas[antenna]['position.phi.data']
 
-        x0 = R * cos(phi)
-        y0 = R * sin(phi)
+        x0 = R * numpy.cos(phi)
+        y0 = R * numpy.sin(phi)
 
-        x1 = (R-antenna_plotlength) * cos(phi)
-        y1 = (R-antenna_plotlength) * sin(phi)
+        x1 = (R-antenna_plotlength) * numpy.cos(phi)
+        y1 = (R-antenna_plotlength) * numpy.sin(phi)
 
-        ax.plot([x0, x1], [y0, y1], 's-', **kw)
+        ax.plot([x0, x1], [y0, y1], 's-',markevery=2, **kw)
 
     return ax
 
@@ -1227,11 +1227,11 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
 
     :return: axes handler
     """
-
+    
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers'].time()))
+        time_index = numpy.arange(len(ods['ec_launchers']['time']))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers'].time()
+        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1246,7 +1246,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
     equilibrium = ods['equilibrium']
     launchers = ods['ec_launchers.launcher']
     if launcher_plotlength is None:
-        launcher_plotlength = 0.1 * equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+        launcher_plotlength = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
 
@@ -1254,10 +1254,10 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_plotlength=None, **k
         Z0 = launchers[launcher]['launching_position.z']
         ang_pol = launchers[launcher]['steering_angle_pol.data']
 
-        R1 = R - launcher_plotlength * sin(ang_pol)
-        Z1 = Z +  launcher_plotlength * cos(ang_pol)
+        R1 = R0 - launcher_plotlength * numpy.sin(ang_pol)
+        Z1 = Z0 +  launcher_plotlength * numpy.cos(ang_pol)
 
-        ax.plot([R0, R1], [Z0, Z1], 'o-', everymarker=2, **kw)
+        ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
     return ax
 
@@ -1282,9 +1282,9 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
 
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers'].time()))
+        time_index = numpy.arange(len(ods['ec_launchers']['time']))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers'].time()
+        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1299,19 +1299,19 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_plotlength=N
     equilibrium = ods['equilibrium']
     launchers = ods['ec_launchers.launcher']
     if launcher_plotlength is None:
-        launcher_plotlength = 0.1 *  equilibrium['global_quantities.time_slice'][time_index]['vacuum_toroidal_field.r0']
+        launcher_plotlength = 0.1 *  equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
         R = launchers[launcher]['launching_position.r']
         phi = launchers[launcher]['launching_position.phi']
         ang_tor = launchers[launcher]['steering_angle_tor.data']
 
-        x0 = R * cos(phi)
-        y0 = R * sin(phi)
+        x0 = R * numpy.cos(phi)
+        y0 = R * numpy.sin(phi)
 
-        x1 = x + launcher*plotlength * cos(ang_tor-phi)
-        y1 = y + launcher*plotlength * sin(ang_tor-phi)
-        ax.plot([x0, x1], [y0, y1], 'o-', everymarker=2, **kw)
+        x1 = x0 + launcher_plotlength * numpy.cos(ang_tor+phi)
+        y1 = y0 + launcher_plotlength * numpy.sin(ang_tor+phi)
+        ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return ax
 
