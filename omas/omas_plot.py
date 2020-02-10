@@ -2024,10 +2024,10 @@ def position_control_overlay(
         eq = ods['equilibrium']
         try:
             rxm = [
-                interp1d(eq['time'], eq['time_slice[:].boundary.outline.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
             ]
             zxm = [
-                interp1d(eq['time'], eq['time_slice[:].boundary.outline.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
             ]
         except ValueError:
             rxm = zxm = np.NaN
