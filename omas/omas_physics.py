@@ -612,7 +612,7 @@ def equilibrium_consistent(ods):
         eq['profiles_2d.0.z'] = Z
         eq['profiles_2d.0.b_field_tor'] = fpol / R
 
-    stored_energy(ods, update=True)
+    equilibrium_stored_energy(ods, update=True)
 
     return ods
 
