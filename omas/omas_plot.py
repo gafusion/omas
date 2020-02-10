@@ -1937,6 +1937,12 @@ def position_control_overlay(
     :param t: float
         Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
 
+    :param xpoint_marker: string
+        Matplotlib marker spec for X-point target(s)
+
+    :param strike_marker: string
+        Matplotlib marker spec for strike point target(s)
+
     :param \**kw: Additional keywords.
 
         * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
@@ -1986,9 +1992,13 @@ def position_control_overlay(
     x = ods['pulse_schedule.position_control.x_point']
     s = ods['pulse_schedule.position_control.strike_point']
     ikw = dict(bounds_error=False, fill_value=np.NaN)
-    nbp = np.shape(b['[:].r.reference.data'])[0]
-    nx = np.shape(x['[:].r.reference.data'])[0]
-    ns = np.shape(s['[:].r.reference.data'])[0]
+    try:
+        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
+        return
     r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
     z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
