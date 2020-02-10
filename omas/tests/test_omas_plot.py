@@ -444,7 +444,7 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
 
         # Add sample data
-        pc_ods.sample_position_control()
+        pc_ods.sample_pulse_schedule()
 
         # Basic test
         pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
@@ -456,9 +456,17 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.sample_equilibrium()
         pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
 
-        # Debugging tools
-        pc_ods.plot_overlay(thomson_scattering=False, position_control=True, timing_ref=time.time())
+        return
 
+    def test_pulse_schedule_overlay(self):
+        """
+        Tests method for plotting overlay of pulse_schedule data.
+        The main item here is position_control, which has its own test. So, this will be short.
+        """
+        import time
+        pc_ods = ODS()
+        pc_ods.sample_pulse_schedule()
+        pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
         return
 
 
