@@ -2022,15 +2022,20 @@ def position_control_overlay(
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
     if nxm > 0:
         eq = ods['equilibrium']
-        try:
-            rxm = [
-                interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
-            ]
-            zxm = [
-                interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
-            ]
-        except ValueError:
-            rxm = zxm = np.NaN
+        if len(eq['time']) == 1:
+            it = eq['time_slice'].keys()[0]
+            rxm = [eq['time_slice'][it]['boundary.x_point'][i]['r'] for i in range(nxm)]
+            zxm = [eq['time_slice'][it]['boundary.x_point'][i]['z'] for i in range(nxm)]
+        else:
+            try:
+                rxm = [
+                    interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
+                ]
+                zxm = [
+                    interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
+                ]
+            except ValueError:
+                rxm = zxm = np.NaN
     else:
         rxm = zxm = np.NaN
     if timing_ref is not None:

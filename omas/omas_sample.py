@@ -127,8 +127,8 @@ def equilibrium(
         ods['equilibrium.time_slice'][0]['boundary.x_point.0.r'] = 1.304
         ods['equilibrium.time_slice'][0]['boundary.x_point.0.z'] = -1.222
 
-    ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
+    ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
     ods.set_time_array(
         'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
