@@ -455,6 +455,11 @@ class TestOmasPlot(unittest.TestCase):
         # Now with equilibrium data (magnetic axis position affects label alignment
         pc_ods.sample_equilibrium()
         pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+        pc_ods.sample_equilibrium(include_xpoint=True)
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+
+        # Call the method itself
+        pc_ods.plot_position_control_overlay()
 
         return
 
@@ -467,6 +472,7 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods = ODS()
         pc_ods.sample_pulse_schedule()
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
+        pc_ods.plot_pulse_schedule_overlay()
         return
 
 

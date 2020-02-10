@@ -45,7 +45,14 @@ def dataset_description(ods):
 
 @add_to_ODS
 def equilibrium(
-        ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True, include_q=True
+        ods,
+        time_index=0,
+        include_profiles=True,
+        include_phi=True,
+        include_psi=True,
+        include_wall=True,
+        include_q=True,
+        include_xpoint=False,
 ):
     """
     Add sample equilibrium data
@@ -57,18 +64,27 @@ def equilibrium(
 
     :param include_profiles: bool
         Include 1D profiles of pressure, q, p', FF'
+        They are in the sample set, so not including them means deleting them.
 
     :param include_phi: bool
         Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)
+        This is in the sample set, so not including it means deleting it.
 
     :param include_psi: bool
         Include 1D and 2D profiles of psi (poloidal flux)
+        This is in the sample set, so not including it means deleting it.
 
     :param include_wall: bool
         Include the first wall
+        This is in the sample set, so not including it means deleting it.
 
     :param include_q: bool
         Include safety factor
+        This is in the sample set, so not including it means deleting it.
+
+    :param include_xpoint: bool
+        Include X-point R-Z coordinates
+        This is not in the sample set, so including it means making it up
 
     :return: ODS instance with equilibrium data added
         Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
@@ -106,6 +122,10 @@ def equilibrium(
 
     if not include_wall:
         del eq['wall']
+
+    if include_xpoint:
+        ods['equilibrium.time_slice'][0]['boundary.x_point.r'] = 1.304
+        ods['equilibrium.time_slice'][0]['boundary.x_point.z'] = -1.222
 
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
