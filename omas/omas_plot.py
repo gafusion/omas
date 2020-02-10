@@ -1149,7 +1149,8 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
         ax = pyplot.gca()
 
     overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
-    for hw_sys in list_structures(ods.imas_version):
+    special_subs = ['position_control']
+    for hw_sys in list_structures(ods.imas_version) + special_subs:
         if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
             overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
             try:
@@ -1924,7 +1925,7 @@ def langmuir_probes_overlay(
 
 @add_to__ODS__
 def position_control_overlay(
-        ods, ax=None, t=None, xpoint_marker = 'x', strike_marker='s', show_measured_xpoint = False, **kw):
+        ods, ax=None, t=None, xpoint_marker='x', strike_marker='s', show_measured_xpoint=False, **kw):
     r"""
     Overlays position_control data
 
@@ -1957,6 +1958,22 @@ def position_control_overlay(
             t = 0
     if ax is None:
         ax = pyplot.gca()
+    # Handle multi-slice request
+    if len(np.atleast_1d(t)) > 1:
+        for tt in t:
+            position_control_overlay(
+                ods,
+                ax=ax,
+                t=tt,
+                xpoint_marker=xpoint_marker,
+                strike_marker=strike_marker,
+                show_measured_xpoint=show_measured_xpoint,
+                **copy.deepcopy(kw)
+            )
+        return
+    else:
+        t = np.atleast_1d(t)[0]
+
     labelevery = kw.pop('labelevery', 1)
     label_r_shift = kw.pop('label_r_shift', 0)
     label_z_shift = kw.pop('label_z_shift', 0)
@@ -2083,6 +2100,9 @@ def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
         Must contain langmuir_probes with embedded position data
 
     :param ax: Axes instance
+
+    :param t: float
+        Time in s
 
     :param \**kw: Additional keywords.
 
