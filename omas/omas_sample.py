@@ -533,8 +533,9 @@ def pulse_schedule(ods_):
         """Adds sample data for the position control subset"""
         bdry = ods['pulse_schedule.position_control.boundary_outline']
 
-        t = np.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])
-        bdry[0]['r.reference.data'] = np.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])
+        # These data are sampled from DIII-D#161558 at the following times:
+        t = np.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])  # s
+        bdry[0]['r.reference.data'] = np.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
         bdry[0]['z.reference.data'] = np.array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
         bdry[1]['r.reference.data'] = np.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
         bdry[1]['z.reference.data'] = np.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
@@ -584,9 +585,9 @@ def pulse_schedule(ods_):
         xpt[1]['z.reference.data'] = np.array([np.NaN] * len(t))
 
         for i in range(2):
-            xpt[i]['r.reference_type'] = strk[i]['z.reference_type'] = 1
-            xpt[i]['r.reference_name'] = strk[i]['z.reference_name'] = 'strk{}'.format(i)
-            xpt[i]['r.reference.time'] = strk[i]['z.reference.time'] = t
+            xpt[i]['r.reference_type'] = xpt[i]['z.reference_type'] = 1
+            xpt[i]['r.reference_name'] = xpt[i]['z.reference_name'] = 'strk{}'.format(i)
+            xpt[i]['r.reference.time'] = xpt[i]['z.reference.time'] = t
 
         return
 
