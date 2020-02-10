@@ -260,16 +260,11 @@ class ODS(MutableMapping):
                 return time
             # We crossed [:] or something and picked up a 2D time array
             elif any([len(time.shape) > 1 for time in times_values]):
-                time0 = [time for time in times_values if len(time.shape) == 1]
-                if len(time0):
-                    # There is a 1D time we can use as a reference. Use the first hit.
-                    time0 = time0[0]
-                else:
-                    # There is no 1D time to use as a reference
-                    time0 = list(times.values())[0]
-                    # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
-                    while len(time0.shape) > 1:
-                        time0 = np.take(time0, 0, axis=0)
+                # Make a 1D reference time0 that can be comapred against other time arrays
+                time0 = list(times.values())[0]
+                # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
+                while len(time0.shape) > 1:
+                    time0 = numpy.take(time0, 0, axis=0)
                 for time in times.values():
                     # Make sure all time arrays are close to the time0 we identified
                     assert abs(time - time0).max() < 1e-7
