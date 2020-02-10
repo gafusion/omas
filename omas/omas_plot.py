@@ -1775,7 +1775,8 @@ def langmuir_probes_overlay(
         ods, ax=None, embedded_probes=None, colors=None, show_embedded=True, show_reciprocating=False, **kw
 ):
     r"""
-    Overlays Langmuir probes
+    Overlays Langmuir probe locations
+
     :param ods: ODS instance
         Must contain langmuir_probes with embedded position data
 
@@ -1921,6 +1922,179 @@ def langmuir_probes_overlay(
             )
     return
 
+@add_to__ODS__
+def position_control_overlay(
+        ods, ax=None, t=None, xpoint_marker = 'x', strike_marker='s', show_measured_xpoint = False, **kw):
+    r"""
+    Overlays position_control data
+
+    :param ods: ODS instance
+        Must contain langmuir_probes with embedded position data
+
+    :param ax: Axes instance
+
+    :param t: float
+        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+
+    :param \**kw: Additional keywords.
+
+        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
+
+        * Others will be passed to the plot() call for drawing shape control targets
+    """
+    import numpy as np
+    from matplotlib import pyplot
+    from matplotlib import rcParams
+    from scipy.interpolate import interp1d
+
+    # Unpack basics
+    device = ods['dataset_description.data_entry'].get('machine', '')
+    shot = ods['dataset_description.data_entry'].get('pulse', 0)
+    if t is None:
+        try:
+            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+        except (ValueError, IndexError):
+            t = 0
+    if ax is None:
+        ax = pyplot.gca()
+    labelevery = kw.pop('labelevery', 1)
+    label_r_shift = kw.pop('label_r_shift', 0)
+    label_z_shift = kw.pop('label_z_shift', 0)
+    label_ha = kw.pop('label_ha', None)
+    label_va = kw.pop('label_va', None)
+    notesize = kw.pop('notesize', 'xx-small')
+
+    # Select data
+    b = ods['pulse_schedule.position_control.boundary_outline']
+    x = ods['pulse_schedule.position_control.x_point']
+    s = ods['pulse_schedule.position_control.strike_point']
+    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    nbp = np.shape(b['[:].r.reference.data'])[0]
+    nx = np.shape(x['[:].r.reference.data'])[0]
+    ns = np.shape(s['[:].r.reference.data'])[0]
+    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
+    bname = b['[:].r.reference_name']
+    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
+    xname = x['[:].r.reference_name']
+    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
+    sname = s['[:].r.reference_name']
+    # Measured X-point position from eq might not be present
+    nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
+    if nxm > 0:
+        eq = ods['equilibrium']
+        try:
+            rxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.outline.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
+            ]
+            zxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.outline.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
+            ]
+        except ValueError:
+            rxm = zxm = np.NaN
+    else:
+        rxm = zxm = np.NaN
+
+    # Masking
+    mask = kw.pop('mask', np.ones(len(r), bool))
+    r = (np.array(r)[mask]).tolist()
+    z = (np.array(z)[mask]).tolist()
+    bname = (np.array(bname)[mask]).tolist()
+
+    # Handle main plot setup and customizations
+    kw.setdefault('linestyle', ' ')
+    kwx = copy.deepcopy(kw)
+    kws = copy.deepcopy(kw)
+    kw.setdefault('marker', 'o')
+    plot_out = ax.plot(r, z, **kw)
+
+    kwx['marker'] = xpoint_marker
+    kwx.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
+    if show_measured_xpoint:
+        xmplot_out = ax.plot(rxm, zxm, **kwx)
+    else:
+        xmplot_out = None
+    kwx.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
+    kwx['color'] = plot_out[0].get_color()
+    xplot_out = ax.plot(rx, zx, **kwx)
+
+    kws['marker'] = strike_marker
+    splot_out = ax.plot(rx, zs, **kws)
+
+    # Handle plot annotations
+    try:
+        rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
+    except ValueError:
+        rsplit = r0
+
+    default_ha = [['left', 'right'][int((r + rx + rs)[i] < rsplit)] for i in range(nbp + nx + ns)]
+    default_va = [['top', 'bottom'][int((z + zx + rs)[i] > 0)] for i in range(nbp + nx + ns)]
+    label_ha, label_va, kw = text_alignment_setup(
+        nbp + nx + ns, default_ha=default_ha, default_va=default_va, label_ha=label_ha, label_va=label_va
+    )
+
+    for i in range(nbp):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
+            ax.text(
+                r[i] + label_r_shift,
+                z[i] + label_z_shift,
+                '\n {} \n'.format(bname[i]),
+                color=plot_out[0].get_color(),
+                va=label_va[i],
+                ha=label_ha[i],
+                fontsize=notesize,
+            )
+    for i in range(nx):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rx[i]):
+            ax.text(
+                rx[i] + label_r_shift,
+                zx[i] + label_z_shift,
+                '\n {} \n'.format(xname[i]),
+                color=xplot_out[0].get_color(),
+                va=label_va[nbp + i],
+                ha=label_ha[nbp + i],
+                fontsize=notesize,
+            )
+
+    for i in range(ns):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rs[i]):
+            ax.text(
+                rs[i] + label_r_shift,
+                zs[i] + label_z_shift,
+                '\n {} \n'.format(sname[i]),
+                color=xplot_out[0].get_color(),
+                va=label_va[nbp + nx + i],
+                ha=label_ha[nbp + nx + i],
+                fontsize=notesize,
+            )
+    return
+
+@add_to__ODS__
+def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
+    r"""
+    Overlays relevant data from pulse_schedule, such as position control
+
+    :param ods: ODS instance
+        Must contain langmuir_probes with embedded position data
+
+    :param ax: Axes instance
+
+    :param \**kw: Additional keywords.
+
+        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
+
+        * Others will be passed to the plot() calls.
+    """
+
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    position_control_overlay(ods, ax=ax, t=t, **kw)
+    return
 
 @add_to__ODS__
 def summary(ods, fig=None, quantity=None):
