@@ -577,6 +577,7 @@ def pulse_schedule(ods_):
             strk[i]['r.reference_name'] = strk[i]['z.reference_name'] = 'strk{}'.format(i)
             strk[i]['r.reference.time'] = strk[i]['z.reference.time'] = t
 
+        xpt = ods['pulse_schedule.position_control.x_point']
         xpt[0]['r.reference.data'] = np.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
         xpt[0]['z.reference.data'] = np.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
         xpt[1]['r.reference.data'] = np.array([np.NaN] * len(t))
