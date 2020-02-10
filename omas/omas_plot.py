@@ -1973,13 +1973,13 @@ def position_control_overlay(
     nx = np.shape(x['[:].r.reference.data'])[0]
     ns = np.shape(s['[:].r.reference.data'])[0]
     r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
-    z = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
     rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
-    zx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
     xname = x['[:].r.reference_name']
     rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
-    zs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
     sname = s['[:].r.reference_name']
     # Measured X-point position from eq might not be present
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
@@ -2021,13 +2021,16 @@ def position_control_overlay(
     xplot_out = ax.plot(rx, zx, **kwx)
 
     kws['marker'] = strike_marker
-    splot_out = ax.plot(rx, zs, **kws)
+    kws['color'] = plot_out[0].get_color()
+    splot_out = ax.plot(rs, zs, **kws)
 
     # Handle plot annotations
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
     except ValueError:
-        rsplit = r0
+        # Guesses for a good place to split labels between left and right align
+        r0 = {'DIII-D': 1.6955}
+        rsplit = r0.get(device, 1.7)
 
     default_ha = [['left', 'right'][int((r + rx + rs)[i] < rsplit)] for i in range(nbp + nx + ns)]
     default_va = [['top', 'bottom'][int((z + zx + rs)[i] > 0)] for i in range(nbp + nx + ns)]
@@ -2064,7 +2067,7 @@ def position_control_overlay(
                 rs[i] + label_r_shift,
                 zs[i] + label_z_shift,
                 '\n {} \n'.format(sname[i]),
-                color=xplot_out[0].get_color(),
+                color=splot_out[0].get_color(),
                 va=label_va[nbp + nx + i],
                 ha=label_ha[nbp + nx + i],
                 fontsize=notesize,
