@@ -258,6 +258,24 @@ class ODS(MutableMapping):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
                 return time
+            # We crossed [:] or something and picked up a 2D time array
+            elif any([len(time.shape) > 1 for time in times_values]):
+                time0 = [time for time in times_values if len(time.shape) == 1]
+                if len(time0):
+                    # There is a 1D time we can use as a reference. Use the first hit.
+                    time0 = time0[0]
+                else:
+                    # There is no 1D time to use as a reference
+                    time0 = list(times.values())[0]
+                    # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
+                    while len(time0.shape) > 1:
+                        time0 = np.take(time0, 0, axis=0)
+                for time in times.values():
+                    # Make sure all time arrays are close to the time0 we identified
+                    assert abs(time - time0).max() < 1e-7
+                extra_info['homogeneous_time'] = True
+                return time0
+
             # there are inconsistencies with different ways of specifying times in the IDS
             elif len(times) != 1 and not all([times_values[0].shape == time.shape for time in times_values[1:]]):
                 raise ValueError('Inconsistent shapes of time definitions in %s: %s' % (times.keys(), [time.shape for time in times_values]))
