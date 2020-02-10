@@ -1953,6 +1953,11 @@ def position_control_overlay(
     from matplotlib import pyplot
     from matplotlib import rcParams
     from scipy.interpolate import interp1d
+    import time
+
+    timing_ref = kw.pop('timing_ref', None)
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay start')
 
     # Unpack basics
     device = ods['dataset_description.data_entry'].get('machine', '')
@@ -1965,6 +1970,8 @@ def position_control_overlay(
     if ax is None:
         ax = pyplot.gca()
     # Handle multi-slice request
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay setup 1')
     if len(np.atleast_1d(t)) > 1:
         for tt in t:
             position_control_overlay(
@@ -1986,6 +1993,9 @@ def position_control_overlay(
     label_ha = kw.pop('label_ha', None)
     label_va = kw.pop('label_va', None)
     notesize = kw.pop('notesize', 'xx-small')
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay setup 2')
 
     # Select data
     b = ods['pulse_schedule.position_control.boundary_outline']
@@ -2023,6 +2033,8 @@ def position_control_overlay(
             rxm = zxm = np.NaN
     else:
         rxm = zxm = np.NaN
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 
     # Masking
     mask = kw.pop('mask', np.ones(len(r), bool))
@@ -2050,6 +2062,9 @@ def position_control_overlay(
     kws['marker'] = strike_marker
     kws['color'] = plot_out[0].get_color()
     splot_out = ax.plot(rs, zs, **kws)
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay main plots')
 
     # Handle plot annotations
     try:
@@ -2099,6 +2114,9 @@ def position_control_overlay(
                 ha=label_ha[nbp + nx + i],
                 fontsize=notesize,
             )
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay done')
     return
 
 @add_to__ODS__
@@ -2122,6 +2140,10 @@ def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
     """
 
     from matplotlib import pyplot
+    import time
+
+    if kw.get('timing_ref', None) is not None:
+        print(time.time() - kw['timing_ref'], 'pulse_schedule_overlay start')
 
     if ax is None:
         ax = pyplot.gca()
