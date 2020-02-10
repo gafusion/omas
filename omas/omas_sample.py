@@ -589,6 +589,8 @@ def pulse_schedule(ods_):
             xpt[i]['r.reference_name'] = xpt[i]['z.reference_name'] = 'strk{}'.format(i)
             xpt[i]['r.reference.time'] = xpt[i]['z.reference.time'] = t
 
+        ods['pulse_schedule.time'] = t
+
         return
 
     add_position_control(ods_)
