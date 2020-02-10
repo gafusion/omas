@@ -435,6 +435,32 @@ class TestOmasPlot(unittest.TestCase):
         ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
         return
 
+    def test_position_control_overlay(self):
+        """Tests method for plotting overlay of position_control data"""
+
+        pc_ods = ODS()
+
+        # No data; have to abort
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Add sample data
+        pc_ods.sample_position_control()
+
+        # Basic test
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Multi-time
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=[0.5, 2.3]))
+
+        # Now with equilibrium data (magnetic axis position affects label alignment
+        pc_ods.sample_equilibrium()
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+
+        # Debugging tools
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True, timing_ref=time.time())
+
+        return
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPlot)
