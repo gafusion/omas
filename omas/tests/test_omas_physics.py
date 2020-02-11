@@ -60,6 +60,14 @@ class TestOmasPhysics(unittest.TestCase):
         test_name = '.'.join(self.id().split('.')[-2:])
         self.printv('    {} done.'.format(test_name))
 
+    def test_equilibrium_consistent(self):
+        ods = ODS()
+        ods.sample_equilibrium()
+
+        assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
+        ods = equilibrium_consistent(ods)
+        assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
+
     def test_core_profiles_pressures(self):
         ods = ODS()
         ods.sample_core_profiles(include_pressure=False)

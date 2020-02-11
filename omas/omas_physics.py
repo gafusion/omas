@@ -29,6 +29,29 @@ def add_to__ALL__(f):
 class constants(object):
     e = 1.6021766208e-19
 
+@add_to__ODS__
+def equilibrium_stored_energy(ods, update=True):
+    '''
+    Calculate MHD stored energy from equilibrium pressure and volume
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    '''
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    for time_index in ods['equilibrium']['time_slice']:
+        pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
+        volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
+        dvol = numpy.gradient(volume_equil)
+
+        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd']=3.0/2.0*numpy.trapz(pressure_equil*dvol) # [J]
+    return ods_n
 
 @add_to__ODS__
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
@@ -588,6 +611,8 @@ def equilibrium_consistent(ods):
         eq['profiles_2d.0.r'] = R
         eq['profiles_2d.0.z'] = Z
         eq['profiles_2d.0.b_field_tor'] = fpol / R
+
+    equilibrium_stored_energy(ods, update=True)
 
     return ods
 
