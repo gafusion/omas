@@ -83,6 +83,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_ods_process_input_data(self):
         from omas.examples import ods_process_input_data
 
+    @unittest.skipUnless(not failed_MONGO, str(failed_MONGO))
     def test_omas_mongo_example(self):
         from omas.examples import omas_mongo_example
 
@@ -92,12 +93,14 @@ class TestOmasExamples(unittest.TestCase):
     def test_connect_gkdb(self):
         from omas.examples import connect_gkdb
 
+    @unittest.skipUnless(not failed_UDA, str(failed_UDA))
     def test_omas_uda_example(self):
         from omas.examples import omas_uda_example
 
     def test_save_load_all(self):
         from omas.examples import save_load_all
 
+    @unittest.skipUnless(not failed_S3, str(failed_S3))
     def test_plot_omas(self):
         from omas.examples import plot_omas
 
@@ -135,6 +138,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_plot_omas_omfit(self):
         from omas.examples import plot_omas_omfit
 
+    @unittest.skipUnless(not failed_S3, str(failed_S3))
     def test_plot_omas_overlays(self):
         from omas.examples import plot_omas_overlays
 
