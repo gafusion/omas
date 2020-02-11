@@ -270,6 +270,7 @@ class ODS(MutableMapping):
                     assert abs(time - time0).max() < 1e-7
                 extra_info['homogeneous_time'] = True
                 return time0
+            # there are inconsistencies with different ways of specifying times in the IDS
             else:
                 raise ValueError('Inconsistent time definitions in %s' % times.keys())
 
