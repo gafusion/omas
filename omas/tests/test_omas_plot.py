@@ -175,7 +175,7 @@ class TestOmasPlot(unittest.TestCase):
                                 include_q=iq,
                                 include_xpoint=ipsi,  # This doesn't need an independent scan
                             )
-                            if include_profiles and not ispi:
+                            if iprof and not ispi:
                                 # Try to trip up the X-point plotter by putting in an incomplete definition. This
                                 # access attempt should cause the number of X-points to be interpreted as 1, even though
                                 # there is no data and so the X-point is not defined.
