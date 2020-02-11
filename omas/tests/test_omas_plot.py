@@ -206,8 +206,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=False)
+            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
+            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
         return
 
     def test_eqcx_slices(self):
@@ -433,6 +433,48 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_langmuir_probes_overlay()
         # No wall data for helping align labels
         ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
+        return
+
+    def test_position_control_overlay(self):
+        """Tests method for plotting overlay of position_control data"""
+
+        pc_ods = ODS()
+
+        # No data; have to abort
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Add sample data
+        pc_ods.sample_pulse_schedule()
+
+        # Basic test
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Multi-time
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=[0.5, 2.3]))
+
+        # Now with equilibrium data (magnetic axis position affects label alignment
+        pc_ods.sample_equilibrium()
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+        pc_ods.sample_equilibrium(include_xpoint=True)
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+        pc_ods.sample_equilibrium(include_xpoint=True, time_index=1)
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+
+        # Call the method itself
+        pc_ods.plot_position_control_overlay()
+
+        return
+
+    def test_pulse_schedule_overlay(self):
+        """
+        Tests method for plotting overlay of pulse_schedule data.
+        The main item here is position_control, which has its own test. So, this will be short.
+        """
+        import time
+        pc_ods = ODS()
+        pc_ods.sample_pulse_schedule()
+        pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
+        pc_ods.plot_pulse_schedule_overlay()
         return
 
 
