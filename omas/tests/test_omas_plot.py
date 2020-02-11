@@ -173,6 +173,7 @@ class TestOmasPlot(unittest.TestCase):
                                 include_psi=ipsi,
                                 include_wall=iwall,
                                 include_q=iq,
+                                include_xpoint=ipsi,  # This doesn't need an independent scan
                             )
                             for cqo in cq_options:
                                 ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
@@ -230,6 +231,7 @@ class TestOmasPlot(unittest.TestCase):
         ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)
         ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
         ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
+        return
 
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
@@ -243,6 +245,7 @@ class TestOmasPlot(unittest.TestCase):
             show_total_density=True)
         ods2.plot_core_profiles_summary(
             fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+        return
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
