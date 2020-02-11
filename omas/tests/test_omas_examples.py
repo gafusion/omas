@@ -73,7 +73,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_solps_imas(self):
         from omas.examples import solps_imas
 
-    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
+    @unittest.skipUnless(not (failed_IMAS or failed_OMFIT), str(failed_IMAS) + str(failed_OMFIT))
     def test_geqdsk_to_from_imas(self):
         from omas.examples import geqdsk_to_from_imas
 
@@ -107,6 +107,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_uncertain(self):
         from omas.examples import uncertain
 
+    @unittest.skipUnless(not failed_OMFIT, str(failed_OMFIT))
     def test_plot_g_s_2_ip(self):
         from omas.examples import plot_g_s_2_ip
 
@@ -130,6 +131,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_consistency_check(self):
         from omas.examples import consistency_check
 
+    @unittest.skipUnless(not failed_OMFIT, str(failed_OMFIT))
     def test_plot_omas_omfit(self):
         from omas.examples import plot_omas_omfit
 
