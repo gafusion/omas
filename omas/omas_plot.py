@@ -2316,7 +2316,15 @@ def langmuir_probes_overlay(
 
 @add_to__ODS__
 def position_control_overlay(
-        ods, ax=None, t=None, xpoint_marker='x', strike_marker='s', show_measured_xpoint=False, **kw):
+    ods,
+    ax=None,
+    t=None,
+    xpoint_marker='x',
+    strike_marker='s',
+    measured_xpoint_marker='+',
+    show_measured_xpoint=False,
+    **kw
+):
     r"""
     Overlays position_control data
 
@@ -2336,6 +2344,9 @@ def position_control_overlay(
 
     :param show_measured_xpoint: bool
         In addition to the target X-point, mark the measured X-point coordinates.
+
+    :param measured_xpoint_marker: string
+        Matplotlib marker spec for X-point measurement(s)
 
     :param \**kw: Additional keywords.
 
@@ -2445,12 +2456,14 @@ def position_control_overlay(
     kw.setdefault('marker', 'o')
     plot_out = ax.plot(r, z, **kw)
 
-    kwx['marker'] = xpoint_marker
     kwx.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
     if show_measured_xpoint:
-        xmplot_out = ax.plot(rxm, zxm, **kwx)
+        kwxm = copy.deepcopy(kwx)
+        kwxm.setdefault('marker', measured_xpoint_marker)
+        xmplot_out = ax.plot(rxm, zxm, **kwxm)
     else:
         xmplot_out = None
+    kwx['marker'] = xpoint_marker
     kwx.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
     kwx['color'] = plot_out[0].get_color()
     xplot_out = ax.plot(rx, zx, **kwx)
