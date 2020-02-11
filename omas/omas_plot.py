@@ -2334,6 +2334,9 @@ def position_control_overlay(
     :param strike_marker: string
         Matplotlib marker spec for strike point target(s)
 
+    :param show_measured_xpoint: bool
+        In addition to the target X-point, mark the measured X-point coordinates.
+
     :param \**kw: Additional keywords.
 
         * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
