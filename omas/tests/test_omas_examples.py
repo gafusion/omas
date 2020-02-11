@@ -69,9 +69,11 @@ class TestOmasExamples(unittest.TestCase):
     def test_parse_codeparameters(self):
         from omas.examples import parse_codeparameters
 
+    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
     def test_solps_imas(self):
         from omas.examples import solps_imas
 
+    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
     def test_geqdsk_to_from_imas(self):
         from omas.examples import geqdsk_to_from_imas
 
@@ -117,9 +119,11 @@ class TestOmasExamples(unittest.TestCase):
     def test_omas_cocos(self):
         from omas.examples import omas_cocos
 
+    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
     def test_iter_scenario(self):
         from omas.examples import iter_scenario
 
+    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
     def test_simple_imas(self):
         from omas.examples import simple_imas
 
