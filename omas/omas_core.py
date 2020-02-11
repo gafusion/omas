@@ -1409,11 +1409,13 @@ class ODS(MutableMapping):
 
         :return: return from save_omas_XXX() method
         """
-        if '.' not in args[0]:
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
         return eval('save_omas_' + ext)(self, *args, **kw)
 
     def load(self, *args, **kw):
@@ -1429,11 +1431,13 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
-        if '.' not in args[0]:
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
         if 'consistency_check' in kw:
             consistency_check = kw['consistency_check']
         else:
