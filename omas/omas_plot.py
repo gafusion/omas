@@ -483,7 +483,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, **kw):
+def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, xkw={}, **kw):
     r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -513,7 +513,10 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
         True/False: do(n't) label contours
         None: only label if contours are of q
 
-    :param \**kw: arguments passed to matplotlib plot statements
+    :param xkw: dict [optional]
+        Keywords to pass to plot call to draw X-point(s). Disable X-points by setting xkw={'marker': ''}
+
+    :param \**kw: keywords passed to matplotlib plot statements
 
     :return: Axes instance
     """
@@ -643,6 +646,23 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
         ax.clabel(cs)
+
+    # X-point(s)
+    xkw.setdefault('marker', 'x')
+    if xkw['marker'] not in ['', ' ']:
+        from matplotlib import rcParams
+        xkw.setdefault('color', cs.colors)
+        xkw.setdefault('linestyle', '')
+        xkw.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
+        xkw.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
+        xp = eq['boundary']['x_point']
+        for i in range(len(xp)):
+            try:
+                xr, xz = xp[i]['r'], xp[i]['z']
+            except ValueError:
+                pass
+            else:
+                ax.plot(xr, xz, **xkw)
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
@@ -834,8 +854,6 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
     ax.set_xlim([0, 1])
 
     return axs
-
-
 
 
 @add_to__ODS__
@@ -2316,7 +2334,15 @@ def langmuir_probes_overlay(
 
 @add_to__ODS__
 def position_control_overlay(
-        ods, ax=None, t=None, xpoint_marker='x', strike_marker='s', show_measured_xpoint=False, **kw):
+    ods,
+    ax=None,
+    t=None,
+    xpoint_marker='x',
+    strike_marker='s',
+    measured_xpoint_marker='+',
+    show_measured_xpoint=False,
+    **kw
+):
     r"""
     Overlays position_control data
 
@@ -2333,6 +2359,12 @@ def position_control_overlay(
 
     :param strike_marker: string
         Matplotlib marker spec for strike point target(s)
+
+    :param show_measured_xpoint: bool
+        In addition to the target X-point, mark the measured X-point coordinates.
+
+    :param measured_xpoint_marker: string
+        Matplotlib marker spec for X-point measurement(s)
 
     :param \**kw: Additional keywords.
 
@@ -2442,12 +2474,14 @@ def position_control_overlay(
     kw.setdefault('marker', 'o')
     plot_out = ax.plot(r, z, **kw)
 
-    kwx['marker'] = xpoint_marker
     kwx.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
     if show_measured_xpoint:
-        xmplot_out = ax.plot(rxm, zxm, **kwx)
+        kwxm = copy.deepcopy(kwx)
+        kwxm.setdefault('marker', measured_xpoint_marker)
+        xmplot_out = ax.plot(rxm, zxm, **kwxm)
     else:
         xmplot_out = None
+    kwx['marker'] = xpoint_marker
     kwx.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
     kwx['color'] = plot_out[0].get_color()
     xplot_out = ax.plot(rx, zx, **kwx)
