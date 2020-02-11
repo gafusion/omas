@@ -51,4 +51,4 @@ try:
 except ImportError as _excp:
     failed_OMFIT = _excp
 
-__all__ = ['failed_IMAS', 'failed_HDC', 'failed_S3', 'failed_MONGO', 'failed_OMFIT']
+__all__ = ['failed_IMAS', 'failed_HDC', 'failed_S3', 'failed_MONGO', 'failed_OMFIT', 'failed_UDA']
