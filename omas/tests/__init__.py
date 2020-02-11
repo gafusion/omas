@@ -1,4 +1,5 @@
 try:
+    from failed_imports import *
     from test_omas_core import *
     from test_omas_physics import *
     from test_omas_plot import *
