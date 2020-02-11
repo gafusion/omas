@@ -124,8 +124,8 @@ def equilibrium(
         del eq['wall']
 
     if include_xpoint:
-        ods['equilibrium.time_slice'][0]['boundary.x_point.0.r'] = 1.304
-        ods['equilibrium.time_slice'][0]['boundary.x_point.0.z'] = -1.222
+        eq['equilibrium.time_slice'][0]['boundary.x_point.0.r'] = 1.304
+        eq['equilibrium.time_slice'][0]['boundary.x_point.0.z'] = -1.222
 
     ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])

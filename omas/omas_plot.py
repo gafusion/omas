@@ -2027,15 +2027,12 @@ def position_control_overlay(
             rxm = [eq['time_slice'][it]['boundary.x_point'][i]['r'] for i in range(nxm)]
             zxm = [eq['time_slice'][it]['boundary.x_point'][i]['z'] for i in range(nxm)]
         else:
-            try:
-                rxm = [
-                    interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['r'], **ikw)(t) for i in range(nxm)
-                ]
-                zxm = [
-                    interp1d(eq['time'], eq['time_slice[:].boundary.x_point'][i]['z'], **ikw)(t) for i in range(nxm)
-                ]
-            except ValueError:
-                rxm = zxm = np.NaN
+            rxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)
+            ]
+            zxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)
+            ]
     else:
         rxm = zxm = np.NaN
     if timing_ref is not None:
