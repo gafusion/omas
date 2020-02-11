@@ -9,6 +9,14 @@ except ImportError as _excp:
     failed_IMAS = _excp
 
 try:
+    import pyuda
+
+    failed_UDA = False
+except ImportError as _excp:
+    failed_UDA = _excp
+
+
+try:
     import hdc
 
     failed_HDC = False
