@@ -1685,7 +1685,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', 'imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
