@@ -24,6 +24,10 @@ from omas import *
 from omas.omas_utils import *
 from failed_imports import *
 
+# Use Agg backend to avoid opening up figures
+import matplotlib
+matplotlib.use('Agg')
+
 class TestOmasExamples(unittest.TestCase):
     """
     Test suite for omas_utils.py
