@@ -171,7 +171,7 @@ class ODS(MutableMapping):
         self._dynamic_path_creation = dynamic_path_creation
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
-        self.imas_version = imas_version
+        self._imas_version = imas_version
         self.location = location
         self._cocos = cocos
         self.cocosio = cocosio
@@ -328,6 +328,27 @@ class ODS(MutableMapping):
             self['time'] = numpy.atleast_1d(self['time'][time_index])
 
         return self
+
+    @property
+    def imas_version(self):
+        """
+        Property that returns the imas_version of this ods
+
+        :return: string with imas_version
+        """
+        if not hasattr(self, '_imas_version'):
+            self._imas_version = omas_rcparams['imas_version']
+        return self._imas_version
+
+    @imas_version.setter
+    def imas_version(self, imas_version_value):
+        self._imas_version = imas_version_value
+        for item in self.keys():
+            if isinstance(self.getraw(item), ODS):
+                if 'code.parameters' in self.getraw(item).location:
+                    continue
+                else:
+                    self.getraw(item).imas_version = imas_version_value
 
     @property
     def consistency_check(self):
