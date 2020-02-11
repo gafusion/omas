@@ -175,6 +175,12 @@ class TestOmasPlot(unittest.TestCase):
                                 include_q=iq,
                                 include_xpoint=ipsi,  # This doesn't need an independent scan
                             )
+                            if include_profiles and not ispi:
+                                # Try to trip up the X-point plotter by putting in an incomplete definition. This
+                                # access attempt should cause the number of X-points to be interpreted as 1, even though
+                                # there is no data and so the X-point is not defined.
+                                ods['equilibrium.time_slice.0.boundary.x_point.0']
+
                             for cqo in cq_options:
                                 ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
 
