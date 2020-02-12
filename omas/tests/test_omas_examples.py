@@ -15,22 +15,19 @@ Test script for omas/examples/...
 from __future__ import print_function, division, unicode_literals
 import os
 import unittest
-import numpy
-import warnings
-import copy
+
+# Use Agg backend to avoid opening up figures
+import matplotlib
+matplotlib.use('Agg')
 
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
 from failed_imports import *
 
-# Use Agg backend to avoid opening up figures
-import matplotlib
-matplotlib.use('Agg')
-
 class TestOmasExamples(unittest.TestCase):
     """
-    Test suite for omas_utils.py
+    Test suite for examples files
     """
 
     # Flags to edit while testing
