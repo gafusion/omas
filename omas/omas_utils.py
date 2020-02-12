@@ -28,8 +28,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False):
     """
     from omas import ODS
 
-    ods1 = ods1.flat()
-    ods2 = ods2.flat()
+    ods1 = ods1.flat(return_empty_leaves=True)
+    ods2 = ods2.flat(return_empty_leaves=True)
 
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
