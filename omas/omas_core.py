@@ -955,17 +955,12 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def pretty_paths(self):
+    def paths(self, return_empty_leaves=False, **kw):
         """
-        Traverse the ods and return paths that have data formatted nicely
+        Traverse the ods and return paths to the its leaves
 
-        :return: list of paths that have data formatted nicely
-        """
-        return list(map(l2i, self.paths()))
-
-    def paths(self, **kw):
-        """
-        Traverse the ods and return paths that have data
+        :param return_empty_leaves: if False only return paths to leaves that have data
+                                    if True also return paths to empty leaves
 
         :return: list of paths that have data
         """
@@ -973,26 +968,44 @@ class ODS(MutableMapping):
         path = kw.setdefault('path', [])
         for kid in self.keys():
             if isinstance(self.getraw(kid), ODS):
-                self.getraw(kid).paths(paths=paths, path=path + [kid])
+                self.getraw(kid).paths(return_empty_leaves=return_empty_leaves, paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
+        if not len(self.keys()) and return_empty_leaves:
+            paths.append(path)
         return paths
 
-    def full_paths(self):
+    def pretty_paths(self, **kw):
+        """
+        Traverse the ods and return paths that have data formatted nicely
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: list of paths that have data formatted nicely
+        """
+        return list(map(l2i, self.paths(**kw)))
+
+    def full_paths(self, **kw):
         """
         Traverse the ods and return paths from root of ODS that have data
+
+        :param \**kw: extra keywords passed to the path() method
 
         :return: list of paths that have data
         """
         location = p2l(self.location)
-        return [location + path for path in self.paths()]
+        return [location + path for path in self.paths(**kw)]
 
-    def flat(self):
+    def flat(self, **kw):
         """
-        :return: flat dictionary representation of the data
+        Flat dictionary representation of the data
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: OrderedDict with flat representation of the data
         """
         tmp = OrderedDict()
-        for path in self.paths():
+        for path in self.paths(**kw):
             tmp[l2o(path)] = self[path]
         return tmp
 
