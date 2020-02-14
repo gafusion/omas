@@ -550,12 +550,12 @@ class ODS(MutableMapping):
             elif isinstance(self.omas_data, list):
                 key[0] = len(self.omas_data)
 
-        if len(key) > 1:
-            pass_on_value = value
-        if key[0] == 'parameters' and self.location.endswith('.code'):
+        # handle dynamic path creation for .code.parameters leaf
+        if len(key)==1 and key[0] == 'parameters' and self.location.endswith('.code') and not isinstance(value, basestring):
             value = CodeParameters()
         # if the user has entered path rather than a single key
         elif len(key) > 1:
+            pass_on_value = value
             value = self.__class__(imas_version=self.imas_version,
                                    consistency_check=self.consistency_check,
                                    dynamic_path_creation=self.dynamic_path_creation,
