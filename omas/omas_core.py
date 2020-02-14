@@ -349,7 +349,13 @@ class ODS(MutableMapping):
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
-                    continue
+                    # consistency_check=True makes sure that code.parameters is of type CodeParameters
+                    if consistency_value:
+                        tmp = CodeParameters()
+                        tmp.update(self.getraw(item))
+                        self.setraw(item, tmp)
+                    else:
+                        continue
                 else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
@@ -544,8 +550,11 @@ class ODS(MutableMapping):
             elif isinstance(self.omas_data, list):
                 key[0] = len(self.omas_data)
 
+        # handle dynamic path creation for .code.parameters leaf
+        if len(key)==1 and key[0] == 'parameters' and self.location.endswith('.code') and not isinstance(value, basestring):
+            value = CodeParameters()
         # if the user has entered path rather than a single key
-        if len(key) > 1:
+        elif len(key) > 1:
             pass_on_value = value
             value = self.__class__(imas_version=self.imas_version,
                                    consistency_check=self.consistency_check,

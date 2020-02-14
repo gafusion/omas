@@ -375,14 +375,28 @@ class TestOmasCore(unittest.TestCase):
         ods = ODS()
         ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
 
-        tmp={}
+        tmp = {}
         tmp.update(ods['equilibrium.code.parameters'])
         ods['equilibrium.code.parameters'] = tmp
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         with omas_environment(ods, xmlcodeparams=True):
-            assert isinstance(ods['equilibrium.code.parameters'],basestring)
+            assert isinstance(ods['equilibrium.code.parameters'], basestring)
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        # test that dynamic creation of .code.parameters makes it a CodeParameters object
+        ods = ODS()
+        ods['equilibrium.code.parameters']['param1'] = 1
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        # test saving of code_parameters in json format
+        ods.save('ods_w_codeparams.json')
+
+        # test that loading of data with code.parameters results in a CodeParameters object
+        ods = ODS()
+        ods.load('ods_w_codeparams.json')
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)
