@@ -138,7 +138,7 @@
  },
  "soft_x_rays.channel[:].aperture[:].outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
   "full_path": "soft_x_rays/channel(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "x1x21d_static"
@@ -833,7 +833,7 @@
  },
  "soft_x_rays.channel[:].detector.outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
   "full_path": "soft_x_rays/channel(i1)/detector/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "x1x21d_static"

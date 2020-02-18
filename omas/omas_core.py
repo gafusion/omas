@@ -551,7 +551,7 @@ class ODS(MutableMapping):
                 key[0] = len(self.omas_data)
 
         # handle dynamic path creation for .code.parameters leaf
-        if len(key)==1 and key[0] == 'parameters' and self.location.endswith('.code') and not isinstance(value, basestring):
+        if len(key) == 1 and key[0] == 'parameters' and self.location.endswith('.code') and not isinstance(value, basestring):
             value = CodeParameters()
         # if the user has entered path rather than a single key
         elif len(key) > 1:

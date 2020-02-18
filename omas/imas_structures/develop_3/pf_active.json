@@ -765,7 +765,7 @@
  },
  "pf_active.coil[:].element[:].geometry.outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the element",
+  "documentation": "Irregular outline of the element. Do NOT repeat the first point.",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "rz1d_static"

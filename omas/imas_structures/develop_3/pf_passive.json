@@ -2,7 +2,7 @@
  "pf_passive": {
   "documentation": "Description of the axisymmetric passive conductors, currents flowing in them",
   "full_path": "pf_passive",
-  "lifecycle_last_change": "3.11.0",
+  "lifecycle_last_change": "3.26.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -143,13 +143,13 @@
  },
  "pf_passive.loop[:].current": {
   "coordinates": [
-   "pf_passive.time"
+   "pf_passive.loop[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Passive loop current",
   "full_path": "pf_passive/loop(i1)/current(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "/time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
  },
@@ -162,25 +162,25 @@
  },
  "pf_passive.loop[:].current_error_lower": {
   "coordinates": [
-   "pf_passive.time"
+   "pf_passive.loop[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "/time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
  },
  "pf_passive.loop[:].current_error_upper": {
   "coordinates": [
-   "pf_passive.time"
+   "pf_passive.loop[:].time"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "/time",
+  "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
  },
@@ -562,7 +562,7 @@
  },
  "pf_passive.loop[:].element[:].geometry.outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the element",
+  "documentation": "Irregular outline of the element. Do NOT repeat the first point.",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "rz1d_static"
@@ -891,6 +891,18 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "Ohm.m"
+ },
+ "pf_passive.loop[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Timebase for the dynamic nodes of this loop located at this level of the IDS structure",
+  "full_path": "pf_passive/loop(i1)/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "pf_passive.time": {
   "coordinates": [
