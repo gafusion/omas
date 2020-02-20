@@ -97,6 +97,13 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = float(value)
         elif 'INT' in info['data_type']:
             value = int(value)
+    # structure type is respected check type
+    if info['data_type'] == 'structure' and not isinstance(value, ODS):
+        text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
     # check type
     if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
         text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
