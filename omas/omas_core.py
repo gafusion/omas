@@ -1484,7 +1484,8 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
-        self.consistency_check = consistency_check
+        if consistency_check != self.consistency_check:
+            self.consistency_check = consistency_check
         return self
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
