@@ -223,6 +223,8 @@ class ODS(MutableMapping):
 
         # get time nodes from data structure definitions
         loc = p2l(subtree)
+        if not loc:
+            raise LookupError('Must specify a location in the ODS to get the time of')
         flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
         times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
 
