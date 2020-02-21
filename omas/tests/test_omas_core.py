@@ -268,11 +268,11 @@ class TestOmasCore(unittest.TestCase):
 
     def test_version(self):
         ods = ODS(imas_version='3.20.0')
-        ods['ec_antennas.antenna.0.power'] = 1.0
+        ods['ec_antennas.antenna.0.power.data'] = [1.0]
 
         try:
             ods = ODS(imas_version='3.21.0')
-            ods['ec_antennas.antenna.0.power'] = 1.0
+            ods['ec_antennas.antenna.0.power.data'] = [1.0]
             raise AssertionError('3.21.0 should not have `ec_antennas.antenna.0.power`')
         except LookupError:
             pass
