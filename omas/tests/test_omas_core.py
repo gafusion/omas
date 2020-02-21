@@ -390,11 +390,11 @@ class TestOmasCore(unittest.TestCase):
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         # test saving of code_parameters in json format
-        ods.save('ods_w_codeparams.json')
+        ods.save(tempfile.gettempdir()+'/ods_w_codeparams.json')
 
         # test that loading of data with code.parameters results in a CodeParameters object
         ods = ODS()
-        ods.load('ods_w_codeparams.json')
+        ods.load(tempfile.gettempdir()+'/ods_w_codeparams.json')
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
 
