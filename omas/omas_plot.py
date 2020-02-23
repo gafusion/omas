@@ -684,6 +684,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
     return ax
 
+
 @add_to__ODS__
 def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     r"""
@@ -742,13 +743,12 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     Xin = Rin * cost
     Yin = Rin * sint
 
-    ax.plot(Xin, Yin,  **kw1)
+    ax.plot(Xin, Yin, **kw1)
     kw1.setdefault('color', ax.lines[-1].get_color())
     ax.plot(Xout, Yout, **kw1)
 
     # Wall
     if wall is not None:
-
         Rout = numpy.max(wall[0]['outline']['r'])
         Rin = numpy.min(wall[0]['outline']['r'])
         Xout = Rout * cost
@@ -767,6 +767,7 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     ax.yaxis.set_ticks_position('left')
 
     return ax
+
 
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=None, fig=None, **kw):
@@ -1027,6 +1028,7 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         leg.draggable(True)
     return ax
 
+
 # ================================
 # actuator aimings
 # ================================
@@ -1071,6 +1073,7 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
         ax.plot([R0, R1], [Z0, Z1], '--', **kw)
 
     return ax
+
 
 @add_to__ODS__
 def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
@@ -1118,6 +1121,7 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
 
     return ax
 
+
 @add_to__ODS__
 def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
     """
@@ -1144,7 +1148,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory= antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1169,8 +1173,8 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
         Rvec = Raxis - R
         Zvec = Zaxis - Z
 
-        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec**2+Zvec**2)
-        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec**2+Zvec**2)
+        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
+        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
 
         ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
@@ -1201,7 +1205,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory= antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1221,12 +1225,13 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
 
-        x1 = (R-antenna_trajectory) * numpy.cos(phi)
-        y1 = (R-antenna_trajectory) * numpy.sin(phi)
+        x1 = (R - antenna_trajectory) * numpy.cos(phi)
+        y1 = (R - antenna_trajectory) * numpy.sin(phi)
 
-        ax.plot([x0, x1], [y0, y1], 's-',markevery=2, **kw)
+        ax.plot([x0, x1], [y0, y1], 's-', markevery=2, **kw)
 
     return ax
+
 
 @add_to__ODS__
 def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
@@ -1253,7 +1258,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory= launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1267,13 +1272,12 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
-
         R0 = launchers[launcher]['launching_position.r']
         Z0 = launchers[launcher]['launching_position.z']
         ang_pol = launchers[launcher]['steering_angle_pol.data']
 
         R1 = R0 - launcher_trajectory * numpy.sin(ang_pol)
-        Z1 = Z0 +  launcher_trajectory * numpy.cos(ang_pol)
+        Z1 = Z0 + launcher_trajectory * numpy.cos(ang_pol)
 
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
@@ -1298,7 +1302,6 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
     :return: axes handler
     """
 
-
     if time_index is None:
         time_index = numpy.arange(len(ods['ec_launchers']['time']))
     if isinstance(time_index, (list, numpy.ndarray)):
@@ -1306,7 +1309,7 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory= launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1317,7 +1320,7 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
     equilibrium = ods['equilibrium']
     launchers = ods['ec_launchers.launcher']
     if launcher_trajectory is None:
-        launcher_trajectory = 0.1 *  equilibrium['vacuum_toroidal_field.r0']
+        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
     for launcher in launchers:
         R = launchers[launcher]['launching_position.r']
@@ -1327,8 +1330,8 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
 
-        x1 = x0 + launcher_trajectory * numpy.cos(ang_tor+phi)
-        y1 = y0 + launcher_trajectory * numpy.sin(ang_tor+phi)
+        x1 = x0 + launcher_trajectory * numpy.cos(ang_tor + phi)
+        y1 = y0 + launcher_trajectory * numpy.sin(ang_tor + phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return ax
@@ -2332,16 +2335,17 @@ def langmuir_probes_overlay(
             )
     return
 
+
 @add_to__ODS__
 def position_control_overlay(
-    ods,
-    ax=None,
-    t=None,
-    xpoint_marker='x',
-    strike_marker='s',
-    measured_xpoint_marker='+',
-    show_measured_xpoint=False,
-    **kw
+        ods,
+        ax=None,
+        t=None,
+        xpoint_marker='x',
+        strike_marker='s',
+        measured_xpoint_marker='+',
+        show_measured_xpoint=False,
+        **kw
 ):
     r"""
     Overlays position_control data
@@ -2546,6 +2550,7 @@ def position_control_overlay(
         print(time.time() - timing_ref, 'position_control_overlay done')
     return
 
+
 @add_to__ODS__
 def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
     r"""
@@ -2577,6 +2582,7 @@ def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
 
     position_control_overlay(ods, ax=ax, t=t, **kw)
     return
+
 
 @add_to__ODS__
 def summary(ods, fig=None, quantity=None):
