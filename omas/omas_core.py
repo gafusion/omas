@@ -560,15 +560,20 @@ class ODS(MutableMapping):
                 key[0] = len(self.omas_data)
 
         # handle dynamic path creation for .code.parameters leaf
-        if len(key) == 1 and key[0] == 'parameters' and self.location.endswith('.code') and not isinstance(value, basestring):
+        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+            pass_on_value = value
             value = CodeParameters()
+            value.update(pass_on_value)
         # if the user has entered path rather than a single key
         elif len(key) > 1:
             pass_on_value = value
-            value = self.__class__(imas_version=self.imas_version,
-                                   consistency_check=self.consistency_check,
-                                   dynamic_path_creation=self.dynamic_path_creation,
-                                   cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+            if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+                value = CodeParameters()
+            else:
+                value = self.__class__(imas_version=self.imas_version,
+                                       consistency_check=self.consistency_check,
+                                       dynamic_path_creation=self.dynamic_path_creation,
+                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -1543,9 +1548,9 @@ class ODS(MutableMapping):
                 self[item].codeparams2xml()
             return
         elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
-            self['code.parameters'] = self['code.parameters'].tostring()
+            self['code.parameters'] = self['code.parameters'].to_string()
         elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
-            self['parameters'] = self['parameters'].tostring()
+            self['parameters'] = self['parameters'].to_string()
 
     def codeparams2dict(self):
         '''
@@ -1557,9 +1562,9 @@ class ODS(MutableMapping):
             return
         try:
             if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
-                self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+                self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
             elif ('parameters' in self and isinstance(self['parameters'], basestring)):
-                self['parameters'] = CodeParameters().fromstring(self['parameters'])
+                self['parameters'] = CodeParameters().from_string(self['parameters'])
         except Exception as _excp:
             printe(repr(_excp))
 
@@ -1572,11 +1577,11 @@ class CodeParameters(dict):
     def __init__(self, string=None):
         if isinstance(string, basestring):
             if os.path.exists(string):
-                self.fromfile(string)
+                self.from_file(string)
             else:
-                self.fromstring(string)
+                self.from_string(string)
 
-    def fromstring(self, code_params_string):
+    def from_string(self, code_params_string):
         '''
         Load data from code.parameters XML string
 
@@ -1588,11 +1593,11 @@ class CodeParameters(dict):
         self.clear()
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
-            recursive_interpreter(tmp)
+            recursive_interpreter(tmp, dict_cls=CodeParameters)
             self.update(tmp)
         return self
 
-    def fromfile(self, code_params_file):
+    def from_file(self, code_params_file):
         '''
         Load data from code.parameters XML file
 
@@ -1601,19 +1606,58 @@ class CodeParameters(dict):
         :return: self
         '''
         with open(code_params_file, 'r') as f:
-            return self.fromstring(f.read())
+            return self.from_string(f.read())
 
-    def tostring(self):
+    def to_string(self):
         '''
         generate an XML string from this dictionary
 
         :return: XML string
         '''
         import xmltodict
-        tmp = {'parameters': OrderedDict()}
+        tmp = {'parameters': CodeParameters()}
         tmp['parameters'].update(copy.deepcopy(self))
         recursive_encoder(tmp)
         return xmltodict.unparse(tmp, pretty=True)
+
+    def __setitem__(self, key, value):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            dict.__setitem__(self, key[0], self.__class__())
+            dict.__getitem__(self, key[0])[key[1:]] = value
+        # return leaf
+        else:
+            # convert ODSs to CodeParameters
+            if isinstance(value, ODS):
+                value = CodeParameters()
+            dict.__setitem__(self, key[0], value)
+
+    def __getitem__(self, key):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            return dict.__getitem__(self, key[0])[key[1:]]
+        # return leaf
+        else:
+            return dict.__getitem__(self, key[0])
+
+    def update(self, value):
+        # convert ODSs to CodeParameters
+        if isinstance(value, ODS):
+            for item in value.paths():
+                self[item] = value[item]
+        else:
+            for item in value.keys():
+                self[item] = value[item]
 
 
 def codeparams_xml_save(f):

@@ -777,13 +777,15 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     return tmp
 
 
-def recursive_interpreter(me, interpret_method=ast.literal_eval):
+def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=OrderedDict):
     '''
     Traverse dictionaries and list to convert strings to int/float when appropriate
 
     :param me: root of the dictionary to traverse
 
     :param interpret_method: method used for conversion (ast.literal_eval by default)
+
+    :param dict_cls: dictionary class to use
 
     :return: root of the dictionary
     '''
@@ -796,7 +798,14 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval):
         if me[kid] is None:
             continue
         elif isinstance(me[kid], (list, dict)):
-            recursive_interpreter(me[kid], interpret_method=interpret_method)
+            if not isinstance(me[kid], dict_cls):
+                tmp = me[kid]
+                me[kid] = dict_cls()
+                me[kid].update(tmp)
+            recursive_interpreter(me[kid], interpret_method=interpret_method, dict_cls=dict_cls)
+            if isinstance(kid, basestring) and kid.startswith('__integer_'):
+                me[int(re.sub('__integer_([0-9]+)__', r'\1', kid))] = me[kid]
+                del me[kid]
         else:
             try:
                 me[kid] = interpret_method(me[kid])
@@ -810,13 +819,12 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval):
                     me[kid] = numpy.array(values)
                 except ValueError:
                     pass
-
     return me
 
 
 def recursive_encoder(me):
     '''
-    Traverse dictionaries and list to convert entries strings as appropriate
+    Traverse dictionaries and list to convert entries as appropriate
 
     :param me: root of the dictionary to traverse
 
@@ -837,6 +845,10 @@ def recursive_encoder(me):
                 me[kid] = ' '.join([repr(x) for x in me[kid]])
             else:
                 me[kid] = str(me[kid])
+        # omas encoding of integer keys
+        if isinstance(kid, int):
+            me['__integer_%d__' % kid] = me[kid]
+            del me[kid]
     return me
 
 
