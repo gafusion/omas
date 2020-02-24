@@ -482,6 +482,10 @@ class TestOmasPlot(unittest.TestCase):
         mask[0] = True
         mask[-1] = True
         pc_ods.plot_position_control_overlay(mask=mask)
+        # Force the overlay function to extend the mask by giving it one that's too small
+        small_mask = mask[:-2]
+        small_mask[-1] = True
+        pc_ods.plot_position_control_overlay(mask=small_mask)
 
         return
 
