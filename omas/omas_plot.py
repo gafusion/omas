@@ -2342,6 +2342,7 @@ def position_control_overlay(
         t=None,
         xpoint_marker='x',
         strike_marker='s',
+        labels=None,
         measured_xpoint_marker='+',
         show_measured_xpoint=False,
         **kw
@@ -2362,6 +2363,9 @@ def position_control_overlay(
 
     :param strike_marker: string
         Matplotlib marker spec for strike point target(s)
+
+    :param labels: list of strings [optional]
+        Override default point labels. Length must be long enough to cover all points.
 
     :param show_measured_xpoint: bool
         In addition to the target X-point, mark the measured X-point coordinates.
@@ -2526,12 +2530,15 @@ def position_control_overlay(
         mnbp + mnx + mns, default_ha=default_ha, default_va=default_va, label_ha=label_ha, label_va=label_va
     )
 
+    if labels is None:
+        labels = bname + xname + sname
+
     for i in range(mnbp):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
             ax.text(
                 r[i] + label_r_shift,
                 z[i] + label_z_shift,
-                '\n {} \n'.format(bname[i]),
+                '\n {} \n'.format(labels[i]),
                 color=plot_out[0].get_color(),
                 va=label_va[i],
                 ha=label_ha[i],
@@ -2542,7 +2549,7 @@ def position_control_overlay(
             ax.text(
                 rx[i] + label_r_shift,
                 zx[i] + label_z_shift,
-                '\n {} \n'.format(xname[i]),
+                '\n {} \n'.format(labels[mnbp + i]),
                 color=xplot_out[0].get_color(),
                 va=label_va[mnbp + i],
                 ha=label_ha[mnbp + i],
@@ -2554,7 +2561,7 @@ def position_control_overlay(
             ax.text(
                 rs[i] + label_r_shift,
                 zs[i] + label_z_shift,
-                '\n {} \n'.format(sname[i]),
+                '\n {} \n'.format(labels[mnbp + mnx + i]),
                 color=splot_out[0].get_color(),
                 va=label_va[mnbp + mnx + i],
                 ha=label_ha[mnbp + mnx + i],
