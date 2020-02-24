@@ -474,8 +474,11 @@ class TestOmasPlot(unittest.TestCase):
 
         # Call with mask
         nb = len(pc_ods['pulse_schedule']['position_control']['boundary_outline'])
-        mask = [False] * nb
-        mask[nb//2] = True
+        nx = len(pc_ods['pulse_schedule']['position_control']['x_point'])
+        ns = len(pc_ods['pulse_schedule']['position_control']['strike_point'])
+        nn = nb + nx + ns
+        mask = [False] * nn
+        mask[nn // 2] = True
         mask[0] = True
         mask[-1] = True
         pc_ods.plot_position_control_overlay(mask=mask)
