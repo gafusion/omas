@@ -641,7 +641,6 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     value_2d[:, -1] = value_2d[:, -2]
     value_2d[-1, :] = value_2d[-2, :]
     value_2d[-1, -1] = value_2d[-2, -2]
-    levels = numpy.r_[0.1:0.9 + 0.0001:0.1]
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
