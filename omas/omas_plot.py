@@ -641,7 +641,6 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     value_2d[:, -1] = value_2d[:, -2]
     value_2d[-1, :] = value_2d[-2, :]
     value_2d[-1, -1] = value_2d[-2, -2]
-    levels = numpy.r_[0.1:0.9 + 0.0001:0.1]
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
@@ -2343,6 +2342,7 @@ def position_control_overlay(
         t=None,
         xpoint_marker='x',
         strike_marker='s',
+        labels=None,
         measured_xpoint_marker='+',
         show_measured_xpoint=False,
         **kw
@@ -2363,6 +2363,9 @@ def position_control_overlay(
 
     :param strike_marker: string
         Matplotlib marker spec for strike point target(s)
+
+    :param labels: list of strings [optional]
+        Override default point labels. Length must be long enough to cover all points.
 
     :param show_measured_xpoint: bool
         In addition to the target X-point, mark the measured X-point coordinates.
@@ -2466,10 +2469,26 @@ def position_control_overlay(
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 
     # Masking
-    mask = kw.pop('mask', np.ones(len(r), bool))
-    r = (np.array(r)[mask]).tolist()
-    z = (np.array(z)[mask]).tolist()
-    bname = (np.array(bname)[mask]).tolist()
+    mask = np.array(kw.pop('mask', np.ones(nbp+nx+ns, bool)))
+    # Extend mask to make correct length, if needed
+    if len(mask) < (nbp + nx + ns):
+        extra_mask = np.ones(nbp + nx + ns - len(mask), bool)
+        mask = np.append(mask, extra_mask)
+    maskb = mask[:nbp]
+    maskx = mask[nbp:nbp + nx]
+    masks = mask[nbp + nx: nbp + nx + ns]
+    r = (np.array(r)[maskb]).tolist()
+    z = (np.array(z)[maskb]).tolist()
+    bname = (np.array(bname)[maskb]).tolist()
+    rx = (np.array(rx)[maskx]).tolist()
+    zx = (np.array(zx)[maskx]).tolist()
+    xname = (np.array(xname)[maskx]).tolist()
+    rs = (np.array(rs)[masks]).tolist()
+    zs = (np.array(zs)[masks]).tolist()
+    sname = (np.array(sname)[masks]).tolist()
+    mnbp = len(r)
+    mnx = len(rx)
+    mns = len(rs)
 
     # Handle main plot setup and customizations
     kw.setdefault('linestyle', ' ')
@@ -2505,44 +2524,47 @@ def position_control_overlay(
         r0 = {'DIII-D': 1.6955}
         rsplit = r0.get(device, 1.7)
 
-    default_ha = [['left', 'right'][int((r + rx + rs)[i] < rsplit)] for i in range(nbp + nx + ns)]
-    default_va = [['top', 'bottom'][int((z + zx + rs)[i] > 0)] for i in range(nbp + nx + ns)]
+    default_ha = [['left', 'right'][int((r + rx + rs)[i] < rsplit)] for i in range(mnbp + mnx + mns)]
+    default_va = [['top', 'bottom'][int((z + zx + rs)[i] > 0)] for i in range(mnbp + mnx + mns)]
     label_ha, label_va, kw = text_alignment_setup(
-        nbp + nx + ns, default_ha=default_ha, default_va=default_va, label_ha=label_ha, label_va=label_va
+        mnbp + mnx + mns, default_ha=default_ha, default_va=default_va, label_ha=label_ha, label_va=label_va
     )
 
-    for i in range(nbp):
+    if labels is None:
+        labels = bname + xname + sname
+
+    for i in range(mnbp):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
             ax.text(
                 r[i] + label_r_shift,
                 z[i] + label_z_shift,
-                '\n {} \n'.format(bname[i]),
+                '\n {} \n'.format(labels[i]),
                 color=plot_out[0].get_color(),
                 va=label_va[i],
                 ha=label_ha[i],
                 fontsize=notesize,
             )
-    for i in range(nx):
+    for i in range(mnx):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rx[i]):
             ax.text(
                 rx[i] + label_r_shift,
                 zx[i] + label_z_shift,
-                '\n {} \n'.format(xname[i]),
+                '\n {} \n'.format(labels[mnbp + i]),
                 color=xplot_out[0].get_color(),
-                va=label_va[nbp + i],
-                ha=label_ha[nbp + i],
+                va=label_va[mnbp + i],
+                ha=label_ha[mnbp + i],
                 fontsize=notesize,
             )
 
-    for i in range(ns):
+    for i in range(mns):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rs[i]):
             ax.text(
                 rs[i] + label_r_shift,
                 zs[i] + label_z_shift,
-                '\n {} \n'.format(sname[i]),
+                '\n {} \n'.format(labels[mnbp + mnx + i]),
                 color=splot_out[0].get_color(),
-                va=label_va[nbp + nx + i],
-                ha=label_ha[nbp + nx + i],
+                va=label_va[mnbp + mnx + i],
+                ha=label_ha[mnbp + mnx + i],
                 fontsize=notesize,
             )
 
