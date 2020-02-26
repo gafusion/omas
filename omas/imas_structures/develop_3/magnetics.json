@@ -2,7 +2,7 @@
  "magnetics": {
   "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
   "full_path": "magnetics",
-  "lifecycle_last_change": "3.26.0",
+  "lifecycle_last_change": "3.27.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.24.0",
   "maxoccur": "3"
@@ -20,7 +20,7 @@
  },
  "magnetics.b_field_pol_probe[:].area": {
   "data_type": "FLT_0D",
-  "documentation": "Area of each turn of the coil",
+  "documentation": "Area of each turn of the sensor; becomes effective area when multiplied by the turns",
   "full_path": "magnetics/b_field_pol_probe(i1)/area",
   "lifecycle_status": "active",
   "type": "static",
@@ -91,7 +91,7 @@
  },
  "magnetics.b_field_pol_probe[:].field": {
   "data_type": "structure",
-  "documentation": "Measured magnetic field",
+  "documentation": "Magnetic field component in direction of sensor normal axis (n) averaged over sensor volume defined by area and length, where n = cos(poloidal_angle)*cos(toroidal_angle)*grad(R) - sin(poloidal_angle)*grad(Z) + cos(poloidal_angle)*sin(toroidal_angle)*grad(Phi)/norm(grad(Phi))",
   "full_path": "magnetics/b_field_pol_probe(i1)/field",
   "lifecycle_status": "active",
   "structure_reference": "signal_flt_1d_validity",
@@ -189,7 +189,7 @@
  },
  "magnetics.b_field_pol_probe[:].length": {
   "data_type": "FLT_0D",
-  "documentation": "Length of the coil",
+  "documentation": "Length of the sensor along it's normal vector (n)",
   "full_path": "magnetics/b_field_pol_probe(i1)/length",
   "lifecycle_status": "active",
   "type": "static",
@@ -314,11 +314,12 @@
  },
  "magnetics.b_field_pol_probe[:].poloidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Poloidal angle of the coil orientation",
+  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/b_field_pol_probe(i1)/poloidal_angle",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].poloidal_angle_error_index": {
   "data_type": "int_type",
@@ -333,7 +334,8 @@
   "full_path": "magnetics/b_field_pol_probe(i1)/poloidal_angle_error_lower",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].poloidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -341,7 +343,8 @@
   "full_path": "magnetics/b_field_pol_probe(i1)/poloidal_angle_error_upper",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].position": {
   "data_type": "structure",
@@ -445,11 +448,12 @@
  },
  "magnetics.b_field_pol_probe[:].toroidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Toroidal angle of coil orientation (0 if fully in the poloidal plane) ",
+  "documentation": "Angle of the projection of the sensor normal vector (n) in the horizontal plane with the increasing R direction (i.e. grad(R)) (angle is counter-clockwise from above as in cocos=11 phi-like angle). Values should be taken modulo pi with values within (-pi/2,pi/2]. Zero if projected sensor normal is parallel to grad(R), pi/2 if it is parallel to grad(phi).",
   "full_path": "magnetics/b_field_pol_probe(i1)/toroidal_angle",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].toroidal_angle_error_index": {
   "data_type": "int_type",
@@ -464,7 +468,8 @@
   "full_path": "magnetics/b_field_pol_probe(i1)/toroidal_angle_error_lower",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].toroidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -472,7 +477,8 @@
   "full_path": "magnetics/b_field_pol_probe(i1)/toroidal_angle_error_upper",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_pol_probe[:].turns": {
   "data_type": "INT_0D",
@@ -604,7 +610,7 @@
  },
  "magnetics.b_field_tor_probe[:].area": {
   "data_type": "FLT_0D",
-  "documentation": "Area of each turn of the coil",
+  "documentation": "Area of each turn of the sensor; becomes effective area when multiplied by the turns",
   "full_path": "magnetics/b_field_tor_probe(i1)/area",
   "lifecycle_status": "active",
   "type": "static",
@@ -675,7 +681,7 @@
  },
  "magnetics.b_field_tor_probe[:].field": {
   "data_type": "structure",
-  "documentation": "Measured magnetic field",
+  "documentation": "Magnetic field component in direction of sensor normal axis (n) averaged over sensor volume defined by area and length, where n = cos(poloidal_angle)*cos(toroidal_angle)*grad(R) - sin(poloidal_angle)*grad(Z) + cos(poloidal_angle)*sin(toroidal_angle)*grad(Phi)/norm(grad(Phi))",
   "full_path": "magnetics/b_field_tor_probe(i1)/field",
   "lifecycle_status": "active",
   "structure_reference": "signal_flt_1d_validity",
@@ -773,7 +779,7 @@
  },
  "magnetics.b_field_tor_probe[:].length": {
   "data_type": "FLT_0D",
-  "documentation": "Length of the coil",
+  "documentation": "Length of the sensor along it's normal vector (n)",
   "full_path": "magnetics/b_field_tor_probe(i1)/length",
   "lifecycle_status": "active",
   "type": "static",
@@ -898,11 +904,12 @@
  },
  "magnetics.b_field_tor_probe[:].poloidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Poloidal angle of the coil orientation",
+  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/b_field_tor_probe(i1)/poloidal_angle",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].poloidal_angle_error_index": {
   "data_type": "int_type",
@@ -917,7 +924,8 @@
   "full_path": "magnetics/b_field_tor_probe(i1)/poloidal_angle_error_lower",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].poloidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -925,7 +933,8 @@
   "full_path": "magnetics/b_field_tor_probe(i1)/poloidal_angle_error_upper",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].position": {
   "data_type": "structure",
@@ -1029,11 +1038,12 @@
  },
  "magnetics.b_field_tor_probe[:].toroidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Toroidal angle of coil orientation (0 if fully in the poloidal plane) ",
+  "documentation": "Angle of the projection of the sensor normal vector (n) in the horizontal plane with the increasing R direction (i.e. grad(R)) (angle is counter-clockwise from above as in cocos=11 phi-like angle). Values should be taken modulo pi with values within (-pi/2,pi/2]. Zero if projected sensor normal is parallel to grad(R), pi/2 if it is parallel to grad(phi).",
   "full_path": "magnetics/b_field_tor_probe(i1)/toroidal_angle",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].toroidal_angle_error_index": {
   "data_type": "int_type",
@@ -1048,7 +1058,8 @@
   "full_path": "magnetics/b_field_tor_probe(i1)/toroidal_angle_error_lower",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].toroidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -1056,7 +1067,8 @@
   "full_path": "magnetics/b_field_tor_probe(i1)/toroidal_angle_error_upper",
   "lifecycle_status": "active",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.b_field_tor_probe[:].turns": {
   "data_type": "INT_0D",
@@ -1189,7 +1201,7 @@
  },
  "magnetics.bpol_probe[:].area": {
   "data_type": "FLT_0D",
-  "documentation": "Area of each turn of the coil",
+  "documentation": "Area of each turn of the sensor; becomes effective area when multiplied by the turns",
   "full_path": "magnetics/bpol_probe(i1)/area",
   "lifecycle_status": "obsolescent",
   "type": "static",
@@ -1260,7 +1272,7 @@
  },
  "magnetics.bpol_probe[:].field": {
   "data_type": "structure",
-  "documentation": "Measured magnetic field",
+  "documentation": "Magnetic field component in direction of sensor normal axis (n) averaged over sensor volume defined by area and length, where n = cos(poloidal_angle)*cos(toroidal_angle)*grad(R) - sin(poloidal_angle)*grad(Z) + cos(poloidal_angle)*sin(toroidal_angle)*grad(Phi)/norm(grad(Phi))",
   "full_path": "magnetics/bpol_probe(i1)/field",
   "lifecycle_status": "obsolescent",
   "structure_reference": "signal_flt_1d_validity",
@@ -1358,7 +1370,7 @@
  },
  "magnetics.bpol_probe[:].length": {
   "data_type": "FLT_0D",
-  "documentation": "Length of the coil",
+  "documentation": "Length of the sensor along it's normal vector (n)",
   "full_path": "magnetics/bpol_probe(i1)/length",
   "lifecycle_status": "obsolescent",
   "type": "static",
@@ -1483,11 +1495,12 @@
  },
  "magnetics.bpol_probe[:].poloidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Poloidal angle of the coil orientation",
+  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/bpol_probe(i1)/poloidal_angle",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].poloidal_angle_error_index": {
   "data_type": "int_type",
@@ -1502,7 +1515,8 @@
   "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_lower",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].poloidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -1510,7 +1524,8 @@
   "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_upper",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].position": {
   "data_type": "structure",
@@ -1614,11 +1629,12 @@
  },
  "magnetics.bpol_probe[:].toroidal_angle": {
   "data_type": "FLT_0D",
-  "documentation": "Toroidal angle of coil orientation (0 if fully in the poloidal plane) ",
+  "documentation": "Angle of the projection of the sensor normal vector (n) in the horizontal plane with the increasing R direction (i.e. grad(R)) (angle is counter-clockwise from above as in cocos=11 phi-like angle). Values should be taken modulo pi with values within (-pi/2,pi/2]. Zero if projected sensor normal is parallel to grad(R), pi/2 if it is parallel to grad(phi).",
   "full_path": "magnetics/bpol_probe(i1)/toroidal_angle",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].toroidal_angle_error_index": {
   "data_type": "int_type",
@@ -1633,7 +1649,8 @@
   "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_lower",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].toroidal_angle_error_upper": {
   "data_type": "FLT_0D",
@@ -1641,7 +1658,8 @@
   "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_upper",
   "lifecycle_status": "obsolescent",
   "type": "static",
-  "units": "rad"
+  "units": "rad",
+  "url": "magnetics/magnetics_angles.svg"
  },
  "magnetics.bpol_probe[:].turns": {
   "data_type": "INT_0D",
@@ -1857,7 +1875,7 @@
  },
  "magnetics.flux_loop[:].flux": {
   "data_type": "structure",
-  "documentation": "Measured flux",
+  "documentation": "Measured magnetic flux over loop in which Z component of normal to loop is directed downwards (negative grad Z direction)",
   "full_path": "magnetics/flux_loop(i1)/flux",
   "lifecycle_status": "active",
   "structure_reference": "signal_flt_1d_validity",

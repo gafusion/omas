@@ -173,7 +173,14 @@ class TestOmasPlot(unittest.TestCase):
                                 include_psi=ipsi,
                                 include_wall=iwall,
                                 include_q=iq,
+                                include_xpoint=ipsi,  # This doesn't need an independent scan
                             )
+                            if iprof and not ipsi:
+                                # Try to trip up the X-point plotter by putting in an incomplete definition. This
+                                # access attempt should cause the number of X-points to be interpreted as 1, even though
+                                # there is no data and so the X-point is not defined.
+                                ods['equilibrium.time_slice.0.boundary.x_point.0']
+
                             for cqo in cq_options:
                                 ods.plot_equilibrium_CX(contour_quantity=cqo, allow_fallback=True)
 
@@ -206,8 +213,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=False)
+            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
+            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
         return
 
     def test_eqcx_slices(self):
@@ -230,6 +237,7 @@ class TestOmasPlot(unittest.TestCase):
         ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)
         ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
         ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
+        return
 
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
@@ -243,6 +251,7 @@ class TestOmasPlot(unittest.TestCase):
             show_total_density=True)
         ods2.plot_core_profiles_summary(
             fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+        return
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
@@ -433,6 +442,63 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_langmuir_probes_overlay()
         # No wall data for helping align labels
         ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
+        return
+
+    def test_position_control_overlay(self):
+        """Tests method for plotting overlay of position_control data"""
+
+        pc_ods = ODS()
+
+        # No data; have to abort
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Add sample data
+        pc_ods.sample_pulse_schedule()
+
+        # Basic test
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=True)
+
+        # Multi-time
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=[0.5, 2.3]))
+
+        # Now with equilibrium data (magnetic axis position affects label alignment
+        pc_ods.sample_equilibrium()
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+        pc_ods.sample_equilibrium(include_xpoint=True)
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+        pc_ods.sample_equilibrium(include_xpoint=True, time_index=1)
+        pc_ods.plot_overlay(thomson_scattering=False, position_control=dict(t=2.3, show_measured_xpoint=True))
+
+        # Call the method itself
+        pc_ods.plot_position_control_overlay()
+
+        # Call with mask
+        nb = len(pc_ods['pulse_schedule']['position_control']['boundary_outline'])
+        nx = len(pc_ods['pulse_schedule']['position_control']['x_point'])
+        ns = len(pc_ods['pulse_schedule']['position_control']['strike_point'])
+        nn = nb + nx + ns
+        mask = [False] * nn
+        mask[nn // 2] = True
+        mask[0] = True
+        mask[-1] = True
+        pc_ods.plot_position_control_overlay(mask=mask)
+        # Force the overlay function to extend the mask by giving it one that's too small
+        small_mask = mask[:-2]
+        small_mask[-1] = True
+        pc_ods.plot_position_control_overlay(mask=small_mask)
+
+        return
+
+    def test_pulse_schedule_overlay(self):
+        """
+        Tests method for plotting overlay of pulse_schedule data.
+        The main item here is position_control, which has its own test. So, this will be short.
+        """
+        import time
+        pc_ods = ODS()
+        pc_ods.sample_pulse_schedule()
+        pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
+        pc_ods.plot_pulse_schedule_overlay()
         return
 
 

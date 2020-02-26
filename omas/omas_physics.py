@@ -29,6 +29,7 @@ def add_to__ALL__(f):
 class constants(object):
     e = 1.6021766208e-19
 
+
 @add_to__ODS__
 def equilibrium_stored_energy(ods, update=True):
     '''
@@ -49,8 +50,11 @@ def equilibrium_stored_energy(ods, update=True):
         pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
 
-        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd']=3.0/2.0*numpy.trapz(pressure_equil,x=volume_equil) # [J]
+
+        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil,x=volume_equil) # [J]
+
     return ods_n
+
 
 @add_to__ODS__
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
@@ -1039,11 +1043,12 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
             except Exception as _excp:
                 # Add more user feedback, since use of consistency_check in an omas_environment can be confusing
                 if item == 'consistency_check':
-                    raise _excp.__class__(str(_excp)+'\nThe IMAS consistency was violated getting out of the omas_environment')
+                    raise _excp.__class__(str(_excp) + '\nThe IMAS consistency was violated getting out of the omas_environment')
                 raise
         # restore input_data_process_functions
         if input_data_process_functions is not None:
             omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
+
 
 def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True):
     """

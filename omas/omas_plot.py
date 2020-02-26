@@ -483,7 +483,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, **kw):
+def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, xkw={}, **kw):
     r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -513,7 +513,10 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
         True/False: do(n't) label contours
         None: only label if contours are of q
 
-    :param \**kw: arguments passed to matplotlib plot statements
+    :param xkw: dict [optional]
+        Keywords to pass to plot call to draw X-point(s). Disable X-points by setting xkw={'marker': ''}
+
+    :param \**kw: keywords passed to matplotlib plot statements
 
     :return: Axes instance
     """
@@ -638,11 +641,27 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     value_2d[:, -1] = value_2d[:, -2]
     value_2d[-1, :] = value_2d[-2, :]
     value_2d[-1, -1] = value_2d[-2, -2]
-    levels = numpy.r_[0.1:0.9 + 0.0001:0.1]
     cs = ax.contour(r, z, value_2d, levels, **kw)
 
     if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
         ax.clabel(cs)
+
+    # X-point(s)
+    xkw.setdefault('marker', 'x')
+    if xkw['marker'] not in ['', ' ']:
+        from matplotlib import rcParams
+        xkw.setdefault('color', cs.colors)
+        xkw.setdefault('linestyle', '')
+        xkw.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
+        xkw.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
+        xp = eq['boundary']['x_point']
+        for i in range(len(xp)):
+            try:
+                xr, xz = xp[i]['r'], xp[i]['z']
+            except ValueError:
+                pass
+            else:
+                ax.plot(xr, xz, **xkw)
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
@@ -655,6 +674,90 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
         ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']), min(wall[0]['outline']['z']),
                  max(wall[0]['outline']['z'])])
+
+    # Axes
+    ax.set_aspect('equal')
+    ax.set_frame_on(False)
+    ax.xaxis.set_ticks_position('bottom')
+    ax.yaxis.set_ticks_position('left')
+
+    return ax
+
+
+@add_to__ODS__
+def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
+    r"""
+    Plot equilibrium toroidal cross-section
+    as per `ods['equilibrium']['time_slice'][time_index]`
+
+    :param ods: ODS instance
+        input ods containing equilibrium data
+
+    :param time_index: int
+        time slice to plot
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: arguments passed to matplotlib plot statements
+
+    :return: Axes instance
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['equilibrium'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['equilibrium'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    wall = None
+    eq = ods['equilibrium']['time_slice'][time_index]
+    if 'wall' in ods:
+        if time_index in ods['wall']['description_2d']:
+            wall = ods['wall']['description_2d'][time_index]['limiter']['unit']
+        elif 0 in ods['wall']['description_2d']:
+            wall = ods['wall']['description_2d'][0]['limiter']['unit']
+
+    # Plotting style
+    kw.setdefault('linewidth', 1)
+    label = kw.pop('label', '')
+    kw1 = copy.deepcopy(kw)
+
+    t_angle = numpy.linspace(0.0, 2.0 * numpy.pi, 100)
+    sint = numpy.sin(t_angle)
+    cost = numpy.cos(t_angle)
+
+    Rout = numpy.max(eq['boundary']['outline']['r'])
+    Rin = numpy.min(eq['boundary']['outline']['r'])
+    Xout = Rout * cost
+    Yout = Rout * sint
+    Xin = Rin * cost
+    Yin = Rin * sint
+
+    ax.plot(Xin, Yin, **kw1)
+    kw1.setdefault('color', ax.lines[-1].get_color())
+    ax.plot(Xout, Yout, **kw1)
+
+    # Wall
+    if wall is not None:
+        Rout = numpy.max(wall[0]['outline']['r'])
+        Rin = numpy.min(wall[0]['outline']['r'])
+        Xout = Rout * cost
+        Yout = Rout * sint
+        Xin = Rin * cost
+        Yin = Rin * sint
+
+        ax.plot(Xin, Yin, 'k', label=label, linewidth=2)
+        ax.plot(Xout, Yout, 'k', label=label, linewidth=2)
+        ax.axis('equal')
 
     # Axes
     ax.set_aspect('equal')
@@ -926,6 +1029,314 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 
 
 # ================================
+# actuator aimings
+# ================================
+
+@add_to__ODS__
+def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
+    """
+    Plot pellets trajectory in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['pellets'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['pellets'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(pellets_trajectory_CX, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    pellets = ods['pellets']['time_slice'][time_index]['pellet']
+    for pellet in pellets:
+        R0 = pellets[pellet]['path_geometry.first_point.r']
+        R1 = pellets[pellet]['path_geometry.second_point.r']
+        Z0 = pellets[pellet]['path_geometry.first_point.z']
+        Z1 = pellets[pellet]['path_geometry.second_point.z']
+        ax.plot([R0, R1], [Z0, Z1], '--', **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
+    """
+    Plot  pellet trajectory in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['pellets'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['pellets'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(pellets_trajectory_CX_topview, time, ods, time_index, ax=ax, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    pellets = ods['pellets']['time_slice'][time_index]['pellet']
+    for pellet in pellets:
+        R0 = pellets[pellet]['path_geometry.first_point.r']
+        R1 = pellets[pellet]['path_geometry.second_point.r']
+        phi0 = pellets[pellet]['path_geometry.first_point.phi']
+        phi1 = pellets[pellet]['path_geometry.second_point.phi']
+
+        x0 = R0 * numpy.cos(phi0)
+        y0 = R0 * numpy.sin(phi0)
+
+        x1 = R1 * numpy.cos(phi1)
+        y1 = R1 * numpy.sin(phi1)
+        ax.plot([x0, x1], [y0, y1], '--', **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
+    """
+    Plot LH antenna position in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param antenna_trajectory: length of antenna on plot
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes handler
+
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['lh_antennas'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['lh_antennas'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']['time_slice'][time_index]
+    antennas = ods['lh_antennas']['antenna']
+
+    if antenna_trajectory is None:
+        antenna_trajectory = 0.1 * ods['equilibrium']['vacuum_toroidal_field.r0']
+
+    for antenna in antennas:
+        R = antennas[antenna]['position.r.data']
+        Z = antennas[antenna]['position.z.data']
+
+        # just point to magnetic axis for now (is there a better way?)
+        Raxis = equilibrium['global_quantities.magnetic_axis.r']
+        Zaxis = equilibrium['global_quantities.magnetic_axis.z']
+
+        Rvec = Raxis - R
+        Zvec = Zaxis - Z
+
+        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
+        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
+
+        ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=None, **kw):
+    """
+    Plot LH antenna in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param antenna_trajectory: length of antenna on plot
+
+    :return: axes handler
+    """
+    if time_index is None:
+        time_index = numpy.arange(len(ods['lh_antennas'].time()))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['lh_antennas'].time()
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    antennas = ods['lh_antennas']['antenna']
+    if antenna_trajectory is None:
+        antenna_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+
+    for antenna in antennas:
+        R = antennas[antenna]['position.r.data']
+        phi = antennas[antenna]['position.phi.data']
+
+        x0 = R * numpy.cos(phi)
+        y0 = R * numpy.sin(phi)
+
+        x1 = (R - antenna_trajectory) * numpy.cos(phi)
+        y1 = (R - antenna_trajectory) * numpy.sin(phi)
+
+        ax.plot([x0, x1], [y0, y1], 's-', markevery=2, **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
+    """
+    Plot EC launchers in poloidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param launcher_trajectory: length of launcher on plot
+
+    :return: axes handler
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['ec_launchers']['time']
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    launchers = ods['ec_launchers.launcher']
+    if launcher_trajectory is None:
+        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+
+    for launcher in launchers:
+        R0 = launchers[launcher]['launching_position.r']
+        Z0 = launchers[launcher]['launching_position.z']
+        ang_pol = launchers[launcher]['steering_angle_pol.data']
+
+        R1 = R0 - launcher_trajectory * numpy.sin(ang_pol)
+        Z1 = Z0 + launcher_trajectory * numpy.cos(ang_pol)
+
+        ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
+
+    return ax
+
+
+@add_to__ODS__
+def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
+    """
+    Plot EC launchers in toroidal cross-section
+
+    :param ods: input ods
+
+    :param time_index: time slice to plot
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :param launcher_trajectory: length of launcher on plot
+
+    :return: axes handler
+    """
+
+    if time_index is None:
+        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        time = ods['ec_launchers']['time']
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+
+    import matplotlib
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    equilibrium = ods['equilibrium']
+    launchers = ods['ec_launchers.launcher']
+    if launcher_trajectory is None:
+        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+
+    for launcher in launchers:
+        R = launchers[launcher]['launching_position.r']
+        phi = launchers[launcher]['launching_position.phi']
+        ang_tor = launchers[launcher]['steering_angle_tor.data']
+
+        x0 = R * numpy.cos(phi)
+        y0 = R * numpy.sin(phi)
+
+        x1 = x0 + launcher_trajectory * numpy.cos(ang_tor + phi)
+        y1 = y0 + launcher_trajectory * numpy.sin(ang_tor + phi)
+        ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
+
+    return ax
+
+
+# ================================
 # Heating and current drive
 # ================================
 @add_to__ODS__
@@ -1149,7 +1560,8 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
         ax = pyplot.gca()
 
     overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
-    for hw_sys in list_structures(ods.imas_version):
+    special_subs = ['position_control']
+    for hw_sys in list_structures(ods.imas_version) + special_subs:
         if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
             overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
             try:
@@ -1775,7 +2187,8 @@ def langmuir_probes_overlay(
         ods, ax=None, embedded_probes=None, colors=None, show_embedded=True, show_reciprocating=False, **kw
 ):
     r"""
-    Overlays Langmuir probes
+    Overlays Langmuir probe locations
+
     :param ods: ODS instance
         Must contain langmuir_probes with embedded position data
 
@@ -1919,6 +2332,277 @@ def langmuir_probes_overlay(
                 '\n {} \n'.format(lp_id_e[i]),
                 color=color, ha=ha[i], va=va[i], fontsize=notesize,
             )
+    return
+
+
+@add_to__ODS__
+def position_control_overlay(
+        ods,
+        ax=None,
+        t=None,
+        xpoint_marker='x',
+        strike_marker='s',
+        labels=None,
+        measured_xpoint_marker='+',
+        show_measured_xpoint=False,
+        **kw
+):
+    r"""
+    Overlays position_control data
+
+    :param ods: ODS instance
+        Must contain langmuir_probes with embedded position data
+
+    :param ax: Axes instance
+
+    :param t: float
+        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+
+    :param xpoint_marker: string
+        Matplotlib marker spec for X-point target(s)
+
+    :param strike_marker: string
+        Matplotlib marker spec for strike point target(s)
+
+    :param labels: list of strings [optional]
+        Override default point labels. Length must be long enough to cover all points.
+
+    :param show_measured_xpoint: bool
+        In addition to the target X-point, mark the measured X-point coordinates.
+
+    :param measured_xpoint_marker: string
+        Matplotlib marker spec for X-point measurement(s)
+
+    :param \**kw: Additional keywords.
+
+        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
+
+        * Others will be passed to the plot() call for drawing shape control targets
+    """
+    import numpy as np
+    from matplotlib import pyplot
+    from matplotlib import rcParams
+    from scipy.interpolate import interp1d
+    import time
+
+    timing_ref = kw.pop('timing_ref', None)
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay start')
+
+    # Unpack basics
+    device = ods['dataset_description.data_entry'].get('machine', '')
+    shot = ods['dataset_description.data_entry'].get('pulse', 0)
+    if t is None:
+        try:
+            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+        except (ValueError, IndexError):
+            t = 0
+    if ax is None:
+        ax = pyplot.gca()
+    # Handle multi-slice request
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay setup 1')
+    if len(np.atleast_1d(t)) > 1:
+        for tt in t:
+            position_control_overlay(
+                ods,
+                ax=ax,
+                t=tt,
+                xpoint_marker=xpoint_marker,
+                strike_marker=strike_marker,
+                show_measured_xpoint=show_measured_xpoint,
+                **copy.deepcopy(kw)
+            )
+        return
+    else:
+        t = np.atleast_1d(t)[0]
+
+    labelevery = kw.pop('labelevery', 1)
+    label_r_shift = kw.pop('label_r_shift', 0)
+    label_z_shift = kw.pop('label_z_shift', 0)
+    label_ha = kw.pop('label_ha', None)
+    label_va = kw.pop('label_va', None)
+    notesize = kw.pop('notesize', 'xx-small')
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay setup 2')
+
+    # Select data
+    b = ods['pulse_schedule.position_control.boundary_outline']
+    x = ods['pulse_schedule.position_control.x_point']
+    s = ods['pulse_schedule.position_control.strike_point']
+    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    try:
+        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
+        return
+    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
+    bname = b['[:].r.reference_name']
+    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
+    xname = x['[:].r.reference_name']
+    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
+    sname = s['[:].r.reference_name']
+    # Measured X-point position from eq might not be present
+    nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
+    if nxm > 0:
+        eq = ods['equilibrium']
+        if len(eq['time']) == 1:
+            it = eq['time_slice'].keys()[0]
+            rxm = [eq['time_slice'][it]['boundary.x_point'][i]['r'] for i in range(nxm)]
+            zxm = [eq['time_slice'][it]['boundary.x_point'][i]['z'] for i in range(nxm)]
+        else:
+            rxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)
+            ]
+            zxm = [
+                interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)
+            ]
+    else:
+        rxm = zxm = np.NaN
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay data unpacked')
+
+    # Masking
+    mask = np.array(kw.pop('mask', np.ones(nbp+nx+ns, bool)))
+    # Extend mask to make correct length, if needed
+    if len(mask) < (nbp + nx + ns):
+        extra_mask = np.ones(nbp + nx + ns - len(mask), bool)
+        mask = np.append(mask, extra_mask)
+    maskb = mask[:nbp]
+    maskx = mask[nbp:nbp + nx]
+    masks = mask[nbp + nx: nbp + nx + ns]
+    r = (np.array(r)[maskb]).tolist()
+    z = (np.array(z)[maskb]).tolist()
+    bname = (np.array(bname)[maskb]).tolist()
+    rx = (np.array(rx)[maskx]).tolist()
+    zx = (np.array(zx)[maskx]).tolist()
+    xname = (np.array(xname)[maskx]).tolist()
+    rs = (np.array(rs)[masks]).tolist()
+    zs = (np.array(zs)[masks]).tolist()
+    sname = (np.array(sname)[masks]).tolist()
+    mnbp = len(r)
+    mnx = len(rx)
+    mns = len(rs)
+
+    # Handle main plot setup and customizations
+    kw.setdefault('linestyle', ' ')
+    kwx = copy.deepcopy(kw)
+    kws = copy.deepcopy(kw)
+    kw.setdefault('marker', 'o')
+    plot_out = ax.plot(r, z, **kw)
+
+    kwx.setdefault('markersize', rcParams['lines.markersize'] * 1.5)
+    if show_measured_xpoint:
+        kwxm = copy.deepcopy(kwx)
+        kwxm.setdefault('marker', measured_xpoint_marker)
+        xmplot_out = ax.plot(rxm, zxm, **kwxm)
+    else:
+        xmplot_out = None
+    kwx['marker'] = xpoint_marker
+    kwx.setdefault('mew', rcParams['lines.markeredgewidth'] * 1.25 + 1.25)
+    kwx['color'] = plot_out[0].get_color()
+    xplot_out = ax.plot(rx, zx, **kwx)
+
+    kws['marker'] = strike_marker
+    kws['color'] = plot_out[0].get_color()
+    splot_out = ax.plot(rs, zs, **kws)
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay main plots')
+
+    # Handle plot annotations
+    try:
+        rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
+    except ValueError:
+        # Guesses for a good place to split labels between left and right align
+        r0 = {'DIII-D': 1.6955}
+        rsplit = r0.get(device, 1.7)
+
+    default_ha = [['left', 'right'][int((r + rx + rs)[i] < rsplit)] for i in range(mnbp + mnx + mns)]
+    default_va = [['top', 'bottom'][int((z + zx + rs)[i] > 0)] for i in range(mnbp + mnx + mns)]
+    label_ha, label_va, kw = text_alignment_setup(
+        mnbp + mnx + mns, default_ha=default_ha, default_va=default_va, label_ha=label_ha, label_va=label_va
+    )
+
+    if labels is None:
+        labels = bname + xname + sname
+
+    for i in range(mnbp):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
+            ax.text(
+                r[i] + label_r_shift,
+                z[i] + label_z_shift,
+                '\n {} \n'.format(labels[i]),
+                color=plot_out[0].get_color(),
+                va=label_va[i],
+                ha=label_ha[i],
+                fontsize=notesize,
+            )
+    for i in range(mnx):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rx[i]):
+            ax.text(
+                rx[i] + label_r_shift,
+                zx[i] + label_z_shift,
+                '\n {} \n'.format(labels[mnbp + i]),
+                color=xplot_out[0].get_color(),
+                va=label_va[mnbp + i],
+                ha=label_ha[mnbp + i],
+                fontsize=notesize,
+            )
+
+    for i in range(mns):
+        if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rs[i]):
+            ax.text(
+                rs[i] + label_r_shift,
+                zs[i] + label_z_shift,
+                '\n {} \n'.format(labels[mnbp + mnx + i]),
+                color=splot_out[0].get_color(),
+                va=label_va[mnbp + mnx + i],
+                ha=label_ha[mnbp + mnx + i],
+                fontsize=notesize,
+            )
+
+    if timing_ref is not None:
+        print(time.time() - timing_ref, 'position_control_overlay done')
+    return
+
+
+@add_to__ODS__
+def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
+    r"""
+    Overlays relevant data from pulse_schedule, such as position control
+
+    :param ods: ODS instance
+        Must contain langmuir_probes with embedded position data
+
+    :param ax: Axes instance
+
+    :param t: float
+        Time in s
+
+    :param \**kw: Additional keywords.
+
+        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
+
+        * Others will be passed to the plot() calls.
+    """
+
+    from matplotlib import pyplot
+    import time
+
+    if kw.get('timing_ref', None) is not None:
+        print(time.time() - kw['timing_ref'], 'pulse_schedule_overlay start')
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    position_control_overlay(ods, ax=ax, t=t, **kw)
     return
 
 

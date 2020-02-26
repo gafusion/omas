@@ -64,9 +64,9 @@ class TestOmasPhysics(unittest.TestCase):
         ods = ODS()
         ods.sample_equilibrium()
 
-        assert (not "energy_mhd" in ods['equilibrium.time_slice.0.global_quantities'])
+        assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
         ods = equilibrium_consistent(ods)
-        assert (("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0))
+        assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
 
     def test_core_profiles_pressures(self):
         ods = ODS()

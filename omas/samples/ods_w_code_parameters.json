@@ -1,0 +1,58 @@
+{
+"ec_launchers": {
+"code": {
+"parameters": {
+"launcher": [
+{
+"ON": 1,
+"mharm": 2
+}
+]
+}
+},
+"launcher": [
+{
+"frequency": {
+"data": [
+110000000000.0
+]
+},
+"identifier": "GYRO1",
+"launching_position": {
+"phi": [
+0.0
+],
+"r": [
+2.4
+],
+"z": [
+0.68
+]
+},
+"mode": {
+"data": [
+1
+]
+},
+"power_launched": {
+"data": [
+1000000.0
+]
+},
+"steering_angle_pol": {
+"data": [
+1.5707963267948966
+]
+},
+"steering_angle_tor": {
+"data": [
+3.490658503988659
+]
+}
+}
+],
+"time": [
+0
+]
+}
+}

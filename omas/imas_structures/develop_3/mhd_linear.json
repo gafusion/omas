@@ -2,7 +2,7 @@
  "mhd_linear": {
   "documentation": "Magnetohydronamic linear stability",
   "full_path": "mhd_linear",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.26.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -1654,15 +1654,174 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system": {
   "data_type": "structure",
-  "documentation": "Flux surface coordinate system on a square grid of flux and poloidal angle",
+  "documentation": "Flux surface coordinate system of the equilibrium used for the MHD calculation on a square grid of flux and poloidal angle",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system",
   "lifecycle_status": "alpha",
   "structure_reference": "mhd_coordinate_system"
  },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid": {
+  "data_type": "structure",
+  "documentation": "Definition of the 2D grid",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "equilibrium_profiles_2d_grid"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim1(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim1_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim2(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim2_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.volume_element": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/volume_element(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.volume_element_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/volume_element_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.volume_element_error_lower": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/volume_element_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.volume_element_error_upper": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/volume_element_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid_type": {
+  "data_type": "structure",
+  "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as centre of grid; theta and values following the COCOS convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label and the straight-field line poloidal angle (mod(index,10)=1); could be non-equidistant; magnetic axis as centre of grid; following the COCOS convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label and the equal arc poloidal angle (mod(index,10)=2)\n13) inverse_psi_polar : Flux surface type with psi as radial label and the polar poloidal angle (mod(index,10)=3); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4), could be non-equidistant; magnetic axis as centre of grid; following the COCOS convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label and Fourier modes in the equal arc poloidal angle (mod(index,10)=5)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label and Fourier modes in the polar poloidal angle (mod(index,10)=6); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the straight-field line poloidal angle\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the equal arc poloidal angle\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the polar poloidal angle\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the straight-field line poloidal angle\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the equal arc poloidal angle\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the polar poloidal angle\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] and the straight-field line poloidal angle\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] and the equal arc poloidal angle\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] and the polar poloidal angle\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the straight-field line poloidal angle\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the equal arc poloidal angle\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the polar poloidal angle\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] and the straight-field line poloidal angle\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] and the equal arc poloidal angle\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] and the polar poloidal angle\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the straight-field line poloidal angle\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the equal arc poloidal angle\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the polar poloidal angle\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the straight-field line poloidal angle\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the equal arc poloidal angle\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the polar poloidal angle\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the polar poloidal angle\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid_type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid_type/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid_type/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid_type/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.jacobian": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Absolute value of the jacobian of the coordinate system",
@@ -1680,8 +1839,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.jacobian_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"jacobian\"",
@@ -1692,8 +1851,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.jacobian_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"jacobian\"",
@@ -1704,8 +1863,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.r": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Values of the major radius on the grid",
@@ -1723,8 +1882,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.r_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"r\"",
@@ -1735,8 +1894,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.r_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"r\"",
@@ -1747,8 +1906,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_contravariant": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1768,8 +1927,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_contravariant_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1782,8 +1941,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_contravariant_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1796,8 +1955,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_covariant": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1817,8 +1976,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_covariant_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1831,8 +1990,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_covariant_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -1845,8 +2004,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.z": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Values of the Height on the grid",
@@ -1864,8 +2023,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.z_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"z\"",
@@ -1876,8 +2035,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.z_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"z\"",
@@ -5165,15 +5324,174 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system": {
   "data_type": "structure",
-  "documentation": "Flux surface coordinate system on a square grid of flux and poloidal angle",
+  "documentation": "Flux surface coordinate system of the equilibrium used for the MHD calculation on a square grid of flux and poloidal angle",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system",
   "lifecycle_status": "alpha",
   "structure_reference": "mhd_coordinate_system"
  },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid": {
+  "data_type": "structure",
+  "documentation": "Definition of the 2D grid",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "equilibrium_profiles_2d_grid"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim1(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim1_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim2(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim2_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.volume_element": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/volume_element(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.volume_element_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/volume_element_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.volume_element_error_lower": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/volume_element_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.volume_element_error_upper": {
+  "coordinates": [
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/volume_element_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid_type": {
+  "data_type": "structure",
+  "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as centre of grid; theta and values following the COCOS convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label and the straight-field line poloidal angle (mod(index,10)=1); could be non-equidistant; magnetic axis as centre of grid; following the COCOS convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label and the equal arc poloidal angle (mod(index,10)=2)\n13) inverse_psi_polar : Flux surface type with psi as radial label and the polar poloidal angle (mod(index,10)=3); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4), could be non-equidistant; magnetic axis as centre of grid; following the COCOS convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label and Fourier modes in the equal arc poloidal angle (mod(index,10)=5)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label and Fourier modes in the polar poloidal angle (mod(index,10)=6); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the straight-field line poloidal angle\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the equal arc poloidal angle\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the polar poloidal angle\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the straight-field line poloidal angle\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the equal arc poloidal angle\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the polar poloidal angle\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] and the straight-field line poloidal angle\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] and the equal arc poloidal angle\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] and the polar poloidal angle\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the straight-field line poloidal angle\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the equal arc poloidal angle\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the polar poloidal angle\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] and the straight-field line poloidal angle\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] and the equal arc poloidal angle\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] and the polar poloidal angle\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the straight-field line poloidal angle\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the equal arc poloidal angle\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the polar poloidal angle\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the straight-field line poloidal angle\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the equal arc poloidal angle\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the polar poloidal angle\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the polar poloidal angle\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid_type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid_type/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid_type/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid_type/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.jacobian": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Absolute value of the jacobian of the coordinate system",
@@ -5191,8 +5509,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.jacobian_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"jacobian\"",
@@ -5203,8 +5521,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.jacobian_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"jacobian\"",
@@ -5215,8 +5533,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.r": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Values of the major radius on the grid",
@@ -5234,8 +5552,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.r_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"r\"",
@@ -5246,8 +5564,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.r_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"r\"",
@@ -5258,8 +5576,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_contravariant": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5279,8 +5597,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_contravariant_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5293,8 +5611,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_contravariant_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5307,8 +5625,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_covariant": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5328,8 +5646,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_covariant_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5342,8 +5660,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_covariant_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2",
    "1...3",
    "1...3"
   ],
@@ -5356,8 +5674,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.z": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Values of the Height on the grid",
@@ -5375,8 +5693,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.z_error_lower": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"z\"",
@@ -5387,8 +5705,8 @@
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.z_error_upper": {
   "coordinates": [
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1",
-   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2"
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1",
+   "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"z\"",

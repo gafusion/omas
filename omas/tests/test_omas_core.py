@@ -268,11 +268,11 @@ class TestOmasCore(unittest.TestCase):
 
     def test_version(self):
         ods = ODS(imas_version='3.20.0')
-        ods['ec_antennas.antenna.0.power'] = 1.0
+        ods['ec_antennas.antenna.0.power.data'] = [1.0]
 
         try:
             ods = ODS(imas_version='3.21.0')
-            ods['ec_antennas.antenna.0.power'] = 1.0
+            ods['ec_antennas.antenna.0.power.data'] = [1.0]
             raise AssertionError('3.21.0 should not have `ec_antennas.antenna.0.power`')
         except LookupError:
             pass
@@ -375,14 +375,45 @@ class TestOmasCore(unittest.TestCase):
         ods = ODS()
         ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
 
-        tmp={}
+        tmp = {}
         tmp.update(ods['equilibrium.code.parameters'])
         ods['equilibrium.code.parameters'] = tmp
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         with omas_environment(ods, xmlcodeparams=True):
-            assert isinstance(ods['equilibrium.code.parameters'],basestring)
+            assert isinstance(ods['equilibrium.code.parameters'], basestring)
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        # test that dynamic creation of .code.parameters makes it a CodeParameters object
+        ods = ODS()
+        ods['equilibrium.code.parameters']['param1'] = 1
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        # test saving of code_parameters in json format
+        ods.save(tempfile.gettempdir() + '/ods_w_codeparams.json')
+
+        # test that loading of data with code.parameters results in a CodeParameters object
+        ods = ODS()
+        ods.load(tempfile.gettempdir() + '/ods_w_codeparams.json')
+        assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
+
+        # test loading CodeParameters from a json
+        ods = ODS().load(imas_json_dir + '/../samples/ods_w_code_parameters.json')
+        # test traversing ODS and code parameters with OMAS syntax
+        assert ods['ec_launchers.code.parameters.launcher.0.mharm'] == 2
+        # test that sub-tree elements of code parameters are also of CodeParameters class
+        assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
+        # test to_string and from_string methods
+        with omas_environment(ods, xmlcodeparams=True):
+            code_parameters_string = ods['ec_launchers.code.parameters']
+            tmp = CodeParameters().from_string(code_parameters_string)
+            assert isinstance(tmp['launcher'], CodeParameters)
+            assert tmp['launcher.0.mharm'] == 2
+        # test that CodeParameters are restored after xmlcodeparams=True environment
+        assert isinstance(ods['ec_launchers.code.parameters'], CodeParameters)
+        assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
+        assert isinstance(ods['ec_launchers.code.parameters.launcher.0'], CodeParameters)
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasCore)

@@ -97,6 +97,13 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = float(value)
         elif 'INT' in info['data_type']:
             value = int(value)
+    # structure type is respected check type
+    if info['data_type'] == 'structure' and not isinstance(value, ODS):
+        text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
     # check type
     if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
         text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
@@ -216,6 +223,8 @@ class ODS(MutableMapping):
 
         # get time nodes from data structure definitions
         loc = p2l(subtree)
+        if not loc:
+            raise LookupError('Must specify a location in the ODS to get the time of')
         flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
         times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
 
@@ -258,6 +267,18 @@ class ODS(MutableMapping):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
                 return time
+            # We crossed [:] or something and picked up a 2D time array
+            elif any([len(time.shape) > 1 for time in times_values]):
+                # Make a 1D reference time0 that can be comapred against other time arrays
+                time0 = list(times.values())[0]
+                # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
+                while len(time0.shape) > 1:
+                    time0 = numpy.take(time0, 0, axis=0)
+                for time in times.values():
+                    # Make sure all time arrays are close to the time0 we identified
+                    assert abs(time - time0).max() < 1e-7
+                extra_info['homogeneous_time'] = True
+                return time0
             # there are inconsistencies with different ways of specifying times in the IDS
             else:
                 raise ValueError('Inconsistent time definitions in %s' % times.keys())
@@ -337,7 +358,13 @@ class ODS(MutableMapping):
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
-                    continue
+                    # consistency_check=True makes sure that code.parameters is of type CodeParameters
+                    if consistency_value:
+                        tmp = CodeParameters()
+                        tmp.update(self.getraw(item))
+                        self.setraw(item, tmp)
+                    else:
+                        continue
                 else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
@@ -532,13 +559,21 @@ class ODS(MutableMapping):
             elif isinstance(self.omas_data, list):
                 key[0] = len(self.omas_data)
 
-        # if the user has entered path rather than a single key
-        if len(key) > 1:
+        # handle dynamic path creation for .code.parameters leaf
+        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
             pass_on_value = value
-            value = self.__class__(imas_version=self.imas_version,
-                                   consistency_check=self.consistency_check,
-                                   dynamic_path_creation=self.dynamic_path_creation,
-                                   cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+            value = CodeParameters()
+            value.update(pass_on_value)
+        # if the user has entered path rather than a single key
+        elif len(key) > 1:
+            pass_on_value = value
+            if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+                value = CodeParameters()
+            else:
+                value = self.__class__(imas_version=self.imas_version,
+                                       consistency_check=self.consistency_check,
+                                       dynamic_path_creation=self.dynamic_path_creation,
+                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -1409,11 +1444,13 @@ class ODS(MutableMapping):
 
         :return: return from save_omas_XXX() method
         """
-        if '.' not in args[0]:
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
         return eval('save_omas_' + ext)(self, *args, **kw)
 
     def load(self, *args, **kw):
@@ -1429,11 +1466,13 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
-        if '.' not in args[0]:
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
         else:
             ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
         if 'consistency_check' in kw:
             consistency_check = kw['consistency_check']
         else:
@@ -1452,7 +1491,8 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
-        self.consistency_check = consistency_check
+        if consistency_check != self.consistency_check:
+            self.consistency_check = consistency_check
         return self
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
@@ -1508,9 +1548,9 @@ class ODS(MutableMapping):
                 self[item].codeparams2xml()
             return
         elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
-            self['code.parameters'] = self['code.parameters'].tostring()
+            self['code.parameters'] = self['code.parameters'].to_string()
         elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
-            self['parameters'] = self['parameters'].tostring()
+            self['parameters'] = self['parameters'].to_string()
 
     def codeparams2dict(self):
         '''
@@ -1522,9 +1562,9 @@ class ODS(MutableMapping):
             return
         try:
             if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
-                self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+                self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
             elif ('parameters' in self and isinstance(self['parameters'], basestring)):
-                self['parameters'] = CodeParameters().fromstring(self['parameters'])
+                self['parameters'] = CodeParameters().from_string(self['parameters'])
         except Exception as _excp:
             printe(repr(_excp))
 
@@ -1537,11 +1577,11 @@ class CodeParameters(dict):
     def __init__(self, string=None):
         if isinstance(string, basestring):
             if os.path.exists(string):
-                self.fromfile(string)
+                self.from_file(string)
             else:
-                self.fromstring(string)
+                self.from_string(string)
 
-    def fromstring(self, code_params_string):
+    def from_string(self, code_params_string):
         '''
         Load data from code.parameters XML string
 
@@ -1553,11 +1593,11 @@ class CodeParameters(dict):
         self.clear()
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
-            recursive_interpreter(tmp)
+            recursive_interpreter(tmp, dict_cls=CodeParameters)
             self.update(tmp)
         return self
 
-    def fromfile(self, code_params_file):
+    def from_file(self, code_params_file):
         '''
         Load data from code.parameters XML file
 
@@ -1566,19 +1606,58 @@ class CodeParameters(dict):
         :return: self
         '''
         with open(code_params_file, 'r') as f:
-            return self.fromstring(f.read())
+            return self.from_string(f.read())
 
-    def tostring(self):
+    def to_string(self):
         '''
         generate an XML string from this dictionary
 
         :return: XML string
         '''
         import xmltodict
-        tmp = {'parameters': OrderedDict()}
+        tmp = {'parameters': CodeParameters()}
         tmp['parameters'].update(copy.deepcopy(self))
         recursive_encoder(tmp)
         return xmltodict.unparse(tmp, pretty=True)
+
+    def __setitem__(self, key, value):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            dict.__setitem__(self, key[0], self.__class__())
+            dict.__getitem__(self, key[0])[key[1:]] = value
+        # return leaf
+        else:
+            # convert ODSs to CodeParameters
+            if isinstance(value, ODS):
+                value = CodeParameters()
+            dict.__setitem__(self, key[0], value)
+
+    def __getitem__(self, key):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            return dict.__getitem__(self, key[0])[key[1:]]
+        # return leaf
+        else:
+            return dict.__getitem__(self, key[0])
+
+    def update(self, value):
+        # convert ODSs to CodeParameters
+        if isinstance(value, ODS):
+            for item in value.paths():
+                self[item] = value[item]
+        else:
+            for item in value.keys():
+                self[item] = value[item]
 
 
 def codeparams_xml_save(f):
