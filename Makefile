@@ -29,6 +29,14 @@ tests2:
 tests3:
 	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
+tests_core: tests2_core tests3_core
+
+tests2_core:
+	python2 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
+
+tests3_core:
+	python3 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
+
 tests_plot: tests2_plot tests3_plot
 
 tests2_plot:
