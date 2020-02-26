@@ -569,6 +569,7 @@ class ODS(MutableMapping):
             pass_on_value = value
             if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
                 value = CodeParameters()
+                value[key[1:]] = pass_on_value
             else:
                 value = self.__class__(imas_version=self.imas_version,
                                        consistency_check=self.consistency_check,
@@ -1628,14 +1629,15 @@ class CodeParameters(dict):
 
         # go deeper
         if len(key) > 1:
-            dict.__setitem__(self, key[0], self.__class__())
-            dict.__getitem__(self, key[0])[key[1:]] = value
+            if key[0] not in self or not isinstance(self[key[0]], CodeParameters):
+                self.setraw(key[0], self.__class__())
+            self.getraw(key[0])[key[1:]] = value
         # return leaf
         else:
             # convert ODSs to CodeParameters
             if isinstance(value, ODS):
                 value = CodeParameters()
-            dict.__setitem__(self, key[0], value)
+            self.setraw(key[0], value)
 
     def __getitem__(self, key):
         key = p2l(key)
@@ -1645,19 +1647,87 @@ class CodeParameters(dict):
 
         # go deeper
         if len(key) > 1:
-            return dict.__getitem__(self, key[0])[key[1:]]
+            return self.getraw(key[0])[key[1:]]
         # return leaf
         else:
-            return dict.__getitem__(self, key[0])
+            return self.getraw(key[0])
+
+    def getraw(self, key):
+        '''
+        Method to access data to CodeParameters with no processing of the key.
+        Effectively behaves like a pure Python dictionary/list __getitem__.
+        This method is mostly meant to be used in the inner workings of the CodeParameters class.
+
+        :param key: string or integer
+
+        :return: value
+        '''
+        return dict.__getitem__(self, key)
+
+    def setraw(self, key, value):
+        '''
+        Method to assign data to CodeParameters with no processing of the key.
+        Effectively behaves like a pure Python dictionary/list __setitem__.
+        This method is mostly meant to be used in the inner workings of the CodeParameters class.
+
+        :param key: string or integer
+
+        :param value: value to assign
+
+        :return: value
+        '''
+        return dict.__setitem__(self, key, value)
 
     def update(self, value):
+        '''
+        Update CodeParameters
+        NOTE: ODSs will be converted to CodeParameters classes
+
+        :param value: dictionary structure
+
+        :return: self
+        '''
         # convert ODSs to CodeParameters
-        if isinstance(value, ODS):
+        if isinstance(value, (ODS, CodeParameters)):
             for item in value.paths():
                 self[item] = value[item]
         else:
             for item in value.keys():
                 self[item] = value[item]
+        return self
+
+    def paths(self, **kw):
+        """
+        Traverse the code parameters and return paths that have data
+
+        :return: list of paths that have data
+        """
+        paths = kw.setdefault('paths', [])
+        path = kw.setdefault('path', [])
+        for kid in self.keys():
+            if isinstance(self.getraw(kid), CodeParameters):
+                self.getraw(kid).paths(paths=paths, path=path + [kid])
+            else:
+                paths.append(path + [kid])
+        return paths
+
+    def keys(self):
+        '''
+        :return: keys as list
+        '''
+        return list(dict.keys(self))
+
+    def values(self):
+        '''
+        :return: values as list
+        '''
+        return list(dict.values(self))
+
+    def items(self):
+        '''
+        :return: key-value pairs as list
+        '''
+        return list(dict.items(self))
 
 
 def codeparams_xml_save(f):

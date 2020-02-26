@@ -413,6 +413,7 @@ class TestOmasCore(unittest.TestCase):
         assert isinstance(ods['ec_launchers.code.parameters'], CodeParameters)
         assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
         assert isinstance(ods['ec_launchers.code.parameters.launcher.0'], CodeParameters)
+        assert len(ods['ec_launchers.code.parameters.launcher.0']) == 2
 
 
 if __name__ == '__main__':
