@@ -273,7 +273,7 @@
  },
  "nbi.unit[:].aperture[:].outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
   "full_path": "nbi/unit(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "x1x21d_static"
@@ -2091,7 +2091,7 @@
  },
  "nbi.unit[:].source.outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
   "full_path": "nbi/unit(i1)/source/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "x1x21d_static"

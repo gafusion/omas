@@ -97,6 +97,13 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = float(value)
         elif 'INT' in info['data_type']:
             value = int(value)
+    # structure type is respected check type
+    if info['data_type'] == 'structure' and not isinstance(value, ODS):
+        text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
+        if consistency_check == 'warn':
+            printe(text)
+        else:
+            raise ValueError(text)
     # check type
     if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
         text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
@@ -216,6 +223,8 @@ class ODS(MutableMapping):
 
         # get time nodes from data structure definitions
         loc = p2l(subtree)
+        if not loc:
+            raise LookupError('Must specify a location in the ODS to get the time of')
         flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
         times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
 
@@ -370,7 +379,13 @@ class ODS(MutableMapping):
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
             for item in self.keys():
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
-                    continue
+                    # consistency_check=True makes sure that code.parameters is of type CodeParameters
+                    if consistency_value:
+                        tmp = CodeParameters()
+                        tmp.update(self.getraw(item))
+                        self.setraw(item, tmp)
+                    else:
+                        continue
                 else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
@@ -565,13 +580,22 @@ class ODS(MutableMapping):
             elif isinstance(self.omas_data, list):
                 key[0] = len(self.omas_data)
 
-        # if the user has entered path rather than a single key
-        if len(key) > 1:
+        # handle dynamic path creation for .code.parameters leaf
+        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
             pass_on_value = value
-            value = self.__class__(imas_version=self.imas_version,
-                                   consistency_check=self.consistency_check,
-                                   dynamic_path_creation=self.dynamic_path_creation,
-                                   cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+            value = CodeParameters()
+            value.update(pass_on_value)
+        # if the user has entered path rather than a single key
+        elif len(key) > 1:
+            pass_on_value = value
+            if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+                value = CodeParameters()
+                value[key[1:]] = pass_on_value
+            else:
+                value = self.__class__(imas_version=self.imas_version,
+                                       consistency_check=self.consistency_check,
+                                       dynamic_path_creation=self.dynamic_path_creation,
+                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -1502,7 +1526,8 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
-        self.consistency_check = consistency_check
+        if consistency_check != self.consistency_check:
+            self.consistency_check = consistency_check
         return self
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
@@ -1558,9 +1583,9 @@ class ODS(MutableMapping):
                 self[item].codeparams2xml()
             return
         elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
-            self['code.parameters'] = self['code.parameters'].tostring()
+            self['code.parameters'] = self['code.parameters'].to_string()
         elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
-            self['parameters'] = self['parameters'].tostring()
+            self['parameters'] = self['parameters'].to_string()
 
     def codeparams2dict(self):
         '''
@@ -1572,9 +1597,9 @@ class ODS(MutableMapping):
             return
         try:
             if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
-                self['code.parameters'] = CodeParameters().fromstring(self['code.parameters'])
+                self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
             elif ('parameters' in self and isinstance(self['parameters'], basestring)):
-                self['parameters'] = CodeParameters().fromstring(self['parameters'])
+                self['parameters'] = CodeParameters().from_string(self['parameters'])
         except Exception as _excp:
             printe(repr(_excp))
 
@@ -1587,11 +1612,11 @@ class CodeParameters(dict):
     def __init__(self, string=None):
         if isinstance(string, basestring):
             if os.path.exists(string):
-                self.fromfile(string)
+                self.from_file(string)
             else:
-                self.fromstring(string)
+                self.from_string(string)
 
-    def fromstring(self, code_params_string):
+    def from_string(self, code_params_string):
         '''
         Load data from code.parameters XML string
 
@@ -1603,11 +1628,11 @@ class CodeParameters(dict):
         self.clear()
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
-            recursive_interpreter(tmp)
+            recursive_interpreter(tmp, dict_cls=CodeParameters)
             self.update(tmp)
         return self
 
-    def fromfile(self, code_params_file):
+    def from_file(self, code_params_file):
         '''
         Load data from code.parameters XML file
 
@@ -1616,19 +1641,127 @@ class CodeParameters(dict):
         :return: self
         '''
         with open(code_params_file, 'r') as f:
-            return self.fromstring(f.read())
+            return self.from_string(f.read())
 
-    def tostring(self):
+    def to_string(self):
         '''
         generate an XML string from this dictionary
 
         :return: XML string
         '''
         import xmltodict
-        tmp = {'parameters': OrderedDict()}
+        tmp = {'parameters': CodeParameters()}
         tmp['parameters'].update(copy.deepcopy(self))
         recursive_encoder(tmp)
         return xmltodict.unparse(tmp, pretty=True)
+
+    def __setitem__(self, key, value):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            if key[0] not in self or not isinstance(self[key[0]], CodeParameters):
+                self.setraw(key[0], self.__class__())
+            self.getraw(key[0])[key[1:]] = value
+        # return leaf
+        else:
+            # convert ODSs to CodeParameters
+            if isinstance(value, ODS):
+                value = CodeParameters()
+            self.setraw(key[0], value)
+
+    def __getitem__(self, key):
+        key = p2l(key)
+
+        if not len(key):
+            return self
+
+        # go deeper
+        if len(key) > 1:
+            return self.getraw(key[0])[key[1:]]
+        # return leaf
+        else:
+            return self.getraw(key[0])
+
+    def getraw(self, key):
+        '''
+        Method to access data to CodeParameters with no processing of the key.
+        Effectively behaves like a pure Python dictionary/list __getitem__.
+        This method is mostly meant to be used in the inner workings of the CodeParameters class.
+
+        :param key: string or integer
+
+        :return: value
+        '''
+        return dict.__getitem__(self, key)
+
+    def setraw(self, key, value):
+        '''
+        Method to assign data to CodeParameters with no processing of the key.
+        Effectively behaves like a pure Python dictionary/list __setitem__.
+        This method is mostly meant to be used in the inner workings of the CodeParameters class.
+
+        :param key: string or integer
+
+        :param value: value to assign
+
+        :return: value
+        '''
+        return dict.__setitem__(self, key, value)
+
+    def update(self, value):
+        '''
+        Update CodeParameters
+        NOTE: ODSs will be converted to CodeParameters classes
+
+        :param value: dictionary structure
+
+        :return: self
+        '''
+        # convert ODSs to CodeParameters
+        if isinstance(value, (ODS, CodeParameters)):
+            for item in value.paths():
+                self[item] = value[item]
+        else:
+            for item in value.keys():
+                self[item] = value[item]
+        return self
+
+    def paths(self, **kw):
+        """
+        Traverse the code parameters and return paths that have data
+
+        :return: list of paths that have data
+        """
+        paths = kw.setdefault('paths', [])
+        path = kw.setdefault('path', [])
+        for kid in self.keys():
+            if isinstance(self.getraw(kid), CodeParameters):
+                self.getraw(kid).paths(paths=paths, path=path + [kid])
+            else:
+                paths.append(path + [kid])
+        return paths
+
+    def keys(self):
+        '''
+        :return: keys as list
+        '''
+        return list(dict.keys(self))
+
+    def values(self):
+        '''
+        :return: values as list
+        '''
+        return list(dict.values(self))
+
+    def items(self):
+        '''
+        :return: key-value pairs as list
+        '''
+        return list(dict.items(self))
 
 
 def codeparams_xml_save(f):

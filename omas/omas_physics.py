@@ -29,6 +29,7 @@ def add_to__ALL__(f):
 class constants(object):
     e = 1.6021766208e-19
 
+
 @add_to__ODS__
 def equilibrium_stored_energy(ods, update=True):
     '''
@@ -50,8 +51,9 @@ def equilibrium_stored_energy(ods, update=True):
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
         dvol = numpy.gradient(volume_equil)
 
-        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd']=3.0/2.0*numpy.trapz(pressure_equil*dvol) # [J]
+        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil * dvol)  # [J]
     return ods_n
+
 
 @add_to__ODS__
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
@@ -951,6 +953,78 @@ def cocos_transform(cocosin_index, cocosout_index):
 
     return transforms
 
+@add_to__ALL__
+def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
+    '''
+    Utility function to identify COCOS coordinate system
+    If multiple COCOS are possible, then all are returned.
+
+    :param B0: toroidal magnetic field (with sign)
+
+    :param Ip: plasma current (with sign)
+
+    :param q: safety factor profile (with sign) as function of psi
+
+    :param psi: poloidal flux as function of psi(with sign)
+
+    :param clockwise_phi: (optional) [True, False] if phi angle is defined clockwise or not
+                          This is required to identify odd Vs even COCOS
+                          Note that this cannot be determined from the output of a code.
+                          An easy way to determine this is to answer the question: is positive B0 clockwise?
+
+    :param a: (optional) flux surfaces minor radius as function of psi
+              This is required to identify 2*pi term in psi definition
+
+    :return: list with possible COCOS
+    '''
+
+    if clockwise_phi is None:
+        sigma_rpz = clockwise_phi
+    elif clockwise_phi:
+        sigma_rpz = +1
+    else:
+        sigma_rpz = -1
+
+    # return both even and odd COCOS if clockwise_phi is not provided
+    if sigma_rpz is None:
+        tmp = identify_cocos(B0, Ip, q, psi, True, a)
+        tmp.extend(identify_cocos(B0, Ip, q, psi, False, a))
+        return tmp
+
+    sigma_Ip = numpy.sign(Ip)
+    sigma_B0 = numpy.sign(B0)
+    sign_dpsi_pos = numpy.sign(gradient(psi))[0]
+    sign_q_pos = numpy.sign(q)[0]
+
+    sigma_Bp = sign_dpsi_pos / sigma_Ip
+    sigma_rhotp = sign_q_pos / (sigma_Ip * sigma_B0)
+
+    sigma2cocos = {(+1, +1, +1): 1,  # +Bp, +rpz, +rtp
+                   (+1, -1, +1): 2,  # +Bp, -rpz, +rtp
+                   (-1, +1, -1): 3,  # -Bp, +rpz, -rtp
+                   (-1, -1, -1): 4,  # -Bp, -rpz, -rtp
+                   (+1, +1, -1): 5,  # +Bp, +rpz, -rtp
+                   (+1, -1, -1): 6,  # +Bp, -rpz, -rtp
+                   (-1, +1, +1): 7,  # -Bp, +rpz, +rtp
+                   (-1, -1, +1): 8}  # -Bp, -rpz, +rtp
+
+    # identify 2*pi term in psi definition based on q estimate
+    if a is not None:
+        index = numpy.argmin(numpy.abs(q))
+        if index == 0:
+            index += 1
+        q_estimate = numpy.abs((pi * B0 * (a - a[0]) ** 2) / (psi - psi[0]))
+        if numpy.abs(q_estimate[index] - q[index]) < numpy.abs(q_estimate[index] / (2 * pi) - q[index]):
+            eBp = 1
+        else:
+            eBp = 0
+
+        return [sigma2cocos[(sigma_Bp, sigma_rpz, sigma_rhotp)] + 10 * eBp]
+
+    # return COCOS<10 as well as COCOS>10 if a is not provided
+    else:
+        return [sigma2cocos[(sigma_Bp, sigma_rpz, sigma_rhotp)], sigma2cocos[(sigma_Bp, sigma_rpz, sigma_rhotp)] + 10]
+
 
 @add_to__ALL__
 @contextmanager
@@ -1034,11 +1108,12 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
             except Exception as _excp:
                 # Add more user feedback, since use of consistency_check in an omas_environment can be confusing
                 if item == 'consistency_check':
-                    raise _excp.__class__(str(_excp)+'\nThe IMAS consistency was violated getting out of the omas_environment')
+                    raise _excp.__class__(str(_excp) + '\nThe IMAS consistency was violated getting out of the omas_environment')
                 raise
         # restore input_data_process_functions
         if input_data_process_functions is not None:
             omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
+
 
 def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True):
     """

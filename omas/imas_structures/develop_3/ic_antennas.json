@@ -1672,7 +1672,7 @@
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.outline": {
   "data_type": "structure",
-  "documentation": "Irregular outline of the element",
+  "documentation": "Irregular outline of the element. Do NOT repeat the first point.",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/outline",
   "lifecycle_status": "alpha",
   "structure_reference": "rz1d_static"

@@ -2,7 +2,7 @@
  "ec_launchers": {
   "documentation": "Launchers for heating and current drive in the electron cyclotron (EC) frequencies.",
   "full_path": "ec_launchers",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.26.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -503,18 +503,14 @@
   "documentation": "Launching position of the beam",
   "full_path": "ec_launchers/launcher(i1)/launching_position",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_dynamic_aos1_common_time"
+  "structure_reference": "rzphi0d_static"
  },
  "ec_launchers.launcher[:].launching_position.phi": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Toroidal angle",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/phi(:)",
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/phi",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "rad"
  },
  "ec_launchers.launcher[:].launching_position.phi_error_index": {
@@ -525,39 +521,27 @@
   "type": "constant"
  },
  "ec_launchers.launcher[:].launching_position.phi_error_lower": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Lower error for \"phi\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/phi_error_lower(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/phi_error_lower",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "rad"
  },
  "ec_launchers.launcher[:].launching_position.phi_error_upper": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Upper error for \"phi\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/phi_error_upper(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/phi_error_upper",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "rad"
  },
  "ec_launchers.launcher[:].launching_position.r": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Major radius",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/r(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/r",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].launching_position.r_error_index": {
@@ -568,51 +552,27 @@
   "type": "constant"
  },
  "ec_launchers.launcher[:].launching_position.r_error_lower": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Lower error for \"r\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/r_error_lower(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/r_error_lower",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].launching_position.r_error_upper": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Upper error for \"r\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/r_error_upper(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/r_error_upper",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
- "ec_launchers.launcher[:].launching_position.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "flt_1d_type",
-  "documentation": "Time for the R,Z,phi coordinates",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/time(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
-  "units": "s"
- },
  "ec_launchers.launcher[:].launching_position.z": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Height",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/z(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/z",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].launching_position.z_error_index": {
@@ -623,27 +583,19 @@
   "type": "constant"
  },
  "ec_launchers.launcher[:].launching_position.z_error_lower": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Lower error for \"z\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/z_error_lower(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/z_error_lower",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].launching_position.z_error_upper": {
-  "coordinates": [
-   "ec_launchers.launcher[:].launching_position.time"
-  ],
-  "data_type": "FLT_1D",
+  "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
-  "full_path": "ec_launchers/launcher(i1)/launching_position/z_error_upper(:)",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/z_error_upper",
   "lifecycle_status": "alpha",
-  "timebasepath": "launching_position/time",
-  "type": "dynamic",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].mode": {

@@ -2,7 +2,7 @@
  "thomson_scattering": {
   "documentation": "Thomson scattering diagnostic",
   "full_path": "thomson_scattering",
-  "lifecycle_last_change": "3.0.4",
+  "lifecycle_last_change": "3.28.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -17,6 +17,154 @@
   "lifecycle_status": "alpha",
   "maxoccur": "100",
   "structure_reference": "thomson_scattering_channel"
+ },
+ "thomson_scattering.channel[:].delta_position": {
+  "data_type": "structure",
+  "documentation": "Incremental variation of the position of the measurements, due to e.g. different lasers not intersecting the line of sight at the same position. The actual position is then the static position + delta_position",
+  "full_path": "thomson_scattering/channel(i1)/delta_position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_dynamic_aos1_common_time"
+ },
+ "thomson_scattering.channel[:].delta_position.phi": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.r": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time for the R,Z,phi coordinates",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "thomson_scattering.channel[:].delta_position.z": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
  },
  "thomson_scattering.channel[:].identifier": {
   "data_type": "STR_0D",
@@ -97,7 +245,7 @@
  },
  "thomson_scattering.channel[:].position": {
   "data_type": "structure",
-  "documentation": "Position of the measurements (intersection between laser beam and line of sight)",
+  "documentation": "Average position of the measurements (intersection between laser beam and line of sight)",
   "full_path": "thomson_scattering/channel(i1)/position",
   "lifecycle_status": "alpha",
   "structure_reference": "rzphi0d_static"
