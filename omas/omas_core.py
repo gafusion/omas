@@ -204,7 +204,7 @@ class ODS(MutableMapping):
         else:
             return homogeneous_time
 
-    def time(self, key='', extra_info=None, skip=None):
+    def time(self, key='', extra_info=None):
         """
         Return the time information for a given ODS location
 
