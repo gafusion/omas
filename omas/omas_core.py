@@ -346,7 +346,7 @@ class ODS(MutableMapping):
         :return: string with imas_version
         """
         if not hasattr(self, '_imas_version'):
-            self._imas_version = omas_rcparams['imas_version']
+            self._imas_version = omas_rcparams['default_imas_version']
         return self._imas_version
 
     @imas_version.setter
