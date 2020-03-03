@@ -521,9 +521,12 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     :return: Axes instance
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -704,9 +707,12 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     :return: Axes instance
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -791,9 +797,12 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -887,9 +896,12 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['core_profiles'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['core_profiles'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -981,9 +993,12 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['core_profiles'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['core_profiles'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1049,9 +1064,12 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['pellets'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['pellets'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1090,9 +1108,12 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['pellets'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['pellets'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1137,13 +1158,14 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
     :param kw: arguments passed to matplotlib plot statements
 
     :return: axes handler
-
     """
-
     if time_index is None:
-        time_index = numpy.arange(len(ods['lh_antennas'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['lh_antennas'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1198,9 +1220,12 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['lh_antennas'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['lh_antennas'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1249,11 +1274,13 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
 
     :return: axes handler
     """
-
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+        time = ods['ec_launchers'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1302,9 +1329,12 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+        time = ods['ec_launchers'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1355,9 +1385,12 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1398,9 +1431,12 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1446,9 +1482,12 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
