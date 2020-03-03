@@ -1663,7 +1663,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                     pass
             try:
                 r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
-            except ValueError:
+            except LookupError:
                 r2 = z2 = None
             locations[location_name] += [r2, z2]
     try:
@@ -1839,9 +1839,11 @@ def magnetics_overlay(
     from matplotlib import pyplot
 
     # Make sure there is something to plot or else just give up and return
-    nbp = get_channel_count(
-        ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
-        test_checker='checker > 0')
+    nbp = 0
+    if compare_version(ods.imas_version,'3.23.3')>0:
+        nbp = get_channel_count(
+            ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
+            test_checker='checker > 0')
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
         test_checker='checker > 0')
