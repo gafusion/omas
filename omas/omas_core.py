@@ -1763,6 +1763,18 @@ class CodeParameters(dict):
         '''
         return list(dict.items(self))
 
+    def flat(self, **kw):
+        """
+        Flat dictionary representation of the data
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: OrderedDict with flat representation of the data
+        """
+        tmp = OrderedDict()
+        for path in self.paths(**kw):
+            tmp[l2o(path)] = self[path]
+        return tmp
 
 def codeparams_xml_save(f):
     '''

@@ -12,7 +12,7 @@ import sys
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
-def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False):
+def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_path_string=''):
     """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
@@ -26,7 +26,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False):
 
     :return: string with reason for difference, or False otherwise
     """
-    from omas import ODS
+    from omas import ODS, CodeParameters
 
     ods1 = ods1.flat(return_empty_leaves=True)
     ods2 = ods2.flat(return_empty_leaves=True)
@@ -36,24 +36,28 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False):
     differences = []
     for k in k1.difference(k2):
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])):
-            differences.append('DIFF: key `%s` missing in 2nd ods' % k)
+            differences.append('DIFF: key `%s` missing in 2nd ods' % (prepend_path_string + k))
     for k in k2.difference(k1):
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
-            differences.append('DIFF: key `%s` missing in 1st ods' % k)
+            differences.append('DIFF: key `%s` missing in 1st ods' % (prepend_path_string + k))
     for k in k1.intersection(k2):
         if ods1[k] is None and ods2[k] is None:
             pass
         elif isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
             if ods1[k] != ods2[k]:
-                differences.append('DIFF: `%s` differ in value' % k)
+                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
         elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-            differences.append('DIFF: `%s` differ in type (%s,%s)' % (k, type(ods1[k]), type(ods2[k])))
+            differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
             if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % k)
+                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+        elif isinstance(ods1[k], CodeParameters) and isinstance(ods2[k], CodeParameters):
+            tmp = different_ods(ods1[k], ods2[k], ignore_type=ignore_type, ignore_empty=ignore_empty, prepend_path_string=k + '.')
+            if tmp:
+                differences.extend(tmp)
         else:
             if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % k)
+                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
     if len(differences):
         return differences
     else:
