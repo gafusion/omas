@@ -1702,7 +1702,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                     pass
             try:
                 r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
-            except LookupError:
+            except (LookupError, ValueError):
                 r2 = z2 = None
             locations[location_name] += [r2, z2]
     try:
