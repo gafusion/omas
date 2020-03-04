@@ -176,7 +176,7 @@ def json_dumper(obj, objects_encode=True):
     if isinstance(obj, ODS):
         return obj.omas_data
 
-    if not objects_encode:
+    if objects_encode is False:
         if isinstance(obj, numpy.ndarray):
             return obj.tolist()
         elif sys.version_info >= (3, 0) and isinstance(obj, (range, map)):
