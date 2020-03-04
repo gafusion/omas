@@ -73,7 +73,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         f = filename
         json_string = f.read()
 
-    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls), **kw)
+    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls, null_to=numpy.NaN), **kw)
     tmp.consistency_check = consistency_check
     return tmp
 
