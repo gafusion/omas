@@ -15,7 +15,6 @@ try:
 except ImportError as _excp:
     failed_UDA = _excp
 
-
 try:
     import hdc
 
@@ -29,7 +28,7 @@ try:
     if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
         raise RuntimeError('Missing AWS configuration file ~/.aws/config')
     failed_S3 = False
-except RuntimeError as _excp:
+except (ImportError, RuntimeError) as _excp:
     failed_S3 = _excp
 
 try:
@@ -41,7 +40,7 @@ try:
     client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
     client.server_info()
     failed_MONGO = False
-except ServerSelectionTimeoutError as _excp:
+except (ImportError, ServerSelectionTimeoutError) as _excp:
     failed_MONGO = _excp
 
 try:
