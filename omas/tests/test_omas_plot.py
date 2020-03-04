@@ -19,9 +19,11 @@ import numpy
 import warnings
 import copy
 
-# Plot imports
-import matplotlib as mpl
-from matplotlib import pyplot as plt
+# Use Agg backend to avoid opening up figures
+import matplotlib
+
+matplotlib.use('Agg')
+from matplotlib import pyplot
 
 # OMAS imports
 from omas import *
@@ -33,37 +35,17 @@ class TestOmasPlot(unittest.TestCase):
     Test suite for omas_plot.py
     """
 
-    # Flags to edit while testing
-    show_plots = False  # This will get in the way of automatic testing
-    keep_plots_open = False
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
     # Sample data for use in tests
     ods = ods_sample()
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
 
     def setUp(self):
         test_id = self.id()
         test_name = '.'.join(test_id.split('.')[-2:])
         if test_name not in ['TestOmasPlot.test_ch_count']:
             self.fig = plt.figure(test_name)
-        self.printv('{}...'.format(test_name))
 
     def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
-        if not self.keep_plots_open:
-            plt.close()
-
-    @classmethod
-    def tearDownClass(cls):
-        if cls.show_plots:
-            plt.show()
+        pyplot.close()
 
     def test_quantity(self):
         self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal', '$n_e$', lw=2)
@@ -133,7 +115,6 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_gas_arrow(self):
         from omas.omas_plot import gas_arrow
-        self.printv('  gas_arrow ods.cocos = {}'.format(self.ods.cocos))
         # Explicitly test the direction keyword
         gas_arrow(self.ods, 1.5, 0.0, direction=0, color='k')
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi / 2, color='gray')

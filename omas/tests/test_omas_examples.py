@@ -18,35 +18,23 @@ import unittest
 
 # Use Agg backend to avoid opening up figures
 import matplotlib
+
 matplotlib.use('Agg')
+from matplotlib import pyplot
 
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
-from failed_imports import *
+from omas.tests.failed_imports import *
+
 
 class TestOmasExamples(unittest.TestCase):
     """
     Test suite for examples files
     """
 
-    # Flags to edit while testing
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        self.printv('{}...'.format(test_name))
-
     def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
+        pyplot.close()
 
     def test_omas_units(self):
         from omas.examples import omas_units
@@ -142,6 +130,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_omas_info(self):
         from omas.examples import omas_info
 
+
 # for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):
 #     if '__init__' in filename:
 #         continue
@@ -152,5 +141,5 @@ class TestOmasExamples(unittest.TestCase):
 #     print(execstring)
 
 if __name__ == '__main__':
-   suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasExamples)
-   unittest.TextTestRunner(verbosity=2).run(suite)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasExamples)
+    unittest.TextTestRunner(verbosity=2).run(suite)

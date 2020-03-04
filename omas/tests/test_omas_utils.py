@@ -33,52 +33,30 @@ class TestOmasUtils(unittest.TestCase):
     Test suite for omas_utils.py
     """
 
-    # Flags to edit while testing
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
     # Sample data for use in tests
     specific_test_version = '3.18.0'
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
 
     def test_different_ods(self):
         ods = ODS()
         ods2 = ODS()
         ods2.sample_equilibrium()
         diff_eq = different_ods(ods, ods2)
-        self.printv('  diff_eq = {}'.format(diff_eq))
         assert isinstance(diff_eq, list)
         assert ('equilibrium' in ' '.join(diff_eq)) or ('wall' in ' '.join(diff_eq))
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
         ods3.sample_core_profiles()
         diff_prof = ods2.diff(ods3)
-        self.printv('  diff_prof = {}'.format(diff_prof))
         assert isinstance(diff_prof, list)
         assert isinstance(different_ods(ods3, ods2), list)
         assert 'core_profiles' in ' '.join(diff_prof)
         ods2.sample_core_profiles(include_pressure=False)
         diff_prof2 = different_ods(ods3, ods2)
-        self.printv('  diff_prof2 = {}'.format(diff_prof2))
         assert isinstance(diff_prof2, list)
         assert 'core_profiles' in ' '.join(diff_prof2)
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
         diff_prof3 = ods2.diff(ods3)
-        self.printv('  diff_prof3 = {}'.format(diff_prof3))
         assert isinstance(diff_prof3, list)
         assert 'value' in ' '.join(diff_prof3)
         ods2.sample_core_profiles()
@@ -89,7 +67,6 @@ class TestOmasUtils(unittest.TestCase):
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
         diff_prof5 = different_ods(ods2, ods3)
-        self.printv('  diff_prof5 = {}'.format(diff_prof5))
         assert isinstance(diff_prof5, list)
         assert 'name' in ' '.join(diff_prof5)
 
