@@ -1039,7 +1039,7 @@ class ODS(MutableMapping):
         return (False, True)
 
     def __len__(self):
-        return len(self.omas_data)
+        return len(self.keys())
 
     def __iter__(self):
         return iter(self.keys())
