@@ -981,7 +981,7 @@ class ODS(MutableMapping):
 
     def paths(self, return_empty_leaves=False, **kw):
         """
-        Traverse the ods and return paths to the its leaves
+        Traverse the ods and return paths to its leaves
 
         :param return_empty_leaves: if False only return paths to leaves that have data
                                     if True also return paths to empty leaves
