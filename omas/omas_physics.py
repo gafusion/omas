@@ -247,10 +247,7 @@ def core_profiles_densities(ods, update=True):
         if not update:
             prof1d_n['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
 
-        try:
-            __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
-        except Exception: 
-            __zeros__ = 0. * prof1d['grid']['psi']
+        __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
         # electrons
         consistent_density(prof1d_n['electrons'])
