@@ -19,10 +19,6 @@ import numpy
 import warnings
 import copy
 
-# Plot imports
-import matplotlib as mpl
-from matplotlib import pyplot as plt
-
 # OMAS imports
 from omas import *
 from omas.omas_utils import *

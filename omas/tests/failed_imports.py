@@ -1,4 +1,4 @@
-from omas.omas_setup import *
+from omas.omas_setup import omas_rcparams
 import os
 
 try:

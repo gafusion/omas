@@ -42,7 +42,7 @@ class TestOmasPlot(unittest.TestCase):
         test_id = self.id()
         test_name = '.'.join(test_id.split('.')[-2:])
         if test_name not in ['TestOmasPlot.test_ch_count']:
-            self.fig = plt.figure(test_name)
+            self.fig = pyplot.figure(test_name)
 
     def tearDown(self):
         pyplot.close()
@@ -94,7 +94,7 @@ class TestOmasPlot(unittest.TestCase):
         e = 0.1 + y * 0.01 + x * 0.01
         u = unumpy.uarray(y, e)
 
-        ax = plt.gca()
+        ax = pyplot.gca()
         ub1 = uband(x, u, ax)
         ub2 = uband(x, -u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
@@ -201,7 +201,7 @@ class TestOmasPlot(unittest.TestCase):
         ods2 = ODS().sample_equilibrium(time_index=0, include_wall=True)
         ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
         # Test for missing wall
-        plt.figure('TestOmasPlot.test_eqcx missing wall')
+        pyplot.figure('TestOmasPlot.test_eqcx missing wall')
         ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()
 
     def test_eqcx_resample(self):
@@ -212,21 +212,21 @@ class TestOmasPlot(unittest.TestCase):
     def test_eq_summary(self):
         ods2 = ODS().sample_equilibrium(include_phi=False)
         ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)
-        ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
-        ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
+        ods2.plot_equilibrium_summary(fig=pyplot.gcf(), label='label test')
+        ods3.plot_equilibrium_summary(fig=pyplot.figure('TestOmasPlot.test_eq_summary with rho'))
 
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()
-        ods2.plot_core_profiles_summary(fig=plt.gcf())
+        ods2.plot_core_profiles_summary(fig=pyplot.gcf())
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
             show_total_density=True)
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
             show_total_density=True)
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
