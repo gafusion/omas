@@ -118,10 +118,8 @@ def core_profiles_pressures(ods, update=True):
         if not update:
             prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
 
-        try:
-            __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
-        except Exception: 
-            __zeros__ = 0. * prof1d['grid']['psi']
+
+        __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
         prof1d_p['pressure_thermal'] = copy.deepcopy(__zeros__)
         prof1d_p['pressure_ion_total'] = copy.deepcopy(__zeros__)
