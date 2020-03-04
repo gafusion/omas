@@ -61,6 +61,14 @@ tests2_utils:
 tests3_utils:
 	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
+tests_examples: tests2_examples tests3_examples
+
+tests2_examples:
+	python2 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
+
+tests3_examples:
+	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
+
 requirements:
 	rm -f requirements_python2.txt
 	rm -f requirements_python3.txt
