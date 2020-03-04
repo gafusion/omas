@@ -17,6 +17,7 @@ Finally, a check is done to make sure that the final ODS is the same as the init
 from __future__ import print_function, division, unicode_literals
 
 import os
+from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
@@ -56,8 +57,8 @@ paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
 ods_end = load_omas_imas(machine='ITER', pulse=1, paths=paths)
 
 # check data
-check = different_ods(ods_start, ods_end)
-if not check:
+difference = different_ods(ods_start, ods_end)
+if not difference:
     print('OMAS data got saved and loaded correctly throughout')
 else:
-    pprint(check)
+    pprint(difference)
