@@ -363,7 +363,7 @@ class TestOmasPhysics(unittest.TestCase):
             index = numpy.argsort(psi11)
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
 
-    @unittest.skipUnless(not failed_PINT, str(failed_PINT))
+    @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):
         import pint
         ureg = pint.UnitRegistry()

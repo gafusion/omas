@@ -66,7 +66,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('dx through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_MONGO, str(failed_MONGO))
+    @unittest.skipIf(failed_MONGO, str(failed_MONGO))
     def test_omas_mongo(self):
         ods = ods_sample()
         ods1 = through_omas_mongo(ods)
@@ -74,7 +74,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('mongo through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_S3, str(failed_S3))
+    @unittest.skipIf(failed_S3, str(failed_S3))
     def test_omas_s3(self):
         ods = ods_sample()
         ods1 = through_omas_s3(ods)
@@ -82,7 +82,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('s3 through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_imas(self):
         ods = ods_sample()
         ods1 = through_omas_imas(ods)
@@ -90,7 +90,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('hdc through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_HDC, str(failed_HDC))
+    @unittest.skipIf(failed_HDC, str(failed_HDC))
     def test_omas_hdc(self):
         ods = ods_sample()
         ods1 = through_omas_hdc(ods)
