@@ -26,7 +26,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation', 'symlink_imas_structure_versions',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
-    'omas_rcparams', 'rcparams_environment', '__version__'
+    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
 ]
 
 # List of functions that can be added by third-party Python
@@ -1934,9 +1934,7 @@ def through_omas_pkl(ods):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.pkl'
+    filename = omas_testdir() + '/test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
     return ods1

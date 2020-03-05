@@ -8,9 +8,8 @@ GKDB is a publicly accessible database of delta-f flux-tube gyro-kinetic simulat
 which stores its data according to the `gyrokinetic` IMAS IDS https://gafusion.github.io/omas/schema/schema_gyrokinetics.html
 """
 
-from omas import ODS, imas_json_dir
+from omas import ODS, imas_json_dir, omas_testdir
 from pprint import pprint
-import tempfile
 import sys
 
 # load a sample GKDB sample json file
@@ -22,7 +21,7 @@ ods['gyrokinetics'].load(sample_filename)
 pprint(ods.pretty_paths())
 
 # save a copy
-filename = tempfile.gettempdir() + '/gkdb_linear_initialvalue.json'
+filename = omas_testdir() + '/gkdb_linear_initialvalue.json'
 ods['gyrokinetics'].save(filename)
 
 # load the newly saved copy

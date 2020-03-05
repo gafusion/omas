@@ -13,6 +13,7 @@ import os
 import numpy
 import uncertainties.unumpy as unumpy
 from uncertainties import ufloat
+os.chdir(omas_testdir())
 
 # generate some uncertain data
 ods = ODS()

@@ -12,7 +12,6 @@ All other save methods retain the code.parameters tree structure
 
 from pprint import pprint
 from omas import *
-import tempfile
 import os
 
 # Assign code parameters using dictionary approach

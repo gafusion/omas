@@ -11,10 +11,9 @@ from __future__ import print_function, division, unicode_literals
 
 from matplotlib import pyplot
 import os
-import tempfile
 from omas import *
 
-os.chdir(tempfile.gettempdir())
+os.chdir(omas_testdir())
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk
 from omfit.classes.omfit_onetwo import OMFITstatefile

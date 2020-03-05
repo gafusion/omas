@@ -86,10 +86,7 @@ def through_omas_json(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.json'
-
+    filename = omas_testdir() + '/test.json'
     if method == 'function':
         save_omas_json(ods, filename)
         ods1 = load_omas_json(filename)
