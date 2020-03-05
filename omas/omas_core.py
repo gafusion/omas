@@ -246,8 +246,6 @@ class ODS(MutableMapping):
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
                     times[item] = time
-                except IndexError:
-                    pass
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):
                         pass
@@ -528,10 +526,11 @@ class ODS(MutableMapping):
 
     @dynamic_path_creation.setter
     def dynamic_path_creation(self, dynamic_path_value):
-        self._dynamic_path_creation = dynamic_path_value
-        for item in self.keys():
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).dynamic_path_creation = dynamic_path_value
+        if dynamic_path_value != self._dynamic_path_creation:
+            self._dynamic_path_creation = dynamic_path_value
+            for item in self.keys():
+                if isinstance(self.getraw(item), ODS):
+                    self.getraw(item).dynamic_path_creation = dynamic_path_value
 
     def _validate(self, value, structure):
         """
@@ -871,7 +870,10 @@ class ODS(MutableMapping):
                     data[k] = valid * numpy.nan
             # force dtype to avoid obtaining arrays of objects in case
             # the shape of the concatenated arrays do not match
-            return numpy.array(data, dtype=numpy.array(data[0]).dtype)
+            if len(data):
+                return numpy.array(data, dtype=numpy.array(data[0]).dtype)
+            else:
+                raise ValueError('`%s` has no data' % self.location)
 
         # dynamic path creation
         elif key[0] not in self.keys():
@@ -893,7 +895,7 @@ class ODS(MutableMapping):
                     return value.__getitem__(key[1:], cocos_and_coords)
                 else:
                     return value[l2o(key[1:])]
-            except ValueError:
+            except ValueError: # ValueError is raised when nodes have no data
                 if dynamically_created:
                     del self[key[0]]
                 raise
