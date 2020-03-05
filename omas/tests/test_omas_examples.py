@@ -72,6 +72,7 @@ class TestOmasExamples(unittest.TestCase):
     def test_omas_mongo_example(self):
         from omas.examples import omas_mongo_example
 
+    @unittest.skipIf(failed_S3, str(failed_S3))
     def test_save_load_through(self):
         from omas.examples import save_load_through
 
