@@ -49,9 +49,10 @@ def equilibrium_stored_energy(ods, update=True):
     for time_index in ods['equilibrium']['time_slice']:
         pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
-        dvol = numpy.gradient(volume_equil)
 
-        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil * dvol)  # [J]
+
+        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil,x=volume_equil) # [J]
+
     return ods_n
 
 
@@ -116,6 +117,7 @@ def core_profiles_pressures(ods, update=True):
 
         if not update:
             prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
+
 
         __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
