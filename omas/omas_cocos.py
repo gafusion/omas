@@ -740,7 +740,7 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbe
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.real']='?'                            #[ADD?]# 1.125000 # toroidal  velocity
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.amplitude_multiplier']='?'                                                  #[ADD?]# 0.600000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.frequency']='?'                                                             #[ADD?]# 0.600000 # toroidal
-_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']='?'                                                            #[ADD?]# 0.600000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']=None                                                           #[ADD?]# 0.600000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.jacobian']='?'                                     #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_contravariant']='?'                         #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_covariant']='?'                             #[ADD?]# 0.428571 # toroidal
