@@ -56,6 +56,10 @@ _cocos_signals['bremsstrahlung_visible.channel.:.line_of_sight.second_point.phi'
 
 # CAMERA_IR
 
+# CAMERA_VISIBLE
+_cocos_signals['camera_visible.channel.:.aperture.:.centre.phi']='?'                                 #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_visible.channel.:.detector.:.geometry_matrix.emission_grid.phi']='?'          #[ADD?]# 2.000000 # phi  [rad]
+
 # CHARGE_EXCHANGE
 _cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='?'                                 #[ADD?]# 2.666667 # velocity  _pol  [m.s^-1]
 _cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='?'                                 #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
@@ -641,15 +645,15 @@ _cocos_signals['magnetics.flux_loop.:.position.:.phi']='TOR'                    
 _cocos_signals['magnetics.rogowski_coil.:.position.:.phi']='?'                                      #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['magnetics.method.:.ip.data']='TOR'                                                         # 1.750000 # ip  [A]
 _cocos_signals['magnetics.rogowski_coil.:.current.data']='?'                                        #[ADD?]# 1.750000 # current  [A]
+_cocos_signals['magnetics.b_field_pol_probe.:.bandwidth_3db']='?'                                   #[ADD?]# 1.666667 # b  b_field  [Hz]
+_cocos_signals['magnetics.b_field_tor_probe.:.bandwidth_3db']='?'                                   #[ADD?]# 1.666667 # b  b_field  [Hz]
 _cocos_signals['magnetics.b_field_pol_probe.:.field.data']='?'                                      #[ADD?]# 1.500000 # b  b_field  [T]
 _cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.b_field_tor_probe.:.field.data']='?'                                      #[ADD?]# 1.500000 # b  b_field  [T]
 _cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.b_field_pol_probe.:.area']='?'                                            #[ADD?]# 0.666667 # b  b_field
-_cocos_signals['magnetics.b_field_pol_probe.:.bandwidth_3db']='?'                                   #[ADD?]# 0.666667 # b  b_field
 _cocos_signals['magnetics.b_field_pol_probe.:.length']='?'                                          #[ADD?]# 0.666667 # b  b_field
 _cocos_signals['magnetics.b_field_tor_probe.:.area']='?'                                            #[ADD?]# 0.666667 # b  b_field
-_cocos_signals['magnetics.b_field_tor_probe.:.bandwidth_3db']='?'                                   #[ADD?]# 0.666667 # b  b_field
 _cocos_signals['magnetics.b_field_tor_probe.:.length']='?'                                          #[ADD?]# 0.666667 # b  b_field
 
 # MHD
@@ -695,6 +699,8 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.psi_potential_per
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.psi_potential_perturbed.imaginary']='?'                              #[ADD?]# 2.285714 # toroidal  psi  [V]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.psi_potential_perturbed.real']='?'                                   #[ADD?]# 2.285714 # toroidal  psi  [V]
 _cocos_signals['mhd_linear.vacuum_toroidal_field.b0']='TOR'                                                                                # 2.000000 # b0  [T]
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.frequency']='?'                                                             #[ADD?]# 1.600000 # toroidal  [Hz]
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']=None                                                                  # 1.600000 # toroidal  [Hz]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.m_pol_dominant']='?'                                                        #[ADD?]# 1.600000 # toroidal  [-]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.phase']='?'                                                                 #[ADD?]# 1.600000 # toroidal  [rad]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.radial_mode_number']='?'                                                    #[ADD?]# 1.600000 # toroidal  [-]
@@ -739,8 +745,6 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbe
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.imaginary']='?'                       #[ADD?]# 1.125000 # toroidal  velocity
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.real']='?'                            #[ADD?]# 1.125000 # toroidal  velocity
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.amplitude_multiplier']='?'                                                  #[ADD?]# 0.600000 # toroidal
-_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.frequency']='?'                                                             #[ADD?]# 0.600000 # toroidal
-_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.growthrate']=None                                                           #[ADD?]# 0.600000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.jacobian']='?'                                     #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_contravariant']='?'                         #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_covariant']='?'                             #[ADD?]# 0.428571 # toroidal
@@ -771,6 +775,12 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim2']='?'  
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.volume_element']='?'                                            #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.imaginary']='?'                          #[ADD?]# 0.375000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.real']='?'                               #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.dim1']='?'                                    #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.dim2']='?'                                    #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.volume_element']='?'                          #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.grid.dim1']='?'                                    #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.grid.dim2']='?'                                    #[ADD?]# 0.375000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system.grid.volume_element']='?'                          #[ADD?]# 0.375000 # toroidal
 
 # MSE
 _cocos_signals['mse.channel.:.active_spatial_resolution.:.centre.phi']='TOR'                           # 2.000000 # phi  [rad]
@@ -789,10 +799,10 @@ _cocos_signals['nbi.unit.:.source.centre.phi']='?'                              
 
 # NEUTRON_DIAGNOSTIC
 _cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.amplitude.data']='?'                   #[ADD?]# 2.200000 # b  b_field  [V]
+_cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?'                   #[ADD?]# 2.200000 # b  b_field  [Hz]
 _cocos_signals['neutron_diagnostic.detectors.:.aperture.:.centre.phi']='TOR'                                # 2.000000 # phi  [rad]
 _cocos_signals['neutron_diagnostic.detectors.:.detector.centre.phi']='TOR'                                  # 2.000000 # phi  [rad]
 _cocos_signals['neutron_diagnostic.detectors.:.position.phi']='TOR'                                         # 2.000000 # phi  [rad]
-_cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?'                   #[ADD?]# 1.200000 # b  b_field
 
 # NTMS
 _cocos_signals['ntms.vacuum_toroidal_field.b0']='TOR'                                            # 2.000000 # b0  [T]
@@ -1017,6 +1027,7 @@ _cocos_signals['tf.coil.:.current.data']='?'                                    
 _cocos_signals['tf.field_map.:.a_field_tor.:.values']='?'                                             #[ADD?]# 1.600000 # _tor  [T.m]
 
 # THOMSON_SCATTERING
+_cocos_signals['thomson_scattering.channel.:.delta_position.phi']='?'                  #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['thomson_scattering.channel.:.position.phi']='TOR'                             # 2.000000 # phi  [rad]
 
 # TRANSPORT_SOLVER_NUMERICS

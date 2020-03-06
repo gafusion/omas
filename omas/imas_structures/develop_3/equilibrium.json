@@ -2,7 +2,7 @@
  "equilibrium": {
   "documentation": "Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.",
   "full_path": "equilibrium",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.28.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "3"
@@ -4695,6 +4695,187 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].constraints.pf_passive_current": {
+  "coordinates": [
+   "pf_passive.loop"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Current in a set of axisymmetric passive conductors",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "equilibrium_constraints_0D",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].exact": {
+  "data_type": "INT_0D",
+  "documentation": "Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/exact",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].measured": {
+  "data_type": "FLT_0D",
+  "documentation": "Measured value",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/measured",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].measured_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/measured_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].measured_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/measured_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].measured_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/measured_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].reconstructed": {
+  "data_type": "FLT_0D",
+  "documentation": "Value calculated from the reconstructed equilibrium",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/reconstructed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].reconstructed_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/reconstructed_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].reconstructed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/reconstructed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].reconstructed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/reconstructed_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].source": {
+  "data_type": "STR_0D",
+  "documentation": "Path to the source data for this measurement in the IMAS data dictionary",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/source",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].time_measurement": {
+  "data_type": "FLT_0D",
+  "documentation": "Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/time_measurement",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].time_measurement_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/time_measurement_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].time_measurement_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/time_measurement_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].time_measurement_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/time_measurement_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].weight": {
+  "data_type": "FLT_0D",
+  "documentation": "Weight given to the measurement",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/weight",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].weight_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/weight_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].weight_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/weight_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pf_passive_current[:].weight_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/weight_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
  "equilibrium.time_slice[:].constraints.pressure": {
   "coordinates": [
    "1...N"
@@ -5153,6 +5334,293 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/weight_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Array of strike points, for each of them the RZ position is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "equilibrium_constraints_pure_position"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"chi_squared_r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared_r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared_r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"chi_squared_z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared_z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared_z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].exact": {
+  "data_type": "INT_0D",
+  "documentation": "Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/exact",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured": {
+  "data_type": "structure",
+  "documentation": "Measured or estimated position",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed": {
+  "data_type": "structure",
+  "documentation": "Position estimated from the reconstructed equilibrium",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.r_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.z_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].source": {
+  "data_type": "STR_0D",
+  "documentation": "Path to the source data for this measurement in the IMAS data dictionary",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/source",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].time_measurement": {
+  "data_type": "FLT_0D",
+  "documentation": "Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/time_measurement",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].time_measurement_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/time_measurement_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].time_measurement_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/time_measurement_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].time_measurement_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/time_measurement_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].weight": {
+  "data_type": "FLT_0D",
+  "documentation": "Weight given to the measurement",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/weight",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].weight_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/weight_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].weight_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/weight_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.strike_point[:].weight_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/weight_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
