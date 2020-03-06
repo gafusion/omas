@@ -13,45 +13,12 @@ Test script for omas saving/loading data in different formats
 
 from __future__ import print_function, division, unicode_literals
 import unittest
-
 import os
 import numpy
+
+# OMAS imports
 from omas import *
-
-try:
-    import imas
-
-    failed_IMAS = False
-except ImportError as _excp:
-    failed_IMAS = _excp
-
-try:
-    import hdc
-
-    failed_HDC = False
-except ImportError as _excp:
-    failed_HDC = _excp
-
-try:
-    import boto3
-
-    if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
-        raise RuntimeError('Missing AWS configuration file ~/.aws/config')
-    failed_S3 = False
-except RuntimeError as _excp:
-    failed_S3 = _excp
-
-try:
-    from pymongo import MongoClient
-    from pymongo.errors import ServerSelectionTimeoutError
-    from omas.omas_mongo import get_mongo_credentials
-
-    up = get_mongo_credentials(server=omas_rcparams['default_mongo_server'])
-    client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
-    client.server_info()
-    failed_mongo = False
-except ServerSelectionTimeoutError as _excp:
-    failed_mongo = _excp
+from omas.tests.failed_imports import *
 
 
 class TestOmasSuite(unittest.TestCase):
@@ -100,7 +67,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('dx through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_mongo, str(failed_mongo))
+    @unittest.skipIf(failed_MONGO, str(failed_MONGO))
     def test_omas_mongo(self):
         ods = ods_sample()
         ods1 = through_omas_mongo(ods)
@@ -108,7 +75,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('mongo through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_S3, str(failed_S3))
+    @unittest.skipIf(failed_S3, str(failed_S3))
     def test_omas_s3(self):
         ods = ods_sample()
         ods1 = through_omas_s3(ods)
@@ -116,7 +83,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('s3 through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_imas(self):
         ods = ods_sample()
         ods1 = through_omas_imas(ods)
@@ -124,7 +91,7 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('hdc through difference: %s' % diff)
 
-    @unittest.skipUnless(not failed_HDC, str(failed_HDC))
+    @unittest.skipIf(failed_HDC, str(failed_HDC))
     def test_omas_hdc(self):
         ods = ods_sample()
         ods1 = through_omas_hdc(ods)

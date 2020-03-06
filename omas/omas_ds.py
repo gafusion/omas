@@ -172,10 +172,7 @@ def through_omas_ds(ods, method=['function', 'class_method'][1]):
 
     :return: OMAS data set
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.ds'
-
+    filename = omas_testdir(__file__) + '/test.ds'
     if method == 'function':
         save_omas_ds(ods, filename)
         ods1 = load_omas_ds(filename)
@@ -193,15 +190,11 @@ def through_omas_dx(odx, method=['function', 'class_method'][1]):
 
     :return: OMAS data xarray
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.dx'
-
+    filename = omas_testdir(__file__) + '/test.dx'
     if method == 'function':
         save_omas_dx(odx, filename)
         odx1 = load_omas_dx(filename)
     else:
         odx.save(filename)
         odx1 = ODX().load(filename)
-
     return odx1

@@ -13,15 +13,17 @@ Test script for omas/omas_plot.py
 
 # Basic imports
 from __future__ import print_function, division, unicode_literals
-import os
 import unittest
+import os
 import numpy
 import warnings
 import copy
 
-# Plot imports
-import matplotlib as mpl
-from matplotlib import pyplot as plt
+# Use Agg backend to avoid opening up figures
+import matplotlib
+
+matplotlib.use('Agg')
+from matplotlib import pyplot
 
 # OMAS imports
 from omas import *
@@ -33,37 +35,17 @@ class TestOmasPlot(unittest.TestCase):
     Test suite for omas_plot.py
     """
 
-    # Flags to edit while testing
-    show_plots = False  # This will get in the way of automatic testing
-    keep_plots_open = False
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
     # Sample data for use in tests
     ods = ods_sample()
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
 
     def setUp(self):
         test_id = self.id()
         test_name = '.'.join(test_id.split('.')[-2:])
         if test_name not in ['TestOmasPlot.test_ch_count']:
-            self.fig = plt.figure(test_name)
-        self.printv('{}...'.format(test_name))
+            self.fig = pyplot.figure(test_name)
 
     def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
-        if not self.keep_plots_open:
-            plt.close()
-
-    @classmethod
-    def tearDownClass(cls):
-        if cls.show_plots:
-            plt.show()
+        pyplot.close()
 
     def test_quantity(self):
         self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal', '$n_e$', lw=2)
@@ -112,7 +94,7 @@ class TestOmasPlot(unittest.TestCase):
         e = 0.1 + y * 0.01 + x * 0.01
         u = unumpy.uarray(y, e)
 
-        ax = plt.gca()
+        ax = pyplot.gca()
         ub1 = uband(x, u, ax)
         ub2 = uband(x, -u, fill_kw=dict(alpha=0.15, color='k'), color='r')
         assert ub1 != ub2
@@ -133,7 +115,6 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_gas_arrow(self):
         from omas.omas_plot import gas_arrow
-        self.printv('  gas_arrow ods.cocos = {}'.format(self.ods.cocos))
         # Explicitly test the direction keyword
         gas_arrow(self.ods, 1.5, 0.0, direction=0, color='k')
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi / 2, color='gray')
@@ -157,7 +138,6 @@ class TestOmasPlot(unittest.TestCase):
     def test_eqcx_basic(self):
         """Our basic ods comes with eq data, so try to just plot that thing"""
         self.ods.plot_equilibrium_CX()
-        return
 
     def test_eqcx_data_availability_variations(self):
         """Plot all the equilibrium contour quantity options with all the combinations of available data"""
@@ -215,43 +195,38 @@ class TestOmasPlot(unittest.TestCase):
         with self.assertRaises(ValueError):
             # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
             ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
-        return
 
     def test_eqcx_slices(self):
         """Test dealing with different time indices, including getting wall from a different slice than the eq"""
         ods2 = ODS().sample_equilibrium(time_index=0, include_wall=True)
         ods2.sample_equilibrium(time_index=1, include_wall=False).plot_equilibrium_CX()  # Get wall from slice 0
         # Test for missing wall
-        plt.figure('TestOmasPlot.test_eqcx missing wall')
+        pyplot.figure('TestOmasPlot.test_eqcx missing wall')
         ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=False).plot_equilibrium_CX()
-        return
 
     def test_eqcx_resample(self):
         """Test the sf (scaling factor) option"""
         self.ods.plot_equilibrium_CX(sf=1)
         self.ods.plot_equilibrium_CX(sf=3)
-        return
 
     def test_eq_summary(self):
         ods2 = ODS().sample_equilibrium(include_phi=False)
         ods3 = ODS().sample_equilibrium(include_profiles=True, include_phi=False, include_wall=True)
-        ods2.plot_equilibrium_summary(fig=plt.gcf(), label='label test')
-        ods3.plot_equilibrium_summary(fig=plt.figure('TestOmasPlot.test_eq_summary with rho'))
-        return
+        ods2.plot_equilibrium_summary(fig=pyplot.gcf(), label='label test')
+        ods3.plot_equilibrium_summary(fig=pyplot.figure('TestOmasPlot.test_eq_summary with rho'))
 
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()
-        ods2.plot_core_profiles_summary(fig=plt.gcf())
+        ods2.plot_core_profiles_summary(fig=pyplot.gcf())
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
             show_total_density=True)
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
             show_total_density=True)
         ods2.plot_core_profiles_summary(
-            fig=plt.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
-        return
+            fig=pyplot.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
@@ -260,7 +235,6 @@ class TestOmasPlot(unittest.TestCase):
         ods3 = copy.deepcopy(self.ods)
         ods3.sample_core_profiles(add_junk_ion=True)
         ods3.plot_core_profiles_pressures()
-        return
 
     # PF active overlay
     def test_pf_active_overlay(self):
@@ -275,7 +249,6 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, pf_active=True)
         ODS().plot_pf_active_overlay()
-        return
 
     # Magnetics overlay
     def test_magnetics_overlay(self):
@@ -295,7 +268,6 @@ class TestOmasPlot(unittest.TestCase):
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True, magnetics=True)
         ODS().plot_magnetics_overlay()
-        return
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
@@ -307,7 +279,6 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods.plot_thomson_scattering_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=True)
-        return
 
     def test_ts_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -321,7 +292,6 @@ class TestOmasPlot(unittest.TestCase):
             mask = copy.copy(mask0)
             mask[i] = False
             ts_ods.plot_overlay(thomson_scattering=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i)))
-        return
 
     def test_ts_overlay_labels(self):
         ts_ods = copy.deepcopy(self.ods)
@@ -331,7 +301,6 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods.plot_overlay(
             thomson_scattering=dict(labelevery=2, notesize=9, color='b', label_ha='right', label_va='top')
         )
-        return
 
     # Charge exchange overlay
     def test_cer_overlay(self):
@@ -350,7 +319,6 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.plot_charge_exchange_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, charge_exchange=True)
-        return
 
     # Inteferometer overlay
     def test_interferometer_overlay(self):
@@ -362,7 +330,6 @@ class TestOmasPlot(unittest.TestCase):
         intf_ods.plot_interferometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, interferometer=True)
-        return
 
     # Bolometer overlay
     def test_bolo_overlay(self):
@@ -376,7 +343,6 @@ class TestOmasPlot(unittest.TestCase):
         bolo_ods.plot_bolometer_overlay()
         # Test empty one; make sure fail is graceful
         ODS().plot_overlay(thomson_scattering=False, bolometer=True)
-        return
 
     def test_bolo_overlay_mask(self):
         from omas.omas_plot import get_channel_count
@@ -392,7 +358,6 @@ class TestOmasPlot(unittest.TestCase):
             bolo_ods.plot_overlay(
                 thomson_scattering=False,
                 bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i)))
-        return
 
     # Gas injection overlay
     def test_gas_overlay(self):
@@ -417,7 +382,6 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_overlay(thomson_scattering=False, gas_injection=True)
         # Test without equilibrium data: can't use magnetic axis to help decide how to align labels
         ODS().sample_gas_injection().plot_overlay(thomson_scattering=False, gas_injection=True)
-        return
 
     # Langmuir probes overlays
     def test_langmuir_probes_embedded_overlay(self):
@@ -442,7 +406,6 @@ class TestOmasPlot(unittest.TestCase):
         ODS().plot_langmuir_probes_overlay()
         # No wall data for helping align labels
         ODS().sample_langmuir_probes().plot_overlay(thomson_scattering=False, langmuir_probes=True)
-        return
 
     def test_position_control_overlay(self):
         """Tests method for plotting overlay of position_control data"""
@@ -487,8 +450,6 @@ class TestOmasPlot(unittest.TestCase):
         small_mask[-1] = True
         pc_ods.plot_position_control_overlay(mask=small_mask)
 
-        return
-
     def test_pulse_schedule_overlay(self):
         """
         Tests method for plotting overlay of pulse_schedule data.
@@ -499,7 +460,6 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.sample_pulse_schedule()
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
         pc_ods.plot_pulse_schedule_overlay()
-        return
 
 
 if __name__ == '__main__':

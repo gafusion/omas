@@ -73,7 +73,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         f = filename
         json_string = f.read()
 
-    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls), **kw)
+    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls, null_to=numpy.NaN), **kw)
     tmp.consistency_check = consistency_check
     return tmp
 
@@ -86,10 +86,7 @@ def through_omas_json(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.json'
-
+    filename = omas_testdir(__file__) + '/test.json'
     if method == 'function':
         save_omas_json(ods, filename)
         ods1 = load_omas_json(filename)

@@ -200,3 +200,19 @@ add_datastructures['info'] = {
         "description": "run number"
     }
 }
+
+
+def omas_testdir(filename_topic=''):
+    '''
+    Return path to temporary folder where OMAS TEST file are saved/loaded
+
+    NOTE: If directory does not exists it is created
+
+    :return: string with path to OMAS TEST folder
+    '''
+    if filename_topic:
+        filename_topic = os.path.splitext(os.path.split(filename_topic)[-1])[0] + '/'
+    tmp = tempfile.gettempdir() + '/OMAS_TESTS/' + filename_topic
+    if not os.path.exists(tmp):
+        os.makedirs(tmp)
+    return tmp

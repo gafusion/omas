@@ -13,7 +13,7 @@ from omas import *
 import numpy
 
 # load sample data from S3
-ods = load_omas_s3('DIIIDoverlay_sample', user='omas_shared')
+ods = load_omas_s3('DIIIDoverlay_sample', user='omas_shared', imas_version='3.21.0')
 
 # plot equilibrium and wall
 ods.plot_equilibrium_CX()

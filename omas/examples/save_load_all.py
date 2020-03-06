@@ -11,6 +11,7 @@ from __future__ import print_function, division, unicode_literals
 
 import os
 import numpy
+from pprint import pprint
 from omas import *
 from omas.omas_utils import printd
 
@@ -32,11 +33,11 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type
         ods1 = globals()['through_omas_' + test_type](ods)
-        check = different_ods(ods, ods1)
-        if not check:
+        difference = different_ods(ods, ods1)
+        if not chedifferenceck:
             print('OMAS data got saved and loaded correctly')
         else:
-            pprint(check)
+            pprint(difference)
 
     else:
         os.environ['OMAS_DEBUG_TOPIC'] = '*'

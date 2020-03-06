@@ -24,24 +24,26 @@ print('consistency_check = False')
 print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = False
-# add entry with wrong dimensions
+ods.dynamic_path_creation='dynamic_array_structures'
+# can add entry with wrong dimensions
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
-# add entry that is obsolescent
+# can add entry that is obsolescent
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
-# add entry that does not exist in IMAS
-ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
+# can add entry that does not exist in IMAS
+ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 
 print('*' * 20)
 print("consistency_check = 'warn'")
 print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = 'warn'
-# add entry with wrong dimensions
+ods.dynamic_path_creation='dynamic_array_structures'
+# can add entry with wrong dimensions but warning message is printed
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
-# add entry that is obsolescent
+# can add entry that is obsolescent but warning message is printed
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
-# add entry that does not exist in IMAS
-ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
+# can add entry that does not exist in IMAS but warning message is printed
+ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 
 ###################################
 # In the above example `consistency_check = warn` or `True` result in the following warnings::
@@ -55,11 +57,21 @@ print('*' * 20)
 ods = ods_sample()
 ods.consistency_check = True  # this is the default
 # add entry with wrong dimensions
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
+try:
+    ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
+    raise Exception('Was able to add an entry with wrong dimensions!')
+except ValueError:
+    pass
 # add entry that is obsolescent
-ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1, 1], [1, 1]]
+ods['equilibrium.time_slice[0].profiles_2d[0].grid.dim1'] = [1,2,3]
+ods['equilibrium.time_slice[0].profiles_2d[0].grid.dim2'] = [1,2,3,4]
+ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = [[1,1,1]*4]
 # add entry that does not exist in IMAS
-ods['equilibrium.time_slice[2].does_not_exist.global_quantities.ip'] = 1
+try:
+    ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
+    raise Exception('Was able to add an entry with that is not in IMAS even if consistency_check = True')
+except LookupError:
+    pass
 
 ###################################
 # In the above example `consistency_check = True` result in the following error::

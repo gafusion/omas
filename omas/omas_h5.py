@@ -137,9 +137,7 @@ def through_omas_h5(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.h5'
+    filename = omas_testdir(__file__) + '/test.h5'
     if method == 'function':
         save_omas_h5(ods, filename)
         ods1 = load_omas_h5(filename)
