@@ -50,8 +50,7 @@ def equilibrium_stored_energy(ods, update=True):
         pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
 
-
-        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil,x=volume_equil) # [J]
+        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
 
     return ods_n
 
@@ -117,7 +116,6 @@ def core_profiles_pressures(ods, update=True):
 
         if not update:
             prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
-
 
         __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
@@ -1166,13 +1164,16 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
     # (eg. when running test_examples) it may be that _extra_structures is not empty
     # Thus, we clear _structures and _extra_structures to make sure that
     # dict_structures() is not polluted by _extra_structures
-    _structures.clear()
-    _extra_structures.clear()
+    _structures_bkp = copy.deepcopy(_structures)
+    _extra_structures_bkp = copy.deepcopy(_extra_structures)
+    try:
+        _structures.clear()
+        _extra_structures.clear()
 
-    ods = ODS()
-    out = {}
-    text = []
-    csig = ["""
+        ods = ODS()
+        out = {}
+        text = []
+        csig = ["""
 '''List of automatic COCOS transformations
 
 -------
@@ -1210,119 +1211,125 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
 _cocos_signals = {}
 """]
 
-    # loop over structures
-    for structure in structures:
-        text.extend(['', '# ' + structure.upper()])
-        csig.extend(['', '# ' + structure.upper()])
+        # loop over structures
+        for structure in structures:
+            text.extend(['', '# ' + structure.upper()])
+            csig.extend(['', '# ' + structure.upper()])
 
-        out[structure] = {}
-        ods[structure]
-        d = dict_structures(imas_version=omas_rcparams['default_imas_version'])
-        m = 0
-        # generate score and add reason for scoring
-        for item in sorted(list(_structures[(structure, omas_rcparams['default_imas_version'])].keys())):
-            item = i2o(item)
-            item_ = item
-            if any([item.endswith(k) for k in [':.values', ':.value', ':.data']]):
-                item_ = l2o(p2l(item)[:-2])
-            elif any([item.endswith(k) for k in ['.values', '.value', '.data']]):
-                item_ = l2o(p2l(item)[:-1])
-            m = max(m, len(item))
-            score = 0
-            rationale = []
-            if item.startswith(structure) and '_error_' not in item:
-                entry = "_cocos_signals['%s']=" % i2o(item)
-                info = omas_info_node(item)
-                units = info.get('units', None)
-                data_type = info.get('data_type', None)
-                documentation = info.get('documentation', '')
-                if data_type in ['structure', 'STR_0D', 'struct_array']:
-                    continue
-                elif units in [None, 's']:
-                    out[structure].setdefault(-1, []).append((item, '[%s]' % units))
-                    continue
-                elif any([(item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in
-                          ['chi_squared', 'standard_deviation', 'weight', 'coefficients', 'r', 'z', 'beta_tor',
-                           'beta_pol', 'radial', 'rho_tor_norm', 'darea_drho_tor',
-                           'dvolume_drho_tor', 'ratio', 'fraction', 'rate', 'd', 'flux', 'v', 'b_field_max', 'width_tor']]):
-                    out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
-                    continue
-                elif any([k in documentation for k in ['always positive']]):
-                    out[structure].setdefault(-1, []).append((item, documentation))
-                    continue
-                n = item.count('.')
-                for pnt, key in enumerate(p2l(item)):
-                    pnt = pnt / float(n)
-                    for case in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
-                        if key == case:
-                            rationale += [case]
-                            score += pnt
-                            break
-                    for case in ['q', 'j', 'phi', 'psi', 'ip', 'b', 'f', 'v', 'f_df']:
-                        if key.startswith('%s_' % case) and not any([key.startswith(k) for k in ['psi_norm']]):
-                            rationale += [case]
-                            score += pnt
-                            break
-                    for case in ['velocity', 'current', 'b_field', 'e_field', 'torque', 'momentum']:
-                        if case in key and key not in ['heating_current_drive']:
-                            rationale += [case]
-                            score += pnt
-                            break
-                    for case in ['_dpsi']:
-                        if case in key and case + '_norm' not in key:
-                            rationale += [case]
-                            score += pnt
-                            break
-                    for case in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
-                        if ((key.endswith(case) or key.startswith(case)) and not any([key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']])):
-                            rationale += [case]
-                            score += pnt
-                            break
-                if units in cocos_units:
-                    if len(rationale):
-                        rationale += ['[%s]' % units]
-                        score += 1
-                out[structure].setdefault(score, []).append((item, '  '.join(rationale)))
+            out[structure] = {}
+            ods[structure]
+            d = dict_structures(imas_version=omas_rcparams['default_imas_version'])
+            m = 0
+            # generate score and add reason for scoring
+            for item in sorted(list(_structures[(structure, omas_rcparams['default_imas_version'])].keys())):
+                item = i2o(item)
+                item_ = item
+                if any([item.endswith(k) for k in [':.values', ':.value', ':.data']]):
+                    item_ = l2o(p2l(item)[:-2])
+                elif any([item.endswith(k) for k in ['.values', '.value', '.data']]):
+                    item_ = l2o(p2l(item)[:-1])
+                m = max(m, len(item))
+                score = 0
+                rationale = []
+                if item.startswith(structure) and '_error_' not in item:
+                    entry = "_cocos_signals['%s']=" % i2o(item)
+                    info = omas_info_node(item)
+                    units = info.get('units', None)
+                    data_type = info.get('data_type', None)
+                    documentation = info.get('documentation', '')
+                    if data_type in ['structure', 'STR_0D', 'struct_array']:
+                        continue
+                    elif units in [None, 's']:
+                        out[structure].setdefault(-1, []).append((item, '[%s]' % units))
+                        continue
+                    elif any([(item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in
+                              ['chi_squared', 'standard_deviation', 'weight', 'coefficients', 'r', 'z', 'beta_tor',
+                               'beta_pol', 'radial', 'rho_tor_norm', 'darea_drho_tor',
+                               'dvolume_drho_tor', 'ratio', 'fraction', 'rate', 'd', 'flux', 'v', 'b_field_max', 'width_tor']]):
+                        out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
+                        continue
+                    elif any([k in documentation for k in ['always positive']]):
+                        out[structure].setdefault(-1, []).append((item, documentation))
+                        continue
+                    n = item.count('.')
+                    for pnt, key in enumerate(p2l(item)):
+                        pnt = pnt / float(n)
+                        for case in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
+                            if key == case:
+                                rationale += [case]
+                                score += pnt
+                                break
+                        for case in ['q', 'j', 'phi', 'psi', 'ip', 'b', 'f', 'v', 'f_df']:
+                            if key.startswith('%s_' % case) and not any([key.startswith(k) for k in ['psi_norm']]):
+                                rationale += [case]
+                                score += pnt
+                                break
+                        for case in ['velocity', 'current', 'b_field', 'e_field', 'torque', 'momentum']:
+                            if case in key and key not in ['heating_current_drive']:
+                                rationale += [case]
+                                score += pnt
+                                break
+                        for case in ['_dpsi']:
+                            if case in key and case + '_norm' not in key:
+                                rationale += [case]
+                                score += pnt
+                                break
+                        for case in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
+                            if ((key.endswith(case) or key.startswith(case)) and not any([key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']])):
+                                rationale += [case]
+                                score += pnt
+                                break
+                    if units in cocos_units:
+                        if len(rationale):
+                            rationale += ['[%s]' % units]
+                            score += 1
+                    out[structure].setdefault(score, []).append((item, '  '.join(rationale)))
 
-        # generate output
-        for score in reversed(sorted(out[structure])):
-            for item, rationale in out[structure][score]:
+            # generate output
+            for score in reversed(sorted(out[structure])):
+                for item, rationale in out[structure][score]:
 
-                message = '       '
-                if _cocos_signals.get(item, '?') == '?':
-                    if score > 0:
-                        message = '#[ADD?]'
-                    else:
+                    message = '       '
+                    if _cocos_signals.get(item, '?') == '?':
+                        if score > 0:
+                            message = '#[ADD?]'
+                        else:
+                            message = '#[DEL?]'
+                    elif score < 0:
                         message = '#[DEL?]'
-                elif score < 0:
-                    message = '#[DEL?]'
 
-                transform = _cocos_signals.get(item, '?')
-                transform = None if transform is None else "'%s'" % transform
-                txt = ("_cocos_signals['%s']=%s" % (item, transform)).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
-                text.append(txt)
-                if score > threshold or (item in _cocos_signals and _cocos_signals[item] != '?'):
-                    csig.append(txt)
+                    transform = _cocos_signals.get(item, '?')
+                    transform = None if transform is None else "'%s'" % transform
+                    txt = ("_cocos_signals['%s']=%s" % (item, transform)).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
+                    text.append(txt)
+                    if score > threshold or (item in _cocos_signals and _cocos_signals[item] != '?'):
+                        csig.append(txt)
 
-        # print to screen (note that this prints ALL the entries, whereas omas_cocos.py only contains entries that score above a give threshold)
-        if verbose:
-            print('\n'.join(text) + '\n\n' + '-' * 20)
+            # print to screen (note that this prints ALL the entries, whereas omas_cocos.py only contains entries that score above a give threshold)
+            if verbose:
+                print('\n'.join(text) + '\n\n' + '-' * 20)
 
-    filename = os.path.abspath(str(os.path.dirname(__file__)) + '/omas_cocos.py')
-    if write:
-        # update omas_cocos.py
-        with open(filename, 'w') as f:
-            f.write(str('\n'.join(csig)))
-    else:
-        # check that omas_cocos.py file is up-to-date
-        with open(filename, 'r') as f:
-            original = str(f.read())
-        new = str('\n'.join(csig))
-        import difflib
-        diff = difflib.unified_diff(original, new)
-        assert original == new, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.\n' + ''.join(diff)
+        filename = os.path.abspath(str(os.path.dirname(__file__)) + '/omas_cocos.py')
+        if write:
+            # update omas_cocos.py
+            with open(filename, 'w') as f:
+                f.write(str('\n'.join(csig)))
+        else:
+            # check that omas_cocos.py file is up-to-date
+            with open(filename, 'r') as f:
+                original = str(f.read())
+            new = str('\n'.join(csig))
+            import difflib
+            diff = difflib.unified_diff(original, new)
+            assert original == new, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.\n' + ''.join(diff)
 
-    return out
+        return out
+
+    finally:
+        _structures.clear()
+        _structures.update(_structures_bkp)
+        _extra_structures.clear()
+        _extra_structures.update(_extra_structures_bkp)
 
 
 # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
