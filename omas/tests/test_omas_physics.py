@@ -11,10 +11,9 @@ Test script for omas/omas_physics.py
 -------
 """
 
-# Basic imports
 from __future__ import print_function, division, unicode_literals
-import os
 import unittest
+import os
 import numpy
 import warnings
 import copy

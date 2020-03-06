@@ -11,9 +11,9 @@ Test script for omas/omas_core.py
 -------
 """
 
-# Basic imports
 from __future__ import print_function, division, unicode_literals
 import unittest
+import os
 import numpy
 from pprint import pprint
 
@@ -24,26 +24,8 @@ from omas.omas_setup import *
 
 class TestOmasCore(unittest.TestCase):
     """
-    Test suite for omas_physics.py
+    Test suite for omas_core.py
     """
-
-    # Flags to edit while testing
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
 
     def test_misc(self):
         ods = ODS()

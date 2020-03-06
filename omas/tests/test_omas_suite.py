@@ -13,9 +13,10 @@ Test script for omas saving/loading data in different formats
 
 from __future__ import print_function, division, unicode_literals
 import unittest
-
 import os
 import numpy
+
+# OMAS imports
 from omas import *
 from omas.tests.failed_imports import *
 

@@ -13,8 +13,8 @@ Test script for omas/examples/...
 
 # Basic imports
 from __future__ import print_function, division, unicode_literals
-import os
 import unittest
+import os
 
 # Use Agg backend to avoid opening up figures
 import matplotlib
