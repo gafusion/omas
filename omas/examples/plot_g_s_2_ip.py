@@ -13,8 +13,6 @@ from matplotlib import pyplot
 import os
 from omas import *
 
-os.chdir(omas_testdir())
-
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk
 from omfit.classes.omfit_onetwo import OMFITstatefile
 from omfit.classes.omfit_gacode import OMFITgacode

@@ -13,7 +13,6 @@ import os
 import numpy
 import uncertainties.unumpy as unumpy
 from uncertainties import ufloat
-os.chdir(omas_testdir())
 
 # generate some uncertain data
 ods = ODS()
@@ -26,20 +25,20 @@ ods['thomson_scattering.ids_properties.homogeneous_time'] = 1
 
 # save/load from pickle
 print('== PKL ==')
-save_omas_pkl(ods, 'test.pkl')
-ods = load_omas_pkl('test.pkl')
+save_omas_pkl(ods, omas_testdir() + '/test.pkl')
+ods = load_omas_pkl(omas_testdir() + '/test.pkl')
 print(ods)
 
 # save/load from json
 print('== JSON ==')
-save_omas_json(ods, 'test.json')
-ods = load_omas_json('test.json')
+save_omas_json(ods, omas_testdir() + '/test.json')
+ods = load_omas_json(omas_testdir() + '/test.json')
 print(ods)
 
 # save/load from nc
 print('== NC ==')
-save_omas_nc(ods, 'test.nc')
-ods = load_omas_nc('test.nc')
+save_omas_nc(ods, omas_testdir() + '/test.nc')
+ods = load_omas_nc(omas_testdir() + '/test.nc')
 print(ods)
 
 # save/load from imas
