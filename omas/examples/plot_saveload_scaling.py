@@ -75,7 +75,7 @@ for n in samples:
         ods.sample_equilibrium(time_index=k)
 
     # hierarchical write to HDF5
-    filename = omas_testdir() + '/tmp.h5'
+    filename = omas_testdir(__file__) + '/tmp.h5'
     t0 = time.time()
     save_omas_h5(ods, filename)
     times['HW'].append(time.time() - t0)
@@ -109,7 +109,7 @@ for n in samples:
     odx = ods_2_odx(ods)
     times['HM'].append(time.time() - t0)
 
-    filename = omas_testdir() + '/tmp.ds'
+    filename = omas_testdir(__file__) + '/tmp.ds'
 
     # tensor write to HDF5
     t0 = time.time()

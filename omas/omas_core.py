@@ -1934,7 +1934,7 @@ def through_omas_pkl(ods):
 
     :return: ods
     """
-    filename = omas_testdir() + '/test.pkl'
+    filename = omas_testdir(__file__) + '/test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
     return ods1

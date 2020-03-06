@@ -137,7 +137,7 @@ def through_omas_h5(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    filename = omas_testdir() + '/test.h5'
+    filename = omas_testdir(__file__) + '/test.h5'
     if method == 'function':
         save_omas_h5(ods, filename)
         ods1 = load_omas_h5(filename)

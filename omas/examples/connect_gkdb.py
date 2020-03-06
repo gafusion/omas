@@ -21,7 +21,7 @@ ods['gyrokinetics'].load(sample_filename)
 pprint(ods.pretty_paths())
 
 # save a copy
-filename = omas_testdir() + '/gkdb_linear_initialvalue.json'
+filename = omas_testdir(__file__) + '/gkdb_linear_initialvalue.json'
 ods['gyrokinetics'].save(filename)
 
 # load the newly saved copy

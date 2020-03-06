@@ -172,7 +172,7 @@ def through_omas_ds(ods, method=['function', 'class_method'][1]):
 
     :return: OMAS data set
     """
-    filename = omas_testdir() + '/test.ds'
+    filename = omas_testdir(__file__) + '/test.ds'
     if method == 'function':
         save_omas_ds(ods, filename)
         ods1 = load_omas_ds(filename)
@@ -190,7 +190,7 @@ def through_omas_dx(odx, method=['function', 'class_method'][1]):
 
     :return: OMAS data xarray
     """
-    filename = omas_testdir() + '/test.dx'
+    filename = omas_testdir(__file__) + '/test.dx'
     if method == 'function':
         save_omas_dx(odx, filename)
         odx1 = load_omas_dx(filename)

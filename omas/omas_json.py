@@ -86,7 +86,7 @@ def through_omas_json(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    filename = omas_testdir() + '/test.json'
+    filename = omas_testdir(__file__) + '/test.json'
     if method == 'function':
         save_omas_json(ods, filename)
         ods1 = load_omas_json(filename)
