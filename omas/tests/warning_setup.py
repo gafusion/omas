@@ -14,7 +14,7 @@ def set_omas_warnings():
     warnings.filterwarnings('error')
 
     # Selectively downgrade certain warnings into just warnings, but make them go off every time instead of just once.
-    warnings.filterwarnings('always', category=RuntimeWarning, message='numpy.ufunc size changed.*')
+    warnings.filterwarnings('always', category=RuntimeWarning, message='.*may indicate binary incompatibility.*')
     warnings.filterwarnings('always', category=FutureWarning, message='The Panel class is removed.*')
     warnings.filterwarnings('always', category=UserWarning, message='Attempting to set identical left==right.*')
     warnings.filterwarnings('always', category=UserWarning, message='No contour levels were found.*')
