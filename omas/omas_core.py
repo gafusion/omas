@@ -1093,7 +1093,7 @@ class ODS(MutableMapping):
         return s, []
 
     def get(self, key, default=None):
-        """
+        r"""
         Check if key is present and if not return default value without creating value in omas data structure
 
         :param key: ods location
