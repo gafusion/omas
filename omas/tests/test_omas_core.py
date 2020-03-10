@@ -20,6 +20,7 @@ from pprint import pprint
 # OMAS imports
 from omas import *
 from omas.omas_setup import *
+from omas.tests import warning_setup
 
 
 class TestOmasCore(unittest.TestCase):

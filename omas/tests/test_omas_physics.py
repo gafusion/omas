@@ -23,6 +23,7 @@ import itertools
 from omas import *
 from omas.omas_utils import *
 from omas.omas_physics import *
+from omas.tests import warning_setup
 
 try:
     import pint

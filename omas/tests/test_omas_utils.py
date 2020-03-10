@@ -21,6 +21,7 @@ import copy
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
+from omas.tests import warning_setup
 
 
 class TestOmasUtils(unittest.TestCase):

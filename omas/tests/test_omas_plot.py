@@ -28,6 +28,7 @@ from matplotlib import pyplot
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
+from omas.tests import warning_setup
 
 
 class TestOmasPlot(unittest.TestCase):

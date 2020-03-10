@@ -19,6 +19,7 @@ import numpy
 # OMAS imports
 from omas import *
 from omas.tests.failed_imports import *
+from omas.tests import warning_setup
 
 
 class TestOmasSuite(unittest.TestCase):

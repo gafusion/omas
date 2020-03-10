@@ -1,7 +1,7 @@
 from omas.omas_setup import omas_rcparams
 import os
 import warnings
-from .tests.warning_setup import hard_warnings, set_omas_warnings
+from omas.tests.warning_setup import hard_warnings, set_omas_warnings
 
 try:
     import imas
