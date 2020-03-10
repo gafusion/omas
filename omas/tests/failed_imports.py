@@ -46,15 +46,13 @@ try:
 except (ImportError, ServerSelectionTimeoutError) as _excp:
     failed_MONGO = _excp
 
-if hard_warnings:
+with warnings.catch_warnings():
     warnings.simplefilter('ignore')
-try:
-    from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
+    try:
+        from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 
-    failed_OMFIT = False
-except ImportError as _excp:
-    failed_OMFIT = _excp
-if hard_warnings:
-    set_omas_warnings()
+        failed_OMFIT = False
+    except ImportError as _excp:
+        failed_OMFIT = _excp
 
 __all__ = ['failed_IMAS', 'failed_HDC', 'failed_S3', 'failed_MONGO', 'failed_OMFIT', 'failed_UDA']
