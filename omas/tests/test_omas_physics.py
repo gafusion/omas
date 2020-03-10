@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # # -*- coding: utf-8 -*-
 
 """
@@ -31,7 +31,6 @@ try:
 except ImportError as _excp:
     failed_PINT = _excp
 
-
 class TestOmasPhysics(unittest.TestCase):
     """
     Test suite for omas_physics.py
@@ -44,6 +43,7 @@ class TestOmasPhysics(unittest.TestCase):
         assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
         ods = equilibrium_consistent(ods)
         assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
+        return
 
     def test_core_profiles_pressures(self):
         ods = ODS()
@@ -54,6 +54,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         ods2 = core_profiles_pressures(ods, update=False)
         assert all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')])
+        return
 
     def test_core_profiles_currents(self):
 
@@ -169,10 +170,12 @@ class TestOmasPhysics(unittest.TestCase):
         CPC(ods, kw=kw, should_AE=True)
         kw = {'j_ohmic': Jval, 'j_non_inductive': None, 'j_actuator': None}
         CPC(ods, kw=kw)  # j_ni is 4
+        return
 
     def test_current_from_eq(self):
         ods = ODS().sample_equilibrium()
         current_from_eq(ods, 0)
+        return
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
@@ -189,6 +192,7 @@ class TestOmasPhysics(unittest.TestCase):
             assert cocos['sigma_Bp'] == 1
         for cocos in [cocos3, cocos4, cocos7, cocos8]:
             assert cocos['sigma_Bp'] == -1
+        return
 
     def test_cocos_transform(self):
         assert cocos_transform(None, None)['TOR'] == 1
@@ -198,6 +202,7 @@ class TestOmasPhysics(unittest.TestCase):
             for cocos_add in range(2):
                 for thing in ['BT', 'TOR', 'POL', 'Q']:
                     assert cocos_transform(cocos_ind + cocos_add * 10, cocos_ind + cocos_add * 10)[thing] == 1
+        return
 
     def test_coordsio(self):
         data5 = numpy.linspace(0, 1, 5)
@@ -257,6 +262,8 @@ class TestOmasPhysics(unittest.TestCase):
         ods6 = ODS()
         ods6['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
 
+        return
+
     def test_cocosio(self):
         x = numpy.linspace(.1, 1, 10)
 
@@ -290,6 +297,8 @@ class TestOmasPhysics(unittest.TestCase):
 
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
         assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
+
+        return
 
     def test_coordsio_cocosio(self):
         x = numpy.linspace(0.1, 1, 11)
@@ -354,6 +363,7 @@ class TestOmasPhysics(unittest.TestCase):
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi2__, psi2, p))
             index = numpy.argsort(psi11)
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
+        return
 
     @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):
@@ -368,6 +378,7 @@ class TestOmasPhysics(unittest.TestCase):
             tmp = ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
             assert tmp.magnitude == 0.008
             assert tmp.units == 'second'
+        return
 
     def test_search_ion(self):
         ods = ODS()
@@ -396,6 +407,7 @@ class TestOmasPhysics(unittest.TestCase):
             raise AssertError('no_matches_raise_error failed')
         except IndexError:
             pass
+        return
 
     def test_search_in_array_structure(self):
         ods = ODS()
@@ -420,6 +432,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro', 'identifier.description': 'bla bla'})
         assert tmp[0] == 2
+        return
 
     def test_latest_cocos(self):
         from omas.omas_utils import list_structures, omas_rcparams
@@ -428,6 +441,9 @@ class TestOmasPhysics(unittest.TestCase):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*defining its COCOS transform.*")
             generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
+        return
+
+    # End of TestOmasPhysics class
 
 
 if __name__ == '__main__':
