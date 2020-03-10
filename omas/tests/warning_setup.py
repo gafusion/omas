@@ -3,7 +3,7 @@ import warnings
 import os
 
 hard_warnings = os.environ['USER'] in ['eldond']
-# hard_warnings = False
+print('Setting up OMAS warnings for user {}'.format(os.environ['USER']))
 
 
 def set_omas_warnings():
