@@ -1002,7 +1002,7 @@ class ODS(MutableMapping):
         return paths
 
     def pretty_paths(self, **kw):
-        """
+        r"""
         Traverse the ods and return paths that have data formatted nicely
 
         :param \**kw: extra keywords passed to the path() method
@@ -1012,7 +1012,7 @@ class ODS(MutableMapping):
         return list(map(l2i, self.paths(**kw)))
 
     def full_paths(self, **kw):
-        """
+        r"""
         Traverse the ods and return paths from root of ODS that have data
 
         :param \**kw: extra keywords passed to the path() method
@@ -1023,7 +1023,7 @@ class ODS(MutableMapping):
         return [location + path for path in self.paths(**kw)]
 
     def flat(self, **kw):
-        """
+        r"""
         Flat dictionary representation of the data
 
         :param \**kw: extra keywords passed to the path() method
@@ -1093,7 +1093,7 @@ class ODS(MutableMapping):
         return s, []
 
     def get(self, key, default=None):
-        """
+        r"""
         Check if key is present and if not return default value without creating value in omas data structure
 
         :param key: ods location
@@ -1766,7 +1766,7 @@ class CodeParameters(dict):
         return list(dict.items(self))
 
     def flat(self, **kw):
-        """
+        r"""
         Flat dictionary representation of the data
 
         :param \**kw: extra keywords passed to the path() method

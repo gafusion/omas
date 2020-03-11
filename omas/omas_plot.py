@@ -2475,9 +2475,17 @@ def position_control_overlay(
     ikw = dict(bounds_error=False, fill_value=np.NaN)
     try:
         nbp = np.shape(b['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        nbp = 0
+    try:
         nx = np.shape(x['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        nx = 0
+    try:
         ns = np.shape(s['[:].r.reference.data'])[0]
     except (IndexError, ValueError):
+        ns = 0
+    if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return
     r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
