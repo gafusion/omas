@@ -483,7 +483,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, xkw={}, **kw):
+def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, show_wall=True, xkw={}, **kw):
     r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -515,6 +515,9 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
 
     :param xkw: dict [optional]
         Keywords to pass to plot call to draw X-point(s). Disable X-points by setting xkw={'marker': ''}
+
+    :param show_wall: bool
+        Plot the inner wall or limiting surface, if available
 
     :param \**kw: keywords passed to matplotlib plot statements
 
@@ -620,7 +623,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     # Wall clipping
     if wall is not None:
         path = matplotlib.path.Path(numpy.transpose(numpy.array([wall[0]['outline']['r'], wall[0]['outline']['z']])))
-        wall_path = matplotlib.patches.PathPatch(path, facecolor='none')
+        wall_path = matplotlib.patches.PathPatch(path, facecolor='none', edgecolor='none')
         ax.add_patch(wall_path)
 
     # Contours
@@ -672,7 +675,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
             collection.set_clip_path(wall_path)
 
     # Wall
-    if wall is not None:
+    if wall is not None and show_wall:
         ax.plot(wall[0]['outline']['r'], wall[0]['outline']['z'], 'k', linewidth=2)
 
         ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']), min(wall[0]['outline']['z']),
