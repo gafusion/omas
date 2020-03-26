@@ -3,11 +3,11 @@ import sys
 import glob
 import subprocess
 
-all_install_require = ['cython>=0.29.5', 'setuptools>=41.2', 'numpy>=1.16.1', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython','xmltodict']
+all_install_require = ['uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython','xmltodict']
 install_requires = {}
 # https://github.com/pydata/xarray/commit/faacc8da000b7971233142be349ee39c6d088510
-install_requires[2] = all_install_require + ['xarray<=0.11.0']
-install_requires[3] = all_install_require + ['xarray']
+install_requires[2] = ['numpy'] + all_install_require + ['xarray<=0.11.0']
+install_requires[3] = ['numpy>=1.16.1'] + all_install_require + ['xarray']
 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],

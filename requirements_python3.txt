@@ -2,9 +2,7 @@
 #
 # usage: pip install -r requirements_python3.txt
 
-cython>=0.29.5           # required for numpy?
-setuptools>=41.2         # required for xarray
-numpy                    # required
+numpy>=1.16.1            # required
 uncertainties            # required
 pint                     # required
 netCDF4                  # required
