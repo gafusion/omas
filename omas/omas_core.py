@@ -98,7 +98,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         elif 'INT' in info['data_type']:
             value = int(value)
     # structure type is respected check type
-    if info['data_type'] == 'structure' and not isinstance(value, ODS):
+    if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
         text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
         if consistency_check == 'warn':
             printe(text)
