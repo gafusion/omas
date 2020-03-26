@@ -7,7 +7,7 @@ all_install_require = ['uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib'
 install_requires = {}
 # https://github.com/pydata/xarray/commit/faacc8da000b7971233142be349ee39c6d088510
 install_requires[2] = ['numpy'] + all_install_require + ['xarray<=0.11.0']
-install_requires[3] = ['numpy>=1.16.1'] + all_install_require + ['xarray']
+install_requires[3] = ['numpy>=1.16.1'] + all_install_require + ['xarray', 'setuptools>=41.2']
 
 extras_require = {'hdc': ['pyhdc'],
                   'imas': ['imas'],

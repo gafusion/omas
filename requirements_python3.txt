@@ -2,6 +2,7 @@
 #
 # usage: pip install -r requirements_python3.txt
 
+setuptools>=41.2         # required
 numpy>=1.16.1            # required
 uncertainties            # required
 pint                     # required
