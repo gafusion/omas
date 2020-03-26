@@ -14,7 +14,7 @@ pymongo                  # required
 dnspython                # required
 xmltodict                # required
 xarray                   # required
-setuptools               # required for xarray
+setuptools>=41.2         # required for xarray
 
 Pillow                   # build_documentation
 Sphinx                   # build_documentation
