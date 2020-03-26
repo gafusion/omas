@@ -2,7 +2,8 @@
 #
 # usage: pip install -r requirements_python3.txt
 
-numpy                    # required
+setuptools>=41.2         # required
+numpy>=1.16.1            # required
 uncertainties            # required
 pint                     # required
 netCDF4                  # required
