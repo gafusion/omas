@@ -1668,8 +1668,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
 
     # Make sure there is something to plot or else just give up and return
     npipes = get_channel_count(
-        ods, 'gas_injection', check_loc='gas_injection.pipe.0.exit_position.r', test_checker='checker > 0',
-        channels_name='pipe')
+        ods, 'gas_injection',
+        check_loc='gas_injection.pipe.0.exit_position.r',
+        channels_name='pipe',
+        test_checker='~numpy.isnan(checker)'
+    )
     if npipes == 0:
         return
 
@@ -1885,10 +1888,12 @@ def magnetics_overlay(
     if compare_version(ods.imas_version,'3.23.3')>0:
         nbp = get_channel_count(
             ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
-            test_checker='checker > 0')
+            test_checker='~numpy.isnan(checker)',
+        )
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
-        test_checker='checker > 0')
+        test_checker='~numpy.isnan(checker)',
+    )
     if max([nbp, nfl]) == 0:
         return
 
@@ -1950,7 +1955,8 @@ def interferometer_overlay(ods, ax=None, **kw):
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
-        test_checker='checker > 0')
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -2002,7 +2008,11 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        ods,
+        'thomson_scattering',
+        check_loc='thomson_scattering.channel.0.position.r',
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -2070,7 +2080,9 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(checker > 0)')
+        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data',
+        test_checker='any(~numpy.isnan(checker))',
+    )
     if nc == 0:
         return
 
@@ -2169,7 +2181,9 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='checker > 0')
+        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r',
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -2273,7 +2287,7 @@ def langmuir_probes_overlay(
                 ods,
                 'langmuir_probes',
                 check_loc='langmuir_probes.embedded.0.position.r',
-                test_checker='checker > 0',
+                test_checker='~numpy.isnan(checker)',
                 channels_name='embedded',
             )
             embedded_indices = range(nce)
@@ -2285,7 +2299,7 @@ def langmuir_probes_overlay(
             ods,
             'langmuir_probes',
             check_loc='langmuir_probes.reciprocating.0.plunge.0.position.r',
-            test_checker='checker > 0',
+            test_checker='~numpy.isnan(checker)',
             channels_name='reciprocating',
         )
     else:
