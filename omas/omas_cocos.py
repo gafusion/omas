@@ -203,6 +203,10 @@ _cocos_signals['core_transport.model.:.profiles_1d.:.grid_v.psi_boundary']='?'  
 _cocos_signals['core_transport.model.:.profiles_1d.:.grid_v.psi_magnetic_axis']='?'                                      #[ADD?]# 2.000000 # psi  [Wb]
 _cocos_signals['core_transport.vacuum_toroidal_field.b0']='TOR'                                                                 # 2.000000 # b0  [T]
 
+# CRYOSTAT
+_cocos_signals['cryostat.description_2d.:.cryostat.unit.:.element.:.j_tor.data']='?'                   #[ADD?]# 2.777778 # j  _tor  [A]
+_cocos_signals['cryostat.description_2d.:.thermal_shield.unit.:.element.:.j_tor.data']='?'             #[ADD?]# 2.777778 # j  _tor  [A]
+
 # DATASET_DESCRIPTION
 
 # DISRUPTION
@@ -538,6 +542,8 @@ _cocos_signals['equilibrium.time_slice.:.ggd.:.phi.:.values']='TOR'             
 _cocos_signals['equilibrium.time_slice.:.ggd.:.psi.:.values']='PSI'                                                             # 1.714286 # psi  [Wb]
 _cocos_signals['equilibrium.time_slice.:.constraints.pf_current.:.measured']='?'                                         #[ADD?]# 1.666667 # current  [A]
 _cocos_signals['equilibrium.time_slice.:.constraints.pf_current.:.reconstructed']='?'                                    #[ADD?]# 1.666667 # current  [A]
+_cocos_signals['equilibrium.time_slice.:.constraints.pf_passive_current.:.measured']='?'                                 #[ADD?]# 1.666667 # current  [A]
+_cocos_signals['equilibrium.time_slice.:.constraints.pf_passive_current.:.reconstructed']='?'                            #[ADD?]# 1.666667 # current  [A]
 _cocos_signals['equilibrium.time_slice.:.constraints.q.:.measured']='Q'                                                         # 1.666667 # q  [-]
 _cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed']='Q'                                                    # 1.666667 # q  [-]
 
