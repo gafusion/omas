@@ -272,11 +272,16 @@ class ODS(MutableMapping):
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                 while len(time0.shape) > 1:
                     time0 = numpy.take(time0, 0, axis=0)
-                for time in times.values():
-                    # Make sure all time arrays are close to the time0 we identified
-                    assert abs(time - time0).max() < 1e-7
-                extra_info['homogeneous_time'] = True
-                return time0
+
+                if all([time.size==time0.size for time in times.values()]):
+                    for time in times.values():
+                        # Make sure all time arrays are close to the time0 we identified
+                        assert abs(time - time0).max() < 1e-7
+                    extra_info['homogeneous_time'] = True
+                    return time0
+                else: # Similar to ValueError exception caught above
+                    extra_info['homogeneous_time'] = False
+                    return None
             # there are inconsistencies with different ways of specifying times in the IDS
             else:
                 raise ValueError('Inconsistent time definitions in %s' % times.keys())
