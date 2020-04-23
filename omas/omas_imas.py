@@ -618,25 +618,7 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
 
     :return: OMAS data set
     """
-    # set MDSPLUS_TREE_BASE_? environment variables as per
-    # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
-    try:
-        bkp_imas_environment = {}
-        for k in range(10):
-            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
-                bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
-
-        # load data from imas
-        ods = load_omas_imas(user=None, machine=None, pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
-
-    finally:
-        # restore existing IMAS environment
-        for k in range(10):
-            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ.update(bkp_imas_environment)
-
-    return ods
+    return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True, skip_ion_state=True):
