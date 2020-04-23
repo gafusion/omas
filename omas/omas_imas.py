@@ -7,6 +7,7 @@ from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
 from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
+from .omas_utils import _extra_structures
 
 
 # --------------------------------------------
