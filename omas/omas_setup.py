@@ -13,7 +13,7 @@ import sys
 import glob
 import json
 import copy
-from collections import MutableMapping, OrderedDict
+from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
@@ -48,6 +48,8 @@ import xarray
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
+    from collections import MutableMapping
+
     import cPickle as pickle
 
 
@@ -55,6 +57,8 @@ if sys.version_info < (3, 0):
         return string
 
 else:
+    from collections.abc import MutableMapping
+
     basestring = str
     unicode = str
     import pickle
