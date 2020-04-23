@@ -1836,6 +1836,7 @@ def codeparams_xml_load(f):
     loading of code.parameters from an XML string
     '''
 
+    @wraps(f)
     def wrapper(*args, **kwargs):
         ods = f(*args, **kwargs)
         ods.codeparams2dict()
