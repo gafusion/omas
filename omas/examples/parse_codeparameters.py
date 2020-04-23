@@ -55,3 +55,9 @@ ods1 = load_omas_imas(machine='ITER', pulse=1)
 
 # code.parameters are dictionaries in the ODS
 pprint(ods['equilibrium.code.parameters'])
+
+# Handle code.parameters that are not in XML format as per IMAS specifications
+ods = ODS()
+ods['equilibrium.code.parameters'] = 'not in XML format'
+with omas_environment(ods, xmlcodeparams=True):
+    print(ods['equilibrium.code.parameters']) # This will not raise an error

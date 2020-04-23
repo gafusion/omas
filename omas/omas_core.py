@@ -273,13 +273,13 @@ class ODS(MutableMapping):
                 while len(time0.shape) > 1:
                     time0 = numpy.take(time0, 0, axis=0)
 
-                if all([time.size==time0.size for time in times.values()]):
+                if all([time.size == time0.size for time in times.values()]):
                     for time in times.values():
                         # Make sure all time arrays are close to the time0 we identified
                         assert abs(time - time0).max() < 1e-7
                     extra_info['homogeneous_time'] = True
                     return time0
-                else: # Similar to ValueError exception caught above
+                else:  # Similar to ValueError exception caught above
                     extra_info['homogeneous_time'] = False
                     return None
             # there are inconsistencies with different ways of specifying times in the IDS
@@ -900,7 +900,7 @@ class ODS(MutableMapping):
                     return value.__getitem__(key[1:], cocos_and_coords)
                 else:
                     return value[l2o(key[1:])]
-            except ValueError: # ValueError is raised when nodes have no data
+            except ValueError:  # ValueError is raised when nodes have no data
                 if dynamically_created:
                     del self[key[0]]
                 raise
@@ -1598,6 +1598,7 @@ class ODS(MutableMapping):
         '''
         Convert code.parameters to a CodeParameters dictionary object
         '''
+        import xml
         if not self.location:
             for item in self:
                 self[item].codeparams2dict()
@@ -1607,8 +1608,10 @@ class ODS(MutableMapping):
                 self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
             elif ('parameters' in self and isinstance(self['parameters'], basestring)):
                 self['parameters'] = CodeParameters().from_string(self['parameters'])
+        except xml.parsers.expat.ExpatError:
+            printe('%s.code.parameters is not formatted as XML' % self.location)
         except Exception as _excp:
-            printe(repr(_excp))
+            printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
 
 class CodeParameters(dict):
