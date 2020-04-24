@@ -10099,7 +10099,7 @@
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flux surface averaged grad_rho^2/R^2",
+  "documentation": "Flux surface averaged |grad_rho_tor|^2/R^2",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm2(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -10139,7 +10139,7 @@
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flux surface averaged grad_rho^2",
+  "documentation": "Flux surface averaged |grad_rho_tor|^2",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm3(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -10259,7 +10259,7 @@
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flux surface averaged grad_rho^2/B^2",
+  "documentation": "Flux surface averaged |grad_rho_tor|^2/B^2",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm6(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -10299,7 +10299,7 @@
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flux surface averaged grad_rho",
+  "documentation": "Flux surface averaged |grad_rho_tor|",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm7(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
