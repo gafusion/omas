@@ -26,7 +26,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'generate_xml_schemas', 'create_json_structure', 'create_html_documentation', 'symlink_imas_structure_versions',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
-    'omas_rcparams', 'rcparams_environment', '__version__'
+    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
 ]
 
 # List of functions that can be added by third-party Python
@@ -98,7 +98,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         elif 'INT' in info['data_type']:
             value = int(value)
     # structure type is respected check type
-    if info['data_type'] == 'structure' and not isinstance(value, ODS):
+    if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
         text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
         if consistency_check == 'warn':
             printe(text)
@@ -178,7 +178,7 @@ class ODS(MutableMapping):
         self._dynamic_path_creation = dynamic_path_creation
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
-        self.imas_version = imas_version
+        self._imas_version = imas_version
         self.location = location
         self._cocos = cocos
         self.cocosio = cocosio
@@ -204,7 +204,7 @@ class ODS(MutableMapping):
         else:
             return homogeneous_time
 
-    def time(self, key='', extra_info=None, skip=None):
+    def time(self, key='', extra_info=None):
         """
         Return the time information for a given ODS location
 
@@ -246,8 +246,6 @@ class ODS(MutableMapping):
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
                     times[item] = time
-                except IndexError:
-                    pass
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):
                         pass
@@ -274,11 +272,16 @@ class ODS(MutableMapping):
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                 while len(time0.shape) > 1:
                     time0 = numpy.take(time0, 0, axis=0)
-                for time in times.values():
-                    # Make sure all time arrays are close to the time0 we identified
-                    assert abs(time - time0).max() < 1e-7
-                extra_info['homogeneous_time'] = True
-                return time0
+
+                if all([time.size == time0.size for time in times.values()]):
+                    for time in times.values():
+                        # Make sure all time arrays are close to the time0 we identified
+                        assert abs(time - time0).max() < 1e-7
+                    extra_info['homogeneous_time'] = True
+                    return time0
+                else:  # Similar to ValueError exception caught above
+                    extra_info['homogeneous_time'] = False
+                    return None
             # there are inconsistencies with different ways of specifying times in the IDS
             else:
                 raise ValueError('Inconsistent time definitions in %s' % times.keys())
@@ -337,6 +340,27 @@ class ODS(MutableMapping):
             self['time'] = numpy.atleast_1d(self['time'][time_index])
 
         return self
+
+    @property
+    def imas_version(self):
+        """
+        Property that returns the imas_version of this ods
+
+        :return: string with imas_version
+        """
+        if not hasattr(self, '_imas_version'):
+            self._imas_version = omas_rcparams['default_imas_version']
+        return self._imas_version
+
+    @imas_version.setter
+    def imas_version(self, imas_version_value):
+        self._imas_version = imas_version_value
+        for item in self.keys():
+            if isinstance(self.getraw(item), ODS):
+                if 'code.parameters' in self.getraw(item).location:
+                    continue
+                else:
+                    self.getraw(item).imas_version = imas_version_value
 
     @property
     def consistency_check(self):
@@ -507,10 +531,11 @@ class ODS(MutableMapping):
 
     @dynamic_path_creation.setter
     def dynamic_path_creation(self, dynamic_path_value):
-        self._dynamic_path_creation = dynamic_path_value
-        for item in self.keys():
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).dynamic_path_creation = dynamic_path_value
+        if dynamic_path_value != self._dynamic_path_creation:
+            self._dynamic_path_creation = dynamic_path_value
+            for item in self.keys():
+                if isinstance(self.getraw(item), ODS):
+                    self.getraw(item).dynamic_path_creation = dynamic_path_value
 
     def _validate(self, value, structure):
         """
@@ -850,7 +875,10 @@ class ODS(MutableMapping):
                     data[k] = valid * numpy.nan
             # force dtype to avoid obtaining arrays of objects in case
             # the shape of the concatenated arrays do not match
-            return numpy.array(data, dtype=numpy.array(data[0]).dtype)
+            if len(data):
+                return numpy.array(data, dtype=numpy.array(data[0]).dtype)
+            else:
+                raise ValueError('`%s` has no data' % self.location)
 
         # dynamic path creation
         elif key[0] not in self.keys():
@@ -872,7 +900,7 @@ class ODS(MutableMapping):
                     return value.__getitem__(key[1:], cocos_and_coords)
                 else:
                     return value[l2o(key[1:])]
-            except ValueError:
+            except ValueError:  # ValueError is raised when nodes have no data
                 if dynamically_created:
                     del self[key[0]]
                 raise
@@ -958,17 +986,12 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def pretty_paths(self):
+    def paths(self, return_empty_leaves=False, **kw):
         """
-        Traverse the ods and return paths that have data formatted nicely
+        Traverse the ods and return paths to its leaves
 
-        :return: list of paths that have data formatted nicely
-        """
-        return list(map(l2i, self.paths()))
-
-    def paths(self, **kw):
-        """
-        Traverse the ods and return paths that have data
+        :param return_empty_leaves: if False only return paths to leaves that have data
+                                    if True also return paths to empty leaves
 
         :return: list of paths that have data
         """
@@ -976,26 +999,44 @@ class ODS(MutableMapping):
         path = kw.setdefault('path', [])
         for kid in self.keys():
             if isinstance(self.getraw(kid), ODS):
-                self.getraw(kid).paths(paths=paths, path=path + [kid])
+                self.getraw(kid).paths(return_empty_leaves=return_empty_leaves, paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
+        if not len(self.keys()) and return_empty_leaves:
+            paths.append(path)
         return paths
 
-    def full_paths(self):
+    def pretty_paths(self, **kw):
+        r"""
+        Traverse the ods and return paths that have data formatted nicely
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: list of paths that have data formatted nicely
         """
+        return list(map(l2i, self.paths(**kw)))
+
+    def full_paths(self, **kw):
+        r"""
         Traverse the ods and return paths from root of ODS that have data
+
+        :param \**kw: extra keywords passed to the path() method
 
         :return: list of paths that have data
         """
         location = p2l(self.location)
-        return [location + path for path in self.paths()]
+        return [location + path for path in self.paths(**kw)]
 
-    def flat(self):
-        """
-        :return: flat dictionary representation of the data
+    def flat(self, **kw):
+        r"""
+        Flat dictionary representation of the data
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: OrderedDict with flat representation of the data
         """
         tmp = OrderedDict()
-        for path in self.paths():
+        for path in self.paths(**kw):
             tmp[l2o(path)] = self[path]
         return tmp
 
@@ -1005,7 +1046,7 @@ class ODS(MutableMapping):
         return (False, True)
 
     def __len__(self):
-        return len(self.omas_data)
+        return len(self.keys())
 
     def __iter__(self):
         return iter(self.keys())
@@ -1057,7 +1098,7 @@ class ODS(MutableMapping):
         return s, []
 
     def get(self, key, default=None):
-        """
+        r"""
         Check if key is present and if not return default value without creating value in omas data structure
 
         :param key: ods location
@@ -1516,7 +1557,7 @@ class ODS(MutableMapping):
 
         :param structure: input structure
 
-        :return: ODS
+        :return: self
         '''
         if isinstance(structure, dict):
             keys = list(map(str, structure.keys()))
@@ -1557,6 +1598,7 @@ class ODS(MutableMapping):
         '''
         Convert code.parameters to a CodeParameters dictionary object
         '''
+        import xml
         if not self.location:
             for item in self:
                 self[item].codeparams2dict()
@@ -1566,8 +1608,10 @@ class ODS(MutableMapping):
                 self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
             elif ('parameters' in self and isinstance(self['parameters'], basestring)):
                 self['parameters'] = CodeParameters().from_string(self['parameters'])
+        except xml.parsers.expat.ExpatError:
+            printe('%s.code.parameters is not formatted as XML' % self.location)
         except Exception as _excp:
-            printe(repr(_excp))
+            printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
 
 class CodeParameters(dict):
@@ -1729,6 +1773,49 @@ class CodeParameters(dict):
         '''
         return list(dict.items(self))
 
+    def flat(self, **kw):
+        r"""
+        Flat dictionary representation of the data
+
+        :param \**kw: extra keywords passed to the path() method
+
+        :return: OrderedDict with flat representation of the data
+        """
+        tmp = OrderedDict()
+        for path in self.paths(**kw):
+            tmp[l2o(path)] = self[path]
+        return tmp
+
+    def from_structure(self, structure):
+        '''
+        Generate CodeParamters starting from a hierarchical structure made of dictionaries and lists
+
+        :param structure: input structure
+
+        :return: self
+        '''
+        if isinstance(structure, dict):
+            keys = list(map(str, structure.keys()))
+        elif isinstance(structure, list):
+            keys = list(range(len(structure)))
+        else:
+            raise ValueError('from_structure must be fed either a structure made of dictionaries and lists')
+
+        for item in keys:
+            if isinstance(structure[item], dict):
+                self[item].from_structure(structure[item])
+            elif isinstance(structure[item], list):
+                # identify if this is a leaf
+                if len(structure[item]) and not isinstance(structure[item][0], dict):
+                    self[item] = numpy.array(structure[item])
+                # or a node in the IMAS tree
+                else:
+                    self[item].from_structure(structure[item])
+            else:
+                self[item] = copy.deepcopy(structure[item])
+
+        return self
+
 
 def codeparams_xml_save(f):
     '''
@@ -1749,6 +1836,7 @@ def codeparams_xml_load(f):
     loading of code.parameters from an XML string
     '''
 
+    @wraps(f)
     def wrapper(*args, **kwargs):
         ods = f(*args, **kwargs)
         ods.codeparams2dict()
@@ -1797,7 +1885,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', 'imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
@@ -1855,9 +1943,7 @@ def through_omas_pkl(ods):
 
     :return: ods
     """
-    if not os.path.exists(tempfile.gettempdir() + '/OMAS_TESTS/'):
-        os.makedirs(tempfile.gettempdir() + '/OMAS_TESTS/')
-    filename = tempfile.gettempdir() + '/OMAS_TESTS/test.pkl'
+    filename = omas_testdir(__file__) + '/test.pkl'
     save_omas_pkl(ods, filename)
     ods1 = load_omas_pkl(filename)
     return ods1

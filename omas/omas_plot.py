@@ -483,7 +483,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, xkw={}, **kw):
+def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], contour_quantity='rho', allow_fallback=True, ax=None, sf=3, label_contours=None, show_wall=True, xkw={}, **kw):
     r"""
     Plot equilibrium cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -516,14 +516,20 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     :param xkw: dict [optional]
         Keywords to pass to plot call to draw X-point(s). Disable X-points by setting xkw={'marker': ''}
 
+    :param show_wall: bool
+        Plot the inner wall or limiting surface, if available
+
     :param \**kw: keywords passed to matplotlib plot statements
 
     :return: Axes instance
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -617,7 +623,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     # Wall clipping
     if wall is not None:
         path = matplotlib.path.Path(numpy.transpose(numpy.array([wall[0]['outline']['r'], wall[0]['outline']['z']])))
-        wall_path = matplotlib.patches.PathPatch(path, facecolor='none')
+        wall_path = matplotlib.patches.PathPatch(path, facecolor='none', edgecolor='none')
         ax.add_patch(wall_path)
 
     # Contours
@@ -669,7 +675,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
             collection.set_clip_path(wall_path)
 
     # Wall
-    if wall is not None:
+    if wall is not None and show_wall:
         ax.plot(wall[0]['outline']['r'], wall[0]['outline']['z'], 'k', linewidth=2)
 
         ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']), min(wall[0]['outline']['z']),
@@ -704,9 +710,12 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     :return: Axes instance
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -791,9 +800,12 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['equilibrium'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['equilibrium'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -887,9 +899,12 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['core_profiles'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['core_profiles'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -981,9 +996,12 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['core_profiles'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['core_profiles'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1049,9 +1067,12 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['pellets'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['pellets'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1090,9 +1111,12 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['pellets'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['pellets'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1137,13 +1161,14 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
     :param kw: arguments passed to matplotlib plot statements
 
     :return: axes handler
-
     """
-
     if time_index is None:
-        time_index = numpy.arange(len(ods['lh_antennas'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['lh_antennas'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1198,9 +1223,12 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['lh_antennas'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['lh_antennas'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1249,11 +1277,13 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
 
     :return: axes handler
     """
-
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+        time = ods['ec_launchers'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1302,9 +1332,12 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
     """
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['ec_launchers']['time']))
+        time = ods['ec_launchers'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
     if isinstance(time_index, (list, numpy.ndarray)):
-        time = ods['ec_launchers']['time']
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1355,9 +1388,12 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1398,9 +1434,12 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
     :return: axes handler
     """
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1446,9 +1485,12 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
         fig = pyplot.figure()
 
     if time_index is None:
-        time_index = numpy.arange(len(ods['waves'].time()))
-    if isinstance(time_index, (list, numpy.ndarray)):
         time = ods['waves'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
@@ -1626,8 +1668,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
 
     # Make sure there is something to plot or else just give up and return
     npipes = get_channel_count(
-        ods, 'gas_injection', check_loc='gas_injection.pipe.0.exit_position.r', test_checker='checker > 0',
-        channels_name='pipe')
+        ods, 'gas_injection',
+        check_loc='gas_injection.pipe.0.exit_position.r',
+        channels_name='pipe',
+        test_checker='~numpy.isnan(checker)'
+    )
     if npipes == 0:
         return
 
@@ -1663,7 +1708,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                     pass
             try:
                 r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
-            except ValueError:
+            except (LookupError, ValueError):
                 r2 = z2 = None
             locations[location_name] += [r2, z2]
     try:
@@ -1839,12 +1884,16 @@ def magnetics_overlay(
     from matplotlib import pyplot
 
     # Make sure there is something to plot or else just give up and return
-    nbp = get_channel_count(
-        ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
-        test_checker='checker > 0')
+    nbp = 0
+    if compare_version(ods.imas_version,'3.23.3')>0:
+        nbp = get_channel_count(
+            ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
+            test_checker='~numpy.isnan(checker)',
+        )
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop',
-        test_checker='checker > 0')
+        test_checker='~numpy.isnan(checker)',
+    )
     if max([nbp, nfl]) == 0:
         return
 
@@ -1906,7 +1955,8 @@ def interferometer_overlay(ods, ax=None, **kw):
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
-        test_checker='checker > 0')
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -1958,7 +2008,11 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        ods,
+        'thomson_scattering',
+        check_loc='thomson_scattering.channel.0.position.r',
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -2026,7 +2080,9 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(checker > 0)')
+        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data',
+        test_checker='any(~numpy.isnan(checker))',
+    )
     if nc == 0:
         return
 
@@ -2125,7 +2181,9 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='checker > 0')
+        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r',
+        test_checker='~numpy.isnan(checker)',
+    )
     if nc == 0:
         return
 
@@ -2229,7 +2287,7 @@ def langmuir_probes_overlay(
                 ods,
                 'langmuir_probes',
                 check_loc='langmuir_probes.embedded.0.position.r',
-                test_checker='checker > 0',
+                test_checker='~numpy.isnan(checker)',
                 channels_name='embedded',
             )
             embedded_indices = range(nce)
@@ -2241,7 +2299,7 @@ def langmuir_probes_overlay(
             ods,
             'langmuir_probes',
             check_loc='langmuir_probes.reciprocating.0.plunge.0.position.r',
-            test_checker='checker > 0',
+            test_checker='~numpy.isnan(checker)',
             channels_name='reciprocating',
         )
     else:
@@ -2434,9 +2492,17 @@ def position_control_overlay(
     ikw = dict(bounds_error=False, fill_value=np.NaN)
     try:
         nbp = np.shape(b['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        nbp = 0
+    try:
         nx = np.shape(x['[:].r.reference.data'])[0]
+    except (IndexError, ValueError):
+        nx = 0
+    try:
         ns = np.shape(s['[:].r.reference.data'])[0]
     except (IndexError, ValueError):
+        ns = 0
+    if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return
     r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]

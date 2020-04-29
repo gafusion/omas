@@ -37,16 +37,15 @@ odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, c
 # showcase use of MongoDB storage for GKDB data
 # =============================================
 # load a sample GKDB sample json file
-# note use of `consistency_check='warn'` is necessary since GKDB json is in fact not yet 100% compatible with IMAS
 sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
-ods = ODS(consistency_check='warn')
+ods = ODS()
 ods['gyrokinetics'].load(sample_filename)
 
 # write GKDB entry to the database
 _id = ods.save('mongo', collection='gkdb', database='test')
 
 # reload GKDB entry
-ods1 = ODS(consistency_check='warn')
+ods1 = ODS()
 ods1.load('mongo', {'_id': _id}, collection='gkdb', database='test')
 
 # look for differences between original GKDB json and MongoDB entry

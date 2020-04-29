@@ -11,21 +11,17 @@ Test script for omas/omas_utils.py
 -------
 """
 
-# Basic imports
 from __future__ import print_function, division, unicode_literals
-import os
 import unittest
+import os
 import numpy
 import warnings
 import copy
 
-# Plot imports
-import matplotlib as mpl
-from matplotlib import pyplot as plt
-
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
+from omas.tests import warning_setup
 
 
 class TestOmasUtils(unittest.TestCase):
@@ -33,52 +29,30 @@ class TestOmasUtils(unittest.TestCase):
     Test suite for omas_utils.py
     """
 
-    # Flags to edit while testing
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
     # Sample data for use in tests
     specific_test_version = '3.18.0'
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
 
     def test_different_ods(self):
         ods = ODS()
         ods2 = ODS()
         ods2.sample_equilibrium()
         diff_eq = different_ods(ods, ods2)
-        self.printv('  diff_eq = {}'.format(diff_eq))
         assert isinstance(diff_eq, list)
         assert ('equilibrium' in ' '.join(diff_eq)) or ('wall' in ' '.join(diff_eq))
         ods3 = copy.deepcopy(ods2)
         assert different_ods(ods2, ods3) is False
         ods3.sample_core_profiles()
         diff_prof = ods2.diff(ods3)
-        self.printv('  diff_prof = {}'.format(diff_prof))
         assert isinstance(diff_prof, list)
         assert isinstance(different_ods(ods3, ods2), list)
         assert 'core_profiles' in ' '.join(diff_prof)
         ods2.sample_core_profiles(include_pressure=False)
         diff_prof2 = different_ods(ods3, ods2)
-        self.printv('  diff_prof2 = {}'.format(diff_prof2))
         assert isinstance(diff_prof2, list)
         assert 'core_profiles' in ' '.join(diff_prof2)
         ods2.sample_core_profiles()
         ods2['core_profiles.profiles_1d.0.electrons.density_thermal'][0] = 1.5212
         diff_prof3 = ods2.diff(ods3)
-        self.printv('  diff_prof3 = {}'.format(diff_prof3))
         assert isinstance(diff_prof3, list)
         assert 'value' in ' '.join(diff_prof3)
         ods2.sample_core_profiles()
@@ -89,13 +63,14 @@ class TestOmasUtils(unittest.TestCase):
         ods2['core_profiles.code.name'] = 'fake name 1'
         ods3['core_profiles.code.name'] = 'fake name 2'
         diff_prof5 = different_ods(ods2, ods3)
-        self.printv('  diff_prof5 = {}'.format(diff_prof5))
         assert isinstance(diff_prof5, list)
         assert 'name' in ' '.join(diff_prof5)
+        return
 
     def test_printe(self):
         printe('printe_test,', end='')
         printw('printw_test', end='')
+        return
 
     def test_is_numeric(self):
         assert is_numeric(5) is True
@@ -104,9 +79,11 @@ class TestOmasUtils(unittest.TestCase):
         assert is_numeric({'blah': 'blah'}) is False
         assert is_numeric([]) is False
         assert is_numeric(None) is False
+        return
 
     def test_remove_parentheses(self):
         assert remove_parentheses('zoom(b(la)h)what', replace_with='|') == 'zoom|what'
+        return
 
     def test_closest_index(self):
         # Basic tests
@@ -120,6 +97,7 @@ class TestOmasUtils(unittest.TestCase):
         self.assertRaises(TypeError, closest_index, 5, 5)  # First arg is not a list --> TypeError
         self.assertRaises(TypeError, closest_index, [1, 2, 3], 'string_not_number')
         self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
+        return
 
     def test_list_structures(self):  # Also tests dict_structures
         struct_list = list_structures(omas_rcparams['default_imas_version'])
@@ -135,6 +113,7 @@ class TestOmasUtils(unittest.TestCase):
         assert 'pf_active' in struct_dict2.keys()
         assert all([item in struct_dict.keys() for item in struct_list])
         assert all([item in struct_dict2.keys() for item in struct_list2])
+        return
 
     def test_omas_info(self):
         get_list = ['pf_active', 'thomson_scattering', 'charge_exchange']
@@ -146,6 +125,7 @@ class TestOmasUtils(unittest.TestCase):
             assert isinstance(ods_info_pfa['pf_active.circuit.0.connections.documentation'], basestring)
         ods_info_list = omas_info(get_list)
         assert all([item in ods_info_list for item in get_list])
+        return
 
     def test_o2u(self):
         assert o2u('equilibrium.time_slice.0.global_quantities.ip') == 'equilibrium.time_slice.:.global_quantities.ip'
@@ -153,15 +133,20 @@ class TestOmasUtils(unittest.TestCase):
         assert o2u('2') == ':'
         assert o2u('equilibrium') == 'equilibrium'
         assert o2u('equilibrium.2') == 'equilibrium.:'
+        return
 
     def test_set_time_array(self):
         ods = ODS()
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 0, 0.1)
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 1, 0.2)
+        return
 
     def test_info(self):
         omas_info('equilibrium')
         omas_info(None)
+        return
+
+    # End of TestOmasUtils class
 
 
 if __name__ == '__main__':
