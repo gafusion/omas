@@ -11,23 +11,19 @@ Test script for omas/omas_physics.py
 -------
 """
 
-# Basic imports
 from __future__ import print_function, division, unicode_literals
-import os
 import unittest
+import os
 import numpy
 import warnings
 import copy
 import itertools
 
-# Plot imports
-import matplotlib as mpl
-from matplotlib import pyplot as plt
-
 # OMAS imports
 from omas import *
 from omas.omas_utils import *
 from omas.omas_physics import *
+from omas.tests import warning_setup
 
 try:
     import pint
@@ -36,29 +32,10 @@ try:
 except ImportError as _excp:
     failed_PINT = _excp
 
-
 class TestOmasPhysics(unittest.TestCase):
     """
     Test suite for omas_physics.py
     """
-
-    # Flags to edit while testing
-    verbose = False  # Spammy, but occasionally useful for debugging a weird problem
-
-    # Utilities for this test
-    def printv(self, *arg):
-        """Utility for tests to use"""
-        if self.verbose:
-            print(*arg)
-
-    def setUp(self):
-        test_id = self.id()
-        test_name = '.'.join(test_id.split('.')[-2:])
-        self.printv('{}...'.format(test_name))
-
-    def tearDown(self):
-        test_name = '.'.join(self.id().split('.')[-2:])
-        self.printv('    {} done.'.format(test_name))
 
     def test_equilibrium_consistent(self):
         ods = ODS()
@@ -67,16 +44,18 @@ class TestOmasPhysics(unittest.TestCase):
         assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
         ods = equilibrium_consistent(ods)
         assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
+        return
 
     def test_core_profiles_pressures(self):
         ods = ODS()
         ods.sample_core_profiles(include_pressure=False)
         ods2 = core_profiles_pressures(ods, update=True)
         diff = ods.diff(ods2)
-        assert (not diff)
+        assert not diff
 
         ods2 = core_profiles_pressures(ods, update=False)
-        assert (all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')]))
+        assert all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')])
+        return
 
     def test_core_profiles_currents(self):
 
@@ -192,10 +171,12 @@ class TestOmasPhysics(unittest.TestCase):
         CPC(ods, kw=kw, should_AE=True)
         kw = {'j_ohmic': Jval, 'j_non_inductive': None, 'j_actuator': None}
         CPC(ods, kw=kw)  # j_ni is 4
+        return
 
     def test_current_from_eq(self):
         ods = ODS().sample_equilibrium()
         current_from_eq(ods, 0)
+        return
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
@@ -212,6 +193,7 @@ class TestOmasPhysics(unittest.TestCase):
             assert cocos['sigma_Bp'] == 1
         for cocos in [cocos3, cocos4, cocos7, cocos8]:
             assert cocos['sigma_Bp'] == -1
+        return
 
     def test_cocos_transform(self):
         assert cocos_transform(None, None)['TOR'] == 1
@@ -221,32 +203,30 @@ class TestOmasPhysics(unittest.TestCase):
             for cocos_add in range(2):
                 for thing in ['BT', 'TOR', 'POL', 'Q']:
                     assert cocos_transform(cocos_ind + cocos_add * 10, cocos_ind + cocos_add * 10)[thing] == 1
+        return
 
     def test_coordsio(self):
         data5 = numpy.linspace(0, 1, 5)
         data10 = numpy.linspace(0, 1, 10)
 
-        if self.verbose:
-            os.environ['OMAS_DEBUG_TOPIC'] = 'coordsio'
-
         # data can be entered without any coordinate checks
         ods0 = ODS()
         ods0['equilibrium.time_slice[0].profiles_1d.psi'] = data10
         ods0['equilibrium.time_slice[0].profiles_1d.f'] = data5
-        assert (len(ods0['equilibrium.time_slice[0].profiles_1d.psi']) != len(ods0['equilibrium.time_slice[0].profiles_1d.f']))
+        assert len(ods0['equilibrium.time_slice[0].profiles_1d.psi']) != len(ods0['equilibrium.time_slice[0].profiles_1d.f'])
 
         # if a coordinate exists, then that is the coordinate that it is used
         ods1 = ODS()
         ods1['equilibrium.time_slice[0].profiles_1d.psi'] = data10
         with omas_environment(ods1, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': data5}):
             ods1['equilibrium.time_slice[0].profiles_1d.f'] = data5
-        assert (len(ods1['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+        assert len(ods1['equilibrium.time_slice[0].profiles_1d.f']) == 10
 
         # if a coordinate does not exists, then it is added
         ods2 = ODS()
         with omas_environment(ods2, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': data5}):
             ods2['equilibrium.time_slice[0].profiles_1d.pressure'] = data5
-        assert (len(ods2['equilibrium.time_slice[0].profiles_1d.pressure']) == 5)
+        assert len(ods2['equilibrium.time_slice[0].profiles_1d.pressure']) == 5
 
         # coordinates can be easily copied over from existing ODSs with .list_coordinates() method
         ods3 = ODS()
@@ -255,67 +235,71 @@ class TestOmasPhysics(unittest.TestCase):
             ods3['equilibrium.time_slice[0].profiles_1d.f'] = ods1['equilibrium.time_slice[0].profiles_1d.f']
         with omas_environment(ods3, coordsio=ods2):
             ods3['equilibrium.time_slice[0].profiles_1d.pressure'] = ods2['equilibrium.time_slice[0].profiles_1d.pressure']
-        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
-        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.pressure']) == 10)
+        assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10
+        assert len(ods3['equilibrium.time_slice[0].profiles_1d.pressure']) == 10
 
         # ods can be queried on different coordinates than they were originally filled in (ods example)
         with omas_environment(ods3, coordsio=ods2):
-            assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 5)
-        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+            assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 5
+        assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10
 
         # ods can be queried on different coordinates than they were originally filled in (ods example)
         with omas_environment(ods3, coordsio=ods3):
-            assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+            assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10
 
         # ods can be queried on different coordinates than they were originally filled in (dictionary example)
         with omas_environment(ods3, coordsio={'equilibrium.time_slice[0].profiles_1d.psi': data5}):
-            assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 5)
-        assert (len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10)
+            assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 5
+        assert len(ods3['equilibrium.time_slice[0].profiles_1d.f']) == 10
 
         # this case is different because the coordinate and the data do not share the same parent
         ods5 = ODS()
         ods5['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
         with omas_environment(ods5, coordsio={'core_profiles.profiles_1d[0].grid.rho_tor_norm': data10}):
             ods5['core_profiles.profiles_1d[0].electrons.density_thermal'] = data10
-        assert (len(ods5['core_profiles.profiles_1d[0].grid.rho_tor_norm']) == 5)
-        assert (len(ods5['core_profiles.profiles_1d[0].electrons.density_thermal']) == 5)
+        assert len(ods5['core_profiles.profiles_1d[0].grid.rho_tor_norm']) == 5
+        assert len(ods5['core_profiles.profiles_1d[0].electrons.density_thermal']) == 5
 
         ods6 = ODS()
         ods6['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
+
+        return
 
     def test_cocosio(self):
         x = numpy.linspace(.1, 1, 10)
 
         ods = ODS(cocosio=11, cocos=11)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
 
         ods = ODS(cocosio=11, cocos=2)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
 
         ods = ODS(cocosio=2, cocos=11)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
 
         ods = ODS(cocosio=2, cocos=2)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
 
         # reassign the same value
         ods = ODS(cocosio=2)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = ods['equilibrium.time_slice.0.profiles_1d.psi']
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
 
         # use omas_environment
         ods = ODS(cocosio=2)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
         with omas_environment(ods, cocosio=11):
-            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * (2 * numpy.pi)))
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * (2 * numpy.pi))
 
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
+
+        return
 
     def test_coordsio_cocosio(self):
         x = numpy.linspace(0.1, 1, 11)
@@ -327,15 +311,15 @@ class TestOmasPhysics(unittest.TestCase):
         ods = ODS()
         with omas_environment(ods, cocosio=2):
             ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
-            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x))
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi))
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], x)
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi)
 
         with omas_environment(ods, cocosio=2, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': xh}):
             ods['equilibrium.time_slice.0.profiles_1d.phi'] = yh
-            assert (len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(yh))
-            assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], xh))
-        assert (numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi))
-        assert (len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(y))
+            assert len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(yh)
+            assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], xh)
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.psi'], -x * 2 * numpy.pi)
+        assert len(ods['equilibrium.time_slice.0.profiles_1d.phi']) == len(y)
 
         ods = ODS()
 
@@ -380,20 +364,22 @@ class TestOmasPhysics(unittest.TestCase):
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi2__, psi2, p))
             index = numpy.argsort(psi11)
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
+        return
 
-    @unittest.skipUnless(not failed_PINT, str(failed_PINT))
+    @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):
         import pint
         ureg = pint.UnitRegistry()
 
         ods = ODS()
         ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] = 8.0 * ureg.milliseconds
-        assert (ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] == 0.008)
+        assert ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement'] == 0.008
 
         with omas_environment(ods, unitsio=True):
             tmp = ods['equilibrium.time_slice[0].constraints.diamagnetic_flux.time_measurement']
-            assert (tmp.magnitude == 0.008)
-            assert (tmp.units == 'second')
+            assert tmp.magnitude == 0.008
+            assert tmp.units == 'second'
+        return
 
     def test_search_ion(self):
         ods = ODS()
@@ -422,6 +408,7 @@ class TestOmasPhysics(unittest.TestCase):
             raise AssertError('no_matches_raise_error failed')
         except IndexError:
             pass
+        return
 
     def test_search_in_array_structure(self):
         ods = ODS()
@@ -446,6 +433,7 @@ class TestOmasPhysics(unittest.TestCase):
 
         tmp = search_in_array_structure(ods['core_transport.model'], {'identifier.name': 'omas_tgyro', 'identifier.description': 'bla bla'})
         assert tmp[0] == 2
+        return
 
     def test_latest_cocos(self):
         from omas.omas_utils import list_structures, omas_rcparams
@@ -454,6 +442,9 @@ class TestOmasPhysics(unittest.TestCase):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*defining its COCOS transform.*")
             generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
+        return
+
+    # End of TestOmasPhysics class
 
 
 if __name__ == '__main__':

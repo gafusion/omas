@@ -1,0 +1,221 @@
+{
+ "numerics": {
+  "documentation": "Numeric parameters passed as argument to a component or a workflow. Most quantities are dynamic in this IDS in order to record the history of the numerics parameters at each execution of the component or workflow (so one time index = one execution of the component). Provide as input to the component a single time slice from this IDS containing the relevant parameters.",
+  "full_path": "numerics",
+  "lifecycle_last_change": "3.26.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.26.0",
+  "maxoccur": "10"
+ },
+ "numerics.ids_properties": {
+  "data_type": "structure",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "numerics/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "numerics.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "numerics/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "numerics/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "numerics/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "numerics/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "numerics/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.version_put": {
+  "data_type": "structure",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "numerics/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "numerics.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "numerics/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "numerics/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "numerics/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Generic time",
+  "full_path": "numerics/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_end": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "End time",
+  "full_path": "numerics/time_end(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_end_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_end\"",
+  "full_path": "numerics/time_end_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.time_end_error_lower": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_end\"",
+  "full_path": "numerics/time_end_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_end_error_upper": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_end\"",
+  "full_path": "numerics/time_end_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_start": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Start time",
+  "full_path": "numerics/time_start(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_start_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_start\"",
+  "full_path": "numerics/time_start_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.time_start_error_lower": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_start\"",
+  "full_path": "numerics/time_start_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_start_error_upper": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_start\"",
+  "full_path": "numerics/time_start_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_step": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Time interval between main steps (if relevant and constant during one execution of the component)",
+  "full_path": "numerics/time_step(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_step_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"time_step\"",
+  "full_path": "numerics/time_step_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "numerics.time_step_error_lower": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_step\"",
+  "full_path": "numerics/time_step_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "numerics.time_step_error_upper": {
+  "coordinates": [
+   "numerics.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_step\"",
+  "full_path": "numerics/time_step_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

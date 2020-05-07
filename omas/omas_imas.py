@@ -7,6 +7,7 @@ from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
 from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
+from .omas_utils import _extra_structures
 
 
 # --------------------------------------------
@@ -618,25 +619,7 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
 
     :return: OMAS data set
     """
-    # set MDSPLUS_TREE_BASE_? environment variables as per
-    # imasdb /work/imas/shared/iterdb/3 ; env | grep MDSPLUS_TREE_BASE
-    try:
-        bkp_imas_environment = {}
-        for k in range(10):
-            if 'MDSPLUS_TREE_BASE_%d' % k in os.environ:
-                bkp_imas_environment['MDSPLUS_TREE_BASE_%d' % k] = os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ['MDSPLUS_TREE_BASE_%d' % k] = '/work/imas/shared/iterdb/3/%d' % k
-
-        # load data from imas
-        ods = load_omas_imas(user=None, machine=None, pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
-
-    finally:
-        # restore existing IMAS environment
-        for k in range(10):
-            del os.environ['MDSPLUS_TREE_BASE_%d' % k]
-            os.environ.update(bkp_imas_environment)
-
-    return ods
+    return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True, skip_ion_state=True):
@@ -717,8 +700,12 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
             else:
                 subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
         except Exception:
-            print('Error traversing %s ! Possible IMAS version mismatch!' % l2o(path + [kid]))
-            return paths
+            # check if the issue was that we were trying to load something that was added to the _extra_structures
+            if o2i(l2u(propagate_path)) in _extra_structures[propagate_path[0]]:
+                # printe('`%s` does not exist in the IMAS data dictionary. Consider opening a JIRA issue asking for its addition: https://jira.iter.org' % l2i(path + [kid]))
+                continue
+            printe('Error querying IMAS database for `%s` Possible IMAS version mismatch?' % l2i(path + [kid]))
+            continue
         paths += subtree_paths
 
         # assume_uniform_array_structures

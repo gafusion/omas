@@ -16,6 +16,7 @@ from uncertainties import ufloat
 
 # generate some uncertain data
 ods = ODS()
+ods['equilibrium.time'] = [0.0]
 ods['equilibrium.time_slice[0].global_quantities.ip'] = ufloat(3, 0.1)
 ods['thomson_scattering.channel[0].t_e.data'] = unumpy.uarray([1, 2, 3], [.1, .2, .3])
 ods['thomson_scattering.channel[0].n_e.data'] = numpy.array([1., 2., 3.])
@@ -24,20 +25,20 @@ ods['thomson_scattering.ids_properties.homogeneous_time'] = 1
 
 # save/load from pickle
 print('== PKL ==')
-save_omas_pkl(ods, 'test.pkl')
-ods = load_omas_pkl('test.pkl')
+save_omas_pkl(ods, omas_testdir(__file__) + '/test.pkl')
+ods = load_omas_pkl(omas_testdir(__file__) + '/test.pkl')
 print(ods)
 
 # save/load from json
 print('== JSON ==')
-save_omas_json(ods, 'test.json')
-ods = load_omas_json('test.json')
+save_omas_json(ods, omas_testdir(__file__) + '/test.json')
+ods = load_omas_json(omas_testdir(__file__) + '/test.json')
 print(ods)
 
 # save/load from nc
 print('== NC ==')
-save_omas_nc(ods, 'test.nc')
-ods = load_omas_nc('test.nc')
+save_omas_nc(ods, omas_testdir(__file__) + '/test.nc')
+ods = load_omas_nc(omas_testdir(__file__) + '/test.nc')
 print(ods)
 
 # save/load from imas

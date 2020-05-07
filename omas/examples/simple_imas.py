@@ -69,11 +69,11 @@ pprint(ods1.pretty_paths())
 print('=' * 20)
 print(' Compared saved/loaded data')
 print('=' * 20)
-check = different_ods(ods, ods1)
-if not check:
+difference = different_ods(ods, ods1)
+if not difference:
     print('OMAS data got saved and loaded correctly')
 else:
-    pprint(check)
+    pprint(difference)
 
 # automatic paths discovery
 # ods1 = load_omas_imas(machine='ITER', pulse=1)

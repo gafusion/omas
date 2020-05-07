@@ -19,15 +19,9 @@
 },
 "identifier": "GYRO1",
 "launching_position": {
-"phi": [
-0.0
-],
-"r": [
-2.4
-],
-"z": [
-0.68
-]
+"phi": 0.0,
+"r": 2.4,
+"z": 0.68
 },
 "mode": {
 "data": [

@@ -13,7 +13,7 @@ import sys
 import glob
 import json
 import copy
-from collections import MutableMapping, OrderedDict
+from collections import OrderedDict
 import re
 import numpy
 from pprint import pprint
@@ -21,6 +21,8 @@ from io import StringIO
 from contextlib import contextmanager
 import tempfile
 import warnings
+from functools import wraps
+import ast
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
@@ -40,13 +42,14 @@ import uncertainties
 import uncertainties.unumpy as unumpy
 from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
-import ast
 
 # xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
 import xarray
 
 # Python3/2 import differences
 if sys.version_info < (3, 0):
+    from collections import MutableMapping
+
     import cPickle as pickle
 
 
@@ -54,6 +57,8 @@ if sys.version_info < (3, 0):
         return string
 
 else:
+    from collections.abc import MutableMapping
+
     basestring = str
     unicode = str
     import pickle
@@ -200,3 +205,19 @@ add_datastructures['info'] = {
         "description": "run number"
     }
 }
+
+
+def omas_testdir(filename_topic=''):
+    '''
+    Return path to temporary folder where OMAS TEST file are saved/loaded
+
+    NOTE: If directory does not exists it is created
+
+    :return: string with path to OMAS TEST folder
+    '''
+    if filename_topic:
+        filename_topic = os.path.splitext(os.path.split(filename_topic)[-1])[0] + '/'
+    tmp = tempfile.gettempdir() + '/OMAS_TESTS/' + filename_topic
+    if not os.path.exists(tmp):
+        os.makedirs(tmp)
+    return tmp
