@@ -556,7 +556,7 @@ def equilibrium_CX(ods, time_index=None, levels=numpy.r_[0.1:0.9 + 0.0001:0.1], 
     kw1['linewidth'] = kw['linewidth'] + 1
 
     # Boundary
-    ax.plot(eq['boundary']['outline']['r'], eq['boundary']['outline']['z'], label=label, **kw1)
+    ax.plot(eq['boundary.outline.r'], eq['boundary.outline.z'], label=label, **kw1)
     kw1.setdefault('color', ax.lines[-1].get_color())
 
     # Magnetic axis
