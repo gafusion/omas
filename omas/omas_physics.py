@@ -24,31 +24,51 @@ def add_to__ALL__(f):
     __all__.append(f.__name__)
     return f
 
+def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise'][0]):
+    '''
+    Decorator function that:
+     1. checks that required quantities are there
+     2. makes a copy if update=False
+    '''
+
+    def _req(f):
+        from functools import wraps
+        @wraps(f)
+        def wrapper(*args, **kw):
+            args, kw = args_as_kw(f, args, kw)
+
+            # handle missing required quantities
+            missing = []
+            for k in require:
+                if k not in kw['ods']:
+                    missing.append(k)
+            if len(missing):
+                txt = 'could not evaluate %s because of missing %s ODS' % (f.__name__, missing)
+                if require_mode == 'warn_through':
+                    printe(txt)
+                elif require_mode == 'warn_skip':
+                    printe(txt)
+                    return kw['ods']
+                elif require_mode == 'raise':
+                    raise RuntimeError(txt)
+
+            # handle update in place
+            if not kw.get('update', True):
+                from omas import ODS
+                kw['ods'] = ODS().copy_attrs_from(kw['ods'])
+            return f(*args, **kw)
+
+        return wrapper
+
+    return _req
 
 # constants class that mimics scipy.constants
 class constants(object):
     e = 1.6021766208e-19
 
 
-def update_ods(f):
-    '''
-    Decorator function make a copy of ODS if keyword argument `update=True`
-    '''
-
-    from functools import wraps
-    @wraps(f)
-    def wrapper(*args, **kw):
-        args, kw = args_as_kw(f, args, kw)
-        if not kw.get('update', True):
-            from omas import ODS
-            kw['ods'] = ODS().copy_attrs_from(kw['ods'])
-        return f(*args, **kw)
-
-    return wrapper
-
-
 @add_to__ODS__
-@update_ods
+@preprocess_ods('equilibrium')
 def equilibrium_stored_energy(ods, update=True):
     """
     Calculate MHD stored energy from equilibrium pressure and volume
@@ -59,20 +79,15 @@ def equilibrium_stored_energy(ods, update=True):
 
     :return: updated ods
     """
-    if not ('equilibrium' in ods):
-        printe('could not evaluate equilibrium stored energy because of missing equilibrium ODS')
-
-    else:
-        for time_index in ods['equilibrium']['time_slice']:
-            pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
-            volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
-            ods['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
-
+    for time_index in ods['equilibrium']['time_slice']:
+        pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
+        volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
+        ods['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
     return ods
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('core_profiles', 'equilibrium')
 def summary_greenwald(ods, update=True):
     """
     Calculates Greenwald Fraction for each time slice and stores them in the summary ods.
@@ -83,24 +98,20 @@ def summary_greenwald(ods, update=True):
 
     :return: updated ods
     """
-    if not ('core_profiles' in ods and 'equilibrium' in ods):
-        printe('could not evaluate summary greenwald because of missing equilibrium or core_profiles ODS')
-
-    else:
-        a = (ods['equilibrium.time_slice.:.profiles_1d.r_outboard'][:, -1] - ods['equilibrium.time_slice.:.profiles_1d.r_inboard'][:, -1]) / 2
-        ip = ods['equilibrium.time_slice.:.global_quantities.ip']
-        ne_vol_avg = []
-        for k in ods['equilibrium.time_slice']:
-            with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]}):
-                ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
-                volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
-                ne_vol_avg.append(numpy.trapz(ne, x=volume) / volume[-1])
-        ods['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    a = (ods['equilibrium.time_slice.:.profiles_1d.r_outboard'][:, -1] - ods['equilibrium.time_slice.:.profiles_1d.r_inboard'][:, -1]) / 2
+    ip = ods['equilibrium.time_slice.:.global_quantities.ip']
+    ne_vol_avg = []
+    for k in ods['equilibrium.time_slice']:
+        with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]}):
+            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
+            volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
+            ne_vol_avg.append(numpy.trapz(ne, x=volume) / volume[-1])
+    ods['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
     return ods
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
 def summary_taue(ods, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
@@ -111,74 +122,70 @@ def summary_taue(ods, update=True):
 
     :return: updated ods
     """
-    if not ('core_profiles' in ods and 'core_sources' in ods and 'equilibrium' in ods):
-        printe('could not evaluate summary taue because of missing equilibrium or core_profiles or core_sources ODS')
+    # Global params:
+    r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
+    bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
 
-    else:
-        # Global params:
-        r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
-        bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
+    # update ODS with stored energy from equilibrium
+    ods.physics_equilibrium_stored_energy()
 
-        # update ODS with stored energy from equilibrium
-        ods.physics_equilibrium_stored_energy()
+    tau_e_scaling = []
+    tau_e_MHD = []
+    for time_index in ods['equilibrium']['time_slice']:
+        equilibrium_ods = ods['equilibrium']['time_slice'][time_index]
+        a = (equilibrium_ods['profiles_1d']['r_outboard'][-1] - equilibrium_ods['profiles_1d']['r_inboard'][-1]) / 2
+        ip = equilibrium_ods['global_quantities']['ip']
+        aspect = r_major / a
+        psi = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
+        rho_tor_norm_equi = equilibrium_ods['profiles_1d']['rho_tor_norm']
+        rho_tor_norm_core = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
+        psi = numpy.interp(rho_tor_norm_core, rho_tor_norm_equi, psi)
+        # Making Equilibrium grid same grid as core_sources and core_profiles
+        with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi}):
+            volume = equilibrium_ods['profiles_1d']['volume']
+            kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
+            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+            ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
-        tau_e_scaling = []
-        tau_e_MHD = []
-        for time_index in ods['equilibrium']['time_slice']:
-            equilibrium_ods = ods['equilibrium']['time_slice'][time_index]
-            a = (equilibrium_ods['profiles_1d']['r_outboard'][-1] - equilibrium_ods['profiles_1d']['r_inboard'][-1]) / 2
-            ip = equilibrium_ods['global_quantities']['ip']
-            aspect = r_major / a
-            psi = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
-            rho_tor_norm_equi = equilibrium_ods['profiles_1d']['rho_tor_norm']
-            rho_tor_norm_core = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-            psi = numpy.interp(rho_tor_norm_core, rho_tor_norm_equi, psi)
-            # Making Equilibrium grid same grid as core_sources and core_profiles
-            with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi}):
-                volume = equilibrium_ods['profiles_1d']['volume']
-                kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
-                ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
-                ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
+            # Naive weighted isotope average:
+            n_deuterium_avg = 0.0
+            n_tritium_avg = 0.0
+            ions = ods['core_profiles']['profiles_1d'][time_index]['ion']
+            for ion in ods['core_profiles']['profiles_1d'][time_index]['ion']:
+                if ions[ion]['label'] == 'D' or 'd':
+                    n_deuterium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
+                elif ions[ion]['label'] == 'T' or 't':
+                    n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
+            isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
-                # Naive weighted isotope average:
-                n_deuterium_avg = 0.0
-                n_tritium_avg = 0.0
-                ions = ods['core_profiles']['profiles_1d'][time_index]['ion']
-                for ion in ods['core_profiles']['profiles_1d'][time_index]['ion']:
-                    if ions[ion]['label'] == 'D' or 'd':
-                        n_deuterium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
-                    elif ions[ion]['label'] == 'T' or 't':
-                        n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
-                isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
+            # Find P_aux from core_sources ods:
+            pow_prof = numpy.zeros(len(ne))
+            sources = ods['core_sources']['source']
+            for source in ods['core_sources']['source']:
+                if 'identifier' not in sources[source] or 'index' not in sources[source]['identifier']:
+                    printw(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
+                elif sources[source]['identifier']['index'] == 100:
+                    if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
+                        pow_prof += sources[source]['profiles_1d'][time_index]['total_ion_energy']
+                    elif 'electrons' in sources[source]['profiles_1d'][time_index]:
+                        pow_prof += sources[source]['profiles_1d'][time_index]['electrons']['energy']
+            p_aux = numpy.trapz(pow_prof, x=volume)
+            tau_e = abs(56.2e-3 * (abs(ip) / 1e6) ** 0.93 * abs(bt) ** 0.15 * (ne_vol_avg / 1e19) ** 0.41 * (p_aux / 1e6) ** -0.69 * r_major ** 1.97 * kappa ** 0.78 * aspect ** -0.58 * isotope_factor ** 0.19)  # [s]
+            # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
+            tau_e_scaling.append(tau_e)
+            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
 
-                # Find P_aux from core_sources ods:
-                pow_prof = numpy.zeros(len(ne))
-                sources = ods['core_sources']['source']
-                for source in ods['core_sources']['source']:
-                    if 'identifier' not in sources[source] or 'index' not in sources[source]['identifier']:
-                        printw(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
-                    elif sources[source]['identifier']['index'] == 100:
-                        if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
-                            pow_prof += sources[source]['profiles_1d'][time_index]['total_ion_energy']
-                        elif 'electrons' in sources[source]['profiles_1d'][time_index]:
-                            pow_prof += sources[source]['profiles_1d'][time_index]['electrons']['energy']
-                p_aux = numpy.trapz(pow_prof, x=volume)
-                tau_e = abs(56.2e-3 * (abs(ip) / 1e6) ** 0.93 * abs(bt) ** 0.15 * (ne_vol_avg / 1e19) ** 0.41 * (p_aux / 1e6) ** -0.69 * r_major ** 1.97 * kappa ** 0.78 * aspect ** -0.58 * isotope_factor ** 0.19)  # [s]
-                # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
-                tau_e_scaling.append(tau_e)
-                tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
-
-        # assign quantities in the ODS
-        ods['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
-        ods['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
-        ods['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
-        ods['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
+    # assign quantities in the ODS
+    ods['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
+    ods['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
+    ods['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
+    ods['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
 
     return ods
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods()
 def summary_global_quantities(ods, update=True):
     """
     Calculates global quantities for each time slice and stores them in the summary ods:
@@ -196,7 +203,7 @@ def summary_global_quantities(ods, update=True):
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods()
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     '''
     Calls all core_profiles consistency functions including
@@ -214,14 +221,14 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 
     :return: updated ods
     '''
-    ods = core_profiles_pressures(ods)
+    core_profiles_pressures(ods)
     core_profiles_densities(ods)
     core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
     return ods
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('core_profiles')
 def core_profiles_pressures(ods, update=True):
     '''
     Calculates individual ions pressures
@@ -326,7 +333,7 @@ def core_profiles_pressures(ods, update=True):
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('core_profiles')
 def core_profiles_densities(ods, update=True):
     '''
     Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent
@@ -377,7 +384,7 @@ def core_profiles_densities(ods, update=True):
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('core_profiles')
 def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     '''
     calculates effective charge
@@ -415,7 +422,7 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('equilibrium', 'core_profiles')
 def current_from_eq(ods, time_index, update=True):
     """
     This function sets the currents in ods['core_profiles']['profiles_1d'][time_index]
@@ -459,7 +466,7 @@ def current_from_eq(ods, time_index, update=True):
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods('equilibrium', 'core_profiles')
 def core_profiles_currents(ods, time_index, rho_tor_norm,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
@@ -667,7 +674,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
 
 @add_to__ODS__
-@update_ods
+@preprocess_ods()
 def wall_add(ods, machine=None, update=True):
     '''
     Add wall information to the ODS
@@ -714,6 +721,7 @@ def wall_add(ods, machine=None, update=True):
 
 
 @add_to__ODS__
+@preprocess_ods('equilibrium')
 def equilibrium_consistent(ods, update=True):
     '''
     Calculate missing derived quantities for equilibrium IDS
@@ -752,6 +760,7 @@ def equilibrium_consistent(ods, update=True):
 
 
 @add_to__ODS__
+@preprocess_ods('equilibrium')
 def equilibrium_transpose_RZ(ods, flip_dims=False, update=True):
     '''
     Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.
