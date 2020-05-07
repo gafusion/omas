@@ -46,21 +46,22 @@ def equilibrium_stored_energy(ods, update=True):
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
-    for time_index in ods['equilibrium']['time_slice']:
-        pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
-        volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
+    if not ('equilibrium' in ods):
+        printe('could not evaluate equilibrium stored energy because of missing equilibrium ODS')
 
-        ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
+    else:
+        for time_index in ods['equilibrium']['time_slice']:
+            pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
+            volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
+            ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
 
     return ods_n
 
 
 @add_to__ODS__
-def summary_global_quantities(ods, update=True):
+def summary_greenwald(ods, update=True):
     """
-    Calculates global quantities for each time slice and stores them in the summary ods.
-     - Greenwald Fraction
-     - Energy confinement time estimated from the IPB98(y,2) scaling
+    Calculates Greenwald Fraction for each time slice and stores them in the summary ods.
 
     :param ods: input ods
 
@@ -73,20 +74,54 @@ def summary_global_quantities(ods, update=True):
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
-    # Global params:
-    r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
-    bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
+    if not ('core_profiles' in ods and 'equilibrium' in ods):
+        printe('could not evaluate summary greenwald because of missing equilibrium or core_profiles ODS')
 
-    # update ODS with stored energy from equilibrium
-    ods_n.physics_equilibrium_stored_energy()
+    else:
+        a = (ods['equilibrium.time_slice.:.profiles_1d.r_outboard'][:, -1] - ods['equilibrium.time_slice.:.profiles_1d.r_inboard'][:, -1]) / 2
+        ip = ods['equilibrium.time_slice.:.global_quantities.ip']
+        ne_vol_avg = []
+        for k in ods['equilibrium.time_slice']:
+            with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]}):
+                ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
+                volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
+                ne_vol_avg.append(numpy.trapz(ne, x=volume) / volume[-1])
+        ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    return ods_n
 
-    if 'core_profiles' in ods and 'core_sources' in ods and 'equilibrium' in ods:
+
+@add_to__ODS__
+def summary_taue(ods, update=True):
+    """
+    Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    if not ('core_profiles' in ods and 'core_sources' in ods and 'equilibrium' in ods):
+        printe('could not evaluate summary taue because of missing equilibrium or core_profiles or core_sources ODS')
+
+    else:
+        # Global params:
+        r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
+        bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
+
+        # update ODS with stored energy from equilibrium
+        ods_n.physics_equilibrium_stored_energy()
+
         tau_e_scaling = []
         tau_e_MHD = []
-        green_time = []
         for time_index in ods['equilibrium']['time_slice']:
             equilibrium_ods = ods['equilibrium']['time_slice'][time_index]
-            a = (equilibrium_ods['profiles_1d']['r_outboard'][-1] - equilibrium_ods['profiles_1d']['r_inboard'][-1])/2
+            a = (equilibrium_ods['profiles_1d']['r_outboard'][-1] - equilibrium_ods['profiles_1d']['r_inboard'][-1]) / 2
             ip = equilibrium_ods['global_quantities']['ip']
             aspect = r_major / a
             psi = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
@@ -127,16 +162,37 @@ def summary_global_quantities(ods, update=True):
                 # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
                 tau_e_scaling.append(tau_e)
                 tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
-                green_time.append(abs(ne_vol_avg / 1e20 / ip * 1e6 * numpy.pi * a * a))
 
         # assign quantities in the ODS
         ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
         ods_n['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
-        ods_n['summary']['global_quantities']['greenwald_fraction']['value'] = numpy.array(green_time)
         ods_n['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
         ods_n['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
 
     return ods_n
+
+
+@add_to__ODS__
+def summary_global_quantities(ods, update=True):
+    """
+    Calculates global quantities for each time slice and stores them in the summary ods.
+     - Greenwald Fraction
+     - Energy confinement time estimated from the IPB98(y,2) scaling
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    ods_n.physics_summary_greenwald()
+
+    ods_n.physics_summary_taue()
 
 
 @add_to__ODS__
