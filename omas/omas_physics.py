@@ -54,6 +54,7 @@ def equilibrium_stored_energy(ods, update=True):
 
     return ods_n
 
+
 @add_to__ODS__
 def summary_global_quantities(ods, update=True):
     """
@@ -71,11 +72,14 @@ def summary_global_quantities(ods, update=True):
     if not update:
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
+
     # Global params:
     r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
     bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
 
-# Currently only working for TGYRO output other outputs could follow just needs to be checked
+    # update ODS with stored energy from equilibrium
+    ods_n.physics_equilibrium_stored_energy()
+
     if 'core_profiles' in ods and 'core_sources' in ods and 'equilibrium' in ods:
         tau_e_scaling = []
         tau_e_MHD = []
@@ -107,33 +111,33 @@ def summary_global_quantities(ods, update=True):
                         n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
                 isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
-                # update ODS with stored energy from equilibrium
-                ods_n.physics_equilibrium_stored_energy()
                 # Find P_aux from core_sources ods:
                 pow_prof = numpy.zeros(len(ne))
                 sources = ods['core_sources']['source']
                 for source in ods['core_sources']['source']:
-                    if 'index' not in sources[source]['identifier']:
-                        printw("The code that outputs"+sources[source]['identifier']['name']+" the core_sources in this ODS did not fill in the index, see: \
-                               https://gafusion.github.io/omas/schema/schema_core%20sources.html")
-                    if sources[source]['identifier']['index'] == 100:
+                    if 'identifier' not in sources[source] or 'index' not in sources[source]['identifier']:
+                        printw(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
+                    elif sources[source]['identifier']['index'] == 100:
                         if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
                             pow_prof += sources[source]['profiles_1d'][time_index]['total_ion_energy']
                         elif 'electrons' in sources[source]['profiles_1d'][time_index]:
                             pow_prof += sources[source]['profiles_1d'][time_index]['electrons']['energy']
                 p_aux = numpy.trapz(pow_prof, x=volume)
-                print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect,
-                      'isotope',isotope_factor)
-                tau_e_scaling.append(abs(56.2e-3 * (abs(ip)/1e6)**0.93 * abs(bt)**0.15 * (ne_vol_avg/1e19)**0.41 * (p_aux/1e6)**-0.69 * r_major**1.97 * kappa**0.78 * aspect**-0.58 * isotope_factor**0.19))  # [s]
+                tau_e = abs(56.2e-3 * (abs(ip) / 1e6) ** 0.93 * abs(bt) ** 0.15 * (ne_vol_avg / 1e19) ** 0.41 * (p_aux / 1e6) ** -0.69 * r_major ** 1.97 * kappa ** 0.78 * aspect ** -0.58 * isotope_factor ** 0.19)  # [s]
+                # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
+                tau_e_scaling.append(tau_e)
                 tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
-                green_time.append(abs(ne_vol_avg/1e20 / ip * 1e6 * numpy.pi * a * a))
+                green_time.append(abs(ne_vol_avg / 1e20 / ip * 1e6 * numpy.pi * a * a))
+
+        # assign quantities in the ODS
         ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
         ods_n['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
         ods_n['summary']['global_quantities']['greenwald_fraction']['value'] = numpy.array(green_time)
-        ods_n['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources after TGYRO run"
-        ods_n['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated after TGYRO run"
+        ods_n['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
+        ods_n['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
 
     return ods_n
+
 
 @add_to__ODS__
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
