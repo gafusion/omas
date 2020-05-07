@@ -30,7 +30,25 @@ class constants(object):
     e = 1.6021766208e-19
 
 
+def update_ods(f):
+    '''
+    Decorator function make a copy of ODS if keyword argument `update=True`
+    '''
+
+    from functools import wraps
+    @wraps(f)
+    def wrapper(*args, **kw):
+        args, kw = args_as_kw(f, args, kw)
+        if not kw.get('update', True):
+            from omas import ODS
+            kw['ods'] = ODS().copy_attrs_from(kw['ods'])
+        return f(*args, **kw)
+
+    return wrapper
+
+
 @add_to__ODS__
+@update_ods
 def equilibrium_stored_energy(ods, update=True):
     """
     Calculate MHD stored energy from equilibrium pressure and volume
@@ -41,11 +59,6 @@ def equilibrium_stored_energy(ods, update=True):
 
     :return: updated ods
     """
-    ods_n = ods
-    if not update:
-        from omas import ODS
-        ods_n = ODS().copy_attrs_from(ods)
-
     if not ('equilibrium' in ods):
         printe('could not evaluate equilibrium stored energy because of missing equilibrium ODS')
 
@@ -53,12 +66,13 @@ def equilibrium_stored_energy(ods, update=True):
         for time_index in ods['equilibrium']['time_slice']:
             pressure_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['pressure']
             volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
-            ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
+            ods['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
 
-    return ods_n
+    return ods
 
 
 @add_to__ODS__
+@update_ods
 def summary_greenwald(ods, update=True):
     """
     Calculates Greenwald Fraction for each time slice and stores them in the summary ods.
@@ -69,11 +83,6 @@ def summary_greenwald(ods, update=True):
 
     :return: updated ods
     """
-    ods_n = ods
-    if not update:
-        from omas import ODS
-        ods_n = ODS().copy_attrs_from(ods)
-
     if not ('core_profiles' in ods and 'equilibrium' in ods):
         printe('could not evaluate summary greenwald because of missing equilibrium or core_profiles ODS')
 
@@ -86,11 +95,12 @@ def summary_greenwald(ods, update=True):
                 ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
                 volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
                 ne_vol_avg.append(numpy.trapz(ne, x=volume) / volume[-1])
-        ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
-    return ods_n
+        ods['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    return ods
 
 
 @add_to__ODS__
+@update_ods
 def summary_taue(ods, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
@@ -101,11 +111,6 @@ def summary_taue(ods, update=True):
 
     :return: updated ods
     """
-    ods_n = ods
-    if not update:
-        from omas import ODS
-        ods_n = ODS().copy_attrs_from(ods)
-
     if not ('core_profiles' in ods and 'core_sources' in ods and 'equilibrium' in ods):
         printe('could not evaluate summary taue because of missing equilibrium or core_profiles or core_sources ODS')
 
@@ -115,7 +120,7 @@ def summary_taue(ods, update=True):
         bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
 
         # update ODS with stored energy from equilibrium
-        ods_n.physics_equilibrium_stored_energy()
+        ods.physics_equilibrium_stored_energy()
 
         tau_e_scaling = []
         tau_e_MHD = []
@@ -164,18 +169,19 @@ def summary_taue(ods, update=True):
                 tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
 
         # assign quantities in the ODS
-        ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
-        ods_n['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
-        ods_n['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
-        ods_n['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
+        ods['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
+        ods['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
+        ods['summary']['global_quantities']['tau_energy']['source'] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
+        ods['summary']['global_quantities']['tau_energy_98']['source'] = "Combination of equilibrium, core_sources and core_profiles calculated"
 
-    return ods_n
+    return ods
 
 
 @add_to__ODS__
+@update_ods
 def summary_global_quantities(ods, update=True):
     """
-    Calculates global quantities for each time slice and stores them in the summary ods.
+    Calculates global quantities for each time slice and stores them in the summary ods:
      - Greenwald Fraction
      - Energy confinement time estimated from the IPB98(y,2) scaling
 
@@ -185,17 +191,12 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods_n = ods
-    if not update:
-        from omas import ODS
-        ods_n = ODS().copy_attrs_from(ods)
-
     ods_n.physics_summary_greenwald()
-
     ods_n.physics_summary_taue()
 
 
 @add_to__ODS__
+@update_ods
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     '''
     Calls all core_profiles consistency functions including
@@ -213,13 +214,14 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 
     :return: updated ods
     '''
-    ods = core_profiles_pressures(ods, update=update)
-    core_profiles_densities(ods, update=True)
-    core_profiles_zeff(ods, update=True, use_electrons_density=use_electrons_density)
+    ods = core_profiles_pressures(ods)
+    core_profiles_densities(ods)
+    core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
     return ods
 
 
 @add_to__ODS__
+@update_ods
 def core_profiles_pressures(ods, update=True):
     '''
     Calculates individual ions pressures
@@ -245,27 +247,18 @@ def core_profiles_pressures(ods, update=True):
 
     :return: updated ods
     '''
-    ods_p = ods
-    if not update:
-        from omas import ODS
-        ods_p = ODS().copy_attrs_from(ods)
-
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
-        prof1d_p = ods_p['core_profiles']['profiles_1d'][time_index]
-
-        if not update:
-            prof1d_p['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
 
         __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
-        prof1d_p['pressure_thermal'] = copy.deepcopy(__zeros__)
-        prof1d_p['pressure_ion_total'] = copy.deepcopy(__zeros__)
-        prof1d_p['pressure_perpendicular'] = copy.deepcopy(__zeros__)
-        prof1d_p['pressure_parallel'] = copy.deepcopy(__zeros__)
+        prof1d['pressure_thermal'] = copy.deepcopy(__zeros__)
+        prof1d['pressure_ion_total'] = copy.deepcopy(__zeros__)
+        prof1d['pressure_perpendicular'] = copy.deepcopy(__zeros__)
+        prof1d['pressure_parallel'] = copy.deepcopy(__zeros__)
 
         # electrons
-        prof1d_p['electrons']['pressure'] = copy.deepcopy(__zeros__)
+        prof1d['electrons']['pressure'] = copy.deepcopy(__zeros__)
 
         __p__ = None
         if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
@@ -274,30 +267,28 @@ def core_profiles_pressures(ods, update=True):
             __p__ = nominal_values(prof1d['electrons']['pressure_thermal'])
 
         if __p__ is not None:
-            prof1d_p['electrons']['pressure_thermal'] = __p__
-            prof1d_p['electrons']['pressure'] += __p__
-            prof1d_p['pressure_thermal'] += __p__
-            prof1d_p['pressure_perpendicular'] += __p__ / 3.
-            prof1d_p['pressure_parallel'] += __p__ / 3.
+            prof1d['electrons']['pressure_thermal'] = __p__
+            prof1d['electrons']['pressure'] += __p__
+            prof1d['pressure_thermal'] += __p__
+            prof1d['pressure_perpendicular'] += __p__ / 3.
+            prof1d['pressure_parallel'] += __p__ / 3.
 
         if 'pressure_fast_perpendicular' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_fast_perpendicular'])
-            if not update:
-                prof1d_p['electrons']['pressure_fast_perpendicular'] = __p__
-            prof1d_p['electrons']['pressure'] += 2. * __p__
-            prof1d_p['pressure_perpendicular'] += __p__
+            prof1d['electrons']['pressure_fast_perpendicular'] = __p__
+            prof1d['electrons']['pressure'] += 2. * __p__
+            prof1d['pressure_perpendicular'] += __p__
 
         if 'pressure_fast_parallel' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_fast_parallel'])
-            if not update:
-                prof1d_p['electrons']['pressure_fast_parallel'] = __p__
-            prof1d_p['electrons']['pressure'] += __p__
-            prof1d_p['pressure_parallel'] += __p__
+            prof1d['electrons']['pressure_fast_parallel'] = __p__
+            prof1d['electrons']['pressure'] += __p__
+            prof1d['pressure_parallel'] += __p__
 
         # ions
         for k in range(len(prof1d['ion'])):
 
-            prof1d_p['ion'][k]['pressure'] = copy.deepcopy(__zeros__)
+            prof1d['ion'][k]['pressure'] = copy.deepcopy(__zeros__)
 
             __p__ = None
             if 'density_thermal' in prof1d['ion'][k] and 'temperature' in prof1d['ion'][k]:
@@ -306,37 +297,36 @@ def core_profiles_pressures(ods, update=True):
                 __p__ = nominal_values(prof1d['ion'][k]['pressure_thermal'])
 
             if __p__ is not None:
-                prof1d_p['ion'][k]['pressure_thermal'] = __p__
-                prof1d_p['ion'][k]['pressure'] += __p__
-                prof1d_p['pressure_thermal'] += __p__
-                prof1d_p['pressure_perpendicular'] += __p__ / 3.
-                prof1d_p['pressure_parallel'] += __p__ / 3.
-                prof1d_p['pressure_ion_total'] += __p__
+                prof1d['ion'][k]['pressure_thermal'] = __p__
+                prof1d['ion'][k]['pressure'] += __p__
+                prof1d['pressure_thermal'] += __p__
+                prof1d['pressure_perpendicular'] += __p__ / 3.
+                prof1d['pressure_parallel'] += __p__ / 3.
+                prof1d['pressure_ion_total'] += __p__
 
             if 'pressure_fast_perpendicular' in prof1d['ion'][k]:
                 __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_perpendicular'])
-                if not update:
-                    prof1d_p['ion'][k]['pressure_fast_perpendicular'] = __p__
-                prof1d_p['ion'][k]['pressure'] += 2. * __p__
-                prof1d_p['pressure_perpendicular'] += __p__
+                prof1d['ion'][k]['pressure_fast_perpendicular'] = __p__
+                prof1d['ion'][k]['pressure'] += 2. * __p__
+                prof1d['pressure_perpendicular'] += __p__
 
             if 'pressure_fast_parallel' in prof1d['ion'][k]:
                 __p__ = nominal_values(prof1d['ion'][k]['pressure_fast_parallel'])
-                if not update:
-                    prof1d_p['ion'][k]['pressure_fast_parallel'] = __p__
-                prof1d_p['ion'][k]['pressure'] += __p__
-                prof1d_p['pressure_parallel'] += __p__
+                prof1d['ion'][k]['pressure_fast_parallel'] = __p__
+                prof1d['ion'][k]['pressure'] += __p__
+                prof1d['pressure_parallel'] += __p__
 
         # extra pressure information that is not within IMAS structure is set only if consistency_check is not True
-        if ods_p.consistency_check is not True:
-            prof1d_p['pressure'] = prof1d_p['pressure_perpendicular'] * 2 + prof1d_p['pressure_parallel']
-            prof1d_p['pressure_electron_total'] = prof1d_p['pressure_thermal'] - prof1d_p['pressure_ion_total']
-            prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
+        if ods.consistency_check is not True:
+            prof1d['pressure'] = prof1d['pressure_perpendicular'] * 2 + prof1d['pressure_parallel']
+            prof1d['pressure_electron_total'] = prof1d['pressure_thermal'] - prof1d['pressure_ion_total']
+            prof1d['pressure_fast'] = prof1d['pressure'] - prof1d['pressure_thermal']
 
-    return ods_p
+    return ods
 
 
 @add_to__ODS__
+@update_ods
 def core_profiles_densities(ods, update=True):
     '''
     Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent
@@ -347,11 +337,6 @@ def core_profiles_densities(ods, update=True):
 
     :return: updated ods
     '''
-
-    ods_n = ods
-    if not update:
-        from omas import ODS
-        ods_n = ODS().copy_attrs_from(ods)
 
     def consistent_density(loc):
         if 'density' in loc:
@@ -377,25 +362,22 @@ def core_profiles_densities(ods, update=True):
                 loc[density] = copy.deepcopy(__zeros__)
 
     for time_index in ods['core_profiles']['profiles_1d']:
-        prof1d = ods['core_profiles']['profiles_1d'][time_index]
-        prof1d_n = ods_n['core_profiles']['profiles_1d'][time_index]
-
-        if not update:
-            prof1d_n['grid']['rho_tor_norm'] = prof1d['grid']['rho_tor_norm']
+        prof1d = ods_['core_profiles']['profiles_1d'][time_index]
 
         __zeros__ = 0. * prof1d['grid']['rho_tor_norm']
 
         # electrons
-        consistent_density(prof1d_n['electrons'])
+        consistent_density(prof1d['electrons'])
 
         # ions
         for k in range(len(prof1d['ion'])):
-            consistent_density(prof1d_n['ion'][k])
+            consistent_density(prof1d['ion'][k])
 
-    return ods_n
+    return ods
 
 
 @add_to__ODS__
+@update_ods
 def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     '''
     calculates effective charge
@@ -411,7 +393,7 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
     :return: updated ods
     '''
 
-    ods_z = core_profiles_densities(ods, update=update)
+    ods_z = core_profiles_densities(ods)
 
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -433,15 +415,17 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
 
 
 @add_to__ODS__
-def current_from_eq(ods, time_index):
+@update_ods
+def current_from_eq(ods, time_index, update=True):
     """
     This function sets the currents in ods['core_profiles']['profiles_1d'][time_index]
     using ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor']
 
-    :param ods: ODS to update in-place
+    :param ods: input ods
 
     :param time_index: ODS time index to updated
 
+    :param update: operate in place
     """
 
     rho = ods['equilibrium.time_slice'][time_index]['profiles_1d.rho_tor_norm']
@@ -475,10 +459,11 @@ def current_from_eq(ods, time_index):
 
 
 @add_to__ODS__
+@update_ods
 def core_profiles_currents(ods, time_index, rho_tor_norm,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
-                           j_total='default', warn=True):
+                           j_total='default', warn=True, update=True):
     """
     This function sets currents in ods['core_profiles']['profiles_1d'][time_index]
 
@@ -487,7 +472,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     Updates integrated currents in ods['core_profiles']['global_quantities']
     (N.B.: `equilibrium` IDS is required for evaluating j_tor and integrated currents)
 
-    :param ods: ODS to update in-place
+    :param ods: input ods
 
     :param time_index: ODS time index to updated
 
@@ -512,6 +497,8 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     :param j_total: Total <J.B>/B0
         Consistency requires j_total = j_ohmic + j_non_inductive either as
         explicitly provided or as computed from other components.
+
+    :param update: operate in place
     """
 
     from scipy.integrate import cumtrapz
@@ -680,13 +667,16 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
 
 
 @add_to__ODS__
-def wall_add(ods, machine=None):
+@update_ods
+def wall_add(ods, machine=None, update=True):
     '''
     Add wall information to the ODS
 
-    :param ods: ODS to update in-place
+    :param ods: input ods
 
     :param machine: machine of which to load the wall (if None it is taken from ods['dataset_description.data_entry.machine'])
+
+    :param update: operate in place
     '''
     if machine is None:
         if 'machine' in ods['dataset_description.data_entry']:
@@ -724,11 +714,13 @@ def wall_add(ods, machine=None):
 
 
 @add_to__ODS__
-def equilibrium_consistent(ods):
+def equilibrium_consistent(ods, update=True):
     '''
     Calculate missing derived quantities for equilibrium IDS
 
-    :param ods: ODS to update in-place
+    :param ods: input ods
+
+    :param update: operate in place
 
     :return: updated ods
     '''
@@ -760,11 +752,11 @@ def equilibrium_consistent(ods):
 
 
 @add_to__ODS__
-def equilibrium_transpose_RZ(ods, flip_dims=False):
+def equilibrium_transpose_RZ(ods, flip_dims=False, update=True):
     '''
     Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.
 
-    :param ods: ODS to update in-place
+    :param ods: input ods
 
     :param flip_dims: whether to switch the equilibrium.time_slice.:.profiles_2d.:.grid.dim1 and dim1
 

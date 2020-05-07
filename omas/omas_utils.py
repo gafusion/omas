@@ -399,6 +399,80 @@ def underline_last(text, offset=0):
     return text + '\n' + underline
 
 
+def function_arguments(f, discard=None, asString=False):
+    """
+    Returns the arguments that a function takes
+
+    :param f: function to inspect
+
+    :param discard: list of function arguments to discard
+
+    :param asString: concatenate arguments to a string
+
+    :return: tuple of four elements
+
+    * list of compulsory function arguments
+
+    * dictionary of function arguments that have defaults
+
+    * True/False if the function allows variable arguments
+
+    * True/False if the function allows keywords
+    """
+    import inspect
+    the_argspec = inspect.getfullargspec(f)
+    the_keywords = the_argspec.varkw
+
+    args = []
+    kws = {}
+    string = ''
+    for k, arg in enumerate(the_argspec.args):
+        if (discard is not None) and (arg in tolist(discard)):
+            continue
+        d = ''
+        if the_argspec.defaults is not None:
+            if (-len(the_argspec.args) + k) >= -len(the_argspec.defaults):
+                d = the_argspec.defaults[-len(the_argspec.args) + k]
+                kws[arg] = d
+                string += arg + '=' + repr(d) + ',\n'
+            else:
+                args.append(arg)
+                string += arg + ',\n'
+        else:
+            args.append(arg)
+            string += arg + ',\n'
+        if the_argspec.varargs:
+            string += '*[],\n'
+        if the_keywords:
+            string += '**{},\n'
+        string = string.strip()
+    if asString:
+        return string
+    else:
+        return args, kws, the_argspec.varargs is not None, the_keywords is not None
+
+
+def args_as_kw(f, args, kw):
+    '''
+    Move function arguments to kw arguments
+
+    :param f: function
+
+    :param args: positional arguments
+
+    :param kw: keywords arguments
+
+    :return: tuple with positional arguments moved to keyword arguments
+    '''
+    a, k, astar, kstar = function_arguments(f)
+    n = 0
+    for name, value in zip(a, args):
+        if name not in kw:
+            kw[name] = value
+        n += 1
+    return args[n:], kw
+
+
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
