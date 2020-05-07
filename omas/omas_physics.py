@@ -53,9 +53,8 @@ def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise']
                     raise RuntimeError(txt)
 
             # handle update in place
-            if not kw.get('update', True):
-                from omas import ODS
-                kw['ods'] = ODS().copy_attrs_from(kw['ods'])
+            if kw.get('update', True):
+                kw['ods'] = copy.deepcopy(kw['ods'])
             return f(*args, **kw)
 
         return wrapper
