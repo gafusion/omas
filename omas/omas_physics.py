@@ -137,10 +137,6 @@ def summary_taue(ods, update=True):
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
-    # Global params:
-    r_major = ods['equilibrium']['vacuum_toroidal_field']['r0']
-    bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][0]
-
     # update ODS with stored energy from equilibrium
     ods.physics_equilibrium_stored_energy()
 
@@ -149,6 +145,8 @@ def summary_taue(ods, update=True):
     for time_index in ods['equilibrium']['time_slice']:
         equilibrium_ods = ods['equilibrium']['time_slice'][time_index]
         a = (equilibrium_ods['profiles_1d']['r_outboard'][-1] - equilibrium_ods['profiles_1d']['r_inboard'][-1]) / 2
+        r_major = (equilibrium_ods['profiles_1d']['r_outboard'][-1] + equilibrium_ods['profiles_1d']['r_inboard'][-1]) / 2
+        bt = ods['equilibrium']['vacuum_toroidal_field']['b0'][time_index] * ods['equilibrium']['vacuum_toroidal_field']['r0'] / r_major
         ip = equilibrium_ods['global_quantities']['ip']
         aspect = r_major / a
         psi = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
