@@ -44,7 +44,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     for k in k1.intersection(k2):
         if ods1[k] is None and ods2[k] is None:
             pass
-        elif isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
+        elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
             if ods1[k] != ods2[k]:
                 differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
         elif not ignore_type and type(ods1[k]) != type(ods2[k]):
@@ -74,7 +74,7 @@ def printd(*objects, **kw):
     environmental variable OMAS_DEBUG_TOPIC sets the topic to be printed
     """
     topic = kw.pop('topic', '')
-    if isinstance(topic, basestring):
+    if isinstance(topic, str):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
@@ -119,7 +119,7 @@ def is_uncertain(var):
     def _uncertain_check(x):
         return isinstance(x, uncertainties.core.AffineScalarFunc)
 
-    if isinstance(var, basestring):
+    if isinstance(var, str):
         return False
     elif numpy.iterable(var):
         tmp = numpy.array(var).flat
@@ -626,7 +626,7 @@ def p2l(key):
     if isinstance(key, (int, numpy.integer)):
         return [int(key)]
 
-    if isinstance(key, basestring) and not ('.' in key or '[' in key):
+    if isinstance(key, str) and not ('.' in key or '[' in key):
         if len(key):
             return [key]
         else:
@@ -818,7 +818,7 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
 
     if not structures:
         structures = sorted(list(dict_structures(imas_version).keys()))
-    elif isinstance(structures, basestring):
+    elif isinstance(structures, str):
         structures = [structures]
 
     # caching
@@ -890,7 +890,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
                 me[kid] = dict_cls()
                 me[kid].update(tmp)
             recursive_interpreter(me[kid], interpret_method=interpret_method, dict_cls=dict_cls)
-            if isinstance(kid, basestring) and kid.startswith('__integer_'):
+            if isinstance(kid, str) and kid.startswith('__integer_'):
                 me[int(re.sub('__integer_([0-9]+)__', r'\1', kid))] = me[kid]
                 del me[kid]
         else:
@@ -898,7 +898,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
                 me[kid] = interpret_method(me[kid])
             except (ValueError, SyntaxError) as _excp:
                 pass
-            if isinstance(me[kid], basestring) and ' ' in me[kid]:
+            if isinstance(me[kid], str) and ' ' in me[kid]:
                 try:
                     values = []
                     for item in re.split(r'[ |\t]+', me[kid].strip()):

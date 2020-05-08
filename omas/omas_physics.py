@@ -550,7 +550,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     data = {}
     with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
         for j in ['j_actuator', 'j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total']:
-            if isinstance(eval(j), basestring) and eval(j) == 'default':
+            if isinstance(eval(j), str) and eval(j) == 'default':
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
@@ -1322,7 +1322,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
         if structure_name not in cocos_structures:
             cocos_structures.append(structure_name)
 
-    if isinstance(structures, basestring):
+    if isinstance(structures, str):
         structures = [structures]
     structures += cocos_structures
     structures = numpy.unique(structures)

@@ -227,7 +227,7 @@ def gas_filter(label, which_gas):
         Flag indicating whether or not a valve with this label should be shown
     """
     include = False
-    if isinstance(which_gas, basestring):
+    if isinstance(which_gas, str):
         if which_gas == 'all':
             include = True
     elif isinstance(which_gas, list):

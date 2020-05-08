@@ -27,7 +27,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     '''
     import h5py
 
-    if isinstance(filename, basestring):
+    if isinstance(filename, str):
         with h5py.File(filename, 'w') as g:
             dict2hdf5(g, dictin, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
         return

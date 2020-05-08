@@ -175,7 +175,7 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
 
     if not include_pressure:
         for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
-            if p2l(item)[0]=='core_profiles' and p2l(item)[-1].startswith('pres') and item in ods:
+            if p2l(item)[0] == 'core_profiles' and p2l(item)[-1].startswith('pres') and item in ods:
                 del ods[item]
 
     ods['core_profiles.profiles_1d'][time_index]['time'] = float(time_index)

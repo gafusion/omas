@@ -16,7 +16,7 @@ __version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 've
 if sys.version_info < (3, 5):
     raise Exception('''
 OMAS v%s only runs with Python 3.6+ and you are running Python %s
-'''%(__version__, '.'.join(map(str,sys.version_info[:2]))))
+''' % (__version__, '.'.join(map(str, sys.version_info[:2]))))
 
 import glob
 import json
@@ -54,32 +54,8 @@ from uncertainties import ufloat
 # xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
 import xarray
 
-# Python3/2 import differences
 from collections.abc import MutableMapping
-
-basestring = str
-unicode = str
 import pickle
-
-_orig_pickle_loads = pickle.loads
-
-
-def _pickle_loads_python2compatible(*args, **kw):
-    kw.setdefault('encoding', 'latin1')
-    return _orig_pickle_loads(*args, **kw)
-
-
-pickle.loads = _pickle_loads_python2compatible
-
-_orig_pickle_load = pickle.load
-
-
-def _pickle_load_python2compatible(*args, **kw):
-    kw.setdefault('encoding', 'latin1')
-    return _orig_pickle_load(*args, **kw)
-
-
-pickle.load = _pickle_load_python2compatible
 
 
 def b2s(bytes):
@@ -89,7 +65,7 @@ def b2s(bytes):
 # --------------------------------------------
 # configuration of directories and IMAS infos
 # --------------------------------------------
-class IMAS_json_dir(unicode):
+class IMAS_json_dir(str):
     '''
     directory where the JSON data structures for the different versions of IMAS are stored
     '''
@@ -157,7 +133,7 @@ omas_rcparams.update({
     'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
     'default_imas_version': _default_imas_version,
     'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net',
-    'pickle_protocol': 2  # pickle.HIGHEST_PROTOCOL (`2` is used to ensure Python 3-->2 compatibility)
+    'pickle_protocol': 4
 })
 
 
