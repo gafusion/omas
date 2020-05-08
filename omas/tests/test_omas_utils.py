@@ -69,7 +69,6 @@ class TestOmasUtils(unittest.TestCase):
 
     def test_printe(self):
         printe('printe_test,', end='')
-        printw('printw_test', end='')
         return
 
     def test_is_numeric(self):

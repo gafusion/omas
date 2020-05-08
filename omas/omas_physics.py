@@ -178,7 +178,7 @@ def summary_taue(ods, update=True):
             sources = ods['core_sources']['source']
             for source in ods['core_sources']['source']:
                 if 'identifier' not in sources[source] or 'index' not in sources[source]['identifier']:
-                    printw(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
+                    printe(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
                 elif sources[source]['identifier']['index'] == 100:
                     if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
                         pow_prof += sources[source]['profiles_1d'][time_index]['total_ion_energy']

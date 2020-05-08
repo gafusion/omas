@@ -104,10 +104,6 @@ def printe(*objects, **kw):
     print(*objects, **kw)
 
 
-# printw works like printe (this is done to allow mindless copy of some OMFIT functions in OMAS)
-printw = printe
-
-
 def is_uncertain(var):
     '''
     :param var: Variable or array to test
