@@ -55,45 +55,35 @@ from uncertainties import ufloat
 import xarray
 
 # Python3/2 import differences
-if sys.version_info < (3, 0):
-    from collections import MutableMapping
+from collections.abc import MutableMapping
 
-    import cPickle as pickle
+basestring = str
+unicode = str
+import pickle
 
-
-    def b2s(string):
-        return string
-
-else:
-    from collections.abc import MutableMapping
-
-    basestring = str
-    unicode = str
-    import pickle
-
-    _orig_pickle_loads = pickle.loads
+_orig_pickle_loads = pickle.loads
 
 
-    def _pickle_loads_python2compatible(*args, **kw):
-        kw.setdefault('encoding', 'latin1')
-        return _orig_pickle_loads(*args, **kw)
+def _pickle_loads_python2compatible(*args, **kw):
+    kw.setdefault('encoding', 'latin1')
+    return _orig_pickle_loads(*args, **kw)
 
 
-    pickle.loads = _pickle_loads_python2compatible
+pickle.loads = _pickle_loads_python2compatible
 
-    _orig_pickle_load = pickle.load
-
-
-    def _pickle_load_python2compatible(*args, **kw):
-        kw.setdefault('encoding', 'latin1')
-        return _orig_pickle_load(*args, **kw)
+_orig_pickle_load = pickle.load
 
 
-    pickle.load = _pickle_load_python2compatible
+def _pickle_load_python2compatible(*args, **kw):
+    kw.setdefault('encoding', 'latin1')
+    return _orig_pickle_load(*args, **kw)
 
 
-    def b2s(bytes):
-        return bytes.decode("utf-8")
+pickle.load = _pickle_load_python2compatible
+
+
+def b2s(bytes):
+    return bytes.decode("utf-8")
 
 
 # --------------------------------------------

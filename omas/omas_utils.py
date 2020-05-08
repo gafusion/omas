@@ -180,7 +180,7 @@ def json_dumper(obj, objects_encode=True):
     if objects_encode is False:
         if isinstance(obj, numpy.ndarray):
             return obj.tolist()
-        elif sys.version_info >= (3, 0) and isinstance(obj, (range, map)):
+        elif isinstance(obj, (range, map)):
             return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()
@@ -212,7 +212,7 @@ def json_dumper(obj, objects_encode=True):
                     return dict(__ndarray_tolist__=obj.tolist(),
                                 dtype=str(obj.dtype),
                                 shape=obj.shape)
-        elif sys.version_info >= (3, 0) and isinstance(obj, range):
+        elif isinstance(obj, range):
             return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()

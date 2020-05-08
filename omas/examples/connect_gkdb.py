@@ -38,8 +38,6 @@ else:
 
 # raise error if trying to run GKDB under Python2x
 try:
-    if sys.version_info < (3, 0):
-        raise ImportError('gkdb library is only Python 3 compatible')
     import gkdb.core.model
 except ImportError as _excp:
     print('Could not import gkdb library: %s' % repr(_excp))

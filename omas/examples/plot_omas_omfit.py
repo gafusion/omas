@@ -4,7 +4,6 @@
 OMFIT classes and plotting
 ==========================
 How to generate ODSs from OMFITclasses, and use OMAS plot methods
-This example only works with python 2.7 since OMFIT is only Python 2.7 compatible
 """
 
 from __future__ import print_function, division, unicode_literals

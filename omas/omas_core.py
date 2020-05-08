@@ -1067,7 +1067,6 @@ class ODS(MutableMapping):
 
     def keys(self):
         if isinstance(self.omas_data, dict):
-            # map keys with str to get strings and not unicode when working with Python 2.7
             return list(map(str, self.omas_data.keys()))
         elif isinstance(self.omas_data, list):
             return list(range(len(self.omas_data)))

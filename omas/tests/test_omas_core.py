@@ -60,7 +60,7 @@ class TestOmasCore(unittest.TestCase):
         assert (ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse'])
         assert (ods.get('dataset_description.bad', None) is None)
 
-        # check that keys is an iterable (so that Python 2/3 work the same way)
+        # check that keys is an iterable
         keys = ods.keys()
         keys[0]
 

@@ -8,11 +8,7 @@ from __future__ import print_function, division, unicode_literals
 from .omas_core import ODS
 import numpy
 import sys
-
-if sys.version_info < (3, 0):
-    from collections import Sequence
-else:
-    from collections.abc import Sequence
+from collections.abc import Sequence
 
 try:
     _pyhdc_import_excp = None
