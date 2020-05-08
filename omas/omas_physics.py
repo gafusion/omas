@@ -24,6 +24,7 @@ def add_to__ALL__(f):
     __all__.append(f.__name__)
     return f
 
+
 def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise'][0]):
     '''
     Decorator function that:
@@ -57,6 +58,7 @@ def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise']
         return wrapper
 
     return _req
+
 
 # constants class that mimics scipy.constants
 class constants(object):

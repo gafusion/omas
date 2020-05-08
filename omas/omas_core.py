@@ -6,8 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-
-__version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
+from .omas_utils import __version__
 
 __all__ = [
     'ODS', 'ODX',

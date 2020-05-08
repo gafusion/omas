@@ -10,6 +10,14 @@ from __future__ import print_function, division, unicode_literals
 # --------------------------------------------
 import os
 import sys
+
+__version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
+
+if sys.version_info < (3, 5):
+    raise Exception('''
+OMAS v%s only runs with Python 3.6+ and you are running Python %s
+'''%(__version__, '.'.join(map(str,sys.version_info[:2]))))
+
 import glob
 import json
 import copy
