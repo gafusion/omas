@@ -652,7 +652,6 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
-                raise
                 text = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if self.consistency_check == 'warn':
                     printe(text)
