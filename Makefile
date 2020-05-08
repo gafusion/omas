@@ -38,6 +38,9 @@ tests_examples:
 tests_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
+tests_examples:
+	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
+
 requirements:
 	rm -f requirements.txt
 	python setup.py --name
