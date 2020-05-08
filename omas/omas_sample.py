@@ -23,16 +23,23 @@ def add_to_ODS(f):
     return f
 
 
-def ods_sample():
+def ods_sample(ntimes=1):
     '''
-    returns an ODS populated with all of the samples
+    Returns an ODS populated with all of the samples
+
+    :param ntimes: number of time slices to generate
 
     :return: sample ods
     '''
     ods = ODS()
     for ds in __all__:
         printd('Adding %s sample data to ods' % ds, topic='sample')
-        ods = eval(ds)(ods)
+        args, kw, _, _ = function_arguments(eval(ds))
+        if 'time_index' in kw:
+            for k in range(ntimes):
+                ods = eval(ds)(ods, time_index=k)
+        else:
+            ods = eval(ds)(ods)
     return ods
 
 
