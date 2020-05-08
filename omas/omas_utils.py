@@ -6,6 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_setup import *
+from .omas_setup import __version__
 import sys
 
 
@@ -43,7 +44,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     for k in k1.intersection(k2):
         if ods1[k] is None and ods2[k] is None:
             pass
-        elif isinstance(ods1[k], basestring) and isinstance(ods2[k], basestring):
+        elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
             if ods1[k] != ods2[k]:
                 differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
         elif not ignore_type and type(ods1[k]) != type(ods2[k]):
@@ -73,7 +74,7 @@ def printd(*objects, **kw):
     environmental variable OMAS_DEBUG_TOPIC sets the topic to be printed
     """
     topic = kw.pop('topic', '')
-    if isinstance(topic, basestring):
+    if isinstance(topic, str):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
     objects = ['DEBUG:'] + list(objects)
@@ -103,10 +104,6 @@ def printe(*objects, **kw):
     print(*objects, **kw)
 
 
-# printw works like printe (this is done to allow mindless copy of some OMFIT functions in OMAS)
-printw = printe
-
-
 def is_uncertain(var):
     '''
     :param var: Variable or array to test
@@ -118,7 +115,7 @@ def is_uncertain(var):
     def _uncertain_check(x):
         return isinstance(x, uncertainties.core.AffineScalarFunc)
 
-    if isinstance(var, basestring):
+    if isinstance(var, str):
         return False
     elif numpy.iterable(var):
         tmp = numpy.array(var).flat
@@ -179,7 +176,7 @@ def json_dumper(obj, objects_encode=True):
     if objects_encode is False:
         if isinstance(obj, numpy.ndarray):
             return obj.tolist()
-        elif sys.version_info >= (3, 0) and isinstance(obj, (range, map)):
+        elif isinstance(obj, (range, map)):
             return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()
@@ -211,7 +208,7 @@ def json_dumper(obj, objects_encode=True):
                     return dict(__ndarray_tolist__=obj.tolist(),
                                 dtype=str(obj.dtype),
                                 shape=obj.shape)
-        elif sys.version_info >= (3, 0) and isinstance(obj, range):
+        elif isinstance(obj, range):
             return list(obj)
         elif isinstance(obj, numpy.generic):
             return obj.item()
@@ -399,6 +396,80 @@ def underline_last(text, offset=0):
     return text + '\n' + underline
 
 
+def function_arguments(f, discard=None, asString=False):
+    """
+    Returns the arguments that a function takes
+
+    :param f: function to inspect
+
+    :param discard: list of function arguments to discard
+
+    :param asString: concatenate arguments to a string
+
+    :return: tuple of four elements
+
+    * list of compulsory function arguments
+
+    * dictionary of function arguments that have defaults
+
+    * True/False if the function allows variable arguments
+
+    * True/False if the function allows keywords
+    """
+    import inspect
+    the_argspec = inspect.getfullargspec(f)
+    the_keywords = the_argspec.varkw
+
+    args = []
+    kws = {}
+    string = ''
+    for k, arg in enumerate(the_argspec.args):
+        if (discard is not None) and (arg in tolist(discard)):
+            continue
+        d = ''
+        if the_argspec.defaults is not None:
+            if (-len(the_argspec.args) + k) >= -len(the_argspec.defaults):
+                d = the_argspec.defaults[-len(the_argspec.args) + k]
+                kws[arg] = d
+                string += arg + '=' + repr(d) + ',\n'
+            else:
+                args.append(arg)
+                string += arg + ',\n'
+        else:
+            args.append(arg)
+            string += arg + ',\n'
+        if the_argspec.varargs:
+            string += '*[],\n'
+        if the_keywords:
+            string += '**{},\n'
+        string = string.strip()
+    if asString:
+        return string
+    else:
+        return args, kws, the_argspec.varargs is not None, the_keywords is not None
+
+
+def args_as_kw(f, args, kw):
+    '''
+    Move function arguments to kw arguments
+
+    :param f: function
+
+    :param args: positional arguments
+
+    :param kw: keywords arguments
+
+    :return: tuple with positional arguments moved to keyword arguments
+    '''
+    a, k, astar, kstar = function_arguments(f)
+    n = 0
+    for name, value in zip(a, args):
+        if name not in kw:
+            kw[name] = value
+        n += 1
+    return args[n:], kw
+
+
 # ----------------------------------------------
 # handling of OMAS json structures
 # ----------------------------------------------
@@ -551,7 +622,7 @@ def p2l(key):
     if isinstance(key, (int, numpy.integer)):
         return [int(key)]
 
-    if isinstance(key, basestring) and not ('.' in key or '[' in key):
+    if isinstance(key, str) and not ('.' in key or '[' in key):
         if len(key):
             return [key]
         else:
@@ -743,7 +814,7 @@ def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
 
     if not structures:
         structures = sorted(list(dict_structures(imas_version).keys()))
-    elif isinstance(structures, basestring):
+    elif isinstance(structures, str):
         structures = [structures]
 
     # caching
@@ -815,7 +886,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
                 me[kid] = dict_cls()
                 me[kid].update(tmp)
             recursive_interpreter(me[kid], interpret_method=interpret_method, dict_cls=dict_cls)
-            if isinstance(kid, basestring) and kid.startswith('__integer_'):
+            if isinstance(kid, str) and kid.startswith('__integer_'):
                 me[int(re.sub('__integer_([0-9]+)__', r'\1', kid))] = me[kid]
                 del me[kid]
         else:
@@ -823,7 +894,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
                 me[kid] = interpret_method(me[kid])
             except (ValueError, SyntaxError) as _excp:
                 pass
-            if isinstance(me[kid], basestring) and ' ' in me[kid]:
+            if isinstance(me[kid], str) and ' ' in me[kid]:
                 try:
                     values = []
                     for item in re.split(r'[ |\t]+', me[kid].strip()):

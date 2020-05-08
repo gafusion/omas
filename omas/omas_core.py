@@ -6,8 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-
-__version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
+from .omas_utils import __version__
 
 __all__ = [
     'ODS', 'ODX',
@@ -59,7 +58,7 @@ def force_imas_type(value):
         value = float(value)
     elif isinstance(value, (int, numpy.integer)):
         value = int(value)
-    if isinstance(value, basestring):
+    if isinstance(value, str):
         pass
     elif isinstance(value, bytes):
         value = value.decode('utf-8', errors='ignore')
@@ -105,7 +104,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         else:
             raise ValueError(text)
     # check type
-    if not (isinstance(value, (int, float, unicode, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
+    if not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
         text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
         if consistency_check == 'warn':
             printe(text)
@@ -585,14 +584,14 @@ class ODS(MutableMapping):
                 key[0] = len(self.omas_data)
 
         # handle dynamic path creation for .code.parameters leaf
-        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, str):
             pass_on_value = value
             value = CodeParameters()
             value.update(pass_on_value)
         # if the user has entered path rather than a single key
         elif len(key) > 1:
             pass_on_value = value
-            if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, basestring):
+            if key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, str):
                 value = CodeParameters()
                 value[key[1:]] = pass_on_value
             else:
@@ -655,7 +654,7 @@ class ODS(MutableMapping):
                     self.omas_data = {}
         elif isinstance(key[0], int) and not isinstance(self.omas_data, list):
             raise TypeError('Cannot convert from dict to list once ODS has data')
-        elif isinstance(key[0], basestring) and not isinstance(self.omas_data, dict):
+        elif isinstance(key[0], str) and not isinstance(self.omas_data, dict):
             raise TypeError('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
@@ -747,7 +746,7 @@ class ODS(MutableMapping):
         # assign values to this ODS
         if key[0] not in self.keys() or len(key) == 1:
             # structure
-            if isinstance(key[0], basestring):
+            if isinstance(key[0], str):
                 self.omas_data[key[0]] = value
             # arrays of structures
             else:
@@ -834,7 +833,7 @@ class ODS(MutableMapping):
         '''
 
         # handle pattern match
-        if isinstance(key, basestring) and key.startswith('@'):
+        if isinstance(key, str) and key.startswith('@'):
             key = self.search_paths(key, 1, '@')[0]
 
         # handle individual keys as well as full paths
@@ -1068,7 +1067,6 @@ class ODS(MutableMapping):
 
     def keys(self):
         if isinstance(self.omas_data, dict):
-            # map keys with str to get strings and not unicode when working with Python 2.7
             return list(map(str, self.omas_data.keys()))
         elif isinstance(self.omas_data, list):
             return list(range(len(self.omas_data)))
@@ -1278,7 +1276,7 @@ class ODS(MutableMapping):
 
         :return: list of ODS locations matching search_pattern pattern
         '''
-        if not isinstance(search_pattern, basestring):
+        if not isinstance(search_pattern, str):
             return [search_pattern]
 
         elif regular_expression_startswith:
@@ -1604,9 +1602,9 @@ class ODS(MutableMapping):
                 self[item].codeparams2dict()
             return
         try:
-            if ('code.parameters' in self and isinstance(self['code.parameters'], basestring)):
+            if ('code.parameters' in self and isinstance(self['code.parameters'], str)):
                 self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
-            elif ('parameters' in self and isinstance(self['parameters'], basestring)):
+            elif ('parameters' in self and isinstance(self['parameters'], str)):
                 self['parameters'] = CodeParameters().from_string(self['parameters'])
         except xml.parsers.expat.ExpatError:
             printe('%s.code.parameters is not formatted as XML' % self.location)
@@ -1620,7 +1618,7 @@ class CodeParameters(dict):
     """
 
     def __init__(self, string=None):
-        if isinstance(string, basestring):
+        if isinstance(string, str):
             if os.path.exists(string):
                 self.from_file(string)
             else:

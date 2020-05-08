@@ -150,7 +150,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         if skip_ggd and kid in ['ggd', 'grids_ggd']:
             continue
 
-        if isinstance(kid, basestring):
+        if isinstance(kid, str):
             if skip_uncertainties and kid.endswith('_error_upper'):
                 continue
             if kid.endswith('_error_lower') or kid.endswith('_error_index'):
@@ -234,7 +234,7 @@ def offset(path, off):
 
     :return: path with applied offset
     '''
-    return [p if isinstance(p, basestring) else p + off for p in path]
+    return [p if isinstance(p, str) else p + off for p in path]
 
 
 def uda_get(client, path, pulse, run):

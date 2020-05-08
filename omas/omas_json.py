@@ -36,7 +36,7 @@ def save_omas_json(ods, filename, objects_encode=None, **kw):
 
     json_string = json.dumps(ods, default=lambda x: json_dumper(x, objects_encode), **kw)
 
-    if isinstance(filename, basestring):
+    if isinstance(filename, str):
         with open(filename, 'w') as f:
             f.write(json_string)
     else:
@@ -66,7 +66,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         tmp._consistency_check = False
         return tmp
 
-    if isinstance(filename, basestring):
+    if isinstance(filename, str):
         with open(filename, 'r') as f:
             json_string = f.read()
     else:

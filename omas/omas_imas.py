@@ -137,7 +137,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     out = m
     for kp, p in enumerate(path):
         location = l2i([ds] + path[:kp + 1])
-        if isinstance(p, basestring):
+        if isinstance(p, str):
             if hasattr(out, p):
                 if kp < (len(path) - 1):
                     debug_path += '.' + p
@@ -193,7 +193,7 @@ def imas_empty(value):
     elif (isinstance(value, float) and value == -9E40) or (isinstance(value, int) and value == -999999999):
         value = None
     # empty strings
-    elif isinstance(value, basestring) and not len(value):
+    elif isinstance(value, str) and not len(value):
         value = None
     return value
 
@@ -232,7 +232,7 @@ def imas_get(ids, path, skip_missing_nodes=False):
     # traverse the IDS to get the data
     out = m
     for kp, p in enumerate(path):
-        if isinstance(p, basestring):
+        if isinstance(p, str):
             if hasattr(out, p):
                 debug_path += '.%s' % p
                 out = getattr(out, p)
@@ -334,11 +334,11 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
-        ods['dataset_description.data_entry.user'] = unicode(user)
-        ods['dataset_description.data_entry.machine'] = unicode(machine)
+        ods['dataset_description.data_entry.user'] = str(user)
+        ods['dataset_description.data_entry.machine'] = str(machine)
         ods['dataset_description.data_entry.pulse'] = int(pulse)
         ods['dataset_description.data_entry.run'] = int(run)
-        ods['dataset_description.imas_version'] = unicode(imas_version)
+        ods['dataset_description.imas_version'] = str(imas_version)
         save_omas_pkl(ods, filename)
 
     else:
@@ -524,11 +524,11 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             ids.close()
 
     if paths is None:
-        ods.setdefault('dataset_description.data_entry.user', unicode(user))
-        ods.setdefault('dataset_description.data_entry.machine', unicode(machine))
+        ods.setdefault('dataset_description.data_entry.user', str(user))
+        ods.setdefault('dataset_description.data_entry.machine', str(machine))
         ods.setdefault('dataset_description.data_entry.pulse', int(pulse))
         ods.setdefault('dataset_description.data_entry.run', int(run))
-        ods.setdefault('dataset_description.imas_version', unicode(imas_version))
+        ods.setdefault('dataset_description.imas_version', str(imas_version))
 
     try:
         ods.consistency_check = True
@@ -557,7 +557,7 @@ def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=Fa
     if user is None:
         user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
         user = list(map(lambda x: x.split(os.sep)[-3], user))
-    elif isinstance(user, basestring):
+    elif isinstance(user, str):
         user = [user]
 
     # build database for each user
@@ -695,7 +695,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
         # recursive call
         try:
-            if isinstance(kid, basestring):
+            if isinstance(kid, str):
                 subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
             else:
                 subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)

@@ -1,8 +1,7 @@
 all:
 	@echo 'OMAS makefile help'
 	@echo ''
-	@echo ' - make tests2        : run all regression tests with Python2'
-	@echo ' - make tests3        : run all regression tests with Python3'
+	@echo ' - make tests         : run all regression tests'
 	@echo ' - make omfit_tests   : run test_omas in OMFIT'
 	@echo ' - make requirements  : build requirements.txt'
 	@echo ' - make json          : generate IMAS json structure files'
@@ -16,70 +15,34 @@ all:
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
-tests: tests2 tests3
-
 TEST_FLAGS=-s omas/tests -v -f
 
-omfit_tests:
-	omfit test_omas
-
-tests2:
-	python2 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
-
-tests3:
+tests:
 	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
-tests_core: tests2_core tests3_core
-
-tests2_core:
-	python2 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
-
-tests3_core:
+tests_core:
 	python3 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
 
-tests_plot: tests2_plot tests3_plot
-
-tests2_plot:
-	python2 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
-
-tests3_plot:
+tests_plot:
 	python3 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
-tests_physics: tests2_physics tests3_physics
-
-tests2_physics:
-	python2 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
-
-tests3_physics:
+tests_physics:
 	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
-tests_utils: tests2_utils tests3_utils
-
-tests2_utils:
-	python2 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
-
-tests3_utils:
+tests_utils:
 	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
-tests_examples: tests2_examples tests3_examples
-
-tests2_examples:
-	python2 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
-
-tests3_examples:
+tests_examples:
 	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
 
-tests_suite: tests2_suite tests3_suite
-
-tests2_suite:
-	python2 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
-
-tests3_suite:
+tests_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
+tests_examples:
+	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
+
 requirements:
-	rm -f requirements_python2.txt
-	rm -f requirements_python3.txt
+	rm -f requirements.txt
 	python setup.py --name
 
 html:
@@ -114,13 +77,12 @@ testpypi:
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 
-release: tests2 tests3 requirements json cocos docs tag
+release: tests requirements json cocos docs tag
 	@echo 'Make release done'
 
 .PHONY: site-packages
 
 site-packages:
-	# for the time being we use requirements_python2 to allow for python 2 and 3 compatibility
-	pip install --upgrade --target ./site-packages -r requirements_python2.txt
+	pip install --upgrade --target ./site-packages -r requirements.txt
 	@echo "for TCSH: setenv PYTHONPATH $$PWD/site-packages:\$$PYTHONPATH"
 	@echo "for BASH: export PYTHONPATH=$$PWD/site-packages:\$$PYTHONPATH"

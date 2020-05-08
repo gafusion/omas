@@ -60,7 +60,7 @@ class TestOmasCore(unittest.TestCase):
         assert (ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse'])
         assert (ods.get('dataset_description.bad', None) is None)
 
-        # check that keys is an iterable (so that Python 2/3 work the same way)
+        # check that keys is an iterable
         keys = ods.keys()
         keys[0]
 
@@ -346,7 +346,7 @@ class TestOmasCore(unittest.TestCase):
         with omas_environment(ods, input_data_process_functions=[robust_eval]):
             ods['int'] = '1'
             ods['float'] = '1.0'
-            ods['basestring'] = 'bla'
+            ods['str'] = 'bla'
             ods['complex'] = '2+1j'
         for item in ods:
             assert isinstance(ods[item], eval(item))
@@ -380,7 +380,7 @@ class TestOmasCore(unittest.TestCase):
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         with omas_environment(ods, xmlcodeparams=True):
-            assert isinstance(ods['equilibrium.code.parameters'], basestring)
+            assert isinstance(ods['equilibrium.code.parameters'], str)
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         # test that dynamic creation of .code.parameters makes it a CodeParameters object

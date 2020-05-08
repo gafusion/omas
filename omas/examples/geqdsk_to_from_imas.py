@@ -6,8 +6,6 @@ OMFIT gEQDSK and IMAS
 This example loads a gEQDSK file using the OMFITgeqdsk class.
 The gEQKDS file is then save to IMAS and loaded back.
 
-This example only works with python 2.7 since OMFIT is only Python 2.7 compatible
-
 Prior running this script, the following commands must be typed at the teriminal
 > import IMAS OMAS
 > imasdb ITER

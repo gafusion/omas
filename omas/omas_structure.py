@@ -310,10 +310,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
         lines.append('</table><p></p>')
 
     with open(filename, 'w') as f:
-        if sys.version_info < (3, 0):
-            f.write('\n'.join(lines).encode('utf-8'))
-        else:
-            f.write('\n'.join(lines))
+        f.write('\n'.join(lines))
 
 
 def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
