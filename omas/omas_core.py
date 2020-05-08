@@ -1500,12 +1500,15 @@ class ODS(MutableMapping):
         :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
                          set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
 
+        :param consistency_check: perform consistency check once the data is loaded
+
         :param \*args: extra arguments passed to load_omas_XXX() method
 
         :param \**kw: extra keywords passed to load_omas_XXX() method
 
         :return: ODS with loaded data
         """
+        # figure out format that was used
         if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
@@ -1513,6 +1516,8 @@ class ODS(MutableMapping):
             ext = os.path.splitext(args[0])[-1].strip('.')
             if not ext:
                 ext = 'pkl'
+
+        # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw['consistency_check']
         else:
@@ -1521,7 +1526,11 @@ class ODS(MutableMapping):
             kw['consistency_check'] = False
         else:
             kw['consistency_check'] = consistency_check
+
+        # load the data
         results = eval('load_omas_' + ext)(*args, **kw)
+
+        # mongoDB may return more than one result, or none
         if ext in ['mongo']:
             if not len(results):
                 raise RuntimeError(ext + ' query returned no result!')
@@ -1531,8 +1540,11 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
+
+        # apply consistency checks
         if consistency_check != self.consistency_check:
             self.consistency_check = consistency_check
+
         return self
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
