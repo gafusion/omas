@@ -103,29 +103,38 @@ def load_omas_nc(filename, consistency_check=True):
 
 
 class dynamic_omas_nc(dynamic_ODS):
-    def __init__(self, filename, consistency_check=True):
-        self.kw = {'filename': filename,
-                   'consistency_check': consistency_check}
-        from netCDF4 import Dataset
-        self.dataset = Dataset(filename, 'r')
-        self.connected = True
+    def __init__(self, filename):
+        self.kw = {'filename': filename}
+        self.dataset = None
+        self.active = False
 
-    def connect(self):
-        self.__init__(**self.kw)
+    def open(self):
+        printd('Dynamic open  %s' % self.kw['filename'], topic='dynamic')
+        from netCDF4 import Dataset
+        self.dataset = Dataset(self.kw['filename'], 'r')
+        self.active = True
+        return self
+
+    def close(self):
+        printd('Dynamic close %s' % self.kw['filename'], topic='dynamic')
+        self.dataset = None
+        self.active = False
+        return self
 
     def __getitem__(self, key):
-        if not self.connected:
+        if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        printd('Dyamically reading %s from %s' % (key, self.kw['filename']), topic='dynamic')
+        printd('Dynamic read  %s: %s' % (self.kw['filename'], key), topic='dynamic')
         return get_ds_item(self.dataset, key)
 
     def __contains__(self, key):
-        if not self.connected:
+        if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         return key in self.dataset.variables
 
     def keys(self, location):
         return numpy.unique([convert_int(k[len(location):].lstrip('.').split('.')[0]) for k in self.dataset.variables.keys() if k.startswith(location)])
+
 
 def through_omas_nc(ods, method=['function', 'class_method'][1]):
     """

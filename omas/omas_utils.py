@@ -458,7 +458,7 @@ def function_arguments(f, discard=None, asString=False):
 
 def args_as_kw(f, args, kw):
     '''
-    Move function arguments to kw arguments
+    Move positional arguments to kw arguments
 
     :param f: function
 

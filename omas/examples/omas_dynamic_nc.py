@@ -17,15 +17,15 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 ods = ods_sample(ntimes=2)
 ods.save('test.nc')
 
-# load the data using the dynamic keyword
-# this will load in memory only the data when it is first requested
+# ODS.open() will keep the file descriptor open so that OMAS
+# can load in memory only the data when it is first requested
+# NOTE: one can use the `with` statement or open()/close()
 ods = ODS()
-ods.load('test.nc', dynamic=True)
-
-# data gets read from NC file when first requested
-print(ods['equilibrium.time_slice.:.global_quantities.ip'])
-# then it is in memory
-print(ods['equilibrium.time_slice.0.global_quantities.ip'])
+with ods.open('test.nc'):
+    # data gets read from NC file when first requested
+    print(ods['equilibrium.time_slice.:.global_quantities.ip'])
+    # then it is in memory
+    print(ods['equilibrium.time_slice.0.global_quantities.ip'])
 
 # save it as a pickle (which will keep memory of the dynamic nature of the ODS)
 ods.save('test.pkl')
@@ -37,5 +37,6 @@ ods.load('test.pkl')
 # the data that was loaded is stored in the pickle
 print(ods.flat().keys())
 
-# and we can continue using the dynamic link to load more data
-print(ods['equilibrium.time'])
+# re-open the file descriptor to continue loading more data
+with ods.open():
+    print(ods['equilibrium.time'])
