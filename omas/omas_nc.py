@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import ODS, dynamic_ODS
 
 
 # --------------------------------------------
@@ -46,7 +46,40 @@ def save_omas_nc(ods, filename, **kw):
                 dataset.createVariable(item + '_error_upper', data.dtype, dims)[:] = std
 
 
-def load_omas_nc(filename, consistency_check=True, ):
+def get_ds_item(dataset, item):
+    '''
+    Convenience function for loading OMAS data stored in a NC file variable
+    Handles arrays, scalars, strings, and uncertain quantities
+
+    :param dataset: nc dataset
+
+    :param item: variable name
+
+    :return: data
+    '''
+    if dataset.variables[item].shape:
+        # arrays
+        if item + '_error_upper' in dataset.variables.keys():
+            tmp = uarray(numpy.array(dataset.variables[item]),
+                         numpy.array(dataset.variables[item + '_error_upper']))
+        else:
+            tmp = numpy.array(dataset.variables[item])
+    else:
+        # uncertain scalars
+        if item + '_error_upper' in dataset.variables.keys():
+            tmp = ufloat(dataset.variables[item][0].item(),
+                         dataset.variables[item + '_error_upper'][0].item())
+        else:
+            try:
+                # scalars
+                tmp = dataset.variables[item][0].item()
+            except AttributeError:
+                # strings
+                tmp = dataset.variables[item][0]
+    return tmp
+
+
+def load_omas_nc(filename, consistency_check=True):
     """
     Load an OMAS data set from NetCDF file
 
@@ -64,28 +97,35 @@ def load_omas_nc(filename, consistency_check=True, ):
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):
                 continue
-            if dataset.variables[item].shape:
-                # arrays
-                if item + '_error_upper' in dataset.variables.keys():
-                    ods[item] = uarray(numpy.array(dataset.variables[item]),
-                                       numpy.array(dataset.variables[item + '_error_upper']))
-                else:
-                    ods[item] = numpy.array(dataset.variables[item])
-            else:
-                # uncertain scalars
-                if item + '_error_upper' in dataset.variables.keys():
-                    ods[item] = ufloat(dataset.variables[item][0].item(),
-                                       dataset.variables[item + '_error_upper'][0].item())
-                else:
-                    try:
-                        # scalars
-                        ods[item] = dataset.variables[item][0].item()
-                    except AttributeError:
-                        # strings
-                        ods[item] = dataset.variables[item][0]
+            ods[item] = get_ds_item(dataset, item)
     ods.consistency_check = consistency_check
     return ods
 
+
+class dynamic_omas_nc(dynamic_ODS):
+    def __init__(self, filename, consistency_check=True):
+        self.kw = {'filename': filename,
+                   'consistency_check': consistency_check}
+        from netCDF4 import Dataset
+        self.dataset = Dataset(filename, 'r')
+        self.connected = True
+
+    def connect(self):
+        self.__init__(**self.kw)
+
+    def __getitem__(self, key):
+        if not self.connected:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        printd('Dyamically reading %s from %s' % (key, self.kw['filename']), topic='dynamic')
+        return get_ds_item(self.dataset, key)
+
+    def __contains__(self, key):
+        if not self.connected:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        return key in self.dataset.variables
+
+    def keys(self, location):
+        return numpy.unique([convert_int(k[len(location):].lstrip('.').split('.')[0]) for k in self.dataset.variables.keys() if k.startswith(location)])
 
 def through_omas_nc(ods, method=['function', 'class_method'][1]):
     """

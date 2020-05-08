@@ -131,6 +131,9 @@ class TestOmasExamples(unittest.TestCase):
     def test_omas_info(self):
         from omas.examples import omas_info
 
+    def test_omas_dynamic_nc(self):
+        from omas.examples import omas_dynamic_nc
+
 
 # for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):
 #     if '__init__' in filename:

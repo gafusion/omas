@@ -146,7 +146,8 @@ class ODS(MutableMapping):
                  cocosio=omas_rcparams['cocosio'],
                  coordsio=omas_rcparams['coordsio'],
                  unitsio=omas_rcparams['unitsio'],
-                 structure=None):
+                 structure=None,
+                 dynamic=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
@@ -180,6 +181,7 @@ class ODS(MutableMapping):
         self._imas_version = imas_version
         self.location = location
         self._cocos = cocos
+        self._dynamic = dynamic
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
@@ -598,7 +600,8 @@ class ODS(MutableMapping):
                 value = self.__class__(imas_version=self.imas_version,
                                        consistency_check=self.consistency_check,
                                        dynamic_path_creation=self.dynamic_path_creation,
-                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                                       dynamic=self._dynamic)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -631,6 +634,7 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
+                raise
                 text = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if self.consistency_check == 'warn':
                     printe(text)
@@ -857,7 +861,7 @@ class ODS(MutableMapping):
         # data slicing
         if key[0] == ':':
             data = []
-            for k, item in enumerate(self.keys()):
+            for k, item in enumerate(self.keys(dynamic=True)):
                 try:
                     data.append(self.__getitem__([item] + key[1:], cocos_and_coords))
                 except ValueError:
@@ -882,11 +886,18 @@ class ODS(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
-                dynamically_created = True
-                self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
-                                                        consistency_check=self.consistency_check,
-                                                        dynamic_path_creation=self.dynamic_path_creation,
-                                                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
+                if self._dynamic:
+                    location = l2o([self.location, key[0]])
+                if self._dynamic and location in self._dynamic:
+                    value = self._dynamic[location]
+                    self.__setitem__(key[0], value)
+                else:
+                    dynamically_created = True
+                    self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
+                                                            consistency_check=self.consistency_check,
+                                                            dynamic_path_creation=self.dynamic_path_creation,
+                                                            cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                                                            dynamic=self._dynamic))
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
@@ -1065,11 +1076,14 @@ class ODS(MutableMapping):
             return False
         return True
 
-    def keys(self):
+    def keys(self, dynamic=False):
+        dynamic_keys = []
+        if dynamic and self._dynamic:
+            dynamic_keys = list(self._dynamic.keys(self.location))
         if isinstance(self.omas_data, dict):
-            return list(map(str, self.omas_data.keys()))
+            return sorted(list(map(str, self.omas_data.keys())) + dynamic_keys)
         elif isinstance(self.omas_data, list):
-            return list(range(len(self.omas_data)))
+            return sorted(list(range(len(self.omas_data))) + dynamic_keys)
         else:
             return []
 
@@ -1527,23 +1541,28 @@ class ODS(MutableMapping):
         else:
             kw['consistency_check'] = consistency_check
 
+        # dynamic data
+        if ext in ['nc'] and kw.pop('dynamic', False):
+            self._dynamic = eval('dynamic_omas_' + ext)(*args, **kw)
+
         # load the data
-        results = eval('load_omas_' + ext)(*args, **kw)
-
-        # mongoDB may return more than one result, or none
-        if ext in ['mongo']:
-            if not len(results):
-                raise RuntimeError(ext + ' query returned no result!')
-            elif len(results) > 1:
-                raise RuntimeError(ext + ' query returned more than one result!')
-            else:
-                self.omas_data = list(results.values())[0].omas_data
         else:
-            self.omas_data = results.omas_data
+            results = eval('load_omas_' + ext)(*args, **kw)
 
-        # apply consistency checks
-        if consistency_check != self.consistency_check:
-            self.consistency_check = consistency_check
+            # mongoDB may return more than one result, or none
+            if ext in ['mongo']:
+                if not len(results):
+                    raise RuntimeError(ext + ' query returned no result!')
+                elif len(results) > 1:
+                    raise RuntimeError(ext + ' query returned more than one result!')
+                else:
+                    self.omas_data = list(results.values())[0].omas_data
+            else:
+                self.omas_data = results.omas_data
+
+            # apply consistency checks
+            if consistency_check != self.consistency_check:
+                self.consistency_check = consistency_check
 
         return self
 
@@ -1622,6 +1641,23 @@ class ODS(MutableMapping):
             printe('%s.code.parameters is not formatted as XML' % self.location)
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
+
+
+class dynamic_ODS:
+    kw = {}
+
+    connected = False
+
+    def __getstate__(self):
+        return self.kw
+
+    def __setstate__(self, kw):
+        try:
+            self.__init__(**kw)
+        except Exception as _excp:
+            self.kw = kw
+            printe(repr(_excp))
+            printe('Dynamic link broken: %s' % kw)
 
 
 class CodeParameters(dict):
@@ -1895,7 +1931,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_dynamic']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
