@@ -1616,7 +1616,7 @@ class ODS(MutableMapping):
             if not ext:
                 ext = 'pkl'
 
-        if ext in ['nc']:
+        if ext in ['nc', 'imas']:
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check

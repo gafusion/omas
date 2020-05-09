@@ -109,14 +109,14 @@ class dynamic_omas_nc(dynamic_ODS):
         self.active = False
 
     def open(self):
-        printd('Dynamic open  %s' % self.kw['filename'], topic='dynamic')
+        printd('Dynamic open  %s' % self.kw, topic='dynamic')
         from netCDF4 import Dataset
         self.dataset = Dataset(self.kw['filename'], 'r')
         self.active = True
         return self
 
     def close(self):
-        printd('Dynamic close %s' % self.kw['filename'], topic='dynamic')
+        printd('Dynamic close %s' % self.kw, topic='dynamic')
         self.dataset = None
         self.active = False
         return self

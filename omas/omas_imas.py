@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
+from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS
 from .omas_utils import _extra_structures
 
 
@@ -536,6 +536,47 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
         printe(repr(_excp))
 
     return ods
+
+
+class dynamic_omas_imas(dynamic_ODS):
+    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
+        self.kw = {'user': user,
+                   'machine': machine,
+                   'pulse': pulse,
+                   'run': run,
+                   'verbose': verbose}
+        self.ids = None
+        self.active = False
+
+    def open(self):
+        printd('Dynamic open  %s' % self.kw, topic='dynamic')
+        self.ids = imas_open(new=False, **self.kw)
+        self.active = True
+        return self
+
+    def close(self):
+        printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.ids = None
+        self.active = False
+        return self
+
+    def __getitem__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        printd('Dynamic read  %s: %s' % (self.kw['filename'], key), topic='dynamic')
+        return imas_get(self.ids, p2l(key))
+
+    def __contains__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        return key in imas_get(self.ids, p2l(location))
+
+    def keys(self, location):
+        tmp = imas_get(self.ids, p2l(location))
+        if isinstance(p2l(location)[-1], str):
+            return tmp.keys()
+        else:
+            return range(len(tmp))
 
 
 def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
