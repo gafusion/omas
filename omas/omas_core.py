@@ -1737,7 +1737,7 @@ class dynamic_ODS:
         return self
 
     def __exit__(self, type, value, traceback):
-        return self.close()
+        self.close()
 
 
 class CodeParameters(dict):

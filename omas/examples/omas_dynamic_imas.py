@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Dynamic loading of data
-=======================
-This example illustrates how OMAS can load in memory only the data when it is first requested
-This is done here for a NC file, but the approach can be extended to any seekable storage system, including IMAS.
+Dynamic loading of IMAS data
+============================
+This example illustrates how OMAS can load in memory IMAS data only when it is first requested
 """
 
 import os
@@ -12,17 +11,16 @@ from omas import *
 
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
-omas_rcparams['allow_fake_imas_fallback'] = True
 
 # generate some data and save it as a netcdf file
 ods = ods_sample(ntimes=2)
-ods.save('imas','meneghini','sample',133221,0)
+ods.save('imas',os.environ['USER'],'DIII-D',1000,0,new=True,verbose=True)
 
 # ODS.open() will keep the file descriptor open so that OMAS
 # can load in memory only the data when it is first requested
 # NOTE: one can use the `with` statement or open()/close()
 ods = ODS()
-with ods.open('imas','meneghini','sample',133221,0):
+with ods.open('imas',os.environ['USER'],'DIII-D',1000,0):
     # data gets read from NC file when first requested
     print(ods['equilibrium.time_slice.:.global_quantities.ip'])
     # then it is in memory
@@ -39,5 +37,6 @@ ods.load('test.pkl')
 print(ods.flat().keys())
 
 # re-open the file descriptor to continue loading more data
-with ods.open():
+with ods.open('imas',os.environ['USER'],'DIII-D',1000,0):
     print(ods['equilibrium.time'])
+

@@ -187,18 +187,35 @@ def imas_empty(value):
 
     :return: None if value is an IMAS empty
     '''
-    if isinstance(value, numpy.ndarray) and not value.size:
-        value = None
-    # missing floats and integers
-    elif (isinstance(value, float) and value == -9E40) or (isinstance(value, int) and value == -999999999):
-        value = None
+    # arrays
+    if isinstance(value, numpy.ndarray):
+        if not value.size:
+            return None
+        else:
+            return value
+    # missing floats
+    elif isinstance(value, float):
+        if value == -9E40:
+            return None
+        else:
+            return value
+    # missing integers
+    elif isinstance(value, int):
+        if value == -999999999:
+            return None
+        else:
+            return value
     # empty strings
-    elif isinstance(value, str) and not len(value):
-        value = None
-    return value
+    elif isinstance(value, str):
+        if not len(value):
+            return None
+        else:
+            return value
+    # anything else is not a leaf
+    return None
 
 
-def imas_get(ids, path, skip_missing_nodes=False):
+def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
     """
     read the value of a path in an open IMAS ids
 
@@ -210,6 +227,8 @@ def imas_get(ids, path, skip_missing_nodes=False):
                              `False` raise an error
                              `True` does not raise error
                              `None` prints a warning message
+
+    :param check_empty: return None if not a leaf or empty leaf
 
     :return: the value that was read if successful or None otherwise
     """
@@ -249,10 +268,11 @@ def imas_get(ids, path, skip_missing_nodes=False):
             out = out[p]
 
     # handle missing data
-    data = imas_empty(out)
+    if check_empty:
+        out = imas_empty(out)
 
     printd(debug_path, topic='imas_code')
-    return data
+    return out
 
 
 # --------------------------------------------
@@ -429,7 +449,8 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
 
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
-                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True):
+                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
+                   consistency_check=True):
     """
     Load OMAS data from IMAS
 
@@ -547,15 +568,19 @@ class dynamic_omas_imas(dynamic_ODS):
                    'verbose': verbose}
         self.ids = None
         self.active = False
+        self.open_ids = []
 
     def open(self):
         printd('Dynamic open  %s' % self.kw, topic='dynamic')
         self.ids = imas_open(new=False, **self.kw)
         self.active = True
+        self.open_ids = []
         return self
 
     def close(self):
         printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.ids.close()
+        self.open_ids = []
         self.ids = None
         self.active = False
         return self
@@ -563,20 +588,24 @@ class dynamic_omas_imas(dynamic_ODS):
     def __getitem__(self, key):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        printd('Dynamic read  %s: %s' % (self.kw['filename'], key), topic='dynamic')
+        printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
         return imas_get(self.ids, p2l(key))
 
     def __contains__(self, key):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        return key in imas_get(self.ids, p2l(location))
+        path = p2l(key)
+        if path[0] not in self.open_ids:
+            getattr(self.ids, path[0]).get()
+            self.open_ids.append(path[0])
+        return imas_empty(imas_get(self.ids, path)) is not None
 
     def keys(self, location):
-        tmp = imas_get(self.ids, p2l(location))
-        if isinstance(p2l(location)[-1], str):
-            return tmp.keys()
-        else:
+        tmp = imas_get(self.ids, p2l(location), check_empty=False)
+        if tmp.__class__.__name__.endswith('structArray'):
             return range(len(tmp))
+        else:
+            return [] # needs work
 
 
 def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
