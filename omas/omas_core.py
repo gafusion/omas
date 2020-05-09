@@ -91,11 +91,15 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = value.astype(float)
         elif 'INT' in info['data_type']:
             value = value.astype(int)
+        elif 'STR' in info['data_type']:
+            value = value.astype(str)
     elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
         if 'FLT' in info['data_type']:
             value = float(value)
         elif 'INT' in info['data_type']:
             value = int(value)
+        elif 'STR' in info['data_type']:
+            value = str(value)
     # structure type is respected check type
     if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
         text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
