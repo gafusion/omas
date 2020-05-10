@@ -1106,7 +1106,7 @@ class ODS(MutableMapping):
         elif isinstance(self.omas_data, list):
             return sorted(list(range(len(self.omas_data))) + dynamic_keys)
         else:
-            return []
+            return dynamic_keys
 
     def values(self):
         return [self[item] for item in self.keys()]

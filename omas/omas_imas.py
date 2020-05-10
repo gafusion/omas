@@ -601,11 +601,7 @@ class dynamic_omas_imas(dynamic_ODS):
         return imas_empty(imas_get(self.ids, path)) is not None
 
     def keys(self, location):
-        tmp = imas_get(self.ids, p2l(location), check_empty=False)
-        if tmp.__class__.__name__.endswith('structArray'):
-            return range(len(tmp))
-        else:
-            return keys_leading_to_a_filled_path(self.ids, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']))
+        return keys_leading_to_a_filled_path(self.ids, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']))
 
 
 def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
@@ -813,7 +809,7 @@ def reach_ids_location(ids, path):
             out = getattr(out, p)
         else:
             out = out[p]
-    return m
+    return out
 
 
 def reach_ds_location(path, imas_version):
@@ -832,16 +828,26 @@ def reach_ds_location(path, imas_version):
         if not isinstance(p, str):
             p = ':'
         out = out[p]
-    return m
+    return out
 
 
 def keys_leading_to_a_filled_path(ids, location, imas_version):
+    if not len(location):
+        filled_keys = []
+        for structure in list_structures(imas_version=imas_version):
+            if not hasattr(ids, structure):
+                continue
+            getattr(ids, structure).get()
+            if getattr(ids, structure).ids_properties.homogeneous_time != -999999999:
+                filled_keys.append(structure)
+        return filled_keys
+
     path = p2l(location)
     ids = reach_ids_location(ids, path)
     ds = reach_ds_location(path, imas_version)
 
     # always list all arrays of structures
-    if keys[0] == ':':
+    if list(ds.keys())[0] == ':':
         return range(len(ids))
 
     # find which keys have at least one filled path underneath

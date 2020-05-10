@@ -6,15 +6,22 @@ Dynamic loading of IMAS data
 This example illustrates how OMAS can load in memory IMAS data only when it is first requested
 """
 
-import os
+import os,sys
 from omas import *
 
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
-os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
+#os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
 # generate some data and save it as a netcdf file
-ods = ods_sample(ntimes=2)
-ods.save('imas',os.environ['USER'],'DIII-D',1000,0,new=True,verbose=True)
+#ods = ods_sample(ntimes=2)
+#ods.save('imas',os.environ['USER'],'DIII-D',1000,0,new=True,verbose=True)
+
+ods = ODS()
+with ods.open('imas',os.environ['USER'],'DIII-D',1000,0):
+    print(ods.keys(True))
+    print(ods['equilibrium.time_slice.0.profiles_1d'].keys(True))
+
+sys.exit()
 
 # ODS.open() will keep the file descriptor open so that OMAS
 # can load in memory only the data when it is first requested
