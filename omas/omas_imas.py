@@ -832,6 +832,18 @@ def reach_ds_location(path, imas_version):
 
 
 def keys_leading_to_a_filled_path(ids, location, imas_version):
+    '''
+    What keys at a given IMAS location lead to a leaf that has data
+
+    :param ids: IMAS ids
+
+    :param location: location to query
+
+    :param imas_version:  IMAS version
+
+    :return: list of keys
+    '''
+    # if no location is passed, then we see if the IDSs are filled at all
     if not len(location):
         filled_keys = []
         for structure in list_structures(imas_version=imas_version):
