@@ -605,7 +605,7 @@ class dynamic_omas_imas(dynamic_ODS):
         if tmp.__class__.__name__.endswith('structArray'):
             return range(len(tmp))
         else:
-            return [] # needs work
+            return keys_leading_to_a_filled_path(self.ids, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']))
 
 
 def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
@@ -692,7 +692,8 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True, skip_ion_state=True):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False,
+                        stop_on_first_fill=False, skip_ggd=True, skip_ion_state=True):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -707,6 +708,8 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     :param requested_paths: list of paths that are requested
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
+
+    :param stop_on_first_fill: return as soon as one path with data hass been found
 
     :param skip_ggd: do not traverse ggd structures
 
@@ -787,7 +790,68 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
                     p[len(path)] = key
                 paths += subtree_paths
 
+        # if stop_on_first_fill return as soon as a filled path has been found
+        if len(paths) and stop_on_first_fill:
+            return paths
+
     return paths
+
+
+def reach_ids_location(ids, path):
+    '''
+    Traverse IMAS structure until reaching location
+
+    :param ids: IMAS ids
+
+    :param path: path to reach
+
+    :return: requested location in IMAS ids
+    '''
+    out = ids
+    for p in path:
+        if isinstance(p, str):
+            out = getattr(out, p)
+        else:
+            out = out[p]
+    return m
+
+
+def reach_ds_location(path, imas_version):
+    '''
+    Traverse ds structure until reaching location
+
+    :param path: path to reach
+
+    :param imas_version: IMAS version
+
+    :return: requested location in ds
+    '''
+    ds = load_structure(path[0], imas_version=imas_version)[1]
+    out = ds
+    for kp, p in enumerate(path):
+        if not isinstance(p, str):
+            p = ':'
+        out = out[p]
+    return m
+
+
+def keys_leading_to_a_filled_path(ids, location, imas_version):
+    path = p2l(location)
+    ids = reach_ids_location(ids, path)
+    ds = reach_ds_location(path, imas_version)
+
+    # always list all arrays of structures
+    if keys[0] == ':':
+        return range(len(ids))
+
+    # find which keys have at least one filled path underneath
+    filled_keys = []
+    for kid in ds.keys():
+        paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], stop_on_first_fill=True)
+        if len(paths):
+            filled_keys.append(kid)
+
+    return filled_keys
 
 
 def through_omas_imas(ods, method=['function', 'class_method'][1]):
