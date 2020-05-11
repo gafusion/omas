@@ -6,7 +6,7 @@ Test script for omas/omas_core.py
 
 .. code-block:: none
 
-   python -m unittest omas/tests/test_omas_core
+   python3 -m unittest omas/tests/test_omas_core
 
 -------
 """
