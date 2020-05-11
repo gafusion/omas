@@ -1,0 +1,27 @@
+{
+ "info.imas_version": {
+  "data_type": "STR_0D",
+  "description": "imas version",
+  "full_path": "info.imas_version"
+ },
+ "info.machine": {
+  "data_type": "STR_0D",
+  "description": "machine name",
+  "full_path": "info.machine"
+ },
+ "info.run": {
+  "data_type": "INT_0D",
+  "description": "run number",
+  "full_path": "info.run"
+ },
+ "info.shot": {
+  "data_type": "INT_0D",
+  "description": "shot number",
+  "full_path": "info.shot"
+ },
+ "info.user": {
+  "data_type": "STR_0D",
+  "description": "user name",
+  "full_path": "info.user"
+ }
+}
