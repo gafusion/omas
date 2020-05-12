@@ -1628,7 +1628,7 @@ class ODS(MutableMapping):
             if True:
                 factory = Pyro5.api.Proxy('PYRO:obj_215957ca4b6c420bbc0a8d6813654640@localhost:62980')
             else:
-                factory = dynamic_ODS_factory
+                factory = dynamic_ODS_factory()
             self.dynamic = dynamic_ODS_factory.nc(*args, **kw)
             self.dynamic.open()
             return self.dynamic
@@ -1715,14 +1715,52 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
+def serializable(f):
+    def serializable_f(*args,**kw):
+        tmp = f(*args, **kw)
+        if hasattr(tmp, 'tolist'):
+            return tmp.tolist()
+        else:
+            return tmp
+
+    return serializable_f
+
 @Pyro5.api.expose
 class dynamic_ODS_factory():
 
-    def imas(*args, **kw):
+    def imas(self, *args, **kw):
         return dynamic_omas_imas(*args, **kw)
 
-    def nc(*args, **kw):
-        return dynamic_omas_nc(*args, **kw)
+    def nc(self, *args, **kw):
+        from omas.omas_nc import dynamic_omas_nc
+        tmp=dynamic_omas_nc(*args,**kw)
+        self.case=tmp
+        return id(tmp)
+
+    def open(self, *args, **kw):
+        return self.case.open(*args,**kw)
+
+    def close(self, *args, **kw):
+        return self.case.close(*args,**kw)
+
+    def __enter__(self, *args, **kw):
+        return self.case.__enter__(*args,**kw)
+
+    def __exit__(self, *args, **kw):
+        return self.case.__exit__(*args,**kw)
+
+    @serializable
+    def keys(self, *args, **kw):
+        return self.case.keys(*args,**kw)
+
+    @serializable
+    def __contains__(self, b):
+        return self.case.__contains__(b)
+
+    @serializable
+    def __getitem__(self, b):
+        return self.case.__getitem__(b)
+
 
 class dynamic_ODS:
     kw = {}
