@@ -909,8 +909,8 @@ class ODS(MutableMapping):
             if self.dynamic_path_creation:
                 if self.dynamic:
                     location = l2o([self.location, key[0]])
-                if self.dynamic and location in self.dynamic:
-                    value = self.dynamic[location]
+                if self.dynamic is not None and self.dynamic.__contains__(location):
+                    value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
                 else:
                     dynamically_created = True
@@ -1626,10 +1626,11 @@ class ODS(MutableMapping):
                 self.consistency_check = consistency_check
 
             if True:
-                factory = Pyro5.api.Proxy('PYRO:obj_215957ca4b6c420bbc0a8d6813654640@localhost:62980')
+                factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@localhost:39921')
             else:
                 factory = dynamic_ODS_factory()
-            self.dynamic = dynamic_ODS_factory.nc(*args, **kw)
+            self.dynamic = factory
+            getattr(self.dynamic, ext)(*args, **kw)
             self.dynamic.open()
             return self.dynamic
         else:
