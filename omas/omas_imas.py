@@ -860,7 +860,7 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
 
     # always list all arrays of structures
     if list(ds.keys())[0] == ':':
-        return range(len(ids))
+        return list(range(len(ids)))
 
     # find which keys have at least one filled path underneath
     filled_keys = []

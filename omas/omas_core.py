@@ -1730,7 +1730,9 @@ def serializable(f):
 class dynamic_ODS_factory():
 
     def imas(self, *args, **kw):
-        return dynamic_omas_imas(*args, **kw)
+        tmp=dynamic_omas_imas(*args, **kw)
+        self.case=tmp
+        return id(tmp)
 
     def nc(self, *args, **kw):
         from omas.omas_nc import dynamic_omas_nc
