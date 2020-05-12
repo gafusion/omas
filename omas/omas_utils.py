@@ -428,7 +428,7 @@ def function_arguments(f, discard=None, asString=False):
     the_keywords = the_argspec.varkw
 
     args = []
-    kws = {}
+    kws = OrderedDict()
     string = ''
     for k, arg in enumerate(the_argspec.args):
         if (discard is not None) and (arg in tolist(discard)):
@@ -469,8 +469,11 @@ def args_as_kw(f, args, kw):
     :return: tuple with positional arguments moved to keyword arguments
     '''
     a, k, astar, kstar = function_arguments(f)
+    if len(a) and a[0]=='self':
+        a=a[1:]
+    a = a + list(k.keys())
     n = 0
-    for name, value in zip(a, args):
+    for name, value in list(zip(a, args)):
         if name not in kw:
             kw[name] = value
         n += 1

@@ -1726,25 +1726,50 @@ def serializable(f):
 
     return serializable_f
 
+def kw_as_str(kw):
+    out=[]
+    for item in sorted(list(kw.keys())):
+        out.append('%s=%s'%(item,kw[item]))
+    return '_|_'.join(out)
+
+cases={}
+
 @Pyro5.api.expose
 class dynamic_ODS_factory():
 
+    case =None
+
     def imas(self, *args, **kw):
-        tmp=dynamic_omas_imas(*args, **kw)
-        self.case=tmp
-        return id(tmp)
+        from omas.omas_imas import dynamic_omas_imas
+        args,kw=args_as_kw(dynamic_omas_imas,args,kw)
+        cid = kw_as_str(kw)
+        print(cid,len(cases))
+        if cid not in cases:
+            cases[cid]=dynamic_omas_imas(*args,**kw)
+        self.case=cases[cid]
+        return cid
 
     def nc(self, *args, **kw):
         from omas.omas_nc import dynamic_omas_nc
-        tmp=dynamic_omas_nc(*args,**kw)
-        self.case=tmp
-        return id(tmp)
+        args,kw=args_as_kw(dynamic_omas_nc,args,kw)
+        print(kw)
+        cid = kw_as_str(kw)
+        if cid not in cases:
+            cases[cid]=dynamic_omas_nc(*args,**kw)
+        self.case=cases[cid]
+        return cid
 
     def open(self, *args, **kw):
-        return self.case.open(*args,**kw)
+        if not self.case.active:
+            return self.case.open(*args,**kw)
+        else:
+            return self.case
 
     def close(self, *args, **kw):
-        return self.case.close(*args,**kw)
+        if self.case.active:
+            return self.case.close(*args,**kw)
+        else:
+            return self
 
     def __enter__(self, *args, **kw):
         return self.case.__enter__(*args,**kw)
