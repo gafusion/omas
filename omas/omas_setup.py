@@ -31,6 +31,7 @@ import tempfile
 import warnings
 from functools import wraps
 import ast
+import Pyro5.api
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \

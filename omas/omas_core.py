@@ -1625,7 +1625,11 @@ class ODS(MutableMapping):
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
 
-            self.dynamic = eval('dynamic_omas_' + ext)(*args, **kw)
+            if True:
+                factory = Pyro5.api.Proxy('PYRO:obj_215957ca4b6c420bbc0a8d6813654640@localhost:62980')
+            else:
+                factory = dynamic_ODS_factory
+            self.dynamic = dynamic_ODS_factory.nc(*args, **kw)
             self.dynamic.open()
             return self.dynamic
         else:
@@ -1711,6 +1715,14 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
+@Pyro5.api.expose
+class dynamic_ODS_factory():
+
+    def imas(*args, **kw):
+        return dynamic_omas_imas(*args, **kw)
+
+    def nc(*args, **kw):
+        return dynamic_omas_nc(*args, **kw)
 
 class dynamic_ODS:
     kw = {}
