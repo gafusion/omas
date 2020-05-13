@@ -1046,7 +1046,7 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     return ax
 
 @add_to__ODS__
-def profiles_fluxes(ods, time_index=0, fig=None, axes=None,
+def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
                           plotting_label=" ", show_total_density=True, plot_zeff=False):
     """
     Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.
@@ -1089,7 +1089,8 @@ def profiles_fluxes(ods, time_index=0, fig=None, axes=None,
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(profiles_fluxes, time, ods, time_index, fig=fig, ax={}, **kw)
+            return ods_time_plot(core_transport_fluxes, time, ods, time_index=time_index, fig=fig, axes=axes,
+                                 plotting_label=plotting_label, show_total_density=show_total_density, plot_zeff=plot_zeff)
 
     def sum_density_types(specie_index):
         final_density = numpy.zeros(len(prof1d['grid.rho_tor_norm']))
@@ -1161,33 +1162,33 @@ def profiles_fluxes(ods, time_index=0, fig=None, axes=None,
     # Fluxes
     if "core_transport" in ods:
         core_transport = ods['core_transport']['model']
-        rho_TGLF = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
+        rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
         # Qe
-        axes[0,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[0,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
+        axes[0,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[0,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
         axes[0,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance")
         axes[0,1].set_ylabel('$Q_e$ [W/$m^2$]', fontsize='small')
         axes[0,1].axvline(0.8, ls='--', color='k')
         axes[0,1].axvline(0.2, ls='--', color='k')
 
         # Qi
-        axes[1,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[1,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # W/m^2
+        axes[1,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
+        axes[1,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # W/m^2
         axes[1,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label,'r'), label="power_balance" + plotting_label)
         axes[1,1].set_ylabel('$Q_i$ [W/$m^2$]', fontsize='small')
         axes[1,1].axvline(0.8, ls='--', color='k')
         axes[1,1].axvline(0.2, ls='--', color='k')
 
         # Particle flux (electron particle source)
-        axes[2,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[2,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # particles/s/m^2
+        axes[2,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
+        axes[2,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # particles/s/m^2
         axes[2,1].set_ylabel('$\Gamma_{e}$ [particles/s/$m^2$]', fontsize='small')
         axes[2,1].axvline(0.8, ls='--', color='k')
         axes[2,1].axvline(0.2, ls='--', color='k')
 
         # Pi (toroidal momentum flux)
-        axes[3,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[3,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # N/m
+        axes[3,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
+        axes[3,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # N/m
         axes[3,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label,'r'), label="power_balance" + plotting_label)
         axes[3,1].set_ylabel('$\Pi_{i}$ [N/$m$]', fontsize='small')
         axes[3,1].axvline(0.8, ls='--', color='k')
