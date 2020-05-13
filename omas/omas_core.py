@@ -1716,8 +1716,9 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
+
 def serializable(f):
-    def serializable_f(*args,**kw):
+    def serializable_f(*args, **kw):
         tmp = f(*args, **kw)
         if hasattr(tmp, 'tolist'):
             return tmp.tolist()
@@ -1726,60 +1727,62 @@ def serializable(f):
 
     return serializable_f
 
+
 def kw_as_str(kw):
-    out=[]
+    out = []
     for item in sorted(list(kw.keys())):
-        out.append('%s=%s'%(item,kw[item]))
+        out.append('%s=%s' % (item, kw[item]))
     return '_|_'.join(out)
 
-cases={}
+
+cases = {}
+
 
 @Pyro5.api.expose
 class dynamic_ODS_factory():
-
-    case =None
+    case = None
 
     def imas(self, *args, **kw):
         from omas.omas_imas import dynamic_omas_imas
-        args,kw=args_as_kw(dynamic_omas_imas,args,kw)
+        args, kw = args_as_kw(dynamic_omas_imas, args, kw)
         cid = kw_as_str(kw)
-        print(cid,len(cases))
+        print(cid, len(cases))
         if cid not in cases:
-            cases[cid]=dynamic_omas_imas(*args,**kw)
-        self.case=cases[cid]
+            cases[cid] = dynamic_omas_imas(*args, **kw)
+        self.case = cases[cid]
         return cid
 
     def nc(self, *args, **kw):
         from omas.omas_nc import dynamic_omas_nc
-        args,kw=args_as_kw(dynamic_omas_nc,args,kw)
+        args, kw = args_as_kw(dynamic_omas_nc, args, kw)
         print(kw)
         cid = kw_as_str(kw)
         if cid not in cases:
-            cases[cid]=dynamic_omas_nc(*args,**kw)
-        self.case=cases[cid]
+            cases[cid] = dynamic_omas_nc(*args, **kw)
+        self.case = cases[cid]
         return cid
 
     def open(self, *args, **kw):
         if not self.case.active:
-            return self.case.open(*args,**kw)
+            return self.case.open(*args, **kw)
         else:
             return self.case
 
     def close(self, *args, **kw):
         if self.case.active:
-            return self.case.close(*args,**kw)
+            return self.case.close(*args, **kw)
         else:
             return self
 
     def __enter__(self, *args, **kw):
-        return self.case.__enter__(*args,**kw)
+        return self.case.__enter__(*args, **kw)
 
     def __exit__(self, *args, **kw):
-        return self.case.__exit__(*args,**kw)
+        return self.case.__exit__(*args, **kw)
 
     @serializable
     def keys(self, *args, **kw):
-        return self.case.keys(*args,**kw)
+        return self.case.keys(*args, **kw)
 
     @serializable
     def __contains__(self, b):
