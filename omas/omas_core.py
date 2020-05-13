@@ -1762,7 +1762,12 @@ class dynamic_ODS_wrapper():
         return self.factory.__contains__(self.idc, *args, **kw)
 
     def __getitem__(self, *args, **kw):
-        return pickle.loads(self.factory.__getitem__(self.idc, *args, **kw))
+        if self.remote:
+            tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
+            tmp = base64.b64decode(tmp['data'])
+            return pickle.loads(tmp)
+        else:
+            return self.factory.__getitem__(self.idc, self.remote, *args, **kw)
 
 
 cases = {}
@@ -1805,9 +1810,12 @@ class dynamic_ODS_factory():
     def __contains__(self, idc, *args, **kw):
         return cases[idc].__contains__(*args, **kw)
 
-    def __getitem__(self, idc, *args, **kw):
-        return pickle.dumps(cases[idc].__getitem__(*args, **kw),
-                            protocol=omas_rcparams['pickle_protocol'])
+    def __getitem__(self, idc, remote, *args, **kw):
+        if remote:
+            return pickle.dumps(cases[idc].__getitem__(*args, **kw),
+                                protocol=omas_rcparams['pickle_protocol'])
+        else:
+            return cases[idc].__getitem__(*args, **kw)
 
 
 class dynamic_ODS:
