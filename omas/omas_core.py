@@ -1624,13 +1624,7 @@ class ODS(MutableMapping):
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
-
-            if True:
-                factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@localhost:39921')
-            else:
-                factory = dynamic_ODS_factory()
-            self.dynamic = factory
-            getattr(self.dynamic, ext)(*args, **kw)
+            self.dynamic = dynamic_ODS_wrapper(ext, False, *args, **kw)
             self.dynamic.open()
             return self.dynamic
         else:
@@ -1735,62 +1729,78 @@ def kw_as_str(kw):
     return '_|_'.join(out)
 
 
+class dynamic_ODS_wrapper():
+    def __init__(self, ext, remote, *args, **kw):
+        self.ext = ext
+        self.remote = remote
+        self.idc = id(self)
+        if remote:
+            factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@localhost:39921')
+        else:
+            factory = dynamic_ODS_factory()
+        self.factory = factory.initialize(self.idc, ext, *args, **kw)
+
+    def open(self, *args, **kw):
+        return self.factory.open(self.idc, *args, **kw)
+
+    def close(self, *args, **kw):
+        return self.factory.close(self.idc, *args, **kw)
+
+    def __contains__(self, *args, **kw):
+        return self.factory.__contains__(self.idc, *args, **kw)
+
+    def __enter__(self, *args, **kw):
+        return self.factory.enter(self.idc, *args, **kw)
+
+    def __exit__(self, *args, **kw):
+        return self.factory.exit(self.idc, *args, **kw)
+
+    def keys(self, *args, **kw):
+        return self.factory.keys(self.idc, *args, **kw)
+
+    def __getitem__(self, *args, **kw):
+        return self.factory.__getitem__(self.idc, *args, **kw)
+
+
 cases = {}
 
 
 @Pyro5.api.expose
 class dynamic_ODS_factory():
-    case = None
+    def initialize(self, idc, ext, *args, **kw):
+        if ext == 'nc':
+            from omas.omas_nc import dynamic_omas_nc
+            tmp = dynamic_omas_nc(*args, **kw)
+        elif ext == 'imas':
+            from omas.omas_imas import dynamic_omas_imas
+            tmp = dynamic_omas_imas(*args, **kw)
+        if idc not in cases:
+            cases[idc] = tmp
+        return self
 
-    def imas(self, *args, **kw):
-        from omas.omas_imas import dynamic_omas_imas
-        args, kw = args_as_kw(dynamic_omas_imas, args, kw)
-        cid = kw_as_str(kw)
-        print(cid, len(cases))
-        if cid not in cases:
-            cases[cid] = dynamic_omas_imas(*args, **kw)
-        self.case = cases[cid]
-        return cid
+    def open(self, idc, *args, **kw):
+        return cases[idc].open(*args, **kw)
 
-    def nc(self, *args, **kw):
-        from omas.omas_nc import dynamic_omas_nc
-        args, kw = args_as_kw(dynamic_omas_nc, args, kw)
-        print(kw)
-        cid = kw_as_str(kw)
-        if cid not in cases:
-            cases[cid] = dynamic_omas_nc(*args, **kw)
-        self.case = cases[cid]
-        return cid
+    def close(self, idc, *args, **kw):
+        return cases[idc].close(*args, **kw)
 
-    def open(self, *args, **kw):
-        if not self.case.active:
-            return self.case.open(*args, **kw)
-        else:
-            return self.case
+    def enter(self, idc, *args, **kw):
+        return cases[idc].__enter__(*args, **kw)
 
-    def close(self, *args, **kw):
-        if self.case.active:
-            return self.case.close(*args, **kw)
-        else:
-            return self
-
-    def __enter__(self, *args, **kw):
-        return self.case.__enter__(*args, **kw)
-
-    def __exit__(self, *args, **kw):
-        return self.case.__exit__(*args, **kw)
+    def exit(self, idc, *args, **kw):
+        return cases[idc].__exit__(*args, **kw)
 
     @serializable
-    def keys(self, *args, **kw):
-        return self.case.keys(*args, **kw)
+    def keys(self, idc, *args, **kw):
+        return cases[idc].keys(*args, **kw)
 
     @serializable
-    def __contains__(self, b):
-        return self.case.__contains__(b)
+    def __contains__(self, idc, *args, **kw):
+        return cases[idc].__contains__(*args, **kw)
 
     @serializable
-    def __getitem__(self, b):
-        return self.case.__getitem__(b)
+    def __getitem__(self, idc, *args, **kw):
+        return cases[idc].__getitem__(*args, **kw)
 
 
 class dynamic_ODS:
