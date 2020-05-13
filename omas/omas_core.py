@@ -1733,21 +1733,21 @@ class dynamic_ODS_wrapper():
     def __init__(self, ext, remote, *args, **kw):
         self.ext = ext
         self.remote = remote
-        self.idc = id(self)
         if remote:
             factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@localhost:39921')
         else:
             factory = dynamic_ODS_factory()
         self.factory = factory.initialize(self.idc, ext, *args, **kw)
 
+    @property
+    def idc(self):
+        return id(self)
+
     def open(self, *args, **kw):
         return self.factory.open(self.idc, *args, **kw)
 
     def close(self, *args, **kw):
         return self.factory.close(self.idc, *args, **kw)
-
-    def __contains__(self, *args, **kw):
-        return self.factory.__contains__(self.idc, *args, **kw)
 
     def __enter__(self, *args, **kw):
         return self.factory.enter(self.idc, *args, **kw)
@@ -1758,8 +1758,11 @@ class dynamic_ODS_wrapper():
     def keys(self, *args, **kw):
         return self.factory.keys(self.idc, *args, **kw)
 
+    def __contains__(self, *args, **kw):
+        return self.factory.__contains__(self.idc, *args, **kw)
+
     def __getitem__(self, *args, **kw):
-        return self.factory.__getitem__(self.idc, *args, **kw)
+        return pickle.loads(self.factory.__getitem__(self.idc, *args, **kw))
 
 
 cases = {}
@@ -1767,6 +1770,7 @@ cases = {}
 
 @Pyro5.api.expose
 class dynamic_ODS_factory():
+
     def initialize(self, idc, ext, *args, **kw):
         if ext == 'nc':
             from omas.omas_nc import dynamic_omas_nc
@@ -1782,25 +1786,28 @@ class dynamic_ODS_factory():
         return cases[idc].open(*args, **kw)
 
     def close(self, idc, *args, **kw):
-        return cases[idc].close(*args, **kw)
+        tmp = cases[idc].close(*args, **kw)
+        del cases[idc]
+        return tmp
 
     def enter(self, idc, *args, **kw):
         return cases[idc].__enter__(*args, **kw)
 
     def exit(self, idc, *args, **kw):
-        return cases[idc].__exit__(*args, **kw)
+        tmp = cases[idc].__exit__(*args, **kw)
+        del cases[idc]
+        return tmp
 
     @serializable
     def keys(self, idc, *args, **kw):
         return cases[idc].keys(*args, **kw)
 
-    @serializable
     def __contains__(self, idc, *args, **kw):
         return cases[idc].__contains__(*args, **kw)
 
-    @serializable
     def __getitem__(self, idc, *args, **kw):
-        return cases[idc].__getitem__(*args, **kw)
+        return pickle.dumps(cases[idc].__getitem__(*args, **kw),
+                            protocol=omas_rcparams['pickle_protocol'])
 
 
 class dynamic_ODS:

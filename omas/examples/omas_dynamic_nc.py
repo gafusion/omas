@@ -38,5 +38,5 @@ ods.load('test.pkl')
 print(ods.flat().keys())
 
 # re-open the file descriptor to continue loading more data
-with ods.open():
+with ods.open('test.nc'):
     print(ods['equilibrium.time'])

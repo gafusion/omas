@@ -11,10 +11,11 @@ from omas import *
 
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
+os.environ['USER']='menghio'
 
 # generate some data and save it in IMAS
-ods = ods_sample(ntimes=2)
-ods.save('imas', os.environ['USER'], 'DIII-D', 1000, 0, new=True, verbose=True)
+# ods = ods_sample(ntimes=2)
+# ods.save('imas', os.environ['USER'], 'DIII-D', 1000, 0, new=True, verbose=True)
 
 # ODS.open() will keep the file descriptor open so that OMAS
 # can load in memory only the data when it is first requested
@@ -37,10 +38,10 @@ ods.load('test.pkl')
 print(ods.flat().keys())
 
 # re-open the file descriptor to continue loading more data
-with ods.open():
+with ods.open('imas', os.environ['USER'], 'DIII-D', 1000, 0):
     print(ods['equilibrium.time'])
 
 # dynamic load can also tell us what IMAS elements have data
-with ods.open():
+with ods.open('imas', os.environ['USER'], 'DIII-D', 1000, 0):
     print(ods.keys(dynamic=True))
     print(ods['equilibrium.time_slice.0.profiles_1d'].keys(dynamic=True))
