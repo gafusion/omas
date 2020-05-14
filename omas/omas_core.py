@@ -1130,6 +1130,9 @@ class ODS(MutableMapping):
             s += ' ' + repr(self['summary.ids_properties.comment'])
         return s, []
 
+    def __tree_keys__(self):
+        return self.keys(dynamic=True)
+
     def get(self, key, default=None):
         r"""
         Check if key is present and if not return default value without creating value in omas data structure
@@ -1599,6 +1602,7 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
+        remote = kw.pop('remote', False)
         # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw.pop('consistency_check')
@@ -1624,7 +1628,7 @@ class ODS(MutableMapping):
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
-            self.dynamic = dynamic_ODS_wrapper(ext, False, *args, **kw)
+            self.dynamic = dynamic_ODS_wrapper(ext, remote, *args, **kw)
             self.dynamic.open()
             return self.dynamic
         else:
@@ -1722,22 +1726,29 @@ def serializable(f):
     return serializable_f
 
 
-def kw_as_str(kw):
-    out = []
-    for item in sorted(list(kw.keys())):
-        out.append('%s=%s' % (item, kw[item]))
-    return '_|_'.join(out)
-
-
 class dynamic_ODS_wrapper():
     def __init__(self, ext, remote, *args, **kw):
+        r'''
+        :param ext: format of the dynamic load
+
+        :param remote: False for local dynamic data access
+                       integer with the port number for remote data access on localhost
+                       string with server and port number in the format `server:port`
+
+        :param \*args: arguments passed to dynamic load function
+
+        :param \**kw: keyword arguments passed to dynamic load function
+        '''
         self.ext = ext
         self.remote = remote
         if remote:
-            factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@localhost:39921')
+            if isinstance(remote, int):
+                remote = 'localhost:%d' % remote
+            factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@' + remote)
         else:
             factory = dynamic_ODS_factory()
         self.factory = factory.initialize(self.idc, ext, *args, **kw)
+        self.keys_cache = {}
 
     @property
     def idc(self):
@@ -1753,10 +1764,13 @@ class dynamic_ODS_wrapper():
         return self.factory.enter(self.idc, *args, **kw)
 
     def __exit__(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         return self.factory.exit(self.idc, *args, **kw)
 
-    def keys(self, *args, **kw):
-        return self.factory.keys(self.idc, *args, **kw)
+    def keys(self, location, *args, **kw):
+        if location not in self.keys_cache:
+            self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
+        return self.keys_cache[location]
 
     def __contains__(self, *args, **kw):
         return self.factory.__contains__(self.idc, *args, **kw)
@@ -1770,11 +1784,19 @@ class dynamic_ODS_wrapper():
             return self.factory.__getitem__(self.idc, self.remote, *args, **kw)
 
 
-cases = {}
+pyro_cases = {}
 
 
 @Pyro5.api.expose
 class dynamic_ODS_factory():
+    '''
+    Class file that serves the dynamic data
+    pyro_cases holds the instances of dynamic_omas objects
+    organized according an ID connection (idc) that is passed
+    to all methods of this class. Dynamic serving of data
+    through this class is needed to provide the same interface
+    whether the data is local or is accessed remotely via Pyro.
+    '''
 
     def initialize(self, idc, ext, *args, **kw):
         if ext == 'nc':
@@ -1783,42 +1805,44 @@ class dynamic_ODS_factory():
         elif ext == 'imas':
             from omas.omas_imas import dynamic_omas_imas
             tmp = dynamic_omas_imas(*args, **kw)
-        if idc not in cases:
-            cases[idc] = tmp
+        if idc not in pyro_cases:
+            pyro_cases[idc] = tmp
         return self
 
     def open(self, idc, *args, **kw):
-        return cases[idc].open(*args, **kw)
+        return pyro_cases[idc].open(*args, **kw)
 
     def close(self, idc, *args, **kw):
-        tmp = cases[idc].close(*args, **kw)
-        del cases[idc]
+        tmp = pyro_cases[idc].close(*args, **kw)
+        del pyro_cases[idc]
         return tmp
 
     def enter(self, idc, *args, **kw):
-        return cases[idc].__enter__(*args, **kw)
+        return pyro_cases[idc].__enter__(*args, **kw)
 
     def exit(self, idc, *args, **kw):
-        tmp = cases[idc].__exit__(*args, **kw)
-        del cases[idc]
+        tmp = pyro_cases[idc].__exit__(*args, **kw)
+        del pyro_cases[idc]
         return tmp
 
-    @serializable
     def keys(self, idc, *args, **kw):
-        return cases[idc].keys(*args, **kw)
+        return numpy.atleast_1d(pyro_cases[idc].keys(*args, **kw)).tolist()
 
     def __contains__(self, idc, *args, **kw):
-        return cases[idc].__contains__(*args, **kw)
+        return pyro_cases[idc].__contains__(*args, **kw)
 
     def __getitem__(self, idc, remote, *args, **kw):
         if remote:
-            return pickle.dumps(cases[idc].__getitem__(*args, **kw),
+            return pickle.dumps(pyro_cases[idc].__getitem__(*args, **kw),
                                 protocol=omas_rcparams['pickle_protocol'])
         else:
-            return cases[idc].__getitem__(*args, **kw)
+            return pyro_cases[idc].__getitem__(*args, **kw)
 
 
 class dynamic_ODS:
+    '''
+    Abstract base class that dynamic_omas_... classes inherit from
+    '''
     kw = {}
 
     active = False

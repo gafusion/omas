@@ -560,6 +560,12 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
 
 class dynamic_omas_imas(dynamic_ODS):
+    '''
+    Class that provides dynamic data loading from NC file
+    This class is not to be used by itself, but via the
+    ODS.open() method.
+    '''
+
     def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
         self.kw = {'user': user,
                    'machine': machine,
