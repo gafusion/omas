@@ -67,6 +67,11 @@ for type in ['H', 'T']:  # hierarchical or tensor
     for action in ['R', 'W', 'M', 'A', 'S', 'B']:  # Read, Write, Mapping, Array access, Stripe access, Bulk access
         times[type + action] = []
 
+try:
+    __file__
+except NameError:
+    import inspect
+    __file__  = inspect.getfile(lambda: None)
 for n in samples:
     print('%d/%d'%(n,samples[-1]))
 
