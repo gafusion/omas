@@ -1103,12 +1103,12 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
             final_density += prof1d[density]
         return final_density
 
-    if ods['summary.ids_properties.comment'] == "INIT":
-        linestyle = '--'
-        linewidth = 3
-    else:
+    if ods['core_transport.ids_properties.comment'] == "TGYRO":
         linestyle = '-'
         linewidth = 2
+    else:
+        linestyle = '--'
+        linewidth = 3
 
     if "core_profiles" in ods:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1122,7 +1122,7 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
         axes[-1,1].set_xlabel('$\\rho$')
 
         # Temp electrons
-        axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['summary']['ids_properties']['comment'] + " " + plotting_label)  # keV
+        axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # keV
         axes[0,0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
         axes[0,0].axvline(0.8, ls='--', color='k')
         axes[0,0].axvline(0.2, ls='--', color='k')
@@ -1145,7 +1145,7 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
             rotation = (equlibrium['profiles_1d']['centroid']['r_max']-equlibrium['profiles_1d']['centroid']['r_min'])/2 \
                      + equlibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['omega0']
-            axes[3,0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['summary']['ids_properties']['comment'] + " " + plotting_label)  # m/s
+            axes[3,0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # m/s
             axes[3,0].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
             axes[3,0].axvline(0.8, ls='--', color='k')
             axes[3,0].axvline(0.2, ls='--', color='k')

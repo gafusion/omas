@@ -139,16 +139,13 @@ def equilibrium(
 
 
 @add_to_ODS
-def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
+def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
     """
     Add sample core_profiles data
 
     :param ods: ODS instance
 
     :param time_index: int
-
-    :param nx: int
-        Number of points in test profiles
 
     :param add_junk_ion: bool
         Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.
@@ -171,7 +168,7 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
         ions = ods['core_profiles.profiles_1d'][time_index]['ion']
         ions[len(ions)] = copy.deepcopy(ions[len(ions) - 1])
         for item in ions[len(ions) - 1].flat():
-            ions[len(ions) - 1][item] *= 0
+            ions[len(ions) - 1][items] *= 0
 
     if not include_pressure:
         for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
@@ -179,6 +176,52 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
                 del ods[item]
 
     ods['core_profiles.profiles_1d'][time_index]['time'] = float(time_index)
+
+    return ods
+
+@add_to_ODS
+def core_sources(ods, time_index=0):
+    """
+    Add sample core_profiles data
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with sources added.
+        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
+        some contexts. If you do not want the original to be modified, deepcopy it first.
+    """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)
+
+    sources = pr['core_sources.source']
+    for source in sources:
+        ods['core_sources.source'][source]['identifier'].update(sources[source]['identifier'])
+        ods['core_sources.source'][source]['profiles_1d'][time_index].update(sources[source]['profiles_1d.0'])
+
+    return ods
+
+@add_to_ODS
+def core_transport(ods, time_index=0):
+    """
+    Add sample core_profiles data
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with sources added.
+        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
+        some contexts. If you do not want the original to be modified, deepcopy it first.
+    """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)
+
+    models = pr['core_transport.model']
+    for model in models:
+        ods['core_transport.model'][model]['identifier'].update(models[model]['identifier'])
+        ods['core_transport.model'][model]['profiles_1d'][time_index].update(models[model]['profiles_1d.0'])
 
     return ods
 
