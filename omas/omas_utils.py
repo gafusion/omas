@@ -104,6 +104,10 @@ def printe(*objects, **kw):
     print(*objects, **kw)
 
 
+def print_stack():
+    return traceback.print_stack(file=sys.__stderr__)
+
+
 def is_uncertain(var):
     '''
     :param var: Variable or array to test
@@ -218,6 +222,7 @@ def json_dumper(obj, objects_encode=True):
             return obj.decode('utf-8')
         else:
             return obj.toJSON()
+
 
 def convert_int(value):
     '''
@@ -469,8 +474,8 @@ def args_as_kw(f, args, kw):
     :return: tuple with positional arguments moved to keyword arguments
     '''
     a, k, astar, kstar = function_arguments(f)
-    if len(a) and a[0]=='self':
-        a=a[1:]
+    if len(a) and a[0] == 'self':
+        a = a[1:]
     a = a + list(k.keys())
     n = 0
     for name, value in list(zip(a, args)):

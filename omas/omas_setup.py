@@ -33,6 +33,7 @@ from functools import wraps
 import ast
 import Pyro5.api
 import base64
+import traceback
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \

@@ -1102,9 +1102,9 @@ class ODS(MutableMapping):
         if dynamic and self.dynamic:
             dynamic_keys = list(self.dynamic.keys(self.location))
         if isinstance(self.omas_data, dict):
-            return sorted(list(map(str, self.omas_data.keys())) + dynamic_keys)
+            return sorted(numpy.unique(list(map(str, self.omas_data.keys())) + dynamic_keys).tolist())
         elif isinstance(self.omas_data, list):
-            return sorted(list(range(len(self.omas_data))) + dynamic_keys)
+            return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
         else:
             return dynamic_keys
 
@@ -1131,6 +1131,9 @@ class ODS(MutableMapping):
         return s, []
 
     def __tree_keys__(self):
+        '''
+        OMFIT tree keys display dynamic
+        '''
         return self.keys(dynamic=True)
 
     def get(self, key, default=None):
@@ -1749,39 +1752,49 @@ class dynamic_ODS_wrapper():
             factory = dynamic_ODS_factory()
         self.factory = factory.initialize(self.idc, ext, *args, **kw)
         self.keys_cache = {}
+        self.contains_cache = {}
 
     @property
     def idc(self):
         return id(self)
 
     def open(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
+        if self.remote:
+            self.factory._pyroClaimOwnership()
         return self.factory.open(self.idc, *args, **kw)
 
     def close(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
+        if self.remote:
+            self.factory._pyroClaimOwnership()
         return self.factory.close(self.idc, *args, **kw)
 
     def __enter__(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
+        if self.remote:
+            self.factory._pyroClaimOwnership()
         return self.factory.enter(self.idc, *args, **kw)
 
     def __exit__(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
+        if self.remote:
+            self.factory._pyroClaimOwnership()
         return self.factory.exit(self.idc, *args, **kw)
 
     def keys(self, location, *args, **kw):
         if location not in self.keys_cache:
-            self.factory._pyroClaimOwnership()
+            if self.remote:
+                self.factory._pyroClaimOwnership()
             self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
         return self.keys_cache[location]
 
-    def __contains__(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
-        return self.factory.__contains__(self.idc, *args, **kw)
+    def __contains__(self, location, *args, **kw):
+        if location not in self.contains_cache:
+            if self.remote:
+                self.factory._pyroClaimOwnership()
+            self.contains_cache[location] = self.factory.__contains__(self.idc, location, *args, **kw)
+        return self.contains_cache[location]
 
     def __getitem__(self, *args, **kw):
-        self.factory._pyroClaimOwnership()
+        if self.remote:
+            self.factory._pyroClaimOwnership()
         if self.remote:
             tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
             tmp = base64.b64decode(tmp['data'])
