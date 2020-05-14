@@ -1755,12 +1755,15 @@ class dynamic_ODS_wrapper():
         return id(self)
 
     def open(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         return self.factory.open(self.idc, *args, **kw)
 
     def close(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         return self.factory.close(self.idc, *args, **kw)
 
     def __enter__(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         return self.factory.enter(self.idc, *args, **kw)
 
     def __exit__(self, *args, **kw):
@@ -1769,13 +1772,16 @@ class dynamic_ODS_wrapper():
 
     def keys(self, location, *args, **kw):
         if location not in self.keys_cache:
+            self.factory._pyroClaimOwnership()
             self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
         return self.keys_cache[location]
 
     def __contains__(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         return self.factory.__contains__(self.idc, *args, **kw)
 
     def __getitem__(self, *args, **kw):
+        self.factory._pyroClaimOwnership()
         if self.remote:
             tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
             tmp = base64.b64decode(tmp['data'])
