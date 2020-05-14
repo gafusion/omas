@@ -231,7 +231,10 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_core_transport(self):
         ods_test = copy.deepcopy(self.ods)
-        ods_test.sample_transport()
+        ods_test.sample_core_transport()
+        ods_test.sample_core_profiles()
+        ods_test.sample_equilibrium()
+
         ods_test.plot_core_transport_fluxes()
         fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
         ods_test.plot_core_transport_fluxes(fig=fig, axes=axes, show_total_density=False, plotting_label="test")
