@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load
+from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS
 from .omas_utils import _extra_structures
 
 
@@ -187,18 +187,35 @@ def imas_empty(value):
 
     :return: None if value is an IMAS empty
     '''
-    if isinstance(value, numpy.ndarray) and not value.size:
-        value = None
-    # missing floats and integers
-    elif (isinstance(value, float) and value == -9E40) or (isinstance(value, int) and value == -999999999):
-        value = None
+    # arrays
+    if isinstance(value, numpy.ndarray):
+        if not value.size:
+            return None
+        else:
+            return value
+    # missing floats
+    elif isinstance(value, float):
+        if value == -9E40:
+            return None
+        else:
+            return value
+    # missing integers
+    elif isinstance(value, int):
+        if value == -999999999:
+            return None
+        else:
+            return value
     # empty strings
-    elif isinstance(value, str) and not len(value):
-        value = None
-    return value
+    elif isinstance(value, str):
+        if not len(value):
+            return None
+        else:
+            return value
+    # anything else is not a leaf
+    return None
 
 
-def imas_get(ids, path, skip_missing_nodes=False):
+def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
     """
     read the value of a path in an open IMAS ids
 
@@ -210,6 +227,8 @@ def imas_get(ids, path, skip_missing_nodes=False):
                              `False` raise an error
                              `True` does not raise error
                              `None` prints a warning message
+
+    :param check_empty: return None if not a leaf or empty leaf
 
     :return: the value that was read if successful or None otherwise
     """
@@ -249,10 +268,11 @@ def imas_get(ids, path, skip_missing_nodes=False):
             out = out[p]
 
     # handle missing data
-    data = imas_empty(out)
+    if check_empty:
+        out = imas_empty(out)
 
     printd(debug_path, topic='imas_code')
-    return data
+    return out
 
 
 # --------------------------------------------
@@ -429,7 +449,8 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
 
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
-                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True):
+                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
+                   consistency_check=True):
     """
     Load OMAS data from IMAS
 
@@ -538,6 +559,51 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     return ods
 
 
+class dynamic_omas_imas(dynamic_ODS):
+    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
+        self.kw = {'user': user,
+                   'machine': machine,
+                   'pulse': pulse,
+                   'run': run,
+                   'verbose': verbose}
+        self.ids = None
+        self.active = False
+        self.open_ids = []
+
+    def open(self):
+        printd('Dynamic open  %s' % self.kw, topic='dynamic')
+        self.ids = imas_open(new=False, **self.kw)
+        self.active = True
+        self.open_ids = []
+        return self
+
+    def close(self):
+        printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.ids.close()
+        self.open_ids = []
+        self.ids = None
+        self.active = False
+        return self
+
+    def __getitem__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
+        return imas_get(self.ids, p2l(key))
+
+    def __contains__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        path = p2l(key)
+        if path[0] not in self.open_ids:
+            getattr(self.ids, path[0]).get()
+            self.open_ids.append(path[0])
+        return imas_empty(imas_get(self.ids, path)) is not None
+
+    def keys(self, location):
+        return keys_leading_to_a_filled_path(self.ids, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']))
+
+
 def browse_imas(user=os.environ.get('USER', 'dummy_user'), pretty=True, quiet=False,
                 user_imasdbdir=os.sep.join([os.environ['HOME'], 'public', 'imasdb'])):
     '''
@@ -622,7 +688,8 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False, skip_ggd=True, skip_ion_state=True):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False,
+                        stop_on_first_fill=False, skip_ggd=True, skip_ion_state=True):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -637,6 +704,8 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     :param requested_paths: list of paths that are requested
 
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
+
+    :param stop_on_first_fill: return as soon as one path with data hass been found
 
     :param skip_ggd: do not traverse ggd structures
 
@@ -717,7 +786,90 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
                     p[len(path)] = key
                 paths += subtree_paths
 
+        # if stop_on_first_fill return as soon as a filled path has been found
+        if len(paths) and stop_on_first_fill:
+            return paths
+
     return paths
+
+
+def reach_ids_location(ids, path):
+    '''
+    Traverse IMAS structure until reaching location
+
+    :param ids: IMAS ids
+
+    :param path: path to reach
+
+    :return: requested location in IMAS ids
+    '''
+    out = ids
+    for p in path:
+        if isinstance(p, str):
+            out = getattr(out, p)
+        else:
+            out = out[p]
+    return out
+
+
+def reach_ds_location(path, imas_version):
+    '''
+    Traverse ds structure until reaching location
+
+    :param path: path to reach
+
+    :param imas_version: IMAS version
+
+    :return: requested location in ds
+    '''
+    ds = load_structure(path[0], imas_version=imas_version)[1]
+    out = ds
+    for kp, p in enumerate(path):
+        if not isinstance(p, str):
+            p = ':'
+        out = out[p]
+    return out
+
+
+def keys_leading_to_a_filled_path(ids, location, imas_version):
+    '''
+    What keys at a given IMAS location lead to a leaf that has data
+
+    :param ids: IMAS ids
+
+    :param location: location to query
+
+    :param imas_version:  IMAS version
+
+    :return: list of keys
+    '''
+    # if no location is passed, then we see if the IDSs are filled at all
+    if not len(location):
+        filled_keys = []
+        for structure in list_structures(imas_version=imas_version):
+            if not hasattr(ids, structure):
+                continue
+            getattr(ids, structure).get()
+            if getattr(ids, structure).ids_properties.homogeneous_time != -999999999:
+                filled_keys.append(structure)
+        return filled_keys
+
+    path = p2l(location)
+    ids = reach_ids_location(ids, path)
+    ds = reach_ds_location(path, imas_version)
+
+    # always list all arrays of structures
+    if list(ds.keys())[0] == ':':
+        return range(len(ids))
+
+    # find which keys have at least one filled path underneath
+    filled_keys = []
+    for kid in ds.keys():
+        paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], stop_on_first_fill=True)
+        if len(paths):
+            filled_keys.append(kid)
+
+    return filled_keys
 
 
 def through_omas_imas(ods, method=['function', 'class_method'][1]):

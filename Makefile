@@ -43,7 +43,7 @@ tests_examples:
 
 requirements:
 	rm -f requirements.txt
-	python setup.py --name
+	python3 setup.py --name
 
 html:
 	cd sphinx && make html
@@ -55,11 +55,11 @@ docs: html
 	cd sphinx && make commit && make push
 
 json:
-	cd omas/utilities && python build_json_structures.py
+	cd omas/utilities && python3 build_json_structures.py
 	make cocos
 
 cocos:
-	cd omas/utilities && python generate_cocos_signals.py
+	cd omas/utilities && python3 generate_cocos_signals.py
 
 tag:
 	git tag -a v$$(cat omas/version) $$(git log --pretty=format:"%h" --grep="^version $$(cat omas/version)") -m "version $$(cat omas/version)"
@@ -67,13 +67,13 @@ tag:
 
 sdist:
 	rm -rf dist
-	python setup.py sdist
+	python3 setup.py sdist
 
 pypi: sdist
-	python -m twine upload --repository pypi dist/*
+	python3 -m twine upload --repository pypi dist/*
 
 testpypi:
-	python -m twine upload --repository testpypi dist/*
+	python3 -m twine upload --repository testpypi dist/*
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 

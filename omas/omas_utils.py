@@ -219,6 +219,19 @@ def json_dumper(obj, objects_encode=True):
         else:
             return obj.toJSON()
 
+def convert_int(value):
+    '''
+    Try to convert value to integer and do nothing on error
+
+    :param value: value to try to convert
+
+    :return: value, possibly converted to int
+    '''
+    try:
+        return int(value)
+    except ValueError:
+        return value
+
 
 def json_loader(object_pairs, cls=dict, null_to=None):
     """
@@ -233,12 +246,6 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     :return: ojbect
     """
     from omas import ODS
-    def convert_int(key):
-        try:
-            return int(key)
-        except ValueError:
-            return key
-
     object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
 
     dct = cls()
@@ -451,7 +458,7 @@ def function_arguments(f, discard=None, asString=False):
 
 def args_as_kw(f, args, kw):
     '''
-    Move function arguments to kw arguments
+    Move positional arguments to kw arguments
 
     :param f: function
 
