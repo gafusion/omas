@@ -232,8 +232,10 @@ class TestOmasPlot(unittest.TestCase):
     def test_core_transport(self):
         ods_test = copy.deepcopy(self.ods)
         ods_test.sample_core_transport()
+        ods_test['core_transport.ids_properties.comment'] = "TGRYO"
         ods_test.sample_core_profiles()
         ods_test.sample_equilibrium()
+        ods_test['core_profiles.profiles_1d[0].omega0'] = numpy.linspace(4e4,2e3,len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
 
         ods_test.plot_core_transport_fluxes()
         fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
