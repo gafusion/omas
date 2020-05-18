@@ -25,6 +25,12 @@ ods['thomson_scattering.ids_properties.homogeneous_time'] = 1
 
 # save/load from pickle
 print('== PKL ==')
+try:
+    __file__
+except NameError:
+    import inspect
+    __file__  = inspect.getfile(lambda: None)
+omas_testing_directory = omas_testdir()
 save_omas_pkl(ods, omas_testdir(__file__) + '/test.pkl')
 ods = load_omas_pkl(omas_testdir(__file__) + '/test.pkl')
 print(ods)

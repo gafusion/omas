@@ -91,11 +91,15 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = value.astype(float)
         elif 'INT' in info['data_type']:
             value = value.astype(int)
+        elif 'STR' in info['data_type']:
+            value = value.astype(str)
     elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
         if 'FLT' in info['data_type']:
             value = float(value)
         elif 'INT' in info['data_type']:
             value = int(value)
+        elif 'STR' in info['data_type']:
+            value = str(value)
     # structure type is respected check type
     if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
         text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
@@ -146,7 +150,8 @@ class ODS(MutableMapping):
                  cocosio=omas_rcparams['cocosio'],
                  coordsio=omas_rcparams['coordsio'],
                  unitsio=omas_rcparams['unitsio'],
-                 structure=None):
+                 structure=None,
+                 dynamic=None):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
@@ -180,6 +185,7 @@ class ODS(MutableMapping):
         self._imas_version = imas_version
         self.location = location
         self._cocos = cocos
+        self._dynamic = dynamic
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
@@ -511,6 +517,24 @@ class ODS(MutableMapping):
                 self.getraw(item).coordsio = coordsio_value
 
     @property
+    def dynamic(self):
+        """
+        property that point to dynamic_ODS object
+
+        :return: dynamic_ODS object
+        """
+        if not hasattr(self, '_dynamic'):
+            self._dynamic = None
+        return self._dynamic
+
+    @dynamic.setter
+    def dynamic(self, dynamic):
+        self._dynamic = dynamic
+        for item in self.keys():
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).dynamic = dynamic
+
+    @property
     def dynamic_path_creation(self):
         """
         property that sets whether dynamic path creation is enabled or not
@@ -521,13 +545,6 @@ class ODS(MutableMapping):
             self._dynamic_path_creation = True
         return self._dynamic_path_creation
 
-    @property
-    def ulocation(self):
-        '''
-        :return: string with location of this object in universal ODS path format
-        '''
-        return o2u(self.location)
-
     @dynamic_path_creation.setter
     def dynamic_path_creation(self, dynamic_path_value):
         if dynamic_path_value != self._dynamic_path_creation:
@@ -535,6 +552,13 @@ class ODS(MutableMapping):
             for item in self.keys():
                 if isinstance(self.getraw(item), ODS):
                     self.getraw(item).dynamic_path_creation = dynamic_path_value
+
+    @property
+    def ulocation(self):
+        '''
+        :return: string with location of this object in universal ODS path format
+        '''
+        return o2u(self.location)
 
     def _validate(self, value, structure):
         """
@@ -598,7 +622,8 @@ class ODS(MutableMapping):
                 value = self.__class__(imas_version=self.imas_version,
                                        consistency_check=self.consistency_check,
                                        dynamic_path_creation=self.dynamic_path_creation,
-                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio)
+                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                                       dynamic=self._dynamic)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -857,7 +882,7 @@ class ODS(MutableMapping):
         # data slicing
         if key[0] == ':':
             data = []
-            for k, item in enumerate(self.keys()):
+            for k, item in enumerate(self.keys(dynamic=True)):
                 try:
                     data.append(self.__getitem__([item] + key[1:], cocos_and_coords))
                 except ValueError:
@@ -882,11 +907,18 @@ class ODS(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys():
             if self.dynamic_path_creation:
-                dynamically_created = True
-                self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
-                                                        consistency_check=self.consistency_check,
-                                                        dynamic_path_creation=self.dynamic_path_creation,
-                                                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio))
+                if self.dynamic:
+                    location = l2o([self.location, key[0]])
+                if self.dynamic and location in self.dynamic:
+                    value = self.dynamic[location]
+                    self.__setitem__(key[0], value)
+                else:
+                    dynamically_created = True
+                    self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
+                                                            consistency_check=self.consistency_check,
+                                                            dynamic_path_creation=self.dynamic_path_creation,
+                                                            cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                                                            dynamic=self.dynamic))
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
@@ -1065,13 +1097,16 @@ class ODS(MutableMapping):
             return False
         return True
 
-    def keys(self):
+    def keys(self, dynamic=False):
+        dynamic_keys = []
+        if dynamic and self.dynamic:
+            dynamic_keys = list(self.dynamic.keys(self.location))
         if isinstance(self.omas_data, dict):
-            return list(map(str, self.omas_data.keys()))
+            return sorted(list(map(str, self.omas_data.keys())) + dynamic_keys)
         elif isinstance(self.omas_data, list):
-            return list(range(len(self.omas_data)))
+            return sorted(list(range(len(self.omas_data))) + dynamic_keys)
         else:
-            return []
+            return dynamic_keys
 
     def values(self):
         return [self[item] for item in self.keys()]
@@ -1500,12 +1535,15 @@ class ODS(MutableMapping):
         :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
                          set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
 
+        :param consistency_check: perform consistency check once the data is loaded
+
         :param \*args: extra arguments passed to load_omas_XXX() method
 
         :param \**kw: extra keywords passed to load_omas_XXX() method
 
         :return: ODS with loaded data
         """
+        # figure out format that was used
         if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
             ext = args[0]
             args = args[1:]
@@ -1513,6 +1551,8 @@ class ODS(MutableMapping):
             ext = os.path.splitext(args[0])[-1].strip('.')
             if not ext:
                 ext = 'pkl'
+
+        # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw['consistency_check']
         else:
@@ -1521,7 +1561,11 @@ class ODS(MutableMapping):
             kw['consistency_check'] = False
         else:
             kw['consistency_check'] = consistency_check
+
+        # load the data
         results = eval('load_omas_' + ext)(*args, **kw)
+
+        # mongoDB may return more than one result, or none
         if ext in ['mongo']:
             if not len(results):
                 raise RuntimeError(ext + ' query returned no result!')
@@ -1531,9 +1575,65 @@ class ODS(MutableMapping):
                 self.omas_data = list(results.values())[0].omas_data
         else:
             self.omas_data = results.omas_data
+            if ext == 'pkl':
+                self.copy_attrs_from(results)
+
+        # apply consistency checks
         if consistency_check != self.consistency_check:
             self.consistency_check = consistency_check
+
         return self
+
+    def open(self, *args, **kw):
+        r"""
+        Dynamically load OMAS data for seekable storage formats
+
+        :param filename: filename.XXX where the extension is used to select load format method (eg. 'nc','h5','ds')
+                         set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
+
+        :param consistency_check: perform consistency check once the data is loaded
+
+        :param \*args: extra arguments passed to dynamic_omas_XXX() method
+
+        :param \**kw: extra keywords passed to dynamic_omas_XXX() method
+
+        :return: ODS with loaded data
+        """
+        # manage consistency_check logic
+        if 'consistency_check' in kw:
+            consistency_check = kw.pop('consistency_check')
+        else:
+            consistency_check = self.consistency_check
+        if self.location:
+            consistency_check = False
+
+        # without args/kw re-connect
+        if self.dynamic and not len(args) and not len(kw):
+            return self.dynamic.open()
+
+        # figure out format that was used
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
+
+        if ext in ['nc', 'imas']:
+            # apply consistency checks
+            if consistency_check != self.consistency_check:
+                self.consistency_check = consistency_check
+
+            self.dynamic = eval('dynamic_omas_' + ext)(*args, **kw)
+            self.dynamic.open()
+            return self.dynamic
+        else:
+            raise ValueError(ext + ' OMAS storage does not support dynamic loading')
+
+    def close(self):
+        if self.dynamic:
+            self.dynamic.close()
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
         '''
@@ -1610,6 +1710,34 @@ class ODS(MutableMapping):
             printe('%s.code.parameters is not formatted as XML' % self.location)
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
+
+
+class dynamic_ODS:
+    kw = {}
+
+    active = False
+
+    def __init__(self):
+        raise NotImplementedError('Classes that subclass %s should have a __init__() method' % self.__class__)
+
+    def open(self):
+        raise NotImplementedError('Classes that subclass %s should have a open() method' % self.__class__)
+
+    def close(self):
+        raise NotImplementedError('Classes that subclass %s should have a close() method' % self.__class__)
+
+    def __getstate__(self):
+        return self.kw
+
+    def __setstate__(self, kw):
+        self.kw = kw
+        self.active = False
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.close()
 
 
 class CodeParameters(dict):
@@ -1883,7 +2011,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_dynamic']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
