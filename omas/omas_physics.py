@@ -211,9 +211,10 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods_n.physics_summary_greenwald()
-    ods_n.physics_summary_taue()
+    ods.physics_summary_greenwald()
+    ods.physics_summary_taue()
 
+    return ods
 
 @add_to__ODS__
 @preprocess_ods()
