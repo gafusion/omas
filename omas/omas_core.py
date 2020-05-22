@@ -623,7 +623,7 @@ class ODS(MutableMapping):
                                        consistency_check=self.consistency_check,
                                        dynamic_path_creation=self.dynamic_path_creation,
                                        cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                                       dynamic=self._dynamic)
+                                       dynamic=self.dynamic)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -1199,7 +1199,8 @@ class ODS(MutableMapping):
         :return: self
         '''
         for item in omas_ods_attrs:
-            setattr(self, item, getattr(ods, item))
+            if hasattr(ods, item):
+                setattr(self, item, getattr(ods, item))
         return self
 
     def prune(self):
