@@ -35,6 +35,7 @@ The development version of omas can also be installed with pip:
     sudo pip install --upgrade -e .[build_structures,build_documentation]       # Add this `omas` directory to your $PYTHONPATH
                                                                                 # The [build_structures,build_documentation] options
                                                                                 # install packages required for extra development purposes
+                                                                                # Maybe necessary to use `--user` option of `pip` with no `sudo`
 
 List of `Python 2 <_static/requirements_python2.txt>`_ or `Python 3 <_static/requirements_python3.txt>`_ package requirements.
 
