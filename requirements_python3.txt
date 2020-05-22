@@ -2,19 +2,20 @@
 #
 # usage: pip install -r requirements_python3.txt
 
-setuptools>=41.2         # required
-numpy>=1.16.1            # required
-uncertainties            # required
-pint                     # required
-netCDF4                  # required
 boto3                    # required
-matplotlib               # required
-scipy                    # required
-h5py                     # required
-pymongo                  # required
 dnspython                # required
-xmltodict                # required
+h5py                     # required
+matplotlib               # required
+netCDF4                  # required
+numpy>=1.16.1            # required
+pint                     # required
+pymongo                  # required
+pyro5                    # required
+scipy                    # required
+setuptools>=41.2         # required
+uncertainties            # required
 xarray                   # required
+xmltodict                # required
 
 Pillow                   # build_documentation
 Sphinx                   # build_documentation

@@ -2,18 +2,19 @@
 #
 # usage: pip install -r requirements_python2.txt
 
-numpy                    # required
-uncertainties            # required
-pint                     # required
-netCDF4                  # required
 boto3                    # required
-matplotlib               # required
-scipy                    # required
-h5py                     # required
-pymongo                  # required
 dnspython                # required
-xmltodict                # required
+h5py                     # required
+matplotlib               # required
+netCDF4                  # required
+numpy                    # required
+pint                     # required
+pymongo                  # required
+pyro5                    # required
+scipy                    # required
+uncertainties            # required
 xarray<=0.11.0           # required
+xmltodict                # required
 
 Pillow                   # build_documentation
 Sphinx                   # build_documentation
