@@ -34,8 +34,8 @@ def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise']
     def _req(f):
         from functools import wraps
         @wraps(f)
-        def wrapper(*args, **kw):
-            args, kw = args_as_kw(f, args, kw)
+        def wrapper(*args1, **kw1):
+            args, kw = args_as_kw(f, args1, kw1)
 
             # handle missing required quantities
             missing = []
@@ -215,6 +215,7 @@ def summary_global_quantities(ods, update=True):
     ods.physics_summary_taue()
 
     return ods
+
 
 @add_to__ODS__
 @preprocess_ods()
@@ -502,7 +503,7 @@ def current_from_eq(ods, time_index):
 
 @add_to__ODS__
 @preprocess_ods('equilibrium', 'core_profiles')
-def core_profiles_currents(ods, time_index, rho_tor_norm,
+def core_profiles_currents(ods, time_index, rho_tor_norm=None,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
                            j_total='default', warn=True):
@@ -544,6 +545,9 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     from scipy.integrate import cumtrapz
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
+
+    if rho_tor_norm is None:
+        rho_tor_norm = prof1d['grid.rho_tor_norm']
 
     # SETUP DEFAULTS
     data = {}
