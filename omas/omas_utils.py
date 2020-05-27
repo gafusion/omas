@@ -219,6 +219,7 @@ def json_dumper(obj, objects_encode=True):
         else:
             return obj.toJSON()
 
+
 def convert_int(value):
     '''
     Try to convert value to integer and do nothing on error
@@ -428,7 +429,7 @@ def function_arguments(f, discard=None, asString=False):
     the_keywords = the_argspec.varkw
 
     args = []
-    kws = {}
+    kws = OrderedDict()
     string = ''
     for k, arg in enumerate(the_argspec.args):
         if (discard is not None) and (arg in tolist(discard)):
@@ -470,7 +471,7 @@ def args_as_kw(f, args, kw):
     '''
     a, k, astar, kstar = function_arguments(f)
     n = 0
-    for name, value in zip(a, args):
+    for name, value in zip(a + list(k.keys()), args):
         if name not in kw:
             kw[name] = value
         n += 1
