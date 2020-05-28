@@ -12,6 +12,7 @@ all:
 	@echo ' - make pypi          : upload to pypi'
 	@echo ' - make html          : generate sphinx documentation'
 	@echo ' - make examples      : generate sphinx documentation with examples'
+	@echo ' - make samples       : generate sample files'
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
@@ -50,6 +51,9 @@ html:
 
 examples:
 	cd sphinx && make examples
+
+samples:
+	cd omas/utilities && python3 generate_ods_samples.py
 
 docs: html
 	cd sphinx && make commit && make push

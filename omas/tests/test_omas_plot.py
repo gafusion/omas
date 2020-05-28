@@ -229,6 +229,18 @@ class TestOmasPlot(unittest.TestCase):
         ods2.plot_core_profiles_summary(
             fig=pyplot.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
 
+    def test_core_transport(self):
+        ods_test = copy.deepcopy(self.ods)
+        ods_test.sample_core_transport()
+        ods_test['core_transport.ids_properties.comment'] = "TGRYO"
+        ods_test.sample_core_profiles()
+        ods_test.sample_equilibrium()
+        ods_test['core_profiles.profiles_1d.0.rotation_frequency_tor_sonic'] = numpy.linspace(4e4, 2e3, len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
+        ods_test.plot_core_transport_fluxes()
+        fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
+        ods_test.plot_core_transport_fluxes(fig=fig, axes=axes, show_total_density=False, plotting_label="test")
+        ods_test.plot_core_transport_fluxes(plot_zeff=True, plotting_label="test")
+
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()

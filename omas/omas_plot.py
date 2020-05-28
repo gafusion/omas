@@ -444,7 +444,13 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
 
     if stime is None:
         axtime = pyplot.axes([0.1, 0.96, 0.75, 0.03])
-        stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=min(numpy.diff(time)))
+        min_time = min(time)
+        max_time = max(time)
+        if min_time == max_time:
+            min_time = min_time - 1
+            max_time = max_time + 1
+
+        stime = Slider(axtime, 'Time[s]', min_time, max_time, valinit=min(time), valstep=min(numpy.diff(time)))
         if stime not in _stimes:
             _stimes.append(stime)
             if len(_stimes) > 100:
@@ -1045,8 +1051,10 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         leg.draggable(True)
     return ax
 
+
 @add_to__ODS__
-def TGYRO_profiles_fluxes(ods, time_index=0, fig=None, axes=None, state="None", show_total_density=True):
+def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
+                          plotting_label=" ", show_total_density=True, plot_zeff=False):
     """
     Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.
 
@@ -1054,16 +1062,29 @@ def TGYRO_profiles_fluxes(ods, time_index=0, fig=None, axes=None, state="None", 
 
     :param time_index: time slice to plot
 
-    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+    :param fig, axes: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param plotting_label: String to add to plot labels can be left empty
 
     :param show_total_density: bool
         Show total thermal+fast in addition to thermal/fast breakdown if available
 
+    :param plot_zeff: if True, plot zeff below the rotatation
+
     :return: axes
     """
-    if fig == None:
+    if fig is None:
         from matplotlib import pyplot
-        fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
+        if plot_zeff:
+            nrows = 5
+        else:
+            nrows = 4
+        fig, axes = pyplot.subplots(nrows=nrows, ncols=2, sharex='col')
+
+    # Color dict for the plots:
+    color_label_dict = {'STEP_SC_exp': 'r', 'STEP_SC_exp_rot': 'b',
+                        'STEP_SC_pro': 'g', 'STEP_SC_exp_hcd': 'c',
+                        '0': 'r', '1': 'b', '2': 'g', '3': 'c', '4': 'm', '5': 'y', '6': 'lime'}
 
     if time_index is None:
         time = ods['equilibrium'].time()
@@ -1075,7 +1096,8 @@ def TGYRO_profiles_fluxes(ods, time_index=0, fig=None, axes=None, state="None", 
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(TGYRO_profiles_fluxes, time, ods, time_index, fig=fig, ax={}, **kw)
+            return ods_time_plot(core_transport_fluxes, time, ods, time_index=time_index, fig=fig, axes=axes,
+                                 plotting_label=plotting_label, show_total_density=show_total_density, plot_zeff=plot_zeff)
 
     def sum_density_types(specie_index):
         final_density = numpy.zeros(len(prof1d['grid.rho_tor_norm']))
@@ -1088,17 +1110,12 @@ def TGYRO_profiles_fluxes(ods, time_index=0, fig=None, axes=None, state="None", 
             final_density += prof1d[density]
         return final_density
 
-    if ods['summary.ids_properties.comment'] == "INIT":
-        linestyle = '--'
-        linewidth = 3
-    else:
+    if ods['core_transport.ids_properties.comment'] == "TGYRO":
         linestyle = '-'
         linewidth = 2
-
-    if state == "None":
-        state_label = " "
     else:
-        state_label = " State="+state
+        linestyle = '--'
+        linewidth = 3
 
     if "core_profiles" in ods:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1108,73 +1125,94 @@ def TGYRO_profiles_fluxes(ods, time_index=0, fig=None, axes=None, state="None", 
         ods_species = ['electrons'] + ['ion[%d]' % k for k in range(len(prof1d['ion']))]
         species_name = ['Electrons'] + [prof1d['ion[%d].label' % k] + ' ion' for k in range(len(prof1d['ion']))]
 
-        axes[-1,0].set_xlabel('$\\rho$')
-        axes[-1,1].set_xlabel('$\\rho$')
+        axes[-1, 0].set_xlabel('$\\rho$')
+        axes[-1, 1].set_xlabel('$\\rho$')
 
         # Temp electrons
-        axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, label=ods['summary']['ids_properties']['comment'] + state_label) # keV
-        axes[0,0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
-        axes[0,0].axvline(0.8, ls='--', color='k')
-        axes[0,0].axvline(0.2, ls='--', color='k')
-        axes[0,0].legend(prop={'size': 12})
+        axes[0, 0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # keV
+        axes[0, 0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
+        axes[0, 0].axvline(0.8, ls='--', color='k')
+        axes[0, 0].axvline(0.2, ls='--', color='k')
+        axes[0, 0].legend(prop={'size': 12})
+
+        # Temp main ion species
+        axes[1, 0].plot(rho_core_prof, prof1d[ods_species[1]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[1] + " " + plotting_label)  # keV
+        axes[1, 0].set_ylabel('$T_{i}\,[keV]$', fontsize='small')
+        axes[1, 0].axvline(0.8, ls='--', color='k')
+        axes[1, 0].axvline(0.2, ls='--', color='k')
 
         # ne
-        axes[1,0].plot(rho_core_prof, sum_density_types(specie_index=0), ls=linestyle, lw=linewidth, label=species_name[0] + state_label) # keV
-        axes[1,0].set_ylabel('$n_{e}\,[m^{-3}]$', fontsize='small')
-        axes[1,0].axvline(0.8, ls='--', color='k')
-        axes[1,0].axvline(0.2, ls='--', color='k')
-        # Temp main ion species
-        axes[2,0].plot(rho_core_prof, prof1d[ods_species[1]]['temperature']/1e3, ls=linestyle, lw=linewidth, label=species_name[1] + state_label) # keV
-        axes[2,0].set_ylabel('$T_{i}\,[keV]$', fontsize='small')
-        axes[2,0].axvline(0.8, ls='--', color='k')
-        axes[2,0].axvline(0.2, ls='--', color='k')
-        # Ion densities
-        for index, ion in enumerate(ods_species[1:]):
-            axes[3,0].plot(rho_core_prof, sum_density_types(specie_index=index+1), ls=linestyle, lw=linewidth, label=species_name[index+1] + state_label) # keV
-            axes[3,0].set_ylabel('$n_{ions}\,[m^{-3}]$', fontsize='small')
-            axes[3,0].axvline(0.8, ls='--', color='k')
-            axes[3,0].axvline(0.2, ls='--', color='k')
+        axes[2, 0].plot(rho_core_prof, sum_density_types(specie_index=0), ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[0] + " " + plotting_label)  # keV
+        axes[2, 0].set_ylabel('$n_{e}\,[m^{-3}]$', fontsize='small')
+        axes[2, 0].axvline(0.8, ls='--', color='k')
+        axes[2, 0].axvline(0.2, ls='--', color='k')
+
         # rotation
         from .omas_physics import omas_environment
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
-            rotation = (equlibrium['profiles_1d']['centroid']['r_max']-equlibrium['profiles_1d']['centroid']['r_min'])/2 \
-                     + equlibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['omega0']
-            axes[3,1].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, label=ods['summary']['ids_properties']['comment'] + state_label) # m/s
-            axes[3,1].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
-            axes[3,1].axvline(0.8, ls='--', color='k')
-            axes[3,1].axvline(0.2, ls='--', color='k')
-            axes[3,1].axvline(0.8, ls='--', color='k')
-            axes[3,1].axvline(0.2, ls='--', color='k')
+            omega0 = prof1d.get('rotation_frequency_tor_sonic', prof1d.get('omega0', None))
+            rotation = (equlibrium['profiles_1d']['r_outboard'] - equlibrium['profiles_1d']['r_inboard']) / 2 \
+                       + equlibrium['profiles_1d']['geometric_axis']['r'] * -omega0
+            axes[3, 0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # m/s
+            axes[3, 0].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
+            axes[3, 0].axvline(0.8, ls='--', color='k')
+            axes[3, 0].axvline(0.2, ls='--', color='k')
+            axes[3, 0].axvline(0.8, ls='--', color='k')
+            axes[3, 0].axvline(0.2, ls='--', color='k')
+
+        # plot zeff if plot_zeff is passed to plotting function
+        if plot_zeff:
+            axes[4, 0].plot(rho_core_prof, prof1d['zeff'], ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=plotting_label)  # keV
+            axes[4, 0].set_ylabel('$Z_{eff}$', fontsize='small')
+            axes[4, 0].axvline(0.8, ls='--', color='k')
+            axes[4, 0].axvline(0.2, ls='--', color='k')
 
     # Fluxes
     if "core_transport" in ods:
         core_transport = ods['core_transport']['model']
-        rho_TGLF = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
+        rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
         # Qe
-        axes[0,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', marker="o", markersize=6, lw=2, label="total" + state_label)
-        axes[0,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', marker="x", markersize=8, lw=2, label="target" + state_label) # W/m^2
-        axes[0,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, label="power_balance")
-        axes[0,1].set_ylabel('$Q_e$ (W/$m^2$)', fontsize='small')
-        axes[0,1].axvline(0.8, ls='--', color='k')
-        axes[0,1].axvline(0.2, ls='--', color='k')
+        axes[0, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[0, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
+        axes[0, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance")
+        axes[0, 1].set_ylabel('$Q_e$ [W/$m^2$]', fontsize='small')
+        axes[0, 1].axvline(0.8, ls='--', color='k')
+        axes[0, 1].axvline(0.2, ls='--', color='k')
 
         # Qi
-        axes[1,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', marker="o", markersize=6, lw=2, label="total" + state_label)
-        axes[1,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', marker="x", markersize=8, lw=2, label="target" + state_label) # W/m^2
-        axes[1,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, label="power_balance" + state_label)
-        axes[1,1].set_ylabel('$Q_i$ (W/$m^2$)', fontsize='small')
-        axes[1,1].legend(prop={'size': 12})
-        axes[1,1].axvline(0.8, ls='--', color='k')
-        axes[1,1].axvline(0.2, ls='--', color='k')
+        axes[1, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[1, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # W/m^2
+        axes[1, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
+        axes[1, 1].set_ylabel('$Q_i$ [W/$m^2$]', fontsize='small')
+        axes[1, 1].axvline(0.8, ls='--', color='k')
+        axes[1, 1].axvline(0.2, ls='--', color='k')
+
+        # Particle flux (electron particle source)
+        axes[2, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[2, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # particles/s/m^2
+        axes[2, 1].set_ylabel('$\Gamma_{e}$ [particles/s/$m^2$]', fontsize='small')
+        axes[2, 1].axvline(0.8, ls='--', color='k')
+        axes[2, 1].axvline(0.2, ls='--', color='k')
 
         # Pi (toroidal momentum flux)
-        axes[2,1].plot(rho_TGLF, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', marker="o", markersize=6, lw=2, label="total" + state_label)
-        axes[2,1].plot(rho_TGLF, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', marker="x", markersize=8, lw=2, label="target" + state_label) # W/m^2
-        axes[2,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, label="power_balance" + state_label)
-        axes[2,1].set_ylabel('$Q_e$ (W/$m^2$)', fontsize='small')
-        axes[2,1].axvline(0.8, ls='--', color='k')
-        axes[2,1].axvline(0.2, ls='--', color='k')
+        axes[3, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[3, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # N/m
+        axes[3, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
+        axes[3, 1].set_ylabel('$\Pi_{i}$ [N/$m$]', fontsize='small')
+        axes[3, 1].axvline(0.8, ls='--', color='k')
+        axes[3, 1].axvline(0.2, ls='--', color='k')
+
+        # Custom legend since it is uniform
+        from matplotlib.lines import Line2D
+
+        legend_elements = [Line2D([0], [0], color='k', lw=3, ls='--', label='Power Balance'),
+                           Line2D([0], [0], color='k', lw=3, label='Model total'),
+                           Line2D([0], [0], marker='o', ls='None', color='k', label='Model target', markersize=6)]
+
+        axes[0, 1].legend(handles=legend_elements)
+
     return axes
+
 
 # ================================
 # actuator aimings
@@ -2015,7 +2053,7 @@ def magnetics_overlay(
 
     # Make sure there is something to plot or else just give up and return
     nbp = 0
-    if compare_version(ods.imas_version,'3.23.3')>0:
+    if compare_version(ods.imas_version, '3.23.3') > 0:
         nbp = get_channel_count(
             ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
             test_checker='~numpy.isnan(checker)',
@@ -2665,7 +2703,7 @@ def position_control_overlay(
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 
     # Masking
-    mask = np.array(kw.pop('mask', np.ones(nbp+nx+ns, bool)))
+    mask = np.array(kw.pop('mask', np.ones(nbp + nx + ns, bool)))
     # Extend mask to make correct length, if needed
     if len(mask) < (nbp + nx + ns):
         extra_mask = np.ones(nbp + nx + ns - len(mask), bool)
