@@ -1051,6 +1051,7 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         leg.draggable(True)
     return ax
 
+
 @add_to__ODS__
 def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
                           plotting_label=" ", show_total_density=True, plot_zeff=False):
@@ -1124,82 +1125,82 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
         ods_species = ['electrons'] + ['ion[%d]' % k for k in range(len(prof1d['ion']))]
         species_name = ['Electrons'] + [prof1d['ion[%d].label' % k] + ' ion' for k in range(len(prof1d['ion']))]
 
-        axes[-1,0].set_xlabel('$\\rho$')
-        axes[-1,1].set_xlabel('$\\rho$')
+        axes[-1, 0].set_xlabel('$\\rho$')
+        axes[-1, 1].set_xlabel('$\\rho$')
 
         # Temp electrons
-        axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # keV
-        axes[0,0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
-        axes[0,0].axvline(0.8, ls='--', color='k')
-        axes[0,0].axvline(0.2, ls='--', color='k')
-        axes[0,0].legend(prop={'size': 12})
+        axes[0, 0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # keV
+        axes[0, 0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
+        axes[0, 0].axvline(0.8, ls='--', color='k')
+        axes[0, 0].axvline(0.2, ls='--', color='k')
+        axes[0, 0].legend(prop={'size': 12})
 
         # Temp main ion species
-        axes[1,0].plot(rho_core_prof, prof1d[ods_species[1]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=species_name[1] + " " + plotting_label)  # keV
-        axes[1,0].set_ylabel('$T_{i}\,[keV]$', fontsize='small')
-        axes[1,0].axvline(0.8, ls='--', color='k')
-        axes[1,0].axvline(0.2, ls='--', color='k')
+        axes[1, 0].plot(rho_core_prof, prof1d[ods_species[1]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[1] + " " + plotting_label)  # keV
+        axes[1, 0].set_ylabel('$T_{i}\,[keV]$', fontsize='small')
+        axes[1, 0].axvline(0.8, ls='--', color='k')
+        axes[1, 0].axvline(0.2, ls='--', color='k')
 
         # ne
-        axes[2,0].plot(rho_core_prof, sum_density_types(specie_index=0), ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=species_name[0] + " " + plotting_label)  # keV
-        axes[2,0].set_ylabel('$n_{e}\,[m^{-3}]$', fontsize='small')
-        axes[2,0].axvline(0.8, ls='--', color='k')
-        axes[2,0].axvline(0.2, ls='--', color='k')
+        axes[2, 0].plot(rho_core_prof, sum_density_types(specie_index=0), ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[0] + " " + plotting_label)  # keV
+        axes[2, 0].set_ylabel('$n_{e}\,[m^{-3}]$', fontsize='small')
+        axes[2, 0].axvline(0.8, ls='--', color='k')
+        axes[2, 0].axvline(0.2, ls='--', color='k')
 
         # rotation
-        # find minor radius
         from .omas_physics import omas_environment
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
-            rotation = (equlibrium['profiles_1d']['r_outboard']-equlibrium['profiles_1d']['r_inboard'])/2 \
-                     + equlibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['omega0']
-            axes[3,0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # m/s
-            axes[3,0].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
-            axes[3,0].axvline(0.8, ls='--', color='k')
-            axes[3,0].axvline(0.2, ls='--', color='k')
-            axes[3,0].axvline(0.8, ls='--', color='k')
-            axes[3,0].axvline(0.2, ls='--', color='k')
+            omega0 = prof1d.get('rotation_frequency_tor_sonic', prof1d.get('omega0', None))
+            rotation = (equlibrium['profiles_1d']['r_outboard'] - equlibrium['profiles_1d']['r_inboard']) / 2 \
+                       + equlibrium['profiles_1d']['geometric_axis']['r'] * -omega0
+            axes[3, 0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=ods['core_transport.ids_properties.comment'] + " " + plotting_label)  # m/s
+            axes[3, 0].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
+            axes[3, 0].axvline(0.8, ls='--', color='k')
+            axes[3, 0].axvline(0.2, ls='--', color='k')
+            axes[3, 0].axvline(0.8, ls='--', color='k')
+            axes[3, 0].axvline(0.2, ls='--', color='k')
 
         # plot zeff if plot_zeff is passed to plotting function
         if plot_zeff:
-            axes[4,0].plot(rho_core_prof, prof1d['zeff'], ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=plotting_label)  # keV
-            axes[4,0].set_ylabel('$Z_{eff}$', fontsize='small')
-            axes[4,0].axvline(0.8, ls='--', color='k')
-            axes[4,0].axvline(0.2, ls='--', color='k')
+            axes[4, 0].plot(rho_core_prof, prof1d['zeff'], ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=plotting_label)  # keV
+            axes[4, 0].set_ylabel('$Z_{eff}$', fontsize='small')
+            axes[4, 0].axvline(0.8, ls='--', color='k')
+            axes[4, 0].axvline(0.2, ls='--', color='k')
 
     # Fluxes
     if "core_transport" in ods:
         core_transport = ods['core_transport']['model']
         rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
         # Qe
-        axes[0,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[0,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
-        axes[0,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance")
-        axes[0,1].set_ylabel('$Q_e$ [W/$m^2$]', fontsize='small')
-        axes[0,1].axvline(0.8, ls='--', color='k')
-        axes[0,1].axvline(0.2, ls='--', color='k')
+        axes[0, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[0, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
+        axes[0, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance")
+        axes[0, 1].set_ylabel('$Q_e$ [W/$m^2$]', fontsize='small')
+        axes[0, 1].axvline(0.8, ls='--', color='k')
+        axes[0, 1].axvline(0.2, ls='--', color='k')
 
         # Qi
-        axes[1,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[1,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # W/m^2
-        axes[1,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label,'r'), label="power_balance" + plotting_label)
-        axes[1,1].set_ylabel('$Q_i$ [W/$m^2$]', fontsize='small')
-        axes[1,1].axvline(0.8, ls='--', color='k')
-        axes[1,1].axvline(0.2, ls='--', color='k')
+        axes[1, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[1, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # W/m^2
+        axes[1, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
+        axes[1, 1].set_ylabel('$Q_i$ [W/$m^2$]', fontsize='small')
+        axes[1, 1].axvline(0.8, ls='--', color='k')
+        axes[1, 1].axvline(0.2, ls='--', color='k')
 
         # Particle flux (electron particle source)
-        axes[2,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[2,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # particles/s/m^2
-        axes[2,1].set_ylabel('$\Gamma_{e}$ [particles/s/$m^2$]', fontsize='small')
-        axes[2,1].axvline(0.8, ls='--', color='k')
-        axes[2,1].axvline(0.2, ls='--', color='k')
+        axes[2, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[2, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # particles/s/m^2
+        axes[2, 1].set_ylabel('$\Gamma_{e}$ [particles/s/$m^2$]', fontsize='small')
+        axes[2, 1].axvline(0.8, ls='--', color='k')
+        axes[2, 1].axvline(0.2, ls='--', color='k')
 
         # Pi (toroidal momentum flux)
-        axes[3,1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label,'r'), label="total" + plotting_label)
-        axes[3,1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label,'r'), label="target" + plotting_label)  # N/m
-        axes[3,1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label,'r'), label="power_balance" + plotting_label)
-        axes[3,1].set_ylabel('$\Pi_{i}$ [N/$m$]', fontsize='small')
-        axes[3,1].axvline(0.8, ls='--', color='k')
-        axes[3,1].axvline(0.2, ls='--', color='k')
+        axes[3, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
+        axes[3, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # N/m
+        axes[3, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
+        axes[3, 1].set_ylabel('$\Pi_{i}$ [N/$m$]', fontsize='small')
+        axes[3, 1].axvline(0.8, ls='--', color='k')
+        axes[3, 1].axvline(0.2, ls='--', color='k')
 
         # Custom legend since it is uniform
         from matplotlib.lines import Line2D
@@ -1208,9 +1209,10 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
                            Line2D([0], [0], color='k', lw=3, label='Model total'),
                            Line2D([0], [0], marker='o', ls='None', color='k', label='Model target', markersize=6)]
 
-        axes[0,1].legend(handles=legend_elements)
+        axes[0, 1].legend(handles=legend_elements)
 
     return axes
+
 
 # ================================
 # actuator aimings
@@ -2051,7 +2053,7 @@ def magnetics_overlay(
 
     # Make sure there is something to plot or else just give up and return
     nbp = 0
-    if compare_version(ods.imas_version,'3.23.3')>0:
+    if compare_version(ods.imas_version, '3.23.3') > 0:
         nbp = get_channel_count(
             ods, 'magnetics', check_loc='magnetics.b_field_pol_probe.0.position.r', channels_name='b_field_pol_probe',
             test_checker='~numpy.isnan(checker)',
@@ -2701,7 +2703,7 @@ def position_control_overlay(
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 
     # Masking
-    mask = np.array(kw.pop('mask', np.ones(nbp+nx+ns, bool)))
+    mask = np.array(kw.pop('mask', np.ones(nbp + nx + ns, bool)))
     # Extend mask to make correct length, if needed
     if len(mask) < (nbp + nx + ns):
         extra_mask = np.ones(nbp + nx + ns - len(mask), bool)

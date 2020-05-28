@@ -186,6 +186,7 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
 
     return ods
 
+
 @add_to_ODS
 def core_sources(ods, time_index=0):
     """
@@ -208,6 +209,7 @@ def core_sources(ods, time_index=0):
         ods['core_sources.source'][source]['profiles_1d'][time_index].update(sources[source]['profiles_1d.0'])
 
     return ods
+
 
 @add_to_ODS
 def core_transport(ods, time_index=0):
