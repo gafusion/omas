@@ -1163,7 +1163,7 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 
     sigma_Ip = numpy.sign(Ip)
     sigma_B0 = numpy.sign(B0)
-    sign_dpsi_pos = numpy.sign(gradient(psi))[0]
+    sign_dpsi_pos = numpy.sign(numpy.gradient(psi))[0]
     sign_q_pos = numpy.sign(q)[0]
 
     sigma_Bp = sign_dpsi_pos / sigma_Ip
