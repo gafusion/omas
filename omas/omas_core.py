@@ -6,7 +6,7 @@
 from __future__ import print_function, division, unicode_literals
 
 from .omas_utils import *
-from .omas_utils import __version__
+from .omas_utils import __version__, _extra_structures
 
 __all__ = [
     'ODS', 'ODX',
@@ -370,9 +370,9 @@ class ODS(MutableMapping):
     @property
     def consistency_check(self):
         """
-        property that sets whether consistency with IMAS schema is enabled or not
+        property that returns whether consistency with IMAS schema is enabled or not
 
-        :return: True/False
+        :return: True/False/'warn'/'drop'/'strict' or a combination of those strings
         """
         if not hasattr(self, '_consistency_check'):
             self._consistency_check = omas_rcparams['consistency_check']
@@ -380,12 +380,17 @@ class ODS(MutableMapping):
 
     @consistency_check.setter
     def consistency_check(self, consistency_value):
+        """
+        property that sets whether consistency with IMAS schema is enabled or not
+
+        :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
+        """
         old_consistency_check = self._consistency_check
         try:
             # set ._consistency_check for this ODS
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
-            for item in self.keys():
+            for item in list(self.keys()):
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
                     # consistency_check=True makes sure that code.parameters is of type CodeParameters
                     if consistency_value:
@@ -405,7 +410,10 @@ class ODS(MutableMapping):
                                 raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
-                            if structure_key in self.structure:
+                            strict_fail = False
+                            if isinstance(consistency_value, str) and 'strict' in consistency_value and structure_key in self.structure and p2l(self.location + '.%s' % item)[0] in _extra_structures and o2i(o2u(self.location + '.%s' % item)) in _extra_structures[p2l(self.location + '.%s' % item)[0]]:
+                                strict_fail = True
+                            if not strict_fail and structure_key in self.structure:
                                 structure = self.structure[structure_key]
                             else:
                                 options = list(self.structure.keys())
@@ -413,14 +421,20 @@ class ODS(MutableMapping):
                                     options = 'A numerical index is needed with n>=0'
                                 else:
                                     options = 'Did you mean: %s' % options
-                                spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
-                                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
-                                if consistency_value == 'warn':
-                                    printe(text)
+                                text = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
+                                if isinstance(consistency_value, str) and 'warn' in consistency_value or 'drop' in consistency_value:
+                                    if 'warn' in consistency_value:
+                                        if 'drop' in consistency_value:
+                                            printe('Dropping invalid ' + text)
+                                        else:
+                                            printe('Invalid ' + text)
                                     structure = {}
                                     consistency_value_propagate = False
                                 else:
-                                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
+                                    raise LookupError(underline_last('Invalid ' + text, len('LookupError: ')) + '\n' + options)
+                                if isinstance(consistency_value, str) and 'drop' in consistency_value:
+                                    del self[item]
+                                    continue
                         # assign structure and location information
                         if isinstance(self.getraw(item), ODS):
                             self.getraw(item).structure = structure
