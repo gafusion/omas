@@ -175,7 +175,7 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
         ions = ods['core_profiles.profiles_1d'][time_index]['ion']
         ions[len(ions)] = copy.deepcopy(ions[len(ions) - 1])
         for item in ions[len(ions) - 1].flat():
-            ions[len(ions) - 1][items] *= 0
+            ions[len(ions) - 1][item] *= 0
 
     if not include_pressure:
         for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
