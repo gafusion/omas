@@ -444,7 +444,13 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
 
     if stime is None:
         axtime = pyplot.axes([0.1, 0.96, 0.75, 0.03])
-        stime = Slider(axtime, 'Time[s]', min(time), max(time), valinit=min(time), valstep=min(numpy.diff(time)))
+        min_time = min(time)
+        max_time = max(time)
+        if min_time == max_time:
+            min_time = min_time - 1
+            max_time = max_time + 1
+
+        stime = Slider(axtime, 'Time[s]', min_time, max_time, valinit=min(time), valstep=min(numpy.diff(time)))
         if stime not in _stimes:
             _stimes.append(stime)
             if len(_stimes) > 100:
