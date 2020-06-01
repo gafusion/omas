@@ -250,6 +250,8 @@ class ODS(MutableMapping):
                             continue
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
+                    elif isinstance(time, ODS): # an empty ODS means no data is there
+                        pass
                     times[item] = time
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):
@@ -258,7 +260,7 @@ class ODS(MutableMapping):
                         # return False if time is not homogeneous
                         extra_info['homogeneous_time'] = False
                         return None
-            times_values = numpy.atleast_1d(list(times.values()))
+            times_values = list(times.values())
 
             extra_info['location'] = times.keys()
             # no time data defined
