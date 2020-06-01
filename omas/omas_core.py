@@ -258,7 +258,7 @@ class ODS(MutableMapping):
                         # return False if time is not homogeneous
                         extra_info['homogeneous_time'] = False
                         return None
-            times_values = list(times.values())
+            times_values = numpy.atleast_1d(list(times.values()))
 
             extra_info['location'] = times.keys()
             # no time data defined
