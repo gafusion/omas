@@ -2,7 +2,7 @@
  "thomson_scattering": {
   "documentation": "Thomson scattering diagnostic",
   "full_path": "thomson_scattering",
-  "lifecycle_last_change": "3.27.0",
+  "lifecycle_last_change": "3.28.2",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -15,7 +15,7 @@
   "documentation": "Set of channels (lines-of-sight)",
   "full_path": "thomson_scattering/channel(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "100",
+  "maxoccur": "150",
   "structure_reference": "thomson_scattering_channel"
  },
  "thomson_scattering.channel[:].delta_position": {
