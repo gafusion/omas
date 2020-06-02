@@ -230,8 +230,7 @@ class ODS(MutableMapping):
         loc = p2l(subtree)
         if not loc:
             raise LookupError('Must specify a location in the ODS to get the time of')
-        flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
-        times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
+        times_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0]+'.')]
 
         # traverse ODS upstream until time information is found
         time = {}
@@ -250,8 +249,6 @@ class ODS(MutableMapping):
                             continue
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
-                    elif isinstance(time, ODS): # an empty ODS means no data is there
-                        pass
                     times[item] = time
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):

@@ -241,6 +241,11 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
     open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
 
+    # generate times cache file
+    times = extract_times(imas_version=imas_version)
+    dump_string = json.dumps(times, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
+    open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json', 'w').write(dump_string)
+
 
 def create_html_documentation(imas_version=omas_rcparams['default_imas_version']):
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version, imas_version), 'omas_doc.html']))
@@ -335,6 +340,29 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
         omas_coordinates.update(coords)
 
     return sorted(list(omas_coordinates))
+
+
+def extract_times(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of strings with times across all structures
+
+    :param imas_version: imas version
+
+    :return: list with times
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    omas_times = []
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+
+        for item in tmp:
+            if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'structure':
+                continue
+            omas_times.append(item)
+
+    return sorted(omas_times)
 
 
 def symlink_imas_structure_versions(test=True, verbose=True):
