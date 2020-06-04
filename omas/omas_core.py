@@ -421,7 +421,7 @@ class ODS(MutableMapping):
                                 else:
                                     options = 'Did you mean: %s' % options
                                 text = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
-                                if isinstance(consistency_value, str) and 'warn' in consistency_value or 'drop' in consistency_value:
+                                if isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
                                     if 'warn' in consistency_value:
                                         if 'drop' in consistency_value:
                                             printe('Dropping invalid ' + text)
