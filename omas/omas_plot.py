@@ -1471,12 +1471,18 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
     for launcher in launchers:
         R0 = launchers[launcher]['launching_position.r']
         Z0 = launchers[launcher]['launching_position.z']
-        ang_pol = launchers[launcher]['steering_angle_pol.data']
+        ang_tor = launchers[launcher]['steering_angle_tor.data'] 
+        ang_pol = launchers[launcher]['steering_angle_pol.data'] 
+        ang_pol_proj = 0.5*numpy.pi - np.arctan2(numpy.tan(ang_pol),numpy.cos(ang_tor))
 
-        R1 = R0 - launcher_trajectory * numpy.sin(ang_pol)
-        Z1 = Z0 + launcher_trajectory * numpy.cos(ang_pol)
-
+        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol_proj)
+        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol_proj)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
+
+        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol)
+        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol)
+        ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
+
 
     return ax
 
@@ -1525,17 +1531,15 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
     for launcher in launchers:
         R = launchers[launcher]['launching_position.r']
         phi = launchers[launcher]['launching_position.phi']
-        ang_tor = launchers[launcher]['steering_angle_tor.data']
+        ang_tor = launchers[launcher]['steering_angle_tor.data'] 
 
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
-
-        x1 = x0 + launcher_trajectory * numpy.cos(ang_tor + phi)
-        y1 = y0 + launcher_trajectory * numpy.sin(ang_tor + phi)
+        x1 = x0 - launcher_trajectory * numpy.cos(ang_tor + phi)
+        y1 = y0 - launcher_trajectory * numpy.sin(ang_tor + phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return ax
-
 
 # ================================
 # Heating and current drive
