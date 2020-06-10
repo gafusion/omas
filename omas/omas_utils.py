@@ -219,6 +219,7 @@ def json_dumper(obj, objects_encode=True):
         else:
             return obj.toJSON()
 
+
 def convert_int(value):
     '''
     Try to convert value to integer and do nothing on error
@@ -428,7 +429,7 @@ def function_arguments(f, discard=None, asString=False):
     the_keywords = the_argspec.varkw
 
     args = []
-    kws = {}
+    kws = OrderedDict()
     string = ''
     for k, arg in enumerate(the_argspec.args):
         if (discard is not None) and (arg in tolist(discard)):
@@ -470,7 +471,7 @@ def args_as_kw(f, args, kw):
     '''
     a, k, astar, kstar = function_arguments(f)
     n = 0
-    for name, value in zip(a, args):
+    for name, value in zip(a + list(k.keys()), args):
         if name not in kw:
             kw[name] = value
         n += 1
@@ -492,6 +493,8 @@ _structures_dict = {}
 _info_structures = {}
 # dictionary that contains all the coordinates defined within the data dictionary
 _coordinates = {}
+# dictionary that contains all the times defined within the data dictionary
+_times = {}
 
 # extra structures that python modules using omas can define
 # by setting omas.omas_utils._extra_structures equal to a
@@ -604,9 +607,33 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
     # caching
     if imas_version not in _coordinates:
         filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json'
-        with open(filename, 'r') as f:
-            _coordinates[imas_version] = json.load(f)
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _coordinates[imas_version] = json.load(f)
+        else:
+            from .omas_structure import extract_coordinates
+            _coordinates[imas_version] = extract_coordinates(imas_version)
     return _coordinates[imas_version]
+
+
+def omas_times(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of times
+
+    :param imas_version: IMAS version to look up
+
+    :return: list of strings with IMAS times
+    '''
+    # caching
+    if imas_version not in _times:
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json'
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _times[imas_version] = json.load(f)
+        else:
+            from .omas_structure import extract_times
+            _times[imas_version] = extract_times(imas_version)
+    return _times[imas_version]
 
 
 _p2l_cache = {}

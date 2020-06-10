@@ -10693,7 +10693,7 @@
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_tor(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.j_tor_error_index": {
   "data_type": "int_type",
@@ -10714,7 +10714,7 @@
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_tor_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.j_tor_error_upper": {
   "cocos_label_transformation": "ip_like",
@@ -10728,7 +10728,7 @@
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_tor_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.magnetic_shear": {
   "coordinates": [

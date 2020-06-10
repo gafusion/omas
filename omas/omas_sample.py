@@ -134,13 +134,11 @@ def equilibrium(
         eq['equilibrium.time_slice'][0]['boundary.x_point.0.r'] = 1.304
         eq['equilibrium.time_slice'][0]['boundary.x_point.0.z'] = -1.222
 
-    ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
+    ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
-    ods.set_time_array(
-        'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
-    )
-    ods['equilibrium.time'] = ods['equilibrium.time_slice[:].time']
+    ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
+    ods.set_time_array('equilibrium.time', time_index, float(time_index))
 
     return ods
 
@@ -175,7 +173,7 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
         ions = ods['core_profiles.profiles_1d'][time_index]['ion']
         ions[len(ions)] = copy.deepcopy(ions[len(ions) - 1])
         for item in ions[len(ions) - 1].flat():
-            ions[len(ions) - 1][items] *= 0
+            ions[len(ions) - 1][item] *= 0
 
     if not include_pressure:
         for item in ods.physics_core_profiles_pressures(update=False).flat().keys():
@@ -183,8 +181,10 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
                 del ods[item]
 
     ods['core_profiles.profiles_1d'][time_index]['time'] = float(time_index)
+    ods.set_time_array('core_profiles.time', time_index, float(time_index))
 
     return ods
+
 
 @add_to_ODS
 def core_sources(ods, time_index=0):
@@ -200,14 +200,21 @@ def core_sources(ods, time_index=0):
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)['core_sources']
 
-    sources = pr['core_sources.source']
-    for source in sources:
-        ods['core_sources.source'][source]['identifier'].update(sources[source]['identifier'])
-        ods['core_sources.source'][source]['profiles_1d'][time_index].update(sources[source]['profiles_1d.0'])
-
+    if 'core_sources' not in ods:
+        ods['core_sources'].update(pr)
+    else:
+        for item in pr:
+            if item not in ods['core_sources']:
+                ods['core_sources'][item] = pr[item]
+        sources = pr['source']
+        for source in sources:
+            ods['core_sources.source'][source]['identifier'].update(sources[source]['identifier'])
+            ods['core_sources.source'][source]['profiles_1d'][time_index].update(sources[source]['profiles_1d.0'])
+    ods.set_time_array('core_sources.time', time_index, float(time_index))
     return ods
+
 
 @add_to_ODS
 def core_transport(ods, time_index=0):
@@ -223,13 +230,19 @@ def core_transport(ods, time_index=0):
         some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)['core_transport']
 
-    models = pr['core_transport.model']
-    for model in models:
-        ods['core_transport.model'][model]['identifier'].update(models[model]['identifier'])
-        ods['core_transport.model'][model]['profiles_1d'][time_index].update(models[model]['profiles_1d.0'])
-
+    if 'core_transport' not in ods:
+        ods['core_transport'].update(pr)
+    else:
+        for item in pr:
+            if item not in ods['core_transport']:
+                ods['core_transport'][item] = pr[item]
+        models = pr['model']
+        for model in models:
+            ods['core_transport.model'][model]['identifier'].update(models[model]['identifier'])
+            ods['core_transport.model'][model]['profiles_1d'][time_index].update(models[model]['profiles_1d.0'])
+    ods.set_time_array('core_sources.time', time_index, float(time_index))
     return ods
 
 

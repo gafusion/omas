@@ -1278,7 +1278,7 @@
   "full_path": "bolometer/channel(i1)/etendue",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m^2.str"
+  "units": "m^2.sr"
  },
  "bolometer.channel[:].etendue_error_index": {
   "data_type": "int_type",
@@ -1293,7 +1293,7 @@
   "full_path": "bolometer/channel(i1)/etendue_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m^2.str"
+  "units": "m^2.sr"
  },
  "bolometer.channel[:].etendue_error_upper": {
   "data_type": "FLT_0D",
@@ -1301,7 +1301,7 @@
   "full_path": "bolometer/channel(i1)/etendue_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m^2.str"
+  "units": "m^2.sr"
  },
  "bolometer.channel[:].etendue_method": {
   "data_type": "structure",
