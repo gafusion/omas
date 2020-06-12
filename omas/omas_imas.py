@@ -367,7 +367,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
             set_paths = []
             for path in reversed(paths):
                 set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
-            set_paths = filter(None, set_paths)
+            set_paths = list(filter(None, set_paths))
 
             # assign the data
             for path in set_paths:
