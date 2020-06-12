@@ -1,5 +1,3 @@
-from __future__ import print_function, division, unicode_literals
-
 import os, sys
 
 sys.path.insert(0, os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])

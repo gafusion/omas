@@ -12,7 +12,6 @@ Test script for omas/examples/...
 """
 
 # Basic imports
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 

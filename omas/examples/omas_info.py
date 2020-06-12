@@ -6,8 +6,6 @@ IDS info
 This is an example showing how to query OMAS for structural information about IMAS IDSs
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from pprint import pprint
 from omas import *
 

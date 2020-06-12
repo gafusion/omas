@@ -6,8 +6,6 @@ Time in OMAS
 This example illustrates how OMAS can handle the time dimension
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from omas import *
 
 # test generation of a sample ods

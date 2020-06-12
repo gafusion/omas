@@ -1,7 +1,6 @@
 '''
 Quickly check that python packages required for proper running of OMAS are all installed
 '''
-from __future__ import print_function
 import os
 from pprint import pprint
 import sys

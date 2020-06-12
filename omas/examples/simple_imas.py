@@ -12,8 +12,6 @@ Prior running this script, the following commands must be typed at the teriminal
 > imasdb ITER
 """
 
-from __future__ import print_function, division  # , unicode_literals
-
 import os
 from pprint import pprint
 from omas import *

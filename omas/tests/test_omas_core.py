@@ -11,7 +11,6 @@ Test script for omas/omas_core.py
 -------
 """
 
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 import numpy

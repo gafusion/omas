@@ -13,8 +13,6 @@ There are three possible settings:
 * **consistency_check = True**: will raise an error if entry is outside of IMAS scope. Recommended when working with IMAS. The error raised will clearly say where the error is, and provide suggestions based on valid IMAS structure.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 
 from omas import *

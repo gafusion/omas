@@ -6,8 +6,6 @@
 # to start a mongodb server on the local workstation
 # mongod --dbpath $DIRECTORY_WHERE_TO_STORE_DATA
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS
 

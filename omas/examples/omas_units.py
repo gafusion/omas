@@ -6,8 +6,6 @@ Units conversions
 This example illustrates how OMAS can automatically translate units by leveraging the `pint` Python package
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from omas import *
 
 import pint

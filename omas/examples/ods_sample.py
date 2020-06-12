@@ -7,8 +7,6 @@ OMAS provides a way to populate ODSs with sample data.
 This is often useful for testing/debugging purposes.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'

@@ -12,7 +12,6 @@ This example shows how OMAS supports dynamic path crection using different synta
   :target: ../_images/dynamic_path_testimonial.png
 """
 
-from __future__ import print_function, division, unicode_literals
 import numpy
 
 from omas import *

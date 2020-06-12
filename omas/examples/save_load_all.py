@@ -7,8 +7,6 @@ Save and load a sample ODS through the different OMAS save formats and check tha
 A final report summarizes if some storage systems combinations have errors.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 import numpy
 from pprint import pprint

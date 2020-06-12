@@ -9,8 +9,6 @@ This feature is extremely useful when different codes that have different
 computational grids need to read/write parts of the same data structure.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import numpy
 from omas import *
 

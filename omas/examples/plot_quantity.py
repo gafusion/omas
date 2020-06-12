@@ -7,8 +7,6 @@ This example shows how to use the .plot_quantity() method to
 conveniently and rapidly plot individual ODS quantities
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from matplotlib import pyplot
 import os
 from omas import *
