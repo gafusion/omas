@@ -2,7 +2,7 @@
  "summary": {
   "documentation": "Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the \"time\" vector) or time-averaged over an interval (in such case the \"time_width\" of the interval is indicated and the \"time\" vector represents the end of each time interval).",
   "full_path": "summary",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.29.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "1"
@@ -5100,6 +5100,64 @@
   "type": "dynamic",
   "units": "J"
  },
+ "summary.global_quantities.fusion_gain": {
+  "data_type": "structure",
+  "documentation": "Fusion gain : ratio of the power provided by fusion reactions to the auxiliary power needed to heat the plasma. Often noted as Q in the litterature.",
+  "full_path": "summary/global_quantities/fusion_gain",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "-"
+ },
+ "summary.global_quantities.fusion_gain.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/fusion_gain/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.fusion_gain.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/fusion_gain/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.fusion_gain.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/fusion_gain/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.fusion_gain.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/fusion_gain/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.fusion_gain.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/fusion_gain/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
  "summary.global_quantities.greenwald_fraction": {
   "data_type": "structure",
   "documentation": "Greenwald fraction =line_average/n_e/value divided by (global_quantities/ip/value *1e6 * pi * minor_radius^2)",
@@ -5415,6 +5473,180 @@
   "type": "dynamic",
   "units": "-"
  },
+ "summary.global_quantities.power_bremsstrahlung": {
+  "data_type": "structure",
+  "documentation": "Radiated power from Bremsstrahlung",
+  "full_path": "summary/global_quantities/power_bremsstrahlung",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W"
+ },
+ "summary.global_quantities.power_bremsstrahlung.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/power_bremsstrahlung/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_bremsstrahlung.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/power_bremsstrahlung/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_bremsstrahlung.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/power_bremsstrahlung/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_bremsstrahlung.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/power_bremsstrahlung/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_bremsstrahlung.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/power_bremsstrahlung/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_line": {
+  "data_type": "structure",
+  "documentation": "Radiated power from line radiation",
+  "full_path": "summary/global_quantities/power_line",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W"
+ },
+ "summary.global_quantities.power_line.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/power_line/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_line.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/power_line/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_line.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/power_line/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_line.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/power_line/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_line.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/power_line/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_loss": {
+  "data_type": "structure",
+  "documentation": "Power through separatrix",
+  "full_path": "summary/global_quantities/power_loss",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W"
+ },
+ "summary.global_quantities.power_loss.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/power_loss/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_loss.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/power_loss/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_loss.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/power_loss/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_loss.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/power_loss/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_loss.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/power_loss/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
  "summary.global_quantities.power_ohm": {
   "data_type": "structure",
   "documentation": "Ohmic power",
@@ -5589,6 +5821,64 @@
   "type": "dynamic",
   "units": "W"
  },
+ "summary.global_quantities.power_synchrotron": {
+  "data_type": "structure",
+  "documentation": "Radiated power from synchrotron radiation",
+  "full_path": "summary/global_quantities/power_synchrotron",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W"
+ },
+ "summary.global_quantities.power_synchrotron.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/power_synchrotron/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_synchrotron.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/power_synchrotron/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_synchrotron.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/power_synchrotron/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.power_synchrotron.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/power_synchrotron/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.global_quantities.power_synchrotron.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/power_synchrotron/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
  "summary.global_quantities.q_95": {
   "data_type": "structure",
   "documentation": "q at the 95% poloidal flux surface",
@@ -5692,6 +5982,64 @@
   "lifecycle_status": "active",
   "type": "constant",
   "units": "m"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel": {
+  "data_type": "structure",
+  "documentation": "Ratio of Helium confinement time to fuel confinement time",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "-"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "summary.global_quantities.ratio_tau_helium_fuel.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/ratio_tau_helium_fuel/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "-"
  },
  "summary.global_quantities.resistance": {
   "data_type": "structure",
@@ -8377,6 +8725,64 @@
   "lifecycle_status": "active",
   "type": "static",
   "units": "m"
+ },
+ "summary.heating_current_drive.power_additional": {
+  "data_type": "structure",
+  "documentation": "Total additional external power (NBI+EC+IC+LH, without ohmic) coupled to the plasma",
+  "full_path": "summary/heating_current_drive/power_additional",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W"
+ },
+ "summary.heating_current_drive.power_additional.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/heating_current_drive/power_additional/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.heating_current_drive.power_additional.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/heating_current_drive/power_additional/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.heating_current_drive.power_additional.value_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/heating_current_drive/power_additional/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.heating_current_drive.power_additional.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/heating_current_drive/power_additional/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "summary.heating_current_drive.power_additional.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/heating_current_drive/power_additional/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W"
  },
  "summary.heating_current_drive.power_ec": {
   "data_type": "structure",
@@ -24009,7 +24415,7 @@
  },
  "summary.pedestal_fits.linear.rhostar_pedestal_top_electron_magnetic_axis": {
   "data_type": "structure",
-  "documentation": "Normalised Larmor radius at pressure pedestal top for electrons using the magnetic field on the magnetic axis (definition used in most tokamak litterature)",
+  "documentation": "Normalised Larmor radius at pressure pedestal top for electrons using the magnetic field on the magnetic axis (definition used in most tokamak literature)",
   "full_path": "summary/pedestal_fits/linear/rhostar_pedestal_top_electron_magnetic_axis",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",

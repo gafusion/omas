@@ -2,7 +2,7 @@
  "langmuir_probes": {
   "documentation": "Langmuir probes",
   "full_path": "langmuir_probes",
-  "lifecycle_last_change": "3.24.0",
+  "lifecycle_last_change": "3.29.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.22.0",
   "maxoccur": "3"
@@ -937,6 +937,37 @@
   "timebasepath": "time",
   "type": "dynamic",
   "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].surface_area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of the probe surface exposed to the plasma",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
  },
  "langmuir_probes.embedded[:].t_e": {
   "data_type": "structure",
