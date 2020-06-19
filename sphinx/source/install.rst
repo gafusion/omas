@@ -3,7 +3,7 @@ Installation
 
 .. _install:
 
-OMAS runs both with *Python2* and *Python3*.
+OMAS runs on *Python3*.
 
 **Pypi**: To install `OMAS with pip <https://pypi.python.org/pypi/omas/>`_ (for users):
 
@@ -37,7 +37,7 @@ The development version of omas can also be installed with pip:
                                                                                 # install packages required for extra development purposes
                                                                                 # Maybe necessary to use `--user` option of `pip` with no `sudo`
 
-List of `Python 2 <_static/requirements_python2.txt>`_ or `Python 3 <_static/requirements_python3.txt>`_ package requirements.
+List of `Python package requirements <_static/requirements.txt>`_.
 
 Installation with IMAS
 ======================
@@ -51,7 +51,7 @@ The simplest way to ensure that the `omas` dependencies are always available and
     cd path_to_omas_installation
     git clone git@github.com:gafusion/omas.git
     cd omas
-    pip install --target ./site-packages -r requirements_python2.txt
+    pip install --target ./site-packages -r requirements.txt
 
 Then update the `omas` UNIX module to include the `omas` and the `omas/site-packages` folders to the $PYTHONPATH environmental variable:
 

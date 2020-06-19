@@ -16,7 +16,7 @@ mapper = {'dnspython': None,
           'Sphinx': 'sphinx',
           'Pillow': 'PIL'}
 
-filename = os.path.split(os.path.abspath(__file__))[0] + os.sep + 'requirements_python%d.txt' % sys.version_info[0]
+filename = os.path.split(os.path.abspath(__file__))[0] + os.sep + 'requirements.txt'
 with open(filename, 'r') as f:
     lines = f.readlines()
 lines = [
