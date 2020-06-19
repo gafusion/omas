@@ -141,7 +141,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_eqcx_data_availability_variations(self):
         """Plot all the equilibrium contour quantity options with all the combinations of available data"""
-        cq_options = ['rho', 'psi', 'phi', 'q']
+        cq_options = ['rho_tor_norm', 'psi', 'phi', 'q']
         for iwall in [True, False]:
             for ipsi in [True, False]:
                 for iphi in [True, False]:
@@ -193,8 +193,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
+            # Fails because we ask for junk.
+            ods.plot_equilibrium_CX(contour_quantity='__not_existing_quantity__', allow_fallback=False)
 
     def test_eqcx_slices(self):
         """Test dealing with different time indices, including getting wall from a different slice than the eq"""

@@ -817,6 +817,18 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
                     eq2D['grid.dim1'] = tmp
     return ods
 
+@add_to__ALL__
+def grids_ggd_points_triangles(grid):
+    '''
+    Return points and triangles in grids_ggd structure
+
+    :param grid: a ggd grid such as 'equilibrium.grids_ggd[0].grid[0]'
+
+    :return: tuple with points and triangles
+    '''
+    points = grid['space[0].objects_per_dimension[0].object[:].geometry']
+    triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
+    return points, triangles
 
 @add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):

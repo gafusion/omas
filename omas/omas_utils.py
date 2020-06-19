@@ -138,16 +138,25 @@ def is_numeric(value):
         return False
 
 
-def omas_interp1d(x, xp, fp, left=None, right=None, period=None):
+def omas_interp1d(x, xp, yp, left=None, right=None, period=None, extrapolate=True):
     '''
     If xp is not increasing, the results are numpy.interp1d nonsense.
     This function wraps numpy.interp1d but makes sure that the x-coordinate sequence xp is increasing.
 
+    :param extrapolate: linear extrapolation beyond bounds
+
     '''
     if not numpy.all(numpy.diff(xp) > 0):
         index = numpy.argsort(xp)
-        return numpy.interp(x, xp[index], fp[index], left=left, right=right, period=period)
-    return numpy.interp(x, xp, fp, left=left, right=right, period=period)
+    else:
+        index = numpy.arange(len(xp)).astype(int)
+    y = numpy.interp(x, xp[index], yp[index], left=left, right=right, period=period)
+    if extrapolate:
+        if not period and not left:
+            y = numpy.where(x < xp[index[0]], yp[index[0]] + (x - xp[index[0]]) * (yp[index[0]] - yp[index[1]]) / (xp[index[0]] - xp[index[1]]), y)
+        if not period and not right:
+            y = numpy.where(x > xp[index[-1]], yp[index[-1]] + (x - xp[index[-1]]) * (yp[index[-1]] - yp[index[-2]]) / (xp[index[-1]] - xp[index[-2]]), y)
+    return y
 
 
 omas_interp1d.__doc__ += numpy.interp.__doc__
