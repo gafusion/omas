@@ -91,6 +91,49 @@ def equilibrium_stored_energy(ods, update=True):
 
 
 @add_to__ODS__
+@preprocess_ods('equilibrium')
+def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method='linear', update=True):
+    """
+    Convert GGD data to profiles 2D
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    cache = True
+    points = ods['equilibrium.grids_ggd[0].grid[0].space[0].objects_per_dimension[0].object[:].geometry']
+    if resolution is None:
+        resolution = int(numpy.sqrt(len(points[:, 0])))
+        resolution = [resolution, resolution]
+
+    if time_index is None:
+        time_index = range(len(ods['equilibrium.time_slice']))
+    elif isinstance(time_index, int):
+        time_index = [time_index]
+
+    for k in time_index:
+        ods['equilibrium.time_slice.%d.profiles_2d.0.grid_type'].setdefault(1)
+        for k in ods['equilibrium.time_slice.%d.profiles_2d']:
+            profiles_2d = ods['equilibrium.time_slice.%d.profiles_2d.0']
+            if 'grid_type.index' in profiles_2d and profiles_2d['grid_type.index'] == 1:
+                break
+        ggd = ods['equilibrium']['time_slice'][k]['ggd'][0]
+        for what in ggd:
+            quantity = ggd[what + '.0.values']
+            r, z, interpolated, cache = scatter_to_rectangular(points[:, 0], points[:, 1], quantity, resolution[0], resolution[1], return_cache=cache)
+            profiles_2d[what] = interpolated.T
+        profiles_2d['grid.dim1'] = r
+        profiles_2d['grid.dim2'] = z
+
+
+@add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_greenwald(ods, update=True):
     """
@@ -817,6 +860,7 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
                     eq2D['grid.dim1'] = tmp
     return ods
 
+
 @add_to__ALL__
 def grids_ggd_points_triangles(grid):
     '''
@@ -829,6 +873,72 @@ def grids_ggd_points_triangles(grid):
     points = grid['space[0].objects_per_dimension[0].object[:].geometry']
     triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
     return points, triangles
+
+
+@add_to__ALL__
+def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], sanitize=True, return_cache=False):
+    '''
+    Interpolate scattered data points to rectangular grid
+
+    :param r: r coordinate of data points
+
+    :param z: z coordinate of data points
+
+    :param data: data
+
+    :param R: scalars, 1D arrays, or 2D arrays
+
+    :param Z: scalars, 1D arrays, or 2D arrays
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
+    :param sanitize: avoid NaNs in regions where data is missing
+
+    :param return_cache: cache object or boolean to return cache object for faster interpolaton
+
+    :return: R, Z, interpolated_data (and cache if return_cache)
+    '''
+    import scipy
+
+    if isinstance(R, int) and isinstance(Z, int):
+        R, Z = numpy.meshgrid(linspace(numpy.min(r), numpy.max(r), R), linspace(numpy.min(z), numpy.max(z), Z))
+    elif len(numpy.atleast_1d(R).shape) == 1 and len(numpy.atleast_1d(Z).shape) == 1:
+        R, Z = numpy.meshgrid(R, Z)
+    elif len(numpy.atleast_1d(R).shape) == 2 and len(numpy.atleast_1d(Z).shape) == 2:
+        pass
+    else:
+        raise ValueError('R and Z must both be either scalars, 1D arrays, or 2D arrays')
+
+    cache = None
+    if method == 'nearest':
+        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
+        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'linear':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
+        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'cubic':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
+        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'extrapolate':
+        interpolant = scipy.interpolate.Rbf(r, z, data)
+        intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
+    else:
+        raise ValueError('Interpolation method %s is not recognized' % method)
+
+    # remove any NaNs using a rough nearest interpolation
+    index = ~numpy.isnan(intepolated_data.flat)
+    if sanitize and sum(1 - index):
+        intepolated_data.flat[~index] = scipy.interpolate.NearestNDInterpolator((R.flatten()[index], Z.flatten()[index]),
+                                                                                intepolated_data.flatten()[index])((R.flatten()[~index], Z.flatten()[~index]))
+
+    if return_cache:
+        return R[0, :], Z[:, 0], intepolated_data, cache
+    return R[0, :], Z[:, 0], intepolated_data
+
 
 @add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
