@@ -417,8 +417,10 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     axs = {}
 
     def do_clean(time0):
-        for ax in axs:
-            axs[ax].cla()
+        if axs is not None:
+            for ax in axs:
+                if axs[ax] is not None:
+                    axs[ax].cla()
 
     def update(time0):
         if 'ax' in kw:
@@ -487,10 +489,11 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 @add_to__ODS__
-def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_norm', allow_fallback='psi',
-                   ax=None, sf=1, label_contours=None, show_wall=True, xkw={}, ggd_points_triangles=None, **kw):
+def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_norm', allow_fallback=True, ax=None, sf=3,
+                   label_contours=None, show_wall=True, xkw={}, ggd_points_triangles=None, **kw):
     r"""
-    Plot equilibrium cross-section as per `ods['equilibrium']['time_slice'][time_index]`
+    Plot equilibrium cross-section
+    as per `ods['equilibrium']['time_slice'][time_index]`
 
     :param ods: ODS instance
         input ods containing equilibrium data
@@ -504,8 +507,8 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     :param contour_quantity: string
         quantity to contour; options: psi (poloidal magnetic flux), rho (sqrt of toroidal flux), phi (toroidal flux)
 
-    :param allow_fallback: bool or string
-        boolean indicating whether to fallback to `psi` or to the quantity defined in this string
+    :param allow_fallback: bool
+        If rho/phi is requested but not available, plot on psi instead if allowed. Otherwise, raise ValueError.
 
     :param ax: Axes instance
         axes to plot in (active axes is generated if `ax is None`)
@@ -596,11 +599,10 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
         # Most robust thing is to use PSI2D and interpolate 1D quantities over it
         if get2d('psi') is not None and 'psi' in eq['profiles_1d'] and contour_quantity in eq['profiles_1d']:
             x_value_1d = eq['profiles_1d']['psi']
-            m = numpy.min(x_value_1d)
-            M = numpy.max(x_value_1d)
+            m = x_value_1d[0]
+            M = x_value_1d[-1]
             x_value_1d = (x_value_1d - m) / (M - m)
-            x_value_2d = get2d('psi')
-            x_value_2d = (x_value_2d - m) / (M - m)
+            x_value_2d = (get2d('psi') - m) / (M - m)
             value_1d = eq['profiles_1d'][contour_quantity]
             value_2d = omas_interp1d(x_value_2d, x_value_1d, value_1d)
             break
@@ -627,7 +629,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
             max_q = int(numpy.round(omas_interp1d(0.95, x_value_1d, value_1d)))
             levels = numpy.arange(max_q)
         else:
-            levels = numpy.linspace(numpy.min(value_1d), numpy.max(value_1d), 11)[1:-1]
+            levels = numpy.linspace(value_1d[0], value_1d[-1], 11)[1:-1]
             levels = numpy.hstack((levels, levels[-1] + (levels[1] - levels[0]) * numpy.arange(100)[1:]))
 
     # Wall clipping
@@ -648,17 +650,20 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
         else:
             z, r = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
 
+        # sanitize
+        value_2d = value_2d.copy()
+        value_2d[:, -1] = value_2d[:, -2]
+        value_2d[-1, :] = value_2d[-2, :]
+        value_2d[-1, -1] = value_2d[-2, -2]
+
         # Resample
         if sf > 1:
+            value_2d[numpy.isnan(value_2d)] = numpy.nanmean(value_2d)
             import scipy.ndimage
             r = scipy.ndimage.zoom(r, sf)
             z = scipy.ndimage.zoom(z, sf)
             value_2d = scipy.ndimage.zoom(value_2d, sf)
 
-        value_2d = value_2d.copy()
-        value_2d[:, -1] = value_2d[:, -2]
-        value_2d[-1, :] = value_2d[-2, :]
-        value_2d[-1, -1] = value_2d[-2, -2]
         cs = ax.contour(r, z, value_2d, levels, **kw)
 
         if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
