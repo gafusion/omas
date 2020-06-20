@@ -1773,6 +1773,8 @@ class CodeParameters(dict):
         '''
         import xmltodict
         self.clear()
+        if not code_params_string.strip().endswith('</parameters>'):
+            code_params_string = '<parameters>' + code_params_string + '</parameters>'
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
             recursive_interpreter(tmp, dict_cls=CodeParameters)
