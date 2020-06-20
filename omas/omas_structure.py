@@ -342,7 +342,7 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
 
 def extract_times(imas_version=omas_rcparams['default_imas_version']):
     '''
-    return list of strings with times across all structures
+    return list of strings with .time across all structures
 
     :param imas_version: imas version
 
@@ -361,6 +361,28 @@ def extract_times(imas_version=omas_rcparams['default_imas_version']):
             omas_times.append(item)
 
     return sorted(omas_times)
+
+
+def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of strings endingwith .ggd or .grids_ggd across all structures
+
+    :param imas_version: imas version
+
+    :return: list with times
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    omas_ggd = []
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+
+        for item in tmp:
+            if item.endswith('.ggd') or item.endswith('.grids_ggd'):
+                omas_ggd.append(item)
+
+    return sorted(omas_ggd)
 
 
 def symlink_imas_structure_versions(test=True, verbose=True):

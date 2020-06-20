@@ -862,6 +862,45 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
 
 
 @add_to__ALL__
+def delete_ggd(ods, ds=None):
+    '''
+    delete all .ggd and .grids_ggd entries
+
+    :param ods: input ods
+
+    :param ds: string or list of strings where to limit the deletion process
+
+    :return: list of strings with deleted entries
+    '''
+    if ds is None:
+        ds = ods.keys()
+    elif isinstance(ds, str):
+        ds = [ds]
+
+    from .omas_structure import extract_ggd
+    ggds = extract_ggd()
+
+    deleted = []
+    for ggd in ggds:
+        if not any([ggd.startswith(structure + '.') for structure in ds]):
+            continue
+
+        if ':' not in ggd:
+            if ggd in ods:
+                del ods[ggd]
+                deleted.append(ggd)
+        else:
+            dir,base=ggd.split('[:]')
+            if dir in ods:
+                for k in ods[dir].keys():
+                    if 'ggd' in ods[dir+'[%d]'%k]:
+                        del ods[dir][k][base]
+                        deleted.append(ggd)
+
+    return deleted
+
+
+@add_to__ALL__
 def grids_ggd_points_triangles(grid):
     '''
     Return points and triangles in grids_ggd structure
