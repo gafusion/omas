@@ -98,6 +98,12 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 
     :param ods: input ods
 
+    :param time_index: time slices to process
+
+    :param resolution: integer or tuple for rectangular grid resolution
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
     :param update: operate in place
 
     :return: updated ods
@@ -107,10 +113,11 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
-    cache = True
     points = ods['equilibrium.grids_ggd[0].grid[0].space[0].objects_per_dimension[0].object[:].geometry']
+
     if resolution is None:
         resolution = int(numpy.sqrt(len(points[:, 0])))
+    if isinstance(resolution, int):
         resolution = [resolution, resolution]
 
     if time_index is None:
@@ -118,10 +125,11 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
     elif isinstance(time_index, int):
         time_index = [time_index]
 
+    cache = True
     for k in time_index:
-        ods['equilibrium.time_slice.%d.profiles_2d.0.grid_type'].setdefault(1)
-        for k in ods['equilibrium.time_slice.%d.profiles_2d']:
-            profiles_2d = ods['equilibrium.time_slice.%d.profiles_2d.0']
+        ods_n['equilibrium.time_slice.%d.profiles_2d.0.grid_type'].setdefault(1)
+        for k in ods_n['equilibrium.time_slice.%d.profiles_2d']:
+            profiles_2d = ods_n['equilibrium.time_slice.%d.profiles_2d.0']
             if 'grid_type.index' in profiles_2d and profiles_2d['grid_type.index'] == 1:
                 break
         ggd = ods['equilibrium']['time_slice'][k]['ggd'][0]
@@ -131,7 +139,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
             profiles_2d[what] = interpolated.T
         profiles_2d['grid.dim1'] = r
         profiles_2d['grid.dim2'] = z
-
+    return ods_n
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
