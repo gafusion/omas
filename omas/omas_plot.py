@@ -629,7 +629,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
             max_q = int(numpy.round(omas_interp1d(0.95, x_value_1d, value_1d)))
             levels = numpy.arange(max_q)
         else:
-            levels = numpy.linspace(value_1d[0], value_1d[-1], 11)[1:-1]
+            levels = numpy.linspace(numpy.min(value_1d), numpy.max(value_1d), 11)[1:-1]
             levels = numpy.hstack((levels, levels[-1] + (levels[1] - levels[0]) * numpy.arange(100)[1:]))
 
     # Wall clipping
