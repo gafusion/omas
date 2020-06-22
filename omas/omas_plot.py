@@ -432,7 +432,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
         else:
             ax = axs
         time_index0 = time_index[numpy.argmin(abs(time - time0))]
-        tmp = ods_plot_function(ods, time_index0, ax=ax, **kw)
+        tmp = ods_plot_function(ods, time_index0, ax=ax, **kw)['ax']
         if isinstance(tmp, dict):
             axs.update(tmp)
         else:
@@ -535,7 +535,8 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     """
 
     # caching of ggd data
-    if 'equilibrium.grids_ggd' in ods and not ggd_points_triangles:
+    if ggd_points_triangles is None and 'equilibrium.grids_ggd' in ods:
+        from .omas_physics import grids_ggd_points_triangles
         ggd_points_triangles = grids_ggd_points_triangles(ods['equilibrium.grids_ggd[0].grid[0]'])
 
     if allow_fallback is True:
@@ -563,6 +564,8 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     if ax is None:
         ax = pyplot.gca()
 
+    return_dict = {'ax': ax}
+
     wall = None
     eq = ods['equilibrium']['time_slice'][time_index]
     if 'wall' in ods:
@@ -588,7 +591,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     # get 2d data either from grid or ggd
     def get2d(contour_quantity):
         pr2d = None
-        if 'profiles_2d.0.%s' % contour_quantity in eq:
+        if 'profiles_2d' in eq and 'profiles_2d.0.%s' % contour_quantity in eq:
             pr2d = eq['profiles_2d.0.%s' % contour_quantity]
         elif 'ggd.0.%s.0.values' % contour_quantity in eq:
             pr2d = eq['ggd.0.%s.0.values' % contour_quantity]
@@ -622,6 +625,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
                 return ax
             else:
                 raise ValueError(txt)
+    return_dict['contour_quantity'] = contour_quantity
 
     # handle levels
     if levels is None and value_1d is not None:
@@ -642,13 +646,13 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     kw.pop('color', '')
     kw['linewidths'] = kw.pop('linewidth')
 
-    if 'profiles_2d' in eq:
+    if 'profiles_2d.0' in eq:
         # Contours
-        if 'r' in eq['profiles_2d'][0] and 'z' in eq['profiles_2d'][0]:
-            r = eq['profiles_2d'][0]['r']
-            z = eq['profiles_2d'][0]['z']
+        if 'r' in eq['profiles_2d.0'] and 'z' in eq['profiles_2d.0']:
+            r = eq['profiles_2d.0.r']
+            z = eq['profiles_2d.0.z']
         else:
-            z, r = numpy.meshgrid(eq['profiles_2d'][0]['grid']['dim2'], eq['profiles_2d'][0]['grid']['dim1'])
+            z, r = numpy.meshgrid(eq['profiles_2d.0.grid.dim2'], eq['profiles_2d.0.grid.dim1'])
 
         # sanitize
         value_2d = value_2d.copy()
@@ -672,7 +676,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     elif 'ggd' in eq:
         cs = ax.tricontour(ggd_points_triangles[0][:, 0], ggd_points_triangles[0][:, 1], ggd_points_triangles[1], value_2d, levels=levels, **kw)
     else:
-        raise Exception('no 2d')
+        raise Exception('No 2D equilibrium data to plot')
 
     if contour_quantity == 'q':
         ax.clabel(cs, cs.levels, inline=True, fontsize=10)
@@ -702,9 +706,8 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     # Wall
     if wall is not None and show_wall:
         ax.plot(wall[0]['outline']['r'], wall[0]['outline']['z'], 'k', linewidth=2)
-
-        ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']), min(wall[0]['outline']['z']),
-                 max(wall[0]['outline']['z'])])
+        ax.axis([min(wall[0]['outline']['r']), max(wall[0]['outline']['r']),
+                 min(wall[0]['outline']['z']), max(wall[0]['outline']['z'])])
 
     # Axes
     ax.set_aspect('equal')
@@ -712,7 +715,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
 
-    return ax
+    return return_dict
 
 
 @add_to__ODS__
@@ -744,7 +747,7 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf, label_contours=label_contours, **kw)
+            return ods_time_plot(equilibrium_CX_topview, time, ods, time_index, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -799,11 +802,22 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
 
-    return ax
+    return {'ax': ax}
+
+
+nice_names = {'rho_tor_norm': '$\\rho$',
+              'rho_tor': '$\\rho [m]$',
+              'rho_volume_norm': '$\\rho_{\\rm vol}$',
+              'psi_norm': '$\\psi$',
+              'psi': '$\\psi$ [Wb]',
+              'phi': '$\\phi$ [Wb]',
+              'phi_norm': '$\\phi$',
+              'q': '$q$',
+              }
 
 
 @add_to__ODS__
-def equilibrium_summary(ods, time_index=None, fig=None, **kw):
+def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=None, **kw):
     """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -814,10 +828,18 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
+    :param ggd_points_triangles:
+        Caching of ggd data structure as generated by omas_physics.grids_ggd_points_triangles() method
+
     :param kw: arguments passed to matplotlib plot statements
 
     :return: figure handler
     """
+
+    # caching of ggd data
+    if ggd_points_triangles is None and 'equilibrium.grids_ggd' in ods:
+        from .omas_physics import grids_ggd_points_triangles
+        ggd_points_triangles = grids_ggd_points_triangles(ods['equilibrium.grids_ggd[0].grid[0]'])
 
     from matplotlib import pyplot
 
@@ -834,25 +856,26 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ax={}, **kw)
+            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ggd_points_triangles=ggd_points_triangles, ax={}, **kw)
 
     axs = kw.pop('ax', {})
 
     ax = cached_add_subplot(fig, axs, 1, 3, 1)
-    equilibrium_CX(ods, time_index=time_index, ax=ax, **kw)
+    contour_quantity = kw.pop('contour_quantity', 'rho_tor_norm')
+    tmp = equilibrium_CX(ods, time_index=time_index, ax=ax, contour_quantity=contour_quantity, ggd_points_triangles=ggd_points_triangles, **kw)
     eq = ods['equilibrium']['time_slice'][time_index]
 
     # x
-    if 'phi' in eq['profiles_2d'][0] and 'phi' in eq['profiles_1d']:
-        x = numpy.sqrt(abs(eq['profiles_1d']['phi']))
-        xName = '$\\rho$'
+    if tmp['contour_quantity'] in eq['profiles_1d']:
+        raw_xName = tmp['contour_quantity']
+        x = eq['profiles_1d'][raw_xName]
     else:
-        x = eq['profiles_1d']['psi']
-        xName = '$\\psi$'
-    x = (x - min(x)) / (max(x) - min(x))
+        raw_xName = 'psi'
+        x = eq['profiles_1d']['psi_norm']
+        x = (x - min(x)) / (max(x) - min(x))
+    xName = nice_names.get(raw_xName, raw_xName)
 
     # pressure
-
     ax = cached_add_subplot(fig, axs, 2, 3, 2)
     ax.plot(x, eq['profiles_1d']['pressure'], **kw)
     kw.setdefault('color', ax.lines[-1].get_color())
@@ -888,9 +911,10 @@ def equilibrium_summary(ods, time_index=None, fig=None, **kw):
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     pyplot.xlabel(xName)
 
-    ax.set_xlim([0, 1])
+    if raw_xName.endswith('norm'):
+        ax.set_xlim([0, 1])
 
-    return axs
+    return {'ax': axs}
 
 
 @add_to__ODS__
@@ -1001,7 +1025,7 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
         ax0.set_ylim([0, ax0.get_ylim()[1]])
     if ax1 is not None:
         ax1.set_ylim([0, ax1.get_ylim()[1]])
-    return axs
+    return {'ax': axs}
 
 
 @add_to__ODS__
@@ -1068,7 +1092,7 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         leg.set_draggable(True)
     else:
         leg.draggable(True)
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1274,7 +1298,7 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
         Z1 = pellets[pellet]['path_geometry.second_point.z']
         ax.plot([R0, R1], [Z0, Z1], '--', **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1324,7 +1348,7 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
         y1 = R1 * numpy.sin(phi1)
         ax.plot([x0, x1], [y0, y1], '--', **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1384,7 +1408,7 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
 
         ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1439,7 +1463,7 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
 
         ax.plot([x0, x1], [y0, y1], 's-', markevery=2, **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1497,7 +1521,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1552,7 +1576,7 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
         y1 = y0 - launcher_trajectory * numpy.sin(ang_tor + phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 # ================================
@@ -1599,7 +1623,7 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
             ax.plot(b['position.r'], b['position.z'], **kw)
             # plotc(b['position.r'], b['position.z'], b['electrons.power']/max(b['electrons.power']), ax=ax, **kw)
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1646,7 +1670,7 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
     ax.set_ylabel('[%s]' % omas_info_node(b.ulocation + '.' + what)['units'])
     ax.set_xlabel('rho')
 
-    return ax
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1696,26 +1720,31 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
 
     ax.set_xlim([0, 1])
 
-    return axs
+    return {'ax': axs}
 
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
     from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
+
     time = ods['nbi.time']
     nbi = ods['nbi.unit']
     tmp = []
     for beam in nbi:
         tmp.append(nbi[beam]['power_launched.data'])
         ax.plot(time, tmp[-1], label=nbi[beam]['identifier'])
+
     ax.plot(time, numpy.sum(tmp, 0), 'k', lw=2, label='Total')
+
     ax.set_title('Neutral Beam Injectors power')
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Power [W]')
     ax.legend()
-    return
+
+    return {'ax': ax}
 
 
 # ================================
@@ -1802,7 +1831,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
                     ax.set_ylim(auto=True)
                 overlay_function(ods, ax, **overlay_kw)
 
-    return
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1852,6 +1881,9 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     npipes = get_channel_count(
         ods, 'gas_injection',
@@ -1859,13 +1891,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         channels_name='pipe',
         test_checker='~numpy.isnan(checker)'
     )
+
     if npipes == 0:
-        return
+        return {'ax': ax}
 
     mask = kw.pop('mask', numpy.ones(npipes, bool))
-
-    if ax is None:
-        ax = pyplot.gca()
 
     pipes = ods['gas_injection']['pipe']  # Shortcut
 
@@ -1932,7 +1962,8 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                 r + label_dr, z + label_dz, label,
                 color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize,
             )
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -1958,14 +1989,14 @@ def pf_active_overlay(ods, ax=None, **kw):
     import matplotlib
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     nc = get_channel_count(
         ods, 'pf_active', check_loc='pf_active.coil.0.element.0.geometry.geometry_type', channels_name='coil',
         test_checker='checker > -1')
     if nc == 0:
-        return
-
-    if ax is None:
-        ax = pyplot.gca()
+        return {'ax': ax}
 
     kw.setdefault('label', 'Active PF coils')
     kw.setdefault('facecolor', 'gray')
@@ -1982,6 +2013,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     def path_rectangle(rectangle):
         """
         :param rectangle: ODS sub-folder: element.*.geometry.rectangle
+
         :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
         """
         x = rectangle['r']
@@ -1995,6 +2027,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     def path_outline(outline):
         """
         :param outline: ODS sub-folder: element.*.geometry.outline
+
         :return: n x 2 array giving the path around the outline of the coil element, suitable for input to Polygon()
         """
         return numpy.array([outline['r'], outline['z']]).T
@@ -2032,7 +2065,7 @@ def pf_active_overlay(ods, ax=None, **kw):
 
     ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
 
-    return
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2069,6 +2102,9 @@ def magnetics_overlay(
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     nbp = 0
     if compare_version(ods.imas_version, '3.23.3') > 0:
@@ -2081,10 +2117,7 @@ def magnetics_overlay(
         test_checker='~numpy.isnan(checker)',
     )
     if max([nbp, nfl]) == 0:
-        return
-
-    if ax is None:
-        ax = pyplot.gca()
+        return {'ax': ax}
 
     color = kw.pop('color', None)
     bpol_probe_color = color if bpol_probe_color is None else bpol_probe_color
@@ -2117,7 +2150,7 @@ def magnetics_overlay(
     if show_flux_loop:
         show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
 
-    return
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2138,16 +2171,16 @@ def interferometer_overlay(ods, ax=None, **kw):
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r',
         test_checker='~numpy.isnan(checker)',
     )
     if nc == 0:
-        return
-
-    if ax is None:
-        ax = pyplot.gca()
+        return {'ax': ax}
 
     color = kw.pop('color', None)
     labelevery = kw.pop('labelevery', 1)
@@ -2171,7 +2204,7 @@ def interferometer_overlay(ods, ax=None, **kw):
                     ch['identifier'],
                     color=color, va=label_va[i], ha=label_ha[i], fontsize=notesize,
                 )
-    return
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2192,6 +2225,9 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods,
@@ -2200,10 +2236,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
         test_checker='~numpy.isnan(checker)',
     )
     if nc == 0:
-        return
-
-    if ax is None:
-        ax = pyplot.gca()
+        return {'ax': ax}
 
     labelevery = kw.pop('labelevery', 5)
     notesize = kw.pop('notesize', 'xx-small')
@@ -2228,7 +2261,8 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
                 ts_id[i],
                 color=ts_mark[0].get_color(), fontsize=notesize, ha=label_ha[i], va=label_va[i]
             )
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2264,16 +2298,16 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data',
         test_checker='any(~numpy.isnan(checker))',
     )
     if nc == 0:
-        return
-
-    if ax is None:
-        ax = pyplot.gca()
+        return {'ax': ax}
 
     try:
         eq_time = ods['equilibrium.time_slice.0.time']
@@ -2338,7 +2372,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
                     cer_id[i],
                     color=color, fontsize=notesize, ha=ha[i], va=va[i]
                 )
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2365,16 +2400,17 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     from matplotlib import pyplot
 
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
         ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r',
         test_checker='~numpy.isnan(checker)',
     )
     if nc == 0:
-        return
+        return {'ax': ax}
 
-    if ax is None:
-        ax = pyplot.gca()
     mask = kw.pop('mask', numpy.ones(nc, bool))
 
     r1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.r'] for i in range(nc)])[mask]
@@ -2423,7 +2459,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
                 va=label_va[i],
                 fontsize=notesize,
             )
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2458,6 +2495,10 @@ def langmuir_probes_overlay(
     """
     from matplotlib import pyplot
 
+    # Get a handle on the axes
+    if ax is None:
+        ax = pyplot.gca()
+
     # Make sure there is something to plot or else just give up and return
     if show_embedded:
         if embedded_probes is not None:
@@ -2491,11 +2532,8 @@ def langmuir_probes_overlay(
     else:
         ncr = 0
     if (nce == 0) and (ncr == 0):
-        return
+        return {'ax': ax}
 
-    # Get a handle on the axes
-    if ax is None:
-        ax = pyplot.gca()
     # Set up masks
     mask = kw.pop('mask', numpy.ones(nce + ncr, bool))
     mask_e = mask[:nce]  # For wall-embedded probes
@@ -2576,7 +2614,8 @@ def langmuir_probes_overlay(
                 '\n {} \n'.format(lp_id_e[i]),
                 color=color, ha=ha[i], va=va[i], fontsize=notesize,
             )
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2657,7 +2696,7 @@ def position_control_overlay(
                 show_measured_xpoint=show_measured_xpoint,
                 **copy.deepcopy(kw)
             )
-        return
+        return {'ax': ax}
     else:
         t = np.atleast_1d(t)[0]
 
@@ -2690,7 +2729,7 @@ def position_control_overlay(
         ns = 0
     if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
-        return
+        return {'ax': ax}
     r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
     z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
@@ -2822,7 +2861,8 @@ def position_control_overlay(
 
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay done')
-    return
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
@@ -2855,11 +2895,11 @@ def pulse_schedule_overlay(ods, ax=None, t=None, **kw):
         ax = pyplot.gca()
 
     position_control_overlay(ods, ax=ax, t=t, **kw)
-    return
+    return {'ax': ax}
 
 
 @add_to__ODS__
-def summary(ods, fig=None, quantity=None):
+def summary(ods, fig=None, quantity=None, **kw):
     '''
     Plot summary time traces. Internally makes use of plot_quantity method.
 
@@ -2869,7 +2909,7 @@ def summary(ods, fig=None, quantity=None):
 
     :param quantity: if None plot all time-dependent global_quantities. Else a list of strings with global quantities to plot
 
-    :return: figure handler
+    :return: list of axes
     '''
 
     from matplotlib import pyplot
@@ -2880,6 +2920,7 @@ def summary(ods, fig=None, quantity=None):
         quantity = ods['summary.global_quantities']
 
     # two passes, one for counting number of plots the second for actual plotting
+    axs = kw.pop('ax', {})
     n = 0
     for step in ['count', 'plot']:
         k = 0
@@ -2892,12 +2933,13 @@ def summary(ods, fig=None, quantity=None):
                     r = int(numpy.sqrt(n + 1))
                     c = int(numpy.ceil(n / numpy.sqrt(n)))
                     if k == 1:
-                        ax = ax0 = fig.add_subplot(r, c, k)
+                        ax = ax0 = cached_add_subplot(fig, axs, r, c, k)
                     else:
-                        ax = fig.add_subplot(r, c, k, sharex=ax0)
+                        ax = cached_add_subplot(fig, axs, r, c, k, sharex=ax0)
                     ax.set_title(q)
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
-    return fig
+
+    return {'ax': axs}
 
 
 latexit = {}
@@ -2994,7 +3036,8 @@ def quantity(ods, key,
 
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    return ax
+
+    return {'ax': ax}
 
 
 # this test is here to prevent
