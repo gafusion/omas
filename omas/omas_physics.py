@@ -141,6 +141,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_greenwald(ods, update=True):
@@ -898,10 +899,10 @@ def delete_ggd(ods, ds=None):
                 del ods[ggd]
                 deleted.append(ggd)
         else:
-            dir,base=ggd.split('[:]')
+            dir, base = ggd.split('[:]')
             if dir in ods:
                 for k in ods[dir].keys():
-                    if 'ggd' in ods[dir+'[%d]'%k]:
+                    if 'ggd' in ods[dir + '[%d]' % k]:
                         del ods[dir][k][base]
                         deleted.append(ggd)
 
@@ -1458,7 +1459,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
             omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
 
 
-def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True):
+def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False):
     """
     This is a utility function for generating the omas_cocos.py Python file
 
@@ -1474,13 +1475,17 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
 
     :return: dictionary structure with tally of score and reason for scoring for every entry
     """
+    # update OMAS cocos information with the one stored in IMAS
+    from .omas_structure import extract_cocos
+    _cocos_signals.update(extract_cocos())
+
     # units of entries currently in cocos_singals
     cocos_units = []
     for item in _cocos_signals:
         if _cocos_signals[item] == '?':
             continue
         info = omas_info_node(item)
-        if len(info):  # info may have no length if nodes are deleted between IMAS versions
+        if len(info) and 'units' in info:  # info may have no length if nodes are deleted between IMAS versions
             units = info['units']
             if units not in cocos_units:
                 cocos_units.append(units)
@@ -1555,6 +1560,7 @@ _cocos_signals = {}
 
         # loop over structures
         for structure in structures:
+            print('Updating COCOS info for: ' + structure)
             text.extend(['', '# ' + structure.upper()])
             csig.extend(['', '# ' + structure.upper()])
 

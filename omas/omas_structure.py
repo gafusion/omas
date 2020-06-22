@@ -385,6 +385,51 @@ def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
     return sorted(omas_ggd)
 
 
+def extract_cocos(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return dictionary of entries with cocos transformations across all structures
+
+    :param imas_version: imas version
+
+    :return: dictionary with cocos transformations
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+    from omas.omas_utils import i2o
+
+    cocos_mapper = {}
+    cocos_mapper["'1'"] = '--delete--'
+    cocos_mapper[".sigma_ip_eff"] = 'TOR'
+    cocos_mapper[".fact_q"] = 'Q'
+    cocos_mapper[".fact_psi"] = 'PSI'
+    cocos_mapper[".sigma_b0_eff"] = 'TOR'
+    cocos_mapper[".fact_dodpsi"] = 'dPSI'
+    cocos_mapper[".fact_dtheta"] = 'POL'
+    cocos_mapper[".sigma_rphiz_eff"] = 'TOR'
+    cocos_mapper["grid_type_transformation(index_grid_type,1)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,2)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,3)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,4)"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim1"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim2"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim3"] = '--delete--'
+    cocos_mapper[".fact_dim2*.fact_dim2"] = '--delete--'
+    cocos_mapper[".fact_dim2*.fact_dim3"] = '--delete--'
+    cocos_mapper[".fact_dim3*.fact_dim3"] = '--delete--'
+
+    omas_cocos = {}
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+        for item in tmp:
+            if 'cocos_transformation_expression' in tmp[item]:
+                cocos = tmp[item]['cocos_transformation_expression']
+                cocos = cocos_mapper.get(cocos, cocos)
+                if cocos != '--delete--':
+                    omas_cocos[i2o(item)] = cocos
+
+    return omas_cocos
+
+
 def symlink_imas_structure_versions(test=True, verbose=True):
     '''
     Generate symbolic links in imas_structures so that no files are added when there are no changes between IDSs
