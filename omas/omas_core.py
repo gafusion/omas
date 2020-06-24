@@ -228,12 +228,19 @@ class ODS(MutableMapping):
         loc = p2l(subtree)
         if not loc:
             raise LookupError('Must specify a location in the ODS to get the time of')
-        times_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0]+'.')]
+        utimes_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0] + '.')]
+
+        # get time nodes with actual numbers for indeces of arrays of structures and identify time index
+        times_ds = list(map(lambda item: u2o(item, l2o(subtree)), utimes_ds))
+        try:
+            time_array_index = int(re.sub('.*\.([0-9]+)\.time.*', r'\1', ' '.join(times_ds)))
+        except Exception:
+            time_array_index = None
 
         # traverse ODS upstream until time information is found
         time = {}
         for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
-            times_sub_ds = [k for k in times_ds if k.startswith(l2u(sub))]
+            times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
             this_subtree = l2o(sub)
 
             # get time data from ods
@@ -266,6 +273,8 @@ class ODS(MutableMapping):
             elif len(times) == 1 or all([times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
+                if time_array_index:
+                    return time[time_array_index]
                 return time
             # We crossed [:] or something and picked up a 2D time array
             elif any([len(time.shape) > 1 for time in times_values]):
@@ -274,12 +283,13 @@ class ODS(MutableMapping):
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                 while len(time0.shape) > 1:
                     time0 = numpy.take(time0, 0, axis=0)
-
                 if all([time.size == time0.size for time in times.values()]):
                     for time in times.values():
                         # Make sure all time arrays are close to the time0 we identified
                         assert abs(time - time0).max() < 1e-7
                     extra_info['homogeneous_time'] = True
+                    if time_array_index:
+                        return time0[time_array_index]
                     return time0
                 else:  # Similar to ValueError exception caught above
                     extra_info['homogeneous_time'] = False
