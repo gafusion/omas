@@ -273,7 +273,7 @@ class ODS(MutableMapping):
             elif len(times) == 1 or all([times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
-                if time_array_index:
+                if time_array_index is not None:
                     return time[time_array_index]
                 return time
             # We crossed [:] or something and picked up a 2D time array
@@ -288,7 +288,7 @@ class ODS(MutableMapping):
                         # Make sure all time arrays are close to the time0 we identified
                         assert abs(time - time0).max() < 1e-7
                     extra_info['homogeneous_time'] = True
-                    if time_array_index:
+                    if time_array_index is not None:
                         return time0[time_array_index]
                     return time0
                 else:  # Similar to ValueError exception caught above
