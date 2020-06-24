@@ -234,14 +234,14 @@ class ODS(MutableMapping):
         time = {}
         for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
             times_sub_ds = [k for k in times_ds if k.startswith(l2u(sub))]
-            subtree = l2o(sub)
+            this_subtree = l2o(sub)
 
             # get time data from ods
             times = {}
             n = len(self.location)
             for item in times_sub_ds:
                 try:
-                    time = self.__getitem__(u2o(item, subtree)[n:], None)  # traverse ODS
+                    time = self.__getitem__(u2o(item, this_subtree)[n:], None)  # traverse ODS
                     if isinstance(time, numpy.ndarray):
                         if time.size == 0:
                             continue

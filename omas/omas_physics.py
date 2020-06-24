@@ -126,13 +126,13 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         time_index = [time_index]
 
     cache = True
-    for k in time_index:
-        ods_n['equilibrium.time_slice.%d.profiles_2d.0.grid_type'].setdefault(1)
-        for k in ods_n['equilibrium.time_slice.%d.profiles_2d']:
-            profiles_2d = ods_n['equilibrium.time_slice.%d.profiles_2d.0']
+    for itime in time_index:
+        ods_n[f'equilibrium.time_slice.{itime}.profiles_2d.0.grid_type'].setdefault('index', 1)
+        for k in ods_n[f'equilibrium.time_slice.{itime}.profiles_2d']:
+            profiles_2d = ods_n[f'equilibrium.time_slice.{itime}.profiles_2d.{k}']
             if 'grid_type.index' in profiles_2d and profiles_2d['grid_type.index'] == 1:
                 break
-        ggd = ods['equilibrium']['time_slice'][k]['ggd'][0]
+        ggd = ods[f'equilibrium.time_slice.{itime}.ggd.0']
         for what in ggd:
             quantity = ggd[what + '.0.values']
             r, z, interpolated, cache = scatter_to_rectangular(points[:, 0], points[:, 1], quantity, resolution[0], resolution[1], return_cache=cache)
@@ -949,7 +949,7 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     import scipy
 
     if isinstance(R, int) and isinstance(Z, int):
-        R, Z = numpy.meshgrid(linspace(numpy.min(r), numpy.max(r), R), linspace(numpy.min(z), numpy.max(z), Z))
+        R, Z = numpy.meshgrid(numpy.linspace(numpy.min(r), numpy.max(r), R), numpy.linspace(numpy.min(z), numpy.max(z), Z))
     elif len(numpy.atleast_1d(R).shape) == 1 and len(numpy.atleast_1d(Z).shape) == 1:
         R, Z = numpy.meshgrid(R, Z)
     elif len(numpy.atleast_1d(R).shape) == 2 and len(numpy.atleast_1d(Z).shape) == 2:
@@ -960,17 +960,17 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     cache = None
     if method == 'nearest':
         interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
-        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
     elif method == 'linear':
         if cache is None:
             cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
         interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
     elif method == 'cubic':
         if cache is None:
             cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
         interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(vstack((R.flat, Z.flat)).T), R.shape)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
     elif method == 'extrapolate':
         interpolant = scipy.interpolate.Rbf(r, z, data)
         intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
