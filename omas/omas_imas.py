@@ -519,7 +519,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and (k % (len(fetch_paths) // 10) == 0 or k == len(fetch_paths) - 1):
+                if verbose and (k % int(ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
                     print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
                 # get data from IDS
                 data = imas_get(ids, path, None)
