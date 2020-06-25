@@ -389,7 +389,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
+def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
     """
     Return list of IMAS paths that have data
 
@@ -398,6 +398,8 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
     :param paths: list of paths to load from IMAS
 
     :param imas_version: IMAS version
+
+    :param time: extract a time slice [expressed in seconds] from the IDS
 
     :param skip_ggd: do not load ggd structure
 
@@ -422,31 +424,46 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
             continue
         if not hasattr(ids, ds):
             if verbose:
-                print('| %s IDS of IMAS version %s is unknown' % (ds.ljust(ndss), imas_version))
+                print(f'| {ds.ljust(ndss)} IDS of IMAS version {imas_version} is unknown')
             continue
-        # ids fetching
-        printd("ids.%s.get()" % ds, topic='imas_code')
-        try:
-            getattr(ids, ds).get()
-        except ValueError as _excp:
-            print('x %s IDS failed on get' % ds.ljust(ndss))  # not sure why some IDSs fail on .get()... it's not about them being empty
-            continue
+
+        # ids.get()
+        if time is None:
+            printd(f"ids.{ds}.get()", topic='imas_code')
+            try:
+                getattr(ids, ds).get()
+            except ValueError as _excp:
+                print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
+                continue
+
+        # ids.get_slice()
+        else:
+            printd(f"ids.{ds}.get_slice({time}, 1)", topic='imas_code')
+            try:
+                getattr(ids, ds).get_slice(time, 1)
+            except ValueError as _excp:
+                print(f'x {ds.ljust(ndss)} IDS failed on getslice')
+                continue
+
+        # see if the IDS has any data (if so homogeneous_time must be populated)
         if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
             if verbose:
                 try:
-                    print('* %s IDS has data (%d times)' % (ds.ljust(ndss), len(getattr(ids, ds).time)))
+                    print(f'* {ds.ljust(ndss)} IDS has data ({len(getattr(ids, ds).time)} times)')
                 except Exception as _excp:
-                    print('* %s IDS' % ds.ljust(ndss))
+                    print(f'* {ds.ljust(ndss)} IDS')
                 fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+
         else:
             if verbose:
-                print('- %s IDS is empty' % ds.ljust(ndss))
+                print(f'- {ds.ljust(ndss)} IDS is empty')
+
     joined_fetch_paths = list(map(l2i, fetch_paths))
     return fetch_paths, joined_fetch_paths
 
 
 @codeparams_xml_load
-def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
+def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None, time=None,
                    imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
                    consistency_check=True):
     """
@@ -464,6 +481,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     :param run: IMAS run
 
     :param paths: list of paths to load from IMAS
+
+    :param time: time slice [expressed in seconds] to be extracted
 
     :param imas_version: IMAS version (force specific version)
 
@@ -512,7 +531,9 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
         try:
             # see what paths have data
-            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, paths=paths, imas_version=imas_version, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state, verbose=verbose)
+            # NOTE: this is where the IDS.get operation occurs
+            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, paths=paths, time=time, imas_version=imas_version,
+                                                                skip_ggd=skip_ggd, skip_ion_state=skip_ion_state, verbose=verbose)
 
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
