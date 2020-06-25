@@ -135,7 +135,9 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         ggd = ods[f'equilibrium.time_slice.{itime}.ggd.0']
         for what in ggd:
             quantity = ggd[what + '.0.values']
-            r, z, interpolated, cache = scatter_to_rectangular(points[:, 0], points[:, 1], quantity, resolution[0], resolution[1], return_cache=cache)
+            r, z, interpolated, cache = scatter_to_rectangular(points[:, 0], points[:, 1], quantity,
+                                                               resolution[0], resolution[1], method=method,
+                                                               return_cache=cache)
             profiles_2d[what] = interpolated.T
         profiles_2d['grid.dim1'] = r
         profiles_2d['grid.dim2'] = z
@@ -1052,6 +1054,8 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
         interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
         intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
     elif method == 'extrapolate':
+        if cache is None:
+            cache = True
         interpolant = scipy.interpolate.Rbf(r, z, data)
         intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
     else:
