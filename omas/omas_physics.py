@@ -519,8 +519,14 @@ def current_from_eq(ods, time_index):
     :param ods: ODS to update in-place
 
     :param time_index: ODS time index to updated
-
+    if None, all times are updated
     """
+
+    # run an all time slices if time_index is None
+    if time_index is None:
+        for itime in ods['equilibrium.time_slice']:
+            current_from_eq(ods, time_index=itime)
+        return
 
     rho = ods['equilibrium.time_slice'][time_index]['profiles_1d.rho_tor_norm']
 
@@ -554,7 +560,7 @@ def current_from_eq(ods, time_index):
 
 @add_to__ODS__
 @preprocess_ods('equilibrium', 'core_profiles')
-def core_profiles_currents(ods, time_index, rho_tor_norm=None,
+def core_profiles_currents(ods, time_index=None, rho_tor_norm=None,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
                            j_total='default', warn=True):
@@ -569,6 +575,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm=None,
     :param ods: ODS to update in-place
 
     :param time_index: ODS time index to updated
+    if None, all times are updated
 
     :param rho_tor_norm:  normalized rho grid upon which each j is given
 
@@ -593,9 +600,18 @@ def core_profiles_currents(ods, time_index, rho_tor_norm=None,
         explicitly provided or as computed from other components.
     """
 
+    # run an all time slices if time_index is None
+    if time_index is None:
+        for itime in ods['core_profiles.profiles_1d']:
+            core_profiles_currents(ods, time_index=itime, rho_tor_norm=rho_tor_norm,
+                                   j_actuator=j_actuator, j_bootstrap=j_bootstrap,
+                                   j_ohmic=j_ohmic, j_non_inductive=j_non_inductive,
+                                   j_total=j_total, warn=warn)
+        return
+
     from scipy.integrate import cumtrapz
 
-    prof1d = ods['core_profiles']['profiles_1d'][time_index]
+    prof1d = ods['core_profiles.profiles_1d'][time_index]
 
     if rho_tor_norm is None:
         rho_tor_norm = prof1d['grid.rho_tor_norm']
@@ -715,7 +731,6 @@ def core_profiles_currents(ods, time_index, rho_tor_norm=None,
     # =============
     # UPDATE ODS
     # =============
-
     with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
         for j in ['j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total', 'j_tor']:
             if eval(j) is not None:
@@ -726,7 +741,6 @@ def core_profiles_currents(ods, time_index, rho_tor_norm=None,
     # ======================
     # INTEGRATED CURRENTS
     # ======================
-
     if eq is None:
         # can't integrate currents without the equilibrium
         return
