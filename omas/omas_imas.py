@@ -436,13 +436,13 @@ def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_st
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
 
-        # ids.get_slice()
+        # ids.getSlice()
         else:
-            printd(f"ids.{ds}.get_slice({time}, 1)", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({time}, 1)", topic='imas_code')
             try:
-                getattr(ids, ds).get_slice(time, 1)
+                getattr(ids, ds).getSlice(time, 1)
             except ValueError as _excp:
-                print(f'x {ds.ljust(ndss)} IDS failed on getslice')
+                print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
 
         # see if the IDS has any data (if so homogeneous_time must be populated)
