@@ -1512,9 +1512,6 @@ class ODS(MutableMapping):
 
         ds = p2l(self.location)[0]
 
-        if ds in add_datastructures:
-            return True
-
         extra_info = {}
         time = self.time(extra_info=extra_info)
         if extra_info['homogeneous_time'] is False:
