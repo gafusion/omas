@@ -5,6 +5,13 @@
 
 from .omas_utils import *
 
+# add support for occurrences to each IDS
+for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
+    add_datastructures[structure]={f"{structure}.ids_properties.occurrence": {
+        "full_path": f"{structure}.ids_properties.occurrence",
+        "data_type": "INT_0D",
+        "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]"
+    }}
 
 # --------------------------------------------
 # generation of the imas structure json files

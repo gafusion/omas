@@ -99,6 +99,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
+    # handle uncertain data
     if numpy.atleast_1d(is_uncertain(value)).any():
         path = copy.deepcopy(path)
         tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
@@ -109,12 +110,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` IDS is used by OMAS to hold user, machine, pulse, run, imas_version
-    # for saving methods that do not carry that information. IMAS does not store
-    # this information as part of the data dictionary.
-    if ds in add_datastructures.keys():
-        return
-
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
@@ -123,6 +118,8 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
             m.time[0] = -1.0
+    elif l2i(path) == 'ids_properties.occurrence':  # IMAS does not store occurrence info as part of the IDSs
+        return
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
@@ -348,7 +345,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
         filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
-        printe('Overloaded save_omas_imas: %s' % filename)
+        printe(f'Overloaded save_omas_imas: {filename}')
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
@@ -371,15 +368,14 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
             # assign the data
             for path in set_paths:
-                printd('writing %s' % l2i(path))
+                printd(f'writing {l2i(path)}')
                 imas_set(ids, path, ods[path], True)
 
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
-                if ds in add_datastructures.keys():
-                    continue
-                printd("ids.%s.put(0)" % ds, topic='imas_code')
-                getattr(ids, ds).put(0)
+                occ = ods.get('ids_properties.occurrence', 0)
+                printd(f"ids.{ds}.put({occ})", topic='imas_code')
+                getattr(ids, ds).put(occ)
 
         finally:
             # close connection to IMAS database
@@ -389,11 +385,13 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
+def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
     """
     Return list of IMAS paths that have data
 
     :param ids: IMAS ids
+
+    :param occurrence: dictinonary with the occurrence to load for each IDS
 
     :param paths: list of paths to load from IMAS
 
@@ -427,11 +425,14 @@ def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_st
                 print(f'| {ds.ljust(ndss)} IDS of IMAS version {imas_version} is unknown')
             continue
 
+        # retrieve this occurrence for this IDS
+        occ = occurrence.get(ds, 0)
+
         # ids.get()
         if time is None:
             printd(f"ids.{ds}.get()", topic='imas_code')
             try:
-                getattr(ids, ds).get()
+                getattr(ids, ds).get(occ)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
@@ -440,7 +441,7 @@ def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_st
         else:
             printd(f"ids.{ds}.getSlice({time}, 1)", topic='imas_code')
             try:
-                getattr(ids, ds).getSlice(time, 1)
+                getattr(ids, ds).getSlice(occ, time, 1)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
@@ -463,8 +464,9 @@ def infer_fetch_paths(ids, paths, time, imas_version, skip_ggd=True, skip_ion_st
 
 
 @codeparams_xml_load
-def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None, time=None,
-                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
+def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={},
+                   paths=None, time=None, imas_version=None,
+                   skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
                    consistency_check=True):
     """
     Load OMAS data from IMAS
@@ -479,6 +481,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     :param pulse: IMAS pulse
 
     :param run: IMAS run
+
+    :param occurrence: dictinonary with the occurrence to load for each IDS
 
     :param paths: list of paths to load from IMAS
 
@@ -532,8 +536,9 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
         try:
             # see what paths have data
             # NOTE: this is where the IDS.get operation occurs
-            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, paths=paths, time=time, imas_version=imas_version,
-                                                                skip_ggd=skip_ggd, skip_ion_state=skip_ion_state, verbose=verbose)
+            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, occurrence=occurrence, paths=paths, time=time,
+                                                                imas_version=imas_version, skip_ggd=skip_ggd,
+                                                                skip_ion_state=skip_ion_state, verbose=verbose)
 
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
@@ -563,12 +568,18 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             printd("ids.close()", topic='imas_code')
             ids.close()
 
+    # add dataset_description information to this ODS
     if paths is None:
         ods.setdefault('dataset_description.data_entry.user', str(user))
         ods.setdefault('dataset_description.data_entry.machine', str(machine))
         ods.setdefault('dataset_description.data_entry.pulse', int(pulse))
         ods.setdefault('dataset_description.data_entry.run', int(run))
         ods.setdefault('dataset_description.imas_version', str(imas_version))
+
+    # add occurrence information to the ODS
+    for ds in ods:
+        if 'ids_properties' in ods[ds]:
+            ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
 
     try:
         ods.consistency_check = True
