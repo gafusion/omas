@@ -843,12 +843,12 @@ def trim_common_path(p1, p2):
     return p1[both.index(None):], p2[both.index(None):]
 
 
-def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
+def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version']):
     '''
     This function returns an ods with the leaf nodes filled with their property informations
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
-                       if not structures, then all structures are returned (slow and big)
+                       if None, then all structures are returned
 
     :return: ods
     '''
