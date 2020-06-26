@@ -529,7 +529,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
         filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
-        ods = load_omas_pkl(filename)
+        ods = load_omas_pkl(filename, consistency_check=False)
 
     else:
 

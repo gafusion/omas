@@ -419,6 +419,8 @@ class ODS(MutableMapping):
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
                             else:
                                 raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
+                        elif self.location.endswith('.ids_properties') and item == 'occurrence':
+                            continue
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
                             strict_fail = False
