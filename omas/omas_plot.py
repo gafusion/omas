@@ -355,8 +355,11 @@ def padded_extension(values_in, n, fill_value):
     """
     Forces values_in to be at least length n by appending copies of fill_value as needed
     :param values_in: scalar or 1D iterable
+
     :param n: int
+
     :param fill_value: scalar
+
     :return: 1D array with length >= n
     """
     x = numpy.atleast_1d(values_in).tolist()
@@ -370,11 +373,15 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
     Interprets text alignment instructions
     :param n: int
         Number of labels that need alignment instructions
+
     :param default_ha: string or list of n strings
         Default horizontal alignment. If one is supplied, it will be copied n times.
+
     :param default_va: string or list of n strings
         Default vertical alignment. If one is supplied, it will be copied n times.
+
     :param kw: keywords caught by overlay method
+
     :return: (list of n strings, list of n strings, kw)
         Horizontal alignment instructions
         Vertical alignment instructions
@@ -397,18 +404,24 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
     return label_ha, label_va, kw
 
 
-def label_shifter(n, **kw):
+def label_shifter(n, kw):
     """
     Interprets label shift instructions
+
     :param n: int
         Number of labels that need shift instructions
+
+    :param kw: dict
+        Keywords passed to main plot script; label shifting keywords will be removed
+
+    :return: (1D array with length >= n, 1D array with length >= n)
+        R shifts
+        Z shifts
     """
     label_dr = kw.pop('label_r_shift', 0)
     label_dz = kw.pop('label_z_shift', 0)
-    if not np.isscalar(label_dr):
-        label_dr = padded_extension(label_dr, n, 0)
-    if not np.isscalar(label_dz):
-        label_dz = padded_extension(label_dz, n, 0)
+    label_dr = padded_extension(label_dr, n, fill_value=label_dr if numpy.isscalar(label_dr) else 0)
+    label_dz = padded_extension(label_dz, n, fill_value=label_dz if numpy.isscalar(label_dz) else 0)
     return label_dr, label_dz
 
 
@@ -1536,7 +1549,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         Z0 = launchers[launcher]['launching_position.z']
         ang_tor = launchers[launcher]['steering_angle_tor.data']
         ang_pol = launchers[launcher]['steering_angle_pol.data']
-        ang_pol_proj = 0.5 * numpy.pi - np.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
+        ang_pol_proj = 0.5 * numpy.pi - numpy.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
 
         R1 = R0 - launcher_trajectory * numpy.cos(ang_pol_proj)
         Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol_proj)
@@ -1971,7 +1984,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     default_ha = [['left', 'right'][int(float(loc.split('_')[0]) < rsplit)] for loc in locations]
     default_va = [['top', 'bottom'][int(float(loc.split('_')[1]) > 0)] for loc in locations]
     label_ha, label_va, kw = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
-    label_dr, label_dz = label_shifter(len(locations), **kw)
+    label_dr, label_dz = label_shifter(len(locations), kw)
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
@@ -1989,7 +2002,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
             ax.text(
-                r + label_dr, z + label_dz, label,
+                r + label_dr[i], z + label_dz[i], label,
                 color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize,
             )
 
@@ -2083,8 +2096,8 @@ def pf_active_overlay(ods, ax=None, **kw):
                 pf_id = None
             if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
                 ax.text(
-                    numpy.mean(path[:, 0]) + label_dr,
-                    numpy.mean(path[:, 1]) + label_dz,
+                    numpy.mean(path[:, 0]) + label_dr[i],
+                    numpy.mean(path[:, 1]) + label_dz[i],
                     pf_id,
                     ha=label_ha[i], va=label_va[i], fontsize=notesize,
                 )
@@ -2167,7 +2180,7 @@ def magnetics_overlay(
         for i in range(sum(mask_)):
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    r[mask_][i] + label_dr, z[mask_][i] + label_dz, ods[topname][i]['identifier'],
+                    r[mask_][i] + label_dr[mask_][i], z[mask_][i] + label_dz[mask_][i], ods[topname][i]['identifier'],
                     color=color_, fontsize=notesize, ha=label_ha[i], va=label_va[i],
                 )
 
@@ -2217,6 +2230,7 @@ def interferometer_overlay(ods, ax=None, **kw):
     label_ha, label_va, kw = text_alignment_setup(nc, default_ha='left', default_va='top', **kw)
     label_dr, label_dz = label_shifter(nc, **kw)
 
+    j = 0
     for i in range(nc):
         if mask[i]:
             ch = ods['interferometer.channel'][i]
@@ -2226,11 +2240,12 @@ def interferometer_overlay(ods, ax=None, **kw):
             color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    max([r1, r2]) + label_dr,
-                    min([z1, z2]) + label_dz,
+                    max([r1, r2]) + label_dr[j],
+                    min([z1, z2]) + label_dz[j],
                     ch['identifier'],
                     color=color, va=label_va[i], ha=label_ha[i], fontsize=notesize,
                 )
+            j += 1
     return {'ax': ax}
 
 
@@ -2282,8 +2297,8 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     for i in range(sum(mask)):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r[i] + label_dr,
-                z[i] + label_dz,
+                r[i] + label_dr[i],
+                z[i] + label_dz[i],
                 ts_id[i],
                 color=ts_mark[0].get_color(), fontsize=notesize, ha=label_ha[i], va=label_va[i]
             )
@@ -2383,6 +2398,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     # Plot
     label_bank = {'T': 'Tang. CER', 'V': 'Vert. CER', 'R': 'Rad. CER'}  # These get popped so only one each in legend
+    j = 0
     for i in range(nc):
         if mask[i]:
             ch_type = cer_id[i][0].upper()
@@ -2392,12 +2408,12 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
             colors[ch_type] = color = cer_mark[0].get_color()  # Save color for this view dir in case it was None
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    numpy.mean(r[i]) + label_dr,
-                    numpy.mean(z[i]) + label_dz,
+                    numpy.mean(r[i]) + label_dr[j],
+                    numpy.mean(z[i]) + label_dz[j],
                     cer_id[i],
                     color=color, fontsize=notesize, ha=ha[i], va=va[i]
                 )
-
+        j += 1
     return {'ax': ax}
 
 
@@ -2475,8 +2491,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r2[i] + label_dr,
-                z2[i] + label_dz,
+                r2[i] + label_dr[i],
+                z2[i] + label_dz[i],
                 '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]),
                 color=color,
                 ha=label_ha[i],
@@ -2632,8 +2648,8 @@ def langmuir_probes_overlay(
             color = lp_mark[0].get_color()  # Make subsequent marks the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r_e[i] + label_dr,
-                z_e[i] + label_dz,
+                r_e[i] + label_dr[i],
+                z_e[i] + label_dz[i],
                 '\n {} \n'.format(lp_id_e[i]),
                 color=color, ha=ha[i], va=va[i], fontsize=notesize,
             )
@@ -2850,8 +2866,8 @@ def position_control_overlay(
     for i in range(mnbp):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
             ax.text(
-                r[i] + label_dr,
-                z[i] + label_dz,
+                r[i] + label_dr[i],
+                z[i] + label_dz[i],
                 '\n {} \n'.format(labels[i]),
                 color=plot_out[0].get_color(),
                 va=label_va[i],
@@ -2861,8 +2877,8 @@ def position_control_overlay(
     for i in range(mnx):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rx[i]):
             ax.text(
-                rx[i] + label_dr,
-                zx[i] + label_dz,
+                rx[i] + label_dr[i],
+                zx[i] + label_dz[i],
                 '\n {} \n'.format(labels[mnbp + i]),
                 color=xplot_out[0].get_color(),
                 va=label_va[mnbp + i],
@@ -2873,8 +2889,8 @@ def position_control_overlay(
     for i in range(mns):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rs[i]):
             ax.text(
-                rs[i] + label_dr,
-                zs[i] + label_dz,
+                rs[i] + label_dr[i],
+                zs[i] + label_dz[i],
                 '\n {} \n'.format(labels[mnbp + mnx + i]),
                 color=splot_out[0].get_color(),
                 va=label_va[mnbp + mnx + i],
