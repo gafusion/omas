@@ -2050,7 +2050,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
     label_ha, label_va, kw = text_alignment_setup(nc, default_ha='center', default_va='center', **kw)
-    label_dr, label_dz = label_shifter(nc, **kw)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     def path_rectangle(rectangle):
         """
@@ -2170,7 +2170,7 @@ def magnetics_overlay(
     mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
     label_ha, label_va, kw = text_alignment_setup(nbp + nfl, **kw)
-    label_dr, label_dz = label_shifter(nbp + nfl, **kw)
+    label_dr, label_dz = label_shifter(nbp + nfl, kw)
 
     def show_mag(n, topname, posroot, label, color_, marker, mask_):
         r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
@@ -2228,7 +2228,7 @@ def interferometer_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     notesize = kw.pop('notesize', 'medium')
     label_ha, label_va, kw = text_alignment_setup(nc, default_ha='left', default_va='top', **kw)
-    label_dr, label_dz = label_shifter(nc, **kw)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     j = 0
     for i in range(nc):
@@ -2287,7 +2287,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     kw.setdefault('label', 'Thomson scattering')
     kw.setdefault('linestyle', ' ')
     label_ha, label_va, kw = text_alignment_setup(nc, **kw)
-    label_dr, label_dz = label_shifter(nc, **kw)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
@@ -2374,7 +2374,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     }
     notesize = kw.pop('notesize', 'xx-small')
     ha, va, kw = text_alignment_setup(nc, **kw)
-    label_dr, label_dz = label_shifter(nc, **kw)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
     r = [[numpy.NaN]] * nc
@@ -2474,7 +2474,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     notesize = kw.pop('notesize', 'xx-small')
     default_ha = [['right', 'left'][int(z1[i] > 0)] for i in range(ncm)]
     label_ha, label_va, kw = text_alignment_setup(ncm, default_ha=default_ha, default_va='top', **kw)
-    label_dr, label_dz = label_shifter(ncm, **kw)
+    label_dr, label_dz = label_shifter(ncm, kw)
 
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
@@ -2605,7 +2605,7 @@ def langmuir_probes_overlay(
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
-    label_dr, label_dz = label_shifter(ncem, **kw)
+    label_dr, label_dz = label_shifter(ncem, kw)
 
     # Decide which side each probe is on, for aligning annotation labels
     ha = ['center'] * ncem
@@ -2818,7 +2818,7 @@ def position_control_overlay(
     mnx = len(rx)
     mns = len(rs)
 
-    label_dr, label_dz = label_shifter(mnbp + mnx + mns, **kw)
+    label_dr, label_dz = label_shifter(mnbp + mnx + mns, kw)
 
     # Handle main plot setup and customizations
     kw.setdefault('linestyle', ' ')
