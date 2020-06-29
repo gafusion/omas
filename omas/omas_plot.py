@@ -1511,7 +1511,7 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         Z0 = launchers[launcher]['launching_position.z']
         ang_tor = launchers[launcher]['steering_angle_tor.data']
         ang_pol = launchers[launcher]['steering_angle_pol.data']
-        ang_pol_proj = 0.5 * numpy.pi - np.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
+        ang_pol_proj = 0.5 * numpy.pi - numpy.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
 
         R1 = R0 - launcher_trajectory * numpy.cos(ang_pol_proj)
         Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol_proj)
