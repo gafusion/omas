@@ -2180,7 +2180,7 @@ def magnetics_overlay(
         for i in range(sum(mask_)):
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    r[mask_][i] + label_dr[mask_][i], z[mask_][i] + label_dz[mask_][i], ods[topname][i]['identifier'],
+                    r[mask_][i] + label_dr[i], z[mask_][i] + label_dz[i], ods[topname][i]['identifier'],
                     color=color_, fontsize=notesize, ha=label_ha[i], va=label_va[i],
                 )
 
