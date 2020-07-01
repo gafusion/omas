@@ -497,7 +497,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     stime.on_changed(update)
     for time0 in time:
         axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
-    return (stime, axtime), axs
+    return {'stime':stime, 'axtime':axtime, 'ax':axs}
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -884,6 +884,8 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
     if fig is None:
         fig = pyplot.figure()
 
+    axs = kw.pop('ax', {})
+
     if time_index is None:
         time = ods['equilibrium'].time()
         if time is None:
@@ -894,9 +896,7 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ggd_points_triangles=ggd_points_triangles, ax={}, **kw)
-
-    axs = kw.pop('ax', {})
+            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw)
 
     ax = cached_add_subplot(fig, axs, 1, 3, 1)
     contour_quantity = kw.pop('contour_quantity', 'rho_tor_norm')
