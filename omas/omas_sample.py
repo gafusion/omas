@@ -311,11 +311,15 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
         outline['r'] = [1.5, 1.6, 1.7, 1.5]
         outline['z'] = [0.1, 0.3, -0.1, 0]
 
-    # generate some data that is not time homogeneous
+    for i in range(nc):
+        # Give the dummy coils identifiers so the plot overlay can try to label them; otherwise the labels aren't tested
+        ods['pf_active.coil'][i]['element.0.identifier'] = f'samp{i}'
+
+    # Generate some data that are not time homogeneous
     for i in range(nc_reg):
         n = (1 + i) * 10
-        outline = ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
-        outline = ods['pf_active.coil'][i]['current.time'] = numpy.linspace(0, 1, n)
+        ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
+        ods['pf_active.coil'][i]['current.time'] = numpy.linspace(0, 1, n)
 
     return ods
 
