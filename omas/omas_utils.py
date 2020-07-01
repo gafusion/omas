@@ -65,13 +65,17 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
 def printd(*objects, **kw):
     """
     debug print
-    environmental variable OMAS_DEBUG_TOPIC sets the topic to be printed
+
+    Use environmental variable $OMAS_DEBUG_TOPIC to set the topic to be printed
     """
     topic = kw.pop('topic', '')
     if isinstance(topic, str):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
-    objects = ['DEBUG:'] + list(objects)
+    if len(topic):
+        objects = [f'DEBUG ({",".join(topic)}):'] + list(objects)
+    else:
+        objects = ['DEBUG:'] + list(objects)
     topic_selected = os.environ.get('OMAS_DEBUG_TOPIC', '')
     dump = False
     if topic_selected.endswith('_dump'):
