@@ -60,9 +60,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
     printd('Loading OMAS data from Json: %s' % filename, topic='json')
 
     def cls():
-        tmp = ODS(imas_version=imas_version)
-        tmp._consistency_check = False
-        return tmp
+        return ODS(imas_version=imas_version, consistency_check=False)
 
     if isinstance(filename, str):
         with open(filename, 'r') as f:
@@ -72,6 +70,10 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         json_string = f.read()
 
     tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls, null_to=numpy.NaN), **kw)
+    # we must manually call set_child_locations since the json_loader
+    # routine uses the ODS.setraw method that does not do that for us
+    tmp.set_child_locations()
+    # perform consistency check
     tmp.consistency_check = consistency_check
     return tmp
 

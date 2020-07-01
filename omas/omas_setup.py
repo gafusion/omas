@@ -118,10 +118,8 @@ omas_rcparams = OMAS_rc_params()
 omas_rcparams.update({
     'cocos': 11,
     'cocosio': 11,
-    'coordsio': {},
     'consistency_check': True,
     'dynamic_path_creation': True,
-    'unitsio': False,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(),
                                                                 os.environ.get('USER', 'dummy_user'),
                                                                 'OMAS_TMP_DIR'])),
@@ -149,6 +147,7 @@ def rcparams_environment(**kw):
 # additional data structures
 # --------------------------------------------
 add_datastructures = {}
+
 
 def omas_testdir(filename_topic=''):
     '''

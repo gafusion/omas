@@ -27,8 +27,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     """
     from omas import ODS, CodeParameters
 
-    ods1 = ods1.flat(return_empty_leaves=True)
-    ods2 = ods2.flat(return_empty_leaves=True)
+    ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
+    ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
@@ -50,10 +50,6 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
         elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
             if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
                 differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        elif isinstance(ods1[k], CodeParameters) and isinstance(ods2[k], CodeParameters):
-            tmp = different_ods(ods1[k], ods2[k], ignore_type=ignore_type, ignore_empty=ignore_empty, prepend_path_string=k + '.')
-            if tmp:
-                differences.extend(tmp)
         else:
             if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
                 differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
@@ -257,22 +253,44 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
 
     dct = cls()
-    for x, y in object_pairs:
-        if null_to is not None and y is None:
-            y = null_to
-        if isinstance(y, list):
-            if len(y) and isinstance(y[0], ODS):
-                dct[x] = cls()
-                for k in range(len(y)):
-                    dct[x][k] = y[k]
-            else:
-                if null_to is not None:
+    # for ODSs we can use the setraw() method which does
+    # not peform any sort of check, nor tries to parse
+    # special OMAS syntaxes and is thus much faster
+    if isinstance(dct, ODS):
+        for x, y in object_pairs:
+            if null_to is not None and y is None:
+                y = null_to
+            if isinstance(y, list):
+                if len(y) and isinstance(y[0], ODS):
+                    dct.setraw(x, cls())
                     for k in range(len(y)):
-                        if y[k] is None:
-                            y[k] = null_to
+                        dct[x].setraw(k, y[k])
+                else:
+                    if null_to is not None:
+                        for k in range(len(y)):
+                            if y[k] is None:
+                                y[k] = null_to
+                    y = numpy.array(y) # to handle objects_encode=None as used in OMAS
+                    dct.setraw(x, y)
+            else:
+                dct.setraw(x, y)
+    else:
+        for x, y in object_pairs:
+            if null_to is not None and y is None:
+                y = null_to
+            if isinstance(y, list):
+                if len(y) and isinstance(y[0], ODS):
+                    dct[x] = cls()
+                    for k in range(len(y)):
+                        dct[x][k] = y[k]
+                else:
+                    if null_to is not None:
+                        for k in range(len(y)):
+                            if y[k] is None:
+                                y[k] = null_to
+                    dct[x] = y
+            else:
                 dct[x] = y
-        else:
-            dct[x] = y
 
     if "dtype" in dct:  # python2/3 compatibility
         dct["dtype"] = dct["dtype"].replace('S', 'U')
