@@ -351,27 +351,44 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
         return geo_map.get(geometry_type, None)
 
 
+def padded_extension(values_in, n, fill_value):
+    """
+    Forces values_in to be at least length n by appending copies of fill_value as needed
+    :param values_in: scalar or 1D iterable
+
+    :param n: int
+
+    :param fill_value: scalar
+
+    :return: 1D array with length >= n
+    """
+    x = numpy.atleast_1d(values_in).tolist()
+    if len(x) < n:
+        x += [fill_value] * (n - len(x))
+    return numpy.array(x)
+
+
 def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
     """
     Interprets text alignment instructions
     :param n: int
         Number of labels that need alignment instructions
+
     :param default_ha: string or list of n strings
         Default horizontal alignment. If one is supplied, it will be copied n times.
+
     :param default_va: string or list of n strings
         Default vertical alignment. If one is supplied, it will be copied n times.
+
     :param kw: keywords caught by overlay method
+
     :return: (list of n strings, list of n strings, kw)
         Horizontal alignment instructions
         Vertical alignment instructions
         Updated keywords
     """
-    label_ha = numpy.atleast_1d(kw.pop('label_ha', None)).tolist()
-    label_va = numpy.atleast_1d(kw.pop('label_va', None)).tolist()
-    if len(label_ha) == 1:
-        label_ha *= n
-    if len(label_va) == 1:
-        label_va *= n
+    label_ha = padded_extension(kw.pop('label_ha', None), n, None)
+    label_va = padded_extension(kw.pop('label_va', None), n, None)
 
     default_ha = numpy.atleast_1d(default_ha).tolist()
     default_va = numpy.atleast_1d(default_va).tolist()
@@ -385,6 +402,27 @@ def text_alignment_setup(n, default_ha='left', default_va='baseline', **kw):
         label_va[i] = default_va[i] if label_va[i] is None else label_va[i]
 
     return label_ha, label_va, kw
+
+
+def label_shifter(n, kw):
+    """
+    Interprets label shift instructions
+
+    :param n: int
+        Number of labels that need shift instructions
+
+    :param kw: dict
+        Keywords passed to main plot script; label shifting keywords will be removed
+
+    :return: (1D array with length >= n, 1D array with length >= n)
+        R shifts
+        Z shifts
+    """
+    label_dr = kw.pop('label_r_shift', 0)
+    label_dz = kw.pop('label_z_shift', 0)
+    label_dr = padded_extension(label_dr, n, fill_value=label_dr if numpy.isscalar(label_dr) else 0)
+    label_dz = padded_extension(label_dz, n, fill_value=label_dz if numpy.isscalar(label_dz) else 0)
+    return label_dr, label_dz
 
 
 # hold last 100 references of matplotlib.widgets.Slider
@@ -1800,13 +1838,19 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
                 Each spec should be: 'top', 'bottom', 'center', 'baseline', or 'center_baseline'.
                 None (either as a scalar or an item in the list) will give default alignment for the affected item(s).
 
-            * label_r_shift: numeric
-                Add a constant offset to the R coordinates of all text labels for the current hardware system
+            * label_r_shift: float or float array/list.
+                Add an offset to the R coordinates of all text labels for the current hardware system.
                 (in data units, which would normally be m)
+                Scalar: add the same offset to all labels.
+                Iterable: Each label can have its own offset.
+                    If the list/array of offsets is too short, it will be padded with 0s.
 
-            * label_z_shift: numeric
-                Add a constant offset to the Z coordinates of all text labels for the current hardware system
+            * label_z_shift: float or float array/list
+                Add an offset to the Z coordinates of all text labels for the current hardware system
                 (in data units, which would normally be m)
+                Scalar: add the same offset to all labels.
+                Iterable: Each label can have its own offset.
+                    If the list/array of offsets is too short, it will be padded with 0s.
 
             * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
     """
@@ -1940,8 +1984,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     default_ha = [['left', 'right'][int(float(loc.split('_')[0]) < rsplit)] for loc in locations]
     default_va = [['top', 'bottom'][int(float(loc.split('_')[1]) > 0)] for loc in locations]
     label_ha, label_va, kw = text_alignment_setup(len(locations), default_ha=default_ha, default_va=default_va, **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(len(locations), kw)
 
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
@@ -1959,7 +2002,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
             ax.text(
-                r + label_dr, z + label_dz, label,
+                r + label_dr[i], z + label_dz[i], label,
                 color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize,
             )
 
@@ -2007,8 +2050,7 @@ def pf_active_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     scalex, scaley = kw.pop('scalex', True), kw.pop('scaley', True)
     label_ha, label_va, kw = text_alignment_setup(nc, default_ha='center', default_va='center', **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     def path_rectangle(rectangle):
         """
@@ -2054,8 +2096,8 @@ def pf_active_overlay(ods, ax=None, **kw):
                 pf_id = None
             if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
                 ax.text(
-                    numpy.mean(path[:, 0]) + label_dr,
-                    numpy.mean(path[:, 1]) + label_dz,
+                    numpy.mean(path[:, 0]) + label_dr[i],
+                    numpy.mean(path[:, 1]) + label_dz[i],
                     pf_id,
                     ha=label_ha[i], va=label_va[i], fontsize=notesize,
                 )
@@ -2128,8 +2170,7 @@ def magnetics_overlay(
     mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
     notesize = kw.pop('notesize', 'xx-small')
     label_ha, label_va, kw = text_alignment_setup(nbp + nfl, **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(nbp + nfl, kw)
 
     def show_mag(n, topname, posroot, label, color_, marker, mask_):
         r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
@@ -2139,7 +2180,7 @@ def magnetics_overlay(
         for i in range(sum(mask_)):
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    r[mask_][i] + label_dr, z[mask_][i] + label_dz, ods[topname][i]['identifier'],
+                    r[mask_][i] + label_dr[i], z[mask_][i] + label_dz[i], ods[topname][i]['identifier'],
                     color=color_, fontsize=notesize, ha=label_ha[i], va=label_va[i],
                 )
 
@@ -2187,9 +2228,9 @@ def interferometer_overlay(ods, ax=None, **kw):
     mask = kw.pop('mask', numpy.ones(nc, bool))
     notesize = kw.pop('notesize', 'medium')
     label_ha, label_va, kw = text_alignment_setup(nc, default_ha='left', default_va='top', **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(nc, kw)
 
+    j = 0
     for i in range(nc):
         if mask[i]:
             ch = ods['interferometer.channel'][i]
@@ -2199,11 +2240,12 @@ def interferometer_overlay(ods, ax=None, **kw):
             color = line[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    max([r1, r2]) + label_dr,
-                    min([z1, z2]) + label_dz,
+                    max([r1, r2]) + label_dr[j],
+                    min([z1, z2]) + label_dz[j],
                     ch['identifier'],
                     color=color, va=label_va[i], ha=label_ha[i], fontsize=notesize,
                 )
+            j += 1
     return {'ax': ax}
 
 
@@ -2245,8 +2287,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     kw.setdefault('label', 'Thomson scattering')
     kw.setdefault('linestyle', ' ')
     label_ha, label_va, kw = text_alignment_setup(nc, **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     r = numpy.array([ods['thomson_scattering']['channel'][i]['position']['r'] for i in range(nc)])[mask]
     z = numpy.array([ods['thomson_scattering']['channel'][i]['position']['z'] for i in range(nc)])[mask]
@@ -2256,8 +2297,8 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
     for i in range(sum(mask)):
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r[i] + label_dr,
-                z[i] + label_dz,
+                r[i] + label_dr[i],
+                z[i] + label_dz[i],
                 ts_id[i],
                 color=ts_mark[0].get_color(), fontsize=notesize, ha=label_ha[i], va=label_va[i]
             )
@@ -2333,8 +2374,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     }
     notesize = kw.pop('notesize', 'xx-small')
     ha, va, kw = text_alignment_setup(nc, **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
     r = [[numpy.NaN]] * nc
@@ -2358,6 +2398,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     # Plot
     label_bank = {'T': 'Tang. CER', 'V': 'Vert. CER', 'R': 'Rad. CER'}  # These get popped so only one each in legend
+    j = 0
     for i in range(nc):
         if mask[i]:
             ch_type = cer_id[i][0].upper()
@@ -2367,12 +2408,12 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
             colors[ch_type] = color = cer_mark[0].get_color()  # Save color for this view dir in case it was None
             if (labelevery > 0) and ((i % labelevery) == 0):
                 ax.text(
-                    numpy.mean(r[i]) + label_dr,
-                    numpy.mean(z[i]) + label_dz,
+                    numpy.mean(r[i]) + label_dr[j],
+                    numpy.mean(z[i]) + label_dz[j],
                     cer_id[i],
                     color=color, fontsize=notesize, ha=ha[i], va=va[i]
                 )
-
+        j += 1
     return {'ax': ax}
 
 
@@ -2433,8 +2474,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     notesize = kw.pop('notesize', 'xx-small')
     default_ha = [['right', 'left'][int(z1[i] > 0)] for i in range(ncm)]
     label_ha, label_va, kw = text_alignment_setup(ncm, default_ha=default_ha, default_va='top', **kw)
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(ncm, kw)
 
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
@@ -2451,8 +2491,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
             color = bolo_line[0].get_color()  # Make subsequent lines the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r2[i] + label_dr,
-                z2[i] + label_dz,
+                r2[i] + label_dr[i],
+                z2[i] + label_dz[i],
                 '{}{}'.format(['\n', ''][int(z1[i] > 0)], bolo_id[i]),
                 color=color,
                 ha=label_ha[i],
@@ -2565,8 +2605,7 @@ def langmuir_probes_overlay(
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
     notesize = kw.pop('notesize', 'xx-small')
-    label_dr = kw.pop('label_r_shift', 0)
-    label_dz = kw.pop('label_z_shift', 0)
+    label_dr, label_dz = label_shifter(ncem, kw)
 
     # Decide which side each probe is on, for aligning annotation labels
     ha = ['center'] * ncem
@@ -2609,8 +2648,8 @@ def langmuir_probes_overlay(
             color = lp_mark[0].get_color()  # Make subsequent marks the same color
         if (labelevery > 0) and ((i % labelevery) == 0):
             ax.text(
-                r_e[i] + label_dr,
-                z_e[i] + label_dz,
+                r_e[i] + label_dr[i],
+                z_e[i] + label_dz[i],
                 '\n {} \n'.format(lp_id_e[i]),
                 color=color, ha=ha[i], va=va[i], fontsize=notesize,
             )
@@ -2701,8 +2740,6 @@ def position_control_overlay(
         t = np.atleast_1d(t)[0]
 
     labelevery = kw.pop('labelevery', 1)
-    label_r_shift = kw.pop('label_r_shift', 0)
-    label_z_shift = kw.pop('label_z_shift', 0)
     label_ha = kw.pop('label_ha', None)
     label_va = kw.pop('label_va', None)
     notesize = kw.pop('notesize', 'xx-small')
@@ -2781,6 +2818,8 @@ def position_control_overlay(
     mnx = len(rx)
     mns = len(rs)
 
+    label_dr, label_dz = label_shifter(mnbp + mnx + mns, kw)
+
     # Handle main plot setup and customizations
     kw.setdefault('linestyle', ' ')
     kwx = copy.deepcopy(kw)
@@ -2827,8 +2866,8 @@ def position_control_overlay(
     for i in range(mnbp):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(r[i]):
             ax.text(
-                r[i] + label_r_shift,
-                z[i] + label_z_shift,
+                r[i] + label_dr[i],
+                z[i] + label_dz[i],
                 '\n {} \n'.format(labels[i]),
                 color=plot_out[0].get_color(),
                 va=label_va[i],
@@ -2838,8 +2877,8 @@ def position_control_overlay(
     for i in range(mnx):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rx[i]):
             ax.text(
-                rx[i] + label_r_shift,
-                zx[i] + label_z_shift,
+                rx[i] + label_dr[i],
+                zx[i] + label_dz[i],
                 '\n {} \n'.format(labels[mnbp + i]),
                 color=xplot_out[0].get_color(),
                 va=label_va[mnbp + i],
@@ -2850,8 +2889,8 @@ def position_control_overlay(
     for i in range(mns):
         if (labelevery > 0) and ((i % labelevery) == 0) and ~np.isnan(rs[i]):
             ax.text(
-                rs[i] + label_r_shift,
-                zs[i] + label_z_shift,
+                rs[i] + label_dr[i],
+                zs[i] + label_dz[i],
                 '\n {} \n'.format(labels[mnbp + mnx + i]),
                 color=splot_out[0].get_color(),
                 va=label_va[mnbp + mnx + i],
