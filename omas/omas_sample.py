@@ -677,3 +677,84 @@ def pulse_schedule(ods_):
     add_position_control(ods_)
 
     return ods_
+
+
+def ec_launchers(ods, ngyros=2, ntimes=6):
+    """
+
+    :param ods: ODS instance
+
+    :param ngyros: number of gyrotrons
+
+    :param ntimes: number of times
+
+    :return: ODS instance
+        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    """
+    
+    times = numpy.linspace(0, 1, ntimes)
+    ones = numpy.ones(ntimes)
+
+    ods['ec_launchers.ids_properties.homogeneous_time'] = 1
+    for gyro in range(ngyros):
+        ods['ec_launchers']['time'] = times
+        ods['ec_launchers']['launcher'][gyro]['identifier'] = 'GYRO_'+str(gyro)
+        ods['ec_launchers']['launcher'][gyro]['frequency']['data'] = ones * 110e9
+
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['phi'] = 0.0 * ones
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['r'] = 2.4 * ones
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['z'] = 0.68 * ones
+        ods['ec_launchers']['launcher'][gyro]['mode']['data'] = -1.0 * ones
+        ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (ones-0.5*numpy.cos(2*pi*times+gyro/ngyros))
+
+        ods['ec_launchers']['launcher'][gyro]['steering_angle_pol']['data'] = 0.61 * ones
+        ods['ec_launchers']['launcher'][gyro]['steering_angle_tor']['data'] = 0.0 * ones
+
+    return ods
+
+def nbi(ods, nunits=2, ntimes=6):
+
+    """
+    :param ods: ODS instance
+
+    :param nunits: number of times
+
+    :param ntimes: number of times
+
+    :return: ODS instance
+        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    """
+    
+    times = numpy.linspace(0, 1, ntimes)
+    ones = numpy.ones(ntimes)
+
+    ods['nbi.ids_properties.homogeneous_time'] = 1
+
+    for unit in range(nunits):
+        ods['nbi']['unit'][unit]['beam_current_fraction']['data'] = [0.27032773*ones, 0.14438479*ones, 0.07613747*ones]
+        ods['nbi']['unit'][unit]['beam_power_fraction']['data'] = [0.36067036*ones, 0.09631886*ones, 0.03386079*ones]
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['angle'] = -0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['direction'] = 1
+
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['horizontal'] = 0.00873
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['particles_fraction'] = 1.0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['vertical'] = 0.227
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_horizontal'] = 1e31
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_vertical'] = 10.
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['phi'] = -0.773
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['r'] = 8.11
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['z'] = 0.0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['tangency_radius'] = 1.146
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['width_vertical'] = 0.48
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['width_horizontal'] = 0.1
+ 
+        ods['nbi']['unit'][unit]['identifier'] = 'beam_'+str(unit)
+        ods['nbi']['unit'][unit]['energy']['data'] = 80e3 * ones
+
+        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.e6 * (ones-0.5*numpy.cos(2*pi*times+unit/nunits))
+
+
+        ods['nbi']['unit'][unit]['species']['a'] = 2.0
+        ods['nbi']['unit'][unit]['species']['z_n'] = 1.0
+
+    return ods
