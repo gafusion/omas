@@ -678,7 +678,7 @@ def pulse_schedule(ods_):
 
     return ods_
 
-
+@add_to_ODS
 def ec_launchers(ods, ngyros=2, ntimes=6):
     """
 
@@ -712,6 +712,7 @@ def ec_launchers(ods, ngyros=2, ntimes=6):
 
     return ods
 
+@add_to_ODS
 def nbi(ods, nunits=2, ntimes=6):
 
     """
