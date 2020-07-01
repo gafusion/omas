@@ -6,7 +6,7 @@ OMAS plot examples
 This example loads some data from S3, augments the ODS with pressure information, and generates some plots
 """
 
-from matplotlib.pyplot import show
+from matplotlib import pyplot
 from omas import *
 
 # load some data from S3
@@ -18,12 +18,12 @@ ods.physics_core_profiles_pressures()
 
 # omas plot for pressures
 ods.plot_core_profiles_pressures()
-show()
+pyplot.show()
 
 # omas plot for core profiles
 ods.plot_core_profiles_summary()
-show()
+pyplot.show()
 
 # omas plot for equilibrium
 omas_plot.equilibrium_summary(ods, linewidth=1, label='my equilibrium')
-show()
+pyplot.show()

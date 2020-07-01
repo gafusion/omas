@@ -1626,7 +1626,7 @@ class ODS(MutableMapping):
             self.copy_attrs_from(results)
 
         # apply consistency checks
-        if consistency_check != self.consistency_check or consistency_check!=results.consistency_check:
+        if consistency_check != self.consistency_check or consistency_check != results.consistency_check:
             self.consistency_check = consistency_check
 
         return self
@@ -2102,7 +2102,11 @@ def load_omas_pkl(filename, consistency_check=None, imas_version=None):
     printd('Loading from %s' % filename, topic='pkl')
 
     with open(filename, 'rb') as f:
-        tmp = pickle.load(f)
+        try:
+            tmp = pickle.load(f)
+        except UnicodeDecodeError:
+            # to support ODSs created with Python2
+            tmp = pickle.load(f, encoding="latin1")
     if imas_version is not None:
         tmp.imas_version = imas_version
     if consistency_check is not None:
