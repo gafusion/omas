@@ -481,7 +481,7 @@ class TestOmasPlot(unittest.TestCase):
         ods.sample_ec_launchers()
         # Test plots with default/minimal options
         ods.plot_ec_launchers_CX()
-        ods.ec_launchers_CX_topview()
+        ods.plot_ec_launchers_CX_topview()
 
     def test_nbi(self):
         """Tests basic NBI plots"""
