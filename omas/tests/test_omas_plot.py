@@ -479,8 +479,6 @@ class TestOmasPlot(unittest.TestCase):
         ods = ODS()
         ods.sample_equilibrium()
         ods.sample_ec_launchers()
-        # Make base plot
-        ods.plot_overlay(thomson_scattering=False)
         # Test plots with default/minimal options
         ods.plot_ec_launchers_CX()
         ods.ec_launchers_CX_topview()
