@@ -678,6 +678,7 @@ def pulse_schedule(ods_):
 
     return ods_
 
+
 @add_to_ODS
 def ec_launchers(ods, ngyros=2, ntimes=6):
     """
@@ -705,12 +706,15 @@ def ec_launchers(ods, ngyros=2, ntimes=6):
         ods['ec_launchers']['launcher'][gyro]['launching_position']['r'] = 2.4 * ones
         ods['ec_launchers']['launcher'][gyro]['launching_position']['z'] = 0.68 * ones
         ods['ec_launchers']['launcher'][gyro]['mode']['data'] = -1.0 * ones
-        ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (ones-0.5*numpy.cos(2*pi*times+gyro/ngyros))
+        ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (
+                ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros)
+        )
 
         ods['ec_launchers']['launcher'][gyro]['steering_angle_pol']['data'] = 0.61 * ones
         ods['ec_launchers']['launcher'][gyro]['steering_angle_tor']['data'] = 0.0 * ones
 
     return ods
+
 
 @add_to_ODS
 def nbi(ods, nunits=2, ntimes=6):
@@ -729,6 +733,7 @@ def nbi(ods, nunits=2, ntimes=6):
     times = numpy.linspace(0, 1, ntimes)
     ones = numpy.ones(ntimes)
 
+    ods['nbi.time'] = times
     ods['nbi.ids_properties.homogeneous_time'] = 1
 
     for unit in range(nunits):
@@ -752,8 +757,7 @@ def nbi(ods, nunits=2, ntimes=6):
         ods['nbi']['unit'][unit]['identifier'] = 'beam_'+str(unit)
         ods['nbi']['unit'][unit]['energy']['data'] = 80e3 * ones
 
-        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.e6 * (ones-0.5*numpy.cos(2*pi*times+unit/nunits))
-
+        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.e6 * (ones-0.5*numpy.cos(2*numpy.pi*times+unit/nunits))
 
         ods['nbi']['unit'][unit]['species']['a'] = 2.0
         ods['nbi']['unit'][unit]['species']['z_n'] = 1.0
