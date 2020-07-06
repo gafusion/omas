@@ -2005,7 +2005,7 @@ def gas_injection_overlay(
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
         if show_all_pipes_in_group:
-            show_locs = locations[loc][::3]  # Each pipe has ['label', r2, z2], so ::3 selects just labels.
+            show_locs = list(set(locations[loc][::3]))  # Each pipe has ['label', r2, z2], so ::3 selects just labels.
         else:
             show_locs = [locations[loc][0]]
         label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + show_locs + [''])
