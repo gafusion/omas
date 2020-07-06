@@ -887,8 +887,9 @@ class ODS(MutableMapping):
         '''
         if isinstance(key, list):
             if len(key) > 1:
-                self.setraw(key[0], self.same_init_ods())
-                return self.setraw(key[1:], value)
+                if key[0] not in self:
+                    self.setraw(key[0], self.same_init_ods())
+                return self.getraw(key[0]).setraw(key[1:], value)
             else:
                 key = key[0]
         if self.omas_data is None:

@@ -465,8 +465,8 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={},
                    paths=None, time=None, imas_version=None,
-                   skip_uncertainties=False, skip_ion_state=True, skip=['ggd', 'grids_ggd'], verbose=True,
-                   consistency_check=True):
+                   skip_uncertainties=False, skip_ion_state=True, skip=[],
+                   consistency_check=True, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -494,6 +494,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     :param skip_ion_state: do not load ion_state structure
 
     :param skip: list of paths to skip
+
+    :param consistency_check: perform consistency_check
 
     :param verbose: print loading progress
 
@@ -577,11 +579,16 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
     # add occurrence information to the ODS
     for ds in ods:
+        print('+++',ds,'+++')
         if 'ids_properties' in ods[ds]:
             ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
 
+    # must manually call set_child_locations since
+    # we used the ODS.setraw that does not do that for us
+    ods.set_child_locations()
+
     try:
-        ods.consistency_check = True
+        ods.consistency_check = consistency_check
     except LookupError as _excp:
         printe(repr(_excp))
 
@@ -776,7 +783,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         if skip_ion_state and kid in ['state'] and 'ion' in path:
             continue
 
-        # skip ggd structures
+        # skip structures
         if kid in skip:
             continue
 
