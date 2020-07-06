@@ -473,6 +473,24 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
         pc_ods.plot_pulse_schedule_overlay()
 
+    def test_ec_launchers_overlay(self):
+        """Tests several plotting methods for showing EC launchers data"""
+        # Prepare sample data
+        ods = ODS()
+        ods.sample_equilibrium()
+        ods.sample_ec_launchers()
+        # Test plots with default/minimal options
+        ods.plot_ec_launchers_CX()
+        ods.plot_ec_launchers_CX_topview()
+
+    def test_nbi(self):
+        """Tests basic NBI plots"""
+        # Prep sample data
+        ods = ODS()
+        ods.sample_nbi()
+        # Test relevant plots with basic/default/minimal options
+        ods.plot_nbi_summary()
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOmasPlot)
