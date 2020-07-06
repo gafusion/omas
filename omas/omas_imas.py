@@ -418,8 +418,6 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state
     dss = numpy.unique([p[0] for p in requested_paths])
     ndss = max([len(d) for d in dss])
     for ds in dss:
-        if ds in add_datastructures.keys():
-            continue
         if not hasattr(ids, ds):
             if verbose:
                 print(f'| {ds.ljust(ndss)} IDS of IMAS version {imas_version} is unknown')
@@ -540,7 +538,6 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, occurrence=occurrence, paths=paths, time=time,
                                                                 imas_version=imas_version, skip_ion_state=skip_ion_state,
                                                                 skip=skip, verbose=verbose)
-
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
