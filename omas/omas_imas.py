@@ -385,7 +385,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
+def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state=False, skip=[], verbose=True):
     """
     Return list of IMAS paths that have data
 
@@ -399,9 +399,9 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ggd=True,
 
     :param time: extract a time slice [expressed in seconds] from the IDS
 
-    :param skip_ggd: do not load ggd structure
-
     :param skip_ion_state: do not load ion state structure
+
+    :param skip: list of paths to skip
 
     :param verbose: print ids infos
 
@@ -453,7 +453,8 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ggd=True,
                     print(f'* {ds.ljust(ndss)} IDS has data ({len(getattr(ids, ds).time)} times)')
                 except Exception as _excp:
                     print(f'* {ds.ljust(ndss)} IDS')
-                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [],
+                                                   requested_paths, skip_ion_state=skip_ion_state, skip=skip)
 
         else:
             if verbose:
@@ -466,7 +467,7 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ggd=True,
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={},
                    paths=None, time=None, imas_version=None,
-                   skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
+                   skip_uncertainties=False, skip_ion_state=True, skip=['ggd', 'grids_ggd'], verbose=True,
                    consistency_check=True):
     """
     Load OMAS data from IMAS
@@ -492,9 +493,9 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
     :param skip_uncertainties: do not load uncertain data
 
-    :param skip_ggd: do not load ggd structure
-
     :param skip_ion_state: do not load ion_state structure
+
+    :param skip: list of paths to skip
 
     :param verbose: print loading progress
 
@@ -537,8 +538,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             # see what paths have data
             # NOTE: this is where the IDS.get operation occurs
             fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, occurrence=occurrence, paths=paths, time=time,
-                                                                imas_version=imas_version, skip_ggd=skip_ggd,
-                                                                skip_ion_state=skip_ion_state, verbose=verbose)
+                                                                imas_version=imas_version, skip_ion_state=skip_ion_state,
+                                                                skip=skip, verbose=verbose)
 
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
@@ -720,7 +721,7 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
 
 
 def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False,
-                        stop_on_first_fill=False, skip_ggd=True, skip_ion_state=True):
+                        stop_on_first_fill=False, skip_ion_state=False, skip=[]):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -738,9 +739,9 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
     :param stop_on_first_fill: return as soon as one path with data hass been found
 
-    :param skip_ggd: do not traverse ggd structures
-
     :param skip_ion_state: do not traverse ion state
+
+    :param skip: list of paths to skip
 
     :return: returns list of paths in an IDS that are filled
     """
@@ -774,12 +775,12 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     # traverse
     for kid in keys:
 
-        # skip ggd structures
-        if skip_ggd and kid in ['ggd', 'grids_ggd']:
-            continue
-
         # skip ion state structures
         if skip_ion_state and kid in ['state'] and 'ion' in path:
+            continue
+
+        # skip ggd structures
+        if kid in skip:
             continue
 
         propagate_path = copy.copy(path)
@@ -796,9 +797,13 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         # recursive call
         try:
             if isinstance(kid, str):
-                subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [],
+                                                    propagate_requested_paths, assume_uniform_array_structures,
+                                                    skip_ion_state=skip_ion_state, skip=skip)
             else:
-                subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [],
+                                                    propagate_requested_paths, assume_uniform_array_structures,
+                                                    skip_ion_state=skip_ion_state, skip=skip)
         except Exception:
             # check if the issue was that we were trying to load something that was added to the _extra_structures
             if o2i(l2u(propagate_path)) in _extra_structures[propagate_path[0]]:
