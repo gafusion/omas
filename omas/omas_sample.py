@@ -520,9 +520,17 @@ def gas_injection(ods):
     ods['gas_injection.pipe.1.second_point.phi'] = 6.5
 
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
-    ods['gas_injection.pipe.2.exit_position.r'] = 2.1
-    ods['gas_injection.pipe.2.exit_position.z'] = -0.6
+    ods['gas_injection.pipe.2.exit_position.r'] = 1.65
+    ods['gas_injection.pipe.2.exit_position.z'] = 1.1
+    ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
+    ods['gas_injection.pipe.2.second_point.phi'] = 6.5
+    # This one is at the same R,Z as FAKE_GAS_B, but it doesn't have a second point defined; this supports testing.
+
+    ods['gas_injection.pipe.3.name'] = 'FAKE_GAS_D'
+    ods['gas_injection.pipe.3.exit_position.r'] = 2.1
+    ods['gas_injection.pipe.3.exit_position.z'] = -0.6
+    ods['gas_injection.pipe.3.valve.0.identifier'] = 'FAKE_GAS_VALVE_D'
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
 
     return ods
