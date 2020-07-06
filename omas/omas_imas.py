@@ -561,7 +561,8 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                         except uncertainties.core.NegativeStdDev as _excp:
                             printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
                 # assign data to ODS
-                ods[path] = data
+                # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
+                ods.setraw(path, data)
 
         finally:
             # close connection to IMAS database

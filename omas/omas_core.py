@@ -506,7 +506,7 @@ class ODS(MutableMapping):
     @cocosio.setter
     def cocosio(self, cocosio_value):
         if cocosio_value is None:
-            cocosio_value = omas_rcparams['cocos'] # default value for cocosio
+            cocosio_value = omas_rcparams['cocos']  # default value for cocosio
         self._cocosio = cocosio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -526,7 +526,7 @@ class ODS(MutableMapping):
     @unitsio.setter
     def unitsio(self, unitsio_value):
         if unitsio_value is None:
-            unitsio_value = {} # default value for unitsio
+            unitsio_value = {}  # default value for unitsio
         self._unitsio = unitsio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -546,7 +546,7 @@ class ODS(MutableMapping):
     @coordsio.setter
     def coordsio(self, coordsio_value):
         if coordsio_value is None:
-            coordsio_value = (None, {}) # default value for coordsio
+            coordsio_value = (None, {})  # default value for coordsio
         elif not isinstance(coordsio_value, (list, tuple)):
             coordsio_value = (self, coordsio_value)
         self._coordsio = coordsio_value
@@ -657,11 +657,7 @@ class ODS(MutableMapping):
                 value = CodeParameters()
                 value[key[1:]] = pass_on_value
             else:
-                value = self.__class__(imas_version=self.imas_version,
-                                       consistency_check=self.consistency_check,
-                                       dynamic_path_creation=self.dynamic_path_creation,
-                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                                       dynamic=self.dynamic)
+                value = self.same_init_ods()
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -816,9 +812,7 @@ class ODS(MutableMapping):
                 # dynamic array structure creation
                 if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
-                        ods = self.__class__()
-                        ods.copy_attrs_from(self)
-                        self[item] = ods
+                        self[item] = self.same_init_ods()
                 # index exists
                 if key[0] < len(self.omas_data):
                     self.omas_data[key[0]] = value
@@ -867,18 +861,36 @@ class ODS(MutableMapping):
 
         return self.omas_data[key]
 
+    def same_init_ods(self):
+        '''
+        Initializes a new ODS with the same attributes as this one
+
+        :return: new ODS
+        '''
+        return self.__class__(imas_version=self.imas_version,
+                              consistency_check=self.consistency_check,
+                              dynamic_path_creation=self.dynamic_path_creation,
+                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                              dynamic=self.dynamic)
+
     def setraw(self, key, value):
         '''
         Method to assign data to an ODS with no processing of the key, and it is thus faster than the ODS.__setitem__(key, value)
         Effectively behaves like a pure Python dictionary/list __setitem__.
         This method is mostly meant to be used in the inner workings of the ODS class.
 
-        :param key: string or integer
+        :param key: string, integer or a list of these
 
         :param value: value to assign
 
         :return: value
         '''
+        if isinstance(key, list):
+            if len(key) > 1:
+                self.setraw(key[0], self.same_init_ods())
+                return self.setraw(key[1:], value)
+            else:
+                key = key[0]
         if self.omas_data is None:
             if isinstance(key, int):
                 self.omas_data = []
@@ -965,11 +977,7 @@ class ODS(MutableMapping):
                     self.__setitem__(key[0], value)
                 else:
                     dynamically_created = True
-                    self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
-                                                            consistency_check=self.consistency_check,
-                                                            dynamic_path_creation=self.dynamic_path_creation,
-                                                            cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                                                            dynamic=self.dynamic))
+                    self.__setitem__(key[0], self.same_init_ods())
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
