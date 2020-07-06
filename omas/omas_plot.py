@@ -1055,16 +1055,9 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
             ax.set_xlabel('$\\rho$')
     ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
-<<<<<<< HEAD
 
-    return axes
-=======
-    if ax0 is not None:
-        ax0.set_ylim([0, ax0.get_ylim()[1]])
-    if ax1 is not None:
-        ax1.set_ylim([0, ax1.get_ylim()[1]])
-    return {'ax': axs}
->>>>>>> 51bc554b6396ac5c7f4ac48f8c93ececb696b0f6
+    return {'ax': axes}
+ 
 
 
 @add_to__ODS__
