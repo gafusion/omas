@@ -567,7 +567,6 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
     # add occurrence information to the ODS
     for ds in ods:
-        print('+++',ds,'+++')
         if 'ids_properties' in ods[ds]:
             ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
 
