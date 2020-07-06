@@ -145,9 +145,9 @@ class ODS(MutableMapping):
                  dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
                  cocos=omas_rcparams['cocos'],
-                 cocosio=omas_rcparams['cocosio'],
-                 coordsio={},
-                 unitsio=False,
+                 cocosio=None,
+                 coordsio=None,
+                 unitsio=None,
                  structure=None,
                  dynamic=None):
         """
@@ -170,7 +170,9 @@ class ODS(MutableMapping):
 
         :param unitsio: ODS will return data with units if True
 
-        :param structure: IMAS schema to use
+        :param structure: internal keyword that specifies what IMAS schema to use
+
+        :param dynamic: internal keyword used for dynamic data loading
         """
         if structure is None:
             structure = {}
@@ -184,9 +186,9 @@ class ODS(MutableMapping):
         self.location = location
         self._cocos = cocos
         self._dynamic = dynamic
-        self.cocosio = cocosio
-        self.coordsio = coordsio
-        self.unitsio = unitsio
+        self._cocosio = cocosio
+        self._coordsio = coordsio
+        self._unitsio = unitsio
 
     def homogeneous_time(self, key='', default=True):
         '''
@@ -497,12 +499,14 @@ class ODS(MutableMapping):
 
         :return: cocosio value
         """
-        if not hasattr(self, '_cocosio'):
-            self._cocosio = {}
+        if not hasattr(self, '_cocosio') or self._cocosio is None:
+            self.cocosio = None
         return self._cocosio
 
     @cocosio.setter
     def cocosio(self, cocosio_value):
+        if cocosio_value is None:
+            cocosio_value = omas_rcparams['cocos'] # default value for cocosio
         self._cocosio = cocosio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -515,12 +519,14 @@ class ODS(MutableMapping):
 
         :return: unitsio value
         """
-        if not hasattr(self, '_unitsio'):
-            self._unitsio = False
+        if not hasattr(self, '_unitsio') or self._unitsio is None:
+            self.unitsio = None
         return self._unitsio
 
     @unitsio.setter
     def unitsio(self, unitsio_value):
+        if unitsio_value is None:
+            unitsio_value = {} # default value for unitsio
         self._unitsio = unitsio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -533,13 +539,15 @@ class ODS(MutableMapping):
 
         :return: coordsio value
         """
-        if not hasattr(self, '_coordsio'):
-            self._coordsio = (None, {})
+        if not hasattr(self, '_coordsio') or self._coordsio is None:
+            self.coordsio = None
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, coordsio_value):
-        if not isinstance(coordsio_value, (list, tuple)):
+        if coordsio_value is None:
+            coordsio_value = (None, {}) # default value for coordsio
+        elif not isinstance(coordsio_value, (list, tuple)):
             coordsio_value = (self, coordsio_value)
         self._coordsio = coordsio_value
         for item in self.keys():

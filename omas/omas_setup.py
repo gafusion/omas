@@ -117,7 +117,6 @@ class OMAS_rc_params(dict):
 omas_rcparams = OMAS_rc_params()
 omas_rcparams.update({
     'cocos': 11,
-    'cocosio': 11,
     'consistency_check': True,
     'dynamic_path_creation': True,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(),
