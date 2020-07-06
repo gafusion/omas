@@ -23,7 +23,7 @@ except ImportError as _excp:
 
 def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
                   imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                  skip_uncertainties=False, skip_ggd=True, verbose=True):
+                  skip_uncertainties=False, verbose=True):
     '''
     Load UDA data to OMAS
 
@@ -40,8 +40,6 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     :param imas_version: IMAS version
 
     :param skip_uncertainties: do not load uncertain data
-
-    :param skip_ggd: do not load ggd structure
 
     :param verbose: print loading progress
 
@@ -86,8 +84,7 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     ods = ODS(consistency_check=False)
     for k, ds in enumerate(available_ds):
         filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1],
-                            path=[], paths=[], requested_paths=requested_paths,
-                            skip_uncertainties=skip_uncertainties, skip_ggd=skip_ggd,
+                            path=[], paths=[], requested_paths=requested_paths, skip_uncertainties=skip_uncertainties,
                             perc=[float(k) / len(available_ds) * 100, float(k + 1) / len(available_ds) * 100, float(k) / len(available_ds) * 100])
     ods.consistency_check = True
     ods.prune()
@@ -96,7 +93,7 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     return ods
 
 
-def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, skip_uncertainties, skip_ggd, perc=[0., 100., 0.]):
+def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, skip_uncertainties, perc=[0., 100., 0.]):
     '''
     Recursively traverse ODS and populate it with data from UDA
 
@@ -117,8 +114,6 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
     :param requested_paths: list of paths that are requested
 
     :param skip_uncertainties: do not load uncertain data
-
-    :param skip_ggd: do not load ggd structure
 
     :return: filled ODS
     '''
@@ -141,11 +136,6 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
     # traverse
     n = float(len(keys))
     for k, kid in enumerate(keys):
-
-        # skip ggd structures
-        if skip_ggd and kid in ['ggd', 'grids_ggd']:
-            continue
-
         if isinstance(kid, str):
             if skip_uncertainties and kid.endswith('_error_upper'):
                 continue
@@ -184,7 +174,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         pp0 = perc[0] + k / n * (perc[1] - perc[0])
         pp1 = perc[0] + (k + 1) / n * (perc[1] - perc[0])
         pp2 = perc[2]
-        paths = filled_paths_in_uda(ods[kid], client, pulse, run, ds[kkid], propagate_path, [], propagate_requested_paths, skip_uncertainties, skip_ggd, [pp0, pp1, pp2])
+        paths = filled_paths_in_uda(ods[kid], client, pulse, run, ds[kkid], propagate_path, [], propagate_requested_paths, skip_uncertainties, [pp0, pp1, pp2])
 
     # generate uncertain data
     if not skip_uncertainties and isinstance(ods.omas_data, dict):

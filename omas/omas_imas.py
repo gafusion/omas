@@ -385,7 +385,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state=False, skip=[], verbose=True):
+def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
     """
     Return list of IMAS paths that have data
 
@@ -398,10 +398,6 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state
     :param imas_version: IMAS version
 
     :param time: extract a time slice [expressed in seconds] from the IDS
-
-    :param skip_ion_state: do not load ion state structure
-
-    :param skip: list of paths to skip
 
     :param verbose: print ids infos
 
@@ -451,8 +447,7 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state
                     print(f'* {ds.ljust(ndss)} IDS has data ({len(getattr(ids, ds).time)} times)')
                 except Exception as _excp:
                     print(f'* {ds.ljust(ndss)} IDS')
-                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [],
-                                                   requested_paths, skip_ion_state=skip_ion_state, skip=skip)
+                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
 
         else:
             if verbose:
@@ -464,9 +459,7 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, skip_ion_state
 
 @codeparams_xml_load
 def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={},
-                   paths=None, time=None, imas_version=None,
-                   skip_uncertainties=False, skip_ion_state=True, skip=[],
-                   consistency_check=True, verbose=True):
+                   paths=None, time=None, imas_version=None, skip_uncertainties=False, consistency_check=True, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -490,10 +483,6 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
     :param imas_version: IMAS version (force specific version)
 
     :param skip_uncertainties: do not load uncertain data
-
-    :param skip_ion_state: do not load ion_state structure
-
-    :param skip: list of paths to skip
 
     :param consistency_check: perform consistency_check
 
@@ -538,8 +527,7 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
             # see what paths have data
             # NOTE: this is where the IDS.get operation occurs
             fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, occurrence=occurrence, paths=paths, time=time,
-                                                                imas_version=imas_version, skip_ion_state=skip_ion_state,
-                                                                skip=skip, verbose=verbose)
+                                                                imas_version=imas_version, verbose=verbose)
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
@@ -724,8 +712,8 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False,
-                        stop_on_first_fill=False, skip_ion_state=False, skip=[]):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None,
+                        assume_uniform_array_structures=False, stop_on_first_fill=False):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -742,10 +730,6 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
     :param stop_on_first_fill: return as soon as one path with data hass been found
-
-    :param skip_ion_state: do not traverse ion state
-
-    :param skip: list of paths to skip
 
     :return: returns list of paths in an IDS that are filled
     """
@@ -778,15 +762,6 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
     # traverse
     for kid in keys:
-
-        # skip ion state structures
-        if skip_ion_state and kid in ['state'] and 'ion' in path:
-            continue
-
-        # skip structures
-        if kid in skip:
-            continue
-
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
 
@@ -802,12 +777,10 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         try:
             if isinstance(kid, str):
                 subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [],
-                                                    propagate_requested_paths, assume_uniform_array_structures,
-                                                    skip_ion_state=skip_ion_state, skip=skip)
+                                                    propagate_requested_paths, assume_uniform_array_structures)
             else:
                 subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [],
-                                                    propagate_requested_paths, assume_uniform_array_structures,
-                                                    skip_ion_state=skip_ion_state, skip=skip)
+                                                    propagate_requested_paths, assume_uniform_array_structures)
         except Exception:
             # check if the issue was that we were trying to load something that was added to the _extra_structures
             if o2i(l2u(propagate_path)) in _extra_structures[propagate_path[0]]:
