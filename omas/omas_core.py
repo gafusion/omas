@@ -1216,9 +1216,13 @@ class ODS(MutableMapping):
 
     def __getstate__(self):
         state = {}
-        for item in omas_dictstate:
+        for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
-                state[item] = self.__dict__[item]
+                # we do not want to carry with us this information
+                if item in ['_cocosio', '_coordsio', '_unitsio']:
+                    state[item] = None
+                else:
+                    state[item] = self.__dict__[item]
         return state
 
     def copy(self):
@@ -1241,14 +1245,14 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
 
         :param ods: input ods
 
         :return: self
         '''
         for item in omas_ods_attrs:
-            setattr(self, item, getattr(ods, item))
+            setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):
@@ -2068,7 +2072,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_dynamic']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
