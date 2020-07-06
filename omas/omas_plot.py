@@ -1969,7 +1969,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
             try:
                 r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
             except (LookupError, ValueError):
-                r2 = z2 = None
+                if len(locations[location_name]) > 3:
+                    # If an item has already been added at this location, use its r2, z2 to fill in missing values
+                    r2 = locations[location_name][-3]
+                    z2 = locations[location_name][-2]
+                else:
+                    r2 = z2 = None
             locations[location_name] += [r2, z2]
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
