@@ -12,7 +12,6 @@ Test script for omas/omas_plot.py
 """
 
 # Basic imports
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 import numpy
@@ -142,7 +141,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_eqcx_data_availability_variations(self):
         """Plot all the equilibrium contour quantity options with all the combinations of available data"""
-        cq_options = ['rho', 'psi', 'phi', 'q']
+        cq_options = ['rho_tor_norm', 'psi', 'phi', 'q']
         for iwall in [True, False]:
             for ipsi in [True, False]:
                 for iphi in [True, False]:
@@ -194,8 +193,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
+            # Fails because we ask for junk.
+            ods.plot_equilibrium_CX(contour_quantity='__not_existing_quantity__', allow_fallback=False)
 
     def test_eqcx_slices(self):
         """Test dealing with different time indices, including getting wall from a different slice than the eq"""
@@ -235,8 +234,7 @@ class TestOmasPlot(unittest.TestCase):
         ods_test['core_transport.ids_properties.comment'] = "TGRYO"
         ods_test.sample_core_profiles()
         ods_test.sample_equilibrium()
-        ods_test['core_profiles.profiles_1d[0].omega0'] = numpy.linspace(4e4,2e3,len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
-
+        ods_test['core_profiles.profiles_1d.0.rotation_frequency_tor_sonic'] = numpy.linspace(4e4, 2e3, len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
         ods_test.plot_core_transport_fluxes()
         fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
         ods_test.plot_core_transport_fluxes(fig=fig, axes=axes, show_total_density=False, plotting_label="test")
@@ -474,6 +472,24 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.sample_pulse_schedule()
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
         pc_ods.plot_pulse_schedule_overlay()
+
+    def test_ec_launchers_overlay(self):
+        """Tests several plotting methods for showing EC launchers data"""
+        # Prepare sample data
+        ods = ODS()
+        ods.sample_equilibrium()
+        ods.sample_ec_launchers()
+        # Test plots with default/minimal options
+        ods.plot_ec_launchers_CX()
+        ods.plot_ec_launchers_CX_topview()
+
+    def test_nbi(self):
+        """Tests basic NBI plots"""
+        # Prep sample data
+        ods = ODS()
+        ods.sample_nbi()
+        # Test relevant plots with basic/default/minimal options
+        ods.plot_nbi_summary()
 
 
 if __name__ == '__main__':

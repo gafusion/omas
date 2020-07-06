@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 # --------------------------------------------
 # external imports
 # --------------------------------------------
@@ -120,10 +118,8 @@ omas_rcparams = OMAS_rc_params()
 omas_rcparams.update({
     'cocos': 11,
     'cocosio': 11,
-    'coordsio': {},
     'consistency_check': True,
     'dynamic_path_creation': True,
-    'unitsio': False,
     'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(),
                                                                 os.environ.get('USER', 'dummy_user'),
                                                                 'OMAS_TMP_DIR'])),
@@ -151,34 +147,6 @@ def rcparams_environment(**kw):
 # additional data structures
 # --------------------------------------------
 add_datastructures = {}
-# info data structure carries shot/run/version/machine/user info through different save formats
-add_datastructures['info'] = {
-    "info.shot": {
-        "full_path": "info.shot",
-        "data_type": "INT_0D",
-        "description": "shot number"
-    },
-    "info.imas_version": {
-        "full_path": "info.imas_version",
-        "data_type": "STR_0D",
-        "description": "imas version"
-    },
-    "info.machine": {
-        "full_path": "info.machine",
-        "data_type": "STR_0D",
-        "description": "machine name"
-    },
-    "info.user": {
-        "full_path": "info.user",
-        "data_type": "STR_0D",
-        "description": "user name"
-    },
-    "info.run": {
-        "full_path": "info.run",
-        "data_type": "INT_0D",
-        "description": "run number"
-    }
-}
 
 
 def omas_testdir(filename_topic=''):

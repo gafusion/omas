@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -76,8 +74,6 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
 
     available_ds = []
     for ds in numpy.unique([p[0] for p in requested_paths]):
-        if ds in add_datastructures.keys():
-            continue
 
         if uda_get(client, [ds, 'ids_properties', 'homogeneous_time'], pulse, run) is None:
             if verbose:

@@ -7,8 +7,6 @@ This example shows how OMAS can be used to generate a GACODE input.profiles
 file given a gEQDSK file and a ONETWO statefile.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from matplotlib import pyplot
 import os
 from omas import *

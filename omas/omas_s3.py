@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import save_omas_pkl, load_omas_pkl, ODS
 

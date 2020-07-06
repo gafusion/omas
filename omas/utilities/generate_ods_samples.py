@@ -1,7 +1,6 @@
-from __future__ import print_function, division, unicode_literals
-
 import os, sys
-sys.path.insert(0,os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
+
+sys.path.insert(0, os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
 
 import numpy
 from matplotlib import pyplot
@@ -19,6 +18,7 @@ eq = OMFITgeqdsk(imas_json_dir + '/../samples/g145419.02100')
 eq.resample(17)
 eq['fluxSurfaces'].changeResolution(1)
 ods = eq.to_omas()
+ods.consistency_check = 'strict_drop_warn'
 save_omas_json(ods, imas_json_dir + '/../samples/sample_equilibrium_ods.json')
 
 # generate core_profiles and core_sources sample

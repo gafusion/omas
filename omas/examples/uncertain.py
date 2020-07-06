@@ -6,8 +6,6 @@ Uncertain data
 This example shows how OMAS can seamlessly handle unceratain data leveraging the `uncertainties` Python package
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from omas import *
 import os
 import numpy

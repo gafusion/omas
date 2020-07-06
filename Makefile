@@ -1,5 +1,7 @@
+VERSION := $(shell cat omas/version)
+
 all:
-	@echo 'OMAS makefile help'
+	@echo 'OMAS $(VERSION) makefile help'
 	@echo ''
 	@echo ' - make tests         : run all regression tests'
 	@echo ' - make omfit_tests   : run test_omas in OMFIT'
@@ -12,6 +14,7 @@ all:
 	@echo ' - make pypi          : upload to pypi'
 	@echo ' - make html          : generate sphinx documentation'
 	@echo ' - make examples      : generate sphinx documentation with examples'
+	@echo ' - make samples       : generate sample files'
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
@@ -38,9 +41,6 @@ tests_examples:
 tests_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
-tests_examples:
-	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
-
 requirements:
 	rm -f requirements.txt
 	python3 setup.py --name
@@ -50,6 +50,9 @@ html:
 
 examples:
 	cd sphinx && make examples
+
+samples:
+	cd omas/utilities && python3 generate_ods_samples.py
 
 docs: html
 	cd sphinx && make commit && make push
@@ -62,7 +65,7 @@ cocos:
 	cd omas/utilities && python3 generate_cocos_signals.py
 
 tag:
-	git tag -a v$$(cat omas/version) $$(git log --pretty=format:"%h" --grep="^version $$(cat omas/version)") -m "version $$(cat omas/version)"
+	git tag -a v$(VERSION) $$(git log --pretty=format:"%h" --grep="^version $(VERSION)") -m "version $(VERSION)"
 	git push --tags
 
 sdist:
@@ -70,10 +73,10 @@ sdist:
 	python3 setup.py sdist
 
 pypi: sdist
-	python3 -m twine upload --repository pypi dist/*
+	python3 -m twine upload --repository pypi dist/omas-$(VERSION).tar.gz
 
 testpypi:
-	python3 -m twine upload --repository testpypi dist/*
+	python3 -m twine upload --repository testpypi dist/omas-$(VERSION).tar.gz
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 

@@ -2,7 +2,7 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.22.0",
+  "lifecycle_last_change": "3.28.2",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "5"
@@ -1052,13 +1052,6 @@
   "type": "dynamic",
   "units": "s"
  },
- "coils_non_axisymmetric.coils_n": {
-  "data_type": "INT_0D",
-  "documentation": "Number of coils around the torus, in case is_periodic = 1",
-  "full_path": "coils_non_axisymmetric/coils_n",
-  "lifecycle_status": "alpha",
-  "type": "static"
- },
  "coils_non_axisymmetric.ids_properties": {
   "data_type": "structure",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
@@ -1128,13 +1121,6 @@
   "full_path": "coils_non_axisymmetric/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
- },
- "coils_non_axisymmetric.is_periodic": {
-  "data_type": "INT_0D",
-  "documentation": "Flag indicating whether coils are described one by one in the coil() structure (flag=0) or whether the coil structure represents only coils having different characteristics (flag = 1, n_coils must be filled in that case). In the latter case, the coil() sequence is repeated periodically around the torus.",
-  "full_path": "coils_non_axisymmetric/is_periodic",
-  "lifecycle_status": "alpha",
-  "type": "static"
  },
  "coils_non_axisymmetric.time": {
   "coordinates": [

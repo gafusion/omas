@@ -6,8 +6,6 @@ OMAS plot examples
 This example loads some data from S3, augments the ODS with pressure information, and generates some plots
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from matplotlib.pyplot import show
 from omas import *
 

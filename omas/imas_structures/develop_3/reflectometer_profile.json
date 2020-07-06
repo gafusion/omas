@@ -649,12 +649,12 @@
    "reflectometer_profile.channel[:].n_e.time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Major radius",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "reflectometer_profile/channel(i1)/position/phi(:,:)",
   "lifecycle_status": "alpha",
   "timebasepath": "n_e/time",
   "type": "dynamic",
-  "units": "Toroidal angle"
+  "units": "rad"
  },
  "reflectometer_profile.channel[:].position.phi_error_index": {
   "change_nbc_description": "leaf_renamed",
@@ -680,7 +680,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "n_e/time",
   "type": "dynamic",
-  "units": "Toroidal angle"
+  "units": "rad"
  },
  "reflectometer_profile.channel[:].position.phi_error_upper": {
   "change_nbc_description": "leaf_renamed",
@@ -696,7 +696,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "n_e/time",
   "type": "dynamic",
-  "units": "Toroidal angle"
+  "units": "rad"
  },
  "reflectometer_profile.channel[:].position.psi": {
   "coordinates": [

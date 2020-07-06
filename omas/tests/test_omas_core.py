@@ -11,7 +11,6 @@ Test script for omas/omas_core.py
 -------
 """
 
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 import numpy
@@ -193,11 +192,14 @@ class TestOmasCore(unittest.TestCase):
         # get time information from explicitly set time array
         extra_info = {}
         assert numpy.allclose(ods.time('equilibrium'), [101, 201, 302])
+        assert numpy.allclose(ods.time('equilibrium.time_slice'), [101, 201, 302])
+        assert numpy.allclose(ods['equilibrium'].time('time_slice'), [101, 201, 302])
         assert ods['equilibrium'].homogeneous_time() is True
 
         # get time value from a single item in array of structures
         extra_info = {}
         assert ods['equilibrium.time_slice'][0].time() == 101
+        assert ods['equilibrium'].time('time_slice.0') == 101
         assert ods['equilibrium.time_slice'][0].homogeneous_time() is True
 
         # sample pf_active data has non-homogeneous times

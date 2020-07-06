@@ -6,8 +6,6 @@ Interpolate whole ODS
 Seamless handling of coordinates within OMAS makes it easy to reinterpolate a whole ODS on a new grid
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import numpy
 from omas import *
 
