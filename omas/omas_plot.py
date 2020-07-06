@@ -1065,7 +1065,8 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
             nrows = 5
         else:
             nrows = 4
-        fig, axes = pyplot.subplots(nrows=nrows, ncols=2, sharex='col')
+        ncols = 2
+        fig, axes = pyplot.subplots(nrows=nrows, ncols=ncols, sharex='col')
 
     # Color dict for the plots:
     color_label_dict = {'STEP_SC_exp': 'r', 'STEP_SC_exp_rot': 'b',
@@ -1112,7 +1113,9 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
         axes[-1,1].set_xlabel('$\\rho$')
 
         # Temp electrons
-        axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=plotting_label)  # keV
+        axes = cached_add_subplot(fig, axes, nrows, ncols, 1)
+        uband(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ax=ax, **kw)
+        #axes[0,0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature']/1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label,'r'), label=plotting_label)  # keV
         axes[0,0].set_ylabel('$T_{e}\,[keV]$', fontsize='large')
         axes[0,0].axvline(0.8, ls='--', color='k')
         axes[0,0].axvline(0.2, ls='--', color='k')
