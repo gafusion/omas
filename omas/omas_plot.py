@@ -1879,8 +1879,10 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
 
 @add_to__ODS__
-def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas='all',
-                          simple_labels=False, label_spacer=0, colors=None, draw_arrow=True, **kw):
+def gas_injection_overlay(
+        ods, ax=None, angle_not_in_pipe_name=False, which_gas='all',
+        show_all_pipes_in_group=True, simple_labels=False, label_spacer=0, colors=None, draw_arrow=True, **kw
+):
     r"""
     Plots overlays of gas injectors
 
@@ -1900,6 +1902,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
         - If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
           GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
           RF_ on DIII-D, for example.
+
+    :param show_all_pipes_in_group: bool
+        Some pipes have the same R,Z coordinates of their exit positions (but different phi locations) and will
+        appear at the same location on the plot. If this keyword is True, labels for all the pipes in such a group
+        will be displayed together. If it is False, only the first one in the group will be labeled.
 
     :param simple_labels: bool
         Simplify labels by removing suffix after the last underscore.
@@ -1953,7 +1960,7 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
                 continue  # Skip this valve because it's not active
 
             r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
-            location_name = '{:0.3f}_{:0.3f}'.format(r, z)
+            location_name = f'{r:0.3f}_{z:0.3f}'
 
             if simple_labels:
                 label = '_'.join(label.split('_')[:-1])
@@ -1969,7 +1976,12 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
             try:
                 r2, z2 = pipe['second_point']['r'], pipe['second_point']['z']
             except (LookupError, ValueError):
-                r2 = z2 = None
+                if len(locations[location_name]) > 3:
+                    # If an item has already been added at this location, use its r2, z2 to fill in missing values
+                    r2 = locations[location_name][-3]
+                    z2 = locations[location_name][-2]
+                else:
+                    r2 = z2 = None
             locations[location_name] += [r2, z2]
     try:
         rsplit = ods['equilibrium.time_slice'][0]['global_quantities.magnetic_axis.r']
@@ -1992,7 +2004,11 @@ def gas_injection_overlay(ods, ax=None, angle_not_in_pipe_name=False, which_gas=
     colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
-        label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + [locations[loc][0]] + [''])
+        if show_all_pipes_in_group:
+            show_locs = list(set(locations[loc][::3]))  # Each pipe has ['label', r2, z2], so ::3 selects just labels.
+        else:
+            show_locs = [locations[loc][0]]
+        label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + show_locs + [''])
         if draw_arrow:
             kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
             gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors[i], **kw)
