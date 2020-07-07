@@ -11,14 +11,14 @@ from omas import *
 import numpy
 
 # load sample data from S3
-ods = load_omas_s3('DIIIDoverlay_sample', user='omas_shared', imas_version='3.21.0')
+ods = ods_sample()
 
 # plot equilibrium and wall
 ods.plot_equilibrium_CX()
 # plot overlays
 ods.plot_overlay(  # Values can be True to simply turn on or dict to pass keywords to specific overlay functions
     gas_injection={'colors': ['b', 'g', 'c']},  # , 'which_gas': ['GASA', 'LOB1']},
-    bolometer={'labelevery': 1, 'mask': numpy.append(numpy.ones(24, bool), (numpy.arange(24) % 2).astype(bool)), 'linestyle': '--'},
+    bolometer={'labelevery': 1, 'linestyle': '--'},
     thomson_scattering={'labelevery': 4, 'color': 'r'},
     debug_all_plots=True,
 )

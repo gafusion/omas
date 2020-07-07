@@ -497,7 +497,7 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     stime.on_changed(update)
     for time0 in time:
         axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
-    return {'stime':stime, 'axtime':axtime, 'ax':axs}
+    return {'stime': stime, 'axtime': axtime, 'ax': axs}
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -2454,11 +2454,11 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     mask = kw.pop('mask', numpy.ones(nc, bool))
 
-    r1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.r'] for i in range(nc)])[mask]
-    z1 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.first_point.z'] for i in range(nc)])[mask]
-    r2 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.second_point.r'] for i in range(nc)])[mask]
-    z2 = numpy.array([ods['bolometer']['channel'][i]['line_of_sight.second_point.z'] for i in range(nc)])[mask]
-    bolo_id = numpy.array([ods['bolometer']['channel'][i]['identifier'] for i in range(nc)])[mask]
+    r1 = ods['bolometer.channel.:.line_of_sight.first_point.r'][mask]
+    z1 = ods['bolometer.channel.:.line_of_sight.first_point.z'][mask]
+    r2 = ods['bolometer.channel.:.line_of_sight.second_point.r'][mask]
+    z2 = ods['bolometer.channel.:.line_of_sight.second_point.z'][mask]
+    bolo_id = ods['bolometer.channel.:.identifier'][mask]
 
     ncm = len(r1)
 
