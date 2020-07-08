@@ -223,9 +223,13 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         #        continue
         ds = item.split('.')[0]
         hout.setdefault(ds, {})[item] = fout[item]
+        if ds in add_datastructures:
+            hout[ds].update(add_datastructures[ds])
 
     # additional data structures
-    hout.update(add_datastructures)
+    for ds in add_datastructures:
+        if ds not in hout:
+            hout[ds]=add_datastructures[ds]
 
     # prepare directory structure
     if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version)):
@@ -457,6 +461,8 @@ def symlink_imas_structure_versions(test=True, verbose=True):
 
     # check if two files are identical
     def same_ds(a, b):
+        if not os.path.exists(a) or not os.path.exists(b):
+            return False
         with open(a) as a:
             with open(b) as b:
                 return a.read() == b.read()
@@ -475,9 +481,12 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                 else:
                     structures_strides[ds].append([version])
         previous_tag_structures = this_tag_structures
-    if verbose:
+
+    # print strides
+    if verbose or not test:
         pprint(structures_strides)
 
+    # apply symlinks
     if not test:
         for ds in structures_strides:
             for stride in structures_strides[ds]:
@@ -487,6 +496,5 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                         this = dict_structures(stride[-1])[ds][len(dir):]
                         prev = dict_structures(version)[ds]
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
-                        print(command)
                         subprocess.Popen(command, shell=True).communicate()
     return structures_strides

@@ -1087,6 +1087,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "coils_non_axisymmetric.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "coils_non_axisymmetric.ids_properties.occurrence"
+ },
  "coils_non_axisymmetric.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",

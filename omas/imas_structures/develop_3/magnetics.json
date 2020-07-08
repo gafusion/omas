@@ -2322,6 +2322,11 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "magnetics.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "magnetics.ids_properties.occurrence"
+ },
  "magnetics.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",

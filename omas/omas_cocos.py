@@ -605,8 +605,6 @@ _cocos_signals['ic_antennas.antenna.:.module.:.current.:.amplitude.data']='?'   
 _cocos_signals['ic_antennas.antenna.:.module.:.current.:.phase.data']='?'                                     #[ADD?]# 1.625000 # current  [rad]
 _cocos_signals['ic_antennas.antenna.:.surface_current.:.spectrum']='?'                                        #[ADD?]# 1.600000 # current  [A]
 
-# INFO
-
 # INTERFEROMETER
 _cocos_signals['interferometer.channel.:.line_of_sight.first_point.phi']='TOR'                           # 2.000000 # phi  [rad]
 _cocos_signals['interferometer.channel.:.line_of_sight.second_point.phi']='TOR'                          # 2.000000 # phi  [rad]

@@ -2,7 +2,7 @@
  "pf_active": {
   "documentation": "Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems",
   "full_path": "pf_active",
-  "lifecycle_last_change": "3.23.1",
+  "lifecycle_last_change": "3.29.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -283,6 +283,69 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "T"
+ },
+ "pf_active.coil[:].b_field_max_timed": {
+  "data_type": "structure",
+  "documentation": "Maximum absolute value of the magnetic field on the conductor surface",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T"
+ },
+ "pf_active.coil[:].b_field_max_timed.data": {
+  "coordinates": [
+   "pf_active.coil[:].b_field_max_timed.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_max_timed/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "pf_active.coil[:].b_field_max_timed.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.coil[:].b_field_max_timed.data_error_lower": {
+  "coordinates": [
+   "pf_active.coil[:].b_field_max_timed.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_max_timed/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "pf_active.coil[:].b_field_max_timed.data_error_upper": {
+  "coordinates": [
+   "pf_active.coil[:].b_field_max_timed.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_max_timed/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "pf_active.coil[:].b_field_max_timed.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "pf_active/coil(i1)/b_field_max_timed/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_max_timed/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "pf_active.coil[:].current": {
   "cocos_label_transformation": "ip_like",
@@ -1239,6 +1302,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_active.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "pf_active.ids_properties.occurrence"
+ },
  "pf_active.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1280,6 +1348,189 @@
   "full_path": "pf_active/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "pf_active.radial_force": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "struct_array",
+  "documentation": "Radial forces on the axisymmetric PF coil system",
+  "full_path": "pf_active/radial_force(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "pf_forces"
+ },
+ "pf_active.radial_force[:].combination": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
+  "full_path": "pf_active/radial_force(i1)/combination(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.radial_force[:].combination_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"combination\"",
+  "full_path": "pf_active/radial_force(i1)/combination_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.radial_force[:].combination_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"combination\"",
+  "full_path": "pf_active/radial_force(i1)/combination_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.radial_force[:].combination_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"combination\"",
+  "full_path": "pf_active/radial_force(i1)/combination_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.radial_force[:].force": {
+  "data_type": "structure",
+  "documentation": "Force (positive when upwards for a vertical force, positive when outwards for a radial force) ",
+  "full_path": "pf_active/radial_force(i1)/force",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].force.data": {
+  "coordinates": [
+   "pf_active.radial_force[:].force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/radial_force(i1)/force/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].force.data_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/radial_force(i1)/force/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.radial_force[:].force.data_error_lower": {
+  "coordinates": [
+   "pf_active.radial_force[:].force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/radial_force(i1)/force/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].force.data_error_upper": {
+  "coordinates": [
+   "pf_active.radial_force[:].force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/radial_force(i1)/force/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].force.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "flt_1d_type",
+  "documentation": "Time",
+  "full_path": "pf_active/radial_force(i1)/force/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.radial_force[:].limit_max": {
+  "data_type": "FLT_0D",
+  "documentation": "Maximum force combination limit",
+  "full_path": "pf_active/radial_force(i1)/limit_max",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].limit_max_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"limit_max\"",
+  "full_path": "pf_active/radial_force(i1)/limit_max_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.radial_force[:].limit_max_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"limit_max\"",
+  "full_path": "pf_active/radial_force(i1)/limit_max_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].limit_max_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"limit_max\"",
+  "full_path": "pf_active/radial_force(i1)/limit_max_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].limit_min": {
+  "data_type": "FLT_0D",
+  "documentation": "Minimum force combination limit",
+  "full_path": "pf_active/radial_force(i1)/limit_min",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].limit_min_error_index": {
+  "data_type": "int_type",
+  "documentation": "Index in the error_description list for \"limit_min\"",
+  "full_path": "pf_active/radial_force(i1)/limit_min_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.radial_force[:].limit_min_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"limit_min\"",
+  "full_path": "pf_active/radial_force(i1)/limit_min_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].limit_min_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"limit_min\"",
+  "full_path": "pf_active/radial_force(i1)/limit_min_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.radial_force[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the force combination",
+  "full_path": "pf_active/radial_force(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "pf_active.supply": {
   "coordinates": [
@@ -1798,14 +2049,14 @@
   "full_path": "pf_active/vertical_force(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
-  "structure_reference": "pf_vertical_forces"
+  "structure_reference": "pf_forces"
  },
  "pf_active.vertical_force[:].combination": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Coils involved in the force combinations. Normally the vertical force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
+  "documentation": "Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
   "full_path": "pf_active/vertical_force(i1)/combination(:)",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -1842,7 +2093,7 @@
  },
  "pf_active.vertical_force[:].force": {
   "data_type": "structure",
-  "documentation": "Force ",
+  "documentation": "Force (positive when upwards for a vertical force, positive when outwards for a radial force) ",
   "full_path": "pf_active/vertical_force(i1)/force",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1905,7 +2156,7 @@
  },
  "pf_active.vertical_force[:].limit_max": {
   "data_type": "FLT_0D",
-  "documentation": "Vertical force combination limit",
+  "documentation": "Maximum force combination limit",
   "full_path": "pf_active/vertical_force(i1)/limit_max",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -1936,7 +2187,7 @@
  },
  "pf_active.vertical_force[:].limit_min": {
   "data_type": "FLT_0D",
-  "documentation": "Vertical force combination limit",
+  "documentation": "Minimum force combination limit",
   "full_path": "pf_active/vertical_force(i1)/limit_min",
   "lifecycle_status": "alpha",
   "type": "static",
