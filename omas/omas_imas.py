@@ -761,6 +761,9 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None,
 
     # traverse
     for kid in keys:
+        if kid == 'occurrence' and path[-1] == 'ids_properties':
+            continue
+
         propagate_path = copy.copy(path)
         propagate_path.append(kid)
 
