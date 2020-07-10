@@ -1027,7 +1027,7 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
                 if q in prof1d[specie]:
                     plotting_list.append(prof1d[specie][q])
                 else:
-                    plotting_list.append(np.zeros(len(rho)))
+                    plotting_list.append(numpy.zeros(len(rho)))
                 label_name.append(f'{names[index]} {q.capitalize()}')
         else:
             plotting_list.append(prof1d[q])
