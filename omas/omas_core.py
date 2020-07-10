@@ -1721,7 +1721,7 @@ class ODS(MutableMapping):
         '''
         return different_ods(self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty)
 
-    def from_structure(self, structure):
+    def from_structure(self, structure, depth=0):
         '''
         Generate an ODS starting from a hierarchical structure made of dictionaries and lists
 
@@ -1738,17 +1738,19 @@ class ODS(MutableMapping):
 
         for item in keys:
             if isinstance(structure[item], dict):
-                self[item].from_structure(structure[item])
+                self[item].from_structure(structure[item], depth=depth + 1)
             elif isinstance(structure[item], list):
                 # identify if this is a leaf
                 if len(structure[item]) and not isinstance(structure[item][0], dict):
-                    self[item] = numpy.array(structure[item])
+                    self.setraw(item, numpy.array(structure[item]))
                 # or a node in the IMAS tree
                 else:
-                    self[item].from_structure(structure[item])
+                    self[item].from_structure(structure[item], depth=depth + 1)
             else:
-                self[item] = copy.deepcopy(structure[item])
-
+                self.setraw(item, copy.deepcopy(structure[item]))
+            if depth == 0 and isinstance(self[item], ODS):
+                self[item].set_child_locations()
+                self[item].consistency_check = self.consistency_check
         return self
 
     def codeparams2xml(self):
@@ -1986,7 +1988,7 @@ class CodeParameters(dict):
             tmp[l2o(path)] = self[path]
         return tmp
 
-    def from_structure(self, structure):
+    def from_structure(self, structure, depth=0):
         '''
         Generate CodeParamters starting from a hierarchical structure made of dictionaries and lists
 
@@ -2003,14 +2005,14 @@ class CodeParameters(dict):
 
         for item in keys:
             if isinstance(structure[item], dict):
-                self[item].from_structure(structure[item])
+                self[item].from_structure(structure[item], depth=depth + 1)
             elif isinstance(structure[item], list):
                 # identify if this is a leaf
                 if len(structure[item]) and not isinstance(structure[item][0], dict):
                     self[item] = numpy.array(structure[item])
                 # or a node in the IMAS tree
                 else:
-                    self[item].from_structure(structure[item])
+                    self[item].from_structure(structure[item], depth=depth + 1)
             else:
                 self[item] = copy.deepcopy(structure[item])
 

@@ -55,7 +55,9 @@ def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['defa
     return str(res.inserted_id)
 
 
-def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['default_mongo_server'], consistency_check=True, imas_version=omas_rcparams['default_imas_version']):
+def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['default_mongo_server'],
+                    consistency_check=True, imas_version=omas_rcparams['default_imas_version'],
+                    limit=None):
     """
     Load an OMAS data set from MongoDB
 
@@ -70,6 +72,8 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :param imas_version: imas version to use for consistency check
+
+    :param limit: return at most `limit` number of results
 
     :return: list of OMAS data set that match find criterion
     """
@@ -97,8 +101,13 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
     coll = db[collection]
 
     # find all the matching records
+    found = coll.find(find)
+    if limit is not None:
+        found = found.limit(limit)
+
+    # populate ODSs
     results = {}
-    for record in coll.find(find):
+    for record in found:
         ods = ODS(consistency_check=consistency_check, imas_version=imas_version)
         _id = record['_id']
         del record['_id']

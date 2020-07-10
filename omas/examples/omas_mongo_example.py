@@ -25,14 +25,14 @@ ods = ODS().load('mongo', {'_id': _id}, collection='test', database='test')
 print('find entries that satisfy the query by matching strings')
 odss = load_omas_mongo({'equilibrium.code.name': 'test_code'}, collection='test', database='test')
 
-print('find entries based on scalar condition')
+print('find at most 5 entries based on scalar condition')
 # https://docs.mongodb.com/manual/tutorial/query-embedded-documents/
-odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt': 0}}, collection='test', database='test')
+odss = load_omas_mongo({'equilibrium.time_slice.0.global_quantities.ip': {'$gt': 0}}, collection='test', database='test', limit=5)
 print(f' - found {len(odss)} entries')
 
-print('find entries based on conditions on array elements')
+print('find at most 5 entries based on conditions on array elements')
 # https://docs.mongodb.com/manual/tutorial/query-arrays/
-odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, collection='test', database='test')
+odss = load_omas_mongo({'equilibrium.vacuum_toroidal_field.b0': {'$size': 1}}, collection='test', database='test', limit=5)
 print(f' - found {len(odss)} entries')
 
 # =============================================
