@@ -1669,7 +1669,7 @@ _cocos_signals = {}
                     units = info.get('units', None)
                     data_type = info.get('data_type', None)
                     documentation = info.get('documentation', '')
-                    if data_type in ['structure', 'STR_0D', 'struct_array']:
+                    if data_type in ['STRUCTURE', 'STR_0D', 'STRUCT_ARRAY']:
                         continue
                     elif units in [None, 's']:
                         out[structure].setdefault(-1, []).append((item, '[%s]' % units))

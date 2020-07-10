@@ -7,11 +7,12 @@ from .omas_utils import *
 
 # add support for occurrences to each IDS
 for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
-    add_datastructures[structure]={f"{structure}.ids_properties.occurrence": {
+    add_datastructures[structure] = {f"{structure}.ids_properties.occurrence": {
         "full_path": f"{structure}.ids_properties.occurrence",
         "data_type": "INT_0D",
         "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]"
     }}
+
 
 # --------------------------------------------
 # generation of the imas structure json files
@@ -187,6 +188,11 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                 del fout[item][key]
             elif key.startswith('@path'):
                 fout[item][key] = process_path(fout[item][key])
+            elif key == '@data_type':
+                if fout[item][key] == 'flt_type':
+                    fout[item][key] = 'FLT_0D'
+                else:
+                    fout[item][key] = fout[item][key].upper()
         if len(coords):
             # # this is a check for duplicated coordinates, which it is not an error per se
             # if len(numpy.unique(list(filter(lambda x: not x.startswith('1...'), coords)))) != len(list(filter(lambda x: not x.startswith('1...'), coords))):
@@ -229,7 +235,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     # additional data structures
     for ds in add_datastructures:
         if ds not in hout:
-            hout[ds]=add_datastructures[ds]
+            hout[ds] = add_datastructures[ds]
 
     # prepare directory structure
     if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version)):
@@ -367,7 +373,7 @@ def extract_times(imas_version=omas_rcparams['default_imas_version']):
         tmp = load_structure(structure, imas_version)[0]
 
         for item in tmp:
-            if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'structure':
+            if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'STRUCTURE':
                 continue
             omas_times.append(item)
 
