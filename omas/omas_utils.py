@@ -40,19 +40,22 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
             differences.append('DIFF: key `%s` missing in 1st ods' % (prepend_path_string + k))
     for k in k1.intersection(k2):
-        if ods1[k] is None and ods2[k] is None:
-            pass
-        elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
-            if ods1[k] != ods2[k]:
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-            differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
-        elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        else:
-            if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+        try:
+            if ods1[k] is None and ods2[k] is None:
+                pass
+            elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
+                if ods1[k] != ods2[k]:
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+            elif not ignore_type and type(ods1[k]) != type(ods2[k]):
+                differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
+            elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
+                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+            else:
+                if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+        except Exception:
+            raise Exception(f'Error comparing {k}')
     if len(differences):
         return differences
     else:
