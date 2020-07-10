@@ -6,13 +6,14 @@
 from .omas_utils import *
 
 # add support for occurrences to each IDS
+number_of_omas_only_add_datastructures_entries = 0
 for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
     add_datastructures[structure] = {f"{structure}.ids_properties.occurrence": {
         "full_path": f"{structure}.ids_properties.occurrence",
         "data_type": "INT_0D",
         "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]"
     }}
-
+    number_of_omas_only_add_datastructures_entries = len(add_datastructures[structure])
 
 # --------------------------------------------
 # generation of the imas structure json files
@@ -234,7 +235,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
 
     # additional data structures
     for ds in add_datastructures:
-        if ds not in hout:
+        if ds not in hout and len(add_datastructures[ds]) > number_of_omas_only_add_datastructures_entries:
             hout[ds] = add_datastructures[ds]
 
     # prepare directory structure
