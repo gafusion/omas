@@ -98,6 +98,10 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = int(value)
         elif 'STR' in info['data_type']:
             value = str(value)
+    elif isinstance(value, bytes):
+        if 'STR' in info['data_type']:
+            value = b2s(value)
+
     # structure type is respected check type
     if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
         text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
