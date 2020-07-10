@@ -8,7 +8,7 @@
   "maxoccur": "3"
  },
  "sdn.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "sdn/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "sdn.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "sdn/ids_properties",
   "lifecycle_status": "alpha",
@@ -88,6 +88,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "sdn.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "sdn.ids_properties.occurrence"
+ },
  "sdn.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -103,7 +108,7 @@
   "type": "constant"
  },
  "sdn.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "sdn/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -134,7 +139,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "sdn/time(:)",
   "lifecycle_status": "alpha",
@@ -146,7 +151,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of topics. SDN signals are grouped by topic",
   "full_path": "sdn/topic(i1)",
   "lifecycle_status": "alpha",
@@ -164,7 +169,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of signals which can be allocated to the SDN",
   "full_path": "sdn/topic(i1)/signal(i2)",
   "lifecycle_status": "alpha",
@@ -193,7 +198,7 @@
   "type": "constant"
  },
  "sdn.topic[:].signal[:].quality": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
   "full_path": "sdn/topic(i1)/signal(i2)/quality",
   "lifecycle_status": "alpha",
@@ -214,7 +219,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "sdn/topic(i1)/signal(i2)/quality/time(:)",
   "lifecycle_status": "alpha",
@@ -223,7 +228,7 @@
   "units": "s"
  },
  "sdn.topic[:].signal[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Signal value",
   "full_path": "sdn/topic(i1)/signal(i2)/value",
   "lifecycle_status": "alpha",
@@ -243,7 +248,7 @@
   "units": "mixed"
  },
  "sdn.topic[:].signal[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "sdn/topic(i1)/signal(i2)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -277,7 +282,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "sdn/topic(i1)/signal(i2)/value/time(:)",
   "lifecycle_status": "alpha",

@@ -8,7 +8,7 @@
   "maxoccur": "3"
  },
  "mhd_linear.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "mhd_linear/code",
   "lifecycle_status": "alpha"
@@ -59,7 +59,7 @@
   "type": "constant"
  },
  "mhd_linear.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "mhd_linear/ids_properties",
   "lifecycle_status": "alpha"
@@ -78,11 +78,16 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd_linear.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "mhd_linear.ids_properties.occurrence"
+ },
  "mhd_linear.time": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "mhd_linear/time",
   "lifecycle_status": "alpha",
@@ -92,7 +97,7 @@
   "coordinates": [
    "mhd_linear.time_slice[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Core plasma radial profiles for various time slices",
   "full_path": "mhd_linear/time_slice(itime)",
   "lifecycle_status": "alpha",
@@ -100,7 +105,7 @@
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "mhd_linear/time_slice(itime)/time",
   "lifecycle_status": "alpha",
@@ -111,7 +116,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Vector of toroidal modes",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)",
   "lifecycle_status": "alpha",
@@ -126,7 +131,7 @@
   "units": "Hz"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_index",
   "lifecycle_status": "alpha",
@@ -157,7 +162,7 @@
   "units": "Hz"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growthrate\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_index",
   "lifecycle_status": "alpha",
@@ -187,20 +192,20 @@
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "MHD modes in the confined plasma",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma",
   "lifecycle_status": "alpha"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pertubed vector potential for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed",
   "lifecycle_status": "alpha",
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "First coordinate (radial)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1",
   "lifecycle_status": "alpha",
@@ -220,7 +225,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -263,7 +268,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
@@ -294,7 +299,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second coordinate (poloidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2",
   "lifecycle_status": "alpha",
@@ -314,7 +319,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -357,7 +362,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
@@ -388,7 +393,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Third coordinate (toroidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3",
   "lifecycle_status": "alpha",
@@ -408,7 +413,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -451,7 +456,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
@@ -482,14 +487,14 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pertubed magnetic field for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed",
   "lifecycle_status": "alpha",
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "First coordinate (radial)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1",
   "lifecycle_status": "alpha",
@@ -509,7 +514,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -552,7 +557,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
@@ -583,7 +588,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second coordinate (poloidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2",
   "lifecycle_status": "alpha",
@@ -603,7 +608,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -646,7 +651,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
@@ -677,7 +682,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Third coordinate (toroidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3",
   "lifecycle_status": "alpha",
@@ -697,7 +702,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -740,7 +745,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
@@ -771,7 +776,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel displacement of the modes",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel",
   "lifecycle_status": "alpha",
@@ -791,7 +796,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -834,7 +839,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_index",
   "lifecycle_status": "alpha",
@@ -865,7 +870,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Perpendicular displacement of the modes",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular",
   "lifecycle_status": "alpha",
@@ -885,7 +890,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -928,7 +933,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_index",
   "lifecycle_status": "alpha",
@@ -959,7 +964,7 @@
   "units": "m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Definition of the 2D grid",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid",
   "lifecycle_status": "alpha"
@@ -976,7 +981,7 @@
   "units": "mixed"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_index",
   "lifecycle_status": "alpha",
@@ -1016,7 +1021,7 @@
   "units": "mixed"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_index",
   "lifecycle_status": "alpha",
@@ -1057,7 +1062,7 @@
   "units": "m^3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_index",
   "lifecycle_status": "alpha",
@@ -1088,7 +1093,7 @@
   "units": "m^3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "mhd_linear/mhd_linear_grid_type_identifier.xml",
   "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention, theta=atan2(z-zaxis,r-raxis)\u2261polar angle\n11) inverse psi_straight field line : Flux surface type with psi as radial label, theta straight-field line (mod(index,10)=1), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n12) inverse psi_equal : Arc flux surface type with psi as radial label, theta to have equal arc (mod(index,10)=2)\n13) inverse psi_polar : Flux surface type with psi as radial label, theta as polar angle, could be non-equidistant\n14) inverse psi_m : Flux surface type with psi as radial label and poloidal mode number as dim2, could be non-equidistant\n21) inverse rhopolnorm_straight field line : Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and theta straight-field line\n22) inverse rhopolnorm_equal arc : Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta to have equal arc\n23) inverse rhopolnorm_polar : Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta as polar angle, could be non-equidistant\n23) inverse rhopolnorm_m : Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and poloidal mode number as dim2, could be non-equidistant\n31) inverse rhotornorm_straight field line : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux and theta straight-field line\n32) inverse rhotornorm_equal arc : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta to have equal arc\n33) inverse rhotornorm_polar : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta as polar angle, could be non-equidistant\n34) inverse rhotornorm_m : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant\n41) inverse rhopol_straight field line : Flux surface type with radial label is sqrt[psi-psi_axis] and theta straight-field line\n42) inverse rhopol_equal arc : Flux surface type with radial label is sqrt[psi-psi_axis], theta to have equal arc\n43) inverse rhopol_polar : Same as 13 but radial label is sqrt[psi-psi_axis], theta as polar angle, could be non-equidistant\n44) inverse rhopol_m : Same as 13 but radial label is sqrt[psi-psi_axis], poloidal mode number as dim2, could be non-equidistant\n51) inverse rhotor_straight field line : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux and theta straight-field line\n52) inverse rhotor_equal arc : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta to have equal arc\n53) inverse rhotor_polar : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta as polar angle, could be non-equidistant\n54) inverse rhotor_m : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant\n91) irregular rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1); needs to know if R,Z, psi,theta for dim1, dim2?Used with connect and only for rz",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid_type",
@@ -1116,7 +1121,7 @@
   "type": "constant"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Perturbed mass density for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed",
   "lifecycle_status": "alpha",
@@ -1136,7 +1141,7 @@
   "units": "kg.m^-3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1179,7 +1184,7 @@
   "units": "kg.m^-3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_index",
   "lifecycle_status": "alpha",
@@ -1210,7 +1215,7 @@
   "units": "kg.m^-3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Perturbed pressure for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed",
   "lifecycle_status": "alpha",
@@ -1230,7 +1235,7 @@
   "units": "Pa"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1273,7 +1278,7 @@
   "units": "Pa"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_index",
   "lifecycle_status": "alpha",
@@ -1315,7 +1320,7 @@
   "units": "s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tau_alfven\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_index",
   "lifecycle_status": "alpha",
@@ -1355,7 +1360,7 @@
   "units": "s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tau_resistive\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_index",
   "lifecycle_status": "alpha",
@@ -1384,7 +1389,7 @@
   "units": "s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Perturbed temperature for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed",
   "lifecycle_status": "alpha",
@@ -1404,7 +1409,7 @@
   "units": "eV"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1447,7 +1452,7 @@
   "units": "eV"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_index",
   "lifecycle_status": "alpha",
@@ -1478,14 +1483,14 @@
   "units": "eV"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pertubed velocity for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed",
   "lifecycle_status": "alpha",
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "First coordinate (radial)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1",
   "lifecycle_status": "alpha",
@@ -1505,7 +1510,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1548,7 +1553,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
@@ -1579,7 +1584,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second coordinate (poloidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2",
   "lifecycle_status": "alpha",
@@ -1599,7 +1604,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1642,7 +1647,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
@@ -1673,7 +1678,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Third coordinate (toroidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3",
   "lifecycle_status": "alpha",
@@ -1693,7 +1698,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1736,7 +1741,7 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
@@ -1767,20 +1772,20 @@
   "units": "m/s"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "MHD modes in the vacuum",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum",
   "lifecycle_status": "alpha"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pertubed vector potential for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed",
   "lifecycle_status": "alpha",
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "First coordinate (radial)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1",
   "lifecycle_status": "alpha",
@@ -1800,7 +1805,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1843,7 +1848,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
@@ -1874,7 +1879,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second coordinate (poloidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2",
   "lifecycle_status": "alpha",
@@ -1894,7 +1899,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1937,7 +1942,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
@@ -1968,7 +1973,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Third coordinate (toroidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3",
   "lifecycle_status": "alpha",
@@ -1988,7 +1993,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2031,7 +2036,7 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
@@ -2062,14 +2067,14 @@
   "units": "T.m"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pertubed magnetic field for given toroidal mode number",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed",
   "lifecycle_status": "alpha",
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "First coordinate (radial)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1",
   "lifecycle_status": "alpha",
@@ -2089,7 +2094,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2132,7 +2137,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_index",
   "lifecycle_status": "alpha",
@@ -2163,7 +2168,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second coordinate (poloidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2",
   "lifecycle_status": "alpha",
@@ -2183,7 +2188,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2226,7 +2231,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_index",
   "lifecycle_status": "alpha",
@@ -2257,7 +2262,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Third coordinate (toroidal)",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3",
   "lifecycle_status": "alpha",
@@ -2277,7 +2282,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2320,7 +2325,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_index",
   "lifecycle_status": "alpha",
@@ -2351,7 +2356,7 @@
   "units": "T"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Definition of the 2D grid",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid",
   "lifecycle_status": "alpha"
@@ -2368,7 +2373,7 @@
   "units": "mixed"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_index",
   "lifecycle_status": "alpha",
@@ -2408,7 +2413,7 @@
   "units": "mixed"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_index",
   "lifecycle_status": "alpha",
@@ -2449,7 +2454,7 @@
   "units": "m^3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_index",
   "lifecycle_status": "alpha",
@@ -2480,7 +2485,7 @@
   "units": "m^3"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "mhd_linear/mhd_linear_grid_type_identifier.xml",
   "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention, theta=atan2(z-zaxis,r-raxis)\u2261polar angle\n11) inverse psi_straight field line : Flux surface type with psi as radial label, theta straight-field line (mod(index,10)=1), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n12) inverse psi_equal : Arc flux surface type with psi as radial label, theta to have equal arc (mod(index,10)=2)\n13) inverse psi_polar : Flux surface type with psi as radial label, theta as polar angle, could be non-equidistant\n14) inverse psi_m : Flux surface type with psi as radial label and poloidal mode number as dim2, could be non-equidistant\n21) inverse rhopolnorm_straight field line : Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and theta straight-field line\n22) inverse rhopolnorm_equal arc : Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta to have equal arc\n23) inverse rhopolnorm_polar : Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta as polar angle, could be non-equidistant\n23) inverse rhopolnorm_m : Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and poloidal mode number as dim2, could be non-equidistant\n31) inverse rhotornorm_straight field line : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux and theta straight-field line\n32) inverse rhotornorm_equal arc : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta to have equal arc\n33) inverse rhotornorm_polar : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta as polar angle, could be non-equidistant\n34) inverse rhotornorm_m : Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant\n41) inverse rhopol_straight field line : Flux surface type with radial label is sqrt[psi-psi_axis] and theta straight-field line\n42) inverse rhopol_equal arc : Flux surface type with radial label is sqrt[psi-psi_axis], theta to have equal arc\n43) inverse rhopol_polar : Same as 13 but radial label is sqrt[psi-psi_axis], theta as polar angle, could be non-equidistant\n44) inverse rhopol_m : Same as 13 but radial label is sqrt[psi-psi_axis], poloidal mode number as dim2, could be non-equidistant\n51) inverse rhotor_straight field line : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux and theta straight-field line\n52) inverse rhotor_equal arc : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta to have equal arc\n53) inverse rhotor_polar : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta as polar angle, could be non-equidistant\n54) inverse rhotor_m : Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant\n91) irregular rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1); needs to know if R,Z, psi,theta for dim1, dim2?Used with connect and only for rz",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid_type",
@@ -2508,7 +2513,7 @@
   "type": "constant"
  },
  "mhd_linear.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
   "full_path": "mhd_linear/vacuum_toroidal_field",
   "lifecycle_status": "alpha"
@@ -2525,7 +2530,7 @@
   "units": "T"
  },
  "mhd_linear.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -2562,7 +2567,7 @@
   "units": "m"
  },
  "mhd_linear.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (lines-of-sight)",
   "full_path": "polarimeter/channel(i1)",
   "lifecycle_status": "alpha",
@@ -19,7 +19,7 @@
   "structure_reference": "polarimeter_channel"
  },
  "polarimeter.channel[:].ellipticity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Ellipticity",
   "full_path": "polarimeter/channel(i1)/ellipticity",
   "lifecycle_status": "alpha",
@@ -39,7 +39,7 @@
   "units": "-"
  },
  "polarimeter.channel[:].ellipticity.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "polarimeter/channel(i1)/ellipticity/data_error_index",
   "lifecycle_status": "alpha",
@@ -73,7 +73,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "polarimeter/channel(i1)/ellipticity/time(:)",
   "lifecycle_status": "alpha",
@@ -108,7 +108,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].ellipticity_initial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ellipticity_initial\"",
   "full_path": "polarimeter/channel(i1)/ellipticity_initial_error_index",
   "lifecycle_status": "alpha",
@@ -131,7 +131,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].faraday_angle": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Faraday angle (variation of the Faraday angle induced by crossing the plasma) ",
   "full_path": "polarimeter/channel(i1)/faraday_angle",
   "lifecycle_status": "alpha",
@@ -151,7 +151,7 @@
   "units": "rad"
  },
  "polarimeter.channel[:].faraday_angle.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "polarimeter/channel(i1)/faraday_angle/data_error_index",
   "lifecycle_status": "alpha",
@@ -185,7 +185,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "polarimeter/channel(i1)/faraday_angle/time(:)",
   "lifecycle_status": "alpha",
@@ -219,14 +219,14 @@
   "type": "static"
  },
  "polarimeter.channel[:].line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
   "full_path": "polarimeter/channel(i1)/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_3points"
  },
  "polarimeter.channel[:].line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "polarimeter/channel(i1)/line_of_sight/first_point",
   "lifecycle_status": "alpha",
@@ -241,7 +241,7 @@
   "units": "rad"
  },
  "polarimeter.channel[:].line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -272,7 +272,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -303,7 +303,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -326,7 +326,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "polarimeter/channel(i1)/line_of_sight/second_point",
   "lifecycle_status": "alpha",
@@ -341,7 +341,7 @@
   "units": "rad"
  },
  "polarimeter.channel[:].line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -372,7 +372,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -403,7 +403,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -426,7 +426,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.third_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the third point",
   "full_path": "polarimeter/channel(i1)/line_of_sight/third_point",
   "lifecycle_status": "alpha",
@@ -441,7 +441,7 @@
   "units": "rad"
  },
  "polarimeter.channel[:].line_of_sight.third_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -472,7 +472,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.third_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -503,7 +503,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].line_of_sight.third_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "polarimeter/channel(i1)/line_of_sight/third_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -541,7 +541,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].polarisation_initial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"polarisation_initial\"",
   "full_path": "polarimeter/channel(i1)/polarisation_initial_error_index",
   "lifecycle_status": "alpha",
@@ -572,7 +572,7 @@
   "units": "m"
  },
  "polarimeter.channel[:].wavelength_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength\"",
   "full_path": "polarimeter/channel(i1)/wavelength_error_index",
   "lifecycle_status": "alpha",
@@ -595,7 +595,7 @@
   "units": "m"
  },
  "polarimeter.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "polarimeter/code",
   "lifecycle_status": "alpha",
@@ -648,7 +648,7 @@
   "type": "constant"
  },
  "polarimeter.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "polarimeter/ids_properties",
   "lifecycle_status": "alpha",
@@ -675,6 +675,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "polarimeter.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "polarimeter.ids_properties.occurrence"
+ },
  "polarimeter.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -690,7 +695,7 @@
   "type": "constant"
  },
  "polarimeter.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "polarimeter/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -721,7 +726,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "polarimeter/time(:)",
   "lifecycle_status": "alpha",

@@ -8,7 +8,7 @@
   "maxoccur": "15"
  },
  "core_profiles.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "core_profiles/code",
   "lifecycle_status": "active",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "core_profiles.global_quantities": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Various global quantities derived from the profiles",
   "full_path": "core_profiles/global_quantities",
   "lifecycle_status": "active",
@@ -80,7 +80,7 @@
   "units": "-"
  },
  "core_profiles.global_quantities.beta_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_pol\"",
   "full_path": "core_profiles/global_quantities/beta_pol_error_index",
   "lifecycle_status": "active",
@@ -123,7 +123,7 @@
   "units": "-"
  },
  "core_profiles.global_quantities.beta_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_tor\"",
   "full_path": "core_profiles/global_quantities/beta_tor_error_index",
   "lifecycle_status": "active",
@@ -166,7 +166,7 @@
   "units": "-"
  },
  "core_profiles.global_quantities.beta_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_tor_norm\"",
   "full_path": "core_profiles/global_quantities/beta_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -209,7 +209,7 @@
   "units": "A"
  },
  "core_profiles.global_quantities.current_bootstrap_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_bootstrap\"",
   "full_path": "core_profiles/global_quantities/current_bootstrap_error_index",
   "lifecycle_status": "active",
@@ -252,7 +252,7 @@
   "units": "A"
  },
  "core_profiles.global_quantities.current_non_inductive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_non_inductive\"",
   "full_path": "core_profiles/global_quantities/current_non_inductive_error_index",
   "lifecycle_status": "active",
@@ -295,7 +295,7 @@
   "units": "J"
  },
  "core_profiles.global_quantities.energy_diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_diamagnetic\"",
   "full_path": "core_profiles/global_quantities/energy_diamagnetic_error_index",
   "lifecycle_status": "active",
@@ -338,7 +338,7 @@
   "units": "A"
  },
  "core_profiles.global_quantities.ip_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ip\"",
   "full_path": "core_profiles/global_quantities/ip_error_index",
   "lifecycle_status": "active",
@@ -394,7 +394,7 @@
   "units": "-"
  },
  "core_profiles.global_quantities.li_3_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"li_3\"",
   "full_path": "core_profiles/global_quantities/li_3_error_index",
   "lifecycle_status": "active",
@@ -425,7 +425,7 @@
   "units": "-"
  },
  "core_profiles.global_quantities.li_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"li\"",
   "full_path": "core_profiles/global_quantities/li_error_index",
   "lifecycle_status": "active",
@@ -470,7 +470,7 @@
   "units": "V"
  },
  "core_profiles.global_quantities.v_loop_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_loop\"",
   "full_path": "core_profiles/global_quantities/v_loop_error_index",
   "lifecycle_status": "active",
@@ -501,7 +501,7 @@
   "units": "V"
  },
  "core_profiles.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "core_profiles/ids_properties",
   "lifecycle_status": "active",
@@ -528,6 +528,11 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_profiles.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "core_profiles.ids_properties.occurrence"
+ },
  "core_profiles.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -546,7 +551,7 @@
   "coordinates": [
    "core_profiles.profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Core plasma radial profiles for various time slices",
   "full_path": "core_profiles/profiles_1d(itime)",
   "lifecycle_status": "active",
@@ -566,7 +571,7 @@
   "units": "ohm^-1.m^-1"
  },
  "core_profiles.profiles_1d[:].conductivity_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel_error_index",
   "lifecycle_status": "active",
@@ -606,7 +611,7 @@
   "units": "A"
  },
  "core_profiles.profiles_1d[:].current_parallel_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_inside\"",
   "full_path": "core_profiles/profiles_1d(itime)/current_parallel_inside_error_index",
   "lifecycle_status": "active",
@@ -635,7 +640,7 @@
   "units": "A"
  },
  "core_profiles.profiles_1d[:].e_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electric field, averaged on the magnetic surface. E.g for the parallel component, average(E.B) / B0, using core_profiles/vacuum_toroidal_field/b0",
   "full_path": "core_profiles/profiles_1d(itime)/e_field",
   "lifecycle_status": "active",
@@ -654,7 +659,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic_error_index",
   "lifecycle_status": "active",
@@ -694,7 +699,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel_error_index",
   "lifecycle_status": "active",
@@ -734,7 +739,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal_error_index",
   "lifecycle_status": "active",
@@ -774,7 +779,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/radial_error_index",
   "lifecycle_status": "active",
@@ -814,7 +819,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal_error_index",
   "lifecycle_status": "active",
@@ -855,7 +860,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].e_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel_error_index",
   "lifecycle_status": "active",
@@ -886,7 +891,7 @@
   "units": "V.m^-1"
  },
  "core_profiles.profiles_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "core_profiles/profiles_1d(itime)/electrons",
   "lifecycle_status": "active",
@@ -904,7 +909,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.collisionality_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"collisionality_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/collisionality_norm_error_index",
   "lifecycle_status": "active",
@@ -944,7 +949,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_error_index",
   "lifecycle_status": "active",
@@ -984,7 +989,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast_error_index",
   "lifecycle_status": "active",
@@ -1013,7 +1018,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the density profile",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit",
   "lifecycle_status": "active",
@@ -1032,7 +1037,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -1082,7 +1087,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -1129,7 +1134,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -1169,7 +1174,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -1219,7 +1224,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -1248,7 +1253,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -1287,7 +1292,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -1327,7 +1332,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -1367,7 +1372,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_thermal_error_index",
   "lifecycle_status": "active",
@@ -1414,7 +1419,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_error_index",
   "lifecycle_status": "active",
@@ -1454,7 +1459,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel_error_index",
   "lifecycle_status": "active",
@@ -1494,7 +1499,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -1534,7 +1539,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -1574,7 +1579,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_error_index",
   "lifecycle_status": "active",
@@ -1603,7 +1608,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the temperature profile",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit",
   "lifecycle_status": "active",
@@ -1622,7 +1627,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -1672,7 +1677,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -1719,7 +1724,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -1759,7 +1764,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -1809,7 +1814,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -1838,7 +1843,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -1877,7 +1882,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -1917,7 +1922,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -1953,7 +1958,7 @@
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Velocity",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity",
   "lifecycle_status": "obsolescent",
@@ -1973,7 +1978,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
@@ -2013,7 +2018,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
@@ -2053,7 +2058,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -2093,7 +2098,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
@@ -2133,7 +2138,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -2174,7 +2179,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol_error_index",
   "lifecycle_status": "active",
@@ -2217,7 +2222,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].electrons.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor_error_index",
   "lifecycle_status": "active",
@@ -2248,7 +2253,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "core_profiles/profiles_1d(itime)/grid",
   "lifecycle_status": "active",
@@ -2266,7 +2271,7 @@
   "units": "m^2"
  },
  "core_profiles.profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "active",
@@ -2306,7 +2311,7 @@
   "units": "Wb"
  },
  "core_profiles.profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "active",
@@ -2346,7 +2351,7 @@
   "units": "m"
  },
  "core_profiles.profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "active",
@@ -2386,7 +2391,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -2426,7 +2431,7 @@
   "units": "m^3"
  },
  "core_profiles.profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "active",
@@ -2458,7 +2463,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)",
   "lifecycle_status": "active",
@@ -2477,7 +2482,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_error_index",
   "lifecycle_status": "active",
@@ -2517,7 +2522,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast_error_index",
   "lifecycle_status": "active",
@@ -2546,7 +2551,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the density profile",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit",
   "lifecycle_status": "active",
@@ -2565,7 +2570,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -2615,7 +2620,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -2662,7 +2667,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -2702,7 +2707,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -2752,7 +2757,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -2781,7 +2786,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -2820,7 +2825,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -2860,7 +2865,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -2900,7 +2905,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_thermal_error_index",
   "lifecycle_status": "active",
@@ -2939,7 +2944,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)",
   "lifecycle_status": "active",
@@ -2955,7 +2960,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a_error_index",
   "lifecycle_status": "active",
@@ -2994,7 +2999,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -3027,7 +3032,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n_error_index",
   "lifecycle_status": "active",
@@ -3082,7 +3087,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_error_index",
   "lifecycle_status": "active",
@@ -3122,7 +3127,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel_error_index",
   "lifecycle_status": "active",
@@ -3162,7 +3167,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -3202,7 +3207,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -3242,7 +3247,7 @@
   "units": "rad.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].rotation_frequency_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/rotation_frequency_tor_error_index",
   "lifecycle_status": "active",
@@ -3274,7 +3279,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)",
   "lifecycle_status": "active",
@@ -3293,7 +3298,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_error_index",
   "lifecycle_status": "active",
@@ -3333,7 +3338,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast_error_index",
   "lifecycle_status": "active",
@@ -3362,7 +3367,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the density profile",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit",
   "lifecycle_status": "active",
@@ -3381,7 +3386,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -3431,7 +3436,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -3478,7 +3483,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -3518,7 +3523,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -3568,7 +3573,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -3597,7 +3602,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -3636,7 +3641,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -3676,7 +3681,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -3716,7 +3721,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_thermal_error_index",
   "lifecycle_status": "active",
@@ -3760,7 +3765,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ionisation_potential\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential_error_index",
   "lifecycle_status": "active",
@@ -3801,7 +3806,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_error_index",
   "lifecycle_status": "active",
@@ -3841,7 +3846,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_index",
   "lifecycle_status": "active",
@@ -3881,7 +3886,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -3921,7 +3926,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -3961,7 +3966,7 @@
   "units": "rad.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].rotation_frequency_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/rotation_frequency_tor_error_index",
   "lifecycle_status": "active",
@@ -4001,7 +4006,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature_error_index",
   "lifecycle_status": "active",
@@ -4030,7 +4035,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Velocity",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity",
   "lifecycle_status": "obsolescent",
@@ -4050,7 +4055,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
@@ -4090,7 +4095,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
@@ -4130,7 +4135,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -4170,7 +4175,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
@@ -4210,7 +4215,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -4247,7 +4252,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -4296,7 +4301,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_1d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_1d_error_index",
   "lifecycle_status": "active",
@@ -4325,7 +4330,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_error_index",
   "lifecycle_status": "active",
@@ -4359,7 +4364,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_square_1d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average_square_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_square_1d_error_index",
   "lifecycle_status": "active",
@@ -4396,7 +4401,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max_error_index",
   "lifecycle_status": "active",
@@ -4427,7 +4432,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min_error_index",
   "lifecycle_status": "active",
@@ -4458,7 +4463,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_square_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average_error_index",
   "lifecycle_status": "active",
@@ -4492,7 +4497,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_error_index",
   "lifecycle_status": "active",
@@ -4528,7 +4533,7 @@
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Velocity (average over charge states when multiple charge states are considered)",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity",
   "lifecycle_status": "obsolescent",
@@ -4548,7 +4553,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
@@ -4588,7 +4593,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
@@ -4628,7 +4633,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -4668,7 +4673,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
@@ -4708,7 +4713,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -4749,7 +4754,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol_error_index",
   "lifecycle_status": "active",
@@ -4792,7 +4797,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor_error_index",
   "lifecycle_status": "active",
@@ -4842,7 +4847,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_1d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d_error_index",
   "lifecycle_status": "active",
@@ -4871,7 +4876,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "active",
@@ -4905,7 +4910,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion_square_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d_error_index",
   "lifecycle_status": "active",
@@ -4945,7 +4950,7 @@
   "units": "A/m^2"
  },
  "core_profiles.profiles_1d[:].j_bootstrap_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_bootstrap\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap_error_index",
   "lifecycle_status": "active",
@@ -4985,7 +4990,7 @@
   "units": "A/m^2"
  },
  "core_profiles.profiles_1d[:].j_non_inductive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_non_inductive\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive_error_index",
   "lifecycle_status": "active",
@@ -5025,7 +5030,7 @@
   "units": "A/m^2"
  },
  "core_profiles.profiles_1d[:].j_ohmic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_ohmic\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_ohmic_error_index",
   "lifecycle_status": "active",
@@ -5065,7 +5070,7 @@
   "units": "A/m^2"
  },
  "core_profiles.profiles_1d[:].j_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_tor_error_index",
   "lifecycle_status": "active",
@@ -5105,7 +5110,7 @@
   "units": "A/m^2"
  },
  "core_profiles.profiles_1d[:].j_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_total_error_index",
   "lifecycle_status": "active",
@@ -5145,7 +5150,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].magnetic_shear_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"magnetic_shear\"",
   "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear_error_index",
   "lifecycle_status": "active",
@@ -5185,7 +5190,7 @@
   "units": "kg.m^-1.s^-1"
  },
  "core_profiles.profiles_1d[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/momentum_tor_error_index",
   "lifecycle_status": "active",
@@ -5225,7 +5230,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].n_i_thermal_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_thermal_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/n_i_thermal_total_error_index",
   "lifecycle_status": "active",
@@ -5265,7 +5270,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].n_i_total_over_n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e_error_index",
   "lifecycle_status": "active",
@@ -5297,7 +5302,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different neutral species",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)",
   "lifecycle_status": "active",
@@ -5316,7 +5321,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_error_index",
   "lifecycle_status": "active",
@@ -5356,7 +5361,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast_error_index",
   "lifecycle_status": "active",
@@ -5396,7 +5401,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_thermal_error_index",
   "lifecycle_status": "active",
@@ -5428,7 +5433,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)",
   "lifecycle_status": "active",
@@ -5444,7 +5449,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a_error_index",
   "lifecycle_status": "active",
@@ -5483,7 +5488,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -5516,7 +5521,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n_error_index",
   "lifecycle_status": "active",
@@ -5571,7 +5576,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_error_index",
   "lifecycle_status": "active",
@@ -5611,7 +5616,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel_error_index",
   "lifecycle_status": "active",
@@ -5651,7 +5656,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -5691,7 +5696,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -5723,7 +5728,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (energy, excitation, ...)",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)",
   "lifecycle_status": "active",
@@ -5742,7 +5747,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_error_index",
   "lifecycle_status": "active",
@@ -5782,7 +5787,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast_error_index",
   "lifecycle_status": "active",
@@ -5822,7 +5827,7 @@
   "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_thermal_error_index",
   "lifecycle_status": "active",
@@ -5865,7 +5870,7 @@
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/neutral_type",
@@ -5905,7 +5910,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_error_index",
   "lifecycle_status": "active",
@@ -5945,7 +5950,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel_error_index",
   "lifecycle_status": "active",
@@ -5985,7 +5990,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -6025,7 +6030,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -6065,7 +6070,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature_error_index",
   "lifecycle_status": "active",
@@ -6094,7 +6099,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Velocity",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity",
   "lifecycle_status": "obsolescent",
@@ -6114,7 +6119,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
@@ -6154,7 +6159,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
@@ -6194,7 +6199,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -6234,7 +6239,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
@@ -6274,7 +6279,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -6311,7 +6316,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -6352,7 +6357,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].neutral[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature_error_index",
   "lifecycle_status": "active",
@@ -6381,7 +6386,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Velocity (average over charge states when multiple charge states are considered)",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity",
   "lifecycle_status": "obsolescent",
@@ -6401,7 +6406,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
@@ -6441,7 +6446,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
@@ -6481,7 +6486,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -6521,7 +6526,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
@@ -6561,7 +6566,7 @@
   "units": "m.s^-1"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
@@ -6601,7 +6606,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].pressure_ion_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_ion_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total_error_index",
   "lifecycle_status": "active",
@@ -6641,7 +6646,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].pressure_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel_error_index",
   "lifecycle_status": "active",
@@ -6681,7 +6686,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].pressure_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular_error_index",
   "lifecycle_status": "active",
@@ -6721,7 +6726,7 @@
   "units": "Pa"
  },
  "core_profiles.profiles_1d[:].pressure_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal_error_index",
   "lifecycle_status": "active",
@@ -6761,7 +6766,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].q_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "core_profiles/profiles_1d(itime)/q_error_index",
   "lifecycle_status": "active",
@@ -6801,7 +6806,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_error_index",
   "lifecycle_status": "active",
@@ -6830,7 +6835,7 @@
   "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the t_i_average profile",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit",
   "lifecycle_status": "active",
@@ -6849,7 +6854,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -6899,7 +6904,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -6946,7 +6951,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -6986,7 +6991,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -7036,7 +7041,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -7065,7 +7070,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -7104,7 +7109,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -7144,7 +7149,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -7173,7 +7178,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "core_profiles/profiles_1d(itime)/time",
   "lifecycle_status": "active",
@@ -7192,7 +7197,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"zeff\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_error_index",
   "lifecycle_status": "active",
@@ -7221,7 +7226,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Information on the fit used to obtain the zeff profile",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit",
   "lifecycle_status": "active",
@@ -7240,7 +7245,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.chi_squared_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/chi_squared_error_index",
   "lifecycle_status": "active",
@@ -7290,7 +7295,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_index",
   "lifecycle_status": "active",
@@ -7337,7 +7342,7 @@
   "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_index",
   "lifecycle_status": "active",
@@ -7377,7 +7382,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -7427,7 +7432,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].zeff_fit.time_measurement_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/time_measurement_error_index",
   "lifecycle_status": "active",
@@ -7456,7 +7461,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].zeff_fit.time_measurement_slice_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/time_measurement_slice_method",
   "lifecycle_status": "active",
@@ -7495,7 +7500,7 @@
   "units": "s"
  },
  "core_profiles.profiles_1d[:].zeff_fit.time_measurement_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/time_measurement_width_error_index",
   "lifecycle_status": "active",
@@ -7535,7 +7540,7 @@
   "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/weight_error_index",
   "lifecycle_status": "active",
@@ -7567,7 +7572,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "core_profiles/time(:)",
   "lifecycle_status": "active",
@@ -7576,7 +7581,7 @@
   "units": "s"
  },
  "core_profiles.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
   "full_path": "core_profiles/vacuum_toroidal_field",
   "lifecycle_status": "active",
@@ -7595,7 +7600,7 @@
   "units": "T"
  },
  "core_profiles.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_profiles/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "active",
@@ -7634,7 +7639,7 @@
   "units": "m"
  },
  "core_profiles.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_profiles/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "active",

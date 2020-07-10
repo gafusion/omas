@@ -8,7 +8,7 @@
   "maxoccur": "10"
  },
  "camera_ir.calibration": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibration data",
   "full_path": "camera_ir/calibration",
   "lifecycle_status": "alpha",
@@ -70,7 +70,7 @@
   "type": "static"
  },
  "camera_ir.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "camera_ir/code",
   "lifecycle_status": "alpha",
@@ -126,7 +126,7 @@
   "coordinates": [
    "camera_ir.frame[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of frames",
   "full_path": "camera_ir/frame(itime)",
   "lifecycle_status": "alpha",
@@ -146,7 +146,7 @@
   "type": "dynamic"
  },
  "camera_ir.frame[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "camera_ir/frame(itime)/time",
   "lifecycle_status": "alpha",
@@ -154,7 +154,7 @@
   "units": "s"
  },
  "camera_ir.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "camera_ir/ids_properties",
   "lifecycle_status": "alpha",
@@ -201,7 +201,7 @@
   "type": "constant"
  },
  "camera_ir.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "camera_ir/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -239,7 +239,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "camera_ir/time(:)",
   "lifecycle_status": "alpha",

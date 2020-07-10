@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (lines of sight)",
   "full_path": "mse/channel(i1)",
   "lifecycle_status": "alpha",
@@ -21,7 +21,7 @@
   "coordinates": [
    "mse.channel[:].active_spatial_resolution[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Spatial resolution of the measurement, calculated as a convolution of the atomic smearing, magnetic and beam geometry smearing and detector projection, for a set of time slices (use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse)",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)",
   "lifecycle_status": "alpha",
@@ -29,7 +29,7 @@
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the centre of the spatially resolved zone",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre",
   "lifecycle_status": "alpha"
@@ -43,7 +43,7 @@
   "units": "rad"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -74,7 +74,7 @@
   "units": "m"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -105,7 +105,7 @@
   "units": "m"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -139,7 +139,7 @@
   "units": "mixed"
  },
  "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometric_coefficients\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -168,7 +168,7 @@
   "units": "mixed"
  },
  "mse.channel[:].active_spatial_resolution[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/time",
   "lifecycle_status": "alpha",
@@ -176,7 +176,7 @@
   "units": "s"
  },
  "mse.channel[:].active_spatial_resolution[:].width": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Full width of the spatially resolved zone in the R, Z and phi directions",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width",
   "lifecycle_status": "alpha"
@@ -190,7 +190,7 @@
   "units": "rad"
  },
  "mse.channel[:].active_spatial_resolution[:].width.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index",
   "lifecycle_status": "alpha",
@@ -221,7 +221,7 @@
   "units": "m"
  },
  "mse.channel[:].active_spatial_resolution[:].width.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_index",
   "lifecycle_status": "alpha",
@@ -252,7 +252,7 @@
   "units": "m"
  },
  "mse.channel[:].active_spatial_resolution[:].width.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_index",
   "lifecycle_status": "alpha",
@@ -278,14 +278,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of a set of collimating apertures",
   "full_path": "mse/channel(i1)/aperture(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "5"
  },
  "mse.channel[:].aperture[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "mse/channel(i1)/aperture(i2)/centre",
   "lifecycle_status": "alpha"
@@ -299,7 +299,7 @@
   "units": "rad"
  },
  "mse.channel[:].aperture[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -330,7 +330,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -361,7 +361,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -391,7 +391,7 @@
   "type": "static"
  },
  "mse.channel[:].aperture[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "mse/channel(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha"
@@ -408,7 +408,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "mse/channel(i1)/aperture(i2)/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -448,7 +448,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "mse/channel(i1)/aperture(i2)/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -485,7 +485,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "mse/channel(i1)/aperture(i2)/radius_error_index",
   "lifecycle_status": "alpha",
@@ -508,7 +508,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha"
@@ -522,7 +522,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -553,7 +553,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -584,7 +584,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -607,7 +607,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha"
@@ -621,7 +621,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -652,7 +652,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -683,7 +683,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -706,7 +706,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha"
@@ -720,7 +720,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -751,7 +751,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -782,7 +782,7 @@
   "units": "m"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -805,13 +805,13 @@
   "units": "m"
  },
  "mse.channel[:].detector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detector description",
   "full_path": "mse/channel(i1)/detector",
   "lifecycle_status": "alpha"
  },
  "mse.channel[:].detector.centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "mse/channel(i1)/detector/centre",
   "lifecycle_status": "alpha"
@@ -825,7 +825,7 @@
   "units": "rad"
  },
  "mse.channel[:].detector.centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/detector/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -856,7 +856,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/detector/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -887,7 +887,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -917,7 +917,7 @@
   "type": "static"
  },
  "mse.channel[:].detector.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "mse/channel(i1)/detector/outline",
   "lifecycle_status": "alpha"
@@ -934,7 +934,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "mse/channel(i1)/detector/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -974,7 +974,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "mse/channel(i1)/detector/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -1011,7 +1011,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "mse/channel(i1)/detector/radius_error_index",
   "lifecycle_status": "alpha",
@@ -1034,7 +1034,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha"
@@ -1048,7 +1048,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1079,7 +1079,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1110,7 +1110,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1133,7 +1133,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha"
@@ -1147,7 +1147,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1178,7 +1178,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1209,7 +1209,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1232,7 +1232,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha"
@@ -1246,7 +1246,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1277,7 +1277,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1308,7 +1308,7 @@
   "units": "m"
  },
  "mse.channel[:].detector.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1331,13 +1331,13 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the channel, given by 2 points",
   "full_path": "mse/channel(i1)/line_of_sight",
   "lifecycle_status": "alpha"
  },
  "mse.channel[:].line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "mse/channel(i1)/line_of_sight/first_point",
   "lifecycle_status": "alpha"
@@ -1351,7 +1351,7 @@
   "units": "rad"
  },
  "mse.channel[:].line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1382,7 +1382,7 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1413,7 +1413,7 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1436,7 +1436,7 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "mse/channel(i1)/line_of_sight/second_point",
   "lifecycle_status": "alpha"
@@ -1450,7 +1450,7 @@
   "units": "rad"
  },
  "mse.channel[:].line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1481,7 +1481,7 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1512,7 +1512,7 @@
   "units": "m"
  },
  "mse.channel[:].line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1542,7 +1542,7 @@
   "type": "static"
  },
  "mse.channel[:].polarisation_angle": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "MSE polarisation angle",
   "full_path": "mse/channel(i1)/polarisation_angle",
   "lifecycle_status": "alpha"
@@ -1559,7 +1559,7 @@
   "units": "rad"
  },
  "mse.channel[:].polarisation_angle.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "mse/channel(i1)/polarisation_angle/data_error_index",
   "lifecycle_status": "alpha",
@@ -1591,7 +1591,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "mse/channel(i1)/polarisation_angle/time",
   "lifecycle_status": "alpha",
@@ -1605,7 +1605,7 @@
   "type": "constant"
  },
  "mse.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "mse/code",
   "lifecycle_status": "alpha"
@@ -1656,7 +1656,7 @@
   "type": "constant"
  },
  "mse.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "mse/ids_properties",
   "lifecycle_status": "alpha"
@@ -1682,6 +1682,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mse.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "mse.ids_properties.occurrence"
+ },
  "mse.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1700,7 +1705,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "mse/time",
   "lifecycle_status": "alpha",

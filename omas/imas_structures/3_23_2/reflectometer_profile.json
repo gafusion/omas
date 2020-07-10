@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels, e.g. different reception antennas or frequency bandwidths of the reflectometer",
   "full_path": "reflectometer_profile/channel(i1)",
   "lifecycle_status": "alpha",
@@ -30,7 +30,7 @@
   "units": "Hz"
  },
  "reflectometer_profile.channel[:].frequencies_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequencies\"",
   "full_path": "reflectometer_profile/channel(i1)/frequencies_error_index",
   "lifecycle_status": "alpha",
@@ -66,14 +66,14 @@
   "type": "static"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the detection antenna, to be filled only if its position is distinct from the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point",
   "lifecycle_status": "alpha",
@@ -88,7 +88,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -119,7 +119,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -150,7 +150,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -173,7 +173,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point",
   "lifecycle_status": "alpha",
@@ -188,7 +188,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -219,7 +219,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -250,7 +250,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -273,14 +273,14 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point",
   "lifecycle_status": "alpha",
@@ -295,7 +295,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -326,7 +326,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -357,7 +357,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -380,7 +380,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point",
   "lifecycle_status": "alpha",
@@ -395,7 +395,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -426,7 +426,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -457,7 +457,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -491,7 +491,7 @@
    "1...N",
    "reflectometer_profile.channel[:].n_e.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron density",
   "full_path": "reflectometer_profile/channel(i1)/n_e",
   "lifecycle_status": "alpha",
@@ -512,7 +512,7 @@
   "units": "m^-3"
  },
  "reflectometer_profile.channel[:].n_e.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_index",
   "lifecycle_status": "alpha",
@@ -548,7 +548,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/n_e/time(:)",
   "lifecycle_status": "alpha",
@@ -568,7 +568,7 @@
    "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].phase.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch",
   "full_path": "reflectometer_profile/channel(i1)/phase",
   "lifecycle_status": "alpha",
@@ -589,7 +589,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].phase.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/phase/data_error_index",
   "lifecycle_status": "alpha",
@@ -625,7 +625,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/phase/time(:)",
   "lifecycle_status": "alpha",
@@ -634,7 +634,7 @@
   "units": "s"
  },
  "reflectometer_profile.channel[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the density measurements",
   "full_path": "reflectometer_profile/channel(i1)/position",
   "lifecycle_status": "alpha",
@@ -645,7 +645,7 @@
    "1...N",
    "reflectometer_profile.channel[:].position.phi.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal angle",
   "full_path": "reflectometer_profile/channel(i1)/position/phi",
   "lifecycle_status": "alpha",
@@ -666,7 +666,7 @@
   "units": "rad"
  },
  "reflectometer_profile.channel[:].position.phi.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/data_error_index",
   "lifecycle_status": "alpha",
@@ -702,7 +702,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/phi/time(:)",
   "lifecycle_status": "alpha",
@@ -715,7 +715,7 @@
    "1...N",
    "reflectometer_profile.channel[:].position.r.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "reflectometer_profile/channel(i1)/position/r",
   "lifecycle_status": "alpha",
@@ -736,7 +736,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].position.r.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/r/data_error_index",
   "lifecycle_status": "alpha",
@@ -772,7 +772,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/r/time(:)",
   "lifecycle_status": "alpha",
@@ -785,7 +785,7 @@
    "1...N",
    "reflectometer_profile.channel[:].position.z.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "reflectometer_profile/channel(i1)/position/z",
   "lifecycle_status": "alpha",
@@ -806,7 +806,7 @@
   "units": "m"
  },
  "reflectometer_profile.channel[:].position.z.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/position/z/data_error_index",
   "lifecycle_status": "alpha",
@@ -842,7 +842,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "reflectometer_profile/channel(i1)/position/z/time(:)",
   "lifecycle_status": "alpha",
@@ -859,7 +859,7 @@
   "units": "s"
  },
  "reflectometer_profile.channel[:].sweep_time_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sweep_time\"",
   "full_path": "reflectometer_profile/channel(i1)/sweep_time_error_index",
   "lifecycle_status": "alpha",
@@ -882,7 +882,7 @@
   "units": "s"
  },
  "reflectometer_profile.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "reflectometer_profile/code",
   "lifecycle_status": "alpha",
@@ -935,7 +935,7 @@
   "type": "constant"
  },
  "reflectometer_profile.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "reflectometer_profile/ids_properties",
   "lifecycle_status": "alpha",
@@ -962,6 +962,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "reflectometer_profile.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "reflectometer_profile.ids_properties.occurrence"
+ },
  "reflectometer_profile.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -977,7 +982,7 @@
   "type": "constant"
  },
  "reflectometer_profile.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "reflectometer_profile/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -1008,7 +1013,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "reflectometer_profile/time(:)",
   "lifecycle_status": "alpha",

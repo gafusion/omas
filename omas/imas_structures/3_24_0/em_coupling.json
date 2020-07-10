@@ -18,7 +18,7 @@
   "type": "static"
  },
  "em_coupling.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "em_coupling/code",
   "lifecycle_status": "alpha",
@@ -83,7 +83,7 @@
   "units": "T/A"
  },
  "em_coupling.field_probes_active_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"field_probes_active\"",
   "full_path": "em_coupling/field_probes_active_error_index",
   "lifecycle_status": "alpha",
@@ -126,7 +126,7 @@
   "units": "T/A"
  },
  "em_coupling.field_probes_grid_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"field_probes_grid\"",
   "full_path": "em_coupling/field_probes_grid_error_index",
   "lifecycle_status": "alpha",
@@ -169,7 +169,7 @@
   "units": "T/A"
  },
  "em_coupling.field_probes_passive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"field_probes_passive\"",
   "full_path": "em_coupling/field_probes_passive_error_index",
   "lifecycle_status": "alpha",
@@ -220,7 +220,7 @@
   "type": "constant"
  },
  "em_coupling.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "em_coupling/ids_properties",
   "lifecycle_status": "alpha",
@@ -247,6 +247,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "em_coupling.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "em_coupling.ids_properties.occurrence"
+ },
  "em_coupling.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -262,7 +267,7 @@
   "type": "constant"
  },
  "em_coupling.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "em_coupling/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -302,7 +307,7 @@
   "units": "H"
  },
  "em_coupling.mutual_active_active_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_active_active\"",
   "full_path": "em_coupling/mutual_active_active_error_index",
   "lifecycle_status": "alpha",
@@ -345,7 +350,7 @@
   "units": "H"
  },
  "em_coupling.mutual_grid_active_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_grid_active\"",
   "full_path": "em_coupling/mutual_grid_active_error_index",
   "lifecycle_status": "alpha",
@@ -388,7 +393,7 @@
   "units": "H"
  },
  "em_coupling.mutual_grid_grid_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_grid_grid\"",
   "full_path": "em_coupling/mutual_grid_grid_error_index",
   "lifecycle_status": "alpha",
@@ -431,7 +436,7 @@
   "units": "H"
  },
  "em_coupling.mutual_grid_passive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_grid_passive\"",
   "full_path": "em_coupling/mutual_grid_passive_error_index",
   "lifecycle_status": "alpha",
@@ -474,7 +479,7 @@
   "units": "H"
  },
  "em_coupling.mutual_loops_active_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_loops_active\"",
   "full_path": "em_coupling/mutual_loops_active_error_index",
   "lifecycle_status": "alpha",
@@ -517,7 +522,7 @@
   "units": "H"
  },
  "em_coupling.mutual_loops_grid_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_loops_grid\"",
   "full_path": "em_coupling/mutual_loops_grid_error_index",
   "lifecycle_status": "alpha",
@@ -560,7 +565,7 @@
   "units": "H"
  },
  "em_coupling.mutual_loops_passive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_loops_passive\"",
   "full_path": "em_coupling/mutual_loops_passive_error_index",
   "lifecycle_status": "alpha",
@@ -603,7 +608,7 @@
   "units": "H"
  },
  "em_coupling.mutual_passive_active_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_passive_active\"",
   "full_path": "em_coupling/mutual_passive_active_error_index",
   "lifecycle_status": "alpha",
@@ -646,7 +651,7 @@
   "units": "H"
  },
  "em_coupling.mutual_passive_passive_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mutual_passive_passive\"",
   "full_path": "em_coupling/mutual_passive_passive_error_index",
   "lifecycle_status": "alpha",
@@ -700,7 +705,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "em_coupling/time(:)",
   "lifecycle_status": "alpha",

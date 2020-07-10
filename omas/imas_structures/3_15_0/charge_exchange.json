@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (lines-of-sight)",
   "full_path": "charge_exchange/channel(i1)",
   "lifecycle_status": "alpha",
@@ -29,7 +29,7 @@
   "units": "Atomic Mass Unit"
  },
  "charge_exchange.channel[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "charge_exchange/channel(i1)/a_error_index",
   "lifecycle_status": "alpha",
@@ -82,13 +82,13 @@
   "type": "static"
  },
  "charge_exchange.channel[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the measurements",
   "full_path": "charge_exchange/channel(i1)/position",
   "lifecycle_status": "alpha"
  },
  "charge_exchange.channel[:].position.phi": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal angle",
   "full_path": "charge_exchange/channel(i1)/position/phi",
   "lifecycle_status": "alpha"
@@ -105,7 +105,7 @@
   "units": "rad"
  },
  "charge_exchange.channel[:].position.phi.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/phi/data_error_index",
   "lifecycle_status": "alpha",
@@ -137,14 +137,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/position/phi/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "charge_exchange.channel[:].position.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "charge_exchange/channel(i1)/position/r",
   "lifecycle_status": "alpha"
@@ -161,7 +161,7 @@
   "units": "m"
  },
  "charge_exchange.channel[:].position.r.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/r/data_error_index",
   "lifecycle_status": "alpha",
@@ -193,14 +193,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/position/r/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "charge_exchange.channel[:].position.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "charge_exchange/channel(i1)/position/z",
   "lifecycle_status": "alpha"
@@ -217,7 +217,7 @@
   "units": "m"
  },
  "charge_exchange.channel[:].position.z.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/z/data_error_index",
   "lifecycle_status": "alpha",
@@ -249,14 +249,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/position/z/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "charge_exchange.channel[:].temperature": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Ion temperature (of the emmitting impurity)",
   "full_path": "charge_exchange/channel(i1)/temperature",
   "lifecycle_status": "alpha"
@@ -273,7 +273,7 @@
   "units": "eV"
  },
  "charge_exchange.channel[:].temperature.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/temperature/data_error_index",
   "lifecycle_status": "alpha",
@@ -305,14 +305,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/temperature/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "charge_exchange.channel[:].velocity_pol": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Poloidal velocity (of the emmitting impurity)",
   "full_path": "charge_exchange/channel(i1)/velocity_pol",
   "lifecycle_status": "alpha"
@@ -329,7 +329,7 @@
   "units": "eV"
  },
  "charge_exchange.channel[:].velocity_pol.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/velocity_pol/data_error_index",
   "lifecycle_status": "alpha",
@@ -361,14 +361,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/velocity_pol/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "charge_exchange.channel[:].velocity_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal velocity (of the emmitting impurity)",
   "full_path": "charge_exchange/channel(i1)/velocity_tor",
   "lifecycle_status": "alpha"
@@ -385,7 +385,7 @@
   "units": "eV"
  },
  "charge_exchange.channel[:].velocity_tor.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/velocity_tor/data_error_index",
   "lifecycle_status": "alpha",
@@ -417,7 +417,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/channel(i1)/velocity_tor/time",
   "lifecycle_status": "alpha",
@@ -435,7 +435,7 @@
   "units": "Elementary Charge Unit"
  },
  "charge_exchange.channel[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "charge_exchange/channel(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -475,7 +475,7 @@
   "units": "Elementary Charge Unit"
  },
  "charge_exchange.channel[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "charge_exchange/channel(i1)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -504,7 +504,7 @@
   "units": "Elementary Charge Unit"
  },
  "charge_exchange.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "charge_exchange/code",
   "lifecycle_status": "alpha"
@@ -555,7 +555,7 @@
   "type": "constant"
  },
  "charge_exchange.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "charge_exchange/ids_properties",
   "lifecycle_status": "alpha"
@@ -581,6 +581,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "charge_exchange.ids_properties.occurrence"
+ },
  "charge_exchange.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -599,7 +604,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "charge_exchange/time",
   "lifecycle_status": "alpha",

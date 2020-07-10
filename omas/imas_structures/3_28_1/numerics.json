@@ -8,7 +8,7 @@
   "maxoccur": "10"
  },
  "numerics.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "numerics/ids_properties",
   "lifecycle_status": "alpha",
@@ -55,7 +55,7 @@
   "type": "constant"
  },
  "numerics.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "numerics/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -86,7 +86,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "numerics/time(:)",
   "lifecycle_status": "alpha",
@@ -107,7 +107,7 @@
   "units": "s"
  },
  "numerics.time_end_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_end\"",
   "full_path": "numerics/time_end_error_index",
   "lifecycle_status": "alpha",
@@ -150,7 +150,7 @@
   "units": "s"
  },
  "numerics.time_start_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_start\"",
   "full_path": "numerics/time_start_error_index",
   "lifecycle_status": "alpha",
@@ -193,7 +193,7 @@
   "units": "s"
  },
  "numerics.time_step_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_step\"",
   "full_path": "numerics/time_step_error_index",
   "lifecycle_status": "alpha",

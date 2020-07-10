@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "barometry.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "barometry/code",
   "lifecycle_status": "alpha",
@@ -63,7 +63,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of gauges",
   "full_path": "barometry/gauge(i1)",
   "lifecycle_status": "alpha",
@@ -79,7 +79,7 @@
   "units": "Pa"
  },
  "barometry.gauge[:].calibration_coefficient_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"calibration_coefficient\"",
   "full_path": "barometry/gauge(i1)/calibration_coefficient_error_index",
   "lifecycle_status": "alpha",
@@ -109,7 +109,7 @@
   "type": "static"
  },
  "barometry.gauge[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the measurements",
   "full_path": "barometry/gauge(i1)/position",
   "lifecycle_status": "alpha",
@@ -124,7 +124,7 @@
   "units": "rad"
  },
  "barometry.gauge[:].position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "barometry/gauge(i1)/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -155,7 +155,7 @@
   "units": "m"
  },
  "barometry.gauge[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "barometry/gauge(i1)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -186,7 +186,7 @@
   "units": "m"
  },
  "barometry.gauge[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "barometry/gauge(i1)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -209,7 +209,7 @@
   "units": "m"
  },
  "barometry.gauge[:].pressure": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pressure",
   "full_path": "barometry/gauge(i1)/pressure",
   "lifecycle_status": "alpha",
@@ -227,7 +227,7 @@
   "units": "Pa"
  },
  "barometry.gauge[:].pressure.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "barometry/gauge(i1)/pressure/data_error_index",
   "lifecycle_status": "alpha",
@@ -259,14 +259,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "barometry/gauge(i1)/pressure/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "barometry.gauge[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the gauge (index = 1: Penning; index = 2: Baratron)",
   "full_path": "barometry/gauge(i1)/type",
   "lifecycle_status": "alpha",
@@ -294,7 +294,7 @@
   "type": "static"
  },
  "barometry.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "barometry/ids_properties",
   "lifecycle_status": "alpha",
@@ -321,6 +321,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "barometry.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "barometry.ids_properties.occurrence"
+ },
  "barometry.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -339,7 +344,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "barometry/time(:)",
   "lifecycle_status": "alpha",

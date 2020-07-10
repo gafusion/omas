@@ -8,7 +8,7 @@
   "maxoccur": "1"
  },
  "cryostat.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "cryostat/code",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of 2D cryostat descriptions, for each type of possible physics or engineering configurations necessary",
   "full_path": "cryostat/description_2d(i1)",
   "lifecycle_status": "alpha",
@@ -72,14 +72,14 @@
   "structure_reference": "cryostat_2d"
  },
  "cryostat.description_2d[:].cryostat": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Mechanical structure of the cryostat. It is described as a set of nested layers with given physics properties; Two representations are admitted for each vessel unit : annular (two contours) or block elements.",
   "full_path": "cryostat/description_2d(i1)/cryostat",
   "lifecycle_status": "alpha",
   "structure_reference": "vessel_2d"
  },
  "cryostat.description_2d[:].cryostat.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the description. index = 0 for the official single/multiple annular representation and 1 for the official block element representation for each unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index=2",
   "full_path": "cryostat/description_2d(i1)/cryostat/type",
   "lifecycle_status": "alpha",
@@ -110,7 +110,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of units",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)",
   "lifecycle_status": "alpha",
@@ -118,14 +118,14 @@
   "structure_reference": "vessel_2d_unit"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Annular representation of a layer by two contours, inner and outer. Alternatively, the layer can be described by a centreline and thickness. ",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular",
   "lifecycle_status": "alpha",
   "structure_reference": "vessel_2d_annular"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.centreline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/centreline",
   "lifecycle_status": "alpha",
@@ -150,7 +150,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.centreline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/centreline/r_error_index",
   "lifecycle_status": "alpha",
@@ -190,7 +190,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.centreline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/centreline/z_error_index",
   "lifecycle_status": "alpha",
@@ -219,7 +219,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_inner": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Inner vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_inner",
   "lifecycle_status": "alpha",
@@ -244,7 +244,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_inner.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_inner/r_error_index",
   "lifecycle_status": "alpha",
@@ -284,7 +284,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_inner.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_inner/z_error_index",
   "lifecycle_status": "alpha",
@@ -313,7 +313,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_outer": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outer vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_outer",
   "lifecycle_status": "alpha",
@@ -338,7 +338,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_outer.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_outer/r_error_index",
   "lifecycle_status": "alpha",
@@ -378,7 +378,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_outer.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_outer/z_error_index",
   "lifecycle_status": "alpha",
@@ -415,7 +415,7 @@
   "units": "ohm.m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -449,7 +449,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.thickness_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/thickness_error_index",
   "lifecycle_status": "alpha",
@@ -481,7 +481,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of block elements",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -489,7 +489,7 @@
   "structure_reference": "vessel_2d_element"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].j_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor",
   "lifecycle_status": "alpha",
@@ -509,7 +509,7 @@
   "units": "A"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].j_tor.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_index",
   "lifecycle_status": "alpha",
@@ -543,7 +543,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/time(:)",
   "lifecycle_status": "alpha",
@@ -559,7 +559,7 @@
   "type": "static"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outline of the block element. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/outline",
   "lifecycle_status": "alpha",
@@ -584,7 +584,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -624,7 +624,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -661,7 +661,7 @@
   "units": "Ohm"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -692,7 +692,7 @@
   "units": "ohm.m"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -729,14 +729,14 @@
   "type": "static"
  },
  "cryostat.description_2d[:].thermal_shield": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Mechanical structure of the cryostat thermal shield. It is described as a set of nested layers with given physics properties; Two representations are admitted for each vessel unit : annular (two contours) or block elements.",
   "full_path": "cryostat/description_2d(i1)/thermal_shield",
   "lifecycle_status": "alpha",
   "structure_reference": "vessel_2d"
  },
  "cryostat.description_2d[:].thermal_shield.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the description. index = 0 for the official single/multiple annular representation and 1 for the official block element representation for each unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index=2",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/type",
   "lifecycle_status": "alpha",
@@ -767,7 +767,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of units",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)",
   "lifecycle_status": "alpha",
@@ -775,14 +775,14 @@
   "structure_reference": "vessel_2d_unit"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Annular representation of a layer by two contours, inner and outer. Alternatively, the layer can be described by a centreline and thickness. ",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular",
   "lifecycle_status": "alpha",
   "structure_reference": "vessel_2d_annular"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.centreline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/centreline",
   "lifecycle_status": "alpha",
@@ -807,7 +807,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.centreline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/centreline/r_error_index",
   "lifecycle_status": "alpha",
@@ -847,7 +847,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.centreline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/centreline/z_error_index",
   "lifecycle_status": "alpha",
@@ -876,7 +876,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_inner": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Inner vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_inner",
   "lifecycle_status": "alpha",
@@ -901,7 +901,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_inner.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_inner/r_error_index",
   "lifecycle_status": "alpha",
@@ -941,7 +941,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_inner.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_inner/z_error_index",
   "lifecycle_status": "alpha",
@@ -970,7 +970,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_outer": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outer vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_outer",
   "lifecycle_status": "alpha",
@@ -995,7 +995,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_outer.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_outer/r_error_index",
   "lifecycle_status": "alpha",
@@ -1035,7 +1035,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_outer.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_outer/z_error_index",
   "lifecycle_status": "alpha",
@@ -1072,7 +1072,7 @@
   "units": "ohm.m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -1106,7 +1106,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.thickness_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/thickness_error_index",
   "lifecycle_status": "alpha",
@@ -1138,7 +1138,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of block elements",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -1146,7 +1146,7 @@
   "structure_reference": "vessel_2d_element"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor",
   "lifecycle_status": "alpha",
@@ -1166,7 +1166,7 @@
   "units": "A"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_tor.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_index",
   "lifecycle_status": "alpha",
@@ -1200,7 +1200,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/time(:)",
   "lifecycle_status": "alpha",
@@ -1216,7 +1216,7 @@
   "type": "static"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outline of the block element. Do NOT repeat the first point for closed contours",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/outline",
   "lifecycle_status": "alpha",
@@ -1241,7 +1241,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -1281,7 +1281,7 @@
   "units": "m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -1318,7 +1318,7 @@
   "units": "Ohm"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -1349,7 +1349,7 @@
   "units": "ohm.m"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -1386,7 +1386,7 @@
   "type": "static"
  },
  "cryostat.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "cryostat/ids_properties",
   "lifecycle_status": "alpha",
@@ -1433,7 +1433,7 @@
   "type": "constant"
  },
  "cryostat.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "cryostat/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -1464,7 +1464,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "cryostat/time(:)",
   "lifecycle_status": "alpha",

@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (detector or pixel of a camera)",
   "full_path": "hard_x_rays/channel(i1)",
   "lifecycle_status": "alpha",
@@ -22,7 +22,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of a set of collimating apertures",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)",
   "lifecycle_status": "alpha",
@@ -30,7 +30,7 @@
   "structure_reference": "detector_aperture"
  },
  "hard_x_rays.channel[:].aperture[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/centre",
   "lifecycle_status": "alpha",
@@ -45,7 +45,7 @@
   "units": "rad"
  },
  "hard_x_rays.channel[:].aperture[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -76,7 +76,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -107,7 +107,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -137,7 +137,7 @@
   "type": "static"
  },
  "hard_x_rays.channel[:].aperture[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha",
@@ -155,7 +155,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -195,7 +195,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -232,7 +232,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/radius_error_index",
   "lifecycle_status": "alpha",
@@ -263,7 +263,7 @@
   "units": "m^2"
  },
  "hard_x_rays.channel[:].aperture[:].surface_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/surface_error_index",
   "lifecycle_status": "alpha",
@@ -286,7 +286,7 @@
   "units": "m^2"
  },
  "hard_x_rays.channel[:].aperture[:].x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -301,7 +301,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -332,7 +332,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -363,7 +363,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -386,7 +386,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -401,7 +401,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -432,7 +432,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -463,7 +463,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -486,7 +486,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -501,7 +501,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -532,7 +532,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -563,7 +563,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].aperture[:].x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -590,7 +590,7 @@
    "hard_x_rays.channel[:].energy_band",
    "hard_x_rays.channel[:].brightness.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power flux received by the detector, per unit solid angle and per unit area (i.e. power divided by the etendue), in multiple energy bands if available from the detector",
   "full_path": "hard_x_rays/channel(i1)/brightness",
   "lifecycle_status": "alpha",
@@ -611,7 +611,7 @@
   "units": "W.m^-2.sr^-1"
  },
  "hard_x_rays.channel[:].brightness.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "hard_x_rays/channel(i1)/brightness/data_error_index",
   "lifecycle_status": "alpha",
@@ -647,7 +647,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "hard_x_rays/channel(i1)/brightness/time(:)",
   "lifecycle_status": "alpha",
@@ -656,14 +656,14 @@
   "units": "s"
  },
  "hard_x_rays.channel[:].detector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detector description",
   "full_path": "hard_x_rays/channel(i1)/detector",
   "lifecycle_status": "alpha",
   "structure_reference": "detector_aperture"
  },
  "hard_x_rays.channel[:].detector.centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "hard_x_rays/channel(i1)/detector/centre",
   "lifecycle_status": "alpha",
@@ -678,7 +678,7 @@
   "units": "rad"
  },
  "hard_x_rays.channel[:].detector.centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "hard_x_rays/channel(i1)/detector/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -709,7 +709,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "hard_x_rays/channel(i1)/detector/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -740,7 +740,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/detector/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -770,7 +770,7 @@
   "type": "static"
  },
  "hard_x_rays.channel[:].detector.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "hard_x_rays/channel(i1)/detector/outline",
   "lifecycle_status": "alpha",
@@ -788,7 +788,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "hard_x_rays/channel(i1)/detector/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -828,7 +828,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "hard_x_rays/channel(i1)/detector/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -865,7 +865,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "hard_x_rays/channel(i1)/detector/radius_error_index",
   "lifecycle_status": "alpha",
@@ -896,7 +896,7 @@
   "units": "m^2"
  },
  "hard_x_rays.channel[:].detector.surface_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "hard_x_rays/channel(i1)/detector/surface_error_index",
   "lifecycle_status": "alpha",
@@ -919,7 +919,7 @@
   "units": "m^2"
  },
  "hard_x_rays.channel[:].detector.x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "hard_x_rays/channel(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -934,7 +934,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -965,7 +965,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -996,7 +996,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1019,7 +1019,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "hard_x_rays/channel(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -1034,7 +1034,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1065,7 +1065,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1096,7 +1096,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1119,7 +1119,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "hard_x_rays/channel(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -1134,7 +1134,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1165,7 +1165,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1196,7 +1196,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].detector.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/detector/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1222,7 +1222,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of energy bands in which photons are counted by the detector",
   "full_path": "hard_x_rays/channel(i1)/energy_band(i2)",
   "lifecycle_status": "alpha",
@@ -1241,7 +1241,7 @@
   "units": "-"
  },
  "hard_x_rays.channel[:].energy_band[:].detection_efficiency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"detection_efficiency\"",
   "full_path": "hard_x_rays/channel(i1)/energy_band(i2)/detection_efficiency_error_index",
   "lifecycle_status": "alpha",
@@ -1281,7 +1281,7 @@
   "units": "eV"
  },
  "hard_x_rays.channel[:].energy_band[:].energies_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energies\"",
   "full_path": "hard_x_rays/channel(i1)/energy_band(i2)/energies_error_index",
   "lifecycle_status": "alpha",
@@ -1318,7 +1318,7 @@
   "units": "eV"
  },
  "hard_x_rays.channel[:].energy_band[:].lower_bound_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"lower_bound\"",
   "full_path": "hard_x_rays/channel(i1)/energy_band(i2)/lower_bound_error_index",
   "lifecycle_status": "alpha",
@@ -1349,7 +1349,7 @@
   "units": "eV"
  },
  "hard_x_rays.channel[:].energy_band[:].upper_bound_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"upper_bound\"",
   "full_path": "hard_x_rays/channel(i1)/energy_band(i2)/upper_bound_error_index",
   "lifecycle_status": "alpha",
@@ -1380,7 +1380,7 @@
   "units": "m^2.str"
  },
  "hard_x_rays.channel[:].etendue_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"etendue\"",
   "full_path": "hard_x_rays/channel(i1)/etendue_error_index",
   "lifecycle_status": "alpha",
@@ -1403,7 +1403,7 @@
   "units": "m^2.str"
  },
  "hard_x_rays.channel[:].etendue_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods",
   "full_path": "hard_x_rays/channel(i1)/etendue_method",
   "lifecycle_status": "alpha",
@@ -1438,14 +1438,14 @@
   "type": "static"
  },
  "hard_x_rays.channel[:].line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the channel, given by 2 points",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
  },
  "hard_x_rays.channel[:].line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/first_point",
   "lifecycle_status": "alpha",
@@ -1460,7 +1460,7 @@
   "units": "rad"
  },
  "hard_x_rays.channel[:].line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1491,7 +1491,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1522,7 +1522,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1545,7 +1545,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/second_point",
   "lifecycle_status": "alpha",
@@ -1560,7 +1560,7 @@
   "units": "rad"
  },
  "hard_x_rays.channel[:].line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1591,7 +1591,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1622,7 +1622,7 @@
   "units": "m"
  },
  "hard_x_rays.channel[:].line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "hard_x_rays/channel(i1)/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1656,7 +1656,7 @@
    "hard_x_rays.channel[:].energy_band",
    "hard_x_rays.channel[:].power.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power received on the detector, in multiple energy bands if available from the detector",
   "full_path": "hard_x_rays/channel(i1)/power",
   "lifecycle_status": "alpha",
@@ -1677,7 +1677,7 @@
   "units": "W"
  },
  "hard_x_rays.channel[:].power.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "hard_x_rays/channel(i1)/power/data_error_index",
   "lifecycle_status": "alpha",
@@ -1713,7 +1713,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "hard_x_rays/channel(i1)/power/time(:)",
   "lifecycle_status": "alpha",
@@ -1729,7 +1729,7 @@
   "type": "static"
  },
  "hard_x_rays.channel[:].validity_timed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "full_path": "hard_x_rays/channel(i1)/validity_timed",
   "lifecycle_status": "alpha",
@@ -1750,7 +1750,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "hard_x_rays/channel(i1)/validity_timed/time(:)",
   "lifecycle_status": "alpha",
@@ -1759,7 +1759,7 @@
   "units": "s"
  },
  "hard_x_rays.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "hard_x_rays/code",
   "lifecycle_status": "alpha",
@@ -1815,7 +1815,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Emissivity profile per energy band (assumed common to all channels used in the profile reconstruction)",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)",
   "lifecycle_status": "alpha",
@@ -1836,7 +1836,7 @@
   "units": "(photons).m^-3.str^-1.s^-1"
  },
  "hard_x_rays.emissivity_profile_1d[:].emissivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"emissivity\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/emissivity_error_index",
   "lifecycle_status": "alpha",
@@ -1881,7 +1881,7 @@
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_external_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"half_width_external\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_external_error_index",
   "lifecycle_status": "alpha",
@@ -1924,7 +1924,7 @@
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].half_width_internal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"half_width_internal\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/half_width_internal_error_index",
   "lifecycle_status": "alpha",
@@ -1963,7 +1963,7 @@
   "units": "eV"
  },
  "hard_x_rays.emissivity_profile_1d[:].lower_bound_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"lower_bound\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/lower_bound_error_index",
   "lifecycle_status": "alpha",
@@ -1998,7 +1998,7 @@
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].peak_position_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"peak_position\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/peak_position_error_index",
   "lifecycle_status": "alpha",
@@ -2040,7 +2040,7 @@
   "units": "-"
  },
  "hard_x_rays.emissivity_profile_1d[:].rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -2072,7 +2072,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/time(:)",
   "lifecycle_status": "alpha",
@@ -2089,7 +2089,7 @@
   "units": "eV"
  },
  "hard_x_rays.emissivity_profile_1d[:].upper_bound_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"upper_bound\"",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/upper_bound_error_index",
   "lifecycle_status": "alpha",
@@ -2112,7 +2112,7 @@
   "units": "eV"
  },
  "hard_x_rays.emissivity_profile_1d[:].validity_timed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed",
   "lifecycle_status": "alpha",
@@ -2133,7 +2133,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "hard_x_rays/emissivity_profile_1d(i1)/validity_timed/time(:)",
   "lifecycle_status": "alpha",
@@ -2142,7 +2142,7 @@
   "units": "s"
  },
  "hard_x_rays.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "hard_x_rays/ids_properties",
   "lifecycle_status": "alpha",
@@ -2169,6 +2169,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "hard_x_rays.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "hard_x_rays.ids_properties.occurrence"
+ },
  "hard_x_rays.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -2184,7 +2189,7 @@
   "type": "constant"
  },
  "hard_x_rays.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "hard_x_rays/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -2215,7 +2220,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "hard_x_rays/time(:)",
   "lifecycle_status": "alpha",

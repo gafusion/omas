@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "controllers.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "controllers/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "controllers.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "controllers/ids_properties",
   "lifecycle_status": "alpha",
@@ -88,6 +88,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "controllers.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "controllers.ids_properties.occurrence"
+ },
  "controllers.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -103,7 +108,7 @@
   "type": "constant"
  },
  "controllers.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "controllers/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -134,7 +139,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "A linear controller, this is rather conventional",
   "full_path": "controllers/linear_controller(i1)",
   "lifecycle_status": "alpha",
@@ -170,7 +175,7 @@
    "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].inputs.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Input signals; the timebase is common to inputs and outputs for any particular controller",
   "full_path": "controllers/linear_controller(i1)/inputs",
   "lifecycle_status": "alpha",
@@ -191,7 +196,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].inputs.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/inputs/data_error_index",
   "lifecycle_status": "alpha",
@@ -227,7 +232,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/inputs/time(:)",
   "lifecycle_status": "alpha",
@@ -257,7 +262,7 @@
    "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].outputs.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Output signals; the timebase is common to inputs and outputs for any particular controller",
   "full_path": "controllers/linear_controller(i1)/outputs",
   "lifecycle_status": "alpha",
@@ -278,7 +283,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].outputs.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/outputs/data_error_index",
   "lifecycle_status": "alpha",
@@ -314,7 +319,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/outputs/time(:)",
   "lifecycle_status": "alpha",
@@ -323,7 +328,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].pid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Filtered PID controller",
   "full_path": "controllers/linear_controller(i1)/pid",
   "lifecycle_status": "alpha",
@@ -335,7 +340,7 @@
    "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.d.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivative term",
   "full_path": "controllers/linear_controller(i1)/pid/d",
   "lifecycle_status": "alpha",
@@ -357,7 +362,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].pid.d.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/pid/d/data_error_index",
   "lifecycle_status": "alpha",
@@ -395,7 +400,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/pid/d/time(:)",
   "lifecycle_status": "alpha",
@@ -409,7 +414,7 @@
    "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.i.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Integral term",
   "full_path": "controllers/linear_controller(i1)/pid/i",
   "lifecycle_status": "alpha",
@@ -431,7 +436,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].pid.i.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/pid/i/data_error_index",
   "lifecycle_status": "alpha",
@@ -469,7 +474,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/pid/i/time(:)",
   "lifecycle_status": "alpha",
@@ -483,7 +488,7 @@
    "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.p.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Proportional term",
   "full_path": "controllers/linear_controller(i1)/pid/p",
   "lifecycle_status": "alpha",
@@ -505,7 +510,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].pid.p.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/pid/p/data_error_index",
   "lifecycle_status": "alpha",
@@ -543,7 +548,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/pid/p/time(:)",
   "lifecycle_status": "alpha",
@@ -552,7 +557,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].pid.tau": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Filter time-constant for the D-term",
   "full_path": "controllers/linear_controller(i1)/pid/tau",
   "lifecycle_status": "alpha",
@@ -572,7 +577,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].pid.tau.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/pid/tau/data_error_index",
   "lifecycle_status": "alpha",
@@ -606,7 +611,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/pid/tau/time(:)",
   "lifecycle_status": "alpha",
@@ -615,7 +620,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].statespace": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Statespace controller in discrete or continuous time",
   "full_path": "controllers/linear_controller(i1)/statespace",
   "lifecycle_status": "alpha",
@@ -627,7 +632,7 @@
    "controllers.linear_controller[:].statespace.state_names",
    "controllers.linear_controller[:].statespace.a.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "A matrix",
   "full_path": "controllers/linear_controller(i1)/statespace/a",
   "lifecycle_status": "alpha",
@@ -649,7 +654,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].statespace.a.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/statespace/a/data_error_index",
   "lifecycle_status": "alpha",
@@ -687,7 +692,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/statespace/a/time(:)",
   "lifecycle_status": "alpha",
@@ -701,7 +706,7 @@
    "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].statespace.b.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "B matrix",
   "full_path": "controllers/linear_controller(i1)/statespace/b",
   "lifecycle_status": "alpha",
@@ -723,7 +728,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].statespace.b.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/statespace/b/data_error_index",
   "lifecycle_status": "alpha",
@@ -761,7 +766,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/statespace/b/time(:)",
   "lifecycle_status": "alpha",
@@ -775,7 +780,7 @@
    "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.c.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "C matrix",
   "full_path": "controllers/linear_controller(i1)/statespace/c",
   "lifecycle_status": "alpha",
@@ -797,7 +802,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].statespace.c.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/statespace/c/data_error_index",
   "lifecycle_status": "alpha",
@@ -835,7 +840,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/statespace/c/time(:)",
   "lifecycle_status": "alpha",
@@ -849,7 +854,7 @@
    "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.d.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "D matrix, normally proper and D=0",
   "full_path": "controllers/linear_controller(i1)/statespace/d",
   "lifecycle_status": "alpha",
@@ -871,7 +876,7 @@
   "units": "mixed"
  },
  "controllers.linear_controller[:].statespace.d.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/statespace/d/data_error_index",
   "lifecycle_status": "alpha",
@@ -909,7 +914,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/statespace/d/time(:)",
   "lifecycle_status": "alpha",
@@ -918,7 +923,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].statespace.deltat": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time",
   "full_path": "controllers/linear_controller(i1)/statespace/deltat",
   "lifecycle_status": "alpha",
@@ -938,7 +943,7 @@
   "units": "s"
  },
  "controllers.linear_controller[:].statespace.deltat.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/linear_controller(i1)/statespace/deltat/data_error_index",
   "lifecycle_status": "alpha",
@@ -972,7 +977,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/linear_controller(i1)/statespace/deltat/time(:)",
   "lifecycle_status": "alpha",
@@ -994,7 +999,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "A non-linear controller, this is less conventional and will have to be developed",
   "full_path": "controllers/nonlinear_controller(i1)",
   "lifecycle_status": "alpha",
@@ -1037,7 +1042,7 @@
    "controllers.nonlinear_controller[:].input_names",
    "controllers.nonlinear_controller[:].inputs.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Input signals; the timebase is common  to inputs and outputs for any particular controller",
   "full_path": "controllers/nonlinear_controller(i1)/inputs",
   "lifecycle_status": "alpha",
@@ -1058,7 +1063,7 @@
   "units": "mixed"
  },
  "controllers.nonlinear_controller[:].inputs.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/nonlinear_controller(i1)/inputs/data_error_index",
   "lifecycle_status": "alpha",
@@ -1094,7 +1099,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/nonlinear_controller(i1)/inputs/time(:)",
   "lifecycle_status": "alpha",
@@ -1124,7 +1129,7 @@
    "controllers.nonlinear_controller[:].output_names",
    "controllers.nonlinear_controller[:].outputs.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Output signals; the timebase is common  to inputs and outputs for any particular controller",
   "full_path": "controllers/nonlinear_controller(i1)/outputs",
   "lifecycle_status": "alpha",
@@ -1145,7 +1150,7 @@
   "units": "mixed"
  },
  "controllers.nonlinear_controller[:].outputs.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "controllers/nonlinear_controller(i1)/outputs/data_error_index",
   "lifecycle_status": "alpha",
@@ -1181,7 +1186,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "controllers/nonlinear_controller(i1)/outputs/time(:)",
   "lifecycle_status": "alpha",
@@ -1193,7 +1198,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "controllers/time(:)",
   "lifecycle_status": "alpha",

@@ -8,7 +8,7 @@
   "maxoccur": "1"
  },
  "gyrokinetics.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "gyrokinetics/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "gyrokinetics.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisions related quantities",
   "full_path": "gyrokinetics/collisions",
   "lifecycle_status": "alpha",
@@ -80,7 +80,7 @@
   "units": "-"
  },
  "gyrokinetics.collisions.collisionality_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"collisionality_norm\"",
   "full_path": "gyrokinetics/collisions/collisionality_norm_error_index",
   "lifecycle_status": "alpha",
@@ -111,7 +111,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface characteristics",
   "full_path": "gyrokinetics/flux_surface",
   "lifecycle_status": "alpha",
@@ -126,7 +126,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.b_field_tor_sign_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_tor_sign\"",
   "full_path": "gyrokinetics/flux_surface/b_field_tor_sign_error_index",
   "lifecycle_status": "alpha",
@@ -160,7 +160,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.dc_dr_minor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dc_dr_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/dc_dr_minor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -200,7 +200,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.ds_dr_minor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ds_dr_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/ds_dr_minor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -237,7 +237,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.elongation_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation\"",
   "full_path": "gyrokinetics/flux_surface/elongation_error_index",
   "lifecycle_status": "alpha",
@@ -268,7 +268,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.ip_sign_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ip_sign\"",
   "full_path": "gyrokinetics/flux_surface/ip_sign_error_index",
   "lifecycle_status": "alpha",
@@ -299,7 +299,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.magnetic_shear_r_minor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"magnetic_shear_r_minor\"",
   "full_path": "gyrokinetics/flux_surface/magnetic_shear_r_minor_error_index",
   "lifecycle_status": "alpha",
@@ -330,7 +330,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.pressure_gradient_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_gradient_norm\"",
   "full_path": "gyrokinetics/flux_surface/pressure_gradient_norm_error_index",
   "lifecycle_status": "alpha",
@@ -361,7 +361,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.q_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "gyrokinetics/flux_surface/q_error_index",
   "lifecycle_status": "alpha",
@@ -392,7 +392,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.r_minor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/r_minor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -426,7 +426,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.shape_coefficients_c_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shape_coefficients_c\"",
   "full_path": "gyrokinetics/flux_surface/shape_coefficients_c_error_index",
   "lifecycle_status": "alpha",
@@ -466,7 +466,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.shape_coefficients_s_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shape_coefficients_s\"",
   "full_path": "gyrokinetics/flux_surface/shape_coefficients_s_error_index",
   "lifecycle_status": "alpha",
@@ -503,7 +503,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.triangularity_lower_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_lower\"",
   "full_path": "gyrokinetics/flux_surface/triangularity_lower_error_index",
   "lifecycle_status": "alpha",
@@ -534,7 +534,7 @@
   "units": "-"
  },
  "gyrokinetics.flux_surface.triangularity_upper_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_upper\"",
   "full_path": "gyrokinetics/flux_surface/triangularity_upper_error_index",
   "lifecycle_status": "alpha",
@@ -560,7 +560,7 @@
   "coordinates": [
    "gyrokinetics.species"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Normalised fluxes integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)",
   "lifecycle_status": "alpha",
@@ -576,7 +576,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -607,7 +607,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -638,7 +638,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -669,7 +669,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -700,7 +700,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -731,7 +731,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -762,7 +762,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -793,7 +793,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -824,7 +824,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -855,7 +855,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -886,7 +886,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -917,7 +917,7 @@
   "units": "-"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -940,7 +940,7 @@
   "units": "-"
  },
  "gyrokinetics.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "gyrokinetics/ids_properties",
   "lifecycle_status": "alpha",
@@ -987,7 +987,7 @@
   "type": "constant"
  },
  "gyrokinetics.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "gyrokinetics/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -1015,7 +1015,7 @@
   "type": "constant"
  },
  "gyrokinetics.model": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Assumptions of the GK calculations",
   "full_path": "gyrokinetics/model",
   "lifecycle_status": "alpha",
@@ -1103,7 +1103,7 @@
   "units": "-"
  },
  "gyrokinetics.model.time_interval_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_interval_norm\"",
   "full_path": "gyrokinetics/model/time_interval_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1135,7 +1135,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of species (including electrons) used in the calculation and related quantities",
   "full_path": "gyrokinetics/species(i1)",
   "lifecycle_status": "alpha",
@@ -1151,7 +1151,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].charge_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"charge_norm\"",
   "full_path": "gyrokinetics/species(i1)/charge_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1182,7 +1182,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].density_log_gradient_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_log_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/density_log_gradient_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1213,7 +1213,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].density_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_norm\"",
   "full_path": "gyrokinetics/species(i1)/density_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1244,7 +1244,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].mass_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mass_norm\"",
   "full_path": "gyrokinetics/species(i1)/mass_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1275,7 +1275,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].temperature_log_gradient_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_log_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/temperature_log_gradient_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1306,7 +1306,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].temperature_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_norm\"",
   "full_path": "gyrokinetics/species(i1)/temperature_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1337,7 +1337,7 @@
   "units": "-"
  },
  "gyrokinetics.species[:].velocity_tor_gradient_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/velocity_tor_gradient_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1360,7 +1360,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Physical quantities common to all species",
   "full_path": "gyrokinetics/species_all",
   "lifecycle_status": "alpha",
@@ -1375,7 +1375,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all.beta_reference_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_reference\"",
   "full_path": "gyrokinetics/species_all/beta_reference_error_index",
   "lifecycle_status": "alpha",
@@ -1406,7 +1406,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all.debye_length_reference_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"debye_length_reference\"",
   "full_path": "gyrokinetics/species_all/debye_length_reference_error_index",
   "lifecycle_status": "alpha",
@@ -1437,7 +1437,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all.shearing_rate_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shearing_rate_norm\"",
   "full_path": "gyrokinetics/species_all/shearing_rate_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1468,7 +1468,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all.velocity_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor_norm\"",
   "full_path": "gyrokinetics/species_all/velocity_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1499,7 +1499,7 @@
   "units": "-"
  },
  "gyrokinetics.species_all.zeff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"zeff\"",
   "full_path": "gyrokinetics/species_all/zeff_error_index",
   "lifecycle_status": "alpha",
@@ -1525,7 +1525,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of tags to which this entry belongs",
   "full_path": "gyrokinetics/tag(i1)",
   "lifecycle_status": "alpha",
@@ -1550,7 +1550,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "gyrokinetics/time(:)",
   "lifecycle_status": "alpha",
@@ -1562,7 +1562,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of wavevectors",
   "full_path": "gyrokinetics/wavevector(i1)",
   "lifecycle_status": "alpha",
@@ -1578,7 +1578,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].binormal_component_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"binormal_component_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/binormal_component_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1604,7 +1604,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of eigenmode for this wavector",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)",
   "lifecycle_status": "alpha",
@@ -1624,7 +1624,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_norm_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_norm_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_norm_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1667,7 +1667,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_norm_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_norm_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_norm_real_error_index",
   "lifecycle_status": "alpha",
@@ -1709,7 +1709,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_parity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_parity_error_index",
   "lifecycle_status": "alpha",
@@ -1749,7 +1749,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_weight_error_index",
   "lifecycle_status": "alpha",
@@ -1790,7 +1790,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_norm_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_norm_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_norm_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -1833,7 +1833,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_norm_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_norm_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_norm_real_error_index",
   "lifecycle_status": "alpha",
@@ -1875,7 +1875,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_parity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_parity_error_index",
   "lifecycle_status": "alpha",
@@ -1915,7 +1915,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_weight_error_index",
   "lifecycle_status": "alpha",
@@ -1947,7 +1947,7 @@
   "coordinates": [
    "gyrokinetics.species"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Fluxes and moments of the perturbed distribution function, for this eigenmode and for each species",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)",
   "lifecycle_status": "alpha",
@@ -1955,7 +1955,7 @@
   "structure_reference": "gyrokinetics_fluxes_moments"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Normalised fluxes in the laboratory frame",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm",
   "lifecycle_status": "alpha",
@@ -1970,7 +1970,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.energy_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/energy_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2001,7 +2001,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.energy_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/energy_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2032,7 +2032,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.energy_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/energy_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -2063,7 +2063,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_parallel_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_parallel_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2094,7 +2094,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_parallel_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_parallel_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2125,7 +2125,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_parallel_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_parallel_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -2156,7 +2156,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_perpendicular_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_perpendicular_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2187,7 +2187,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_perpendicular_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_perpendicular_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2218,7 +2218,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.momentum_tor_perpendicular_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/momentum_tor_perpendicular_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -2249,7 +2249,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.particles_a_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/particles_a_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2280,7 +2280,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.particles_b_field_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/particles_b_field_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2311,7 +2311,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm.particles_phi_potential_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm/particles_phi_potential_error_index",
   "lifecycle_status": "alpha",
@@ -2334,7 +2334,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Moments (normalised) of the perturbed distribution function defined in the rotating frame",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame",
   "lifecycle_status": "alpha",
@@ -2353,7 +2353,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.density_gyroaveraged_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_gyroaveraged_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/density_gyroaveraged_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2396,7 +2396,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.density_gyroaveraged_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_gyroaveraged_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/density_gyroaveraged_real_error_index",
   "lifecycle_status": "alpha",
@@ -2439,7 +2439,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.density_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/density_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2482,7 +2482,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.density_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/density_real_error_index",
   "lifecycle_status": "alpha",
@@ -2525,7 +2525,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_parallel_gyroaveraged_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_parallel_gyroaveraged_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_parallel_gyroaveraged_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2568,7 +2568,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_parallel_gyroaveraged_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_parallel_gyroaveraged_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_parallel_gyroaveraged_real_error_index",
   "lifecycle_status": "alpha",
@@ -2611,7 +2611,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_parallel_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_parallel_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_parallel_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2654,7 +2654,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_parallel_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_parallel_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_parallel_real_error_index",
   "lifecycle_status": "alpha",
@@ -2697,7 +2697,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_perpendicular_gyroaveraged_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_perpendicular_gyroaveraged_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_perpendicular_gyroaveraged_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2740,7 +2740,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_perpendicular_gyroaveraged_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_perpendicular_gyroaveraged_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_perpendicular_gyroaveraged_real_error_index",
   "lifecycle_status": "alpha",
@@ -2783,7 +2783,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_perpendicular_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_perpendicular_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_perpendicular_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2826,7 +2826,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.temperature_perpendicular_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_perpendicular_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/temperature_perpendicular_real_error_index",
   "lifecycle_status": "alpha",
@@ -2869,7 +2869,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.velocity_parallel_gyroaveraged_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_parallel_gyroaveraged_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/velocity_parallel_gyroaveraged_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2912,7 +2912,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.velocity_parallel_gyroaveraged_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_parallel_gyroaveraged_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/velocity_parallel_gyroaveraged_real_error_index",
   "lifecycle_status": "alpha",
@@ -2955,7 +2955,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.velocity_parallel_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_parallel_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/velocity_parallel_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -2998,7 +2998,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_rotating_frame.velocity_parallel_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_parallel_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_rotating_frame/velocity_parallel_real_error_index",
   "lifecycle_status": "alpha",
@@ -3037,7 +3037,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].frequency_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/frequency_norm_error_index",
   "lifecycle_status": "alpha",
@@ -3068,7 +3068,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].growth_rate_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growth_rate_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/growth_rate_norm_error_index",
   "lifecycle_status": "alpha",
@@ -3099,7 +3099,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].growth_rate_tolerance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growth_rate_tolerance\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/growth_rate_tolerance_error_index",
   "lifecycle_status": "alpha",
@@ -3134,7 +3134,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_norm_imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_norm_imaginary\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_norm_imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -3177,7 +3177,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_norm_real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_norm_real\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_norm_real_error_index",
   "lifecycle_status": "alpha",
@@ -3219,7 +3219,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_parity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_parity_error_index",
   "lifecycle_status": "alpha",
@@ -3259,7 +3259,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_weight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_weight_error_index",
   "lifecycle_status": "alpha",
@@ -3299,7 +3299,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].poloidal_angle_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_angle\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/poloidal_angle_error_index",
   "lifecycle_status": "alpha",
@@ -3339,7 +3339,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].time_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/time_norm_error_index",
   "lifecycle_status": "alpha",
@@ -3383,7 +3383,7 @@
   "units": "-"
  },
  "gyrokinetics.wavevector[:].radial_component_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_component_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/radial_component_norm_error_index",
   "lifecycle_status": "alpha",

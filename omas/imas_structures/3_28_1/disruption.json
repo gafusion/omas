@@ -8,7 +8,7 @@
   "maxoccur": "1"
  },
  "disruption.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "disruption/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "disruption.global_quantities": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Global quantities",
   "full_path": "disruption/global_quantities",
   "lifecycle_status": "alpha",
@@ -80,7 +80,7 @@
   "units": "A"
  },
  "disruption.global_quantities.current_halo_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_pol\"",
   "full_path": "disruption/global_quantities/current_halo_pol_error_index",
   "lifecycle_status": "alpha",
@@ -123,7 +123,7 @@
   "units": "A"
  },
  "disruption.global_quantities.current_halo_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_tor\"",
   "full_path": "disruption/global_quantities/current_halo_tor_error_index",
   "lifecycle_status": "alpha",
@@ -166,7 +166,7 @@
   "units": "J"
  },
  "disruption.global_quantities.energy_ohm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_ohm\"",
   "full_path": "disruption/global_quantities/energy_ohm_error_index",
   "lifecycle_status": "alpha",
@@ -209,7 +209,7 @@
   "units": "J"
  },
  "disruption.global_quantities.energy_ohm_halo_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_ohm_halo\"",
   "full_path": "disruption/global_quantities/energy_ohm_halo_error_index",
   "lifecycle_status": "alpha",
@@ -252,7 +252,7 @@
   "units": "J"
  },
  "disruption.global_quantities.energy_radiated_electrons_impurities_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_radiated_electrons_impurities\"",
   "full_path": "disruption/global_quantities/energy_radiated_electrons_impurities_error_index",
   "lifecycle_status": "alpha",
@@ -295,7 +295,7 @@
   "units": "J"
  },
  "disruption.global_quantities.energy_radiated_electrons_impurities_halo_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_radiated_electrons_impurities_halo\"",
   "full_path": "disruption/global_quantities/energy_radiated_electrons_impurities_halo_error_index",
   "lifecycle_status": "alpha",
@@ -338,7 +338,7 @@
   "units": "W"
  },
  "disruption.global_quantities.power_ohm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_ohm\"",
   "full_path": "disruption/global_quantities/power_ohm_error_index",
   "lifecycle_status": "alpha",
@@ -381,7 +381,7 @@
   "units": "W"
  },
  "disruption.global_quantities.power_ohm_halo_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_ohm_halo\"",
   "full_path": "disruption/global_quantities/power_ohm_halo_error_index",
   "lifecycle_status": "alpha",
@@ -424,7 +424,7 @@
   "units": "W"
  },
  "disruption.global_quantities.power_radiated_electrons_impurities_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_electrons_impurities\"",
   "full_path": "disruption/global_quantities/power_radiated_electrons_impurities_error_index",
   "lifecycle_status": "alpha",
@@ -467,7 +467,7 @@
   "units": "W"
  },
  "disruption.global_quantities.power_radiated_electrons_impurities_halo_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_electrons_impurities_halo\"",
   "full_path": "disruption/global_quantities/power_radiated_electrons_impurities_halo_error_index",
   "lifecycle_status": "alpha",
@@ -501,7 +501,7 @@
   "coordinates": [
    "disruption.halo_currents[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Halo currents geometry and values for a set of time slices",
   "full_path": "disruption/halo_currents(itime)",
   "lifecycle_status": "alpha",
@@ -510,7 +510,7 @@
   "type": "dynamic"
  },
  "disruption.halo_currents[:].active_wall_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "R,Z position of the point of the plasma boundary in contact with the wall",
   "full_path": "disruption/halo_currents(itime)/active_wall_point",
   "lifecycle_status": "alpha",
@@ -525,7 +525,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].active_wall_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/active_wall_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -556,7 +556,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].active_wall_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/active_wall_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -582,7 +582,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of wall areas through which there are halo currents",
   "full_path": "disruption/halo_currents(itime)/area(i1)",
   "lifecycle_status": "alpha",
@@ -598,7 +598,7 @@
   "units": "A"
  },
  "disruption.halo_currents[:].area[:].current_halo_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_pol\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/current_halo_pol_error_index",
   "lifecycle_status": "alpha",
@@ -621,7 +621,7 @@
   "units": "A"
  },
  "disruption.halo_currents[:].area[:].end_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the end point of this area",
   "full_path": "disruption/halo_currents(itime)/area(i1)/end_point",
   "lifecycle_status": "alpha",
@@ -636,7 +636,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].area[:].end_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/end_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -667,7 +667,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].area[:].end_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/end_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -690,7 +690,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].area[:].start_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the start point of this area",
   "full_path": "disruption/halo_currents(itime)/area(i1)/start_point",
   "lifecycle_status": "alpha",
@@ -705,7 +705,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].area[:].start_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/start_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -736,7 +736,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].area[:].start_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/start_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -759,7 +759,7 @@
   "units": "m"
  },
  "disruption.halo_currents[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "disruption/halo_currents(itime)/time",
   "lifecycle_status": "alpha",
@@ -767,7 +767,7 @@
   "units": "s"
  },
  "disruption.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "disruption/ids_properties",
   "lifecycle_status": "alpha",
@@ -814,7 +814,7 @@
   "type": "constant"
  },
  "disruption.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "disruption/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -847,7 +847,7 @@
   "coordinates": [
    "disruption.profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Radial profiles for a set of time slices",
   "full_path": "disruption/profiles_1d(itime)",
   "lifecycle_status": "alpha",
@@ -856,7 +856,7 @@
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "disruption/profiles_1d(itime)/grid",
   "lifecycle_status": "alpha",
@@ -874,7 +874,7 @@
   "units": "m^2"
  },
  "disruption.profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "disruption/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -925,7 +925,7 @@
   "units": "Wb"
  },
  "disruption.profiles_1d[:].grid.psi_boundary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_boundary_error_index",
   "lifecycle_status": "alpha",
@@ -948,7 +948,7 @@
   "units": "Wb"
  },
  "disruption.profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -991,7 +991,7 @@
   "units": "Wb"
  },
  "disruption.profiles_1d[:].grid.psi_magnetic_axis_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_magnetic_axis_error_index",
   "lifecycle_status": "alpha",
@@ -1025,7 +1025,7 @@
   "units": "-"
  },
  "disruption.profiles_1d[:].grid.rho_pol_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_pol_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1065,7 +1065,7 @@
   "units": "m"
  },
  "disruption.profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1105,7 +1105,7 @@
   "units": "-"
  },
  "disruption.profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1145,7 +1145,7 @@
   "units": "m^3"
  },
  "disruption.profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "disruption/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -1185,7 +1185,7 @@
   "units": "A.m^-2"
  },
  "disruption.profiles_1d[:].j_runaways_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_runaways\"",
   "full_path": "disruption/profiles_1d(itime)/j_runaways_error_index",
   "lifecycle_status": "alpha",
@@ -1225,7 +1225,7 @@
   "units": "W.m^-3"
  },
  "disruption.profiles_1d[:].power_density_conductive_losses_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_conductive_losses\"",
   "full_path": "disruption/profiles_1d(itime)/power_density_conductive_losses_error_index",
   "lifecycle_status": "alpha",
@@ -1265,7 +1265,7 @@
   "units": "W.m^-3"
  },
  "disruption.profiles_1d[:].power_density_radiative_losses_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_radiative_losses\"",
   "full_path": "disruption/profiles_1d(itime)/power_density_radiative_losses_error_index",
   "lifecycle_status": "alpha",
@@ -1294,7 +1294,7 @@
   "units": "W.m^-3"
  },
  "disruption.profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "disruption/profiles_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -1305,7 +1305,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "disruption/time(:)",
   "lifecycle_status": "alpha",
@@ -1316,7 +1316,7 @@
  "disruption.vacuum_toroidal_field": {
   "cocos_alias": "IDSPATH",
   "cocos_replace": "disruption.vacuum_toroidal_field",
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
   "full_path": "disruption/vacuum_toroidal_field",
   "lifecycle_status": "alpha",
@@ -1338,7 +1338,7 @@
   "units": "T"
  },
  "disruption.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "disruption/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -1383,7 +1383,7 @@
   "units": "m"
  },
  "disruption.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "disruption/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

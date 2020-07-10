@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (frequency)",
   "full_path": "ece/channel(i1)",
   "lifecycle_status": "alpha",
@@ -19,7 +19,7 @@
   "structure_reference": "ece_channel"
  },
  "ece.channel[:].frequency": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Frequency of the channel",
   "full_path": "ece/channel(i1)/frequency",
   "lifecycle_status": "alpha",
@@ -37,7 +37,7 @@
   "units": "Hz"
  },
  "ece.channel[:].frequency.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/frequency/data_error_index",
   "lifecycle_status": "alpha",
@@ -69,14 +69,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/frequency/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.channel[:].harmonic": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Harmonic detected by the channel. 1 corresponds to the \"O1\" mode, while 2 corresponds to the \"X2\" mode. ",
   "full_path": "ece/channel(i1)/harmonic",
   "lifecycle_status": "alpha",
@@ -96,7 +96,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/harmonic/time(:)",
   "lifecycle_status": "alpha",
@@ -117,14 +117,14 @@
   "type": "static"
  },
  "ece.channel[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the measurements",
   "full_path": "ece/channel(i1)/position",
   "lifecycle_status": "alpha",
   "structure_reference": "rzphi1d_dynamic_aos1"
  },
  "ece.channel[:].position.phi": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "ece/channel(i1)/position/phi",
   "lifecycle_status": "alpha",
@@ -142,7 +142,7 @@
   "units": "rad"
  },
  "ece.channel[:].position.phi.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/position/phi/data_error_index",
   "lifecycle_status": "alpha",
@@ -174,14 +174,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/position/phi/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.channel[:].position.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "ece/channel(i1)/position/r",
   "lifecycle_status": "alpha",
@@ -199,7 +199,7 @@
   "units": "m"
  },
  "ece.channel[:].position.r.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/position/r/data_error_index",
   "lifecycle_status": "alpha",
@@ -231,14 +231,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/position/r/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.channel[:].position.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "ece/channel(i1)/position/z",
   "lifecycle_status": "alpha",
@@ -256,7 +256,7 @@
   "units": "m"
  },
  "ece.channel[:].position.z.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/position/z/data_error_index",
   "lifecycle_status": "alpha",
@@ -288,14 +288,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/position/z/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.channel[:].t_e": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron temperature",
   "full_path": "ece/channel(i1)/t_e",
   "lifecycle_status": "alpha",
@@ -313,7 +313,7 @@
   "units": "eV"
  },
  "ece.channel[:].t_e.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/t_e/data_error_index",
   "lifecycle_status": "alpha",
@@ -345,14 +345,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/t_e/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.channel[:].t_e_voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Raw voltage measured on each channel, from which the calibrated temperature data is then derived",
   "full_path": "ece/channel(i1)/t_e_voltage",
   "lifecycle_status": "alpha",
@@ -370,7 +370,7 @@
   "units": "V"
  },
  "ece.channel[:].t_e_voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/t_e_voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -402,14 +402,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/channel(i1)/t_e_voltage/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "ece.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "ece/code",
   "lifecycle_status": "alpha",
@@ -461,7 +461,7 @@
   "type": "constant"
  },
  "ece.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "ece/ids_properties",
   "lifecycle_status": "alpha",
@@ -488,6 +488,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ece.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "ece.ids_properties.occurrence"
+ },
  "ece.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -503,14 +508,14 @@
   "type": "constant"
  },
  "ece.line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the diagnostic (valid for all channels), defined by two points",
   "full_path": "ece/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
  },
  "ece.line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "ece/line_of_sight/first_point",
   "lifecycle_status": "alpha",
@@ -525,7 +530,7 @@
   "units": "rad"
  },
  "ece.line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -556,7 +561,7 @@
   "units": "m"
  },
  "ece.line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -587,7 +592,7 @@
   "units": "m"
  },
  "ece.line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -610,7 +615,7 @@
   "units": "m"
  },
  "ece.line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "ece/line_of_sight/second_point",
   "lifecycle_status": "alpha",
@@ -625,7 +630,7 @@
   "units": "rad"
  },
  "ece.line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -656,7 +661,7 @@
   "units": "m"
  },
  "ece.line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -687,7 +692,7 @@
   "units": "m"
  },
  "ece.line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -713,7 +718,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "ece/time(:)",
   "lifecycle_status": "alpha",

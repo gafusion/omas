@@ -17,7 +17,7 @@
   "type": "static"
  },
  "actuator.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "actuator/code",
   "lifecycle_status": "alpha"
@@ -80,7 +80,7 @@
   "units": "mixed"
  },
  "actuator.generic_dynamic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"generic_dynamic\"",
   "full_path": "actuator/generic_dynamic_error_index",
   "lifecycle_status": "alpha",
@@ -111,7 +111,7 @@
   "units": "mixed"
  },
  "actuator.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "actuator/ids_properties",
   "lifecycle_status": "alpha"
@@ -151,7 +151,7 @@
   "units": "W"
  },
  "actuator.power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "actuator/power_error_index",
   "lifecycle_status": "alpha",
@@ -185,7 +185,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "actuator/time",
   "lifecycle_status": "alpha",

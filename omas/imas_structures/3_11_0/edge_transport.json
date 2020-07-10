@@ -7,7 +7,7 @@
   "maxoccur": "10"
  },
  "edge_transport.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "edge_transport/code",
   "lifecycle_status": "alpha"
@@ -58,7 +58,7 @@
   "type": "constant"
  },
  "edge_transport.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "edge_transport/ids_properties",
   "lifecycle_status": "alpha"
@@ -77,11 +77,16 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "edge_transport.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "edge_transport.ids_properties.occurrence"
+ },
  "edge_transport.model": {
   "coordinates": [
    "1...N_Models"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport is described by a combination of various transport models",
   "full_path": "edge_transport/model(i1)",
   "lifecycle_status": "alpha",
@@ -96,7 +101,7 @@
   "units": "-"
  },
  "edge_transport.model[:].flux_multiplier_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux_multiplier\"",
   "full_path": "edge_transport/model(i1)/flux_multiplier_error_index",
   "lifecycle_status": "alpha",
@@ -122,7 +127,7 @@
   "coordinates": [
    "edge_transport.model[:].ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients represented using the general grid description, for various time slices",
   "full_path": "edge_transport/model(i1)/ggd(itime)",
   "lifecycle_status": "alpha",
@@ -133,7 +138,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Conductivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)",
   "lifecycle_status": "alpha",
@@ -164,7 +169,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -195,7 +200,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -261,7 +266,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -292,7 +297,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -344,7 +349,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -375,7 +380,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -427,7 +432,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -458,7 +463,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -510,7 +515,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -541,7 +546,7 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].conductivity[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -570,13 +575,13 @@
   "units": "ohm^-1.m^-1"
  },
  "edge_transport.model[:].ggd[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the electrons",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons",
   "lifecycle_status": "alpha"
  },
  "edge_transport.model[:].ggd[:].electrons.energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities for the electron energy equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy",
   "lifecycle_status": "alpha"
@@ -585,7 +590,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/d(i2)",
   "lifecycle_status": "alpha",
@@ -605,7 +610,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/d(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -661,7 +666,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/d(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -693,7 +698,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux(i2)",
   "lifecycle_status": "alpha",
@@ -713,7 +718,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -769,7 +774,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -801,7 +806,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux_limiter(i2)",
   "lifecycle_status": "alpha",
@@ -821,7 +826,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux_limiter(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -877,7 +882,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/flux_limiter(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -909,7 +914,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/v(i2)",
   "lifecycle_status": "alpha",
@@ -929,7 +934,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/v(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -985,7 +990,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/energy/v(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1014,7 +1019,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities for the electron density equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles",
   "lifecycle_status": "alpha"
@@ -1023,7 +1028,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/d(i2)",
   "lifecycle_status": "alpha",
@@ -1043,7 +1048,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/d(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1099,7 +1104,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/d(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1131,7 +1136,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux(i2)",
   "lifecycle_status": "alpha",
@@ -1151,7 +1156,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1207,7 +1212,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1239,7 +1244,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux_limiter(i2)",
   "lifecycle_status": "alpha",
@@ -1259,7 +1264,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux_limiter(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1315,7 +1320,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/flux_limiter(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1347,7 +1352,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/v(i2)",
   "lifecycle_status": "alpha",
@@ -1367,7 +1372,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/v(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1423,7 +1428,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].electrons.particles.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/electrons/particles/v(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1452,7 +1457,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid",
   "lifecycle_status": "alpha"
@@ -1461,7 +1466,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)",
   "lifecycle_status": "alpha",
@@ -1471,7 +1476,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)",
   "lifecycle_status": "alpha",
@@ -1489,7 +1494,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1531,7 +1536,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1577,7 +1582,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1620,7 +1625,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -1630,7 +1635,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -1658,7 +1663,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid subset identifier",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/identifier",
   "lifecycle_status": "alpha"
@@ -1685,7 +1690,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/metric",
   "lifecycle_status": "alpha"
@@ -1702,7 +1707,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1744,7 +1749,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1790,7 +1795,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1823,7 +1828,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid identifier",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/identifier",
   "lifecycle_status": "alpha"
@@ -1853,7 +1858,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)",
   "lifecycle_status": "alpha",
@@ -1870,7 +1875,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/geometry_type",
   "lifecycle_status": "alpha"
@@ -1900,7 +1905,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)",
   "lifecycle_status": "alpha",
@@ -1910,7 +1915,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -1920,7 +1925,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
   "lifecycle_status": "alpha",
@@ -1955,7 +1960,7 @@
   "units": "mixed"
  },
  "edge_transport.model[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -1992,7 +1997,7 @@
   "units": "m^dimension"
  },
  "edge_transport.model[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -2028,7 +2033,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the various ion and neutral species",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)",
   "lifecycle_status": "alpha",
@@ -2038,7 +2043,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -2053,7 +2058,7 @@
   "units": "Atomic Mass Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2084,7 +2089,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -2115,7 +2120,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2138,7 +2143,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the ion energy equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy",
   "lifecycle_status": "alpha"
@@ -2147,7 +2152,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/d(i3)",
   "lifecycle_status": "alpha",
@@ -2167,7 +2172,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/d(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2223,7 +2228,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/d(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2255,7 +2260,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux(i3)",
   "lifecycle_status": "alpha",
@@ -2275,7 +2280,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2331,7 +2336,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2363,7 +2368,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -2383,7 +2388,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux_limiter(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2439,7 +2444,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/flux_limiter(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2471,7 +2476,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/v(i3)",
   "lifecycle_status": "alpha",
@@ -2491,7 +2496,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/v(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2547,7 +2552,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/energy/v(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2583,7 +2588,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for the ion momentum equations",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum",
   "lifecycle_status": "alpha"
@@ -2592,7 +2597,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)",
   "lifecycle_status": "alpha",
@@ -2623,7 +2628,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2654,7 +2659,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -2720,7 +2725,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2751,7 +2756,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -2803,7 +2808,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2834,7 +2839,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -2886,7 +2891,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2917,7 +2922,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -2969,7 +2974,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3000,7 +3005,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -3032,7 +3037,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)",
   "lifecycle_status": "alpha",
@@ -3063,7 +3068,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3094,7 +3099,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -3160,7 +3165,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3191,7 +3196,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -3243,7 +3248,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3274,7 +3279,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -3326,7 +3331,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3357,7 +3362,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -3409,7 +3414,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3440,7 +3445,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -3472,7 +3477,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -3503,7 +3508,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3534,7 +3539,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -3600,7 +3605,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3631,7 +3636,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -3683,7 +3688,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3714,7 +3719,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -3766,7 +3771,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3797,7 +3802,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -3849,7 +3854,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3880,7 +3885,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -3912,7 +3917,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)",
   "lifecycle_status": "alpha",
@@ -3943,7 +3948,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -3974,7 +3979,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -4040,7 +4045,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4071,7 +4076,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -4123,7 +4128,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4154,7 +4159,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -4206,7 +4211,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4237,7 +4242,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -4289,7 +4294,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4320,7 +4325,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -4363,7 +4368,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport related to the ion density equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles",
   "lifecycle_status": "alpha"
@@ -4372,7 +4377,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/d(i3)",
   "lifecycle_status": "alpha",
@@ -4392,7 +4397,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/d(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4448,7 +4453,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/d(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -4480,7 +4485,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux(i3)",
   "lifecycle_status": "alpha",
@@ -4500,7 +4505,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4556,7 +4561,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -4588,7 +4593,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -4608,7 +4613,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux_limiter(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4664,7 +4669,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/flux_limiter(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -4696,7 +4701,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/v(i3)",
   "lifecycle_status": "alpha",
@@ -4716,7 +4721,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/v(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4772,7 +4777,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].particles.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/particles/v(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -4804,7 +4809,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the different states of the species",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -4818,7 +4823,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the energy equation of the charge state considered ",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy",
   "lifecycle_status": "alpha"
@@ -4827,7 +4832,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/d(i4)",
   "lifecycle_status": "alpha",
@@ -4847,7 +4852,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/d(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -4903,7 +4908,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/d(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -4935,7 +4940,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux(i4)",
   "lifecycle_status": "alpha",
@@ -4955,7 +4960,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5011,7 +5016,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -5043,7 +5048,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -5063,7 +5068,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux_limiter(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5119,7 +5124,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/flux_limiter(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -5151,7 +5156,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/v(i4)",
   "lifecycle_status": "alpha",
@@ -5171,7 +5176,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/v(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5227,7 +5232,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/energy/v(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -5263,7 +5268,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the momentum equations of the charge state considered",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum",
   "lifecycle_status": "alpha"
@@ -5272,7 +5277,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)",
   "lifecycle_status": "alpha",
@@ -5303,7 +5308,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5334,7 +5339,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -5400,7 +5405,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5431,7 +5436,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -5483,7 +5488,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5514,7 +5519,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -5566,7 +5571,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5597,7 +5602,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -5649,7 +5654,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5680,7 +5685,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -5712,7 +5717,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)",
   "lifecycle_status": "alpha",
@@ -5743,7 +5748,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5774,7 +5779,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -5840,7 +5845,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5871,7 +5876,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -5923,7 +5928,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -5954,7 +5959,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -6006,7 +6011,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6037,7 +6042,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -6089,7 +6094,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6120,7 +6125,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -6152,7 +6157,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -6183,7 +6188,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6214,7 +6219,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -6280,7 +6285,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6311,7 +6316,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6363,7 +6368,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6394,7 +6399,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -6446,7 +6451,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6477,7 +6482,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -6529,7 +6534,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6560,7 +6565,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -6592,7 +6597,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)",
   "lifecycle_status": "alpha",
@@ -6623,7 +6628,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6654,7 +6659,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -6720,7 +6725,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6751,7 +6756,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6803,7 +6808,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6834,7 +6839,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -6886,7 +6891,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -6917,7 +6922,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -6969,7 +6974,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7000,7 +7005,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -7029,7 +7034,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to density equation of the charge state considered (thermal+non-thermal)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles",
   "lifecycle_status": "alpha"
@@ -7038,7 +7043,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/d(i4)",
   "lifecycle_status": "alpha",
@@ -7058,7 +7063,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/d(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7114,7 +7119,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/d(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -7146,7 +7151,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux(i4)",
   "lifecycle_status": "alpha",
@@ -7166,7 +7171,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7222,7 +7227,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -7254,7 +7259,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -7274,7 +7279,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux_limiter(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7330,7 +7335,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/flux_limiter(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -7362,7 +7367,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/v(i4)",
   "lifecycle_status": "alpha",
@@ -7382,7 +7387,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/v(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7438,7 +7443,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/particles/v(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -7475,7 +7480,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -7513,7 +7518,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -7544,7 +7549,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -7575,7 +7580,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -7598,7 +7603,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for total momentum equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum",
   "lifecycle_status": "alpha"
@@ -7607,7 +7612,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)",
   "lifecycle_status": "alpha",
@@ -7638,7 +7643,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7669,7 +7674,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -7735,7 +7740,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7766,7 +7771,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -7818,7 +7823,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7849,7 +7854,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -7901,7 +7906,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -7932,7 +7937,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -7984,7 +7989,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8015,7 +8020,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.d[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -8047,7 +8052,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)",
   "lifecycle_status": "alpha",
@@ -8078,7 +8083,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8109,7 +8114,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -8175,7 +8180,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8206,7 +8211,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -8258,7 +8263,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8289,7 +8294,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -8341,7 +8346,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8372,7 +8377,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -8424,7 +8429,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8455,7 +8460,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].momentum.flux[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -8487,7 +8492,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)",
   "lifecycle_status": "alpha",
@@ -8518,7 +8523,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8549,7 +8554,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -8615,7 +8620,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8646,7 +8651,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -8698,7 +8703,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8729,7 +8734,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -8781,7 +8786,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8812,7 +8817,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -8864,7 +8869,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8895,7 +8900,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -8927,7 +8932,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)",
   "lifecycle_status": "alpha",
@@ -8958,7 +8963,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -8989,7 +8994,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -9055,7 +9060,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9086,7 +9091,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -9138,7 +9143,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9169,7 +9174,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -9221,7 +9226,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9252,7 +9257,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -9304,7 +9309,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9335,7 +9340,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].momentum.v[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -9367,7 +9372,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the various ion and neutral species",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)",
   "lifecycle_status": "alpha",
@@ -9377,7 +9382,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -9392,7 +9397,7 @@
   "units": "Atomic Mass Unit"
  },
  "edge_transport.model[:].ggd[:].neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -9423,7 +9428,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -9454,7 +9459,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -9477,7 +9482,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the ion energy equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy",
   "lifecycle_status": "alpha"
@@ -9486,7 +9491,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/d(i3)",
   "lifecycle_status": "alpha",
@@ -9506,7 +9511,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/d(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9562,7 +9567,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/d(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -9594,7 +9599,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux(i3)",
   "lifecycle_status": "alpha",
@@ -9614,7 +9619,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9670,7 +9675,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -9702,7 +9707,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -9722,7 +9727,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux_limiter(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9778,7 +9783,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/flux_limiter(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -9810,7 +9815,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/v(i3)",
   "lifecycle_status": "alpha",
@@ -9830,7 +9835,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/v(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -9886,7 +9891,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/energy/v(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -9929,7 +9934,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for the ion momentum equations",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum",
   "lifecycle_status": "alpha"
@@ -9938,7 +9943,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)",
   "lifecycle_status": "alpha",
@@ -9969,7 +9974,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10000,7 +10005,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -10066,7 +10071,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10097,7 +10102,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -10149,7 +10154,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10180,7 +10185,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -10232,7 +10237,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10263,7 +10268,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -10315,7 +10320,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10346,7 +10351,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -10378,7 +10383,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)",
   "lifecycle_status": "alpha",
@@ -10409,7 +10414,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10440,7 +10445,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -10506,7 +10511,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10537,7 +10542,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -10589,7 +10594,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10620,7 +10625,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -10672,7 +10677,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10703,7 +10708,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -10755,7 +10760,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10786,7 +10791,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -10818,7 +10823,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -10849,7 +10854,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10880,7 +10885,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -10946,7 +10951,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -10977,7 +10982,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -11029,7 +11034,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11060,7 +11065,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -11112,7 +11117,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11143,7 +11148,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -11195,7 +11200,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11226,7 +11231,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -11258,7 +11263,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)",
   "lifecycle_status": "alpha",
@@ -11289,7 +11294,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11320,7 +11325,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -11386,7 +11391,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11417,7 +11422,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -11469,7 +11474,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11500,7 +11505,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -11552,7 +11557,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11583,7 +11588,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -11635,7 +11640,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11666,7 +11671,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -11702,7 +11707,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport related to the ion density equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles",
   "lifecycle_status": "alpha"
@@ -11711,7 +11716,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/d(i3)",
   "lifecycle_status": "alpha",
@@ -11731,7 +11736,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/d(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11787,7 +11792,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/d(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -11819,7 +11824,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux(i3)",
   "lifecycle_status": "alpha",
@@ -11839,7 +11844,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -11895,7 +11900,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -11927,7 +11932,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux_limiter(i3)",
   "lifecycle_status": "alpha",
@@ -11947,7 +11952,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux_limiter(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12003,7 +12008,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/flux_limiter(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12035,7 +12040,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/v(i3)",
   "lifecycle_status": "alpha",
@@ -12055,7 +12060,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/v(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12111,7 +12116,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].particles.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/particles/v(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12143,7 +12148,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the different states of the species",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -12157,7 +12162,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the energy equation of the charge state considered ",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy",
   "lifecycle_status": "alpha"
@@ -12166,7 +12171,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/d(i4)",
   "lifecycle_status": "alpha",
@@ -12186,7 +12191,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/d(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12242,7 +12247,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/d(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12274,7 +12279,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux(i4)",
   "lifecycle_status": "alpha",
@@ -12294,7 +12299,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12350,7 +12355,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12382,7 +12387,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -12402,7 +12407,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux_limiter(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12458,7 +12463,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/flux_limiter(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12490,7 +12495,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/v(i4)",
   "lifecycle_status": "alpha",
@@ -12510,7 +12515,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/v(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12566,7 +12571,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/energy/v(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -12602,7 +12607,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the momentum equations of the charge state considered",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum",
   "lifecycle_status": "alpha"
@@ -12611,7 +12616,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)",
   "lifecycle_status": "alpha",
@@ -12642,7 +12647,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12673,7 +12678,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -12739,7 +12744,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12770,7 +12775,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -12822,7 +12827,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12853,7 +12858,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -12905,7 +12910,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -12936,7 +12941,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -12988,7 +12993,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13019,7 +13024,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -13051,7 +13056,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)",
   "lifecycle_status": "alpha",
@@ -13082,7 +13087,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13113,7 +13118,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -13179,7 +13184,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13210,7 +13215,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -13262,7 +13267,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13293,7 +13298,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -13345,7 +13350,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13376,7 +13381,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -13428,7 +13433,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13459,7 +13464,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -13491,7 +13496,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -13522,7 +13527,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13553,7 +13558,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -13619,7 +13624,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13650,7 +13655,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -13702,7 +13707,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13733,7 +13738,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -13785,7 +13790,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13816,7 +13821,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -13868,7 +13873,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13899,7 +13904,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -13931,7 +13936,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)",
   "lifecycle_status": "alpha",
@@ -13962,7 +13967,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].diamagnetic_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/diamagnetic_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -13993,7 +13998,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/diamagnetic_error_index",
   "lifecycle_status": "alpha",
@@ -14059,7 +14064,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].parallel_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/parallel_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14090,7 +14095,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -14142,7 +14147,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].poloidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/poloidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14173,7 +14178,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/poloidal_error_index",
   "lifecycle_status": "alpha",
@@ -14225,7 +14230,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].radial_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/radial_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14256,7 +14261,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/radial_error_index",
   "lifecycle_status": "alpha",
@@ -14308,7 +14313,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].toroidal_coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14339,7 +14344,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_error_index",
   "lifecycle_status": "alpha",
@@ -14368,7 +14373,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/neutral_type",
   "lifecycle_status": "alpha"
@@ -14395,7 +14400,7 @@
   "type": "constant"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to density equation of the charge state considered (thermal+non-thermal)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles",
   "lifecycle_status": "alpha"
@@ -14404,7 +14409,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/d(i4)",
   "lifecycle_status": "alpha",
@@ -14424,7 +14429,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/d(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14480,7 +14485,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/d(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -14512,7 +14517,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux(i4)",
   "lifecycle_status": "alpha",
@@ -14532,7 +14537,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14588,7 +14593,7 @@
   "units": "m^-2.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -14620,7 +14625,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux_limiter(i4)",
   "lifecycle_status": "alpha",
@@ -14640,7 +14645,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux_limiter(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14696,7 +14701,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/flux_limiter(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -14728,7 +14733,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/v(i4)",
   "lifecycle_status": "alpha",
@@ -14748,7 +14753,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/v(i4)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14804,7 +14809,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].particles.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/particles/v(i4)/values_error_index",
   "lifecycle_status": "alpha",
@@ -14841,7 +14846,7 @@
   "units": "Elementary Charge Unit"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -14871,7 +14876,7 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "edge_transport/model(i1)/ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -14879,7 +14884,7 @@
   "units": "s"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for the total (summed over ion  species) energy equation",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy",
   "lifecycle_status": "alpha"
@@ -14888,7 +14893,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective diffusivity, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/d(i2)",
   "lifecycle_status": "alpha",
@@ -14908,7 +14913,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.d[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/d(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -14964,7 +14969,7 @@
   "units": "m^2.s^-1"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.d[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/d(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -14996,7 +15001,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux(i2)",
   "lifecycle_status": "alpha",
@@ -15016,7 +15021,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.flux[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -15072,7 +15077,7 @@
   "units": "W.m^-2"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.flux[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -15104,7 +15109,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Flux limiter coefficient, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux_limiter(i2)",
   "lifecycle_status": "alpha",
@@ -15124,7 +15129,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.flux_limiter[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux_limiter(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -15180,7 +15185,7 @@
   "units": "-"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.flux_limiter[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/flux_limiter(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -15212,7 +15217,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective convection, on various grid subsets",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/v(i2)",
   "lifecycle_status": "alpha",
@@ -15232,7 +15237,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.v[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/v(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -15288,7 +15293,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].ggd[:].total_ion_energy.v[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/total_ion_energy/v(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -15317,7 +15322,7 @@
   "units": "m.s^-1"
  },
  "edge_transport.model[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport model identifier",
   "full_path": "edge_transport/model(i1)/identifier",
   "lifecycle_status": "alpha"
@@ -15347,7 +15352,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "edge_transport/time",
   "lifecycle_status": "alpha",

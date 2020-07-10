@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system",
   "full_path": "pf_active/circuit(i1)",
   "lifecycle_status": "alpha",
@@ -31,7 +31,7 @@
   "url": "pf_active/PFConnections.html"
  },
  "pf_active.circuit[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Current in the circuit between the sides of the group of supplies (only for circuits with a single supply or in which supplies are grouped)",
   "full_path": "pf_active/circuit(i1)/current",
   "lifecycle_status": "alpha",
@@ -51,7 +51,7 @@
   "units": "A"
  },
  "pf_active.circuit[:].current.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/circuit(i1)/current/data_error_index",
   "lifecycle_status": "alpha",
@@ -85,7 +85,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/circuit(i1)/current/time(:)",
   "lifecycle_status": "alpha",
@@ -115,7 +115,7 @@
   "type": "static"
  },
  "pf_active.circuit[:].voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Voltage on the circuit between the sides of the group of supplies (only for circuits with a single supply or in which supplies are grouped)",
   "full_path": "pf_active/circuit(i1)/voltage",
   "lifecycle_status": "alpha",
@@ -135,7 +135,7 @@
   "units": "V"
  },
  "pf_active.circuit[:].voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/circuit(i1)/voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -169,7 +169,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/circuit(i1)/voltage/time(:)",
   "lifecycle_status": "alpha",
@@ -178,7 +178,7 @@
   "units": "s"
  },
  "pf_active.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "pf_active/code",
   "lifecycle_status": "alpha",
@@ -234,7 +234,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Active PF coils",
   "full_path": "pf_active/coil(i1)",
   "lifecycle_status": "alpha",
@@ -253,7 +253,7 @@
   "units": "T"
  },
  "pf_active.coil[:].b_field_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_max\"",
   "full_path": "pf_active/coil(i1)/b_field_max_error_index",
   "lifecycle_status": "alpha",
@@ -282,7 +282,7 @@
   "units": "T"
  },
  "pf_active.coil[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Current in the coil, positive when counter-clockwise when seen from above",
   "full_path": "pf_active/coil(i1)/current",
   "lifecycle_status": "alpha",
@@ -302,7 +302,7 @@
   "units": "A"
  },
  "pf_active.coil[:].current.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/coil(i1)/current/data_error_index",
   "lifecycle_status": "alpha",
@@ -336,7 +336,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/coil(i1)/current/time(:)",
   "lifecycle_status": "alpha",
@@ -357,7 +357,7 @@
   "units": "A"
  },
  "pf_active.coil[:].current_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_limit_max\"",
   "full_path": "pf_active/coil(i1)/current_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -391,7 +391,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Each PF coil is comprised of a number of cross-section elements described  individually",
   "full_path": "pf_active/coil(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -407,7 +407,7 @@
   "units": "m^2"
  },
  "pf_active.coil[:].element[:].area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "pf_active/coil(i1)/element(i2)/area_error_index",
   "lifecycle_status": "alpha",
@@ -430,14 +430,14 @@
   "units": "m^2"
  },
  "pf_active.coil[:].element[:].geometry": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Cross-sectional shape of the element",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry",
   "lifecycle_status": "alpha",
   "structure_reference": "outline_2d_geometry_static"
  },
  "pf_active.coil[:].element[:].geometry.arcs_of_circle": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/arcs_of_circle",
   "lifecycle_status": "alpha",
@@ -455,7 +455,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.arcs_of_circle.curvature_radii_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_radii\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii_error_index",
   "lifecycle_status": "alpha",
@@ -495,7 +495,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.arcs_of_circle.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/arcs_of_circle/r_error_index",
   "lifecycle_status": "alpha",
@@ -535,7 +535,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.arcs_of_circle.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/arcs_of_circle/z_error_index",
   "lifecycle_status": "alpha",
@@ -571,7 +571,7 @@
   "type": "static"
  },
  "pf_active.coil[:].element[:].geometry.oblique": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Trapezoidal description of the element",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique",
   "lifecycle_status": "alpha",
@@ -586,7 +586,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.alpha_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/alpha_error_index",
   "lifecycle_status": "alpha",
@@ -617,7 +617,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.beta_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/beta_error_index",
   "lifecycle_status": "alpha",
@@ -648,7 +648,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.length_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_error_index",
   "lifecycle_status": "alpha",
@@ -679,7 +679,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/r_error_index",
   "lifecycle_status": "alpha",
@@ -710,7 +710,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.thickness_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/thickness_error_index",
   "lifecycle_status": "alpha",
@@ -741,7 +741,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.oblique.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/z_error_index",
   "lifecycle_status": "alpha",
@@ -764,7 +764,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the element. Do NOT repeat the first point.",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/outline",
   "lifecycle_status": "alpha",
@@ -782,7 +782,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -822,7 +822,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -851,7 +851,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.rectangle": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Rectangular description of the element",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/rectangle",
   "lifecycle_status": "alpha",
@@ -866,7 +866,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.rectangle.height_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/rectangle/height_error_index",
   "lifecycle_status": "alpha",
@@ -897,7 +897,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.rectangle.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/rectangle/r_error_index",
   "lifecycle_status": "alpha",
@@ -928,7 +928,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.rectangle.width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/rectangle/width_error_index",
   "lifecycle_status": "alpha",
@@ -959,7 +959,7 @@
   "units": "m"
  },
  "pf_active.coil[:].element[:].geometry.rectangle.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/rectangle/z_error_index",
   "lifecycle_status": "alpha",
@@ -1004,7 +1004,7 @@
   "units": "-"
  },
  "pf_active.coil[:].element[:].turns_with_sign_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"turns_with_sign\"",
   "full_path": "pf_active/coil(i1)/element(i2)/turns_with_sign_error_index",
   "lifecycle_status": "alpha",
@@ -1035,7 +1035,7 @@
   "units": "J"
  },
  "pf_active.coil[:].energy_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_limit_max\"",
   "full_path": "pf_active/coil(i1)/energy_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -1080,7 +1080,7 @@
   "units": "Ohm"
  },
  "pf_active.coil[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "pf_active/coil(i1)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -1114,7 +1114,7 @@
   "units": "K"
  },
  "pf_active.coil[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "pf_active/coil(i1)/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -1143,7 +1143,7 @@
   "units": "K"
  },
  "pf_active.coil[:].voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Voltage on the coil terminals (Vside1-Vside2)",
   "full_path": "pf_active/coil(i1)/voltage",
   "lifecycle_status": "alpha",
@@ -1163,7 +1163,7 @@
   "units": "V"
  },
  "pf_active.coil[:].voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/coil(i1)/voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -1197,7 +1197,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/coil(i1)/voltage/time(:)",
   "lifecycle_status": "alpha",
@@ -1206,7 +1206,7 @@
   "units": "s"
  },
  "pf_active.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "pf_active/ids_properties",
   "lifecycle_status": "alpha",
@@ -1233,6 +1233,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_active.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "pf_active.ids_properties.occurrence"
+ },
  "pf_active.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1248,7 +1253,7 @@
   "type": "constant"
  },
  "pf_active.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "pf_active/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -1279,7 +1284,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "PF power supplies",
   "full_path": "pf_active/supply(i1)",
   "lifecycle_status": "alpha",
@@ -1287,7 +1292,7 @@
   "structure_reference": "pf_supplies"
  },
  "pf_active.supply[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Current at the supply output, defined positive if it flows from point 1 to point 2 in the circuit connected to the supply (outside the supply)",
   "full_path": "pf_active/supply(i1)/current",
   "lifecycle_status": "alpha",
@@ -1307,7 +1312,7 @@
   "units": "A"
  },
  "pf_active.supply[:].current.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/supply(i1)/current/data_error_index",
   "lifecycle_status": "alpha",
@@ -1341,7 +1346,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/supply(i1)/current/time(:)",
   "lifecycle_status": "alpha",
@@ -1358,7 +1363,7 @@
   "units": "A"
  },
  "pf_active.supply[:].current_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_limit_max\"",
   "full_path": "pf_active/supply(i1)/current_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -1389,7 +1394,7 @@
   "units": "A"
  },
  "pf_active.supply[:].current_limit_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_limit_min\"",
   "full_path": "pf_active/supply(i1)/current_limit_min_error_index",
   "lifecycle_status": "alpha",
@@ -1420,7 +1425,7 @@
   "units": "V"
  },
  "pf_active.supply[:].current_limiter_gain_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_limiter_gain\"",
   "full_path": "pf_active/supply(i1)/current_limiter_gain_error_index",
   "lifecycle_status": "alpha",
@@ -1451,7 +1456,7 @@
   "units": "s"
  },
  "pf_active.supply[:].delay_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delay\"",
   "full_path": "pf_active/supply(i1)/delay_error_index",
   "lifecycle_status": "alpha",
@@ -1482,7 +1487,7 @@
   "units": "J"
  },
  "pf_active.supply[:].energy_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_limit_max\"",
   "full_path": "pf_active/supply(i1)/energy_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -1516,7 +1521,7 @@
   "units": "mixed"
  },
  "pf_active.supply[:].filter_denominator_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"filter_denominator\"",
   "full_path": "pf_active/supply(i1)/filter_denominator_error_index",
   "lifecycle_status": "alpha",
@@ -1556,7 +1561,7 @@
   "units": "mixed"
  },
  "pf_active.supply[:].filter_numerator_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"filter_numerator\"",
   "full_path": "pf_active/supply(i1)/filter_numerator_error_index",
   "lifecycle_status": "alpha",
@@ -1614,7 +1619,7 @@
   "units": "Ohm"
  },
  "pf_active.supply[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "pf_active/supply(i1)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -1644,7 +1649,7 @@
   "type": "static"
  },
  "pf_active.supply[:].voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Voltage at the supply output (Vside1-Vside2)",
   "full_path": "pf_active/supply(i1)/voltage",
   "lifecycle_status": "alpha",
@@ -1664,7 +1669,7 @@
   "units": "V"
  },
  "pf_active.supply[:].voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/supply(i1)/voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -1698,7 +1703,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/supply(i1)/voltage/time(:)",
   "lifecycle_status": "alpha",
@@ -1715,7 +1720,7 @@
   "units": "V"
  },
  "pf_active.supply[:].voltage_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"voltage_limit_max\"",
   "full_path": "pf_active/supply(i1)/voltage_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -1746,7 +1751,7 @@
   "units": "V"
  },
  "pf_active.supply[:].voltage_limit_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"voltage_limit_min\"",
   "full_path": "pf_active/supply(i1)/voltage_limit_min_error_index",
   "lifecycle_status": "alpha",
@@ -1772,7 +1777,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "pf_active/time(:)",
   "lifecycle_status": "alpha",
@@ -1784,7 +1789,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Vertical forces on the axisymmetric PF coil system",
   "full_path": "pf_active/vertical_force(i1)",
   "lifecycle_status": "alpha",
@@ -1803,7 +1808,7 @@
   "units": "-"
  },
  "pf_active.vertical_force[:].combination_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"combination\"",
   "full_path": "pf_active/vertical_force(i1)/combination_error_index",
   "lifecycle_status": "alpha",
@@ -1832,7 +1837,7 @@
   "units": "-"
  },
  "pf_active.vertical_force[:].force": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Force ",
   "full_path": "pf_active/vertical_force(i1)/force",
   "lifecycle_status": "alpha",
@@ -1852,7 +1857,7 @@
   "units": "N"
  },
  "pf_active.vertical_force[:].force.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pf_active/vertical_force(i1)/force/data_error_index",
   "lifecycle_status": "alpha",
@@ -1886,7 +1891,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/vertical_force(i1)/force/time(:)",
   "lifecycle_status": "alpha",
@@ -1903,7 +1908,7 @@
   "units": "N"
  },
  "pf_active.vertical_force[:].limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"limit_max\"",
   "full_path": "pf_active/vertical_force(i1)/limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -1934,7 +1939,7 @@
   "units": "N"
  },
  "pf_active.vertical_force[:].limit_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"limit_min\"",
   "full_path": "pf_active/vertical_force(i1)/limit_min_error_index",
   "lifecycle_status": "alpha",

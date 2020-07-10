@@ -19,7 +19,7 @@
   "units": "Atomic Mass Unit"
  },
  "spectrometer_mass.a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "spectrometer_mass/a_error_index",
   "lifecycle_status": "alpha",
@@ -48,7 +48,7 @@
   "units": "Atomic Mass Unit"
  },
  "spectrometer_mass.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "spectrometer_mass/code",
   "lifecycle_status": "alpha",
@@ -108,7 +108,7 @@
   "type": "static"
  },
  "spectrometer_mass.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "spectrometer_mass/ids_properties",
   "lifecycle_status": "alpha",
@@ -150,7 +150,7 @@
   "type": "constant"
  },
  "spectrometer_mass.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "spectrometer_mass/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -188,7 +188,7 @@
   "coordinates": [
    "spectrometer_mass.a"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Partial pressures recorded by the spectrometer",
   "full_path": "spectrometer_mass/pressures_partial",
   "lifecycle_status": "alpha",
@@ -209,7 +209,7 @@
   "units": "Pa"
  },
  "spectrometer_mass.pressures_partial.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_mass/pressures_partial/data_error_index",
   "lifecycle_status": "alpha",
@@ -245,7 +245,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_mass/pressures_partial/time(:)",
   "lifecycle_status": "alpha",
@@ -275,7 +275,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "spectrometer_mass/time(:)",
   "lifecycle_status": "alpha",

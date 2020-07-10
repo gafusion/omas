@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (detector or pixel of a camera)",
   "full_path": "spectrometer_visible/channel(i1)",
   "lifecycle_status": "alpha",
@@ -22,7 +22,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].active_spatial_resolution[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "In case of active spectroscopy, describes the spatial resolution of the measurement, calculated as a convolution of the atomic smearing, magnetic and beam geometry smearing and detector projection, for a set of time slices",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)",
   "lifecycle_status": "alpha",
@@ -31,7 +31,7 @@
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the centre of the spatially resolved zone",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre",
   "lifecycle_status": "alpha",
@@ -46,7 +46,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -77,7 +77,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -108,7 +108,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -131,7 +131,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/time",
   "lifecycle_status": "alpha",
@@ -139,7 +139,7 @@
   "units": "s"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Full width of the spatially resolved zone in the R, Z and phi directions",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width",
   "lifecycle_status": "alpha",
@@ -154,7 +154,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index",
   "lifecycle_status": "alpha",
@@ -185,7 +185,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/r_error_index",
   "lifecycle_status": "alpha",
@@ -216,7 +216,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/z_error_index",
   "lifecycle_status": "alpha",
@@ -242,7 +242,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of a set of collimating apertures",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)",
   "lifecycle_status": "alpha",
@@ -250,7 +250,7 @@
   "structure_reference": "detector_aperture"
  },
  "spectrometer_visible.channel[:].aperture[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre",
   "lifecycle_status": "alpha",
@@ -265,7 +265,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -296,7 +296,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -327,7 +327,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -357,7 +357,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].aperture[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha",
@@ -375,7 +375,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -415,7 +415,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -452,7 +452,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/radius_error_index",
   "lifecycle_status": "alpha",
@@ -483,7 +483,7 @@
   "units": "m^2"
  },
  "spectrometer_visible.channel[:].aperture[:].surface_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/surface_error_index",
   "lifecycle_status": "alpha",
@@ -506,7 +506,7 @@
   "units": "m^2"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -521,7 +521,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -552,7 +552,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -583,7 +583,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -614,7 +614,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_width_error_index",
   "lifecycle_status": "alpha",
@@ -637,7 +637,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -652,7 +652,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -683,7 +683,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -714,7 +714,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -745,7 +745,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_width_error_index",
   "lifecycle_status": "alpha",
@@ -768,7 +768,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -783,7 +783,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -814,7 +814,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -845,7 +845,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -868,14 +868,14 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detector description",
   "full_path": "spectrometer_visible/channel(i1)/detector",
   "lifecycle_status": "alpha",
   "structure_reference": "detector_aperture"
  },
  "spectrometer_visible.channel[:].detector.centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre",
   "lifecycle_status": "alpha",
@@ -890,7 +890,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].detector.centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -921,7 +921,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -952,7 +952,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -982,7 +982,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].detector.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "spectrometer_visible/channel(i1)/detector/outline",
   "lifecycle_status": "alpha",
@@ -1000,7 +1000,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -1040,7 +1040,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -1077,7 +1077,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/radius_error_index",
   "lifecycle_status": "alpha",
@@ -1108,7 +1108,7 @@
   "units": "m^2"
  },
  "spectrometer_visible.channel[:].detector.surface_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/surface_error_index",
   "lifecycle_status": "alpha",
@@ -1131,7 +1131,7 @@
   "units": "m^2"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -1146,7 +1146,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1177,7 +1177,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1208,7 +1208,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1239,7 +1239,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x1_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_width_error_index",
   "lifecycle_status": "alpha",
@@ -1262,7 +1262,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -1277,7 +1277,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1308,7 +1308,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1339,7 +1339,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1370,7 +1370,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x2_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_width_error_index",
   "lifecycle_status": "alpha",
@@ -1393,7 +1393,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -1408,7 +1408,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1439,7 +1439,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1470,7 +1470,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1493,14 +1493,14 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector_image": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Image of the detector or pixel on the focal plane of the optical system",
   "full_path": "spectrometer_visible/channel(i1)/detector_image",
   "lifecycle_status": "alpha",
   "structure_reference": "detector_image"
  },
  "spectrometer_visible.channel[:].detector_image.circular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of circular or elliptic image",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/circular",
   "lifecycle_status": "alpha",
@@ -1515,7 +1515,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].detector_image.circular.ellipticity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ellipticity\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/circular/ellipticity_error_index",
   "lifecycle_status": "alpha",
@@ -1546,7 +1546,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector_image.circular.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/circular/radius_error_index",
   "lifecycle_status": "alpha",
@@ -1576,7 +1576,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].detector_image.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Coordinates of the points shaping the polygon of the image",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline",
   "lifecycle_status": "alpha",
@@ -1594,7 +1594,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].detector_image.outline.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1634,7 +1634,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector_image.outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -1674,7 +1674,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].detector_image.outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -1711,7 +1711,7 @@
   "units": "m^2.str"
  },
  "spectrometer_visible.channel[:].etendue_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"etendue\"",
   "full_path": "spectrometer_visible/channel(i1)/etendue_error_index",
   "lifecycle_status": "alpha",
@@ -1734,7 +1734,7 @@
   "units": "m^2.str"
  },
  "spectrometer_visible.channel[:].etendue_method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods",
   "full_path": "spectrometer_visible/channel(i1)/etendue_method",
   "lifecycle_status": "alpha",
@@ -1762,14 +1762,14 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].fibre_image": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Image of the optical fibre on the focal plane of the optical system",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image",
   "lifecycle_status": "alpha",
   "structure_reference": "detector_image"
  },
  "spectrometer_visible.channel[:].fibre_image.circular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of circular or elliptic image",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/circular",
   "lifecycle_status": "alpha",
@@ -1784,7 +1784,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].fibre_image.circular.ellipticity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ellipticity\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/circular/ellipticity_error_index",
   "lifecycle_status": "alpha",
@@ -1815,7 +1815,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].fibre_image.circular.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/circular/radius_error_index",
   "lifecycle_status": "alpha",
@@ -1845,7 +1845,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].fibre_image.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Coordinates of the points shaping the polygon of the image",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline",
   "lifecycle_status": "alpha",
@@ -1863,7 +1863,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1903,7 +1903,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -1943,7 +1943,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -1972,7 +1972,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].filter_spectrometer": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities measured by the channel if connected to a filter spectrometer",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer",
   "lifecycle_status": "alpha",
@@ -1982,7 +1982,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.calibrated_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated line gross areas integrals ",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_line_integrals",
   "lifecycle_status": "alpha",
@@ -2003,7 +2003,7 @@
   "units": "m^-2.s^-1.sr^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.calibrated_line_integrals.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_line_integrals/data_error_index",
   "lifecycle_status": "alpha",
@@ -2039,7 +2039,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_line_integrals/time(:)",
   "lifecycle_status": "alpha",
@@ -2059,7 +2059,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.calibrated_lines_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"calibrated_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_lines_error_index",
   "lifecycle_status": "alpha",
@@ -2096,7 +2096,7 @@
   "units": "s"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.exposure_time_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/exposure_time_error_index",
   "lifecycle_status": "alpha",
@@ -2122,7 +2122,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.raw_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Line gross integral intensities",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_intensities",
   "lifecycle_status": "alpha",
@@ -2143,7 +2143,7 @@
   "units": "m^-2.s^-1.sr^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_intensities.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_intensities/data_error_index",
   "lifecycle_status": "alpha",
@@ -2179,7 +2179,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_intensities/time(:)",
   "lifecycle_status": "alpha",
@@ -2201,7 +2201,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.processed_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated, background subtracted power radiances",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_power_radiances",
   "lifecycle_status": "alpha",
@@ -2222,7 +2222,7 @@
   "units": "W.m^-2.sr^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_power_radiances.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_power_radiances/data_error_index",
   "lifecycle_status": "alpha",
@@ -2258,7 +2258,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_power_radiances/time(:)",
   "lifecycle_status": "alpha",
@@ -2270,7 +2270,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.processed_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated, background subtracted line integrals ",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances",
   "lifecycle_status": "alpha",
@@ -2291,7 +2291,7 @@
   "units": "m^-2.s^-1.sr^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_radiances.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances/data_error_index",
   "lifecycle_status": "alpha",
@@ -2327,7 +2327,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances/time(:)",
   "lifecycle_status": "alpha",
@@ -2339,7 +2339,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.processed_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated, background subtracted line integrals, adjusted as if the line was centred at the peak responsivity of the system (for this line)",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances_adjusted",
   "lifecycle_status": "alpha",
@@ -2360,7 +2360,7 @@
   "units": "m^-2.s^-1.sr^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_radiances_adjusted.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances_adjusted/data_error_index",
   "lifecycle_status": "alpha",
@@ -2396,7 +2396,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances_adjusted/time(:)",
   "lifecycle_status": "alpha",
@@ -2408,7 +2408,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.raw_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Raw voltage output of the whole acquisition chain for each raw line",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/output_voltage",
   "lifecycle_status": "alpha",
@@ -2429,7 +2429,7 @@
   "units": "V"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.output_voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/output_voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -2465,7 +2465,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/output_voltage/time(:)",
   "lifecycle_status": "alpha",
@@ -2477,7 +2477,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.raw_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Gain corrected and background subtracted voltage for each raw line",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photoelectric_voltage",
   "lifecycle_status": "alpha",
@@ -2498,7 +2498,7 @@
   "units": "V"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.photoelectric_voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photoelectric_voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -2534,7 +2534,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photoelectric_voltage/time(:)",
   "lifecycle_status": "alpha",
@@ -2546,7 +2546,7 @@
   "coordinates": [
    "spectrometer_visible.channel[:].filter_spectrometer.raw_lines "
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detected photon count for each raw line",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photon_count",
   "lifecycle_status": "alpha",
@@ -2567,7 +2567,7 @@
   "units": "s^-1"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.photon_count.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photon_count/data_error_index",
   "lifecycle_status": "alpha",
@@ -2603,7 +2603,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photon_count/time(:)",
   "lifecycle_status": "alpha",
@@ -2623,7 +2623,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.processed_lines_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"processed_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/processed_lines_error_index",
   "lifecycle_status": "alpha",
@@ -2667,7 +2667,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.radiance_calibration_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radiance_calibration\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/radiance_calibration_error_index",
   "lifecycle_status": "alpha",
@@ -2701,7 +2701,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.raw_lines_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"raw_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/raw_lines_error_index",
   "lifecycle_status": "alpha",
@@ -2730,7 +2730,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities measured by the channel if connected to a grating spectrometer",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer",
   "lifecycle_status": "alpha",
@@ -2745,7 +2745,7 @@
   "units": "s"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.exposure_time_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/exposure_time_error_index",
   "lifecycle_status": "alpha",
@@ -2776,7 +2776,7 @@
   "units": "m^-1"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.grating_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"grating\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/grating_error_index",
   "lifecycle_status": "alpha",
@@ -2803,7 +2803,7 @@
    "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Intensity spectrum (not calibrated), i.e. number of photoelectrons detected by unit time by a wavelength pixel of the channel, taking into account electronic gain compensation and channels relative calibration",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/intensity_spectrum",
   "lifecycle_status": "alpha",
@@ -2824,7 +2824,7 @@
   "units": "(counts) s^-1"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/intensity_spectrum/data_error_index",
   "lifecycle_status": "alpha",
@@ -2860,7 +2860,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/intensity_spectrum/time(:)",
   "lifecycle_status": "alpha",
@@ -2872,7 +2872,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of processed spectral lines",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)",
   "lifecycle_status": "alpha",
@@ -2880,7 +2880,7 @@
   "structure_reference": "spectro_vis_channel_processed_line"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].intensity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Non-calibrated intensity (integrated over the spectrum for this line)",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/intensity",
   "lifecycle_status": "alpha",
@@ -2900,7 +2900,7 @@
   "units": "s^-1"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].intensity.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/intensity/data_error_index",
   "lifecycle_status": "alpha",
@@ -2934,7 +2934,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/intensity/time(:)",
   "lifecycle_status": "alpha",
@@ -2950,7 +2950,7 @@
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].radiance": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated, background subtracted radiance (integrated over the spectrum for this line)",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/radiance",
   "lifecycle_status": "alpha",
@@ -2970,7 +2970,7 @@
   "units": "m^-2.s^-1.sr^-1"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].radiance.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/radiance/data_error_index",
   "lifecycle_status": "alpha",
@@ -3004,7 +3004,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/radiance/time(:)",
   "lifecycle_status": "alpha",
@@ -3021,7 +3021,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].wavelength_central_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_central\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/wavelength_central_error_index",
   "lifecycle_status": "alpha",
@@ -3062,7 +3062,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_calibration_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radiance_calibration\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_calibration_error_index",
   "lifecycle_status": "alpha",
@@ -3095,7 +3095,7 @@
    "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Calibrated spectral radiance (radiance per unit wavelength)",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_spectral",
   "lifecycle_status": "alpha",
@@ -3116,7 +3116,7 @@
   "units": "(photons).m^-2.s^-1.sr^-1.m^-1"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_spectral/data_error_index",
   "lifecycle_status": "alpha",
@@ -3152,7 +3152,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_spectral/time(:)",
   "lifecycle_status": "alpha",
@@ -3169,7 +3169,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.slit_width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"slit_width\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/slit_width_error_index",
   "lifecycle_status": "alpha",
@@ -3192,7 +3192,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Wavelength calibration data. The wavelength is obtained from the pixel index k by: wavelength =  k * gain + offset. k is starting from 1.",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration",
   "lifecycle_status": "alpha",
@@ -3207,7 +3207,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gain\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain_error_index",
   "lifecycle_status": "alpha",
@@ -3238,7 +3238,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"offset\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset_error_index",
   "lifecycle_status": "alpha",
@@ -3279,7 +3279,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelengths_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelengths_error_index",
   "lifecycle_status": "alpha",
@@ -3308,7 +3308,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].isotope_ratios": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Isotope ratios and related information",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios",
   "lifecycle_status": "alpha",
@@ -3318,7 +3318,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of isotopes",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)",
   "lifecycle_status": "alpha",
@@ -3338,7 +3338,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"cold_neutrals_fraction\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction_error_index",
   "lifecycle_status": "alpha",
@@ -3381,7 +3381,7 @@
   "units": "eV"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"cold_neutrals_temperature\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature_error_index",
   "lifecycle_status": "alpha",
@@ -3424,7 +3424,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_ratio\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio_error_index",
   "lifecycle_status": "alpha",
@@ -3458,7 +3458,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -3474,7 +3474,7 @@
   "units": "Atomic Mass Unit"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -3513,7 +3513,7 @@
   "units": "Elementary Charge Unit"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -3546,7 +3546,7 @@
   "units": "Elementary Charge Unit"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -3581,7 +3581,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"hot_neutrals_fraction\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction_error_index",
   "lifecycle_status": "alpha",
@@ -3624,7 +3624,7 @@
   "units": "eV"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"hot_neutrals_temperature\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature_error_index",
   "lifecycle_status": "alpha",
@@ -3665,7 +3665,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Timebase for dynamic quantities at this level of the data structure",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/time(:)",
   "lifecycle_status": "alpha",
@@ -3674,7 +3674,7 @@
   "units": "s"
  },
  "spectrometer_visible.channel[:].isotope_ratios.method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "spectrometer_visible/spectrometer_visible_method_identifier.xml",
   "documentation": "Fitting method used to calculate isotope ratios\n1) multi_gaussian : Multi-gaussian fitting\n2) exp_times_multi_gaussian : Experimental signal multiplied by multi-gaussian ratio",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/method",
@@ -3715,7 +3715,7 @@
   "units": "dB"
  },
  "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"signal_to_noise\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise_error_index",
   "lifecycle_status": "alpha",
@@ -3749,7 +3749,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Timebase for dynamic quantities at this level of the data structure",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/time(:)",
   "lifecycle_status": "alpha",
@@ -3776,14 +3776,14 @@
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Light collection efficiencies (fraction of the local emission detected by the optical system) for a list of points defining regions of interest. To be used for non-pinhole optics.",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies",
   "lifecycle_status": "alpha",
   "structure_reference": "spectro_vis_channel_light_collection"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "List of positions for which the light collection efficiencies are provided",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions",
   "lifecycle_status": "alpha",
@@ -3801,7 +3801,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/phi_error_index",
   "lifecycle_status": "alpha",
@@ -3841,7 +3841,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/r_error_index",
   "lifecycle_status": "alpha",
@@ -3881,7 +3881,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/z_error_index",
   "lifecycle_status": "alpha",
@@ -3921,7 +3921,7 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/values_error_index",
   "lifecycle_status": "alpha",
@@ -3950,14 +3950,14 @@
   "units": "-"
  },
  "spectrometer_visible.channel[:].line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight of the channel, given by 2 points",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point",
   "lifecycle_status": "alpha",
@@ -3972,7 +3972,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -4003,7 +4003,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -4034,7 +4034,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -4057,7 +4057,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point",
   "lifecycle_status": "alpha",
@@ -4072,7 +4072,7 @@
   "units": "rad"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -4103,7 +4103,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -4134,7 +4134,7 @@
   "units": "m"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -4171,7 +4171,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of spectrometer the channel is connected to (index=1: grating, 2: filter)",
   "full_path": "spectrometer_visible/channel(i1)/type",
   "lifecycle_status": "alpha",
@@ -4206,7 +4206,7 @@
   "type": "static"
  },
  "spectrometer_visible.channel[:].validity_timed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "full_path": "spectrometer_visible/channel(i1)/validity_timed",
   "lifecycle_status": "alpha",
@@ -4227,7 +4227,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_visible/channel(i1)/validity_timed/time(:)",
   "lifecycle_status": "alpha",
@@ -4236,7 +4236,7 @@
   "units": "s"
  },
  "spectrometer_visible.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "spectrometer_visible/code",
   "lifecycle_status": "alpha",
@@ -4296,7 +4296,7 @@
   "type": "static"
  },
  "spectrometer_visible.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "spectrometer_visible/ids_properties",
   "lifecycle_status": "alpha",
@@ -4323,6 +4323,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_visible.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "spectrometer_visible.ids_properties.occurrence"
+ },
  "spectrometer_visible.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -4338,7 +4343,7 @@
   "type": "constant"
  },
  "spectrometer_visible.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "spectrometer_visible/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -4369,7 +4374,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "spectrometer_visible/time(:)",
   "lifecycle_status": "alpha",

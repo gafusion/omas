@@ -8,7 +8,7 @@
   "maxoccur": "8"
  },
  "waves.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "waves/code",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Wave description for each frequency",
   "full_path": "waves/coherent_wave(i1)",
   "lifecycle_status": "alpha",
@@ -75,7 +75,7 @@
   "coordinates": [
    "waves.coherent_wave[:].beam_tracing[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Beam tracing calculations, for various time slices",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)",
   "lifecycle_status": "alpha",
@@ -87,7 +87,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of rays/beams describing the wave propagation",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)",
   "lifecycle_status": "alpha",
@@ -95,14 +95,14 @@
   "structure_reference": "waves_coherent_wave_beam_tracing_beam"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electric field polarization of the ray/beam along its path",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field",
   "lifecycle_status": "alpha",
   "structure_reference": "waves_coherent_wave_beam_tracing_beam_e_field"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.minus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Right hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/minus",
   "lifecycle_status": "alpha",
@@ -121,7 +121,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.minus.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -161,7 +161,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.minus.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/real_error_index",
   "lifecycle_status": "alpha",
@@ -190,7 +190,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel to magnetic field polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel",
   "lifecycle_status": "alpha",
@@ -209,7 +209,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.parallel.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -249,7 +249,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.parallel.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/real_error_index",
   "lifecycle_status": "alpha",
@@ -278,7 +278,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.plus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Left hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/plus",
   "lifecycle_status": "alpha",
@@ -297,7 +297,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.plus.imaginary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/imaginary_error_index",
   "lifecycle_status": "alpha",
@@ -337,7 +337,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.plus.real_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/real_error_index",
   "lifecycle_status": "alpha",
@@ -366,7 +366,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/electrons",
   "lifecycle_status": "alpha",
@@ -384,7 +384,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].electrons.power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/electrons/power_error_index",
   "lifecycle_status": "alpha",
@@ -416,7 +416,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)",
   "lifecycle_status": "alpha",
@@ -427,7 +427,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/element(i4)",
   "lifecycle_status": "alpha",
@@ -443,7 +443,7 @@
   "units": "Atomic Mass Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/element(i4)/a_error_index",
   "lifecycle_status": "alpha",
@@ -482,7 +482,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/element(i4)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -515,7 +515,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/element(i4)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -563,7 +563,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/power_error_index",
   "lifecycle_status": "alpha",
@@ -595,7 +595,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)",
   "lifecycle_status": "alpha",
@@ -628,7 +628,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].state[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/power_error_index",
   "lifecycle_status": "alpha",
@@ -665,7 +665,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -703,7 +703,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -734,7 +734,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -765,7 +765,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -799,7 +799,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].length_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/length_error_index",
   "lifecycle_status": "alpha",
@@ -828,7 +828,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the ray/beam along its path",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position",
   "lifecycle_status": "alpha",
@@ -846,7 +846,7 @@
   "units": "rad"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -886,7 +886,7 @@
   "units": "Wb"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/psi_error_index",
   "lifecycle_status": "alpha",
@@ -926,7 +926,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -966,7 +966,7 @@
   "units": "rad"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.theta_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/theta_error_index",
   "lifecycle_status": "alpha",
@@ -1006,7 +1006,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -1035,7 +1035,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].power_flow_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Normalised power flow",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm",
   "lifecycle_status": "alpha",
@@ -1053,7 +1053,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].power_flow_norm.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/parallel_error_index",
   "lifecycle_status": "alpha",
@@ -1093,7 +1093,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].power_flow_norm.perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"perpendicular\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -1130,7 +1130,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].power_initial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_initial\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/power_initial_error_index",
   "lifecycle_status": "alpha",
@@ -1153,7 +1153,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Wave vector of the ray/beam along its path",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector",
   "lifecycle_status": "alpha",
@@ -1171,7 +1171,7 @@
   "units": "m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"k_r\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_error_index",
   "lifecycle_status": "alpha",
@@ -1211,7 +1211,7 @@
   "units": "m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"k_tor\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1251,7 +1251,7 @@
   "units": "m^-1"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"k_z\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_error_index",
   "lifecycle_status": "alpha",
@@ -1291,7 +1291,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.n_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_parallel\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -1331,7 +1331,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.n_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_perpendicular\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -1377,7 +1377,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].beam_tracing[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/time",
   "lifecycle_status": "alpha",
@@ -1388,7 +1388,7 @@
   "coordinates": [
    "waves.coherent_wave[:].full_wave[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Solution by a full wave code, given on a generic grid description, for various time slices",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)",
   "lifecycle_status": "alpha",
@@ -1397,7 +1397,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].full_wave[:].b_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the wave magnetic field",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field",
   "lifecycle_status": "alpha",
@@ -1407,7 +1407,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Magnitude of perpendicular (to the static magnetic field) wave magnetic field tangent to a flux surface, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/bi_normal(i2)",
   "lifecycle_status": "alpha",
@@ -1428,7 +1428,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.bi_normal[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/bi_normal(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1484,7 +1484,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.bi_normal[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/bi_normal(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1516,7 +1516,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Magnitude of wave magnetic field normal to a flux surface, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/normal(i2)",
   "lifecycle_status": "alpha",
@@ -1537,7 +1537,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.normal[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/normal(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1593,7 +1593,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.normal[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/normal(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1625,7 +1625,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Parallel (to the static magnetic field) component of the wave magnetic field, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/parallel(i2)",
   "lifecycle_status": "alpha",
@@ -1646,7 +1646,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.parallel[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/parallel(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1702,7 +1702,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].b_field.parallel[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/b_field/parallel(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1731,7 +1731,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the wave electric field",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field",
   "lifecycle_status": "alpha",
@@ -1741,7 +1741,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Magnitude of perpendicular (to the static magnetic field) wave electric field tangent to a flux surface, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/bi_normal(i2)",
   "lifecycle_status": "alpha",
@@ -1762,7 +1762,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.bi_normal[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/bi_normal(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1818,7 +1818,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.bi_normal[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/bi_normal(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1850,7 +1850,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Right hand circularly polarised component of the perpendicular (to the static magnetic field) electric field, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/minus(i2)",
   "lifecycle_status": "alpha",
@@ -1871,7 +1871,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.minus[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/minus(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1927,7 +1927,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.minus[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/minus(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1959,7 +1959,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Magnitude of wave electric field normal to a flux surface, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/normal(i2)",
   "lifecycle_status": "alpha",
@@ -1980,7 +1980,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.normal[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/normal(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2036,7 +2036,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.normal[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/normal(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2068,7 +2068,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Parallel (to the static magnetic field) component of electric field, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/parallel(i2)",
   "lifecycle_status": "alpha",
@@ -2089,7 +2089,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.parallel[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/parallel(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2145,7 +2145,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.parallel[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/parallel(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2177,7 +2177,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Left hand circularly polarised component of the perpendicular (to the static magnetic field) electric field, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/plus(i2)",
   "lifecycle_status": "alpha",
@@ -2198,7 +2198,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.plus[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/plus(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2254,7 +2254,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].e_field.plus[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/e_field/plus(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2283,7 +2283,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid",
   "lifecycle_status": "alpha",
@@ -2293,7 +2293,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)",
   "lifecycle_status": "alpha",
@@ -2304,7 +2304,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/base(i3)",
   "lifecycle_status": "alpha",
@@ -2323,7 +2323,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -2365,7 +2365,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -2411,7 +2411,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2454,7 +2454,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -2465,7 +2465,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/element(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -2494,7 +2494,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
   "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes belonging to the associated spaces\n2) faces : All faces belonging to the associated spaces\n3) x_aligned_faces : All x-aligned (poloidally) aligned faces belonging to the associated spaces\n4) y_aligned_faces : All y-aligned (radially) aligned faces belonging to the associated spaces\n5) cells : All cells belonging to the associated spaces\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned faces inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned faces in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned faces in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned faces in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned faces connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned faces connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned faces defining the outer target\n14) inner_target : y-aligned faces defining the inner target\n15) core_boundary : Innermost x-aligned faces\n16) separatrix : x-aligned faces defining the active separatrix\n17) main_chamber_wall : x-aligned faces defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned faces defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned faces defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned faces defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned faces defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned faces defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned faces inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned faces in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned faces in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned faces in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned faces defining the non-active separatrix\n34) outer_baffle_2 : x-aligned faces defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned faces defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned faces defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned faces defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/identifier",
@@ -2523,7 +2523,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/metric",
   "lifecycle_status": "alpha",
@@ -2541,7 +2541,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -2583,7 +2583,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -2629,7 +2629,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2662,7 +2662,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
   "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylinder\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular domain",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/identifier",
@@ -2694,7 +2694,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)",
   "lifecycle_status": "alpha",
@@ -2712,7 +2712,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].full_wave[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/geometry_type",
   "lifecycle_status": "alpha",
@@ -2740,7 +2740,7 @@
   "type": "dynamic"
  },
  "waves.coherent_wave[:].full_wave[:].grid.space[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_space_identifier.xml",
   "documentation": "Space identifier\n0) unspecified : unspecified\n1) primary_standard : Primary space defining the standard grid\n2) primary_staggered : Primary space defining a grid staggered with respect to the primary standard space",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/identifier",
@@ -2772,7 +2772,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/objects_per_dimension(i3)",
   "lifecycle_status": "alpha",
@@ -2783,7 +2783,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -2794,7 +2794,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
   "lifecycle_status": "alpha",
@@ -2830,7 +2830,7 @@
   "units": "mixed"
  },
  "waves.coherent_wave[:].full_wave[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -2867,7 +2867,7 @@
   "units": "m^dimension"
  },
  "waves.coherent_wave[:].full_wave[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -2903,7 +2903,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Perpendicular wave vector, given on various grid subsets",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/k_perpendicular(i2)",
   "lifecycle_status": "alpha",
@@ -2924,7 +2924,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].k_perpendicular[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/k_perpendicular(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2980,7 +2980,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].k_perpendicular[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/k_perpendicular(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -3009,7 +3009,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].full_wave[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "waves/coherent_wave(i1)/full_wave(itime)/time",
   "lifecycle_status": "alpha",
@@ -3020,7 +3020,7 @@
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Global quantities for various time slices",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)",
   "lifecycle_status": "alpha",
@@ -3037,7 +3037,7 @@
   "units": "A"
  },
  "waves.coherent_wave[:].global_quantities[:].current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3071,7 +3071,7 @@
   "units": "A"
  },
  "waves.coherent_wave[:].global_quantities[:].current_tor_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3100,7 +3100,7 @@
   "units": "A"
  },
  "waves.coherent_wave[:].global_quantities[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons",
   "lifecycle_status": "alpha",
@@ -3122,7 +3122,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3156,7 +3156,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3193,7 +3193,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -3227,7 +3227,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3264,7 +3264,7 @@
   "units": "Hz"
  },
  "waves.coherent_wave[:].global_quantities[:].frequency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/frequency_error_index",
   "lifecycle_status": "alpha",
@@ -3290,7 +3290,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)",
   "lifecycle_status": "alpha",
@@ -3308,7 +3308,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -3324,7 +3324,7 @@
   "units": "Atomic Mass Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -3363,7 +3363,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -3396,7 +3396,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -3441,7 +3441,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3475,7 +3475,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3512,7 +3512,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -3546,7 +3546,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3578,7 +3578,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -3608,7 +3608,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3642,7 +3642,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3679,7 +3679,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -3713,7 +3713,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3750,7 +3750,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -3788,7 +3788,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -3819,7 +3819,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -3850,7 +3850,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -3891,7 +3891,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_error_index",
   "lifecycle_status": "alpha",
@@ -3925,7 +3925,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].power_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3954,7 +3954,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].global_quantities[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/time",
   "lifecycle_status": "alpha",
@@ -3962,7 +3962,7 @@
   "units": "s"
  },
  "waves.coherent_wave[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the coherent wave, in terms of the type and name of the antenna driving the wave and an index separating waves driven by the same antenna.",
   "full_path": "waves/coherent_wave(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -3983,7 +3983,7 @@
   "type": "constant"
  },
  "waves.coherent_wave[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/wave_identifier.xml",
   "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH\n0) unspecified : unspecified\n1) EC : Wave field for electron cyclotron heating and current drive\n2) LH : Wave field for lower hybrid heating and current drive\n3) IC : Wave field for ion cyclotron frequency heating and current drive",
   "full_path": "waves/coherent_wave(i1)/identifier/type",
@@ -4015,7 +4015,7 @@
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source radial profiles (flux surface averaged quantities) for various time slices",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)",
   "lifecycle_status": "alpha",
@@ -4035,7 +4035,7 @@
   "units": "A.m^-2"
  },
  "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_density\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_error_index",
   "lifecycle_status": "alpha",
@@ -4076,7 +4076,7 @@
   "units": "A.m^-2"
  },
  "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4118,7 +4118,7 @@
   "units": "A"
  },
  "waves.coherent_wave[:].profiles_1d[:].current_tor_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor_inside\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_error_index",
   "lifecycle_status": "alpha",
@@ -4159,7 +4159,7 @@
   "units": "A"
  },
  "waves.coherent_wave[:].profiles_1d[:].current_tor_inside_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4193,7 +4193,7 @@
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].n_tor"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)",
   "lifecycle_status": "alpha",
@@ -4201,7 +4201,7 @@
   "structure_reference": "waves_profiles_1d_e_field_n_tor"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].minus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Right hand polarised electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus",
   "lifecycle_status": "alpha",
@@ -4220,7 +4220,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].minus.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -4260,7 +4260,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].minus.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/phase_error_index",
   "lifecycle_status": "alpha",
@@ -4289,7 +4289,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel",
   "lifecycle_status": "alpha",
@@ -4308,7 +4308,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].parallel.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -4348,7 +4348,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].parallel.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/phase_error_index",
   "lifecycle_status": "alpha",
@@ -4377,7 +4377,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].plus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Left hand polarised electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus",
   "lifecycle_status": "alpha",
@@ -4396,7 +4396,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].plus.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -4436,7 +4436,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].plus.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/phase_error_index",
   "lifecycle_status": "alpha",
@@ -4465,7 +4465,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons",
   "lifecycle_status": "alpha",
@@ -4483,7 +4483,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4524,7 +4524,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4566,7 +4566,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4607,7 +4607,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4649,7 +4649,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4690,7 +4690,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4732,7 +4732,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4773,7 +4773,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4804,7 +4804,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid",
   "lifecycle_status": "alpha",
@@ -4822,7 +4822,7 @@
   "units": "m^2"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -4862,7 +4862,7 @@
   "units": "Wb"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -4902,7 +4902,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4942,7 +4942,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -4982,7 +4982,7 @@
   "units": "m^3"
  },
  "waves.coherent_wave[:].profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -5014,7 +5014,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)",
   "lifecycle_status": "alpha",
@@ -5025,7 +5025,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -5041,7 +5041,7 @@
   "units": "Atomic Mass Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -5080,7 +5080,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -5113,7 +5113,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -5161,7 +5161,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5202,7 +5202,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5244,7 +5244,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -5285,7 +5285,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5327,7 +5327,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5368,7 +5368,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5410,7 +5410,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -5451,7 +5451,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5485,7 +5485,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -5518,7 +5518,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5559,7 +5559,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5601,7 +5601,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -5642,7 +5642,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5684,7 +5684,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5725,7 +5725,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5767,7 +5767,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -5808,7 +5808,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5847,7 +5847,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -5885,7 +5885,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -5916,7 +5916,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -5947,7 +5947,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -5982,7 +5982,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].k_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"k_perpendicular\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/k_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -6034,7 +6034,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].power_density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_error_index",
   "lifecycle_status": "alpha",
@@ -6075,7 +6075,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_1d[:].power_density_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6117,7 +6117,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].power_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_error_index",
   "lifecycle_status": "alpha",
@@ -6158,7 +6158,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].power_inside_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6189,7 +6189,7 @@
   "units": "W"
  },
  "waves.coherent_wave[:].profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -6200,7 +6200,7 @@
   "coordinates": [
    "waves.coherent_wave[:].profiles_2d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "2D profiles in poloidal cross-section, for various time slices",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)",
   "lifecycle_status": "alpha",
@@ -6212,7 +6212,7 @@
   "coordinates": [
    "waves.coherent_wave[:].profiles_2d[:].n_tor"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Components of the electric field per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)",
   "lifecycle_status": "alpha",
@@ -6220,7 +6220,7 @@
   "structure_reference": "waves_profiles_2d_e_field_n_tor"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].minus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Right hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus",
   "lifecycle_status": "alpha",
@@ -6240,7 +6240,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].minus.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -6283,7 +6283,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].minus.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/phase_error_index",
   "lifecycle_status": "alpha",
@@ -6314,7 +6314,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel",
   "lifecycle_status": "alpha",
@@ -6334,7 +6334,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].parallel.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -6377,7 +6377,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].parallel.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/phase_error_index",
   "lifecycle_status": "alpha",
@@ -6408,7 +6408,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].plus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Left hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus",
   "lifecycle_status": "alpha",
@@ -6428,7 +6428,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].plus.amplitude_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/amplitude_error_index",
   "lifecycle_status": "alpha",
@@ -6471,7 +6471,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].plus.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/phase_error_index",
   "lifecycle_status": "alpha",
@@ -6502,7 +6502,7 @@
   "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons",
   "lifecycle_status": "alpha",
@@ -6521,7 +6521,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6565,7 +6565,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6610,7 +6610,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -6654,7 +6654,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6687,7 +6687,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "2D grid in a poloidal cross-section",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid",
   "lifecycle_status": "alpha",
@@ -6706,7 +6706,7 @@
   "units": "m^2"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -6749,7 +6749,7 @@
   "units": "Wb"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -6792,7 +6792,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/r_error_index",
   "lifecycle_status": "alpha",
@@ -6835,7 +6835,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6878,7 +6878,7 @@
   "units": "-"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -6921,7 +6921,7 @@
   "units": "rad"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.theta_geometric_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta_geometric\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/theta_geometric_error_index",
   "lifecycle_status": "alpha",
@@ -6964,7 +6964,7 @@
   "units": "rad"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.theta_straight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta_straight\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/theta_straight_error_index",
   "lifecycle_status": "alpha",
@@ -6998,7 +6998,7 @@
   "coordinates": [
    "waves.coherent_wave[:].profiles_2d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid type: index=0: Rectangular grid in the (R,Z) coordinates; index=1: Rectangular grid in the (radial, theta_geometric) coordinates; index=2: Rectangular grid in the (radial, theta_straight) coordinates. index=3: unstructured grid.",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/type",
   "lifecycle_status": "alpha",
@@ -7039,7 +7039,7 @@
   "units": "m^3"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -7082,7 +7082,7 @@
   "units": "m"
  },
  "waves.coherent_wave[:].profiles_2d[:].grid.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/grid/z_error_index",
   "lifecycle_status": "alpha",
@@ -7116,7 +7116,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)",
   "lifecycle_status": "alpha",
@@ -7127,7 +7127,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -7143,7 +7143,7 @@
   "units": "Atomic Mass Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -7182,7 +7182,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -7215,7 +7215,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -7264,7 +7264,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -7308,7 +7308,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7353,7 +7353,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -7397,7 +7397,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7433,7 +7433,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -7467,7 +7467,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -7511,7 +7511,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7556,7 +7556,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -7600,7 +7600,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7641,7 +7641,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -7679,7 +7679,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -7710,7 +7710,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -7741,7 +7741,7 @@
   "units": "Elementary Charge Unit"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -7786,7 +7786,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_error_index",
   "lifecycle_status": "alpha",
@@ -7830,7 +7830,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density_n_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7863,7 +7863,7 @@
   "units": "W.m^-3"
  },
  "waves.coherent_wave[:].profiles_2d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/time",
   "lifecycle_status": "alpha",
@@ -7871,7 +7871,7 @@
   "units": "s"
  },
  "waves.coherent_wave[:].wave_solver_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of wave deposition solver used for this wave. Index = 1 for beam/ray tracing; index = 2 for full wave",
   "full_path": "waves/coherent_wave(i1)/wave_solver_type",
   "lifecycle_status": "alpha",
@@ -7899,7 +7899,7 @@
   "type": "constant"
  },
  "waves.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "waves/ids_properties",
   "lifecycle_status": "alpha",
@@ -7926,6 +7926,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "waves.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "waves.ids_properties.occurrence"
+ },
  "waves.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -7941,7 +7946,7 @@
   "type": "constant"
  },
  "waves.magnetic_axis": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Magnetic axis position (used to define a poloidal angle for the 2D profiles)",
   "full_path": "waves/magnetic_axis",
   "lifecycle_status": "alpha",
@@ -7960,7 +7965,7 @@
   "units": "m"
  },
  "waves.magnetic_axis.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "waves/magnetic_axis/r_error_index",
   "lifecycle_status": "alpha",
@@ -8003,7 +8008,7 @@
   "units": "m"
  },
  "waves.magnetic_axis.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "waves/magnetic_axis/z_error_index",
   "lifecycle_status": "alpha",
@@ -8037,7 +8042,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "waves/time(:)",
   "lifecycle_status": "alpha",
@@ -8046,7 +8051,7 @@
   "units": "s"
  },
  "waves.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "waves/vacuum_toroidal_field",
   "lifecycle_status": "alpha",
@@ -8065,7 +8070,7 @@
   "units": "T"
  },
  "waves.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "waves/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -8104,7 +8109,7 @@
   "units": "m"
  },
  "waves.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "waves/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

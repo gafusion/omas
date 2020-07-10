@@ -8,7 +8,7 @@
   "maxoccur": "8"
  },
  "distributions.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "distributions/code",
   "lifecycle_status": "alpha",
@@ -63,7 +63,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of distribution functions. Every distribution function has to be associated with only one particle species, specified in distri_vec/species/, but there could be multiple distribution function for each species. In this case, the fast particle populations should be superposed",
   "full_path": "distributions/distribution(i1)",
   "lifecycle_status": "alpha",
@@ -71,7 +71,7 @@
   "structure_reference": "distributions_d"
  },
  "distributions.distribution[:].fast_filter": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of how the fast and the thermal particle populations are separated",
   "full_path": "distributions/distribution(i1)/fast_filter",
   "lifecycle_status": "alpha",
@@ -89,7 +89,7 @@
   "units": "eV"
  },
  "distributions.distribution[:].fast_filter.energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/fast_filter/energy_error_index",
   "lifecycle_status": "alpha",
@@ -118,7 +118,7 @@
   "units": "eV"
  },
  "distributions.distribution[:].fast_filter.method": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Method used to separate the fast and thermal particle population (indices TBD)",
   "full_path": "distributions/distribution(i1)/fast_filter/method",
   "lifecycle_status": "alpha",
@@ -149,7 +149,7 @@
   "coordinates": [
    "distributions.distribution[:].ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Distribution represented using the ggd, for various time slices",
   "full_path": "distributions/distribution(i1)/ggd(itime)",
   "lifecycle_status": "alpha",
@@ -161,7 +161,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.",
   "full_path": "distributions/distribution(i1)/ggd(itime)/expansion(i2)",
   "lifecycle_status": "alpha",
@@ -173,7 +173,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Values of the distribution function expansion, for various grid subsets",
   "full_path": "distributions/distribution(i1)/ggd(itime)/expansion(i2)/grid_subset(i3)",
   "lifecycle_status": "alpha",
@@ -194,7 +194,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].expansion[:].grid_subset[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/expansion(i2)/grid_subset(i3)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -250,7 +250,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].expansion[:].grid_subset[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/expansion(i2)/grid_subset(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -279,7 +279,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid",
   "lifecycle_status": "alpha",
@@ -289,7 +289,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)",
   "lifecycle_status": "alpha",
@@ -300,7 +300,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)",
   "lifecycle_status": "alpha",
@@ -319,7 +319,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -361,7 +361,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -407,7 +407,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -450,7 +450,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -461,7 +461,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -490,7 +490,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid subset identifier",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -518,7 +518,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/metric",
   "lifecycle_status": "alpha",
@@ -536,7 +536,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -578,7 +578,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -624,7 +624,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -657,7 +657,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid identifier",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/identifier",
   "lifecycle_status": "alpha",
@@ -688,7 +688,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)",
   "lifecycle_status": "alpha",
@@ -706,7 +706,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].ggd[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/geometry_type",
   "lifecycle_status": "alpha",
@@ -737,7 +737,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)",
   "lifecycle_status": "alpha",
@@ -748,7 +748,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -759,7 +759,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
   "lifecycle_status": "alpha",
@@ -795,7 +795,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -832,7 +832,7 @@
   "units": "m^dimension"
  },
  "distributions.distribution[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -876,7 +876,7 @@
   "units": "eV"
  },
  "distributions.distribution[:].ggd[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "distributions/distribution(i1)/ggd(itime)/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -905,7 +905,7 @@
   "units": "eV"
  },
  "distributions.distribution[:].ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distributions/distribution(i1)/ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -916,7 +916,7 @@
   "coordinates": [
    "distributions.distribution[:].global_quantities[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Global quantities (integrated over plasma volume for moments of the distribution, collisional exchange and source terms), for various time slices",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)",
   "lifecycle_status": "alpha",
@@ -925,14 +925,14 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].global_quantities[:].collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_global_quantities_collisions"
  },
  "distributions.distribution[:].global_quantities[:].collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -947,7 +947,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -978,7 +978,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -1009,7 +1009,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1040,7 +1040,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1066,7 +1066,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -1077,7 +1077,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -1093,7 +1093,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -1133,7 +1133,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -1166,7 +1166,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -1218,7 +1218,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -1249,7 +1249,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -1275,7 +1275,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -1305,7 +1305,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -1336,7 +1336,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -1367,7 +1367,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1398,7 +1398,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1429,7 +1429,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -1467,7 +1467,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -1498,7 +1498,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -1529,7 +1529,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1560,7 +1560,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1591,7 +1591,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].global_quantities[:].collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -1622,7 +1622,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1653,7 +1653,7 @@
   "units": "J"
  },
  "distributions.distribution[:].global_quantities[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -1684,7 +1684,7 @@
   "units": "J"
  },
  "distributions.distribution[:].global_quantities[:].energy_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_fast\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/energy_fast_error_index",
   "lifecycle_status": "alpha",
@@ -1715,7 +1715,7 @@
   "units": "J"
  },
  "distributions.distribution[:].global_quantities[:].energy_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/energy_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -1746,7 +1746,7 @@
   "units": "-"
  },
  "distributions.distribution[:].global_quantities[:].particles_fast_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_fast_n\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/particles_fast_n_error_index",
   "lifecycle_status": "alpha",
@@ -1777,7 +1777,7 @@
   "units": "-"
  },
  "distributions.distribution[:].global_quantities[:].particles_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_n\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/particles_n_error_index",
   "lifecycle_status": "alpha",
@@ -1803,7 +1803,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of volume integrated sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)",
   "lifecycle_status": "alpha",
@@ -1811,7 +1811,7 @@
   "structure_reference": "distributions_d_global_quantities_source"
  },
  "distributions.distribution[:].global_quantities[:].source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the wave or particle source process, defined respectively in distribution/wave or distribution/process",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -1825,7 +1825,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].global_quantities[:].source[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the source term. Index  = 1 for a wave, index = 2 for a particle source process",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)/identifier/type",
   "lifecycle_status": "alpha",
@@ -1868,7 +1868,7 @@
   "units": "s^-1"
  },
  "distributions.distribution[:].global_quantities[:].source[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -1899,7 +1899,7 @@
   "units": "W"
  },
  "distributions.distribution[:].global_quantities[:].source[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)/power_error_index",
   "lifecycle_status": "alpha",
@@ -1930,7 +1930,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].source[:].torque_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/source(i2)/torque_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1953,7 +1953,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/time",
   "lifecycle_status": "alpha",
@@ -1969,7 +1969,7 @@
   "units": "N.m"
  },
  "distributions.distribution[:].global_quantities[:].torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/global_quantities(itime)/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -2009,7 +2009,7 @@
   "coordinates": [
    "distributions.distribution[:].markers[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Distribution represented by a set of markers (test particles)",
   "full_path": "distributions/distribution(i1)/markers(itime)",
   "lifecycle_status": "alpha",
@@ -2021,7 +2021,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "doc_identifier": "utilities/coordinate_identifier.xml",
   "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented\n0) unspecified : unspecified\n1) x : First cartesian coordinate in the horizontal plane\n2) y : Second cartesian coordinate in the horizontal plane (grad(x) x grad(y) = grad(z))\n3) z : Vertical coordinate z\n4) r : Major radius\n5) phi : Toroidal angle\n10) psi : Poloidal magnetic flux\n11) rho_tor : The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field\n12) rho_tor_norm : The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux\n13) rho_pol : The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux\n14) rho_pol_norm : The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux\n20) theta : Geometrical poloidal angle around the magnetic axis\n21) theta_straight : Straight field line poloidal angle\n22) theta_equal_arc : Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane.\n100) velocity : Total velocity; modulus of the velocity vector\n101) velocity_x : Velocity component in the x-direction\n102) velocity_y : Velocity component in the z-direction\n103) velocity_z : Velocity component in the z-direction\n104) velocity_phi : Velocity component in the toroidal direction\n105) velocity_parallel : Velocity component parallel to the magnetic field\n106) velocity_perpendicular : Velocity perpendicular to the magnetic field\n107) velocity_thermal : Velocity normalised to the local thermal velocity of the thermal ions (of the relevant species)\n200) momentum : Modulus of the relativistic momentum vector\n201) momentum_parallel : Component of the relativistic momentum vector parallel to the magnetic field\n202) momentum_perpendicular : Component of the relativistic momentum vector perpendicular to the magnetic field\n203) canonical_momentum_phi : Canonical toroidal angular momentum\n300) energy_hamiltonian : Hamiltonian energy, including both kinetic and potential energy\n301) energy_kinetic : Kinetic energy\n302) magnetic_moment : magnetic moment\n400) lambda : Ratio, magnetic moment over hamiltonian energy\n402) pitch_angle : Angle between the magnetic field and the velocity vector\n403) pitch : Ratio, parallel velocity over total velocity\n404) pitch_at_min_b : Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit",
   "full_path": "distributions/distribution(i1)/markers(itime)/coordinate_identifier(i2)",
@@ -2064,7 +2064,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].markers[:].positions_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"positions\"",
   "full_path": "distributions/distribution(i1)/markers(itime)/positions_error_index",
   "lifecycle_status": "alpha",
@@ -2095,7 +2095,7 @@
   "units": "mixed"
  },
  "distributions.distribution[:].markers[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distributions/distribution(i1)/markers(itime)/time",
   "lifecycle_status": "alpha",
@@ -2114,7 +2114,7 @@
   "units": "-"
  },
  "distributions.distribution[:].markers[:].weights_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weights\"",
   "full_path": "distributions/distribution(i1)/markers(itime)/weights_error_index",
   "lifecycle_status": "alpha",
@@ -2146,7 +2146,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List all processes (NBI units, fusion reactions, ...) affecting the distribution, identified as in distribution_sources/source(i)/process in the DISTRIBUTION_SOURCES IDS",
   "full_path": "distributions/distribution(i1)/process(i2)",
   "lifecycle_status": "alpha",
@@ -2161,7 +2161,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].process[:].nbi_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy",
   "full_path": "distributions/distribution(i1)/process(i2)/nbi_energy",
   "lifecycle_status": "alpha",
@@ -2196,7 +2196,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].process[:].reactant_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal",
   "full_path": "distributions/distribution(i1)/process(i2)/reactant_energy",
   "lifecycle_status": "alpha",
@@ -2224,7 +2224,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].process[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/distribution_source_identifier.xml",
   "documentation": "Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes\n0) unspecified : unspecified\n1) NBI : Source from neutral beam injection\n100) nuclear : Source from nuclear reaction (reaction type unspecified)\n101) H_H_to_D_positron_nu : Source from nuclear reaction: H+H->D+positron+neutrino\n102) H_D_to_He3_gamma : Source from nuclear reaction: H+D->He3+gamma\n103) H_T_to_He3_n : Source from nuclear reaction: H+T->He3+neutron\n104) H_He3_to_He4_positron_nu : Source from nuclear reaction: H+He3->He4+positron+neutrino\n105) D_D_to_T_H : Source from nuclear reaction: D+D->T+H\n106) D_D_to_He3_n : Source from nuclear reaction: D+D->He3+neutron\n107) D_T_to_He4_n : Source from nuclear reaction: T+D->He4+neutron\n108) D_He3_to_He4_positron : Source from nuclear reaction: He3+D->He4+positron\n109) T_T_to_He4_n_n : Source from nuclear reaction: T+T->He4+neutron+neutron\n110) T_He3_to_He4_H_n : Source from nuclear reaction: He3+T->He4+H+neutron\n111) He3_He3_to_He4_H_H : Source from nuclear reaction: He3+He3->He4+neutron+neutron\n112) He3_He4_to_Be7_gamma : Source from nuclear reaction: He3+He4->Be7+gamma\n113) Li6_n_to_He4_T : Source from nuclear reaction: Li6+n->He4+T\n114) Li7_n_to_He4_T_n : Source from nuclear reaction: Li7+n->He4+T+n\n1000) runaway : Source from runaway processes",
   "full_path": "distributions/distribution(i1)/process(i2)/type",
@@ -2256,7 +2256,7 @@
   "coordinates": [
    "distributions.distribution[:].profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Radial profiles (flux surface averaged quantities) for various time slices",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)",
   "lifecycle_status": "alpha",
@@ -2265,21 +2265,21 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the co-passing particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial_collisions"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -2297,7 +2297,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -2337,7 +2337,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -2377,7 +2377,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -2417,7 +2417,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -2449,7 +2449,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -2460,7 +2460,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -2476,7 +2476,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2516,7 +2516,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -2549,7 +2549,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2604,7 +2604,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -2644,7 +2644,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -2676,7 +2676,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -2709,7 +2709,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -2749,7 +2749,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -2789,7 +2789,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -2829,7 +2829,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -2866,7 +2866,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -2904,7 +2904,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -2935,7 +2935,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -2969,7 +2969,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3009,7 +3009,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3046,7 +3046,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -3080,7 +3080,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3120,7 +3120,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3160,7 +3160,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/density_error_index",
   "lifecycle_status": "alpha",
@@ -3200,7 +3200,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3240,7 +3240,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -3280,7 +3280,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3320,7 +3320,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -3352,7 +3352,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of flux averaged sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)",
   "lifecycle_status": "alpha",
@@ -3371,7 +3371,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.source[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -3400,7 +3400,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the wave or particle source process, defined respectively in distribution/wave or distribution/process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -3414,7 +3414,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.source[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the source term. Index  = 1 for a wave, index = 2 for a particle source process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)/identifier/type",
   "lifecycle_status": "alpha",
@@ -3460,7 +3460,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.source[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3500,7 +3500,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.source[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/source(i2)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -3540,7 +3540,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].co_passing.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/co_passing/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -3569,14 +3569,14 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_collisions"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -3594,7 +3594,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3634,7 +3634,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -3674,7 +3674,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3714,7 +3714,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3746,7 +3746,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -3757,7 +3757,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -3773,7 +3773,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -3813,7 +3813,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -3846,7 +3846,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -3901,7 +3901,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -3941,7 +3941,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -3973,7 +3973,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -4006,7 +4006,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4046,7 +4046,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4086,7 +4086,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4126,7 +4126,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4163,7 +4163,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -4201,7 +4201,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -4232,7 +4232,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -4266,7 +4266,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4306,7 +4306,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4343,7 +4343,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -4366,21 +4366,21 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the counter-passing particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial_collisions"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -4398,7 +4398,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4438,7 +4438,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4478,7 +4478,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4518,7 +4518,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4550,7 +4550,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -4561,7 +4561,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -4577,7 +4577,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -4617,7 +4617,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -4650,7 +4650,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -4705,7 +4705,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4745,7 +4745,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4777,7 +4777,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -4810,7 +4810,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4850,7 +4850,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -4890,7 +4890,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4930,7 +4930,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4967,7 +4967,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -5005,7 +5005,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -5036,7 +5036,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -5070,7 +5070,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5110,7 +5110,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5147,7 +5147,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -5181,7 +5181,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5221,7 +5221,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5261,7 +5261,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/density_error_index",
   "lifecycle_status": "alpha",
@@ -5301,7 +5301,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5341,7 +5341,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -5381,7 +5381,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5421,7 +5421,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -5453,7 +5453,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of flux averaged sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)",
   "lifecycle_status": "alpha",
@@ -5472,7 +5472,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.source[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -5501,7 +5501,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the wave or particle source process, defined respectively in distribution/wave or distribution/process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -5515,7 +5515,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.source[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the source term. Index  = 1 for a wave, index = 2 for a particle source process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)/identifier/type",
   "lifecycle_status": "alpha",
@@ -5561,7 +5561,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.source[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5601,7 +5601,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.source[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/source(i2)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -5641,7 +5641,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].counter_passing.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/counter_passing/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -5681,7 +5681,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5721,7 +5721,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5761,7 +5761,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/density_error_index",
   "lifecycle_status": "alpha",
@@ -5801,7 +5801,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5830,7 +5830,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid",
   "lifecycle_status": "alpha",
@@ -5848,7 +5848,7 @@
   "units": "m^2"
  },
  "distributions.distribution[:].profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -5888,7 +5888,7 @@
   "units": "Wb"
  },
  "distributions.distribution[:].profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -5928,7 +5928,7 @@
   "units": "m"
  },
  "distributions.distribution[:].profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5968,7 +5968,7 @@
   "units": "-"
  },
  "distributions.distribution[:].profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -6008,7 +6008,7 @@
   "units": "m^3"
  },
  "distributions.distribution[:].profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -6048,7 +6048,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -6088,7 +6088,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6128,7 +6128,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6160,7 +6160,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of flux averaged sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)",
   "lifecycle_status": "alpha",
@@ -6179,7 +6179,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].source[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -6208,7 +6208,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the wave or particle source process, defined respectively in distribution/wave or distribution/process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -6222,7 +6222,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_1d[:].source[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the source term. Index  = 1 for a wave, index = 2 for a particle source process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)/identifier/type",
   "lifecycle_status": "alpha",
@@ -6268,7 +6268,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].source[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6308,7 +6308,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].source[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/source(i2)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -6337,7 +6337,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].thermalisation": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged source of thermal particles, momentum and energy due to thermalisation. Here thermalisation refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorised as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/thermalisation",
   "lifecycle_status": "alpha",
@@ -6355,7 +6355,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].thermalisation.energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/thermalisation/energy_error_index",
   "lifecycle_status": "alpha",
@@ -6395,7 +6395,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].thermalisation.momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/thermalisation/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6435,7 +6435,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].thermalisation.particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/thermalisation/particles_error_index",
   "lifecycle_status": "alpha",
@@ -6464,7 +6464,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -6483,7 +6483,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -6512,21 +6512,21 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the trapped particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_1d_partial_collisions"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -6544,7 +6544,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6584,7 +6584,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -6624,7 +6624,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6664,7 +6664,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6696,7 +6696,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -6707,7 +6707,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -6723,7 +6723,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -6763,7 +6763,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -6796,7 +6796,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -6851,7 +6851,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6891,7 +6891,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -6923,7 +6923,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -6956,7 +6956,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6996,7 +6996,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -7036,7 +7036,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7076,7 +7076,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7113,7 +7113,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -7151,7 +7151,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -7182,7 +7182,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -7216,7 +7216,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7256,7 +7256,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7293,7 +7293,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -7327,7 +7327,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7367,7 +7367,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7407,7 +7407,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/density_error_index",
   "lifecycle_status": "alpha",
@@ -7447,7 +7447,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -7487,7 +7487,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -7527,7 +7527,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -7567,7 +7567,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -7599,7 +7599,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of flux averaged sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)",
   "lifecycle_status": "alpha",
@@ -7618,7 +7618,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.source[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -7647,7 +7647,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the wave or particle source process, defined respectively in distribution/wave or distribution/process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -7661,7 +7661,7 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.source[:].identifier.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the source term. Index  = 1 for a wave, index = 2 for a particle source process",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)/identifier/type",
   "lifecycle_status": "alpha",
@@ -7707,7 +7707,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.source[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7747,7 +7747,7 @@
   "units": "s^-1.m^-3"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.source[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/source(i2)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -7787,7 +7787,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_1d[:].trapped.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_1d(itime)/trapped/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -7819,7 +7819,7 @@
   "coordinates": [
    "distributions.distribution[:].profiles_2d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "2D profiles in the poloidal plane for various time slices",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)",
   "lifecycle_status": "alpha",
@@ -7828,21 +7828,21 @@
   "type": "dynamic"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the co-passing particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial_collisions"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -7861,7 +7861,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -7904,7 +7904,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -7947,7 +7947,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7990,7 +7990,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8024,7 +8024,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -8035,7 +8035,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -8051,7 +8051,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -8091,7 +8091,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -8124,7 +8124,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -8180,7 +8180,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -8223,7 +8223,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -8257,7 +8257,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -8291,7 +8291,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -8334,7 +8334,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -8377,7 +8377,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8420,7 +8420,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8459,7 +8459,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -8497,7 +8497,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -8528,7 +8528,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -8563,7 +8563,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8606,7 +8606,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8645,7 +8645,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -8680,7 +8680,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8723,7 +8723,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8766,7 +8766,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/density_error_index",
   "lifecycle_status": "alpha",
@@ -8809,7 +8809,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -8852,7 +8852,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -8895,7 +8895,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -8938,7 +8938,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -8981,7 +8981,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].co_passing.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/co_passing/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -9012,14 +9012,14 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_collisions"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -9038,7 +9038,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -9081,7 +9081,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -9124,7 +9124,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9167,7 +9167,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9201,7 +9201,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -9212,7 +9212,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -9228,7 +9228,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -9268,7 +9268,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -9301,7 +9301,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -9357,7 +9357,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -9400,7 +9400,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -9434,7 +9434,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -9468,7 +9468,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -9511,7 +9511,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -9554,7 +9554,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9597,7 +9597,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9636,7 +9636,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -9674,7 +9674,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -9705,7 +9705,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -9740,7 +9740,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9783,7 +9783,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -9822,7 +9822,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -9845,21 +9845,21 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the counter-passing particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial_collisions"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -9878,7 +9878,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -9921,7 +9921,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -9964,7 +9964,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10007,7 +10007,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10041,7 +10041,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -10052,7 +10052,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -10068,7 +10068,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -10108,7 +10108,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -10141,7 +10141,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -10197,7 +10197,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -10240,7 +10240,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -10274,7 +10274,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -10308,7 +10308,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -10351,7 +10351,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -10394,7 +10394,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10437,7 +10437,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10476,7 +10476,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -10514,7 +10514,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -10545,7 +10545,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -10580,7 +10580,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10623,7 +10623,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10662,7 +10662,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -10697,7 +10697,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10740,7 +10740,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -10783,7 +10783,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/density_error_index",
   "lifecycle_status": "alpha",
@@ -10826,7 +10826,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -10869,7 +10869,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -10912,7 +10912,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -10955,7 +10955,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -10998,7 +10998,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].counter_passing.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/counter_passing/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -11041,7 +11041,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -11084,7 +11084,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -11127,7 +11127,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/density_error_index",
   "lifecycle_status": "alpha",
@@ -11170,7 +11170,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -11201,7 +11201,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid. The grid has to be rectangular in a pair of coordinates, as specified in type",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid",
   "lifecycle_status": "alpha",
@@ -11219,7 +11219,7 @@
   "units": "m^2"
  },
  "distributions.distribution[:].profiles_2d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -11259,7 +11259,7 @@
   "units": "Wb"
  },
  "distributions.distribution[:].profiles_2d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -11299,7 +11299,7 @@
   "units": "m"
  },
  "distributions.distribution[:].profiles_2d[:].grid.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/r_error_index",
   "lifecycle_status": "alpha",
@@ -11339,7 +11339,7 @@
   "units": "m"
  },
  "distributions.distribution[:].profiles_2d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -11379,7 +11379,7 @@
   "units": "-"
  },
  "distributions.distribution[:].profiles_2d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -11419,7 +11419,7 @@
   "units": "rad"
  },
  "distributions.distribution[:].profiles_2d[:].grid.theta_geometric_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta_geometric\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/theta_geometric_error_index",
   "lifecycle_status": "alpha",
@@ -11459,7 +11459,7 @@
   "units": "rad"
  },
  "distributions.distribution[:].profiles_2d[:].grid.theta_straight_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta_straight\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/theta_straight_error_index",
   "lifecycle_status": "alpha",
@@ -11491,7 +11491,7 @@
   "coordinates": [
    "distributions.distribution[:].profiles_2d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid type: index=0: Rectangular grid in the (R,Z) coordinates; index=1: Rectangular grid in the (radial, theta_geometric) coordinates; index=2: Rectangular grid in the (radial, theta_straight) coordinates. ",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/type",
   "lifecycle_status": "alpha",
@@ -11531,7 +11531,7 @@
   "units": "m^3"
  },
  "distributions.distribution[:].profiles_2d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -11571,7 +11571,7 @@
   "units": "m"
  },
  "distributions.distribution[:].profiles_2d[:].grid.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/grid/z_error_index",
   "lifecycle_status": "alpha",
@@ -11612,7 +11612,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -11655,7 +11655,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -11698,7 +11698,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -11729,7 +11729,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/time",
   "lifecycle_status": "alpha",
@@ -11749,7 +11749,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -11780,21 +11780,21 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flux surface averaged profile evaluated using the trapped particle part of the distribution.",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power and torque exchanged between the species described by the distribution and the different plasma species through collisions",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions",
   "lifecycle_status": "alpha",
   "structure_reference": "distributions_d_profiles_2d_partial_collisions"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Collisional exchange with electrons",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/electrons",
   "lifecycle_status": "alpha",
@@ -11813,7 +11813,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.electrons.power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/electrons/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -11856,7 +11856,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.electrons.power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/electrons/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -11899,7 +11899,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.electrons.torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/electrons/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -11942,7 +11942,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.electrons.torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/electrons/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -11976,7 +11976,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various ion species",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)",
   "lifecycle_status": "alpha",
@@ -11987,7 +11987,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -12003,7 +12003,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -12043,7 +12043,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -12076,7 +12076,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -12132,7 +12132,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -12175,7 +12175,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -12209,7 +12209,7 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)",
   "lifecycle_status": "alpha",
@@ -12243,7 +12243,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].power_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/power_fast_error_index",
   "lifecycle_status": "alpha",
@@ -12286,7 +12286,7 @@
   "units": "W.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].power_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_thermal\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/power_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -12329,7 +12329,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12372,7 +12372,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12411,7 +12411,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -12449,7 +12449,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -12480,7 +12480,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -12515,7 +12515,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].torque_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/torque_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12558,7 +12558,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].torque_thermal_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_thermal_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/torque_thermal_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12597,7 +12597,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.collisions.ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/collisions/ion(i2)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -12632,7 +12632,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.current_fast_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_fast_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/current_fast_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12675,7 +12675,7 @@
   "units": "A.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.current_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_tor\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/current_tor_error_index",
   "lifecycle_status": "alpha",
@@ -12718,7 +12718,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/density_error_index",
   "lifecycle_status": "alpha",
@@ -12761,7 +12761,7 @@
   "units": "m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -12804,7 +12804,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -12847,7 +12847,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.pressure_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/pressure_fast_error_index",
   "lifecycle_status": "alpha",
@@ -12890,7 +12890,7 @@
   "units": "J.m^-3"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -12933,7 +12933,7 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].profiles_2d[:].trapped.torque_tor_j_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_j_radial\"",
   "full_path": "distributions/distribution(i1)/profiles_2d(itime)/trapped/torque_tor_j_radial_error_index",
   "lifecycle_status": "alpha",
@@ -12964,14 +12964,14 @@
   "units": "N.m^-2"
  },
  "distributions.distribution[:].species": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Species described by this distribution",
   "full_path": "distributions/distribution(i1)/species",
   "lifecycle_status": "alpha",
   "structure_reference": "distribution_species"
  },
  "distributions.distribution[:].species.ion": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "distributions/distribution(i1)/species/ion",
   "lifecycle_status": "alpha",
@@ -12981,7 +12981,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/species/ion/element(i2)",
   "lifecycle_status": "alpha",
@@ -12997,7 +12997,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].species.ion.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/species/ion/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -13037,7 +13037,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/species/ion/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -13070,7 +13070,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/species/ion/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -13100,7 +13100,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].species.ion.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/species/ion/state",
   "lifecycle_status": "alpha",
@@ -13129,7 +13129,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/species/ion/state/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -13167,7 +13167,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.state.z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distributions/distribution(i1)/species/ion/state/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -13198,7 +13198,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.state.z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distributions/distribution(i1)/species/ion/state/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -13229,7 +13229,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.ion.z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distributions/distribution(i1)/species/ion/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -13252,7 +13252,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.neutral": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "distributions/distribution(i1)/species/neutral",
   "lifecycle_status": "alpha",
@@ -13262,7 +13262,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distributions/distribution(i1)/species/neutral/element(i2)",
   "lifecycle_status": "alpha",
@@ -13278,7 +13278,7 @@
   "units": "Atomic Mass Unit"
  },
  "distributions.distribution[:].species.neutral.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distributions/distribution(i1)/species/neutral/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -13318,7 +13318,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.neutral.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distributions/distribution(i1)/species/neutral/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -13351,7 +13351,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.neutral.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distributions/distribution(i1)/species/neutral/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -13381,7 +13381,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].species.neutral.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "distributions/distribution(i1)/species/neutral/state",
   "lifecycle_status": "alpha",
@@ -13402,7 +13402,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].species.neutral.state.neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "distributions/distribution(i1)/species/neutral/state/neutral_type",
@@ -13439,7 +13439,7 @@
   "units": "Elementary Charge Unit"
  },
  "distributions.distribution[:].species.neutral.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distributions/distribution(i1)/species/neutral/state/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -13469,7 +13469,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].species.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon\n0) unspecified : unspecified\n1) electron : Electron\n2) ion : Ion species in a single/average state; refer to ion-structure\n3) ion_state : Ion species in a particular state; refer to ion/state-structure\n4) neutral : Neutral species in a single/average state; refer to neutral-structure\n5) neutral_state : Neutral species in a particular state; refer to neutral/state-structure\n6) neutron : Neutron\n7) photon : Photon",
   "full_path": "distributions/distribution(i1)/species/type",
@@ -13501,7 +13501,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List all waves affecting the distribution, identified as in waves/coherent_wave(i)/identifier in the waves IDS",
   "full_path": "distributions/distribution(i1)/wave(i2)",
   "lifecycle_status": "alpha",
@@ -13523,7 +13523,7 @@
   "type": "constant"
  },
  "distributions.distribution[:].wave[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/wave_identifier.xml",
   "documentation": "Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH\n0) unspecified : unspecified\n1) EC : Wave field for electron cyclotron heating and current drive\n2) LH : Wave field for lower hybrid heating and current drive\n3) IC : Wave field for ion cyclotron frequency heating and current drive",
   "full_path": "distributions/distribution(i1)/wave(i2)/type",
@@ -13552,7 +13552,7 @@
   "type": "constant"
  },
  "distributions.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "distributions/ids_properties",
   "lifecycle_status": "alpha",
@@ -13579,6 +13579,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "distributions.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "distributions.ids_properties.occurrence"
+ },
  "distributions.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -13594,7 +13599,7 @@
   "type": "constant"
  },
  "distributions.magnetic_axis": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Magnetic axis position (used to define a poloidal angle for the 2D profiles)",
   "full_path": "distributions/magnetic_axis",
   "lifecycle_status": "alpha",
@@ -13612,7 +13617,7 @@
   "units": "m"
  },
  "distributions.magnetic_axis.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "distributions/magnetic_axis/r_error_index",
   "lifecycle_status": "alpha",
@@ -13652,7 +13657,7 @@
   "units": "m"
  },
  "distributions.magnetic_axis.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "distributions/magnetic_axis/z_error_index",
   "lifecycle_status": "alpha",
@@ -13684,14 +13689,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "distributions/time(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distributions.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
   "full_path": "distributions/vacuum_toroidal_field",
   "lifecycle_status": "alpha",
@@ -13709,7 +13714,7 @@
   "units": "T"
  },
  "distributions.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "distributions/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -13746,7 +13751,7 @@
   "units": "m"
  },
  "distributions.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "distributions/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

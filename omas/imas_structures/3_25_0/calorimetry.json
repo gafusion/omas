@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "calorimetry.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "calorimetry/code",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of cooling loops",
   "full_path": "calorimetry/cooling_loop(i1)",
   "lifecycle_status": "alpha",
@@ -79,7 +79,7 @@
   "type": "static"
  },
  "calorimetry.cooling_loop[:].mass_flow": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Mass flow of the coolant going through the loop",
   "full_path": "calorimetry/cooling_loop(i1)/mass_flow",
   "lifecycle_status": "alpha",
@@ -99,7 +99,7 @@
   "units": "kg.s^-1"
  },
  "calorimetry.cooling_loop[:].mass_flow.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/cooling_loop(i1)/mass_flow/data_error_index",
   "lifecycle_status": "alpha",
@@ -133,7 +133,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/cooling_loop(i1)/mass_flow/time(:)",
   "lifecycle_status": "alpha",
@@ -167,7 +167,7 @@
   "type": "static"
  },
  "calorimetry.cooling_loop[:].temperature_in": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Temperature of the coolant when entering the loop",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_in",
   "lifecycle_status": "alpha",
@@ -187,7 +187,7 @@
   "units": "K"
  },
  "calorimetry.cooling_loop[:].temperature_in.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_in/data_error_index",
   "lifecycle_status": "alpha",
@@ -221,7 +221,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_in/time(:)",
   "lifecycle_status": "alpha",
@@ -248,7 +248,7 @@
   "type": "dynamic"
  },
  "calorimetry.cooling_loop[:].temperature_out": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Temperature of the coolant when exiting the loop",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_out",
   "lifecycle_status": "alpha",
@@ -268,7 +268,7 @@
   "units": "K"
  },
  "calorimetry.cooling_loop[:].temperature_out.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_out/data_error_index",
   "lifecycle_status": "alpha",
@@ -302,7 +302,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/cooling_loop(i1)/temperature_out/time(:)",
   "lifecycle_status": "alpha",
@@ -332,7 +332,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of groups of components on which calorimetry measurements are carried out (grouped by tokamak subsystems or localisation on the machine)",
   "full_path": "calorimetry/group(i1)",
   "lifecycle_status": "alpha",
@@ -343,7 +343,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of components on which calorimetry measurements are carried out",
   "full_path": "calorimetry/group(i1)/component(i2)",
   "lifecycle_status": "alpha",
@@ -351,7 +351,7 @@
   "structure_reference": "calorimetry_group_component"
  },
  "calorimetry.group[:].component[:].energy_cumulated": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Energy extracted from the component since the start of the pulse",
   "full_path": "calorimetry/group(i1)/component(i2)/energy_cumulated",
   "lifecycle_status": "alpha",
@@ -371,7 +371,7 @@
   "units": "J"
  },
  "calorimetry.group[:].component[:].energy_cumulated.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/group(i1)/component(i2)/energy_cumulated/data_error_index",
   "lifecycle_status": "alpha",
@@ -405,7 +405,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/group(i1)/component(i2)/energy_cumulated/time(:)",
   "lifecycle_status": "alpha",
@@ -440,7 +440,7 @@
   "units": "J"
  },
  "calorimetry.group[:].component[:].energy_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_total\"",
   "full_path": "calorimetry/group(i1)/component(i2)/energy_total_error_index",
   "lifecycle_status": "alpha",
@@ -470,7 +470,7 @@
   "type": "static"
  },
  "calorimetry.group[:].component[:].mass_flow": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Mass flow of the coolant going through the component",
   "full_path": "calorimetry/group(i1)/component(i2)/mass_flow",
   "lifecycle_status": "alpha",
@@ -490,7 +490,7 @@
   "units": "kg.s^-1"
  },
  "calorimetry.group[:].component[:].mass_flow.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/group(i1)/component(i2)/mass_flow/data_error_index",
   "lifecycle_status": "alpha",
@@ -524,7 +524,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/group(i1)/component(i2)/mass_flow/time(:)",
   "lifecycle_status": "alpha",
@@ -558,7 +558,7 @@
   "type": "static"
  },
  "calorimetry.group[:].component[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power extracted from the component",
   "full_path": "calorimetry/group(i1)/component(i2)/power",
   "lifecycle_status": "alpha",
@@ -578,7 +578,7 @@
   "units": "W"
  },
  "calorimetry.group[:].component[:].power.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/group(i1)/component(i2)/power/data_error_index",
   "lifecycle_status": "alpha",
@@ -612,7 +612,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/group(i1)/component(i2)/power/time(:)",
   "lifecycle_status": "alpha",
@@ -639,7 +639,7 @@
   "type": "dynamic"
  },
  "calorimetry.group[:].component[:].temperature_in": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Temperature of the coolant when entering the component",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_in",
   "lifecycle_status": "alpha",
@@ -659,7 +659,7 @@
   "units": "K"
  },
  "calorimetry.group[:].component[:].temperature_in.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_in/data_error_index",
   "lifecycle_status": "alpha",
@@ -693,7 +693,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_in/time(:)",
   "lifecycle_status": "alpha",
@@ -720,7 +720,7 @@
   "type": "dynamic"
  },
  "calorimetry.group[:].component[:].temperature_out": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Temperature of the coolant when exiting the component",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_out",
   "lifecycle_status": "alpha",
@@ -740,7 +740,7 @@
   "units": "K"
  },
  "calorimetry.group[:].component[:].temperature_out.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_out/data_error_index",
   "lifecycle_status": "alpha",
@@ -774,7 +774,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "calorimetry/group(i1)/component(i2)/temperature_out/time(:)",
   "lifecycle_status": "alpha",
@@ -815,7 +815,7 @@
   "type": "static"
  },
  "calorimetry.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "calorimetry/ids_properties",
   "lifecycle_status": "alpha",
@@ -842,6 +842,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "calorimetry.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "calorimetry.ids_properties.occurrence"
+ },
  "calorimetry.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -857,7 +862,7 @@
   "type": "constant"
  },
  "calorimetry.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "calorimetry/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -888,7 +893,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "calorimetry/time(:)",
   "lifecycle_status": "alpha",

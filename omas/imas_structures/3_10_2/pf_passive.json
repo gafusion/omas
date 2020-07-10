@@ -7,7 +7,7 @@
   "maxoccur": "3"
  },
  "pf_passive.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "pf_passive/code",
   "lifecycle_status": "alpha"
@@ -58,7 +58,7 @@
   "type": "constant"
  },
  "pf_passive.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "pf_passive/ids_properties",
   "lifecycle_status": "alpha"
@@ -77,11 +77,16 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_passive.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "pf_passive.ids_properties.occurrence"
+ },
  "pf_passive.loop": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.",
   "full_path": "pf_passive/loop(i1)",
   "lifecycle_status": "alpha",
@@ -96,7 +101,7 @@
   "units": "m^2"
  },
  "pf_passive.loop[:].area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "pf_passive/loop(i1)/area_error_index",
   "lifecycle_status": "alpha",
@@ -130,7 +135,7 @@
   "units": "A"
  },
  "pf_passive.loop[:].current_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_index",
   "lifecycle_status": "alpha",
@@ -159,7 +164,7 @@
   "units": "A"
  },
  "pf_passive.loop[:].geometry": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Shape of the passive loop",
   "full_path": "pf_passive/loop(i1)/geometry",
   "lifecycle_status": "alpha"
@@ -172,7 +177,7 @@
   "type": "static"
  },
  "pf_passive.loop[:].geometry.oblique": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Trapezoidal description of the element",
   "full_path": "pf_passive/loop(i1)/geometry/oblique",
   "lifecycle_status": "alpha"
@@ -186,7 +191,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.alpha_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/alpha_error_index",
   "lifecycle_status": "alpha",
@@ -217,7 +222,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.beta_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/beta_error_index",
   "lifecycle_status": "alpha",
@@ -248,7 +253,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.length_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/length_error_index",
   "lifecycle_status": "alpha",
@@ -279,7 +284,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/r_error_index",
   "lifecycle_status": "alpha",
@@ -310,7 +315,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.thickness_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/thickness_error_index",
   "lifecycle_status": "alpha",
@@ -341,7 +346,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.oblique.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/geometry/oblique/z_error_index",
   "lifecycle_status": "alpha",
@@ -364,7 +369,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the element",
   "full_path": "pf_passive/loop(i1)/geometry/outline",
   "lifecycle_status": "alpha"
@@ -381,7 +386,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/geometry/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -421,7 +426,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/geometry/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -450,7 +455,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.rectangle": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Rectangular description of the element",
   "full_path": "pf_passive/loop(i1)/geometry/rectangle",
   "lifecycle_status": "alpha"
@@ -464,7 +469,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.rectangle.height_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "pf_passive/loop(i1)/geometry/rectangle/height_error_index",
   "lifecycle_status": "alpha",
@@ -495,7 +500,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.rectangle.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/geometry/rectangle/r_error_index",
   "lifecycle_status": "alpha",
@@ -526,7 +531,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.rectangle.width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "pf_passive/loop(i1)/geometry/rectangle/width_error_index",
   "lifecycle_status": "alpha",
@@ -557,7 +562,7 @@
   "units": "m"
  },
  "pf_passive.loop[:].geometry.rectangle.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/geometry/rectangle/z_error_index",
   "lifecycle_status": "alpha",
@@ -595,7 +600,7 @@
   "units": "Ohm"
  },
  "pf_passive.loop[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "pf_passive/loop(i1)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -626,7 +631,7 @@
   "units": "Ohm.m"
  },
  "pf_passive.loop[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "pf_passive/loop(i1)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -652,7 +657,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pf_passive/time",
   "lifecycle_status": "alpha",
