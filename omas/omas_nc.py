@@ -95,7 +95,8 @@ def load_omas_nc(filename, consistency_check=True):
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):
                 continue
-            ods[item] = get_ds_item(dataset, item)
+            ods.setraw(p2l(item), get_ds_item(dataset, item))
+    ods.set_child_locations()
     ods.consistency_check = consistency_check
     return ods
 
