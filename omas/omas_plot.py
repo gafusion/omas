@@ -172,7 +172,13 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
     return result
 
 def imas_units_to_latex(unit):
-    #converts units to a nice latex format for plot labels
+    '''
+    converts units to a nice latex format for plot labels
+    
+    :param unit: string with unit in imas format
+    
+    :return: string with unit in latex format
+    '''
     unit = re.sub('(\-?[0-9]+)', r'{\1}', unit)
     unit = re.sub('\.', r'\,', unit)
     return f' [${unit}$]'
