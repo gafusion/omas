@@ -171,6 +171,11 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     return result
 
+def imas_units_to_latex(unit):
+    #converts units to a nice latex format for plot labels
+    unit = re.sub('(\-?[0-9]+)', r'{\1}', unit)
+    unit = re.sub('\.', r'\,', unit)
+    return f' [${unit}$]'
 
 @add_to__ALL__
 def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
@@ -981,6 +986,7 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
     """
 
     from matplotlib import pyplot
+    from omas.omas_utils import o2u
 
     if time_index is None:
         time = ods['core_profiles'].time()
@@ -1021,15 +1027,18 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
 
     plotting_list = []
     label_name = []
+    unit_list = []
     for q in quantities:
         if 'density' in q or 'temperature' in q:
             for index, specie in enumerate(species_in_tree):
+                unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
                 if q in prof1d[specie]:
                     plotting_list.append(prof1d[specie][q])
                 else:
                     plotting_list.append(numpy.zeros(len(rho)))
                 label_name.append(f'{names[index]} {q.capitalize()}')
         else:
+            unit_list.append(omas_info_node(o2u(f"core_profiles.prof1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
             label_name.append(q.capitalize())
 
@@ -1043,21 +1052,20 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
             sharey = ax
             sharex = ax
         ax = cached_add_subplot(fig, axes, nrows, ncols, plot, sharex=sharex, sharey=sharey)
-        uband(rho, y, ax=ax, **kw)
 
+        uband(rho, y, ax=ax, **kw)
         if "Temp" in label_name[index]:
-            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + "[keV]", fontsize=15)
+            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + "[$m^{-3}$]", fontsize=15)
+            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
         else:
-            ax.set_ylabel(label_name[index][:10], fontsize=15)
+            ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]), fontsize=15)
         if (nplots - plot) < ncols:
             ax.set_xlabel('$\\rho$')
     ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
 
     return {'ax': axes}
- 
 
 
 @add_to__ODS__
