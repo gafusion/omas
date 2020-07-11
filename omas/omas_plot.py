@@ -1208,7 +1208,7 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
 
     if "core_profiles" in ods:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
-        equlibrium = ods['equilibrium']['time_slice'][time_index]
+        equilibrium = ods['equilibrium']['time_slice'][time_index]
         rho_core_prof = prof1d['grid.rho_tor_norm']
 
         ods_species = ['electrons'] + ['ion[%d]' % k for k in range(len(prof1d['ion']))]
@@ -1230,8 +1230,8 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
         if 'rotation_frequency_tor_sonic' in prof1d:
             from .omas_physics import omas_environment
             with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
-                rotation = (equlibrium['profiles_1d']['r_outboard'] - equlibrium['profiles_1d']['r_inboard']) / 2 \
-                           + equlibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['rotation_frequency_tor_sonic']
+                rotation = (equilibrium['profiles_1d']['r_outboard'] - equilibrium['profiles_1d']['r_inboard']) / 2 \
+                           + equilibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['rotation_frequency_tor_sonic']
                 ax = plot_function(x=rho_core_prof, y=rotation,
                               plot_num=7, ylabel='R*$\Omega_0$ (m/s)')
                 if not plot_zeff: ax.set_xlabel('$\\rho$')
