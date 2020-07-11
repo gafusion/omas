@@ -986,7 +986,6 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
     """
 
     from matplotlib import pyplot
-    from omas.omas_utils import o2u
 
     if time_index is None:
         time = ods['core_profiles'].time()
