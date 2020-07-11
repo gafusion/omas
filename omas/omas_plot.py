@@ -1038,7 +1038,7 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
                     plotting_list.append(numpy.zeros(len(rho)))
                 label_name.append(f'{names[index]} {q.capitalize()}')
         else:
-            unit_list.append(omas_info_node(o2u(f"core_profiles.prof1d.0.{q}"))['units'])
+            unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
             label_name.append(q.capitalize())
 
