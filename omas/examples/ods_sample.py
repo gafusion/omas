@@ -25,5 +25,5 @@ ods = ODS()
 # add sample equilibrium data to an ODS
 ods.sample_equilibrium()
 
-# alternatively, ods_sample() generates a sample ODS that is populated by all `ODS.sample_` methods
-ods = ods_sample()
+# alternatively, ods.sample() populates the ods with the output of all `ODS.sample_` methods
+ods.sample()

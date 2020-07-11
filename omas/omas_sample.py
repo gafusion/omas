@@ -29,16 +29,7 @@ def ods_sample(ntimes=1):
 
     :return: sample ods
     '''
-    ods = ODS()
-    for ds in __all__:
-        printd('Adding %s sample data to ods' % ds, topic='sample')
-        args, kw, _, _ = function_arguments(eval(ds))
-        if 'time_index' in kw:
-            for k in range(ntimes):
-                ods = eval(ds)(ods, time_index=k)
-        else:
-            ods = eval(ds)(ods)
-    return ods
+    return ODS().sample(ntimes=ntimes)
 
 
 @add_to_ODS

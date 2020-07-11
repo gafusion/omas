@@ -1785,6 +1785,24 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
+    def sample(self, ntimes=1):
+        '''
+        Populates the ods with sample data
+
+        :param ntimes: number of time slices to generate
+
+        :return: self
+        '''
+        for func in omas_sample.__all__:
+            printd(f'Adding {func} sample data to ods', topic='sample')
+            args, kw, _, _ = function_arguments(getattr(self, 'sample_' + func))
+            if 'time_index' in kw:
+                for k in range(ntimes):
+                    getattr(self, 'sample_' + func)(time_index=k)
+            else:
+                getattr(self, 'sample_' + func)()
+        return self
+
 
 class dynamic_ODS:
     kw = {}

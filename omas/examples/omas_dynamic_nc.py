@@ -14,7 +14,7 @@ from omas import *
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
 # generate some data and save it as a netcdf file
-ods = ods_sample(ntimes=2)
+ods = ODS().sample(ntimes=2)
 ods.save('test.nc')
 
 # ODS.open() will keep the file descriptor open so that OMAS

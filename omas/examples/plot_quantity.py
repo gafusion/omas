@@ -11,7 +11,7 @@ from matplotlib import pyplot
 import os
 from omas import *
 
-ods = ods_sample()
+ods = ODS().sample()
 
 kw = {}
 kw['lw'] = 2

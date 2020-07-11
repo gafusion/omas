@@ -36,7 +36,7 @@ class TestOmasPlot(unittest.TestCase):
     """
 
     # Sample data for use in tests
-    ods = ods_sample()
+    ods = ODS().sample()
 
     def setUp(self):
         test_id = self.id()

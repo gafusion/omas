@@ -129,7 +129,7 @@ class TestOmasCore(unittest.TestCase):
         return
 
     def test_coordinates(self):
-        ods = ods_sample()
+        ods = ODS().sample()
         assert (len(ods.list_coordinates()) > 0)
         assert (len(ods['equilibrium'].list_coordinates()) > 0)
         return
@@ -292,14 +292,14 @@ class TestOmasCore(unittest.TestCase):
         except ValueError as _excp:
             pass
 
-        ods = ods_sample()
+        ods = ODS().sample()
 
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
         return
 
     def test_deepcopy(self):
-        ods = ods_sample()
+        ods = ODS().sample()
 
         # inject non-consistent data
         ods.consistency_check = False

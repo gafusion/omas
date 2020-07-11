@@ -20,7 +20,7 @@ from omas import *
 print('*' * 20)
 print('consistency_check = False')
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = False
 ods.dynamic_path_creation='dynamic_array_structures'
 # can add entry with wrong dimensions
@@ -33,7 +33,7 @@ ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 print('*' * 20)
 print("consistency_check = 'warn'")
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = 'warn'
 ods.dynamic_path_creation='dynamic_array_structures'
 # can add entry with wrong dimensions but warning message is printed
@@ -52,7 +52,7 @@ ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 print('*' * 20)
 print("consistency_check = True")
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = True  # this is the default
 # add entry with wrong dimensions
 try:
