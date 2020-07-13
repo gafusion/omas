@@ -218,15 +218,8 @@ class TestOmasPlot(unittest.TestCase):
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()
-        ods2.plot_core_profiles_summary(fig=pyplot.gcf())
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
-            show_total_density=True)
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
-            show_total_density=True)
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+        ods2.plot_core_profiles_summary(fig=pyplot.figure())
+        ods2.plot_core_profiles_summary(fig=pyplot.figure(),quantities=['temperature', 'density_thermal','j_tor','zeff'], ods_species=[-1,0], lw=3, ls='--')
 
     def test_core_transport(self):
         ods_test = copy.deepcopy(self.ods)
@@ -236,9 +229,8 @@ class TestOmasPlot(unittest.TestCase):
         ods_test.sample_equilibrium()
         ods_test['core_profiles.profiles_1d.0.rotation_frequency_tor_sonic'] = numpy.linspace(4e4, 2e3, len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
         ods_test.plot_core_transport_fluxes()
-        fig, axes = pyplot.subplots(nrows=4, ncols=2, sharex='col')
-        ods_test.plot_core_transport_fluxes(fig=fig, axes=axes, show_total_density=False, plotting_label="test")
-        ods_test.plot_core_transport_fluxes(plot_zeff=True, plotting_label="test")
+        ods_test.plot_core_transport_fluxes(show_total_density=False, label='test')
+        ods_test.plot_core_transport_fluxes(plot_zeff=True, label="test")
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)

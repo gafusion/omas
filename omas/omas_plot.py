@@ -171,6 +171,17 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     return result
 
+def imas_units_to_latex(unit):
+    '''
+    converts units to a nice latex format for plot labels
+    
+    :param unit: string with unit in imas format
+    
+    :return: string with unit in latex format
+    '''
+    unit = re.sub('(\-?[0-9]+)', r'{\1}', unit)
+    unit = re.sub('\.', r'\,', unit)
+    return f' [${unit}$]'
 
 @add_to__ALL__
 def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
@@ -956,24 +967,24 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=True, show_thermal_fast_breakdown=True, show_total_density=True, **kw):
+def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species=None,
+                          quantities=['density_thermal', 'temperature'], **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
-
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
-    :param combine_dens_temps: combine species plot of density and temperatures
+    :param axes: axes to plot in (active axes is generated if `ax is None`)
 
-    :param show_thermal_fast_breakdown: bool
-        Show thermal and fast components of density in addition to total if available
+    :param time_index: time slice to plot
 
-    :param show_total_density: bool
-        Show total thermal+fast in addition to thermal/fast breakdown if available
+    :param ods_species: list of ion specie indices as listed in the core_profiles ods (electron index = -1)
+        if None selected plot all the ion speciess
+
+    :param quantities: list of strings to plot from the profiles_1d ods like zeff, temperature & rotation_frequency_tor_sonic
 
     :param kw: arguments passed to matplotlib plot statements
 
@@ -981,9 +992,6 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
     """
 
     from matplotlib import pyplot
-
-    if fig is None:
-        fig = pyplot.figure()
 
     if time_index is None:
         time = ods['core_profiles'].time()
@@ -995,75 +1003,74 @@ def core_profiles_summary(ods, time_index=None, fig=None, combine_dens_temps=Tru
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={}, combine_dens_temps=combine_dens_temps, show_thermal_fast_breakdown=show_thermal_fast_breakdown, show_total_density=show_total_density, **kw)
-
-    axs = kw.pop('ax', {})
+            return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={},
+                                 ods_species=ods_species, quantities=quantities, **kw)
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
-    x = prof1d['grid.rho_tor_norm']
+    rho = prof1d['grid.rho_tor_norm']
 
-    what = ['electrons'] + ['ion[%d]' % k for k in range(len(prof1d['ion']))]
-    names = ['Electrons'] + [prof1d['ion[%d].label' % k] + ' ion' for k in range(len(prof1d['ion']))]
+    if fig is None:
+        fig = pyplot.figure()
+    if axes is None:
+        axes = kw.pop('ax', {})
+    if 'lw' not in kw:
+        kw['lw']=2.2
 
-    r = len(prof1d['ion']) + 1
+    # Determine subplot rows x colls
+    if ods_species is None:
+        ncols = len(prof1d['ion']) + 1
+        ods_species = [-1] + list(prof1d['ion'])
+    else:
+        ncols = len(ods_species)
 
-    ax = ax0 = ax1 = None
-    for k, item in enumerate(what):
+    nplots = sum([ncols if 'density' in i or 'temperature' in i else 1 for i in quantities])
+    nrows = numpy.ceil(nplots / ncols)
 
-        # densities (thermal and fast)
-        for therm_fast in ['', '_thermal', '_fast']:
-            if (not show_thermal_fast_breakdown) and len(therm_fast):
-                continue  # Skip _thermal and _fast because the flag turned these details off
-            if (not show_total_density) and (len(therm_fast) == 0):
-                continue  # Skip total thermal+fast because the flag turned it off
-            therm_fast_name = {
-                '': ' (thermal+fast)',
-                '_thermal': ' (thermal)' if show_total_density else '',
-                '_fast': ' (fast)',
-            }[therm_fast]
-            density = item + '.density' + therm_fast
-            # generate axes
-            if combine_dens_temps:
-                if ax0 is None:
-                    ax = ax0 = cached_add_subplot(fig, axs, 1, 2, 1)
-            else:
-                ax = ax0 = cached_add_subplot(fig, axs, r, 2, (2 * k) + 1, sharex=ax, sharey=ax0)
-            # plot if data is present
-            if item + '.density' + therm_fast in prof1d:
-                uband(x, prof1d[density], label=names[k] + therm_fast_name, ax=ax0, **kw)
-                if k == len(prof1d['ion']):
-                    ax0.set_xlabel('$\\rho$')
-                if k == 0:
-                    ax0.set_title('Density [m$^{-3}$]')
-                if not combine_dens_temps:
-                    ax0.set_ylabel(names[k])
-            # add plot of measurements
-            if density + '_fit.measured' in prof1d and density + '_fit.rho_tor_norm' in prof1d:
-                uerrorbar(prof1d[density + '_fit.rho_tor_norm'], prof1d[density + '_fit.measured'], ax=ax)
+    # Generate species with corresponding name
+    species_in_tree = [f"ion.{i}" if i >= 0 else 'electrons' for i in ods_species]
+    names = [f"{prof1d[i]['label']} ion" if i != 'electrons' else "electron" for i in species_in_tree]
 
-        # temperatures
-        if combine_dens_temps:
-            if ax1 is None:
-                ax = ax1 = cached_add_subplot(fig, axs, 1, 2, 2, sharex=ax)
+    plotting_list = []
+    label_name = []
+    unit_list = []
+    for q in quantities:
+        if 'density' in q or 'temperature' in q:
+            for index, specie in enumerate(species_in_tree):
+                unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
+                if q in prof1d[specie]:
+                    plotting_list.append(prof1d[specie][q])
+                else:
+                    plotting_list.append(numpy.zeros(len(rho)))
+                label_name.append(f'{names[index]} {q.capitalize()}')
         else:
-            ax = ax1 = cached_add_subplot(fig, axs, r, 2, (2 * k) + 2, sharex=ax, sharey=ax1)
-        # plot if data is present
-        if item + '.temperature' in prof1d:
-            uband(x, prof1d[item + '.temperature'], label=names[k], ax=ax1, **kw)
-            if k == len(prof1d['ion']):
-                ax1.set_xlabel('$\\rho$')
-            if k == 0:
-                ax1.set_title('Temperature [eV]')
-            # add plot of measurements
-            if item + '.temperature_fit.measured' in prof1d and item + '.temperature_fit.rho_tor_norm' in prof1d:
-                uerrorbar(prof1d[item + '.temperature_fit.rho_tor_norm'], prof1d[item + '.temperature_fit.measured'], ax=ax)
+            unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
+            plotting_list.append(prof1d[q])
+            label_name.append(q.capitalize())
 
+    for index, y in enumerate(plotting_list):
+        plot = index + 1
+
+        if index % ncols == 0:
+            sharey = None
+            sharex = None
+        elif 'Density' in label_name[index] or 'Temperature' in label_name[index]:
+            sharey = ax
+            sharex = ax
+        ax = cached_add_subplot(fig, axes, nrows, ncols, plot, sharex=sharex, sharey=sharey)
+
+        uband(rho, y, ax=ax, **kw)
+        if "Temp" in label_name[index]:
+            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
+        elif "Density" in label_name[index]:
+            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
+        else:
+            ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]), fontsize=15)
+        if (nplots - plot) < ncols:
+            ax.set_xlabel('$\\rho$')
+    ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
-    if ax0 is not None:
-        ax0.set_ylim([0, ax0.get_ylim()[1]])
-    if ax1 is not None:
-        ax1.set_ylim([0, ax1.get_ylim()[1]])
-    return {'ax': axs}
+
+    return {'ax': axes}
 
 
 @add_to__ODS__
@@ -1134,38 +1141,41 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
-                          plotting_label=" ", show_total_density=True, plot_zeff=False):
+def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
+                          show_total_density=True, plot_zeff=False , **kw):
     """
     Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.
 
     :param ods: input ods
 
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param axes: axes to plot in (active axes is generated if `ax is None`)
+
     :param time_index: time slice to plot
-
-    :param fig, axes: figure to plot in (a new figure is generated if `fig is None`)
-
-    :param plotting_label: String to add to plot labels can be left empty
 
     :param show_total_density: bool
         Show total thermal+fast in addition to thermal/fast breakdown if available
 
-    :param plot_zeff: if True, plot zeff below the rotatation
+    :param plot_zeff: if True, plot zeff below the plasma rotation
+
+    :kw: matplotlib plot parameters
 
     :return: axes
     """
-    if fig is None:
-        from matplotlib import pyplot
-        if plot_zeff:
-            nrows = 5
-        else:
-            nrows = 4
-        fig, axes = pyplot.subplots(nrows=nrows, ncols=2, sharex='col')
+    from matplotlib import pyplot
+    if plot_zeff:
+        nrows = 5
+    else:
+        nrows = 4
+    ncols = 2
 
-    # Color dict for the plots:
-    color_label_dict = {'STEP_SC_exp': 'r', 'STEP_SC_exp_rot': 'b',
-                        'STEP_SC_pro': 'g', 'STEP_SC_exp_hcd': 'c',
-                        '0': 'r', '1': 'b', '2': 'g', '3': 'c', '4': 'm', '5': 'y', '6': 'lime'}
+    if fig is None:
+        fig = pyplot.figure()
+    if axes is None:
+        axes = kw.pop('ax', {})
+    if 'lw' not in kw:
+        kw['lw'] = 2.2
 
     if time_index is None:
         time = ods['equilibrium'].time()
@@ -1178,7 +1188,7 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
             time_index = time_index[0]
         else:
             return ods_time_plot(core_transport_fluxes, time, ods, time_index=time_index, fig=fig, axes=axes,
-                                 plotting_label=plotting_label, show_total_density=show_total_density, plot_zeff=plot_zeff)
+                                 show_total_density=show_total_density, plot_zeff=plot_zeff)
 
     def sum_density_types(specie_index):
         final_density = numpy.zeros(len(prof1d['grid.rho_tor_norm']))
@@ -1191,103 +1201,102 @@ def core_transport_fluxes(ods, time_index=0, fig=None, axes=None,
             final_density += prof1d[density]
         return final_density
 
-    linestyle = '-'
-    linewidth = 2
+    def plot_function(x, y, plot_num, ylabel, sharey=None, ls=None):
+        ax = cached_add_subplot(fig, axes, nrows, ncols, plot_num, sharey=sharey)
+        uband(x, y, ax=ax, **kw)
+        ax.set_ylabel(ylabel, fontsize='large')
+        ax.axvline(0.8, ls='--', color='k')
+        ax.axvline(0.2, ls='--', color='k')
+        if 'label' in kw:
+            ax.legend(prop={'size': 12})
+        return ax
 
     if "core_profiles" in ods:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
-        equlibrium = ods['equilibrium']['time_slice'][time_index]
+        equilibrium = ods['equilibrium']['time_slice'][time_index]
         rho_core_prof = prof1d['grid.rho_tor_norm']
 
         ods_species = ['electrons'] + ['ion[%d]' % k for k in range(len(prof1d['ion']))]
         species_name = ['Electrons'] + [prof1d['ion[%d].label' % k] + ' ion' for k in range(len(prof1d['ion']))]
 
-        axes[-1, 0].set_xlabel('$\\rho$')
-        axes[-1, 1].set_xlabel('$\\rho$')
+        # Temperature electrons
+        ax = plot_function(x= rho_core_prof, y= prof1d[ods_species[0]]['temperature'] / 1e3,
+                      plot_num= 1, ylabel= '$T_{e}\,[keV]$')
 
-        # Temp electrons
-        axes[0, 0].plot(rho_core_prof, prof1d[ods_species[0]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=plotting_label)  # keV
-        axes[0, 0].set_ylabel('$T_{e}\,[keV]$', fontsize='small')
-        axes[0, 0].axvline(0.8, ls='--', color='k')
-        axes[0, 0].axvline(0.2, ls='--', color='k')
-        axes[0, 0].legend(prop={'size': 12})
+        # Temperature main ion species
+        ax = plot_function(x= rho_core_prof, y= prof1d[ods_species[1]]['temperature'] / 1e3,
+                      plot_num=3, ylabel='$T_{i}\,[keV]$', sharey=ax)
 
-        # Temp main ion species
-        axes[1, 0].plot(rho_core_prof, prof1d[ods_species[1]]['temperature'] / 1e3, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[1] + " " + plotting_label)  # keV
-        axes[1, 0].set_ylabel('$T_{i}\,[keV]$', fontsize='small')
-        axes[1, 0].axvline(0.8, ls='--', color='k')
-        axes[1, 0].axvline(0.2, ls='--', color='k')
+        # Density electrons
+        ax = plot_function(x=rho_core_prof, y=sum_density_types(specie_index=0),
+                      plot_num=5, ylabel='$n_{e}\,[m^{-3}]$')
 
-        # ne
-        axes[2, 0].plot(rho_core_prof, sum_density_types(specie_index=0), ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=species_name[0] + " " + plotting_label)  # keV
-        axes[2, 0].set_ylabel('$n_{e}\,[m^{-3}]$', fontsize='small')
-        axes[2, 0].axvline(0.8, ls='--', color='k')
-        axes[2, 0].axvline(0.2, ls='--', color='k')
+        # Rotation
+        if 'rotation_frequency_tor_sonic' in prof1d:
+            from .omas_physics import omas_environment
+            with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
+                rotation = (equilibrium['profiles_1d']['r_outboard'] - equilibrium['profiles_1d']['r_inboard']) / 2 \
+                           + equilibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['rotation_frequency_tor_sonic']
+                ax = plot_function(x=rho_core_prof, y=rotation,
+                              plot_num=7, ylabel='R*$\Omega_0$ (m/s)')
+                if not plot_zeff: ax.set_xlabel('$\\rho$')
 
-        # rotation
-        from .omas_physics import omas_environment
-        with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
-            rotation = (equlibrium['profiles_1d']['r_outboard'] - equlibrium['profiles_1d']['r_inboard']) / 2 \
-                       + equlibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['rotation_frequency_tor_sonic']
-            axes[3, 0].plot(rho_core_prof, rotation, ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=plotting_label)  # m/s
-            axes[3, 0].set_ylabel('R*$\Omega_0$ (m/s)', fontsize='small')
-            axes[3, 0].axvline(0.8, ls='--', color='k')
-            axes[3, 0].axvline(0.2, ls='--', color='k')
-            axes[3, 0].axvline(0.8, ls='--', color='k')
-            axes[3, 0].axvline(0.2, ls='--', color='k')
-
-        # plot zeff if plot_zeff is passed to plotting function
+        # Zeff
         if plot_zeff:
-            axes[4, 0].plot(rho_core_prof, prof1d['zeff'], ls=linestyle, lw=linewidth, color=color_label_dict.setdefault(plotting_label, 'r'), label=plotting_label)  # keV
-            axes[4, 0].set_ylabel('$Z_{eff}$', fontsize='small')
-            axes[4, 0].axvline(0.8, ls='--', color='k')
-            axes[4, 0].axvline(0.2, ls='--', color='k')
+            ax = plot_function(x= rho_core_prof, y= prof1d['zeff'],
+                        plot_num= 9, ylabel= '$Z_{eff}$')
+            ax.set_xlabel('$\\rho$')
 
-    # Fluxes
-    if "core_transport" in ods:
-        core_transport = ods['core_transport']['model']
-        rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
-        # Qe
-        axes[0, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[0, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='None', marker="o", color=color_label_dict.setdefault(plotting_label, 'r'), markersize=8, label="target" + plotting_label)  # W/m^2
-        axes[0, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance")
-        axes[0, 1].set_ylabel('$Q_e$ [W/$m^2$]', fontsize='small')
-        axes[0, 1].axvline(0.8, ls='--', color='k')
-        axes[0, 1].axvline(0.2, ls='--', color='k')
+        # Fluxes
+        if "core_transport" in ods:
+            core_transport = ods['core_transport']['model']
+            rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_d']['rho_tor']
 
-        # Qi
-        axes[1, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[1, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # W/m^2
-        axes[1, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
-        axes[1, 1].set_ylabel('$Q_i$ [W/$m^2$]', fontsize='small')
-        axes[1, 1].axvline(0.8, ls='--', color='k')
-        axes[1, 1].axvline(0.2, ls='--', color='k')
+            # Qe
+            ax = plot_function(x=rho_transport_model, y=core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'],
+                               plot_num=2, ylabel='$Q_e$ [W/$m^2$]')
+            color =  ax.lines[-3].get_color()
 
-        # Particle flux (electron particle source)
-        axes[2, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[2, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # particles/s/m^2
-        axes[2, 1].set_ylabel('$\Gamma_{e}$ [particles/s/$m^2$]', fontsize='small')
-        axes[2, 1].axvline(0.8, ls='--', color='k')
-        axes[2, 1].axvline(0.2, ls='--', color='k')
+            uband(x=rho_transport_model, y=core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'],
+                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+            uband(x=rho_core_prof, y=core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'],
+                  ax=ax, ls='--', lw=3, color=color)
 
-        # Pi (toroidal momentum flux)
-        axes[3, 1].plot(rho_transport_model, core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='-', lw=2.5, color=color_label_dict.setdefault(plotting_label, 'r'), label="total" + plotting_label)
-        axes[3, 1].plot(rho_transport_model, core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='None', marker="o", markersize=8, color=color_label_dict.setdefault(plotting_label, 'r'), label="target" + plotting_label)  # N/m
-        axes[3, 1].plot(rho_core_prof, core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'], ls='--', lw=3, color=color_label_dict.setdefault(plotting_label, 'r'), label="power_balance" + plotting_label)
-        axes[3, 1].set_ylabel('$\Pi_{i}$ [N/$m$]', fontsize='small')
-        axes[3, 1].axvline(0.8, ls='--', color='k')
-        axes[3, 1].axvline(0.2, ls='--', color='k')
+            # Add legend on top (black) as it applies to all lines
+            from matplotlib.lines import Line2D
+            legend_elements = [Line2D([0], [0], color='k', lw=3, ls='--', label='Power Balance'),
+                               Line2D([0], [0], color='k', lw=3, label='Model total'),
+                               Line2D([0], [0], marker='o', ls='None', color='k', label='Model target', markersize=6)]
 
-        # Custom legend since it is uniform
-        from matplotlib.lines import Line2D
+            fig.legend(handles=legend_elements).set_draggable(True)
 
-        legend_elements = [Line2D([0], [0], color='k', lw=3, ls='--', label='Power Balance'),
-                           Line2D([0], [0], color='k', lw=3, label='Model total'),
-                           Line2D([0], [0], marker='o', ls='None', color='k', label='Model target', markersize=6)]
+            # Qi
+            ax = plot_function(x=rho_transport_model, y= core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                               plot_num= 4, ylabel='$Q_i$ [W/$m^2$]')
+            uband(x=rho_transport_model, y= core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+            uband(x=rho_core_prof, y= core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                  ax=ax, ls='--', lw=3, color=color)
 
-        axes[0, 1].legend(handles=legend_elements)
+            # Particle flux (electron particle source)
+            ax = plot_function(x=rho_transport_model, y= 3/2 * core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'],
+                               plot_num=6, ylabel=r'$ \frac{3}{2}T_{e}\Gamma_{e}$ [W/$m^2$]')
+            uband(x=rho_transport_model, y=  3/2 * core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'],
+                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+            ax.set_xlim(0,1)
 
-    return axes
+            # Pi (toroidal momentum flux)
+            ax = plot_function(x=rho_transport_model,
+                               y=core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'],
+                               plot_num=8, ylabel='$\Pi_{i}$ [N/$m$]')
+            ax.set_xlabel('$\\rho$')
+
+            uband(x=rho_transport_model, y=core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'],
+                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+            uband(x=rho_core_prof, y=core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'],
+                  ax=ax, ls='--', lw=3, color=color)
+
+    return {'ax': axes}
 
 
 # ================================
