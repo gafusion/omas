@@ -82,10 +82,14 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     :return: value
     '''
     # force type consistent with data dictionary
+    txt = ''
     if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
         pass
     elif isinstance(value, numpy.ndarray):
-        if 'FLT' in info['data_type']:
+        if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
+            value = ODS()
+            value.omas_data = []
+        elif 'FLT' in info['data_type']:
             value = value.astype(float)
         elif 'INT' in info['data_type']:
             value = value.astype(int)
@@ -103,39 +107,28 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = b2s(value)
 
     # structure type is respected check type
-    if 'data_type' in info and info['data_type'] == 'STRUCTURE' and not isinstance(value, ODS):
-        text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    if 'data_type' in info and info['data_type'] in ['STRUCTURE', 'STRUCT_ARRAY'] and not isinstance(value, ODS):
+        txt = f'{location} is of type {type(value)} but this should be an ODS'
     # check type
-    if not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
-        text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    elif not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, (CodeParameters, ODS))):
+        txt = f'{location} is of type {type(value)} but supported types are: string, float, int, array'
     # check consistency for scalar entries
-    if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-        text = '%s must be a scalar of type %s' % (location, info['data_type'])
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    elif 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+        txt = f'{location} is of type {type(value)} must be a scalar of type {info["data_type"]}'
     # check consistency for number of dimensions
     elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-        text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+        txt = f'{location} must be an array with dimensions {info["coordinates"]}'
+
+    if len(txt) and consistency_check is True:
+        raise ValueError(txt)
     elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-        txt = '%s is in %s state for IMAS %s' % (o2u(location), info['lifecycle_status'].upper(), imas_version)
-        if imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
-            printe(txt)
+        txt = f'{o2u(location)} is in {info["lifecycle_status"].upper()} state for IMAS {imas_version}'
+        if consistency_check and imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
             _consistency_warnings.setdefault(imas_version, []).append(txt)
-    return value
+        else:
+            txt = ''
+
+    return value, txt
 
 
 class ODS(MutableMapping):
@@ -447,13 +440,13 @@ class ODS(MutableMapping):
                                 if isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
                                     if 'warn' in consistency_value:
                                         if 'drop' in consistency_value:
-                                            printe('Dropping invalid ' + text)
+                                            printe(f'Dropping invalid {txt}')
                                         else:
-                                            printe('Invalid ' + text)
+                                            printe(f'Invalid {txt}')
                                     structure = {}
                                     consistency_value_propagate = False
                                 else:
-                                    raise LookupError(underline_last('Invalid ' + text, len('LookupError: ')) + '\n' + options)
+                                    raise LookupError(underline_last(f'Invalid {txt}', len('LookupError: ')) + '\n' + options)
                                 if isinstance(consistency_value, str) and 'drop' in consistency_value:
                                     del self[item]
                                     continue
@@ -464,7 +457,18 @@ class ODS(MutableMapping):
                         else:
                             location = l2o([self.location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
-                            value = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            value, txt = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            if not len(txt):
+                                pass
+                            elif isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
+                                if 'warn' in consistency_value:
+                                    if 'drop' in consistency_value:
+                                        printe(f'Dropping invalid {txt}')
+                                    else:
+                                        printe(f'Invalid {txt}')
+                                if isinstance(consistency_value, str) and 'drop' in consistency_value:
+                                    del self[item]
+                                    continue
                             if value is not self.getraw(item):
                                 self.setraw(item, value)
                     # propagate consistency check
@@ -799,7 +803,17 @@ class ODS(MutableMapping):
 
             # check that dimensions and data types are consistent with IMAS specifications
             if self.consistency_check and '.code.parameters.' not in location:
-                value = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
+                value, txt = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
+                if not len(txt):
+                    pass
+                elif isinstance(self.consistency_check, str) and ('warn' in self.consistency_check or 'drop' in self.consistency_check):
+                    if 'warn' in self.consistency_check:
+                        if 'drop' in self.consistency_check:
+                            printe(f'Dropping invalid {txt}')
+                        else:
+                            printe(f'Invalid {txt}')
+                    if 'drop' in self.consistency_check:
+                        return
 
         # check if the branch/node was dynamically created
         dynamically_created = False
