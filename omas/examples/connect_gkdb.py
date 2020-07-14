@@ -15,7 +15,8 @@ import sys
 # load a sample GKDB sample json file
 sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
 ods = ODS()
-ods['gyrokinetics'].load(sample_filename)
+# warn about `gyrokinetics.fluxes_integrated_norm = []` and drop it
+ods['gyrokinetics'].load(sample_filename, consistency_check='warn_drop')
 
 # show content
 pprint(ods.pretty_paths())
