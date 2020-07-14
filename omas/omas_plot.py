@@ -171,6 +171,7 @@ def uband(x, y, ax=None, fill_kw={'alpha': 0.25}, **kw):
 
     return result
 
+
 def imas_units_to_latex(unit):
     '''
     converts units to a nice latex format for plot labels
@@ -182,6 +183,7 @@ def imas_units_to_latex(unit):
     unit = re.sub('(\-?[0-9]+)', r'{\1}', unit)
     unit = re.sub('\.', r'\,', unit)
     return f' [${unit}$]'
+
 
 @add_to__ALL__
 def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_name='channel'):
@@ -602,9 +604,9 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_CX, time, ods, time_index, levels=levels,
-                                 contour_quantity=contour_quantity, allow_fallback=allow_fallback, ax=ax, sf=sf,
-                                 label_contours=label_contours, show_wall=show_wall, xkw=xkw,
+            return ods_time_plot(equilibrium_CX, time, ods, time_index,
+                                 levels=levels, contour_quantity=contour_quantity, allow_fallback=allow_fallback,
+                                 ax=ax, sf=sf, label_contours=label_contours, show_wall=show_wall, xkw=xkw,
                                  ggd_points_triangles=ggd_points_triangles, **kw)
 
     import matplotlib
@@ -796,7 +798,8 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_CX_topview, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(equilibrium_CX_topview, time, ods, time_index,
+                                 ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -907,7 +910,8 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(equilibrium_summary, time, ods, time_index, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw)
+            return ods_time_plot(equilibrium_summary, time, ods, time_index,
+                                 fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw)
 
     ax = cached_add_subplot(fig, axs, 1, 3, 1)
     contour_quantity = kw.pop('contour_quantity', 'rho_tor_norm')
@@ -967,7 +971,7 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species=None,
+def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None,
                           quantities=['density_thermal', 'temperature'], **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
@@ -976,8 +980,6 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
     :param ods: input ods
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
-
-    :param axes: axes to plot in (active axes is generated if `ax is None`)
 
     :param time_index: time slice to plot
 
@@ -993,6 +995,11 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
 
     from matplotlib import pyplot
 
+    if fig is None:
+        fig = pyplot.figure()
+
+    axs = kw.pop('ax', {})
+
     if time_index is None:
         time = ods['core_profiles'].time()
         if time is None:
@@ -1003,18 +1010,11 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_profiles_summary, time, ods, time_index, fig=fig, ax={},
-                                 ods_species=ods_species, quantities=quantities, **kw)
+            return ods_time_plot(core_profiles_summary, time, ods, time_index,
+                                 fig=fig, ods_species=ods_species, quantities=quantities, ax=axs, **kw)
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
     rho = prof1d['grid.rho_tor_norm']
-
-    if fig is None:
-        fig = pyplot.figure()
-    if axes is None:
-        axes = kw.pop('ax', {})
-    if 'lw' not in kw:
-        kw['lw']=2.2
 
     # Determine subplot rows x colls
     if ods_species is None:
@@ -1024,7 +1024,7 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
         ncols = len(ods_species)
 
     nplots = sum([ncols if 'density' in i or 'temperature' in i else 1 for i in quantities])
-    nrows = numpy.ceil(nplots / ncols)
+    nrows = int(numpy.ceil(nplots / ncols))
 
     # Generate species with corresponding name
     species_in_tree = [f"ion.{i}" if i >= 0 else 'electrons' for i in ods_species]
@@ -1056,21 +1056,22 @@ def core_profiles_summary(ods, fig=None, axes=None, time_index=None, ods_species
         elif 'Density' in label_name[index] or 'Temperature' in label_name[index]:
             sharey = ax
             sharex = ax
-        ax = cached_add_subplot(fig, axes, nrows, ncols, plot, sharex=sharex, sharey=sharey)
+        ax = cached_add_subplot(fig, axs, nrows, ncols, plot, sharex=sharex, sharey=sharey)
 
         uband(rho, y, ax=ax, **kw)
         if "Temp" in label_name[index]:
-            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
+            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]), fontsize=15)
+            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
         else:
-            ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]), fontsize=15)
+            ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
             ax.set_xlabel('$\\rho$')
-    ax.legend(loc='lower center')
+    if 'label' in kw:
+        ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
 
-    return {'ax': axes}
+    return {'ax': axs}
 
 
 @add_to__ODS__
@@ -1099,7 +1100,8 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_profiles_pressures, time, ods, time_index=time_index, ax=ax)
+            return ods_time_plot(core_profiles_pressures, time, ods, time_index,
+                                 ax=ax)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1141,16 +1143,13 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
-                          show_total_density=True, plot_zeff=False , **kw):
+def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=True, plot_zeff=False, **kw):
     """
     Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.
 
     :param ods: input ods
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
-
-    :param axes: axes to plot in (active axes is generated if `ax is None`)
 
     :param time_index: time slice to plot
 
@@ -1164,21 +1163,14 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
     :return: axes
     """
     from matplotlib import pyplot
-    if plot_zeff:
-        nrows = 5
-    else:
-        nrows = 4
-    ncols = 2
 
     if fig is None:
         fig = pyplot.figure()
-    if axes is None:
-        axes = kw.pop('ax', {})
-    if 'lw' not in kw:
-        kw['lw'] = 2.2
+
+    axs = kw.pop('ax', {})
 
     if time_index is None:
-        time = ods['equilibrium'].time()
+        time = ods['core_profiles'].time()
         if time is None:
             time_index = 0
         else:
@@ -1187,8 +1179,8 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_transport_fluxes, time, ods, time_index=time_index, fig=fig, axes=axes,
-                                 show_total_density=show_total_density, plot_zeff=plot_zeff)
+            return ods_time_plot(core_transport_fluxes, time, ods, time_index,
+                                 fig=fig, ax=axs, show_total_density=show_total_density, plot_zeff=plot_zeff, **kw)
 
     def sum_density_types(specie_index):
         final_density = numpy.zeros(len(prof1d['grid.rho_tor_norm']))
@@ -1201,15 +1193,17 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
             final_density += prof1d[density]
         return final_density
 
-    def plot_function(x, y, plot_num, ylabel, sharey=None, ls=None):
-        ax = cached_add_subplot(fig, axes, nrows, ncols, plot_num, sharey=sharey)
+    def plot_function(x, y, plot_num, ylabel, sharex=None, sharey=None):
+        ax = cached_add_subplot(fig, axs, nrows, ncols, plot_num, sharex=sharex, sharey=sharey)
         uband(x, y, ax=ax, **kw)
-        ax.set_ylabel(ylabel, fontsize='large')
-        ax.axvline(0.8, ls='--', color='k')
-        ax.axvline(0.2, ls='--', color='k')
-        if 'label' in kw:
-            ax.legend(prop={'size': 12})
+        ax.set_ylabel(ylabel)
         return ax
+
+    if plot_zeff:
+        nrows = 5
+    else:
+        nrows = 4
+    ncols = 2
 
     if "core_profiles" in ods:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1220,31 +1214,35 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
         species_name = ['Electrons'] + [prof1d['ion[%d].label' % k] + ' ion' for k in range(len(prof1d['ion']))]
 
         # Temperature electrons
-        ax = plot_function(x= rho_core_prof, y= prof1d[ods_species[0]]['temperature'] / 1e3,
-                      plot_num= 1, ylabel= '$T_{e}\,[keV]$')
+        ax = plot_function(x=rho_core_prof, y=prof1d[ods_species[0]]['temperature'] / 1e3,
+                           plot_num=1, ylabel='$T_{e}\,[keV]$')
+        pyplot.setp(ax.get_xticklabels(), visible=False)
 
         # Temperature main ion species
-        ax = plot_function(x= rho_core_prof, y= prof1d[ods_species[1]]['temperature'] / 1e3,
-                      plot_num=3, ylabel='$T_{i}\,[keV]$', sharey=ax)
+        ax = plot_function(x=rho_core_prof, y=prof1d[ods_species[1]]['temperature'] / 1e3,
+                           plot_num=3, ylabel='$T_{i}\,[keV]$', sharey=ax, sharex=ax)
+        pyplot.setp(ax.get_xticklabels(), visible=False)
 
         # Density electrons
         ax = plot_function(x=rho_core_prof, y=sum_density_types(specie_index=0),
-                      plot_num=5, ylabel='$n_{e}\,[m^{-3}]$')
+                           plot_num=5, ylabel='$n_{e}\,[m^{-3}]$', sharex=ax)
+        pyplot.setp(ax.get_xticklabels(), visible=False)
 
         # Rotation
         if 'rotation_frequency_tor_sonic' in prof1d:
             from .omas_physics import omas_environment
-            with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': prof1d['grid']['psi']}):
+            with omas_environment(ods, coordsio={f'equilibrium.time_slice.{k}.profiles_1d.psi': prof1d['grid']['psi'] for k in range(len(ods['equilibrium.time_slice']))}):
                 rotation = (equilibrium['profiles_1d']['r_outboard'] - equilibrium['profiles_1d']['r_inboard']) / 2 \
                            + equilibrium['profiles_1d']['geometric_axis']['r'] * -prof1d['rotation_frequency_tor_sonic']
                 ax = plot_function(x=rho_core_prof, y=rotation,
-                              plot_num=7, ylabel='R*$\Omega_0$ (m/s)')
+                                   plot_num=7, ylabel='R*$\Omega_0$ (m/s)', sharex=ax)
                 if not plot_zeff: ax.set_xlabel('$\\rho$')
 
         # Zeff
         if plot_zeff:
-            ax = plot_function(x= rho_core_prof, y= prof1d['zeff'],
-                        plot_num= 9, ylabel= '$Z_{eff}$')
+            pyplot.setp(ax.get_xticklabels(), visible=False)
+            ax = plot_function(x=rho_core_prof, y=prof1d['zeff'],
+                               plot_num=9, ylabel='$Z_{eff}$', sharex=ax)
             ax.set_xlabel('$\\rho$')
 
         # Fluxes
@@ -1254,49 +1252,52 @@ def core_transport_fluxes(ods, fig=None, axes=None, time_index=0,
 
             # Qe
             ax = plot_function(x=rho_transport_model, y=core_transport[2]['profiles_1d'][time_index]['electrons']['energy']['flux'],
-                               plot_num=2, ylabel='$Q_e$ [W/$m^2$]')
-            color =  ax.lines[-3].get_color()
-
+                               plot_num=2, ylabel='$Q_e$ [W/$m^2$]', sharex=ax)
+            color = ax.lines[-1].get_color()
             uband(x=rho_transport_model, y=core_transport[3]['profiles_1d'][time_index]['electrons']['energy']['flux'],
-                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+                  ax=ax, marker='o', ls='None', color=color)
             uband(x=rho_core_prof, y=core_transport[4]['profiles_1d'][time_index]['electrons']['energy']['flux'],
-                  ax=ax, ls='--', lw=3, color=color)
+                  ax=ax, ls='--', color=color)
+            pyplot.setp(ax.get_xticklabels(), visible=False)
 
             # Add legend on top (black) as it applies to all lines
             from matplotlib.lines import Line2D
-            legend_elements = [Line2D([0], [0], color='k', lw=3, ls='--', label='Power Balance'),
-                               Line2D([0], [0], color='k', lw=3, label='Model total'),
+            legend_elements = [Line2D([0], [0], color='k', ls='--', label='Power Balance'),
+                               Line2D([0], [0], color='k', label='Model total'),
                                Line2D([0], [0], marker='o', ls='None', color='k', label='Model target', markersize=6)]
 
             fig.legend(handles=legend_elements).set_draggable(True)
 
             # Qi
-            ax = plot_function(x=rho_transport_model, y= core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'],
-                               plot_num= 4, ylabel='$Q_i$ [W/$m^2$]')
-            uband(x=rho_transport_model, y= core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'],
-                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
-            uband(x=rho_core_prof, y= core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'],
-                  ax=ax, ls='--', lw=3, color=color)
+            ax = plot_function(x=rho_transport_model, y=core_transport[2]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                               plot_num=4, ylabel='$Q_i$ [W/$m^2$]', sharex=ax, sharey=ax)
+            uband(x=rho_transport_model, y=core_transport[3]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                  ax=ax, marker='o', ls='None', color=color)
+            uband(x=rho_core_prof, y=core_transport[4]['profiles_1d'][time_index]['total_ion_energy']['flux'],
+                  ax=ax, ls='--', color=color)
+            pyplot.setp(ax.get_xticklabels(), visible=False)
 
             # Particle flux (electron particle source)
-            ax = plot_function(x=rho_transport_model, y= 3/2 * core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'],
-                               plot_num=6, ylabel=r'$ \frac{3}{2}T_{e}\Gamma_{e}$ [W/$m^2$]')
-            uband(x=rho_transport_model, y=  3/2 * core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'],
-                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
-            ax.set_xlim(0,1)
+            ax = plot_function(x=rho_transport_model, y=3 / 2 * core_transport[2]['profiles_1d'][time_index]['electrons']['particles']['flux'],
+                               plot_num=6, ylabel=r'$ \frac{3}{2}T_{e}\Gamma_{e}$ [W/$m^2$]', sharex=ax)
+            uband(x=rho_transport_model, y=3 / 2 * core_transport[3]['profiles_1d'][time_index]['electrons']['particles']['flux'],
+                  ax=ax, marker='o', ls='None', color=color)
+            pyplot.setp(ax.get_xticklabels(), visible=False)
 
             # Pi (toroidal momentum flux)
             ax = plot_function(x=rho_transport_model,
                                y=core_transport[2]['profiles_1d'][time_index]['momentum_tor']['flux'],
-                               plot_num=8, ylabel='$\Pi_{i}$ [N/$m$]')
+                               plot_num=8, ylabel='$\Pi_{i}$ [N/$m$]', sharex=ax)
             ax.set_xlabel('$\\rho$')
 
             uband(x=rho_transport_model, y=core_transport[3]['profiles_1d'][time_index]['momentum_tor']['flux'],
-                  ax=ax, marker='o',  markersize=8, ls='None', color=color)
+                  ax=ax, marker='o', ls='None', color=color)
             uband(x=rho_core_prof, y=core_transport[4]['profiles_1d'][time_index]['momentum_tor']['flux'],
-                  ax=ax, ls='--', lw=3, color=color)
+                  ax=ax, ls='--', color=color)
 
-    return {'ax': axes}
+            ax.set_xlim(0, 1)
+
+    return {'ax': axs}
 
 
 # ================================
@@ -1329,7 +1330,8 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(pellets_trajectory_CX, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(pellets_trajectory_CX, time, ods, time_index,
+                                 ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1373,7 +1375,8 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(pellets_trajectory_CX_topview, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(pellets_trajectory_CX_topview, time, ods,
+                                 time_index, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1399,7 +1402,7 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
+def lh_antennas_CX(ods, time_index=None, ax=None, antenna_trajectory=None, **kw):
     """
     Plot LH antenna position in poloidal cross-section
 
@@ -1425,7 +1428,8 @@ def lh_antennas_CX(ods, time_index=0, ax=None, antenna_trajectory=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX, time, ods, time_index,
+                                 ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1485,7 +1489,8 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index,
+                                 ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1540,7 +1545,8 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX, time, ods, time_index,
+                                 ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1599,7 +1605,8 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index,
+                                 ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1654,7 +1661,8 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_CX, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(waves_beam_CX, time, ods, time_index,
+                                 ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1700,7 +1708,8 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_profile, time, ods, time_index, what=what, ax=ax, **kw)
+            return ods_time_plot(waves_beam_profile, time, ods, time_index,
+                                 what=what, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1751,7 +1760,8 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_summary, time, ods, time_index, fig=fig, ax={}, **kw)
+            return ods_time_plot(waves_beam_summary, time, ods, time_index,
+                                 fig=fig, ax={}, **kw)
 
     axs = kw.pop('ax', {})
 
