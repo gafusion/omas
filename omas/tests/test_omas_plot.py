@@ -227,7 +227,6 @@ class TestOmasPlot(unittest.TestCase):
         ods_test['core_transport.ids_properties.comment'] = "TGRYO"
         ods_test.sample_core_profiles()
         ods_test.sample_equilibrium()
-        ods_test['core_profiles.profiles_1d.0.rotation_frequency_tor_sonic'] = numpy.linspace(4e4, 2e3, len(ods_test['core_profiles.profiles_1d.0.grid.rho_tor_norm']))
         ods_test.plot_core_transport_fluxes()
         ods_test.plot_core_transport_fluxes(show_total_density=False, label='test')
         ods_test.plot_core_transport_fluxes(plot_zeff=True, label="test")
@@ -485,6 +484,22 @@ class TestOmasPlot(unittest.TestCase):
         ods.sample_nbi()
         # Test relevant plots with basic/default/minimal options
         ods.plot_nbi_summary()
+
+    def test_ods_time_plot(self):
+        # generate some time-dependent data
+        ods = ODS().sample(2)
+
+        # omas plot for pressures
+        ods.plot_core_profiles_pressures()
+
+        # omas plot for core profiles
+        ods.plot_core_profiles_summary()
+
+        # omas plot for equilibrium
+        omas_plot.equilibrium_summary(ods, linewidth=1, label='my equilibrium')
+
+        # omas plot for transport fluxes
+        ods.plot_core_transport_fluxes()
 
 
 if __name__ == '__main__':
