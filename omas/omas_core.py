@@ -436,7 +436,7 @@ class ODS(MutableMapping):
                                     options = 'A numerical index is needed with n>=0'
                                 else:
                                     options = 'Did you mean: %s' % options
-                                text = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
+                                txt = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
                                 if isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
                                     if 'warn' in consistency_value:
                                         if 'drop' in consistency_value:
@@ -698,9 +698,9 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
-                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
+                txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if self.consistency_check == 'warn':
-                    printe(text)
+                    printe(txt)
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
@@ -709,7 +709,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
+                    raise LookupError(underline_last(txt, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
         if not self.omas_data or not len(self.omas_data):
