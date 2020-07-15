@@ -15,6 +15,7 @@ import unittest
 import os
 import numpy
 from pprint import pprint
+import xarray
 
 # OMAS imports
 from omas import *
