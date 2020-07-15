@@ -85,6 +85,7 @@ def load_omas_dx(filename, consistency_check=True):
 
     :return: OMAS data xarray
     """
+    import xarray
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()
@@ -154,6 +155,7 @@ def load_omas_ds(filename, consistency_check=True):
 
     :return: OMAS data set
     """
+    import xarray
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()

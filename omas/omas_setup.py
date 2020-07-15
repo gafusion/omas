@@ -50,7 +50,7 @@ from uncertainties.unumpy import nominal_values, std_devs, uarray
 from uncertainties import ufloat
 
 # xarrays: avoid loading xarrays upfront since it can be slow and it is not always used
-import xarray
+# import xarray
 
 from collections.abc import MutableMapping
 import pickle

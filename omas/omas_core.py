@@ -46,8 +46,10 @@ def force_imas_type(value):
         value = function(value)
     if isinstance(value, list):
         value = numpy.array(value)
-    if isinstance(value, xarray.DataArray):
-        value = value.values
+    if 'xarray' in value.__class__.__name__:
+        import xarray
+        if isinstance(value, xarray.DataArray):
+            value = value.values
     if isinstance(value, numpy.ndarray) and not len(value.shape):
         value = value.item()
     if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
