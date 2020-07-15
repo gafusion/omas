@@ -433,7 +433,7 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
 
         # ids.getSlice()
         else:
-            printd(f"ids.{ds}.getSlice({time}, 1)", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({occ}, {time}, 1)", topic='imas_code')
             try:
                 getattr(ids, ds).getSlice(occ, time, 1)
             except ValueError as _excp:
