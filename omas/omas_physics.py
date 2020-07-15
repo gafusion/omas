@@ -1029,6 +1029,7 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     :return: R, Z, interpolated_data (and cache if return_cache)
     '''
     import scipy
+    from scipy import interpolate
 
     if isinstance(R, int) and isinstance(Z, int):
         R, Z = numpy.meshgrid(numpy.linspace(numpy.min(r), numpy.max(r), R), numpy.linspace(numpy.min(z), numpy.max(z), Z))
