@@ -1,0 +1,2161 @@
+{
+ "langmuir_probes": {
+  "documentation": "Langmuir probes",
+  "full_path": "langmuir_probes",
+  "lifecycle_last_change": "3.29.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.22.0",
+  "maxoccur": "3"
+ },
+ "langmuir_probes.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "langmuir_probes/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "langmuir_probes.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "langmuir_probes/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "langmuir_probes/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.output_flag": {
+  "coordinates": [
+   "langmuir_probes.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "langmuir_probes/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "langmuir_probes.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "langmuir_probes/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "langmuir_probes/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "langmuir_probes/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of embedded (in a plasma facing component) probes or probe pins",
+  "full_path": "langmuir_probes/embedded(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "100",
+  "structure_reference": "langmuir_probes_embedded"
+ },
+ "langmuir_probes.embedded[:].b_field_angle": {
+  "data_type": "STRUCTURE",
+  "documentation": "Incident angle of the magnetic field with respect to PFC surface",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "rad"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "rad",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].b_field_angle.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/b_field_angle/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix": {
+  "data_type": "STRUCTURE",
+  "documentation": "Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].distance_separatrix.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/distance_separatrix/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel heat flux at the probe position",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "W.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].heat_flux_parallel.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the probe",
+  "full_path": "langmuir_probes/embedded(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion parallel current density at the probe position",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A.m^-2",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].j_ion_parallel.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/j_ion_parallel/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of temperatures describing the electron and ion distribution functions in case of multi-temperature fits",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "2",
+  "structure_reference": "langmuir_probes_multi_temperature"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron temperature",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion temperature",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].multi_temperature_fits[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].multi_temperature_fits[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Timebase for the dynamic nodes of this probe located at this level of the IDS structure",
+  "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.embedded[:].n_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron density",
+  "full_path": "langmuir_probes/embedded(i1)/n_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "m^-3"
+ },
+ "langmuir_probes.embedded[:].n_e.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].n_e.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].n_e.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "m^-3",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].n_e.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].n_e.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/n_e/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the probe",
+  "full_path": "langmuir_probes/embedded(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.embedded[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the measurements",
+  "full_path": "langmuir_probes/embedded(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "langmuir_probes.embedded[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "langmuir_probes/embedded(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.embedded[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.embedded[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "langmuir_probes.embedded[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "langmuir_probes/embedded(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "langmuir_probes/embedded(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "langmuir_probes/embedded(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "langmuir_probes.embedded[:].potential_floating": {
+  "data_type": "STRUCTURE",
+  "documentation": "Floating potential",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "V"
+ },
+ "langmuir_probes.embedded[:].potential_floating.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_floating.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].potential_floating.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_floating.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_floating.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].potential_floating.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/potential_floating/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_plasma": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plasma potential",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "V"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].potential_plasma.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/potential_plasma/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion saturation current measured by the probe",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "A"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].saturation_current_ion.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/saturation_current_ion/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].surface_area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of the probe surface exposed to the plasma",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "langmuir_probes.embedded[:].surface_area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface_area\"",
+  "full_path": "langmuir_probes/embedded(i1)/surface_area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "langmuir_probes.embedded[:].t_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron temperature",
+  "full_path": "langmuir_probes/embedded(i1)/t_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "langmuir_probes.embedded[:].t_e.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].t_e.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_e.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_e.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].t_e.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/t_e/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_i": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion temperature",
+  "full_path": "langmuir_probes/embedded(i1)/t_i",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "langmuir_probes.embedded[:].t_i.data": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_i.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].t_i.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_i.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].t_i.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.embedded[:].t_i.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.embedded[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/embedded(i1)/t_i/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "langmuir_probes.embedded[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Timebase for the dynamic nodes of this probe located at this level of the IDS structure",
+  "full_path": "langmuir_probes/embedded(i1)/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.ids_properties": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "langmuir_probes/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "langmuir_probes.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "langmuir_probes/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "langmuir_probes/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "langmuir_probes/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "langmuir_probes.ids_properties.occurrence"
+ },
+ "langmuir_probes.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "langmuir_probes/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "langmuir_probes/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "langmuir_probes.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "langmuir_probes/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "langmuir_probes.reciprocating": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of reciprocating probes or probe pins",
+  "full_path": "langmuir_probes/reciprocating(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "100",
+  "structure_reference": "langmuir_probes_reciprocating"
+ },
+ "langmuir_probes.reciprocating[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the probe",
+  "full_path": "langmuir_probes/reciprocating(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.reciprocating[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the probe",
+  "full_path": "langmuir_probes/reciprocating(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "langmuir_probes.reciprocating[:].plunge": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physicas quantities within the plunge are described via the time_within_plunge vector.",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "langmuir_probes_plunge",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle": {
+  "data_type": "STRUCTURE",
+  "documentation": "Incident angle of the magnetic field with respect to PFC surface",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix": {
+  "data_type": "STRUCTURE",
+  "documentation": "Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel heat flux at the probe position",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].heat_flux_parallel.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/heat_flux_parallel/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion parallel current density at the probe position",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].j_ion_parallel.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/j_ion_parallel/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel Mach number",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "-"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron density",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "m^-3"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].n_e.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the measurements",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_position_reciprocating"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.phi": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.phi_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.phi_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.r": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.r_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.r_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the position data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].position.time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the position data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.z": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.z_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].position.z_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating": {
+  "data_type": "STRUCTURE",
+  "documentation": "Floating potential",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_floating.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_floating/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plasma potential",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].potential_plasma.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/potential_plasma/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion saturation current measured by the probe",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "A"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].saturation_current_ion.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/saturation_current_ion/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron temperature",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_e.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i": {
+  "data_type": "STRUCTURE",
+  "documentation": "Ion temperature",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i",
+  "lifecycle_status": "alpha",
+  "structure_reference": "langmuir_probes_plunge_physical_quantity",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.data": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.data_error_lower": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.data_error_upper": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/validity",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].t_i.validity_timed": {
+  "coordinates": [
+   "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time of maximum penetration of the probe during a given plunge",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Time vector for describing the dynamics within the plunge",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time_within_plunge(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_within_plunge\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time_within_plunge_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_within_plunge\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time_within_plunge_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_within_plunge\"",
+  "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time_within_plunge_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "langmuir_probes.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Generic time",
+  "full_path": "langmuir_probes/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
