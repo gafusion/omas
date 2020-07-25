@@ -21,7 +21,7 @@ def set_omas_warnings():
     warnings.filterwarnings('always', category=matplotlib.cbook.deprecation.MatplotlibDeprecationWarning)
     warnings.filterwarnings('always', category=DeprecationWarning, message='Using or importing the ABCs.*')
     warnings.filterwarnings('always', category=RuntimeWarning, message='invalid value encountered.*')
-    warnings.filterwarnings('always', category=RuntimeWarning, message='please use dns.resolver.resolve.*')
+    warnings.filterwarnings('always', category=DeprecationWarning, message='please use dns.resolver.resolve.*')
     print('OMAS warnings set to hard mode')
     return
 
