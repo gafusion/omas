@@ -504,7 +504,7 @@ _cocos_signals['equilibrium.time_slice.:.ggd.:.b_field_tor.:.values']='TOR'     
 _cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_tor']='TOR'                                          # 3.000000 # b  _tor  [T]
 _cocos_signals['equilibrium.time_slice.:.profiles_1d.f_df_dpsi']='dPSI'                                                         # 3.000000 # f  _dpsi  [T^2.m^2/Wb]
 _cocos_signals['equilibrium.time_slice.:.profiles_1d.j_parallel']='TOR'                                                         # 3.000000 # j  parallel  [A/m^2]
-_cocos_signals['equilibrium.time_slice.:.profiles_1d.j_tor']='TOR'                                                              # 3.000000 # j  _tor  [A/m^2]
+_cocos_signals['equilibrium.time_slice.:.profiles_1d.j_tor']='TOR'                                                              # 3.000000 # j  _tor  [A.m^-2]
 _cocos_signals['equilibrium.time_slice.:.profiles_2d.:.b_tor']='TOR'                                                            # 3.000000 # b  _tor  [T]
 _cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_parallel']='TOR'                                                       # 3.000000 # j  parallel  [A.m^-2]
 _cocos_signals['equilibrium.time_slice.:.profiles_2d.:.j_tor']='TOR'                                                            # 3.000000 # j  _tor  [A.m^-2]
@@ -627,6 +627,9 @@ _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.heat_flux_parallel.data
 _cocos_signals['langmuir_probes.embedded.:.heat_flux_parallel.data']='?'                            #[ADD?]# 0.750000 # parallel
 
 # LH_ANTENNAS
+_cocos_signals['lh_antennas.antenna.:.row.:.n_pol']='?'                                   #[ADD?]# 2.000000 # _pol  [-]
+_cocos_signals['lh_antennas.antenna.:.row.:.n_tor']='?'                                   #[ADD?]# 2.000000 # _tor  [-]
+_cocos_signals['lh_antennas.antenna.:.row.:.position.phi']='?'                            #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['lh_antennas.antenna.:.position.phi.data']='?'                             #[ADD?]# 1.800000 # phi  [rad]
 
 # MAGNETICS
@@ -763,10 +766,16 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_pert
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.coefficients_real']='?'                       #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.imaginary']='?'                               #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.mass_density_perturbed.real']='?'                                    #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.ntv.imaginary']='?'                                                  #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.ntv.real']='?'                                                       #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.coefficients_imaginary']='?'                      #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.coefficients_real']='?'                           #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.imaginary']='?'                                   #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.pressure_perturbed.real']='?'                                        #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.stress_maxwell.imaginary']='?'                                       #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.stress_maxwell.real']='?'                                            #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.stress_reynolds.imaginary']='?'                                      #[ADD?]# 0.428571 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.stress_reynolds.real']='?'                                           #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.coefficients_imaginary']='?'                   #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.coefficients_real']='?'                        #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.temperature_perturbed.imaginary']='?'                                #[ADD?]# 0.428571 # toroidal
@@ -825,6 +834,7 @@ _cocos_signals['pellets.time_slice.:.pellet.:.path_profiles.velocity']='?'      
 _cocos_signals['pellets.time_slice.:.pellet.:.velocity_initial']='?'                          #[ADD?]# 2.000000 # velocity  [m.s^-1]
 
 # PF_ACTIVE
+_cocos_signals['pf_active.coil.:.b_field_max_timed.data']='?'                                     #[ADD?]# 2.500000 # b  b_field  [T]
 _cocos_signals['pf_active.coil.:.current_limit_max']=None                                                # 2.000000 # current  [A]
 _cocos_signals['pf_active.supply.:.current_limit_max']=None                                              # 2.000000 # current  [A]
 _cocos_signals['pf_active.supply.:.current_limit_min']=None                                              # 2.000000 # current  [A]
@@ -858,9 +868,9 @@ _cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.first_po
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.second_point.phi']='TOR'               # 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.first_point.phi']='TOR'                 # 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.second_point.phi']='TOR'                # 2.000000 # phi  [rad]
+_cocos_signals['reflectometer_profile.channel.:.position.phi']='?'                                      #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.psi_normalization.psi_boundary']='?'                              #[ADD?]# 2.000000 # psi  [Wb]
 _cocos_signals['reflectometer_profile.psi_normalization.psi_magnetic_axis']='?'                         #[ADD?]# 2.000000 # psi  [Wb]
-_cocos_signals['reflectometer_profile.channel.:.position.phi']='?'                                      #[ADD?]# 1.000000 # phi
 _cocos_signals['reflectometer_profile.channel.:.position.psi']='?'                                      #[ADD?]# 1.000000 # psi
 
 # SAWTEETH
@@ -889,6 +899,20 @@ _cocos_signals['soft_x_rays.channel.:.aperture.:.centre.phi']='TOR'             
 _cocos_signals['soft_x_rays.channel.:.detector.centre.phi']='TOR'                              # 2.000000 # phi  [rad]
 _cocos_signals['soft_x_rays.channel.:.line_of_sight.first_point.phi']='TOR'                    # 2.000000 # phi  [rad]
 _cocos_signals['soft_x_rays.channel.:.line_of_sight.second_point.phi']='TOR'                   # 2.000000 # phi  [rad]
+
+# SPECTROMETER_MASS
+
+# SPECTROMETER_UV
+_cocos_signals['spectrometer_uv.channel.:.grating.image_field.centre.phi']='?'                  #[ADD?]# 2.666667 # e_field  phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.aperture.:.centre.phi']='?'                           #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.detector.centre.phi']='?'                             #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.grating.centre.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.grating.summit.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.line_of_sight.first_point.phi']='?'                   #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.line_of_sight.second_point.phi']='?'                  #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_uv.channel.:.grating.image_field.curvature_radius']='?'            #[ADD?]# 0.800000 # e_field
+_cocos_signals['spectrometer_uv.channel.:.grating.image_field.x3_unit_vector.x']='?'            #[ADD?]# 0.666667 # e_field
+_cocos_signals['spectrometer_uv.channel.:.grating.image_field.x3_unit_vector.y']='?'            #[ADD?]# 0.666667 # e_field
 
 # SPECTROMETER_VISIBLE
 _cocos_signals['spectrometer_visible.channel.:.active_spatial_resolution.:.centre.phi']='TOR'                                 # 2.000000 # phi  [rad]

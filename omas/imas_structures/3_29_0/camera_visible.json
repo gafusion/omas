@@ -1,0 +1,1414 @@
+{
+ "camera_visible": {
+  "documentation": "Camera in the visible light range",
+  "full_path": "camera_visible",
+  "lifecycle_last_change": "3.27.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.27.0",
+  "maxoccur": "20"
+ },
+ "camera_visible.channel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of channels (a front aperture, possibly followed by others, viewing the plasma recorded by one or more detectors e.g. for different wavelength ranges)",
+  "full_path": "camera_visible/channel(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "camera_visible_channel"
+ },
+ "camera_visible.channel[:].aperture": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Description of apertures between plasma and the detectors (position, outline shape and orientation)",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "detector_aperture"
+ },
+ "camera_visible.channel[:].aperture[:].centre": {
+  "data_type": "STRUCTURE",
+  "documentation": "If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "camera_visible.channel[:].aperture[:].centre.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].aperture[:].centre.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].centre.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].aperture[:].centre.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].aperture[:].centre.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].centre.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].centre.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].centre.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].centre.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].centre.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].centre.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].centre.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/centre/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].geometry_type": {
+  "data_type": "INT_0D",
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular', 3:'rectangle'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.  In case of 'rectangle', the surface is a rectangle defined by its centre, widths in the X1 and X2 directions, and normal vector oriented towards the plasma X3.",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/geometry_type",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_visible.channel[:].aperture[:].outline": {
+  "data_type": "STRUCTURE",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline",
+  "lifecycle_status": "alpha",
+  "structure_reference": "x1x21d_static"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x1": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x1(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x1_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x1_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x1_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x2": {
+  "coordinates": [
+   "camera_visible.channel[:].aperture[:].outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x2(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x2_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x2_error_lower": {
+  "coordinates": [
+   "camera_visible.channel[:].aperture[:].outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].outline.x2_error_upper": {
+  "coordinates": [
+   "camera_visible.channel[:].aperture[:].outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/outline/x2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].radius": {
+  "data_type": "FLT_0D",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/radius",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].radius_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radius\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/radius_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].radius_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"radius\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/radius_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].radius_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"radius\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/radius_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "camera_visible.channel[:].aperture[:].surface_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "camera_visible.channel[:].aperture[:].surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the aperture in the X1 direction, used only if geometry_type = 3",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_width_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x1_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x1_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x1_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the aperture in the X2 direction, used only if geometry_type = 3",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_width_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x2_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x2_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2_width\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x2_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].aperture[:].x3_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/aperture(i2)/x3_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of detectors",
+  "full_path": "camera_visible/channel(i1)/detector(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "camera_visible_detector"
+ },
+ "camera_visible.channel[:].detector[:].counts_to_radiance": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Counts to radiance factor, for each pixel of the detector. Includes both the transmission losses in the relay optics and the quantum efficiency of the camera itself, integrated over the wavelength range",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/counts_to_radiance(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "photons.m^-2.s^-1.sr^-1.counts^-1"
+ },
+ "camera_visible.channel[:].detector[:].counts_to_radiance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"counts_to_radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/counts_to_radiance_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].counts_to_radiance_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"counts_to_radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/counts_to_radiance_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "photons.m^-2.s^-1.sr^-1.counts^-1"
+ },
+ "camera_visible.channel[:].detector[:].counts_to_radiance_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"counts_to_radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/counts_to_radiance_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "photons.m^-2.s^-1.sr^-1.counts^-1"
+ },
+ "camera_visible.channel[:].detector[:].exposure_time": {
+  "data_type": "FLT_0D",
+  "documentation": "Exposure time",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/exposure_time",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_visible.channel[:].detector[:].exposure_time_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"exposure_time\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/exposure_time_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].exposure_time_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"exposure_time\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/exposure_time_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_visible.channel[:].detector[:].exposure_time_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"exposure_time\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/exposure_time_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_visible.channel[:].detector[:].frame": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].frame[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of frames",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "camera_visible_frame",
+  "type": "dynamic"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].image_raw": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "INT_2D",
+  "documentation": "Raw image (unprocessed) (digital levels). First dimension : line index (horizontal axis). Second dimension: column index (vertical axis).",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/image_raw(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].radiance": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Radiance image. First dimension : line index (horizontal axis). Second dimension: column index (vertical axis).",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/radiance(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "photons.m^-2.s^-1.sr^-1"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].radiance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/radiance_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].radiance_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/radiance_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "photons.m^-2.s^-1.sr^-1"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].radiance_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"radiance\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/radiance_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "photons.m^-2.s^-1.sr^-1"
+ },
+ "camera_visible.channel[:].detector[:].frame[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/frame(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix": {
+  "data_type": "STRUCTURE",
+  "documentation": "Description of geometry matrix (ray transfer matrix)",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix",
+  "lifecycle_status": "alpha",
+  "structure_reference": "camera_visible_geometry_matrix"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.data": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi"
+  ],
+  "data_type": "FLT_5D",
+  "documentation": "The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to each pixel of the receiver (detector). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. The first two dimension correspond to the detector pixels : first dimension : line index (horizontal axis); second dimension: column index (vertical axis). The last three dimensions correspond to the light emission grid : Third dimension: Major radius. Fourth dimension: Height. Fifth dimension: Toroidal angle.",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/data(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.data_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi"
+  ],
+  "data_type": "FLT_5D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/data_error_lower(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.data_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi"
+  ],
+  "data_type": "FLT_5D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/data_error_upper(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid": {
+  "data_type": "STRUCTURE",
+  "documentation": "Grid defining the light emission cells",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_static"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi_error_lower": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi_error_upper": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z_error_lower": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z_error_upper": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/emission_grid/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].geometry_matrix.voxel_map": {
+  "coordinates": [
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.r",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.z",
+   "camera_visible.channel[:].detector[:].geometry_matrix.emission_grid.phi"
+  ],
+  "data_type": "INT_3D",
+  "documentation": "Voxel map for geometry matrix. The cells with same number are merged in the computation into a single emission source meta-cell. Cells with number -1 are excluded. Count starts from 0.",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/geometry_matrix/voxel_map(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_visible.channel[:].detector[:].noise": {
+  "data_type": "FLT_0D",
+  "documentation": "Detector noise (e.g. read-out noise) (rms counts per second exposure time)",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/noise",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "camera_visible.channel[:].detector[:].noise_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"noise\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/noise_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].noise_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"noise\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/noise_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "camera_visible.channel[:].detector[:].noise_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"noise\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/noise_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_alpha": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Alpha angle of each pixel in the horizontal axis",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_alpha(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_alpha_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pixel_to_alpha\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_alpha_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_alpha_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pixel_to_alpha\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_alpha_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_alpha_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pixel_to_alpha\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_alpha_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_beta": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Beta angle of each pixel in the vertical axis",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_beta(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_beta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pixel_to_beta\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_beta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_beta_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pixel_to_beta\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_beta_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].pixel_to_beta_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pixel_to_beta\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/pixel_to_beta_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower bound of the detector wavelength range",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_lower_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelength_lower\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_lower_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_lower_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"wavelength_lower\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_lower_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_lower_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"wavelength_lower\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_lower_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the detector wavelength range",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_upper_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelength_upper\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_upper_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_upper_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"wavelength_upper\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_upper_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].detector[:].wavelength_upper_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"wavelength_upper\"",
+  "full_path": "camera_visible/channel(i1)/detector(i2)/wavelength_upper_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "camera_visible.channel[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the channel",
+  "full_path": "camera_visible/channel(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_visible.channel[:].viewing_angle_alpha_bounds": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Minimum and maximum values of alpha angle of the field of view, where alpha is the agle between the axis X3 and projection of the chord of view  on the plane X1X3 counted clockwise from the top view of X2 axis. X1, X2, X3 are the ones of the first aperture (i.e. the closest to the plasma).",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_alpha_bounds(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].viewing_angle_alpha_bounds_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"viewing_angle_alpha_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_alpha_bounds_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].viewing_angle_alpha_bounds_error_lower": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"viewing_angle_alpha_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_alpha_bounds_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].viewing_angle_alpha_bounds_error_upper": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"viewing_angle_alpha_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_alpha_bounds_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].viewing_angle_beta_bounds": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Minimum and maximum values of beta angle of the field of view, where beta is the angle between the axis X3 and projection of the chord of view on the plane X2X3 counted clockwise from the top view of X1 axis. X1, X2, X3 are the ones of the first aperture (i.e. the closest to the plasma).",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_beta_bounds(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].viewing_angle_beta_bounds_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"viewing_angle_beta_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_beta_bounds_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.channel[:].viewing_angle_beta_bounds_error_lower": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"viewing_angle_beta_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_beta_bounds_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.channel[:].viewing_angle_beta_bounds_error_upper": {
+  "coordinates": [
+   "1...2"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"viewing_angle_beta_bounds\"",
+  "full_path": "camera_visible/channel(i1)/viewing_angle_beta_bounds_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "camera_visible.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "camera_visible/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "camera_visible.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "camera_visible/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "camera_visible/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.code.output_flag": {
+  "coordinates": [
+   "camera_visible.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "camera_visible/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "camera_visible.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "camera_visible/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "camera_visible/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "camera_visible/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "camera_visible/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "camera_visible.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "camera_visible/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "camera_visible/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "camera_visible/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "camera_visible.ids_properties.occurrence"
+ },
+ "camera_visible.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "camera_visible/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "camera_visible/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.version_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "camera_visible/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "camera_visible.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "camera_visible/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "camera_visible/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "camera_visible/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_visible.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the camera",
+  "full_path": "camera_visible/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_visible.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Generic time",
+  "full_path": "camera_visible/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
