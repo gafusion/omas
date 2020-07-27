@@ -172,6 +172,12 @@ class TestOmasPhysics(unittest.TestCase):
         CPC(ods, kw=kw)  # j_ni is 4
         return
 
+    def test_sumary_global_quantities(self):
+        ods = ODS().sample()
+        ods.physics_summary_global_quantities()
+        assert ods['summary']['global_quantities']['tau_energy']['value'] is not None
+        return
+
     def test_current_from_eq(self):
         ods = ODS().sample_equilibrium()
         current_from_eq(ods, 0)
