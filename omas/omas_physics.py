@@ -267,9 +267,15 @@ def summary_total_powers(ods, update=True):
               'ec': copy.deepcopy(q_init), 'lh': copy.deepcopy(q_init),
               'ic': copy.deepcopy(q_init)}
 
+    ignore_indices = list(range(100, 108)) + list(range(900,910))
+
     for time_index in sources[0]['profiles_1d']:
         vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
         for source in sources:
+            if sources[source]['identifier.index'] in ignore_indices:
+                # Skip the combined sources to prevent double counting
+                print(sources[source]['identifier.name'], "is excluded from summary_total_powers with index", sources[source]['identifier.index'])
+                continue
             if 'electrons' in sources[source]['profiles_1d'][time_index] and 'energy' in \
                     sources[source]['profiles_1d'][time_index]['electrons']:
                 q_dict['total'] += sources[source]['profiles_1d'][time_index]['electrons']['energy']
