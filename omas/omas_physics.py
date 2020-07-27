@@ -258,7 +258,6 @@ def summary_total_powers(ods, update=True):
         from omas import ODS
         ods_n = ODS().copy_attrs_from(ods)
 
-    import copy
     sources = ods_n['core_sources']['source']
     index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
     power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
@@ -274,17 +273,16 @@ def summary_total_powers(ods, update=True):
         for source in sources:
             if sources[source]['identifier.index'] in ignore_indices:
                 # Skip the combined sources to prevent double counting
-                print(sources[source]['identifier.name'], "is excluded from summary_total_powers with index", sources[source]['identifier.index'])
                 continue
             if 'electrons' in sources[source]['profiles_1d'][time_index] and 'energy' in \
                     sources[source]['profiles_1d'][time_index]['electrons']:
                 q_dict['total'] += sources[source]['profiles_1d'][time_index]['electrons']['energy']
-                if sources[source]['identifier.index'] in index_dict.keys():
+                if sources[source]['identifier.index'] in index_dict:
                     q_dict[index_dict[sources[source]['identifier.index']]] += \
                     sources[source]['profiles_1d'][time_index]['electrons']['energy']
             if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
                 q_dict['total'] += sources[source]['profiles_1d'][time_index]['total_ion_energy']
-                if sources[source]['identifier.index'] in index_dict.keys():
+                if sources[source]['identifier.index'] in index_dict:
                     q_dict[index_dict[sources[source]['identifier.index']]] += \
                     sources[source]['profiles_1d'][time_index]['total_ion_energy']
 
