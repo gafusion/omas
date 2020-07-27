@@ -4,7 +4,8 @@
 {
 "identifier": {
 "description": "(electron) ohmic power density, watts/meter^3",
-"name": "qohm"
+"name": "qohm",
+"index": 7
 },
 "profiles_1d": [
 {
@@ -57,7 +58,8 @@
 {
 "identifier": {
 "description": "Source of energy to electrons due to collisional energy exchange with thermal ions",
-"name": "qdelt"
+"name": "qdelt",
+"index": 11
 },
 "profiles_1d": [
 {
@@ -123,7 +125,8 @@
 {
 "identifier": {
 "description": "radiated power density, watts/meter^3",
-"name": "qrad"
+"name": "qrad",
+"index": 10
 },
 "profiles_1d": [
 {
@@ -176,7 +179,8 @@
 {
 "identifier": {
 "description": "qione, electron power density due to  recombination and impact ionization, watts/meter^3",
-"name": "qione"
+"name": "qione",
+"index": 602
 },
 "profiles_1d": [
 {
@@ -229,7 +233,8 @@
 {
 "identifier": {
 "description": "power to elec. from beam, watts/meter^3",
-"name": "qbeame"
+"name": "qbeame",
+"index": 2
 },
 "profiles_1d": [
 {
@@ -282,7 +287,8 @@
 {
 "identifier": {
 "description": "qrfe, RF electron heating, watts/meter^3",
-"name": "qrfe"
+"name": "qrfe",
+"index": 3
 },
 "profiles_1d": [
 {
@@ -335,7 +341,8 @@
 {
 "identifier": {
 "description": "total fusion electron heating, watts/meter^3",
-"name": "qfuse"
+"name": "qfuse",
+"index": 6
 },
 "profiles_1d": [
 {
@@ -388,7 +395,8 @@
 {
 "identifier": {
 "description": "qioni, ion power density due to  recombination and impact ionization, watts/meter^3",
-"name": "qioni"
+"name": "qioni",
+"index": 2
 },
 "profiles_1d": [
 {
@@ -439,7 +447,8 @@
 {
 "identifier": {
 "description": "qcx, ion power density due to neutral-ion charge exchange, watts/meter^3",
-"name": "qcx"
+"name": "qcx",
+"index": 305
 },
 "profiles_1d": [
 {
@@ -490,7 +499,8 @@
 {
 "identifier": {
 "description": "power to ions  from beam, watts/meter^3",
-"name": "qbeami"
+"name": "qbeami",
+"index": 2
 },
 "profiles_1d": [
 {
@@ -541,7 +551,8 @@
 {
 "identifier": {
 "description": "qrfi, RF electron heating, watts/meter^3",
-"name": "qrfi"
+"name": "qrfi",
+"index": 3
 },
 "profiles_1d": [
 {
@@ -592,7 +603,8 @@
 {
 "identifier": {
 "description": "total fusion ion heating, watts/meter^3",
-"name": "qfusi"
+"name": "qfusi",
+"index": 6
 },
 "profiles_1d": [
 {
@@ -643,7 +655,8 @@
 {
 "identifier": {
 "description": "Source of electrons due to electron impact ionization of thermal neutrals",
-"name": "sion_thermal_e"
+"name": "sion_thermal_e",
+"index": 0
 },
 "profiles_1d": [
 {
@@ -696,7 +709,8 @@
 {
 "identifier": {
 "description": "sbeame : beam electron source,#/(meter^3*second)",
-"name": "sbeame"
+"name": "sbeame",
+"index": 2
 },
 "profiles_1d": [
 {
@@ -749,7 +763,8 @@
 {
 "identifier": {
 "description": "Source of electrons due to recombination",
-"name": "srecom_e"
+"name": "srecom_e",
+"index": 602
 },
 "profiles_1d": [
 {
@@ -802,7 +817,8 @@
 {
 "identifier": {
 "description": "spellet : THERMAL ion source due to pellets, #/(meter^3*second)",
-"name": "spellet"
+"name": "spellet",
+"index": 14
 },
 "profiles_1d": [
 {
@@ -855,7 +871,8 @@
 {
 "identifier": {
 "description": "Torque due to beams (sprbeame+sprbeami+ssprcxl)",
-"name": "storqueb"
+"name": "storqueb",
+"index": 2
 },
 "profiles_1d": [
 {
