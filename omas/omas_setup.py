@@ -9,7 +9,8 @@
 import os
 import sys
 
-__version__ = open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r').read().strip()
+with open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r') as _f:
+    __version__ = _f.read().strip()
 
 if sys.version_info < (3, 5):
     raise Exception('''
