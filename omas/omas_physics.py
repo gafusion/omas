@@ -15,7 +15,6 @@ def add_to__ODS__(f):
     anything wrapped here will be available as a ODS method with name 'physics_'+f.__name__
     '''
     __ods__.append(f.__name__)
-    __all__.append(f.__name__)
     return f
 
 
@@ -1000,7 +999,6 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
     return ods
 
 
-@add_to__ALL__
 def delete_ggd(ods, ds=None):
     '''
     delete all .ggd and .grids_ggd entries
@@ -1039,7 +1037,6 @@ def delete_ggd(ods, ds=None):
     return deleted
 
 
-@add_to__ALL__
 def grids_ggd_points_triangles(grid):
     '''
     Return points and triangles in grids_ggd structure
@@ -1053,7 +1050,6 @@ def grids_ggd_points_triangles(grid):
     return points, triangles
 
 
-@add_to__ALL__
 def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], sanitize=True, return_cache=False):
     '''
     Interpolate scattered data points to rectangular grid

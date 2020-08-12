@@ -41,18 +41,18 @@ class TestOmasPhysics(unittest.TestCase):
         ods.sample_equilibrium()
 
         assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
-        ods = equilibrium_consistent(ods)
+        ods.physics_equilibrium_consistent()
         assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
         return
 
     def test_core_profiles_pressures(self):
         ods = ODS()
         ods.sample_core_profiles(include_pressure=False)
-        ods2 = core_profiles_pressures(ods, update=True)
+        ods2 = ods.physics_core_profiles_pressures(update=True)
         diff = ods.diff(ods2)
         assert not diff
 
-        ods2 = core_profiles_pressures(ods, update=False)
+        ods2 = ods.physics_core_profiles_pressures(update=False)
         assert all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')])
         return
 
@@ -68,7 +68,7 @@ class TestOmasPhysics(unittest.TestCase):
         def CPC(ods, kw=jdef, should_RE=False, should_AE=False, warn=False):
 
             try:
-                core_profiles_currents(ods, 0, rho, warn=warn, **kw)
+                ods.physics_core_profiles_currents(0, rho, warn=warn, **kw)
             except RuntimeError as err:
                 if should_RE:
                     pass
@@ -180,7 +180,7 @@ class TestOmasPhysics(unittest.TestCase):
 
     def test_current_from_eq(self):
         ods = ODS().sample_equilibrium()
-        current_from_eq(ods, 0)
+        ods.physics_current_from_eq(0)
         return
 
     def test_define_cocos(self):

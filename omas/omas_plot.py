@@ -14,7 +14,6 @@ def add_to__ODS__(f):
     '''
     anything wrapped here will be available as a ODS method with name 'plot_'+f.__name__
     '''
-    __all__.append(f.__name__)
     __ods__.append(f.__name__)
     return f
 
