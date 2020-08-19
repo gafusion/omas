@@ -9,7 +9,7 @@ from .omas_utils import __version__, _extra_structures
 __all__ = [
     'ODS', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
-    'ods_sample', 'different_ods',
+    'ods_sample', 'different_ods', 'omas_structure',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
@@ -1818,6 +1818,31 @@ class ODS(MutableMapping):
                 getattr(self, 'sample_' + func)()
         return self
 
+    def document(self, what=['coordinates', 'data_type', 'documentation', 'units']):
+        '''
+        RST documentation of the ODs content
+
+        :param what: fields to be included in the documentation
+                     if None, all fields are included
+
+        :return: string with RST documentation
+        '''
+        pp = {}
+        for item in self.pretty_paths():
+            tt = l2u(p2l(item))
+            pp[tt] = omas_info_node(tt)
+
+        txt = []
+        for item in sorted(pp.keys()):
+            txt += ['', item]
+            txt += ['-' * len(item)]
+            for elms in pp[item]:
+                if what is not None and elms not in what:
+                    continue
+                value = str(pp[item][elms])
+                txt += [f'* {elms}: {value}']
+
+        return '\n'.join(txt)
 
 class dynamic_ODS:
     kw = {}
@@ -2200,3 +2225,4 @@ from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
 from .omas_mongo import *
+from . import omas_structure
