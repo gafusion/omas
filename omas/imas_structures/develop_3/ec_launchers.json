@@ -2,7 +2,7 @@
  "ec_launchers": {
   "documentation": "Launchers for heating and current drive in the electron cyclotron (EC) frequencies.",
   "full_path": "ec_launchers",
-  "lifecycle_last_change": "3.28.1",
+  "lifecycle_last_change": "3.29.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -143,7 +143,7 @@
   "documentation": "Set of Electron Cyclotron launchers",
   "full_path": "ec_launchers/launcher(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "10",
+  "maxoccur": "12",
   "structure_reference": "ec_launchers_launcher"
  },
  "ec_launchers.launcher[:].beam": {
