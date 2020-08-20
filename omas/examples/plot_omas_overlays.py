@@ -14,7 +14,7 @@ import numpy
 ods = ods_sample()
 
 # plot equilibrium and wall
-ods.plot_equilibrium_CX()
+ods.plot_equilibrium_CX(contour_quantity='psi_norm')
 # plot overlays
 ods.plot_overlay(  # Values can be True to simply turn on or dict to pass keywords to specific overlay functions
     gas_injection={'colors': ['b', 'g', 'c']},  # , 'which_gas': ['GASA', 'LOB1']},
