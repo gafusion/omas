@@ -2,7 +2,7 @@
  "waves": {
   "documentation": "RF wave propagation and deposition. Note that current estimates in this IDS are a priori not taking into account synergies between multiple sources (a convergence loop with Fokker-Planck calculations is required to account for such synergies) ",
   "full_path": "waves",
-  "lifecycle_last_change": "3.9.0",
+  "lifecycle_last_change": "3.29.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.5.0",
   "maxoccur": "8"
@@ -69,7 +69,7 @@
   "documentation": "Wave description for each frequency",
   "full_path": "waves/coherent_wave(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "10",
+  "maxoccur": "12",
   "structure_reference": "waves_coherent_wave"
  },
  "waves.coherent_wave[:].beam_tracing": {

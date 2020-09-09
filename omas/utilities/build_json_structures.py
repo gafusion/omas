@@ -5,6 +5,7 @@ os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
 sys.path.insert(0,os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
 from omas import *
+from omas.omas_structure import *
 
 force_build_json = 'last'
 

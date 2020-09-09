@@ -14,7 +14,6 @@ def add_to__ODS__(f):
     '''
     anything wrapped here will be available as a ODS method with name 'plot_'+f.__name__
     '''
-    __all__.append(f.__name__)
     __ods__.append(f.__name__)
     return f
 
@@ -556,7 +555,7 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
         values to pass to 2D plot as contour levels
 
     :param contour_quantity: string
-        quantity to contour; options: psi (poloidal magnetic flux), rho (sqrt of toroidal flux), phi (toroidal flux)
+        quantity to contour, anything in eq['profiles_1d'] or eq['profiles_2d'] or psi_norm
 
     :param allow_fallback: bool
         If rho/phi is requested but not available, plot on psi instead if allowed. Otherwise, raise ValueError.
@@ -651,13 +650,16 @@ def equilibrium_CX(ods, time_index=None, levels=None, contour_quantity='rho_tor_
     # Choose quantity to plot
     for fallback in range(2):
         # Most robust thing is to use PSI2D and interpolate 1D quantities over it
-        if get2d('psi') is not None and 'psi' in eq['profiles_1d'] and contour_quantity in eq['profiles_1d']:
+        if get2d('psi') is not None and 'psi' in eq['profiles_1d'] and contour_quantity in eq['profiles_1d'] or contour_quantity == 'psi_norm':
             x_value_1d = eq['profiles_1d']['psi']
             m = x_value_1d[0]
             M = x_value_1d[-1]
             x_value_1d = (x_value_1d - m) / (M - m)
             x_value_2d = (get2d('psi') - m) / (M - m)
-            value_1d = eq['profiles_1d'][contour_quantity]
+            if contour_quantity == 'psi_norm':
+                value_1d = x_value_1d
+            else:
+                value_1d = eq['profiles_1d'][contour_quantity]
             value_2d = omas_interp1d(x_value_2d, x_value_1d, value_1d)
             break
         # Next get 2D quantity

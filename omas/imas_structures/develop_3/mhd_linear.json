@@ -2,7 +2,7 @@
  "mhd_linear": {
   "documentation": "Magnetohydronamic linear stability",
   "full_path": "mhd_linear",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.29.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -309,6 +309,37 @@
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/ballooning_type/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].energy_perturbed": {
+  "data_type": "FLT_0D",
+  "documentation": "Perturbed energy associated to the mode",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/energy_perturbed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].energy_perturbed_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_perturbed\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/energy_perturbed_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].energy_perturbed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"energy_perturbed\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/energy_perturbed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "mhd_linear.time_slice[:].toroidal_mode[:].energy_perturbed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"energy_perturbed\"",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/energy_perturbed_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "J"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].frequency": {
   "data_type": "FLT_0D",
