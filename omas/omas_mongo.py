@@ -55,9 +55,15 @@ def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['defa
     return str(res.inserted_id)
 
 
-def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['default_mongo_server'],
-                    consistency_check=True, imas_version=omas_rcparams['default_imas_version'],
-                    limit=None):
+def load_omas_mongo(
+    find,
+    collection,
+    database='omas',
+    server=omas_rcparams['default_mongo_server'],
+    consistency_check=True,
+    imas_version=omas_rcparams['default_imas_version'],
+    limit=None,
+):
     """
     Load an OMAS data set from MongoDB
 
@@ -118,7 +124,7 @@ def load_omas_mongo(find, collection, database='omas', server=omas_rcparams['def
 
 
 def get_mongo_credentials(server='', database='', collection=''):
-    '''
+    """
     Users can specify their credentials in a `~/.omas/mongo_credentials` json file
     formatted like this:
 
@@ -144,7 +150,7 @@ def get_mongo_credentials(server='', database='', collection=''):
     :param collection: collection name in database to look credentials for
 
     :return: dictionary with 'user' and 'pass' keys
-    '''
+    """
     server = server.split('@')[-1]
     up = {'user': 'omas_test', 'pass': 'omas_test'}
     config = {}

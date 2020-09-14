@@ -3,7 +3,7 @@ from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
-sys.path.insert(0,os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
+sys.path.insert(0, os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
 from omas import *
 from omas.omas_structure import *
 
@@ -20,7 +20,11 @@ for imas_version in imas_versions:
 
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions[imas_version], 'omas_doc.html']))
 
-    if not os.path.exists(filename) or force_build_json is True or (force_build_json == 'last' and (imas_version == list(imas_versions.keys())[-1]) or imas_version == 'develop/3'):
+    if (
+        not os.path.exists(filename)
+        or force_build_json is True
+        or (force_build_json == 'last' and (imas_version == list(imas_versions.keys())[-1]) or imas_version == 'develop/3')
+    ):
         generate_xml_schemas(imas_version=imas_version)
         create_json_structure(imas_version=imas_version)
         create_html_documentation(imas_version=imas_version)

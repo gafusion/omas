@@ -8,11 +8,13 @@ from .omas_utils import *
 # add support for occurrences to each IDS
 number_of_omas_only_add_datastructures_entries = 0
 for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
-    add_datastructures[structure] = {f"{structure}.ids_properties.occurrence": {
-        "full_path": f"{structure}.ids_properties.occurrence",
-        "data_type": "INT_0D",
-        "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]"
-    }}
+    add_datastructures[structure] = {
+        f"{structure}.ids_properties.occurrence": {
+            "full_path": f"{structure}.ids_properties.occurrence",
+            "data_type": "INT_0D",
+            "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+        }
+    }
     number_of_omas_only_add_datastructures_entries = len(add_datastructures[structure])
 
 # --------------------------------------------
@@ -36,22 +38,34 @@ def generate_xml_schemas(imas_version=None):
     if not os.path.exists(dd_folder):
         subprocess.Popen(
             'cd %s ; git clone ssh://git@git.iter.org/imas/data-dictionary.git' % os.sep.join([imas_json_dir, '..']),
-            stdout=subprocess.PIPE, shell=True).communicate()[0]
+            stdout=subprocess.PIPE,
+            shell=True,
+        ).communicate()[0]
 
     # download Saxon
     sax_folder = os.sep.join([imas_json_dir, '..', saxon_version])
     if not os.path.exists(sax_folder):
-        subprocess.Popen("""
+        subprocess.Popen(
+            """
         cd {install_dir}
         curl https://iweb.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
-        rm {saxon_version}.zip""".format(install_dir=os.sep.join([imas_json_dir, '..']), saxon_major_version=saxon_major_version, saxon_version=saxon_version), shell=True).communicate()
+        rm {saxon_version}.zip""".format(
+                install_dir=os.sep.join([imas_json_dir, '..']), saxon_major_version=saxon_major_version, saxon_version=saxon_version
+            ),
+            shell=True,
+        ).communicate()
 
     # fetch data structure updates
-    subprocess.Popen("""
+    subprocess.Popen(
+        """
     cd {dd_folder}
     git fetch
-    """.format(dd_folder=dd_folder), shell=True).communicate()
+    """.format(
+            dd_folder=dd_folder
+        ),
+        shell=True,
+    ).communicate()
 
     # find IMAS data-dictionary tags
     result = b2s(subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0])
@@ -77,13 +91,16 @@ make
 rm -rf {imas_json_dir}/{_imas_version}/
 mkdir {imas_json_dir}/{_imas_version}/
 cp IDSDef.xml {imas_json_dir}/{_imas_version}/
-""".format(tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder, saxon_version=saxon_version)
+""".format(
+        tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder, saxon_version=saxon_version
+    )
     print(executable)
     subprocess.Popen(executable, shell=True).communicate()
 
 
 def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     import xmltodict
+
     file = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + 'IDSDef.xml'
     tmp = xmltodict.parse(open(file).read())
 
@@ -146,7 +163,10 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         if '@units' in me:
             if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
                 me['@units'] = '-'
-            if fname in ['equilibrium.time_slice[:].profiles_1d.geometric_axis.r', 'equilibrium.time_slice[:].profiles_1d.geometric_axis.z']:
+            if fname in [
+                'equilibrium.time_slice[:].profiles_1d.geometric_axis.r',
+                'equilibrium.time_slice[:].profiles_1d.geometric_axis.z',
+            ]:
                 me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
             if me['@units'] in ['as_parent', 'as parent', 'as_parent_level_2']:
                 me['@units'] = parent['units']
@@ -267,13 +287,15 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version, imas_version), 'omas_doc.html']))
 
     table_header = "<table border=1, width='100%'>"
-    sub_table_header = '<tr>' \
-                       '<th style="width:25%">Path</th>' \
-                       '<th style="width:25%">Dimensions</th>' \
-                       '<th>Type</th>' \
-                       '<th>Units</th>' \
-                       '<th>Description</th>' \
-                       '</tr>'
+    sub_table_header = (
+        '<tr>'
+        '<th style="width:25%">Path</th>'
+        '<th style="width:25%">Dimensions</th>'
+        '<th>Type</th>'
+        '<th>Units</th>'
+        '<th>Description</th>'
+        '</tr>'
+    )
 
     column_style = 'style="word-wrap:break-word;word-break:break-all"'
     lines = []
@@ -301,7 +323,10 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                 status = ''
                 if 'lifecycle_status' in structure[item] and structure[item]['lifecycle_status'] not in ['active']:
                     color_mapper = {'alpha': 'blue', 'obsolescent': 'red'}
-                    status = '</p><p><font color="%s">(%s)</font>' % (color_mapper.get(structure[item]['lifecycle_status'], 'orange'), structure[item]['lifecycle_status'])
+                    status = '</p><p><font color="%s">(%s)</font>' % (
+                        color_mapper.get(structure[item]['lifecycle_status'], 'orange'),
+                        structure[item]['lifecycle_status'],
+                    )
                 # highlight entries that are a coordinate
                 item_with_coordinate_highlight = item
                 if item in coords:
@@ -309,21 +334,25 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
                 try:
                     lines.append(
                         '<tr>'
-                        '<td {column_style}><p>{item_with_coordinate_highlight}{status}</p></td>' \
-                        '<td {column_style}><p>{coordinates}</p></td>' \
-                        '<td><p>{data_type}</p></td>' \
-                        '<td><p>{units}</p></td>' \
+                        '<td {column_style}><p>{item_with_coordinate_highlight}{status}</p></td>'
+                        '<td {column_style}><p>{coordinates}</p></td>'
+                        '<td><p>{data_type}</p></td>'
+                        '<td><p>{units}</p></td>'
                         '<td><p>{description}</p></td>'
                         '</tr>'.format(
                             item_with_coordinate_highlight=item_with_coordinate_highlight,
-                            coordinates=re.sub('\[\]', '', re.sub('[\'\"]', '', re.sub(',', ',<br>', str(
-                                list(map(str, structure[item].get('coordinates', ''))))))),
+                            coordinates=re.sub(
+                                '\[\]',
+                                '',
+                                re.sub('[\'\"]', '', re.sub(',', ',<br>', str(list(map(str, structure[item].get('coordinates', '')))))),
+                            ),
                             data_type=structure[item].get('data_type', '') + is_uncertain,
                             units=structure[item].get('units', ''),
                             description=re.sub('\n', '<br>', structure[item].get('documentation', '')),
                             status=status,
-                            column_style=column_style
-                        ))
+                            column_style=column_style,
+                        )
+                    )
                 except Exception:
                     printe(item)
                     raise
@@ -335,13 +364,13 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
 
 
 def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return list of strings with coordinates across all structures
 
     :param imas_version: imas version
 
     :return: list with coordinate
-    '''
+    """
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
@@ -359,13 +388,13 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
 
 
 def extract_times(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return list of strings with .time across all structures
 
     :param imas_version: imas version
 
     :return: list with times
-    '''
+    """
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
@@ -382,13 +411,13 @@ def extract_times(imas_version=omas_rcparams['default_imas_version']):
 
 
 def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return list of strings endingwith .ggd or .grids_ggd across all structures
 
     :param imas_version: imas version
 
     :return: list with times
-    '''
+    """
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
@@ -404,13 +433,13 @@ def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
 
 
 def extract_cocos(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return dictionary of entries with cocos transformations across all structures
 
     :param imas_version: imas version
 
     :return: dictionary with cocos transformations
-    '''
+    """
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
     from omas.omas_utils import i2o
@@ -449,7 +478,7 @@ def extract_cocos(imas_version=omas_rcparams['default_imas_version']):
 
 
 def symlink_imas_structure_versions(test=True, verbose=True):
-    '''
+    """
     Generate symbolic links in imas_structures so that no files are added when there are no changes between IDSs
 
     :param test: whether to actually apply symlink commands
@@ -457,7 +486,7 @@ def symlink_imas_structure_versions(test=True, verbose=True):
     :param verbose: wheter to print to screen structures strides
 
     :returns: dictionary with structure stides per IDS
-    '''
+    """
 
     import subprocess
     from pprint import pprint
@@ -500,7 +529,7 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                 if len(stride) > 1:
                     for version in stride[:-1]:
                         dir = imas_json_dir + '/'
-                        this = dict_structures(stride[-1])[ds][len(dir):]
+                        this = dict_structures(stride[-1])[ds][len(dir) :]
                         prev = dict_structures(version)[ds]
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
                         subprocess.Popen(command, shell=True).communicate()

@@ -8,7 +8,7 @@ from .omas_core import ODS
 
 
 def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None):
-    '''
+    """
     Utility function to save hierarchy of dictionaries containing numpy-compatible objects to hdf5 file
 
     :param filename: hdf5 file to save to
@@ -22,7 +22,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     :param lists_as_dicts: convert lists to dictionaries with integer strings
 
     :param compression: gzip compression level
-    '''
+    """
     import h5py
 
     if isinstance(filename, str):
@@ -61,7 +61,9 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
                 tmp = tmp.astype('S')
             elif tmp.dtype.name.lower().startswith('o'):
                 if numpy.atleast_1d(is_uncertain(tmp)).any():
-                    g.create_dataset(key + '_error_upper', std_devs(tmp).shape, dtype=std_devs(tmp).dtype, compression=compression)[...] = std_devs(tmp)
+                    g.create_dataset(key + '_error_upper', std_devs(tmp).shape, dtype=std_devs(tmp).dtype, compression=compression)[
+                        ...
+                    ] = std_devs(tmp)
                     tmp = nominal_values(tmp)
                 else:
                     continue
@@ -85,14 +87,15 @@ def save_omas_h5(ods, filename):
 
 
 def convertDataset(ods, data):
-    '''
+    """
     Recursive utility function to map HDF5 structure to ODS
 
     :param ods: input ODS to be populated
 
     :param data: HDF5 dataset of group
-    '''
+    """
     import h5py
+
     keys = data.keys()
     try:
         keys = sorted(list(map(int, keys)))
@@ -122,6 +125,7 @@ def load_omas_h5(filename, consistency_check=True):
     :return: OMAS data set
     """
     import h5py
+
     ods = ODS(consistency_check=False)
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)

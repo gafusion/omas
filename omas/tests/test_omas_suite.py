@@ -22,7 +22,6 @@ from omas.tests import warning_setup
 
 
 class TestOmasSuite(unittest.TestCase):
-
     def test_omas_pkl(self):
         ods = ODS().sample()
         ods1 = through_omas_pkl(ods)

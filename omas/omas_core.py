@@ -6,6 +6,7 @@
 from .omas_utils import *
 from .omas_utils import __version__, _extra_structures
 
+# fmt: off
 __all__ = [
     'ODS', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
@@ -24,6 +25,7 @@ __all__ = [
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
 ]
+# fmt: on
 
 # List of functions that can be added by third-party Python
 # packages for processing input data that will go in an ODS
@@ -33,13 +35,13 @@ input_data_process_functions = []
 
 
 def force_imas_type(value):
-    '''
+    """
     IMAS supports (arrays of) integers, floats and strings
 
     :param value: input value
 
     :return: input value converted to be IMAS compatible
-    '''
+    """
     # lists are saved as numpy arrays, and 0D numpy arrays as scalars
     for function in input_data_process_functions:
         value = function(value)
@@ -47,6 +49,7 @@ def force_imas_type(value):
         value = numpy.array(value)
     if 'DataArray' in value.__class__.__name__:
         import xarray
+
         if isinstance(value, xarray.DataArray):
             value = value.values
     if isinstance(value, numpy.ndarray) and not len(value.shape):
@@ -68,7 +71,7 @@ _consistency_warnings = {}
 
 
 def consistency_checker(location, value, info, consistency_check, imas_version):
-    '''
+    """
     Print warnings or raise errors if object does not satisfy IMAS data dictionary
     Converts numeric data to INT/FLOAT depending on IMAS specifications
 
@@ -81,7 +84,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     :param imas_version: IMAS version
 
     :return: value
-    '''
+    """
     # force type consistent with data dictionary
     txt = ''
     if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
@@ -111,13 +114,21 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     if 'data_type' in info and info['data_type'] in ['STRUCTURE', 'STRUCT_ARRAY'] and not isinstance(value, ODS):
         txt = f'{location} is of type {type(value)} but this should be an ODS'
     # check type
-    elif not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, (CodeParameters, ODS))):
+    elif not (
+        isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable))
+        or value is None
+        or isinstance(value, (CodeParameters, ODS))
+    ):
         txt = f'{location} is of type {type(value)} but supported types are: string, float, int, array'
     # check consistency for scalar entries
     elif 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
         txt = f'{location} is of type {type(value)} must be a scalar of type {info["data_type"]}'
     # check consistency for number of dimensions
-    elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
+    elif (
+        'coordinates' in info
+        and len(info['coordinates'])
+        and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
+    ):
         txt = f'{location} must be an array with dimensions {info["coordinates"]}'
 
     if len(txt) and consistency_check is True:
@@ -137,17 +148,19 @@ class ODS(MutableMapping):
     OMAS Data Structure class
     """
 
-    def __init__(self,
-                 imas_version=omas_rcparams['default_imas_version'],
-                 consistency_check=omas_rcparams['consistency_check'],
-                 dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
-                 location='',
-                 cocos=omas_rcparams['cocos'],
-                 cocosio=None,
-                 coordsio=None,
-                 unitsio=None,
-                 structure=None,
-                 dynamic=None):
+    def __init__(
+        self,
+        imas_version=omas_rcparams['default_imas_version'],
+        consistency_check=omas_rcparams['consistency_check'],
+        dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
+        location='',
+        cocos=omas_rcparams['cocos'],
+        cocosio=None,
+        coordsio=None,
+        unitsio=None,
+        structure=None,
+        dynamic=None,
+    ):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
@@ -189,14 +202,14 @@ class ODS(MutableMapping):
         self._unitsio = unitsio
 
     def homogeneous_time(self, key='', default=True):
-        '''
+        """
         Dynamically evaluate whether time is homogeneous or not
         NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
 
         :param default: what to return in case no time basis is defined
 
         :return: True/False or default value (True) if no time basis is defined
-        '''
+        """
         if not len(self.location) and not len(key):
             raise ValueError('homogeneous_time() can not be called on a top-level ODS')
         extra_info = {}
@@ -270,7 +283,9 @@ class ODS(MutableMapping):
                 time = None
                 extra_info['homogeneous_time'] = None
             # if there is a single time entry, or there are multiple time entries that are all consistent with one another
-            elif len(times) == 1 or all([times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
+            elif len(times) == 1 or all(
+                [times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]
+            ):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
                 if isinstance(time, (float, int)):
@@ -305,7 +320,7 @@ class ODS(MutableMapping):
         return None
 
     def slice_at_time(self, time=None, time_index=None):
-        '''
+        """
         method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
 
         :param time: time value to select
@@ -313,7 +328,7 @@ class ODS(MutableMapping):
         :param time_index: time index to select (NOTE: time_index has precedence over time)
 
         :return: modified ODS
-        '''
+        """
 
         # set time_index for parent and children
         if 'time' in self and isinstance(self['time'], numpy.ndarray):
@@ -421,13 +436,21 @@ class ODS(MutableMapping):
                                 # load the json structure file
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
                             else:
-                                raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
+                                raise RuntimeError(
+                                    'When switching from False to True .consistency_check=True must be set at the top-level ODS'
+                                )
                         elif self.location.endswith('.ids_properties') and item == 'occurrence':
                             continue
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
                             strict_fail = False
-                            if isinstance(consistency_value, str) and 'strict' in consistency_value and structure_key in self.structure and p2l(self.location + '.%s' % item)[0] in _extra_structures and o2i(o2u(self.location + '.%s' % item)) in _extra_structures[p2l(self.location + '.%s' % item)[0]]:
+                            if (
+                                isinstance(consistency_value, str)
+                                and 'strict' in consistency_value
+                                and structure_key in self.structure
+                                and p2l(self.location + '.%s' % item)[0] in _extra_structures
+                                and o2i(o2u(self.location + '.%s' % item)) in _extra_structures[p2l(self.location + '.%s' % item)[0]]
+                            ):
                                 strict_fail = True
                             if not strict_fail and structure_key in self.structure:
                                 structure = self.structure[structure_key]
@@ -602,9 +625,9 @@ class ODS(MutableMapping):
 
     @property
     def ulocation(self):
-        '''
+        """
         :return: string with location of this object in universal ODS path format
-        '''
+        """
         return o2u(self.location)
 
     def _validate(self, value, structure):
@@ -623,9 +646,9 @@ class ODS(MutableMapping):
                 structure[structure_key]
 
     def set_child_locations(self):
-        '''
+        """
         traverse ODSs and set .location attribute
-        '''
+        """
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
                 self.getraw(item).location = l2o([self.location, item])
@@ -655,7 +678,12 @@ class ODS(MutableMapping):
                 key[0] = len(self.omas_data)
 
         # handle dynamic path creation for .code.parameters leaf
-        if len(key) == 1 and key[0] == 'parameters' and (self.location.endswith('.code') or not self.location) and not isinstance(value, str):
+        if (
+            len(key) == 1
+            and key[0] == 'parameters'
+            and (self.location.endswith('.code') or not self.location)
+            and not isinstance(value, str)
+        ):
             pass_on_value = value
             value = CodeParameters()
             value.update(pass_on_value)
@@ -739,7 +767,13 @@ class ODS(MutableMapping):
                 ulocation = o2u(location)
 
                 # handle cocos transformations coming in
-                if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals and not isinstance(value, ODS):
+                if (
+                    self.cocosio
+                    and self.cocosio != self.cocos
+                    and '.' in location
+                    and ulocation in omas_physics.cocos_signals
+                    and not isinstance(value, ODS)
+                ):
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
                         if self.consistency_check == 'warn':
@@ -757,7 +791,16 @@ class ODS(MutableMapping):
                 # handle units (Python pint package)
                 if str(value.__class__).startswith("<class 'pint."):
                     import pint
-                    if 'units' in info and isinstance(value, pint.quantity._Quantity) or (isinstance(value, numpy.ndarray) and value.size and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)):
+
+                    if (
+                        'units' in info
+                        and isinstance(value, pint.quantity._Quantity)
+                        or (
+                            isinstance(value, numpy.ndarray)
+                            and value.size
+                            and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)
+                        )
+                    ):
                         value = value.to(info['units']).magnitude
 
                 # coordinates interpolation
@@ -778,8 +821,17 @@ class ODS(MutableMapping):
                         # if all coordinates information is present
                         if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(input_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None)) or
-                                    (not numpy.allclose(input_coordinates.__getitem__(coord, False), ods_coordinates.__getitem__(coord, False))) for coord in coordinates]):
+                            if any(
+                                [
+                                    len(input_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None))
+                                    or (
+                                        not numpy.allclose(
+                                            input_coordinates.__getitem__(coord, False), ods_coordinates.__getitem__(coord, False)
+                                        )
+                                    )
+                                    for coord in coordinates
+                                ]
+                            ):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
@@ -788,9 +840,14 @@ class ODS(MutableMapping):
                                 # if the (first) coordinate is in input_coordinates
                                 coordinate = coordinates[0]
                                 if len(input_coordinates.__getitem__(coordinate, None)) != len(value):
-                                    raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, input_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
+                                    raise Exception(
+                                        'coordsio %s.shape=%s does not match %s.shape=%s'
+                                        % (coordinate, input_coordinates.__getitem__(coordinate, False).shape, location, value.shape)
+                                    )
                                 printd('Adding %s interpolated to input %s coordinate' % (self.location, coordinate), topic='coordsio')
-                                value = omas_interp1d(ods_coordinates.__getitem__(coordinate, None), input_coordinates.__getitem__(coordinate, None), value)
+                                value = omas_interp1d(
+                                    ods_coordinates.__getitem__(coordinate, None), input_coordinates.__getitem__(coordinate, None), value
+                                )
                             else:
                                 printd('%s ods and coordsio match' % (coordinates), topic='coordsio')
                         else:
@@ -867,7 +924,7 @@ class ODS(MutableMapping):
                 self.set_child_locations()
 
     def getraw(self, key):
-        '''
+        """
         Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__(key)
         Effectively behaves like a pure Python dictionary/list __getitem__.
         This method is mostly meant to be used in the inner workings of the ODS class.
@@ -876,24 +933,28 @@ class ODS(MutableMapping):
         :param key: string or integer
 
         :return: ODS value
-        '''
+        """
 
         return self.omas_data[key]
 
     def same_init_ods(self):
-        '''
+        """
         Initializes a new ODS with the same attributes as this one
 
         :return: new ODS
-        '''
-        return self.__class__(imas_version=self.imas_version,
-                              consistency_check=self.consistency_check,
-                              dynamic_path_creation=self.dynamic_path_creation,
-                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                              dynamic=self.dynamic)
+        """
+        return self.__class__(
+            imas_version=self.imas_version,
+            consistency_check=self.consistency_check,
+            dynamic_path_creation=self.dynamic_path_creation,
+            cocos=self.cocos,
+            cocosio=self.cocosio,
+            coordsio=self.coordsio,
+            dynamic=self.dynamic,
+        )
 
     def setraw(self, key, value):
-        '''
+        """
         Method to assign data to an ODS with no processing of the key, and it is thus faster than the ODS.__setitem__(key, value)
         Effectively behaves like a pure Python dictionary/list __setitem__.
         This method is mostly meant to be used in the inner workings of the ODS class.
@@ -903,7 +964,7 @@ class ODS(MutableMapping):
         :param value: value to assign
 
         :return: value
-        '''
+        """
         if isinstance(key, list):
             if len(key) > 1:
                 if key[0] not in self:
@@ -923,7 +984,7 @@ class ODS(MutableMapping):
         return value
 
     def __getitem__(self, key, cocos_and_coords=True):
-        '''
+        """
         ODS getitem method allows support for different syntaxes to access data
 
         :param key: different syntaxes to access data, for example:
@@ -938,7 +999,7 @@ class ODS(MutableMapping):
               * None: disabled COCOS and disabled interpolation
 
         :return: ODS value
-        '''
+        """
 
         # handle pattern match
         if isinstance(key, str) and key.startswith('@'):
@@ -1049,8 +1110,17 @@ class ODS(MutableMapping):
                         # if all coordinates information is present
                         if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
                             # if there is any coordinate that does not match
-                            if any([len(output_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None)) or
-                                    (not numpy.allclose(output_coordinates.__getitem__(coord, None), ods_coordinates.__getitem__(coord, None))) for coord in coordinates]):
+                            if any(
+                                [
+                                    len(output_coordinates.__getitem__(coord, None)) != len(ods_coordinates.__getitem__(coord, None))
+                                    or (
+                                        not numpy.allclose(
+                                            output_coordinates.__getitem__(coord, None), ods_coordinates.__getitem__(coord, None)
+                                        )
+                                    )
+                                    for coord in coordinates
+                                ]
+                            ):
 
                                 # for the time being omas interpolates only 1D quantities
                                 if len(info['coordinates']) > 1:
@@ -1059,19 +1129,37 @@ class ODS(MutableMapping):
                                 # if the (first) coordinate is in output_coordinates
                                 coordinate = coordinates[0]
                                 if len(ods_coordinates.__getitem__(coordinate, None)) != len(value):
-                                    raise Exception('coordsio %s.shape=%s does not match %s.shape=%s' % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape))
+                                    raise Exception(
+                                        'coordsio %s.shape=%s does not match %s.shape=%s'
+                                        % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape)
+                                    )
                                 printd('Returning %s interpolated to output %s coordinate' % (location, coordinate), topic='coordsio')
                                 try:
-                                    value = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), value)
+                                    value = omas_interp1d(
+                                        output_coordinates.__getitem__(coordinate, None),
+                                        ods_coordinates.__getitem__(coordinate, None),
+                                        value,
+                                    )
                                 except TypeError:
                                     if numpy.atleast_1d(is_uncertain(value)).any():
-                                        v = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), nominal_values(value))
-                                        s = omas_interp1d(output_coordinates.__getitem__(coordinate, None), ods_coordinates.__getitem__(coordinate, None), std_devs(value))
+                                        v = omas_interp1d(
+                                            output_coordinates.__getitem__(coordinate, None),
+                                            ods_coordinates.__getitem__(coordinate, None),
+                                            nominal_values(value),
+                                        )
+                                        s = omas_interp1d(
+                                            output_coordinates.__getitem__(coordinate, None),
+                                            ods_coordinates.__getitem__(coordinate, None),
+                                            std_devs(value),
+                                        )
                                         value = unumpy.uarray(v, s)
                             else:
                                 printd('%s ods and coordsio match' % (coordinates), topic='coordsio')
                         else:
-                            printd('Getting `%s` without knowing some of the coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
+                            printd(
+                                'Getting `%s` without knowing some of the coordinates `%s`' % (self.location, all_coordinates),
+                                topic='coordsio',
+                            )
 
                     elif ulocation in omas_coordinates(self.imas_version) and location in output_coordinates:
                         value = output_coordinates.__getitem__(location, False)
@@ -1080,8 +1168,10 @@ class ODS(MutableMapping):
                 if 'units' in info and self.unitsio:
                     import pint
                     from .omas_setup import ureg
+
                     if ureg[0] is None:
                         import pint
+
                         ureg[0] = pint.UnitRegistry()
                     value = value * getattr(ureg[0], info['units'])
 
@@ -1109,9 +1199,12 @@ class ODS(MutableMapping):
         path = kw.setdefault('path', [])
         for kid in self.keys():
             if isinstance(self.getraw(kid), ODS):
-                self.getraw(kid).paths(return_empty_leaves=return_empty_leaves,
-                                       traverse_code_parameters=traverse_code_parameters,
-                                       paths=paths, path=path + [kid])
+                self.getraw(kid).paths(
+                    return_empty_leaves=return_empty_leaves,
+                    traverse_code_parameters=traverse_code_parameters,
+                    paths=paths,
+                    path=path + [kid],
+                )
             elif traverse_code_parameters and isinstance(self.getraw(kid), CodeParameters):
                 self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
@@ -1201,9 +1294,9 @@ class ODS(MutableMapping):
         return repr(self.omas_data)
 
     def __tree_repr__(self):
-        '''
+        """
         OMFIT tree representation
-        '''
+        """
         if not self.location:
             return self, []
         s = '--{%d}--' % len(self)
@@ -1254,17 +1347,17 @@ class ODS(MutableMapping):
         return state
 
     def copy(self):
-        '''
+        """
         :return: copy.deepcopy of current ODS object
-        '''
+        """
         return copy.deepcopy(self)
 
     def clear(self):
-        '''
+        """
         remove data from a branch
 
         :return: current ODS object
-        '''
+        """
         if isinstance(self.omas_data, dict):
             self.omas_data.clear()
         elif isinstance(self.omas_data, list):
@@ -1272,23 +1365,23 @@ class ODS(MutableMapping):
         return self
 
     def copy_attrs_from(self, ods):
-        '''
+        """
         copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
 
         :param ods: input ods
 
         :return: self
-        '''
+        """
         for item in omas_ods_attrs:
             setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):
-        '''
+        """
         Prune ODS branches that are leafless
 
         :return: number of branches that were pruned
-        '''
+        """
         n = 0
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -1299,7 +1392,7 @@ class ODS(MutableMapping):
         return n
 
     def set_time_array(self, key, time_index, value):
-        '''
+        """
         Convenience function for setting time dependent arrays
 
         :param key: ODS location to edit
@@ -1309,7 +1402,7 @@ class ODS(MutableMapping):
         :param value: value to set
 
         :return: time dependent array
-        '''
+        """
 
         orig_value = []
         if key in self:
@@ -1329,11 +1422,11 @@ class ODS(MutableMapping):
         return orig_value
 
     def update(self, ods2):
-        '''
+        """
         Adds ods2's key-values pairs to the ods
 
         :param ods2: dictionary or ODS to be added into the ODS
-        '''
+        """
         if isinstance(ods2, ODS):
             for item in ods2.paths():
                 self[item] = ods2[item]
@@ -1347,11 +1440,11 @@ class ODS(MutableMapping):
                 self.dynamic_path_creation = bkp_dynamic_path_creation
 
     def list_coordinates(self):
-        '''
+        """
         return dictionary with coordinates in a given ODS
 
         :return: dictionary with coordinates (keys are absolute location, values are relative locations)
-        '''
+        """
         coords = {}
 
         n = len(self.location)
@@ -1362,14 +1455,14 @@ class ODS(MutableMapping):
         return coords
 
     def coordinates(self, key):
-        '''
+        """
         return dictionary with coordinates of a given ODS location
 
         :param key: ODS location to return the coordinates of
                     Note: both the key location and coordinates must have data
 
         :return: OrderedDict with coordinates of a given ODS location
-        '''
+        """
         coords = OrderedDict()
 
         self.__getitem__(key, False)  # raise an error if data is not there
@@ -1384,7 +1477,7 @@ class ODS(MutableMapping):
         return coords
 
     def search_paths(self, search_pattern, n=None, regular_expression_startswith=''):
-        '''
+        """
         Find ODS locations that match a pattern
 
         :param search_pattern: regular expression ODS location string
@@ -1397,7 +1490,7 @@ class ODS(MutableMapping):
                to use '@' to indicate access to a path by regular expression.
 
         :return: list of ODS locations matching search_pattern pattern
-        '''
+        """
         if not isinstance(search_pattern, str):
             return [search_pattern]
 
@@ -1405,7 +1498,7 @@ class ODS(MutableMapping):
             if not search_pattern.startswith(regular_expression_startswith):
                 return [search_pattern]
             else:
-                search_pattern = search_pattern[len(regular_expression_startswith):]
+                search_pattern = search_pattern[len(regular_expression_startswith) :]
 
         search = re.compile(search_pattern)
         matches = []
@@ -1413,21 +1506,24 @@ class ODS(MutableMapping):
             if re.match(search, path):
                 matches.append(path)
         if n is not None and len(matches) != n:
-            raise ValueError('Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches)))
+            raise ValueError(
+                'Found %d matches of `%s` instead of the %d requested\n%s' % (len(matches), search_pattern, n, '\n'.join(matches))
+            )
         return matches
 
     def xarray(self, key):
-        '''
+        """
         Returns data of an ODS location and correspondnig coordinates as an xarray dataset
         Note that the Dataset and the DataArrays have their attributes set with the ODSs structure info
 
         :param key: ODS location
 
         :return: xarray dataset
-        '''
+        """
         key = self.search_paths(key, 1, '@')[0]
 
         import xarray
+
         key = p2l(key)
 
         info = omas_info_node(l2u(key))
@@ -1452,7 +1548,7 @@ class ODS(MutableMapping):
         return ds
 
     def dataset(self, homogeneous=[False, 'time', 'full', None][-1]):
-        '''
+        """
         Return xarray.Dataset representation of a whole ODS
 
         Forming the N-D labeled arrays (tensors) that are at the base of xarrays,
@@ -1470,7 +1566,7 @@ class ODS(MutableMapping):
                             * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
 
         :return: xarray.Dataset
-        '''
+        """
         import xarray
 
         if not self.location:
@@ -1480,23 +1576,30 @@ class ODS(MutableMapping):
             return DS
 
         def arraystruct_indexnames(key):
-            '''
+            """
             return list of strings with a name for each of the arrays of structures indexes
 
             :param key: ods location
 
             :return: list of strings
-            '''
+            """
             base = key.split('.')[0]
             coordinates = []
             counter = 0
-            for c in [':'.join(key.split(':')[:k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
+            for c in [':'.join(key.split(':')[: k + 1]).strip('.') for k, struct in enumerate(key.split(':'))]:
                 info = omas_info_node(o2u(c))
                 if 'coordinates' in info:
                     for infoc in info['coordinates']:
                         if infoc == '1...N':
                             infoc = c
-                        coordinates.append('__' + '_'.join([base, infoc.split('.')[-1]] + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':'] + ['index%d__' % counter]))
+                        coordinates.append(
+                            '__'
+                            + '_'.join(
+                                [base, infoc.split('.')[-1]]
+                                + [str(k) for k in p2l(key) if isinstance(k, int) or k == ':']
+                                + ['index%d__' % counter]
+                            )
+                        )
                         counter += 1
             return coordinates
 
@@ -1519,7 +1622,7 @@ class ODS(MutableMapping):
         upaths = fupaths
         if self.location:
             n = len(self.location)
-            upaths = list(map(lambda key: key[n + 1:], fupaths))
+            upaths = list(map(lambda key: key[n + 1 :], fupaths))
 
         # Figure out coordinate indexes
         # NOTE: We use coordinates indexes instead of proper coordinates
@@ -1723,7 +1826,7 @@ class ODS(MutableMapping):
             self.dynamic.close()
 
     def diff(self, ods, ignore_type=False, ignore_empty=False):
-        '''
+        """
         return differences between this ODS and the one passed
 
         :param ods: ODS to compare against
@@ -1733,17 +1836,17 @@ class ODS(MutableMapping):
         :param ignore_empty: ignore empty nodes
 
         :return: dictionary with differences
-        '''
+        """
         return different_ods(self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty)
 
     def from_structure(self, structure, depth=0):
-        '''
+        """
         Generate an ODS starting from a hierarchical structure made of dictionaries and lists
 
         :param structure: input structure
 
         :return: self
-        '''
+        """
         if isinstance(structure, dict):
             keys = list(map(str, structure.keys()))
         elif isinstance(structure, list):
@@ -1769,31 +1872,32 @@ class ODS(MutableMapping):
         return self
 
     def codeparams2xml(self):
-        '''
+        """
         Convert code.parameters to a XML string
-        '''
+        """
         if not self.location:
             for item in self:
                 self[item].codeparams2xml()
             return
-        elif ('code.parameters' in self and isinstance(self['code.parameters'], CodeParameters)):
+        elif 'code.parameters' in self and isinstance(self['code.parameters'], CodeParameters):
             self['code.parameters'] = self['code.parameters'].to_string()
-        elif ('parameters' in self and isinstance(self['parameters'], CodeParameters)):
+        elif 'parameters' in self and isinstance(self['parameters'], CodeParameters):
             self['parameters'] = self['parameters'].to_string()
 
     def codeparams2dict(self):
-        '''
+        """
         Convert code.parameters to a CodeParameters dictionary object
-        '''
+        """
         import xml
+
         if not self.location:
             for item in self:
                 self[item].codeparams2dict()
             return
         try:
-            if ('code.parameters' in self and isinstance(self['code.parameters'], str)):
+            if 'code.parameters' in self and isinstance(self['code.parameters'], str):
                 self['code.parameters'] = CodeParameters().from_string(self['code.parameters'])
-            elif ('parameters' in self and isinstance(self['parameters'], str)):
+            elif 'parameters' in self and isinstance(self['parameters'], str):
                 self['parameters'] = CodeParameters().from_string(self['parameters'])
         except xml.parsers.expat.ExpatError:
             printe('%s.code.parameters is not formatted as XML' % self.location)
@@ -1801,13 +1905,13 @@ class ODS(MutableMapping):
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
     def sample(self, ntimes=1):
-        '''
+        """
         Populates the ods with sample data
 
         :param ntimes: number of time slices to generate
 
         :return: self
-        '''
+        """
         for func in omas_sample.__ods__:
             printd(f'Adding {func} sample data to ods', topic='sample')
             args, kw, _, _ = function_arguments(getattr(self, 'sample_' + func))
@@ -1819,14 +1923,14 @@ class ODS(MutableMapping):
         return self
 
     def document(self, what=['coordinates', 'data_type', 'documentation', 'units']):
-        '''
+        """
         RST documentation of the ODs content
 
         :param what: fields to be included in the documentation
                      if None, all fields are included
 
         :return: string with RST documentation
-        '''
+        """
         pp = {}
         for item in self.pretty_paths():
             tt = l2u(p2l(item))
@@ -1843,6 +1947,7 @@ class ODS(MutableMapping):
                 txt += [f'* {elms}: {value}']
 
         return '\n'.join(txt)
+
 
 class dynamic_ODS:
     kw = {}
@@ -1885,14 +1990,15 @@ class CodeParameters(dict):
                 self.from_string(string)
 
     def from_string(self, code_params_string):
-        '''
+        """
         Load data from code.parameters XML string
 
         :param code_params_string: XML string
 
         :return: self
-        '''
+        """
         import xmltodict
+
         self.clear()
         if not code_params_string.strip().endswith('</parameters>'):
             code_params_string = '<parameters>' + code_params_string + '</parameters>'
@@ -1903,23 +2009,24 @@ class CodeParameters(dict):
         return self
 
     def from_file(self, code_params_file):
-        '''
+        """
         Load data from code.parameters XML file
 
         :param code_params_file: XML file
 
         :return: self
-        '''
+        """
         with open(code_params_file, 'r') as f:
             return self.from_string(f.read())
 
     def to_string(self):
-        '''
+        """
         generate an XML string from this dictionary
 
         :return: XML string
-        '''
+        """
         import xmltodict
+
         tmp = {'parameters': CodeParameters()}
         tmp['parameters'].update(copy.deepcopy(self))
         recursive_encoder(tmp)
@@ -1957,7 +2064,7 @@ class CodeParameters(dict):
             return self.getraw(key[0])
 
     def getraw(self, key):
-        '''
+        """
         Method to access data to CodeParameters with no processing of the key.
         Effectively behaves like a pure Python dictionary/list __getitem__.
         This method is mostly meant to be used in the inner workings of the CodeParameters class.
@@ -1965,11 +2072,11 @@ class CodeParameters(dict):
         :param key: string or integer
 
         :return: value
-        '''
+        """
         return dict.__getitem__(self, key)
 
     def setraw(self, key, value):
-        '''
+        """
         Method to assign data to CodeParameters with no processing of the key.
         Effectively behaves like a pure Python dictionary/list __setitem__.
         This method is mostly meant to be used in the inner workings of the CodeParameters class.
@@ -1979,18 +2086,18 @@ class CodeParameters(dict):
         :param value: value to assign
 
         :return: value
-        '''
+        """
         return dict.__setitem__(self, key, value)
 
     def update(self, value):
-        '''
+        """
         Update CodeParameters
         NOTE: ODSs will be converted to CodeParameters classes
 
         :param value: dictionary structure
 
         :return: self
-        '''
+        """
         # convert ODSs to CodeParameters
         if isinstance(value, (ODS, CodeParameters)):
             for item in value.paths():
@@ -2016,21 +2123,21 @@ class CodeParameters(dict):
         return paths
 
     def keys(self):
-        '''
+        """
         :return: keys as list
-        '''
+        """
         return list(dict.keys(self))
 
     def values(self):
-        '''
+        """
         :return: values as list
-        '''
+        """
         return list(dict.values(self))
 
     def items(self):
-        '''
+        """
         :return: key-value pairs as list
-        '''
+        """
         return list(dict.items(self))
 
     def flat(self, **kw):
@@ -2047,13 +2154,13 @@ class CodeParameters(dict):
         return tmp
 
     def from_structure(self, structure, depth=0):
-        '''
+        """
         Generate CodeParamters starting from a hierarchical structure made of dictionaries and lists
 
         :param structure: input structure
 
         :return: self
-        '''
+        """
         if isinstance(structure, dict):
             keys = list(map(str, structure.keys()))
         elif isinstance(structure, list):
@@ -2078,10 +2185,10 @@ class CodeParameters(dict):
 
 
 def codeparams_xml_save(f):
-    '''
+    """
     Decorator function to be used around the omas_save_XXX methods to enable
     saving of code.parameters as an XML string
-    '''
+    """
 
     def wrapper(ods, *args, **kwargs):
         with omas_environment(ods, xmlcodeparams=True):
@@ -2091,10 +2198,10 @@ def codeparams_xml_save(f):
 
 
 def codeparams_xml_load(f):
-    '''
+    """
     Decorator function to be used around the omas_load_XXX methods to enable
     loading of code.parameters from an XML string
-    '''
+    """
 
     @wraps(f)
     def wrapper(*args, **kwargs):
@@ -2145,7 +2252,18 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic']
+omas_ods_attrs = [
+    '_consistency_check',
+    '_dynamic_path_creation',
+    '_imas_version',
+    'location',
+    'structure',
+    '_cocos',
+    '_cocosio',
+    '_coordsio',
+    '_unitsio',
+    '_dynamic',
+]
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))

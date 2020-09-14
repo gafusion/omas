@@ -26,7 +26,8 @@ try:
     __file__
 except NameError:
     import inspect
-    __file__  = inspect.getfile(lambda: None)
+
+    __file__ = inspect.getfile(lambda: None)
 filename = omas_testdir(__file__) + '/gkdb_linear_initialvalue.json'
 ods['gyrokinetics'].save(filename)
 

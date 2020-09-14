@@ -13,21 +13,21 @@ __ods__ = []
 
 
 def add_to_ODS(f):
-    '''
+    """
     anything wrapped here will be available as a ODS method with name 'sample_'+f.__name__
-    '''
+    """
     __ods__.append(f.__name__)
     return f
 
 
 def ods_sample(ntimes=1):
-    '''
+    """
     Returns an ODS populated with all of the samples
 
     :param ntimes: number of time slices to generate
 
     :return: sample ods
-    '''
+    """
     return ODS().sample(ntimes=ntimes)
 
 
@@ -40,14 +40,14 @@ def dataset_description(ods):
 
 @add_to_ODS
 def equilibrium(
-        ods,
-        time_index=0,
-        include_profiles=True,
-        include_phi=True,
-        include_psi=True,
-        include_wall=True,
-        include_q=True,
-        include_xpoint=False,
+    ods,
+    time_index=0,
+    include_profiles=True,
+    include_phi=True,
+    include_psi=True,
+    include_wall=True,
+    include_q=True,
+    include_xpoint=False,
 ):
     """
     Add sample equilibrium data
@@ -85,6 +85,7 @@ def equilibrium(
     :return: ODS instance with equilibrium data added
     """
     from omas import load_omas_json
+
     eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
@@ -149,6 +150,7 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
     :return: ODS instance with profiles added
     """
     from omas import load_omas_json
+
     pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json', consistency_check=False)
 
     ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d.0'])
@@ -185,6 +187,7 @@ def core_sources(ods, time_index=0):
     :return: ODS instance with sources added
     """
     from omas import load_omas_json
+
     pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)['core_sources']
 
     if 'core_sources' not in ods:
@@ -214,6 +217,7 @@ def core_transport(ods, time_index=0):
     :return: ODS instance with sources added
     """
     from omas import load_omas_json
+
     pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)['core_transport']
 
     if 'core_transport' not in ods:
@@ -252,8 +256,8 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
     nc = nc_reg + nc_weird + nc_undefined
     fc_dat = [
         #  R        Z       dR      dZ    tilt1  tilt2
-        [.8608, .16830, .0508, .32106, 0.0, 0.0],
-        [1.0041, 1.5169, .13920, .11940, 45.0, 0.0],
+        [0.8608, 0.16830, 0.0508, 0.32106, 0.0, 0.0],
+        [1.0041, 1.5169, 0.13920, 0.11940, 45.0, 0.0],
         [2.6124, 0.4376, 0.17320, 0.1946, 0.0, 92.40],
         [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
     ]
@@ -272,19 +276,19 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
         else:
             outline = ods['pf_active.coil'][i]['element.0.geometry.outline']
             fdat = fc_dat[i]
-            fdat[4] = -fc_dat[i][4] * numpy.pi / 180.
-            fdat[5] = -(fc_dat[i][5] * numpy.pi / 180. if fc_dat[i][5] != 0 else numpy.pi / 2.)
+            fdat[4] = -fc_dat[i][4] * numpy.pi / 180.0
+            fdat[5] = -(fc_dat[i][5] * numpy.pi / 180.0 if fc_dat[i][5] != 0 else numpy.pi / 2.0)
             outline['r'] = [
-                fdat[0] - fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi / 2. + fdat[5])),
-                fdat[0] - fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi / 2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. + fdat[3] / 2. * numpy.tan((numpy.pi / 2. + fdat[5])),
-                fdat[0] + fdat[2] / 2. - fdat[3] / 2. * numpy.tan((numpy.pi / 2. + fdat[5])),
+                fdat[0] - fdat[2] / 2.0 - fdat[3] / 2.0 * numpy.tan((numpy.pi / 2.0 + fdat[5])),
+                fdat[0] - fdat[2] / 2.0 + fdat[3] / 2.0 * numpy.tan((numpy.pi / 2.0 + fdat[5])),
+                fdat[0] + fdat[2] / 2.0 + fdat[3] / 2.0 * numpy.tan((numpy.pi / 2.0 + fdat[5])),
+                fdat[0] + fdat[2] / 2.0 - fdat[3] / 2.0 * numpy.tan((numpy.pi / 2.0 + fdat[5])),
             ]
             outline['z'] = [
-                fdat[1] - fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
-                fdat[1] + fdat[3] / 2. - fdat[2] / 2. * numpy.tan(-fdat[4]),
-                fdat[1] + fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
-                fdat[1] - fdat[3] / 2. + fdat[2] / 2. * numpy.tan(-fdat[4]),
+                fdat[1] - fdat[3] / 2.0 - fdat[2] / 2.0 * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2.0 - fdat[2] / 2.0 * numpy.tan(-fdat[4]),
+                fdat[1] + fdat[3] / 2.0 + fdat[2] / 2.0 * numpy.tan(-fdat[4]),
+                fdat[1] - fdat[3] / 2.0 + fdat[2] / 2.0 * numpy.tan(-fdat[4]),
             ]
             ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = outline_code
 
@@ -586,10 +590,38 @@ def wall(ods):
     ods['wall.description_2d[0].limiter.type.index'] = 0
     ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
     ods['wall.description_2d[0].limiter.unit[0].outline.r'] = [
-        1.0, 1.0, 1.3, 1.4, 1.6, 2.15, 2.35, 2.35, 2.15, 1.800, 1.350, 1.35, 1.10, 1.00, 1.0
+        1.0,
+        1.0,
+        1.3,
+        1.4,
+        1.6,
+        2.15,
+        2.35,
+        2.35,
+        2.15,
+        1.800,
+        1.350,
+        1.35,
+        1.10,
+        1.00,
+        1.0,
     ]
     ods['wall.description_2d[0].limiter.unit[0].outline.z'] = [
-        0.0, 1.4, 1.4, 1.3, 1.1, 1.00, 0.50, -0.5, -1.0, -1.25, -1.25, -1.4, -1.4, -1.3, 0.0
+        0.0,
+        1.4,
+        1.4,
+        1.3,
+        1.1,
+        1.00,
+        0.50,
+        -0.5,
+        -1.0,
+        -1.25,
+        -1.25,
+        -1.4,
+        -1.4,
+        -1.3,
+        0.0,
     ]
 
     return ods
@@ -613,7 +645,7 @@ def pulse_schedule(ods):
         # These data are sampled from DIII-D#161558 at the following times:
         t = numpy.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])  # s
         bdry[0]['r.reference.data'] = numpy.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
-        bdry[0]['z.reference.data'] = numpy.array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+        bdry[0]['z.reference.data'] = numpy.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         bdry[1]['r.reference.data'] = numpy.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
         bdry[1]['z.reference.data'] = numpy.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
         bdry[2]['r.reference.data'] = numpy.array([1.9, 1.9, 1.9, 1.88, 1.87, 1.87, 1.87, 1.87, 1.83, 1.83])
@@ -625,7 +657,7 @@ def pulse_schedule(ods):
         bdry[5]['r.reference.data'] = numpy.array([1.32, 1.28, 1.28, 1.3, 1.31, 1.32, 1.32, 1.32, 1.07, 1.07])
         bdry[5]['z.reference.data'] = numpy.array([0.73, 0.77, 0.77, 0.75, 0.74, 0.73, 0.73, 0.73, 0.99, 0.99])
         bdry[6]['r.reference.data'] = numpy.array([0.92, 1.16, 1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 0.92, 0.92])
-        bdry[6]['z.reference.data'] = numpy.array([0., 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0., 0.])
+        bdry[6]['z.reference.data'] = numpy.array([0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0, 0.0])
         bdry[7]['r.reference.data'] = numpy.array([1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2])
         bdry[7]['z.reference.data'] = numpy.array([0.5, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.5, 0.5])
         bdry[8]['r.reference.data'] = numpy.array([1.08, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.08, 1.08])
@@ -700,7 +732,7 @@ def ec_launchers(ods, ngyros=2, ntimes=6):
         ods['ec_launchers']['launcher'][gyro]['launching_position']['z'] = 0.68 * ones
         ods['ec_launchers']['launcher'][gyro]['mode']['data'] = -1.0 * ones
         ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (
-                ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros)
+            ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros)
         )
 
         ods['ec_launchers']['launcher'][gyro]['steering_angle_pol']['data'] = 0.61 * ones
@@ -740,7 +772,7 @@ def nbi(ods, nunits=2, ntimes=6):
         ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['particles_fraction'] = 1.0
         ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['vertical'] = 0.227
         ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_horizontal'] = 1e31
-        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_vertical'] = 10.
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_vertical'] = 10.0
         ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['phi'] = -0.773
         ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['r'] = 8.11
         ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['z'] = 0.0
@@ -751,7 +783,7 @@ def nbi(ods, nunits=2, ntimes=6):
         ods['nbi']['unit'][unit]['identifier'] = 'beam_' + str(unit)
         ods['nbi']['unit'][unit]['energy']['data'] = 80e3 * ones
 
-        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.e6 * (ones - 0.5 * numpy.cos(2 * numpy.pi * times + unit / nunits))
+        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.0e6 * (ones - 0.5 * numpy.cos(2 * numpy.pi * times + unit / nunits))
 
         ods['nbi']['unit'][unit]['species']['a'] = 2.0
         ods['nbi']['unit'][unit]['species']['z_n'] = 1.0

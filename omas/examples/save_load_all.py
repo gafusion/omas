@@ -64,13 +64,11 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
                         print('FROM %s TO %s : OK' % (t1.center(5), t2.center(5)))
                         results[k1, k2] = 1.0
                     else:
-                        print('FROM %s TO %s : NO --> %s' %
-                              (t1.center(5), t2.center(5), different))
+                        print('FROM %s TO %s : NO --> %s' % (t1.center(5), t2.center(5), different))
                         results[k1, k2] = -1.0
 
                 except Exception as _excp:
-                    print('FROM %s TO %s : NO --> %s' %
-                          (t1.center(5), t2.center(5), repr(_excp)))
+                    print('FROM %s TO %s : NO --> %s' % (t1.center(5), t2.center(5), repr(_excp)))
                     if do_raise:
                         raise
         print('=' * 20)

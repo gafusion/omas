@@ -29,15 +29,15 @@ ods = ODS()
 
 # first time-slice
 # 0D data
-ods['equilibrium']['time_slice'][0]['time'] = 1000.
-ods['equilibrium']['time_slice'][0]['global_quantities.ip'] = 1.E6
+ods['equilibrium']['time_slice'][0]['time'] = 1000.0
+ods['equilibrium']['time_slice'][0]['global_quantities.ip'] = 1.0e6
 # 1D data
 ods['equilibrium']['time_slice'][0]['profiles_1d.psi'] = [1, 2, 3]
 
 # second time-slice
 # 0D data
-ods['equilibrium']['time_slice'][1]['time'] = 1200.
-ods['equilibrium']['time_slice'][1]['global_quantities.ip'] = 1.E6
+ods['equilibrium']['time_slice'][1]['time'] = 1200.0
+ods['equilibrium']['time_slice'][1]['global_quantities.ip'] = 1.0e6
 # 1D data
 ods['equilibrium']['time_slice'][1]['profiles_1d.psi'] = [1, 2, 3]
 # 2D data
@@ -45,7 +45,7 @@ ods['equilibrium']['time_slice'][1]['profiles_2d'][0]['b_field_tor'] = [[1, 2, 3
 
 # different ODS
 # 0D data
-ods['core_profiles']['time'] = [1000.]
+ods['core_profiles']['time'] = [1000.0]
 
 # Save to IMAS
 print('=' * 20)

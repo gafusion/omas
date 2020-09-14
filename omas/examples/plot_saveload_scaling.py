@@ -71,9 +71,10 @@ try:
     __file__
 except NameError:
     import inspect
-    __file__  = inspect.getfile(lambda: None)
+
+    __file__ = inspect.getfile(lambda: None)
 for n in samples:
-    print('%d/%d'%(n,samples[-1]))
+    print('%d/%d' % (n, samples[-1]))
 
     # keep adding time slices to the data structure
     for k in range(len(ods['equilibrium.time_slice']), n):

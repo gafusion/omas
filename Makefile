@@ -15,6 +15,7 @@ all:
 	@echo ' - make html          : generate sphinx documentation'
 	@echo ' - make examples      : generate sphinx documentation with examples'
 	@echo ' - make samples       : generate sample files'
+	@echo ' - make format        : format source using black'
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
@@ -82,6 +83,9 @@ testpypi:
 
 release: tests requirements json cocos docs tag
 	@echo 'Make release done'
+
+format:
+	black -S -l 140 .
 
 .PHONY: site-packages
 
