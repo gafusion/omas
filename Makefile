@@ -84,8 +84,10 @@ testpypi:
 release: tests requirements json cocos docs tag
 	@echo 'Make release done'
 
-format:
+fmt:
 	black -S -l 140 .
+
+format:fmt cocos
 
 .PHONY: site-packages
 
