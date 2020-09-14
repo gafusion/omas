@@ -1186,7 +1186,7 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
 
     def sum_density_types(specie_index):
         final_density = numpy.zeros(len(prof1d['grid.rho_tor_norm']))
-        for therm_fast in ['', '_thermal', '_fast']:
+        for therm_fast in ['_thermal', '_fast']:
             if not show_total_density and therm_fast != "_thermal":
                 continue  # Skip total thermal+fast because the flag turned it off
             density = ods_species[specie_index] + '.density' + therm_fast
@@ -1208,6 +1208,7 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
     ncols = 2
 
     if "core_profiles" in ods:
+        ods.physics_core_profiles_densities()
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
         equilibrium = ods['equilibrium']['time_slice'][time_index]
         rho_core_prof = prof1d['grid.rho_tor_norm']
@@ -1231,7 +1232,7 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
         pyplot.setp(ax.get_xticklabels(), visible=False)
 
         # Rotation
-        if 'rotation_frequency_tor_sonic' in prof1d:
+        if 'rotation_frequency_tor_sonic' in prof1d and 'psi' in prof1d['grid']:
             from .omas_physics import omas_environment
             with omas_environment(ods, coordsio={f'equilibrium.time_slice.{k}.profiles_1d.psi': prof1d['grid']['psi'] for k in range(len(ods['equilibrium.time_slice']))}):
                 rotation = (equilibrium['profiles_1d']['r_outboard'] - equilibrium['profiles_1d']['r_inboard']) / 2 \
