@@ -13,7 +13,7 @@ from omas import *
 
 # Local or remote data transfer
 # If remote, we start an omas service locally to which we then connect
-remote = True
+remote = False
 if remote is True:
     import sys
     import subprocess
