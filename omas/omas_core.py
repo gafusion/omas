@@ -6,6 +6,7 @@
 from .omas_utils import *
 from .omas_utils import __version__, _extra_structures
 
+# fmt: off
 __all__ = [
     'ODS',
     'ODX',
@@ -65,6 +66,7 @@ __all__ = [
     'omas_service',
     'omas_service_script',
 ]
+# fmt: on
 
 # List of functions that can be added by third-party Python
 # packages for processing input data that will go in an ODS
