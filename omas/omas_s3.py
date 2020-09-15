@@ -35,6 +35,7 @@ def remote_uri(uri, filename, action):
     if system == 's3':
         import boto3
         from boto3.s3.transfer import TransferConfig
+
         s3bucket = location.split('/')[0]
         s3connection = boto3.resource('s3')
         s3filename = '/'.join(location.split('/')[1:])
@@ -65,6 +66,7 @@ def remote_uri(uri, filename, action):
         elif action == 'up':
             printd('Uploading %s to %s' % (filename, uri), topic='s3')
             from botocore.exceptions import ClientError
+
             if s3filename.endswith('/'):
                 s3filename += filename.split('/')[-1]
             try:
@@ -104,7 +106,9 @@ def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_d
     return remote_uri(_base_S3_uri(user), os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], 'up')
 
 
-def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), consistency_check=None, imas_version=None, tmp_dir=omas_rcparams['tmp_imas_dir']):
+def load_omas_s3(
+    filename, user=os.environ.get('USER', 'dummy_user'), consistency_check=None, imas_version=None, tmp_dir=omas_rcparams['tmp_imas_dir']
+):
     """
     Download an OMAS object from S3 and read it as pickle
 
@@ -125,7 +129,9 @@ def load_omas_s3(filename, user=os.environ.get('USER', 'dummy_user'), consistenc
     if not os.path.exists(os.path.abspath(tmp_dir)):
         os.makedirs(os.path.abspath(tmp_dir))
     remote_uri(_base_S3_uri(user) + filename, os.path.abspath(tmp_dir) + os.sep + os.sep + os.path.split(filename)[1], 'down')
-    return load_omas_pkl(os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], consistency_check=consistency_check, imas_version=imas_version)
+    return load_omas_pkl(
+        os.path.abspath(tmp_dir) + os.sep + os.path.split(filename)[1], consistency_check=consistency_check, imas_version=imas_version
+    )
 
 
 def list_omas_s3(user=''):

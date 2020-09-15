@@ -89,13 +89,13 @@ def load_omas_hdc(hdc, consistency_check=True):
 
 
 def through_omas_hdc(ods, method=['function', 'class_method'][1]):
-    '''
+    """
     Test save and load HDC
 
     :param ods: ods
 
     :return: ods
-    '''
+    """
     if method == 'function':
         hdc = save_omas_hdc(ods)
         ods1 = load_omas_hdc(hdc)

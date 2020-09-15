@@ -10,11 +10,7 @@ import warnings
 warnings.simplefilter('ignore', category=DeprecationWarning)
 warnings.simplefilter('ignore', category=FutureWarning)
 
-mapper = {'dnspython': None,
-          'sphinx-bootstrap-theme': None,
-          'sphinx-gallery': None,
-          'Sphinx': 'sphinx',
-          'Pillow': 'PIL'}
+mapper = {'dnspython': None, 'sphinx-bootstrap-theme': None, 'sphinx-gallery': None, 'Sphinx': 'sphinx', 'Pillow': 'PIL'}
 
 filename = os.path.split(os.path.abspath(__file__))[0] + os.sep + 'requirements.txt'
 with open(filename, 'r') as f:
@@ -24,7 +20,11 @@ lines = [
     for line in lines
     if line.strip() and not line.strip().startswith('#')
 ]
-lines = [(mapper.get(package, package), required) for package, required in lines if mapper.get(package, package is not None) and required == 'required']
+lines = [
+    (mapper.get(package, package), required)
+    for package, required in lines
+    if mapper.get(package, package is not None) and required == 'required'
+]
 
 good = []
 for k, (package, required) in enumerate(lines):

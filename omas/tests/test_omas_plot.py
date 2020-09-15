@@ -64,6 +64,7 @@ class TestOmasPlot(unittest.TestCase):
     # Support functions, utilities, and general overlay tests
     def test_ch_count(self):
         from omas.omas_plot import get_channel_count
+
         nc = 10
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering(nc=nc)
@@ -74,13 +75,19 @@ class TestOmasPlot(unittest.TestCase):
         nc_empty = get_channel_count(empty_ods, 'thomson_scattering')
         assert nc_empty == 0
 
-        nc_ts_check_pass = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0')
+        nc_ts_check_pass = get_channel_count(
+            ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker > 0'
+        )
         assert nc_ts_check_pass == nc
 
-        nc_ts_check_fail = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0')
+        nc_ts_check_fail = get_channel_count(
+            ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='checker < 0'
+        )
         assert nc_ts_check_fail == 0
 
-        nc_ts_check_fail2 = get_channel_count(ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0')
+        nc_ts_check_fail2 = get_channel_count(
+            ts_ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.n_e.data', test_checker='checker > 0'
+        )
         assert nc_ts_check_fail2 == 0
 
     def test_uband(self):
@@ -115,6 +122,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_gas_arrow(self):
         from omas.omas_plot import gas_arrow
+
         # Explicitly test the direction keyword
         gas_arrow(self.ods, 1.5, 0.0, direction=0, color='k')
         gas_arrow(self.ods, 1.5, 0.0, direction=numpy.pi / 2, color='gray')
@@ -122,6 +130,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_geo_type_lookup(self):
         from omas.omas_plot import geo_type_lookup
+
         # Basic tests
         assert geo_type_lookup(1, 'pf_active', imas_version='3.19.0', reverse=False) == 'outline'
         assert geo_type_lookup(1, 'pf_active', imas_version='3.18.0', reverse=False) == 'outline'
@@ -219,7 +228,9 @@ class TestOmasPlot(unittest.TestCase):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()
         ods2.plot_core_profiles_summary(fig=pyplot.figure())
-        ods2.plot_core_profiles_summary(fig=pyplot.figure(),quantities=['temperature', 'density_thermal','j_tor','zeff'], ods_species=[-1,0], lw=3, ls='--')
+        ods2.plot_core_profiles_summary(
+            fig=pyplot.figure(), quantities=['temperature', 'density_thermal', 'j_tor', 'zeff'], ods_species=[-1, 0], lw=3, ls='--'
+        )
 
     def test_core_transport(self):
         ods_test = copy.deepcopy(self.ods)
@@ -261,11 +272,12 @@ class TestOmasPlot(unittest.TestCase):
         mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
         # Test keywords
         mag_ods.plot_overlay(
-            thomson_scattering=False,
-            magnetics=dict(bpol_probe_color='r', bpol_probe_marker='x', show_flux_loop=False, labelevery=1))
+            thomson_scattering=False, magnetics=dict(bpol_probe_color='r', bpol_probe_marker='x', show_flux_loop=False, labelevery=1)
+        )
         mag_ods.plot_overlay(
             thomson_scattering=False,
-            magnetics=dict(bpol_probe_color='m', flux_loop_marker='+', show_bpol_probe=False, notesize=9, labelevery=1))
+            magnetics=dict(bpol_probe_color='m', flux_loop_marker='+', show_bpol_probe=False, notesize=9, labelevery=1),
+        )
         # Test direct call
         mag_ods.plot_magnetics_overlay()
         # Test empty one; make sure fail is graceful
@@ -285,6 +297,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_ts_overlay_mask(self):
         from omas.omas_plot import get_channel_count
+
         ts_ods = copy.deepcopy(self.ods)
         ts_ods = ts_ods.sample_thomson_scattering()
         nc = get_channel_count(ts_ods, 'thomson_scattering')
@@ -301,9 +314,7 @@ class TestOmasPlot(unittest.TestCase):
         ts_ods = ts_ods.sample_thomson_scattering()
         for i, lab in enumerate([2, 3, 5, 7]):
             ts_ods.plot_overlay(thomson_scattering=dict(labelevery=lab, notesize=10 + i * 2 + lab, color='k'))
-        ts_ods.plot_overlay(
-            thomson_scattering=dict(labelevery=2, notesize=9, color='b', label_ha='right', label_va='top')
-        )
+        ts_ods.plot_overlay(thomson_scattering=dict(labelevery=2, notesize=9, color='b', label_ha='right', label_va='top'))
 
     # Charge exchange overlay
     def test_cer_overlay(self):
@@ -315,7 +326,8 @@ class TestOmasPlot(unittest.TestCase):
         cer_ods.plot_overlay(thomson_scattering=False, charge_exchange=dict(which_pos='all'))
         cer_ods.plot_overlay(
             thomson_scattering=False,
-            charge_exchange=dict(which_pos='closest', color_tangential='r', color_vertical='b', marker_tangential='h'))
+            charge_exchange=dict(which_pos='closest', color_tangential='r', color_vertical='b', marker_tangential='h'),
+        )
         # Make a fresh copy with no EQ data so it will trigger the exception and fall back to which_pos='all'
         ODS().sample_charge_exchange().plot_overlay(thomson_scattering=False, charge_exchange=dict(which_pos='closest'))
         # Test direct call
@@ -349,6 +361,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_bolo_overlay_mask(self):
         from omas.omas_plot import get_channel_count
+
         bolo_ods = copy.deepcopy(self.ods)
         bolo_ods = bolo_ods.sample_bolometer()
         nc = get_channel_count(bolo_ods, 'bolometer')
@@ -359,8 +372,8 @@ class TestOmasPlot(unittest.TestCase):
             mask = copy.copy(mask0)
             mask[i] = False
             bolo_ods.plot_overlay(
-                thomson_scattering=False,
-                bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i)))
+                thomson_scattering=False, bolometer=dict(mask=mask, marker=markers[i], mew=0.5, markersize=3 * (nc - i), lw=0.5 * (nc - i))
+            )
 
     # Gas injection overlay
     def test_gas_overlay(self):
@@ -369,17 +382,11 @@ class TestOmasPlot(unittest.TestCase):
         gas_ods = gas_ods.sample_gas_injection()
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=True)
         # Fancy keywords tests
-        gas_ods.plot_overlay(
-            thomson_scattering=False,
-            gas_injection=dict(which_gas=['GASA', 'GASB'], draw_arrow=False))
-        gas_ods.plot_overlay(
-            thomson_scattering=False,
-            gas_injection=dict(which_gas=['FAKE_GAS_A', 'FAKE_GAS_B'], draw_arrow=False))
+        gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['GASA', 'GASB'], draw_arrow=False))
+        gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['FAKE_GAS_A', 'FAKE_GAS_B'], draw_arrow=False))
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['NON-EXISTENT GAS VALVE']))
         gas_ods.plot_overlay(
-            thomson_scattering=False, gas_injection=dict(
-                angle_not_in_pipe_name=True, simple_labels=True, show_all_pipes_in_group=False
-            )
+            thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True, simple_labels=True, show_all_pipes_in_group=False)
         )
 
         # Test direct call
@@ -462,6 +469,7 @@ class TestOmasPlot(unittest.TestCase):
         The main item here is position_control, which has its own test. So, this will be short.
         """
         import time
+
         pc_ods = ODS()
         pc_ods.sample_pulse_schedule()
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))

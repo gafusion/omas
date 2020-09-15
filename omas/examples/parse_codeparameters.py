@@ -60,4 +60,4 @@ pprint(ods['equilibrium.code.parameters'])
 ods = ODS()
 ods['equilibrium.code.parameters'] = 'not in XML format'
 with omas_environment(ods, xmlcodeparams=True):
-    print(ods['equilibrium.code.parameters']) # This will not raise an error
+    print(ods['equilibrium.code.parameters'])  # This will not raise an error

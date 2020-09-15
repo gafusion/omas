@@ -25,18 +25,10 @@ pprint(ods.pretty_paths())
 ods['edge_profiles.ggd[0].electrons.density[9].values'] = linspace(0, 1, 10)
 
 # save updated ODS to our personal IMAS database
-save_omas_imas(ods,
-               machine='ITER',
-               pulse=102292,
-               run=11,
-               new=True,
-               imas_version=omas_rcparams['default_imas_version'])
+save_omas_imas(ods, machine='ITER', pulse=102292, run=11, new=True, imas_version=omas_rcparams['default_imas_version'])
 
 # re-load data from our personal IMAS database
-ods1 = load_omas_imas(machine='ITER',
-                      pulse=102292,
-                      run=11,
-                      imas_version=omas_rcparams['default_imas_version'])
+ods1 = load_omas_imas(machine='ITER', pulse=102292, run=11, imas_version=omas_rcparams['default_imas_version'])
 
 # convince ourselves that the data has indeed been written and read back
 print(ods1['edge_profiles.ggd[0].electrons.density[9].values'])

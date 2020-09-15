@@ -16,9 +16,6 @@ port = 56563
 
 pulse = 30420
 
-ods = load_omas_uda(server=server,
-                    port=port,
-                    pulse=pulse,
-                    paths=['magnetics'])
+ods = load_omas_uda(server=server, port=port, pulse=pulse, paths=['magnetics'])
 
 pprint(ods.pretty_paths())

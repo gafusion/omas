@@ -49,7 +49,9 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
                 differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
             elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
+                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(
+                    std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True
+                ):
                     differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
             else:
                 if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
@@ -110,12 +112,12 @@ def print_stack():
 
 
 def is_uncertain(var):
-    '''
+    """
     :param var: Variable or array to test
 
     :return: True if variable is instance of uncertainties or
              array of shape var with elements indicating uncertainty
-    '''
+    """
 
     def _uncertain_check(x):
         return isinstance(x, uncertainties.core.AffineScalarFunc)
@@ -146,13 +148,13 @@ def is_numeric(value):
 
 
 def omas_interp1d(x, xp, yp, left=None, right=None, period=None, extrapolate=True):
-    '''
+    """
     If xp is not increasing, the results are numpy.interp1d nonsense.
     This function wraps numpy.interp1d but makes sure that the x-coordinate sequence xp is increasing.
 
     :param extrapolate: linear extrapolation beyond bounds
 
-    '''
+    """
     if not numpy.all(numpy.diff(xp) > 0):
         index = numpy.argsort(xp)
     else:
@@ -160,9 +162,15 @@ def omas_interp1d(x, xp, yp, left=None, right=None, period=None, extrapolate=Tru
     y = numpy.interp(x, xp[index], yp[index], left=left, right=right, period=period)
     if extrapolate:
         if not period and not left:
-            y = numpy.where(x < xp[index[0]], yp[index[0]] + (x - xp[index[0]]) * (yp[index[0]] - yp[index[1]]) / (xp[index[0]] - xp[index[1]]), y)
+            y = numpy.where(
+                x < xp[index[0]], yp[index[0]] + (x - xp[index[0]]) * (yp[index[0]] - yp[index[1]]) / (xp[index[0]] - xp[index[1]]), y
+            )
         if not period and not right:
-            y = numpy.where(x > xp[index[-1]], yp[index[-1]] + (x - xp[index[-1]]) * (yp[index[-1]] - yp[index[-2]]) / (xp[index[-1]] - xp[index[-2]]), y)
+            y = numpy.where(
+                x > xp[index[-1]],
+                yp[index[-1]] + (x - xp[index[-1]]) * (yp[index[-1]] - yp[index[-2]]) / (xp[index[-1]] - xp[index[-2]]),
+                y,
+            )
     return y
 
 
@@ -201,27 +209,28 @@ def json_dumper(obj, objects_encode=True):
         tmp = is_uncertain(obj)
         if numpy.any(numpy.atleast_1d(tmp)):
             if not len(numpy.array(tmp).shape):
-                return dict(__ufloat__=nominal_values(obj),
-                            __ufloat_std__=std_devs(obj))
+                return dict(__ufloat__=nominal_values(obj), __ufloat_std__=std_devs(obj))
             else:
                 nomv = nominal_values(obj)
-                return dict(__udarray_tolist_avg__=nomv.tolist(),
-                            __udarray_tolist_std__=std_devs(obj).tolist(),
-                            dtype=str(nomv.dtype),
-                            shape=obj.shape)
+                return dict(
+                    __udarray_tolist_avg__=nomv.tolist(),
+                    __udarray_tolist_std__=std_devs(obj).tolist(),
+                    dtype=str(nomv.dtype),
+                    shape=obj.shape,
+                )
         elif isinstance(obj, numpy.ndarray):
             if 'complex' in str(obj.dtype).lower():
-                return dict(__ndarray_tolist_real__=obj.real.tolist(),
-                            __ndarray_tolist_imag__=obj.imag.tolist(),
-                            dtype=str(obj.dtype),
-                            shape=obj.shape)
+                return dict(
+                    __ndarray_tolist_real__=obj.real.tolist(),
+                    __ndarray_tolist_imag__=obj.imag.tolist(),
+                    dtype=str(obj.dtype),
+                    shape=obj.shape,
+                )
             else:
                 if objects_encode is None:
                     return obj.tolist()
                 else:
-                    return dict(__ndarray_tolist__=obj.tolist(),
-                                dtype=str(obj.dtype),
-                                shape=obj.shape)
+                    return dict(__ndarray_tolist__=obj.tolist(), dtype=str(obj.dtype), shape=obj.shape)
         elif isinstance(obj, range):
             return list(obj)
         elif isinstance(obj, numpy.generic):
@@ -235,13 +244,13 @@ def json_dumper(obj, objects_encode=True):
 
 
 def convert_int(value):
-    '''
+    """
     Try to convert value to integer and do nothing on error
 
     :param value: value to try to convert
 
     :return: value, possibly converted to int
-    '''
+    """
     try:
         return int(value)
     except ValueError:
@@ -261,6 +270,7 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     :return: ojbect
     """
     from omas import ODS
+
     object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
 
     dct = cls()
@@ -281,7 +291,7 @@ def json_loader(object_pairs, cls=dict, null_to=None):
                         for k in range(len(y)):
                             if y[k] is None:
                                 y[k] = null_to
-                    y = numpy.array(y) # to handle objects_encode=None as used in OMAS
+                    y = numpy.array(y)  # to handle objects_encode=None as used in OMAS
                     dct.setraw(x, y)
             else:
                 dct.setraw(x, y)
@@ -308,15 +318,20 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     if '__ndarray_tolist__' in dct:
         return numpy.array(dct['__ndarray_tolist__'], dtype=dct['dtype']).reshape(dct['shape'])
     elif '__ndarray_tolist_real__' in dct and '__ndarray_tolist_imag__' in dct:
-        return (numpy.array(dct['__ndarray_tolist_real__'], dtype=dct['dtype']).reshape(dct['shape']) +
-                numpy.array(dct['__ndarray_tolist_imag__'], dtype=dct['dtype']).reshape(dct['shape']) * 1j)
+        return (
+            numpy.array(dct['__ndarray_tolist_real__'], dtype=dct['dtype']).reshape(dct['shape'])
+            + numpy.array(dct['__ndarray_tolist_imag__'], dtype=dct['dtype']).reshape(dct['shape']) * 1j
+        )
     elif '__udarray_tolist_avg__' in dct and '__udarray_tolist_std__' in dct:
-        return uarray(numpy.array(dct['__udarray_tolist_avg__'], dtype=dct['dtype']).reshape(dct['shape']),
-                      numpy.array(dct['__udarray_tolist_std__'], dtype=dct['dtype']).reshape(dct['shape']))
+        return uarray(
+            numpy.array(dct['__udarray_tolist_avg__'], dtype=dct['dtype']).reshape(dct['shape']),
+            numpy.array(dct['__udarray_tolist_std__'], dtype=dct['dtype']).reshape(dct['shape']),
+        )
     elif '__ufloat__' in dct and '__ufloat_std__' in dct:
         return ufloat(dct['__ufloat__'], dct['__ufloat_std__'])
     elif '__ndarray__' in dct:
         import base64
+
         data = base64.b64decode(dct['__ndarray__'])
         return numpy.frombuffer(data, dct['dtype']).reshape(dct['shape'])
     elif '__complex__' in dct:
@@ -333,6 +348,7 @@ def recursive_glob(pattern='*', rootdir='.'):
     :param rootdir: top level directory to search under
     """
     import fnmatch
+
     matches = []
     for root, dirnames, filenames in os.walk(rootdir):
         for filename in fnmatch.filter(filenames, pattern):
@@ -341,7 +357,7 @@ def recursive_glob(pattern='*', rootdir='.'):
 
 
 def remove_parentheses(inv, replace_with=''):
-    '''
+    """
     function used to remove/replace top-level matching parenthesis from a string
 
     :param inv: input string
@@ -349,7 +365,7 @@ def remove_parentheses(inv, replace_with=''):
     :param replace_with: string to replace matching parenthesis with
 
     :return: input string without first set of matching parentheses
-    '''
+    """
     k = 0
     lp = ''
     out = ''
@@ -389,6 +405,7 @@ def closest_index(my_list, my_number=0):
         raise TypeError("closestIndex() requires a numeric scalar as the second argument. Got instead: {:}".format(my_number))
 
     import bisect
+
     pos = bisect.bisect_left(my_list, my_number)
     if pos == 0:
         return 0
@@ -424,7 +441,7 @@ def compare_version(version1, version2):
 
 
 def underline_last(text, offset=0):
-    '''
+    """
     Utility function to underline the last part of a path
 
     :param text: text to underline
@@ -432,7 +449,7 @@ def underline_last(text, offset=0):
     :param offset: add offset to underling
 
     :return: original text with underline on a new line
-    '''
+    """
     index = [i for i, x in enumerate(text) if x in ['.', ' ']][-1]
     if text[index] == '.':
         index += 1
@@ -461,6 +478,7 @@ def function_arguments(f, discard=None, asString=False):
     * True/False if the function allows keywords
     """
     import inspect
+
     the_argspec = inspect.getfullargspec(f)
     the_keywords = the_argspec.varkw
 
@@ -494,7 +512,7 @@ def function_arguments(f, discard=None, asString=False):
 
 
 def args_as_kw(f, args, kw):
-    '''
+    """
     Move positional arguments to kw arguments
 
     :param f: function
@@ -504,7 +522,7 @@ def args_as_kw(f, args, kw):
     :param kw: keywords arguments
 
     :return: tuple with positional arguments moved to keyword arguments
-    '''
+    """
     a, k, astar, kstar = function_arguments(f)
     if len(a) and a[0] == 'self':
         a = a[1:]
@@ -556,13 +574,13 @@ _extra_structures = {}
 
 
 def list_structures(imas_version):
-    '''
+    """
     list names of structures in imas version
 
     :param imas_version: imas version
 
     :return: list with names of structures in imas version
-    '''
+    """
     json_filenames = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
     json_filenames = filter(lambda x: os.path.basename(x)[0] != '_', json_filenames)
     structures = sorted(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], json_filenames)))
@@ -572,13 +590,13 @@ def list_structures(imas_version):
 
 
 def dict_structures(imas_version):
-    '''
+    """
     maps structure names to json filenames
 
     :param imas_version: imas version
 
     :return: dictionary maps structure names to json filenames
-    '''
+    """
     paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
     if not len(paths):
         raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
@@ -636,13 +654,13 @@ def load_structure(filename, imas_version):
 
 
 def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return list of coordinates
 
     :param imas_version: IMAS version to look up
 
     :return: list of strings with IMAS coordinates
-    '''
+    """
     # caching
     if imas_version not in _coordinates:
         filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json'
@@ -651,18 +669,19 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
                 _coordinates[imas_version] = json.load(f)
         else:
             from .omas_structure import extract_coordinates
+
             _coordinates[imas_version] = extract_coordinates(imas_version)
     return _coordinates[imas_version]
 
 
 def omas_times(imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return list of times
 
     :param imas_version: IMAS version to look up
 
     :return: list of strings with IMAS times
-    '''
+    """
     # caching
     if imas_version not in _times:
         filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json'
@@ -671,6 +690,7 @@ def omas_times(imas_version=omas_rcparams['default_imas_version']):
                 _times[imas_version] = json.load(f)
         else:
             from .omas_structure import extract_times
+
             _times[imas_version] = extract_times(imas_version)
     return _times[imas_version]
 
@@ -798,13 +818,13 @@ _o2i_pattern = re.compile(r'\.([:0-9]+)')
 
 
 def o2u(path):
-    '''
+    """
     Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
 
     :param path: ODS path format
 
     :return: universal ODS path format
-    '''
+    """
     path = str(path)
     if '.' in path:
         return re.sub(_o2u_pattern, '.:', path)
@@ -835,7 +855,7 @@ def o2i(path):
 
 
 def u2o(upath, path):
-    '''
+    """
     Replaces `:` and integers in `upath` with ':' and integers from in `path`
     e.g. uo2('a.:.b.:.c.1.d.1.e','f.:.g.1.h.1.i.:.k')) becomes ('bla.1.hello.2.bla')
 
@@ -844,7 +864,7 @@ def u2o(upath, path):
     :param path: ODS path
 
     :return: filled in ODS path
-    '''
+    """
     if upath.startswith('1...'):
         return upath
     ul = p2l(upath)
@@ -860,7 +880,7 @@ def u2o(upath, path):
 
 
 def trim_common_path(p1, p2):
-    '''
+    """
     return paths in lists format trimmed of the common first path between paths p1 and p2
 
     :param p1: ODS path
@@ -868,22 +888,22 @@ def trim_common_path(p1, p2):
     :param p2: ODS path
 
     :return: paths in list format trimmed of common part
-    '''
+    """
     p1 = p2l(p1)
     p2 = p2l(p2)
     both = [x if x[0] == x[1] else None for x in zip(p1, p2)] + [None]
-    return p1[both.index(None):], p2[both.index(None):]
+    return p1[both.index(None) :], p2[both.index(None) :]
 
 
 def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     This function returns an ods with the leaf nodes filled with their property informations
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
                        if None, then all structures are returned
 
     :return: ods
-    '''
+    """
 
     if not structures:
         structures = sorted(list(dict_structures(imas_version).keys()))
@@ -893,6 +913,7 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
     # caching
     if imas_version not in _info_structures:
         from omas import ODS
+
         _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
     ods = _info_structures[imas_version]
 
@@ -904,7 +925,7 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
                 if re.match('.*_error_(index|lower|upper)$', item.split('.')[-1]):
                     continue
                 parent = False
-                for item1 in lst[k + 1:]:
+                for item1 in lst[k + 1 :]:
                     if l2u(item1.split('.')[:-1]).rstrip('[:]') == item:
                         parent = True
                         break
@@ -916,7 +937,7 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
 
 
 def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
-    '''
+    """
     return information about a given node
 
     :param key: IMAS path
@@ -924,7 +945,7 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     :param imas_version: IMAS version to look up
 
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
-    '''
+    """
     tmp = {}
     try:
         tmp.update(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
@@ -934,7 +955,7 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
 
 
 def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=OrderedDict):
-    '''
+    """
     Traverse dictionaries and list to convert strings to int/float when appropriate
 
     :param me: root of the dictionary to traverse
@@ -944,7 +965,7 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
     :param dict_cls: dictionary class to use
 
     :return: root of the dictionary
-    '''
+    """
     if isinstance(me, list):
         keys = range(len(me))
     elif isinstance(me, dict):
@@ -979,13 +1000,13 @@ def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=Ordere
 
 
 def recursive_encoder(me):
-    '''
+    """
     Traverse dictionaries and list to convert entries as appropriate
 
     :param me: root of the dictionary to traverse
 
     :return: root of the dictionary
-    '''
+    """
     if isinstance(me, list):
         keys = range(len(me))
     elif isinstance(me, dict):
@@ -1009,14 +1030,15 @@ def recursive_encoder(me):
 
 
 def get_actor_io_ids(filename):
-    '''
+    """
     Parse IMAS Python actor script and return actor input and output IDSs
 
     :param filename: filename of the IMAS Python actor
 
     :return: tuple with list of input IDSs and output IDSs
-    '''
+    """
     import ast
+
     with open(filename, 'r') as f:
         module = ast.parse(f.read())
     actor = os.path.splitext(os.path.split(filename)[-1])[0]

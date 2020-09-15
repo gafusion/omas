@@ -86,6 +86,7 @@ def load_omas_dx(filename, consistency_check=True):
     :return: OMAS data xarray
     """
     import xarray
+
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()
@@ -104,18 +105,18 @@ def save_omas_dx(odx, filename):
 
 
 def ods_2_odx(ods):
-    '''
+    """
     Map ODS to an ODX
 
     :param ods: OMAS data set
 
     :return: OMAS data xarray
-    '''
+    """
     return ODX(ods.dataset())
 
 
 def odx_2_ods(odx, consistency_check=True):
-    '''
+    """
     Map ODX to ODS
 
     :param odx: OMAS data xarray
@@ -123,7 +124,7 @@ def odx_2_ods(odx, consistency_check=True):
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :return: OMAS data set
-    '''
+    """
     DS = odx.omas_data
     ods = ODS(consistency_check=False)
     ods.dynamic_path_creation = 'dynamic_array_structures'
@@ -156,6 +157,7 @@ def load_omas_ds(filename, consistency_check=True):
     :return: OMAS data set
     """
     import xarray
+
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()

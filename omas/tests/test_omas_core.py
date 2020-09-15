@@ -57,8 +57,8 @@ class TestOmasCore(unittest.TestCase):
         ods['dataset_description.data_entry.run'] = 0
 
         # check .get() method
-        assert (ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse'])
-        assert (ods.get('dataset_description.bad', None) is None)
+        assert ods.get('dataset_description.data_entry.pulse') == ods['dataset_description.data_entry.pulse']
+        assert ods.get('dataset_description.bad', None) is None
 
         # check that keys is an iterable
         keys = ods.keys()
@@ -70,26 +70,31 @@ class TestOmasCore(unittest.TestCase):
         except ValueError:
             assert 'wall.description_2d.0.limiter.unit.0.outline' not in ods
 
-        ods['equilibrium']['time_slice'][0]['time'] = 1000.
+        ods['equilibrium']['time_slice'][0]['time'] = 1000.0
         ods['equilibrium']['time_slice'][0]['global_quantities']['ip'] = 1.5
 
         ods2 = copy.deepcopy(ods)
         ods2['equilibrium']['time_slice'][1] = ods['equilibrium']['time_slice'][0]
-        ods2['equilibrium.time_slice.1.time'] = 2000.
+        ods2['equilibrium.time_slice.1.time'] = 2000.0
 
         ods2['equilibrium']['time_slice'][2] = copy.deepcopy(ods['equilibrium']['time_slice'][0])
-        ods2['equilibrium.time_slice[2].time'] = 3000.
+        ods2['equilibrium.time_slice[2].time'] = 3000.0
 
-        assert (ods2['equilibrium']['time_slice'][0]['global_quantities'].ulocation == ods2['equilibrium']['time_slice'][2]['global_quantities'].ulocation)
+        assert (
+            ods2['equilibrium']['time_slice'][0]['global_quantities'].ulocation
+            == ods2['equilibrium']['time_slice'][2]['global_quantities'].ulocation
+        )
 
-        ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.
+        ods2['equilibrium.time_slice.1.global_quantities.ip'] = 2.0
 
         # check different ways of addressing data
-        for item in [ods2['equilibrium.time_slice']['1.global_quantities'],
-                     ods2[['equilibrium', 'time_slice', 1, 'global_quantities']],
-                     ods2[('equilibrium', 'time_slice', 1, 'global_quantities')],
-                     ods2['equilibrium.time_slice.1.global_quantities'],
-                     ods2['equilibrium.time_slice[1].global_quantities']]:
+        for item in [
+            ods2['equilibrium.time_slice']['1.global_quantities'],
+            ods2[['equilibrium', 'time_slice', 1, 'global_quantities']],
+            ods2[('equilibrium', 'time_slice', 1, 'global_quantities')],
+            ods2['equilibrium.time_slice.1.global_quantities'],
+            ods2['equilibrium.time_slice[1].global_quantities'],
+        ]:
             assert item.ulocation == 'equilibrium.time_slice.:.global_quantities'
 
         ods2['equilibrium.time_slice.0.profiles_1d.psi'] = numpy.linspace(0, 1, 10)
@@ -101,7 +106,7 @@ class TestOmasCore(unittest.TestCase):
         ods2['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3, 0.1)
 
         # uncertain array
-        ods2['equilibrium.time_slice[2].profiles_1d.q'] = uarray([0., 1., 2., 3.], [0, .1, .2, .3])
+        ods2['equilibrium.time_slice[2].profiles_1d.q'] = uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3])
 
         ckbkp = ods.consistency_check
         tmp = pickle.dumps(ods2)
@@ -118,7 +123,7 @@ class TestOmasCore(unittest.TestCase):
 
         # check writing setting an xarray.DataArray
         ods2['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
-            uarray([0., 1., 2., 3.], [0, .1, .2, .3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
+            uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
         )
         return
 
@@ -144,7 +149,7 @@ class TestOmasCore(unittest.TestCase):
         ods.sample_core_profiles(time_index=0)
         ods.sample_core_profiles(time_index=1)
 
-        n = 1E10
+        n = 1e10
         sizes = {}
         for homogeneous in [False, 'time', None, 'full']:
             DS = ods.dataset(homogeneous=homogeneous)
@@ -158,7 +163,9 @@ class TestOmasCore(unittest.TestCase):
         ods.sample_pf_active()
         try:
             DS = ods.dataset(homogeneous='full')
-            raise AssertionError('sample pf_active data should not be able to collect across channels because their time arrays are not homogeneous')
+            raise AssertionError(
+                'sample pf_active data should not be able to collect across channels because their time arrays are not homogeneous'
+            )
         except ValueError:
             pass
         return
@@ -247,20 +254,20 @@ class TestOmasCore(unittest.TestCase):
         for k in range(10):
             ods['equilibrium.time_slice.+.global_quantities.ip'] = k
         assert len(ods['equilibrium.time_slice']) == 10
-        assert (ods['equilibrium.time_slice'][9]['global_quantities.ip'] == 9)
+        assert ods['equilibrium.time_slice'][9]['global_quantities.ip'] == 9
 
         # access element by using negative indices
-        assert (ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == 9)
-        assert (ods['equilibrium.time_slice.-10.global_quantities.ip'] == 0)
+        assert ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == 9
+        assert ods['equilibrium.time_slice.-10.global_quantities.ip'] == 0
 
         # set element by using negative indices
         ods['equilibrium.time_slice.-1.global_quantities.ip'] = -99
         ods['equilibrium.time_slice'][-10]['global_quantities.ip'] = -100
-        assert (ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == -99)
-        assert (ods['equilibrium.time_slice'][-10]['global_quantities.ip'] == -100)
+        assert ods['equilibrium.time_slice'][-1]['global_quantities.ip'] == -99
+        assert ods['equilibrium.time_slice'][-10]['global_quantities.ip'] == -100
 
         # access by pattern
-        assert (ods['@eq.*1.*.ip'] == 1)
+        assert ods['@eq.*1.*.ip'] == 1
         return
 
     def test_version(self):
@@ -315,6 +322,7 @@ class TestOmasCore(unittest.TestCase):
         # deepcopy should not raise a consistency_check error
         # since we are directly manipulating the __dict__ attributes
         import copy
+
         ods1 = copy.deepcopy(ods)
 
         # make sure non-consistent data got also copied over
@@ -340,6 +348,7 @@ class TestOmasCore(unittest.TestCase):
     def test_input_data_process_functions(self):
         def robust_eval(string):
             import ast
+
             try:
                 return ast.literal_eval(string)
             except:

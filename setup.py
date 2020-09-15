@@ -3,13 +3,30 @@ import sys
 import glob
 import subprocess
 
-install_requires = ['numpy>=1.16.1', 'uncertainties', 'pint', 'netCDF4', 'boto3', 'matplotlib', 'scipy', 'h5py', 'pymongo', 'dnspython', 'xmltodict', 'xarray', 'setuptools>=41.2', 'pyro5']
+install_requires = [
+    'numpy>=1.16.1',
+    'uncertainties',
+    'pint',
+    'netCDF4',
+    'boto3',
+    'matplotlib',
+    'scipy',
+    'h5py',
+    'pymongo',
+    'dnspython',
+    'xmltodict',
+    'xarray',
+    'setuptools>=41.2',
+    'pyro5',
+]
 
-extras_require = {'hdc': ['pyhdc'],
-                  'imas': ['imas'],
-                  'uda': ['pyuda'],
-                  'build_structures': ['bs4'],
-                  'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow']}
+extras_require = {
+    'hdc': ['pyhdc'],
+    'imas': ['imas'],
+    'uda': ['pyuda'],
+    'build_structures': ['bs4'],
+    'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow'],
+}
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep
@@ -22,22 +39,20 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
         for item in install_requires:
             f.write(item.ljust(25) + '# required\n')
         f.write('\n')
-        for requirement in sorted(list(extras_require.keys()), key=lambda x:x.lower()):
-            for item in sorted(extras_require[requirement], key=lambda x:x.lower()):
+        for requirement in sorted(list(extras_require.keys()), key=lambda x: x.lower()):
+            for item in sorted(extras_require[requirement], key=lambda x: x.lower()):
                 if requirement in ['imas', 'hdc', 'uda', 'build_structures']:
                     item = '#' + item
                     f.write(item.ljust(25) + '# %s\n' % requirement)
 
-packages = ['omas',
-            'omas.examples',
-            'omas.samples',
-            'omas.tests',
-            'omas.utilities']
-package_data = {'omas': ['*.py', 'version'],
-                'omas.examples': ['*.py'],
-                'omas.samples': ['*'],
-                'omas.tests': ['*.py'],
-                'omas.utilities': ['*.py']}
+packages = ['omas', 'omas.examples', 'omas.samples', 'omas.tests', 'omas.utilities']
+package_data = {
+    'omas': ['*.py', 'version'],
+    'omas.examples': ['*.py'],
+    'omas.samples': ['*'],
+    'omas.tests': ['*.py'],
+    'omas.utilities': ['*.py'],
+}
 for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
     packages.append('omas.imas_structures.' + os.path.split(item)[1])
     package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
@@ -65,14 +80,12 @@ setup(
     url='https://gafusion.github.io/omas',
     author='Orso Meneghini',
     license='MIT',
-    classifiers=[
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3'
-    ],
+    classifiers=['License :: OSI Approved :: MIT License', 'Programming Language :: Python :: 3'],
     keywords='integrated modeling OMFIT IMAS ITER',
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=packages,
     package_data=package_data,
     install_requires=install_requires,
-    extras_require=extras_require)
+    extras_require=extras_require,
+)

@@ -16,8 +16,8 @@ from uncertainties import ufloat
 ods = ODS()
 ods['equilibrium.time'] = [0.0]
 ods['equilibrium.time_slice[0].global_quantities.ip'] = ufloat(3, 0.1)
-ods['thomson_scattering.channel[0].t_e.data'] = unumpy.uarray([1, 2, 3], [.1, .2, .3])
-ods['thomson_scattering.channel[0].n_e.data'] = numpy.array([1., 2., 3.])
+ods['thomson_scattering.channel[0].t_e.data'] = unumpy.uarray([1, 2, 3], [0.1, 0.2, 0.3])
+ods['thomson_scattering.channel[0].n_e.data'] = numpy.array([1.0, 2.0, 3.0])
 ods['thomson_scattering.time'] = numpy.linspace(0, 1, 3)
 ods['thomson_scattering.ids_properties.homogeneous_time'] = 1
 
@@ -27,7 +27,8 @@ try:
     __file__
 except NameError:
     import inspect
-    __file__  = inspect.getfile(lambda: None)
+
+    __file__ = inspect.getfile(lambda: None)
 omas_testing_directory = omas_testdir()
 save_omas_pkl(ods, omas_testdir(__file__) + '/test.pkl')
 ods = load_omas_pkl(omas_testdir(__file__) + '/test.pkl')

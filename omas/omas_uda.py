@@ -12,7 +12,6 @@ try:
 except ImportError as _excp:
     _pyyda_import_excp = _excp
 
-
     # replace pyuda class by a simple exception throwing class
     class pyuda(object):
         """Import error UDA class"""
@@ -21,10 +20,17 @@ except ImportError as _excp:
             raise _pyuda_import_excp
 
 
-def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
-                  imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
-                  skip_uncertainties=False, verbose=True):
-    '''
+def load_omas_uda(
+    server=None,
+    port=None,
+    pulse=None,
+    run=0,
+    paths=None,
+    imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']),
+    skip_uncertainties=False,
+    verbose=True,
+):
+    """
     Load UDA data to OMAS
 
     :param server: UDA server
@@ -44,7 +50,7 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     :param verbose: print loading progress
 
     :return: OMAS data set
-    '''
+    """
 
     if pulse is None or run is None:
         raise Exception('`pulse` and `run` must be specified')
@@ -83,9 +89,18 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
 
     ods = ODS(consistency_check=False)
     for k, ds in enumerate(available_ds):
-        filled_paths_in_uda(ods, client, pulse, run, load_structure(ds, imas_version=imas_version)[1],
-                            path=[], paths=[], requested_paths=requested_paths, skip_uncertainties=skip_uncertainties,
-                            perc=[float(k) / len(available_ds) * 100, float(k + 1) / len(available_ds) * 100, float(k) / len(available_ds) * 100])
+        filled_paths_in_uda(
+            ods,
+            client,
+            pulse,
+            run,
+            load_structure(ds, imas_version=imas_version)[1],
+            path=[],
+            paths=[],
+            requested_paths=requested_paths,
+            skip_uncertainties=skip_uncertainties,
+            perc=[float(k) / len(available_ds) * 100, float(k + 1) / len(available_ds) * 100, float(k) / len(available_ds) * 100],
+        )
     ods.consistency_check = True
     ods.prune()
     if verbose:
@@ -93,8 +108,8 @@ def load_omas_uda(server=None, port=None, pulse=None, run=0, paths=None,
     return ods
 
 
-def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, skip_uncertainties, perc=[0., 100., 0.]):
-    '''
+def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_paths, skip_uncertainties, perc=[0.0, 100.0, 0.0]):
+    """
     Recursively traverse ODS and populate it with data from UDA
 
     :param ods: ODS to be filled
@@ -116,7 +131,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
     :param skip_uncertainties: do not load uncertain data
 
     :return: filled ODS
-    '''
+    """
     # leaf
     if not len(ds):
         return paths
@@ -174,19 +189,21 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         pp0 = perc[0] + k / n * (perc[1] - perc[0])
         pp1 = perc[0] + (k + 1) / n * (perc[1] - perc[0])
         pp2 = perc[2]
-        paths = filled_paths_in_uda(ods[kid], client, pulse, run, ds[kkid], propagate_path, [], propagate_requested_paths, skip_uncertainties, [pp0, pp1, pp2])
+        paths = filled_paths_in_uda(
+            ods[kid], client, pulse, run, ds[kkid], propagate_path, [], propagate_requested_paths, skip_uncertainties, [pp0, pp1, pp2]
+        )
 
     # generate uncertain data
     if not skip_uncertainties and isinstance(ods.omas_data, dict):
         for kid in list(ods.omas_data.keys()):
-            if kid.endswith('_error_upper') and kid[:-len('_error_upper')] in ods.omas_data:
+            if kid.endswith('_error_upper') and kid[: -len('_error_upper')] in ods.omas_data:
                 try:
                     if isinstance(ods[kid], ODS):
                         pass
                     elif isinstance(ods[kid], float):
-                        ods[kid[:-len('_error_upper')]] = ufloat(ods[kid[:-len('_error_upper')]], ods[kid])
+                        ods[kid[: -len('_error_upper')]] = ufloat(ods[kid[: -len('_error_upper')]], ods[kid])
                     else:
-                        ods[kid[:-len('_error_upper')]] = uarray(ods[kid[:-len('_error_upper')]], ods[kid])
+                        ods[kid[: -len('_error_upper')]] = uarray(ods[kid[: -len('_error_upper')]], ods[kid])
                     del ods[kid]
                 except Exception as _excp:
                     printe('Error loading uncertain data: %s' % kid)
@@ -194,7 +211,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
 
 
 def uda_get_shape(client, path, pulse, run):
-    '''
+    """
     Get the number of elements in a structure of arrays
 
     :param client: pyuda.Client object
@@ -206,12 +223,12 @@ def uda_get_shape(client, path, pulse, run):
     :param run: UDA run
 
     :return: integer
-    '''
+    """
     return uda_get(client, path + ['Shape_of'], pulse, run)
 
 
 def offset(path, off):
-    '''
+    """
     IMAS UDA indexing starts from one
 
     :param path: ODS path expressed as list
@@ -219,12 +236,12 @@ def offset(path, off):
     :param off: offset to apply
 
     :return: path with applied offset
-    '''
+    """
     return [p if isinstance(p, str) else p + off for p in path]
 
 
 def uda_get(client, path, pulse, run):
-    '''
+    """
     Get the data from UDA
 
     :param client: pyuda.Client object
@@ -236,7 +253,7 @@ def uda_get(client, path, pulse, run):
     :param run: UDA run
 
     :return: data
-    '''
+    """
     try:
         location = l2o(offset(path, +1)).replace('.', '/')
         tmp = client.get(location, pulse)

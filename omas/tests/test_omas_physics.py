@@ -31,6 +31,7 @@ try:
 except ImportError as _excp:
     failed_PINT = _excp
 
+
 class TestOmasPhysics(unittest.TestCase):
     """
     Test suite for omas_physics.py
@@ -42,7 +43,9 @@ class TestOmasPhysics(unittest.TestCase):
 
         assert "energy_mhd" not in ods['equilibrium.time_slice.0.global_quantities']
         ods.physics_equilibrium_consistent()
-        assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0)
+        assert ("energy_mhd" in ods['equilibrium.time_slice.0.global_quantities']) and (
+            ods['equilibrium.time_slice.0.global_quantities.energy_mhd'] > 0
+        )
         return
 
     def test_core_profiles_pressures(self):
@@ -58,7 +61,7 @@ class TestOmasPhysics(unittest.TestCase):
 
     def test_core_profiles_currents(self):
 
-        rho = numpy.linspace(0., 1., 4)
+        rho = numpy.linspace(0.0, 1.0, 4)
         Jval = 1e5 * numpy.ones(4)
         jdef = {}
         Js = ['j_actuator', 'j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total']
@@ -95,13 +98,15 @@ class TestOmasPhysics(unittest.TestCase):
             CPC(ODS(), kw=kw, should_RE=(J1 == 'j_actuator'))
 
             # Now try setting two
-            for J2 in Js[i + 1:]:
+            for J2 in Js[i + 1 :]:
                 kw = copy.deepcopy(jdef)
                 kw[J1] = Jval
                 kw[J2] = Jval
-                should_RE = ((not isinstance(kw['j_actuator'], str) or kw['j_actuator'] != 'default') and
-                             (isinstance(kw['j_bootstrap'], str) and kw['j_bootstrap'] == 'default') and
-                             (isinstance(kw['j_non_inductive'], str) and kw['j_non_inductive'] == 'default'))
+                should_RE = (
+                    (not isinstance(kw['j_actuator'], str) or kw['j_actuator'] != 'default')
+                    and (isinstance(kw['j_bootstrap'], str) and kw['j_bootstrap'] == 'default')
+                    and (isinstance(kw['j_non_inductive'], str) and kw['j_non_inductive'] == 'default')
+                )
                 CPC(ODS(), kw=kw, should_RE=should_RE)
 
         # Try setting three
@@ -109,24 +114,22 @@ class TestOmasPhysics(unittest.TestCase):
             kw = copy.deepcopy(jdef)
             for key in keys:
                 kw[key] = Jval
-            if (('j_actuator' in keys) and
-                    ('j_bootstrap' in keys) and
-                    ('j_non_inductive' in keys)):
+            if ('j_actuator' in keys) and ('j_bootstrap' in keys) and ('j_non_inductive' in keys):
                 CPC(ODS(), kw=kw, should_AE=True)
                 kw['j_non_inductive'] = 2 * Jval
-            elif (('j_non_inductive' in keys) and
-                  ('j_ohmic' in keys) and
-                  ('j_total' in keys)):
+            elif ('j_non_inductive' in keys) and ('j_ohmic' in keys) and ('j_total' in keys):
                 CPC(ODS(), kw=kw, should_AE=True)
                 kw['j_total'] = 2 * Jval
             CPC(ODS(), kw=kw)
 
         # Try setting four
-        for dkey, rkey, factor in [('j_total', 'j_non_inductive', 2),
-                                   ('j_ohmic', 'j_non_inductive', 2),
-                                   ('j_non_inductive', 'j_total', 3),
-                                   ('j_bootstrap', 'j_total', 2),
-                                   ('j_actuator', 'j_total', 2)]:
+        for dkey, rkey, factor in [
+            ('j_total', 'j_non_inductive', 2),
+            ('j_ohmic', 'j_non_inductive', 2),
+            ('j_non_inductive', 'j_total', 3),
+            ('j_bootstrap', 'j_total', 2),
+            ('j_actuator', 'j_total', 2),
+        ]:
             kw = copy.deepcopy(jdef)
             for key in kw.keys():
                 if key != dkey:
@@ -147,15 +150,13 @@ class TestOmasPhysics(unittest.TestCase):
 
         # Now test with equilibrium and existing quantities
         ods = ODS().sample_equilibrium()
-        kw = {'j_actuator': Jval,
-              'j_bootstrap': Jval}
+        kw = {'j_actuator': Jval, 'j_bootstrap': Jval}
         CPC(ods, kw=kw)  # j_ni = 2
         kw = {'j_bootstrap': 2 * Jval}
         CPC(ods, kw=kw, should_AE=True)
         kw = {'j_bootstrap': 2 * Jval, 'j_non_inductive': None}
         CPC(ods, kw=kw)  # j_ni = 3
-        kw = {'j_actuator': 1.5 * Jval,
-              'j_bootstrap': 1.5 * Jval}
+        kw = {'j_actuator': 1.5 * Jval, 'j_bootstrap': 1.5 * Jval}
         CPC(ods, kw=kw)
         kw = {'j_bootstrap': 2 * Jval, 'j_actuator': None}
         CPC(ods, kw=kw)
@@ -271,7 +272,7 @@ class TestOmasPhysics(unittest.TestCase):
         return
 
     def test_cocosio(self):
-        x = numpy.linspace(.1, 1, 10)
+        x = numpy.linspace(0.1, 1, 10)
 
         ods = ODS(cocosio=11, cocos=11)
         ods['equilibrium.time_slice.0.profiles_1d.psi'] = x
@@ -374,6 +375,7 @@ class TestOmasPhysics(unittest.TestCase):
     @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):
         import pint
+
         ureg = pint.UnitRegistry()
 
         ods = ODS()
@@ -446,7 +448,9 @@ class TestOmasPhysics(unittest.TestCase):
 
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*defining its COCOS transform.*")
-            generate_cocos_signals(list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False)
+            generate_cocos_signals(
+                list_structures(imas_version=omas_rcparams['default_imas_version']), threshold=0, write=False, verbose=False
+            )
         return
 
     # End of TestOmasPhysics class

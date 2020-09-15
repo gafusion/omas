@@ -12,6 +12,7 @@ from omas import *
 # user defined function that takes input string and converts it to python types
 def robust_eval(string):
     import ast
+
     try:
         return ast.literal_eval(string)
     except:

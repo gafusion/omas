@@ -11,7 +11,7 @@ from omas import *
 
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
-os.environ['USER']='menghio'
+os.environ['USER'] = 'menghio'
 
 # generate some data and save it in IMAS
 ods = ODS().sample(ntimes=2)

@@ -13,9 +13,12 @@ with open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 
     __version__ = _f.read().strip()
 
 if sys.version_info < (3, 5):
-    raise Exception('''
+    raise Exception(
+        '''
 OMAS v%s only runs with Python 3.6+ and you are running Python %s
-''' % (__version__, '.'.join(map(str, sys.version_info[:2]))))
+'''
+        % (__version__, '.'.join(map(str, sys.version_info[:2])))
+    )
 
 import glob
 import json
@@ -36,6 +39,7 @@ import traceback
 try:
     import Pyro5.api
 except ImportError:
+
     class dummyPyro5:
         def __getattr__(self, key):
             print(key)
@@ -44,13 +48,13 @@ except ImportError:
         def expose(self, f):
             return f
 
-
     Pyro5 = dummyPyro5()
     print('OMAS %s requires Pyro5. In future versions this will become a required Python package.' % __version__)
 
 formatwarning_orig = warnings.formatwarning
-warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
-    formatwarning_orig(message, category, filename, lineno, line='')
+warnings.formatwarning = lambda message, category, filename, lineno, line=None: formatwarning_orig(
+    message, category, filename, lineno, line=''
+)
 
 # pint: avoid loading pint upfront since it can be slow and it is not always used
 ureg = []
@@ -82,9 +86,10 @@ def b2s(bytes):
 # configuration of directories and IMAS infos
 # --------------------------------------------
 class IMAS_json_dir(str):
-    '''
+    """
     directory where the JSON data structures for the different versions of IMAS are stored
-    '''
+    """
+
     pass
 
 
@@ -92,9 +97,9 @@ imas_json_dir = IMAS_json_dir(os.path.abspath(str(os.path.dirname(__file__)) + '
 
 
 class IMAS_versions(OrderedDict):
-    '''
+    """
     dictionary with list of IMAS version and their sub-folder name in the imas_json_dir
-    '''
+    """
 
     def __init__(self, mode='all'):
         OrderedDict.__init__(self)
@@ -126,28 +131,31 @@ else:
 # rcparams
 # --------------------------------------------
 class OMAS_rc_params(dict):
-    '''
+    """
     dictionary of parameters that control how OMAS operates
-    '''
+    """
+
     pass
 
 
 omas_rcparams = OMAS_rc_params()
-omas_rcparams.update({
-    'cocos': 11,
-    'consistency_check': True,
-    'dynamic_path_creation': True,
-    'tmp_imas_dir': os.environ.get('OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(),
-                                                                os.environ.get('USER', 'dummy_user'),
-                                                                'OMAS_TMP_DIR'])),
-    'fake_imas_dir': os.environ.get('OMAS_FAKE_IMAS_DIR', os.sep.join([os.environ.get('HOME', tempfile.gettempdir()),
-                                                                       'tmp',
-                                                                       'OMAS_FAKE_IMAS_DIR'])),
-    'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
-    'default_imas_version': _default_imas_version,
-    'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net',
-    'pickle_protocol': 4
-})
+omas_rcparams.update(
+    {
+        'cocos': 11,
+        'consistency_check': True,
+        'dynamic_path_creation': True,
+        'tmp_imas_dir': os.environ.get(
+            'OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(), os.environ.get('USER', 'dummy_user'), 'OMAS_TMP_DIR'])
+        ),
+        'fake_imas_dir': os.environ.get(
+            'OMAS_FAKE_IMAS_DIR', os.sep.join([os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])
+        ),
+        'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
+        'default_imas_version': _default_imas_version,
+        'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net',
+        'pickle_protocol': 4,
+    }
+)
 
 
 @contextmanager
@@ -167,13 +175,13 @@ add_datastructures = {}
 
 
 def omas_testdir(filename_topic=''):
-    '''
+    """
     Return path to temporary folder where OMAS TEST file are saved/loaded
 
     NOTE: If directory does not exists it is created
 
     :return: string with path to OMAS TEST folder
-    '''
+    """
     if filename_topic:
         filename_topic = os.path.splitext(os.path.split(filename_topic)[-1])[0] + '/'
     tmp = tempfile.gettempdir() + '/OMAS_TESTS/' + filename_topic

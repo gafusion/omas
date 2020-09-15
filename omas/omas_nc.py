@@ -23,6 +23,7 @@ def save_omas_nc(ods, filename, **kw):
     printd('Saving to %s' % filename, topic='nc')
 
     from netCDF4 import Dataset
+
     odsf = ods.flat()
     with Dataset(filename, 'w', **kw) as dataset:
         for item in odsf:
@@ -45,7 +46,7 @@ def save_omas_nc(ods, filename, **kw):
 
 
 def get_ds_item(dataset, item):
-    '''
+    """
     Convenience function for loading OMAS data stored in a NC file variable
     Handles arrays, scalars, strings, and uncertain quantities
 
@@ -54,19 +55,17 @@ def get_ds_item(dataset, item):
     :param item: variable name
 
     :return: data
-    '''
+    """
     if dataset.variables[item].shape:
         # arrays
         if item + '_error_upper' in dataset.variables.keys():
-            tmp = uarray(numpy.array(dataset.variables[item]),
-                         numpy.array(dataset.variables[item + '_error_upper']))
+            tmp = uarray(numpy.array(dataset.variables[item]), numpy.array(dataset.variables[item + '_error_upper']))
         else:
             tmp = numpy.array(dataset.variables[item])
     else:
         # uncertain scalars
         if item + '_error_upper' in dataset.variables.keys():
-            tmp = ufloat(dataset.variables[item][0].item(),
-                         dataset.variables[item + '_error_upper'][0].item())
+            tmp = ufloat(dataset.variables[item][0].item(), dataset.variables[item + '_error_upper'][0].item())
         else:
             try:
                 # scalars
@@ -90,6 +89,7 @@ def load_omas_nc(filename, consistency_check=True):
     printd('Loading from %s' % filename, topic='nc')
 
     from netCDF4 import Dataset
+
     ods = ODS(consistency_check=False)
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
@@ -102,11 +102,11 @@ def load_omas_nc(filename, consistency_check=True):
 
 
 class dynamic_omas_nc(dynamic_ODS):
-    '''
+    """
     Class that provides dynamic data loading from NC file
     This class is not to be used by itself, but via the
     ODS.open() method.
-    '''
+    """
 
     def __init__(self, filename):
         self.kw = {'filename': filename}
@@ -116,6 +116,7 @@ class dynamic_omas_nc(dynamic_ODS):
     def open(self):
         printd('Dynamic open  %s' % self.kw, topic='dynamic')
         from netCDF4 import Dataset
+
         self.dataset = Dataset(self.kw['filename'], 'r')
         self.active = True
         return self
@@ -139,7 +140,9 @@ class dynamic_omas_nc(dynamic_ODS):
         return key in self.dataset.variables
 
     def keys(self, location):
-        return numpy.unique([convert_int(k[len(location):].lstrip('.').split('.')[0]) for k in self.dataset.variables.keys() if k.startswith(location)])
+        return numpy.unique(
+            [convert_int(k[len(location) :].lstrip('.').split('.')[0]) for k in self.dataset.variables.keys() if k.startswith(location)]
+        )
 
 
 def through_omas_nc(ods, method=['function', 'class_method'][1]):
