@@ -37,7 +37,7 @@ ods.load('test.pkl')
 # the data that was loaded is stored in the pickle
 print(ods.flat().keys())
 
-# re-open the file descriptor to continue loading more data
+# continue loading more data
 with ods.open('imas', os.environ['USER'], 'DIII-D', 1000, 0):
     print(ods['equilibrium.time'])
 

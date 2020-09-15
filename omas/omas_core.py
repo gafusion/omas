@@ -22,7 +22,8 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
-    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
+    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
+    'omas_service', 'omas_service_script'
 ]
 
 # List of functions that can be added by third-party Python
@@ -1878,8 +1879,8 @@ class dynamic_ODS_wrapper():
         self.remote = remote
         if remote:
             if isinstance(remote, int):
-                remote = 'localhost:%d' % remote
-            factory = Pyro5.api.Proxy('PYRO:dynamic_ODS_factory@' + remote)
+                remote = 'PYRO:dynamic_ODS_factory@localhost:%d' % remote
+            factory = Pyro5.api.Proxy(remote)
         else:
             factory = dynamic_ODS_factory()
         self.factory = factory.initialize(self.idc, ext, *args, **kw)
@@ -2374,4 +2375,5 @@ from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
 from .omas_mongo import *
+from .omas_service import *
 from . import omas_structure

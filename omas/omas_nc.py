@@ -122,6 +122,7 @@ class dynamic_omas_nc(dynamic_ODS):
 
     def close(self):
         printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.dataset.close()
         self.dataset = None
         self.active = False
         return self
