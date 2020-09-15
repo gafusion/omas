@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS
 from .omas_utils import _extra_structures
@@ -101,6 +99,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     :return: path if set was done, otherwise None
     """
+    # handle uncertain data
     if numpy.atleast_1d(is_uncertain(value)).any():
         path = copy.deepcopy(path)
         tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
@@ -111,12 +110,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     ds = path[0]
     path = path[1:]
 
-    # `info` IDS is used by OMAS to hold user, machine, pulse, run, imas_version
-    # for saving methods that do not carry that information. IMAS does not store
-    # this information as part of the data dictionary.
-    if ds in add_datastructures.keys():
-        return
-
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
@@ -125,6 +118,8 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
             m.time[0] = -1.0
+    elif l2i(path) == 'ids_properties.occurrence':  # IMAS does not store occurrence info as part of the IDSs
+        return
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
             printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
@@ -350,7 +345,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
         if not omas_rcparams['allow_fake_imas_fallback']:
             raise
         filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
-        printe('Overloaded save_omas_imas: %s' % filename)
+        printe(f'Overloaded save_omas_imas: {filename}')
         from . import save_omas_pkl
         if not os.path.exists(omas_rcparams['fake_imas_dir']):
             os.makedirs(omas_rcparams['fake_imas_dir'])
@@ -369,19 +364,18 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
             set_paths = []
             for path in reversed(paths):
                 set_paths.append(imas_set(ids, path, ods[path], None, allocate=True))
-            set_paths = filter(None, set_paths)
+            set_paths = list(filter(None, set_paths))
 
             # assign the data
             for path in set_paths:
-                printd('writing %s' % l2i(path))
+                printd(f'writing {l2i(path)}')
                 imas_set(ids, path, ods[path], True)
 
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
-                if ds in add_datastructures.keys():
-                    continue
-                printd("ids.%s.put(0)" % ds, topic='imas_code')
-                getattr(ids, ds).put(0)
+                occ = ods.get('ids_properties.occurrence', 0)
+                printd(f"ids.{ds}.put({occ})", topic='imas_code')
+                getattr(ids, ds).put(occ)
 
         finally:
             # close connection to IMAS database
@@ -391,19 +385,19 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     return set_paths
 
 
-def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=True, verbose=True):
+def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
     """
     Return list of IMAS paths that have data
 
     :param ids: IMAS ids
 
+    :param occurrence: dictinonary with the occurrence to load for each IDS
+
     :param paths: list of paths to load from IMAS
 
     :param imas_version: IMAS version
 
-    :param skip_ggd: do not load ggd structure
-
-    :param skip_ion_state: do not load ion state structure
+    :param time: extract a time slice [expressed in seconds] from the IDS
 
     :param verbose: print ids infos
 
@@ -420,37 +414,52 @@ def infer_fetch_paths(ids, paths, imas_version, skip_ggd=True, skip_ion_state=Tr
     dss = numpy.unique([p[0] for p in requested_paths])
     ndss = max([len(d) for d in dss])
     for ds in dss:
-        if ds in add_datastructures.keys():
-            continue
         if not hasattr(ids, ds):
             if verbose:
-                print('| %s IDS of IMAS version %s is unknown' % (ds.ljust(ndss), imas_version))
+                print(f'| {ds.ljust(ndss)} IDS of IMAS version {imas_version} is unknown')
             continue
-        # ids fetching
-        printd("ids.%s.get()" % ds, topic='imas_code')
-        try:
-            getattr(ids, ds).get()
-        except ValueError as _excp:
-            print('x %s IDS failed on get' % ds.ljust(ndss))  # not sure why some IDSs fail on .get()... it's not about them being empty
-            continue
+
+        # retrieve this occurrence for this IDS
+        occ = occurrence.get(ds, 0)
+
+        # ids.get()
+        if time is None:
+            printd(f"ids.{ds}.get()", topic='imas_code')
+            try:
+                getattr(ids, ds).get(occ)
+            except ValueError as _excp:
+                print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
+                continue
+
+        # ids.getSlice()
+        else:
+            printd(f"ids.{ds}.getSlice({occ}, {time}, 1)", topic='imas_code')
+            try:
+                getattr(ids, ds).getSlice(occ, time, 1)
+            except ValueError as _excp:
+                print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
+                continue
+
+        # see if the IDS has any data (if so homogeneous_time must be populated)
         if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
             if verbose:
                 try:
-                    print('* %s IDS has data (%d times)' % (ds.ljust(ndss), len(getattr(ids, ds).time)))
+                    print(f'* {ds.ljust(ndss)} IDS has data ({len(getattr(ids, ds).time)} times)')
                 except Exception as _excp:
-                    print('* %s IDS' % ds.ljust(ndss))
-                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                    print(f'* {ds.ljust(ndss)} IDS')
+                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
+
         else:
             if verbose:
-                print('- %s IDS is empty' % ds.ljust(ndss))
+                print(f'- {ds.ljust(ndss)} IDS is empty')
+
     joined_fetch_paths = list(map(l2i, fetch_paths))
     return fetch_paths, joined_fetch_paths
 
 
 @codeparams_xml_load
-def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, paths=None,
-                   imas_version=None, skip_uncertainties=False, skip_ggd=True, skip_ion_state=True, verbose=True,
-                   consistency_check=True):
+def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={},
+                   paths=None, time=None, imas_version=None, skip_uncertainties=False, consistency_check=True, verbose=True):
     """
     Load OMAS data from IMAS
 
@@ -465,15 +474,17 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
 
     :param run: IMAS run
 
+    :param occurrence: dictinonary with the occurrence to load for each IDS
+
     :param paths: list of paths to load from IMAS
+
+    :param time: time slice [expressed in seconds] to be extracted
 
     :param imas_version: IMAS version (force specific version)
 
     :param skip_uncertainties: do not load uncertain data
 
-    :param skip_ggd: do not load ggd structure
-
-    :param skip_ion_state: do not load ion_state structure
+    :param consistency_check: perform consistency_check
 
     :param verbose: print loading progress
 
@@ -508,20 +519,21 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
         filename = os.sep.join([omas_rcparams['fake_imas_dir'], '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version))])
         printe('Overloaded load_omas_imas: %s' % filename)
         from . import load_omas_pkl
-        ods = load_omas_pkl(filename)
+        ods = load_omas_pkl(filename, consistency_check=False)
 
     else:
 
         try:
             # see what paths have data
-            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, paths=paths, imas_version=imas_version, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state, verbose=verbose)
-
+            # NOTE: this is where the IDS.get operation occurs
+            fetch_paths, joined_fetch_paths = infer_fetch_paths(ids, occurrence=occurrence, paths=paths, time=time,
+                                                                imas_version=imas_version, verbose=verbose)
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
             for k, path in enumerate(fetch_paths):
                 if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                     continue
-                if verbose and (k % (len(fetch_paths) // 10) == 0 or k == len(fetch_paths) - 1):
+                if verbose and (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
                     print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
                 # get data from IDS
                 data = imas_get(ids, path, None)
@@ -537,13 +549,15 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
                         except uncertainties.core.NegativeStdDev as _excp:
                             printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
                 # assign data to ODS
-                ods[path] = data
+                # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
+                ods.setraw(path, data)
 
         finally:
             # close connection to IMAS database
             printd("ids.close()", topic='imas_code')
             ids.close()
 
+    # add dataset_description information to this ODS
     if paths is None:
         ods.setdefault('dataset_description.data_entry.user', str(user))
         ods.setdefault('dataset_description.data_entry.machine', str(machine))
@@ -551,8 +565,17 @@ def load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine=None, puls
         ods.setdefault('dataset_description.data_entry.run', int(run))
         ods.setdefault('dataset_description.imas_version', str(imas_version))
 
+    # add occurrence information to the ODS
+    for ds in ods:
+        if 'ids_properties' in ods[ds]:
+            ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
+
+    # must manually call set_child_locations since
+    # we used the ODS.setraw that does not do that for us
+    ods.set_child_locations()
+
     try:
-        ods.consistency_check = True
+        ods.consistency_check = consistency_check
     except LookupError as _excp:
         printe(repr(_excp))
 
@@ -694,8 +717,8 @@ def load_omas_iter_scenario(pulse, run=0, paths=None,
     return load_omas_imas(user='public', machine='iterdb', pulse=pulse, run=run, paths=paths, imas_version=imas_version, verbose=verbose)
 
 
-def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, assume_uniform_array_structures=False,
-                        stop_on_first_fill=False, skip_ggd=True, skip_ion_state=True):
+def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None,
+                        assume_uniform_array_structures=False, stop_on_first_fill=False):
     """
     Taverse an IDS and list leaf paths (with proper sizing for arrays of structures)
 
@@ -712,10 +735,6 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
     :param assume_uniform_array_structures: assume that the first structure in an array of structures has data in the same nodes locations of the later structures in the array
 
     :param stop_on_first_fill: return as soon as one path with data hass been found
-
-    :param skip_ggd: do not traverse ggd structures
-
-    :param skip_ion_state: do not traverse ion state
 
     :return: returns list of paths in an IDS that are filled
     """
@@ -748,13 +767,7 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
 
     # traverse
     for kid in keys:
-
-        # skip ggd structures
-        if skip_ggd and kid in ['ggd', 'grids_ggd']:
-            continue
-
-        # skip ion state structures
-        if skip_ion_state and kid in ['state'] and 'ion' in path:
+        if kid == 'occurrence' and path[-1] == 'ids_properties':
             continue
 
         propagate_path = copy.copy(path)
@@ -771,13 +784,16 @@ def filled_paths_in_ids(ids, ds, path=None, paths=None, requested_paths=None, as
         # recursive call
         try:
             if isinstance(kid, str):
-                subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                subtree_paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], propagate_path, [],
+                                                    propagate_requested_paths, assume_uniform_array_structures)
             else:
-                subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [], propagate_requested_paths, assume_uniform_array_structures, skip_ggd=skip_ggd, skip_ion_state=skip_ion_state)
+                subtree_paths = filled_paths_in_ids(ids[kid], ds[':'], propagate_path, [],
+                                                    propagate_requested_paths, assume_uniform_array_structures)
         except Exception:
             # check if the issue was that we were trying to load something that was added to the _extra_structures
-            if o2i(l2u(propagate_path)) in _extra_structures[propagate_path[0]]:
-                # printe('`%s` does not exist in the IMAS data dictionary. Consider opening a JIRA issue asking for its addition: https://jira.iter.org' % l2i(path + [kid]))
+            if o2i(l2u(propagate_path)) in _extra_structures.get(propagate_path[0], {}):
+                # printe('`%s` does not exist in the IMAS data dictionary.
+                # Consider opening a JIRA issue asking for its addition: https://jira.iter.org' % l2i(path + [kid]))
                 continue
             printe('Error querying IMAS database for `%s` Possible IMAS version mismatch?' % l2i(path + [kid]))
             continue

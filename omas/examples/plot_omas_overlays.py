@@ -6,21 +6,19 @@ OMAS plot overlays
 This example loads sample DIII-D overlay data and generates an overlays plots
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from matplotlib.pyplot import show, gca
 from omas import *
 import numpy
 
 # load sample data from S3
-ods = load_omas_s3('DIIIDoverlay_sample', user='omas_shared', imas_version='3.21.0')
+ods = ods_sample()
 
 # plot equilibrium and wall
-ods.plot_equilibrium_CX()
+ods.plot_equilibrium_CX(contour_quantity='psi_norm')
 # plot overlays
 ods.plot_overlay(  # Values can be True to simply turn on or dict to pass keywords to specific overlay functions
     gas_injection={'colors': ['b', 'g', 'c']},  # , 'which_gas': ['GASA', 'LOB1']},
-    bolometer={'labelevery': 1, 'mask': numpy.append(numpy.ones(24, bool), (numpy.arange(24) % 2).astype(bool)), 'linestyle': '--'},
+    bolometer={'labelevery': 1, 'linestyle': '--'},
     thomson_scattering={'labelevery': 4, 'color': 'r'},
     debug_all_plots=True,
 )

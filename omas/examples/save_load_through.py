@@ -14,8 +14,6 @@ Finally, a check is done to make sure that the final ODS is the same as the init
   :target: ../_images/omas_through_simple.png
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 from pprint import pprint
 

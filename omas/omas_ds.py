@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS
 import itertools
@@ -87,6 +85,7 @@ def load_omas_dx(filename, consistency_check=True):
 
     :return: OMAS data xarray
     """
+    import xarray
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()
@@ -156,6 +155,7 @@ def load_omas_ds(filename, consistency_check=True):
 
     :return: OMAS data set
     """
+    import xarray
     DS = xarray.open_dataset(filename)
     DS.load()
     DS.close()

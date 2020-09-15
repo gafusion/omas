@@ -18,8 +18,6 @@ Prior running this script, the following commands must be typed at the teriminal
 
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 from matplotlib import pyplot
 

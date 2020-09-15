@@ -7,8 +7,6 @@ OMAS provides a way to populate ODSs with sample data.
 This is often useful for testing/debugging purposes.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
@@ -27,5 +25,5 @@ ods = ODS()
 # add sample equilibrium data to an ODS
 ods.sample_equilibrium()
 
-# alternatively, ods_sample() generates a sample ODS that is populated by all `ODS.sample_` methods
-ods = ods_sample()
+# alternatively, ods.sample() populates the ods with the output of all `ODS.sample_` methods
+ods.sample()

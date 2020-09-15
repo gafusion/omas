@@ -7,7 +7,7 @@
   "maxoccur": "1"
  },
  "pulse_schedule.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "pulse_schedule/code",
   "lifecycle_status": "alpha"
@@ -58,13 +58,13 @@
   "type": "constant"
  },
  "pulse_schedule.density_control": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Gas injection system and density control references",
   "full_path": "pulse_schedule/density_control",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.density_control.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/density_control/mode",
   "lifecycle_status": "alpha"
@@ -83,14 +83,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/mode/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "pulse_schedule.density_control.n_e_line": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Line integrated electron density",
   "full_path": "pulse_schedule/density_control/n_e_line",
   "lifecycle_status": "alpha",
@@ -104,7 +104,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.n_e_line.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/density_control/n_e_line/reference",
   "lifecycle_status": "alpha"
@@ -121,7 +121,7 @@
   "units": "mixed"
  },
  "pulse_schedule.density_control.n_e_line.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/density_control/n_e_line/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -153,7 +153,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/n_e_line/reference/time",
   "lifecycle_status": "alpha",
@@ -174,7 +174,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.n_h_over_n_d": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Average ratio of hydrogen over deuterium density",
   "full_path": "pulse_schedule/density_control/n_h_over_n_d",
   "lifecycle_status": "alpha",
@@ -188,7 +188,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.n_h_over_n_d.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference",
   "lifecycle_status": "alpha"
@@ -205,7 +205,7 @@
   "units": "mixed"
  },
  "pulse_schedule.density_control.n_h_over_n_d.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -237,7 +237,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/n_h_over_n_d/reference/time",
   "lifecycle_status": "alpha",
@@ -258,7 +258,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.n_t_over_n_d": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Average ratio of tritium over deuterium density",
   "full_path": "pulse_schedule/density_control/n_t_over_n_d",
   "lifecycle_status": "alpha",
@@ -272,7 +272,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.n_t_over_n_d.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference",
   "lifecycle_status": "alpha"
@@ -289,7 +289,7 @@
   "units": "mixed"
  },
  "pulse_schedule.density_control.n_t_over_n_d.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -321,7 +321,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/n_t_over_n_d/reference/time",
   "lifecycle_status": "alpha",
@@ -345,14 +345,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of injection valves. Time-dependent",
   "full_path": "pulse_schedule/density_control/valve(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20"
  },
  "pulse_schedule.density_control.valve[:].flow_rate": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Flow rate of the valve",
   "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate",
   "lifecycle_status": "alpha",
@@ -366,7 +366,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.valve[:].flow_rate.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference",
   "lifecycle_status": "alpha"
@@ -383,7 +383,7 @@
   "units": "mixed"
  },
  "pulse_schedule.density_control.valve[:].flow_rate.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -415,7 +415,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/valve(i1)/flow_rate/reference/time",
   "lifecycle_status": "alpha",
@@ -439,7 +439,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Species injected by the valve (may be more than one in case the valve injects a gas mixture)",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)",
   "lifecycle_status": "alpha",
@@ -449,7 +449,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -464,7 +464,7 @@
   "units": "Atomic Mass Unit"
  },
  "pulse_schedule.density_control.valve[:].species[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -495,7 +495,7 @@
   "units": "Elementary Charge Unit"
  },
  "pulse_schedule.density_control.valve[:].species[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -526,7 +526,7 @@
   "units": "Elementary Charge Unit"
  },
  "pulse_schedule.density_control.valve[:].species[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -563,7 +563,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.zeff": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Line average effective charge",
   "full_path": "pulse_schedule/density_control/zeff",
   "lifecycle_status": "alpha",
@@ -577,7 +577,7 @@
   "type": "constant"
  },
  "pulse_schedule.density_control.zeff.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/density_control/zeff/reference",
   "lifecycle_status": "alpha"
@@ -594,7 +594,7 @@
   "units": "mixed"
  },
  "pulse_schedule.density_control.zeff.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/density_control/zeff/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -626,7 +626,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/density_control/zeff/reference/time",
   "lifecycle_status": "alpha",
@@ -647,7 +647,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron cyclotron heating and current drive system",
   "full_path": "pulse_schedule/ec",
   "lifecycle_status": "alpha"
@@ -656,14 +656,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of ECRH antennas",
   "full_path": "pulse_schedule/ec/antenna(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "10"
  },
  "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Normalised toroidal flux coordinate at which the main deposition should occur",
   "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm",
   "lifecycle_status": "alpha",
@@ -677,7 +677,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference",
   "lifecycle_status": "alpha"
@@ -694,7 +694,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].deposition_rho_tor_norm.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -726,7 +726,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/deposition_rho_tor_norm/reference/time",
   "lifecycle_status": "alpha",
@@ -747,7 +747,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].frequency": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Frequency",
   "full_path": "pulse_schedule/ec/antenna(i1)/frequency",
   "lifecycle_status": "alpha",
@@ -761,7 +761,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].frequency.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference",
   "lifecycle_status": "alpha"
@@ -778,7 +778,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].frequency.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -810,7 +810,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/frequency/reference/time",
   "lifecycle_status": "alpha",
@@ -831,7 +831,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_pol": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R. Positive means wave launched downwards, negative means wave launched upwards",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol",
   "lifecycle_status": "alpha",
@@ -845,7 +845,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_pol.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference",
   "lifecycle_status": "alpha"
@@ -862,7 +862,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_pol.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -894,7 +894,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_pol/reference/time",
   "lifecycle_status": "alpha",
@@ -915,7 +915,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi. Positive sign means the waves is injected anti-clockwise when viewed from above.",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor",
   "lifecycle_status": "alpha",
@@ -929,7 +929,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_tor.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference",
   "lifecycle_status": "alpha"
@@ -946,7 +946,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].launching_angle_tor.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -978,7 +978,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/launching_angle_tor/reference/time",
   "lifecycle_status": "alpha",
@@ -999,7 +999,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].phase": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Phase",
   "full_path": "pulse_schedule/ec/antenna(i1)/phase",
   "lifecycle_status": "alpha",
@@ -1013,7 +1013,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].phase.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference",
   "lifecycle_status": "alpha"
@@ -1030,7 +1030,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].phase.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1062,7 +1062,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/phase/reference/time",
   "lifecycle_status": "alpha",
@@ -1083,7 +1083,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power",
   "full_path": "pulse_schedule/ec/antenna(i1)/power",
   "lifecycle_status": "alpha",
@@ -1097,7 +1097,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.antenna[:].power.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ec/antenna(i1)/power/reference",
   "lifecycle_status": "alpha"
@@ -1114,7 +1114,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ec.antenna[:].power.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1146,7 +1146,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/antenna(i1)/power/reference/time",
   "lifecycle_status": "alpha",
@@ -1167,7 +1167,7 @@
   "type": "constant"
  },
  "pulse_schedule.ec.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/ec/mode",
   "lifecycle_status": "alpha"
@@ -1186,20 +1186,20 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ec/mode/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "pulse_schedule.flux_control": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Magnetic flux control references",
   "full_path": "pulse_schedule/flux_control",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.flux_control.beta_normal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA]",
   "full_path": "pulse_schedule/flux_control/beta_normal",
   "lifecycle_status": "alpha",
@@ -1213,7 +1213,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.beta_normal.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/flux_control/beta_normal/reference",
   "lifecycle_status": "alpha"
@@ -1230,7 +1230,7 @@
   "units": "mixed"
  },
  "pulse_schedule.flux_control.beta_normal.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/flux_control/beta_normal/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1262,7 +1262,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/flux_control/beta_normal/reference/time",
   "lifecycle_status": "alpha",
@@ -1283,7 +1283,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.i_plasma": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Plasma current",
   "full_path": "pulse_schedule/flux_control/i_plasma",
   "lifecycle_status": "alpha",
@@ -1297,7 +1297,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.i_plasma.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/flux_control/i_plasma/reference",
   "lifecycle_status": "alpha"
@@ -1314,7 +1314,7 @@
   "units": "mixed"
  },
  "pulse_schedule.flux_control.i_plasma.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/flux_control/i_plasma/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1346,7 +1346,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/flux_control/i_plasma/reference/time",
   "lifecycle_status": "alpha",
@@ -1367,7 +1367,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.li_3": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Internal inductance",
   "full_path": "pulse_schedule/flux_control/li_3",
   "lifecycle_status": "alpha",
@@ -1381,7 +1381,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.li_3.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/flux_control/li_3/reference",
   "lifecycle_status": "alpha"
@@ -1398,7 +1398,7 @@
   "units": "mixed"
  },
  "pulse_schedule.flux_control.li_3.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/flux_control/li_3/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1430,7 +1430,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/flux_control/li_3/reference/time",
   "lifecycle_status": "alpha",
@@ -1451,7 +1451,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.loop_voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Loop voltage",
   "full_path": "pulse_schedule/flux_control/loop_voltage",
   "lifecycle_status": "alpha",
@@ -1465,7 +1465,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.loop_voltage.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/flux_control/loop_voltage/reference",
   "lifecycle_status": "alpha"
@@ -1482,7 +1482,7 @@
   "units": "mixed"
  },
  "pulse_schedule.flux_control.loop_voltage.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/flux_control/loop_voltage/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1514,7 +1514,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/flux_control/loop_voltage/reference/time",
   "lifecycle_status": "alpha",
@@ -1535,7 +1535,7 @@
   "type": "constant"
  },
  "pulse_schedule.flux_control.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/flux_control/mode",
   "lifecycle_status": "alpha"
@@ -1554,14 +1554,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/flux_control/mode/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "pulse_schedule.ic": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Ion cyclotron heating and current drive system",
   "full_path": "pulse_schedule/ic",
   "lifecycle_status": "alpha"
@@ -1570,14 +1570,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of ICRH antennas",
   "full_path": "pulse_schedule/ic/antenna(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "3"
  },
  "pulse_schedule.ic.antenna[:].frequency": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Frequency",
   "full_path": "pulse_schedule/ic/antenna(i1)/frequency",
   "lifecycle_status": "alpha",
@@ -1591,7 +1591,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.antenna[:].frequency.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference",
   "lifecycle_status": "alpha"
@@ -1608,7 +1608,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ic.antenna[:].frequency.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1640,7 +1640,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ic/antenna(i1)/frequency/reference/time",
   "lifecycle_status": "alpha",
@@ -1661,7 +1661,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.antenna[:].phase": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Phase",
   "full_path": "pulse_schedule/ic/antenna(i1)/phase",
   "lifecycle_status": "alpha",
@@ -1675,7 +1675,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.antenna[:].phase.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference",
   "lifecycle_status": "alpha"
@@ -1692,7 +1692,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ic.antenna[:].phase.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1724,7 +1724,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ic/antenna(i1)/phase/reference/time",
   "lifecycle_status": "alpha",
@@ -1745,7 +1745,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.antenna[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power",
   "full_path": "pulse_schedule/ic/antenna(i1)/power",
   "lifecycle_status": "alpha",
@@ -1759,7 +1759,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.antenna[:].power.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/ic/antenna(i1)/power/reference",
   "lifecycle_status": "alpha"
@@ -1776,7 +1776,7 @@
   "units": "mixed"
  },
  "pulse_schedule.ic.antenna[:].power.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1808,7 +1808,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ic/antenna(i1)/power/reference/time",
   "lifecycle_status": "alpha",
@@ -1829,7 +1829,7 @@
   "type": "constant"
  },
  "pulse_schedule.ic.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/ic/mode",
   "lifecycle_status": "alpha"
@@ -1848,14 +1848,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/ic/mode/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "pulse_schedule.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "pulse_schedule/ids_properties",
   "lifecycle_status": "alpha"
@@ -1874,8 +1874,13 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pulse_schedule.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "pulse_schedule.ids_properties.occurrence"
+ },
  "pulse_schedule.lh": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Lower Hybrid heating and current drive system",
   "full_path": "pulse_schedule/lh",
   "lifecycle_status": "alpha"
@@ -1884,14 +1889,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of LH antennas",
   "full_path": "pulse_schedule/lh/antenna(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "3"
  },
  "pulse_schedule.lh.antenna[:].frequency": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Frequency",
   "full_path": "pulse_schedule/lh/antenna(i1)/frequency",
   "lifecycle_status": "alpha",
@@ -1905,7 +1910,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].frequency.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference",
   "lifecycle_status": "alpha"
@@ -1922,7 +1927,7 @@
   "units": "mixed"
  },
  "pulse_schedule.lh.antenna[:].frequency.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -1954,7 +1959,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/lh/antenna(i1)/frequency/reference/time",
   "lifecycle_status": "alpha",
@@ -1975,7 +1980,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].n_parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Main parallel refractive index of the injected wave power spectrum",
   "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel",
   "lifecycle_status": "alpha",
@@ -1989,7 +1994,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].n_parallel.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference",
   "lifecycle_status": "alpha"
@@ -2006,7 +2011,7 @@
   "units": "mixed"
  },
  "pulse_schedule.lh.antenna[:].n_parallel.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2038,7 +2043,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/lh/antenna(i1)/n_parallel/reference/time",
   "lifecycle_status": "alpha",
@@ -2059,7 +2064,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].phase": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Phasing between neighbour waveguides (in the toroidal direction)",
   "full_path": "pulse_schedule/lh/antenna(i1)/phase",
   "lifecycle_status": "alpha",
@@ -2073,7 +2078,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].phase.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference",
   "lifecycle_status": "alpha"
@@ -2090,7 +2095,7 @@
   "units": "mixed"
  },
  "pulse_schedule.lh.antenna[:].phase.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2122,7 +2127,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/lh/antenna(i1)/phase/reference/time",
   "lifecycle_status": "alpha",
@@ -2143,7 +2148,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power",
   "full_path": "pulse_schedule/lh/antenna(i1)/power",
   "lifecycle_status": "alpha",
@@ -2157,7 +2162,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.antenna[:].power.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/lh/antenna(i1)/power/reference",
   "lifecycle_status": "alpha"
@@ -2174,7 +2179,7 @@
   "units": "mixed"
  },
  "pulse_schedule.lh.antenna[:].power.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2206,7 +2211,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/lh/antenna(i1)/power/reference/time",
   "lifecycle_status": "alpha",
@@ -2227,7 +2232,7 @@
   "type": "constant"
  },
  "pulse_schedule.lh.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/lh/mode",
   "lifecycle_status": "alpha"
@@ -2246,20 +2251,20 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/lh/mode/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "pulse_schedule.nbi": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral beam heating and current drive system",
   "full_path": "pulse_schedule/nbi",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.nbi.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/nbi/mode",
   "lifecycle_status": "alpha"
@@ -2278,7 +2283,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/nbi/mode/time",
   "lifecycle_status": "alpha",
@@ -2288,14 +2293,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of NBI units",
   "full_path": "pulse_schedule/nbi/unit(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "36"
  },
  "pulse_schedule.nbi.unit[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Full energy of the injected species (acceleration of a single atom)",
   "full_path": "pulse_schedule/nbi/unit(i1)/energy",
   "lifecycle_status": "alpha",
@@ -2309,7 +2314,7 @@
   "type": "constant"
  },
  "pulse_schedule.nbi.unit[:].energy.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference",
   "lifecycle_status": "alpha"
@@ -2326,7 +2331,7 @@
   "units": "mixed"
  },
  "pulse_schedule.nbi.unit[:].energy.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2358,7 +2363,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/nbi/unit(i1)/energy/reference/time",
   "lifecycle_status": "alpha",
@@ -2379,7 +2384,7 @@
   "type": "constant"
  },
  "pulse_schedule.nbi.unit[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power",
   "full_path": "pulse_schedule/nbi/unit(i1)/power",
   "lifecycle_status": "alpha",
@@ -2393,7 +2398,7 @@
   "type": "constant"
  },
  "pulse_schedule.nbi.unit[:].power.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/nbi/unit(i1)/power/reference",
   "lifecycle_status": "alpha"
@@ -2410,7 +2415,7 @@
   "units": "mixed"
  },
  "pulse_schedule.nbi.unit[:].power.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2442,7 +2447,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/nbi/unit(i1)/power/reference/time",
   "lifecycle_status": "alpha",
@@ -2466,7 +2471,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Species injected by the NBI unit (may be more than one in case the unit injects a gas mixture)",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)",
   "lifecycle_status": "alpha",
@@ -2476,7 +2481,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -2491,7 +2496,7 @@
   "units": "Atomic Mass Unit"
  },
  "pulse_schedule.nbi.unit[:].species[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2522,7 +2527,7 @@
   "units": "Elementary Charge Unit"
  },
  "pulse_schedule.nbi.unit[:].species[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -2553,7 +2558,7 @@
   "units": "Elementary Charge Unit"
  },
  "pulse_schedule.nbi.unit[:].species[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2590,19 +2595,19 @@
   "type": "constant"
  },
  "pulse_schedule.position_control": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Plasma position and shape control references",
   "full_path": "pulse_schedule/position_control",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.position_control.active_limiter_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)",
   "full_path": "pulse_schedule/position_control/active_limiter_point",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.position_control.active_limiter_point.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/active_limiter_point/r",
   "lifecycle_status": "alpha",
@@ -2616,7 +2621,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.active_limiter_point.r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference",
   "lifecycle_status": "alpha"
@@ -2633,7 +2638,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.active_limiter_point.r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2665,7 +2670,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/active_limiter_point/r/reference/time",
   "lifecycle_status": "alpha",
@@ -2686,7 +2691,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.active_limiter_point.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/active_limiter_point/z",
   "lifecycle_status": "alpha",
@@ -2700,7 +2705,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.active_limiter_point.z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference",
   "lifecycle_status": "alpha"
@@ -2717,7 +2722,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.active_limiter_point.z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2749,7 +2754,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/active_limiter_point/z/reference/time",
   "lifecycle_status": "alpha",
@@ -2773,14 +2778,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of (R,Z) points defining the outline of the plasma boundary",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "51"
  },
  "pulse_schedule.position_control.boundary_outline[:].r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r",
   "lifecycle_status": "alpha",
@@ -2794,7 +2799,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.boundary_outline[:].r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference",
   "lifecycle_status": "alpha"
@@ -2811,7 +2816,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.boundary_outline[:].r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2843,7 +2848,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/r/reference/time",
   "lifecycle_status": "alpha",
@@ -2864,7 +2869,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.boundary_outline[:].z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z",
   "lifecycle_status": "alpha",
@@ -2878,7 +2883,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.boundary_outline[:].z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference",
   "lifecycle_status": "alpha"
@@ -2895,7 +2900,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.boundary_outline[:].z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -2927,7 +2932,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/boundary_outline(i1)/z/reference/time",
   "lifecycle_status": "alpha",
@@ -2948,7 +2953,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Elongation of the plasma boundary",
   "full_path": "pulse_schedule/position_control/elongation",
   "lifecycle_status": "alpha",
@@ -2962,7 +2967,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/elongation/reference",
   "lifecycle_status": "alpha"
@@ -2979,7 +2984,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.elongation.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/elongation/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3011,7 +3016,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/elongation/reference/time",
   "lifecycle_status": "alpha",
@@ -3032,7 +3037,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation_lower": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Elongation (lower half w.r.t. geometric axis) of the plasma boundary",
   "full_path": "pulse_schedule/position_control/elongation_lower",
   "lifecycle_status": "alpha",
@@ -3046,7 +3051,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation_lower.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/elongation_lower/reference",
   "lifecycle_status": "alpha"
@@ -3063,7 +3068,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.elongation_lower.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/elongation_lower/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3095,7 +3100,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/elongation_lower/reference/time",
   "lifecycle_status": "alpha",
@@ -3116,7 +3121,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation_upper": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Elongation (upper half w.r.t. geometric axis) of the plasma boundary",
   "full_path": "pulse_schedule/position_control/elongation_upper",
   "lifecycle_status": "alpha",
@@ -3130,7 +3135,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.elongation_upper.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/elongation_upper/reference",
   "lifecycle_status": "alpha"
@@ -3147,7 +3152,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.elongation_upper.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/elongation_upper/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3179,7 +3184,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/elongation_upper/reference/time",
   "lifecycle_status": "alpha",
@@ -3203,7 +3208,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of gaps, defined by a reference point and a direction.",
   "full_path": "pulse_schedule/position_control/gap(i1)",
   "lifecycle_status": "alpha",
@@ -3218,7 +3223,7 @@
   "units": "rad"
  },
  "pulse_schedule.position_control.gap[:].angle_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angle\"",
   "full_path": "pulse_schedule/position_control/gap(i1)/angle_error_index",
   "lifecycle_status": "alpha",
@@ -3249,7 +3254,7 @@
   "units": "m"
  },
  "pulse_schedule.position_control.gap[:].r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pulse_schedule/position_control/gap(i1)/r_error_index",
   "lifecycle_status": "alpha",
@@ -3272,7 +3277,7 @@
   "units": "m"
  },
  "pulse_schedule.position_control.gap[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value of the gap, i.e. distance between the reference point and the separatrix along the gap direction",
   "full_path": "pulse_schedule/position_control/gap(i1)/value",
   "lifecycle_status": "alpha",
@@ -3286,7 +3291,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.gap[:].value.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/gap(i1)/value/reference",
   "lifecycle_status": "alpha"
@@ -3303,7 +3308,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.gap[:].value.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3335,7 +3340,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/gap(i1)/value/reference/time",
   "lifecycle_status": "alpha",
@@ -3364,7 +3369,7 @@
   "units": "m"
  },
  "pulse_schedule.position_control.gap[:].z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pulse_schedule/position_control/gap(i1)/z_error_index",
   "lifecycle_status": "alpha",
@@ -3387,13 +3392,13 @@
   "units": "m"
  },
  "pulse_schedule.position_control.geometric_axis": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)",
   "full_path": "pulse_schedule/position_control/geometric_axis",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.position_control.geometric_axis.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/geometric_axis/r",
   "lifecycle_status": "alpha",
@@ -3407,7 +3412,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.geometric_axis.r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/geometric_axis/r/reference",
   "lifecycle_status": "alpha"
@@ -3424,7 +3429,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.geometric_axis.r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3456,7 +3461,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/geometric_axis/r/reference/time",
   "lifecycle_status": "alpha",
@@ -3477,7 +3482,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.geometric_axis.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/geometric_axis/z",
   "lifecycle_status": "alpha",
@@ -3491,7 +3496,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.geometric_axis.z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/geometric_axis/z/reference",
   "lifecycle_status": "alpha"
@@ -3508,7 +3513,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.geometric_axis.z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3540,7 +3545,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/geometric_axis/z/reference/time",
   "lifecycle_status": "alpha",
@@ -3561,13 +3566,13 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.magnetic_axis": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Magnetic axis position",
   "full_path": "pulse_schedule/position_control/magnetic_axis",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.position_control.magnetic_axis.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/magnetic_axis/r",
   "lifecycle_status": "alpha",
@@ -3581,7 +3586,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.magnetic_axis.r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference",
   "lifecycle_status": "alpha"
@@ -3598,7 +3603,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.magnetic_axis.r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3630,7 +3635,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/magnetic_axis/r/reference/time",
   "lifecycle_status": "alpha",
@@ -3651,7 +3656,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.magnetic_axis.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/magnetic_axis/z",
   "lifecycle_status": "alpha",
@@ -3665,7 +3670,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.magnetic_axis.z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference",
   "lifecycle_status": "alpha"
@@ -3682,7 +3687,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.magnetic_axis.z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3714,7 +3719,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/magnetic_axis/z/reference/time",
   "lifecycle_status": "alpha",
@@ -3735,7 +3740,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.minor_radius": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)",
   "full_path": "pulse_schedule/position_control/minor_radius",
   "lifecycle_status": "alpha",
@@ -3749,7 +3754,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.minor_radius.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/minor_radius/reference",
   "lifecycle_status": "alpha"
@@ -3766,7 +3771,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.minor_radius.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/minor_radius/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3798,7 +3803,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/minor_radius/reference/time",
   "lifecycle_status": "alpha",
@@ -3819,7 +3824,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/position_control/mode",
   "lifecycle_status": "alpha"
@@ -3838,7 +3843,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/mode/time",
   "lifecycle_status": "alpha",
@@ -3848,14 +3853,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Array of strike points, for each of them the RZ position is given",
   "full_path": "pulse_schedule/position_control/strike_point(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "4"
  },
  "pulse_schedule.position_control.strike_point[:].r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/r",
   "lifecycle_status": "alpha",
@@ -3869,7 +3874,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.strike_point[:].r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference",
   "lifecycle_status": "alpha"
@@ -3886,7 +3891,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.strike_point[:].r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -3918,7 +3923,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/r/reference/time",
   "lifecycle_status": "alpha",
@@ -3939,7 +3944,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.strike_point[:].z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/z",
   "lifecycle_status": "alpha",
@@ -3953,7 +3958,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.strike_point[:].z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference",
   "lifecycle_status": "alpha"
@@ -3970,7 +3975,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.strike_point[:].z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4002,7 +4007,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/strike_point(i1)/z/reference/time",
   "lifecycle_status": "alpha",
@@ -4023,7 +4028,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Triangularity of the plasma boundary",
   "full_path": "pulse_schedule/position_control/triangularity",
   "lifecycle_status": "alpha",
@@ -4037,7 +4042,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/triangularity/reference",
   "lifecycle_status": "alpha"
@@ -4054,7 +4059,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.triangularity.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/triangularity/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4086,7 +4091,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/triangularity/reference/time",
   "lifecycle_status": "alpha",
@@ -4107,7 +4112,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity_lower": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Lower triangularity of the plasma boundary",
   "full_path": "pulse_schedule/position_control/triangularity_lower",
   "lifecycle_status": "alpha",
@@ -4121,7 +4126,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity_lower.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/triangularity_lower/reference",
   "lifecycle_status": "alpha"
@@ -4138,7 +4143,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.triangularity_lower.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/triangularity_lower/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4170,7 +4175,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/triangularity_lower/reference/time",
   "lifecycle_status": "alpha",
@@ -4191,7 +4196,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity_upper": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Upper triangularity of the plasma boundary",
   "full_path": "pulse_schedule/position_control/triangularity_upper",
   "lifecycle_status": "alpha",
@@ -4205,7 +4210,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.triangularity_upper.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/triangularity_upper/reference",
   "lifecycle_status": "alpha"
@@ -4222,7 +4227,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.triangularity_upper.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/triangularity_upper/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4254,7 +4259,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/triangularity_upper/reference/time",
   "lifecycle_status": "alpha",
@@ -4278,14 +4283,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Array of X-points, for each of them the RZ position is given",
   "full_path": "pulse_schedule/position_control/x_point(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "2"
  },
  "pulse_schedule.position_control.x_point[:].r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "pulse_schedule/position_control/x_point(i1)/r",
   "lifecycle_status": "alpha",
@@ -4299,7 +4304,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.x_point[:].r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference",
   "lifecycle_status": "alpha"
@@ -4316,7 +4321,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.x_point[:].r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4348,7 +4353,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/x_point(i1)/r/reference/time",
   "lifecycle_status": "alpha",
@@ -4369,7 +4374,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.x_point[:].z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "pulse_schedule/position_control/x_point(i1)/z",
   "lifecycle_status": "alpha",
@@ -4383,7 +4388,7 @@
   "type": "constant"
  },
  "pulse_schedule.position_control.x_point[:].z.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference",
   "lifecycle_status": "alpha"
@@ -4400,7 +4405,7 @@
   "units": "mixed"
  },
  "pulse_schedule.position_control.x_point[:].z.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4432,7 +4437,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/position_control/x_point(i1)/z/reference/time",
   "lifecycle_status": "alpha",
@@ -4453,13 +4458,13 @@
   "type": "constant"
  },
  "pulse_schedule.tf": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal field references",
   "full_path": "pulse_schedule/tf",
   "lifecycle_status": "alpha"
  },
  "pulse_schedule.tf.b_field_tor_vacuum_r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above",
   "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r",
   "lifecycle_status": "alpha",
@@ -4473,7 +4478,7 @@
   "type": "constant"
  },
  "pulse_schedule.tf.b_field_tor_vacuum_r.reference": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reference waveform",
   "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference",
   "lifecycle_status": "alpha"
@@ -4490,7 +4495,7 @@
   "units": "mixed"
  },
  "pulse_schedule.tf.b_field_tor_vacuum_r.reference.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/data_error_index",
   "lifecycle_status": "alpha",
@@ -4522,7 +4527,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/tf/b_field_tor_vacuum_r/reference/time",
   "lifecycle_status": "alpha",
@@ -4543,7 +4548,7 @@
   "type": "constant"
  },
  "pulse_schedule.tf.mode": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Control mode (operation mode and/or settings used by the controller)",
   "full_path": "pulse_schedule/tf/mode",
   "lifecycle_status": "alpha"
@@ -4562,7 +4567,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/tf/mode/time",
   "lifecycle_status": "alpha",
@@ -4572,7 +4577,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pulse_schedule/time",
   "lifecycle_status": "alpha",

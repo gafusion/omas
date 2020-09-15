@@ -3,10 +3,17 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 
+# add support for occurrences to each IDS
+number_of_omas_only_add_datastructures_entries = 0
+for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
+    add_datastructures[structure] = {f"{structure}.ids_properties.occurrence": {
+        "full_path": f"{structure}.ids_properties.occurrence",
+        "data_type": "INT_0D",
+        "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]"
+    }}
+    number_of_omas_only_add_datastructures_entries = len(add_datastructures[structure])
 
 # --------------------------------------------
 # generation of the imas structure json files
@@ -182,6 +189,11 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                 del fout[item][key]
             elif key.startswith('@path'):
                 fout[item][key] = process_path(fout[item][key])
+            elif key == '@data_type':
+                if fout[item][key] == 'flt_type':
+                    fout[item][key] = 'FLT_0D'
+                else:
+                    fout[item][key] = fout[item][key].upper()
         if len(coords):
             # # this is a check for duplicated coordinates, which it is not an error per se
             # if len(numpy.unique(list(filter(lambda x: not x.startswith('1...'), coords)))) != len(list(filter(lambda x: not x.startswith('1...'), coords))):
@@ -218,9 +230,13 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         #        continue
         ds = item.split('.')[0]
         hout.setdefault(ds, {})[item] = fout[item]
+        if ds in add_datastructures:
+            hout[ds].update(add_datastructures[ds])
 
     # additional data structures
-    hout.update(add_datastructures)
+    for ds in add_datastructures:
+        if ds not in hout and len(add_datastructures[ds]) > number_of_omas_only_add_datastructures_entries:
+            hout[ds] = add_datastructures[ds]
 
     # prepare directory structure
     if not os.path.exists(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version)):
@@ -240,6 +256,11 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     coords = extract_coordinates(imas_version=imas_version)
     dump_string = json.dumps(coords, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
     open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json', 'w').write(dump_string)
+
+    # generate times cache file
+    times = extract_times(imas_version=imas_version)
+    dump_string = json.dumps(times, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
+    open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json', 'w').write(dump_string)
 
 
 def create_html_documentation(imas_version=omas_rcparams['default_imas_version']):
@@ -337,6 +358,96 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
     return sorted(list(omas_coordinates))
 
 
+def extract_times(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of strings with .time across all structures
+
+    :param imas_version: imas version
+
+    :return: list with times
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    omas_times = []
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+
+        for item in tmp:
+            if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'STRUCTURE':
+                continue
+            omas_times.append(item)
+
+    return sorted(omas_times)
+
+
+def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of strings endingwith .ggd or .grids_ggd across all structures
+
+    :param imas_version: imas version
+
+    :return: list with times
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    omas_ggd = []
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+
+        for item in tmp:
+            if item.endswith('.ggd') or item.endswith('.grids_ggd'):
+                omas_ggd.append(item)
+
+    return sorted(omas_ggd)
+
+
+def extract_cocos(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return dictionary of entries with cocos transformations across all structures
+
+    :param imas_version: imas version
+
+    :return: dictionary with cocos transformations
+    '''
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+    from omas.omas_utils import i2o
+
+    cocos_mapper = {}
+    cocos_mapper["'1'"] = '--delete--'
+    cocos_mapper[".sigma_ip_eff"] = 'TOR'
+    cocos_mapper[".fact_q"] = 'Q'
+    cocos_mapper[".fact_psi"] = 'PSI'
+    cocos_mapper[".sigma_b0_eff"] = 'TOR'
+    cocos_mapper[".fact_dodpsi"] = 'dPSI'
+    cocos_mapper[".fact_dtheta"] = 'POL'
+    cocos_mapper[".sigma_rphiz_eff"] = 'TOR'
+    cocos_mapper["grid_type_transformation(index_grid_type,1)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,2)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,3)"] = '--delete--'
+    cocos_mapper["grid_type_transformation(index_grid_type,4)"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim1"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim2"] = '--delete--'
+    cocos_mapper[".fact_dim1*.fact_dim3"] = '--delete--'
+    cocos_mapper[".fact_dim2*.fact_dim2"] = '--delete--'
+    cocos_mapper[".fact_dim2*.fact_dim3"] = '--delete--'
+    cocos_mapper[".fact_dim3*.fact_dim3"] = '--delete--'
+
+    omas_cocos = {}
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+        for item in tmp:
+            if 'cocos_transformation_expression' in tmp[item]:
+                cocos = tmp[item]['cocos_transformation_expression']
+                cocos = cocos_mapper.get(cocos, cocos)
+                if cocos != '--delete--':
+                    omas_cocos[i2o(item)] = cocos
+
+    return omas_cocos
+
+
 def symlink_imas_structure_versions(test=True, verbose=True):
     '''
     Generate symbolic links in imas_structures so that no files are added when there are no changes between IDSs
@@ -357,6 +468,8 @@ def symlink_imas_structure_versions(test=True, verbose=True):
 
     # check if two files are identical
     def same_ds(a, b):
+        if not os.path.exists(a) or not os.path.exists(b):
+            return False
         with open(a) as a:
             with open(b) as b:
                 return a.read() == b.read()
@@ -375,9 +488,12 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                 else:
                     structures_strides[ds].append([version])
         previous_tag_structures = this_tag_structures
-    if verbose:
+
+    # print strides
+    if verbose or not test:
         pprint(structures_strides)
 
+    # apply symlinks
     if not test:
         for ds in structures_strides:
             for stride in structures_strides[ds]:
@@ -387,6 +503,5 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                         this = dict_structures(stride[-1])[ds][len(dir):]
                         prev = dict_structures(version)[ds]
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
-                        print(command)
                         subprocess.Popen(command, shell=True).communicate()
     return structures_strides

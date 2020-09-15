@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS
 from .omas_physics import constants
@@ -19,7 +17,6 @@ def add_to_ODS(f):
     anything wrapped here will be available as a ODS method with name 'sample_'+f.__name__
     '''
     __ods__.append(f.__name__)
-    __all__.append(f.__name__)
     return f
 
 
@@ -31,16 +28,7 @@ def ods_sample(ntimes=1):
 
     :return: sample ods
     '''
-    ods = ODS()
-    for ds in __all__:
-        printd('Adding %s sample data to ods' % ds, topic='sample')
-        args, kw, _, _ = function_arguments(eval(ds))
-        if 'time_index' in kw:
-            for k in range(ntimes):
-                ods = eval(ds)(ods, time_index=k)
-        else:
-            ods = eval(ds)(ods)
-    return ods
+    return ODS().sample(ntimes=ntimes)
 
 
 @add_to_ODS
@@ -63,6 +51,7 @@ def equilibrium(
 ):
     """
     Add sample equilibrium data
+    This method operates in in-place.
 
     :param ods: ODS instance
 
@@ -94,8 +83,6 @@ def equilibrium(
         This is not in the sample set, so including it means making it up
 
     :return: ODS instance with equilibrium data added
-        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
-        some contexts. If you do not want the original to be modified, deepcopy it first.
     """
     from omas import load_omas_json
     eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
@@ -134,28 +121,24 @@ def equilibrium(
         eq['equilibrium.time_slice'][0]['boundary.x_point.0.r'] = 1.304
         eq['equilibrium.time_slice'][0]['boundary.x_point.0.z'] = -1.222
 
-    ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.time_slice'][time_index].update(eq['equilibrium.time_slice.0'])
+    ods['equilibrium.time_slice'][time_index]['time'] = float(time_index)
     ods['equilibrium.vacuum_toroidal_field.r0'] = eq['equilibrium.vacuum_toroidal_field.r0']
-    ods.set_time_array(
-        'equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0]
-    )
-    ods['equilibrium.time'] = ods['equilibrium.time_slice[:].time']
+    ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', time_index, eq['equilibrium.vacuum_toroidal_field.b0'][0])
+    ods.set_time_array('equilibrium.time', time_index, float(time_index))
 
     return ods
 
 
 @add_to_ODS
-def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure=True):
+def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
     """
     Add sample core_profiles data
+    This method operates in in-place.
 
     :param ods: ODS instance
 
     :param time_index: int
-
-    :param nx: int
-        Number of points in test profiles
 
     :param add_junk_ion: bool
         Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.
@@ -163,9 +146,7 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
     :param include_pressure: bool
         Include pressure profiles when temperature and density are added
 
-    :return: ODS instance with profiles added.
-        Since the original is modified, it is not necessary to catch the return, but it may be convenient to do so in
-        some contexts. If you do not want the original to be modified, deepcopy it first.
+    :return: ODS instance with profiles added
     """
     from omas import load_omas_json
     pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json', consistency_check=False)
@@ -186,15 +167,74 @@ def core_profiles(ods, time_index=0, nx=11, add_junk_ion=False, include_pressure
                 del ods[item]
 
     ods['core_profiles.profiles_1d'][time_index]['time'] = float(time_index)
+    ods.set_time_array('core_profiles.time', time_index, float(time_index))
 
+    return ods
+
+
+@add_to_ODS
+def core_sources(ods, time_index=0):
+    """
+    Add sample core_profiles data
+    This method operates in in-place.
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with sources added
+    """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)['core_sources']
+
+    if 'core_sources' not in ods:
+        ods['core_sources'].update(pr)
+    else:
+        for item in pr:
+            if item not in ods['core_sources']:
+                ods['core_sources'][item] = pr[item]
+        sources = pr['source']
+        for source in sources:
+            ods['core_sources.source'][source]['identifier'].update(sources[source]['identifier'])
+            ods['core_sources.source'][source]['profiles_1d'][time_index].update(sources[source]['profiles_1d.0'])
+    ods.set_time_array('core_sources.time', time_index, float(time_index))
+    return ods
+
+
+@add_to_ODS
+def core_transport(ods, time_index=0):
+    """
+    Add sample core_profiles data
+    This method operates in in-place
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with sources added
+    """
+    from omas import load_omas_json
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)['core_transport']
+
+    if 'core_transport' not in ods:
+        ods['core_transport'].update(pr)
+    else:
+        for item in pr:
+            if item not in ods['core_transport']:
+                ods['core_transport'][item] = pr[item]
+        models = pr['model']
+        for model in models:
+            ods['core_transport.model'][model]['identifier'].update(models[model]['identifier'])
+            ods['core_transport.model'][model]['profiles_1d'][time_index].update(models[model]['profiles_1d.0'])
+    ods.set_time_array('core_sources.time', time_index, float(time_index))
     return ods
 
 
 @add_to_ODS
 def pf_active(ods, nc_weird=0, nc_undefined=0):
     """
-    Adds some FAKE active PF coil locations so that the overlay plot will work in tests.
-    It's fine to test with dummy data as long as you know it's not real.
+    Adds fake active PF coil locations
+    This method operates in in-place
 
     :param ods: ODS instance
 
@@ -202,10 +242,10 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
         Number of coils with badly defined geometry to include for testing plot overlay robustness
 
     :param nc_undefined: int
-        Number of coils with undefined geometry_type (But valid r, z outlines) to include for testing plot overlay
-        robustness.
+        Number of coils with undefined geometry_type (But valid r, z outlines)
+        to include for testing plot overlay robustness.
 
-    :return: ODS instance with FAKE PF ACTIVE HARDWARE INFORMATION added.
+    :return: ODS instance with PF active hardware information added
     """
 
     nc_reg = 4
@@ -257,11 +297,15 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
         outline['r'] = [1.5, 1.6, 1.7, 1.5]
         outline['z'] = [0.1, 0.3, -0.1, 0]
 
-    # generate some data that is not time homogeneous
+    for i in range(nc):
+        # Give the dummy coils identifiers so the plot overlay can try to label them; otherwise the labels aren't tested
+        ods['pf_active.coil'][i]['element.0.identifier'] = f'samp{i}'
+
+    # Generate some data that are not time homogeneous
     for i in range(nc_reg):
         n = (1 + i) * 10
-        outline = ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
-        outline = ods['pf_active.coil'][i]['current.time'] = numpy.linspace(0, 1, n)
+        ods['pf_active.coil'][i]['current.data'] = numpy.linspace(0, 1, n)
+        ods['pf_active.coil'][i]['current.time'] = numpy.linspace(0, 1, n)
 
     return ods
 
@@ -269,12 +313,12 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
 @add_to_ODS
 def magnetics(ods):
     """
-    Adds some FAKE magnetic probe locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    Adds fake magnetic probe locations
+    This method operates in place
 
     :param ods: ODS instance
 
-    :return: ODS instance with FAKE MAGNETICS HARDWARE INFORMATION added.
+    :return: ODS instance with fake magnetics hardware information added
     """
 
     nbp = 12
@@ -312,14 +356,14 @@ def magnetics(ods):
 @add_to_ODS
 def thomson_scattering(ods, nc=10):
     """
-    Adds some FAKE Thomson scattering channel locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    Adds fake Thomson scattering channel locations
+    This method operates in place
 
     :param ods: ODS instance
 
     :param nc: Number of channels to add.
 
-    :return: ODS instance with FAKE THOMSON HARDWARE INFORMATION added.
+    :return: ODS instance with fake Thomson hardware information added
     """
 
     r = numpy.linspace(1.935, 1.945, nc)
@@ -340,15 +384,14 @@ def thomson_scattering(ods, nc=10):
 @add_to_ODS
 def charge_exchange(ods, nc=10):
     """
-    Adds some FAKE CER channel locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
-    The original is modified, so deepcopy first if you want different ODSs.
+    Adds fake CER channel locations
+    This method operates in-place
 
     :param ods: ODS instance
 
     :param nc: Number of channels to add.
 
-    :return: ODS instance with FAKE CER HARDWARE INFORMATION added.
+    :return: ODS instance with fake CER hardware information added
     """
 
     r = numpy.linspace(1.4, 2.2, nc)
@@ -369,12 +412,12 @@ def charge_exchange(ods, nc=10):
 @add_to_ODS
 def interferometer(ods):
     """
-    Adds some FAKE interferometer locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    Adds fake interferometer locations
+    This method operates in place
 
     :param ods: ODS instance
 
-    :return: ODS instance with FAKE INTERFEROMETER HARDWARE INFORMATION added.
+    :return: ODS instance with fake interferometer hardware information addedd
     """
     ods['interferometer.channel.0.identifier'] = 'FAKE horz. interf.'
     r0 = ods['interferometer.channel.0.line_of_sight']
@@ -401,14 +444,14 @@ def interferometer(ods):
 @add_to_ODS
 def bolometer(ods, nc=10):
     """
-    Adds some FAKE bolometer chord locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real.
+    Adds fake bolometer chord locations
+    This method operates in place
 
     :param ods: ODS instance
 
     :param nc: 10  # Number of fake channels to make up for testing
 
-    :return: ODS instance with FAKE BOLOMETER HARDWARE INFORMATION added.
+    :return: ODS instance with fake bolometer hardware information added
     """
 
     angles = numpy.pi + numpy.linspace(-numpy.pi / 4.0, numpy.pi / 4.0, nc)
@@ -435,13 +478,12 @@ def bolometer(ods, nc=10):
 @add_to_ODS
 def gas_injection(ods):
     """
-    Adds some FAKE gas injection locations so that the overlay plot will work in tests. It's fine to test
-    with dummy data as long as you know it's not real. This function can overwrite existing data if you're not careful.
-    The original is modified, so deepcopy first if you want different ODSs.
+    Adds fake gas injection locations
+    This method operates in place
 
     :param ods: ODS instance
 
-    :return: ODS instance with FAKE GAS INJECTION HARDWARE INFORMATION added.
+    :return: ODS instance with fake gas injection hardware information added
     """
 
     ods['gas_injection.time'] = [0]
@@ -462,9 +504,17 @@ def gas_injection(ods):
     ods['gas_injection.pipe.1.second_point.phi'] = 6.5
 
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
-    ods['gas_injection.pipe.2.exit_position.r'] = 2.1
-    ods['gas_injection.pipe.2.exit_position.z'] = -0.6
+    ods['gas_injection.pipe.2.exit_position.r'] = 1.65
+    ods['gas_injection.pipe.2.exit_position.z'] = 1.1
+    ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
     ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
+    ods['gas_injection.pipe.2.second_point.phi'] = 6.5
+    # This one is at the same R,Z as FAKE_GAS_B, but it doesn't have a second point defined; this supports testing.
+
+    ods['gas_injection.pipe.3.name'] = 'FAKE_GAS_D'
+    ods['gas_injection.pipe.3.exit_position.r'] = 2.1
+    ods['gas_injection.pipe.3.exit_position.z'] = -0.6
+    ods['gas_injection.pipe.3.valve.0.identifier'] = 'FAKE_GAS_VALVE_D'
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
 
     return ods
@@ -473,11 +523,12 @@ def gas_injection(ods):
 @add_to_ODS
 def langmuir_probes(ods):
     """
-    Adds some FAKE Langmuir probe locations so the overlay plot will work in tests.
+    Adds fake Langmuir probe locations
+    This method operates in place
+
     :param ods: ODS instance
 
-    :return: ODS instance
-        The data are also written to the original, so you don't have to catch the return
+    :return: ODS instance with fake Langmuir probe hardware information added
     """
 
     ods['langmuir_probes.time'] = numpy.array([0])
@@ -524,12 +575,12 @@ def langmuir_probes(ods):
 @add_to_ODS
 def wall(ods):
     """
-    Adds some FAKE wall data to support testing. The wall is approximately DIII-D shaped, but I didn't try very hard.
+    Adds fake wall data
+    This method operates in in-place
 
     :param ods: ODS instance
 
-    :return: ODS instance
-        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    :return: ODS instance with added wall description
     """
     ods['wall.description_2d[0].limiter.type.description'] = 'first wall'
     ods['wall.description_2d[0].limiter.type.index'] = 0
@@ -545,81 +596,164 @@ def wall(ods):
 
 
 @add_to_ODS
-def pulse_schedule(ods_):
+def pulse_schedule(ods):
     """
-    Adds some FAKE control target data to support testing.
+    Adds fake control target data to support testing
+    This method operates in in-place
 
     :param ods: ODS instance
 
-    :return: ODS instance
-        Edits are done in-place, so you don't have to catch the return (but you can if you want to!)
+    :return: ODS instance with added pulse schedule
     """
-    import numpy as np
 
-    def add_position_control(ods):
+    def add_position_control(ods_):
         """Adds sample data for the position control subset"""
-        bdry = ods['pulse_schedule.position_control.boundary_outline']
+        bdry = ods_['pulse_schedule.position_control.boundary_outline']
 
         # These data are sampled from DIII-D#161558 at the following times:
-        t = np.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])  # s
-        bdry[0]['r.reference.data'] = np.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
-        bdry[0]['z.reference.data'] = np.array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
-        bdry[1]['r.reference.data'] = np.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
-        bdry[1]['z.reference.data'] = np.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
-        bdry[2]['r.reference.data'] = np.array([1.9, 1.9, 1.9, 1.88, 1.87, 1.87, 1.87, 1.87, 1.83, 1.83])
-        bdry[2]['z.reference.data'] = np.array([0.81, 0.81, 0.81, 0.78, 0.76, 0.76, 0.76, 0.76, 0.69, 0.69])
-        bdry[3]['r.reference.data'] = np.array([1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52])
-        bdry[3]['z.reference.data'] = np.array([0.84, 0.91, 0.91, 0.87, 0.84, 0.83, 0.83, 0.83, 1.35, 1.35])
-        bdry[4]['r.reference.data'] = np.array([1.44, 1.39, 1.39, 1.41, 1.43, 1.43, 1.43, 1.43, 1.1, 1.1])
-        bdry[4]['z.reference.data'] = np.array([0.8, 0.86, 0.86, 0.83, 0.81, 0.81, 0.81, 0.81, 1.21, 1.21])
-        bdry[5]['r.reference.data'] = np.array([1.32, 1.28, 1.28, 1.3, 1.31, 1.32, 1.32, 1.32, 1.07, 1.07])
-        bdry[5]['z.reference.data'] = np.array([0.73, 0.77, 0.77, 0.75, 0.74, 0.73, 0.73, 0.73, 0.99, 0.99])
-        bdry[6]['r.reference.data'] = np.array([0.92, 1.16, 1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 0.92, 0.92])
-        bdry[6]['z.reference.data'] = np.array([0., 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0., 0.])
-        bdry[7]['r.reference.data'] = np.array([1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2])
-        bdry[7]['z.reference.data'] = np.array([0.5, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.5, 0.5])
-        bdry[8]['r.reference.data'] = np.array([1.08, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.08, 1.08])
-        bdry[8]['z.reference.data'] = np.array([-0.5, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.5, -0.5])
-        bdry[9]['r.reference.data'] = np.array([1.23, 1.12, 1.12, 1.14, 1.14, 1.14, 1.14, 1.14, 1.23, 1.23])
-        bdry[9]['z.reference.data'] = np.array([-0.78, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.79, -0.79])
-        bdry[10]['r.reference.data'] = np.array([1.94, 1.18, 1.18, 1.21, 1.22, 1.22, 1.22, 1.22, 1.92, 1.92])
-        bdry[10]['z.reference.data'] = np.array([-0.88, -0.81, -0.81, -0.79, -0.79, -0.79, -0.79, -0.79, -0.85, -0.85])
-        bdry[11]['r.reference.data'] = np.array([2.23, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 2.18, 2.18])
-        bdry[11]['z.reference.data'] = np.array([-0.43, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.43, -0.43])
+        t = numpy.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])  # s
+        bdry[0]['r.reference.data'] = numpy.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
+        bdry[0]['z.reference.data'] = numpy.array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+        bdry[1]['r.reference.data'] = numpy.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
+        bdry[1]['z.reference.data'] = numpy.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
+        bdry[2]['r.reference.data'] = numpy.array([1.9, 1.9, 1.9, 1.88, 1.87, 1.87, 1.87, 1.87, 1.83, 1.83])
+        bdry[2]['z.reference.data'] = numpy.array([0.81, 0.81, 0.81, 0.78, 0.76, 0.76, 0.76, 0.76, 0.69, 0.69])
+        bdry[3]['r.reference.data'] = numpy.array([1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52])
+        bdry[3]['z.reference.data'] = numpy.array([0.84, 0.91, 0.91, 0.87, 0.84, 0.83, 0.83, 0.83, 1.35, 1.35])
+        bdry[4]['r.reference.data'] = numpy.array([1.44, 1.39, 1.39, 1.41, 1.43, 1.43, 1.43, 1.43, 1.1, 1.1])
+        bdry[4]['z.reference.data'] = numpy.array([0.8, 0.86, 0.86, 0.83, 0.81, 0.81, 0.81, 0.81, 1.21, 1.21])
+        bdry[5]['r.reference.data'] = numpy.array([1.32, 1.28, 1.28, 1.3, 1.31, 1.32, 1.32, 1.32, 1.07, 1.07])
+        bdry[5]['z.reference.data'] = numpy.array([0.73, 0.77, 0.77, 0.75, 0.74, 0.73, 0.73, 0.73, 0.99, 0.99])
+        bdry[6]['r.reference.data'] = numpy.array([0.92, 1.16, 1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 0.92, 0.92])
+        bdry[6]['z.reference.data'] = numpy.array([0., 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0., 0.])
+        bdry[7]['r.reference.data'] = numpy.array([1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2])
+        bdry[7]['z.reference.data'] = numpy.array([0.5, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.5, 0.5])
+        bdry[8]['r.reference.data'] = numpy.array([1.08, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.08, 1.08])
+        bdry[8]['z.reference.data'] = numpy.array([-0.5, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.5, -0.5])
+        bdry[9]['r.reference.data'] = numpy.array([1.23, 1.12, 1.12, 1.14, 1.14, 1.14, 1.14, 1.14, 1.23, 1.23])
+        bdry[9]['z.reference.data'] = numpy.array([-0.78, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.79, -0.79])
+        bdry[10]['r.reference.data'] = numpy.array([1.94, 1.18, 1.18, 1.21, 1.22, 1.22, 1.22, 1.22, 1.92, 1.92])
+        bdry[10]['z.reference.data'] = numpy.array([-0.88, -0.81, -0.81, -0.79, -0.79, -0.79, -0.79, -0.79, -0.85, -0.85])
+        bdry[11]['r.reference.data'] = numpy.array([2.23, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 2.18, 2.18])
+        bdry[11]['z.reference.data'] = numpy.array([-0.43, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.43, -0.43])
 
         for i in range(12):
             bdry[i]['r.reference_type'] = bdry[i]['z.reference_type'] = 1
             bdry[i]['r.reference_name'] = bdry[i]['z.reference_name'] = 'seg{}'.format(i)
             bdry[i]['r.reference.time'] = bdry[i]['z.reference.time'] = t
 
-        strk = ods['pulse_schedule.position_control.strike_point']
-        strk[0]['r.reference.data'] = np.array([np.NaN, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, np.NaN, np.NaN])
-        strk[0]['z.reference.data'] = np.array(
-            [np.NaN, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, np.NaN, np.NaN]
-        )
-        strk[1]['r.reference.data'] = np.array([np.NaN, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, np.NaN, np.NaN])
-        strk[1]['z.reference.data'] = np.array([np.NaN, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, np.NaN, np.NaN])
+        strk = ods_['pulse_schedule.position_control.strike_point']
+        strk[0]['r.reference.data'] = numpy.array([numpy.NaN, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, numpy.NaN, numpy.NaN])
+        strk[0]['z.reference.data'] = numpy.array([numpy.NaN, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, numpy.NaN, numpy.NaN])
+        strk[1]['r.reference.data'] = numpy.array([numpy.NaN, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, numpy.NaN, numpy.NaN])
+        strk[1]['z.reference.data'] = numpy.array([numpy.NaN, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, numpy.NaN, numpy.NaN])
 
         for i in range(2):
             strk[i]['r.reference_type'] = strk[i]['z.reference_type'] = 1
             strk[i]['r.reference_name'] = strk[i]['z.reference_name'] = 'strk{}'.format(i)
             strk[i]['r.reference.time'] = strk[i]['z.reference.time'] = t
 
-        xpt = ods['pulse_schedule.position_control.x_point']
-        xpt[0]['r.reference.data'] = np.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
-        xpt[0]['z.reference.data'] = np.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
-        xpt[1]['r.reference.data'] = np.array([np.NaN] * len(t))
-        xpt[1]['z.reference.data'] = np.array([np.NaN] * len(t))
+        xpt = ods_['pulse_schedule.position_control.x_point']
+        xpt[0]['r.reference.data'] = numpy.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
+        xpt[0]['z.reference.data'] = numpy.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
+        xpt[1]['r.reference.data'] = numpy.array([numpy.NaN] * len(t))
+        xpt[1]['z.reference.data'] = numpy.array([numpy.NaN] * len(t))
 
         for i in range(2):
             xpt[i]['r.reference_type'] = xpt[i]['z.reference_type'] = 1
             xpt[i]['r.reference_name'] = xpt[i]['z.reference_name'] = 'strk{}'.format(i)
             xpt[i]['r.reference.time'] = xpt[i]['z.reference.time'] = t
 
-        ods['pulse_schedule.time'] = t
+        ods_['pulse_schedule.time'] = t
 
-        return
+    add_position_control(ods)
 
-    add_position_control(ods_)
+    return ods
 
-    return ods_
+
+@add_to_ODS
+def ec_launchers(ods, ngyros=2, ntimes=6):
+    """
+    Adds fake ec launchers data to support testing
+    This method operates in in-place
+
+    :param ods: ODS instance
+
+    :param ngyros: number of gyrotrons
+
+    :param ntimes: number of times
+
+    :return: ODS instance with added ec_launchers
+    """
+
+    times = numpy.linspace(0.0, 1.0, ntimes)
+    ones = numpy.ones(ntimes)
+
+    ods['ec_launchers.ids_properties.homogeneous_time'] = 1
+    for gyro in range(ngyros):
+        ods['ec_launchers']['time'] = times
+        ods['ec_launchers']['launcher'][gyro]['identifier'] = 'GYRO_' + str(gyro)
+        ods['ec_launchers']['launcher'][gyro]['frequency']['data'] = ones * 110e9
+
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['phi'] = 0.0 * ones
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['r'] = 2.4 * ones
+        ods['ec_launchers']['launcher'][gyro]['launching_position']['z'] = 0.68 * ones
+        ods['ec_launchers']['launcher'][gyro]['mode']['data'] = -1.0 * ones
+        ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (
+                ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros)
+        )
+
+        ods['ec_launchers']['launcher'][gyro]['steering_angle_pol']['data'] = 0.61 * ones
+        ods['ec_launchers']['launcher'][gyro]['steering_angle_tor']['data'] = 0.0 * ones
+
+    return ods
+
+
+@add_to_ODS
+def nbi(ods, nunits=2, ntimes=6):
+    """
+    Adds fake nbi data to support testing
+    This method operates in in-place
+
+    :param ods: ODS instance
+
+    :param nunits: number of times
+
+    :param ntimes: number of times
+
+    :return: ODS instance with added nbi
+    """
+
+    times = numpy.linspace(0.0, 1.0, ntimes)
+    ones = numpy.ones(ntimes)
+
+    ods['nbi.time'] = times
+    ods['nbi.ids_properties.homogeneous_time'] = 1
+
+    for unit in range(nunits):
+        ods['nbi']['unit'][unit]['beam_current_fraction']['data'] = [0.27032773 * ones, 0.14438479 * ones, 0.07613747 * ones]
+        ods['nbi']['unit'][unit]['beam_power_fraction']['data'] = [0.36067036 * ones, 0.09631886 * ones, 0.03386079 * ones]
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['angle'] = -0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['direction'] = 1
+
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['horizontal'] = 0.00873
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['particles_fraction'] = 1.0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['divergence_component'][0]['vertical'] = 0.227
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_horizontal'] = 1e31
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['focus']['focal_length_vertical'] = 10.
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['phi'] = -0.773
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['r'] = 8.11
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['position']['z'] = 0.0
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['tangency_radius'] = 1.146
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['width_vertical'] = 0.48
+        ods['nbi']['unit'][unit]['beamlets_group'][0]['width_horizontal'] = 0.1
+
+        ods['nbi']['unit'][unit]['identifier'] = 'beam_' + str(unit)
+        ods['nbi']['unit'][unit]['energy']['data'] = 80e3 * ones
+
+        ods['nbi']['unit'][unit]['power_launched']['data'] = 2.e6 * (ones - 0.5 * numpy.cos(2 * numpy.pi * times + unit / nunits))
+
+        ods['nbi']['unit'][unit]['species']['a'] = 2.0
+        ods['nbi']['unit'][unit]['species']['z_n'] = 1.0
+
+    return ods

@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of Lower Hybrid antennas",
   "full_path": "lh_antennas/antenna(i1)",
   "lifecycle_status": "alpha",
@@ -27,7 +27,7 @@
   "units": "Hz"
  },
  "lh_antennas.antenna[:].frequency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "lh_antennas/antenna(i1)/frequency_error_index",
   "lifecycle_status": "alpha",
@@ -60,7 +60,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of antenna modules",
   "full_path": "lh_antennas/antenna(i1)/module(i2)",
   "lifecycle_status": "alpha",
@@ -82,7 +82,7 @@
   "type": "static"
  },
  "lh_antennas.antenna[:].module[:].phase": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Phase of the forward power arriving at the back of this module",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/phase",
   "lifecycle_status": "alpha",
@@ -102,7 +102,7 @@
   "units": "rad"
  },
  "lh_antennas.antenna[:].module[:].phase.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/phase/data_error_index",
   "lifecycle_status": "alpha",
@@ -136,7 +136,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/phase/time(:)",
   "lifecycle_status": "alpha",
@@ -145,7 +145,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].module[:].power_forward": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Forward power arriving to the back of the module",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_forward",
   "lifecycle_status": "alpha",
@@ -165,7 +165,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].module[:].power_forward.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_forward/data_error_index",
   "lifecycle_status": "alpha",
@@ -199,7 +199,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_forward/time(:)",
   "lifecycle_status": "alpha",
@@ -208,7 +208,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].module[:].power_launched": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power launched from this module into the vacuum vessel",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_launched",
   "lifecycle_status": "alpha",
@@ -228,7 +228,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].module[:].power_launched.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_launched/data_error_index",
   "lifecycle_status": "alpha",
@@ -262,7 +262,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_launched/time(:)",
   "lifecycle_status": "alpha",
@@ -271,7 +271,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].module[:].power_reflected": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reflected power",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_reflected",
   "lifecycle_status": "alpha",
@@ -291,7 +291,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].module[:].power_reflected.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_reflected/data_error_index",
   "lifecycle_status": "alpha",
@@ -325,7 +325,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/power_reflected/time(:)",
   "lifecycle_status": "alpha",
@@ -334,7 +334,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].module[:].reflection_coefficient": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power reflection coefficient",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/reflection_coefficient",
   "lifecycle_status": "alpha",
@@ -354,7 +354,7 @@
   "units": "-"
  },
  "lh_antennas.antenna[:].module[:].reflection_coefficient.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/reflection_coefficient/data_error_index",
   "lifecycle_status": "alpha",
@@ -388,7 +388,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/module(i2)/reflection_coefficient/time(:)",
   "lifecycle_status": "alpha",
@@ -397,7 +397,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].n_parallel_peak": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Peak parallel refractive index of the launched wave spectrum (simple estimate based on the measured phase difference)",
   "full_path": "lh_antennas/antenna(i1)/n_parallel_peak",
   "lifecycle_status": "alpha",
@@ -417,7 +417,7 @@
   "units": "-"
  },
  "lh_antennas.antenna[:].n_parallel_peak.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/n_parallel_peak/data_error_index",
   "lifecycle_status": "alpha",
@@ -451,7 +451,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/n_parallel_peak/time(:)",
   "lifecycle_status": "alpha",
@@ -467,7 +467,7 @@
   "type": "static"
  },
  "lh_antennas.antenna[:].phase_average": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Phase difference between two neighbouring modules (average over modules), at the mouth (front) of the antenna",
   "full_path": "lh_antennas/antenna(i1)/phase_average",
   "lifecycle_status": "alpha",
@@ -487,7 +487,7 @@
   "units": "rad"
  },
  "lh_antennas.antenna[:].phase_average.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/phase_average/data_error_index",
   "lifecycle_status": "alpha",
@@ -521,7 +521,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/phase_average/time(:)",
   "lifecycle_status": "alpha",
@@ -530,7 +530,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of a reference point on the antenna (allowing also tracking the possible movements of the antenna)",
   "full_path": "lh_antennas/antenna(i1)/position",
   "lifecycle_status": "alpha",
@@ -544,7 +544,7 @@
   "type": "static"
  },
  "lh_antennas.antenna[:].position.phi": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
   "full_path": "lh_antennas/antenna(i1)/position/phi",
   "lifecycle_status": "alpha",
@@ -564,7 +564,7 @@
   "units": "rad"
  },
  "lh_antennas.antenna[:].position.phi.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/position/phi/data_error_index",
   "lifecycle_status": "alpha",
@@ -598,7 +598,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/position/phi/time(:)",
   "lifecycle_status": "alpha",
@@ -607,7 +607,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].position.r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Major radius",
   "full_path": "lh_antennas/antenna(i1)/position/r",
   "lifecycle_status": "alpha",
@@ -627,7 +627,7 @@
   "units": "m"
  },
  "lh_antennas.antenna[:].position.r.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/position/r/data_error_index",
   "lifecycle_status": "alpha",
@@ -661,7 +661,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/position/r/time(:)",
   "lifecycle_status": "alpha",
@@ -670,7 +670,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].position.z": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Height",
   "full_path": "lh_antennas/antenna(i1)/position/z",
   "lifecycle_status": "alpha",
@@ -690,7 +690,7 @@
   "units": "m"
  },
  "lh_antennas.antenna[:].position.z.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/position/z/data_error_index",
   "lifecycle_status": "alpha",
@@ -724,7 +724,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/position/z/time(:)",
   "lifecycle_status": "alpha",
@@ -733,7 +733,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].power_forward": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Forward power arriving at the back of the antenna",
   "full_path": "lh_antennas/antenna(i1)/power_forward",
   "lifecycle_status": "alpha",
@@ -753,7 +753,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].power_forward.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/power_forward/data_error_index",
   "lifecycle_status": "alpha",
@@ -787,7 +787,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/power_forward/time(:)",
   "lifecycle_status": "alpha",
@@ -796,7 +796,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].power_launched": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power launched from this antenna into the vacuum vessel",
   "full_path": "lh_antennas/antenna(i1)/power_launched",
   "lifecycle_status": "alpha",
@@ -816,7 +816,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].power_launched.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/power_launched/data_error_index",
   "lifecycle_status": "alpha",
@@ -850,7 +850,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/power_launched/time(:)",
   "lifecycle_status": "alpha",
@@ -859,7 +859,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].power_reflected": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Reflected power",
   "full_path": "lh_antennas/antenna(i1)/power_reflected",
   "lifecycle_status": "alpha",
@@ -879,7 +879,7 @@
   "units": "W"
  },
  "lh_antennas.antenna[:].power_reflected.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/power_reflected/data_error_index",
   "lifecycle_status": "alpha",
@@ -913,7 +913,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/power_reflected/time(:)",
   "lifecycle_status": "alpha",
@@ -922,7 +922,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].pressure_tank": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Pressure in the vacuum tank of the antenna",
   "full_path": "lh_antennas/antenna(i1)/pressure_tank",
   "lifecycle_status": "alpha",
@@ -942,7 +942,7 @@
   "units": "Pa"
  },
  "lh_antennas.antenna[:].pressure_tank.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/pressure_tank/data_error_index",
   "lifecycle_status": "alpha",
@@ -976,7 +976,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/pressure_tank/time(:)",
   "lifecycle_status": "alpha",
@@ -985,7 +985,7 @@
   "units": "s"
  },
  "lh_antennas.antenna[:].reflection_coefficient": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power reflection coefficient, averaged over modules",
   "full_path": "lh_antennas/antenna(i1)/reflection_coefficient",
   "lifecycle_status": "alpha",
@@ -1005,7 +1005,7 @@
   "units": "-"
  },
  "lh_antennas.antenna[:].reflection_coefficient.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/antenna(i1)/reflection_coefficient/data_error_index",
   "lifecycle_status": "alpha",
@@ -1039,7 +1039,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/antenna(i1)/reflection_coefficient/time(:)",
   "lifecycle_status": "alpha",
@@ -1048,7 +1048,7 @@
   "units": "s"
  },
  "lh_antennas.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "lh_antennas/code",
   "lifecycle_status": "alpha",
@@ -1101,7 +1101,7 @@
   "type": "constant"
  },
  "lh_antennas.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "lh_antennas/ids_properties",
   "lifecycle_status": "alpha",
@@ -1128,6 +1128,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "lh_antennas.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "lh_antennas.ids_properties.occurrence"
+ },
  "lh_antennas.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1143,7 +1148,7 @@
   "type": "constant"
  },
  "lh_antennas.power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power coupled to the plasma by the whole LH system (sum over antennas)",
   "full_path": "lh_antennas/power",
   "lifecycle_status": "alpha",
@@ -1163,7 +1168,7 @@
   "units": "W"
  },
  "lh_antennas.power.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/power/data_error_index",
   "lifecycle_status": "alpha",
@@ -1197,7 +1202,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/power/time(:)",
   "lifecycle_status": "alpha",
@@ -1209,7 +1214,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "lh_antennas/time(:)",
   "lifecycle_status": "alpha",

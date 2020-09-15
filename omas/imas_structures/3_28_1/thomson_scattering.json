@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (lines-of-sight)",
   "full_path": "thomson_scattering/channel(i1)",
   "lifecycle_status": "alpha",
@@ -19,7 +19,7 @@
   "structure_reference": "thomson_scattering_channel"
  },
  "thomson_scattering.channel[:].delta_position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Incremental variation of the position of the measurements, due to e.g. different lasers not intersecting the line of sight at the same position. The actual position is then the static position + delta_position",
   "full_path": "thomson_scattering/channel(i1)/delta_position",
   "lifecycle_status": "alpha",
@@ -38,7 +38,7 @@
   "units": "rad"
  },
  "thomson_scattering.channel[:].delta_position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -81,7 +81,7 @@
   "units": "m"
  },
  "thomson_scattering.channel[:].delta_position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_index",
   "lifecycle_status": "alpha",
@@ -115,7 +115,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time for the R,Z,phi coordinates",
   "full_path": "thomson_scattering/channel(i1)/delta_position/time(:)",
   "lifecycle_status": "alpha",
@@ -136,7 +136,7 @@
   "units": "m"
  },
  "thomson_scattering.channel[:].delta_position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_index",
   "lifecycle_status": "alpha",
@@ -174,7 +174,7 @@
   "type": "static"
  },
  "thomson_scattering.channel[:].n_e": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron density",
   "full_path": "thomson_scattering/channel(i1)/n_e",
   "lifecycle_status": "alpha",
@@ -194,7 +194,7 @@
   "units": "m^-3"
  },
  "thomson_scattering.channel[:].n_e.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "thomson_scattering/channel(i1)/n_e/data_error_index",
   "lifecycle_status": "alpha",
@@ -228,7 +228,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "thomson_scattering/channel(i1)/n_e/time(:)",
   "lifecycle_status": "alpha",
@@ -244,7 +244,7 @@
   "type": "static"
  },
  "thomson_scattering.channel[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Average position of the measurements (intersection between laser beam and line of sight)",
   "full_path": "thomson_scattering/channel(i1)/position",
   "lifecycle_status": "alpha",
@@ -259,7 +259,7 @@
   "units": "rad"
  },
  "thomson_scattering.channel[:].position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "thomson_scattering/channel(i1)/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -290,7 +290,7 @@
   "units": "m"
  },
  "thomson_scattering.channel[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "thomson_scattering/channel(i1)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -321,7 +321,7 @@
   "units": "m"
  },
  "thomson_scattering.channel[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "thomson_scattering/channel(i1)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -344,7 +344,7 @@
   "units": "m"
  },
  "thomson_scattering.channel[:].t_e": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron temperature",
   "full_path": "thomson_scattering/channel(i1)/t_e",
   "lifecycle_status": "alpha",
@@ -364,7 +364,7 @@
   "units": "eV"
  },
  "thomson_scattering.channel[:].t_e.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "thomson_scattering/channel(i1)/t_e/data_error_index",
   "lifecycle_status": "alpha",
@@ -398,7 +398,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "thomson_scattering/channel(i1)/t_e/time(:)",
   "lifecycle_status": "alpha",
@@ -407,7 +407,7 @@
   "units": "s"
  },
  "thomson_scattering.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "thomson_scattering/code",
   "lifecycle_status": "alpha",
@@ -460,7 +460,7 @@
   "type": "constant"
  },
  "thomson_scattering.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "thomson_scattering/ids_properties",
   "lifecycle_status": "alpha",
@@ -487,6 +487,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "thomson_scattering.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "thomson_scattering.ids_properties.occurrence"
+ },
  "thomson_scattering.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -502,7 +507,7 @@
   "type": "constant"
  },
  "thomson_scattering.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "thomson_scattering/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -533,7 +538,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "thomson_scattering/time(:)",
   "lifecycle_status": "alpha",

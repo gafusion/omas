@@ -11,7 +11,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of channels (detector or pixel of a camera)",
   "full_path": "bolometer/channel(i1)",
   "lifecycle_status": "alpha",
@@ -22,7 +22,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of a set of collimating apertures",
   "full_path": "bolometer/channel(i1)/aperture(i2)",
   "lifecycle_status": "alpha",
@@ -30,7 +30,7 @@
   "structure_reference": "detector_aperture"
  },
  "bolometer.channel[:].aperture[:].centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "bolometer/channel(i1)/aperture(i2)/centre",
   "lifecycle_status": "alpha",
@@ -45,7 +45,7 @@
   "units": "rad"
  },
  "bolometer.channel[:].aperture[:].centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -76,7 +76,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -107,7 +107,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -137,7 +137,7 @@
   "type": "static"
  },
  "bolometer.channel[:].aperture[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "bolometer/channel(i1)/aperture(i2)/outline",
   "lifecycle_status": "alpha",
@@ -155,7 +155,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -195,7 +195,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -232,7 +232,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/radius_error_index",
   "lifecycle_status": "alpha",
@@ -255,7 +255,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -270,7 +270,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -301,7 +301,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -332,7 +332,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -355,7 +355,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -370,7 +370,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -401,7 +401,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -432,7 +432,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -455,7 +455,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -470,7 +470,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -501,7 +501,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -532,7 +532,7 @@
   "units": "m"
  },
  "bolometer.channel[:].aperture[:].x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -555,14 +555,14 @@
   "units": "m"
  },
  "bolometer.channel[:].detector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detector description",
   "full_path": "bolometer/channel(i1)/detector",
   "lifecycle_status": "alpha",
   "structure_reference": "detector_aperture"
  },
  "bolometer.channel[:].detector.centre": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
   "full_path": "bolometer/channel(i1)/detector/centre",
   "lifecycle_status": "alpha",
@@ -577,7 +577,7 @@
   "units": "rad"
  },
  "bolometer.channel[:].detector.centre.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "bolometer/channel(i1)/detector/centre/phi_error_index",
   "lifecycle_status": "alpha",
@@ -608,7 +608,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.centre.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "bolometer/channel(i1)/detector/centre/r_error_index",
   "lifecycle_status": "alpha",
@@ -639,7 +639,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.centre.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/detector/centre/z_error_index",
   "lifecycle_status": "alpha",
@@ -669,7 +669,7 @@
   "type": "static"
  },
  "bolometer.channel[:].detector.outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system",
   "full_path": "bolometer/channel(i1)/detector/outline",
   "lifecycle_status": "alpha",
@@ -687,7 +687,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.outline.x1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "bolometer/channel(i1)/detector/outline/x1_error_index",
   "lifecycle_status": "alpha",
@@ -727,7 +727,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.outline.x2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "bolometer/channel(i1)/detector/outline/x2_error_index",
   "lifecycle_status": "alpha",
@@ -764,7 +764,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "bolometer/channel(i1)/detector/radius_error_index",
   "lifecycle_status": "alpha",
@@ -787,7 +787,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x1_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). ",
   "full_path": "bolometer/channel(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha",
@@ -802,7 +802,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x1_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -833,7 +833,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x1_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -864,7 +864,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x1_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/detector/x1_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -887,7 +887,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x2_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "bolometer/channel(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha",
@@ -902,7 +902,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x2_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -933,7 +933,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x2_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -964,7 +964,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x2_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/detector/x2_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -987,7 +987,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "bolometer/channel(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -1002,7 +1002,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -1033,7 +1033,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -1064,7 +1064,7 @@
   "units": "m"
  },
  "bolometer.channel[:].detector.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/detector/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -1094,14 +1094,14 @@
   "type": "static"
  },
  "bolometer.channel[:].line_of_sight": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the reference line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path",
   "full_path": "bolometer/channel(i1)/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_3points"
  },
  "bolometer.channel[:].line_of_sight.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "bolometer/channel(i1)/line_of_sight/first_point",
   "lifecycle_status": "alpha",
@@ -1116,7 +1116,7 @@
   "units": "rad"
  },
  "bolometer.channel[:].line_of_sight.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1147,7 +1147,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1178,7 +1178,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1201,7 +1201,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "bolometer/channel(i1)/line_of_sight/second_point",
   "lifecycle_status": "alpha",
@@ -1216,7 +1216,7 @@
   "units": "rad"
  },
  "bolometer.channel[:].line_of_sight.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1247,7 +1247,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1278,7 +1278,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1301,7 +1301,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.third_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the third point",
   "full_path": "bolometer/channel(i1)/line_of_sight/third_point",
   "lifecycle_status": "alpha",
@@ -1316,7 +1316,7 @@
   "units": "rad"
  },
  "bolometer.channel[:].line_of_sight.third_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/third_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1347,7 +1347,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.third_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/third_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -1378,7 +1378,7 @@
   "units": "m"
  },
  "bolometer.channel[:].line_of_sight.third_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "bolometer/channel(i1)/line_of_sight/third_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -1408,7 +1408,7 @@
   "type": "static"
  },
  "bolometer.channel[:].power": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power received on the detector",
   "full_path": "bolometer/channel(i1)/power",
   "lifecycle_status": "alpha",
@@ -1426,7 +1426,7 @@
   "units": "W"
  },
  "bolometer.channel[:].power.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "bolometer/channel(i1)/power/data_error_index",
   "lifecycle_status": "alpha",
@@ -1458,7 +1458,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "bolometer/channel(i1)/power/time",
   "lifecycle_status": "alpha",
@@ -1472,7 +1472,7 @@
   "type": "static"
  },
  "bolometer.channel[:].validity_timed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)",
   "full_path": "bolometer/channel(i1)/validity_timed",
   "lifecycle_status": "alpha",
@@ -1492,14 +1492,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "bolometer/channel(i1)/validity_timed/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "bolometer.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "bolometer/code",
   "lifecycle_status": "alpha",
@@ -1551,7 +1551,7 @@
   "type": "constant"
  },
  "bolometer.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "bolometer/ids_properties",
   "lifecycle_status": "alpha",
@@ -1577,6 +1577,11 @@
   "full_path": "bolometer/ids_properties/homogeneous_time",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "bolometer.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "bolometer.ids_properties.occurrence"
  },
  "bolometer.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1604,7 +1609,7 @@
   "units": "W"
  },
  "bolometer.power_radiated_inside_lcfs_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_inside_lcfs\"",
   "full_path": "bolometer/power_radiated_inside_lcfs_error_index",
   "lifecycle_status": "alpha",
@@ -1644,7 +1649,7 @@
   "units": "W"
  },
  "bolometer.power_radiated_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_total\"",
   "full_path": "bolometer/power_radiated_total_error_index",
   "lifecycle_status": "alpha",
@@ -1686,7 +1691,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "bolometer/time",
   "lifecycle_status": "alpha",

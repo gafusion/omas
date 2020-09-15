@@ -6,26 +6,28 @@ OMAS plot examples
 This example loads some data from S3, augments the ODS with pressure information, and generates some plots
 """
 
-from __future__ import print_function, division, unicode_literals
-
-from matplotlib.pyplot import show
+from matplotlib import pyplot
 from omas import *
 
 # load some data from S3
 ods = load_omas_s3('OMFITprofiles_sample', user='omas_shared')
 
 # augment ODS with pressure information
-ods.consistency_check = False  # NOTE: some extra pressures are calculated if IMAS consistency_check = False
 ods.physics_core_profiles_pressures()
 
 # omas plot for pressures
 ods.plot_core_profiles_pressures()
-show()
+pyplot.show()
 
 # omas plot for core profiles
 ods.plot_core_profiles_summary()
-show()
+pyplot.show()
 
 # omas plot for equilibrium
 omas_plot.equilibrium_summary(ods, linewidth=1, label='my equilibrium')
-show()
+pyplot.show()
+
+# omas plot for transport fluxes
+ods = ODS().sample(5)
+ods.plot_core_transport_fluxes()
+pyplot.show()

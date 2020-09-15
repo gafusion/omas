@@ -12,7 +12,6 @@ Test script for omas/omas_plot.py
 """
 
 # Basic imports
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 import numpy
@@ -37,7 +36,7 @@ class TestOmasPlot(unittest.TestCase):
     """
 
     # Sample data for use in tests
-    ods = ods_sample()
+    ods = ODS().sample()
 
     def setUp(self):
         test_id = self.id()
@@ -142,7 +141,7 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_eqcx_data_availability_variations(self):
         """Plot all the equilibrium contour quantity options with all the combinations of available data"""
-        cq_options = ['rho', 'psi', 'phi', 'q']
+        cq_options = ['rho_tor_norm', 'psi', 'phi', 'q']
         for iwall in [True, False]:
             for ipsi in [True, False]:
                 for iphi in [True, False]:
@@ -194,8 +193,8 @@ class TestOmasPlot(unittest.TestCase):
 
         ods = ODS().sample_equilibrium(include_phi=True, include_psi=True, include_q=True)
         with self.assertRaises(ValueError):
-            # Fails because we ask for junk. Allow fallback so the ValueError isn't raised due to missing data.
-            ods.plot_equilibrium_CX(contour_quantity='blahblahblah hrrrnggg! EEEEK!!', allow_fallback=True)
+            # Fails because we ask for junk.
+            ods.plot_equilibrium_CX(contour_quantity='__not_existing_quantity__', allow_fallback=False)
 
     def test_eqcx_slices(self):
         """Test dealing with different time indices, including getting wall from a different slice than the eq"""
@@ -219,15 +218,18 @@ class TestOmasPlot(unittest.TestCase):
     def test_core_profiles(self):
         ods2 = copy.deepcopy(self.ods)
         ods2.sample_core_profiles()
-        ods2.plot_core_profiles_summary(fig=pyplot.gcf())
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles totals only'), show_thermal_fast_breakdown=False,
-            show_total_density=True)
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles total and breakdown'), show_thermal_fast_breakdown=True,
-            show_total_density=True)
-        ods2.plot_core_profiles_summary(
-            fig=pyplot.figure('TestOmasPlot.test_core_profiles no combine temp/dens'), combine_dens_temps=False)
+        ods2.plot_core_profiles_summary(fig=pyplot.figure())
+        ods2.plot_core_profiles_summary(fig=pyplot.figure(),quantities=['temperature', 'density_thermal','j_tor','zeff'], ods_species=[-1,0], lw=3, ls='--')
+
+    def test_core_transport(self):
+        ods_test = copy.deepcopy(self.ods)
+        ods_test.sample_core_transport()
+        ods_test['core_transport.ids_properties.comment'] = "TGRYO"
+        ods_test.sample_core_profiles()
+        ods_test.sample_equilibrium()
+        ods_test.plot_core_transport_fluxes()
+        ods_test.plot_core_transport_fluxes(show_total_density=False, label='test')
+        ods_test.plot_core_transport_fluxes(plot_zeff=True, label="test")
 
     def test_core_pressure(self):
         ods2 = copy.deepcopy(self.ods)
@@ -375,7 +377,10 @@ class TestOmasPlot(unittest.TestCase):
             gas_injection=dict(which_gas=['FAKE_GAS_A', 'FAKE_GAS_B'], draw_arrow=False))
         gas_ods.plot_overlay(thomson_scattering=False, gas_injection=dict(which_gas=['NON-EXISTENT GAS VALVE']))
         gas_ods.plot_overlay(
-            thomson_scattering=False, gas_injection=dict(angle_not_in_pipe_name=True, simple_labels=True))
+            thomson_scattering=False, gas_injection=dict(
+                angle_not_in_pipe_name=True, simple_labels=True, show_all_pipes_in_group=False
+            )
+        )
 
         # Test direct call
         gas_ods.plot_gas_injection_overlay()
@@ -461,6 +466,40 @@ class TestOmasPlot(unittest.TestCase):
         pc_ods.sample_pulse_schedule()
         pc_ods.plot_overlay(thomson_scattering=False, pulse_schedule=dict(timing_ref=time.time()))
         pc_ods.plot_pulse_schedule_overlay()
+
+    def test_ec_launchers_overlay(self):
+        """Tests several plotting methods for showing EC launchers data"""
+        # Prepare sample data
+        ods = ODS()
+        ods.sample_equilibrium()
+        ods.sample_ec_launchers()
+        # Test plots with default/minimal options
+        ods.plot_ec_launchers_CX()
+        ods.plot_ec_launchers_CX_topview()
+
+    def test_nbi(self):
+        """Tests basic NBI plots"""
+        # Prep sample data
+        ods = ODS()
+        ods.sample_nbi()
+        # Test relevant plots with basic/default/minimal options
+        ods.plot_nbi_summary()
+
+    def test_ods_time_plot(self):
+        # generate some time-dependent data
+        ods = ODS().sample(2)
+
+        # omas plot for pressures
+        ods.plot_core_profiles_pressures()
+
+        # omas plot for core profiles
+        ods.plot_core_profiles_summary()
+
+        # omas plot for equilibrium
+        omas_plot.equilibrium_summary(ods, linewidth=1, label='my equilibrium')
+
+        # omas plot for transport fluxes
+        ods.plot_core_transport_fluxes()
 
 
 if __name__ == '__main__':

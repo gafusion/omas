@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "turbulence.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "turbulence/code",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "coordinates": [
    "turbulence.grid_2d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Values for the 2D grid, for various time slices. The timebase of this array of structure must be a subset of the profiles_2d timebase",
   "full_path": "turbulence/grid_2d(itime)",
   "lifecycle_status": "alpha",
@@ -84,7 +84,7 @@
   "units": "mixed"
  },
  "turbulence.grid_2d[:].dim1_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "turbulence/grid_2d(itime)/dim1_error_index",
   "lifecycle_status": "alpha",
@@ -124,7 +124,7 @@
   "units": "mixed"
  },
  "turbulence.grid_2d[:].dim2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "turbulence/grid_2d(itime)/dim2_error_index",
   "lifecycle_status": "alpha",
@@ -153,7 +153,7 @@
   "units": "mixed"
  },
  "turbulence.grid_2d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "turbulence/grid_2d(itime)/time",
   "lifecycle_status": "alpha",
@@ -161,7 +161,7 @@
   "units": "s"
  },
  "turbulence.grid_2d_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
   "documentation": "Selection of one of a set of grid types for grid_2d\n1) rectangular : Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label and the straight-field line poloidal angle (mod(index,10)=1); could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label and the equal arc poloidal angle (mod(index,10)=2)\n13) inverse_psi_polar : Flux surface type with psi as radial label and the polar poloidal angle (mod(index,10)=3); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label and Fourier modes in the equal arc poloidal angle (mod(index,10)=5)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label and Fourier modes in the polar poloidal angle (mod(index,10)=6); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the straight-field line poloidal angle\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the equal arc poloidal angle\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and the polar poloidal angle\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the straight-field line poloidal angle\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the equal arc poloidal angle\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and Fourier modes in the polar poloidal angle\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] and the straight-field line poloidal angle\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] and the equal arc poloidal angle\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] and the polar poloidal angle\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the straight-field line poloidal angle\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the equal arc poloidal angle\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] and Fourier modes in the polar poloidal angle\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] and the straight-field line poloidal angle\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] and the equal arc poloidal angle\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] and the polar poloidal angle\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the straight-field line poloidal angle\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the equal arc poloidal angle\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] and Fourier modes in the polar poloidal angle\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the straight-field line poloidal angle\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the equal arc poloidal angle\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and the polar poloidal angle\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0], Phi being toroidal flux, and Fourier modes in the polar poloidal angle\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
   "full_path": "turbulence/grid_2d_type",
@@ -190,7 +190,7 @@
   "type": "constant"
  },
  "turbulence.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "turbulence/ids_properties",
   "lifecycle_status": "alpha",
@@ -217,6 +217,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "turbulence.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "turbulence.ids_properties.occurrence"
+ },
  "turbulence.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -232,7 +237,7 @@
   "type": "constant"
  },
  "turbulence.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "turbulence/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -263,7 +268,7 @@
   "coordinates": [
    "turbulence.profiles_2d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Fluctuating physical quantities for various time slices",
   "full_path": "turbulence/profiles_2d(itime)",
   "lifecycle_status": "alpha",
@@ -272,7 +277,7 @@
   "type": "dynamic"
  },
  "turbulence.profiles_2d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to electrons",
   "full_path": "turbulence/profiles_2d(itime)/electrons",
   "lifecycle_status": "alpha",
@@ -291,7 +296,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].electrons.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_error_index",
   "lifecycle_status": "alpha",
@@ -334,7 +339,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].electrons.density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -377,7 +382,7 @@
   "units": "eV"
  },
  "turbulence.profiles_2d[:].electrons.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/electrons/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -411,7 +416,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the various ion species",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)",
   "lifecycle_status": "alpha",
@@ -431,7 +436,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].ion[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_error_index",
   "lifecycle_status": "alpha",
@@ -474,7 +479,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].ion[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -508,7 +513,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -524,7 +529,7 @@
   "units": "Atomic Mass Unit"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -563,7 +568,7 @@
   "units": "Elementary Charge Unit"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -596,7 +601,7 @@
   "units": "Elementary Charge Unit"
  },
  "turbulence.profiles_2d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -645,7 +650,7 @@
   "units": "eV"
  },
  "turbulence.profiles_2d[:].ion[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -684,7 +689,7 @@
   "units": "Elementary Charge Unit"
  },
  "turbulence.profiles_2d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -710,7 +715,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the various neutral species",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)",
   "lifecycle_status": "alpha",
@@ -730,7 +735,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].neutral[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_error_index",
   "lifecycle_status": "alpha",
@@ -773,7 +778,7 @@
   "units": "m^-3"
  },
  "turbulence.profiles_2d[:].neutral[:].density_thermal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/density_thermal_error_index",
   "lifecycle_status": "alpha",
@@ -807,7 +812,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -823,7 +828,7 @@
   "units": "Atomic Mass Unit"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -862,7 +867,7 @@
   "units": "Elementary Charge Unit"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -895,7 +900,7 @@
   "units": "Elementary Charge Unit"
  },
  "turbulence.profiles_2d[:].neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -944,7 +949,7 @@
   "units": "eV"
  },
  "turbulence.profiles_2d[:].neutral[:].temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -975,7 +980,7 @@
   "units": "eV"
  },
  "turbulence.profiles_2d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "turbulence/profiles_2d(itime)/time",
   "lifecycle_status": "alpha",
@@ -986,7 +991,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "turbulence/time(:)",
   "lifecycle_status": "alpha",

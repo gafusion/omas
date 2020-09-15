@@ -3,15 +3,13 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
-from .omas_utils import __version__
+from .omas_utils import __version__, _extra_structures
 
 __all__ = [
     'ODS', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
-    'ods_sample', 'different_ods',
+    'ods_sample', 'different_ods', 'omas_structure',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
@@ -23,7 +21,6 @@ __all__ = [
     'load_omas_dx', 'save_omas_dx', 'through_omas_dx', 'ods_2_odx', 'odx_2_ods',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
-    'generate_xml_schemas', 'create_json_structure', 'create_html_documentation', 'symlink_imas_structure_versions',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
 ]
@@ -48,8 +45,10 @@ def force_imas_type(value):
         value = function(value)
     if isinstance(value, list):
         value = numpy.array(value)
-    if isinstance(value, xarray.DataArray):
-        value = value.values
+    if 'DataArray' in value.__class__.__name__:
+        import xarray
+        if isinstance(value, xarray.DataArray):
+            value = value.values
     if isinstance(value, numpy.ndarray) and not len(value.shape):
         value = value.item()
     if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
@@ -84,10 +83,14 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     :return: value
     '''
     # force type consistent with data dictionary
+    txt = ''
     if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
         pass
     elif isinstance(value, numpy.ndarray):
-        if 'FLT' in info['data_type']:
+        if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
+            value = ODS()
+            value.omas_data = []
+        elif 'FLT' in info['data_type']:
             value = value.astype(float)
         elif 'INT' in info['data_type']:
             value = value.astype(int)
@@ -100,40 +103,33 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = int(value)
         elif 'STR' in info['data_type']:
             value = str(value)
+    elif isinstance(value, bytes):
+        if 'STR' in info['data_type']:
+            value = b2s(value)
+
     # structure type is respected check type
-    if 'data_type' in info and info['data_type'] == 'structure' and not isinstance(value, ODS):
-        text = 'Trying to write %s in %s but this should be an ODS' % (type(value), location)
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    if 'data_type' in info and info['data_type'] in ['STRUCTURE', 'STRUCT_ARRAY'] and not isinstance(value, ODS):
+        txt = f'{location} is of type {type(value)} but this should be an ODS'
     # check type
-    if not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, CodeParameters)):
-        text = 'Trying to write %s in %s\nSupported types are: string, float, int, array' % (type(value), location)
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    elif not (isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable)) or value is None or isinstance(value, (CodeParameters, ODS))):
+        txt = f'{location} is of type {type(value)} but supported types are: string, float, int, array'
     # check consistency for scalar entries
-    if 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
-        text = '%s must be a scalar of type %s' % (location, info['data_type'])
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+    elif 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
+        txt = f'{location} is of type {type(value)} must be a scalar of type {info["data_type"]}'
     # check consistency for number of dimensions
     elif 'coordinates' in info and len(info['coordinates']) and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates'])):
-        text = '%s must be an array with dimensions: %s' % (location, info['coordinates'])
-        if consistency_check == 'warn':
-            printe(text)
-        else:
-            raise ValueError(text)
+        txt = f'{location} must be an array with dimensions {info["coordinates"]}'
+
+    if len(txt) and consistency_check is True:
+        raise ValueError(txt)
     elif 'lifecycle_status' in info and info['lifecycle_status'] in ['obsolescent']:
-        txt = '%s is in %s state for IMAS %s' % (o2u(location), info['lifecycle_status'].upper(), imas_version)
-        if imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
-            printe(txt)
+        txt = f'{o2u(location)} is in {info["lifecycle_status"].upper()} state for IMAS {imas_version}'
+        if consistency_check and imas_version not in _consistency_warnings or txt not in _consistency_warnings[imas_version]:
             _consistency_warnings.setdefault(imas_version, []).append(txt)
-    return value
+        else:
+            txt = ''
+
+    return value, txt
 
 
 class ODS(MutableMapping):
@@ -147,9 +143,9 @@ class ODS(MutableMapping):
                  dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
                  location='',
                  cocos=omas_rcparams['cocos'],
-                 cocosio=omas_rcparams['cocosio'],
-                 coordsio=omas_rcparams['coordsio'],
-                 unitsio=omas_rcparams['unitsio'],
+                 cocosio=None,
+                 coordsio=None,
+                 unitsio=None,
                  structure=None,
                  dynamic=None):
         """
@@ -172,7 +168,9 @@ class ODS(MutableMapping):
 
         :param unitsio: ODS will return data with units if True
 
-        :param structure: IMAS schema to use
+        :param structure: internal keyword that specifies what IMAS schema to use
+
+        :param dynamic: internal keyword used for dynamic data loading
         """
         if structure is None:
             structure = {}
@@ -186,9 +184,9 @@ class ODS(MutableMapping):
         self.location = location
         self._cocos = cocos
         self._dynamic = dynamic
-        self.cocosio = cocosio
-        self.coordsio = coordsio
-        self.unitsio = unitsio
+        self._cocosio = cocosio
+        self._coordsio = coordsio
+        self._unitsio = unitsio
 
     def homogeneous_time(self, key='', default=True):
         '''
@@ -230,21 +228,27 @@ class ODS(MutableMapping):
         loc = p2l(subtree)
         if not loc:
             raise LookupError('Must specify a location in the ODS to get the time of')
-        flat_structure, dict_structure = load_structure(loc[0], imas_version=self.imas_version)
-        times_ds = [i2o(k) for k in flat_structure.keys() if k.endswith('.time')]
+        utimes_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0] + '.')]
+
+        # get time nodes with actual numbers for indeces of arrays of structures and identify time index
+        times_ds = list(map(lambda item: u2o(item, l2o(subtree)), utimes_ds))
+        try:
+            time_array_index = int(re.sub('.*\.([0-9]+)\.time.*', r'\1', ' '.join(times_ds)))
+        except Exception:
+            time_array_index = None
 
         # traverse ODS upstream until time information is found
         time = {}
         for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
-            times_sub_ds = [k for k in times_ds if k.startswith(l2u(sub))]
-            subtree = l2o(sub)
+            times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
+            this_subtree = l2o(sub)
 
             # get time data from ods
             times = {}
             n = len(self.location)
             for item in times_sub_ds:
                 try:
-                    time = self.__getitem__(u2o(item, subtree)[n:], None)  # traverse ODS
+                    time = self.__getitem__(u2o(item, this_subtree)[n:], None)  # traverse ODS
                     if isinstance(time, numpy.ndarray):
                         if time.size == 0:
                             continue
@@ -269,6 +273,10 @@ class ODS(MutableMapping):
             elif len(times) == 1 or all([times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
                 time = times_values[0]
                 extra_info['homogeneous_time'] = True
+                if isinstance(time, (float, int)):
+                    return time
+                elif time_array_index is not None:
+                    return time[time_array_index]
                 return time
             # We crossed [:] or something and picked up a 2D time array
             elif any([len(time.shape) > 1 for time in times_values]):
@@ -277,12 +285,15 @@ class ODS(MutableMapping):
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                 while len(time0.shape) > 1:
                     time0 = numpy.take(time0, 0, axis=0)
-
                 if all([time.size == time0.size for time in times.values()]):
                     for time in times.values():
                         # Make sure all time arrays are close to the time0 we identified
                         assert abs(time - time0).max() < 1e-7
                     extra_info['homogeneous_time'] = True
+                    if isinstance(time0, (float, int)):
+                        return time0
+                    elif time_array_index is not None:
+                        return time0[time_array_index]
                     return time0
                 else:  # Similar to ValueError exception caught above
                     extra_info['homogeneous_time'] = False
@@ -370,9 +381,9 @@ class ODS(MutableMapping):
     @property
     def consistency_check(self):
         """
-        property that sets whether consistency with IMAS schema is enabled or not
+        property that returns whether consistency with IMAS schema is enabled or not
 
-        :return: True/False
+        :return: True/False/'warn'/'drop'/'strict' or a combination of those strings
         """
         if not hasattr(self, '_consistency_check'):
             self._consistency_check = omas_rcparams['consistency_check']
@@ -380,12 +391,20 @@ class ODS(MutableMapping):
 
     @consistency_check.setter
     def consistency_check(self, consistency_value):
+        """
+        property that sets whether consistency with IMAS schema is enabled or not
+
+        :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
+        """
+        if not consistency_value and not self._consistency_check:
+            return
+
         old_consistency_check = self._consistency_check
         try:
             # set ._consistency_check for this ODS
             self._consistency_check = consistency_value
             # set .consistency_check and assign the .structure and .location attributes to the underlying ODSs
-            for item in self.keys():
+            for item in list(self.keys()):
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
                     # consistency_check=True makes sure that code.parameters is of type CodeParameters
                     if consistency_value:
@@ -403,9 +422,14 @@ class ODS(MutableMapping):
                                 structure = load_structure(item, imas_version=self.imas_version)[1][item]
                             else:
                                 raise RuntimeError('When switching from False to True .consistency_check=True must be set at the top-level ODS')
+                        elif self.location.endswith('.ids_properties') and item == 'occurrence':
+                            continue
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
-                            if structure_key in self.structure:
+                            strict_fail = False
+                            if isinstance(consistency_value, str) and 'strict' in consistency_value and structure_key in self.structure and p2l(self.location + '.%s' % item)[0] in _extra_structures and o2i(o2u(self.location + '.%s' % item)) in _extra_structures[p2l(self.location + '.%s' % item)[0]]:
+                                strict_fail = True
+                            if not strict_fail and structure_key in self.structure:
                                 structure = self.structure[structure_key]
                             else:
                                 options = list(self.structure.keys())
@@ -413,14 +437,20 @@ class ODS(MutableMapping):
                                     options = 'A numerical index is needed with n>=0'
                                 else:
                                     options = 'Did you mean: %s' % options
-                                spaces = ' ' * len('LookupError') + '  ' + ' ' * (len(self.location) + 2)
-                                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
-                                if consistency_value == 'warn':
-                                    printe(text)
+                                txt = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
+                                if isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
+                                    if 'warn' in consistency_value:
+                                        if 'drop' in consistency_value:
+                                            printe(f'Dropping invalid {txt}')
+                                        else:
+                                            printe(f'Invalid {txt}')
                                     structure = {}
                                     consistency_value_propagate = False
                                 else:
-                                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
+                                    raise LookupError(underline_last(f'Invalid {txt}', len('LookupError: ')) + '\n' + options)
+                                if isinstance(consistency_value, str) and 'drop' in consistency_value:
+                                    del self[item]
+                                    continue
                         # assign structure and location information
                         if isinstance(self.getraw(item), ODS):
                             self.getraw(item).structure = structure
@@ -428,7 +458,18 @@ class ODS(MutableMapping):
                         else:
                             location = l2o([self.location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
-                            value = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            value, txt = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            if not len(txt):
+                                pass
+                            elif isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
+                                if 'warn' in consistency_value:
+                                    if 'drop' in consistency_value:
+                                        printe(f'Dropping invalid {txt}')
+                                    else:
+                                        printe(f'Invalid {txt}')
+                                if isinstance(consistency_value, str) and 'drop' in consistency_value:
+                                    del self[item]
+                                    continue
                             if value is not self.getraw(item):
                                 self.setraw(item, value)
                     # propagate consistency check
@@ -467,12 +508,14 @@ class ODS(MutableMapping):
 
         :return: cocosio value
         """
-        if not hasattr(self, '_cocosio'):
-            self._cocosio = omas_rcparams['cocosio']
+        if not hasattr(self, '_cocosio') or self._cocosio is None:
+            self.cocosio = None
         return self._cocosio
 
     @cocosio.setter
     def cocosio(self, cocosio_value):
+        if cocosio_value is None:
+            cocosio_value = omas_rcparams['cocos']  # default value for cocosio
         self._cocosio = cocosio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -485,12 +528,14 @@ class ODS(MutableMapping):
 
         :return: unitsio value
         """
-        if not hasattr(self, '_unitsio'):
-            self._unitsio = omas_rcparams['unitsio']
+        if not hasattr(self, '_unitsio') or self._unitsio is None:
+            self.unitsio = None
         return self._unitsio
 
     @unitsio.setter
     def unitsio(self, unitsio_value):
+        if unitsio_value is None:
+            unitsio_value = {}  # default value for unitsio
         self._unitsio = unitsio_value
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
@@ -503,13 +548,15 @@ class ODS(MutableMapping):
 
         :return: coordsio value
         """
-        if not hasattr(self, '_coordsio'):
-            self._coordsio = (None, omas_rcparams['coordsio'])
+        if not hasattr(self, '_coordsio') or self._coordsio is None:
+            self.coordsio = None
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, coordsio_value):
-        if not isinstance(coordsio_value, (list, tuple)):
+        if coordsio_value is None:
+            coordsio_value = (None, {})  # default value for coordsio
+        elif not isinstance(coordsio_value, (list, tuple)):
             coordsio_value = (self, coordsio_value)
         self._coordsio = coordsio_value
         for item in self.keys():
@@ -619,11 +666,7 @@ class ODS(MutableMapping):
                 value = CodeParameters()
                 value[key[1:]] = pass_on_value
             else:
-                value = self.__class__(imas_version=self.imas_version,
-                                       consistency_check=self.consistency_check,
-                                       dynamic_path_creation=self.dynamic_path_creation,
-                                       cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                                       dynamic=self.dynamic)
+                value = self.same_init_ods()
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -656,9 +699,9 @@ class ODS(MutableMapping):
                     self.structure[structure_key]
 
             except (LookupError, TypeError):
-                text = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
+                txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if self.consistency_check == 'warn':
-                    printe(text)
+                    printe(txt)
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
@@ -667,7 +710,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         options = 'Did you mean: %s' % options
-                    raise LookupError(underline_last(text, len('LookupError: ')) + '\n' + options)
+                    raise LookupError(underline_last(txt, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
         if not self.omas_data or not len(self.omas_data):
@@ -761,7 +804,17 @@ class ODS(MutableMapping):
 
             # check that dimensions and data types are consistent with IMAS specifications
             if self.consistency_check and '.code.parameters.' not in location:
-                value = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
+                value, txt = consistency_checker(location, value, info, self.consistency_check, self.imas_version)
+                if not len(txt):
+                    pass
+                elif isinstance(self.consistency_check, str) and ('warn' in self.consistency_check or 'drop' in self.consistency_check):
+                    if 'warn' in self.consistency_check:
+                        if 'drop' in self.consistency_check:
+                            printe(f'Dropping invalid {txt}')
+                        else:
+                            printe(f'Invalid {txt}')
+                    if 'drop' in self.consistency_check:
+                        return
 
         # check if the branch/node was dynamically created
         dynamically_created = False
@@ -778,9 +831,7 @@ class ODS(MutableMapping):
                 # dynamic array structure creation
                 if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
-                        ods = self.__class__()
-                        ods.copy_attrs_from(self)
-                        self[item] = ods
+                        self[item] = self.same_init_ods()
                 # index exists
                 if key[0] < len(self.omas_data):
                     self.omas_data[key[0]] = value
@@ -806,8 +857,14 @@ class ODS(MutableMapping):
 
         # if the value is an ODS strucutre
         if isinstance(value, ODS) and value.omas_data is not None and len(value):
-            # make sure entries have the right location
-            self.set_child_locations()
+            # we purposly do not force value.consistency_check = self.consistency_check
+            # because sub-ODSs could be shared among ODSs that have different settings of consistency_check
+            if False and value.consistency_check != self.consistency_check:
+                value.consistency_check = self.consistency_check
+            # We can however make that sure entries have the right location set
+            # even if these are sub-ODSs that could be shared among ODSs
+            elif not value.location or value.location != l2o([self.location] + key):
+                self.set_child_locations()
 
     def getraw(self, key):
         '''
@@ -823,20 +880,46 @@ class ODS(MutableMapping):
 
         return self.omas_data[key]
 
+    def same_init_ods(self):
+        '''
+        Initializes a new ODS with the same attributes as this one
+
+        :return: new ODS
+        '''
+        return self.__class__(imas_version=self.imas_version,
+                              consistency_check=self.consistency_check,
+                              dynamic_path_creation=self.dynamic_path_creation,
+                              cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
+                              dynamic=self.dynamic)
+
     def setraw(self, key, value):
         '''
         Method to assign data to an ODS with no processing of the key, and it is thus faster than the ODS.__setitem__(key, value)
         Effectively behaves like a pure Python dictionary/list __setitem__.
         This method is mostly meant to be used in the inner workings of the ODS class.
 
-        :param key: string or integer
+        :param key: string, integer or a list of these
 
         :param value: value to assign
 
         :return: value
         '''
-
-        self.omas_data[key] = value
+        if isinstance(key, list):
+            if len(key) > 1:
+                if key[0] not in self:
+                    self.setraw(key[0], self.same_init_ods())
+                return self.getraw(key[0]).setraw(key[1:], value)
+            else:
+                key = key[0]
+        if self.omas_data is None:
+            if isinstance(key, int):
+                self.omas_data = []
+            else:
+                self.omas_data = {}
+        if isinstance(key, int) and len(self.omas_data) == key:
+            self.omas_data.append(value)
+        else:
+            self.omas_data[key] = value
         return value
 
     def __getitem__(self, key, cocos_and_coords=True):
@@ -914,11 +997,7 @@ class ODS(MutableMapping):
                     self.__setitem__(key[0], value)
                 else:
                     dynamically_created = True
-                    self.__setitem__(key[0], self.__class__(imas_version=self.imas_version,
-                                                            consistency_check=self.consistency_check,
-                                                            dynamic_path_creation=self.dynamic_path_creation,
-                                                            cocos=self.cocos, cocosio=self.cocosio, coordsio=self.coordsio,
-                                                            dynamic=self.dynamic))
+                    self.__setitem__(key[0], self.same_init_ods())
             else:
                 location = l2o([self.location, key[0]])
                 raise LookupError('Dynamic path creation is disabled, hence `%s` needs to be manually created' % location)
@@ -1017,7 +1096,7 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, **kw):
         """
         Traverse the ods and return paths to its leaves
 
@@ -1030,7 +1109,11 @@ class ODS(MutableMapping):
         path = kw.setdefault('path', [])
         for kid in self.keys():
             if isinstance(self.getraw(kid), ODS):
-                self.getraw(kid).paths(return_empty_leaves=return_empty_leaves, paths=paths, path=path + [kid])
+                self.getraw(kid).paths(return_empty_leaves=return_empty_leaves,
+                                       traverse_code_parameters=traverse_code_parameters,
+                                       paths=paths, path=path + [kid])
+            elif traverse_code_parameters and isinstance(self.getraw(kid), CodeParameters):
+                self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
         if not len(self.keys()) and return_empty_leaves:
@@ -1167,9 +1250,13 @@ class ODS(MutableMapping):
 
     def __getstate__(self):
         state = {}
-        for item in omas_dictstate:
+        for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
-                state[item] = self.__dict__[item]
+                # we do not want to carry with us this information
+                if item in ['_cocosio', '_coordsio', '_unitsio']:
+                    state[item] = None
+                else:
+                    state[item] = self.__dict__[item]
         return state
 
     def copy(self):
@@ -1192,15 +1279,14 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         '''
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
 
         :param ods: input ods
 
         :return: self
         '''
         for item in omas_ods_attrs:
-            if hasattr(ods, item):
-                setattr(self, item, getattr(ods, item))
+            setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):
@@ -1492,9 +1578,6 @@ class ODS(MutableMapping):
 
         ds = p2l(self.location)[0]
 
-        if ds in add_datastructures:
-            return True
-
         extra_info = {}
         time = self.time(extra_info=extra_info)
         if extra_info['homogeneous_time'] is False:
@@ -1579,14 +1662,17 @@ class ODS(MutableMapping):
             elif len(results) > 1:
                 raise RuntimeError(ext + ' query returned more than one result!')
             else:
-                self.omas_data = list(results.values())[0].omas_data
-        else:
-            self.omas_data = results.omas_data
-            if ext == 'pkl':
-                self.copy_attrs_from(results)
+                results = list(results.values())[0]
+
+        # update the data
+        self.omas_data = results.omas_data
+
+        # for pickle we can copy attrs over
+        if ext == 'pkl':
+            self.copy_attrs_from(results)
 
         # apply consistency checks
-        if consistency_check != self.consistency_check:
+        if consistency_check != self.consistency_check or consistency_check != results.consistency_check:
             self.consistency_check = consistency_check
 
         return self
@@ -1656,7 +1742,7 @@ class ODS(MutableMapping):
         '''
         return different_ods(self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty)
 
-    def from_structure(self, structure):
+    def from_structure(self, structure, depth=0):
         '''
         Generate an ODS starting from a hierarchical structure made of dictionaries and lists
 
@@ -1673,17 +1759,19 @@ class ODS(MutableMapping):
 
         for item in keys:
             if isinstance(structure[item], dict):
-                self[item].from_structure(structure[item])
+                self[item].from_structure(structure[item], depth=depth + 1)
             elif isinstance(structure[item], list):
                 # identify if this is a leaf
                 if len(structure[item]) and not isinstance(structure[item][0], dict):
-                    self[item] = numpy.array(structure[item])
+                    self.setraw(item, numpy.array(structure[item]))
                 # or a node in the IMAS tree
                 else:
-                    self[item].from_structure(structure[item])
+                    self[item].from_structure(structure[item], depth=depth + 1)
             else:
-                self[item] = copy.deepcopy(structure[item])
-
+                self.setraw(item, copy.deepcopy(structure[item]))
+            if depth == 0 and isinstance(self[item], ODS):
+                self[item].set_child_locations()
+                self[item].consistency_check = self.consistency_check
         return self
 
     def codeparams2xml(self):
@@ -1718,6 +1806,49 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
+    def sample(self, ntimes=1):
+        '''
+        Populates the ods with sample data
+
+        :param ntimes: number of time slices to generate
+
+        :return: self
+        '''
+        for func in omas_sample.__ods__:
+            printd(f'Adding {func} sample data to ods', topic='sample')
+            args, kw, _, _ = function_arguments(getattr(self, 'sample_' + func))
+            if 'time_index' in kw:
+                for k in range(ntimes):
+                    getattr(self, 'sample_' + func)(time_index=k)
+            else:
+                getattr(self, 'sample_' + func)()
+        return self
+
+    def document(self, what=['coordinates', 'data_type', 'documentation', 'units']):
+        '''
+        RST documentation of the ODs content
+
+        :param what: fields to be included in the documentation
+                     if None, all fields are included
+
+        :return: string with RST documentation
+        '''
+        pp = {}
+        for item in self.pretty_paths():
+            tt = l2u(p2l(item))
+            pp[tt] = omas_info_node(tt)
+
+        txt = []
+        for item in sorted(pp.keys()):
+            txt += ['', item]
+            txt += ['-' * len(item)]
+            for elms in pp[item]:
+                if what is not None and elms not in what:
+                    continue
+                value = str(pp[item][elms])
+                txt += [f'* {elms}: {value}']
+
+        return '\n'.join(txt)
 
 def serializable(f):
     def serializable_f(*args, **kw):
@@ -1912,6 +2043,8 @@ class CodeParameters(dict):
         '''
         import xmltodict
         self.clear()
+        if not code_params_string.strip().endswith('</parameters>'):
+            code_params_string = '<parameters>' + code_params_string + '</parameters>'
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if tmp:
             recursive_interpreter(tmp, dict_cls=CodeParameters)
@@ -2062,7 +2195,7 @@ class CodeParameters(dict):
             tmp[l2o(path)] = self[path]
         return tmp
 
-    def from_structure(self, structure):
+    def from_structure(self, structure, depth=0):
         '''
         Generate CodeParamters starting from a hierarchical structure made of dictionaries and lists
 
@@ -2079,14 +2212,14 @@ class CodeParameters(dict):
 
         for item in keys:
             if isinstance(structure[item], dict):
-                self[item].from_structure(structure[item])
+                self[item].from_structure(structure[item], depth=depth + 1)
             elif isinstance(structure[item], list):
                 # identify if this is a leaf
                 if len(structure[item]) and not isinstance(structure[item][0], dict):
                     self[item] = numpy.array(structure[item])
                 # or a node in the IMAS tree
                 else:
-                    self[item].from_structure(structure[item])
+                    self[item].from_structure(structure[item], depth=depth + 1)
             else:
                 self[item] = copy.deepcopy(structure[item])
 
@@ -2151,8 +2284,8 @@ except ImportError as _excp:
 
 # --------------------------------------------
 # import plotting functions and add them as ODS methods
+# --------------------------------------------
 try:
-    # --------------------------------------------
     from . import omas_plot
 
     __all__.append('omas_plot')
@@ -2161,7 +2294,7 @@ try:
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
 
-omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_dynamic']
+omas_ods_attrs = ['_consistency_check', '_dynamic_path_creation', '_imas_version', 'location', 'structure', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic']
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
@@ -2203,7 +2336,11 @@ def load_omas_pkl(filename, consistency_check=None, imas_version=None):
     printd('Loading from %s' % filename, topic='pkl')
 
     with open(filename, 'rb') as f:
-        tmp = pickle.load(f)
+        try:
+            tmp = pickle.load(f)
+        except UnicodeDecodeError:
+            # to support ODSs created with Python2
+            tmp = pickle.load(f, encoding="latin1")
     if imas_version is not None:
         tmp.imas_version = imas_version
     if consistency_check is not None:
@@ -2232,23 +2369,9 @@ from .omas_imas import *
 from .omas_s3 import *
 from .omas_nc import *
 from .omas_json import *
-from .omas_structure import *
 from .omas_hdc import *
 from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
 from .omas_mongo import *
-
-
-# --------------------------------------------
-# backward compatibility
-# --------------------------------------------
-def save_omas_itm(*args, **kw):
-    '''
-    Dummy function to avoid older versions of OMFIT not to start with latest OMAS
-    '''
-    raise NotImplementedError('omas itm functions are deprecated')
-
-
-load_omas_itm = through_omas_itm = save_omas_itm
-__all__.extend(['save_omas_itm', 'load_omas_itm', 'through_omas_itm'])
+from . import omas_structure

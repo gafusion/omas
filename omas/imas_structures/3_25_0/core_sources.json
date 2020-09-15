@@ -8,7 +8,7 @@
   "maxoccur": "15"
  },
  "core_sources.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "core_sources/code",
   "lifecycle_status": "active",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "core_sources.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "core_sources/ids_properties",
   "lifecycle_status": "active",
@@ -88,6 +88,11 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_sources.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "core_sources.ids_properties.occurrence"
+ },
  "core_sources.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -103,7 +108,7 @@
   "type": "constant"
  },
  "core_sources.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "core_sources/ids_properties/version_put",
   "lifecycle_status": "active",
@@ -135,7 +140,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of source terms",
   "full_path": "core_sources/source(i1)",
   "lifecycle_status": "active",
@@ -146,7 +151,7 @@
   "coordinates": [
    "core_sources.source[:].global_quantities[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Total source quantities integrated over the plasma volume or surface",
   "full_path": "core_sources/source(i1)/global_quantities(itime)",
   "lifecycle_status": "active",
@@ -163,7 +168,7 @@
   "units": "A"
  },
  "core_sources.source[:].global_quantities[:].current_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_index",
   "lifecycle_status": "active",
@@ -186,7 +191,7 @@
   "units": "A"
  },
  "core_sources.source[:].global_quantities[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Sources for electrons",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons",
   "lifecycle_status": "active",
@@ -201,7 +206,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].global_quantities[:].electrons.particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles_error_index",
   "lifecycle_status": "active",
@@ -232,7 +237,7 @@
   "units": "W"
  },
  "core_sources.source[:].global_quantities[:].electrons.power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power_error_index",
   "lifecycle_status": "active",
@@ -263,7 +268,7 @@
   "units": "W"
  },
  "core_sources.source[:].global_quantities[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power_error_index",
   "lifecycle_status": "active",
@@ -286,7 +291,7 @@
   "units": "W"
  },
  "core_sources.source[:].global_quantities[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/time",
   "lifecycle_status": "active",
@@ -302,7 +307,7 @@
   "units": "kg.m^2.s^-2"
  },
  "core_sources.source[:].global_quantities[:].torque_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor_error_index",
   "lifecycle_status": "active",
@@ -333,7 +338,7 @@
   "units": "(ions).s^-1"
  },
  "core_sources.source[:].global_quantities[:].total_ion_particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_particles_error_index",
   "lifecycle_status": "active",
@@ -364,7 +369,7 @@
   "units": "W"
  },
  "core_sources.source[:].global_quantities[:].total_ion_power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power_error_index",
   "lifecycle_status": "active",
@@ -387,7 +392,7 @@
   "units": "W"
  },
  "core_sources.source[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "core_sources/core_source_identifier.xml",
   "documentation": "Source term identifier (process causing this source term)\n0) unspecified : Unspecified source type\n1) total : Total source; combines all sources\n2) nbi : Source from Neutral Beam Injection\n3) ec : Sources from electron cyclotron heating and current drive\n4) lh : Sources from lower hybrid heating and current drive\n5) ic : Sources from heating at the ion cyclotron range of frequencies\n6) fusion : Sources from fusion reactions, e.g. alpha particle heating\n7) ohmic : Source from ohmic heating\n8) bremsstrahlung : Source from bremsstrahlung; radiation losses are negative sources\n9) synchrotron_radiation : Source from synchrotron radiation; radiation losses are negative sources\n10) line_radiation : Source from line radiation; radiation losses are negative sources\n11) collisional_equipartition : Collisional equipartition\n12) cold_neutrals : Source of cold neutrals\n13) bootstrap_current : Bootstrap current\n14) pellet : Sources from injection\n100) auxiliary : Source from auxiliary systems, e.g. heating and current drive systems\n101) ic_nbi : A combination of the ic and nbi sources\n102) ic_fusion : A combination of the ic and fusion sources\n103) ic_nbi_fusion : A combination of the ic and fusion sources\n104) ec_lh : A combination of the ec and lh sources\n105) ec_ic : A combination of the ec and ic sources\n106) lh_ic : A combination of the lh and ic sources\n107) ec_lh_ic : A combination of the ec, lh and ic sources\n108) gas_puff : Gas puff\n109) killer_gas_puff : Killer gas puff\n200) radiation : Total radiation source; radiation losses are negative sources\n201) cyclotron_radiation : Source from cyclotron radiation; radiation losses are negative sources\n202) cyclotron_synchrotron_radiation : Source from combined cyclotron and synchrotron radiation; radiation losses are negative sources\n203) impurity_radiation : Line radiation and Bremsstrahlung source; radiation losses are negative sources.\n303) particles_to_wall : Particle pumping by the wall; negative source for plasma and positive source for the wall\n304) particles_to_pump : Particle pumping by external pump; negative source for plasma and positive source for the pump\n305) charge_exchange : Source from charge exchange. Charge exchange losses are negative sources\n400) transport : Source term related to transport processes\n401) neoclassical : Source term related to neoclassical processes\n402) equipartition : Equipartition due to collisions and turbulence\n403) turbulent_equipartition : Turbulent equipartition\n501) runaways : Source from run-away processes; includes both electron and ion run-away\n601) ionisation : Source from ionisation processes (not accounting for charge exchange)\n602) recombination : Source from recombination processes (not accounting for charge exchange)\n603) excitation : Source from excitation processes\n801) database : Source from database entry\n802) gaussian : Artificial source with a gaussian profile\n901) custom_1 : Custom source terms 1; content to be decided by data provided\n902) custom_2 : Custom source terms 2; content to be decided by data provided\n903) custom_3 : Custom source terms 3; content to be decided by data provided\n904) custom_4 : Custom source terms 4; content to be decided by data provided\n905) custom_5 : Custom source terms 5; content to be decided by data provided\n906) custom_6 : Custom source terms 6; content to be decided by data provided\n907) custom_7 : Custom source terms 7; content to be decided by data provided\n908) custom_8 : Custom source terms 8; content to be decided by data provided\n909) custom_9 : Custom source terms 9; content to be decided by data provided",
   "full_path": "core_sources/source(i1)/identifier",
@@ -419,7 +424,7 @@
   "coordinates": [
    "core_sources.source[:].profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source profiles for various time slices. Source terms are positive (resp. negative) when there is a gain (resp. a loss) to the considered channel.",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)",
   "lifecycle_status": "active",
@@ -439,7 +444,7 @@
   "units": "ohm^-1.m^-1"
  },
  "core_sources.source[:].profiles_1d[:].conductivity_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel_error_index",
   "lifecycle_status": "active",
@@ -479,7 +484,7 @@
   "units": "A"
  },
  "core_sources.source[:].profiles_1d[:].current_parallel_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside_error_index",
   "lifecycle_status": "active",
@@ -508,7 +513,7 @@
   "units": "A"
  },
  "core_sources.source[:].profiles_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Sources for electrons",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons",
   "lifecycle_status": "active",
@@ -526,7 +531,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for electron energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed",
   "lifecycle_status": "active",
@@ -544,7 +549,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -584,7 +589,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -613,7 +618,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_error_index",
   "lifecycle_status": "active",
@@ -653,7 +658,7 @@
   "units": "m^-3.s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for electron density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed",
   "lifecycle_status": "active",
@@ -671,7 +676,7 @@
   "units": "m^-3.s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -711,7 +716,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -740,7 +745,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_error_index",
   "lifecycle_status": "active",
@@ -780,7 +785,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside_error_index",
   "lifecycle_status": "active",
@@ -820,7 +825,7 @@
   "units": "W"
  },
  "core_sources.source[:].profiles_1d[:].electrons.power_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside_error_index",
   "lifecycle_status": "active",
@@ -849,7 +854,7 @@
   "units": "W"
  },
  "core_sources.source[:].profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid",
   "lifecycle_status": "active",
@@ -867,7 +872,7 @@
   "units": "m^2"
  },
  "core_sources.source[:].profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "active",
@@ -915,7 +920,7 @@
   "units": "Wb"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_boundary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_boundary_error_index",
   "lifecycle_status": "active",
@@ -938,7 +943,7 @@
   "units": "Wb"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "active",
@@ -975,7 +980,7 @@
   "units": "Wb"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_magnetic_axis_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_magnetic_axis_error_index",
   "lifecycle_status": "active",
@@ -1009,7 +1014,7 @@
   "units": "-"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_pol_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_pol_norm_error_index",
   "lifecycle_status": "active",
@@ -1049,7 +1054,7 @@
   "units": "m"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "active",
@@ -1089,7 +1094,7 @@
   "units": "-"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -1129,7 +1134,7 @@
   "units": "m^3"
  },
  "core_sources.source[:].profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "active",
@@ -1161,7 +1166,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source terms related to the different ions species",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)",
   "lifecycle_status": "active",
@@ -1172,7 +1177,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "active",
@@ -1188,7 +1193,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "active",
@@ -1227,7 +1232,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -1260,7 +1265,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "active",
@@ -1294,7 +1299,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for ion energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed",
   "lifecycle_status": "active",
@@ -1312,7 +1317,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -1352,7 +1357,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -1381,7 +1386,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_error_index",
   "lifecycle_status": "active",
@@ -1417,7 +1422,7 @@
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Source term for the ion momentum transport equations along various components (directions)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum",
   "lifecycle_status": "active",
@@ -1435,7 +1440,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.diamagnetic_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic_error_index",
   "lifecycle_status": "active",
@@ -1475,7 +1480,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel_error_index",
   "lifecycle_status": "active",
@@ -1515,7 +1520,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.poloidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal_error_index",
   "lifecycle_status": "active",
@@ -1555,7 +1560,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial_error_index",
   "lifecycle_status": "active",
@@ -1595,7 +1600,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for ion toroidal momentum equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed",
   "lifecycle_status": "active",
@@ -1613,7 +1618,7 @@
   "units": "kg.m^2.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -1653,7 +1658,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -1682,7 +1687,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_error_index",
   "lifecycle_status": "active",
@@ -1736,7 +1741,7 @@
   "units": "s^-1.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for ion density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed",
   "lifecycle_status": "active",
@@ -1754,7 +1759,7 @@
   "units": "m^-3.s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -1794,7 +1799,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -1823,7 +1828,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_error_index",
   "lifecycle_status": "active",
@@ -1855,7 +1860,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source terms related to the different charge states of the species (ionisation, energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "active",
@@ -1881,7 +1886,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for state energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed",
   "lifecycle_status": "active",
@@ -1899,7 +1904,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -1939,7 +1944,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -1968,7 +1973,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_error_index",
   "lifecycle_status": "active",
@@ -2012,7 +2017,7 @@
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/neutral_type",
   "lifecycle_status": "obsolescent",
@@ -2052,7 +2057,7 @@
   "units": "s^-1.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for state density equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed",
   "lifecycle_status": "active",
@@ -2070,7 +2075,7 @@
   "units": "m^-3.s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -2110,7 +2115,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -2139,7 +2144,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_error_index",
   "lifecycle_status": "active",
@@ -2176,7 +2181,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -2214,7 +2219,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "active",
@@ -2245,7 +2250,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "active",
@@ -2276,7 +2281,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "active",
@@ -2310,7 +2315,7 @@
   "units": "A.m^-2"
  },
  "core_sources.source[:].profiles_1d[:].j_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel_error_index",
   "lifecycle_status": "active",
@@ -2350,7 +2355,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_index",
   "lifecycle_status": "active",
@@ -2382,7 +2387,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source terms related to the different neutral species",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)",
   "lifecycle_status": "active",
@@ -2393,7 +2398,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)",
   "lifecycle_status": "active",
@@ -2409,7 +2414,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
   "lifecycle_status": "active",
@@ -2448,7 +2453,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -2481,7 +2486,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "active",
@@ -2515,7 +2520,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy_error_index",
   "lifecycle_status": "active",
@@ -2576,7 +2581,7 @@
   "units": "s^-1.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles_error_index",
   "lifecycle_status": "active",
@@ -2608,7 +2613,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source terms related to the different charge states of the species (energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)",
   "lifecycle_status": "active",
@@ -2634,7 +2639,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy_error_index",
   "lifecycle_status": "active",
@@ -2670,7 +2675,7 @@
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/neutral_type",
@@ -2710,7 +2715,7 @@
   "units": "s^-1.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles_error_index",
   "lifecycle_status": "active",
@@ -2747,7 +2752,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -2777,7 +2782,7 @@
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/time",
   "lifecycle_status": "active",
@@ -2796,7 +2801,7 @@
   "units": "kg.m^2.s^-2"
  },
  "core_sources.source[:].profiles_1d[:].torque_tor_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside_error_index",
   "lifecycle_status": "active",
@@ -2836,7 +2841,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Decomposition of the source term for total ion energy equation into implicit and explicit parts",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed",
   "lifecycle_status": "active",
@@ -2854,7 +2859,7 @@
   "units": "W.m^-3"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.explicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part_error_index",
   "lifecycle_status": "active",
@@ -2894,7 +2899,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.implicit_part_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part_error_index",
   "lifecycle_status": "active",
@@ -2923,7 +2928,7 @@
   "units": "s^-1"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_error_index",
   "lifecycle_status": "active",
@@ -2963,7 +2968,7 @@
   "units": "W"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_power_inside_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside_error_index",
   "lifecycle_status": "active",
@@ -2992,14 +2997,14 @@
   "units": "W"
  },
  "core_sources.source[:].species": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Species causing this source term (if relevant, e.g. a particular ion or neutral state in case of line radiation)",
   "full_path": "core_sources/source(i1)/species",
   "lifecycle_status": "active",
   "structure_reference": "distribution_species"
  },
  "core_sources.source[:].species.ion": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "core_sources/source(i1)/species/ion",
   "lifecycle_status": "active",
@@ -3009,7 +3014,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)",
   "lifecycle_status": "active",
@@ -3025,7 +3030,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_sources.source[:].species.ion.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a_error_index",
   "lifecycle_status": "active",
@@ -3064,7 +3069,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -3097,7 +3102,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
   "lifecycle_status": "active",
@@ -3127,7 +3132,7 @@
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/species/ion/state",
   "lifecycle_status": "active",
@@ -3156,7 +3161,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -3194,7 +3199,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.state.z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max_error_index",
   "lifecycle_status": "active",
@@ -3225,7 +3230,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.state.z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min_error_index",
   "lifecycle_status": "active",
@@ -3256,7 +3261,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.ion.z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/species/ion/z_ion_error_index",
   "lifecycle_status": "active",
@@ -3279,7 +3284,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.neutral": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "core_sources/source(i1)/species/neutral",
   "lifecycle_status": "active",
@@ -3289,7 +3294,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)",
   "lifecycle_status": "active",
@@ -3305,7 +3310,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_sources.source[:].species.neutral.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a_error_index",
   "lifecycle_status": "active",
@@ -3344,7 +3349,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.neutral.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -3377,7 +3382,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.neutral.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
   "lifecycle_status": "active",
@@ -3407,7 +3412,7 @@
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "core_sources/source(i1)/species/neutral/state",
   "lifecycle_status": "active",
@@ -3428,7 +3433,7 @@
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "core_sources/source(i1)/species/neutral/state/neutral_type",
@@ -3465,7 +3470,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_sources.source[:].species.neutral.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -3495,7 +3500,7 @@
   "type": "constant"
  },
  "core_sources.source[:].species.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon\n0) unspecified : unspecified\n1) electron : Electron\n2) ion : Ion species in a single/average state; refer to ion-structure\n3) ion_state : Ion species in a particular state; refer to ion/state-structure\n4) neutral : Neutral species in a single/average state; refer to neutral-structure\n5) neutral_state : Neutral species in a particular state; refer to neutral/state-structure\n6) neutron : Neutron\n7) photon : Photon",
   "full_path": "core_sources/source(i1)/species/type",
@@ -3527,7 +3532,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "core_sources/time(:)",
   "lifecycle_status": "active",
@@ -3536,7 +3541,7 @@
   "units": "s"
  },
  "core_sources.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)",
   "full_path": "core_sources/vacuum_toroidal_field",
   "lifecycle_status": "active",
@@ -3555,7 +3560,7 @@
   "units": "T"
  },
  "core_sources.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_sources/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "active",
@@ -3594,7 +3599,7 @@
   "units": "m"
  },
  "core_sources.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_sources/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "active",

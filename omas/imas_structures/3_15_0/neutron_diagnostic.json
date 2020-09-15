@@ -8,7 +8,7 @@
   "maxoccur": "3"
  },
  "neutron_diagnostic.characteristics": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of Diagnostic's module detection characteristics for differen plasma modes based on Design Description",
   "full_path": "neutron_diagnostic/characteristics",
   "lifecycle_status": "alpha"
@@ -22,7 +22,7 @@
   "units": "s"
  },
  "neutron_diagnostic.characteristics.dead_time_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dead_time\"",
   "full_path": "neutron_diagnostic/characteristics/dead_time_error_index",
   "lifecycle_status": "alpha",
@@ -53,7 +53,7 @@
   "units": "s"
  },
  "neutron_diagnostic.characteristics.pulse_length_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pulse_length\"",
   "full_path": "neutron_diagnostic/characteristics/pulse_length_error_index",
   "lifecycle_status": "alpha",
@@ -79,7 +79,7 @@
   "coordinates": [
    "neutron_diagnostic.characteristics.reaction[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Plasma reaction (1 -'DT'; 2 - 'DD')",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)",
   "lifecycle_status": "alpha",
@@ -94,7 +94,7 @@
   "units": "-"
  },
  "neutron_diagnostic.characteristics.reaction[:].error_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"error\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error_error_index",
   "lifecycle_status": "alpha",
@@ -127,7 +127,7 @@
   "coordinates": [
    "neutron_diagnostic.characteristics.reaction[:].mode[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Characteristics of counting linear limits in recent Measuring modes for recent Plasma reaction type",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)",
   "lifecycle_status": "alpha",
@@ -142,7 +142,7 @@
   "units": "cps"
  },
  "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"count_limit_max\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_index",
   "lifecycle_status": "alpha",
@@ -173,7 +173,7 @@
   "units": "cps"
  },
  "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"count_limit_min\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_index",
   "lifecycle_status": "alpha",
@@ -218,7 +218,7 @@
   "units": "-"
  },
  "neutron_diagnostic.characteristics.reaction[:].probability_overlap_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"probability_overlap\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap_error_index",
   "lifecycle_status": "alpha",
@@ -241,7 +241,7 @@
   "units": "-"
  },
  "neutron_diagnostic.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "neutron_diagnostic/code",
   "lifecycle_status": "alpha"
@@ -295,7 +295,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of Detectors properties and Data in Neutron Diagnostic Module",
   "full_path": "neutron_diagnostic/detectors(i1)",
   "lifecycle_status": "alpha",
@@ -312,7 +312,7 @@
   "coordinates": [
    "neutron_diagnostic.detectors[:].mode[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Measuring Mode Properties and Data",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)",
   "lifecycle_status": "alpha",
@@ -320,7 +320,7 @@
   "type": "static"
  },
  "neutron_diagnostic.detectors[:].mode[:].counting": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Counting in Measuring Mode in Dynamic",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting",
   "lifecycle_status": "alpha"
@@ -337,7 +337,7 @@
   "units": "cps"
  },
  "neutron_diagnostic.detectors[:].mode[:].counting.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_index",
   "lifecycle_status": "alpha",
@@ -369,7 +369,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/time",
   "lifecycle_status": "alpha",
@@ -397,7 +397,7 @@
   "type": "static"
  },
  "neutron_diagnostic.detectors[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detector Position Data",
   "full_path": "neutron_diagnostic/detectors(i1)/position",
   "lifecycle_status": "alpha"
@@ -411,7 +411,7 @@
   "units": "rad"
  },
  "neutron_diagnostic.detectors[:].position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -442,7 +442,7 @@
   "units": "m"
  },
  "neutron_diagnostic.detectors[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -473,7 +473,7 @@
   "units": "m"
  },
  "neutron_diagnostic.detectors[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -499,7 +499,7 @@
   "coordinates": [
    "neutron_diagnostic.detectors[:].radiation[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)",
   "lifecycle_status": "alpha",
@@ -521,7 +521,7 @@
   "units": "m^-3"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_nuclear_density\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density_error_index",
   "lifecycle_status": "alpha",
@@ -555,7 +555,7 @@
   "units": "K"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_temperature\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_index",
   "lifecycle_status": "alpha",
@@ -592,7 +592,7 @@
   "units": "m^3"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_volume\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume_error_index",
   "lifecycle_status": "alpha",
@@ -622,7 +622,7 @@
   "type": "static"
  },
  "neutron_diagnostic.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "neutron_diagnostic/ids_properties",
   "lifecycle_status": "alpha"
@@ -648,6 +648,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "neutron_diagnostic.ids_properties.occurrence"
+ },
  "neutron_diagnostic.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -663,7 +668,7 @@
   "type": "constant"
  },
  "neutron_diagnostic.synthetic_signals": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Output Data from Neutron Diagnostic's Module",
   "full_path": "neutron_diagnostic/synthetic_signals",
   "lifecycle_status": "alpha"
@@ -680,7 +685,7 @@
   "units": "W"
  },
  "neutron_diagnostic.synthetic_signals.fusion_power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fusion_power\"",
   "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_index",
   "lifecycle_status": "alpha",
@@ -720,7 +725,7 @@
   "units": "s^-1"
  },
  "neutron_diagnostic.synthetic_signals.total_neutron_flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_neutron_flux\"",
   "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_index",
   "lifecycle_status": "alpha",
@@ -752,7 +757,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "neutron_diagnostic/time",
   "lifecycle_status": "alpha",
@@ -762,14 +767,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Unit ring sources description",
   "full_path": "neutron_diagnostic/unit_source(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "50"
  },
  "neutron_diagnostic.unit_source[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of ring unit sources inside ITER vacuum vessel",
   "full_path": "neutron_diagnostic/unit_source(i1)/position",
   "lifecycle_status": "alpha"
@@ -783,7 +788,7 @@
   "units": "m"
  },
  "neutron_diagnostic.unit_source[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -814,7 +819,7 @@
   "units": "m"
  },
  "neutron_diagnostic.unit_source[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -840,7 +845,7 @@
   "coordinates": [
    "neutron_diagnostic.unit_source[:].radiation[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)",
   "lifecycle_status": "alpha",
@@ -857,7 +862,7 @@
   "coordinates": [
    "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].index"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Plasma reaction (1 - 'DT'; 2 - 'DD')",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)",
   "lifecycle_status": "alpha",
@@ -876,7 +881,7 @@
   "units": "m^-4"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d2flux_drdz\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz_error_index",
   "lifecycle_status": "alpha",
@@ -918,7 +923,7 @@
   "units": "eV"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -959,7 +964,7 @@
   "units": "m^-2"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux_error_index",
   "lifecycle_status": "alpha",
@@ -1009,7 +1014,7 @@
   "units": "m^-3"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reaction_rate\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate_error_index",
   "lifecycle_status": "alpha",
@@ -1052,7 +1057,7 @@
   "units": "cps.m^2.s"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sensitivity\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity_error_index",
   "lifecycle_status": "alpha",

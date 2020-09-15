@@ -7,8 +7,6 @@ Save and load a sample ODS through the different OMAS save formats and check tha
 A final report summarizes if some storage systems combinations have errors.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 import numpy
 from pprint import pprint
@@ -28,7 +26,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
     """
 
     if ods is None:
-        ods = ods_sample()
+        ods = ODS().sample()
 
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type

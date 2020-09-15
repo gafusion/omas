@@ -8,7 +8,7 @@
   "maxoccur": "1"
  },
  "ntms.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "ntms/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "ntms.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "ntms/ids_properties",
   "lifecycle_status": "alpha",
@@ -88,6 +88,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ntms.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "ntms.ids_properties.occurrence"
+ },
  "ntms.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -106,7 +111,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "ntms/time(:)",
   "lifecycle_status": "alpha",
@@ -118,7 +123,7 @@
   "coordinates": [
    "ntms.time_slice[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of neoclassical tearing modes for various time slices",
   "full_path": "ntms/time_slice(itime)",
   "lifecycle_status": "alpha",
@@ -130,7 +135,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of the various NTM modes appearing during the simulation. If a mode appears several times, use several indices in this array of structure with the same m,n values.",
   "full_path": "ntms/time_slice(itime)/mode(i1)",
   "lifecycle_status": "alpha",
@@ -156,7 +161,7 @@
   "units": "m^2.s^-1"
  },
  "ntms.time_slice[:].mode[:].delta_diff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff_error_index",
   "lifecycle_status": "alpha",
@@ -188,7 +193,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "deltaw contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)",
   "lifecycle_status": "alpha",
@@ -211,7 +216,7 @@
   "units": "m^-1"
  },
  "ntms.time_slice[:].mode[:].deltaw[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -234,7 +239,7 @@
   "units": "m^-1"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detailed NTM evolution on a finer timebase than the time_slice array of structure",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution",
   "lifecycle_status": "alpha",
@@ -260,7 +265,7 @@
   "units": "m^2.s^-1"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.delta_diff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff_error_index",
   "lifecycle_status": "alpha",
@@ -294,7 +299,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "deltaw contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)",
   "lifecycle_status": "alpha",
@@ -320,7 +325,7 @@
   "units": "m^-1"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.deltaw[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -360,7 +365,7 @@
   "units": "s^-2"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dfrequency_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt_error_index",
   "lifecycle_status": "alpha",
@@ -400,7 +405,7 @@
   "units": "rad/s"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dphase_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt_error_index",
   "lifecycle_status": "alpha",
@@ -440,7 +445,7 @@
   "units": "m/s"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dwidth_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt_error_index",
   "lifecycle_status": "alpha",
@@ -480,7 +485,7 @@
   "units": "Hz"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.frequency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency_error_index",
   "lifecycle_status": "alpha",
@@ -534,7 +539,7 @@
   "units": "rad"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase_error_index",
   "lifecycle_status": "alpha",
@@ -574,7 +579,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -614,7 +619,7 @@
   "units": "-"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -654,7 +659,7 @@
   "units": "s"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_detailed\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed_error_index",
   "lifecycle_status": "alpha",
@@ -686,7 +691,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "torque contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)",
   "lifecycle_status": "alpha",
@@ -712,7 +717,7 @@
   "units": "kg.m^2.s^-2"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.torque[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -752,7 +757,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width_error_index",
   "lifecycle_status": "alpha",
@@ -789,7 +794,7 @@
   "units": "s^-2"
  },
  "ntms.time_slice[:].mode[:].dfrequency_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt_error_index",
   "lifecycle_status": "alpha",
@@ -820,7 +825,7 @@
   "units": "rad/s"
  },
  "ntms.time_slice[:].mode[:].dphase_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt_error_index",
   "lifecycle_status": "alpha",
@@ -851,7 +856,7 @@
   "units": "m/s"
  },
  "ntms.time_slice[:].mode[:].dwidth_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt_error_index",
   "lifecycle_status": "alpha",
@@ -882,7 +887,7 @@
   "units": "Hz"
  },
  "ntms.time_slice[:].mode[:].frequency_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency_error_index",
   "lifecycle_status": "alpha",
@@ -919,7 +924,7 @@
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "NTM onset characteristics",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset",
   "lifecycle_status": "alpha",
@@ -955,7 +960,7 @@
   "units": "rad"
  },
  "ntms.time_slice[:].mode[:].onset.phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase_error_index",
   "lifecycle_status": "alpha",
@@ -986,7 +991,7 @@
   "units": "s"
  },
  "ntms.time_slice[:].mode[:].onset.time_offset_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_offset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset_error_index",
   "lifecycle_status": "alpha",
@@ -1017,7 +1022,7 @@
   "units": "s"
  },
  "ntms.time_slice[:].mode[:].onset.time_onset_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_onset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset_error_index",
   "lifecycle_status": "alpha",
@@ -1048,7 +1053,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].mode[:].onset.width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width_error_index",
   "lifecycle_status": "alpha",
@@ -1079,7 +1084,7 @@
   "units": "rad"
  },
  "ntms.time_slice[:].mode[:].phase_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase_error_index",
   "lifecycle_status": "alpha",
@@ -1110,7 +1115,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].mode[:].rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1141,7 +1146,7 @@
   "units": "-"
  },
  "ntms.time_slice[:].mode[:].rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1167,7 +1172,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "torque contributions to the Rutherford equation",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)",
   "lifecycle_status": "alpha",
@@ -1190,7 +1195,7 @@
   "units": "kg.m^2.s^-2"
  },
  "ntms.time_slice[:].mode[:].torque[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -1221,7 +1226,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].mode[:].width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width_error_index",
   "lifecycle_status": "alpha",
@@ -1244,7 +1249,7 @@
   "units": "m"
  },
  "ntms.time_slice[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "ntms/time_slice(itime)/time",
   "lifecycle_status": "alpha",
@@ -1252,7 +1257,7 @@
   "units": "s"
  },
  "ntms.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "ntms/vacuum_toroidal_field",
   "lifecycle_status": "alpha",
@@ -1271,7 +1276,7 @@
   "units": "T"
  },
  "ntms.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "ntms/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -1310,7 +1315,7 @@
   "units": "m"
  },
  "ntms.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "ntms/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

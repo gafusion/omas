@@ -6,8 +6,6 @@ OMFIT classes and plotting
 How to generate ODSs from OMFITclasses, and use OMAS plot methods
 """
 
-from __future__ import print_function, division, unicode_literals
-
 from matplotlib.pyplot import show
 
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc

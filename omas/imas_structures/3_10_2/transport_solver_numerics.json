@@ -10,7 +10,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary conditions of the radial transport equations for various time slices. To be removed when the solver_1d structure is finalized.",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)",
   "lifecycle_status": "alpha",
@@ -18,7 +18,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the current diffusion equation.",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/current",
   "lifecycle_status": "alpha"
@@ -27,7 +27,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: poloidal flux; 2: ip; 3: loop voltage; 4: undefined; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/current/identifier",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].current.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/current/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -98,7 +98,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].current.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/current/value_error_index",
   "lifecycle_status": "alpha",
@@ -127,7 +127,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons",
   "lifecycle_status": "alpha"
@@ -136,7 +136,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the electron energy equation (temperature if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/energy",
   "lifecycle_status": "alpha",
@@ -147,7 +147,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/energy/identifier",
   "lifecycle_status": "alpha",
@@ -184,7 +184,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].electrons.energy.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/energy/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -218,7 +218,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].electrons.energy.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/energy/value_error_index",
   "lifecycle_status": "alpha",
@@ -250,7 +250,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the electron density equation (density if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/particles",
   "lifecycle_status": "alpha",
@@ -261,7 +261,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/particles/identifier",
   "lifecycle_status": "alpha",
@@ -298,7 +298,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].electrons.particles.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/particles/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -332,7 +332,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].electrons.particles.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/electrons/particles/value_error_index",
   "lifecycle_status": "alpha",
@@ -364,7 +364,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the ion total (sum over ion species) energy equation (temperature if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/energy_ion_total",
   "lifecycle_status": "alpha",
@@ -375,7 +375,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/energy_ion_total/identifier",
   "lifecycle_status": "alpha",
@@ -412,7 +412,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].energy_ion_total.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/energy_ion_total/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -446,7 +446,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].energy_ion_total.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/energy_ion_total/value_error_index",
   "lifecycle_status": "alpha",
@@ -478,7 +478,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)",
   "lifecycle_status": "alpha",
@@ -493,7 +493,7 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/a_error_index",
   "lifecycle_status": "alpha",
@@ -519,7 +519,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the ion energy equation (temperature if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/energy",
   "lifecycle_status": "alpha",
@@ -530,7 +530,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/energy/identifier",
   "lifecycle_status": "alpha",
@@ -567,7 +567,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].energy.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/energy/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -601,7 +601,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].energy.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/energy/value_error_index",
   "lifecycle_status": "alpha",
@@ -647,7 +647,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the ion density equation (density if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/particles",
   "lifecycle_status": "alpha",
@@ -658,7 +658,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/particles/identifier",
   "lifecycle_status": "alpha",
@@ -695,7 +695,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].particles.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/particles/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -729,7 +729,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].particles.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/particles/value_error_index",
   "lifecycle_status": "alpha",
@@ -761,7 +761,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)",
   "lifecycle_status": "alpha",
@@ -778,7 +778,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the charge state energy equation (temperature if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/energy",
   "lifecycle_status": "alpha",
@@ -789,7 +789,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/energy/identifier",
   "lifecycle_status": "alpha",
@@ -826,7 +826,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].energy.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/energy/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -860,7 +860,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].energy.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/energy/value_error_index",
   "lifecycle_status": "alpha",
@@ -903,7 +903,7 @@
   "type": "constant"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/neutral_type",
   "lifecycle_status": "alpha"
@@ -933,7 +933,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the charge state density equation (density if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/particles",
   "lifecycle_status": "alpha",
@@ -944,7 +944,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_1d[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/particles/identifier",
   "lifecycle_status": "alpha",
@@ -981,7 +981,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].particles.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/particles/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1015,7 +1015,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].particles.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/particles/value_error_index",
   "lifecycle_status": "alpha",
@@ -1052,7 +1052,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -1090,7 +1090,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -1121,7 +1121,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/state(i2)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -1152,7 +1152,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -1183,7 +1183,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].ion[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/ion(i1)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -1209,7 +1209,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Boundary condition for the total plasma toroidal momentum equation (summed over ion species and electrons) (momentum if ID = 1) ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/momentum_tor",
   "lifecycle_status": "alpha",
@@ -1220,7 +1220,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. ID = 1: value of the field y; 2: radial derivative of the field (-dy/drho_tor); 3: scale length of the field y/(-dy/drho_tor); 4: flux; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; ",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/momentum_tor/identifier",
   "lifecycle_status": "alpha",
@@ -1257,7 +1257,7 @@
   "units": "-"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].momentum_tor.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/momentum_tor/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1291,7 +1291,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].momentum_tor.value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/momentum_tor/value_error_index",
   "lifecycle_status": "alpha",
@@ -1320,7 +1320,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/boundary_conditions_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -1331,7 +1331,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary conditions of the transport equations, provided on the GGD, for various time slices",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)",
   "lifecycle_status": "alpha",
@@ -1342,7 +1342,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the current diffusion equation, on various grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/current(i1)",
   "lifecycle_status": "alpha",
@@ -1366,7 +1366,7 @@
   "coordinates": [
    "transport_solver_numerics.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/current(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1407,7 +1407,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].current[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/current(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1438,7 +1438,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons",
   "lifecycle_status": "alpha"
@@ -1447,7 +1447,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the electron energy equation (temperature if ID = 1), on various grid subsets ",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/energy(i1)",
   "lifecycle_status": "alpha",
@@ -1472,7 +1472,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/energy(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1513,7 +1513,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].electrons.energy[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/energy(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1547,7 +1547,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the electron density equation (density if ID = 1), on various grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/particles(i1)",
   "lifecycle_status": "alpha",
@@ -1572,7 +1572,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/particles(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1613,7 +1613,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].electrons.particles[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/electrons/particles(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1644,7 +1644,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid",
   "lifecycle_status": "alpha"
@@ -1653,7 +1653,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)",
   "lifecycle_status": "alpha",
@@ -1663,7 +1663,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/base(i2)",
   "lifecycle_status": "alpha",
@@ -1681,7 +1681,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/base(i2)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1723,7 +1723,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/base(i2)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1769,7 +1769,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/base(i2)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1812,7 +1812,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -1822,7 +1822,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/element(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -1850,7 +1850,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid subset identifier",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/identifier",
   "lifecycle_status": "alpha"
@@ -1877,7 +1877,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/metric",
   "lifecycle_status": "alpha"
@@ -1894,7 +1894,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1936,7 +1936,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1982,7 +1982,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/grid_subset(i1)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2015,7 +2015,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid identifier",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/identifier",
   "lifecycle_status": "alpha"
@@ -2045,7 +2045,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)",
   "lifecycle_status": "alpha",
@@ -2062,7 +2062,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/geometry_type",
   "lifecycle_status": "alpha"
@@ -2092,7 +2092,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/objects_per_dimension(i2)",
   "lifecycle_status": "alpha",
@@ -2102,7 +2102,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -2112,7 +2112,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)",
   "lifecycle_status": "alpha",
@@ -2147,7 +2147,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -2184,7 +2184,7 @@
   "units": "m^dimension"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -2220,7 +2220,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)",
   "lifecycle_status": "alpha",
@@ -2235,7 +2235,7 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2261,7 +2261,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the ion energy equation (temperature if ID = 1), on various grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/energy(i2)",
   "lifecycle_status": "alpha",
@@ -2286,7 +2286,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/energy(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -2327,7 +2327,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].energy[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/energy(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2375,7 +2375,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the ion density equation (density if ID = 1), on various grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/particles(i2)",
   "lifecycle_status": "alpha",
@@ -2400,7 +2400,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/particles(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -2441,7 +2441,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].particles[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/particles(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2475,7 +2475,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)",
   "lifecycle_status": "alpha",
@@ -2492,7 +2492,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the charge state energy equation (temperature if ID = 1), on various grid subsets ",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/energy(i3)",
   "lifecycle_status": "alpha",
@@ -2517,7 +2517,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/energy(i3)/identifier",
   "lifecycle_status": "alpha",
@@ -2558,7 +2558,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].energy[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/energy(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2603,7 +2603,7 @@
   "type": "constant"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/neutral_type",
   "lifecycle_status": "alpha"
@@ -2633,7 +2633,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Boundary condition for the charge state density equation (density if ID = 1), on various grid subsets",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/particles(i3)",
   "lifecycle_status": "alpha",
@@ -2658,7 +2658,7 @@
   "coordinates": [
    "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition type. List of options TBD.",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/particles(i3)/identifier",
   "lifecycle_status": "alpha",
@@ -2699,7 +2699,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].particles[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/particles(i3)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2738,7 +2738,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -2776,7 +2776,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -2807,7 +2807,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/state(i2)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -2838,7 +2838,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -2869,7 +2869,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].ion[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/ion(i1)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2892,7 +2892,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/boundary_conditions_ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -2900,7 +2900,7 @@
   "units": "s"
  },
  "transport_solver_numerics.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "transport_solver_numerics/code",
   "lifecycle_status": "alpha"
@@ -2951,7 +2951,7 @@
   "type": "constant"
  },
  "transport_solver_numerics.convergence": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details To be removed when the solver_1d structure is finalized.",
   "full_path": "transport_solver_numerics/convergence",
   "lifecycle_status": "alpha"
@@ -2960,7 +2960,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Convergence details of the transport equations, for various time slices",
   "full_path": "transport_solver_numerics/convergence/equations(itime)",
   "lifecycle_status": "alpha",
@@ -2968,7 +2968,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.convergence.equations[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the current diffusion equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/current",
   "lifecycle_status": "alpha"
@@ -2981,7 +2981,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.convergence.equations[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/electrons",
   "lifecycle_status": "alpha"
@@ -2990,7 +2990,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the electron energy equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/electrons/energy",
   "lifecycle_status": "alpha",
@@ -3008,7 +3008,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the electron density equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/electrons/particles",
   "lifecycle_status": "alpha",
@@ -3026,7 +3026,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the ion total (sum over ion species) energy equation ",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/energy_ion_total",
   "lifecycle_status": "alpha",
@@ -3044,7 +3044,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)",
   "lifecycle_status": "alpha",
@@ -3059,7 +3059,7 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/a_error_index",
   "lifecycle_status": "alpha",
@@ -3085,7 +3085,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the ion energy equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/energy",
   "lifecycle_status": "alpha",
@@ -3117,7 +3117,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the  ion density equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/particles",
   "lifecycle_status": "alpha",
@@ -3135,7 +3135,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Convergence details of the related to the different states transport equations",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)",
   "lifecycle_status": "alpha",
@@ -3152,7 +3152,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the charge state energy equation ",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/energy",
   "lifecycle_status": "alpha",
@@ -3181,7 +3181,7 @@
   "type": "constant"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/neutral_type",
   "lifecycle_status": "alpha"
@@ -3211,7 +3211,7 @@
   "coordinates": [
    "transport_solver_numerics.convergence.equations[:].ion[:].grid.rho_tor_norm"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details of the charge state density equation",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/particles",
   "lifecycle_status": "alpha",
@@ -3234,7 +3234,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -3272,7 +3272,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -3303,7 +3303,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/state(i2)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -3334,7 +3334,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -3365,7 +3365,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].ion[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/ion(i1)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -3388,7 +3388,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.convergence.equations[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/convergence/equations(itime)/time",
   "lifecycle_status": "alpha",
@@ -3396,7 +3396,7 @@
   "units": "s"
  },
  "transport_solver_numerics.convergence.time_step": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)",
   "full_path": "transport_solver_numerics/convergence/time_step",
   "lifecycle_status": "alpha"
@@ -3413,7 +3413,7 @@
   "units": "s"
  },
  "transport_solver_numerics.convergence.time_step.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "transport_solver_numerics/convergence/time_step/data_error_index",
   "lifecycle_status": "alpha",
@@ -3445,7 +3445,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "transport_solver_numerics/convergence/time_step/time",
   "lifecycle_status": "alpha",
@@ -3455,7 +3455,7 @@
   "coordinates": [
    "transport_solver_numerics.derivatives_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Radial profiles derivatives for various time slices. To be removed when the solver_1d structure is finalized.",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)",
   "lifecycle_status": "alpha",
@@ -3463,7 +3463,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.derivatives_1d[:].d2_drho_tor_norm2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second derivatives of total ion quantities with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d2_drho_tor_norm2",
   "lifecycle_status": "alpha"
@@ -3480,7 +3480,7 @@
   "units": "-"
  },
  "transport_solver_numerics.derivatives_1d[:].d2_drho_tor_norm2.n_i_total_over_n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d2_drho_tor_norm2/n_i_total_over_n_e_error_index",
   "lifecycle_status": "alpha",
@@ -3520,7 +3520,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].d2_drho_tor_norm2.pressure_ion_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_ion_total\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d2_drho_tor_norm2/pressure_ion_total_error_index",
   "lifecycle_status": "alpha",
@@ -3560,7 +3560,7 @@
   "units": "Wb.m^-2"
  },
  "transport_solver_numerics.derivatives_1d[:].d2psi_drho_tor2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d2psi_drho_tor2\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d2psi_drho_tor2_error_index",
   "lifecycle_status": "alpha",
@@ -3589,7 +3589,7 @@
   "units": "Wb.m^-2"
  },
  "transport_solver_numerics.derivatives_1d[:].d_drho_tor_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives of total ion quantities with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_drho_tor_norm",
   "lifecycle_status": "alpha"
@@ -3606,7 +3606,7 @@
   "units": "-"
  },
  "transport_solver_numerics.derivatives_1d[:].d_drho_tor_norm.n_i_total_over_n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_drho_tor_norm/n_i_total_over_n_e_error_index",
   "lifecycle_status": "alpha",
@@ -3646,7 +3646,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].d_drho_tor_norm.pressure_ion_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_ion_total\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_drho_tor_norm/pressure_ion_total_error_index",
   "lifecycle_status": "alpha",
@@ -3675,7 +3675,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].d_dt": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives of total ion quantities with respect to time",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_dt",
   "lifecycle_status": "alpha"
@@ -3692,7 +3692,7 @@
   "units": "-"
  },
  "transport_solver_numerics.derivatives_1d[:].d_dt.n_i_total_over_n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_dt/n_i_total_over_n_e_error_index",
   "lifecycle_status": "alpha",
@@ -3732,7 +3732,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].d_dt.pressure_ion_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_ion_total\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_dt/pressure_ion_total_error_index",
   "lifecycle_status": "alpha",
@@ -3772,7 +3772,7 @@
   "units": "m^2.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].d_dvolume_drho_tor_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dvolume_drho_tor_dt\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/d_dvolume_drho_tor_dt_error_index",
   "lifecycle_status": "alpha",
@@ -3812,7 +3812,7 @@
   "units": "Wb.m^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].dpsi_drho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpsi_drho_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/dpsi_drho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -3863,7 +3863,7 @@
   "units": "V"
  },
  "transport_solver_numerics.derivatives_1d[:].dpsi_dt_cphi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpsi_dt_cphi\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/dpsi_dt_cphi_error_index",
   "lifecycle_status": "alpha",
@@ -3903,7 +3903,7 @@
   "units": "V"
  },
  "transport_solver_numerics.derivatives_1d[:].dpsi_dt_crho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpsi_dt_crho_tor_norm\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/dpsi_dt_crho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -3932,7 +3932,7 @@
   "units": "V"
  },
  "transport_solver_numerics.derivatives_1d[:].dpsi_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpsi_dt\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/dpsi_dt_error_index",
   "lifecycle_status": "alpha",
@@ -3972,7 +3972,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].drho_tor_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"drho_tor_dt\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/drho_tor_dt_error_index",
   "lifecycle_status": "alpha",
@@ -4001,13 +4001,13 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons",
   "lifecycle_status": "alpha"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2",
   "lifecycle_status": "alpha"
@@ -4024,7 +4024,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/density_error_index",
   "lifecycle_status": "alpha",
@@ -4064,7 +4064,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4104,7 +4104,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -4144,7 +4144,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -4184,7 +4184,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -4224,7 +4224,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -4264,7 +4264,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -4304,7 +4304,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d2_drho_tor_norm2.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d2_drho_tor_norm2/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4333,7 +4333,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm",
   "lifecycle_status": "alpha"
@@ -4350,7 +4350,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/density_error_index",
   "lifecycle_status": "alpha",
@@ -4390,7 +4390,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4430,7 +4430,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -4470,7 +4470,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -4510,7 +4510,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -4550,7 +4550,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -4590,7 +4590,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -4630,7 +4630,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_drho_tor_norm.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_drho_tor_norm/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4659,7 +4659,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to time",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt",
   "lifecycle_status": "alpha"
@@ -4676,7 +4676,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/density_error_index",
   "lifecycle_status": "alpha",
@@ -4716,7 +4716,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -4756,7 +4756,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -4796,7 +4796,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -4836,7 +4836,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -4876,7 +4876,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -4916,7 +4916,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -4956,7 +4956,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].electrons.d_dt.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/electrons/d_dt/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -4985,7 +4985,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid",
   "lifecycle_status": "alpha"
@@ -5002,7 +5002,7 @@
   "units": "m^2"
  },
  "transport_solver_numerics.derivatives_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -5042,7 +5042,7 @@
   "units": "Wb"
  },
  "transport_solver_numerics.derivatives_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -5082,7 +5082,7 @@
   "units": "m"
  },
  "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5122,7 +5122,7 @@
   "units": "-"
  },
  "transport_solver_numerics.derivatives_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -5162,7 +5162,7 @@
   "units": "m^3"
  },
  "transport_solver_numerics.derivatives_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -5194,7 +5194,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)",
   "lifecycle_status": "alpha",
@@ -5209,7 +5209,7 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/a_error_index",
   "lifecycle_status": "alpha",
@@ -5232,7 +5232,7 @@
   "units": "Atomic Mass Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2",
   "lifecycle_status": "alpha"
@@ -5249,7 +5249,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/density_error_index",
   "lifecycle_status": "alpha",
@@ -5289,7 +5289,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5329,7 +5329,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -5369,7 +5369,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -5409,7 +5409,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -5449,7 +5449,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -5489,7 +5489,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -5529,7 +5529,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d2_drho_tor_norm2.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d2_drho_tor_norm2/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5558,7 +5558,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm",
   "lifecycle_status": "alpha"
@@ -5575,7 +5575,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/density_error_index",
   "lifecycle_status": "alpha",
@@ -5615,7 +5615,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5655,7 +5655,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -5695,7 +5695,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -5735,7 +5735,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -5775,7 +5775,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -5815,7 +5815,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -5855,7 +5855,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_drho_tor_norm.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_drho_tor_norm/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -5884,7 +5884,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to time",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt",
   "lifecycle_status": "alpha"
@@ -5901,7 +5901,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/density_error_index",
   "lifecycle_status": "alpha",
@@ -5941,7 +5941,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -5981,7 +5981,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -6021,7 +6021,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6061,7 +6061,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -6101,7 +6101,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -6141,7 +6141,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -6181,7 +6181,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].d_dt.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/d_dt/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6227,14 +6227,14 @@
   "coordinates": [
    "1...N_charge_states"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Second derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2",
   "lifecycle_status": "alpha"
@@ -6251,7 +6251,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/density_error_index",
   "lifecycle_status": "alpha",
@@ -6291,7 +6291,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6331,7 +6331,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -6371,7 +6371,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6411,7 +6411,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -6451,7 +6451,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -6491,7 +6491,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -6531,7 +6531,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d2_drho_tor_norm2.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d2_drho_tor_norm2/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6560,7 +6560,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to the normalised toroidal flux",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm",
   "lifecycle_status": "alpha"
@@ -6577,7 +6577,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/density_error_index",
   "lifecycle_status": "alpha",
@@ -6617,7 +6617,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6657,7 +6657,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -6697,7 +6697,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -6737,7 +6737,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -6777,7 +6777,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -6817,7 +6817,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -6857,7 +6857,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_drho_tor_norm.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_drho_tor_norm/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -6886,7 +6886,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Derivatives with respect to time",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt",
   "lifecycle_status": "alpha"
@@ -6903,7 +6903,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/density_error_index",
   "lifecycle_status": "alpha",
@@ -6943,7 +6943,7 @@
   "units": "m^-3"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.density_fast_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/density_fast_error_index",
   "lifecycle_status": "alpha",
@@ -6983,7 +6983,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.pressure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/pressure_error_index",
   "lifecycle_status": "alpha",
@@ -7023,7 +7023,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.pressure_fast_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/pressure_fast_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -7063,7 +7063,7 @@
   "units": "Pa"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.pressure_fast_perpendicular_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/pressure_fast_perpendicular_error_index",
   "lifecycle_status": "alpha",
@@ -7103,7 +7103,7 @@
   "units": "eV"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -7143,7 +7143,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.velocity_pol_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/velocity_pol_error_index",
   "lifecycle_status": "alpha",
@@ -7183,7 +7183,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].d_dt.velocity_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/d_dt/velocity_tor_error_index",
   "lifecycle_status": "alpha",
@@ -7233,7 +7233,7 @@
   "type": "constant"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/neutral_type",
   "lifecycle_status": "alpha"
@@ -7268,7 +7268,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -7306,7 +7306,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -7337,7 +7337,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/state(i2)/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -7368,7 +7368,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -7399,7 +7399,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/ion(i1)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -7422,7 +7422,7 @@
   "units": "Elementary Charge Unit"
  },
  "transport_solver_numerics.derivatives_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/derivatives_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -7430,7 +7430,7 @@
   "units": "s"
  },
  "transport_solver_numerics.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "transport_solver_numerics/ids_properties",
   "lifecycle_status": "alpha"
@@ -7449,8 +7449,13 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "transport_solver_numerics.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "transport_solver_numerics.ids_properties.occurrence"
+ },
  "transport_solver_numerics.primary_coordinate": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Primary coordinate system with which the transport equations are solved. For a 1D transport solver: index = 1 means rho_tor_norm; 2 = rho_tor.",
   "full_path": "transport_solver_numerics/primary_coordinate",
   "lifecycle_status": "alpha"
@@ -7480,7 +7485,7 @@
   "coordinates": [
    "transport_solver_numerics.restart_files[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of code-specific restart files for a given time slice. These files are managed by a physical application to ensure its restart during long simulations",
   "full_path": "transport_solver_numerics/restart_files(itime)",
   "lifecycle_status": "alpha",
@@ -7508,7 +7513,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.restart_files[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/restart_files(itime)/time",
   "lifecycle_status": "alpha",
@@ -7516,7 +7521,7 @@
   "units": "s"
  },
  "transport_solver_numerics.solver": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Solver identifier",
   "full_path": "transport_solver_numerics/solver",
   "lifecycle_status": "alpha"
@@ -7546,7 +7551,7 @@
   "coordinates": [
    "transport_solver_numerics.solver_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Numerics related to 1D radial solver, for various time slices.",
   "full_path": "transport_solver_numerics/solver_1d(itime)",
   "lifecycle_status": "alpha",
@@ -7565,7 +7570,7 @@
   "units": "m^2.s^-1"
  },
  "transport_solver_numerics.solver_1d[:].d_dvolume_drho_tor_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dvolume_drho_tor_dt\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/d_dvolume_drho_tor_dt_error_index",
   "lifecycle_status": "alpha",
@@ -7605,7 +7610,7 @@
   "units": "m.s^-1"
  },
  "transport_solver_numerics.solver_1d[:].drho_tor_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"drho_tor_dt\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/drho_tor_dt_error_index",
   "lifecycle_status": "alpha",
@@ -7637,7 +7642,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of transport equations",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)",
   "lifecycle_status": "alpha",
@@ -7647,14 +7652,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of boundary conditions of the transport equation",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the boundary condition",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/identifier",
   "lifecycle_status": "alpha",
@@ -7690,7 +7695,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].position_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"position\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/position_error_index",
   "lifecycle_status": "alpha",
@@ -7713,7 +7718,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "transport_solver_numerics/transport_solver_numerics_solver_io_equation_boundary_identifier.xml",
   "documentation": "Boundary condition type\n0) Not solved : Equation is not solved\n1) Value : Boundary condition is the value of the equation's primary quantity\n2) Derivative/Ip : Boundary condition is the radial derivative of the equation's primary quantity, or the plasma current for the current diffusion equation\n3) E-folding length/Vloop : Boundary condition is the e-folding length of the equation's primary quantity, or the loop voltage for the current diffusion equation\n4) Flux : Boundary condition is the flux of the equation's primary quantity\n5) Combination : Boundary condition is a linear combination of radial derivative and value of the flux of the equation's primary quantity, in the form a1.y' + a2.y = a3",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/type",
@@ -7753,7 +7758,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].boundary_condition[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/boundary_condition(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -7785,7 +7790,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of numerical coefficients involved in the transport equation",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/coefficient(i2)",
   "lifecycle_status": "alpha",
@@ -7803,7 +7808,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].coefficient[:].profile_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"profile\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/coefficient(i2)/profile_error_index",
   "lifecycle_status": "alpha",
@@ -7832,7 +7837,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].control_parameters": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Solver-specific input or output quantities",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/control_parameters",
   "lifecycle_status": "alpha"
@@ -7841,7 +7846,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of integer type scalar control parameters",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/control_parameters/integer(i2)",
   "lifecycle_status": "alpha",
@@ -7856,7 +7861,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].control_parameters.integer[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/control_parameters/integer(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -7882,7 +7887,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of real type scalar control parameters",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/control_parameters/real(i2)",
   "lifecycle_status": "alpha",
@@ -7897,7 +7902,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].control_parameters.real[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/control_parameters/real(i2)/value_error_index",
   "lifecycle_status": "alpha",
@@ -7920,7 +7925,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].convergence": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Convergence details",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/convergence",
   "lifecycle_status": "alpha"
@@ -7933,7 +7938,7 @@
   "type": "dynamic"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Profile and derivatives of the primary quantity of the transport equation",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity",
   "lifecycle_status": "alpha"
@@ -7950,7 +7955,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.d2_dr2_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d2_dr2\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/d2_dr2_error_index",
   "lifecycle_status": "alpha",
@@ -7990,7 +7995,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.d_dr_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dr\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/d_dr_error_index",
   "lifecycle_status": "alpha",
@@ -8041,7 +8046,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.d_dt_cphi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dt_cphi\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/d_dt_cphi_error_index",
   "lifecycle_status": "alpha",
@@ -8081,7 +8086,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.d_dt_cr_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dt_cr\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/d_dt_cr_error_index",
   "lifecycle_status": "alpha",
@@ -8110,7 +8115,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.d_dt_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d_dt\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/d_dt_error_index",
   "lifecycle_status": "alpha",
@@ -8139,7 +8144,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier of the primary quantity of the transport equation. The description node contains the path to the quantity in the physics IDS (example:\ncore_profiles/profiles_1d/ion(1)/density)",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/identifier",
   "lifecycle_status": "alpha"
@@ -8177,7 +8182,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].equation[:].primary_quantity.profile_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"profile\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/equation(i1)/primary_quantity/profile_error_index",
   "lifecycle_status": "alpha",
@@ -8206,7 +8211,7 @@
   "units": "mixed"
  },
  "transport_solver_numerics.solver_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid",
   "lifecycle_status": "alpha"
@@ -8223,7 +8228,7 @@
   "units": "m^2"
  },
  "transport_solver_numerics.solver_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -8263,7 +8268,7 @@
   "units": "Wb"
  },
  "transport_solver_numerics.solver_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -8303,7 +8308,7 @@
   "units": "m"
  },
  "transport_solver_numerics.solver_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -8343,7 +8348,7 @@
   "units": "-"
  },
  "transport_solver_numerics.solver_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -8383,7 +8388,7 @@
   "units": "m^3"
  },
  "transport_solver_numerics.solver_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "transport_solver_numerics/solver_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -8412,7 +8417,7 @@
   "units": "m^3"
  },
  "transport_solver_numerics.solver_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "transport_solver_numerics/solver_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -8423,14 +8428,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "transport_solver_numerics/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "transport_solver_numerics.time_step": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)",
   "full_path": "transport_solver_numerics/time_step",
   "lifecycle_status": "alpha"
@@ -8447,7 +8452,7 @@
   "units": "s"
  },
  "transport_solver_numerics.time_step.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "transport_solver_numerics/time_step/data_error_index",
   "lifecycle_status": "alpha",
@@ -8479,14 +8484,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "transport_solver_numerics/time_step/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "transport_solver_numerics.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)",
   "full_path": "transport_solver_numerics/vacuum_toroidal_field",
   "lifecycle_status": "alpha"
@@ -8503,7 +8508,7 @@
   "units": "T"
  },
  "transport_solver_numerics.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "transport_solver_numerics/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -8540,7 +8545,7 @@
   "units": "m"
  },
  "transport_solver_numerics.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "transport_solver_numerics/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

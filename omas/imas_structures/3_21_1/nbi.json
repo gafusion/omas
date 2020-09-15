@@ -8,7 +8,7 @@
   "maxoccur": "3"
  },
  "nbi.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "nbi/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "nbi.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "nbi/ids_properties",
   "lifecycle_status": "alpha",
@@ -88,6 +88,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "nbi.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "nbi.ids_properties.occurrence"
+ },
  "nbi.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -106,7 +111,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "nbi/time(:)",
   "lifecycle_status": "alpha",
@@ -118,7 +123,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "The NBI system is described as a set of units of which the power can be controlled individually.",
   "full_path": "nbi/unit(i1)",
   "lifecycle_status": "alpha",
@@ -130,7 +135,7 @@
    "1...3",
    "nbi.unit[:].beam_current_fraction.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
   "full_path": "nbi/unit(i1)/beam_current_fraction",
   "lifecycle_status": "alpha",
@@ -151,7 +156,7 @@
   "units": "-"
  },
  "nbi.unit[:].beam_current_fraction.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "nbi/unit(i1)/beam_current_fraction/data_error_index",
   "lifecycle_status": "alpha",
@@ -187,7 +192,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "nbi/unit(i1)/beam_current_fraction/time(:)",
   "lifecycle_status": "alpha",
@@ -200,7 +205,7 @@
    "1...3",
    "nbi.unit[:].beam_power_fraction.time"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)",
   "full_path": "nbi/unit(i1)/beam_power_fraction",
   "lifecycle_status": "alpha",
@@ -221,7 +226,7 @@
   "units": "-"
  },
  "nbi.unit[:].beam_power_fraction.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "nbi/unit(i1)/beam_power_fraction/data_error_index",
   "lifecycle_status": "alpha",
@@ -257,7 +262,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "nbi/unit(i1)/beam_power_fraction/time(:)",
   "lifecycle_status": "alpha",
@@ -269,7 +274,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)",
   "lifecycle_status": "alpha",
@@ -285,7 +290,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].angle_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angle\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/angle_error_index",
   "lifecycle_status": "alpha",
@@ -308,7 +313,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].beamlets": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Detailed information on beamlets",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets",
   "lifecycle_status": "alpha",
@@ -326,7 +331,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.angles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angles\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/angles_error_index",
   "lifecycle_status": "alpha",
@@ -355,7 +360,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.positions": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of each beamlet",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions",
   "lifecycle_status": "alpha",
@@ -373,7 +378,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.positions.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/phi_error_index",
   "lifecycle_status": "alpha",
@@ -413,7 +418,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.positions.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/r_error_index",
   "lifecycle_status": "alpha",
@@ -453,7 +458,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.positions.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/positions/z_error_index",
   "lifecycle_status": "alpha",
@@ -493,7 +498,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.power_fractions_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_fractions\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/power_fractions_error_index",
   "lifecycle_status": "alpha",
@@ -533,7 +538,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].beamlets.tangency_radii_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tangency_radii\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/beamlets/tangency_radii_error_index",
   "lifecycle_status": "alpha",
@@ -572,7 +577,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Detailed information on beamlet divergence. Divergence is described as a superposition of Gaussian components with amplitide \"particles_fraction\" and vertical/horizontal divergence. Note that for positive ion NBI the divergence is well described by a single Gaussian",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)",
   "lifecycle_status": "alpha",
@@ -588,7 +593,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].divergence_component[:].horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"horizontal\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -619,7 +624,7 @@
   "units": "-"
  },
  "nbi.unit[:].beamlets_group[:].divergence_component[:].particles_fraction_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_fraction\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/particles_fraction_error_index",
   "lifecycle_status": "alpha",
@@ -650,7 +655,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].divergence_component[:].vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vertical\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/divergence_component(i3)/vertical_error_index",
   "lifecycle_status": "alpha",
@@ -673,7 +678,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].focus": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Describes how the beamlet group is focused",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus",
   "lifecycle_status": "alpha",
@@ -688,7 +693,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].focus.focal_length_horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"focal_length_horizontal\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -719,7 +724,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].focus.focal_length_vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"focal_length_vertical\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/focal_length_vertical_error_index",
   "lifecycle_status": "alpha",
@@ -750,7 +755,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width_min_horizontal\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -781,7 +786,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].focus.width_min_vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width_min_vertical\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical_error_index",
   "lifecycle_status": "alpha",
@@ -804,7 +809,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "R, Z, Phi position of the beamlet group centre",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/position",
   "lifecycle_status": "alpha",
@@ -819,7 +824,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -850,7 +855,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -881,7 +886,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -912,7 +917,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].tangency_radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tangency_radius\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tangency_radius_error_index",
   "lifecycle_status": "alpha",
@@ -938,7 +943,7 @@
   "coordinates": [
    "nbi.unit[:].beamlets_group[:].tilting[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "In case of dynamic beam tilting (i.e. during the pulse), e.g. for some Beam Emission Spectroscopy use cases, variations of position, tangency radius and angle with respect to their static value, for various time slices",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)",
   "lifecycle_status": "alpha",
@@ -955,7 +960,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_angle\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_angle_error_index",
   "lifecycle_status": "alpha",
@@ -978,7 +983,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Variation of the position of the beamlet group centre",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position",
   "lifecycle_status": "alpha",
@@ -993,7 +998,7 @@
   "units": "rad"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -1024,7 +1029,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/r_error_index",
   "lifecycle_status": "alpha",
@@ -1055,7 +1060,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_position/z_error_index",
   "lifecycle_status": "alpha",
@@ -1086,7 +1091,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_tangency_radius_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_tangency_radius\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/delta_tangency_radius_error_index",
   "lifecycle_status": "alpha",
@@ -1109,7 +1114,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/tilting(itime)/time",
   "lifecycle_status": "alpha",
@@ -1125,7 +1130,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].width_horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width_horizontal\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -1156,7 +1161,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].width_vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width_vertical\"",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical_error_index",
   "lifecycle_status": "alpha",
@@ -1179,7 +1184,7 @@
   "units": "m"
  },
  "nbi.unit[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Full energy of the injected species (acceleration of a single atom)",
   "full_path": "nbi/unit(i1)/energy",
   "lifecycle_status": "alpha",
@@ -1199,7 +1204,7 @@
   "units": "eV"
  },
  "nbi.unit[:].energy.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "nbi/unit(i1)/energy/data_error_index",
   "lifecycle_status": "alpha",
@@ -1233,7 +1238,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "nbi/unit(i1)/energy/time(:)",
   "lifecycle_status": "alpha",
@@ -1256,7 +1261,7 @@
   "type": "static"
  },
  "nbi.unit[:].power_launched": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Power launched from this unit into the vacuum vessel",
   "full_path": "nbi/unit(i1)/power_launched",
   "lifecycle_status": "alpha",
@@ -1276,7 +1281,7 @@
   "units": "W"
  },
  "nbi.unit[:].power_launched.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "nbi/unit(i1)/power_launched/data_error_index",
   "lifecycle_status": "alpha",
@@ -1310,7 +1315,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "nbi/unit(i1)/power_launched/time(:)",
   "lifecycle_status": "alpha",
@@ -1319,7 +1324,7 @@
   "units": "s"
  },
  "nbi.unit[:].species": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Injected species",
   "full_path": "nbi/unit(i1)/species",
   "lifecycle_status": "alpha",
@@ -1334,7 +1339,7 @@
   "units": "Atomic Mass Unit"
  },
  "nbi.unit[:].species.a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "nbi/unit(i1)/species/a_error_index",
   "lifecycle_status": "alpha",
@@ -1372,7 +1377,7 @@
   "units": "Elementary Charge Unit"
  },
  "nbi.unit[:].species.z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "nbi/unit(i1)/species/z_n_error_index",
   "lifecycle_status": "alpha",

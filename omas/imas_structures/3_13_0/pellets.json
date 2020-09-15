@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "pellets.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "pellets/code",
   "lifecycle_status": "alpha"
@@ -59,7 +59,7 @@
   "type": "constant"
  },
  "pellets.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "pellets/ids_properties",
   "lifecycle_status": "alpha"
@@ -78,11 +78,16 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pellets.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "pellets.ids_properties.occurrence"
+ },
  "pellets.time": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "pellets/time",
   "lifecycle_status": "alpha",
@@ -92,7 +97,7 @@
   "coordinates": [
    "pellets.time_slice[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Description of the pellets launched at various time slices. The time of this structure corresponds to the full ablation of the pellet inside the plasma.",
   "full_path": "pellets/time_slice(itime)",
   "lifecycle_status": "alpha",
@@ -103,20 +108,20 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of pellets ablated in the plasma at a given time",
   "full_path": "pellets/time_slice(itime)/pellet(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded"
  },
  "pellets.time_slice[:].pellet[:].path_geometry": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Geometry of the pellet path in the vaccuum chamber",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry",
   "lifecycle_status": "alpha"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.first_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the first point",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/first_point",
   "lifecycle_status": "alpha"
@@ -130,7 +135,7 @@
   "units": "rad"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.first_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/first_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -161,7 +166,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.first_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/first_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -192,7 +197,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.first_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/first_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -215,7 +220,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.second_point": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the second point",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/second_point",
   "lifecycle_status": "alpha"
@@ -229,7 +234,7 @@
   "units": "rad"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.second_point.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/second_point/phi_error_index",
   "lifecycle_status": "alpha",
@@ -260,7 +265,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.second_point.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/second_point/r_error_index",
   "lifecycle_status": "alpha",
@@ -291,7 +296,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_geometry.second_point.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_geometry/second_point/z_error_index",
   "lifecycle_status": "alpha",
@@ -314,7 +319,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_profiles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "1-D profiles of plasma and pellet along the pellet path ",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles",
   "lifecycle_status": "alpha"
@@ -331,7 +336,7 @@
   "units": "-"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.ablated_particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ablated_particles\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/ablated_particles_error_index",
   "lifecycle_status": "alpha",
@@ -371,7 +376,7 @@
   "units": "s^-1"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.ablation_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ablation_rate\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/ablation_rate_error_index",
   "lifecycle_status": "alpha",
@@ -411,7 +416,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.distance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"distance\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/distance_error_index",
   "lifecycle_status": "alpha",
@@ -451,7 +456,7 @@
   "units": "m^-3"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/n_e_error_index",
   "lifecycle_status": "alpha",
@@ -480,7 +485,7 @@
   "units": "m^-3"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.position": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position along the pellet path",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/position",
   "lifecycle_status": "alpha"
@@ -497,7 +502,7 @@
   "units": "rad"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.position.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/position/phi_error_index",
   "lifecycle_status": "alpha",
@@ -537,7 +542,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.position.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/position/r_error_index",
   "lifecycle_status": "alpha",
@@ -577,7 +582,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.position.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/position/z_error_index",
   "lifecycle_status": "alpha",
@@ -617,7 +622,7 @@
   "units": "Wb"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/psi_error_index",
   "lifecycle_status": "alpha",
@@ -668,7 +673,7 @@
   "units": "-"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.rho_tor_norm_drift_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm_drift\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/rho_tor_norm_drift_error_index",
   "lifecycle_status": "alpha",
@@ -697,7 +702,7 @@
   "units": "-"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -737,7 +742,7 @@
   "units": "eV"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.t_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/t_e_error_index",
   "lifecycle_status": "alpha",
@@ -777,7 +782,7 @@
   "units": "m.s^-1"
  },
  "pellets.time_slice[:].pellet[:].path_profiles.velocity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/path_profiles/velocity_error_index",
   "lifecycle_status": "alpha",
@@ -806,7 +811,7 @@
   "units": "m.s^-1"
  },
  "pellets.time_slice[:].pellet[:].shape": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Initial shape of a pellet at launch",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/shape",
   "lifecycle_status": "alpha"
@@ -823,7 +828,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].shape.size_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"size\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/shape/size_error_index",
   "lifecycle_status": "alpha",
@@ -852,7 +857,7 @@
   "units": "m"
  },
  "pellets.time_slice[:].pellet[:].shape.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Identifier structure for the shape type: 1-spherical; 2-cylindrical; 3-rectangular",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/shape/type",
   "lifecycle_status": "alpha",
@@ -883,7 +888,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of species included in the pellet composition",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)",
   "lifecycle_status": "alpha",
@@ -898,7 +903,7 @@
   "units": "Atomic Mass Unit"
  },
  "pellets.time_slice[:].pellet[:].species[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -929,7 +934,7 @@
   "units": "-"
  },
  "pellets.time_slice[:].pellet[:].species[:].density_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/density_error_index",
   "lifecycle_status": "alpha",
@@ -960,7 +965,7 @@
   "units": "-"
  },
  "pellets.time_slice[:].pellet[:].species[:].fraction_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fraction\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/fraction_error_index",
   "lifecycle_status": "alpha",
@@ -998,7 +1003,7 @@
   "units": "eV"
  },
  "pellets.time_slice[:].pellet[:].species[:].sublimation_energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sublimation_energy\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/sublimation_energy_error_index",
   "lifecycle_status": "alpha",
@@ -1029,7 +1034,7 @@
   "units": "Elementary Charge Unit"
  },
  "pellets.time_slice[:].pellet[:].species[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -1060,7 +1065,7 @@
   "units": "m.s^-1"
  },
  "pellets.time_slice[:].pellet[:].velocity_initial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_initial\"",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/velocity_initial_error_index",
   "lifecycle_status": "alpha",
@@ -1083,7 +1088,7 @@
   "units": "m.s^-1"
  },
  "pellets.time_slice[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "pellets/time_slice(itime)/time",
   "lifecycle_status": "alpha",

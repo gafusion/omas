@@ -8,7 +8,7 @@
   "maxoccur": "6"
  },
  "temporary.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "temporary/code",
   "lifecycle_status": "alpha",
@@ -63,7 +63,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 0D float",
   "full_path": "temporary/constant_float0d(i1)",
   "lifecycle_status": "alpha",
@@ -72,7 +72,7 @@
   "units": "mixed"
  },
  "temporary.constant_float0d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float0d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -108,7 +108,7 @@
   "units": "-"
  },
  "temporary.constant_float0d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float0d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -134,7 +134,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 1D float",
   "full_path": "temporary/constant_float1d(i1)",
   "lifecycle_status": "alpha",
@@ -143,7 +143,7 @@
   "units": "mixed"
  },
  "temporary.constant_float1d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float1d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -182,7 +182,7 @@
   "units": "-"
  },
  "temporary.constant_float1d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float1d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -214,7 +214,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 2D float",
   "full_path": "temporary/constant_float2d(i1)",
   "lifecycle_status": "alpha",
@@ -222,7 +222,7 @@
   "structure_reference": "temporary_constant_quantities_float_2d"
  },
  "temporary.constant_float2d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float2d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -262,7 +262,7 @@
   "units": "mixed"
  },
  "temporary.constant_float2d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float2d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -296,7 +296,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 3D float",
   "full_path": "temporary/constant_float3d(i1)",
   "lifecycle_status": "alpha",
@@ -304,7 +304,7 @@
   "structure_reference": "temporary_constant_quantities_float_3d"
  },
  "temporary.constant_float3d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float3d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -345,7 +345,7 @@
   "units": "mixed"
  },
  "temporary.constant_float3d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float3d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -381,7 +381,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 4D float",
   "full_path": "temporary/constant_float4d(i1)",
   "lifecycle_status": "alpha",
@@ -389,7 +389,7 @@
   "structure_reference": "temporary_constant_quantities_float_4d"
  },
  "temporary.constant_float4d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float4d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -431,7 +431,7 @@
   "units": "mixed"
  },
  "temporary.constant_float4d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float4d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -469,7 +469,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 5D float",
   "full_path": "temporary/constant_float5d(i1)",
   "lifecycle_status": "alpha",
@@ -477,7 +477,7 @@
   "structure_reference": "temporary_constant_quantities_float_5d"
  },
  "temporary.constant_float5d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float5d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -520,7 +520,7 @@
   "units": "mixed"
  },
  "temporary.constant_float5d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float5d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -560,7 +560,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 6D float",
   "full_path": "temporary/constant_float6d(i1)",
   "lifecycle_status": "alpha",
@@ -568,7 +568,7 @@
   "structure_reference": "temporary_constant_quantities_float_6d"
  },
  "temporary.constant_float6d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_float6d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -612,7 +612,7 @@
   "units": "mixed"
  },
  "temporary.constant_float6d[:].value_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "temporary/constant_float6d(i1)/value_error_index",
   "lifecycle_status": "alpha",
@@ -654,7 +654,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 0D integer",
   "full_path": "temporary/constant_integer0d(i1)",
   "lifecycle_status": "alpha",
@@ -662,7 +662,7 @@
   "structure_reference": "temporary_constant_quantities_int_0d"
  },
  "temporary.constant_integer0d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_integer0d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -700,7 +700,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 1D integer",
   "full_path": "temporary/constant_integer1d(i1)",
   "lifecycle_status": "alpha",
@@ -708,7 +708,7 @@
   "structure_reference": "temporary_constant_quantities_int_1d"
  },
  "temporary.constant_integer1d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_integer1d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -749,7 +749,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 2D integer",
   "full_path": "temporary/constant_integer2d(i1)",
   "lifecycle_status": "alpha",
@@ -757,7 +757,7 @@
   "structure_reference": "temporary_constant_quantities_int_2d"
  },
  "temporary.constant_integer2d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_integer2d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -800,7 +800,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 3D integer",
   "full_path": "temporary/constant_integer3d(i1)",
   "lifecycle_status": "alpha",
@@ -808,7 +808,7 @@
   "structure_reference": "temporary_constant_quantities_int_3d"
  },
  "temporary.constant_integer3d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_integer3d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -852,7 +852,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 0D string",
   "full_path": "temporary/constant_string0d(i1)",
   "lifecycle_status": "alpha",
@@ -860,7 +860,7 @@
   "structure_reference": "temporary_constant_quantities_string_0d"
  },
  "temporary.constant_string0d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_string0d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -898,7 +898,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Constant 1D string",
   "full_path": "temporary/constant_string1d(i1)",
   "lifecycle_status": "alpha",
@@ -906,7 +906,7 @@
   "structure_reference": "temporary_constant_quantities_string_1d"
  },
  "temporary.constant_string1d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/constant_string1d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -947,7 +947,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 1D float",
   "full_path": "temporary/dynamic_float1d(i1)",
   "lifecycle_status": "alpha",
@@ -955,7 +955,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_1d"
  },
  "temporary.dynamic_float1d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float1d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -983,7 +983,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float1d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float1d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1001,7 +1001,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float1d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float1d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1033,7 +1033,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float1d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1043,7 +1043,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 2D float",
   "full_path": "temporary/dynamic_float2d(i1)",
   "lifecycle_status": "alpha",
@@ -1051,7 +1051,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_2d"
  },
  "temporary.dynamic_float2d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float2d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1079,7 +1079,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float2d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float2d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1098,7 +1098,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float2d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float2d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1132,7 +1132,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float2d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1142,7 +1142,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 3D float",
   "full_path": "temporary/dynamic_float3d(i1)",
   "lifecycle_status": "alpha",
@@ -1150,7 +1150,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_3d"
  },
  "temporary.dynamic_float3d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float3d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1178,7 +1178,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float3d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float3d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1198,7 +1198,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float3d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float3d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1234,7 +1234,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float3d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1244,7 +1244,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 4D float",
   "full_path": "temporary/dynamic_float4d(i1)",
   "lifecycle_status": "alpha",
@@ -1252,7 +1252,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_4d"
  },
  "temporary.dynamic_float4d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float4d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1280,7 +1280,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float4d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float4d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1301,7 +1301,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float4d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float4d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1339,7 +1339,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float4d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1349,7 +1349,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 5D float",
   "full_path": "temporary/dynamic_float5d(i1)",
   "lifecycle_status": "alpha",
@@ -1357,7 +1357,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_5d"
  },
  "temporary.dynamic_float5d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float5d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1385,7 +1385,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float5d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float5d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1407,7 +1407,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float5d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float5d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1447,7 +1447,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float5d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1457,7 +1457,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 6D float",
   "full_path": "temporary/dynamic_float6d(i1)",
   "lifecycle_status": "alpha",
@@ -1465,7 +1465,7 @@
   "structure_reference": "temporary_dynamic_quantities_float_6d"
  },
  "temporary.dynamic_float6d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_float6d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1493,7 +1493,7 @@
   "type": "constant"
  },
  "temporary.dynamic_float6d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_float6d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1516,7 +1516,7 @@
   "units": "mixed"
  },
  "temporary.dynamic_float6d[:].value.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "temporary/dynamic_float6d(i1)/value/data_error_index",
   "lifecycle_status": "alpha",
@@ -1558,7 +1558,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_float6d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1568,7 +1568,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 1D integer",
   "full_path": "temporary/dynamic_integer1d(i1)",
   "lifecycle_status": "alpha",
@@ -1576,7 +1576,7 @@
   "structure_reference": "temporary_dynamic_quantities_int_1d"
  },
  "temporary.dynamic_integer1d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_integer1d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1604,7 +1604,7 @@
   "type": "constant"
  },
  "temporary.dynamic_integer1d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_integer1d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1625,7 +1625,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_integer1d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1635,7 +1635,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 2D integer",
   "full_path": "temporary/dynamic_integer2d(i1)",
   "lifecycle_status": "alpha",
@@ -1643,7 +1643,7 @@
   "structure_reference": "temporary_dynamic_quantities_int_2d"
  },
  "temporary.dynamic_integer2d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_integer2d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1671,7 +1671,7 @@
   "type": "constant"
  },
  "temporary.dynamic_integer2d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_integer2d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1693,7 +1693,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_integer2d(i1)/value/time",
   "lifecycle_status": "alpha",
@@ -1703,7 +1703,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Dynamic 3D integer",
   "full_path": "temporary/dynamic_integer3d(i1)",
   "lifecycle_status": "alpha",
@@ -1711,7 +1711,7 @@
   "structure_reference": "temporary_dynamic_quantities_int_3d"
  },
  "temporary.dynamic_integer3d[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the quantity using the standard identifier structure",
   "full_path": "temporary/dynamic_integer3d(i1)/identifier",
   "lifecycle_status": "alpha",
@@ -1739,7 +1739,7 @@
   "type": "constant"
  },
  "temporary.dynamic_integer3d[:].value": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Value",
   "full_path": "temporary/dynamic_integer3d(i1)/value",
   "lifecycle_status": "alpha",
@@ -1762,14 +1762,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/dynamic_integer3d(i1)/value/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "temporary.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "temporary/ids_properties",
   "lifecycle_status": "alpha",
@@ -1796,6 +1796,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "temporary.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "temporary.ids_properties.occurrence"
+ },
  "temporary.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1814,7 +1819,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "temporary/time",
   "lifecycle_status": "alpha",

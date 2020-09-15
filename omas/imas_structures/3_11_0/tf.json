@@ -7,7 +7,7 @@
   "maxoccur": "3"
  },
  "tf.b_field_tor_vacuum_r": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above",
   "full_path": "tf/b_field_tor_vacuum_r",
   "lifecycle_status": "alpha"
@@ -24,7 +24,7 @@
   "units": "T.m"
  },
  "tf.b_field_tor_vacuum_r.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "tf/b_field_tor_vacuum_r/data_error_index",
   "lifecycle_status": "alpha",
@@ -56,7 +56,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/b_field_tor_vacuum_r/time",
   "lifecycle_status": "alpha",
@@ -66,7 +66,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of coils around the tokamak",
   "full_path": "tf/coil(i1)",
   "lifecycle_status": "alpha",
@@ -77,7 +77,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of conductors inside the coil. The structure can be used with size 1 for a simplified description as a single conductor. A conductor is composed of several elements, serially connected, i.e. transporting the same current.",
   "full_path": "tf/coil(i1)/conductor(i2)",
   "lifecycle_status": "alpha",
@@ -85,7 +85,7 @@
   "type": "static"
  },
  "tf.coil[:].conductor[:].cross_section": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "The cross-section perpendicular to the TF conductor contour is described by a series of contour points, given by their relative position with respect to the start point of the first element. This cross-section is assumed constant for all elements.",
   "full_path": "tf/coil(i1)/conductor(i2)/cross_section",
   "lifecycle_status": "alpha"
@@ -102,7 +102,7 @@
   "units": "rad"
  },
  "tf.coil[:].conductor[:].cross_section.delta_phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_phi\"",
   "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_phi_error_index",
   "lifecycle_status": "alpha",
@@ -142,7 +142,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].cross_section.delta_r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_r\"",
   "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_r_error_index",
   "lifecycle_status": "alpha",
@@ -182,7 +182,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].cross_section.delta_z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_z\"",
   "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_z_error_index",
   "lifecycle_status": "alpha",
@@ -211,7 +211,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Current in the conductor",
   "full_path": "tf/coil(i1)/conductor(i2)/current",
   "lifecycle_status": "alpha"
@@ -228,7 +228,7 @@
   "units": "A"
  },
  "tf.coil[:].conductor[:].current.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "tf/coil(i1)/conductor(i2)/current/data_error_index",
   "lifecycle_status": "alpha",
@@ -260,20 +260,20 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/coil(i1)/conductor(i2)/current/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "tf.coil[:].conductor[:].elements": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the TF conductor centre",
   "full_path": "tf/coil(i1)/conductor(i2)/elements",
   "lifecycle_status": "alpha"
  },
  "tf.coil[:].conductor[:].elements.centres": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the centre of the arc of a circle of every element (meaningful only if type/index = 2 or 3, fill with default/empty value otherwise)",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/centres",
   "lifecycle_status": "alpha"
@@ -290,7 +290,7 @@
   "units": "rad"
  },
  "tf.coil[:].conductor[:].elements.centres.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/centres/phi_error_index",
   "lifecycle_status": "alpha",
@@ -330,7 +330,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.centres.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/centres/r_error_index",
   "lifecycle_status": "alpha",
@@ -370,7 +370,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.centres.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/centres/z_error_index",
   "lifecycle_status": "alpha",
@@ -399,7 +399,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.end_points": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the end point of every element. Meaningful only if type/index = 1 or 2, fill with default/empty value otherwise",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/end_points",
   "lifecycle_status": "alpha"
@@ -416,7 +416,7 @@
   "units": "rad"
  },
  "tf.coil[:].conductor[:].elements.end_points.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/end_points/phi_error_index",
   "lifecycle_status": "alpha",
@@ -456,7 +456,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.end_points.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/end_points/r_error_index",
   "lifecycle_status": "alpha",
@@ -496,7 +496,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.end_points.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/end_points/z_error_index",
   "lifecycle_status": "alpha",
@@ -525,7 +525,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.intermediate_points": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of an intermediate point along the arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). Meaningful only if type/index = 2, fill with default/empty value otherwise",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/intermediate_points",
   "lifecycle_status": "alpha"
@@ -542,7 +542,7 @@
   "units": "rad"
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/intermediate_points/phi_error_index",
   "lifecycle_status": "alpha",
@@ -582,7 +582,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/intermediate_points/r_error_index",
   "lifecycle_status": "alpha",
@@ -622,7 +622,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/intermediate_points/z_error_index",
   "lifecycle_status": "alpha",
@@ -661,7 +661,7 @@
   "type": "static"
  },
  "tf.coil[:].conductor[:].elements.start_points": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the start point of every element",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/start_points",
   "lifecycle_status": "alpha"
@@ -678,7 +678,7 @@
   "units": "rad"
  },
  "tf.coil[:].conductor[:].elements.start_points.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/start_points/phi_error_index",
   "lifecycle_status": "alpha",
@@ -718,7 +718,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.start_points.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/start_points/r_error_index",
   "lifecycle_status": "alpha",
@@ -758,7 +758,7 @@
   "units": "m"
  },
  "tf.coil[:].conductor[:].elements.start_points.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/start_points/z_error_index",
   "lifecycle_status": "alpha",
@@ -805,7 +805,7 @@
   "units": "Ohm"
  },
  "tf.coil[:].conductor[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "tf/coil(i1)/conductor(i2)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -828,7 +828,7 @@
   "units": "Ohm"
  },
  "tf.coil[:].conductor[:].voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Voltage on the conductor terminals",
   "full_path": "tf/coil(i1)/conductor(i2)/voltage",
   "lifecycle_status": "alpha"
@@ -845,7 +845,7 @@
   "units": "V"
  },
  "tf.coil[:].conductor[:].voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "tf/coil(i1)/conductor(i2)/voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -877,14 +877,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/coil(i1)/conductor(i2)/voltage/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "tf.coil[:].current": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Current in the coil",
   "full_path": "tf/coil(i1)/current",
   "lifecycle_status": "alpha"
@@ -901,7 +901,7 @@
   "units": "A"
  },
  "tf.coil[:].current.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "tf/coil(i1)/current/data_error_index",
   "lifecycle_status": "alpha",
@@ -933,7 +933,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/coil(i1)/current/time",
   "lifecycle_status": "alpha",
@@ -948,7 +948,7 @@
   "units": "Ohm"
  },
  "tf.coil[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "tf/coil(i1)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -979,7 +979,7 @@
   "units": "-"
  },
  "tf.coil[:].turns_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"turns\"",
   "full_path": "tf/coil(i1)/turns_error_index",
   "lifecycle_status": "alpha",
@@ -1002,7 +1002,7 @@
   "units": "-"
  },
  "tf.coil[:].voltage": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Voltage on the coil terminals",
   "full_path": "tf/coil(i1)/voltage",
   "lifecycle_status": "alpha"
@@ -1019,7 +1019,7 @@
   "units": "V"
  },
  "tf.coil[:].voltage.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "tf/coil(i1)/voltage/data_error_index",
   "lifecycle_status": "alpha",
@@ -1051,7 +1051,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/coil(i1)/voltage/time",
   "lifecycle_status": "alpha",
@@ -1068,7 +1068,7 @@
   "coordinates": [
    "tf.field_map[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Map of the vacuum field at various time slices, represented using the generic grid description",
   "full_path": "tf/field_map(itime)",
   "lifecycle_status": "alpha",
@@ -1079,7 +1079,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the vacuum vector potential, given on various grid subsets",
   "full_path": "tf/field_map(itime)/a_field_r(i1)",
   "lifecycle_status": "alpha",
@@ -1099,7 +1099,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/a_field_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1155,7 +1155,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/a_field_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1187,7 +1187,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the vacuum vector potential, given on various grid subsets",
   "full_path": "tf/field_map(itime)/a_field_tor(i1)",
   "lifecycle_status": "alpha",
@@ -1207,7 +1207,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/a_field_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1263,7 +1263,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/a_field_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1295,7 +1295,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the vacuum vector potential, given on various grid subsets",
   "full_path": "tf/field_map(itime)/a_field_z(i1)",
   "lifecycle_status": "alpha",
@@ -1315,7 +1315,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/a_field_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1371,7 +1371,7 @@
   "units": "T.m"
  },
  "tf.field_map[:].a_field_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/a_field_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1403,7 +1403,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the vacuum magnetic field, given on various grid subsets",
   "full_path": "tf/field_map(itime)/b_field_r(i1)",
   "lifecycle_status": "alpha",
@@ -1423,7 +1423,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/b_field_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1479,7 +1479,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/b_field_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1511,7 +1511,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the vacuum magnetic field, given on various grid subsets",
   "full_path": "tf/field_map(itime)/b_field_tor(i1)",
   "lifecycle_status": "alpha",
@@ -1531,7 +1531,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/b_field_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1587,7 +1587,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/b_field_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1619,7 +1619,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the vacuum magnetic field, given on various grid subsets",
   "full_path": "tf/field_map(itime)/b_field_z(i1)",
   "lifecycle_status": "alpha",
@@ -1639,7 +1639,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "tf/field_map(itime)/b_field_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1695,7 +1695,7 @@
   "units": "T"
  },
  "tf.field_map[:].b_field_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "tf/field_map(itime)/b_field_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1724,7 +1724,7 @@
   "units": "T"
  },
  "tf.field_map[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "tf/field_map(itime)/grid",
   "lifecycle_status": "alpha"
@@ -1733,7 +1733,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)",
   "lifecycle_status": "alpha",
@@ -1743,7 +1743,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/base(i2)",
   "lifecycle_status": "alpha",
@@ -1761,7 +1761,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/base(i2)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1803,7 +1803,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/base(i2)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1849,7 +1849,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/base(i2)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1892,7 +1892,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -1902,7 +1902,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/element(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -1930,7 +1930,7 @@
   "type": "dynamic"
  },
  "tf.field_map[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid subset identifier",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/identifier",
   "lifecycle_status": "alpha"
@@ -1957,7 +1957,7 @@
   "type": "dynamic"
  },
  "tf.field_map[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/metric",
   "lifecycle_status": "alpha"
@@ -1974,7 +1974,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -2016,7 +2016,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -2062,7 +2062,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "tf/field_map(itime)/grid/grid_subset(i1)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2095,7 +2095,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid identifier",
   "full_path": "tf/field_map(itime)/grid/identifier",
   "lifecycle_status": "alpha"
@@ -2125,7 +2125,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "tf/field_map(itime)/grid/space(i1)",
   "lifecycle_status": "alpha",
@@ -2142,7 +2142,7 @@
   "type": "dynamic"
  },
  "tf.field_map[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "tf/field_map(itime)/grid/space(i1)/geometry_type",
   "lifecycle_status": "alpha"
@@ -2172,7 +2172,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "tf/field_map(itime)/grid/space(i1)/objects_per_dimension(i2)",
   "lifecycle_status": "alpha",
@@ -2182,7 +2182,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "tf/field_map(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -2192,7 +2192,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "tf/field_map(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)",
   "lifecycle_status": "alpha",
@@ -2227,7 +2227,7 @@
   "units": "mixed"
  },
  "tf.field_map[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "tf/field_map(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -2264,7 +2264,7 @@
   "units": "m^dimension"
  },
  "tf.field_map[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "tf/field_map(itime)/grid/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -2297,7 +2297,7 @@
   "type": "dynamic"
  },
  "tf.field_map[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "tf/field_map(itime)/time",
   "lifecycle_status": "alpha",
@@ -2305,7 +2305,7 @@
   "units": "s"
  },
  "tf.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "tf/ids_properties",
   "lifecycle_status": "alpha"
@@ -2324,6 +2324,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "tf.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "tf.ids_properties.occurrence"
+ },
  "tf.is_periodic": {
   "data_type": "INT_0D",
   "documentation": "Flag indicating whether coils are described one by one in the coil() structure (flag=0) or whether the coil structure represents only coils having different characteristics (flag = 1, n_coils must be filled in that case). In the latter case, the coil() sequence is repeated periodically around the torus.",
@@ -2335,7 +2340,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "tf/time",
   "lifecycle_status": "alpha",

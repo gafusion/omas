@@ -3,7 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -16,7 +15,6 @@ def add_to__ODS__(f):
     anything wrapped here will be available as a ODS method with name 'physics_'+f.__name__
     '''
     __ods__.append(f.__name__)
-    __all__.append(f.__name__)
     return f
 
 
@@ -34,8 +32,8 @@ def preprocess_ods(*require, require_mode=['warn_through', 'warn_skip', 'raise']
     def _req(f):
         from functools import wraps
         @wraps(f)
-        def wrapper(*args, **kw):
-            args, kw = args_as_kw(f, args, kw)
+        def wrapper(*args1, **kw1):
+            args, kw = args_as_kw(f, args1, kw1)
 
             # handle missing required quantities
             missing = []
@@ -88,6 +86,60 @@ def equilibrium_stored_energy(ods, update=True):
 
         ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = 3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)  # [J]
 
+    return ods_n
+
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method='linear', update=True):
+    """
+    Convert GGD data to profiles 2D
+
+    :param ods: input ods
+
+    :param time_index: time slices to process
+
+    :param resolution: integer or tuple for rectangular grid resolution
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    points = ods['equilibrium.grids_ggd[0].grid[0].space[0].objects_per_dimension[0].object[:].geometry']
+
+    if resolution is None:
+        resolution = int(numpy.sqrt(len(points[:, 0])))
+    if isinstance(resolution, int):
+        resolution = [resolution, resolution]
+
+    if time_index is None:
+        time_index = range(len(ods['equilibrium.time_slice']))
+    elif isinstance(time_index, int):
+        time_index = [time_index]
+
+    cache = True
+    for itime in time_index:
+        ods_n[f'equilibrium.time_slice.{itime}.profiles_2d.0.grid_type'].setdefault('index', 1)
+        for k in ods_n[f'equilibrium.time_slice.{itime}.profiles_2d']:
+            profiles_2d = ods_n[f'equilibrium.time_slice.{itime}.profiles_2d.{k}']
+            if 'grid_type.index' in profiles_2d and profiles_2d['grid_type.index'] == 1:
+                break
+        ggd = ods[f'equilibrium.time_slice.{itime}.ggd.0']
+        for what in ggd:
+            quantity = ggd[what + '.0.values']
+            r, z, interpolated, cache = scatter_to_rectangular(points[:, 0], points[:, 1], quantity,
+                                                               resolution[0], resolution[1], method=method,
+                                                               return_cache=cache)
+            profiles_2d[what] = interpolated.T
+        profiles_2d['grid.dim1'] = r
+        profiles_2d['grid.dim2'] = z
     return ods_n
 
 
@@ -171,22 +223,15 @@ def summary_taue(ods, update=True):
                     n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
-            # Find P_aux from core_sources ods:
-            pow_prof = numpy.zeros(len(ne))
-            sources = ods['core_sources']['source']
-            for source in ods['core_sources']['source']:
-                if 'identifier' not in sources[source] or 'index' not in sources[source]['identifier']:
-                    printe(sources[source].location + "['identifier']['index'] is empty, see: https://gafusion.github.io/omas/schema/schema_core%20sources.html")
-                elif sources[source]['identifier']['index'] == 100:
-                    if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
-                        pow_prof += sources[source]['profiles_1d'][time_index]['total_ion_energy']
-                    elif 'electrons' in sources[source]['profiles_1d'][time_index]:
-                        pow_prof += sources[source]['profiles_1d'][time_index]['electrons']['energy']
-            p_aux = numpy.trapz(pow_prof, x=volume)
-            tau_e = abs(56.2e-3 * (abs(ip) / 1e6) ** 0.93 * abs(bt) ** 0.15 * (ne_vol_avg / 1e19) ** 0.41 * (p_aux / 1e6) ** -0.69 * r_major ** 1.97 * kappa ** 0.78 * aspect ** -0.58 * isotope_factor ** 0.19)  # [s]
+            # Get total power from ods function:
+            ods.physics_summary_total_powers()
+            total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+
+            # Calculate tau_e
+            tau_e = abs(56.2e-3 * (abs(ip) / 1e6) ** 0.93 * abs(bt) ** 0.15 * (ne_vol_avg / 1e19) ** 0.41 * (total_power / 1e6) ** -0.69 * r_major ** 1.97 * kappa ** 0.78 * aspect ** -0.58 * isotope_factor ** 0.19)  # [s]
             # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
             tau_e_scaling.append(tau_e)
-            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / p_aux)
+            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / total_power)
 
     # assign quantities in the ODS
     ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
@@ -196,6 +241,61 @@ def summary_taue(ods, update=True):
 
     return ods_n
 
+@add_to__ODS__
+@preprocess_ods('core_sources')
+def summary_total_powers(ods, update=True):
+    """
+    Integrate power densities to the total and heating and current drive systems and fills summary.globalquantities
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+        ods_n = ODS().copy_attrs_from(ods)
+
+    sources = ods_n['core_sources']['source']
+    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
+    power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
+    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    q_dict = {'total': copy.deepcopy(q_init), 'nbi': copy.deepcopy(q_init),
+              'ec': copy.deepcopy(q_init), 'lh': copy.deepcopy(q_init),
+              'ic': copy.deepcopy(q_init)}
+
+    ignore_indices = list(range(100, 108)) + list(range(900,910))
+
+    for time_index in sources[0]['profiles_1d']:
+        vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
+        for source in sources:
+            if sources[source]['identifier.index'] in ignore_indices:
+                # Skip the combined sources to prevent double counting
+                continue
+            if 'electrons' in sources[source]['profiles_1d'][time_index] and 'energy' in \
+                    sources[source]['profiles_1d'][time_index]['electrons']:
+                q_dict['total'] += sources[source]['profiles_1d'][time_index]['electrons']['energy']
+                if sources[source]['identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[source]['identifier.index']]] += \
+                    sources[source]['profiles_1d'][time_index]['electrons']['energy']
+            if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
+                q_dict['total'] += sources[source]['profiles_1d'][time_index]['total_ion_energy']
+                if sources[source]['identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[source]['identifier.index']]] += \
+                    sources[source]['profiles_1d'][time_index]['total_ion_energy']
+
+        for key, value in power_dict.items():
+            power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
+
+    for key, value in power_dict.items():
+        if numpy.sum(value) > 0:
+            if key is 'total':
+                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
+                continue
+            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
+
+    return ods_n
 
 @add_to__ODS__
 @preprocess_ods()
@@ -211,8 +311,10 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods_n.physics_summary_greenwald()
-    ods_n.physics_summary_taue()
+    ods.physics_summary_greenwald()
+    ods.physics_summary_taue()
+
+    return ods
 
 
 @add_to__ODS__
@@ -466,8 +568,14 @@ def current_from_eq(ods, time_index):
     :param ods: ODS to update in-place
 
     :param time_index: ODS time index to updated
-
+    if None, all times are updated
     """
+
+    # run an all time slices if time_index is None
+    if time_index is None:
+        for itime in ods['equilibrium.time_slice']:
+            current_from_eq(ods, time_index=itime)
+        return
 
     rho = ods['equilibrium.time_slice'][time_index]['profiles_1d.rho_tor_norm']
 
@@ -501,7 +609,7 @@ def current_from_eq(ods, time_index):
 
 @add_to__ODS__
 @preprocess_ods('equilibrium', 'core_profiles')
-def core_profiles_currents(ods, time_index, rho_tor_norm,
+def core_profiles_currents(ods, time_index=None, rho_tor_norm=None,
                            j_actuator='default', j_bootstrap='default',
                            j_ohmic='default', j_non_inductive='default',
                            j_total='default', warn=True):
@@ -516,6 +624,7 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     :param ods: ODS to update in-place
 
     :param time_index: ODS time index to updated
+    if None, all times are updated
 
     :param rho_tor_norm:  normalized rho grid upon which each j is given
 
@@ -540,9 +649,21 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
         explicitly provided or as computed from other components.
     """
 
+    # run an all time slices if time_index is None
+    if time_index is None:
+        for itime in ods['core_profiles.profiles_1d']:
+            core_profiles_currents(ods, time_index=itime, rho_tor_norm=rho_tor_norm,
+                                   j_actuator=j_actuator, j_bootstrap=j_bootstrap,
+                                   j_ohmic=j_ohmic, j_non_inductive=j_non_inductive,
+                                   j_total=j_total, warn=warn)
+        return
+
     from scipy.integrate import cumtrapz
 
-    prof1d = ods['core_profiles']['profiles_1d'][time_index]
+    prof1d = ods['core_profiles.profiles_1d'][time_index]
+
+    if rho_tor_norm is None:
+        rho_tor_norm = prof1d['grid.rho_tor_norm']
 
     # SETUP DEFAULTS
     data = {}
@@ -659,7 +780,6 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     # =============
     # UPDATE ODS
     # =============
-
     with omas_environment(ods, coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho_tor_norm}):
         for j in ['j_bootstrap', 'j_non_inductive', 'j_ohmic', 'j_total', 'j_tor']:
             if eval(j) is not None:
@@ -670,7 +790,6 @@ def core_profiles_currents(ods, time_index, rho_tor_norm,
     # ======================
     # INTEGRATED CURRENTS
     # ======================
-
     if eq is None:
         # can't integrate currents without the equilibrium
         return
@@ -739,6 +858,72 @@ def wall_add(ods, machine=None):
                               -4.5459, -4.3926, -4.2394, -4.0862, -3.9861, -3.9856, -3.886,
                               -3.885, -3.6924, -3.5165, -3.3723, -3.2722, -3.225, -3.2346,
                               -3.036]}
+    walls['west'] = {'RLIM': [2.86135614, 2.87861924, 2.90016384, 2.91997554, 2.93800414,
+                              2.95420434, 2.96853494, 2.98095994, 2.99144794, 2.99997234,
+                              3.00651164, 3.01104944, 3.01357414, 3.01407934, 3.01256394,
+                              3.00903154, 3.00349134, 2.99595704, 2.98644784, 2.97498774,
+                              2.96160574, 2.94633544, 2.92921564, 2.91028954, 2.88960484,
+                              2.86721394, 3.1298712, 3.1117572, 3.0928301, 3.0731123,
+                              3.0526269, 3.031398, 3.0094508, 2.9868111, 2.9635054,
+                              2.9395614, 2.9150072, 2.8898718, 2.8641847, 2.8379762,
+                              2.8112773, 2.766, 2.735, 2.704, 2.673,
+                              2.642, 2.611, 2.58, 2.549, 2.518,
+                              2.487, 2.456, 2.4446, 2.4199, 2.3952,
+                              2.3705, 2.3458, 2.3211, 2.2965, 2.2718,
+                              2.2471, 2.2224, 2.1977, 2.173, 2.1483,
+                              2.1236, 2.0989, 2.0742, 2.0495, 2.0249,
+                              2.0002, 1.9755, 1.9508, 1.9261, 1.9014,
+                              1.8966603, 1.8901254, 1.8839482, 1.8781297, 1.8726708,
+                              1.8675721, 1.8628345, 1.8584587, 1.8544453, 1.8507948,
+                              1.8475079, 1.844585, 1.8420265, 1.8398328, 1.8380042,
+                              1.836541, 1.8354435, 1.8347117, 1.8343457, 1.8343457,
+                              1.8347117, 1.8354435, 1.836541, 1.8380042, 1.8398328,
+                              1.8420265, 1.844585, 1.8475079, 1.8507948, 1.8544453,
+                              1.8584587, 1.8628345, 1.8675721, 1.8726708, 1.8781297,
+                              1.8839482, 1.8901254, 1.8966603, 1.9091, 1.928,
+                              1.9468, 1.9657, 1.9845, 2.0034, 2.0222,
+                              2.0411, 2.0599, 2.0788, 2.0977, 2.1165,
+                              2.1354, 2.1542, 2.1731, 2.1919, 2.2108,
+                              2.2297, 2.2485, 2.2674, 2.2862, 2.3051,
+                              2.3239, 2.3428, 2.3616, 2.3805, 2.3895,
+                              2.43351111, 2.47752222, 2.52153333, 2.56554444, 2.60955556,
+                              2.65356667, 2.69757778, 2.74158889, 2.7856, 2.802274,
+                              2.8291295, 2.855505, 2.8813692, 2.9066919, 2.9314431,
+                              2.9555937, 2.9791152, 3.0019799, 3.0241609, 3.045632,
+                              3.0663679, 3.0863443, 3.1055375, 3.1239249, 2.86135614],
+                     'ZLIM': [-0.4702282, -0.44550049, -0.41155163, -0.37656315, -0.34062343,
+                              -0.30382328, -0.26625564, -0.22801541, -0.1891992, -0.14990505,
+                              -0.11023223, -0.07028096, -0.03015215, 0.01005283, 0.05023242,
+                              0.09028511, 0.13010973, 0.16960569, 0.20867321, 0.2472136,
+                              0.2851295, 0.32232515, 0.35870657, 0.39418187, 0.42866144,
+                              0.46205816, 0.51562535, 0.53962674, 0.56299231, 0.58569451,
+                              0.60770659, 0.62900263, 0.64955753, 0.66934707, 0.68834792,
+                              0.70653771, 0.723895, 0.74039934, 0.75603128, 0.77077241,
+                              0.78460535, 0.7492, 0.7492, 0.7492, 0.7492,
+                              0.7492, 0.7492, 0.7492, 0.7492, 0.7492,
+                              0.7492, 0.7492, 0.7986, 0.7886, 0.7787,
+                              0.7687, 0.7587, 0.7487, 0.7388, 0.7288,
+                              0.7188, 0.7088, 0.6989, 0.6889, 0.6789,
+                              0.6689, 0.659, 0.649, 0.639, 0.6291,
+                              0.6191, 0.6091, 0.5991, 0.5892, 0.5792,
+                              0.555, 0.52546258, 0.49584828, 0.46616143, 0.43640637,
+                              0.40658745, 0.37670903, 0.3467755, 0.31679123, 0.28676061,
+                              0.25668802, 0.22657788, 0.19643458, 0.16626254, 0.13606618,
+                              0.1058499, 0.07561814, 0.04537531, 0.01512584, -0.01512584,
+                              -0.04537531, -0.07561814, -0.1058499, -0.13606618, -0.16626254,
+                              -0.19643458, -0.22657788, -0.25668802, -0.28676061, -0.31679123,
+                              -0.3467755, -0.37670903, -0.40658745, -0.43640637, -0.46616143,
+                              -0.49584828, -0.52546258, -0.555, -0.5798, -0.5874,
+                              -0.595, -0.6026, -0.6102, -0.6178, -0.6254,
+                              -0.633, -0.6406, -0.6482, -0.6558, -0.6634,
+                              -0.671, -0.6786, -0.6862, -0.6938, -0.7014,
+                              -0.709, -0.7166, -0.7242, -0.7318, -0.7394,
+                              -0.747, -0.7546, -0.7622, -0.7698, -0.6754,
+                              -0.6754, -0.6754, -0.6754, -0.6754, -0.6754,
+                              -0.6754, -0.6754, -0.6754, -0.6754, -0.78901166,
+                              -0.77548512, -0.76104485, -0.74570785, -0.7294922, -0.71241701,
+                              -0.69450238, -0.67576944, -0.65624025, -0.63593783, -0.61488609,
+                              -0.59310985, -0.57063475, -0.54748729, -0.52369473, -0.4702282]}
 
     if machine.lower() not in walls:
         raise LookupError('OMAS wall information only available for: %s' % walls.keys())
@@ -812,6 +997,124 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
                     eq2D['grid.dim1'] = ed2D['grid.dim2']
                     eq2D['grid.dim1'] = tmp
     return ods
+
+
+def delete_ggd(ods, ds=None):
+    '''
+    delete all .ggd and .grids_ggd entries
+
+    :param ods: input ods
+
+    :param ds: string or list of strings where to limit the deletion process
+
+    :return: list of strings with deleted entries
+    '''
+    if ds is None:
+        ds = ods.keys()
+    elif isinstance(ds, str):
+        ds = [ds]
+
+    from .omas_structure import extract_ggd
+    ggds = extract_ggd()
+
+    deleted = []
+    for ggd in ggds:
+        if not any([ggd.startswith(structure + '.') for structure in ds]):
+            continue
+
+        if ':' not in ggd:
+            if ggd in ods:
+                del ods[ggd]
+                deleted.append(ggd)
+        else:
+            dir, base = ggd.split('[:]')
+            if dir in ods:
+                for k in ods[dir].keys():
+                    if 'ggd' in ods[dir + '[%d]' % k]:
+                        del ods[dir][k][base]
+                        deleted.append(ggd)
+
+    return deleted
+
+
+def grids_ggd_points_triangles(grid):
+    '''
+    Return points and triangles in grids_ggd structure
+
+    :param grid: a ggd grid such as 'equilibrium.grids_ggd[0].grid[0]'
+
+    :return: tuple with points and triangles
+    '''
+    points = grid['space[0].objects_per_dimension[0].object[:].geometry']
+    triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
+    return points, triangles
+
+
+def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], sanitize=True, return_cache=False):
+    '''
+    Interpolate scattered data points to rectangular grid
+
+    :param r: r coordinate of data points
+
+    :param z: z coordinate of data points
+
+    :param data: data
+
+    :param R: scalars, 1D arrays, or 2D arrays
+
+    :param Z: scalars, 1D arrays, or 2D arrays
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
+    :param sanitize: avoid NaNs in regions where data is missing
+
+    :param return_cache: cache object or boolean to return cache object for faster interpolaton
+
+    :return: R, Z, interpolated_data (and cache if return_cache)
+    '''
+    import scipy
+    from scipy import interpolate
+
+    if isinstance(R, int) and isinstance(Z, int):
+        R, Z = numpy.meshgrid(numpy.linspace(numpy.min(r), numpy.max(r), R), numpy.linspace(numpy.min(z), numpy.max(z), Z))
+    elif len(numpy.atleast_1d(R).shape) == 1 and len(numpy.atleast_1d(Z).shape) == 1:
+        R, Z = numpy.meshgrid(R, Z)
+    elif len(numpy.atleast_1d(R).shape) == 2 and len(numpy.atleast_1d(Z).shape) == 2:
+        pass
+    else:
+        raise ValueError('R and Z must both be either scalars, 1D arrays, or 2D arrays')
+
+    cache = None
+    if method == 'nearest':
+        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'linear':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'cubic':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
+        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
+    elif method == 'extrapolate':
+        if cache is None:
+            cache = True
+        interpolant = scipy.interpolate.Rbf(r, z, data)
+        intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
+    else:
+        raise ValueError('Interpolation method %s is not recognized' % method)
+
+    # remove any NaNs using a rough nearest interpolation
+    index = ~numpy.isnan(intepolated_data.flat)
+    if sanitize and sum(1 - index):
+        intepolated_data.flat[~index] = scipy.interpolate.NearestNDInterpolator((R.flatten()[index], Z.flatten()[index]),
+                                                                                intepolated_data.flatten()[index])((R.flatten()[~index], Z.flatten()[~index]))
+
+    if return_cache:
+        return R[0, :], Z[:, 0], intepolated_data, cache
+    return R[0, :], Z[:, 0], intepolated_data
 
 
 @add_to__ALL__
@@ -1163,7 +1466,7 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 
     sigma_Ip = numpy.sign(Ip)
     sigma_B0 = numpy.sign(B0)
-    sign_dpsi_pos = numpy.sign(gradient(psi))[0]
+    sign_dpsi_pos = numpy.sign(numpy.gradient(psi))[0]
     sign_q_pos = numpy.sign(q)[0]
 
     sigma_Bp = sign_dpsi_pos / sigma_Ip
@@ -1285,7 +1588,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
             omas_core.input_data_process_functions[:] = bkp_input_data_process_functions
 
 
-def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True):
+def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False):
     """
     This is a utility function for generating the omas_cocos.py Python file
 
@@ -1301,13 +1604,17 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=True)
 
     :return: dictionary structure with tally of score and reason for scoring for every entry
     """
+    # update OMAS cocos information with the one stored in IMAS
+    from .omas_structure import extract_cocos
+    _cocos_signals.update(extract_cocos())
+
     # units of entries currently in cocos_singals
     cocos_units = []
     for item in _cocos_signals:
         if _cocos_signals[item] == '?':
             continue
         info = omas_info_node(item)
-        if len(info):  # info may have no length if nodes are deleted between IMAS versions
+        if len(info) and 'units' in info:  # info may have no length if nodes are deleted between IMAS versions
             units = info['units']
             if units not in cocos_units:
                 cocos_units.append(units)
@@ -1382,6 +1689,7 @@ _cocos_signals = {}
 
         # loop over structures
         for structure in structures:
+            print('Updating COCOS info for: ' + structure)
             text.extend(['', '# ' + structure.upper()])
             csig.extend(['', '# ' + structure.upper()])
 
@@ -1406,7 +1714,7 @@ _cocos_signals = {}
                     units = info.get('units', None)
                     data_type = info.get('data_type', None)
                     documentation = info.get('documentation', '')
-                    if data_type in ['structure', 'STR_0D', 'struct_array']:
+                    if data_type in ['STRUCTURE', 'STR_0D', 'STRUCT_ARRAY']:
                         continue
                     elif units in [None, 's']:
                         out[structure].setdefault(-1, []).append((item, '[%s]' % units))

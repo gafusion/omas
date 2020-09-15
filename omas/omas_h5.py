@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -105,11 +103,12 @@ def convertDataset(ods, data):
         if item.endswith('_error_upper'):
             continue
         if isinstance(data[item], h5py.Dataset):
-            ods[item] = data[item][()]
             if item + '_error_upper' in data:
-                ods[item] = uarray(ods[item], data[item + '_error_upper'][()])
+                ods.setraw(item, uarray(data[item][()], data[item + '_error_upper'][()]))
+            else:
+                ods.setraw(item, data[item][()])
         elif isinstance(data[item], h5py.Group):
-            convertDataset(ods[oitem], data[item])
+            convertDataset(ods.setraw(oitem, ods.same_init_ods()), data[item])
 
 
 def load_omas_h5(filename, consistency_check=True):
@@ -123,9 +122,11 @@ def load_omas_h5(filename, consistency_check=True):
     :return: OMAS data set
     """
     import h5py
-    ods = ODS(consistency_check=consistency_check)
+    ods = ODS(consistency_check=False)
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)
+    ods.set_child_locations()
+    ods.consistency_check = consistency_check
     return ods
 
 

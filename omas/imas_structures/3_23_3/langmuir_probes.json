@@ -8,7 +8,7 @@
   "maxoccur": "3"
  },
  "langmuir_probes.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "langmuir_probes/code",
   "lifecycle_status": "alpha",
@@ -61,7 +61,7 @@
   "type": "constant"
  },
  "langmuir_probes.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "langmuir_probes/ids_properties",
   "lifecycle_status": "alpha",
@@ -88,6 +88,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "langmuir_probes.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "langmuir_probes.ids_properties.occurrence"
+ },
  "langmuir_probes.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -103,7 +108,7 @@
   "type": "constant"
  },
  "langmuir_probes.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "langmuir_probes/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -134,7 +139,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of probes or probe pins",
   "full_path": "langmuir_probes/probe(i1)",
   "lifecycle_status": "alpha",
@@ -154,7 +159,7 @@
   "units": "rad"
  },
  "langmuir_probes.probe[:].b_field_angle_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_angle\"",
   "full_path": "langmuir_probes/probe(i1)/b_field_angle_error_index",
   "lifecycle_status": "alpha",
@@ -197,7 +202,7 @@
   "units": "W.m^-2"
  },
  "langmuir_probes.probe[:].heat_flux_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"heat_flux_parallel\"",
   "full_path": "langmuir_probes/probe(i1)/heat_flux_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -247,7 +252,7 @@
   "units": "A.m^-2"
  },
  "langmuir_probes.probe[:].j_ion_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_ion_parallel\"",
   "full_path": "langmuir_probes/probe(i1)/j_ion_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -290,7 +295,7 @@
   "units": "-"
  },
  "langmuir_probes.probe[:].mach_number_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mach_number_parallel\"",
   "full_path": "langmuir_probes/probe(i1)/mach_number_parallel_error_index",
   "lifecycle_status": "alpha",
@@ -324,7 +329,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of temperatures describing the electron and ion distribution functions in case of multi-temperature fits",
   "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)",
   "lifecycle_status": "alpha",
@@ -344,7 +349,7 @@
   "units": "eV"
  },
  "langmuir_probes.probe[:].multi_temperature_fits[:].t_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e\"",
   "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_e_error_index",
   "lifecycle_status": "alpha",
@@ -387,7 +392,7 @@
   "units": "eV"
  },
  "langmuir_probes.probe[:].multi_temperature_fits[:].t_i_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i\"",
   "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/t_i_error_index",
   "lifecycle_status": "alpha",
@@ -421,7 +426,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Timebase for the multi-temperature fits",
   "full_path": "langmuir_probes/probe(i1)/multi_temperature_fits(i2)/time(:)",
   "lifecycle_status": "alpha",
@@ -442,7 +447,7 @@
   "units": "m^-3"
  },
  "langmuir_probes.probe[:].n_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e\"",
   "full_path": "langmuir_probes/probe(i1)/n_e_error_index",
   "lifecycle_status": "alpha",
@@ -480,7 +485,7 @@
   "type": "static"
  },
  "langmuir_probes.probe[:].position_reciprocating": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the measurements in case of reciprocating probe",
   "full_path": "langmuir_probes/probe(i1)/position_reciprocating",
   "lifecycle_status": "alpha",
@@ -499,7 +504,7 @@
   "units": "rad"
  },
  "langmuir_probes.probe[:].position_reciprocating.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "langmuir_probes/probe(i1)/position_reciprocating/phi_error_index",
   "lifecycle_status": "alpha",
@@ -542,7 +547,7 @@
   "units": "m"
  },
  "langmuir_probes.probe[:].position_reciprocating.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "langmuir_probes/probe(i1)/position_reciprocating/r_error_index",
   "lifecycle_status": "alpha",
@@ -585,7 +590,7 @@
   "units": "m"
  },
  "langmuir_probes.probe[:].position_reciprocating.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "langmuir_probes/probe(i1)/position_reciprocating/z_error_index",
   "lifecycle_status": "alpha",
@@ -616,7 +621,7 @@
   "units": "m"
  },
  "langmuir_probes.probe[:].position_static": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the measurements in case of fixed probe",
   "full_path": "langmuir_probes/probe(i1)/position_static",
   "lifecycle_status": "alpha",
@@ -631,7 +636,7 @@
   "units": "rad"
  },
  "langmuir_probes.probe[:].position_static.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "langmuir_probes/probe(i1)/position_static/phi_error_index",
   "lifecycle_status": "alpha",
@@ -662,7 +667,7 @@
   "units": "m"
  },
  "langmuir_probes.probe[:].position_static.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "langmuir_probes/probe(i1)/position_static/r_error_index",
   "lifecycle_status": "alpha",
@@ -693,7 +698,7 @@
   "units": "m"
  },
  "langmuir_probes.probe[:].position_static.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "langmuir_probes/probe(i1)/position_static/z_error_index",
   "lifecycle_status": "alpha",
@@ -728,7 +733,7 @@
   "units": "V"
  },
  "langmuir_probes.probe[:].potential_floating_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"potential_floating\"",
   "full_path": "langmuir_probes/probe(i1)/potential_floating_error_index",
   "lifecycle_status": "alpha",
@@ -771,7 +776,7 @@
   "units": "V"
  },
  "langmuir_probes.probe[:].potential_plasma_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"potential_plasma\"",
   "full_path": "langmuir_probes/probe(i1)/potential_plasma_error_index",
   "lifecycle_status": "alpha",
@@ -821,7 +826,7 @@
   "units": "A"
  },
  "langmuir_probes.probe[:].saturation_current_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"saturation_current_ion\"",
   "full_path": "langmuir_probes/probe(i1)/saturation_current_ion_error_index",
   "lifecycle_status": "alpha",
@@ -864,7 +869,7 @@
   "units": "eV"
  },
  "langmuir_probes.probe[:].t_e_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e\"",
   "full_path": "langmuir_probes/probe(i1)/t_e_error_index",
   "lifecycle_status": "alpha",
@@ -907,7 +912,7 @@
   "units": "eV"
  },
  "langmuir_probes.probe[:].t_i_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i\"",
   "full_path": "langmuir_probes/probe(i1)/t_i_error_index",
   "lifecycle_status": "alpha",
@@ -941,7 +946,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Timebase for the dynamic nodes of this probe located at this level of the IDS structure",
   "full_path": "langmuir_probes/probe(i1)/time(:)",
   "lifecycle_status": "alpha",
@@ -953,7 +958,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "langmuir_probes/time(:)",
   "lifecycle_status": "alpha",

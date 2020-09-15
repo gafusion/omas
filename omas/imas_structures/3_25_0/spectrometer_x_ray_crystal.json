@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "spectrometer_x_ray_crystal.camera": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the camera used",
   "full_path": "spectrometer_x_ray_crystal/camera",
   "lifecycle_status": "alpha",
@@ -26,7 +26,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.camera_dimensions_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"camera_dimensions\"",
   "full_path": "spectrometer_x_ray_crystal/camera/camera_dimensions_error_index",
   "lifecycle_status": "alpha",
@@ -55,7 +55,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.center": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the camera center",
   "full_path": "spectrometer_x_ray_crystal/camera/center",
   "lifecycle_status": "alpha",
@@ -70,7 +70,7 @@
   "units": "rad"
  },
  "spectrometer_x_ray_crystal.camera.center.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/camera/center/phi_error_index",
   "lifecycle_status": "alpha",
@@ -101,7 +101,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.center.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/camera/center/r_error_index",
   "lifecycle_status": "alpha",
@@ -132,7 +132,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.center.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/camera/center/z_error_index",
   "lifecycle_status": "alpha",
@@ -166,7 +166,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.pixel_dimensions_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pixel_dimensions\"",
   "full_path": "spectrometer_x_ray_crystal/camera/pixel_dimensions_error_index",
   "lifecycle_status": "alpha",
@@ -205,7 +205,7 @@
   "type": "static"
  },
  "spectrometer_x_ray_crystal.camera.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the camera plane and oriented towards the plasma.",
   "full_path": "spectrometer_x_ray_crystal/camera/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -220,7 +220,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/camera/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -251,7 +251,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/camera/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -282,7 +282,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.camera.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/camera/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -305,7 +305,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "spectrometer_x_ray_crystal/code",
   "lifecycle_status": "alpha",
@@ -358,7 +358,7 @@
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.crystal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the crystal used",
   "full_path": "spectrometer_x_ray_crystal/crystal",
   "lifecycle_status": "alpha",
@@ -373,7 +373,7 @@
   "units": "rad"
  },
  "spectrometer_x_ray_crystal.crystal.angle_bragg_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angle_bragg\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/angle_bragg_error_index",
   "lifecycle_status": "alpha",
@@ -404,7 +404,7 @@
   "units": "rad"
  },
  "spectrometer_x_ray_crystal.crystal.angular_span_horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angular_span_horizontal\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/angular_span_horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -435,7 +435,7 @@
   "units": "rad"
  },
  "spectrometer_x_ray_crystal.crystal.angular_span_vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angular_span_vertical\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/angular_span_vertical_error_index",
   "lifecycle_status": "alpha",
@@ -466,7 +466,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.curvature_horizontal_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_horizontal\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/curvature_horizontal_error_index",
   "lifecycle_status": "alpha",
@@ -497,7 +497,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.curvature_vertical_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_vertical\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/curvature_vertical_error_index",
   "lifecycle_status": "alpha",
@@ -520,7 +520,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "spectrometer_x_ray_crystal/spectrometer_x_ray_crystal_geometry_identifier.xml",
   "documentation": "Geometry of the crystal\n1) planar : Planar\n2) cylindrical : Cylindrical\n3) spherical : Spherical\n4) elliptical : Elliptical",
   "full_path": "spectrometer_x_ray_crystal/crystal/geometry_type",
@@ -557,7 +557,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.height_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/height_error_index",
   "lifecycle_status": "alpha",
@@ -587,7 +587,7 @@
   "type": "static"
  },
  "spectrometer_x_ray_crystal.crystal.summit": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Position of the middle point on the crystal surface",
   "full_path": "spectrometer_x_ray_crystal/crystal/summit",
   "lifecycle_status": "alpha",
@@ -602,7 +602,7 @@
   "units": "rad"
  },
  "spectrometer_x_ray_crystal.crystal.summit.phi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/summit/phi_error_index",
   "lifecycle_status": "alpha",
@@ -633,7 +633,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.summit.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/summit/r_error_index",
   "lifecycle_status": "alpha",
@@ -664,7 +664,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.summit.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/summit/z_error_index",
   "lifecycle_status": "alpha",
@@ -695,7 +695,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.wavelength_bragg_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_bragg\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/wavelength_bragg_error_index",
   "lifecycle_status": "alpha",
@@ -726,7 +726,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.width_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/width_error_index",
   "lifecycle_status": "alpha",
@@ -749,7 +749,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.x3_unit_vector": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the crystal plane and oriented towards the plasma.",
   "full_path": "spectrometer_x_ray_crystal/crystal/x3_unit_vector",
   "lifecycle_status": "alpha",
@@ -764,7 +764,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.x3_unit_vector.x_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/x3_unit_vector/x_error_index",
   "lifecycle_status": "alpha",
@@ -795,7 +795,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.x3_unit_vector.y_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/x3_unit_vector/y_error_index",
   "lifecycle_status": "alpha",
@@ -826,7 +826,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.crystal.x3_unit_vector.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/crystal/x3_unit_vector/z_error_index",
   "lifecycle_status": "alpha",
@@ -861,7 +861,7 @@
   "units": "eV"
  },
  "spectrometer_x_ray_crystal.energy_bound_lower_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_bound_lower\"",
   "full_path": "spectrometer_x_ray_crystal/energy_bound_lower_error_index",
   "lifecycle_status": "alpha",
@@ -904,7 +904,7 @@
   "units": "eV"
  },
  "spectrometer_x_ray_crystal.energy_bound_upper_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_bound_upper\"",
   "full_path": "spectrometer_x_ray_crystal/energy_bound_upper_error_index",
   "lifecycle_status": "alpha",
@@ -935,7 +935,7 @@
   "units": "eV"
  },
  "spectrometer_x_ray_crystal.filter_window": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the filter window",
   "full_path": "spectrometer_x_ray_crystal/filter_window",
   "lifecycle_status": "alpha",
@@ -957,7 +957,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.filter_window.thickness_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "spectrometer_x_ray_crystal/filter_window/thickness_error_index",
   "lifecycle_status": "alpha",
@@ -983,7 +983,7 @@
   "coordinates": [
    "spectrometer_x_ray_crystal.frame[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of frames",
   "full_path": "spectrometer_x_ray_crystal/frame(itime)",
   "lifecycle_status": "alpha",
@@ -1004,7 +1004,7 @@
   "units": "(counts).s^-1"
  },
  "spectrometer_x_ray_crystal.frame[:].photon_count_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"photon_count\"",
   "full_path": "spectrometer_x_ray_crystal/frame(itime)/photon_count_error_index",
   "lifecycle_status": "alpha",
@@ -1035,7 +1035,7 @@
   "units": "(counts).s^-1"
  },
  "spectrometer_x_ray_crystal.frame[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "spectrometer_x_ray_crystal/frame(itime)/time",
   "lifecycle_status": "alpha",
@@ -1043,7 +1043,7 @@
   "units": "s"
  },
  "spectrometer_x_ray_crystal.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "spectrometer_x_ray_crystal/ids_properties",
   "lifecycle_status": "alpha",
@@ -1070,6 +1070,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_x_ray_crystal.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "spectrometer_x_ray_crystal.ids_properties.occurrence"
+ },
  "spectrometer_x_ray_crystal.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -1085,7 +1090,7 @@
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/version_put",
   "lifecycle_status": "alpha",
@@ -1121,7 +1126,7 @@
   "units": "s"
  },
  "spectrometer_x_ray_crystal.integration_time_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"integration_time\"",
   "full_path": "spectrometer_x_ray_crystal/integration_time_error_index",
   "lifecycle_status": "alpha",
@@ -1147,7 +1152,7 @@
   "coordinates": [
    "spectrometer_x_ray_crystal.z_frames"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Electron temperature (proxy estimated directly from the camera, without tomographic inversion)",
   "full_path": "spectrometer_x_ray_crystal/t_e_proxy",
   "lifecycle_status": "alpha",
@@ -1168,7 +1173,7 @@
   "units": "eV"
  },
  "spectrometer_x_ray_crystal.t_e_proxy.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/t_e_proxy/data_error_index",
   "lifecycle_status": "alpha",
@@ -1204,7 +1209,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_x_ray_crystal/t_e_proxy/time(:)",
   "lifecycle_status": "alpha",
@@ -1234,7 +1239,7 @@
   "coordinates": [
    "spectrometer_x_ray_crystal.z_frames"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Ion temperature (proxy estimated directly from the camera, without tomographic inversion)",
   "full_path": "spectrometer_x_ray_crystal/t_i_proxy",
   "lifecycle_status": "alpha",
@@ -1255,7 +1260,7 @@
   "units": "eV"
  },
  "spectrometer_x_ray_crystal.t_i_proxy.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/t_i_proxy/data_error_index",
   "lifecycle_status": "alpha",
@@ -1291,7 +1296,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_x_ray_crystal/t_i_proxy/time(:)",
   "lifecycle_status": "alpha",
@@ -1321,7 +1326,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "spectrometer_x_ray_crystal/time(:)",
   "lifecycle_status": "alpha",
@@ -1333,7 +1338,7 @@
   "coordinates": [
    "spectrometer_x_ray_crystal.z_frames"
   ],
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal velocity (proxy estimated directly from the camera, without tomographic inversion)",
   "full_path": "spectrometer_x_ray_crystal/velocity_tor_proxy",
   "lifecycle_status": "alpha",
@@ -1354,7 +1359,7 @@
   "units": "m.s^-1"
  },
  "spectrometer_x_ray_crystal.velocity_tor_proxy.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/velocity_tor_proxy/data_error_index",
   "lifecycle_status": "alpha",
@@ -1390,7 +1395,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "spectrometer_x_ray_crystal/velocity_tor_proxy/time(:)",
   "lifecycle_status": "alpha",
@@ -1429,7 +1434,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.wavelength_frames_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_frames\"",
   "full_path": "spectrometer_x_ray_crystal/wavelength_frames_error_index",
   "lifecycle_status": "alpha",
@@ -1471,7 +1476,7 @@
   "units": "m"
  },
  "spectrometer_x_ray_crystal.z_frames_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_frames\"",
   "full_path": "spectrometer_x_ray_crystal/z_frames_error_index",
   "lifecycle_status": "alpha",

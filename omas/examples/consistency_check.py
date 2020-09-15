@@ -13,8 +13,6 @@ There are three possible settings:
 * **consistency_check = True**: will raise an error if entry is outside of IMAS scope. Recommended when working with IMAS. The error raised will clearly say where the error is, and provide suggestions based on valid IMAS structure.
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 
 from omas import *
@@ -22,7 +20,7 @@ from omas import *
 print('*' * 20)
 print('consistency_check = False')
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = False
 ods.dynamic_path_creation='dynamic_array_structures'
 # can add entry with wrong dimensions
@@ -35,7 +33,7 @@ ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 print('*' * 20)
 print("consistency_check = 'warn'")
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = 'warn'
 ods.dynamic_path_creation='dynamic_array_structures'
 # can add entry with wrong dimensions but warning message is printed
@@ -54,7 +52,7 @@ ods['equilibrium.time_slice[0].does_not_exist.global_quantities.ip'] = 1
 print('*' * 20)
 print("consistency_check = True")
 print('*' * 20)
-ods = ods_sample()
+ods = ODS().sample()
 ods.consistency_check = True  # this is the default
 # add entry with wrong dimensions
 try:

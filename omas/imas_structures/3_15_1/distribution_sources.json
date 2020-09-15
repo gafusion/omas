@@ -8,7 +8,7 @@
   "maxoccur": "4"
  },
  "distribution_sources.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "distribution_sources/code",
   "lifecycle_status": "alpha"
@@ -59,7 +59,7 @@
   "type": "constant"
  },
  "distribution_sources.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "distribution_sources/ids_properties",
   "lifecycle_status": "alpha"
@@ -85,6 +85,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "distribution_sources.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "distribution_sources.ids_properties.occurrence"
+ },
  "distribution_sources.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -100,7 +105,7 @@
   "type": "constant"
  },
  "distribution_sources.magnetic_axis": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Magnetic axis position (used to define a poloidal angle for the 2D profiles)",
   "full_path": "distribution_sources/magnetic_axis",
   "lifecycle_status": "alpha"
@@ -117,7 +122,7 @@
   "units": "m"
  },
  "distribution_sources.magnetic_axis.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "distribution_sources/magnetic_axis/r_error_index",
   "lifecycle_status": "alpha",
@@ -157,7 +162,7 @@
   "units": "m"
  },
  "distribution_sources.magnetic_axis.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "distribution_sources/magnetic_axis/z_error_index",
   "lifecycle_status": "alpha",
@@ -189,7 +194,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of source/sink terms. A source/sink term corresponds to the particle source due to an NBI injection unit, a nuclear reaction or any combination of them (described in \"identifier\")",
   "full_path": "distribution_sources/source(i1)",
   "lifecycle_status": "alpha",
@@ -199,7 +204,7 @@
   "coordinates": [
    "distribution_sources.source[:].ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source terms in phase space (real space, velocity space, spin state), represented using the ggd, for various time slices",
   "full_path": "distribution_sources/source(i1)/ggd(itime)",
   "lifecycle_status": "alpha",
@@ -217,7 +222,7 @@
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid description",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid",
   "lifecycle_status": "alpha"
@@ -226,7 +231,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)",
   "lifecycle_status": "alpha",
@@ -236,7 +241,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)",
   "lifecycle_status": "alpha",
@@ -254,7 +259,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -296,7 +301,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -342,7 +347,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -385,7 +390,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -395,7 +400,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -423,7 +428,7 @@
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid subset identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier",
   "lifecycle_status": "alpha"
@@ -450,7 +455,7 @@
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric",
   "lifecycle_status": "alpha"
@@ -467,7 +472,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -509,7 +514,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -555,7 +560,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -588,7 +593,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid identifier",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/identifier",
   "lifecycle_status": "alpha"
@@ -618,7 +623,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)",
   "lifecycle_status": "alpha",
@@ -635,7 +640,7 @@
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/geometry_type",
   "lifecycle_status": "alpha"
@@ -665,7 +670,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)",
   "lifecycle_status": "alpha",
@@ -675,7 +680,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -685,7 +690,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
   "lifecycle_status": "alpha",
@@ -720,7 +725,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -757,7 +762,7 @@
   "units": "m^dimension"
  },
  "distribution_sources.source[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -793,7 +798,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source density of particles in phase space, for various grid subsets",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)",
   "lifecycle_status": "alpha",
@@ -813,7 +818,7 @@
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
  "distribution_sources.source[:].ggd[:].particles[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -869,7 +874,7 @@
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
  "distribution_sources.source[:].ggd[:].particles[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -898,7 +903,7 @@
   "units": "(m.s^-1)^-3.m^-3.s^-1"
  },
  "distribution_sources.source[:].ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -909,7 +914,7 @@
   "coordinates": [
    "distribution_sources.source[:].global_quantities[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Global quantities for various time slices",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)",
   "lifecycle_status": "alpha",
@@ -925,7 +930,7 @@
   "units": "s^-1"
  },
  "distribution_sources.source[:].global_quantities[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -956,7 +961,7 @@
   "units": "W"
  },
  "distribution_sources.source[:].global_quantities[:].power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/power_error_index",
   "lifecycle_status": "alpha",
@@ -979,7 +984,7 @@
   "units": "W"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Shinethrough losses",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough",
   "lifecycle_status": "alpha"
@@ -993,7 +998,7 @@
   "units": "s^-1"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/particles_error_index",
   "lifecycle_status": "alpha",
@@ -1024,7 +1029,7 @@
   "units": "W"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.power_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/power_error_index",
   "lifecycle_status": "alpha",
@@ -1055,7 +1060,7 @@
   "units": "N.m"
  },
  "distribution_sources.source[:].global_quantities[:].shinethrough.torque_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1078,7 +1083,7 @@
   "units": "N.m"
  },
  "distribution_sources.source[:].global_quantities[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/time",
   "lifecycle_status": "alpha",
@@ -1094,7 +1099,7 @@
   "units": "N.m"
  },
  "distribution_sources.source[:].global_quantities[:].torque_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1127,7 +1132,7 @@
   "coordinates": [
    "distribution_sources.source[:].markers[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source given as a group of markers (test particles) born per second, for various time slices",
   "full_path": "distribution_sources/source(i1)/markers(itime)",
   "lifecycle_status": "alpha",
@@ -1138,7 +1143,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "doc_identifier": "utilities/coordinate_identifier.xml",
   "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented\n0) unspecified : unspecified\n1) x : First cartesian coordinate in the horizontal plane\n2) y : Second cartesian coordinate in the horizontal plane (grad(x) x grad(y) = grad(z))\n3) z : Vertical coordinate z\n4) r : Major radius\n5) phi : Toroidal angle\n10) psi : Poloidal magnetic flux\n11) rho_tor : The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field\n12) rho_tor_norm : The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux\n13) rho_pol : The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux\n14) rho_pol_norm : The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux\n20) theta : Geometrical poloidal angle around the magnetic axis\n21) theta_straight : Straight field line poloidal angle\n22) theta_equal_arc : Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane.\n100) velocity : Total velocity; modulus of the velocity vector\n101) velocity_x : Velocity component in the x-direction\n102) velocity_y : Velocity component in the z-direction\n103) velocity_z : Velocity component in the z-direction\n104) velocity_phi : Velocity component in the toroidal direction\n105) velocity_parallel : Velocity component parallel to the magnetic field\n106) velocity_perpendicular : Velocity perpendicular to the magnetic field\n107) velocity_thermal : Velocity normalised to the local thermal velocity of the thermal ions (of the relevant species)\n200) momentum : Modulus of the relativistic momentum vector\n201) momentum_parallel : Component of the relativistic momentum vector parallel to the magnetic field\n202) momentum_perpendicular : Component of the relativistic momentum vector perpendicular to the magnetic field\n203) canonical_momentum_phi : Canonical toroidal angular momentum\n300) energy_hamiltonian : Hamiltonian energy, including both kinetic and potential energy\n301) energy_kinetic : Kinetic energy\n302) magnetic_moment : magnetic moment\n400) lambda : Ratio, magnetic moment over hamiltonian energy\n402) pitch_angle : Angle between the magnetic field and the velocity vector\n403) pitch : Ratio, parallel velocity over total velocity\n404) pitch_at_min_b : Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)",
@@ -1180,7 +1185,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].markers[:].positions_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"positions\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/positions_error_index",
   "lifecycle_status": "alpha",
@@ -1211,7 +1216,7 @@
   "units": "mixed"
  },
  "distribution_sources.source[:].markers[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/markers(itime)/time",
   "lifecycle_status": "alpha",
@@ -1230,7 +1235,7 @@
   "units": "-"
  },
  "distribution_sources.source[:].markers[:].weights_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weights\"",
   "full_path": "distribution_sources/source(i1)/markers(itime)/weights_error_index",
   "lifecycle_status": "alpha",
@@ -1262,7 +1267,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of processes (NBI units, fusion reactions, ...) that provide the source.",
   "full_path": "distribution_sources/source(i1)/process(i2)",
   "lifecycle_status": "alpha",
@@ -1276,7 +1281,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].nbi_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy",
   "full_path": "distribution_sources/source(i1)/process(i2)/nbi_energy",
   "lifecycle_status": "alpha"
@@ -1310,7 +1315,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].reactant_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal",
   "full_path": "distribution_sources/source(i1)/process(i2)/reactant_energy",
   "lifecycle_status": "alpha"
@@ -1337,7 +1342,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].process[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/distribution_source_identifier.xml",
   "documentation": "Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes\n0) unspecified : unspecified\n1) NBI : Source from neutral beam injection\n100) nuclear : Source from nuclear reaction (reaction type unspecified)\n101) H_H_to_D_positron_nu : Source from nuclear reaction: H+H->D+positron+neutrino\n102) H_D_to_He3_gamma : Source from nuclear reaction: H+D->He3+gamma\n103) H_T_to_He3_n : Source from nuclear reaction: H+T->He3+neutron\n104) H_He3_to_He4_positron_nu : Source from nuclear reaction: H+He3->He4+positron+neutrino\n105) D_D_to_T_H : Source from nuclear reaction: D+D->T+H\n106) D_D_to_He3_n : Source from nuclear reaction: D+D->He3+neutron\n107) D_T_to_He4_n : Source from nuclear reaction: T+D->He4+neutron\n108) D_He3_to_He4_positron : Source from nuclear reaction: He3+D->He4+positron\n109) T_T_to_He4_n_n : Source from nuclear reaction: T+T->He4+neutron+neutron\n110) T_He3_to_He4_H_n : Source from nuclear reaction: He3+T->He4+H+neutron\n111) He3_He3_to_He4_H_H : Source from nuclear reaction: He3+He3->He4+neutron+neutron\n112) He3_He4_to_Be7_gamma : Source from nuclear reaction: He3+He4->Be7+gamma\n113) Li6_n_to_He4_T : Source from nuclear reaction: Li6+n->He4+T\n114) Li7_n_to_He4_T_n : Source from nuclear reaction: Li7+n->He4+T+n\n1000) runaway : Source from runaway processes",
   "full_path": "distribution_sources/source(i1)/process(i2)/type",
@@ -1368,7 +1373,7 @@
   "coordinates": [
    "distribution_sources.source[:].profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Source radial profiles (flux surface averaged quantities) for various time slices",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)",
   "lifecycle_status": "alpha",
@@ -1387,7 +1392,7 @@
   "units": "W.m^-3"
  },
  "distribution_sources.source[:].profiles_1d[:].energy_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/energy_error_index",
   "lifecycle_status": "alpha",
@@ -1416,7 +1421,7 @@
   "units": "W.m^-3"
  },
  "distribution_sources.source[:].profiles_1d[:].grid": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial grid",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid",
   "lifecycle_status": "alpha"
@@ -1433,7 +1438,7 @@
   "units": "m^2"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/area_error_index",
   "lifecycle_status": "alpha",
@@ -1473,7 +1478,7 @@
   "units": "Wb"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/psi_error_index",
   "lifecycle_status": "alpha",
@@ -1513,7 +1518,7 @@
   "units": "m"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1553,7 +1558,7 @@
   "units": "-"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
   "lifecycle_status": "alpha",
@@ -1593,7 +1598,7 @@
   "units": "m^3"
  },
  "distribution_sources.source[:].profiles_1d[:].grid.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/volume_error_index",
   "lifecycle_status": "alpha",
@@ -1633,7 +1638,7 @@
   "units": "N.m^-2"
  },
  "distribution_sources.source[:].profiles_1d[:].momentum_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_index",
   "lifecycle_status": "alpha",
@@ -1673,7 +1678,7 @@
   "units": "s^-1.m^-3"
  },
  "distribution_sources.source[:].profiles_1d[:].particles_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/particles_error_index",
   "lifecycle_status": "alpha",
@@ -1702,7 +1707,7 @@
   "units": "s^-1.m^-3"
  },
  "distribution_sources.source[:].profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/time",
   "lifecycle_status": "alpha",
@@ -1710,13 +1715,13 @@
   "units": "s"
  },
  "distribution_sources.source[:].species": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Species injected or consumed by this source/sink",
   "full_path": "distribution_sources/source(i1)/species",
   "lifecycle_status": "alpha"
  },
  "distribution_sources.source[:].species.ion": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the ion or neutral species, used if type/index = 2 or 3",
   "full_path": "distribution_sources/source(i1)/species/ion",
   "lifecycle_status": "alpha"
@@ -1725,7 +1730,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)",
   "lifecycle_status": "alpha",
@@ -1740,7 +1745,7 @@
   "units": "Atomic Mass Unit"
  },
  "distribution_sources.source[:].species.ion.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -1780,7 +1785,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -1813,7 +1818,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -1843,7 +1848,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].species.ion.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/state",
   "lifecycle_status": "alpha"
@@ -1871,7 +1876,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -1909,7 +1914,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.state.z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_max_error_index",
   "lifecycle_status": "alpha",
@@ -1940,7 +1945,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.state.z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "distribution_sources/source(i1)/species/ion/state/z_min_error_index",
   "lifecycle_status": "alpha",
@@ -1971,7 +1976,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.ion.z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "distribution_sources/source(i1)/species/ion/z_ion_error_index",
   "lifecycle_status": "alpha",
@@ -1994,7 +1999,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.neutral": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the neutral species, used if type/index = 4 or 5",
   "full_path": "distribution_sources/source(i1)/species/neutral",
   "lifecycle_status": "alpha"
@@ -2003,7 +2008,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)",
   "lifecycle_status": "alpha",
@@ -2018,7 +2023,7 @@
   "units": "Atomic Mass Unit"
  },
  "distribution_sources.source[:].species.neutral.element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2058,7 +2063,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.neutral.element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -2091,7 +2096,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.neutral.element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2121,7 +2126,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "State of the species (energy, excitation, ...)",
   "full_path": "distribution_sources/source(i1)/species/neutral/state",
   "lifecycle_status": "alpha"
@@ -2141,7 +2146,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].species.neutral.state.neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/neutrals_identifier.xml",
   "documentation": "Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI\n1) cold : Cold neutrals\n2) thermal : Thermal neutrals\n3) fast : Fast neutrals\n4) nbi : NBI neutrals",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/neutral_type",
@@ -2177,7 +2182,7 @@
   "units": "Elementary Charge Unit"
  },
  "distribution_sources.source[:].species.neutral.state.vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
   "lifecycle_status": "alpha",
@@ -2207,7 +2212,7 @@
   "type": "constant"
  },
  "distribution_sources.source[:].species.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/species_reference_identifier.xml",
   "documentation": "Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion/state structure);  index=4 for neutral species in a single/average state (refer to neutral structure); index=5 for neutral species in a particular state (refer to neutral/state structure);  index=6 for neutron; index=7 for photon\n0) unspecified : unspecified\n1) electron : Electron\n2) ion : Ion species in a single/average state; refer to ion-structure\n3) ion_state : Ion species in a particular state; refer to ion/state-structure\n4) neutral : Neutral species in a single/average state; refer to neutral-structure\n5) neutral_state : Neutral species in a particular state; refer to neutral/state-structure\n6) neutron : Neutron\n7) photon : Photon",
   "full_path": "distribution_sources/source(i1)/species/type",
@@ -2238,14 +2243,14 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "distribution_sources/time",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
  "distribution_sources.vacuum_toroidal_field": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in rho_tor definition)",
   "full_path": "distribution_sources/vacuum_toroidal_field",
   "lifecycle_status": "alpha"
@@ -2262,7 +2267,7 @@
   "units": "T"
  },
  "distribution_sources.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "alpha",
@@ -2299,7 +2304,7 @@
   "units": "m"
  },
  "distribution_sources.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "distribution_sources/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "alpha",

@@ -14,8 +14,8 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 os.environ['USER']='menghio'
 
 # generate some data and save it in IMAS
-# ods = ods_sample(ntimes=2)
-# ods.save('imas', os.environ['USER'], 'DIII-D', 1000, 0, new=True, verbose=True)
+ods = ODS().sample(ntimes=2)
+ods.save('imas', os.environ['USER'], 'DIII-D', 1000, 0, new=True, verbose=True)
 
 # ODS.open() will keep the file descriptor open so that OMAS
 # can load in memory only the data when it is first requested

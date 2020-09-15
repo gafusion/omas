@@ -6,8 +6,6 @@ COCOS transformations
 OMAS can seamlessly handle coordinates convention translations
 """
 
-from __future__ import print_function, division, unicode_literals
-
 import os
 
 os.environ['OMAS_DEBUG_TOPIC'] = 'cocos'

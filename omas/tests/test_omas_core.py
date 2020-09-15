@@ -11,11 +11,11 @@ Test script for omas/omas_core.py
 -------
 """
 
-from __future__ import print_function, division, unicode_literals
 import unittest
 import os
 import numpy
 from pprint import pprint
+import xarray
 
 # OMAS imports
 from omas import *
@@ -130,9 +130,9 @@ class TestOmasCore(unittest.TestCase):
         return
 
     def test_coordinates(self):
-        ods = ods_sample()
-        assert (len(ods.list_coordinates()) > 0)
-        assert (len(ods['equilibrium'].list_coordinates()) > 0)
+        ods = ODS().sample()
+        assert len(ods.list_coordinates()) > 0
+        assert len(ods['equilibrium'].list_coordinates()) > 0
         return
 
     def test_dataset(self):
@@ -193,11 +193,14 @@ class TestOmasCore(unittest.TestCase):
         # get time information from explicitly set time array
         extra_info = {}
         assert numpy.allclose(ods.time('equilibrium'), [101, 201, 302])
+        assert numpy.allclose(ods.time('equilibrium.time_slice'), [101, 201, 302])
+        assert numpy.allclose(ods['equilibrium'].time('time_slice'), [101, 201, 302])
         assert ods['equilibrium'].homogeneous_time() is True
 
         # get time value from a single item in array of structures
         extra_info = {}
         assert ods['equilibrium.time_slice'][0].time() == 101
+        assert ods['equilibrium'].time('time_slice.0') == 101
         assert ods['equilibrium.time_slice'][0].homogeneous_time() is True
 
         # sample pf_active data has non-homogeneous times
@@ -290,14 +293,14 @@ class TestOmasCore(unittest.TestCase):
         except ValueError as _excp:
             pass
 
-        ods = ods_sample()
+        ods = ODS().sample()
 
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
         return
 
     def test_deepcopy(self):
-        ods = ods_sample()
+        ods = ODS().sample()
 
         # inject non-consistent data
         ods.consistency_check = False

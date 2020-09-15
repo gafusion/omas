@@ -8,7 +8,7 @@
   "maxoccur": "5"
  },
  "wall.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "wall/code",
   "lifecycle_status": "alpha",
@@ -63,7 +63,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of 2D wall descriptions, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, single contour limiter, disjoint gapped plasma facing components, ...).",
   "full_path": "wall/description_2d(i1)",
   "lifecycle_status": "alpha",
@@ -71,14 +71,14 @@
   "structure_reference": "wall_2d"
  },
  "wall.description_2d[:].limiter": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Description of the immobile limiting surface(s) or plasma facing components for defining the Last Closed Flux Surface.",
   "full_path": "wall/description_2d(i1)/limiter",
   "lifecycle_status": "alpha",
   "structure_reference": "wall_2d_limiter"
  },
  "wall.description_2d[:].limiter.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the limiter description. index = 0 for the official single contour limiter and 1 for the official disjoint PFC structure like first wall. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index =2",
   "full_path": "wall/description_2d(i1)/limiter/type",
   "lifecycle_status": "alpha",
@@ -109,7 +109,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of limiter units",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)",
   "lifecycle_status": "alpha",
@@ -131,7 +131,7 @@
   "type": "static"
  },
  "wall.description_2d[:].limiter.unit[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Irregular outline of the limiting surface. Do NOT repeat the first point for closed contours",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)/outline",
   "lifecycle_status": "alpha",
@@ -149,7 +149,7 @@
   "units": "m"
  },
  "wall.description_2d[:].limiter.unit[:].outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -189,7 +189,7 @@
   "units": "m"
  },
  "wall.description_2d[:].limiter.unit[:].outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -226,7 +226,7 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].limiter.unit[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -249,14 +249,14 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].mobile": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "In case of mobile plasma facing components, use the time-dependent description below this node to provide the full outline of the closest PFC surfaces to the plasma. Even in such a case, the 'limiter' structure is still used to provide the outermost limiting surface (can be used e.g. to define the boundary of the mesh of equilibrium reconstruction codes)",
   "full_path": "wall/description_2d(i1)/mobile",
   "lifecycle_status": "alpha",
   "structure_reference": "wall_2d_mobile"
  },
  "wall.description_2d[:].mobile.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the description",
   "full_path": "wall/description_2d(i1)/mobile/type",
   "lifecycle_status": "alpha",
@@ -287,7 +287,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of mobile units",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)",
   "lifecycle_status": "alpha",
@@ -312,7 +312,7 @@
   "coordinates": [
    "wall.description_2d[:].mobile.unit[:].outline[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Irregular outline of the mobile unit, for a set of time slices. Do NOT repeat the first point for closed contours",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)/outline(itime)",
   "lifecycle_status": "alpha",
@@ -332,7 +332,7 @@
   "units": "m"
  },
  "wall.description_2d[:].mobile.unit[:].outline[:].r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)/outline(itime)/r_error_index",
   "lifecycle_status": "alpha",
@@ -361,7 +361,7 @@
   "units": "m"
  },
  "wall.description_2d[:].mobile.unit[:].outline[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)/outline(itime)/time",
   "lifecycle_status": "alpha",
@@ -380,7 +380,7 @@
   "units": "m"
  },
  "wall.description_2d[:].mobile.unit[:].outline[:].z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)/outline(itime)/z_error_index",
   "lifecycle_status": "alpha",
@@ -417,7 +417,7 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].mobile.unit[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "wall/description_2d(i1)/mobile/unit(i2)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -440,7 +440,7 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the description. index = 0 for equilibrium codes (single closed limiter and vessel); 1 for gas-tight walls (disjoint PFCs with inner vessel as last limiter_unit; no vessel structure); 2 for free boundary codes (disjoint PFCs and vessel) ",
   "full_path": "wall/description_2d(i1)/type",
   "lifecycle_status": "alpha",
@@ -468,14 +468,14 @@
   "type": "static"
  },
  "wall.description_2d[:].vessel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Mechanical structure of the vacuum vessel. The vessel is described as a set of nested layers with given physics properties; Two representations are admitted for each vessel unit : annular (two contours) or block elements.",
   "full_path": "wall/description_2d(i1)/vessel",
   "lifecycle_status": "alpha",
   "structure_reference": "wall_2d_vessel"
  },
  "wall.description_2d[:].vessel.type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of the vessel description. index = 0 for the official single/multiple annular vessel and 1 for the official block element representation for each vessel unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index=2",
   "full_path": "wall/description_2d(i1)/vessel/type",
   "lifecycle_status": "alpha",
@@ -506,7 +506,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of vessel units",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)",
   "lifecycle_status": "alpha",
@@ -514,14 +514,14 @@
   "structure_reference": "wall_2d_vessel_unit"
  },
  "wall.description_2d[:].vessel.unit[:].annular": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Annular representation of a vessel layer by two contours, inner and outer",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular",
   "lifecycle_status": "alpha",
   "structure_reference": "wall_2d_vessel_annular"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_inner": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Inner vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_inner",
   "lifecycle_status": "alpha",
@@ -539,7 +539,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_inner.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_inner/r_error_index",
   "lifecycle_status": "alpha",
@@ -579,7 +579,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_inner.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_inner/z_error_index",
   "lifecycle_status": "alpha",
@@ -608,7 +608,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_outer": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outer vessel outline. Do NOT repeat the first point for closed contours",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_outer",
   "lifecycle_status": "alpha",
@@ -626,7 +626,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_outer.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_outer/r_error_index",
   "lifecycle_status": "alpha",
@@ -666,7 +666,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.outline_outer.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/outline_outer/z_error_index",
   "lifecycle_status": "alpha",
@@ -703,7 +703,7 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].vessel.unit[:].annular.resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/annular/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -729,7 +729,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of block elements",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -737,7 +737,7 @@
   "structure_reference": "wall_2d_vessel_element"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].j_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor",
   "lifecycle_status": "alpha",
@@ -755,7 +755,7 @@
   "units": "A"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].j_tor.data_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/data_error_index",
   "lifecycle_status": "alpha",
@@ -787,7 +787,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/time(:)",
   "lifecycle_status": "alpha",
@@ -801,7 +801,7 @@
   "type": "static"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].outline": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Outline of the block element. Do NOT repeat the first point for closed contours",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/outline",
   "lifecycle_status": "alpha",
@@ -819,7 +819,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].outline.r_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/outline/r_error_index",
   "lifecycle_status": "alpha",
@@ -859,7 +859,7 @@
   "units": "m"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].outline.z_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/outline/z_error_index",
   "lifecycle_status": "alpha",
@@ -896,7 +896,7 @@
   "units": "Ohm"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].resistance_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/resistance_error_index",
   "lifecycle_status": "alpha",
@@ -927,7 +927,7 @@
   "units": "ohm.m"
  },
  "wall.description_2d[:].vessel.unit[:].element[:].resistivity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/resistivity_error_index",
   "lifecycle_status": "alpha",
@@ -960,7 +960,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of 3D wall descriptions, described using the GGD, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, ...). ",
   "full_path": "wall/description_ggd(i1)",
   "lifecycle_status": "alpha",
@@ -971,7 +971,7 @@
   "coordinates": [
    "wall.description_ggd[:].ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Wall physics quantities represented using the general grid description, for various time slices.",
   "full_path": "wall/description_ggd(i1)/ggd(itime)",
   "lifecycle_status": "alpha",
@@ -983,7 +983,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Power density arriving on the wall surface, for various wall components (grid subsets)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/power_density(i2)",
   "lifecycle_status": "alpha",
@@ -1004,7 +1004,7 @@
   "units": "W.m^-2"
  },
  "wall.description_ggd[:].ggd[:].power_density[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/power_density(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1060,7 +1060,7 @@
   "units": "W.m^-2"
  },
  "wall.description_ggd[:].ggd[:].power_density[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/power_density(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1092,7 +1092,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Temperature of the wall, for various wall components (grid subsets)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/temperature(i2)",
   "lifecycle_status": "alpha",
@@ -1113,7 +1113,7 @@
   "units": "K"
  },
  "wall.description_ggd[:].ggd[:].temperature[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/temperature(i2)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1169,7 +1169,7 @@
   "units": "K"
  },
  "wall.description_ggd[:].ggd[:].temperature[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/temperature(i2)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1198,7 +1198,7 @@
   "units": "K"
  },
  "wall.description_ggd[:].ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -1209,7 +1209,7 @@
   "coordinates": [
    "wall.description_ggd[:].grid_ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Wall geometry described using the Generic Grid Description, for various time slices (in case of mobile wall elements). The timebase of this array of structure must be a subset of the timebase on which physical quantities are described (../ggd structure). Grid_subsets are used to describe various  wall components in a modular way.",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)",
   "lifecycle_status": "alpha",
@@ -1221,7 +1221,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)",
   "lifecycle_status": "alpha",
@@ -1232,7 +1232,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/base(i3)",
   "lifecycle_status": "alpha",
@@ -1251,7 +1251,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1293,7 +1293,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1339,7 +1339,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1382,7 +1382,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/element(i3)",
   "lifecycle_status": "alpha",
@@ -1393,7 +1393,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/element(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -1422,7 +1422,7 @@
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
   "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes belonging to the associated spaces\n2) faces : All faces belonging to the associated spaces\n3) x_aligned_faces : All x-aligned (poloidally) aligned faces belonging to the associated spaces\n4) y_aligned_faces : All y-aligned (radially) aligned faces belonging to the associated spaces\n5) cells : All cells belonging to the associated spaces\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned faces inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned faces in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned faces in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned faces in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned faces connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned faces connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned faces defining the outer target\n14) inner_target : y-aligned faces defining the inner target\n15) core_boundary : Innermost x-aligned faces\n16) separatrix : x-aligned faces defining the active separatrix\n17) main_chamber_wall : x-aligned faces defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned faces defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned faces defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned faces defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned faces defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned faces defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned faces inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned faces in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned faces in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned faces in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned faces defining the non-active separatrix\n34) outer_baffle_2 : x-aligned faces defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned faces defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned faces defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned faces defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/identifier",
@@ -1451,7 +1451,7 @@
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/metric",
   "lifecycle_status": "alpha",
@@ -1469,7 +1469,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -1511,7 +1511,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -1557,7 +1557,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -1590,7 +1590,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
   "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylinder\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular domain",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/identifier",
@@ -1622,7 +1622,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)",
   "lifecycle_status": "alpha",
@@ -1640,7 +1640,7 @@
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/geometry_type",
   "lifecycle_status": "alpha",
@@ -1668,7 +1668,7 @@
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].space[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_space_identifier.xml",
   "documentation": "Space identifier\n0) unspecified : unspecified\n1) primary_standard : Primary space defining the standard grid\n2) primary_staggered : Primary space defining a grid staggered with respect to the primary standard space",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/identifier",
@@ -1700,7 +1700,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/objects_per_dimension(i3)",
   "lifecycle_status": "alpha",
@@ -1711,7 +1711,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/objects_per_dimension(i3)/object(i4)",
   "lifecycle_status": "alpha",
@@ -1722,7 +1722,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/objects_per_dimension(i3)/object(i4)/boundary(i5)",
   "lifecycle_status": "alpha",
@@ -1758,7 +1758,7 @@
   "units": "mixed"
  },
  "wall.description_ggd[:].grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -1795,7 +1795,7 @@
   "units": "m^dimension"
  },
  "wall.description_ggd[:].grid_ggd[:].space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -1828,7 +1828,7 @@
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "wall/description_ggd(i1)/grid_ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -1836,7 +1836,7 @@
   "units": "s"
  },
  "wall.description_ggd[:].type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports",
   "full_path": "wall/description_ggd(i1)/type",
   "lifecycle_status": "alpha",
@@ -1864,14 +1864,14 @@
   "type": "static"
  },
  "wall.global_quantities": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Simple 0D description of plasma-wall interaction",
   "full_path": "wall/global_quantities",
   "lifecycle_status": "alpha",
   "structure_reference": "wall_global_quantitites"
  },
  "wall.global_quantities.electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to electrons",
   "full_path": "wall/global_quantities/electrons",
   "lifecycle_status": "alpha",
@@ -1889,7 +1889,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.electrons.gas_puff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gas_puff\"",
   "full_path": "wall/global_quantities/electrons/gas_puff_error_index",
   "lifecycle_status": "alpha",
@@ -1929,7 +1929,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.electrons.particle_flux_from_plasma_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particle_flux_from_plasma\"",
   "full_path": "wall/global_quantities/electrons/particle_flux_from_plasma_error_index",
   "lifecycle_status": "alpha",
@@ -1970,7 +1970,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.electrons.particle_flux_from_wall_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particle_flux_from_wall\"",
   "full_path": "wall/global_quantities/electrons/particle_flux_from_wall_error_index",
   "lifecycle_status": "alpha",
@@ -2012,7 +2012,7 @@
   "units": "W"
  },
  "wall.global_quantities.electrons.power_inner_target_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inner_target\"",
   "full_path": "wall/global_quantities/electrons/power_inner_target_error_index",
   "lifecycle_status": "alpha",
@@ -2052,7 +2052,7 @@
   "units": "W"
  },
  "wall.global_quantities.electrons.power_outer_target_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_outer_target\"",
   "full_path": "wall/global_quantities/electrons/power_outer_target_error_index",
   "lifecycle_status": "alpha",
@@ -2092,7 +2092,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.electrons.pumping_speed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pumping_speed\"",
   "full_path": "wall/global_quantities/electrons/pumping_speed_error_index",
   "lifecycle_status": "alpha",
@@ -2124,7 +2124,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the various neutral species",
   "full_path": "wall/global_quantities/neutral(i1)",
   "lifecycle_status": "alpha",
@@ -2135,7 +2135,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "wall/global_quantities/neutral(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -2151,7 +2151,7 @@
   "units": "Atomic Mass Unit"
  },
  "wall.global_quantities.neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "wall/global_quantities/neutral(i1)/element(i2)/a_error_index",
   "lifecycle_status": "alpha",
@@ -2190,7 +2190,7 @@
   "units": "Elementary Charge Unit"
  },
  "wall.global_quantities.neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "wall/global_quantities/neutral(i1)/element(i2)/multiplicity_error_index",
   "lifecycle_status": "alpha",
@@ -2223,7 +2223,7 @@
   "units": "Elementary Charge Unit"
  },
  "wall.global_quantities.neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "wall/global_quantities/neutral(i1)/element(i2)/z_n_error_index",
   "lifecycle_status": "alpha",
@@ -2257,7 +2257,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.neutral[:].gas_puff_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gas_puff\"",
   "full_path": "wall/global_quantities/neutral(i1)/gas_puff_error_index",
   "lifecycle_status": "alpha",
@@ -2304,7 +2304,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.neutral[:].particle_flux_from_plasma_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particle_flux_from_plasma\"",
   "full_path": "wall/global_quantities/neutral(i1)/particle_flux_from_plasma_error_index",
   "lifecycle_status": "alpha",
@@ -2345,7 +2345,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.neutral[:].particle_flux_from_wall_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particle_flux_from_wall\"",
   "full_path": "wall/global_quantities/neutral(i1)/particle_flux_from_wall_error_index",
   "lifecycle_status": "alpha",
@@ -2387,7 +2387,7 @@
   "units": "s^-1"
  },
  "wall.global_quantities.neutral[:].pumping_speed_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pumping_speed\"",
   "full_path": "wall/global_quantities/neutral(i1)/pumping_speed_error_index",
   "lifecycle_status": "alpha",
@@ -2428,7 +2428,7 @@
   "units": "-"
  },
  "wall.global_quantities.neutral[:].recycling_energy_coefficient_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"recycling_energy_coefficient\"",
   "full_path": "wall/global_quantities/neutral(i1)/recycling_energy_coefficient_error_index",
   "lifecycle_status": "alpha",
@@ -2471,7 +2471,7 @@
   "units": "-"
  },
  "wall.global_quantities.neutral[:].recycling_particles_coefficient_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"recycling_particles_coefficient\"",
   "full_path": "wall/global_quantities/neutral(i1)/recycling_particles_coefficient_error_index",
   "lifecycle_status": "alpha",
@@ -2514,7 +2514,7 @@
   "units": "-"
  },
  "wall.global_quantities.neutral[:].sputtering_chemical_coefficient_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sputtering_chemical_coefficient\"",
   "full_path": "wall/global_quantities/neutral(i1)/sputtering_chemical_coefficient_error_index",
   "lifecycle_status": "alpha",
@@ -2557,7 +2557,7 @@
   "units": "-"
  },
  "wall.global_quantities.neutral[:].sputtering_physical_coefficient_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sputtering_physical_coefficient\"",
   "full_path": "wall/global_quantities/neutral(i1)/sputtering_physical_coefficient_error_index",
   "lifecycle_status": "alpha",
@@ -2599,7 +2599,7 @@
   "units": "-"
  },
  "wall.global_quantities.neutral[:].wall_inventory_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wall_inventory\"",
   "full_path": "wall/global_quantities/neutral(i1)/wall_inventory_error_index",
   "lifecycle_status": "alpha",
@@ -2639,7 +2639,7 @@
   "units": "W"
  },
  "wall.global_quantities.power_density_inner_target_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_inner_target_max\"",
   "full_path": "wall/global_quantities/power_density_inner_target_max_error_index",
   "lifecycle_status": "alpha",
@@ -2679,7 +2679,7 @@
   "units": "W"
  },
  "wall.global_quantities.power_density_outer_target_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_outer_target_max\"",
   "full_path": "wall/global_quantities/power_density_outer_target_max_error_index",
   "lifecycle_status": "alpha",
@@ -2719,7 +2719,7 @@
   "units": "W"
  },
  "wall.global_quantities.power_from_plasma_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_from_plasma\"",
   "full_path": "wall/global_quantities/power_from_plasma_error_index",
   "lifecycle_status": "alpha",
@@ -2759,7 +2759,7 @@
   "units": "W"
  },
  "wall.global_quantities.power_inner_target_ion_total_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inner_target_ion_total\"",
   "full_path": "wall/global_quantities/power_inner_target_ion_total_error_index",
   "lifecycle_status": "alpha",
@@ -2799,7 +2799,7 @@
   "units": "W"
  },
  "wall.global_quantities.power_to_cooling_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_to_cooling\"",
   "full_path": "wall/global_quantities/power_to_cooling_error_index",
   "lifecycle_status": "alpha",
@@ -2839,7 +2839,7 @@
   "units": "K"
  },
  "wall.global_quantities.temperature_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "wall/global_quantities/temperature_error_index",
   "lifecycle_status": "alpha",
@@ -2868,7 +2868,7 @@
   "units": "K"
  },
  "wall.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "wall/ids_properties",
   "lifecycle_status": "alpha",
@@ -2895,6 +2895,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "wall.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "wall.ids_properties.occurrence"
+ },
  "wall.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -2913,7 +2918,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time [s]",
   "full_path": "wall/time(:)",
   "lifecycle_status": "alpha",

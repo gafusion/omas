@@ -3,8 +3,6 @@
 -------
 '''
 
-from __future__ import print_function, division, unicode_literals
-
 from .omas_setup import *
 from .omas_setup import __version__
 import sys
@@ -29,8 +27,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     """
     from omas import ODS, CodeParameters
 
-    ods1 = ods1.flat(return_empty_leaves=True)
-    ods2 = ods2.flat(return_empty_leaves=True)
+    ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
+    ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
@@ -42,23 +40,22 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
             differences.append('DIFF: key `%s` missing in 1st ods' % (prepend_path_string + k))
     for k in k1.intersection(k2):
-        if ods1[k] is None and ods2[k] is None:
-            pass
-        elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
-            if ods1[k] != ods2[k]:
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-            differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
-        elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-            if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        elif isinstance(ods1[k], CodeParameters) and isinstance(ods2[k], CodeParameters):
-            tmp = different_ods(ods1[k], ods2[k], ignore_type=ignore_type, ignore_empty=ignore_empty, prepend_path_string=k + '.')
-            if tmp:
-                differences.extend(tmp)
-        else:
-            if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+        try:
+            if ods1[k] is None and ods2[k] is None:
+                pass
+            elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
+                if ods1[k] != ods2[k]:
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+            elif not ignore_type and type(ods1[k]) != type(ods2[k]):
+                differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
+            elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
+                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True):
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+            else:
+                if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
+                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+        except Exception:
+            raise Exception(f'Error comparing {k}')
     if len(differences):
         return differences
     else:
@@ -71,13 +68,17 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
 def printd(*objects, **kw):
     """
     debug print
-    environmental variable OMAS_DEBUG_TOPIC sets the topic to be printed
+
+    Use environmental variable $OMAS_DEBUG_TOPIC to set the topic to be printed
     """
     topic = kw.pop('topic', '')
     if isinstance(topic, str):
         topic = [topic]
     topic = list(map(lambda x: x.lower(), topic))
-    objects = ['DEBUG:'] + list(objects)
+    if len(topic):
+        objects = [f'DEBUG ({",".join(topic)}):'] + list(objects)
+    else:
+        objects = ['DEBUG:'] + list(objects)
     topic_selected = os.environ.get('OMAS_DEBUG_TOPIC', '')
     dump = False
     if topic_selected.endswith('_dump'):
@@ -144,16 +145,25 @@ def is_numeric(value):
         return False
 
 
-def omas_interp1d(x, xp, fp, left=None, right=None, period=None):
+def omas_interp1d(x, xp, yp, left=None, right=None, period=None, extrapolate=True):
     '''
     If xp is not increasing, the results are numpy.interp1d nonsense.
     This function wraps numpy.interp1d but makes sure that the x-coordinate sequence xp is increasing.
 
+    :param extrapolate: linear extrapolation beyond bounds
+
     '''
     if not numpy.all(numpy.diff(xp) > 0):
         index = numpy.argsort(xp)
-        return numpy.interp(x, xp[index], fp[index], left=left, right=right, period=period)
-    return numpy.interp(x, xp, fp, left=left, right=right, period=period)
+    else:
+        index = numpy.arange(len(xp)).astype(int)
+    y = numpy.interp(x, xp[index], yp[index], left=left, right=right, period=period)
+    if extrapolate:
+        if not period and not left:
+            y = numpy.where(x < xp[index[0]], yp[index[0]] + (x - xp[index[0]]) * (yp[index[0]] - yp[index[1]]) / (xp[index[0]] - xp[index[1]]), y)
+        if not period and not right:
+            y = numpy.where(x > xp[index[-1]], yp[index[-1]] + (x - xp[index[-1]]) * (yp[index[-1]] - yp[index[-2]]) / (xp[index[-1]] - xp[index[-2]]), y)
+    return y
 
 
 omas_interp1d.__doc__ += numpy.interp.__doc__
@@ -254,22 +264,44 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
 
     dct = cls()
-    for x, y in object_pairs:
-        if null_to is not None and y is None:
-            y = null_to
-        if isinstance(y, list):
-            if len(y) and isinstance(y[0], ODS):
-                dct[x] = cls()
-                for k in range(len(y)):
-                    dct[x][k] = y[k]
-            else:
-                if null_to is not None:
+    # for ODSs we can use the setraw() method which does
+    # not peform any sort of check, nor tries to parse
+    # special OMAS syntaxes and is thus much faster
+    if isinstance(dct, ODS):
+        for x, y in object_pairs:
+            if null_to is not None and y is None:
+                y = null_to
+            if isinstance(y, list):
+                if len(y) and isinstance(y[0], ODS):
+                    dct.setraw(x, cls())
                     for k in range(len(y)):
-                        if y[k] is None:
-                            y[k] = null_to
+                        dct[x].setraw(k, y[k])
+                else:
+                    if null_to is not None:
+                        for k in range(len(y)):
+                            if y[k] is None:
+                                y[k] = null_to
+                    y = numpy.array(y) # to handle objects_encode=None as used in OMAS
+                    dct.setraw(x, y)
+            else:
+                dct.setraw(x, y)
+    else:
+        for x, y in object_pairs:
+            if null_to is not None and y is None:
+                y = null_to
+            if isinstance(y, list):
+                if len(y) and isinstance(y[0], ODS):
+                    dct[x] = cls()
+                    for k in range(len(y)):
+                        dct[x][k] = y[k]
+                else:
+                    if null_to is not None:
+                        for k in range(len(y)):
+                            if y[k] is None:
+                                y[k] = null_to
+                    dct[x] = y
+            else:
                 dct[x] = y
-        else:
-            dct[x] = y
 
     if "dtype" in dct:  # python2/3 compatibility
         dct["dtype"] = dct["dtype"].replace('S', 'U')
@@ -478,7 +510,7 @@ def args_as_kw(f, args, kw):
         a = a[1:]
     a = a + list(k.keys())
     n = 0
-    for name, value in list(zip(a, args)):
+    for name, value in zip(a + list(k.keys()), args):
         if name not in kw:
             kw[name] = value
         n += 1
@@ -500,6 +532,8 @@ _structures_dict = {}
 _info_structures = {}
 # dictionary that contains all the coordinates defined within the data dictionary
 _coordinates = {}
+# dictionary that contains all the times defined within the data dictionary
+_times = {}
 
 # extra structures that python modules using omas can define
 # by setting omas.omas_utils._extra_structures equal to a
@@ -612,9 +646,33 @@ def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
     # caching
     if imas_version not in _coordinates:
         filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_coordinates.json'
-        with open(filename, 'r') as f:
-            _coordinates[imas_version] = json.load(f)
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _coordinates[imas_version] = json.load(f)
+        else:
+            from .omas_structure import extract_coordinates
+            _coordinates[imas_version] = extract_coordinates(imas_version)
     return _coordinates[imas_version]
+
+
+def omas_times(imas_version=omas_rcparams['default_imas_version']):
+    '''
+    return list of times
+
+    :param imas_version: IMAS version to look up
+
+    :return: list of strings with IMAS times
+    '''
+    # caching
+    if imas_version not in _times:
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json'
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _times[imas_version] = json.load(f)
+        else:
+            from .omas_structure import extract_times
+            _times[imas_version] = extract_times(imas_version)
+    return _times[imas_version]
 
 
 _p2l_cache = {}
@@ -817,12 +875,12 @@ def trim_common_path(p1, p2):
     return p1[both.index(None):], p2[both.index(None):]
 
 
-def omas_info(structures, imas_version=omas_rcparams['default_imas_version']):
+def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version']):
     '''
     This function returns an ods with the leaf nodes filled with their property informations
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
-                       if not structures, then all structures are returned (slow and big)
+                       if None, then all structures are returned
 
     :return: ods
     '''

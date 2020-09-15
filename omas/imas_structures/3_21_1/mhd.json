@@ -8,7 +8,7 @@
   "maxoccur": "2"
  },
  "mhd.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "mhd/code",
   "lifecycle_status": "alpha",
@@ -64,7 +64,7 @@
   "coordinates": [
    "mhd.ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Edge plasma quantities represented using the general grid description, for various time slices.",
   "full_path": "mhd/ggd(itime)",
   "lifecycle_status": "alpha",
@@ -76,7 +76,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the magnetic vector potential, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/a_field_r(i1)",
   "lifecycle_status": "alpha",
@@ -97,7 +97,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/a_field_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -153,7 +153,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/a_field_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -185,7 +185,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the magnetic vector potential, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)",
   "lifecycle_status": "alpha",
@@ -206,7 +206,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -262,7 +262,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -294,7 +294,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the magnetic vector potential, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/a_field_z(i1)",
   "lifecycle_status": "alpha",
@@ -315,7 +315,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/a_field_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -371,7 +371,7 @@
   "units": "T.m"
  },
  "mhd.ggd[:].a_field_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/a_field_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -403,7 +403,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the magnetic field, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/b_field_r(i1)",
   "lifecycle_status": "alpha",
@@ -424,7 +424,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/b_field_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -480,7 +480,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/b_field_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -512,7 +512,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the magnetic field, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)",
   "lifecycle_status": "alpha",
@@ -533,7 +533,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -589,7 +589,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -621,7 +621,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the magnetic field, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/b_field_z(i1)",
   "lifecycle_status": "alpha",
@@ -642,7 +642,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/b_field_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -698,7 +698,7 @@
   "units": "T"
  },
  "mhd.ggd[:].b_field_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/b_field_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -727,7 +727,7 @@
   "units": "T"
  },
  "mhd.ggd[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Quantities related to the electrons",
   "full_path": "mhd/ggd(itime)/electrons",
   "lifecycle_status": "alpha",
@@ -737,7 +737,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Temperature, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/electrons/temperature(i1)",
   "lifecycle_status": "alpha",
@@ -758,7 +758,7 @@
   "units": "eV"
  },
  "mhd.ggd[:].electrons.temperature[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/electrons/temperature(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -814,7 +814,7 @@
   "units": "eV"
  },
  "mhd.ggd[:].electrons.temperature[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/electrons/temperature(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -846,7 +846,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the current density, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/j_r(i1)",
   "lifecycle_status": "alpha",
@@ -867,7 +867,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -923,7 +923,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/j_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -955,7 +955,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the current density, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/j_tor(i1)",
   "lifecycle_status": "alpha",
@@ -976,7 +976,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1032,7 +1032,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1064,7 +1064,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the current density, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/j_z(i1)",
   "lifecycle_status": "alpha",
@@ -1085,7 +1085,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1141,7 +1141,7 @@
   "units": "A.m^-2"
  },
  "mhd.ggd[:].j_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/j_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1173,7 +1173,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Total ion density (sum over ion species and thermal+non-thermal), given on various grid subsets",
   "full_path": "mhd/ggd(itime)/n_i_total(i1)",
   "lifecycle_status": "alpha",
@@ -1194,7 +1194,7 @@
   "units": "m^-3"
  },
  "mhd.ggd[:].n_i_total[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/n_i_total(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1250,7 +1250,7 @@
   "units": "m^-3"
  },
  "mhd.ggd[:].n_i_total[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/n_i_total(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1282,7 +1282,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Electric potential, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/phi_potential(i1)",
   "lifecycle_status": "alpha",
@@ -1303,7 +1303,7 @@
   "units": "V"
  },
  "mhd.ggd[:].phi_potential[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/phi_potential(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1359,7 +1359,7 @@
   "units": "V"
  },
  "mhd.ggd[:].phi_potential[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/phi_potential(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1391,7 +1391,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Poloidal flux, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/psi(i1)",
   "lifecycle_status": "alpha",
@@ -1412,7 +1412,7 @@
   "units": "Wb"
  },
  "mhd.ggd[:].psi[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/psi(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1468,7 +1468,7 @@
   "units": "Wb"
  },
  "mhd.ggd[:].psi[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/psi(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1500,7 +1500,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Ion temperature (averaged on ion species), given on various grid subsets",
   "full_path": "mhd/ggd(itime)/t_i_average(i1)",
   "lifecycle_status": "alpha",
@@ -1521,7 +1521,7 @@
   "units": "eV"
  },
  "mhd.ggd[:].t_i_average[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/t_i_average(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1577,7 +1577,7 @@
   "units": "eV"
  },
  "mhd.ggd[:].t_i_average[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/t_i_average(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1606,7 +1606,7 @@
   "units": "eV"
  },
  "mhd.ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "mhd/ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -1617,7 +1617,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Parallel (to magnetic field) component of the plasma velocity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/velocity_parallel(i1)",
   "lifecycle_status": "alpha",
@@ -1638,7 +1638,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_parallel[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_parallel(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1694,7 +1694,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_parallel[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_parallel(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1726,7 +1726,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "R component of the plasma velocity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/velocity_r(i1)",
   "lifecycle_status": "alpha",
@@ -1747,7 +1747,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_r[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_r(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1803,7 +1803,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_r[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_r(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1835,7 +1835,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the plasma velocity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)",
   "lifecycle_status": "alpha",
@@ -1856,7 +1856,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_tor[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -1912,7 +1912,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_tor[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -1944,7 +1944,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Z component of the plasma velocity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/velocity_z(i1)",
   "lifecycle_status": "alpha",
@@ -1965,7 +1965,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_z[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_z(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2021,7 +2021,7 @@
   "units": "m.s^-1"
  },
  "mhd.ggd[:].velocity_z[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_z(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2053,7 +2053,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Vorticity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/vorticity(i1)",
   "lifecycle_status": "alpha",
@@ -2074,7 +2074,7 @@
   "units": "s^-1"
  },
  "mhd.ggd[:].vorticity[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/vorticity(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2130,7 +2130,7 @@
   "units": "s^-1"
  },
  "mhd.ggd[:].vorticity[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/vorticity(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2162,7 +2162,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Effective charge, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/zeff(i1)",
   "lifecycle_status": "alpha",
@@ -2183,7 +2183,7 @@
   "units": "-"
  },
  "mhd.ggd[:].zeff[:].coefficients_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/zeff(i1)/coefficients_error_index",
   "lifecycle_status": "alpha",
@@ -2239,7 +2239,7 @@
   "units": "-"
  },
  "mhd.ggd[:].zeff[:].values_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "mhd/ggd(itime)/zeff(i1)/values_error_index",
   "lifecycle_status": "alpha",
@@ -2271,7 +2271,7 @@
   "coordinates": [
    "mhd.grid_ggd[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase",
   "full_path": "mhd/grid_ggd(itime)",
   "lifecycle_status": "alpha",
@@ -2283,7 +2283,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Grid subsets",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)",
   "lifecycle_status": "alpha",
@@ -2294,7 +2294,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/base(i2)",
   "lifecycle_status": "alpha",
@@ -2313,7 +2313,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].base[:].jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -2355,7 +2355,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].base[:].tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -2401,7 +2401,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].base[:].tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2444,7 +2444,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/element(i2)",
   "lifecycle_status": "alpha",
@@ -2455,7 +2455,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects defining the element",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/element(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -2484,7 +2484,7 @@
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].grid_subset[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
   "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes belonging to the associated spaces\n2) faces : All faces belonging to the associated spaces\n3) x_aligned_faces : All x-aligned (poloidally) aligned faces belonging to the associated spaces\n4) y_aligned_faces : All y-aligned (radially) aligned faces belonging to the associated spaces\n5) cells : All cells belonging to the associated spaces\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned faces inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned faces in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned faces in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned faces in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned faces connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned faces connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned faces defining the outer target\n14) inner_target : y-aligned faces defining the inner target\n15) core_boundary : Innermost x-aligned faces\n16) separatrix : x-aligned faces defining the active separatrix\n17) main_chamber_wall : x-aligned faces defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned faces defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned faces defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned faces defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned faces defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned faces defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned faces inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned faces in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned faces in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned faces in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned faces defining the non-active separatrix\n34) outer_baffle_2 : x-aligned faces defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned faces defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned faces defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned faces defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/identifier",
@@ -2513,7 +2513,7 @@
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].grid_subset[:].metric": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Metric of the canonical frame onto Cartesian coordinates",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/metric",
   "lifecycle_status": "alpha",
@@ -2531,7 +2531,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].metric.jacobian_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/metric/jacobian_error_index",
   "lifecycle_status": "alpha",
@@ -2573,7 +2573,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].metric.tensor_contravariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "alpha",
@@ -2619,7 +2619,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].grid_subset[:].metric.tensor_covariant_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant_error_index",
   "lifecycle_status": "alpha",
@@ -2652,7 +2652,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
   "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylinder\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular domain",
   "full_path": "mhd/grid_ggd(itime)/identifier",
@@ -2684,7 +2684,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of grid spaces",
   "full_path": "mhd/grid_ggd(itime)/space(i1)",
   "lifecycle_status": "alpha",
@@ -2702,7 +2702,7 @@
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].space[:].geometry_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Type of space geometry (0: standard, 1:Fourier)",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/geometry_type",
   "lifecycle_status": "alpha",
@@ -2730,7 +2730,7 @@
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].space[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_space_identifier.xml",
   "documentation": "Space identifier\n0) unspecified : unspecified\n1) primary_standard : Primary space defining the standard grid\n2) primary_staggered : Primary space defining a grid staggered with respect to the primary standard space",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/identifier",
@@ -2762,7 +2762,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)",
   "lifecycle_status": "alpha",
@@ -2773,7 +2773,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of objects for a given dimension",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)",
   "lifecycle_status": "alpha",
@@ -2784,7 +2784,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/boundary(i4)",
   "lifecycle_status": "alpha",
@@ -2820,7 +2820,7 @@
   "units": "mixed"
  },
  "mhd.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_index",
   "lifecycle_status": "alpha",
@@ -2857,7 +2857,7 @@
   "units": "m^dimension"
  },
  "mhd.grid_ggd[:].space[:].objects_per_dimension[:].object[:].measure_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "mhd/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_index",
   "lifecycle_status": "alpha",
@@ -2890,7 +2890,7 @@
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "mhd/grid_ggd(itime)/time",
   "lifecycle_status": "alpha",
@@ -2898,7 +2898,7 @@
   "units": "s"
  },
  "mhd.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "mhd/ids_properties",
   "lifecycle_status": "alpha",
@@ -2925,6 +2925,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "mhd.ids_properties.occurrence"
+ },
  "mhd.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -2943,7 +2948,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "mhd/time(:)",
   "lifecycle_status": "alpha",

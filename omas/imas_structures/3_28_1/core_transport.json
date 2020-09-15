@@ -9,7 +9,7 @@
   "specific_validation_rules": "yes"
  },
  "core_transport.code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
   "full_path": "core_transport/code",
   "lifecycle_status": "active",
@@ -62,7 +62,7 @@
   "type": "constant"
  },
  "core_transport.ids_properties": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
   "full_path": "core_transport/ids_properties",
   "lifecycle_status": "active",
@@ -89,6 +89,11 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_transport.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "core_transport.ids_properties.occurrence"
+ },
  "core_transport.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",
@@ -104,7 +109,7 @@
   "type": "constant"
  },
  "core_transport.ids_properties.version_put": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Version of the access layer package used to PUT this IDS",
   "full_path": "core_transport/ids_properties/version_put",
   "lifecycle_status": "active",
@@ -136,7 +141,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport is described by a combination of various transport models",
   "full_path": "core_transport/model(i1)",
   "lifecycle_status": "active",
@@ -144,7 +149,7 @@
   "structure_reference": "core_transport_model"
  },
  "core_transport.model[:].code": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Code-specific parameters used for this model",
   "full_path": "core_transport/model(i1)/code",
   "lifecycle_status": "active",
@@ -165,7 +170,7 @@
   "type": "constant"
  },
  "core_transport.model[:].code.output_flag": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
   "full_path": "core_transport/model(i1)/code/output_flag",
   "lifecycle_status": "active",
@@ -186,7 +191,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "core_transport/model(i1)/code/output_flag/time(:)",
   "lifecycle_status": "active",
@@ -231,7 +236,7 @@
   "units": "-"
  },
  "core_transport.model[:].flux_multiplier_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux_multiplier\"",
   "full_path": "core_transport/model(i1)/flux_multiplier_error_index",
   "lifecycle_status": "active",
@@ -254,7 +259,7 @@
   "units": "-"
  },
  "core_transport.model[:].identifier": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "doc_identifier": "core_transport/core_transport_identifier.xml",
   "documentation": "Transport model identifier\n0) unspecified : Unspecified transport type\n1) combined : Combination of data from available transport models. Representation of the total transport in the system\n2) transport_solver : Output from a transport solver\n3) background : Background transport level, ad-hoc transport model not directly related to a physics model\n4) database : Transport specified by a database entry external to the dynamic evolution of the plasma\n5) neoclassical : Neoclassical\n6) anomalous : Representation of turbulent transport\n19) mhd : Transport arising from MHD frequency modes\n20) ntm : Transport arising from the presence of NTMs\n21) sawteeth : Transport arising from the presence of sawteeth\n22) elm_continuous : Continuous ELM model --- gives the ELM averaged profile\n23) elm_resolved : Time resolved ELM model\n24) pedestal : Transport level to give edge pedestal\n25) not_provided : No data provided",
   "full_path": "core_transport/model(i1)/identifier",
@@ -288,7 +293,7 @@
   "coordinates": [
    "core_transport.model[:].profiles_1d[:].time"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficient profiles for various time slices. Fluxes and convection are positive (resp. negative) when outwards i.e. towards the LCFS (resp. inwards i.e.  towards the magnetic axes).",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)",
   "lifecycle_status": "active",
@@ -308,7 +313,7 @@
   "units": "ohm^-1.m^-1"
  },
  "core_transport.model[:].profiles_1d[:].conductivity_parallel_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/conductivity_parallel_error_index",
   "lifecycle_status": "active",
@@ -348,7 +353,7 @@
   "units": "V.m^-1"
  },
  "core_transport.model[:].profiles_1d[:].e_field_radial_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_radial\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/e_field_radial_error_index",
   "lifecycle_status": "active",
@@ -377,14 +382,14 @@
   "units": "V.m^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the electrons",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons",
   "lifecycle_status": "active",
   "structure_reference": "core_transport_model_electrons"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities for the electron energy equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy",
   "lifecycle_status": "active",
@@ -402,7 +407,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/d_error_index",
   "lifecycle_status": "active",
@@ -442,7 +447,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/flux_error_index",
   "lifecycle_status": "active",
@@ -482,7 +487,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/v_error_index",
   "lifecycle_status": "active",
@@ -511,7 +516,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities for the electron density equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles",
   "lifecycle_status": "active",
@@ -529,7 +534,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/d_error_index",
   "lifecycle_status": "active",
@@ -569,7 +574,7 @@
   "units": "m^-2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/flux_error_index",
   "lifecycle_status": "active",
@@ -609,7 +614,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/v_error_index",
   "lifecycle_status": "active",
@@ -638,7 +643,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].grid_d": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid for effective diffusivities and parallel conductivity",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d",
   "lifecycle_status": "active",
@@ -656,7 +661,7 @@
   "units": "m^2"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/area_error_index",
   "lifecycle_status": "active",
@@ -707,7 +712,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_boundary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_boundary_error_index",
   "lifecycle_status": "active",
@@ -730,7 +735,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_error_index",
   "lifecycle_status": "active",
@@ -773,7 +778,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_magnetic_axis_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_magnetic_axis_error_index",
   "lifecycle_status": "active",
@@ -807,7 +812,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_pol_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_pol_norm_error_index",
   "lifecycle_status": "active",
@@ -847,7 +852,7 @@
   "units": "m"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_tor_error_index",
   "lifecycle_status": "active",
@@ -887,7 +892,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -927,7 +932,7 @@
   "units": "m^3"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/volume_error_index",
   "lifecycle_status": "active",
@@ -956,7 +961,7 @@
   "units": "m^3"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid for fluxes",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux",
   "lifecycle_status": "active",
@@ -974,7 +979,7 @@
   "units": "m^2"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/area_error_index",
   "lifecycle_status": "active",
@@ -1025,7 +1030,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_boundary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_boundary_error_index",
   "lifecycle_status": "active",
@@ -1048,7 +1053,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_error_index",
   "lifecycle_status": "active",
@@ -1091,7 +1096,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_magnetic_axis_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_magnetic_axis_error_index",
   "lifecycle_status": "active",
@@ -1125,7 +1130,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_pol_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_pol_norm_error_index",
   "lifecycle_status": "active",
@@ -1165,7 +1170,7 @@
   "units": "m"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_tor_error_index",
   "lifecycle_status": "active",
@@ -1205,7 +1210,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -1245,7 +1250,7 @@
   "units": "m^3"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/volume_error_index",
   "lifecycle_status": "active",
@@ -1274,7 +1279,7 @@
   "units": "m^3"
  },
  "core_transport.model[:].profiles_1d[:].grid_v": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Grid for effective convections",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v",
   "lifecycle_status": "active",
@@ -1292,7 +1297,7 @@
   "units": "m^2"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.area_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/area_error_index",
   "lifecycle_status": "active",
@@ -1343,7 +1348,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_boundary_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_boundary_error_index",
   "lifecycle_status": "active",
@@ -1366,7 +1371,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_error_index",
   "lifecycle_status": "active",
@@ -1409,7 +1414,7 @@
   "units": "Wb"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_magnetic_axis_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_magnetic_axis_error_index",
   "lifecycle_status": "active",
@@ -1443,7 +1448,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_pol_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_pol_norm_error_index",
   "lifecycle_status": "active",
@@ -1483,7 +1488,7 @@
   "units": "m"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_tor_error_index",
   "lifecycle_status": "active",
@@ -1523,7 +1528,7 @@
   "units": "-"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_tor_norm_error_index",
   "lifecycle_status": "active",
@@ -1563,7 +1568,7 @@
   "units": "m^3"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.volume_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/volume_error_index",
   "lifecycle_status": "active",
@@ -1595,7 +1600,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the various ion species",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)",
   "lifecycle_status": "active",
@@ -1606,7 +1611,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)",
   "lifecycle_status": "active",
@@ -1622,7 +1627,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
   "lifecycle_status": "active",
@@ -1661,7 +1666,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -1694,7 +1699,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "active",
@@ -1717,7 +1722,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the ion energy equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy",
   "lifecycle_status": "active",
@@ -1735,7 +1740,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/d_error_index",
   "lifecycle_status": "active",
@@ -1775,7 +1780,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/flux_error_index",
   "lifecycle_status": "active",
@@ -1815,7 +1820,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/v_error_index",
   "lifecycle_status": "active",
@@ -1851,14 +1856,14 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the ion momentum equations for various components (directions)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum",
   "lifecycle_status": "active",
   "structure_reference": "core_transport_model_components_3_momentum"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Diamagnetic component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic",
   "lifecycle_status": "active",
@@ -1876,7 +1881,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/d_error_index",
   "lifecycle_status": "active",
@@ -1916,7 +1921,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -1956,7 +1961,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/flux_error_index",
   "lifecycle_status": "active",
@@ -1996,7 +2001,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/v_error_index",
   "lifecycle_status": "active",
@@ -2025,7 +2030,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel",
   "lifecycle_status": "active",
@@ -2043,7 +2048,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/d_error_index",
   "lifecycle_status": "active",
@@ -2083,7 +2088,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -2123,7 +2128,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/flux_error_index",
   "lifecycle_status": "active",
@@ -2163,7 +2168,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/v_error_index",
   "lifecycle_status": "active",
@@ -2192,7 +2197,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Poloidal component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal",
   "lifecycle_status": "active",
@@ -2210,7 +2215,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/d_error_index",
   "lifecycle_status": "active",
@@ -2250,7 +2255,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -2290,7 +2295,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/flux_error_index",
   "lifecycle_status": "active",
@@ -2330,7 +2335,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/v_error_index",
   "lifecycle_status": "active",
@@ -2359,7 +2364,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial",
   "lifecycle_status": "active",
@@ -2377,7 +2382,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/d_error_index",
   "lifecycle_status": "active",
@@ -2417,7 +2422,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -2457,7 +2462,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/flux_error_index",
   "lifecycle_status": "active",
@@ -2497,7 +2502,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/v_error_index",
   "lifecycle_status": "active",
@@ -2526,7 +2531,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal",
   "lifecycle_status": "active",
@@ -2544,7 +2549,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/d_error_index",
   "lifecycle_status": "active",
@@ -2584,7 +2589,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -2624,7 +2629,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/flux_error_index",
   "lifecycle_status": "active",
@@ -2664,7 +2669,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/v_error_index",
   "lifecycle_status": "active",
@@ -2707,7 +2712,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport related to the ion density equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles",
   "lifecycle_status": "active",
@@ -2725,7 +2730,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/d_error_index",
   "lifecycle_status": "active",
@@ -2765,7 +2770,7 @@
   "units": "m^-2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/flux_error_index",
   "lifecycle_status": "active",
@@ -2805,7 +2810,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/v_error_index",
   "lifecycle_status": "active",
@@ -2837,7 +2842,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the different states of the species",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "active",
@@ -2852,7 +2857,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the energy equation of the charge state considered ",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy",
   "lifecycle_status": "active",
@@ -2870,7 +2875,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/d_error_index",
   "lifecycle_status": "active",
@@ -2910,7 +2915,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/flux_error_index",
   "lifecycle_status": "active",
@@ -2950,7 +2955,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/v_error_index",
   "lifecycle_status": "active",
@@ -2994,14 +2999,14 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the state momentum equations for various components (directions)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum",
   "lifecycle_status": "active",
   "structure_reference": "core_transport_model_components_4_momentum"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Diamagnetic component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic",
   "lifecycle_status": "active",
@@ -3019,7 +3024,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/d_error_index",
   "lifecycle_status": "active",
@@ -3059,7 +3064,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -3099,7 +3104,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/flux_error_index",
   "lifecycle_status": "active",
@@ -3139,7 +3144,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/v_error_index",
   "lifecycle_status": "active",
@@ -3168,7 +3173,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Parallel component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel",
   "lifecycle_status": "active",
@@ -3186,7 +3191,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/d_error_index",
   "lifecycle_status": "active",
@@ -3226,7 +3231,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -3266,7 +3271,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/flux_error_index",
   "lifecycle_status": "active",
@@ -3306,7 +3311,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/v_error_index",
   "lifecycle_status": "active",
@@ -3335,7 +3340,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Poloidal component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal",
   "lifecycle_status": "active",
@@ -3353,7 +3358,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/d_error_index",
   "lifecycle_status": "active",
@@ -3393,7 +3398,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -3433,7 +3438,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/flux_error_index",
   "lifecycle_status": "active",
@@ -3473,7 +3478,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/v_error_index",
   "lifecycle_status": "active",
@@ -3502,7 +3507,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Radial component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial",
   "lifecycle_status": "active",
@@ -3520,7 +3525,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/d_error_index",
   "lifecycle_status": "active",
@@ -3560,7 +3565,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -3600,7 +3605,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/flux_error_index",
   "lifecycle_status": "active",
@@ -3640,7 +3645,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/v_error_index",
   "lifecycle_status": "active",
@@ -3669,7 +3674,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Toroidal component",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal",
   "lifecycle_status": "active",
@@ -3687,7 +3692,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/d_error_index",
   "lifecycle_status": "active",
@@ -3727,7 +3732,7 @@
   "units": "s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.flow_damping_rate_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/flow_damping_rate_error_index",
   "lifecycle_status": "active",
@@ -3767,7 +3772,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/flux_error_index",
   "lifecycle_status": "active",
@@ -3807,7 +3812,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/v_error_index",
   "lifecycle_status": "active",
@@ -3836,7 +3841,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].neutral_type": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/neutral_type",
   "lifecycle_status": "obsolescent",
@@ -3865,7 +3870,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to density equation of the charge state considered (thermal+non-thermal)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles",
   "lifecycle_status": "active",
@@ -3883,7 +3888,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/d_error_index",
   "lifecycle_status": "active",
@@ -3923,7 +3928,7 @@
   "units": "m^-2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/flux_error_index",
   "lifecycle_status": "active",
@@ -3963,7 +3968,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/v_error_index",
   "lifecycle_status": "active",
@@ -4000,7 +4005,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -4038,7 +4043,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].z_max_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
   "lifecycle_status": "active",
@@ -4069,7 +4074,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].z_min_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
   "lifecycle_status": "active",
@@ -4100,7 +4105,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].z_ion_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
   "lifecycle_status": "active",
@@ -4123,7 +4128,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for total toroidal momentum equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor",
   "lifecycle_status": "active",
@@ -4141,7 +4146,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/d_error_index",
   "lifecycle_status": "active",
@@ -4181,7 +4186,7 @@
   "units": "kg.m^-1.s^-2"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/flux_error_index",
   "lifecycle_status": "active",
@@ -4221,7 +4226,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/v_error_index",
   "lifecycle_status": "active",
@@ -4253,7 +4258,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the various neutral species",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)",
   "lifecycle_status": "active",
@@ -4264,7 +4269,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "List of elements forming the atom or molecule",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)",
   "lifecycle_status": "active",
@@ -4280,7 +4285,7 @@
   "units": "Atomic Mass Unit"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].a_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
   "lifecycle_status": "active",
@@ -4319,7 +4324,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
   "lifecycle_status": "active",
@@ -4352,7 +4357,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].z_n_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
   "lifecycle_status": "active",
@@ -4375,7 +4380,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients related to the neutral energy equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy",
   "lifecycle_status": "active",
@@ -4393,7 +4398,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/d_error_index",
   "lifecycle_status": "active",
@@ -4433,7 +4438,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/flux_error_index",
   "lifecycle_status": "active",
@@ -4473,7 +4478,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/v_error_index",
   "lifecycle_status": "active",
@@ -4523,7 +4528,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport related to the neutral density equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles",
   "lifecycle_status": "active",
@@ -4541,7 +4546,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/d_error_index",
   "lifecycle_status": "active",
@@ -4581,7 +4586,7 @@
   "units": "m^-2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/flux_error_index",
   "lifecycle_status": "active",
@@ -4621,7 +4626,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/v_error_index",
   "lifecycle_status": "active",
@@ -4653,7 +4658,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "struct_array",
+  "data_type": "STRUCT_ARRAY",
   "documentation": "Transport coefficients related to the different states of the species",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)",
   "lifecycle_status": "active",
@@ -4668,7 +4673,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to the energy equation of the charge state considered ",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy",
   "lifecycle_status": "active",
@@ -4686,7 +4691,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/d_error_index",
   "lifecycle_status": "active",
@@ -4726,7 +4731,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/flux_error_index",
   "lifecycle_status": "active",
@@ -4766,7 +4771,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/v_error_index",
   "lifecycle_status": "active",
@@ -4802,7 +4807,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport quantities related to density equation of the charge state considered (thermal+non-thermal)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles",
   "lifecycle_status": "active",
@@ -4820,7 +4825,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/d_error_index",
   "lifecycle_status": "active",
@@ -4860,7 +4865,7 @@
   "units": "m^-2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/flux_error_index",
   "lifecycle_status": "active",
@@ -4900,7 +4905,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/v_error_index",
   "lifecycle_status": "active",
@@ -4937,7 +4942,7 @@
   "units": "Elementary Charge Unit"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
   "lifecycle_status": "active",
@@ -4967,7 +4972,7 @@
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].time": {
-  "data_type": "flt_type",
+  "data_type": "FLT_0D",
   "documentation": "Time",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/time",
   "lifecycle_status": "active",
@@ -4975,7 +4980,7 @@
   "units": "s"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy": {
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for the total (summed over ion  species) energy equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy",
   "lifecycle_status": "active",
@@ -4993,7 +4998,7 @@
   "units": "m^2.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.d_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/d_error_index",
   "lifecycle_status": "active",
@@ -5033,7 +5038,7 @@
   "units": "W.m^-2"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.flux_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/flux_error_index",
   "lifecycle_status": "active",
@@ -5073,7 +5078,7 @@
   "units": "m.s^-1"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.v_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/v_error_index",
   "lifecycle_status": "active",
@@ -5105,7 +5110,7 @@
   "coordinates": [
    "1...N"
   ],
-  "data_type": "flt_1d_type",
+  "data_type": "FLT_1D_TYPE",
   "documentation": "Generic time",
   "full_path": "core_transport/time(:)",
   "lifecycle_status": "active",
@@ -5116,7 +5121,7 @@
  "core_transport.vacuum_toroidal_field": {
   "cocos_alias": "IDSPATH",
   "cocos_replace": "core_transport.vacuum_toroidal_field",
-  "data_type": "structure",
+  "data_type": "STRUCTURE",
   "documentation": "Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)",
   "full_path": "core_transport/vacuum_toroidal_field",
   "lifecycle_status": "active",
@@ -5138,7 +5143,7 @@
   "units": "T"
  },
  "core_transport.vacuum_toroidal_field.b0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_transport/vacuum_toroidal_field/b0_error_index",
   "lifecycle_status": "active",
@@ -5183,7 +5188,7 @@
   "units": "m"
  },
  "core_transport.vacuum_toroidal_field.r0_error_index": {
-  "data_type": "int_type",
+  "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_transport/vacuum_toroidal_field/r0_error_index",
   "lifecycle_status": "active",
