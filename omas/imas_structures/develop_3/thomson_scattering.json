@@ -420,6 +420,52 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "thomson_scattering.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "thomson_scattering/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "thomson_scattering.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "thomson_scattering/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "thomson_scattering/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "thomson_scattering/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "thomson_scattering/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "thomson_scattering/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "thomson_scattering.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",

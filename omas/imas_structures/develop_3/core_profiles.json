@@ -22,6 +22,52 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_profiles.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "core_profiles/code/library(i1)",
+  "lifecycle_status": "active",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "core_profiles.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "core_profiles/code/library(i1)/name",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_profiles/code/library(i1)/parameters",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/code/library(i1)/repository",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/code/library(i1)/version",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "core_profiles.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
@@ -205,7 +251,7 @@
    "core_profiles.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Bootstrap current",
+  "documentation": "Bootstrap current (toroidal component). Positive sign means anti-clockwise when viewed from above.",
   "full_path": "core_profiles/global_quantities/current_bootstrap(:)",
   "lifecycle_status": "active",
   "timebasepath": "time",
@@ -257,7 +303,7 @@
    "core_profiles.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Total non-inductive parallel current",
+  "documentation": "Total non-inductive current (toroidal component). Positive sign means anti-clockwise when viewed from above.",
   "full_path": "core_profiles/global_quantities/current_non_inductive(:)",
   "lifecycle_status": "active",
   "timebasepath": "time",
@@ -352,7 +398,7 @@
    "core_profiles.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Total plasma current",
+  "documentation": "Total plasma current (toroidal component). Positive sign means anti-clockwise when viewed from above.",
   "full_path": "core_profiles/global_quantities/ip(:)",
   "lifecycle_status": "active",
   "timebasepath": "time",
@@ -493,7 +539,7 @@
    "core_profiles.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "LCFS loop voltage",
+  "documentation": "LCFS loop voltage (positive value drives positive ohmic current that flows anti-clockwise when viewed from above)",
   "full_path": "core_profiles/global_quantities/v_loop(:)",
   "lifecycle_status": "active",
   "timebasepath": "time",
@@ -7405,7 +7451,7 @@
    "core_profiles.profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Safety factor",
+  "documentation": "Safety factor (IMAS uses COCOS=11: only positive when toroidal current and magnetic field are in same direction)",
   "full_path": "core_profiles/profiles_1d(itime)/q(:)",
   "lifecycle_status": "active",
   "type": "dynamic",

@@ -2,7 +2,7 @@
  "magnetics": {
   "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
   "full_path": "magnetics",
-  "lifecycle_last_change": "3.27.0",
+  "lifecycle_last_change": "3.30.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.24.0",
   "maxoccur": "3"
@@ -1859,6 +1859,52 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "magnetics.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "magnetics/code/library(i1)",
+  "lifecycle_status": "active",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "magnetics.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "magnetics/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "magnetics/code/library(i1)/name",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "magnetics/code/library(i1)/parameters",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "magnetics/code/library(i1)/repository",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "magnetics/code/library(i1)/version",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "magnetics.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
@@ -1897,6 +1943,83 @@
   "full_path": "magnetics/code/version",
   "lifecycle_status": "active",
   "type": "constant"
+ },
+ "magnetics.diamagnetic_flux": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "magnetics.diamagnetic_flux{i}.data",
+  "cocos_transformation_expression": ".sigma_b0_eff",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Diamagnetic flux. The array of structure corresponds to a set of calculation methods (starting with the generally recommended method).",
+  "full_path": "magnetics/diamagnetic_flux(i1)",
+  "lifecycle_status": "active",
+  "maxoccur": "5",
+  "structure_reference": "magnetics_method_distinct",
+  "units": "Wb"
+ },
+ "magnetics.diamagnetic_flux[:].data": {
+  "coordinates": [
+   "magnetics.diamagnetic_flux[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/diamagnetic_flux(i1)/data(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.diamagnetic_flux[:].data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/diamagnetic_flux(i1)/data_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.diamagnetic_flux[:].data_error_lower": {
+  "coordinates": [
+   "magnetics.diamagnetic_flux[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/diamagnetic_flux(i1)/data_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.diamagnetic_flux[:].data_error_upper": {
+  "coordinates": [
+   "magnetics.diamagnetic_flux[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/diamagnetic_flux(i1)/data_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "magnetics.diamagnetic_flux[:].method_name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the calculation method",
+  "full_path": "magnetics/diamagnetic_flux(i1)/method_name",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.diamagnetic_flux[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "magnetics/diamagnetic_flux(i1)/time(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
  },
  "magnetics.flux_loop": {
   "coordinates": [
@@ -2369,6 +2492,83 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "magnetics.ip": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "magnetics.ip{i}.data",
+  "cocos_transformation_expression": ".sigma_ip_eff",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above. The array of structure corresponds to a set of calculation methods (starting with the generally recommended method).",
+  "full_path": "magnetics/ip(i1)",
+  "lifecycle_status": "active",
+  "maxoccur": "5",
+  "structure_reference": "magnetics_method_distinct",
+  "units": "A"
+ },
+ "magnetics.ip[:].data": {
+  "coordinates": [
+   "magnetics.ip[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/ip(i1)/data(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.ip[:].data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/ip(i1)/data_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.ip[:].data_error_lower": {
+  "coordinates": [
+   "magnetics.ip[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/ip(i1)/data_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.ip[:].data_error_upper": {
+  "coordinates": [
+   "magnetics.ip[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/ip(i1)/data_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "magnetics.ip[:].method_name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the calculation method",
+  "full_path": "magnetics/ip(i1)/method_name",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.ip[:].time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "magnetics/ip(i1)/time(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "magnetics.method": {
   "coordinates": [
    "1...N"
@@ -2376,75 +2576,10 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "A method generating processed quantities derived from the magnetic measurements",
   "full_path": "magnetics/method(i1)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.30.0",
   "maxoccur": "10",
   "structure_reference": "magnetics_method"
- },
- "magnetics.method[:].diamagnetic_flux": {
-  "cocos_label_transformation": "b0_like",
-  "cocos_leaf_name_aos_indices": "magnetics.method{i}.diamagnetic_flux.data",
-  "cocos_transformation_expression": ".sigma_b0_eff",
-  "data_type": "STRUCTURE",
-  "documentation": "Diamagnetic flux",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux",
-  "lifecycle_status": "active",
-  "structure_reference": "signal_flt_1d",
-  "units": "Wb"
- },
- "magnetics.method[:].diamagnetic_flux.data": {
-  "coordinates": [
-   "magnetics.method[:].diamagnetic_flux.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux/data(:)",
-  "lifecycle_status": "active",
-  "timebasepath": "diamagnetic_flux/time",
-  "type": "dynamic",
-  "units": "Wb"
- },
- "magnetics.method[:].diamagnetic_flux.data_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_index",
-  "lifecycle_status": "active",
-  "type": "constant"
- },
- "magnetics.method[:].diamagnetic_flux.data_error_lower": {
-  "coordinates": [
-   "magnetics.method[:].diamagnetic_flux.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_lower(:)",
-  "lifecycle_status": "active",
-  "timebasepath": "diamagnetic_flux/time",
-  "type": "dynamic",
-  "units": "Wb"
- },
- "magnetics.method[:].diamagnetic_flux.data_error_upper": {
-  "coordinates": [
-   "magnetics.method[:].diamagnetic_flux.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux/data_error_upper(:)",
-  "lifecycle_status": "active",
-  "timebasepath": "diamagnetic_flux/time",
-  "type": "dynamic",
-  "units": "Wb"
- },
- "magnetics.method[:].diamagnetic_flux.time": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "magnetics/method(i1)/diamagnetic_flux/time(:)",
-  "lifecycle_status": "active",
-  "timebasepath": "diamagnetic_flux/time",
-  "type": "dynamic",
-  "units": "s"
  },
  "magnetics.method[:].ip": {
   "cocos_label_transformation": "ip_like",
@@ -2453,7 +2588,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above.",
   "full_path": "magnetics/method(i1)/ip",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -2464,7 +2599,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "magnetics/method(i1)/ip/data(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
@@ -2473,7 +2608,7 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "magnetics.method[:].ip.data_error_lower": {
@@ -2483,7 +2618,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
@@ -2495,7 +2630,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "A"
@@ -2507,7 +2642,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "magnetics/method(i1)/ip/time(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "ip/time",
   "type": "dynamic",
   "units": "s"
@@ -2516,7 +2651,7 @@
   "data_type": "STR_0D",
   "documentation": "Name of the data processing method",
   "full_path": "magnetics/method(i1)/name",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "static"
  },
  "magnetics.rogowski_coil": {

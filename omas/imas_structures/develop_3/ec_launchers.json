@@ -2,7 +2,7 @@
  "ec_launchers": {
   "documentation": "Launchers for heating and current drive in the electron cyclotron (EC) frequencies.",
   "full_path": "ec_launchers",
-  "lifecycle_last_change": "3.29.1",
+  "lifecycle_last_change": "3.30.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -18,6 +18,52 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "ec_launchers/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "ec_launchers.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "ec_launchers/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "ec_launchers/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "ec_launchers/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "ec_launchers/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "ec_launchers/code/library(i1)/version",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

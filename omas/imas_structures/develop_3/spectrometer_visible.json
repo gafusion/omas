@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.26.0",
+  "lifecycle_last_change": "3.30.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -4170,6 +4170,1044 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
+ "spectrometer_visible.channel[:].polarization_spectroscopy": {
+  "data_type": "STRUCTURE",
+  "documentation": "Physics quantities measured from polarized light spectroscopy",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_channel_polarization"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.b_field_modulus": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Modulus of the magnetic field (always positive, irrespective of the sign convention for the B-field direction), obtained from Zeeman effect fit",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/b_field_modulus(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.b_field_modulus_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"b_field_modulus\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/b_field_modulus_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.b_field_modulus_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"b_field_modulus\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/b_field_modulus_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.b_field_modulus_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"b_field_modulus\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/b_field_modulus_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_r": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower Hybrid electric field component in the major radius direction",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_r(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"e_field_lh_r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_r_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"e_field_lh_r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_r_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"e_field_lh_r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_tor": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower Hybrid electric field component in the toroidal direction",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_tor(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"e_field_lh_tor\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_tor_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_tor_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"e_field_lh_tor\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_tor_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_tor_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"e_field_lh_tor\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_tor_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_z": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower Hybrid electric field component in the vertical direction",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_z(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"e_field_lh_z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_z_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"e_field_lh_z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_z_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"e_field_lh_z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.n_e": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Electron density, obtained from Stark broadening fit",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/n_e(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.n_e_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"n_e\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/n_e_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.n_e_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"n_e\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/n_e_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.n_e_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"n_e\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/n_e_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_cold_neutrals": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Fit of cold neutrals temperature",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_cold_neutrals(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_cold_neutrals_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"temperature_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_cold_neutrals_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_cold_neutrals_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_cold_neutrals_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_cold_neutrals_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_cold_neutrals_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_hot_neutrals": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Fit of hot neutrals temperature",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_hot_neutrals(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_hot_neutrals_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"temperature_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_hot_neutrals_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_hot_neutrals_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"temperature_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_hot_neutrals_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_hot_neutrals_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"temperature_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_hot_neutrals_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Timebase for dynamic quantities at this level of the data structure",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_cold_neutrals": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Projection of the cold neutral velocity along the line of sight, positive when going from first point to second point of the line of sight",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_cold_neutrals(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_cold_neutrals_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"velocity_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_cold_neutrals_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_cold_neutrals_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_cold_neutrals_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_cold_neutrals_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_cold_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_cold_neutrals_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_hot_neutrals": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Projection of the hot neutral velocity along the line of sight, positive when going from first point to second point of the line of sight",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_hot_neutrals(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_hot_neutrals_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"velocity_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_hot_neutrals_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_hot_neutrals_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"velocity_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_hot_neutrals_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_hot_neutrals_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarization_spectroscopy.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"velocity_hot_neutrals\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_hot_neutrals_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "polarization_spectroscopy/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "spectrometer_visible.channel[:].polarizer": {
+  "data_type": "STRUCTURE",
+  "documentation": "Polarizer description",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer",
+  "lifecycle_status": "alpha",
+  "structure_reference": "detector_aperture"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre": {
+  "data_type": "STRUCTURE",
+  "documentation": "If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.centre.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.geometry_type": {
+  "data_type": "INT_0D",
+  "documentation": "Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular', 3:'rectangle'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.  In case of 'rectangle', the surface is a rectangle defined by its centre, widths in the X1 and X2 directions, and normal vector oriented towards the plasma X3.",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/geometry_type",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline": {
+  "data_type": "STRUCTURE",
+  "documentation": "Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline",
+  "lifecycle_status": "alpha",
+  "structure_reference": "x1x21d_static"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x1": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x1 axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x1(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x1_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x1_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x1_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x2": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarizer.outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Positions along x2 axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x2(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x2_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x2_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarizer.outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.outline.x2_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].polarizer.outline.x1"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.radius": {
+  "data_type": "FLT_0D",
+  "documentation": "Radius of the circle, used only if geometry_type = 2",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/radius",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.radius_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radius\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/radius_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.radius_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"radius\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/radius_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.radius_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"radius\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/radius_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.surface": {
+  "data_type": "FLT_0D",
+  "documentation": "Surface of the detector/aperture, derived from the above geometric data",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/surface",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "spectrometer_visible.channel[:].polarizer.surface_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"surface\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/surface_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.surface_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/surface_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "spectrometer_visible.channel[:].polarizer.surface_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/surface_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the aperture in the X1 direction, used only if geometry_type = 3",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_width_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x1_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the aperture in the X2 direction, used only if geometry_type = 3",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_width_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x2_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2_width\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "xyz0d_static"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along X axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/x",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/x_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/x_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/x_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.y": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Y axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/y",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.y_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/y_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.y_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/y_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.y_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"y\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/y_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Component along Z axis",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer.x3_unit_vector.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].polarizer_active": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of whether a polarizer is present and active in the optical system (set to 1 in this case, set to 0 or leave empty ottherwise)",
+  "full_path": "spectrometer_visible/channel(i1)/polarizer_active",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
  "spectrometer_visible.channel[:].type": {
   "data_type": "STRUCTURE",
   "documentation": "Type of spectrometer the channel is connected to (index=1: grating, 2: filter)",
@@ -4246,6 +5284,52 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_visible/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "spectrometer_visible/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "spectrometer_visible.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_visible/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "spectrometer_visible/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_visible/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_visible/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_visible/code/library(i1)/version",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

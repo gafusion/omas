@@ -21,6 +21,52 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "gas_injection.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "gas_injection/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "gas_injection.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gas_injection/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "gas_injection/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "gas_injection/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gas_injection/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gas_injection.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gas_injection/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "gas_injection.code.name": {
   "data_type": "STR_0D",
   "documentation": "Name of software generating IDS",
