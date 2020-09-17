@@ -22,7 +22,7 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
-    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
+    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'omas_service', 'omas_service_script',
 ]
 # fmt: on
