@@ -2137,13 +2137,7 @@ def gas_injection_overlay(
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
             ax.text(
-                r + label_dr[i],
-                z + label_dz[i],
-                label,
-                color=gas_mark[0].get_color(),
-                va=label_va[i],
-                ha=label_ha[i],
-                fontsize=notesize,
+                r + label_dr[i], z + label_dz[i], label, color=gas_mark[0].get_color(), va=label_va[i], ha=label_ha[i], fontsize=notesize
             )
 
     return {'ax': ax}
@@ -2306,11 +2300,7 @@ def magnetics_overlay(
             test_checker='~numpy.isnan(checker)',
         )
     nfl = get_channel_count(
-        ods,
-        'magnetics',
-        check_loc='magnetics.flux_loop.0.position.0.r',
-        channels_name='flux_loop',
-        test_checker='~numpy.isnan(checker)',
+        ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop', test_checker='~numpy.isnan(checker)'
     )
     if max([nbp, nfl]) == 0:
         return {'ax': ax}
@@ -2374,10 +2364,7 @@ def interferometer_overlay(ods, ax=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods,
-        'interferometer',
-        check_loc='interferometer.channel.0.line_of_sight.first_point.r',
-        test_checker='~numpy.isnan(checker)',
+        ods, 'interferometer', check_loc='interferometer.channel.0.line_of_sight.first_point.r', test_checker='~numpy.isnan(checker)'
     )
     if nc == 0:
         return {'ax': ax}
@@ -2434,10 +2421,7 @@ def thomson_scattering_overlay(ods, ax=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods,
-        'thomson_scattering',
-        check_loc='thomson_scattering.channel.0.position.r',
-        test_checker='~numpy.isnan(checker)',
+        ods, 'thomson_scattering', check_loc='thomson_scattering.channel.0.position.r', test_checker='~numpy.isnan(checker)'
     )
     if nc == 0:
         return {'ax': ax}
@@ -2509,10 +2493,7 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods,
-        'charge_exchange',
-        check_loc='charge_exchange.channel.0.position.r.data',
-        test_checker='any(~numpy.isnan(checker))',
+        ods, 'charge_exchange', check_loc='charge_exchange.channel.0.position.r.data', test_checker='any(~numpy.isnan(checker))'
     )
     if nc == 0:
         return {'ax': ax}
@@ -2617,10 +2598,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
 
     # Make sure there is something to plot or else just give up and return
     nc = get_channel_count(
-        ods,
-        'bolometer',
-        check_loc='bolometer.channel.0.line_of_sight.first_point.r',
-        test_checker='~numpy.isnan(checker)',
+        ods, 'bolometer', check_loc='bolometer.channel.0.line_of_sight.first_point.r', test_checker='~numpy.isnan(checker)'
     )
     if nc == 0:
         return {'ax': ax}

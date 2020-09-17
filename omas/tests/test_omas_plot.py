@@ -409,8 +409,7 @@ class TestOmasPlot(unittest.TestCase):
 
         # Overlay with customizations
         lp_ods.plot_overlay(
-            thomson_scattering=False,
-            langmuir_probes=dict(colors='r', label_ha='left', label_va='top', embedded_probes=['donkey!', 'zzz']),
+            thomson_scattering=False, langmuir_probes=dict(colors='r', label_ha='left', label_va='top', embedded_probes=['donkey!', 'zzz'])
         )
 
         # Direct call

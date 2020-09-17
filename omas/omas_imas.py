@@ -627,6 +627,12 @@ def load_omas_imas(
 
 
 class dynamic_omas_imas(dynamic_ODS):
+    """
+    Class that provides dynamic data loading from NC file
+    This class is not to be used by itself, but via the
+    ODS.open() method.
+    """
+
     def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
         self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose}
         self.ids = None
@@ -924,7 +930,7 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
 
     # always list all arrays of structures
     if list(ds.keys())[0] == ':':
-        return range(len(ids))
+        return list(range(len(ids)))
 
     # find which keys have at least one filled path underneath
     filled_keys = []

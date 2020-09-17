@@ -40,14 +40,7 @@ def dataset_description(ods):
 
 @add_to_ODS
 def equilibrium(
-    ods,
-    time_index=0,
-    include_profiles=True,
-    include_phi=True,
-    include_psi=True,
-    include_wall=True,
-    include_q=True,
-    include_xpoint=False,
+    ods, time_index=0, include_profiles=True, include_phi=True, include_psi=True, include_wall=True, include_q=True, include_xpoint=False
 ):
     """
     Add sample equilibrium data

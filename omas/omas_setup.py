@@ -33,6 +33,23 @@ import tempfile
 import warnings
 from functools import wraps
 import ast
+import base64
+import traceback
+
+try:
+    import Pyro5.api
+except ImportError:
+
+    class dummyPyro5:
+        def __getattr__(self, key):
+            print(key)
+            return self
+
+        def expose(self, f):
+            return f
+
+    Pyro5 = dummyPyro5()
+    print('OMAS %s requires Pyro5. In future versions this will become a required Python package.' % __version__)
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: formatwarning_orig(

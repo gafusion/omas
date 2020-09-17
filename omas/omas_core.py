@@ -15,7 +15,6 @@ __all__ = [
     'save_omas_json', 'load_omas_json', 'through_omas_json',
     'save_omas_mongo', 'load_omas_mongo', 'through_omas_mongo',
     'save_omas_hdc', 'load_omas_hdc', 'through_omas_hdc',
-    'load_omas_uda',
     'save_omas_nc', 'load_omas_nc', 'through_omas_nc',
     'save_omas_h5', 'load_omas_h5', 'through_omas_h5',
     'save_omas_ds', 'load_omas_ds', 'through_omas_ds',
@@ -23,7 +22,8 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
-    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__'
+    'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
+    'omas_service', 'omas_service_script',
 ]
 # fmt: on
 
@@ -1053,8 +1053,8 @@ class ODS(MutableMapping):
             if self.dynamic_path_creation:
                 if self.dynamic:
                     location = l2o([self.location, key[0]])
-                if self.dynamic and location in self.dynamic:
-                    value = self.dynamic[location]
+                if self.dynamic is not None and self.dynamic.__contains__(location):
+                    value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
                 else:
                     dynamically_created = True
@@ -1278,9 +1278,9 @@ class ODS(MutableMapping):
         if dynamic and self.dynamic:
             dynamic_keys = list(self.dynamic.keys(self.location))
         if isinstance(self.omas_data, dict):
-            return sorted(list(map(str, self.omas_data.keys())) + dynamic_keys)
+            return sorted(numpy.unique(list(map(str, self.omas_data.keys())) + dynamic_keys).tolist())
         elif isinstance(self.omas_data, list):
-            return sorted(list(range(len(self.omas_data))) + dynamic_keys)
+            return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
         else:
             return dynamic_keys
 
@@ -1305,6 +1305,12 @@ class ODS(MutableMapping):
         if 'summary.ids_properties.comment' in self:
             s += ' ' + repr(self['summary.ids_properties.comment'])
         return s, []
+
+    def __tree_keys__(self):
+        """
+        OMFIT tree keys display dynamic
+        """
+        return self.keys(dynamic=True)
 
     def get(self, key, default=None):
         r"""
@@ -1789,6 +1795,7 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
+        remote = kw.pop('remote', False)
         # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw.pop('consistency_check')
@@ -1814,8 +1821,7 @@ class ODS(MutableMapping):
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
-
-            self.dynamic = eval('dynamic_omas_' + ext)(*args, **kw)
+            self.dynamic = dynamic_ODS_wrapper(ext, remote, *args, **kw)
             self.dynamic.open()
             return self.dynamic
         else:
@@ -1949,7 +1955,152 @@ class ODS(MutableMapping):
         return '\n'.join(txt)
 
 
+def serializable(f):
+    def serializable_f(*args, **kw):
+        tmp = f(*args, **kw)
+        if hasattr(tmp, 'tolist'):
+            return tmp.tolist()
+        else:
+            return tmp
+
+    return serializable_f
+
+
+class dynamic_ODS_wrapper:
+    def __init__(self, ext, remote, *args, **kw):
+        r"""
+        :param ext: format of the dynamic load
+
+        :param remote: False for local dynamic data access
+                       integer with the port number for remote data access on localhost
+                       string with server and port number in the format `server:port`
+
+        :param \*args: arguments passed to dynamic load function
+
+        :param \**kw: keyword arguments passed to dynamic load function
+        """
+        self.ext = ext
+        self.remote = remote
+        if remote:
+            if isinstance(remote, int):
+                remote = 'PYRO:dynamic_ODS_factory@localhost:%d' % remote
+            factory = Pyro5.api.Proxy(remote)
+        else:
+            factory = dynamic_ODS_factory()
+        self.factory = factory.initialize(self.idc, ext, *args, **kw)
+        self.keys_cache = {}
+        self.contains_cache = {}
+
+    @property
+    def idc(self):
+        return id(self)
+
+    def open(self, *args, **kw):
+        if self.remote:
+            self.factory._pyroClaimOwnership()
+        return self.factory.open(self.idc, *args, **kw)
+
+    def close(self, *args, **kw):
+        if self.remote:
+            self.factory._pyroClaimOwnership()
+        return self.factory.close(self.idc, *args, **kw)
+
+    def __enter__(self, *args, **kw):
+        if self.remote:
+            self.factory._pyroClaimOwnership()
+        return self.factory.enter(self.idc, *args, **kw)
+
+    def __exit__(self, *args, **kw):
+        if self.remote:
+            self.factory._pyroClaimOwnership()
+        return self.factory.exit(self.idc, *args, **kw)
+
+    def keys(self, location, *args, **kw):
+        if location not in self.keys_cache:
+            if self.remote:
+                self.factory._pyroClaimOwnership()
+            self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
+        return self.keys_cache[location]
+
+    def __contains__(self, location, *args, **kw):
+        if location not in self.contains_cache:
+            if self.remote:
+                self.factory._pyroClaimOwnership()
+            self.contains_cache[location] = self.factory.__contains__(self.idc, location, *args, **kw)
+        return self.contains_cache[location]
+
+    def __getitem__(self, *args, **kw):
+        if self.remote:
+            self.factory._pyroClaimOwnership()
+        if self.remote:
+            tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
+            tmp = base64.b64decode(tmp['data'])
+            return pickle.loads(tmp)
+        else:
+            return self.factory.__getitem__(self.idc, self.remote, *args, **kw)
+
+
+pyro_cases = {}
+
+
+@Pyro5.api.expose
+class dynamic_ODS_factory:
+    """
+    Class file that serves the dynamic data
+    pyro_cases holds the instances of dynamic_omas objects
+    organized according an ID connection (idc) that is passed
+    to all methods of this class. Dynamic serving of data
+    through this class is needed to provide the same interface
+    whether the data is local or is accessed remotely via Pyro.
+    """
+
+    def initialize(self, idc, ext, *args, **kw):
+        if ext == 'nc':
+            from omas.omas_nc import dynamic_omas_nc
+
+            tmp = dynamic_omas_nc(*args, **kw)
+        elif ext == 'imas':
+            from omas.omas_imas import dynamic_omas_imas
+
+            tmp = dynamic_omas_imas(*args, **kw)
+        if idc not in pyro_cases:
+            pyro_cases[idc] = tmp
+        return self
+
+    def open(self, idc, *args, **kw):
+        return pyro_cases[idc].open(*args, **kw)
+
+    def close(self, idc, *args, **kw):
+        tmp = pyro_cases[idc].close(*args, **kw)
+        del pyro_cases[idc]
+        return tmp
+
+    def enter(self, idc, *args, **kw):
+        return pyro_cases[idc].__enter__(*args, **kw)
+
+    def exit(self, idc, *args, **kw):
+        tmp = pyro_cases[idc].__exit__(*args, **kw)
+        del pyro_cases[idc]
+        return tmp
+
+    def keys(self, idc, *args, **kw):
+        return numpy.atleast_1d(pyro_cases[idc].keys(*args, **kw)).tolist()
+
+    def __contains__(self, idc, *args, **kw):
+        return pyro_cases[idc].__contains__(*args, **kw)
+
+    def __getitem__(self, idc, remote, *args, **kw):
+        if remote:
+            return pickle.dumps(pyro_cases[idc].__getitem__(*args, **kw), protocol=omas_rcparams['pickle_protocol'])
+        else:
+            return pyro_cases[idc].__getitem__(*args, **kw)
+
+
 class dynamic_ODS:
+    """
+    Abstract base class that dynamic_omas_... classes inherit from
+    """
+
     kw = {}
 
     active = False
@@ -2343,4 +2494,5 @@ from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
 from .omas_mongo import *
+from .omas_service import *
 from . import omas_structure

@@ -17,6 +17,7 @@ install_requires = [
     'xmltodict',
     'xarray',
     'setuptools>=41.2',
+    'pyro5',
 ]
 
 extras_require = {

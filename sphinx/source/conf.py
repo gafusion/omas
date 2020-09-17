@@ -443,9 +443,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, 'omas.tex', 'OMAS documentation', 'Orso Meneghini', 'manual'),
-]
+latex_documents = [(master_doc, 'omas.tex', 'OMAS documentation', 'Orso Meneghini', 'manual')]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -491,7 +489,7 @@ man_pages = [(master_doc, 'OMAS', 'OMAS documentation', [author], 1)]
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'OMAS', 'OMAS documentation', author, 'OMAS', 'Ordered Multidimensional Array Structures', 'Miscellaneous'),
+    (master_doc, 'OMAS', 'OMAS documentation', author, 'OMAS', 'Ordered Multidimensional Array Structures', 'Miscellaneous')
 ]
 
 # Documents to append as an appendix to all manuals.

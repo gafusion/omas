@@ -102,6 +102,12 @@ def load_omas_nc(filename, consistency_check=True):
 
 
 class dynamic_omas_nc(dynamic_ODS):
+    """
+    Class that provides dynamic data loading from NC file
+    This class is not to be used by itself, but via the
+    ODS.open() method.
+    """
+
     def __init__(self, filename):
         self.kw = {'filename': filename}
         self.dataset = None
@@ -117,6 +123,7 @@ class dynamic_omas_nc(dynamic_ODS):
 
     def close(self):
         printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.dataset.close()
         self.dataset = None
         self.active = False
         return self
