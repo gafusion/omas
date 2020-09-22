@@ -62,8 +62,11 @@ json:
 	cd omas/utilities && python3 build_json_structures.py
 	make cocos
 
-cocos:
+cocos: symbols
 	cd omas/utilities && python3 generate_cocos_signals.py
+
+symbols:
+	cd omas/utilities && python3 sort_symbols.py
 
 tag:
 	git tag -a v$(VERSION) $$(git log --pretty=format:"%h" --grep="^version $(VERSION)") -m "version $(VERSION)"

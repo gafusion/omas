@@ -427,6 +427,20 @@ class TestOmasCore(unittest.TestCase):
         assert len(ods['ec_launchers.code.parameters.launcher.0']) == 2
         return
 
+    def test_latexit(self):
+        assert latexit['somewhere.:.sublocation.n_e'] == '$n_e$'
+        assert latexit['n_e'] == '$n_e$'
+        assert latexit['.n_e'] == '$n_e$'
+        assert latexit['n_e'] == '$n_e$'
+
+        try:
+            latexit['somewhere.does_not_exist']
+            raise RuntimeError('latexit of missing variable should fail')
+        except KeyError:
+            pass
+
+        assert latexit.get('somewhere.does_not_exist', 'somewhere.does_not_exist') == 'somewhere.does_not_exist'
+
     # End of TestOmasCore class
 
 

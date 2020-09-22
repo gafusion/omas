@@ -3120,13 +3120,6 @@ def summary(ods, fig=None, quantity=None, **kw):
     return {'ax': axs}
 
 
-latexit = {}
-latexit['rho_tor_norm'] = '$\\rho$'
-latexit['zeff'] = '$Z_{\\rm eff}$'
-latexit['m^-3'] = '$m^{-3}$'
-latexit['psi'] = '$\\psi$'
-
-
 @add_to__ODS__
 def quantity(
     ods, key, yname=None, xname=None, yunits=None, xunits=None, ylabel=None, xlabel=None, label=None, xnorm=1.0, ynorm=1.0, ax=None, **kw
