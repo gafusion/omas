@@ -5,6 +5,7 @@
 
 from .omas_utils import *
 from .omas_physics import cocos_transform
+from .omas_symbols import latexit
 
 __all__ = []
 __ods__ = []
