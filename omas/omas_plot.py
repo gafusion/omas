@@ -5,6 +5,7 @@
 
 from .omas_utils import *
 from .omas_physics import cocos_transform
+from .omas_symbols import latexit
 
 __all__ = []
 __ods__ = []
@@ -3118,13 +3119,6 @@ def summary(ods, fig=None, quantity=None, **kw):
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
 
     return {'ax': axs}
-
-
-latexit = {}
-latexit['rho_tor_norm'] = '$\\rho$'
-latexit['zeff'] = '$Z_{\\rm eff}$'
-latexit['m^-3'] = '$m^{-3}$'
-latexit['psi'] = '$\\psi$'
 
 
 @add_to__ODS__

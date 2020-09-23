@@ -23,7 +23,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'omas_service', 'omas_service_script',
+    'omas_service', 'omas_service_script', 'latexit'
 ]
 # fmt: on
 
@@ -1488,7 +1488,7 @@ class ODS(MutableMapping):
 
         :param search_pattern: regular expression ODS location string
 
-        :param n: raise an error if a numbe of occurrences different from n is found
+        :param n: raise an error if a number of occurrences different from n is found
 
         :param regular_expression_startswith: indicates that use of regular expressions
                in the search_pattern is preceeded by certain characters.
@@ -2494,5 +2494,6 @@ from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
 from .omas_mongo import *
+from .omas_symbols import *
 from .omas_service import *
 from . import omas_structure
