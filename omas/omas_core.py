@@ -129,7 +129,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         and len(info['coordinates'])
         and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
     ):
-        txt = f'{location} must be an array with dimensions {info["coordinates"]}'
+        txt = f'{location} has {len(value.shape)} dimensions should have coordinates: {info["coordinates"]}'
 
     if len(txt) and consistency_check is True:
         raise ValueError(txt)
@@ -900,7 +900,10 @@ class ODS(MutableMapping):
                     if not len(self.omas_data):
                         raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
                     else:
-                        raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+                        raise IndexError(
+                            '`%s[%d]` but maximun index is %d.\nPerhaps you want to set ods.dynamic_path_creation=\'dynamic_array_structures\''
+                            % (self.location, key[0], len(self.omas_data) - 1)
+                        )
 
         # pass the value one level deeper
         # and cleanup dynamically created branches if necessary (eg. if consistency check fails)
