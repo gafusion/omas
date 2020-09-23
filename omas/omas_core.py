@@ -129,7 +129,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         and len(info['coordinates'])
         and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
     ):
-        txt = f'{location} has {len(value.shape)} dimensions should have coordinates: {info["coordinates"]}'
+        txt = f'{location} shape {numpy.asarray(value).shape} is inconsistent with coordinates: {info["coordinates"]}'
 
     if len(txt) and consistency_check is True:
         raise ValueError(txt)
@@ -267,6 +267,12 @@ class ODS(MutableMapping):
                             continue
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
+                        # if the time returned is multidimensional (eg. because we are querying the time across different diagnostic channels)
+                        # squash the multidimensional time arrays if they are all the same
+                        if len(time.shape) > 1:
+                            time = numpy.reshape(time, (-1, time.shape[-1]))
+                            if all([numpy.allclose(time[0], t) for t in time[1:]]):
+                                time = time[0]
                     times[item] = time
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):
@@ -282,19 +288,8 @@ class ODS(MutableMapping):
             if not len(times_values):
                 time = None
                 extra_info['homogeneous_time'] = None
-            # if there is a single time entry, or there are multiple time entries that are all consistent with one another
-            elif len(times) == 1 or all(
-                [times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]
-            ):
-                time = times_values[0]
-                extra_info['homogeneous_time'] = True
-                if isinstance(time, (float, int)):
-                    return time
-                elif time_array_index is not None:
-                    return time[time_array_index]
-                return time
             # We crossed [:] or something and picked up a 2D time array
-            elif any([len(time.shape) > 1 for time in times_values]):
+            elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
                 # Make a 1D reference time0 that can be comapred against other time arrays
                 time0 = list(times.values())[0]
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
@@ -313,9 +308,18 @@ class ODS(MutableMapping):
                 else:  # Similar to ValueError exception caught above
                     extra_info['homogeneous_time'] = False
                     return None
+            # if the time entries that are all consistent with one another
+            elif all([len(numpy.asarray(time).shape) == 1 and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
+                time = times_values[0]
+                extra_info['homogeneous_time'] = True
+                if isinstance(time, (float, int)):
+                    return time
+                elif time_array_index is not None:
+                    return time[time_array_index]
+                return time
             # there are inconsistencies with different ways of specifying times in the IDS
             else:
-                raise ValueError('Inconsistent time definitions in %s' % times.keys())
+                raise ValueError('Inconsistent time definitions in:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()]))
 
         return None
 
