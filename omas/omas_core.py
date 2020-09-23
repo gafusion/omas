@@ -1028,28 +1028,59 @@ class ODS(MutableMapping):
 
         # data slicing
         if key[0] == ':':
-            data = []
+            data0 = []
             for k, item in enumerate(self.keys(dynamic=True)):
                 try:
-                    data.append(self.__getitem__([item] + key[1:], cocos_and_coords))
+                    data0.append(self.__getitem__([item] + key[1:], cocos_and_coords))
                 except ValueError:
-                    data.append([])
-            # handle missing data by filling out with NaNs
-            valid = _empty = []
-            for k, item in enumerate(data):
-                if (isinstance(item, list) and not len(item)) or (isinstance(item, numpy.ndarray) and not item.size):
-                    _empty.append(k)
-                else:
-                    valid = item
-            if valid is not _empty and len(_empty):
-                for k in _empty:
-                    data[k] = valid * numpy.nan
-            # force dtype to avoid obtaining arrays of objects in case
-            # the shape of the concatenated arrays do not match
-            if len(data):
-                return numpy.array(data, dtype=numpy.array(data[0]).dtype)
-            else:
+                    data0.append([])
+            # raise an error if no data is returned
+            if not len(data0):
                 raise ValueError('`%s` has no data' % self.location)
+
+            # if they are filled but do not have the same number of dimensions
+            shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
+            if not len(shapes):
+                return numpy.asarray(data0)
+            if not all([len(shape) == len(shapes[0]) for shape in shapes[1:]]):
+                return data0
+
+            # find maximum shape
+            max_shape = []
+            for shape in shapes:
+                for k, s in enumerate(shape):
+                    if len(max_shape) < k + 1:
+                        max_shape.append(s)
+                    else:
+                        max_shape[k] = max(max_shape[k], s)
+            max_shape = tuple([len(data0)] + max_shape)
+
+            # find types
+            dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
+            if not len(dtypes):
+                return numpy.asarray(data0)
+            # return if they have data but different types
+            if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
+                return data0
+            dtype = dtypes[0]
+
+            if dtype.char in 'iIl':
+                data = numpy.full(max_shape, 0)
+            elif dtype.char in 'df':
+                data = numpy.full(max_shape, numpy.nan)
+            elif dtype.char in 'U':
+                data = numpy.full(max_shape, '')
+            else:
+                raise ValueError('Not an IMAS data type %s' % dtype.char)
+
+            if len(max_shape) == 1:
+                for k, item in enumerate(data0):
+                    data[k] = item
+            else:
+                for k, item in enumerate(data0):
+                    data[k, : len(item)] = item
+
+            return data
 
         # dynamic path creation
         elif key[0] not in self.keys():
