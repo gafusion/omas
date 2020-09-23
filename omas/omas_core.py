@@ -1068,12 +1068,13 @@ class ODS(MutableMapping):
                 return data0
             dtype = dtypes[0]
 
+            if dtype.char in 'U':
+                return numpy.asarray(data0)
+
             if dtype.char in 'iIl':
                 data = numpy.full(max_shape, 0)
             elif dtype.char in 'df':
                 data = numpy.full(max_shape, numpy.nan)
-            elif dtype.char in 'U':
-                data = numpy.full(max_shape, '')
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 

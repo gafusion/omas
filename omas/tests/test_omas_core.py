@@ -127,6 +127,22 @@ class TestOmasCore(unittest.TestCase):
         )
         return
 
+    def test_data_slicing(self):
+        ods = ODS()
+        ods['langmuir_probes.embedded.0.name'] = '1'
+        ods['langmuir_probes.embedded.1.name'] = '12'
+        ods['langmuir_probes.embedded.2.name'] = '123'
+        assert ods['langmuir_probes']['embedded.:.name'][2] == '123'
+
+        ods = ODS(consistency_check=False)
+        for k in range(3):
+            ods[f'langmuir_probes.embedded.{k}.name'] = [float(k)] * (k + 1)
+        assert numpy.allclose(
+            ods['langmuir_probes']['embedded.:.name'],
+            numpy.array([[0.0, numpy.nan, numpy.nan], [1.0, 1.0, numpy.nan], [2.0, 2.0, 2.0]]),
+            equal_nan=True,
+        )
+
     def test_dynamic_set_nonzero_array_index(self):
         ods = ODS()
         ods.consistency_check = False
