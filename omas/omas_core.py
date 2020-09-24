@@ -129,7 +129,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         and len(info['coordinates'])
         and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
     ):
-        txt = f'{location} must be an array with dimensions {info["coordinates"]}'
+        txt = f'{location} shape {numpy.asarray(value).shape} is inconsistent with coordinates: {info["coordinates"]}'
 
     if len(txt) and consistency_check is True:
         raise ValueError(txt)
@@ -267,6 +267,12 @@ class ODS(MutableMapping):
                             continue
                         elif len(time.shape) > 1:
                             time = numpy.atleast_1d(numpy.squeeze(time))
+                        # if the time returned is multidimensional (eg. because we are querying the time across different diagnostic channels)
+                        # squash the multidimensional time arrays if they are all the same
+                        if len(time.shape) > 1:
+                            time = numpy.reshape(time, (-1, time.shape[-1]))
+                            if all([numpy.allclose(time[0], t) for t in time[1:]]):
+                                time = time[0]
                     times[item] = time
                 except ValueError as _excp:
                     if 'has no data' in repr(_excp):
@@ -282,19 +288,8 @@ class ODS(MutableMapping):
             if not len(times_values):
                 time = None
                 extra_info['homogeneous_time'] = None
-            # if there is a single time entry, or there are multiple time entries that are all consistent with one another
-            elif len(times) == 1 or all(
-                [times_values[0].shape == time.shape and numpy.allclose(times_values[0], time) for time in times_values[1:]]
-            ):
-                time = times_values[0]
-                extra_info['homogeneous_time'] = True
-                if isinstance(time, (float, int)):
-                    return time
-                elif time_array_index is not None:
-                    return time[time_array_index]
-                return time
             # We crossed [:] or something and picked up a 2D time array
-            elif any([len(time.shape) > 1 for time in times_values]):
+            elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
                 # Make a 1D reference time0 that can be comapred against other time arrays
                 time0 = list(times.values())[0]
                 # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
@@ -313,9 +308,18 @@ class ODS(MutableMapping):
                 else:  # Similar to ValueError exception caught above
                     extra_info['homogeneous_time'] = False
                     return None
+            # if the time entries that are all consistent with one another
+            elif all([len(numpy.asarray(time).shape) == 1 and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
+                time = times_values[0]
+                extra_info['homogeneous_time'] = True
+                if isinstance(time, (float, int)):
+                    return time
+                elif time_array_index is not None:
+                    return time[time_array_index]
+                return time
             # there are inconsistencies with different ways of specifying times in the IDS
             else:
-                raise ValueError('Inconsistent time definitions in %s' % times.keys())
+                raise ValueError('Inconsistent time definitions in:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()]))
 
         return None
 
@@ -900,7 +904,10 @@ class ODS(MutableMapping):
                     if not len(self.omas_data):
                         raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
                     else:
-                        raise IndexError('`%s[%d]` but maximun index is %d' % (self.location, key[0], len(self.omas_data) - 1))
+                        raise IndexError(
+                            '`%s[%d]` but maximun index is %d.\nPerhaps you want to set ods.dynamic_path_creation=\'dynamic_array_structures\''
+                            % (self.location, key[0], len(self.omas_data) - 1)
+                        )
 
         # pass the value one level deeper
         # and cleanup dynamically created branches if necessary (eg. if consistency check fails)
@@ -1025,28 +1032,60 @@ class ODS(MutableMapping):
 
         # data slicing
         if key[0] == ':':
-            data = []
+            data0 = []
             for k, item in enumerate(self.keys(dynamic=True)):
                 try:
-                    data.append(self.__getitem__([item] + key[1:], cocos_and_coords))
+                    data0.append(self.__getitem__([item] + key[1:], cocos_and_coords))
                 except ValueError:
-                    data.append([])
-            # handle missing data by filling out with NaNs
-            valid = _empty = []
-            for k, item in enumerate(data):
-                if (isinstance(item, list) and not len(item)) or (isinstance(item, numpy.ndarray) and not item.size):
-                    _empty.append(k)
-                else:
-                    valid = item
-            if valid is not _empty and len(_empty):
-                for k in _empty:
-                    data[k] = valid * numpy.nan
-            # force dtype to avoid obtaining arrays of objects in case
-            # the shape of the concatenated arrays do not match
-            if len(data):
-                return numpy.array(data, dtype=numpy.array(data[0]).dtype)
-            else:
+                    data0.append([])
+            # raise an error if no data is returned
+            if not len(data0):
                 raise ValueError('`%s` has no data' % self.location)
+
+            # if they are filled but do not have the same number of dimensions
+            shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
+            if not len(shapes):
+                return numpy.asarray(data0)
+            if not all([len(shape) == len(shapes[0]) for shape in shapes[1:]]):
+                return data0
+
+            # find maximum shape
+            max_shape = []
+            for shape in shapes:
+                for k, s in enumerate(shape):
+                    if len(max_shape) < k + 1:
+                        max_shape.append(s)
+                    else:
+                        max_shape[k] = max(max_shape[k], s)
+            max_shape = tuple([len(data0)] + max_shape)
+
+            # find types
+            dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
+            if not len(dtypes):
+                return numpy.asarray(data0)
+            # return if they have data but different types
+            if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
+                return data0
+            dtype = dtypes[0]
+
+            if dtype.char in 'U':
+                return numpy.asarray(data0)
+
+            if dtype.char in 'iIl':
+                data = numpy.full(max_shape, 0)
+            elif dtype.char in 'df':
+                data = numpy.full(max_shape, numpy.nan)
+            else:
+                raise ValueError('Not an IMAS data type %s' % dtype.char)
+
+            if len(max_shape) == 1:
+                for k, item in enumerate(data0):
+                    data[k] = item
+            else:
+                for k, item in enumerate(data0):
+                    data[k, : len(item)] = item
+
+            return data
 
         # dynamic path creation
         elif key[0] not in self.keys():
