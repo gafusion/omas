@@ -134,11 +134,11 @@ class TestOmasCore(unittest.TestCase):
         ods['langmuir_probes.embedded.2.name'] = '123'
         assert ods['langmuir_probes']['embedded.:.name'][2] == '123'
 
-        ods = ODS(consistency_check=False)
+        ods = ODS()
         for k in range(3):
-            ods[f'langmuir_probes.embedded.{k}.name'] = [float(k)] * (k + 1)
+            ods[f'langmuir_probes.embedded.{k}.time'] = [float(k)] * (k + 1)
         assert numpy.allclose(
-            ods['langmuir_probes']['embedded.:.name'],
+            ods['langmuir_probes']['embedded.:.time'],
             numpy.array([[0.0, numpy.nan, numpy.nan], [1.0, 1.0, numpy.nan], [2.0, 2.0, 2.0]]),
             equal_nan=True,
         )
