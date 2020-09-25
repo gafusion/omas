@@ -470,10 +470,11 @@ class TestOmasCore(unittest.TestCase):
         assert odc.keys() == [133221, 133229, 133230]
         assert odc[':.equilibrium.time_slice.:.global_quantities.ip'].size == 15
 
-        for ftype in ['pkl', 'nc', 'json']:
+        for ftype in ['h5', 'pkl', 'nc', 'json']:
             odc.save('test.' + ftype)
             odc1 = ODC().load('test.' + ftype)
-            assert not odc1.diff(odc), f'save/load ODC to {ftype} failed'
+            diff = odc1.diff(odc)
+            assert not diff, f'save/load ODC to {ftype} failed:\r{repr(diff)}'
 
     # End of TestOmasCore class
 

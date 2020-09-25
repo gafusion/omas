@@ -76,13 +76,17 @@ def get_ds_item(dataset, item):
     return tmp
 
 
-def load_omas_nc(filename, consistency_check=True, cls=ODS):
+def load_omas_nc(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS):
     """
-    Load an OMAS data set from NetCDF file
+    Load ODS or ODC from NetCDF file
 
     :param filename: filename to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
+
+    :param imas_version: imas version to use for consistency check
+
+    :param cls: class to use for loading the data
 
     :return: OMAS data set
     """
@@ -90,7 +94,7 @@ def load_omas_nc(filename, consistency_check=True, cls=ODS):
 
     from netCDF4 import Dataset
 
-    ods = cls(consistency_check=False)
+    ods = cls(imas_version=imas_version, consistency_check=False)
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):

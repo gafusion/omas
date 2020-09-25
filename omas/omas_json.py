@@ -44,13 +44,15 @@ def save_omas_json(ods, filename, objects_encode=None, **kw):
 
 def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS, **kw):
     """
-    Load an OMAS data set from Json
+    Load ODS or ODC from Json
 
     :param filename: filename or file descriptor to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :param imas_version: imas version to use for consistency check
+
+    :param cls: class to use for loading the data
 
     :param kw: arguments passed to the json.loads mehtod
 

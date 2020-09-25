@@ -37,15 +37,6 @@ print(f"  keys  : {odc.keys()}")
 print(f"  values: {odc[':.equilibrium.time_slice.0.global_quantities.ip']}")
 print()
 
-print('# collection mixing integers and strings')
-odc = ODC()
-odc['sim1.equilibrium.time_slice.0.global_quantities.ip'] = 1000.3
-odc['133221.equilibrium.time_slice.0.global_quantities.ip'] = 1000.3
-odc['1.equilibrium.time_slice.0.global_quantities.ip'] = 1000.3
-print(f"  keys  : {odc.keys()}")
-print(f"  values: {odc[':.equilibrium.time_slice.0.global_quantities.ip']}")
-print()
-
 print('# data slicing across collection as well as ODSs')
 odc = ODC()
 for k in range(5):

@@ -415,14 +415,6 @@ class ODS(MutableMapping):
 
         :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
         """
-        self._consistency_check_set(consistency_value)
-
-    def _consistency_check_set(self, consistency_value):
-        """
-        low-level method to set whether consistency with IMAS schema is enabled or not
-
-        :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
-        """
         if not consistency_value and not self._consistency_check:
             return
 
@@ -2025,7 +2017,7 @@ class ODC(ODS):
 
     def __init__(self, *args, **kw):
         ODS.__init__(self, *args, **kw)
-        self.omas_data = OrderedDict()
+        self.omas_data = {}
 
     @property
     def consistency_check(self):
@@ -2033,7 +2025,9 @@ class ODC(ODS):
 
     @consistency_check.setter
     def consistency_check(self, consistency_value):
-        self._consistency_check_set(consistency_value)
+        for item in self:
+            self[item].consistency_check = consistency_value
+        self._consistency_check = consistency_value
 
     def same_init_ods(self, cls=None):
         if cls is None:
@@ -2059,7 +2053,7 @@ class ODC(ODS):
             if not ext:
                 ext = 'pkl'
 
-        if ext in ['pkl', 'nc', 'json']:
+        if ext in ['pkl', 'nc', 'json', 'h5']:
             pass
         else:
             raise ValueError(f'Cannot save ODC to {ext} format')
@@ -2078,12 +2072,24 @@ class ODC(ODS):
 
         if ext == 'pkl':
             pass
-        elif ext in ['nc', 'json']:
+        elif ext in ['h5', 'nc', 'json']:
             kw['cls'] = ODC
         else:
             raise ValueError(f'Cannot load ODC from {ext} format')
 
+        # manage consistency_check logic
+        if 'consistency_check' not in kw:
+            kw['consistency_check'] = True
+
         return ODS.load(self, *args, **kw)
+
+    def set_child_locations(self):
+        """
+        traverse ODSs and set .location attribute
+        """
+        for item in self.keys():
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).set_child_locations()
 
 
 def serializable(f):
@@ -2574,7 +2580,7 @@ def save_omas_pkl(ods, filename, **kw):
 
 def load_omas_pkl(filename, consistency_check=None, imas_version=None):
     """
-    Load OMAS data set from Python pickle
+    Load ODS or ODC from Python pickle
 
     :param filename: filename to save to
 
