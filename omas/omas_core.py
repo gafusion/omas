@@ -8,7 +8,7 @@ from .omas_utils import __version__, _extra_structures
 
 # fmt: off
 __all__ = [
-    'ODS', 'ODX',
+    'ODS', 'ODC', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
     'ods_sample', 'different_ods', 'omas_structure',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
@@ -752,7 +752,9 @@ class ODS(MutableMapping):
                     raise LookupError(underline_last(txt, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
-        if not self.omas_data or not len(self.omas_data):
+        if isinstance(self, ODC):
+            pass
+        elif not self.omas_data or not len(self.omas_data):
             if isinstance(key[0], int):
                 if not isinstance(self.omas_data, list):
                     self.omas_data = []
@@ -891,8 +893,11 @@ class ODS(MutableMapping):
 
         # assign values to this ODS
         if key[0] not in self.keys() or len(key) == 1:
+            # ODC is always a dictionary
+            if isinstance(self, ODC):
+                self.omas_data[key[0]] = value
             # structure
-            if isinstance(key[0], str):
+            elif isinstance(key[0], str):
                 self.omas_data[key[0]] = value
             # arrays of structures
             else:
@@ -951,20 +956,22 @@ class ODS(MutableMapping):
 
         return self.omas_data[key]
 
-    def same_init_ods(self):
+    def same_init_ods(self, cls=None):
         """
         Initializes a new ODS with the same attributes as this one
 
         :return: new ODS
         """
-        return self.__class__(
-            imas_version=self.imas_version,
-            consistency_check=self.consistency_check,
-            dynamic_path_creation=self.dynamic_path_creation,
-            cocos=self.cocos,
-            cocosio=self.cocosio,
-            coordsio=self.coordsio,
-            dynamic=self.dynamic,
+        if cls is None:
+            cls = self.__class__
+        return cls(
+            imas_version=self._imas_version,
+            consistency_check=self._consistency_check,
+            dynamic_path_creation=self._dynamic_path_creation,
+            cocos=self._cocos,
+            cocosio=self._cocosio,
+            coordsio=self._coordsio,
+            dynamic=self._dynamic,
         )
 
     def setraw(self, key, value):
@@ -2001,6 +2008,34 @@ class ODS(MutableMapping):
                 txt += [f'* {elms}: {value}']
 
         return '\n'.join(txt)
+
+
+class ODC(ODS):
+    """
+    OMAS Data Collection class
+    """
+
+    def __init__(self, *args, **kw):
+        ODS.__init__(self, *args, **kw)
+        self.omas_data = OrderedDict()
+
+    @property
+    def consistency_check(self):
+        return False
+
+    def same_init_ods(self, cls=None):
+        if cls is None:
+            cls = ODS
+        return ODS.same_init_ods(self, cls=cls)
+
+    def keys(self, dynamic=False):
+        keys = list(self.omas_data.keys())
+        for k, item in enumerate(keys):
+            try:
+                keys[k] = ast.literal_eval(item)
+            except Exception:
+                pass
+        return keys
 
 
 def serializable(f):
