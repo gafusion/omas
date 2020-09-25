@@ -35,6 +35,7 @@ from functools import wraps
 import ast
 import base64
 import traceback
+import difflib
 
 try:
     import Pyro5.api

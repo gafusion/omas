@@ -737,11 +737,18 @@ class ODS(MutableMapping):
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
-                    options = list(self.structure.keys())
+                    if not self.structure:
+                        options = list_structures(imas_version=self.imas_version)
+                    else:
+                        options = list(self.structure.keys())
                     if len(options) == 1 and options[0] == ':':
                         options = 'A numerical index is needed with n>=0'
                     else:
-                        options = 'Did you mean: %s' % options
+                        if len(options) > 5:
+                            options = {option: difflib.SequenceMatcher(None, 'aequilibrium', option).ratio() for option in options}
+                            index = numpy.argsort(list(options.values())).astype(int)
+                            options = list(numpy.array(list(options.keys()))[index[-5:]][::-1]) + ['...']
+                        options = 'Did you mean: ' + ', '.join(options)
                     raise LookupError(underline_last(txt, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
@@ -1063,14 +1070,15 @@ class ODS(MutableMapping):
             dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
             if not len(dtypes):
                 return numpy.asarray(data0)
-            # return if they have data but different types
             if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
                 return data0
             dtype = dtypes[0]
 
+            # array of strings
             if dtype.char in 'U':
                 return numpy.asarray(data0)
 
+            # define an empty array of shape max_shape
             if dtype.char in 'iIl':
                 data = numpy.full(max_shape, 0)
             elif dtype.char in 'df':
@@ -1078,6 +1086,7 @@ class ODS(MutableMapping):
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 
+            # place the data withing the the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
                     data[k] = item
