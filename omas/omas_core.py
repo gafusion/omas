@@ -2059,14 +2059,12 @@ class ODC(ODS):
             if not ext:
                 ext = 'pkl'
 
-        if ext == 'pkl':
+        if ext in ['pkl', 'nc', 'json']:
             pass
-        elif ext == 'nc':
-            kw['cls'] = ODC
         else:
             raise ValueError(f'Cannot save ODC to {ext} format')
 
-        return ODS.load(self, *args, **kw)
+        return ODS.save(self, *args, **kw)
 
     def load(self, *args, **kw):
         # figure out format that was used
@@ -2080,7 +2078,7 @@ class ODC(ODS):
 
         if ext == 'pkl':
             pass
-        elif ext == 'nc':
+        elif ext in ['nc', 'json']:
             kw['cls'] = ODC
         else:
             raise ValueError(f'Cannot load ODC from {ext} format')
