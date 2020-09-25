@@ -415,6 +415,14 @@ class ODS(MutableMapping):
 
         :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
         """
+        self._consistency_check_set(consistency_value)
+
+    def _consistency_check_set(self, consistency_value):
+        """
+        low-level method to set whether consistency with IMAS schema is enabled or not
+
+        :param consistency_value: True/False/'warn'/'drop'/'strict' or a combination of those strings
+        """
         if not consistency_value and not self._consistency_check:
             return
 
@@ -2023,6 +2031,10 @@ class ODC(ODS):
     def consistency_check(self):
         return False
 
+    @consistency_check.setter
+    def consistency_check(self, consistency_value):
+        self._consistency_check_set(consistency_value)
+
     def same_init_ods(self, cls=None):
         if cls is None:
             cls = ODS
@@ -2036,6 +2048,44 @@ class ODC(ODS):
             except Exception:
                 pass
         return keys
+
+    def save(self, *args, **kw):
+        # figure out format that was used
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
+
+        if ext == 'pkl':
+            pass
+        elif ext == 'nc':
+            kw['cls'] = ODC
+        else:
+            raise ValueError(f'Cannot save ODC to {ext} format')
+
+        return ODS.load(self, *args, **kw)
+
+    def load(self, *args, **kw):
+        # figure out format that was used
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
+
+        if ext == 'pkl':
+            pass
+        elif ext == 'nc':
+            kw['cls'] = ODC
+        else:
+            raise ValueError(f'Cannot load ODC from {ext} format')
+
+        return ODS.load(self, *args, **kw)
 
 
 def serializable(f):

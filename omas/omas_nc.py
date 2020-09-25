@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS, dynamic_ODS
+from .omas_core import ODS, ODC, dynamic_ODS
 
 
 # --------------------------------------------
@@ -76,7 +76,7 @@ def get_ds_item(dataset, item):
     return tmp
 
 
-def load_omas_nc(filename, consistency_check=True):
+def load_omas_nc(filename, consistency_check=True, cls=ODS):
     """
     Load an OMAS data set from NetCDF file
 
@@ -90,7 +90,7 @@ def load_omas_nc(filename, consistency_check=True):
 
     from netCDF4 import Dataset
 
-    ods = ODS(consistency_check=False)
+    ods = cls(consistency_check=False)
     with Dataset(filename, 'r') as dataset:
         for item in dataset.variables.keys():
             if item.endswith('_error_upper'):
