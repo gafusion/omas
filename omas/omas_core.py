@@ -698,7 +698,7 @@ class ODS(MutableMapping):
                 value = CodeParameters()
                 value[key[1:]] = pass_on_value
             else:
-                value = self.same_init_ods()
+                value = self.same_init_ods(cls=ODS)
 
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
@@ -965,7 +965,7 @@ class ODS(MutableMapping):
         if cls is None:
             cls = self.__class__
         return cls(
-            imas_version=self._imas_version,
+            imas_version=self.imas_version,
             consistency_check=self._consistency_check,
             dynamic_path_creation=self._dynamic_path_creation,
             cocos=self._cocos,
