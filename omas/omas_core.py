@@ -8,7 +8,7 @@ from .omas_utils import __version__, _extra_structures
 
 # fmt: off
 __all__ = [
-    'ODS', 'ODX',
+    'ODS', 'ODC', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
     'ods_sample', 'different_ods', 'omas_structure',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
@@ -737,15 +737,24 @@ class ODS(MutableMapping):
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
-                    options = list(self.structure.keys())
+                    if not self.structure:
+                        options = list_structures(imas_version=self.imas_version)
+                    else:
+                        options = list(self.structure.keys())
                     if len(options) == 1 and options[0] == ':':
                         options = 'A numerical index is needed with n>=0'
                     else:
-                        options = 'Did you mean: %s' % options
+                        if len(options) > 5:
+                            options = {option: difflib.SequenceMatcher(None, 'aequilibrium', option).ratio() for option in options}
+                            index = numpy.argsort(list(options.values())).astype(int)
+                            options = list(numpy.array(list(options.keys()))[index[-5:]][::-1]) + ['...']
+                        options = 'Did you mean: ' + ', '.join(options)
                     raise LookupError(underline_last(txt, len('LookupError: ')) + '\n' + options)
 
         # check what container type is required and if necessary switch it
-        if not self.omas_data or not len(self.omas_data):
+        if isinstance(self, ODC):
+            pass
+        elif not self.omas_data or not len(self.omas_data):
             if isinstance(key[0], int):
                 if not isinstance(self.omas_data, list):
                     self.omas_data = []
@@ -884,8 +893,11 @@ class ODS(MutableMapping):
 
         # assign values to this ODS
         if key[0] not in self.keys() or len(key) == 1:
+            # ODC is always a dictionary
+            if isinstance(self, ODC):
+                self.omas_data[key[0]] = value
             # structure
-            if isinstance(key[0], str):
+            elif isinstance(key[0], str):
                 self.omas_data[key[0]] = value
             # arrays of structures
             else:
@@ -944,20 +956,22 @@ class ODS(MutableMapping):
 
         return self.omas_data[key]
 
-    def same_init_ods(self):
+    def same_init_ods(self, cls=None):
         """
         Initializes a new ODS with the same attributes as this one
 
         :return: new ODS
         """
-        return self.__class__(
-            imas_version=self.imas_version,
-            consistency_check=self.consistency_check,
-            dynamic_path_creation=self.dynamic_path_creation,
-            cocos=self.cocos,
-            cocosio=self.cocosio,
-            coordsio=self.coordsio,
-            dynamic=self.dynamic,
+        if cls is None:
+            cls = self.__class__
+        return cls(
+            imas_version=self._imas_version,
+            consistency_check=self._consistency_check,
+            dynamic_path_creation=self._dynamic_path_creation,
+            cocos=self._cocos,
+            cocosio=self._cocosio,
+            coordsio=self._coordsio,
+            dynamic=self._dynamic,
         )
 
     def setraw(self, key, value):
@@ -1063,14 +1077,15 @@ class ODS(MutableMapping):
             dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
             if not len(dtypes):
                 return numpy.asarray(data0)
-            # return if they have data but different types
             if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
                 return data0
             dtype = dtypes[0]
 
+            # array of strings
             if dtype.char in 'U':
                 return numpy.asarray(data0)
 
+            # define an empty array of shape max_shape
             if dtype.char in 'iIl':
                 data = numpy.full(max_shape, 0)
             elif dtype.char in 'df':
@@ -1078,6 +1093,7 @@ class ODS(MutableMapping):
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 
+            # place the data withing the the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
                     data[k] = item
@@ -1994,6 +2010,88 @@ class ODS(MutableMapping):
         return '\n'.join(txt)
 
 
+class ODC(ODS):
+    """
+    OMAS Data Collection class
+    """
+
+    def __init__(self, *args, **kw):
+        ODS.__init__(self, *args, **kw)
+        self.omas_data = {}
+
+    @property
+    def consistency_check(self):
+        return False
+
+    @consistency_check.setter
+    def consistency_check(self, consistency_value):
+        for item in self:
+            self[item].consistency_check = consistency_value
+        self._consistency_check = consistency_value
+
+    def same_init_ods(self, cls=None):
+        if cls is None:
+            cls = ODS
+        return ODS.same_init_ods(self, cls=cls)
+
+    def keys(self, dynamic=False):
+        keys = list(self.omas_data.keys())
+        for k, item in enumerate(keys):
+            try:
+                keys[k] = ast.literal_eval(item)
+            except Exception:
+                pass
+        return keys
+
+    def save(self, *args, **kw):
+        # figure out format that was used
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
+
+        if ext in ['pkl', 'nc', 'json', 'h5']:
+            pass
+        else:
+            raise ValueError(f'Cannot save ODC to {ext} format')
+
+        return ODS.save(self, *args, **kw)
+
+    def load(self, *args, **kw):
+        # figure out format that was used
+        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+            ext = args[0]
+            args = args[1:]
+        else:
+            ext = os.path.splitext(args[0])[-1].strip('.')
+            if not ext:
+                ext = 'pkl'
+
+        if ext == 'pkl':
+            pass
+        elif ext in ['h5', 'nc', 'json']:
+            kw['cls'] = ODC
+        else:
+            raise ValueError(f'Cannot load ODC from {ext} format')
+
+        # manage consistency_check logic
+        if 'consistency_check' not in kw:
+            kw['consistency_check'] = True
+
+        return ODS.load(self, *args, **kw)
+
+    def set_child_locations(self):
+        """
+        traverse ODSs and set .location attribute
+        """
+        for item in self.keys():
+            if isinstance(self.getraw(item), ODS):
+                self.getraw(item).set_child_locations()
+
+
 def serializable(f):
     def serializable_f(*args, **kw):
         tmp = f(*args, **kw)
@@ -2482,7 +2580,7 @@ def save_omas_pkl(ods, filename, **kw):
 
 def load_omas_pkl(filename, consistency_check=None, imas_version=None):
     """
-    Load OMAS data set from Python pickle
+    Load ODS or ODC from Python pickle
 
     :param filename: filename to save to
 

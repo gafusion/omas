@@ -461,6 +461,21 @@ class TestOmasCore(unittest.TestCase):
 
         assert latexit.get('somewhere.does_not_exist', 'somewhere.does_not_exist') == 'somewhere.does_not_exist'
 
+    def test_odc(self):
+        odc = ODC()
+        for k in range(5):
+            odc[f'133221.equilibrium.time_slice.{k}.global_quantities.ip'] = 1000.0 + k + 1
+            odc[f'133229.equilibrium.time_slice.{k}.global_quantities.ip'] = 2000.0 + k + 1
+            odc[f'133230.equilibrium.time_slice.{k}.global_quantities.ip'] = 3000.0 + k + 1
+        assert odc.keys() == [133221, 133229, 133230]
+        assert odc[':.equilibrium.time_slice.:.global_quantities.ip'].size == 15
+
+        for ftype in ['h5', 'pkl', 'nc', 'json']:
+            odc.save('test.' + ftype)
+            odc1 = ODC().load('test.' + ftype)
+            diff = odc1.diff(odc)
+            assert not diff, f'save/load ODC to {ftype} failed:\r{repr(diff)}'
+
     # End of TestOmasCore class
 
 

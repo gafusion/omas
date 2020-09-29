@@ -47,7 +47,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
         if isinstance(item, dict):
             if recursive:
-                dict2hdf5(g, item, key, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
+                dict2hdf5(g, item, str(key), recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
 
         elif lists_as_dicts and isinstance(item, (list, tuple)) and not isinstance(item, numpy.ndarray):
             item = {'%d' % k: v for k, v in enumerate(item)}
@@ -114,19 +114,23 @@ def convertDataset(ods, data):
             convertDataset(ods.setraw(oitem, ods.same_init_ods()), data[item])
 
 
-def load_omas_h5(filename, consistency_check=True):
+def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS):
     """
-    Load OMAS data set from HDF5
+    Load ODS or ODC from HDF5
 
     :param filename: filename or file descriptor to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
+    :param imas_version: imas version to use for consistency check
+
+    :param cls: class to use for loading the data
+
     :return: OMAS data set
     """
     import h5py
 
-    ods = ODS(consistency_check=False)
+    ods = cls(imas_version=imas_version, consistency_check=False)
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)
     ods.set_child_locations()

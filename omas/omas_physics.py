@@ -1874,8 +1874,6 @@ _cocos_signals = {}
             with open(filename, 'r') as f:
                 original = str(f.read())
             new = str('\n'.join(csig))
-            import difflib
-
             diff = difflib.unified_diff(original, new)
             assert original == new, 'COCOS signals are not up-to-date! Run `make cocos` to update the omas_cocos.py file.\n' + ''.join(diff)
 

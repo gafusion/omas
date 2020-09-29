@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import ODS, ODC
 
 
 # ---------------------------
@@ -42,15 +42,17 @@ def save_omas_json(ods, filename, objects_encode=None, **kw):
         f.write(json_string)
 
 
-def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], **kw):
+def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS, **kw):
     """
-    Load an OMAS data set from Json
+    Load ODS or ODC from Json
 
     :param filename: filename or file descriptor to load from
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :param imas_version: imas version to use for consistency check
+
+    :param cls: class to use for loading the data
 
     :param kw: arguments passed to the json.loads mehtod
 
@@ -59,8 +61,14 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
 
     printd('Loading OMAS data from Json: %s' % filename, topic='json')
 
-    def cls():
-        return ODS(imas_version=imas_version, consistency_check=False)
+    def base_class(x):
+        clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
+        clscls = lambda: ODC(imas_version=imas_version, consistency_check=False)
+        try:
+            tmp = json_loader(x, clsODS, null_to=numpy.NaN)
+        except Exception:
+            tmp = json_loader(x, clscls, null_to=numpy.NaN)
+        return tmp
 
     if isinstance(filename, str):
         with open(filename, 'r') as f:
@@ -69,7 +77,12 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         f = filename
         json_string = f.read()
 
-    tmp = json.loads(json_string, object_pairs_hook=lambda x: json_loader(x, cls, null_to=numpy.NaN), **kw)
+    tmp = json.loads(json_string, object_pairs_hook=lambda x: base_class(x), **kw)
+    # convert to cls
+    tmp.__class__ = cls
+    data = tmp.omas_data
+    tmp.omas_data = OrderedDict()
+    tmp.update(data)
     # we must manually call set_child_locations since the json_loader
     # routine uses the ODS.setraw method that does not do that for us
     tmp.set_child_locations()
