@@ -116,81 +116,85 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
         return inv
 
     def traverse(me, hout, path, fout, parent):
-        me = copy.copy(me)
-        hout_propagate = hout
-        path_propagate = copy.deepcopy(path)
-        parent = copy.deepcopy(parent)
+        try:
+            fname = None
+            me = copy.copy(me)
+            hout_propagate = hout
+            path_propagate = copy.deepcopy(path)
+            parent = copy.deepcopy(parent)
 
-        if '@structure_reference' in me and me['@structure_reference'] == 'self':
-            return hout, fout
+            if '@structure_reference' in me and me['@structure_reference'] == 'self':
+                return hout, fout
 
-        if '@name' in me:
-            name = me['@name']
-            path_propagate.append(name)
-            hout_propagate = {}
-            hout[name] = hout_propagate
-            # paths
-            if '@path_doc' in me:
-                fname = path_propagate[0] + '/' + me['@path_doc']
-                me['@full_path'] = path_propagate[0] + '/' + me['@path_doc']
-                del me['@path_doc']
+            if '@name' in me:
+                name = me['@name']
+                path_propagate.append(name)
+                hout_propagate = {}
+                hout[name] = hout_propagate
+                # paths
+                if '@path_doc' in me:
+                    fname = path_propagate[0] + '/' + me['@path_doc']
+                    me['@full_path'] = path_propagate[0] + '/' + me['@path_doc']
+                    del me['@path_doc']
+                else:
+                    fname = path_propagate[0]
+                    me['@full_path'] = path_propagate[0]
+                if '@path' in me:
+                    del me['@path']
+                # coordinates
+                for coord in [c for c in me if c.startswith('@coordinate')]:
+                    if '...' not in me[coord]:
+                        me[coord] = path_propagate[0] + '/' + me[coord]
+                # identifiers documentation
+                if '@doc_identifier' in me:
+                    doc_id = xmltodict.parse(open(imas_json_dir + '/../data-dictionary/' + me['@doc_identifier']).read())
+                    hlp = doc_id['constants']['int']
+                    doc = []
+                    for row in hlp:
+                        doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
+                    me['@documentation'] = me['@documentation'].strip() + '\n' + '\n'.join(doc)
+
+                fname = process_path(fname)
+                fout[fname] = {}
+
+            if isinstance(me, list):
+                keys = range(len(me))
             else:
-                fname = path_propagate[0]
-                me['@full_path'] = path_propagate[0]
-            if '@path' in me:
-                del me['@path']
-            # coordinates
-            for coord in [c for c in me if c.startswith('@coordinate')]:
-                if '...' not in me[coord]:
-                    me[coord] = path_propagate[0] + '/' + me[coord]
-            # identifiers documentation
-            if '@doc_identifier' in me:
-                doc_id = xmltodict.parse(open(imas_json_dir + '/../data-dictionary/' + me['@doc_identifier']).read())
-                hlp = doc_id['constants']['int']
-                doc = []
-                for row in hlp:
-                    doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
-                me['@documentation'] = me['@documentation'].strip() + '\n' + '\n'.join(doc)
+                keys = list(me.keys())
 
-            fname = process_path(fname)
-            fout[fname] = {}
+            if '@units' in me:
+                if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
+                    me['@units'] = '-'
+                if fname in [
+                    'equilibrium.time_slice[:].profiles_1d.geometric_axis.r',
+                    'equilibrium.time_slice[:].profiles_1d.geometric_axis.z',
+                ]:
+                    me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
+                if me['@units'] in ['as_parent', 'as parent', 'as_parent_level_2']:
+                    me['@units'] = parent['units']
+                parent['units'] = me['@units']
 
-        if isinstance(me, list):
-            keys = range(len(me))
-        else:
-            keys = list(me.keys())
+            # children inherit lifecycle status from parent
+            if '@lifecycle_status' in me:
+                parent['lifecycle_status'] = me['@lifecycle_status']
+            elif parent['lifecycle_status'] and not isinstance(me, list):
+                me['@lifecycle_status'] = parent['lifecycle_status']
+                keys.append('@lifecycle_status')
 
-        if '@units' in me:
-            if fname == 'equilibrium.time_slice[:].constraints.q':  # bug fix for v3.18.0
-                me['@units'] = '-'
-            if fname in [
-                'equilibrium.time_slice[:].profiles_1d.geometric_axis.r',
-                'equilibrium.time_slice[:].profiles_1d.geometric_axis.z',
-            ]:
-                me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
-            if me['@units'] in ['as_parent', 'as parent', 'as_parent_level_2']:
-                me['@units'] = parent['units']
-            parent['units'] = me['@units']
+            is_leaf = True
+            for kid in keys:
+                if isinstance(me[kid], (dict, list)):
+                    is_leaf = False
+                    traverse(me[kid], hout_propagate, path_propagate, fout, parent)
+                elif fname and fname in fout and kid not in ['@name', '@xmlns:fn']:
+                    hout_propagate[kid] = me[kid]
+                    fout[fname][kid] = me[kid]
 
-        # children inherit lifecycle status from parent
-        if '@lifecycle_status' in me:
-            parent['lifecycle_status'] = me['@lifecycle_status']
-        elif parent['lifecycle_status'] and not isinstance(me, list):
-            me['@lifecycle_status'] = parent['lifecycle_status']
-            keys.append('@lifecycle_status')
-
-        is_leaf = True
-        for kid in keys:
-            if isinstance(me[kid], (dict, list)):
-                is_leaf = False
-                traverse(me[kid], hout_propagate, path_propagate, fout, parent)
-            elif kid not in ['@name', '@xmlns:fn']:
-                hout_propagate[kid] = me[kid]
-                fout[fname][kid] = me[kid]
-
-                # if is_leaf:
-                # print(path_propagate)
-
+                    # if is_leaf:
+                    # print(path_propagate)
+        except Exception:
+            pprint(fout)
+            raise
         return hout, fout
 
     parent = {}
