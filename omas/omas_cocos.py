@@ -209,6 +209,8 @@ _cocos_signals['cryostat.description_2d.:.thermal_shield.unit.:.element.:.j_tor.
 
 # DATASET_DESCRIPTION
 
+# DATASET_FAIR
+
 # DISRUPTION
 _cocos_signals['disruption.halo_currents.:.area.:.current_halo_pol']='?'                              #[ADD?]# 3.200000 # current  current  _pol  [A]
 _cocos_signals['disruption.global_quantities.current_halo_pol']='?'                                   #[ADD?]# 3.000000 # current  _pol  [A]
@@ -615,14 +617,18 @@ _cocos_signals['iron_core.segment.:.b_field']='?'                               
 
 # LANGMUIR_PROBES
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.b_field_angle.data']='?'                   #[ADD?]# 2.666667 # b  b_field  [rad]
-_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.j_ion_parallel.data']='?'                  #[ADD?]# 2.666667 # j  parallel  [A.m^-2]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.j_i_parallel.data']='?'                    #[ADD?]# 2.666667 # j  parallel  [A.m^-2]
 _cocos_signals['langmuir_probes.embedded.:.b_field_angle.data']='?'                                 #[ADD?]# 2.500000 # b  b_field  [rad]
-_cocos_signals['langmuir_probes.embedded.:.j_ion_parallel.data']='?'                                #[ADD?]# 2.500000 # j  parallel  [A.m^-2]
+_cocos_signals['langmuir_probes.embedded.:.j_i_parallel.data']='?'                                  #[ADD?]# 2.500000 # j  parallel  [A.m^-2]
 _cocos_signals['langmuir_probes.embedded.:.position.phi']='?'                                       #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.position.phi']='?'                         #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.ion_saturation_current.data']='?'          #[ADD?]# 1.833333 # current  [A]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.mach_number_parallel.data']='?'            #[ADD?]# 1.833333 # parallel  [-]
-_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.saturation_current_ion.data']='?'          #[ADD?]# 1.833333 # current  [A]
-_cocos_signals['langmuir_probes.embedded.:.saturation_current_ion.data']='?'                        #[ADD?]# 1.750000 # current  [A]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.v_floating.data']='?'                      #[ADD?]# 1.833333 # v  [V]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.v_plasma.data']='?'                        #[ADD?]# 1.833333 # v  [V]
+_cocos_signals['langmuir_probes.embedded.:.ion_saturation_current.data']='?'                        #[ADD?]# 1.750000 # current  [A]
+_cocos_signals['langmuir_probes.embedded.:.v_floating.data']='?'                                    #[ADD?]# 1.750000 # v  [V]
+_cocos_signals['langmuir_probes.embedded.:.v_plasma.data']='?'                                      #[ADD?]# 1.750000 # v  [V]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.heat_flux_parallel.data']='?'              #[ADD?]# 0.833333 # parallel
 _cocos_signals['langmuir_probes.embedded.:.heat_flux_parallel.data']='?'                            #[ADD?]# 0.750000 # parallel
 
@@ -658,6 +664,7 @@ _cocos_signals['magnetics.b_field_pol_probe.:.field.data']='?'                  
 _cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.b_field_tor_probe.:.field.data']='?'                                      #[ADD?]# 1.500000 # b  b_field  [T]
 _cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
+_cocos_signals['magnetics.ip.:.data']='?'                                                           #[ADD?]# 1.333333 # ip  [A]
 _cocos_signals['magnetics.b_field_pol_probe.:.area']='?'                                            #[ADD?]# 0.666667 # b  b_field
 _cocos_signals['magnetics.b_field_pol_probe.:.length']='?'                                          #[ADD?]# 0.666667 # b  b_field
 _cocos_signals['magnetics.b_field_tor_probe.:.area']='?'                                            #[ADD?]# 0.666667 # b  b_field
@@ -752,6 +759,7 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbe
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.imaginary']='?'                       #[ADD?]# 1.125000 # toroidal  velocity
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.velocity_perturbed.coordinate3.real']='?'                            #[ADD?]# 1.125000 # toroidal  velocity
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.amplitude_multiplier']='?'                                                  #[ADD?]# 0.600000 # toroidal
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.energy_perturbed']='?'                                                      #[ADD?]# 0.600000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.jacobian']='?'                                     #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_contravariant']='?'                         #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.tensor_covariant']='?'                             #[ADD?]# 0.428571 # toroidal
@@ -915,6 +923,7 @@ _cocos_signals['spectrometer_uv.channel.:.grating.image_field.x3_unit_vector.x']
 _cocos_signals['spectrometer_uv.channel.:.grating.image_field.x3_unit_vector.y']='?'            #[ADD?]# 0.666667 # e_field
 
 # SPECTROMETER_VISIBLE
+_cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.e_field_lh_tor']='?'                          #[ADD?]# 3.000000 # e_field  _tor  [V.m^-1]
 _cocos_signals['spectrometer_visible.channel.:.active_spatial_resolution.:.centre.phi']='TOR'                                 # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.active_spatial_resolution.:.width.phi']='TOR'                                  # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.aperture.:.centre.phi']='TOR'                                                  # 2.000000 # phi  [rad]
@@ -924,6 +933,9 @@ _cocos_signals['spectrometer_visible.channel.:.fibre_image.outline.phi']='TOR'  
 _cocos_signals['spectrometer_visible.channel.:.light_collection_efficiencies.positions.phi']='TOR'                            # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.line_of_sight.first_point.phi']='TOR'                                          # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.line_of_sight.second_point.phi']='TOR'                                         # 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocity_cold_neutrals']='?'                  #[ADD?]# 2.000000 # velocity  [m.s^-1]
+_cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocity_hot_neutrals']='?'                   #[ADD?]# 2.000000 # velocity  [m.s^-1]
+_cocos_signals['spectrometer_visible.channel.:.polarizer.centre.phi']='?'                                              #[ADD?]# 2.000000 # phi  [rad]
 
 # SPECTROMETER_X_RAY_CRYSTAL
 _cocos_signals['spectrometer_x_ray_crystal.camera.centre.phi']='?'                             #[ADD?]# 2.000000 # phi  [rad]
