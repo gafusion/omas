@@ -1404,6 +1404,78 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
     return {'ax': axs}
 
 
+@add_to__ODS__
+def core_sources_summary(ods, time_index=None, fig=None, **kw):
+    """
+    Plot sources for electrons and all ion species
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param time_index: time slice to plot
+
+    :param kw: arguments passed to matplotlib plot statements
+
+    :return: axes
+    """
+    import matplotlib
+    from matplotlib import pyplot
+
+    if fig is None:
+        fig = pyplot.figure()
+
+    axs = kw.pop('ax', {})
+
+    if time_index is None:
+        time = ods['core_sources'].time()
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    if isinstance(time_index, (list, numpy.ndarray)):
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(core_sources, time, ods, time_index, fig=fig, ax=axs ** kw)
+
+    colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
+    lss = ['-', '--']
+    colors, lss = numpy.meshgrid(colors, lss)
+    if len(ods[f'core_sources.source']) > len(colors):
+        colors = colors.T
+        lss = lss.T
+    colors = colors.flatten()
+    lss = lss.flatten()
+
+    for k, s in enumerate(ods['core_sources.source']):
+        rho = ods[f'core_sources.source.{s}.profiles_1d.{time_index}.grid.rho_tor_norm']
+        label = ods[f'core_sources.source.{s}.identifier.name']
+
+        tmp = {}
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.energy'] = ('$q_e$', 'symlog')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.total_ion_energy'] = ('$q_i$', 'symlog')
+        tmp[None] = None
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.particles'] = ('$p_e$', 'symlog')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.j_parallel'] = ('$J_\parallel$', 'symlog')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.momentum_tor'] = (r'$\pi_i$', 'symlog')
+
+        ax = None
+        for kp, item in enumerate(tmp):
+            if item is None:
+                continue
+            ax = cached_add_subplot(fig, axs, 2, 3, kp + 1, sharex=ax)
+            if item in ods:
+                ax.plot(rho, ods[item], label=label, color=colors[k], ls=lss[k])
+            else:
+                ax.plot(numpy.nan, numpy.nan, label=label, color=colors[k], ls=lss[k])
+            ax.set_title(tmp[item][0])
+            ax.set_yscale(tmp[item][1])
+
+        ax.legend(loc=0)
+    return {'ax': axs}
+
+
 # ================================
 # actuator aimings
 # ================================

@@ -232,6 +232,11 @@ class TestOmasPlot(unittest.TestCase):
             fig=pyplot.figure(), quantities=['temperature', 'density_thermal', 'j_tor', 'zeff'], ods_species=[-1, 0], lw=3, ls='--'
         )
 
+    def test_core_sources(self):
+        ods2 = copy.deepcopy(self.ods)
+        ods2.sample_core_sources()
+        ods2.plot_core_sources_summary(fig=pyplot.figure())
+
     def test_core_transport(self):
         ods_test = copy.deepcopy(self.ods)
         ods_test.sample_core_transport()
