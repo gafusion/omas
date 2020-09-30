@@ -1499,6 +1499,7 @@ class ODS(MutableMapping):
                     self[item] = ods2[item]
             finally:
                 self.dynamic_path_creation = bkp_dynamic_path_creation
+        return self
 
     def list_coordinates(self):
         """
