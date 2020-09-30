@@ -61,6 +61,16 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
 
     printd('Loading OMAS data from Json: %s' % filename, topic='json')
 
+    if isinstance(filename, str):
+        with open(filename, 'r') as f:
+            json_string = f.read()
+    else:
+        json_string = filename.read()
+
+    # allow for empty json file
+    if not len(json_string.strip()):
+        return ODS(imas_version=imas_version, consistency_check=consistency_check)
+
     def base_class(x):
         clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
         clscls = lambda: ODC(imas_version=imas_version, consistency_check=False)
@@ -70,24 +80,21 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
             tmp = json_loader(x, clscls, null_to=numpy.NaN)
         return tmp
 
-    if isinstance(filename, str):
-        with open(filename, 'r') as f:
-            json_string = f.read()
-    else:
-        f = filename
-        json_string = f.read()
-
     tmp = json.loads(json_string, object_pairs_hook=lambda x: base_class(x), **kw)
+
     # convert to cls
     tmp.__class__ = cls
     data = tmp.omas_data
     tmp.omas_data = OrderedDict()
     tmp.update(data)
+
     # we must manually call set_child_locations since the json_loader
     # routine uses the ODS.setraw method that does not do that for us
     tmp.set_child_locations()
+
     # perform consistency check
     tmp.consistency_check = consistency_check
+
     return tmp
 
 
