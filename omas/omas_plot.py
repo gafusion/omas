@@ -934,10 +934,11 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
 
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
-
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
 
     if time_index is None:
         time = ods['equilibrium'].time()
@@ -1037,10 +1038,11 @@ def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quan
 
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
-
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
 
     if time_index is None:
         time = ods['core_profiles'].time()
@@ -1114,7 +1116,7 @@ def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quan
         ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 @add_to__ODS__
@@ -1207,10 +1209,11 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
     """
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
-
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
 
     if time_index is None:
         time = ods['core_profiles'].time()
@@ -1401,7 +1404,7 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
 
             ax.set_xlim(0, 1)
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 @add_to__ODS__
@@ -1422,10 +1425,11 @@ def core_sources_summary(ods, time_index=None, fig=None, **kw):
     import matplotlib
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
-
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
 
     if time_index is None:
         time = ods['core_sources'].time()
@@ -1473,7 +1477,7 @@ def core_sources_summary(ods, time_index=None, fig=None, **kw):
             ax.set_yscale(tmp[item][1])
 
         ax.legend(loc=0)
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 # ================================
@@ -1916,7 +1920,10 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
 
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
     if time_index is None:
@@ -1930,8 +1937,6 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
             time_index = time_index[0]
         else:
             return ods_time_plot(waves_beam_summary, time, ods, time_index, fig=fig, ax={}, **kw)
-
-    axs = kw.pop('ax', {})
 
     ax = cached_add_subplot(fig, axs, 1, 2, 1)
     waves_beam_CX(ods, time_index=time_index, ax=ax, **kw)
@@ -2935,8 +2940,10 @@ def position_control_overlay(
             t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
         except (ValueError, IndexError):
             t = 0
+
     if ax is None:
         ax = pyplot.gca()
+
     # Handle multi-slice request
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay setup 1')
@@ -3165,13 +3172,16 @@ def summary(ods, fig=None, quantity=None, **kw):
 
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
     if quantity is None:
         quantity = ods['summary.global_quantities']
 
-    # two passes, one for counting number of plots the second for actual plotting
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
+
+    # two passes, one for counting number of plots the second for actual plotting
     n = 0
     for step in ['count', 'plot']:
         k = 0
@@ -3190,7 +3200,7 @@ def summary(ods, fig=None, quantity=None, **kw):
                     ax.set_title(q)
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': figg}
 
 
 @add_to__ODS__
