@@ -177,6 +177,7 @@ class TestOmasPhysics(unittest.TestCase):
         ods = ODS().sample()
         ods.physics_summary_global_quantities()
         assert ods['summary']['global_quantities']['tau_energy']['value'] is not None
+        assert ods['summary.global_quantities.beta_tor.value'] is not None
         return
 
     def test_current_from_eq(self):

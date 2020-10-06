@@ -87,7 +87,7 @@ def equilibrium_stored_energy(ods, update=True):
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
 
         ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = (
-            3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)
+                3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)
         )  # [J]
 
     return ods_n
@@ -171,8 +171,8 @@ def summary_greenwald(ods, update=True):
     ne_vol_avg = []
     for k in ods['equilibrium.time_slice']:
         with omas_environment(
-            ods,
-            coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]},
+                ods,
+                coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]},
         ):
             ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
@@ -340,6 +340,7 @@ def summary_global_quantities(ods, update=True):
      - Greenwald Fraction
      - Energy confinement time estimated from the IPB98(y,2) scaling
      - Integrate power densities to the totals
+     - Generate summary.global_quantities from global_quantities of other IDSs
 
     :param ods: input ods
 
@@ -350,15 +351,18 @@ def summary_global_quantities(ods, update=True):
     ods_n = ods.physics_summary_greenwald(update=update)
     ods_n.physics_summary_taue(update=True)
     ods_n.physics_summary_total_powers(update=True)
-
+    ods_n.physics_summary_consistent_global_quantities(update=True)
     return ods_n
 
 
-def summary_equilibrium(ods, update=True):
+@add_to__ODS__
+def summary_consistent_global_quantities(ods, ds=None, update=True):
     """
-    Generate summary.global_quantities from equilibrium.time_slice.:.global_quantities
+    Generate summary.global_quantities from global_quantities of other IDSs
 
     :param ods: input ods
+
+    :param ds: IDS from which to update summary.global_quantities. All IDSs if `None`.
 
     :param update: operate in place
 
@@ -370,17 +374,34 @@ def summary_equilibrium(ods, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    if not 'equilibrium.time_slice.0' in ods:
-        return ods_n
+    global_quantities = copy.copy(omas_global_quantities(ods.imas_version))
 
-    eq_global_list = sorted(omas_info('equilibrium')['equilibrium.time_slice.0.global_quantities'].keys())
-    summary_global_list = sorted(omas_info('summary')['summary.global_quantities'].keys())
-    common_globals = sorted(list(set(eq_global_list).intersection(summary_global_list)))
+    if ds is None:
+        ds = set(map(lambda x: x.split('.')[0], global_quantities))
+    ds = set(ds)
+    if 'summary' in ds:
+        ds.remove('summary')
 
-    for item in common_globals:
-        if f'equilibrium.time_slice.0.global_quantities.{item}' in ods:
-            ods_n[f'summary.global_quantities.{item}.value'] = ods[f'equilibrium.time_slice.:.global_quantities.{item}']
-            ods_n[f'summary.global_quantities.{item}.source'] = 'equilibrium'
+    # global_quantities destinations
+    dst = []
+    for item in global_quantities:
+        path = item.split('.')
+        if path[0] == 'summary':
+            dst.append(path[-1])
+
+    # global_quantities sources
+    src = []
+    for item in global_quantities:
+        path = item.split('.')
+        if path[0] in ds and path[0] in ods and path[-1] in dst:
+            src.append(item)
+
+    # copy global_quantities from other IDSs to summary
+    for item in src:
+        if item.replace(':', '0') in ods:
+            path = item.split('.')
+            ods_n[f'summary.global_quantities.{path[-1]}.value'] = ods[item]
+            ods_n[f'summary.global_quantities.{path[-1]}.source'] = 'Consistency with ' + path[0]
 
     return ods_n
 
@@ -677,15 +698,15 @@ def current_from_eq(ods, time_index):
 @add_to__ODS__
 @preprocess_ods('equilibrium', 'core_profiles')
 def core_profiles_currents(
-    ods,
-    time_index=None,
-    rho_tor_norm=None,
-    j_actuator='default',
-    j_bootstrap='default',
-    j_ohmic='default',
-    j_non_inductive='default',
-    j_total='default',
-    warn=True,
+        ods,
+        time_index=None,
+        rho_tor_norm=None,
+        j_actuator='default',
+        j_bootstrap='default',
+        j_ohmic='default',
+        j_non_inductive='default',
+        j_total='default',
+        warn=True,
 ):
     """
     This function sets currents in ods['core_profiles']['profiles_1d'][time_index]
@@ -1862,7 +1883,7 @@ _cocos_signals = {}
                                 break
                         for case in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
                             if (key.endswith(case) or key.startswith(case)) and not any(
-                                [key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']]
+                                    [key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']]
                             ):
                                 rationale += [case]
                                 score += pnt
