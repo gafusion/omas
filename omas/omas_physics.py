@@ -94,6 +94,57 @@ def equilibrium_stored_energy(ods, update=True):
 
 
 @add_to__ODS__
+def calc_line_den(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=0):
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
+    Zb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['z']
+
+    Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
+    Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
+    dist = numpy.zeros(line_grid)
+
+    for i, Rval in enumerate(Rline):
+        dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
+
+    a = numpy.argpartition(dist, 4)[0: 3]
+    i1 =  a[0]
+    i2 = a[1]
+    if abs(i2-i1) == -1:
+        i2 = a[3]
+
+    Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
+    Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
+
+    psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
+    psi_interp = scipy.interpolate.interp2d(Rgrid, Zgrid, psi2d)
+    psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
+    rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
+    rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
+    ne = ods['core_profiles']['profiles_1d'][0]['electrons']['density_thermal']
+    ne = numpy.interp(rhon_eq, rhon_cp, ne)
+    tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
+    ne_line = 0.
+    for i in range(i1, i2, numpy.sign(i2-i1)):
+        psival = psi_interp(Rline[i], Zline[i])[0]
+        ne_interp  = scipy.interpolate.splev(psival, tck)
+        ne_line  += ne_interp
+    ne_line /= abs(i2-i1)*sqrt((Rline[i2]-Rline[i1])**2+(Zline[i2]-Zline[i1])**2)
+
+
+    if 'summary.line_average.n_e' in ods:
+        ods_n['summary.line_average.n_e'][time_index] = ne_line
+    else:
+        ods_n['summary.line_average.n_e'][time_index] = numpy.atleast1d(ne_line)
+        
+    return ne_line
+
+
+@add_to__ODS__
 @preprocess_ods('equilibrium')
 def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method='linear', update=True):
     """
@@ -1738,7 +1789,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
 #        transforms['BP'] = transforms['POL']
 #        transforms[None] = 1
 #
-                
+
 _cocos_signals = {}
 """
         ]
