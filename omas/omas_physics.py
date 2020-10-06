@@ -94,6 +94,7 @@ def equilibrium_stored_energy(ods, update=True):
 
 
 @add_to__ODS__
+@preprocess_ods('core_profiles', 'equilibrium')
 def calc_line_den(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=0):
     ods_n = ods
     if not update:
@@ -111,11 +112,11 @@ def calc_line_den(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=0):
     for i, Rval in enumerate(Rline):
         dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
 
-    a = numpy.argpartition(dist, 4)[0: 3]
-    i1 =  a[0]
-    i2 = a[1]
-    if abs(i2-i1) == -1:
-        i2 = a[3]
+    tmp = numpy.argpartition(dist, 4)[0: 3]
+    i1 = tmp[0]
+    i2 = tmp[1]
+    if abs(i2-i1) == 1:
+        i2 = tmp[3]
 
     Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
@@ -141,7 +142,7 @@ def calc_line_den(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=0):
     else:
         ods_n['summary.line_average.n_e'][time_index] = numpy.atleast1d(ne_line)
         
-    return ne_line
+    return ods_n
 
 
 @add_to__ODS__
