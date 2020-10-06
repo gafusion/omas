@@ -1014,6 +1014,11 @@ class ODS(MutableMapping):
               * ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string syntax
               * ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes syntax
 
+            NOTE: Python3.6+ f-strings can be very handy when looping over arrays of structures. For example:
+            for time_index in range(len(ods[f'equilibrium.time_slice'])):
+                for grid_index in range(len(ods[f'equilibrium.time_slice.{time_index}.profiles_2d'])):
+                    print(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
+
         :param cocos_and_coords: processing of cocos transforms and coordinates interpolations [True/False/None]
               * True: enabled COCOS and enabled interpolation
               * False: enabled COCOS and disabled interpolation

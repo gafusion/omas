@@ -44,7 +44,7 @@ def nth_repl(s, sub, repl, n):
         i += 1
     # If i is equal to n we found nth match so replace
     if i == n:
-        return s[:find] + repl + s[find + len(sub):]
+        return s[:find] + repl + s[find + len(sub) :]
     return s
 
 
@@ -69,7 +69,7 @@ class PhysicsSymbols(dict):
         for symbol in reversed(sorted(self.keys(), key=lambda x: x[::-1])):
             if location.endswith(symbol) or ('.' not in location and location.endswith(symbol.lstrip('.'))):
                 tmp = dict.__getitem__(self, symbol)
-                if ':' in tmp: #if : is found in the result, then substitute it with the index of the location provided by the user
+                if ':' in tmp:  # if : is found in the result, then substitute it with the index of the location provided by the user
                     indexes = [k for k in location_in if isinstance(k, int)]
                     for k in reversed(range(tmp.count(':'))):
                         tmp = nth_repl(tmp, ':', str(indexes[-1 - k]), tmp.count(':') - k)

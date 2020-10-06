@@ -27,9 +27,14 @@ The `ODS` class extends native Python dictionary and list classes with:
    .. code-block:: python
 
        ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary syntax
-       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
-       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string syntax
        ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes syntax
+       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
+       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # . separated string syntax
+
+       NOTE: Python3.6+ f-strings can be very handy when looping over arrays of structures. For example:
+       for time_index in range(len(ods[f'equilibrium.time_slice'])):
+           for grid_index in range(len(ods[f'equilibrium.time_slice.{time_index}.profiles_2d'])):
+               print(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
 
 4. **Extract sigle time slice** from whole data structure:
 
