@@ -42,6 +42,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "dataset_fair.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "dataset_fair.ids_properties.occurrence"
+ },
  "dataset_fair.ids_properties.provider": {
   "data_type": "STR_0D",
   "documentation": "Name of the person in charge of producing this data",

@@ -286,6 +286,13 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
     dump_string = json.dumps(times, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
     open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_times.json', 'w').write(dump_string)
 
+    # generate global_quantities cache file
+    global_quantities = extract_global_quantities(imas_version=imas_version)
+    dump_string = json.dumps(global_quantities, default=json_dumper, indent=1, separators=(',', ': '), sort_keys=True)
+    open(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_global_quantities.json', 'w').write(
+        dump_string
+    )
+
 
 def create_html_documentation(imas_version=omas_rcparams['default_imas_version']):
     filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions.get(imas_version, imas_version), 'omas_doc.html']))
@@ -378,7 +385,7 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
-    omas_coordinates = set()
+    coordinates = set()
     for structure in list_structures(imas_version=imas_version):
         tmp = load_structure(structure, imas_version)[0]
         coords = []
@@ -386,9 +393,9 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
             if 'coordinates' in tmp[item]:
                 coords.extend(map(i2o, tmp[item]['coordinates']))
         coords = list(filter(lambda x: '...' not in x, set(coords)))
-        omas_coordinates.update(coords)
+        coordinates.update(coords)
 
-    return sorted(list(omas_coordinates))
+    return sorted(list(coordinates))
 
 
 def extract_times(imas_version=omas_rcparams['default_imas_version']):
@@ -402,16 +409,41 @@ def extract_times(imas_version=omas_rcparams['default_imas_version']):
     from omas.omas_utils import list_structures
     from omas.omas_utils import load_structure
 
-    omas_times = []
+    times = []
     for structure in list_structures(imas_version=imas_version):
         tmp = load_structure(structure, imas_version)[0]
 
         for item in tmp:
             if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'STRUCTURE':
                 continue
-            omas_times.append(item)
+            times.append(item)
 
-    return sorted(omas_times)
+    return sorted(times)
+
+
+def extract_global_quantities(imas_version=omas_rcparams['default_imas_version']):
+    """
+    return list of strings with .global_quantities across all structures
+
+    :param imas_version: imas version
+
+    :return: list with times
+    """
+    from omas.omas_utils import list_structures
+    from omas.omas_utils import load_structure
+
+    global_quantities = []
+    for structure in list_structures(imas_version=imas_version):
+        tmp = load_structure(structure, imas_version)[0]
+
+        for item in tmp:
+            if any([item.endswith(error) for error in ['_error_index', '_error_lower', '_error_upper']]):
+                continue
+            elif not item.endswith('.global_quantities.' + item.split('.')[-1]):
+                continue
+            global_quantities.append(item)
+
+    return sorted(global_quantities)
 
 
 def extract_ggd(imas_version=omas_rcparams['default_imas_version']):

@@ -552,6 +552,8 @@ _info_structures = {}
 _coordinates = {}
 # dictionary that contains all the times defined within the data dictionary
 _times = {}
+# dictionary that contains all the _global_quantities defined within the data dictionary
+_global_quantities = {}
 
 # extra structures that python modules using omas can define
 # by setting omas.omas_utils._extra_structures equal to a
@@ -693,6 +695,27 @@ def omas_times(imas_version=omas_rcparams['default_imas_version']):
 
             _times[imas_version] = extract_times(imas_version)
     return _times[imas_version]
+
+
+def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
+    """
+    return list of times
+
+    :param imas_version: IMAS version to look up
+
+    :return: list of strings with IMAS times
+    """
+    # caching
+    if imas_version not in _global_quantities:
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_global_quantities.json'
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _global_quantities[imas_version] = json.load(f)
+        else:
+            from .omas_structure import extract_global_quantities
+
+            _global_quantities[imas_version] = extract_global_quantities(imas_version)
+    return _global_quantities[imas_version]
 
 
 _p2l_cache = {}
