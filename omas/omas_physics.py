@@ -350,6 +350,38 @@ def summary_global_quantities(ods, update=True):
     ods_n = ods.physics_summary_greenwald(update=update)
     ods_n.physics_summary_taue(update=True)
     ods_n.physics_summary_total_powers(update=True)
+
+    return ods_n
+
+
+def summary_equilibrium(ods, update=True):
+    """
+    Generate summary.global_quantities from equilibrium.time_slice.:.global_quantities
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    if not 'equilibrium.time_slice.0' in ods:
+        return ods_n
+
+    eq_global_list = sorted(omas_info('equilibrium')['equilibrium.time_slice.0.global_quantities'].keys())
+    summary_global_list = sorted(omas_info('summary')['summary.global_quantities'].keys())
+    common_globals = sorted(list(set(eq_global_list).intersection(summary_global_list)))
+
+    for item in common_globals:
+        if f'equilibrium.time_slice.0.global_quantities.{item}' in ods:
+            ods_n[f'summary.global_quantities.{item}.value'] = ods[f'equilibrium.time_slice.:.global_quantities.{item}']
+            ods_n[f'summary.global_quantities.{item}.source'] = 'equilibrium'
+
     return ods_n
 
 
