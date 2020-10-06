@@ -270,7 +270,8 @@ def summary_taue(ods, update=True):
 @preprocess_ods('core_sources')
 def summary_total_powers(ods, update=True):
     """
-    Integrate power densities to the total and heating and current drive systems and fills summary.globalquantities
+    Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities
+
     :param ods: input ods
 
     :param update: operate in place
@@ -283,10 +284,13 @@ def summary_total_powers(ods, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    sources = ods_n['core_sources']['source']
+    if 'core_sources.source.0' not in ods_n:
+        return ods_n
+
+    sources = ods_n['core_sources.source']
     index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
     power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    q_init = numpy.zeros(len(sources['0.profiles_1d.0.grid.volume']))
     q_dict = {
         'total': copy.deepcopy(q_init),
         'nbi': copy.deepcopy(q_init),
@@ -294,29 +298,25 @@ def summary_total_powers(ods, update=True):
         'lh': copy.deepcopy(q_init),
         'ic': copy.deepcopy(q_init),
     }
-
     ignore_indices = list(range(100, 108)) + list(range(900, 910))
 
-    for time_index in sources[0]['profiles_1d']:
-        vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
+    for time_index in sources['0.profiles_1d']:
+        vol = sources[f'0.profiles_1d.{time_index}.grid.volume']
         for source in sources:
-            if sources[source]['identifier.index'] in ignore_indices:
+            if sources[f'{source}.identifier.index'] in ignore_indices:
                 # Skip the combined sources to prevent double counting
                 continue
-            if (
-                'electrons' in sources[source]['profiles_1d'][time_index]
-                and 'energy' in sources[source]['profiles_1d'][time_index]['electrons']
-            ):
-                q_dict['total'] += sources[source]['profiles_1d'][time_index]['electrons']['energy']
-                if sources[source]['identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[source]['identifier.index']]] += sources[source]['profiles_1d'][time_index]['electrons'][
-                        'energy'
+            if f'{source}.profiles_1d.{time_index}.electrons.energy' in sources:
+                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.electrons.energy']
+                if sources[f'{source}.identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
+                        f'{source}.profiles_1d.{time_index}.electrons.energy'
                     ]
-            if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
-                q_dict['total'] += sources[source]['profiles_1d'][time_index]['total_ion_energy']
-                if sources[source]['identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[source]['identifier.index']]] += sources[source]['profiles_1d'][time_index][
-                        'total_ion_energy'
+            if f'{source}.profiles_1d.{time_index}.total_ion_energy' in sources:
+                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.total_ion_energy']
+                if sources[f'{source}.identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
+                        f'{source}.profiles_1d.{time_index}.total_ion_energy'
                     ]
 
         for key, value in power_dict.items():
@@ -339,6 +339,7 @@ def summary_global_quantities(ods, update=True):
     Calculates global quantities for each time slice and stores them in the summary ods:
      - Greenwald Fraction
      - Energy confinement time estimated from the IPB98(y,2) scaling
+     - Integrate power densities to the totals
 
     :param ods: input ods
 
@@ -346,10 +347,10 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods.physics_summary_greenwald()
-    ods.physics_summary_taue()
-
-    return ods
+    ods_n = ods.physics_summary_greenwald(update=update)
+    ods_n.physics_summary_taue(update=True)
+    ods_n.physics_summary_total_powers(update=True)
+    return ods_n
 
 
 @add_to__ODS__
