@@ -65,6 +65,52 @@ class constants(object):
 
 
 @add_to__ODS__
+def consistent_times(self, attempt_fix=True, raise_errors=True):
+    """
+    Assign .time and .ids_properties.homogeneous_time info for top-level structures
+    since these are required for writing an IDS to IMAS
+
+    :param attempt_fix: fix dataset_description and wall IDS to have 0 times if none is set
+
+    :param raise_errors: raise errors if could not satisfy IMAS requirements
+
+    :return: `True` if all is good, `False` if requirements are not satisfied, `None` if fixes were applied
+    """
+
+    # if called at top level, loop over all data structures
+    if not len(self.location):
+        out = []
+        for ds in self:
+            out.append(self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors))
+        if any([k is False for k in out]):
+            return False
+        elif any([k is None for k in out]):
+            return None
+        else:
+            return True
+
+    ds = p2l(self.location)[0]
+
+    extra_info = {}
+    time = self.time(extra_info=extra_info)
+    if extra_info['homogeneous_time'] is False:
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+    elif time is not None and len(time):
+        self['time'] = time
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+    elif attempt_fix and ds in ['dataset_description', 'wall']:
+        self['time'] = [0.0]
+        extra_info['homogeneous_time'] = True
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        return None
+    elif raise_errors:
+        raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+    else:
+        return False
+    return True
+
+
+@add_to__ODS__
 @preprocess_ods('equilibrium')
 def equilibrium_stored_energy(ods, update=True):
     """
@@ -87,7 +133,7 @@ def equilibrium_stored_energy(ods, update=True):
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
 
         ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = (
-                3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)
+            3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)
         )  # [J]
 
     return ods_n
@@ -171,8 +217,8 @@ def summary_greenwald(ods, update=True):
     ne_vol_avg = []
     for k in ods['equilibrium.time_slice']:
         with omas_environment(
-                ods,
-                coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]},
+            ods,
+            coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]},
         ):
             ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
@@ -698,15 +744,15 @@ def current_from_eq(ods, time_index):
 @add_to__ODS__
 @preprocess_ods('equilibrium', 'core_profiles')
 def core_profiles_currents(
-        ods,
-        time_index=None,
-        rho_tor_norm=None,
-        j_actuator='default',
-        j_bootstrap='default',
-        j_ohmic='default',
-        j_non_inductive='default',
-        j_total='default',
-        warn=True,
+    ods,
+    time_index=None,
+    rho_tor_norm=None,
+    j_actuator='default',
+    j_bootstrap='default',
+    j_ohmic='default',
+    j_non_inductive='default',
+    j_total='default',
+    warn=True,
 ):
     """
     This function sets currents in ods['core_profiles']['profiles_1d'][time_index]
@@ -1883,7 +1929,7 @@ _cocos_signals = {}
                                 break
                         for case in ['poloidal', 'toroidal', 'parallel', '_tor', '_pol', '_par', 'tor_', 'pol_', 'par_']:
                             if (key.endswith(case) or key.startswith(case)) and not any(
-                                    [key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']]
+                                [key.startswith(k) for k in ['conductivity_', 'pressure_', 'rho_', 'length_']]
                             ):
                                 rationale += [case]
                                 score += pnt

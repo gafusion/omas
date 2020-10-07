@@ -1727,38 +1727,7 @@ class ODS(MutableMapping):
 
         :return: `True` if all is good, `False` if requirements are not satisfied, `None` if fixes were applied
         """
-
-        # if called at top level, loop over all data structures
-        if not len(self.location):
-            out = []
-            for ds in self:
-                out.append(self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors))
-            if any([k is False for k in out]):
-                return False
-            elif any([k is None for k in out]):
-                return None
-            else:
-                return True
-
-        ds = p2l(self.location)[0]
-
-        extra_info = {}
-        time = self.time(extra_info=extra_info)
-        if extra_info['homogeneous_time'] is False:
-            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
-        elif time is not None and len(time):
-            self['time'] = time
-            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
-        elif attempt_fix and ds in ['dataset_description', 'wall']:
-            self['time'] = [0.0]
-            extra_info['homogeneous_time'] = True
-            self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
-            return None
-        elif raise_errors:
-            raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
-        else:
-            return False
-        return True
+        return self.physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
 
     def save(self, *args, **kw):
         r"""
