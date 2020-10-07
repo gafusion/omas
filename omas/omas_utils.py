@@ -780,9 +780,11 @@ def l2i(path):
     :return: IMAS path format
     """
     ipath = ''
-    for step in path:
+    for kstep, step in enumerate(path):
         if isinstance(step, int) or step == ':':
             ipath += "[%s]" % step
+        elif kstep == 0:
+            ipath += '%s' % step
         else:
             ipath += '.%s' % step
     return ipath
