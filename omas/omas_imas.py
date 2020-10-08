@@ -381,8 +381,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
                 occ = ods.get('ids_properties.occurrence', 0)
-                printd(f"{ds}.put(DBentry, {occ})", topic='imas_code')
-                getattr(ids, ds).put(ids.DBentry,occ)
+                printd(f"{ds}.put({occ}, DBentry)", topic='imas_code')
+                getattr(ids, ds).put(occ, ids.DBentry)
 
         finally:
             # close connection to IMAS database
@@ -431,18 +431,18 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
 
         # ids.get()
         if time is None:
-            printd(f"{ds}.get(DBentry)", topic='imas_code')
+            printd(f"{ds}.get({occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).get(ids.DBentry, occ)
+                getattr(ids, ds).get(occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
 
         # ids.getSlice()
         else:
-            printd(f"ids.{ds}.getSlice({time}, 1, DBentry, {occ})", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({time}, 1, {occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).getSlice(time, 1, ids.DBentry, occ)
+                getattr(ids, ds).getSlice(time, 1, occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
