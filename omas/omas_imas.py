@@ -13,9 +13,15 @@ class IDS:
         self.DBentry = DBentry
 
     def __getattr__(self, key):
+        import imas
+
+        printd(f"{key} = imas.{key}()", topic='imas_code')
         tmp = getattr(imas, key)()
         setattr(self, key, tmp)
         return tmp
+
+    def close(self):
+        self.DBentry.close()
 
 
 # --------------------------------------------
@@ -106,7 +112,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -226,7 +232,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -375,13 +381,13 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
                 occ = ods.get('ids_properties.occurrence', 0)
-                printd(f"ids.{ds}.put({occ})", topic='imas_code')
-                getattr(ids, ds).put(occ)
+                printd(f"{ds}.put(DBentry, {occ})", topic='imas_code')
+                getattr(ids, ds).put(ids.DBentry,occ)
 
         finally:
             # close connection to IMAS database
-            printd("ids.close()", topic='imas_code')
-            ids.close()
+            printd("DBentry.close()", topic='imas_code')
+            ids.DBentry.close()
 
     return set_paths
 
@@ -425,18 +431,18 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
 
         # ids.get()
         if time is None:
-            printd(f"ids.{ds}.get()", topic='imas_code')
+            printd(f"{ds}.get(DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).get(occ)
+                getattr(ids, ds).get(ids.DBentry, occ)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
 
         # ids.getSlice()
         else:
-            printd(f"ids.{ds}.getSlice({occ}, {time}, 1)", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({time}, 1, DBentry, {occ})", topic='imas_code')
             try:
-                getattr(ids, ds).getSlice(occ, time, 1)
+                getattr(ids, ds).getSlice(time, 1, ids.DBentry, occ)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
