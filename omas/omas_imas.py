@@ -11,7 +11,7 @@ from .omas_utils import _extra_structures
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verbose=True):
+def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', backend='MDSPLUSBACKEND', verbose=True):
     """
     function to open an IMAS
 
@@ -27,6 +27,8 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
 
     :param imas_major_version: IMAS major version
 
+    :param backend: one of MDSPLUSBACKEND, ASCIIBACKEND, MEMORY
+
     :param verbose: print open parameters
 
     :return: IMAS ids
@@ -39,60 +41,29 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
         )
 
     import imas
+    from imas import imasdef
 
-    printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
-    ids = imas.ids(pulse, run)
+    printd(f"ids = imas.DBEntry(imasdef.MDSPLUSBACKEND, {machine}, {pulse}, {run}, {user}, {imas_major_version}", topic='imas_code')
+    ids = imas.DBEntry(getattr(imasdef, backend), machine, pulse, run, user, imas_major_version)
 
-    if user is None and machine is None:
-        pass
-    elif user is None or machine is None:
-        raise Exception(
-            'user={user}, machine={machine}, imas_major_version={imas_major_version}\n'
-            'Either specify all or none of `user`, `machine`, `imas_version`\n'
-            'If none of them are specified then use `imasdb` command to set '
-            'MDSPLUS_TREE_BASE_? environmental variables'.format(
-                user=repr(user), machine=repr(machine), pulse=pulse, run=run, imas_major_version=imas_major_version
-            )
-        )
-
-    # This approach of opening IDSs has been deprecated
-    if user is None and machine is None:
+    try:
         if new:
-            printd("ids.create()", topic='imas_code')
+            printd(f"ids.create()", topic='imas_code')
             ids.create()
         else:
-            printd("ids.open()", topic='imas_code')
-            try:
-                ids.open()
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError('Error opening imas pulse %d run %d' % (pulse, run))
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database '
-                '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])
+            printd(f"ids.open()", topic='imas_code')
+            ids.open()
+    except Exception as _excp:
+        if 'Error opening imas pulse' in str(_excp):
+            raise IOError(
+                'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+                % (user, machine, pulse, run, imas_major_version, backend)
             )
-
-    # The new approach always requires specifying user and machine
-    else:
-        if new:
-            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            ids.create_env(user, machine, imas_major_version)
-        else:
-            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            try:
-                ids.open_env(user, machine, imas_major_version)
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError(
-                        'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                        % (user, machine, pulse, run, imas_major_version)
-                    )
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                % (user, machine, pulse, run, imas_major_version)
-            )
+    if not ids.isConnected():
+        raise Exception(
+            'Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+            % (user, machine, pulse, run, imas_major_version, backend)
+        )
     return ids
 
 
