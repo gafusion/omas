@@ -648,7 +648,8 @@ class dynamic_omas_imas(dynamic_ODS):
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         path = p2l(key)
         if path[0] not in self.open_ids:
-            getattr(self.ids, path[0]).get()
+            occ = 0
+            getattr(self.ids, path[0]).get(occ, self.ids.DBentry)
             self.open_ids.append(path[0])
         return imas_empty(imas_get(self.ids, path)) is not None
 
@@ -902,7 +903,8 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
         for structure in list_structures(imas_version=imas_version):
             if not hasattr(ids, structure):
                 continue
-            getattr(ids, structure).get()
+            occ = 0
+            getattr(ids, structure).get(occ, ids.DBentry)
             if getattr(ids, structure).ids_properties.homogeneous_time != -999999999:
                 filled_keys.append(structure)
         return filled_keys

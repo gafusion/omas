@@ -54,6 +54,7 @@ class TestOmasExamples(unittest.TestCase):
         from omas.examples import parse_codeparameters
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_solps_imas(self):
         from omas.examples import solps_imas
 
@@ -109,6 +110,7 @@ class TestOmasExamples(unittest.TestCase):
         from omas.examples import omas_cocos
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_iter_scenario(self):
         from omas.examples import iter_scenario
 
@@ -135,7 +137,7 @@ class TestOmasExamples(unittest.TestCase):
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_dynamic_imas(self):
-        from omas.examples import test_omas_dynamic_imas
+        from omas.examples import omas_dynamic_imas
 
     def test_omas_collection(self):
         from omas.examples import omas_collection

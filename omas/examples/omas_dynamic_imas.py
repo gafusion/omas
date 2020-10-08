@@ -11,7 +11,6 @@ from omas import *
 
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
-os.environ['USER'] = 'menghio'
 
 # generate some data and save it in IMAS
 ods = ODS().sample(ntimes=2)
@@ -22,7 +21,7 @@ ods.save('imas', os.environ['USER'], 'DIII-D', 1000, 0, new=True, verbose=True)
 # NOTE: one can use the `with` statement or open()/close()
 ods = ODS()
 with ods.open('imas', os.environ['USER'], 'DIII-D', 1000, 0):
-    # data gets read from NC file when first requested
+    # data gets read from IMAS when first requested
     print(ods['equilibrium.time_slice.:.global_quantities.ip'])
     # then it is in memory
     print(ods['equilibrium.time_slice.0.global_quantities.ip'])
