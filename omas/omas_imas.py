@@ -8,6 +8,16 @@ from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_OD
 from .omas_utils import _extra_structures
 
 
+class IDS:
+    def __init__(self, DBentry):
+        self.DBentry = DBentry
+
+    def __getattr__(self, key):
+        tmp = getattr(imas, key)()
+        setattr(self, key, tmp)
+        return tmp
+
+
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
@@ -42,22 +52,25 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', back
 
     import imas
 
-    printd(f"ids = imas.DBEntry(imas.imasdef.{backend}_BACKEND, {repr(machine)}, {pulse}, {run}, {repr(user)}, {repr(imas_major_version)})", topic='imas_code')
-    ids = imas.DBEntry(getattr(imasdef, backend+'_BACKEND'), machine, pulse, run, user, imas_major_version)
+    printd(
+        f"DBentry = imas.DBEntry(imas.imasdef.{backend}_BACKEND, {repr(machine)}, {pulse}, {run}, {repr(user)}, {repr(imas_major_version)})",
+        topic='imas_code',
+    )
+    DBentry = imas.DBEntry(getattr(imas.imasdef, backend + '_BACKEND'), machine, pulse, run, user, imas_major_version)
 
     if new:
-        printd(f"ids.create()", topic='imas_code')
-        ret_code = ids.create()[0]
+        printd(f"DBentry.create()", topic='imas_code')
+        ret_code = DBentry.create()[0]
     else:
-        printd(f"ids.open()", topic='imas_code')
-        ret_code = ids.open()[0]
+        printd(f"DBentry.open()", topic='imas_code')
+        ret_code = DBentry.open()[0]
 
     if ret_code < 0:
         raise IOError(
-            'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+            'Error opening imas entry (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
             % (user, machine, pulse, run, imas_major_version, backend)
         )
-    return ids
+    return IDS(DBentry)
 
 
 def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
