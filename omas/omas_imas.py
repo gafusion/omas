@@ -25,7 +25,7 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', back
 
     :param new: whether the open should create a new IMAS tree
 
-    :param imas_major_version: IMAS major version
+    :param imas_major_version: IMAS major version (string)
 
     :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
@@ -41,27 +41,20 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', back
         )
 
     import imas
-    from imas import imasdef
 
-    printd(f"ids = imas.DBEntry(imasdef.{backend}_BACKEND, {machine}, {pulse}, {run}, {user}, {imas_major_version}", topic='imas_code')
+    printd(f"ids = imas.DBEntry(imas.imasdef.{backend}_BACKEND, {repr(machine)}, {pulse}, {run}, {repr(user)}, {repr(imas_major_version)})", topic='imas_code')
     ids = imas.DBEntry(getattr(imasdef, backend+'_BACKEND'), machine, pulse, run, user, imas_major_version)
 
-    try:
-        if new:
-            printd(f"ids.create()", topic='imas_code')
-            ids.create()
-        else:
-            printd(f"ids.open()", topic='imas_code')
-            ids.open()
-    except Exception as _excp:
-        if 'Error opening imas pulse' in str(_excp):
-            raise IOError(
-                'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
-                % (user, machine, pulse, run, imas_major_version, backend)
-            )
-    if not ids.isConnected():
-        raise Exception(
-            'Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+    if new:
+        printd(f"ids.create()", topic='imas_code')
+        ret_code = ids.create()[0]
+    else:
+        printd(f"ids.open()", topic='imas_code')
+        ret_code = ids.open()[0]
+
+    if ret_code < 0:
+        raise IOError(
+            'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
             % (user, machine, pulse, run, imas_major_version, backend)
         )
     return ids
