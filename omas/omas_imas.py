@@ -8,10 +8,27 @@ from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_OD
 from .omas_utils import _extra_structures
 
 
+class IDS:
+    def __init__(self, DBentry, occurrence):
+        self.DBentry = DBentry
+        self.occurrence = occurrence
+
+    def __getattr__(self, key):
+        import imas
+
+        printd(f"{key} = imas.{key}()", topic='imas_code')
+        tmp = getattr(imas, key)()
+        setattr(self, key, tmp)
+        return tmp
+
+    def close(self):
+        self.DBentry.close()
+
+
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verbose=True):
+def imas_open(user, machine, pulse, run, occurrence={}, new=False, imas_major_version='3', backend='MDSPLUS', verbose=True):
     """
     function to open an IMAS
 
@@ -25,7 +42,9 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
 
     :param new: whether the open should create a new IMAS tree
 
-    :param imas_major_version: IMAS major version
+    :param imas_major_version: IMAS major version (string)
+
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
     :param verbose: print open parameters
 
@@ -40,60 +59,25 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
 
     import imas
 
-    printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
-    ids = imas.ids(pulse, run)
+    printd(
+        f"DBentry = imas.DBEntry(imas.imasdef.{backend}_BACKEND, {repr(machine)}, {pulse}, {run}, {repr(user)}, {repr(imas_major_version)})",
+        topic='imas_code',
+    )
+    DBentry = imas.DBEntry(getattr(imas.imasdef, backend + '_BACKEND'), machine, pulse, run, user, imas_major_version)
 
-    if user is None and machine is None:
-        pass
-    elif user is None or machine is None:
-        raise Exception(
-            'user={user}, machine={machine}, imas_major_version={imas_major_version}\n'
-            'Either specify all or none of `user`, `machine`, `imas_version`\n'
-            'If none of them are specified then use `imasdb` command to set '
-            'MDSPLUS_TREE_BASE_? environmental variables'.format(
-                user=repr(user), machine=repr(machine), pulse=pulse, run=run, imas_major_version=imas_major_version
-            )
-        )
-
-    # This approach of opening IDSs has been deprecated
-    if user is None and machine is None:
-        if new:
-            printd("ids.create()", topic='imas_code')
-            ids.create()
-        else:
-            printd("ids.open()", topic='imas_code')
-            try:
-                ids.open()
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError('Error opening imas pulse %d run %d' % (pulse, run))
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database '
-                '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])
-            )
-
-    # The new approach always requires specifying user and machine
+    if new:
+        printd(f"DBentry.create()", topic='imas_code')
+        ret_code = DBentry.create()[0]
     else:
-        if new:
-            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            ids.create_env(user, machine, imas_major_version)
-        else:
-            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            try:
-                ids.open_env(user, machine, imas_major_version)
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError(
-                        'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                        % (user, machine, pulse, run, imas_major_version)
-                    )
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                % (user, machine, pulse, run, imas_major_version)
-            )
-    return ids
+        printd(f"DBentry.open()", topic='imas_code')
+        ret_code = DBentry.open()[0]
+
+    if ret_code < 0:
+        raise IOError(
+            'Error opening imas entry (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+            % (user, machine, pulse, run, imas_major_version, backend)
+        )
+    return IDS(DBentry, occurrence)
 
 
 def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
@@ -129,7 +113,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -249,7 +233,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -290,7 +274,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None, verbose=True):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, new=False, imas_version=None, verbose=True):
     """
     Save OMAS data to IMAS
 
@@ -303,6 +287,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     :param pulse: IMAS pulse (reads ods['dataset_description.data_entry.pulse'] if pulse is None)
 
     :param run: IMAS run (reads ods['dataset_description.data_entry.run'] if run is None and finally fallsback on 0)
+
+    :param occurrence: dictinonary with the occurrence to save for each IDS
 
     :param new: whether the open should create a new IMAS tree
 
@@ -353,7 +339,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -397,14 +383,14 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
-                occ = ods.get('ids_properties.occurrence', 0)
-                printd(f"ids.{ds}.put({occ})", topic='imas_code')
-                getattr(ids, ds).put(occ)
+                occ = ids.occurrence.get(ds, ods.get('ids_properties.occurrence', 0))
+                printd(f"{ds}.put({occ}, DBentry)", topic='imas_code')
+                getattr(ids, ds).put(occ, ids.DBentry)
 
         finally:
             # close connection to IMAS database
-            printd("ids.close()", topic='imas_code')
-            ids.close()
+            printd("DBentry.close()", topic='imas_code')
+            ids.DBentry.close()
 
     return set_paths
 
@@ -448,18 +434,18 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
 
         # ids.get()
         if time is None:
-            printd(f"ids.{ds}.get()", topic='imas_code')
+            printd(f"{ds}.get({occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).get(occ)
+                getattr(ids, ds).get(occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
 
         # ids.getSlice()
         else:
-            printd(f"ids.{ds}.getSlice({occ}, {time}, 1)", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({time}, 1, {occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).getSlice(occ, time, 1)
+                getattr(ids, ds).getSlice(time, 1, occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
@@ -534,7 +520,7 @@ def load_omas_imas(
     )
 
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
 
         if imas_version is None:
             try:
@@ -633,8 +619,8 @@ class dynamic_omas_imas(dynamic_ODS):
     ODS.open() method.
     """
 
-    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
-        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose}
+    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, verbose=True):
+        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence':occurrence}
         self.ids = None
         self.active = False
         self.open_ids = []
@@ -664,9 +650,11 @@ class dynamic_omas_imas(dynamic_ODS):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         path = p2l(key)
-        if path[0] not in self.open_ids:
-            getattr(self.ids, path[0]).get()
-            self.open_ids.append(path[0])
+        ds = path[0]
+        if ds not in self.open_ids:
+            occ = self.ids.occurrence.get(ds, 0)
+            getattr(self.ids, ds).get(occ, self.ids.DBentry)
+            self.open_ids.append(ds)
         return imas_empty(imas_get(self.ids, path)) is not None
 
     def keys(self, location):
@@ -916,12 +904,13 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
     # if no location is passed, then we see if the IDSs are filled at all
     if not len(location):
         filled_keys = []
-        for structure in list_structures(imas_version=imas_version):
-            if not hasattr(ids, structure):
+        for ds in list_structures(imas_version=imas_version):
+            if not hasattr(ids, ds):
                 continue
-            getattr(ids, structure).get()
-            if getattr(ids, structure).ids_properties.homogeneous_time != -999999999:
-                filled_keys.append(structure)
+            occ = ids.occurrence.get(ds, 0)
+            getattr(ids, ds).get(occ, ids.DBentry)
+            if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
+                filled_keys.append(ds)
         return filled_keys
 
     path = p2l(location)
