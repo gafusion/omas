@@ -11,7 +11,7 @@ from .omas_utils import _extra_structures
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', backend='MDSPLUSBACKEND', verbose=True):
+def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', backend='MDSPLUS', verbose=True):
     """
     function to open an IMAS
 
@@ -27,7 +27,7 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', back
 
     :param imas_major_version: IMAS major version
 
-    :param backend: one of MDSPLUSBACKEND, ASCIIBACKEND, MEMORY
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
     :param verbose: print open parameters
 
@@ -43,8 +43,8 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', back
     import imas
     from imas import imasdef
 
-    printd(f"ids = imas.DBEntry(imasdef.MDSPLUSBACKEND, {machine}, {pulse}, {run}, {user}, {imas_major_version}", topic='imas_code')
-    ids = imas.DBEntry(getattr(imasdef, backend), machine, pulse, run, user, imas_major_version)
+    printd(f"ids = imas.DBEntry(imasdef.{backend}_BACKEND, {machine}, {pulse}, {run}, {user}, {imas_major_version}", topic='imas_code')
+    ids = imas.DBEntry(getattr(imasdef, backend+'_BACKEND'), machine, pulse, run, user, imas_major_version)
 
     try:
         if new:
