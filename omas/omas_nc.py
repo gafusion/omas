@@ -12,7 +12,7 @@ from .omas_core import ODS, ODC, dynamic_ODS
 # --------------------------------------------
 def save_omas_nc(ods, filename, **kw):
     """
-    Save an OMAS data set to NetCDF file
+    Save an ODS to NetCDF file
 
     :param ods: OMAS data set
 

@@ -17,6 +17,7 @@ __all__ = [
     'save_omas_hdc', 'load_omas_hdc', 'through_omas_hdc',
     'save_omas_nc', 'load_omas_nc', 'through_omas_nc',
     'save_omas_h5', 'load_omas_h5', 'through_omas_h5',
+    'save_omas_ascii', 'load_omas_ascii', 'through_omas_ascii',
     'save_omas_ds', 'load_omas_ds', 'through_omas_ds',
     'load_omas_dx', 'save_omas_dx', 'through_omas_dx', 'ods_2_odx', 'odx_2_ods',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
@@ -141,6 +142,19 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             txt = ''
 
     return value, txt
+
+
+def _handle_extension(*args, **kw):
+    if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+        ext = args[0]
+        args = args[1:]
+    else:
+        ext = os.path.splitext(args[0])[-1].strip('.')
+        if not ext:
+            ext = 'pkl'
+    if ext == 'ids':
+        ext = 'ascii'
+    return ext, args
 
 
 class ODS(MutableMapping):
@@ -1246,12 +1260,14 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, **kw):
         """
         Traverse the ods and return paths to its leaves
 
         :param return_empty_leaves: if False only return paths to leaves that have data
                                     if True also return paths to empty leaves
+
+        :param include_structures: include paths leading to the leaves
 
         :return: list of paths that have data
         """
@@ -1259,13 +1275,18 @@ class ODS(MutableMapping):
         path = kw.setdefault('path', [])
         for kid in self.keys():
             if isinstance(self.getraw(kid), ODS):
+                if include_structures:
+                    paths.append(path + [kid])
                 self.getraw(kid).paths(
                     return_empty_leaves=return_empty_leaves,
                     traverse_code_parameters=traverse_code_parameters,
+                    include_structures=include_structures,
                     paths=paths,
                     path=path + [kid],
                 )
             elif traverse_code_parameters and isinstance(self.getraw(kid), CodeParameters):
+                if include_structures:
+                    paths.append(path)
                 self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
@@ -1727,13 +1748,15 @@ class ODS(MutableMapping):
 
         :return: `True` if all is good, `False` if requirements are not satisfied, `None` if fixes were applied
         """
-        return self.physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        status = self.physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        self.physics_imas_info()
+        return status
 
     def save(self, *args, **kw):
         r"""
         Save OMAS data
 
-        :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds')
+        :param filename: filename.XXX where the extension is used to select save format method (eg. 'pkl','nc','h5','ds','json','ids')
                          set to `imas`, `s3`, `hdc`, `mongo` for load methods that do not have a filename with extension
 
         :param \*args: extra arguments passed to save_omas_XXX() method
@@ -1742,20 +1765,16 @@ class ODS(MutableMapping):
 
         :return: return from save_omas_XXX() method
         """
-        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
-            ext = args[0]
-            args = args[1:]
-        else:
-            ext = os.path.splitext(args[0])[-1].strip('.')
-            if not ext:
-                ext = 'pkl'
+        # figure out format used
+        ext, args = _handle_extension(*args)
+        # save
         return eval('save_omas_' + ext)(self, *args, **kw)
 
     def load(self, *args, **kw):
         r"""
         Load OMAS data
 
-        :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds')
+        :param filename: filename.XXX where the extension is used to select load format method (eg. 'pkl','nc','h5','ds','json','ids')
                          set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
 
         :param consistency_check: perform consistency check once the data is loaded
@@ -1766,14 +1785,8 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
-        # figure out format that was used
-        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
-            ext = args[0]
-            args = args[1:]
-        else:
-            ext = os.path.splitext(args[0])[-1].strip('.')
-            if not ext:
-                ext = 'pkl'
+        # figure out format used
+        ext, args = _handle_extension(*args)
 
         # manage consistency_check logic
         if 'consistency_check' in kw:
@@ -1814,7 +1827,7 @@ class ODS(MutableMapping):
         r"""
         Dynamically load OMAS data for seekable storage formats
 
-        :param filename: filename.XXX where the extension is used to select load format method (eg. 'nc','h5','ds')
+        :param filename: filename.XXX where the extension is used to select load format method (eg. 'nc','h5','ds','json','ids')
                          set to `imas`, `s3`, `hdc`, `mongo` for save methods that do not have a filename with extension
 
         :param consistency_check: perform consistency check once the data is loaded
@@ -1838,14 +1851,8 @@ class ODS(MutableMapping):
         if self.dynamic and not len(args) and not len(kw):
             return self.dynamic.open()
 
-        # figure out format that was used
-        if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
-            ext = args[0]
-            args = args[1:]
-        else:
-            ext = os.path.splitext(args[0])[-1].strip('.')
-            if not ext:
-                ext = 'pkl'
+        # figure out format used
+        ext, args = _handle_extension(*args)
 
         if ext in ['nc', 'imas']:
             # apply consistency checks
@@ -2013,7 +2020,7 @@ class ODC(ODS):
         keys = list(self.omas_data.keys())
         for k, item in enumerate(keys):
             try:
-                keys[k] = ast.literal_eval(item)
+                keys[k] = c(item)
             except Exception:
                 pass
         return keys
@@ -2537,7 +2544,7 @@ omas_dictstate = sorted(list(set(omas_dictstate)))
 # --------------------------------------------
 def save_omas_pkl(ods, filename, **kw):
     """
-    Save OMAS data set to Python pickle
+    Save ODS to Python pickle
 
     :param ods: OMAS data set
 
@@ -2605,6 +2612,7 @@ from .omas_hdc import *
 from .omas_uda import *
 from .omas_h5 import *
 from .omas_ds import *
+from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
 from .omas_service import *

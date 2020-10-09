@@ -733,7 +733,7 @@ def load_omas_iter_scenario(
     pulse, run=0, paths=None, imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True
 ):
     """
-    Load OMAS data set from ITER IMAS scenario database
+    Load ODS from ITER IMAS scenario database
 
     :param pulse: IMAS pulse
 

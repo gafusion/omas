@@ -57,6 +57,13 @@ class TestOmasSuite(unittest.TestCase):
         if diff:
             raise AssertionError('ds through difference: %s' % diff)
 
+    def test_omas_ascii(self):
+        ods = ODS().sample()
+        ods1 = through_omas_ascii(ods)
+        diff = ods.diff(ods1)
+        if diff:
+            raise AssertionError('ascii through difference: %s' % diff)
+
     def test_omas_dx(self):
         ods = ODS().sample()
         odx = ods_2_odx(ods)

@@ -77,7 +77,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
 def save_omas_h5(ods, filename):
     """
-    Save an OMAS data set to HDF5
+    Save an ODS to HDF5
 
     :param ods: OMAS data set
 

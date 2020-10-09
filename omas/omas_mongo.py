@@ -15,7 +15,7 @@ from .omas_core import ODS
 # -----------------------------
 def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['default_mongo_server']):
     """
-    Save an OMAS data set to MongoDB
+    Save an ODS to MongoDB
 
     :param ods: OMAS data set
 
@@ -65,7 +65,7 @@ def load_omas_mongo(
     limit=None,
 ):
     """
-    Load an OMAS data set from MongoDB
+    Load an ODS from MongoDB
 
     :param find: dictionary to find data in the database
 
