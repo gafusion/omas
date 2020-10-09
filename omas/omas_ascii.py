@@ -51,31 +51,74 @@ def imas_eval(value):
         return tmp
 
 
+def imas_ascii_key_sorter(keys, ods_has_location):
+    new_order = [
+        'ids_properties.homogeneous_time',
+        'ids_properties.version_put.data_dictionary',
+        'ids_properties.version_put.access_layer',
+        'ids_properties.version_put.access_layer_language',
+    ]
+
+    if ods_has_location:
+
+        for key in reversed(new_order):
+            if key in keys:
+                keys.insert(0, keys.pop(keys.index(key)))
+
+    return keys
+
+
 # ---------------------------
 # save and load OMAS to ASCII
 # ---------------------------
-def save_omas_ascii(ods, filename, **kw):
+def save_omas_ascii(ods, filename, machine=None, pulse=None, run=None, dir=None):
     """
     Save an ODS to ASCII (follows IMAS ASCII_BACKEND convention)
 
     :param ods: OMAS data set
 
     :param filename: filename or file descriptor to save to
+                     use `None` to save IDSs to multiple files based on machine, pulse, run
+
+    :param machine: machine name to build filename for saving IDSs to multiple files
+
+    :param pulse: pulse number to build filename for saving IDSs to multiple files
+
+    :param run: run number to build filename for saving IDSs to multiple files
+
+    :param dir: directory where to save multiple IDSs files
     """
+
+    if filename is None and machine is not None and pulse is not None and run is not None:
+        for ds in ods:
+            filename = f'{machine}_{pulse}_{run}_{ds}.ids'
+            if dir:
+                filename = dir + os.sep + filename
+            save_omas_ascii(ods[ds], filename, machine=None, pulse=None, run=None)
+        return
+
+    elif filename is not None and machine is None and pulse is None and run is None:
+        pass
+
+    else:
+        raise ValueError('Either `filename` or `machine, pulse, run` can be specified')
 
     printd('Saving OMAS data to ASCII: %s' % filename, topic='ascii')
 
     ods.satisfy_imas_requirements()
 
     ascii_string = []
-    for path in ods.pretty_paths(include_structures=True):
+    for path in imas_ascii_key_sorter(ods.pretty_paths(include_structures=True), ods.location):
         value = ods[path]
         if isinstance(value, ODS) and not isinstance(value.omas_data, list):
             continue
         value = force_imas_type(value)
         info = identify_imas_type(value)
         tokens = []
-        tokens.append(path.replace('.', '/'))
+        if ods.location:
+            tokens.append(ods.location + '.' + path.replace('.', '/'))
+        else:
+            tokens.append(path.replace('.', '/'))
         if 'type' in info:
             tokens.append('	type: ' + info['type'])
         if 'dim' in info:
@@ -106,22 +149,44 @@ def save_omas_ascii(ods, filename, **kw):
         f.write(ascii_string)
 
 
-def load_omas_ascii(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], **kw):
+def load_omas_ascii(
+    filename, machine=None, pulse=None, run=None, dir=None, consistency_check=True, imas_version=omas_rcparams['default_imas_version']
+):
     """
-    Save an ODS to ASCII (follows IMAS ASCII_BACKEND convention)
+    Load an ODS from ASCII (follows IMAS ASCII_BACKEND convention)
 
     :param filename: filename or file descriptor to load from
+                     use `None` to load IDSs from multiple files based on machine, pulse, run
+
+    :param machine: machine name to build filename for loading IDSs from multiple files
+
+    :param pulse: pulse number to build filename for loading IDSs from multiple files
+
+    :param run: run number to build filename for loading IDSs from multiple files
+
+    :param dir: directory from where to load multiple IDSs files
 
     :param consistency_check: verify that data is consistent with IMAS schema
 
     :param imas_version: imas version to use for consistency check
 
-    :param cls: class to use for loading the data
-
-    :param kw: arguments passed to the json.loads mehtod
-
     :return: OMAS data set
     """
+
+    if filename is None and machine is not None and pulse is not None and run is not None:
+        filename = f'{machine}_{pulse}_{run}_*.ids'
+        if dir:
+            filename = dir + os.sep + filename
+        ods = ODS(consistency_check=True, imas_version=omas_rcparams['default_imas_version'])
+        for filename in glob.glob(filename):
+            ods.update(load_omas_ascii(filename, machine=None, pulse=None, run=None))
+        return ods
+
+    elif filename is not None and machine is None and pulse is None and run is None:
+        pass
+
+    else:
+        raise ValueError('Either `filename` or `machine, pulse, run` can be specified')
 
     printd('Loading OMAS data from ASCCI: %s' % filename, topic='ascii')
 
@@ -194,7 +259,7 @@ def load_omas_ascii(filename, consistency_check=True, imas_version=omas_rcparams
     return ods
 
 
-def through_omas_ascii(ods, method=['function', 'class_method'][1]):
+def through_omas_ascii(ods, method=['function', 'class_method'][1], one_or_many_files=['one', 'many'][1]):
     """
     Test save and load OMAS ASCII
 
@@ -202,11 +267,26 @@ def through_omas_ascii(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    filename = omas_testdir(__file__) + '/test.ids'
-    if method == 'function':
-        save_omas_ascii(ods, filename)
-        ods1 = load_omas_ascii(filename)
+    if one_or_many_files == 'one':
+        filename = omas_testdir(__file__) + os.sep + 'test.ids'
+        machine = None
+        pulse = None
+        run = None
+        dir = None
     else:
-        ods.save(filename)
-        ods1 = ODS().load(filename)
+        if method == 'function':
+            filename = None
+        else:
+            filename = 'ascii'
+        machine = 'TEST'
+        pulse = 1
+        run = 0
+        dir = omas_testdir(__file__)
+
+    if method == 'function':
+        save_omas_ascii(ods, filename, machine, pulse, run, dir)
+        ods1 = load_omas_ascii(filename, machine, pulse, run, dir)
+    else:
+        ods.save(filename, machine, pulse, run, dir)
+        ods1 = ODS().load(filename, machine, pulse, run, dir)
     return ods1

@@ -61,7 +61,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
                 elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
                     differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
         except Exception as _excp:
-            raise Exception(f'Error comparing {k}: '+repr(_excp))
+            raise Exception(f'Error comparing {k}: ' + repr(_excp))
     if len(differences):
         return differences
     else:

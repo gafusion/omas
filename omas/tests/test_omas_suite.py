@@ -64,11 +64,12 @@ class TestOmasSuite(unittest.TestCase):
 
     def test_omas_ascii(self):
         ods = ODS().sample()
-        ods1 = through_omas_ascii(ods)
-        diff = ods.diff(ods1)
-        if diff:
-            print('\n'.join(diff))
-            raise AssertionError('ascii through difference')
+        for one_or_many_files in ['one', 'many']:
+            ods1 = through_omas_ascii(ods, one_or_many_files=one_or_many_files)
+            diff = ods.diff(ods1)
+            if diff:
+                print('\n'.join(diff))
+                raise AssertionError(f'ascii through difference for {one_or_many_files} file(s)')
 
     def test_omas_dx(self):
         ods = ODS().sample()

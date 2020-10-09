@@ -145,7 +145,12 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
 
 
 def _handle_extension(*args, **kw):
-    if '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
+    if args[0] == 'ascii':
+        ext = 'ascii'
+        args = list(args)
+        args[0] = None
+        args = tuple(args)
+    elif '/' not in args[0] and '.' not in os.path.split(args[0])[1]:
         ext = args[0]
         args = args[1:]
     else:
@@ -1314,6 +1319,16 @@ class ODS(MutableMapping):
         """
         location = p2l(self.location)
         return [location + path for path in self.paths(**kw)]
+
+    def full_pretty_paths(self, **kw):
+        r"""
+        Traverse the ods and return paths from root of ODS that have data formatted nicely
+
+        :param \**kw: extra keywords passed to the full_paths() method
+
+        :return: list of paths that have data formatted nicely
+        """
+        return list(map(l2i, self.full_paths(**kw)))
 
     def flat(self, **kw):
         r"""
