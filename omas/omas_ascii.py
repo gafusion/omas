@@ -8,7 +8,6 @@ from .omas_core import ODS, ODC, force_imas_type
 
 
 def identify_imas_type(value):
-
     if isinstance(value, (str, numpy.string_, numpy.unicode_, numpy.str_)):
         dtype = dict(type='50 (CHAR_DATA)', dim=1, size=(len(value),))
     elif isinstance(value, (float, numpy.floating)):
@@ -31,14 +30,25 @@ def identify_imas_type(value):
     return dtype
 
 
-def fmt(value):
+imas_nan = -9e40
+
+
+def imas_fmt(value):
     if isinstance(value, (float, numpy.floating)):
         if numpy.isnan(value):
-            return '%5.16e' % -9E40
+            return '%5.16e' % imas_nan
         else:
             return '%5.16e' % value
     else:
         return '%s' % value
+
+
+def imas_eval(value):
+    tmp = ast.literal_eval(value)
+    if tmp == imas_nan:
+        return numpy.nan
+    else:
+        return tmp
 
 
 # ---------------------------
@@ -75,12 +85,12 @@ def save_omas_ascii(ods, filename, **kw):
         if isinstance(value, ODS):
             pass
         elif not isinstance(value, numpy.ndarray):
-            tokens.append(fmt(value))
+            tokens.append(imas_fmt(value))
         elif len(value.shape) == 1:
-            tokens.append(' '.join(map(fmt, value)))
+            tokens.append(' '.join(map(imas_fmt, value)))
         elif len(value.shape) == 2:
             for row in value.T:
-                tokens.append(' '.join(map(fmt, row)))
+                tokens.append(' '.join(map(imas_fmt, row)))
         else:
             raise ValueError(f'{path} not implemented ASCII support for number of dimensions >2')
 
@@ -165,21 +175,21 @@ def load_omas_ascii(filename, consistency_check=True, imas_version=omas_rcparams
         path = token['path']
         # scalar INT or FLOAT
         if 'type' in token and 'dim' in token and token['dim'] == 0:
-            value = ast.literal_eval(token['value'][0])
+            value = imas_eval(token['value'][0])
         # string
         elif 'type' in token and token['type'] == '50 (CHAR_DATA)' and 'dim' in token and token['dim'] == 1:
             value = token['value'][0]
         # 1D arrays
         elif 'type' in token and 'dim' in token and token['dim'] == 1 and 'size' in token:
-            value = numpy.array(list(map(ast.literal_eval, token['value'][0].split())))
+            value = numpy.array(list(map(imas_eval, token['value'][0].split())))
         # 2D arrays
         elif 'type' in token and 'dim' in token and token['dim'] == 2 and 'size' in token:
-            value = numpy.array([list(map(ast.literal_eval, row.split())) for row in token['value']])
+            value = numpy.array([list(map(imas_eval, row.split())) for row in token['value']]).T
         # ODS
         elif 'type' not in token and 'dim' in token:
             continue
 
-        ods[path]= value
+        ods[path] = value
 
     return ods
 
