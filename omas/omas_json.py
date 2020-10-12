@@ -12,7 +12,7 @@ from .omas_core import ODS, ODC
 # ---------------------------
 def save_omas_json(ods, filename, objects_encode=None, **kw):
     """
-    Save an OMAS data set to Json
+    Save an ODS to Json
 
     :param ods: OMAS data set
 

@@ -123,7 +123,7 @@ The `ODS` class extends native Python dictionary and list classes with:
     
         ods.plot_core_profiles_summary()
 
-17. Save/load ODSs to/from **different storage systems**:
+17. Save/load ODSs to/from **different backend storage systems**:
 
 .. _omas_formats:
 
@@ -145,6 +145,8 @@ The `ODS` class extends native Python dictionary and list classes with:
 | **HDC**       | Hierarchical Dynamic Containers                                                      | Memory                 |       no       |   pyhdc (optional)    |
 +---------------+--------------------------------------------------------------------------------------+------------------------+----------------+-----------------------+
 | **UDA**       | Universal Data Access                                                                | UDA Database           |       yes      |   pyuda (optional)    |
++---------------+--------------------------------------------------------------------------------------+------------------------+----------------+-----------------------+
+| **ASCII**     | Format used by the IMAS AL 4.0.x ASCII backend                                       | ASCII file             |       no       |                       |
 +---------------+--------------------------------------------------------------------------------------+------------------------+----------------+-----------------------+
 | **IMAS**      | `ITER data storage system <https://user.iter.org/?uid=YSQENW&action=get_document>`_  | IMAS Database          |       no       |    imas (optional)    |
 +---------------+--------------------------------------------------------------------------------------+------------------------+----------------+-----------------------+

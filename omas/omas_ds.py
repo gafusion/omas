@@ -168,7 +168,7 @@ def load_omas_ds(filename, consistency_check=True):
 
 def through_omas_ds(ods, method=['function', 'class_method'][1]):
     """
-    Test save and load OMAS data set via xarray file format
+    Test save and load ODS via xarray file format
 
     :param ods: OMAS data set
 

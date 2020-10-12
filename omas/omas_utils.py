@@ -49,15 +49,19 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
                 differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
             elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(
+                if nominal_values(ods1[k]).shape != nominal_values(ods2[k]).shape:
+                    differences.append('DIFF: `%s` differ in shape' % (prepend_path_string + k))
+                elif not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(
                     std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True
                 ):
                     differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
             else:
-                if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
+                if nominal_values(ods1[k]).shape != nominal_values(ods2[k]).shape:
+                    differences.append('DIFF: `%s` differ in shape' % (prepend_path_string + k))
+                elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
                     differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        except Exception:
-            raise Exception(f'Error comparing {k}')
+        except Exception as _excp:
+            raise Exception(f'Error comparing {k}: ' + repr(_excp))
     if len(differences):
         return differences
     else:

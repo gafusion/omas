@@ -81,7 +81,7 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
     if not len(self.location):
         out = []
         for ds in self:
-            out.append(self.getraw(ds).satisfy_imas_requirements(attempt_fix=attempt_fix, raise_errors=raise_errors))
+            out.append(self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors))
         if any([k is False for k in out]):
             return False
         elif any([k is None for k in out]):
@@ -108,6 +108,19 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
     else:
         return False
     return True
+
+
+@add_to__ODS__
+def imas_info(self):
+    # if called at top level, loop over all data structures
+    if not len(self.location):
+        for ds in self:
+            self.getraw(ds).physics_imas_info()
+        return
+    else:
+        self['ids_properties.version_put.access_layer'] = 'N/A'
+        self['ids_properties.version_put.access_layer_language'] = 'OMAS'
+        self['ids_properties.version_put.data_dictionary'] = self.imas_version
 
 
 @add_to__ODS__

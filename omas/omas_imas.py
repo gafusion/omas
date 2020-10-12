@@ -620,7 +620,7 @@ class dynamic_omas_imas(dynamic_ODS):
     """
 
     def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, verbose=True):
-        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence':occurrence}
+        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence': occurrence}
         self.ids = None
         self.active = False
         self.open_ids = []
@@ -733,7 +733,7 @@ def load_omas_iter_scenario(
     pulse, run=0, paths=None, imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True
 ):
     """
-    Load OMAS data set from ITER IMAS scenario database
+    Load ODS from ITER IMAS scenario database
 
     :param pulse: IMAS pulse
 
