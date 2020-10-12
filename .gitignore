@@ -8,7 +8,8 @@ __pycache__/
 \#*
 build/
 .DS_Store
-site-packages/
+/site-packages/
+/tmp
 
 omas/data-dictionary
 omas/Saxon*
