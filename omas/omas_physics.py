@@ -79,12 +79,12 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
 
     # if called at top level, loop over all data structures
     if not len(self.location):
-        out = []
+        out = {}
         for ds in self:
-            out.append(self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors))
-        if any([k is False for k in out]):
+            out[ds] = self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        if any([k is False for k in out.values()]):
             return False
-        elif any([k is None for k in out]):
+        elif any([k is None for k in out.values()]):
             return None
         else:
             return True

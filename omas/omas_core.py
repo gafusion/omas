@@ -279,14 +279,16 @@ class ODS(MutableMapping):
             times = {}
             n = len(self.location)
             for item in times_sub_ds:
+                otem = u2o(item, this_subtree)[n:]
+                if otem.replace(':', '0') not in self:
+                    continue
                 try:
-                    time = self.__getitem__(u2o(item, this_subtree)[n:], None)  # traverse ODS
+                    time = self.__getitem__(otem, None)  # traverse ODS
                     if isinstance(time, numpy.ndarray):
                         if time.size == 0:
                             continue
-                        elif len(time.shape) > 1:
-                            time = numpy.atleast_1d(numpy.squeeze(time))
-                        # if the time returned is multidimensional (eg. because we are querying the time across different diagnostic channels)
+                        # if time is still multidimensional
+                        # (eg. because we are querying the time across different diagnostic channels)
                         # squash the multidimensional time arrays if they are all the same
                         if len(time.shape) > 1:
                             time = numpy.reshape(time, (-1, time.shape[-1]))
