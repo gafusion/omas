@@ -584,38 +584,14 @@ def wall(ods):
     ods['wall.description_2d[0].limiter.type.index'] = 0
     ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
     ods['wall.description_2d[0].limiter.unit[0].outline.r'] = [
-        1.0,
-        1.0,
-        1.3,
-        1.4,
-        1.6,
-        2.15,
-        2.35,
-        2.35,
-        2.15,
-        1.800,
-        1.350,
-        1.35,
-        1.10,
-        1.00,
-        1.0,
+        # fmt: off
+        1.0, 1.0, 1.3, 1.4, 1.6, 2.15, 2.35, 2.35, 2.15, 1.800, 1.350, 1.35, 1.10, 1.00, 1.0
+        # fmt: on
     ]
     ods['wall.description_2d[0].limiter.unit[0].outline.z'] = [
-        0.0,
-        1.4,
-        1.4,
-        1.3,
-        1.1,
-        1.00,
-        0.50,
-        -0.5,
-        -1.0,
-        -1.25,
-        -1.25,
-        -1.4,
-        -1.4,
-        -1.3,
-        0.0,
+        # fmt: off
+        0.0, 1.4, 1.4, 1.3, 1.1, 1.00, 0.50, -0.5, -1.0, -1.25, -1.25, -1.4, -1.4, -1.3, 0.0
+        # fmt: on
     ]
 
     return ods
