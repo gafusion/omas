@@ -236,6 +236,7 @@ def load_omas_ascii(
             path = None
 
     ods = ODS(imas_version=imas_version, consistency_check=consistency_check)
+
     for token in tokens.values():
         path = token['path']
         # scalar INT or FLOAT
@@ -282,7 +283,7 @@ def through_omas_ascii(ods, method=['function', 'class_method'][1], one_or_many_
         pulse = 1
         run = 0
         dir = omas_testdir(__file__)
-
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_ascii(ods, filename, machine, pulse, run, dir)
         ods1 = load_omas_ascii(filename, machine, pulse, run, dir)

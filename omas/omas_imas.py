@@ -943,7 +943,7 @@ def through_omas_imas(ods, method=['function', 'class_method'][1]):
     machine = 'ITER'
     pulse = 1
     run = 0
-
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         paths = save_omas_imas(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
         ods1 = load_omas_imas(user=user, machine=machine, pulse=pulse, run=run, paths=paths)

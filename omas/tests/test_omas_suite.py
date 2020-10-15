@@ -62,14 +62,21 @@ class TestOmasSuite(unittest.TestCase):
             print('\n'.join(diff))
             raise AssertionError('ds through difference')
 
-    def test_omas_ascii(self):
+    def test_omas_ascii_many(self):
         ods = ODS().sample()
-        for one_or_many_files in ['one', 'many']:
-            ods1 = through_omas_ascii(ods, one_or_many_files=one_or_many_files)
-            diff = ods.diff(ods1)
-            if diff:
-                print('\n'.join(diff))
-                raise AssertionError(f'ascii through difference for {one_or_many_files} file(s)')
+        ods1 = through_omas_ascii(ods, one_or_many_files='many')
+        diff = ods.diff(ods1)
+        if diff:
+            print('\n'.join(diff))
+            raise AssertionError(f'ascii through difference for many files')
+
+    def test_omas_ascii_one(self):
+        ods = ODS().sample()
+        ods1 = through_omas_ascii(ods, one_or_many_files='one')
+        diff = ods.diff(ods1)
+        if diff:
+            print('\n'.join(diff))
+            raise AssertionError(f'ascii through difference for one file')
 
     def test_omas_dx(self):
         ods = ODS().sample()

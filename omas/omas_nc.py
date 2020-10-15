@@ -158,6 +158,7 @@ def through_omas_nc(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = omas_testdir(__file__) + '/test.nc'
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_json(ods, filename)
         ods1 = load_omas_json(filename)

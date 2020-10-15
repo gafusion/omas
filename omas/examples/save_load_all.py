@@ -8,6 +8,7 @@ A final report summarizes if some storage systems combinations have errors.
 """
 
 import os
+import copy
 import numpy
 from pprint import pprint
 from omas import *
@@ -27,6 +28,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
 
     if ods is None:
         ods = ODS().sample()
+    ods = copy.deepcopy(ods)  # make a copy to make sure throuhs do not alter original ODS
 
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type

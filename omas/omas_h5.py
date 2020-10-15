@@ -147,6 +147,7 @@ def through_omas_h5(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = omas_testdir(__file__) + '/test.h5'
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_h5(ods, filename)
         ods1 = load_omas_h5(filename)

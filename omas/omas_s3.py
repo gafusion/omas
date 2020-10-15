@@ -165,12 +165,11 @@ def through_omas_s3(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = 'test.pkl'
-
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_s3(ods, filename, user='omas_test')
         ods1 = load_omas_s3(filename, user='omas_test')
     else:
         ods.save('s3', filename=filename, user='omas_test')
         ods1 = ODS().load('s3', filename=filename, user='omas_test')
-
     return ods1
