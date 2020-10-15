@@ -386,7 +386,7 @@ def charge_exchange(ods, nc=10):
 
     :param ods: ODS instance
 
-    :param nc: Number of channels to add.
+    :param nc: Number of channels to add
 
     :return: ODS instance with fake CER hardware information added
     """
@@ -402,7 +402,7 @@ def charge_exchange(ods, nc=10):
         ch['position.phi.data'] = numpy.array([6.5])
         ch['position.r.data'] = numpy.array([r[i]])
         ch['position.z.data'] = numpy.array([z[i]])
-
+    ods['charge_exchange.time'] = [0.0]
     return ods
 
 
@@ -579,6 +579,7 @@ def wall(ods):
 
     :return: ODS instance with added wall description
     """
+    ods['wall.time'] = [0.0]
     ods['wall.description_2d[0].limiter.type.description'] = 'first wall'
     ods['wall.description_2d[0].limiter.type.index'] = 0
     ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
