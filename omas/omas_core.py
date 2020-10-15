@@ -1883,7 +1883,7 @@ class ODS(MutableMapping):
         if self.dynamic:
             self.dynamic.close()
 
-    def diff(self, ods, ignore_type=False, ignore_empty=False):
+    def diff(self, ods, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True):
         """
         return differences between this ODS and the one passed
 
@@ -1895,7 +1895,9 @@ class ODS(MutableMapping):
 
         :return: dictionary with differences
         """
-        return different_ods(self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty)
+        return different_ods(
+            self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty, ignore_keys=ignore_keys, ignore_default_keys=ignore_default_keys
+        )
 
     def from_structure(self, structure, depth=0):
         """

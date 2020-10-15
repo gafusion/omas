@@ -11,7 +11,22 @@ import sys
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
-def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_path_string=''):
+default_keys_to_ignore = [
+    'dataset_description.data_entry.user',
+    'dataset_description.data_entry.run',
+    'dataset_description.data_entry.machine',
+    'dataset_description.ids_properties',
+    'dataset_description.imas_version',
+    'dataset_description.time',
+    'ids_properties.homogeneous_time',
+    'ids_properties.occurrence',
+    'ids_properties.version_put.data_dictionary',
+    'ids_properties.version_put.access_layer',
+    'ids_properties.version_put.access_layer_language',
+]
+
+
+def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True):
     """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
@@ -23,6 +38,11 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
 
     :param ignore_empty: ignore emptry nodes
 
+    :param ignore_keys: ignore the following keys
+
+    :param ignore_default_keys: ignores the following keys from the comparison
+                            %s
+
     :return: string with reason for difference, or False otherwise
     """
     from omas import ODS, CodeParameters
@@ -30,36 +50,54 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
     ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
+    keys_to_ignore = []
+    keys_to_ignore.extend(ignore_keys)
+    if ignore_default_keys:
+        keys_to_ignore.extend(default_keys_to_ignore)
+
+    def is_ignored(k):
+        return any([o2u(k).endswith(end) for end in keys_to_ignore])
+
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
     differences = []
     for k in k1.difference(k2):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])):
-            differences.append('DIFF: key `%s` missing in 2nd ods' % (prepend_path_string + k))
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])) and not is_ignored(k):
+            differences.append(f'DIFF: key `{k}` missing in 2nd ods')
     for k in k2.difference(k1):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
-            differences.append('DIFF: key `%s` missing in 1st ods' % (prepend_path_string + k))
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])) and not is_ignored(k):
+            differences.append(f'DIFF: key `{k}` missing in 1st ods')
     for k in k1.intersection(k2):
         try:
-            if ods1[k] is None and ods2[k] is None:
+            if is_ignored(k):
+                pass
+            elif ods1[k] is None and ods2[k] is None:
                 pass
             elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
                 if ods1[k] != ods2[k]:
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+                    differences.append(f'DIFF: `{k}` differ in value')
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-                differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
+                differences.append(f'DIFF: `{f}` differ in type: {type(ods1[k])} vs type(ods2[k])')
             elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-                if nominal_values(ods1[k]).shape != nominal_values(ods2[k]).shape:
-                    differences.append('DIFF: `%s` differ in shape' % (prepend_path_string + k))
-                elif not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(
-                    std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True
-                ):
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+                v1 = nominal_values(ods1[k])
+                v2 = nominal_values(ods2[k])
+                d1 = std_devs(ods1[k])
+                d2 = std_devs(ods1[k])
+                s1 = v1.shape
+                s2 = v2.shape
+                if s1 != s2:
+                    differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
+                elif not numpy.allclose(v1, v2, equal_nan=True) or not numpy.allclose(d1, d2, equal_nan=True):
+                    differences.append(f'DIFF: `{k}` differ in value')
             else:
-                if nominal_values(ods1[k]).shape != nominal_values(ods2[k]).shape:
-                    differences.append('DIFF: `%s` differ in shape' % (prepend_path_string + k))
+                v1 = nominal_values(ods1[k])
+                v2 = nominal_values(ods2[k])
+                s1 = v1.shape
+                s2 = v2.shape
+                if v1.shape != v2.shape:
+                    differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
                 elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+                    differences.append(f'DIFF: `{k}` differ in value')
         except Exception as _excp:
             raise Exception(f'Error comparing {k}: ' + repr(_excp))
     if len(differences):
@@ -67,6 +105,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     else:
         return False
 
+
+different_ods.__doc__ = different_ods.__doc__ % '\n                            '.join(default_keys_to_ignore)
 
 # --------------------------
 # general utility functions
