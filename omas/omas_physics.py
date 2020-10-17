@@ -233,7 +233,7 @@ def summary_greenwald(ods, update=True):
 
 
 @add_to__ODS__
-@preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
+@preprocess_ods('core_profiles', 'equilibrium')
 def summary_taue(ods, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
@@ -285,8 +285,13 @@ def summary_taue(ods, update=True):
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
             # Get total power from ods function:
-            ods.physics_summary_total_powers()
-            total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            if 'core_sources' not in ods:
+                if 'summary.global_quantities.power_steady.value' not in ods:
+                    raise Exception('No core sources nor total power in ods, unable to calculate tau_e')
+                total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            else:
+                ods.physics_summary_total_powers()
+                total_power = ods['summary.global_quantities.power_steady.value'][time_index]
 
             # Calculate tau_e
             tau_e = abs(
