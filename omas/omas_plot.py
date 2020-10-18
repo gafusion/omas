@@ -2694,7 +2694,8 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     if colors is None:
         colors = [kw.pop('color', None)]
     ci = 0
-    color = (colors * nc)[ci]  # Multiplying list by nc makes sure it's always long enough.
+    colors2 = colors * nc
+    color = colors2[ci]  # Multiplying list by nc makes sure it's always long enough.
     kw.setdefault('alpha', 0.8)
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
@@ -2706,7 +2707,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
-            color = colors[ci]  # Allow color to reset when changing fans
+            color = colors2[ci]  # Allow color to reset when changing fans
             new_label = True
         else:
             new_label = False
