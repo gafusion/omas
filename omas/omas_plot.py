@@ -2198,7 +2198,7 @@ def gas_injection_overlay(
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
     colors = numpy.atleast_1d(default_color if colors is None else colors).tolist()
-    colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
+    colors2 = colors * int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
         if show_all_pipes_in_group:
@@ -2208,9 +2208,9 @@ def gas_injection_overlay(
         label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + show_locs + [''])
         if draw_arrow:
             kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
-            gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors[i], **kw)
+            gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors2[i], **kw)
         else:
-            gas_mark = ax.plot(r, z, color=colors[i], **kw)
+            gas_mark = ax.plot(r, z, color=colors2[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
@@ -2692,11 +2692,10 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     ncm = len(r1)
 
     if colors is None:
-        colors = [kw.pop('color', None)] * nc
-    else:
-        colors *= nc  # Just make sure that this will always be long enough.
+        colors = [kw.pop('color', None)]
     ci = 0
-    color = colors[ci]
+    colors2 = colors * nc
+    color = colors2[ci]  # Multiplying list by nc makes sure it's always long enough.
     kw.setdefault('alpha', 0.8)
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
@@ -2708,7 +2707,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
-            color = colors[ci]  # Allow color to reset when changing fans
+            color = colors2[ci]  # Allow color to reset when changing fans
             new_label = True
         else:
             new_label = False
@@ -2820,11 +2819,9 @@ def langmuir_probes_overlay(ods, ax=None, embedded_probes=None, colors=None, sho
 
     # Handle plot keywords
     if colors is None:
-        colors = [kw.pop('color', None)] * nc
-    else:
-        colors *= nc  # Just make sure that this will always be long enough.
+        colors = [kw.pop('color', None)]
     ci = 0
-    color = colors[ci]
+    color = (colors * nc)[ci]  # Multiplying list by nc makes sure it's always long enough.
     kw.setdefault('alpha', 0.8)
     kw.setdefault('marker', '*')
     kw.setdefault('linestyle', ' ')
