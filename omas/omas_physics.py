@@ -183,17 +183,22 @@ def summary_greenwald(ods, update=True):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
-def summary_lineaverage_density(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=None, update=True):
+def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
 
     """
-     Calculates line-aveage electron dnesity for each time slice and stores them in the summary ods.
+     Calculates line-aveage electron density for each time slice and stores them in the summary ods.
 
     :param ods: input ods
+    
+    :param line_grid: number of points to calculate line average density over (includes point outside of boundary)
+    
+    :param time_index: time slices to process
 
     :param update: operate in place
 
     :return: updated ods
     """
+    import scipy
     
     ods_n = ods
     if not update:
@@ -202,51 +207,66 @@ def summary_lineaverage_density(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=
         ods_n = ODS().copy_attrs_from(ods)
 
     if time_index is None:
-        for time_index in range(len(ods['core_profiles']['time_slice'])):
-            summary_lineaverage_density(ods_n, R1, R2, Z1, Z2, line_grid=line_grid, time_index=time_index, update=False)
+        for time_index in range(len(ods['core_profiles']['profiles_1d'])):
+            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=False)
         return ods_n
-
-    if 'time' not in ods['summary']:
-        ods_n['summary']['time'] = ods['core_profiles']['time']
-    if 'summary.line_average.n_e' not in ods:
-        ods_n['summary.line_average.n_e'] = numpy.zeros(len(ods_n['summary']['time']))
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
     Zb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['z']
 
-    Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
-    Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
-    dist = numpy.zeros(line_grid)
-
-    for i, Rval in enumerate(Rline):
-        dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
-
-    tmp = numpy.argpartition(dist, 4)[0: 3]
-    i1 = tmp[0]
-    i2 = tmp[1]
-    if abs(i2-i1) == 1:
-        i2 = tmp[3]
 
     Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Rgrid, Zgrid, psi2d)
+    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-    ne = ods['core_profiles']['profiles_1d'][0]['electrons']['density_thermal']
+    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
     ne = numpy.interp(rhon_eq, rhon_cp, ne)
     tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
-    ne_line = 0.
-    for i in range(i1, i2, numpy.sign(i2-i1)):
-        psival = psi_interp(Rline[i], Zline[i])[0]
-        ne_interp  = scipy.interpolate.splev(psival, tck)
-        ne_line  += ne_interp
-    ne_line /= abs(i2-i1)*sqrt((Rline[i2]-Rline[i1])**2+(Zline[i2]-Zline[i1])**2)
-
-    ods_n['summary.line_average.n_e'][time_index] = ne_line
+    
+    if 'time' not in ods['interferometer']:
+        ods_n['interferometer.ids_properties.homogeneous_time'] = 1
+        ods_n['interferometer']['time'] = copy.copy(ods['core_profiles']['time'])
+    
+    for channel in ods['interferometer']['channel']: 
+    
+        R1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['r']
+        Z1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['z']
+        phi1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['phi']
         
+        R2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['r']
+        Z2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['z']
+        phi2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['phi']
+        
+        if (phi1 != phi2):
+            printe(F'Could not calculate line for channel {channel}. phi values are different')
+            break
+            
+        Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
+        Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
+        dist = numpy.zeros(line_grid)
+ 
+        for i, Rval in enumerate(Rline):
+            dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
+            
+        zero_crossings = numpy.where(numpy.diff(numpy.sign(numpy.gradient(dist))))[0]
+        i1 = zero_crossings[0]
+        i2 = zero_crossings[-1]
+
+        ne_line = 0.
+        for i in range(i1, i2, numpy.sign(i2-i1)):
+            psival = psi_interp(Zline[i], Rline[i])[0]
+            ne_interp  = scipy.interpolate.splev(psival, tck)
+            ne_line  += ne_interp
+        ne_line /= abs(i2-i1)
+
+        if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods:
+            ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods_n['interferometer']['time']))
+        	
+        ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
     return ods_n
 
 
