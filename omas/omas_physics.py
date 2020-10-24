@@ -231,39 +231,47 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
         ods_n['interferometer.ids_properties.homogeneous_time'] = 1
         ods_n['interferometer']['time'] = copy.copy(ods['core_profiles']['time'])
     
-    for channel in ods['interferometer']['channel']: 
-    
-        R1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['r']
-        Z1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['z']
-        phi1 = ods['interferometer']['channel'][channel]['line_of_sight']['first_point']['phi']
-        
-        R2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['r']
-        Z2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['z']
-        phi2 = ods['interferometer']['channel'][channel]['line_of_sight']['second_point']['phi']
-        
-        if (phi1 != phi2):
-            printe(F'Could not calculate line for channel {channel}. phi values are different')
-            break
-            
-        Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
-        Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
-        dist = numpy.zeros(line_grid)
+    ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point',]]
+    for channel in ods['interferometer']['channel']:
+        ne_line_paths = []
+        dist_paths = [] 
+        for ifpath in ifpaths:
+            R1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['r']
+            Z1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['z']
+            phi1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['phi']
+            x1 = R1*numpy.cos(phi1)
+            y1 = R1*numpy.sin(phi1)
+            		
+            R2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['r']
+            Z2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['z']
+            phi2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['phi']
+            x2 = R2*numpy.cos(phi2)
+            y2 = R2*numpy.sin(phi2)
+                
+            xline = (x2-x1) * numpy.linspace(0, 1, line_grid) + x1
+            yline = (y2-y1) * numpy.linspace(0, 1, line_grid) + y1			
+            Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
+            Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
+            dist = numpy.zeros(line_grid)
  
-        for i, Rval in enumerate(Rline):
-            dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
-            
-        zero_crossings = numpy.where(numpy.diff(numpy.sign(numpy.gradient(dist))))[0]
-        i1 = zero_crossings[0]
-        i2 = zero_crossings[-1]
+            for i, Rval in enumerate(Rline):
+                dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
+			
+            zero_crossings = numpy.where(numpy.diff(numpy.sign(numpy.gradient(dist))))[0]
+            i1 = zero_crossings[0]
+            i2 = zero_crossings[-1]
 
-        ne_line = 0.
-        for i in range(i1, i2, numpy.sign(i2-i1)):
-            psival = psi_interp(Zline[i], Rline[i])[0]
-            ne_interp  = scipy.interpolate.splev(psival, tck)
-            ne_line  += ne_interp
-        ne_line /= abs(i2-i1)
-
-        if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods:
+            ne_line = 0.
+            for i in range(i1, i2, numpy.sign(i2-i1)):
+                psival = psi_interp(Zline[i], Rline[i])[0]
+                ne_interp  = scipy.interpolate.splev(psival, tck)
+                ne_line  += ne_interp
+            ne_line /= abs(i2-i1)
+            ne_line_paths.append(ne_line)
+            dist_paths.append(numpy.sqrt((xline[i2]-xline[i1])**2+(yline[i2]-yline[i1])**2+(Zline[i2]-Zline[i1])**2))
+		
+        ne_line = numpy.average(ne_line_paths, weights=dist_paths)
+        if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods_n:
             ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods_n['interferometer']['time']))
         	
         ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
