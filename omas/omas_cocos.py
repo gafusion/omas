@@ -32,7 +32,7 @@
 #        transforms['BP'] = transforms['POL']
 #        transforms[None] = 1
 #
-                
+
 _cocos_signals = {}
 
 
