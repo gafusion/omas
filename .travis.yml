@@ -6,7 +6,6 @@ python:
 install:
  - pip install .
  - pip install coverage codecov
- - make cocos
 
 dist: xenial # required for xvfb and Python 3.7
 
