@@ -248,7 +248,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             x2 = R2*numpy.cos(phi2)
             y2 = R2*numpy.sin(phi2)
                 
-            xline = (x2-x1) * numpy.linspace(0, 1, line_grid) + x1
+            xline = numpy.linspace(x1, x2, line_grid)
             yline = (y2-y1) * numpy.linspace(0, 1, line_grid) + y1			
             Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
             Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
@@ -261,11 +261,9 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            ne_line = 0.
-            for i in range(i1, i2, numpy.sign(i2-i1)):
-                psival = psi_interp(Zline[i], Rline[i])[0]
-                ne_interp  = scipy.interpolate.splev(psival, tck)
-                ne_line  += ne_interp
+            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2-i1))]
+            ne_interp  = scipy.interpolate.splev(psival, tck)
+            ne_line  = numpy.trapz(ne_interp)
             ne_line /= abs(i2-i1)
             ne_line_paths.append(ne_line)
             dist_paths.append(numpy.sqrt((xline[i2]-xline[i1])**2+(yline[i2]-yline[i1])**2+(Zline[i2]-Zline[i1])**2))
