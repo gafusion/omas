@@ -43,12 +43,9 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     :param ignore_default_keys: ignores the following keys from the comparison
                             %s
 
-    :return: string with reason for difference, or False otherwise
+    :return: dictionary with strings with reason for difference, or False otherwise
     """
     from omas import ODS, CodeParameters
-
-    ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
-    ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
     keys_to_ignore = []
     keys_to_ignore.extend(ignore_keys)
@@ -58,8 +55,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     def is_ignored(k):
         return any([o2u(k).endswith(end) for end in keys_to_ignore])
 
-    k1 = set(ods1.keys())
-    k2 = set(ods2.keys())
+    k1 = set(ods1.pretty_paths(return_empty_leaves=True, traverse_code_parameters=True))
+    k2 = set(ods2.pretty_paths(return_empty_leaves=True, traverse_code_parameters=True))
     differences = []
     for k in k1.difference(k2):
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])) and not is_ignored(k):
