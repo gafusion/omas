@@ -249,9 +249,9 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             y2 = R2*numpy.sin(phi2)
                 
             xline = numpy.linspace(x1, x2, line_grid)
-            yline = (y2-y1) * numpy.linspace(0, 1, line_grid) + y1			
-            Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
-            Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
+            yline = numpy.linspace(y1, y2, line_grid)		
+            Rline = numpy.linspace(R1, R2, line_grid)
+            Zline = numpy.linspace(Z1, Z2, line_grid)
             dist = numpy.zeros(line_grid)
  
             for i, Rval in enumerate(Rline):
