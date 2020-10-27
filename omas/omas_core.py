@@ -780,7 +780,7 @@ class ODS(MutableMapping):
                         options = 'A numerical index is needed with n>=0'
                     else:
                         if len(options) > 5:
-                            options = {option: difflib.SequenceMatcher(None, 'aequilibrium', option).ratio() for option in options}
+                            options = {option: difflib.SequenceMatcher(None, structure_key, option).ratio() for option in options}
                             index = numpy.argsort(list(options.values())).astype(int)
                             options = list(numpy.array(list(options.keys()))[index[-5:]][::-1]) + ['...']
                         options = 'Did you mean: ' + ', '.join(options)
