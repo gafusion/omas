@@ -36,6 +36,7 @@ import ast
 import base64
 import traceback
 import difflib
+import weakref
 
 try:
     import Pyro5.api

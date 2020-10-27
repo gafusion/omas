@@ -100,7 +100,6 @@ def load_omas_nc(filename, consistency_check=True, imas_version=omas_rcparams['d
             if item.endswith('_error_upper'):
                 continue
             ods.setraw(p2l(item), get_ds_item(dataset, item))
-    ods.set_child_locations()
     ods.consistency_check = consistency_check
     return ods
 

@@ -88,10 +88,6 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
     tmp.omas_data = OrderedDict()
     tmp.update(data)
 
-    # we must manually call set_child_locations since the json_loader
-    # routine uses the ODS.setraw method that does not do that for us
-    tmp.set_child_locations()
-
     # perform consistency check
     tmp.consistency_check = consistency_check
 

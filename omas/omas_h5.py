@@ -133,7 +133,6 @@ def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['d
     ods = cls(imas_version=imas_version, consistency_check=False)
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)
-    ods.set_child_locations()
     ods.consistency_check = consistency_check
     return ods
 

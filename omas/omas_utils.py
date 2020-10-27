@@ -128,6 +128,9 @@ def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
 
         attrs = omas_ods_attrs
 
+    if '_parent' in attrs:
+        attrs.pop(attrs.index('_parent'))
+
     n = max(list(map(lambda x: len(x), attrs)))
     l1 = set(list(map(lambda x: l2i(x[:-1]), ods1.paths(return_empty_leaves=True, traverse_code_parameters=False))))
     l2 = set(list(map(lambda x: l2i(x[:-1]), ods2.paths(return_empty_leaves=True, traverse_code_parameters=False))))
