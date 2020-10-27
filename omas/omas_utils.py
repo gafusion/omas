@@ -108,6 +108,61 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
 
 different_ods.__doc__ = different_ods.__doc__ % '\n                            '.join(default_keys_to_ignore)
 
+
+def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
+    '''
+    Checks if two ODSs have any difference in their attributes
+
+    :param ods1: first ods to check
+
+    :param ods2: second ods to check
+
+    :param attrs: list of attributes to compare
+
+    :param verbose: print differences to stdout
+
+    :return: dictionary with list of attriibutes that have differences, or False otherwise
+    '''
+
+    if isinstance(attrs, str):
+        attrs = [attrs]
+    elif attrs is None:
+        from .omas_core import omas_ods_attrs
+
+        attrs = omas_ods_attrs
+
+    n = max(list(map(lambda x: len(x), attrs)))
+    l1 = set(list(map(lambda x: l2i(x[:-1]), ods1.paths(return_empty_leaves=True, traverse_code_parameters=False))))
+    l2 = set(list(map(lambda x: l2i(x[:-1]), ods2.paths(return_empty_leaves=True, traverse_code_parameters=False))))
+    paths = sorted(list(l1.intersection(l2)))
+
+    differences = {}
+    for item in paths:
+        first = True
+        try:
+            for k in attrs:
+                a1 = getattr(ods1[item], k)
+                a2 = getattr(ods2[item], k)
+                if a1 != a2:
+                    if first:
+                        if verbose:
+                            print('-' * 20)
+                            print(item)
+                            print('-' * 20)
+                        differences[item] = []
+                        first = False
+                    differences[item].append(k)
+                    if verbose:
+                        print(k.ljust(n) + ': * %s' % a1)
+                        print('`%s * %s' % (' '.ljust(n), a2))
+        except:
+            raise
+    if len(differences):
+        return differences
+    else:
+        return False
+
+
 # --------------------------
 # general utility functions
 # --------------------------

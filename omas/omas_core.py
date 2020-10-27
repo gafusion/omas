@@ -162,6 +162,20 @@ def _handle_extension(*args, **kw):
     return ext, args
 
 
+omas_ods_attrs = [
+    '_consistency_check',
+    '_dynamic_path_creation',
+    '_imas_version',
+    'location',
+    'structure',
+    '_cocos',
+    '_cocosio',
+    '_coordsio',
+    '_unitsio',
+    '_dynamic',
+]
+
+
 class ODS(MutableMapping):
     """
     OMAS Data Structure class
@@ -1901,6 +1915,20 @@ class ODS(MutableMapping):
             self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty, ignore_keys=ignore_keys, ignore_default_keys=ignore_default_keys
         )
 
+    def diff_attrs(self, ods, attrs=omas_ods_attrs, verbose=False):
+        '''
+        Checks if two ODSs have any difference in their attributes
+
+        :param ods: ODS to compare against
+
+        :param attrs: list of attributes to compare
+
+        :param verbose: print differences to stdout
+
+        :return: dictionary with list of attriibutes that have differences, or False otherwise
+        '''
+        return different_ods_attrs(self, ods, attrs=attrs, verbose=verbose)
+
     def from_structure(self, structure, depth=0):
         """
         Generate an ODS starting from a hierarchical structure made of dictionaries and lists
@@ -2009,6 +2037,11 @@ class ODS(MutableMapping):
                 txt += [f'* {elms}: {value}']
 
         return '\n'.join(txt)
+
+
+omas_dictstate = dir(ODS)
+omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
+omas_dictstate = sorted(list(set(omas_dictstate)))
 
 
 class ODC(ODS):
@@ -2540,22 +2573,6 @@ try:
         setattr(ODS, 'plot_' + item, getattr(omas_plot, item))
 except ImportError as _excp:
     printe('OMAS plotting function are not available: ' + repr(_excp))
-
-omas_ods_attrs = [
-    '_consistency_check',
-    '_dynamic_path_creation',
-    '_imas_version',
-    'location',
-    'structure',
-    '_cocos',
-    '_cocosio',
-    '_coordsio',
-    '_unitsio',
-    '_dynamic',
-]
-omas_dictstate = dir(ODS)
-omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
-omas_dictstate = sorted(list(set(omas_dictstate)))
 
 
 # --------------------------------------------

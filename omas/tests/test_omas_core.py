@@ -476,6 +476,14 @@ class TestOmasCore(unittest.TestCase):
             diff = odc1.diff(odc)
             assert not diff, f'save/load ODC to {ftype} failed:\r{repr(diff)}'
 
+    def test_diff_attrs(self):
+        ods = ODS(imas_version='3.30.0').sample_equilibrium()
+        ods1 = ODS(imas_version='3.30.0').sample_equilibrium()
+        assert not ods.diff_attrs(ods1)
+        ods1 = ODS(imas_version='3.29.0').sample_equilibrium()
+        ods1.consistency_check = False
+        assert ods.diff_attrs(ods1, verbose=True)
+
     # End of TestOmasCore class
 
 
