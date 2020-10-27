@@ -1212,7 +1212,7 @@ class ODS(MutableMapping):
                                 if len(ods_coordinates.__getitem__(coordinate, None)) != len(value):
                                     raise Exception(
                                         'coordsio %s.shape=%s does not match %s.shape=%s'
-                                        % (coordinate, output_coordinates.__getitem__(coordinate, False).shape, location, value.shape)
+                                        % (coordinate, ods_coordinates.__getitem__(coordinate, False).shape, location, value.shape)
                                     )
                                 printd('Returning %s interpolated to output %s coordinate' % (location, coordinate), topic='coordsio')
                                 try:
