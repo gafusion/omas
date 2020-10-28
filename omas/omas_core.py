@@ -970,7 +970,7 @@ class ODS(MutableMapping):
                         raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
                     else:
                         raise IndexError(
-                            '`%s[%d]` but maximun index is %d\nPerhaps you want to set ods.dynamic_path_creation=\'dynamic_array_structures\''
+                            '`%s[%d]` but maximum index is %d\nPerhaps you want to set ods.dynamic_path_creation=\'dynamic_array_structures\''
                             % (self.location, key[0], len(self.omas_data) - 1)
                         )
 
