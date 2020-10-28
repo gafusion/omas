@@ -1212,3 +1212,15 @@ def get_actor_io_ids(filename):
         elif line.strip().startswith(':param '):
             ids_in.append(line.split(':')[2].strip())
     return ids_in, ids_out
+
+
+class UnittestCaseOmas(unittest.TestCase):
+    """
+    Base class for unittest.TestCase within OMAS
+    """
+
+    def setUp(self):
+        name = self.__class__.__name__ + '.' + self._testMethodName
+        print('~' * len(name))
+        print(name)
+        print('~' * len(name))

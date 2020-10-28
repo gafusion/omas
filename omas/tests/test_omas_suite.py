@@ -11,17 +11,17 @@ Test script for omas saving/loading data in different formats
 -------
 """
 
-import unittest
 import os
 import numpy
 
 # OMAS imports
 from omas import *
+from omas.omas_utils import *
 from omas.tests.failed_imports import *
 from omas.tests import warning_setup
 
 
-class TestOmasSuite(unittest.TestCase):
+class TestOmasSuite(UnittestCaseOmas):
     def test_omas_pkl(self):
         ods = ODS().sample()
         ods1 = through_omas_pkl(ods)

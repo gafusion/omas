@@ -11,7 +11,6 @@ Test script for omas/omas_core.py
 -------
 """
 
-import unittest
 import os
 import numpy
 from pprint import pprint
@@ -19,11 +18,11 @@ import xarray
 
 # OMAS imports
 from omas import *
-from omas.omas_setup import *
+from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasCore(unittest.TestCase):
+class TestOmasCore(UnittestCaseOmas):
     """
     Test suite for omas_core.py
     """

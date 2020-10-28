@@ -11,7 +11,6 @@ Test script for omas/omas_utils.py
 -------
 """
 
-import unittest
 import os
 import numpy
 import warnings
@@ -23,7 +22,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasUtils(unittest.TestCase):
+class TestOmasUtils(UnittestCaseOmas):
     """
     Test suite for omas_utils.py
     """
