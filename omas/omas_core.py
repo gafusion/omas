@@ -1505,24 +1505,24 @@ class ODS(MutableMapping):
                     self.omas_data[key].parent = self
         return self
 
-    def __deepcopy__(self, memo={}):
+    def __deepcopy__(self, memo):
         tmp = self.same_init_ods()
         memo[id(self)] = tmp
         if self.omas_data is None:
             return tmp
         elif isinstance(self.omas_data, list):
             tmp.omas_data = []
+            for k, value in enumerate(self.omas_data):
+                tmp.omas_data.append(value.__deepcopy__(memo=memo))
+                tmp.omas_data[k].parent = tmp
         else:
             tmp.omas_data = {}
-        for item in self:
-            if isinstance(self[item], ODS):
-                if isinstance(self.omas_data, list):
-                    tmp.omas_data.append(self[item].__deepcopy__())
+            for key in self.omas_data:
+                if isinstance(self.omas_data[key], ODS):
+                    tmp.omas_data[key] = self[key].__deepcopy__(memo=memo)
+                    tmp.omas_data[key].parent = tmp
                 else:
-                    tmp.omas_data[item] = self[item].__deepcopy__()
-                tmp.omas_data[item].parent = tmp
-            else:
-                tmp.omas_data[item] = copy.deepcopy(self[item])
+                    tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
     def copy(self):
