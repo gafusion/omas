@@ -11,7 +11,6 @@ Test script for omas/omas_core.py
 -------
 """
 
-import unittest
 import os
 import numpy
 from pprint import pprint
@@ -19,11 +18,11 @@ import xarray
 
 # OMAS imports
 from omas import *
-from omas.omas_setup import *
+from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasCore(unittest.TestCase):
+class TestOmasCore(UnittestCaseOmas):
     """
     Test suite for omas_core.py
     """
@@ -48,7 +47,7 @@ class TestOmasCore(unittest.TestCase):
         except ValueError:
             pass
         else:
-            raise Exception('OMAS error querying leaf that has not been set')
+            raise Exception('querying leaf that has not been set should raise a ValueError')
 
         # info ODS is used for keeping track of IMAS metadata
         ods['dataset_description.data_entry.machine'] = 'ITER'
@@ -126,6 +125,32 @@ class TestOmasCore(unittest.TestCase):
             uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
         )
         return
+
+    def test_dynamic_location(self):
+        ods = ODS()
+        for k in range(5):
+            ods[f'equilibrium.time_slice.{k}.global_quantities.ip'] = k
+        tmp = ods[f'equilibrium.time_slice.-1']
+        assert tmp.location == f'equilibrium.time_slice.{k}'
+        del ods[f'equilibrium.time_slice.0']
+        assert tmp.location == f'equilibrium.time_slice.{k-1}'
+
+    def test_auto_deepcopy_on_assignment(self):
+        ods = ODS()
+        ods[f'equilibrium.time_slice.0.global_quantities.ip'] = 0.0
+        ods[f'equilibrium.time_slice.1'] = ods[f'equilibrium.time_slice.0']
+
+        # test auto copy.deepcopy on assignment
+        assert id(ods[f'equilibrium.time_slice.0']) != id(ods[f'equilibrium.time_slice.1'])
+
+        # test no extra copy if the user does it for us
+        tmp = copy.deepcopy(ods[f'equilibrium.time_slice.0'])
+        ods[f'equilibrium.time_slice.2'] = tmp
+        assert id(ods[f'equilibrium.time_slice.2']) == id(tmp)
+
+        # test extra copy if multiple assignments
+        ods[f'equilibrium.time_slice.3'] = tmp
+        assert id(ods[f'equilibrium.time_slice.3']) != id(tmp)
 
     def test_data_slicing(self):
         ods = ODS()

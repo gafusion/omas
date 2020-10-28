@@ -600,10 +600,6 @@ def load_omas_imas(
         if 'ids_properties' in ods[ds]:
             ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
 
-    # must manually call set_child_locations since
-    # we used the ODS.setraw that does not do that for us
-    ods.set_child_locations()
-
     try:
         ods.consistency_check = consistency_check
     except LookupError as _excp:

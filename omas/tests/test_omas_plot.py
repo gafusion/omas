@@ -12,7 +12,6 @@ Test script for omas/omas_plot.py
 """
 
 # Basic imports
-import unittest
 import os
 import numpy
 import warnings
@@ -30,7 +29,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasPlot(unittest.TestCase):
+class TestOmasPlot(UnittestCaseOmas):
     """
     Test suite for omas_plot.py
     """

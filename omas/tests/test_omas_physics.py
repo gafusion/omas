@@ -11,7 +11,6 @@ Test script for omas/omas_physics.py
 -------
 """
 
-import unittest
 import os
 import numpy
 import warnings
@@ -32,7 +31,7 @@ except ImportError as _excp:
     failed_PINT = _excp
 
 
-class TestOmasPhysics(unittest.TestCase):
+class TestOmasPhysics(UnittestCaseOmas):
     """
     Test suite for omas_physics.py
     """

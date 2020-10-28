@@ -7,7 +7,6 @@ from .omas_setup import *
 from .omas_setup import __version__
 import sys
 
-
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
@@ -43,9 +42,12 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     :param ignore_default_keys: ignores the following keys from the comparison
                             %s
 
-    :return: dictionary with strings with reason for difference, or False otherwise
+    :return: string with reason for difference, or False otherwise
     """
     from omas import ODS, CodeParameters
+
+    ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
+    ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
     keys_to_ignore = []
     keys_to_ignore.extend(ignore_keys)
@@ -55,8 +57,8 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     def is_ignored(k):
         return any([o2u(k).endswith(end) for end in keys_to_ignore])
 
-    k1 = set(ods1.pretty_paths(return_empty_leaves=True, traverse_code_parameters=True))
-    k2 = set(ods2.pretty_paths(return_empty_leaves=True, traverse_code_parameters=True))
+    k1 = set(ods1.keys())
+    k2 = set(ods2.keys())
     differences = []
     for k in k1.difference(k2):
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])) and not is_ignored(k):
@@ -127,6 +129,9 @@ def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
         from .omas_core import omas_ods_attrs
 
         attrs = omas_ods_attrs
+
+    if '_parent' in attrs:
+        attrs.pop(attrs.index('_parent'))
 
     n = max(list(map(lambda x: len(x), attrs)))
     l1 = set(list(map(lambda x: l2i(x[:-1]), ods1.paths(return_empty_leaves=True, traverse_code_parameters=False))))
@@ -642,6 +647,8 @@ _structures = {}
 # * list of structures as `:`
 # * the leafs are empty dictionaries
 _structures_dict = {}
+# cache for structure()
+_ods_structure_cache = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
 # dictionary that contains all the coordinates defined within the data dictionary
@@ -715,15 +722,16 @@ def load_structure(filename, imas_version):
 
     from .omas_physics import cocos_signals
 
-    filename0 = filename
-    id = (filename0, imas_version)
-    if id in _structures and id in _structures_dict:
-        return _structures[id], _structures_dict[id]
-
+    # translate DS to filename
     if os.sep not in filename:
         filename = dict_structures(imas_version)[filename]
 
-    if filename not in _structures:
+    # check if _structures and _structures_dict already have this in cache
+    id = (filename, imas_version)
+    if id in _structures and id in _structures_dict:
+        return _structures[id], _structures_dict[id]
+
+    else:
         with open(filename, 'r') as f:
             dump_string = f.read()
         # load flat definitions from json file
@@ -749,6 +757,34 @@ def load_structure(filename, imas_version):
                 h = h[step]
 
     return _structures[id], _structures_dict[id]
+
+
+def imas_structure(imas_version, location):
+    '''
+    Returns a dictionary with the IMAS structure given a location
+
+    :param imas_version: imas version
+
+    :param location: path in OMAS format
+
+    :return: dictionary as loaded by load_structure() at location
+    '''
+    if imas_version not in _ods_structure_cache:
+        _ods_structure_cache[imas_version] = {}
+    if location is None:
+        ulocation = o2u(self.location)
+    else:
+        ulocation = o2u(location)
+    if not ulocation:
+        tmp = list_structures(imas_version=imas_version)
+        return {k: k for k in tmp}
+    elif ulocation not in _ods_structure_cache[imas_version]:
+        path = p2l(ulocation)
+        structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
+        for key in path[1:]:
+            structure = structure[key]
+        _ods_structure_cache[imas_version][ulocation] = structure
+    return _ods_structure_cache[imas_version][ulocation]
 
 
 def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
@@ -1176,3 +1212,15 @@ def get_actor_io_ids(filename):
         elif line.strip().startswith(':param '):
             ids_in.append(line.split(':')[2].strip())
     return ids_in, ids_out
+
+
+class UnittestCaseOmas(unittest.TestCase):
+    """
+    Base class for unittest.TestCase within OMAS
+    """
+
+    def setUp(self):
+        name = self.__class__.__name__ + '.' + self._testMethodName
+        print('~' * len(name))
+        print(name)
+        print('~' * len(name))

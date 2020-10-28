@@ -12,7 +12,6 @@ Test script for omas/examples/...
 """
 
 # Basic imports
-import unittest
 import os
 
 # Use Agg backend to avoid opening up figures
@@ -27,7 +26,7 @@ from omas.omas_utils import *
 from omas.tests.failed_imports import *
 
 
-class TestOmasExamples(unittest.TestCase):
+class TestOmasExamples(UnittestCaseOmas):
     """
     Test suite for examples files
     """

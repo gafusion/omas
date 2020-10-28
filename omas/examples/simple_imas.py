@@ -67,7 +67,7 @@ pprint(ods1.pretty_paths())
 print('=' * 20)
 print(' Compared saved/loaded data')
 print('=' * 20)
-difference = different_ods(ods, ods1)
+difference = ods.diff(ods1)
 if not difference:
     print('OMAS data got saved and loaded correctly')
 else:
