@@ -722,15 +722,16 @@ def load_structure(filename, imas_version):
 
     from .omas_physics import cocos_signals
 
-    filename0 = filename
-    id = (filename0, imas_version)
-    if id in _structures and id in _structures_dict:
-        return _structures[id], _structures_dict[id]
-
+    # translate DS to filename
     if os.sep not in filename:
         filename = dict_structures(imas_version)[filename]
 
-    if filename not in _structures:
+    # check if _structures and _structures_dict already have this in cache
+    id = (filename, imas_version)
+    if id in _structures and id in _structures_dict:
+        return _structures[id], _structures_dict[id]
+
+    else:
         with open(filename, 'r') as f:
             dump_string = f.read()
         # load flat definitions from json file
