@@ -128,13 +128,30 @@ class TestOmasCore(unittest.TestCase):
         return
 
     def test_dynammic_location(self):
-        ods=ODS()
+        ods = ODS()
         for k in range(5):
             ods[f'equilibrium.time_slice.{k}.global_quantities.ip'] = k
         tmp = ods[f'equilibrium.time_slice.-1']
         assert tmp.location == f'equilibrium.time_slice.{k}'
         del ods[f'equilibrium.time_slice.0']
         assert tmp.location == f'equilibrium.time_slice.{k-1}'
+
+    def test_auto_deepcopy_on_assignement(self):
+        ods = ODS()
+        ods[f'equilibrium.time_slice.0.global_quantities.ip'] = 0.0
+        ods[f'equilibrium.time_slice.1'] = ods[f'equilibrium.time_slice.0']
+
+        # test auto copy.deepcopy on assignement
+        assert id(ods[f'equilibrium.time_slice.0']) != id(ods[f'equilibrium.time_slice.1'])
+
+        # test no extra copy if the user does it for us
+        tmp = copy.deepcopy(ods[f'equilibrium.time_slice.0'])
+        ods[f'equilibrium.time_slice.2'] = tmp
+        assert id(ods[f'equilibrium.time_slice.2']) == id(tmp)
+
+        # test extra copy if multiple assignements
+        ods[f'equilibrium.time_slice.3'] = tmp
+        assert id(ods[f'equilibrium.time_slice.3']) != id(tmp)
 
     def test_data_slicing(self):
         ods = ODS()
