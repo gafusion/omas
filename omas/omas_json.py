@@ -73,20 +73,17 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
 
     def base_class(x):
         clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
-        clscls = lambda: ODC(imas_version=imas_version, consistency_check=False)
+        clsODC = lambda: ODC(imas_version=imas_version, consistency_check=False)
         try:
             tmp = json_loader(x, clsODS, null_to=numpy.NaN)
         except Exception:
-            tmp = json_loader(x, clscls, null_to=numpy.NaN)
+            tmp = json_loader(x, clsODC, null_to=numpy.NaN)
         return tmp
 
     tmp = json.loads(json_string, object_pairs_hook=lambda x: base_class(x), **kw)
 
     # convert to cls
     tmp.__class__ = cls
-    data = tmp.omas_data
-    tmp.omas_data = OrderedDict()
-    tmp.update(data)
 
     # perform consistency check
     tmp.consistency_check = consistency_check

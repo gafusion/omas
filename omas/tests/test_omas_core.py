@@ -48,7 +48,7 @@ class TestOmasCore(unittest.TestCase):
         except ValueError:
             pass
         else:
-            raise Exception('OMAS error querying leaf that has not been set')
+            raise Exception('querying leaf that has not been set should raise a ValueError')
 
         # info ODS is used for keeping track of IMAS metadata
         ods['dataset_description.data_entry.machine'] = 'ITER'

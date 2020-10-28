@@ -166,8 +166,6 @@ omas_ods_attrs = [
     '_consistency_check',
     '_dynamic_path_creation',
     '_imas_version',
-    'location',
-    'structure',
     '_cocos',
     '_cocosio',
     '_coordsio',
@@ -412,6 +410,9 @@ class ODS(MutableMapping):
 
     @property
     def parent(self):
+        if not hasattr(self, '_parent'):
+            self._parent = None
+            return None
         if self._parent is None:
             return None
         elif self._parent() is None:
@@ -428,7 +429,9 @@ class ODS(MutableMapping):
 
     @property
     def location(self):
-        if self.parent is None:
+        if isinstance(self.parent, ODC):
+            return ''
+        elif self.parent is None:
             return ''
         else:
             parent_location = self.parent.location
@@ -437,6 +440,8 @@ class ODS(MutableMapping):
                 if id(self) == id(item):
                     index = k
                     break
+            if index is None:
+                return ''
             if parent_location:
                 return parent_location + '.' + str(self.parent.keys()[index])
             else:
@@ -444,9 +449,9 @@ class ODS(MutableMapping):
 
     @property
     def structure(self):
-        ulocation = o2u(self.location)
         if self.imas_version not in _ods_location_cache:
             _ods_location_cache[self.imas_version] = {}
+        ulocation = o2u(self.location)
         if not ulocation:
             tmp = list_structures(imas_version=self.imas_version)
             return {k: k for k in tmp}
@@ -778,6 +783,8 @@ class ODS(MutableMapping):
             try:
                 structure = self.structure[structure_key]
                 if isinstance(value, ODS):
+                    if value.omas_data is None and not len(structure) and '.code.parameters' not in location:
+                        raise ValueError('`%s` has no data' % location)
                     self._validate(value, structure)
                     if value.omas_data is None:
                         if ':' in structure:
@@ -792,10 +799,10 @@ class ODS(MutableMapping):
                     if isinstance(value, ODS):
                         value.consistency_check = False
                 elif self.consistency_check:
-                    if not self.structure:
-                        options = list_structures(imas_version=self.imas_version)
-                    else:
+                    try:
                         options = list(self.structure.keys())
+                    except KeyError:
+                        raise LookupError(txt)
                     if len(options) == 1 and options[0] == ':':
                         options = 'A numerical index is needed with n>=0'
                     else:
@@ -1049,6 +1056,12 @@ class ODS(MutableMapping):
                 self.omas_data = []
             else:
                 self.omas_data = {}
+
+        if isinstance(value, ODS):
+            if value.parent is not None:
+                value = copy.deepcopy(value)
+            value.parent = self
+
         if isinstance(key, int) and len(self.omas_data) == key:
             self.omas_data.append(value)
         else:
@@ -1176,7 +1189,7 @@ class ODS(MutableMapping):
 
         value = self.omas_data[key[0]]
         if len(key) > 1:
-            # if the user has entered path rather than a single key
+            # if the user has entered a path rather than a single key
             try:
                 if isinstance(value, ODS):
                     return value.__getitem__(key[1:], cocos_and_coords)
@@ -1482,10 +1495,35 @@ class ODS(MutableMapping):
 
     def __setstate__(self, state):
         self.__dict__.update(state)
-        for item in self.omas_data:
-            if isinstance(self[item], ODS):
-                self[item].parent = self
+        if isinstance(self.omas_data, list):
+            for value in self.omas_data:
+                if isinstance(value, ODS):
+                    value.parent = self
+        elif isinstance(self.omas_data, dict):
+            for key in self.omas_data:
+                if isinstance(self.omas_data[key], ODS):
+                    self.omas_data[key].parent = self
         return self
+
+    def __deepcopy__(self, memo={}):
+        tmp = self.same_init_ods()
+        memo[id(self)] = tmp
+        if self.omas_data is None:
+            return tmp
+        elif isinstance(self.omas_data, list):
+            tmp.omas_data = []
+        else:
+            tmp.omas_data = {}
+        for item in self:
+            if isinstance(self[item], ODS):
+                if isinstance(self.omas_data, list):
+                    tmp.omas_data.append(self[item].__deepcopy__())
+                else:
+                    tmp.omas_data[item] = self[item].__deepcopy__()
+                tmp.omas_data[item].parent = tmp
+            else:
+                tmp.omas_data[item] = copy.deepcopy(self[item])
+        return tmp
 
     def copy(self):
         """
@@ -1514,7 +1552,11 @@ class ODS(MutableMapping):
         :return: self
         """
         for item in omas_ods_attrs:
-            setattr(self, item, getattr(ods, item, None))
+            try:
+                setattr(self, item, getattr(ods, item, None))
+            except:
+                print(item)
+                raise
         return self
 
     def prune(self):
@@ -1866,6 +1908,13 @@ class ODS(MutableMapping):
 
         # update the data
         self.omas_data = results.omas_data
+        if isinstance(self.omas_data, list):
+            for value in self.omas_data:
+                value.omas_data.parent = self
+        elif isinstance(self.omas_data, dict):
+            for key in self.omas_data:
+                if isinstance(self.omas_data[key], ODS):
+                    self.omas_data[key].parent = self
 
         # for pickle we can copy attrs over
         if ext == 'pkl':
