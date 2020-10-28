@@ -2371,7 +2371,10 @@ class CodeParameters(dict):
         if not code_params_string.strip().endswith('</parameters>'):
             code_params_string = '<parameters>' + code_params_string + '</parameters>'
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
-        if tmp:
+        if not isinstance(tmp, (list, dict)):
+            import xml
+            raise xml.parsers.expat.ExpatError('Not in XML format')
+        elif tmp:
             recursive_interpreter(tmp, dict_cls=CodeParameters)
             self.update(tmp)
         return self
