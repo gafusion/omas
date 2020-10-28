@@ -7,7 +7,6 @@ from .omas_setup import *
 from .omas_setup import __version__
 import sys
 
-
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
@@ -648,6 +647,8 @@ _structures = {}
 # * list of structures as `:`
 # * the leafs are empty dictionaries
 _structures_dict = {}
+# cache for structure()
+_ods_structure_cache = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
 # dictionary that contains all the coordinates defined within the data dictionary
@@ -755,6 +756,34 @@ def load_structure(filename, imas_version):
                 h = h[step]
 
     return _structures[id], _structures_dict[id]
+
+
+def imas_structure(imas_version, location):
+    '''
+    Returns a dictionary with the IMAS structure given a location
+
+    :param imas_version: imas version
+
+    :param location: path in OMAS format
+
+    :return: dictionary as loaded by load_structure() at location
+    '''
+    if imas_version not in _ods_structure_cache:
+        _ods_structure_cache[imas_version] = {}
+    if location is None:
+        ulocation = o2u(self.location)
+    else:
+        ulocation = o2u(location)
+    if not ulocation:
+        tmp = list_structures(imas_version=imas_version)
+        return {k: k for k in tmp}
+    elif ulocation not in _ods_structure_cache[imas_version]:
+        path = p2l(ulocation)
+        structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
+        for key in path[1:]:
+            structure = structure[key]
+        _ods_structure_cache[imas_version][ulocation] = structure
+    return _ods_structure_cache[imas_version][ulocation]
 
 
 def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):

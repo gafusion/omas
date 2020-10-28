@@ -174,8 +174,6 @@ omas_ods_attrs = [
     '_parent',
 ]
 
-_ods_location_cache = {}
-
 
 class ODS(MutableMapping):
     """
@@ -450,20 +448,8 @@ class ODS(MutableMapping):
                 return str(self.parent.keys()[index])
 
     @property
-    def structure(self):
-        if self.imas_version not in _ods_location_cache:
-            _ods_location_cache[self.imas_version] = {}
-        ulocation = o2u(self.location)
-        if not ulocation:
-            tmp = list_structures(imas_version=self.imas_version)
-            return {k: k for k in tmp}
-        elif ulocation not in _ods_location_cache[self.imas_version]:
-            path = p2l(ulocation)
-            structure = load_structure(path[0], imas_version=self.imas_version)[1][path[0]]
-            for key in path[1:]:
-                structure = structure[key]
-            _ods_location_cache[self.imas_version][ulocation] = structure
-        return _ods_location_cache[self.imas_version][ulocation]
+    def structure(self, location):
+        return imas_structure(self.imas_version, self.location)
 
     @property
     def imas_version(self):
@@ -525,7 +511,7 @@ class ODS(MutableMapping):
                     consistency_value_propagate = consistency_value
                     if consistency_value:
                         location = self.location
-                        structure = self.structure
+                        structure = imas_structure(self.imas_version, location)
                         if location.endswith('.ids_properties') and item == 'occurrence':
                             continue
                         else:
@@ -789,7 +775,7 @@ class ODS(MutableMapping):
             # perform consistency check with IMAS structure
             structure_key = key[0] if not isinstance(key[0], int) else ':'
             try:
-                structure = self.structure[structure_key]
+                structure = imas_structure(self.imas_version, location)
                 if isinstance(value, ODS):
                     if value.omas_data is None and not len(structure) and '.code.parameters' not in location:
                         raise ValueError('`%s` has no data' % location)
@@ -808,7 +794,7 @@ class ODS(MutableMapping):
                         value.consistency_check = False
                 elif self.consistency_check:
                     try:
-                        options = list(self.structure.keys())
+                        options = list(imas_structure(self.imas_version, self.location).keys())
                     except KeyError:
                         raise LookupError(txt)
                     if len(options) == 1 and options[0] == ':':
@@ -2195,17 +2181,6 @@ class ODC(ODS):
             kw['consistency_check'] = True
 
         return ODS.load(self, *args, **kw)
-
-
-def serializable(f):
-    def serializable_f(*args, **kw):
-        tmp = f(*args, **kw)
-        if hasattr(tmp, 'tolist'):
-            return tmp.tolist()
-        else:
-            return tmp
-
-    return serializable_f
 
 
 class dynamic_ODS_wrapper:
