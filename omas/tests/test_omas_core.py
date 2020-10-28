@@ -127,6 +127,15 @@ class TestOmasCore(unittest.TestCase):
         )
         return
 
+    def test_dynammic_location(self):
+        ods=ODS()
+        for k in range(5):
+            ods[f'equilibrium.time_slice.{k}.global_quantities.ip'] = k
+        tmp = ods[f'equilibrium.time_slice.-1']
+        assert tmp.location == f'equilibrium.time_slice.{k}'
+        del ods[f'equilibrium.time_slice.0']
+        assert tmp.location == f'equilibrium.time_slice.{k-1}'
+
     def test_data_slicing(self):
         ods = ODS()
         ods['langmuir_probes.embedded.0.name'] = '1'
