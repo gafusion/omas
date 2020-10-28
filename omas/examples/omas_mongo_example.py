@@ -24,8 +24,9 @@ _id = save_omas_mongo(ods, collection='test', database='test')
 print('retrieve exact entry using `_id`')
 ods = ODS().load('mongo', {'_id': _id}, collection='test', database='test')
 
-print('find entries that satisfy the query by matching strings')
-odss = load_omas_mongo({'equilibrium.code.name': 'test_code'}, collection='test', database='test')
+print('find at most 5 entries that satisfy the query by matching strings')
+odss = load_omas_mongo({'equilibrium.code.name': 'test_code'}, collection='test', database='test', limit=5)
+print(f' - found {len(odss)} entries')
 
 print('find at most 5 entries based on scalar condition')
 # https://docs.mongodb.com/manual/tutorial/query-embedded-documents/
