@@ -264,8 +264,10 @@ class ODS(MutableMapping):
         if extra_info is None:
             extra_info = {}
 
+        location = self.location
+
         # subselect on requested key
-        subtree = p2l(self.location + '.' + key)
+        subtree = p2l(location + '.' + key)
 
         # get time nodes from data structure definitions
         loc = p2l(subtree)
@@ -288,7 +290,7 @@ class ODS(MutableMapping):
 
             # get time data from ods
             times = {}
-            n = len(self.location)
+            n = len(location)
             for item in times_sub_ds:
                 otem = u2o(item, this_subtree)[n:]
                 if otem.replace(':', '0') not in self:
@@ -522,7 +524,9 @@ class ODS(MutableMapping):
                 else:
                     consistency_value_propagate = consistency_value
                     if consistency_value:
-                        if self.location.endswith('.ids_properties') and item == 'occurrence':
+                        location = self.location
+                        structure = self.structure
+                        if location.endswith('.ids_properties') and item == 'occurrence':
                             continue
                         else:
                             structure_key = item if not isinstance(item, int) else ':'
@@ -530,20 +534,24 @@ class ODS(MutableMapping):
                             if (
                                 isinstance(consistency_value, str)
                                 and 'strict' in consistency_value
-                                and structure_key in self.structure
-                                and p2l(self.location + '.%s' % item)[0] in _extra_structures
-                                and o2i(o2u(self.location + '.%s' % item)) in _extra_structures[p2l(self.location + '.%s' % item)[0]]
+                                and structure_key in structure
+                                and p2l(location + '.%s' % item)[0] in _extra_structures
+                                and o2i(o2u(location + '.%s' % item)) in _extra_structures[p2l(location + '.%s' % item)[0]]
                             ):
                                 strict_fail = True
-                            if not strict_fail and structure_key in self.structure:
-                                structure = self.structure[structure_key]
+                            if not strict_fail and structure_key in structure:
+                                structure[structure_key]
                             else:
-                                options = list(self.structure.keys())
+                                options = list(structure.keys())
                                 if len(options) == 1 and options[0] == ':':
                                     options = 'A numerical index is needed with n>=0'
                                 else:
-                                    options = 'Did you mean: %s' % options
-                                txt = 'IMAS %s location: %s' % (self.imas_version, self.location + '.' + structure_key)
+                                    if len(options) > 5:
+                                        options = {option: difflib.SequenceMatcher(None, structure_key, option).ratio() for option in options}
+                                        index = numpy.argsort(list(options.values())).astype(int)
+                                        options = list(numpy.array(list(options.keys()))[index[-5:]][::-1]) + ['...']
+                                    options = 'Did you mean: ' + ', '.join(options)
+                                txt = 'IMAS %s location: %s' % (self.imas_version, location + '.' + structure_key)
                                 if isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
                                     if 'warn' in consistency_value:
                                         if 'drop' in consistency_value:
@@ -558,7 +566,7 @@ class ODS(MutableMapping):
                                     continue
                         # check that value is consistent
                         if not isinstance(self.getraw(item), ODS):
-                            location = l2o([self.location] + [item])
+                            location = l2o([location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
                             value, txt = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
                             if not len(txt):
