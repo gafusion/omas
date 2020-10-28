@@ -189,7 +189,6 @@ class ODS(MutableMapping):
         cocosio=None,
         coordsio=None,
         unitsio=None,
-        structure=None,
         dynamic=None,
     ):
         """
@@ -202,8 +201,6 @@ class ODS(MutableMapping):
                                       * True (default): arrays of structures can be incrementally extended by accessing at the next element in the array
                                       * 'dynamic_array_structures': arrays of structures can be dynamically extended
 
-        :param location: string with location of this object relative to IMAS schema in ODS path format
-
         :param cocos: internal COCOS representation (this can only be set when the object is created)
 
         :param cocosio: COCOS representation of the data that is read/written from/to the ODS
@@ -212,8 +209,6 @@ class ODS(MutableMapping):
 
         :param unitsio: ODS will return data with units if True
 
-        :param structure: internal keyword that specifies what IMAS schema to use
-
         :param dynamic: internal keyword used for dynamic data loading
         """
         self.omas_data = None
@@ -221,13 +216,13 @@ class ODS(MutableMapping):
         self._dynamic_path_creation = dynamic_path_creation
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
+        self._parent = None
         self._imas_version = imas_version
         self._cocos = cocos
-        self._dynamic = dynamic
         self._cocosio = cocosio
         self._coordsio = coordsio
         self._unitsio = unitsio
-        self._parent = None
+        self._dynamic = dynamic
 
     def homogeneous_time(self, key='', default=True):
         """
@@ -533,7 +528,9 @@ class ODS(MutableMapping):
                                     options = 'A numerical index is needed with n>=0'
                                 else:
                                     if len(options) > 5:
-                                        options = {option: difflib.SequenceMatcher(None, structure_key, option).ratio() for option in options}
+                                        options = {
+                                            option: difflib.SequenceMatcher(None, structure_key, option).ratio() for option in options
+                                        }
                                         index = numpy.argsort(list(options.values())).astype(int)
                                         options = list(numpy.array(list(options.keys()))[index[-5:]][::-1]) + ['...']
                                     options = 'Did you mean: ' + ', '.join(options)
@@ -1038,6 +1035,7 @@ class ODS(MutableMapping):
 
         :return: value
         """
+        # accept path as list of keys
         if isinstance(key, list):
             if len(key) > 1:
                 if key[0] not in self:
@@ -1045,17 +1043,19 @@ class ODS(MutableMapping):
                 return self.getraw(key[0]).setraw(key[1:], value)
             else:
                 key = key[0]
-        if self.omas_data is None:
-            if isinstance(key, int):
-                self.omas_data = []
-            else:
-                self.omas_data = {}
 
+        # set .parent
         if isinstance(value, ODS):
             if value.parent is not None:
                 value = copy.deepcopy(value)
             value.parent = self
 
+        # assign
+        if self.omas_data is None:
+            if isinstance(key, int):
+                self.omas_data = []
+            else:
+                self.omas_data = {}
         if isinstance(key, int) and len(self.omas_data) == key:
             self.omas_data.append(value)
         else:
