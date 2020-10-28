@@ -1221,6 +1221,7 @@ class UnittestCaseOmas(unittest.TestCase):
 
     def setUp(self):
         name = self.__class__.__name__ + '.' + self._testMethodName
+        print('')
         print('~' * len(name))
         print(name)
         print('~' * len(name))
