@@ -424,23 +424,30 @@ class ODS(MutableMapping):
 
     @property
     def location(self):
-        if isinstance(self.parent, ODC):
+        parent = self.parent
+        if isinstance(parent, ODC):
             return ''
-        elif self.parent is None:
+        elif parent is None:
             return ''
         else:
-            parent_location = self.parent.location
-            index = None
-            for k, item in enumerate(self.parent.values()):
-                if id(self) == id(item):
-                    index = k
-                    break
-            if index is None:
+            parent_location = parent.location
+            loc = None
+            if isinstance(parent.omas_data, list):
+                for k, value in enumerate(parent.omas_data):
+                    if value is self:
+                        loc = k
+                        break
+            elif isinstance(parent.omas_data, dict):
+                for key in parent.omas_data:
+                    if parent.omas_data[key] is self:
+                        loc = key
+                        break
+            if loc is None:
                 return ''
             if parent_location:
-                return parent_location + '.' + str(self.parent.keys()[index])
+                return parent_location + '.' + str(loc)
             else:
-                return str(self.parent.keys()[index])
+                return str(loc)
 
     @property
     def structure(self, location):
@@ -2373,6 +2380,7 @@ class CodeParameters(dict):
         tmp = xmltodict.parse(code_params_string).get('parameters', '')
         if not isinstance(tmp, (list, dict)):
             import xml
+
             raise xml.parsers.expat.ExpatError('Not in XML format')
         elif tmp:
             recursive_interpreter(tmp, dict_cls=CodeParameters)
