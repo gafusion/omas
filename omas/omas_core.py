@@ -1160,6 +1160,8 @@ class ODS(MutableMapping):
                 data = numpy.full(max_shape, 0)
             elif dtype.char in 'df':
                 data = numpy.full(max_shape, numpy.nan)
+            elif dtype.char in 'O':
+                data = numpy.full(max_shape, object())
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 
