@@ -12,6 +12,13 @@ import sys
 with open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r') as _f:
     __version__ = _f.read().strip()
 
+# Add minor version revisions here
+# This is done to keep track of changes between OMAS PYPI releases
+# the if statements for these minor revisions can be deleted
+# as the OMAS PYPI version increases
+if __version__ == '0.66.0':
+    __version__ += '.1'
+
 if sys.version_info < (3, 5):
     raise Exception(
         '''

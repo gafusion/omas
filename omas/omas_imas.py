@@ -610,7 +610,7 @@ def load_omas_imas(
 
 class dynamic_omas_imas(dynamic_ODS):
     """
-    Class that provides dynamic data loading from NC file
+    Class that provides dynamic data loading from IMAS
     This class is not to be used by itself, but via the
     ODS.open() method.
     """
