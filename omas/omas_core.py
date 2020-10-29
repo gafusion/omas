@@ -2112,6 +2112,13 @@ class ODS(MutableMapping):
 
         return '\n'.join(txt)
 
+    def to_odx(self):
+        '''
+        Generate a ODX from current ODS
+
+        :return: ODX
+        '''
+        return ods_2_odx(self)
 
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)

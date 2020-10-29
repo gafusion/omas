@@ -494,6 +494,12 @@ class TestOmasCore(UnittestCaseOmas):
 
         assert latexit.get('somewhere.does_not_exist', 'somewhere.does_not_exist') == 'somewhere.does_not_exist'
 
+    def test_odx(self):
+        ods = ODS().sample_equilibrium()
+        odx = ods.to_odx()
+        ods1 = odx.to_ods()
+        assert not ods.diff(ods)
+
     def test_odc(self):
         odc = ODC()
         for k in range(5):

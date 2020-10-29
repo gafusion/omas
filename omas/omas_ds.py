@@ -21,7 +21,7 @@ class ODX(MutableMapping):
                 self.ucache.setdefault(o2u(k), []).append(k)
 
     def __delitem__(self, key):
-        pass
+        return self.omas_data.__delitem__(key)
 
     def __getitem__(self, key):
         # return data if key is exactly in dataset
@@ -44,11 +44,14 @@ class ODX(MutableMapping):
         # return data
         return tmp
 
+    def __getattr__(self, attr):
+        return getattr(self.omas_data, attr)
+
     def __iter__(self):
-        pass
+        return self.omas_data.__iter__()
 
     def __len__(self):
-        return None
+        return self.omas_data.__len__()
 
     def __setitem__(self, key, value):
         if key in self.omas_data.data_vars:
@@ -61,6 +64,16 @@ class ODX(MutableMapping):
         ods = load_omas_dx(*args, **kw)
         self.omas_data = ods.omas_data
         return self
+
+    def to_ods(self, consistency_check=True):
+        '''
+        Generate a ODS from current ODX
+
+        :param consistency_check: use consistency_check flag in ODS
+
+        :return: ODS
+        '''
+        return odx_2_ods(self, consistency_check=consistency_check)
 
 
 def save_omas_ds(ods, filename):
