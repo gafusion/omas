@@ -1626,22 +1626,27 @@ class ODS(MutableMapping):
                 self.dynamic_path_creation = bkp_dynamic_path_creation
         return self
 
-    def list_coordinates(self):
+    def list_coordinates(self, absolute_location=True):
         """
         return dictionary with coordinates in a given ODS
 
-        :return: dictionary with coordinates (keys are absolute location, values are relative locations)
+        :param absolute_location: return keys as absolute or relative locations
+
+        :return: dictionary with coordinates
         """
         coords = {}
 
         n = len(self.location)
         for full_path in self.full_paths():
             if l2u(full_path) in omas_coordinates(self.imas_version):
-                coords[l2o(full_path)] = self[l2o(full_path)[n:]]
+                if absolute_location:
+                    coords[l2o(full_path)] = self[l2o(full_path)[n:].strip('.')]
+                else:
+                    coords[l2o(full_path)[n:].strip('.')] = self[l2o(full_path)[n:].strip('.')]
 
         return coords
 
-    def coordinates(self, key):
+    def coordinates(self, key=None):
         """
         return dictionary with coordinates of a given ODS location
 
@@ -1652,12 +1657,17 @@ class ODS(MutableMapping):
         """
         coords = OrderedDict()
 
+        if key is None:
+            return self.list_coordinates(absolute_location=False)
+
         self.__getitem__(key, False)  # raise an error if data is not there
-        ulocation = l2u(p2l(key))
-        info = omas_info_node(ulocation)
+
+        location = self.location
+        uxlocation = l2u(p2l(location) + p2l(key))
+        info = omas_info_node(uxlocation)
         if 'coordinates' not in info:
-            raise ValueError('ODS location `%s` has no coordinates information' % ulocation)
-        coordinates = map(lambda x: u2o(x, key), info['coordinates'])
+            raise ValueError('ODS location `%s` has no coordinates information' % uxlocation)
+        coordinates = list(map(lambda x: u2o(x[len(location):].strip('.'), key), info['coordinates']))
         for coord in coordinates:
             coords[coord] = self[coord]  # this will raise an error if the coordinates data is not there
 

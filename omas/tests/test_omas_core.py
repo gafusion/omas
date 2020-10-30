@@ -124,7 +124,6 @@ class TestOmasCore(UnittestCaseOmas):
         ods2['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
             uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
         )
-        return
 
     def test_dynamic_location(self):
         ods = ODS()
@@ -181,13 +180,22 @@ class TestOmasCore(UnittestCaseOmas):
         ods.consistency_check = False
         ods.dynamic_path_creation = True
         self.assertRaises(IndexError, ods.__setitem__, 'something[10]', 5)
-        return
 
     def test_coordinates(self):
-        ods = ODS().sample()
-        assert len(ods.list_coordinates()) > 0
-        assert len(ods['equilibrium'].list_coordinates()) > 0
-        return
+        ods = ODS().sample_equilibrium()
+
+        assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods.coordinates('equilibrium.time_slice.0.profiles_1d.q')
+        assert 'time_slice.0.profiles_1d.psi' in ods['equilibrium'].coordinates('time_slice.0.profiles_1d.q')
+
+        assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods.list_coordinates()
+        assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods['equilibrium'].list_coordinates()
+
+        assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods.list_coordinates(absolute_location=False)
+        assert 'time_slice.0.profiles_1d.psi' in ods['equilibrium'].list_coordinates(absolute_location=False)
+
+        assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods.coordinates()
+        assert 'time_slice.0.profiles_1d.psi' in ods['equilibrium'].coordinates()
+
 
     def test_dataset(self):
         ods = ODS()
@@ -217,7 +225,6 @@ class TestOmasCore(UnittestCaseOmas):
             )
         except ValueError:
             pass
-        return
 
     def test_time(self):
         # test generation of a sample ods
@@ -267,7 +274,6 @@ class TestOmasCore(UnittestCaseOmas):
         ods.sample_dataset_description()
         ods['dataset_description'].satisfy_imas_requirements()
         assert ods['dataset_description.ids_properties.homogeneous_time'] is not None
-        return
 
     def test_dynamic_set_existing_list_nonzero_array_index(self):
         ods = ODS()
@@ -277,20 +283,17 @@ class TestOmasCore(UnittestCaseOmas):
         ods['something[7]'] = 10
         assert ods['something[0]'] == 5
         assert ods['something[7]'] == 10
-        return
 
     def test_set_nonexisting_array_index(self):
         ods = ODS()
         ods.consistency_check = False
         ods.dynamic_path_creation = False
         self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
-        return
 
     def test_force_type(self):
         ods = ODS()
         ods['core_profiles.profiles_1d'][0]['ion'][0]['z_ion'] = 1
         assert isinstance(ods['core_profiles.profiles_1d'][0]['ion'][0]['z_ion'], float)
-        return
 
     def test_address_structures(self):
         ods = ODS()
@@ -317,7 +320,6 @@ class TestOmasCore(UnittestCaseOmas):
 
         # access by pattern
         assert ods['@eq.*1.*.ip'] == 1
-        return
 
     def test_version(self):
         ods = ODS(imas_version='3.20.0')
@@ -337,7 +339,6 @@ class TestOmasCore(UnittestCaseOmas):
             tmp = ODS(imas_version='does_not_exist')
         except ValueError:
             pass
-        return
 
     def test_satisfy_imas_requirements(self):
         ods = ODS()
@@ -353,7 +354,6 @@ class TestOmasCore(UnittestCaseOmas):
 
         # re-check if data structures satisfy IMAS requirements (this should pass)
         ods.satisfy_imas_requirements()
-        return
 
     def test_deepcopy(self):
         ods = ODS().sample()
@@ -387,7 +387,6 @@ class TestOmasCore(UnittestCaseOmas):
         # make sure the deepcopy is not shallow
         ods2['equilibrium.vacuum_toroidal_field.r0'] += 1
         assert ods['equilibrium.vacuum_toroidal_field.r0'] + 1 == ods2['equilibrium.vacuum_toroidal_field.r0']
-        return
 
     def test_saveload(self):
         ods = ODS()
@@ -411,7 +410,6 @@ class TestOmasCore(UnittestCaseOmas):
             ods['complex'] = '2+1j'
         for item in ods:
             assert isinstance(ods[item], eval(item))
-        return
 
     def test_conversion_after_assignement(self):
         ods = ODS(consistency_check=False)
@@ -429,7 +427,6 @@ class TestOmasCore(UnittestCaseOmas):
             raise AssertionError('Convertion of list to dict should not be allowed')
         except TypeError:
             pass
-        return
 
     def test_codeparameters(self):
         ods = ODS()
@@ -474,7 +471,6 @@ class TestOmasCore(UnittestCaseOmas):
         assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
         assert isinstance(ods['ec_launchers.code.parameters.launcher.0'], CodeParameters)
         assert len(ods['ec_launchers.code.parameters.launcher.0']) == 2
-        return
 
     def test_latexit(self):
         assert latexit['somewhere.:.sublocation.n_e'] == '$n_e$'
