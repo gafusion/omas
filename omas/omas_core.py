@@ -1667,7 +1667,7 @@ class ODS(MutableMapping):
         info = omas_info_node(uxlocation)
         if 'coordinates' not in info:
             raise ValueError('ODS location `%s` has no coordinates information' % uxlocation)
-        coordinates = list(map(lambda x: u2o(x[len(location):].strip('.'), key), info['coordinates']))
+        coordinates = list(map(lambda x: u2o(x[len(location) :].strip('.'), key), info['coordinates']))
         for coord in coordinates:
             coords[coord] = self[coord]  # this will raise an error if the coordinates data is not there
 
@@ -1722,8 +1722,10 @@ class ODS(MutableMapping):
         import xarray
 
         key = p2l(key)
+        location = p2l(self.location)
+        full_key = location + key
 
-        info = omas_info_node(l2u(key))
+        info = omas_info_node(l2u(full_key))
         coords = self.coordinates(key)
 
         short_coords = OrderedDict()
@@ -1733,15 +1735,19 @@ class ODS(MutableMapping):
         ds = xarray.Dataset()
         ds[key[-1]] = xarray.DataArray(self[key], coords=short_coords, dims=short_coords.keys(), attrs=info)
         ds.attrs['y'] = key[-1]
-        ds.attrs['y_full'] = l2o(key)
+        ds.attrs['y_rel'] = l2o(key)
+        ds.attrs['y_full'] = l2o(full_key)
 
         ds.attrs['x'] = []
+        ds.attrs['x_rel'] = []
         ds.attrs['x_full'] = []
         for coord in coords:
-            info = omas_info_node(o2u(coord))
-            ds[p2l(coord)[-1]] = xarray.DataArray(coords[coord], dims=p2l(coord)[-1], attrs=info)
-            ds.attrs['x'].append(p2l(coord)[-1])
-            ds.attrs['x_full'].append(coord)
+            coord = p2l(coord)
+            info = omas_info_node(l2u(coord))
+            ds[coord[-1]] = xarray.DataArray(coords[l2o(coord)], dims=coord[-1], attrs=info)
+            ds.attrs['x'].append(coord[-1])
+            ds.attrs['x_rel'].append(l2o(coord))
+            ds.attrs['x_full'].append(l2o(location + coord))
         return ds
 
     def dataset(self, homogeneous=[False, 'time', 'full', None][-1]):
@@ -2129,6 +2135,7 @@ class ODS(MutableMapping):
         :return: ODX
         '''
         return ods_2_odx(self)
+
 
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)

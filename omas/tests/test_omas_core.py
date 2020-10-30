@@ -115,13 +115,40 @@ class TestOmasCore(UnittestCaseOmas):
 
         # check flattening
         tmp = ods2.flat()
-        # pprint(tmp)
 
         # check deepcopy
         ods3 = ods2.copy()
 
-        # check writing setting an xarray.DataArray
-        ods2['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
+    def test_xarray(self):
+        ods = ODS().sample_equilibrium()
+        abs = ods.xarray('equilibrium.time_slice.0.profiles_1d.q')
+        rel = ods['equilibrium'].xarray('time_slice.0.profiles_1d.q')
+        for k in [
+            'cocos_label_transformation',
+            'cocos_leaf_name_aos_indices',
+            'cocos_transformation_expression',
+            'coordinates',
+            'data_type',
+            'documentation',
+            'full_path',
+            'lifecycle_status',
+            'type',
+            'units',
+        ]:
+            assert k in abs['q'].attrs
+            assert k in rel['q'].attrs
+            assert abs['q'].attrs[k] == rel['q'].attrs[k]
+        for k in ['y', 'y_rel', 'y_full', 'x', 'x_rel', 'x_full']:
+            assert k in abs.attrs
+            assert k in rel.attrs
+            if '_rel' in k:
+                assert abs.attrs[k] != rel.attrs[k]
+            else:
+                assert abs.attrs[k] == rel.attrs[k]
+
+        # check setting of an xarray.DataArray
+        ods.dynamic_path_creation = 'dynamic_array_structures'
+        ods['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
             uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
         )
 
@@ -132,7 +159,7 @@ class TestOmasCore(UnittestCaseOmas):
         tmp = ods[f'equilibrium.time_slice.-1']
         assert tmp.location == f'equilibrium.time_slice.{k}'
         del ods[f'equilibrium.time_slice.0']
-        assert tmp.location == f'equilibrium.time_slice.{k-1}'
+        assert tmp.location == f'equilibrium.time_slice.{k - 1}'
 
     def test_auto_deepcopy_on_assignment(self):
         ods = ODS()
@@ -170,6 +197,7 @@ class TestOmasCore(UnittestCaseOmas):
     def test_uncertain_slicing(self):
         """Tests whether : slicing works properly with uncertain data"""
         from uncertainties import ufloat
+
         ods = ODS()
         ods['pulse_schedule']['position_control']['x_point'][0]['z']['reference']['data'] = [ufloat(1.019, 0.02), ufloat(1.019, 0.02)]
         result = ods['pulse_schedule.position_control.x_point.:.z.reference.data']
@@ -195,7 +223,6 @@ class TestOmasCore(UnittestCaseOmas):
 
         assert 'equilibrium.time_slice.0.profiles_1d.psi' in ods.coordinates()
         assert 'time_slice.0.profiles_1d.psi' in ods['equilibrium'].coordinates()
-
 
     def test_dataset(self):
         ods = ODS()
