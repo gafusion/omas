@@ -45,6 +45,9 @@ class ODX(MutableMapping):
         return tmp
 
     def __getattr__(self, attr):
+        # avoid picking up deepcopy and pickling methods from dataset
+        if attr in ['__deepcopy__', '__getstate__', '__setstate__']:
+            raise AttributeError('bad attribute `%s`' % attr)
         return getattr(self.omas_data, attr)
 
     def __iter__(self):
