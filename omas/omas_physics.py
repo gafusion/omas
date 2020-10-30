@@ -219,7 +219,7 @@ def summary_greenwald(ods, update=True):
 
     :return: updated ods
     """
-    
+
     ods_n = ods
     if not update:
         from omas import ODS
@@ -240,6 +240,7 @@ def summary_greenwald(ods, update=True):
     ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
     return ods_n
 
+
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
@@ -258,7 +259,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     :return: updated ods
     """
     import scipy
-    
+
     ods_n = ods
     if not update:
         from omas import ODS
@@ -273,7 +274,6 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
     Zb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['z']
 
-
     Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
@@ -285,52 +285,52 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
     ne = numpy.interp(rhon_eq, rhon_cp, ne)
     tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
-    
+
     if 'time' not in ods['interferometer']:
         ods_n['interferometer.ids_properties.homogeneous_time'] = 1
         ods_n['interferometer']['time'] = copy.copy(ods['core_profiles']['time'])
-    
-    ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point',]]
+
+    ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point']]
     for channel in ods['interferometer']['channel']:
         ne_line_paths = []
-        dist_paths = [] 
+        dist_paths = []
         for ifpath in ifpaths:
             R1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['r']
             Z1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['z']
             phi1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['phi']
-            x1 = R1*numpy.cos(phi1)
-            y1 = R1*numpy.sin(phi1)
-            		
+            x1 = R1 * numpy.cos(phi1)
+            y1 = R1 * numpy.sin(phi1)
+
             R2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['r']
             Z2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['z']
             phi2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['phi']
-            x2 = R2*numpy.cos(phi2)
-            y2 = R2*numpy.sin(phi2)
-                
+            x2 = R2 * numpy.cos(phi2)
+            y2 = R2 * numpy.sin(phi2)
+
             xline = numpy.linspace(x1, x2, line_grid)
-            yline = numpy.linspace(y1, y2, line_grid)		
+            yline = numpy.linspace(y1, y2, line_grid)
             Rline = numpy.linspace(R1, R2, line_grid)
             Zline = numpy.linspace(Z1, Z2, line_grid)
             dist = numpy.zeros(line_grid)
- 
+
             for i, Rval in enumerate(Rline):
-                dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
-			
+                dist[i] = numpy.min((Rline[i] - Rb) ** 2 + (Zline[i] - Zb) ** 2)
+
             zero_crossings = numpy.where(numpy.diff(numpy.sign(numpy.gradient(dist))))[0]
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2-i1))]
-            ne_interp  = scipy.interpolate.splev(psival, tck)
-            ne_line  = numpy.trapz(ne_interp)
-            ne_line /= abs(i2-i1)
+            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            ne_interp = scipy.interpolate.splev(psival, tck)
+            ne_line = numpy.trapz(ne_interp)
+            ne_line /= abs(i2 - i1)
             ne_line_paths.append(ne_line)
-            dist_paths.append(numpy.sqrt((xline[i2]-xline[i1])**2+(yline[i2]-yline[i1])**2+(Zline[i2]-Zline[i1])**2))
-		
+            dist_paths.append(numpy.sqrt((xline[i2] - xline[i1]) ** 2 + (yline[i2] - yline[i1]) ** 2 + (Zline[i2] - Zline[i1]) ** 2))
+
         ne_line = numpy.average(ne_line_paths, weights=dist_paths)
         if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods_n:
             ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods_n['interferometer']['time']))
-        	
+
         ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
     return ods_n
 

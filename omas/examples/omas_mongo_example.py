@@ -15,7 +15,7 @@ from omas import *
 from random import random
 
 ods = ODS().sample_equilibrium()
-ods['equilibrium.time_slice.0.global_quantities.ip'] *= (0.9 + random()*0.2)
+ods['equilibrium.time_slice.0.global_quantities.ip'] *= 0.9 + random() * 0.2
 ods['equilibrium.code.name'] = 'test_code'
 
 print('write entry to the database')
