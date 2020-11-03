@@ -1374,6 +1374,24 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     return R[0, :], Z[:, 0], intepolated_data
 
 
+@add_to__ODS__
+def check_iter_scenario_requirements(ods):
+    '''
+    Check that the current ODS satisfies the ITER scenario database requirements as defined in https://confluence.iter.org/x/kQqOE
+
+    :return: list of elements that are missing to satisfy the ITER scenario requirements
+    '''
+    from .omas_imas import iter_scenario_requirements
+
+    fail = []
+    for item in iter_scenario_requirements:
+        try:
+            ods[item]  # acccessing a leaf that has no data will raise an error
+        except Exception:
+            fail.append(item)
+    return fail
+
+
 @add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
     """

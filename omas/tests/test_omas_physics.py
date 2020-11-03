@@ -36,6 +36,19 @@ class TestOmasPhysics(UnittestCaseOmas):
     Test suite for omas_physics.py
     """
 
+    def test_check_iter_scenario_requirements(self):
+        from omas.omas_imas import iter_scenario_requirements
+
+        ods = ODS()
+        tmp = ods.physics_check_iter_scenario_requirements()
+        assert tmp == iter_scenario_requirements
+
+        ods.sample_equilibrium()
+        ods.sample_core_profiles()
+        ods.physics_summary_consistent_global_quantities()
+        tmp = ods.physics_check_iter_scenario_requirements()
+        assert tmp != iter_scenario_requirements
+
     def test_equilibrium_consistent(self):
         ods = ODS()
         ods.sample_equilibrium()
