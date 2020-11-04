@@ -22,6 +22,7 @@ sphinx/source/code.rst
 sphinx/source/usage.rst
 sphinx/source/scenarios.rst
 sphinx/source/schema.rst
+sphinx/source/iter_scenario_requirements.rst
 sphinx/source/schema/
 sphinx/source/auto_examples/
 

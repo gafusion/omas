@@ -72,6 +72,10 @@ Remotely access ITER data with OMFIT
 
        OMFIT['ods'] = load_omas_iter_scenario_remote(pulse=131034, run=0)
 
+ITER scenario requirements
+==========================
+There is :ref:`a subset of IDS fields<ITER scenario requirements>` that are required to add datasets to the ITER scenario database
+
 Tutorial for running predictive ITER modeling with OMFIT+OMAS
 =============================================================
 * `Google docs <https://docs.google.com/document/d/1g3VStisQ1wIrhn__rkDQ4sBiv7VZcOiLZzbDMvKw1Lg/edit?usp=sharing>`_  or `PDF <https://docs.google.com/document/export?format=pdf&id=1g3VStisQ1wIrhn__rkDQ4sBiv7VZcOiLZzbDMvKw1Lg&token=AC4w5VipgAXUCbfJ2uI9G3tidgRWhSaMFw%3A1554239840631&includes_info_params=true>`_
