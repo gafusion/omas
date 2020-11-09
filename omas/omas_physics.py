@@ -478,7 +478,7 @@ def summary_total_powers(ods, update=True):
 
     for key, value in power_dict.items():
         if numpy.sum(value) > 0:
-            if key is 'total':
+            if key == 'total':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
