@@ -17,7 +17,7 @@ OMAS is a Python library to interface with the `ITER <http://iter.org>`_ Integra
 
 Learn More:
 
-* Watch this `video presentation <https://www.youtube.com/watch?v=Th3uua-BOiI>`_
+* Watch this `video presentation <https://youtu.be/kGVbEu1dG4c>`_
 
 * Read detail in the appendix of `"Meneghini et al. Nuclear Fusion (2020)" <https://iopscience.iop.org/article/10.1088/1741-4326/abb918/meta>`_ publication.
 
