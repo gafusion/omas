@@ -141,6 +141,11 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_collection(self):
         from omas.examples import omas_collection
 
+    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_cea_cluster, str(not_running_on_cea_cluster))
+    def test_west_geqdsk(self):
+        from omas.examples import west_geqdsk
+
 
 # for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):
 #     if '__init__' in filename:
