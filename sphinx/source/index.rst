@@ -17,11 +17,9 @@ OMAS is a Python library to interface with the `ITER <http://iter.org>`_ Integra
 
 Learn More:
 
-* Watch this `video presentation <https://youtu.be/kGVbEu1dG4c>`_
+* `Video of a talk <https://youtu.be/kGVbEu1dG4c>`_ given at the 2020 American Physical Society meeting and associated `slides <https://www.dropbox.com/s/n0i5yc0kv0vehgc/OMAS_APS2020.pdf?dl=0>`_
 
-* Read detail in the appendix of `"Meneghini et al. Nuclear Fusion (2020)" <https://iopscience.iop.org/article/10.1088/1741-4326/abb918/meta>`_ publication.
-
-Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <https://omfit.io>`_.
+* Read more details in the appendix of `"Meneghini et al. Nuclear Fusion (2020)" <https://iopscience.iop.org/article/10.1088/1741-4326/abb918/meta>`_ publication.
 
 ---------------------------------
 
