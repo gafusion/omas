@@ -771,18 +771,15 @@ def imas_structure(imas_version, location):
     '''
     if imas_version not in _ods_structure_cache:
         _ods_structure_cache[imas_version] = {}
-    if location is None:
-        ulocation = o2u(self.location)
-    else:
-        ulocation = o2u(location)
-    if not ulocation:
-        tmp = list_structures(imas_version=imas_version)
-        return {k: k for k in tmp}
-    elif ulocation not in _ods_structure_cache[imas_version]:
-        path = p2l(ulocation)
-        structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
-        for key in path[1:]:
-            structure = structure[key]
+    ulocation = o2u(location)
+    if ulocation not in _ods_structure_cache[imas_version]:
+        if not ulocation:
+            structure = {k: k for k in list_structures(imas_version=imas_version)}
+        else:
+            path = p2l(ulocation)
+            structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
+            for key in path[1:]:
+                structure = structure[key]
         _ods_structure_cache[imas_version][ulocation] = structure
     return _ods_structure_cache[imas_version][ulocation]
 
@@ -1103,12 +1100,10 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
 
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     """
-    tmp = {}
     try:
-        tmp.update(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
+        return copy.copy(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
     except KeyError:
-        pass
-    return tmp
+        return {}
 
 
 def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=OrderedDict):

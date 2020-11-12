@@ -928,7 +928,7 @@ class ODS(MutableMapping):
                 # dynamic array structure creation
                 if key[0] >= len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
-                        self[item] = self.same_init_ods()
+                        self.omas_data.append(self.same_init_ods())
                 # index exists
                 if key[0] < len(self.omas_data):
                     self.omas_data[key[0]] = value
@@ -1383,12 +1383,19 @@ class ODS(MutableMapping):
         dynamic_keys = []
         if dynamic and self.dynamic:
             dynamic_keys = list(self.dynamic.keys(self.location))
-        if isinstance(self.omas_data, dict):
-            return sorted(numpy.unique(list(map(str, self.omas_data.keys())) + dynamic_keys).tolist())
-        elif isinstance(self.omas_data, list):
-            return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
+            if isinstance(self.omas_data, dict):
+                return sorted(numpy.unique(list(self.omas_data.keys()) + dynamic_keys).tolist())
+            elif isinstance(self.omas_data, list):
+                return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
+            else:
+                return dynamic_keys
         else:
-            return dynamic_keys
+            if isinstance(self.omas_data, dict):
+                return list(self.omas_data.keys())
+            elif isinstance(self.omas_data, list):
+                return list(range(len(self.omas_data)))
+            else:
+                return []
 
     def values(self):
         return [self[item] for item in self.keys()]
