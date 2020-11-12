@@ -164,7 +164,6 @@ def _handle_extension(*args, **kw):
 
 omas_ods_attrs = [
     '_consistency_check',
-    '_dynamic_path_creation',
     '_imas_version',
     '_cocos',
     '_cocosio',
@@ -184,7 +183,6 @@ class ODS(MutableMapping):
         self,
         imas_version=omas_rcparams['default_imas_version'],
         consistency_check=omas_rcparams['consistency_check'],
-        dynamic_path_creation=omas_rcparams['dynamic_path_creation'],
         cocos=omas_rcparams['cocos'],
         cocosio=None,
         coordsio=None,
@@ -195,11 +193,6 @@ class ODS(MutableMapping):
         :param imas_version: IMAS version to use as a constrain for the nodes names
 
         :param consistency_check: whether to enforce consistency with IMAS schema
-
-        :param dynamic_path_creation: whether to dynamically create the path when setting an item
-                                      * False: raise an error when trying to access a structure element that does not exists
-                                      * True (default): arrays of structures can be incrementally extended by accessing at the next element in the array
-                                      * 'dynamic_array_structures': arrays of structures can be dynamically extended
 
         :param cocos: internal COCOS representation (this can only be set when the object is created)
 
@@ -213,7 +206,6 @@ class ODS(MutableMapping):
         """
         self.omas_data = None
         self._consistency_check = consistency_check
-        self._dynamic_path_creation = dynamic_path_creation
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         self._parent = None
@@ -682,25 +674,6 @@ class ODS(MutableMapping):
                 self.getraw(item).dynamic = dynamic
 
     @property
-    def dynamic_path_creation(self):
-        """
-        property that sets whether dynamic path creation is enabled or not
-
-        :return: True/False
-        """
-        if not hasattr(self, '_dynamic_path_creation'):
-            self._dynamic_path_creation = True
-        return self._dynamic_path_creation
-
-    @dynamic_path_creation.setter
-    def dynamic_path_creation(self, dynamic_path_value):
-        if dynamic_path_value != self._dynamic_path_creation:
-            self._dynamic_path_creation = dynamic_path_value
-            for item in self.keys():
-                if isinstance(self.getraw(item), ODS):
-                    self.getraw(item).dynamic_path_creation = dynamic_path_value
-
-    @property
     def ulocation(self):
         """
         :return: string with location of this object in universal ODS path format
@@ -962,14 +935,14 @@ class ODS(MutableMapping):
             # arrays of structures
             else:
                 # dynamic array structure creation
-                if key[0] >= len(self.omas_data) and self.dynamic_path_creation == 'dynamic_array_structures':
+                if key[0] >= len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
                     for item in range(len(self.omas_data), key[0]):
                         self[item] = self.same_init_ods()
                 # index exists
                 if key[0] < len(self.omas_data):
                     self.omas_data[key[0]] = value
                 # next index creation
-                elif key[0] == len(self.omas_data) and self.dynamic_path_creation:
+                elif key[0] == len(self.omas_data):
                     self.omas_data.append(value)
                 # missing index
                 else:
@@ -977,7 +950,7 @@ class ODS(MutableMapping):
                         raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
                     else:
                         raise IndexError(
-                            '`%s[%d]` but maximum index is %d\nPerhaps you want to set ods.dynamic_path_creation=\'dynamic_array_structures\''
+                            '`%s[%d]` but maximum index is %d\nPerhaps you want to use `with omas_environment(ods, dynamic_path_creation=\'dynamic_array_structures\')'
                             % (self.location, key[0], len(self.omas_data) - 1)
                         )
 
@@ -1023,7 +996,6 @@ class ODS(MutableMapping):
         return cls(
             imas_version=self.imas_version,
             consistency_check=self._consistency_check,
-            dynamic_path_creation=self._dynamic_path_creation,
             cocos=self._cocos,
             cocosio=self._cocosio,
             coordsio=self._coordsio,
@@ -1177,7 +1149,7 @@ class ODS(MutableMapping):
 
         # dynamic path creation
         elif key[0] not in self.keys():
-            if self.dynamic_path_creation:
+            if omas_rcparams['dynamic_path_creation']:
                 if self.dynamic:
                     location = l2o([self.location, key[0]])
                 if self.dynamic is not None and self.dynamic.__contains__(location):
@@ -1391,11 +1363,6 @@ class ODS(MutableMapping):
             tmp[l2o(path)] = self[path]
         return tmp
 
-    def __getnewargs__(self):
-        # tells pickle.dumps to pickle the omas object in such a way that a pickle.loads
-        # back from that string will use omas.__new__ with consistency_check=False and dynamic_path_creation=True
-        return (False, True)
-
     def __len__(self):
         return len(self.keys())
 
@@ -1548,7 +1515,7 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         """
-        copy omas_ods_attrs ['_consistency_check','_dynamic_path_creation','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
+        copy omas_ods_attrs ['_consistency_check','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
 
         :param ods: input ods
 
@@ -1617,13 +1584,9 @@ class ODS(MutableMapping):
             for item in ods2.paths():
                 self[item] = ods2[item]
         else:
-            try:
-                bkp_dynamic_path_creation = self.dynamic_path_creation
-                self.dynamic_path_creation = 'dynamic_array_structures'
+            with omas_environment(self, dynamic_path_creation='dynamic_array_structures'):
                 for item in ods2.keys():
                     self[item] = ods2[item]
-            finally:
-                self.dynamic_path_creation = bkp_dynamic_path_creation
         return self
 
     def list_coordinates(self, absolute_location=True):

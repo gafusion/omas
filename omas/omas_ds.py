@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import ODS, omas_environment
 import itertools
 
 
@@ -143,22 +143,21 @@ def odx_2_ods(odx, consistency_check=True):
     """
     DS = odx.omas_data
     ods = ODS(consistency_check=False)
-    ods.dynamic_path_creation = 'dynamic_array_structures'
-    for uitem in DS.data_vars:
-        depth = uitem.count(':')
-        value = DS[uitem].values
-        if not depth:
-            ods[uitem] = value
-            continue
-        # unroll
-        for kkk in itertools.product(*map(range, DS[uitem].shape[:depth])):
-            item = uitem.replace(':', '{}').format(*kkk)
-            tmp = value
-            for k in kkk:
-                tmp = tmp[k]
-            ods[item] = tmp
+    with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+        for uitem in DS.data_vars:
+            depth = uitem.count(':')
+            value = DS[uitem].values
+            if not depth:
+                ods[uitem] = value
+                continue
+            # unroll
+            for kkk in itertools.product(*map(range, DS[uitem].shape[:depth])):
+                item = uitem.replace(':', '{}').format(*kkk)
+                tmp = value
+                for k in kkk:
+                    tmp = tmp[k]
+                ods[item] = tmp
     ods.consistency_check = consistency_check
-    ods.dynamic_path_creation = True
     return ods
 
 

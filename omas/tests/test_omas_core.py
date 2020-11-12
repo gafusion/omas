@@ -31,15 +31,13 @@ class TestOmasCore(UnittestCaseOmas):
         ods = ODS()
         # check effect of disabling dynamic path creation
         try:
-            ods.dynamic_path_creation = False
-            ods['dataset_description.data_entry.user']
+            with omas_environment(ods, dynamic_path_creation = False):
+                ods['dataset_description.data_entry.user']
         except LookupError:
             ods['dataset_description'] = ODS()
             ods['dataset_description.data_entry.user'] = os.environ.get('USER', 'dummy_user')
         else:
             raise Exception('OMAS error handling dynamic_path_creation=False')
-        finally:
-            ods.dynamic_path_creation = True
 
         # check that accessing leaf that has not been set raises a ValueError, even with dynamic path creation turned on
         try:
@@ -147,10 +145,10 @@ class TestOmasCore(UnittestCaseOmas):
                 assert abs.attrs[k] == rel.attrs[k]
 
         # check setting of an xarray.DataArray
-        ods.dynamic_path_creation = 'dynamic_array_structures'
-        ods['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
-            uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
-        )
+        with omas_environment(ods, dynamic_path_creation = 'dynamic_array_structures'):
+            ods['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
+                uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
+            )
 
     def test_dynamic_location(self):
         ods = ODS()
@@ -206,7 +204,6 @@ class TestOmasCore(UnittestCaseOmas):
     def test_dynamic_set_nonzero_array_index(self):
         ods = ODS()
         ods.consistency_check = False
-        ods.dynamic_path_creation = True
         self.assertRaises(IndexError, ods.__setitem__, 'something[10]', 5)
 
     def test_coordinates(self):
@@ -305,17 +302,17 @@ class TestOmasCore(UnittestCaseOmas):
     def test_dynamic_set_existing_list_nonzero_array_index(self):
         ods = ODS()
         ods.consistency_check = False
-        ods.dynamic_path_creation = 'dynamic_array_structures'
         ods['something[0]'] = 5
-        ods['something[7]'] = 10
+        with omas_environment(ods, dynamic_path_creation = 'dynamic_array_structures'):
+            ods['something[7]'] = 10
         assert ods['something[0]'] == 5
         assert ods['something[7]'] == 10
 
     def test_set_nonexisting_array_index(self):
         ods = ODS()
         ods.consistency_check = False
-        ods.dynamic_path_creation = False
-        self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
+        with omas_environment(ods, dynamic_path_creation = False):
+            self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
 
     def test_force_type(self):
         ods = ODS()

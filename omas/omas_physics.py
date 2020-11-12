@@ -1778,7 +1778,7 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 
 @add_to__ALL__
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, **kw):
+def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw):
     """
     Provides environment for data input/output to/from OMAS
 
@@ -1792,6 +1792,11 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
 
     :param xmlcodeparams: view code.parameters as an XML string while in this environment
 
+    :param dynamic_path_creation: whether to dynamically create the path when setting an item
+                                  * False: raise an error when trying to access a structure element that does not exists
+                                  * True (default): arrays of structures can be incrementally extended by accessing at the next element in the array
+                                  * 'dynamic_array_structures': arrays of structures can be dynamically extended
+
     :param kw: extra keywords set attributes of the ods (eg. 'consistency_check', 'dynamic_path_creation', 'imas_version')
 
     :return: ODS with environment set
@@ -1802,8 +1807,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         from omas import ODS
 
         tmp = ODS(cocos=ods.cocos)
-        tmp.dynamic_path_creation = 'dynamic_array_structures'
-        with omas_environment(tmp, cocosio=cocosio):
+        with omas_environment(tmp, cocosio=cocosio, dynamic_path_creation = 'dynamic_array_structures'):
             tmp.update(coordsio)
         coordsio = tmp
 
@@ -1811,6 +1815,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         raise ValueError('cocosio can only be an integer')
 
     # backup attributes
+    bkp_dynamic_path_creation = omas_rcparams['dynamic_path_creation']
     bkp_cocosio = ods.cocosio
     bkp_coordsio = ods.coordsio
     bkp_unitsio = ods.unitsio
@@ -1827,6 +1832,8 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
+    if dynamic_path_creation is not None:
+        omas_rcparams['dynamic_path_creation'] = dynamic_path_creation
 
     # set input_data_process_functions
     if input_data_process_functions is not None:
@@ -1851,6 +1858,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         if xmlcodeparams:
             ods.codeparams2dict()
         # restore attributes
+        omas_rcparams['dynamic_path_creation'] = bkp_dynamic_path_creation
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio

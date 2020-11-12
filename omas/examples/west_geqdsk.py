@@ -5,14 +5,14 @@ gEQDSK file from IMAS WEST data
 ===============================
 This example loads WEST IMAS equilibrium data and generates a gEQDSK file from it.
 
-make sure to first::
-
-    module load omfit
-    module load IMAS/3.30.0-4.8.4
-
 NOTE: There is an OMFIT script that does this (works also remotely) and can be called with::
 
     omfit gEQDSK_west "shot=55866, run=0, occurrence=1, time=47, resolution=129"
+
+To run this, make sure to first::
+
+    module load omfit
+    module load IMAS/3.30.0-4.8.4
 
 """
 
