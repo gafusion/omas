@@ -560,27 +560,28 @@ def load_omas_imas(
             )
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
-            for k, path in enumerate(fetch_paths):
-                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
-                    continue
-                if verbose and (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
-                    print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
-                # get data from IDS
-                data = imas_get(ids, path, None)
-                # continue for empty data
-                if data is None:
-                    continue
-                # add uncertainty
-                if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
-                    stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
-                    if stdata is not None:
-                        try:
-                            data = uarray(data, stdata)
-                        except uncertainties.core.NegativeStdDev as _excp:
-                            printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
-                # assign data to ODS
-                # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
-                ods.setraw(path, data)
+            with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+                for k, path in enumerate(fetch_paths):
+                    if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
+                        continue
+                    if verbose and (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
+                        print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                    # get data from IDS
+                    data = imas_get(ids, path, None)
+                    # continue for empty data
+                    if data is None:
+                        continue
+                    # add uncertainty
+                    if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
+                        stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
+                        if stdata is not None:
+                            try:
+                                data = uarray(data, stdata)
+                            except uncertainties.core.NegativeStdDev as _excp:
+                                printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
+                    # assign data to ODS
+                    # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
+                    ods.setraw(path, data)
 
         finally:
             # close connection to IMAS database
