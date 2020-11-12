@@ -941,7 +941,6 @@ def l2ut(path):
     """
     lpath = p2l(path)
     opath = l2o(lpath)
-    upath = o2u(path)
     for k, key in enumerate(lpath):
         if not isinstance(key, int):
             continue
@@ -967,7 +966,6 @@ def l2o(path):
 
 _o2u_pattern = re.compile(r'\.[0-9:]+')
 _o2u_pattern_no_split = re.compile(r'^[0-9:]+')
-_i2o_pattern = re.compile(r'\[([:0-9]+)\]')
 _o2i_pattern = re.compile(r'\.([:0-9]+)')
 
 
@@ -979,7 +977,6 @@ def o2u(path):
 
     :return: universal ODS path format
     """
-    path = str(path)
     if '.' in path:
         return re.sub(_o2u_pattern, '.:', path)
     else:
@@ -994,7 +991,7 @@ def i2o(path):
 
     :return: ODS path format
     """
-    return re.sub(_i2o_pattern, r'.\1', path)
+    return path.replace(']','').replace('[','.')
 
 
 def o2i(path):
