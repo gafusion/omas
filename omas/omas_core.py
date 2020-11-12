@@ -162,16 +162,7 @@ def _handle_extension(*args, **kw):
     return ext, args
 
 
-omas_ods_attrs = [
-    '_consistency_check',
-    '_imas_version',
-    '_cocos',
-    '_cocosio',
-    '_coordsio',
-    '_unitsio',
-    '_dynamic',
-    '_parent',
-]
+omas_ods_attrs = ['_consistency_check', '_imas_version', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic', '_parent']
 
 
 class ODS(MutableMapping):

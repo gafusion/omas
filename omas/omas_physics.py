@@ -1778,7 +1778,9 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 
 @add_to__ALL__
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw):
+def omas_environment(
+    ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw
+):
     """
     Provides environment for data input/output to/from OMAS
 
@@ -1807,7 +1809,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         from omas import ODS
 
         tmp = ODS(cocos=ods.cocos)
-        with omas_environment(tmp, cocosio=cocosio, dynamic_path_creation = 'dynamic_array_structures'):
+        with omas_environment(tmp, cocosio=cocosio, dynamic_path_creation='dynamic_array_structures'):
             tmp.update(coordsio)
         coordsio = tmp
 

@@ -31,7 +31,7 @@ class TestOmasCore(UnittestCaseOmas):
         ods = ODS()
         # check effect of disabling dynamic path creation
         try:
-            with omas_environment(ods, dynamic_path_creation = False):
+            with omas_environment(ods, dynamic_path_creation=False):
                 ods['dataset_description.data_entry.user']
         except LookupError:
             ods['dataset_description'] = ODS()
@@ -145,7 +145,7 @@ class TestOmasCore(UnittestCaseOmas):
                 assert abs.attrs[k] == rel.attrs[k]
 
         # check setting of an xarray.DataArray
-        with omas_environment(ods, dynamic_path_creation = 'dynamic_array_structures'):
+        with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
             ods['equilibrium.time_slice[2].profiles_1d.q'] = xarray.DataArray(
                 uarray([0.0, 1.0, 2.0, 3.0], [0, 0.1, 0.2, 0.3]), coords={'x': [1, 2, 3, 4]}, dims=['x']
             )
@@ -303,7 +303,7 @@ class TestOmasCore(UnittestCaseOmas):
         ods = ODS()
         ods.consistency_check = False
         ods['something[0]'] = 5
-        with omas_environment(ods, dynamic_path_creation = 'dynamic_array_structures'):
+        with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
             ods['something[7]'] = 10
         assert ods['something[0]'] == 5
         assert ods['something[7]'] == 10
@@ -311,7 +311,7 @@ class TestOmasCore(UnittestCaseOmas):
     def test_set_nonexisting_array_index(self):
         ods = ODS()
         ods.consistency_check = False
-        with omas_environment(ods, dynamic_path_creation = False):
+        with omas_environment(ods, dynamic_path_creation=False):
             self.assertRaises(IndexError, ods.__setitem__, 'something.[10]', 5)
 
     def test_force_type(self):

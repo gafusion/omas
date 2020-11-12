@@ -20,7 +20,7 @@ ods = ODS()
 
 # without dynamic path creation one must use Python approach to create nested dictionaries
 # this can be extremely tedious!
-with omas_environment(ods, dynamic_path_creation = False):
+with omas_environment(ods, dynamic_path_creation=False):
     ods['equilibrium'] = ODS()
     ods['equilibrium']['time_slice'] = ODS()
     ods['equilibrium']['time_slice'][0] = ODS()
@@ -29,7 +29,7 @@ with omas_environment(ods, dynamic_path_creation = False):
 
 # Dynamic path creation (True by default) makes life easier.
 # NOTE: OMAS supports different data access syntaxes
-with omas_environment(ods, dynamic_path_creation = True):
+with omas_environment(ods, dynamic_path_creation=True):
     # access data as dictionary
     ods['equilibrium']['time_slice'][0]['time'] = 1000.0
     assert ods['equilibrium']['time_slice'][0]['time'] == 1000.0

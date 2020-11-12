@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS
+from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS, omas_environment
 from .omas_utils import _extra_structures
 
 
