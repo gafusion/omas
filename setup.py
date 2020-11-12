@@ -18,6 +18,7 @@ install_requires = [
     'xarray',
     'setuptools>=41.2',
     'pyro5',
+    'tqdm',
 ]
 
 extras_require = {

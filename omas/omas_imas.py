@@ -560,14 +560,19 @@ def load_omas_imas(
             )
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
-            if verbose:
-                progress_fetch_paths = tqdm.tqdm(fetch_paths, file=progress)
+            if verbose and tqdm is not None:
+                progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
             else:
                 progress_fetch_paths = fetch_paths
             with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
                 for k, path in enumerate(progress_fetch_paths):
+                    # print progress
                     if verbose:
-                        pbar.set_description(joined_fetch_paths[k])
+                        if tqdm is not None:
+                            progress_fetch_paths.set_description(joined_fetch_paths[k])
+                        elif (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
+                            print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                    # uncertain data is loaded as part of the nominal value of the data
                     if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
                         continue
                     # get data from IDS

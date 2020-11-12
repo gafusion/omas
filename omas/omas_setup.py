@@ -45,7 +45,11 @@ import traceback
 import difflib
 import weakref
 import unittest
-from tqdm
+
+try:
+    import tqdm
+except ImportError:
+    tqdm = None
 
 try:
     import Pyro5.api
