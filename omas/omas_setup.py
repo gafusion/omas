@@ -45,6 +45,7 @@ import traceback
 import difflib
 import weakref
 import unittest
+from tqdm
 
 try:
     import Pyro5.api
