@@ -1026,6 +1026,10 @@ class ODS(MutableMapping):
                 self.omas_data = []
             else:
                 self.omas_data = {}
+        # dynamic array structure creation
+        if isinstance(key, int) and len(self.omas_data) < key and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
+            for item in range(len(self.omas_data), key):
+                self.omas_data.append(self.same_init_ods())
         if isinstance(key, int) and len(self.omas_data) == key:
             self.omas_data.append(value)
         else:
