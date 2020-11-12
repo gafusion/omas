@@ -324,12 +324,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     if imas_version is not None and 'dataset_description.imas_version' not in ods:
         ods['dataset_description.imas_version'] = ods.imas_version
 
-    if user is not None and machine is not None:
-        printd(
-            'Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
-        )
-    elif user is None and machine is None:
-        printd('Saving to IMAS (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
+    printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
     ods.satisfy_imas_requirements()
@@ -483,9 +478,6 @@ def load_omas_imas(
 ):
     """
     Load OMAS data from IMAS
-
-    NOTE: Either specify both or none of `user` and `machine`
-    If none of them are specified then use `imasdb` command to set the `MDSPLUS_TREE_BASE_?` environmental variables
 
     :param user: IMAS username
 
