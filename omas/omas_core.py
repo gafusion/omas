@@ -733,14 +733,8 @@ class ODS(MutableMapping):
         # full path where we want to place the data
         location = l2o([self.location, key[0]])
 
-        # always setup parent info
-        if isinstance(value, ODS):
-            if value.parent is not None:
-                value = copy.deepcopy(value)
-            value.parent = self
-
+        # perform consistency check with IMAS structure
         if self.consistency_check and '.code.parameters.' not in location:
-            # perform consistency check with IMAS structure
             structure_key = key[0] if not isinstance(key[0], int) else ':'
             try:
                 structure = imas_structure(self.imas_version, location)
@@ -917,33 +911,7 @@ class ODS(MutableMapping):
 
         # assign values to this ODS
         if key[0] not in self.keys() or len(key) == 1:
-            # ODC is always a dictionary
-            if isinstance(self, ODC):
-                self.omas_data[key[0]] = value
-            # structure
-            elif isinstance(key[0], str):
-                self.omas_data[key[0]] = value
-            # arrays of structures
-            else:
-                # dynamic array structure creation
-                if key[0] >= len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
-                    for item in range(len(self.omas_data), key[0]):
-                        self.omas_data.append(self.same_init_ods())
-                # index exists
-                if key[0] < len(self.omas_data):
-                    self.omas_data[key[0]] = value
-                # next index creation
-                elif key[0] == len(self.omas_data):
-                    self.omas_data.append(value)
-                # missing index
-                else:
-                    if not len(self.omas_data):
-                        raise IndexError('`%s[%d]` but ods has no data' % (self.location, key[0]))
-                    else:
-                        raise IndexError(
-                            '`%s[%d]` but maximum index is %d\nPerhaps you want to use `with omas_environment(ods, dynamic_path_creation=\'dynamic_array_structures\')'
-                            % (self.location, key[0], len(self.omas_data) - 1)
-                        )
+            self.setraw(key[0], value)
 
         # pass the value one level deeper
         # and cleanup dynamically created branches if necessary (eg. if consistency check fails)
@@ -1015,25 +983,43 @@ class ODS(MutableMapping):
                 key = key[0]
 
         # set .parent
-        if isinstance(value, ODS):
+        if isinstance(value, ODC):
+            pass
+        elif isinstance(value, ODS):
             if value.parent is not None:
                 value = copy.deepcopy(value)
             value.parent = self
 
-        # assign
-        if self.omas_data is None:
-            if isinstance(key, int):
-                self.omas_data = []
-            else:
+        # structure
+        if isinstance(key, str) or isinstance(self, ODC):
+            if self.omas_data is None:
                 self.omas_data = {}
-        # dynamic array structure creation
-        if isinstance(key, int) and len(self.omas_data) < key and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
-            for item in range(len(self.omas_data), key):
-                self.omas_data.append(self.same_init_ods())
-        if isinstance(key, int) and len(self.omas_data) == key:
-            self.omas_data.append(value)
-        else:
             self.omas_data[key] = value
+
+        # arrays of structures
+        else:
+            if self.omas_data is None:
+                self.omas_data = []
+
+            # dynamic array structure creation
+            if key > len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
+                for k in range(len(self.omas_data), key):
+                    self.setraw(k, self.same_init_ods())
+            # index exists
+            if key < len(self.omas_data):
+                self.omas_data[key] = value
+            # next index creation
+            elif key == len(self.omas_data):
+                self.omas_data.append(value)
+            # missing index
+            else:
+                if not len(self.omas_data):
+                    raise IndexError('`%s[%d]` but ods has no data' % (self.location, key))
+                else:
+                    raise IndexError(
+                        '`%s[%d]` but maximum index is %d\nPerhaps you want to use `with omas_environment(ods, dynamic_path_creation=\'dynamic_array_structures\')'
+                        % (self.location, key, len(self.omas_data) - 1)
+                    )
         return value
 
     def __getitem__(self, key, cocos_and_coords=True):
