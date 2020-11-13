@@ -7,7 +7,7 @@ from .omas_utils import *
 
 # add support for occurrences to each IDS
 number_of_omas_only_add_datastructures_entries = 0
-for structure in sorted(list(dict_structures(omas_rcparams['default_imas_version']).keys())):
+for structure in sorted(list(structures_filenames(omas_rcparams['default_imas_version']).keys())):
     add_datastructures[structure] = {
         f"{structure}.ids_properties.occurrence": {
             "full_path": f"{structure}.ids_properties.occurrence",
@@ -527,7 +527,7 @@ def symlink_imas_structure_versions(test=True, verbose=True):
     import subprocess
     from pprint import pprint
     from omas.omas_setup import IMAS_versions
-    from omas.omas_utils import dict_structures, imas_json_dir
+    from omas.omas_utils import structures_filenames, imas_json_dir
 
     imas_versions = IMAS_versions('tagged')
 
@@ -543,7 +543,7 @@ def symlink_imas_structure_versions(test=True, verbose=True):
     structures_strides = {}
     previous_tag_structures = {}
     for version in list(imas_versions.keys()):
-        this_tag_structures = dict_structures(version)
+        this_tag_structures = structures_filenames(version)
         for ds in this_tag_structures:
             if ds not in structures_strides:
                 structures_strides[ds] = [[version]]
@@ -565,8 +565,8 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                 if len(stride) > 1:
                     for version in stride[:-1]:
                         dir = imas_json_dir + '/'
-                        this = dict_structures(stride[-1])[ds][len(dir) :]
-                        prev = dict_structures(version)[ds]
+                        this = structures_filenames(stride[-1])[ds][len(dir) :]
+                        prev = structures_filenames(version)[ds]
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
                         subprocess.Popen(command, shell=True).communicate()
     return structures_strides

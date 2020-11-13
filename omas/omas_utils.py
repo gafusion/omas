@@ -647,6 +647,8 @@ _structures = {}
 # * list of structures as `:`
 # * the leafs are empty dictionaries
 _structures_dict = {}
+# cache structures filenames
+_structures_filenames = {}
 # cache for structure()
 _ods_structure_cache = {}
 # similar to `_structures_dict` but for use in omas_info
@@ -694,20 +696,21 @@ def list_structures(imas_version):
     return structures
 
 
-def dict_structures(imas_version):
+def structures_filenames(imas_version):
     """
-    maps structure names to json filenames
+    Maps structure names to json filenames
 
     :param imas_version: imas version
 
     :return: dictionary maps structure names to json filenames
     """
-    paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
-    if not len(paths):
-        raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
-    structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
-    return {structure: structures[structure] for structure in structures if not structure.startswith('_')}
-
+    if imas_version not in _structures_filenames:
+        paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
+        if not len(paths):
+            raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
+        structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
+        _structures_filenames[imas_version] = {structure: structures[structure] for structure in structures if not structure.startswith('_')}
+    return _structures_filenames[imas_version]
 
 def load_structure(filename, imas_version):
     """
@@ -724,7 +727,7 @@ def load_structure(filename, imas_version):
 
     # translate DS to filename
     if os.sep not in filename:
-        filename = dict_structures(imas_version)[filename]
+        filename = structures_filenames(imas_version)[filename]
 
     # check if _structures and _structures_dict already have this in cache
     id = (filename, imas_version)
@@ -1057,7 +1060,7 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
     """
 
     if not structures:
-        structures = sorted(list(dict_structures(imas_version).keys()))
+        structures = sorted(list(structures_filenames(imas_version).keys()))
     elif isinstance(structures, str):
         structures = [structures]
 

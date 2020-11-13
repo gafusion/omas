@@ -1929,7 +1929,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
     # if generate_cocos_signals is run after omas has been used for something else
     # (eg. when running test_examples) it may be that _extra_structures is not empty
     # Thus, we clear _structures and _extra_structures to make sure that
-    # dict_structures() is not polluted by _extra_structures
+    # structures_filenames() is not polluted by _extra_structures
     _structures_bkp = copy.deepcopy(_structures)
     _extra_structures_bkp = copy.deepcopy(_extra_structures)
     try:
