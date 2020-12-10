@@ -234,7 +234,7 @@ def summary_greenwald(ods, update=True):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
-def summary_taue(ods, update=True):
+def summary_taue(ods, update=True, PRINTFLAG=False):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
@@ -288,10 +288,11 @@ def summary_taue(ods, update=True):
             if 'core_sources' not in ods:
                 if 'summary.global_quantities.power_steady.value' not in ods:
                     raise Exception('No core sources nor total power in ods, unable to calculate tau_e')
-                total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+                printw("Not recalculating heating power, reusing ods['summary.global_quantities.power_steady.value']")
+                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
             else:
-                ods.physics_summary_total_powers()
-                total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+                ods.physics_summary_heating_power()
+                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
 
             # Calculate tau_e
             tau_e = abs(
@@ -299,15 +300,16 @@ def summary_taue(ods, update=True):
                 * (abs(ip) / 1e6) ** 0.93
                 * abs(bt) ** 0.15
                 * (ne_vol_avg / 1e19) ** 0.41
-                * (total_power / 1e6) ** -0.69
+                * (heating_power / 1e6) ** -0.69
                 * r_major ** 1.97
                 * kappa ** 0.78
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
+            if PRINTFLAG:
+                print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
             tau_e_scaling.append(tau_e)
-            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / total_power)
+            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / heating_power)
 
     # assign quantities in the ODS
     ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
@@ -321,12 +323,14 @@ def summary_taue(ods, update=True):
 
     return ods_n
 
+@add_to__ODS__
+@preprocess_ods('core_profiles')
 
 @add_to__ODS__
 @preprocess_ods('core_sources')
-def summary_total_powers(ods, update=True):
+def summary_heating_power(ods, update=True):
     """
-    Integrate power densities to the total and heating and current drive systems and fills summary.globalquantities
+    Integrate power densities to calculate the total heating and individual H&CD systems, stores values in ods.summary
     :param ods: input ods
 
     :param update: operate in place
@@ -340,47 +344,36 @@ def summary_total_powers(ods, update=True):
         ods_n = ODS().copy_attrs_from(ods)
 
     sources = ods_n['core_sources']['source']
-    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
-    power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
+    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6:'fusion', 7:'ohmic'}
+    power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
     q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
     q_dict = {
-        'total': copy.deepcopy(q_init),
+        'total_heating': copy.deepcopy(q_init),
         'nbi': copy.deepcopy(q_init),
         'ec': copy.deepcopy(q_init),
         'lh': copy.deepcopy(q_init),
         'ic': copy.deepcopy(q_init),
     }
 
-    ignore_indices = list(range(100, 108)) + list(range(900, 910))
-
     for time_index in sources[0]['profiles_1d']:
         vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
         for source in sources:
-            if sources[source]['identifier.index'] in ignore_indices:
-                # Skip the combined sources to prevent double counting
-                continue
-            if (
-                'electrons' in sources[source]['profiles_1d'][time_index]
-                and 'energy' in sources[source]['profiles_1d'][time_index]['electrons']
-            ):
-                q_dict['total'] += sources[source]['profiles_1d'][time_index]['electrons']['energy']
-                if sources[source]['identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[source]['identifier.index']]] += sources[source]['profiles_1d'][time_index]['electrons'][
-                        'energy'
-                    ]
-            if 'total_ion_energy' in sources[source]['profiles_1d'][time_index]:
-                q_dict['total'] += sources[source]['profiles_1d'][time_index]['total_ion_energy']
-                if sources[source]['identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[source]['identifier.index']]] += sources[source]['profiles_1d'][time_index][
-                        'total_ion_energy'
-                    ]
+            source_1d = sources[source]['profiles_1d'][time_index]
+            if sources[source]['identifier.index'] in index_dict:
+                if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
+                    q_dict['total_heating'] += source_1d['electrons']['energy']
+                    if sources[source]['identifier.index'] in power_dict:
+                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
+                if 'total_ion_energy' in source_1d:
+                    q_dict['total_heating'] += source_1d['total_ion_energy']
+                    if sources[source]['identifier.index'] in power_dict:
+                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
 
         for key, value in power_dict.items():
             power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
-
     for key, value in power_dict.items():
         if numpy.sum(value) > 0:
-            if key is 'total':
+            if key is 'total_heating':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
