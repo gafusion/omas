@@ -855,7 +855,7 @@ _p2l_cache = {}
 
 def p2l(key):
     """
-    Converts the many different ways of addressing an ODS path to a list of keys (['bla',0,'bla'])
+    Converts the many different ways of addressing an ODS path to a list of keys ['bla',0,'bla']
 
     :param key: ods location in some format
 
@@ -905,7 +905,7 @@ def p2l(key):
 
 def l2i(path):
     """
-    Formats a list (['bla',0,'bla']) into a IMAS path ('bla[0].bla')
+    Formats a list ['bla',0,'bla'] into a IMAS path 'bla[0].bla'
 
     :param path: ODS path format
 
@@ -924,7 +924,7 @@ def l2i(path):
 
 def l2u(path):
     """
-    Formats a list (['bla',0,'bla']) into a universal ODS path format ('bla.:.bla')
+    Formats a list ['bla',0,'bla'] into a universal path 'bla.:.bla'
     NOTE: a universal ODS path substitutes lists indices with :
 
     :param path: list of strings and integers
@@ -936,7 +936,7 @@ def l2u(path):
 
 def l2ut(path):
     """
-    Formats IMAS time lists (['bla',0,'time_slice',5,'quantity']) with universal ODS path ('bla.0.time_slice.:.quantity')
+    Formats IMAS time lists ['bla',0,'time_slice',5,'quantity'] with universal ODS path 'bla.0.time_slice.:.quantity'
 
     :param path: list of strings and integers
 
@@ -958,7 +958,7 @@ def l2ut(path):
 
 def l2o(path):
     """
-    Formats a list (['bla',0,'bla']) into an ODS path format ('bla.0.bla')
+    Formats a list ['bla',0,'bla'] into an ODS path format 'bla.0.bla'
 
     :param path: list of strings and integers
 
@@ -974,7 +974,7 @@ _o2i_pattern = re.compile(r'\.([:0-9]+)')
 
 def o2u(path):
     """
-    Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
+    Converts an ODS path 'bla.0.bla' into a universal path 'bla.:.bla'
 
     :param path: ODS path format
 
@@ -988,7 +988,7 @@ def o2u(path):
 
 def i2o(path):
     """
-    Formats a IMAS path ('bla[0].bla') format into an ODS path ('bla.0.bla')
+    Formats a IMAS path 'bla[0].bla' into an ODS path 'bla.0.bla'
 
     :param path: IMAS path format
 
@@ -999,7 +999,7 @@ def i2o(path):
 
 def o2i(path):
     """
-    Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
+    Formats a ODS path 'bla.0.bla' into an IMAS path 'bla[0].bla'
 
     :param path: ODS path format
 
@@ -1011,7 +1011,7 @@ def o2i(path):
 def u2o(upath, path):
     """
     Replaces `:` and integers in `upath` with ':' and integers from in `path`
-    e.g. uo2('a.:.b.:.c.1.d.1.e','f.:.g.1.h.1.i.:.k')) becomes ('bla.1.hello.2.bla')
+    e.g. uo2('a.:.b.:.c.1.d.1.e','f.:.g.1.h.1.i.:.k')) becomes 'bla.1.hello.2.bla'
 
     :param upath: universal ODS path
 

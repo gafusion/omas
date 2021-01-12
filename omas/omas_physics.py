@@ -246,7 +246,7 @@ def summary_greenwald(ods, update=True):
 def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
 
     """
-     Calculates line-aveage electron density for each time slice and stores them in the summary ods.
+    Calculates line-average electron density for each time slice and stores them in the summary ods
 
     :param ods: input ods
     
@@ -1301,6 +1301,7 @@ def grids_ggd_points_triangles(grid):
 
     :return: tuple with points and triangles
     """
+    # objects_per_dimension: 0 = nodes, 1 = edges, 2 = faces, 3 = cells / volumes
     points = grid['space[0].objects_per_dimension[0].object[:].geometry']
     triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
     return points, triangles
