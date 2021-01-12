@@ -159,7 +159,7 @@ omas_rcparams.update(
         'cocos': 11,
         'consistency_check': True,
         'dynamic_path_creation': True,
-        'tmp_imas_dir': os.environ.get(
+        'tmp_omas_dir': os.environ.get(
             'OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(), os.environ.get('USER', 'dummy_user'), 'OMAS_TMP_DIR'])
         ),
         'fake_imas_dir': os.environ.get(
