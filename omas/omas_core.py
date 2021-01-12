@@ -695,21 +695,42 @@ class ODS(MutableMapping):
         if not len(key):
             return self
 
-        # negative numbers are used to address arrays of structures from the end
-        if isinstance(key[0], int) and key[0] < 0:
-            if self.omas_data is None:
-                key[0] = 0
-            elif isinstance(self.omas_data, list):
-                if not len(self.omas_data):
+        if isinstance(key[0], int):
+            # negative numbers are used to address arrays of structures from the end
+            if key[0] < 0:
+                if self.omas_data is None:
                     key[0] = 0
+                elif isinstance(self.omas_data, list):
+                    if not len(self.omas_data):
+                        key[0] = 0
+                    else:
+                        key[0] = len(self.omas_data) + key[0]
+        else:
+            # '+' is used to append new entry in array structure
+            if key[0] == '+':
+                if self.omas_data is None:
+                    key[0] = 0
+                elif isinstance(self.omas_data, list):
+                    key[0] = len(self.omas_data)
+            # ':' is used to slice
+            elif ':' in key[0]:
+                if not self.keys():
+                    if key[0]==':':
+                        key[0] = [0]
+                    else:
+                        key[0] = list(range(slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':'))).stop))
                 else:
-                    key[0] = len(self.omas_data) + key[0]
-        # '+' is used to append new entry in array structure
-        elif key[0] == '+':
-            if self.omas_data is None:
-                key[0] = 0
-            elif isinstance(self.omas_data, list):
-                key[0] = len(self.omas_data)
+                    key[0] = slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':')))
+
+        # handle data slicing on write
+        if isinstance(key[0], list):
+            for k in key[0]:
+                self.__setitem__([k] + key[1:], value)
+            return
+        elif isinstance(key[0], slice):
+            for k in self.keys()[key[0]]:
+                self.__setitem__([k]+key[1:], value)
+            return
 
         # handle dynamic path creation for .code.parameters leaf
         if (
@@ -1064,15 +1085,18 @@ class ODS(MutableMapping):
                     key[0] = 0
                 else:
                     key[0] = len(self.omas_data) + key[0]
+        # slice
+        elif isinstance(key[0], str) and ':' in key[0]:
+            key[0] = slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':')))
 
         dynamically_created = False
 
         # data slicing
-        if key[0] == ':':
+        if isinstance(key[0], slice):
             data0 = []
-            for k, item in enumerate(self.keys(dynamic=True)):
+            for k in self.keys(dynamic=True)[key[0]]:
                 try:
-                    data0.append(self.__getitem__([item] + key[1:], cocos_and_coords))
+                    data0.append(self.__getitem__([k] + key[1:], cocos_and_coords))
                 except ValueError:
                     data0.append([])
             # raise an error if no data is returned
