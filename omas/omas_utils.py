@@ -1033,6 +1033,26 @@ def u2o(upath, path):
     return l2o(ul)
 
 
+def u2n(upath, list_of_n):
+    """
+    Replaces `:` and integers in `upath` with integers provided
+    e.g. uo2('a.:.b.:.c.1.d.1.e',[2,3]) becomes 'a.2.b.3.c.1.d.1.e'
+
+    :param upath: universal ODS path
+
+    :param list_of_n: list of numbers
+
+    :return: filled in ODS path
+    """
+    ul = p2l(upath)
+    i = 0
+    for k in range(len(ul)):
+        if ul[k] == ':' or isinstance(ul[k], int):
+            if ul[k] == ':' and i<len(list_of_n):
+                ul[k] = list_of_n[i]
+            i += 1
+    return l2o(ul)
+
 def trim_common_path(p1, p2):
     """
     return paths in lists format trimmed of the common first path between paths p1 and p2
