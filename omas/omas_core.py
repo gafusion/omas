@@ -905,7 +905,7 @@ class ODS(MutableMapping):
                         else:
                             printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                    elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                    elif not self.dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
@@ -1161,6 +1161,11 @@ class ODS(MutableMapping):
                 if self.dynamic is not None and self.dynamic.__contains__(location):
                     value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
+                elif self.dynamic is not None and o2u(location).endswith(':'):
+                    dynamically_created = True
+                    for k in self.keys(dynamic=True):
+                        if k not in self.keys():
+                            self.__setitem__(k, self.same_init_ods())
                 else:
                     dynamically_created = True
                     self.__setitem__(key[0], self.same_init_ods())
@@ -1378,15 +1383,21 @@ class ODS(MutableMapping):
     def __contains__(self, key):
         key = p2l(key)
         h = self
-        for k in key:
+        for c,k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
             else:
-                return False
+                if self.dynamic:
+                    if k in self.dynamic.keys(l2o(p2l(self.location) + key[:c])):
+                        continue
+                    else:
+                        return False
+                else:
+                    return False
         # return False if checking existance of a leaf and the leaf exists but is unassigned
-        if isinstance(h, ODS) and h.omas_data is None:
+        if not self.dynamic and isinstance(h, ODS) and h.omas_data is None:
             return False
         return True
 

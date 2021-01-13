@@ -4,6 +4,7 @@
 Dynamic loading of IMAS data
 ============================
 This example illustrates how OMAS can load in memory IMAS data only when it is first requested
+This approach can also be used to transfer data on demand from/to a server where an OMAS service is running.
 """
 
 import os
@@ -26,7 +27,7 @@ with ods.open('imas', os.environ['USER'], 'DIII-D', 1000, 0):
     # then it is in memory
     print(ods['equilibrium.time_slice.0.global_quantities.ip'])
 
-# save it as a pickle (which will keep memory of the dynamic nature of the ODS)
+# save it as a pickle
 ods.save('test.pkl')
 
 # load the data back

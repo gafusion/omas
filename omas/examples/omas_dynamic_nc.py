@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Dynamic loading of data
-=======================
+Dynamic loading of NetCDF data
+==============================
 This example illustrates how OMAS can load in memory only the data when it is first requested.
 This approach can also be used to transfer data on demand from/to a server where an OMAS service is running.
 What is done here for NC file, also works also for IMAS.
@@ -51,7 +51,7 @@ with ods.open('test.nc', remote=remote):
     # then it is in memory
     print(ods['equilibrium.time_slice.0.global_quantities.ip'])
 
-# save it as a pickle (which will keep memory of the dynamic nature of the ODS)
+# save it as a pickle
 ods.save('test.pkl')
 
 # load the data back

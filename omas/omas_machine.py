@@ -57,6 +57,9 @@ def machine_to_omas(ods, machine, pulse, treename, location):
     else:
         raise ValueError(f"Could not fetch data for {location}. Must define ['TDI']")
 
+    if location.endswith(':'):
+        return int(data[0])
+
     # transpose manipulation
     if mapped.get('TRANSPOSE', False):
         data = np.transpose(data, mapped['TRANSPOSE'])
@@ -89,12 +92,13 @@ def machine_to_omas(ods, machine, pulse, treename, location):
 
 def load_omas_machine(machine, pulse, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS):
     printd('Loading from %s' % machine, topic='machine')
-    ods = cls(imas_version=imas_version, consistency_check=False)
+    ods = cls(imas_version=imas_version, consistency_check=consistency_check)
     treename = 'EFIT01'
     for location in machine_mappings(machine):
+        if location.endswith(':'):
+            continue
         print(location)
         machine_to_omas(ods, machine, pulse, treename, location)
-    ods.consistency_check = consistency_check
     return ods
 
 
@@ -123,28 +127,33 @@ class dynamic_omas_machine(dynamic_ODS):
     def __getitem__(self, key):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
         if o2u(key) not in self.cache:
-            ods = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], 'EFIT01', o2u(key))
-            self.cache[o2u(key)] = ods
-        return self.cache[o2u(key)][key]
+            printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
+            out = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], 'EFIT01', o2u(key))
+            self.cache[o2u(key)] = out
+        if isinstance(self.cache[o2u(key)], int):
+            return self.cache[o2u(key)]
+        else:
+            return self.cache[o2u(key)][key]
 
     def __contains__(self, location):
+        ulocation = o2u(location)
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        if o2u(location).endswith(':'):
+        if ulocation.endswith(':'):
             return False
-        return o2u(location) in machine_mappings(self.kw['machine'])
+        return ulocation in machine_mappings(self.kw['machine'])
 
     def keys(self, location):
-        if location + '.:' in machine_mappings(self.kw['machine']):
-            return list(range(self[location + '.:'][0]))
+        ulocation = o2u(location)
+        if ulocation + '.:' in machine_mappings(self.kw['machine']):
+            return list(range(self[ulocation + '.:']))
         else:
             return np.unique(
                 [
-                    convert_int(k[len(location) :].lstrip('.').split('.')[0])
+                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'])
-                    if k.startswith(location)
+                    if k.startswith(ulocation)
                 ]
             )
 
@@ -199,31 +208,3 @@ def machine_mappings(machine):
                     raise ValueError(f'{location} must have COCOS specified')
 
     return _machine_mappings[machine]
-
-
-# ===================
-
-if __name__ == '__main__':
-    import os
-    import tempfile
-
-    os.chdir(tempfile.gettempdir())
-    from omas import ODS
-    from omfit.classes.omfit_eqdsk import OMFITgeqdsk
-
-    machine = 'd3d'
-    pulse = 168830
-    treename = 'EFIT01'
-
-    ods = load_omas_machine(machine, pulse)
-
-    # ods = ODS()
-    # for location in machine_mappings(machine):
-    #     print(location)
-    #     machine_to_omas(ods, machine, pulse, treename, location)
-
-    g = OMFITgeqdsk(None).from_omas(ods, 100)
-    g.plot()
-    from matplotlib import pyplot
-
-    pyplot.show()

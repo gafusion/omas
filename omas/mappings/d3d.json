@@ -50,7 +50,7 @@
   "TDI": "data(\\{treename}::TOP.RESULTS.GEQDSK.RHOVN)"
  },
  "equilibrium.time_slice.:.profiles_2d.:": {
-  "TDI": 1
+  "TDI": "1"
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
   "eval2TDI": "py2tdi(tile,'\\{treename}::TOP.RESULTS.GEQDSK.R','size(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)')"
@@ -76,10 +76,10 @@
   "TDI": "data(\\{treename}::TOP.RESULTS.GEQDSK.RZERO)[0]"
  },
  "wall.description_2d.:": {
-  "TDI": 1
+  "TDI": "1"
  },
  "wall.description_2d.:.limiter.unit.:": {
-  "TDI": 1
+  "TDI": "1"
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "transpose(data(\\{treename}::TOP.RESULTS.GEQDSK.LIM)[0,])"
