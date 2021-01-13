@@ -1,4 +1,9 @@
 {
+ "__cocos_rules__": {
+  "::TOP\\.RESULTS\\..?EQDSK": {
+   "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{treename}::TOP.RESULTS.GEQDSK.CPASMA)')"
+  }
+ },
  "equilibrium.time": {
   "TDI": "dim_of(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)/1000."
  },

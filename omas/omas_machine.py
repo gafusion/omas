@@ -1,26 +1,10 @@
 # https://confluence.iter.org/display/IMP/UDA+data+mapping+tutorial
 
-import numpy as np
-import json
-import re
-from omas.omas_utils import o2u, l2o, p2l, i2o, u2n, printe, printd, convert_int
-from omas import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
-from omas.omas_core import dynamic_ODS
-from omas.omas_physics import cocos_signals
-from omas.mappings.mds_mapping_functions import *
-
-# ===================
-
-
-with open(imas_json_dir + '/../mappings/cocos_rules.json', 'r') as f:
-    cocos_rules = json.load(f)
-# generate TDI for cocos_rules
-for item in cocos_rules:
-    if 'eval2TDI' in cocos_rules[item]:
-        cocos_rules[item]['TDI'] = eval(cocos_rules[item]['eval2TDI'])
-
-
-# ===================
+from .omas_utils import *
+from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
+from .omas_core import dynamic_ODS
+from .omas_physics import cocos_signals
+from .machine_mappings.mds_mapping_functions import *
 
 
 def machine_to_omas(ods, machine, pulse, treename, location):
@@ -62,12 +46,12 @@ def machine_to_omas(ods, machine, pulse, treename, location):
 
     # transpose manipulation
     if mapped.get('TRANSPOSE', False):
-        data = np.transpose(data, mapped['TRANSPOSE'])
+        data = numpy.transpose(data, mapped['TRANSPOSE'])
 
     # transpose filter
     nanfilter = lambda x: x
     if mapped.get('NANFILTER', False):
-        nanfilter = lambda x: x[~np.isnan(x)]
+        nanfilter = lambda x: x[~numpy.isnan(x)]
 
     # cocos
     cocosio = 11
@@ -81,7 +65,7 @@ def machine_to_omas(ods, machine, pulse, treename, location):
         dsize = len(data.shape)
         if dsize - osize == 0 or ':' not in location:
             if data.size == 1:
-                data = np.asscalar(data)
+                data = data.item()
             ods[location] = nanfilter(data)
         else:
             for k in range(data.shape[0]):
@@ -149,7 +133,7 @@ class dynamic_omas_machine(dynamic_ODS):
         if ulocation + '.:' in machine_mappings(self.kw['machine']):
             return list(range(self[ulocation + '.:']))
         else:
-            return np.unique(
+            return numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'])
@@ -159,6 +143,19 @@ class dynamic_omas_machine(dynamic_ODS):
 
 
 _machine_mappings = {}
+_cocos_rules = {}
+
+
+def machines():
+    '''
+    List of machines that have mappings defined
+
+    :return: list of strings of supported machines
+    '''
+    machines_dict = {}
+    for filename in glob.glob(imas_json_dir + '/../machine_mappings/*.json'):
+        machines_dict[os.path.splitext(os.path.split(filename)[1])[0]] = os.path.abspath(filename)
+    return machines_dict
 
 
 def machine_mappings(machine):
@@ -171,10 +168,19 @@ def machine_mappings(machine):
     :return: dictionary with mapping transformations
     '''
     if machine not in _machine_mappings:
-        with open(imas_json_dir + '/../mappings/d3d.json', 'r') as f:
+        with open(imas_json_dir + f'/../machine_mappings/{machine}.json', 'r') as f:
             _machine_mappings[machine] = json.load(f)
         mappings = _machine_mappings[machine]
+        _cocos_rules.update(mappings.pop('__cocos_rules__', {}))
         umappings = [o2u(loc) for loc in mappings]
+
+        # generate TDI for cocos_rules
+        for item in _cocos_rules:
+            if 'eval2TDI' in _cocos_rules[item]:
+                try:
+                    _cocos_rules[item]['TDI'] = eval(_cocos_rules[item]['eval2TDI'].replace('\\', '\\\\'))
+                except:
+                    print(_cocos_rules[item]['eval2TDI'])
 
         # generate TDI and sanity check mappings
         for location in mappings:
@@ -184,7 +190,7 @@ def machine_mappings(machine):
 
             # generate DTI functions based on eval2DTI
             if 'eval2TDI' in mappings[location]:
-                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'])
+                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'))
 
             # make sure required coordinates info are present in the mapping
             info = omas_info_node(location)
@@ -199,9 +205,9 @@ def machine_mappings(machine):
             # add cocos transformation info
             if o2u(location) in cocos_signals and cocos_signals[o2u(location)] is not None:
                 cocos_defined = False
-                for cocos in cocos_rules:
+                for cocos in _cocos_rules:
                     if re.findall(cocos, mappings[location]['TDI']):
-                        mappings[location]['COCOSIO'] = cocos_rules[cocos]['TDI']
+                        mappings[location]['COCOSIO'] = _cocos_rules[cocos]['TDI']
                         cocos_defined = True
                         break
                 if not cocos_defined:
