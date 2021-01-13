@@ -4,7 +4,9 @@ from .omas_utils import *
 from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_core import dynamic_ODS
 from .omas_physics import cocos_signals
-from .machine_mappings.mds_mapping_functions import *
+
+mapping_functions_namespace = {'__name__':__name__}
+exec('from .machine_mappings.mapping_functions import *', mapping_functions_namespace)
 
 
 def machine_to_omas(ods, machine, pulse, treename, location):
@@ -186,7 +188,7 @@ def machine_mappings(machine):
         for item in _cocos_rules:
             if 'eval2TDI' in _cocos_rules[item]:
                 try:
-                    _cocos_rules[item]['TDI'] = eval(_cocos_rules[item]['eval2TDI'].replace('\\', '\\\\'))
+                    _cocos_rules[item]['TDI'] = eval(_cocos_rules[item]['eval2TDI'].replace('\\', '\\\\'), mapping_functions_namespace)
                 except:
                     print(_cocos_rules[item]['eval2TDI'])
 
@@ -198,7 +200,7 @@ def machine_mappings(machine):
 
             # generate DTI functions based on eval2DTI
             if 'eval2TDI' in mappings[location]:
-                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'))
+                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'), mapping_functions_namespace)
 
             # make sure required coordinates info are present in the mapping
             info = omas_info_node(location)
