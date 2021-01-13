@@ -538,12 +538,14 @@ class TestOmasCore(UnittestCaseOmas):
     @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_load_omas_machine(self):
         from omas.omas_machine import load_omas_machine
+
         machine = 'd3d'
         pulse = 168830
         ods = load_omas_machine(machine, pulse)
 
     def test_machines(self):
         from omas.omas_machine import machines
+
         assert 'd3d' in machines()
 
     def test_diff_attrs(self):

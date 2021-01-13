@@ -1383,7 +1383,7 @@ class ODS(MutableMapping):
     def __contains__(self, key):
         key = p2l(key)
         h = self
-        for c,k in enumerate(key):
+        for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
                 h = h.__getitem__(k, False)

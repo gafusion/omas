@@ -10,6 +10,7 @@ all:
 	@echo ' - make docs          : generate sphinx documentation and pushes it online'
 	@echo ' - make tag           : tag git repository with omas/version and push'
 	@echo ' - make cocos         : generate list of COCOS transformations'
+	@echo ' - make machines      : format machine mappings files'
 	@echo ' - make release       : all of the above, in order'
 	@echo ' - make pypi          : upload to pypi'
 	@echo ' - make html          : generate sphinx documentation'
@@ -65,6 +66,9 @@ json:
 cocos: symbols
 	cd omas/utilities && python3 generate_cocos_signals.py
 
+machines:
+	cd omas/utilities && python3 format_machine_mappings.py
+
 symbols:
 	cd omas/utilities && python3 sort_symbols.py
 
@@ -90,7 +94,7 @@ release: tests requirements json cocos docs tag
 fmt:
 	black -S -l 140 .
 
-format:fmt cocos
+format:fmt cocos machines
 
 .PHONY: site-packages
 

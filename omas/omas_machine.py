@@ -146,15 +146,23 @@ _machine_mappings = {}
 _cocos_rules = {}
 
 
-def machines():
+def machines(machine=None):
     '''
-    List of machines that have mappings defined
+    Function to get machines that have their mappings defined
 
-    :return: list of strings of supported machines
+    :param machine: string with machine name or None
+
+    :return: if `machine==None` returns dictionary with list of machines and their json mapping files
+             if `machine` is a string, then returns json mapping file for that machine
     '''
     machines_dict = {}
     for filename in glob.glob(imas_json_dir + '/../machine_mappings/*.json'):
         machines_dict[os.path.splitext(os.path.split(filename)[1])[0]] = os.path.abspath(filename)
+    if machine is not None:
+        if machine in machines_dict:
+            return machines_dict[machine]
+        else:
+            raise KeyError(f'No machine mapping for `{machine}`. Valid machines are: {list(machines_dict.keys())}')
     return machines_dict
 
 
@@ -168,7 +176,7 @@ def machine_mappings(machine):
     :return: dictionary with mapping transformations
     '''
     if machine not in _machine_mappings:
-        with open(imas_json_dir + f'/../machine_mappings/{machine}.json', 'r') as f:
+        with open(machines(machine), 'r') as f:
             _machine_mappings[machine] = json.load(f)
         mappings = _machine_mappings[machine]
         _cocos_rules.update(mappings.pop('__cocos_rules__', {}))
