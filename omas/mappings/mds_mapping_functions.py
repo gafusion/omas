@@ -14,7 +14,6 @@ def tile(a, n):
     import numpy as np
 
     a = a.data()
-    n = len(n.data())
     return np.array([a for k in range(n)])
 
 

@@ -138,7 +138,7 @@ class dynamic_omas_machine(dynamic_ODS):
 
     def keys(self, location):
         if location + '.:' in machine_mappings(self.kw['machine']):
-            return list(range(len(self[location + '.:'])))
+            return list(range(self[location + '.:'][0]))
         else:
             return np.unique(
                 [

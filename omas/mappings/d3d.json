@@ -3,7 +3,7 @@
   "TDI": "dim_of(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)/1000."
  },
  "equilibrium.time_slice.:": {
-  "TDI": "\\{treename}::TOP.RESULTS.GEQDSK.BCENTR"
+  "TDI": "size(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)"
  },
  "equilibrium.time_slice.:.boundary.outline.r": {
   "NANFILTER": true,
@@ -49,16 +49,19 @@
  "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
   "TDI": "data(\\{treename}::TOP.RESULTS.GEQDSK.RHOVN)"
  },
- "equilibrium.time_slice.:.profiles_2d.0.grid.dim1": {
-  "eval2TDI": "py2tdi(tile,'\\{treename}::TOP.RESULTS.GEQDSK.R','\\{treename}::TOP.RESULTS.GEQDSK.BCENTR')"
+ "equilibrium.time_slice.:.profiles_2d.:": {
+  "TDI": 1
  },
- "equilibrium.time_slice.:.profiles_2d.0.grid.dim2": {
-  "eval2TDI": "py2tdi(tile,'\\{treename}::TOP.RESULTS.GEQDSK.Z','\\{treename}::TOP.RESULTS.GEQDSK.BCENTR')"
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
+  "eval2TDI": "py2tdi(tile,'\\{treename}::TOP.RESULTS.GEQDSK.R','size(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)')"
  },
- "equilibrium.time_slice.:.profiles_2d.0.grid_type.index": {
-  "eval2TDI": "py2tdi(tile,1,'\\{treename}::TOP.RESULTS.GEQDSK.BCENTR')"
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
+  "eval2TDI": "py2tdi(tile,'\\{treename}::TOP.RESULTS.GEQDSK.Z','size(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)')"
  },
- "equilibrium.time_slice.:.profiles_2d.0.psi": {
+ "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
+  "eval2TDI": "py2tdi(tile,1,'size(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)')"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.psi": {
   "TDI": "data(\\{treename}::TOP.RESULTS.GEQDSK.PSIRZ)",
   "TRANSPOSE": [
    0,
@@ -72,10 +75,16 @@
  "equilibrium.vacuum_toroidal_field.r0": {
   "TDI": "data(\\{treename}::TOP.RESULTS.GEQDSK.RZERO)[0]"
  },
- "wall.description_2d.0.limiter.unit.0.outline.r": {
-  "TDI": "transpose(data(\\{treename}::TOP.RESULTS.GEQDSK.LIM))[,0]"
+ "wall.description_2d.:": {
+  "TDI": 1
  },
- "wall.description_2d.0.limiter.unit.0.outline.z": {
-  "TDI": "transpose(data(\\{treename}::TOP.RESULTS.GEQDSK.LIM))[,1]"
+ "wall.description_2d.:.limiter.unit.:": {
+  "TDI": 1
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.r": {
+  "TDI": "transpose(data(\\{treename}::TOP.RESULTS.GEQDSK.LIM)[0,])"
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.z": {
+  "TDI": "transpose(data(\\{treename}::TOP.RESULTS.GEQDSK.LIM)[1,])"
  }
 }
