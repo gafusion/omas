@@ -715,7 +715,7 @@ class ODS(MutableMapping):
             # ':' is used to slice
             elif ':' in key[0]:
                 if not self.keys():
-                    if key[0]==':':
+                    if key[0] == ':':
                         key[0] = [0]
                     else:
                         key[0] = list(range(slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':'))).stop))
@@ -729,7 +729,7 @@ class ODS(MutableMapping):
             return
         elif isinstance(key[0], slice):
             for k in self.keys()[key[0]]:
-                self.__setitem__([k]+key[1:], value)
+                self.__setitem__([k] + key[1:], value)
             return
 
         # handle dynamic path creation for .code.parameters leaf
@@ -1098,6 +1098,7 @@ class ODS(MutableMapping):
                 try:
                     data0.append(self.__getitem__([k] + key[1:], cocos_and_coords))
                 except ValueError:
+                    raise
                     data0.append([])
             # raise an error if no data is returned
             if not len(data0):
@@ -1951,7 +1952,7 @@ class ODS(MutableMapping):
         # figure out format used
         ext, args = _handle_extension(*args)
 
-        if ext in ['nc', 'imas']:
+        if ext in ['nc', 'imas', 'machine']:
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
@@ -2288,6 +2289,10 @@ class dynamic_ODS_factory:
             from omas.omas_imas import dynamic_omas_imas
 
             tmp = dynamic_omas_imas(*args, **kw)
+        elif ext == 'machine':
+            from omas.omas_machine import dynamic_omas_machine
+
+            tmp = dynamic_omas_machine(*args, **kw)
         if idc not in pyro_cases:
             pyro_cases[idc] = tmp
         return self

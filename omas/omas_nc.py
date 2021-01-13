@@ -107,8 +107,7 @@ def load_omas_nc(filename, consistency_check=True, imas_version=omas_rcparams['d
 class dynamic_omas_nc(dynamic_ODS):
     """
     Class that provides dynamic data loading from NC file
-    This class is not to be used by itself, but via the
-    ODS.open() method.
+    This class is not to be used by itself, but via the ODS.open() method.
     """
 
     def __init__(self, filename):

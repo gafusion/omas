@@ -3,8 +3,9 @@
 import numpy as np
 import json
 import re
-from omas.omas_utils import o2u, l2o, p2l, i2o, u2n, printe
-from omas import omas_environment, omas_info_node, imas_json_dir
+from omas.omas_utils import o2u, l2o, p2l, i2o, u2n, printe, printd, convert_int
+from omas import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
+from omas.omas_core import dynamic_ODS
 from omas.omas_physics import cocos_signals
 from omas.mappings.mds_mapping_functions import *
 
@@ -17,6 +18,7 @@ with open(imas_json_dir + '/../mappings/cocos_rules.json', 'r') as f:
 for item in cocos_rules:
     if 'eval2TDI' in cocos_rules[item]:
         cocos_rules[item]['TDI'] = eval(cocos_rules[item]['eval2TDI'])
+
 
 # ===================
 
@@ -37,6 +39,8 @@ def machine_to_omas(ods, machine, pulse, treename, location):
 
     :return: updated ODS
     '''
+    from omfit.classes.omfit_mds import OMFITmdsValue
+
     location = l2o(p2l(location))
     mapped = machine_mappings(machine)[location]
 
@@ -81,6 +85,68 @@ def machine_to_omas(ods, machine, pulse, treename, location):
                 ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
 
     return ods
+
+
+def load_omas_machine(machine, pulse, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS):
+    printd('Loading from %s' % machine, topic='machine')
+    ods = cls(imas_version=imas_version, consistency_check=False)
+    treename = 'EFIT01'
+    for location in machine_mappings(machine):
+        print(location)
+        machine_to_omas(ods, machine, pulse, treename, location)
+    ods.consistency_check = consistency_check
+    return ods
+
+
+class dynamic_omas_machine(dynamic_ODS):
+    """
+    Class that provides dynamic data loading from machine mappings
+    This class is not to be used by itself, but via the ODS.open() method.
+    """
+
+    def __init__(self, machine, pulse, verbose=True):
+        self.kw = {'machine': machine, 'pulse': pulse}
+        self.active = False
+        self.cache = {}
+
+    def open(self):
+        printd('Dynamic open  %s' % self.kw, topic='dynamic')
+        self.active = True
+        return self
+
+    def close(self):
+        printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.active = False
+        self.cache.clear()
+        return self
+
+    def __getitem__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
+        if o2u(key) not in self.cache:
+            ods = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], 'EFIT01', o2u(key))
+            self.cache[o2u(key)] = ods
+        return self.cache[o2u(key)][key]
+
+    def __contains__(self, location):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        if o2u(location).endswith(':'):
+            return False
+        return o2u(location) in machine_mappings(self.kw['machine'])
+
+    def keys(self, location):
+        if location + '.:' in machine_mappings(self.kw['machine']):
+            return list(range(len(self[location + '.:'])))
+        else:
+            return np.unique(
+                [
+                    convert_int(k[len(location) :].lstrip('.').split('.')[0])
+                    for k in machine_mappings(self.kw['machine'])
+                    if k.startswith(location)
+                ]
+            )
 
 
 _machine_mappings = {}
@@ -143,17 +209,18 @@ if __name__ == '__main__':
 
     os.chdir(tempfile.gettempdir())
     from omas import ODS
-    from omfit.classes.omfit_mds import OMFITmdsValue
     from omfit.classes.omfit_eqdsk import OMFITgeqdsk
 
     machine = 'd3d'
     pulse = 168830
     treename = 'EFIT01'
 
-    ods = ODS()
-    for location in machine_mappings(machine):
-        print(location)
-        machine_to_omas(ods, machine, pulse, treename, location)
+    ods = load_omas_machine(machine, pulse)
+
+    # ods = ODS()
+    # for location in machine_mappings(machine):
+    #     print(location)
+    #     machine_to_omas(ods, machine, pulse, treename, location)
 
     g = OMFITgeqdsk(None).from_omas(ods, 100)
     g.plot()

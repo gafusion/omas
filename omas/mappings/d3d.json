@@ -2,6 +2,9 @@
  "equilibrium.time": {
   "TDI": "dim_of(\\{treename}::TOP.RESULTS.GEQDSK.BCENTR)/1000."
  },
+ "equilibrium.time_slice.:": {
+  "TDI": "\\{treename}::TOP.RESULTS.GEQDSK.BCENTR"
+ },
  "equilibrium.time_slice.:.boundary.outline.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{treename}::TOP.RESULTS.GEQDSK.RBBBS','\\{treename}::TOP.RESULTS.GEQDSK.RBBBS',0)"
