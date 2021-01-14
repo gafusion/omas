@@ -1098,7 +1098,6 @@ class ODS(MutableMapping):
                 try:
                     data0.append(self.__getitem__([k] + key[1:], cocos_and_coords))
                 except ValueError:
-                    raise
                     data0.append([])
             # raise an error if no data is returned
             if not len(data0):
