@@ -23,7 +23,7 @@ ods2 = ODS()
 with ods2.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
     g2 = OMFITgeqdsk(None).from_omas(ods2, time=2.1)
 
-pprint(list(ods.flat().keys()))
+pprint(list(ods2.flat().keys()))
 
 g1.plot()
 g2.plot()

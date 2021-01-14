@@ -535,19 +535,6 @@ class TestOmasCore(UnittestCaseOmas):
             diff = odc1.diff(odc)
             assert not diff, f'save/load ODC to {ftype} failed:\r{repr(diff)}'
 
-    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
-    def test_load_omas_machine(self):
-        from omas.omas_machine import load_omas_machine
-
-        machine = 'd3d'
-        pulse = 168830
-        ods = load_omas_machine(machine, pulse)
-
-    def test_machines(self):
-        from omas.omas_machine import machines
-
-        assert 'd3d' in machines()
-
     def test_diff_attrs(self):
         ods = ODS(imas_version='3.30.0').sample_equilibrium()
         ods1 = ODS(imas_version='3.30.0').sample_equilibrium()

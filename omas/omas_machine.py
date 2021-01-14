@@ -57,7 +57,7 @@ def mapping_functions_namespace(branch):
     return _mapping_functions_namespace
 
 
-def machine_to_omas(ods, machine, pulse, location, options={}, branch=None):
+def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_mappings={}):
     '''
     Routine to convert machine data to ODS
 
@@ -73,12 +73,21 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None):
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
+    :param user_mappings: allow specification of external mappings
+
     :return: updated ODS
     '''
     from omfit.classes.omfit_mds import OMFITmdsValue
 
     location = l2o(p2l(location))
     mappings = machine_mappings(machine, branch)
+
+    if user_mappings:
+        mappings=copy.copy(mappings)
+        user_mappings=copy.copy(user_mappings)
+        mappings['__options__'].update(user_mappings.pop('__options__',{}))
+        mappings['__cocos_rules__'].update(user_mappings.pop('__cocos_rules__',{}))
+        mappings.update(user_mappings)
     options_with_defaults = copy.copy(mappings['__options__'])
     options_with_defaults.update(options)
     mapped = mappings[location]
