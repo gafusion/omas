@@ -39,5 +39,5 @@ class TestOmasMachine(UnittestCaseOmas):
                        {'TDI': '\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAN',
                         'treename': '{EFIT_tree}'}}
         location = 'equilibrium.time_slice.:.global_quantities.beta_normal'
-        ods = machine_to_omas(ODS(), self.machine, self.pulse, location, options={}, branch=None, user_mappings=user_mappings)
+        ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, options={}, branch=None, user_mappings=user_mappings)
         print(ods[location])

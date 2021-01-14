@@ -75,9 +75,12 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     :param user_mappings: allow specification of external mappings
 
-    :return: updated ODS
+    :return: updated ODS and data before being assigned to the ODS
     '''
-    from omfit.classes.omfit_mds import OMFITmdsValue
+    try:
+        from classes.omfit_mds import OMFITmdsValue
+    except ImportError:
+        from omfit.classes.omfit_mds import OMFITmdsValue
 
     location = l2o(p2l(location))
     mappings = machine_mappings(machine, branch)
@@ -107,7 +110,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         raise ValueError(f"Could not fetch data for {location}. Must define ['TDI']")
 
     if location.endswith(':'):
-        return int(data[0])
+        return int(data[0]), data
 
     # transpose manipulation
     if mapped.get('TRANSPOSE', False):
@@ -138,7 +141,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             for k in range(data.shape[0]):
                 ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
 
-    return ods
+    return ods, data
 
 
 def load_omas_machine(
@@ -182,8 +185,8 @@ class dynamic_omas_machine(dynamic_ODS):
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         if o2u(key) not in self.cache:
             printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
-            out = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], o2u(key), self.kw['options'], self.kw['branch'])
-            self.cache[o2u(key)] = out
+            ods, _ = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], o2u(key), self.kw['options'], self.kw['branch'])
+            self.cache[o2u(key)] = ods
         if isinstance(self.cache[o2u(key)], int):
             return self.cache[o2u(key)]
         else:
