@@ -15,11 +15,16 @@ from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
-ods = ODS()
-with ods.open('machine', 'd3d', 168830):
-    g = OMFITgeqdsk(None).from_omas(ods, 100)
+ods1 = ODS()
+with ods1.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT01'}):
+    g1 = OMFITgeqdsk(None).from_omas(ods1, time=2.1)
+
+ods2 = ODS()
+with ods2.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
+    g2 = OMFITgeqdsk(None).from_omas(ods2, time=2.1)
 
 pprint(list(ods.flat().keys()))
 
-g.plot()
+g1.plot()
+g2.plot()
 pyplot.show()
