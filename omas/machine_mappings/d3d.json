@@ -6,11 +6,27 @@
  },
  "__options__": {
   "EFIT_tree": "EFIT01",
-  "default_tree": "D3D"
+  "default_tree": "D3D",
+  "machine": "d3d"
+ },
+ "dataset_description.data_entry.machine": {
+  "VALUE": "{machine}"
  },
  "dataset_description.data_entry.pulse": {
   "TDI": "$shot",
   "treename": "{default_tree}"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "VALUE": "pulse"
+ },
+ "dataset_description.data_entry.user": {
+  "ENVIRON": "USER"
+ },
+ "equilibrium.code.name": {
+  "VALUE": "{EFIT_tree}"
+ },
+ "equilibrium.code.version": {
+  "VALUE": "{EFIT_tree}"
  },
  "equilibrium.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",

@@ -12,7 +12,7 @@ _mapping_functions_namespace = {}
 url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url'])
 
 
-expression_types = ['VALUE', 'TDI', 'eval2TDI']
+expression_types = ['VALUE', 'ENVIRON', 'TDI', 'eval2TDI']
 
 
 def mapping_functions_namespace(branch):
@@ -98,6 +98,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     # evaluate TDI
     if 'VALUE' in mapped:
         data = mapped['VALUE'].format(**options_with_defaults)
+    elif 'ENVIRON' in mapped:
+        data = os.environ[mapped['ENVIRON'].format(**options_with_defaults)]
     elif 'TDI' in mapped:
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
