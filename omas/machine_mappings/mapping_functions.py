@@ -57,7 +57,7 @@ def py2tdi(func, *args):
     import re
 
     function = inspect.getsource(func)
-    function_name = re.findall('def (\w+)\(', function)[0]
+    function_name = re.findall(r'def (\w+)\(', function)[0]
 
     function = function.replace('@TDI_function', '')
     function = function.strip().replace('\n', '\\n').replace('{', '{{').replace('}', '}}')

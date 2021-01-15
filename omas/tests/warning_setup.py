@@ -25,6 +25,8 @@ def set_omas_warnings():
     warnings.filterwarnings(
         'always', category=UserWarning, message='Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure'
     )
+    warnings.filterwarnings('always', category=DeprecationWarning, message='tostring\(\) is deprecated. Use tobytes\(\) instead.')
+
     print('OMAS warnings set to hard mode')
     return
 

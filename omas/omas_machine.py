@@ -5,10 +5,14 @@ from .omas_utils import *
 from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_core import dynamic_ODS
 from .omas_physics import cocos_signals
+from .machine_mappings.mapping_functions import *
 
 _mapping_functions_namespace = {}
 
 url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url'])
+
+
+expression_types = ['VALUE', 'TDI', 'eval2TDI']
 
 
 def mapping_functions_namespace(branch):
@@ -57,7 +61,7 @@ def mapping_functions_namespace(branch):
     return _mapping_functions_namespace
 
 
-def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_mappings={}):
+def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None):
     '''
     Routine to convert machine data to ODS
 
@@ -82,21 +86,19 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     except ImportError:
         from omfit.classes.omfit_mds import OMFITmdsValue
 
-    location = l2o(p2l(location))
-    mappings = machine_mappings(machine, branch)
+    if user_machine_mappings is None:
+        user_machine_mappings = {}
 
-    if user_mappings:
-        mappings=copy.copy(mappings)
-        user_mappings=copy.copy(user_mappings)
-        mappings['__options__'].update(user_mappings.pop('__options__',{}))
-        mappings['__cocos_rules__'].update(user_mappings.pop('__cocos_rules__',{}))
-        mappings.update(user_mappings)
+    location = l2o(p2l(location))
+    mappings = machine_mappings(machine, branch, user_machine_mappings)
     options_with_defaults = copy.copy(mappings['__options__'])
     options_with_defaults.update(options)
     mapped = mappings[location]
 
     # evaluate TDI
-    if 'TDI' in mapped:
+    if 'VALUE' in mapped:
+        data = mapped['VALUE'].format(**options_with_defaults)
+    elif 'TDI' in mapped:
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
@@ -104,10 +106,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             if data is None:
                 raise ValueError('data is None')
         except Exception:
-            printe(TDI.replace('\\n', '\n'))
+            printe(mapped['TDI'].format(**options_with_defaults).replace('\\n', '\n'))
             raise
     else:
-        raise ValueError(f"Could not fetch data for {location}. Must define ['TDI']")
+        raise ValueError(f"Could not fetch data for {location}. Must define one of {expression_types}")
 
     if location.endswith(':'):
         return int(data[0]), data
@@ -129,28 +131,38 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         )
 
     # assign data to ODS
-    with omas_environment(ods, cocosio=cocosio):
-        csize = mapped.get('COORDINATES', [])
-        osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])
-        dsize = len(data.shape)
-        if dsize - osize == 0 or ':' not in location:
-            if data.size == 1:
-                data = data.item()
-            ods[location] = nanfilter(data)
-        else:
-            for k in range(data.shape[0]):
-                ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
+    if not hasattr(data, 'shape'):
+        ods[location] = data
+    else:
+        with omas_environment(ods, cocosio=cocosio):
+            csize = mapped.get('COORDINATES', [])
+            osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])
+            dsize = len(data.shape)
+            if dsize - osize == 0 or ':' not in location:
+                if data.size == 1:
+                    data = data.item()
+                ods[location] = nanfilter(data)
+            else:
+                for k in range(data.shape[0]):
+                    ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
 
     return ods, data
 
 
 def load_omas_machine(
-    machine, pulse, options={}, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS, branch=None
+    machine,
+    pulse,
+    options={},
+    consistency_check=True,
+    imas_version=omas_rcparams['default_imas_version'],
+    cls=ODS,
+    branch=None,
+    user_machine_mappings=None,
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
     treename = 'EFIT01'
-    for location in [location for location in machine_mappings(machine, branch) if not location.startswith('__')]:
+    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
         if location.endswith(':'):
             continue
         print(location)
@@ -164,8 +176,8 @@ class dynamic_omas_machine(dynamic_ODS):
     This class is not to be used by itself, but via the ODS.open() method.
     """
 
-    def __init__(self, machine, pulse, options={}, branch=None, verbose=True):
-        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch}
+    def __init__(self, machine, pulse, options={}, branch=None, user_machine_mappings=None, verbose=True):
+        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
         self.active = False
         self.cache = {}
 
@@ -198,17 +210,17 @@ class dynamic_omas_machine(dynamic_ODS):
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         if ulocation.endswith(':'):
             return False
-        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'])
+        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
 
     def keys(self, location):
         ulocation = o2u(location)
-        if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch']):
+        if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
             return list(range(self[ulocation + '.:']))
         else:
             return numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
-                    for k in machine_mappings(self.kw['machine'], self.kw['branch'])
+                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
                     if k.startswith(ulocation)
                 ]
             )
@@ -274,11 +286,13 @@ def machines(machine=None, branch=None):
 
 
 _machine_mappings = {}
+_user_machine_mappings = {}
 
 
-def machine_mappings(machine, branch):
+def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False):
     '''
-    Function to load the json mapping files
+    Function to load the json mapping files (local or remote)
+    Allows for merging external mapping rules defined by users.
     This function sanity-checks and the mapping file and adds extra info required for mapping
 
     :param machine: machine for which to load the mapping files
@@ -287,14 +301,36 @@ def machine_mappings(machine, branch):
 
     :return: dictionary with mapping transformations
     '''
-    if machine not in _machine_mappings:
+    if user_machine_mappings is None:
+        user_machine_mappings = {}
+
+    if (return_raw_mappings or
+        machine not in _machine_mappings
+        or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
+        != _machine_mappings[machine]['__user_machine_mappings__']
+    ):
+
+        # figure out mapping file
         filename, branch = machines(machine, branch)
+
+        # load mappnigs from file
         with open(filename, 'r') as f:
-            _machine_mappings[machine] = json.load(f)
-        mappings = _machine_mappings[machine]
-        mappings.setdefault('__cocos_rules__', {})
-        mappings.setdefault('__options__', {})
-        umappings = [o2u(loc) for loc in mappings]
+            mappings = json.load(f)
+        for item in ['__cocos_rules__', '__options__']:
+            mappings.setdefault(item, {})
+
+        # merge mappings and user_machine_mappings
+        mappings['__user_machine_mappings__'] = []
+        for umap in [_user_machine_mappings, user_machine_mappings]:
+            umap = copy.copy(umap)
+            mappings['__user_machine_mappings__'].extend(list(umap.keys()))
+            for item in ['__cocos_rules__', '__options__']:
+                mappings[item].update(umap.pop(item, {}))
+            mappings.update(umap)
+
+        if return_raw_mappings:
+            mappings.pop('__user_machine_mappings__')
+            return mappings
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
@@ -323,7 +359,7 @@ def machine_mappings(machine, branch):
                 for coordinate in mappings[location]['COORDINATES']:
                     if coordinate == '1...N':
                         continue
-                    elif coordinate not in umappings:
+                    elif coordinate not in mappings:
                         raise ValueError(f'missing coordinate {coordinate} for {location}')
 
             # add cocos transformation info
@@ -336,5 +372,8 @@ def machine_mappings(machine, branch):
                         break
                 if not cocos_defined:
                     raise ValueError(f'{location} must have COCOS specified')
+
+        # cache
+        _machine_mappings[machine] = mappings
 
     return _machine_mappings[machine]

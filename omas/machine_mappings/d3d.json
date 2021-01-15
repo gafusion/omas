@@ -79,7 +79,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_2d.:": {
-  "TDI": "1"
+  "VALUE": 1
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
   "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
@@ -111,10 +111,10 @@
   "treename": "{EFIT_tree}"
  },
  "wall.description_2d.:": {
-  "TDI": "1"
+  "VALUE": 1
  },
  "wall.description_2d.:.limiter.unit.:": {
-  "TDI": "1"
+  "VALUE": 1
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",

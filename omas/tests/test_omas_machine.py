@@ -16,7 +16,7 @@ from omas import *
 from omas.omas_utils import *
 from omas.tests import warning_setup
 from omas.tests.failed_imports import *
-from omas.omas_machine import *
+from omas.omas_machine import machine_to_omas
 
 class TestOmasMachine(UnittestCaseOmas):
     """
@@ -35,9 +35,18 @@ class TestOmasMachine(UnittestCaseOmas):
 
     @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_user_mappings(self):
-        user_mappings = {'equilibrium.time_slice.:.global_quantities.beta_normal':
+        user_machine_mappings = {'equilibrium.time_slice.:.global_quantities.beta_normal':
                        {'TDI': '\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAN',
                         'treename': '{EFIT_tree}'}}
         location = 'equilibrium.time_slice.:.global_quantities.beta_normal'
-        ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, options={}, branch=None, user_mappings=user_mappings)
+
+        user_machine_mappings={
+            "__options__": {'EFIT_tree': 'EFIT01', 'default_tree': 'D3D', 'machine':'d3d'},
+            "dataset_description.data_entry.machine": {
+                "VALUE": "{machine}"
+            }
+        }
+        location='dataset_description.data_entry.machine'
+
+        ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, options={}, branch=None, user_machine_mappings=user_machine_mappings)
         print(ods[location])
