@@ -5,7 +5,8 @@ from .omas_utils import *
 from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_core import dynamic_ODS
 from .omas_physics import cocos_signals
-from .machine_mappings.mapping_functions import *
+
+__all__ = ['expression_types', 'machine_to_omas', 'machines', 'machine_mappings', 'load_omas_machine']
 
 _mapping_functions_namespace = {}
 
@@ -128,9 +129,11 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     # cocos
     cocosio = 11
     if mapped.get('COCOSIO', False):
-        cocosio = int(
-            OMFITmdsValue(server=machine, shot=pulse, treename=treename, TDI=mapped['COCOSIO'].format(**options_with_defaults)).data()[0]
-        )
+        if 'VALUE' in mapped:
+            cocosio = mapped['COCOSIO']
+        else:
+            TDI = mapped['COCOSIO'].format(**options_with_defaults)
+            cocosio = int(OMFITmdsValue(server=machine, shot=pulse, treename=treename, TDI=TDI).data()[0])
 
     # assign data to ODS
     if not hasattr(data, 'shape'):
@@ -163,7 +166,6 @@ def load_omas_machine(
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
-    treename = 'EFIT01'
     for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
         if location.endswith(':'):
             continue
@@ -306,8 +308,9 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
-    if (return_raw_mappings or
-        machine not in _machine_mappings
+    if (
+        return_raw_mappings
+        or machine not in _machine_mappings
         or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
         != _machine_mappings[machine]['__user_machine_mappings__']
     ):

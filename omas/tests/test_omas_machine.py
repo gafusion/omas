@@ -16,7 +16,7 @@ from omas import *
 from omas.omas_utils import *
 from omas.tests import warning_setup
 from omas.tests.failed_imports import *
-from omas.omas_machine import machine_to_omas
+from omas.omas_machine import *
 
 class TestOmasMachine(UnittestCaseOmas):
     """
