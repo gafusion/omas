@@ -92,7 +92,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     '''
     try:
         from classes.omfit_mds import OMFITmdsValue
-    except ImportError:
+    except (ModuleNotFoundError, ImportError):
         from omfit.classes.omfit_mds import OMFITmdsValue
 
     if user_machine_mappings is None:
