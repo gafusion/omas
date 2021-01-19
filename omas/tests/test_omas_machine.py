@@ -18,6 +18,7 @@ from omas.tests import warning_setup
 from omas.tests.failed_imports import *
 from omas.omas_machine import *
 
+
 class TestOmasMachine(UnittestCaseOmas):
     """
     Test suite for omas_machine.py
@@ -33,20 +34,22 @@ class TestOmasMachine(UnittestCaseOmas):
     def test_machines(self):
         assert self.machine in machines()
 
-    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_user_mappings(self):
-        user_machine_mappings = {'equilibrium.time_slice.:.global_quantities.beta_normal':
-                       {'TDI': '\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAN',
-                        'treename': '{EFIT_tree}'}}
-        location = 'equilibrium.time_slice.:.global_quantities.beta_normal'
+        location = 'dataset_description.data_entry.machine'
+        for user_machine_mappings in [{}, {"dataset_description.data_entry.machine": {"VALUE": "{machine}123"}}]:
+            ods, _ = machine_to_omas(
+                ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings
+            )
+            if not user_machine_mappings:
+                assert ods[location] == self.machine
+            else:
+                assert ods[location] == self.machine + '123'
 
-        user_machine_mappings={
-            "__options__": {'EFIT_tree': 'EFIT01', 'default_tree': 'D3D', 'machine':'d3d'},
-            "dataset_description.data_entry.machine": {
-                "VALUE": "{machine}"
-            }
-        }
-        location='dataset_description.data_entry.machine'
-
-        ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, options={}, branch=None, user_machine_mappings=user_machine_mappings)
+    def test_value(self):
+        location = 'dataset_description.data_entry.pulse'
+        ods, data = machine_to_omas(ODS(), self.machine, self.pulse, location)
         print(ods[location])
+
+    def test_python(self):
+        location = 'interferometer.channel.:.identifier'
+        ods, data = machine_to_omas(ODS(), self.machine, self.pulse, location)

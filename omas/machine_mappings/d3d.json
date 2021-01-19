@@ -6,15 +6,13 @@
  },
  "__options__": {
   "EFIT_tree": "EFIT01",
-  "default_tree": "D3D",
-  "machine": "d3d"
+  "default_tree": "D3D"
  },
  "dataset_description.data_entry.machine": {
   "VALUE": "{machine}"
  },
  "dataset_description.data_entry.pulse": {
-  "TDI": "$shot",
-  "treename": "{default_tree}"
+  "VALUE": "{pulse}"
  },
  "dataset_description.data_entry.pulse_type": {
   "VALUE": "pulse"
@@ -125,6 +123,39 @@
  "equilibrium.vacuum_toroidal_field.r0": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
   "treename": "{EFIT_tree}"
+ },
+ "interferometer.channel.:.identifier": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.first_point.phi": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
+  "COCOSIO": 11
+ },
+ "interferometer.channel.:.line_of_sight.first_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.first_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.second_point.phi": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
+  "COCOSIO": 11
+ },
+ "interferometer.channel.:.line_of_sight.second_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.second_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.third_point.phi": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
+  "COCOSIO": 11
+ },
+ "interferometer.channel.:.line_of_sight.third_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.third_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "wall.description_2d.:": {
   "VALUE": 1
