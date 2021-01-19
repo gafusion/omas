@@ -90,11 +90,6 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     :return: updated ODS and data before being assigned to the ODS
     '''
-    try:
-        from classes.omfit_mds import OMFITmdsValue
-    except (ModuleNotFoundError, ImportError):
-        from omfit.classes.omfit_mds import OMFITmdsValue
-
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -132,6 +127,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     # MDS+
     elif 'TDI' in mapped:
+        from omfit.classes.omfit_mds import OMFITmdsValue
+
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
@@ -162,11 +159,13 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     # cocos
     if mapped.get('COCOSIO', False):
-        if 'VALUE' in mapped:
+        if isinstance(mapped['COCOSIO'], int):
             cocosio = mapped['COCOSIO']
-        else:
+        elif 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
             cocosio = int(OMFITmdsValue(server=machine, shot=pulse, treename=treename, TDI=TDI).data()[0])
+        else:
+            raise ValueError('COCOSIO should be an integer or a TDI expression')
 
     # assign data to ODS
     if not hasattr(data, 'shape'):
