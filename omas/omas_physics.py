@@ -565,8 +565,8 @@ def summary_consistent_global_quantities(ods, ds=None, update=True):
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     """
     Calls all core_profiles consistency functions including
-      - core_profiles_pressures
       - core_profiles_densities
+      - core_profiles_pressures
       - core_profiles_zeff
 
     :param ods: input ods
@@ -579,8 +579,8 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 
     :return: updated ods
     """
-    ods = core_profiles_pressures(ods, update=update)
-    core_profiles_densities(ods)
+    ods = core_profiles_densities(ods, update=update)
+    core_profiles_pressures(ods)
     core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
     return ods
 
