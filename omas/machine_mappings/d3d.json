@@ -128,8 +128,8 @@
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.phi": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
-  "COCOSIO": 11
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.r": {
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
@@ -138,8 +138,8 @@
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.phi": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
-  "COCOSIO": 11
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.r": {
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
@@ -148,8 +148,8 @@
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.phi": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})",
-  "COCOSIO": 11
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.r": {
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"

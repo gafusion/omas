@@ -8,33 +8,41 @@ from .omas_physics import cocos_signals
 
 __all__ = ['expression_types', 'machine_to_omas', 'machines', 'machine_mappings', 'load_omas_machine']
 
-_mapping_functions_namespace = {}
+_python_tdi_namespace = {}
 
 url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url'])
 
 expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
 
 
-def mapping_functions_namespace(branch):
-    # return cached mapping function namespace
-    if _mapping_functions_namespace.get('__branch__', False) == branch:
-        return _mapping_functions_namespace
+def python_tdi_namespace(branch):
+    '''
+    Returns the namespace of the python_tdi.py file
+    This is done in such complicated way to allow `inspect.getsource` to work
 
-    # clear mapping function namespace
-    _mapping_functions_namespace.clear()
+    :param branch: remote branch to load
+
+    :return: namespace
+    '''
+    # return cached python tdi function namespace
+    if _python_tdi_namespace.get('__branch__', False) == branch:
+        return _python_tdi_namespace
+
+    # clear python tdi function namespace
+    _python_tdi_namespace.clear()
 
     # remove old machine_mappings modules
     if 'omas.machine_mappings' in sys.modules:
         del sys.modules['omas.machine_mappings']
-    if 'omas.machine_mappings.mapping_functions' in sys.modules:
-        del sys.modules['omas.machine_mappings.mapping_functions']
+    if 'omas.machine_mappings.python_tdi' in sys.modules:
+        del sys.modules['omas.machine_mappings.python_tdi']
 
     # get local mapping functions
     if branch is None:
-        exec('from omas.machine_mappings.mapping_functions import *', _mapping_functions_namespace)
+        exec('from omas.machine_mappings.python_tdi import *', _python_tdi_namespace)
     # get mapping functions from GitHub
     else:
-        printd(f'omas machine mappings functions from branch: `{branch}`', topic='machine')
+        printd(f'omas python tdi mappings from branch: `{branch}`', topic='machine')
 
         # setup temporary import directory
         dir = url_dir.format(branch=branch)
@@ -42,32 +50,44 @@ def mapping_functions_namespace(branch):
             os.makedirs(dir)
         open(dir + os.sep + '__init__.py', 'w').close()
 
-        # download the mapping_functions.py and write it to file
-        url = f"https://raw.githubusercontent.com/gafusion/omas/{branch}/omas/machine_mappings/mapping_functions.py"
+        # download the python_tdi.py and write it to file
+        url = f"https://raw.githubusercontent.com/gafusion/omas/{branch}/omas/machine_mappings/python_tdi.py"
         contents = urllib.request.urlopen(url).read().decode("utf-8")
-        with open(dir + os.sep + 'mapping_functions.py', 'w') as f:
+        with open(dir + os.sep + 'python_tdi.py', 'w') as f:
             f.write(contents)
 
         # import from temporary directory
         if dir + os.sep + '..' not in sys.path:
             sys.path.insert(0, dir + os.sep + '..')
-        exec('from omas_machine_mappings_url.mapping_functions import *', _mapping_functions_namespace)
+        exec('from omas_machine_mappings_url.python_tdi import *', _python_tdi_namespace)
 
         # alias
         sys.modules['omas.machine_mappings'] = sys.modules['omas_machine_mappings_url']
-        sys.modules['omas.machine_mappings.mapping_functions'] = sys.modules['omas_machine_mappings_url.mapping_functions']
+        sys.modules['omas.machine_mappings.python_tdi'] = sys.modules['omas_machine_mappings_url.python_tdi']
 
-    _mapping_functions_namespace['__branch__'] = branch
-    return _mapping_functions_namespace
+    _python_tdi_namespace['__branch__'] = branch
+    return _python_tdi_namespace
 
 
 def update_mapping(machine, location, value):
+    '''
+    Utility function that updates the local mapping file of a given machine with the mapping info of a given location
+
+    :param machine: machine name
+
+    :param location: ODS location to be updated
+
+    :param value: dictionary with mapping info
+
+    :return: dictionary with updated raw mappings
+    '''
     new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
     new_raw_mappings[location] = value
     filename, branch = machines(machine, None)
     with open(filename, 'w') as f:
         json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
     print(f"Updated {filename}")
+    return new_raw_mappings
 
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None):
@@ -118,12 +138,15 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         namespace.update(_namespace_mappings[machine])
         namespace['ods'] = ODS()
         exec(mapped['PYTHON'].format(**options_with_defaults), namespace)
-        data0 = namespace[mapped.get('RETURN','ods')]
+        data0 = namespace[mapped.get('RETURN', 'ods')]
         data = data0[location]
 
-        for loc in numpy.unique(list(map(o2u, data0.flat().keys()))):
-            if loc not in mappings:
-                update_mapping(machine, loc, mapped)
+        # if this python function generated an ODS with multiple enties populated,
+        # then we automatically update all other mapping entries that were not populated before
+        if omas_git_repo:
+            for loc in numpy.unique(list(map(o2u, data0.flat().keys()))):
+                if loc not in mappings:
+                    update_mapping(machine, loc, mapped)
 
     # MDS+
     elif 'TDI' in mapped:
@@ -187,14 +210,14 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
 
 def load_omas_machine(
-        machine,
-        pulse,
-        options={},
-        consistency_check=True,
-        imas_version=omas_rcparams['default_imas_version'],
-        cls=ODS,
-        branch=None,
-        user_machine_mappings=None,
+    machine,
+    pulse,
+    options={},
+    consistency_check=True,
+    imas_version=omas_rcparams['default_imas_version'],
+    cls=ODS,
+    branch=None,
+    user_machine_mappings=None,
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
@@ -255,7 +278,7 @@ class dynamic_omas_machine(dynamic_ODS):
         else:
             return numpy.unique(
                 [
-                    convert_int(k[len(ulocation):].lstrip('.').split('.')[0])
+                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
                     if k.startswith(ulocation)
                 ]
@@ -268,6 +291,7 @@ _machines_dict = {}
 def machines(machine=None, branch=None):
     '''
     Function to get machines that have their mappings defined
+    This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested
 
     :param machine: string with machine name or None
 
@@ -302,22 +326,25 @@ def machines(machine=None, branch=None):
 
         # get remote mappings
         if branch is not None:
-            try:
-                # setup temporary machine_mappings directory
-                dir = url_dir.format(branch=branch)
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
 
-                # download machine.json and write it to file
-                url = f"https://raw.githubusercontent.com/gafusion/omas/{branch}/omas/machine_mappings/{machine}.json"
-                contents = urllib.request.urlopen(url).read().decode("utf-8")
-                filename = dir + os.sep + f'{machine}.json'
-                with open(filename, 'w') as f:
-                    f.write(contents)
-                _machines_dict[machine] = filename
-            except Exception as _excp:
-                printd(f'No machine mappings for `{machine}` from branch `{branch}`: {repr(_excp)}', topic='machine')
-                raise KeyError(f'No machine mapping for `{machine}`. Valid machines are: {list(_machines_dict.keys())}')
+            # setup temporary machine_mappings directory
+            dir = url_dir.format(branch=branch)
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+
+            # download machine.json/py files and write them to file
+            for ext in ['json', 'py']:
+                try:
+                    url = f"https://raw.githubusercontent.com/gafusion/omas/{branch}/omas/machine_mappings/{machine}.json"
+                    contents = urllib.request.urlopen(url).read().decode("utf-8")
+                    filename = dir + os.sep + f'{machine}.{ext}'
+                    with open(filename, 'w') as f:
+                        f.write(contents)
+                    _machines_dict[machine] = filename
+                except Exception as _excp:
+                    if ext != 'json':
+                        printd(f'No machine mappings for `{machine}` from branch `{branch}`: {repr(_excp)}', topic='machine')
+                        raise NotImplementedError(f'No machine mapping for `{machine}`. Valid machines are: {list(_machines_dict.keys())}')
         return _machines_dict[machine], branch
 
 
@@ -342,13 +369,14 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         user_machine_mappings = {}
 
     if (
-            return_raw_mappings
-            or machine not in _machine_mappings
-            or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
-            != _machine_mappings[machine]['__user_machine_mappings__']
+        return_raw_mappings
+        or machine not in _machine_mappings
+        or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
+        != _machine_mappings[machine]['__user_machine_mappings__']
     ):
 
         # figure out mapping file
+        # this function will take care of remote transfer the needed files (both .json and .py) if a remote branch is requested
         filename, branch = machines(machine, branch)
 
         # load mappings from file
@@ -371,6 +399,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             mappings.pop('__user_machine_mappings__')
             return mappings
 
+        # read the machine specific python mapping functions
         _namespace_mappings[machine] = {}
         if os.path.exists(os.path.splitext(filename)[0] + '.py'):
             with open(os.path.splitext(filename)[0] + '.py', 'r') as f:
@@ -381,7 +410,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             if 'eval2TDI' in mappings['__cocos_rules__'][item]:
                 try:
                     mappings['__cocos_rules__'][item]['TDI'] = eval(
-                        mappings['__cocos_rules__'][item]['eval2TDI'].replace('\\', '\\\\'), mapping_functions_namespace(branch)
+                        mappings['__cocos_rules__'][item]['eval2TDI'].replace('\\', '\\\\'), python_tdi_namespace(branch)
                     )
                 except:
                     print(mappings['__cocos_rules__'][item]['eval2TDI'])
@@ -394,7 +423,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
 
             # generate DTI functions based on eval2DTI
             if 'eval2TDI' in mappings[location]:
-                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'), mapping_functions_namespace(branch))
+                mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'), python_tdi_namespace(branch))
 
             # make sure required coordinates info are present in the mapping
             info = omas_info_node(location)
@@ -419,6 +448,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                     raise ValueError(f'{location} must have COCOS specified')
             if 'COCOSIO' in mappings[location] and not has_COCOS:
                 raise ValueError(f'{location} should not have COCOS specified, or COCOS definition should be added to omas_cocos file')
+
         # cache
         _machine_mappings[machine] = mappings
 

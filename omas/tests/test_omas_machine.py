@@ -31,8 +31,23 @@ class TestOmasMachine(UnittestCaseOmas):
     def test_load_omas_machine(self):
         ods = load_omas_machine(self.machine, self.pulse)
 
-    def test_machines(self):
+    def test_machines_list(self):
         assert self.machine in machines()
+
+    def test_machines(self):
+        # access machine description that should fail
+        for branch in [None, 'master', 'dummy']:
+            try:
+                machines('machine_that_does_not_exist', None)
+                raise ValueError('error in machines()')
+            except NotImplementedError:
+                pass
+
+        # local machine returns file
+        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, None)[0]
+
+        # access machine description that should fail
+        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'machine')[0] # this test will fail when we delete this branch
 
     def test_user_mappings(self):
         location = 'dataset_description.data_entry.machine'

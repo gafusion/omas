@@ -1,15 +1,3 @@
-functions = {}
-
-
-def TDI_function(func):
-    import inspect
-
-    source = inspect.getsource(func)
-    functions[func.__name__] = source
-    return func
-
-
-@TDI_function
 def tile(a, n):
     import numpy as np
 
@@ -17,7 +5,6 @@ def tile(a, n):
     return np.array([a for k in range(n)])
 
 
-@TDI_function
 def nan_where(a, b, n):
     import numpy as np
 
@@ -27,7 +14,6 @@ def nan_where(a, b, n):
     return a
 
 
-@TDI_function
 def MDS_gEQDSK_COCOS_identify(bt, ip):
     import numpy as np
 
@@ -39,7 +25,6 @@ def MDS_gEQDSK_COCOS_identify(bt, ip):
     return g_cocos.get((sign_Bt, sign_Ip), None)
 
 
-@TDI_function
 def geqdsk_psi(a, b, c):
     import numpy as np
 
@@ -51,7 +36,6 @@ def geqdsk_psi(a, b, c):
     return M
 
 
-@TDI_function
 def py2tdi(func, *args):
     import inspect
     import re
@@ -59,7 +43,6 @@ def py2tdi(func, *args):
     function = inspect.getsource(func)
     function_name = re.findall(r'def (\w+)\(', function)[0]
 
-    function = function.replace('@TDI_function', '')
     function = function.strip().replace('\n', '\\n').replace('{', '{{').replace('}', '}}')
 
     arguments = ', '.join(map(str, args))
