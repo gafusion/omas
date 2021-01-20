@@ -6,7 +6,7 @@ from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparam
 from .omas_core import dynamic_ODS
 from .omas_physics import cocos_signals
 
-__all__ = ['expression_types', 'machine_to_omas', 'machines', 'machine_mappings', 'load_omas_machine']
+__all__ = ['expression_types', 'machine_to_omas', 'machines', 'machine_mappings', 'load_omas_machine', 'mds_machine_to_server_mapping']
 
 _python_tdi_namespace = {}
 
@@ -90,6 +90,62 @@ def update_mapping(machine, location, value):
     return new_raw_mappings
 
 
+def mds_machine_to_server_mapping(machine, treename):
+    '''
+    Translate machine to MDS+ server
+
+    :param machine: machine name
+
+    :param treename: treename (in case treename affects server to be used)
+
+    :return: string with MDS+ server and port to be used
+    '''
+    try:
+        mapping = {'d3d': 'atlas.gat.com:8000'}
+        return mapping[machine]
+    except KeyError:
+        raise KeyError(
+            machine
+            + ' machine does not have a MDS+ server assigned. Assign at least a dummy one in the `mds_machine_to_server_mapping()` function.'
+        )
+
+
+_mds_connection_cache = {}
+
+
+def mdsvalue(machine, treename, shot, TDI):
+    '''
+    Fetch data from MDS+ with connection caching
+
+    :param machine: machine name (use mds_machine_to_server_mapping)
+
+    :param treename:
+
+    :param shot:
+
+    :param TDI:
+
+    :return:
+    '''
+    import MDSplus
+
+    server = mds_machine_to_server_mapping(machine, treename)
+    for fallback in [0, 1]:
+        if (server, treename, shot) not in _mds_connection_cache:
+            conn = MDSplus.Connection(server)
+            if treename is not None:
+                conn.openTree(treename, shot)
+            _mds_connection_cache[(server, treename, shot)] = conn
+        try:
+            conn = _mds_connection_cache[(server, treename, shot)]
+        except Exception:
+            if (server, treename, shot) in _mds_connection_cache:
+                del _mds_connection_cache[(server, treename, shot)]
+            if fallback:
+                raise
+    return MDSplus.Data.data(conn.get(TDI))
+
+
 def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None):
     '''
     Routine to convert machine data to ODS
@@ -150,12 +206,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     # MDS+
     elif 'TDI' in mapped:
-        from omfit.classes.omfit_mds import OMFITmdsValue
-
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = OMFITmdsValue(server=machine, shot=pulse, treename=treename, TDI=TDI).data()
+            data0 = data = mdsvalue(machine=machine, shot=pulse, treename=treename, TDI=TDI)
             if data is None:
                 raise ValueError('data is None')
         except Exception:
@@ -167,8 +221,6 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     # handle size definition for array of structures
     if location.endswith(':'):
-        if 'TDI' in mapped:
-            data = data[0]
         return int(data), {'raw_data': data0, 'processed_data': data, 'cocosio': cocosio}
 
     # transpose manipulation
@@ -186,7 +238,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             cocosio = mapped['COCOSIO']
         elif 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
-            cocosio = int(OMFITmdsValue(server=machine, shot=pulse, treename=treename, TDI=TDI).data()[0])
+            cocosio = int(mdsvalue(machine=machine, shot=pulse, treename=treename, TDI=TDI))
         else:
             raise ValueError('COCOSIO should be an integer or a TDI expression')
 

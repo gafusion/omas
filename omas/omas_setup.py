@@ -114,6 +114,7 @@ omas_git_repo = False
 if os.path.exists(imas_json_dir + '/../../.git') and os.access(imas_json_dir + '/../../.git', os.W_OK):
     omas_git_repo = True
 
+
 class IMAS_versions(OrderedDict):
     """
     dictionary with list of IMAS version and their sub-folder name in the imas_json_dir

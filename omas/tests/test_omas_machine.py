@@ -47,14 +47,12 @@ class TestOmasMachine(UnittestCaseOmas):
         assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, None)[0]
 
         # access machine description that should fail
-        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'machine')[0] # this test will fail when we delete this branch
+        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'machine')[0]  # this test will fail when we delete this branch
 
     def test_user_mappings(self):
         location = 'dataset_description.data_entry.machine'
         for user_machine_mappings in [{}, {"dataset_description.data_entry.machine": {"VALUE": "{machine}123"}}]:
-            ods, _ = machine_to_omas(
-                ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings
-            )
+            ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings)
             if not user_machine_mappings:
                 assert ods[location] == self.machine
             else:
@@ -68,3 +66,8 @@ class TestOmasMachine(UnittestCaseOmas):
     def test_python(self):
         location = 'interferometer.channel.:.identifier'
         ods, data = machine_to_omas(ODS(), self.machine, self.pulse, location)
+
+    def test_tdi(self):
+        # make sure all machines have a MDS+ server assigned
+        for machine in machines():
+            mds_machine_to_server_mapping(machine, None)

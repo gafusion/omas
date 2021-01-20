@@ -1,6 +1,7 @@
 import numpy as np
 import copy
 
+
 def setup_interferometer_hardware_description_d3d(ods, shot):
     """
     Writes DIII-D CO2 interferometer chord locations into ODS.
