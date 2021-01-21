@@ -2,17 +2,16 @@
 
 import urllib
 from .omas_utils import *
-from . import ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
-from .omas_core import dynamic_ODS
+from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
 
-__all__ = ['expression_types', 'machine_to_omas', 'machines', 'machine_mappings', 'load_omas_machine', 'mds_machine_to_server_mapping']
+__all__ = ['machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine']
 
 _python_tdi_namespace = {}
 
 url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url'])
 
-expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
+machine_expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
 
 
 def python_tdi_namespace(branch):
@@ -138,6 +137,7 @@ def mdsvalue(machine, treename, shot, TDI):
             _mds_connection_cache[(server, treename, shot)] = conn
         try:
             conn = _mds_connection_cache[(server, treename, shot)]
+            break
         except Exception:
             if (server, treename, shot) in _mds_connection_cache:
                 del _mds_connection_cache[(server, treename, shot)]
@@ -217,7 +217,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             raise
 
     else:
-        raise ValueError(f"Could not fetch data for {location}. Must define one of {expression_types}")
+        raise ValueError(f"Could not fetch data for {location}. Must define one of {machine_expression_types}")
 
     # handle size definition for array of structures
     if location.endswith(':'):
@@ -491,9 +491,9 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             has_COCOS = o2u(location) in cocos_signals and cocos_signals[o2u(location)] is not None
             if 'COCOSIO' not in mappings[location] and has_COCOS:
                 cocos_defined = False
-                for cocos in mappings['__cocos_rules__']:
-                    if 'TDI' in mappings[location] and re.findall(cocos, mappings[location]['TDI']):
-                        mappings[location]['COCOSIO'] = mappings['__cocos_rules__'][cocos]['TDI']
+                for cocos_rule in mappings['__cocos_rules__']:
+                    if 'TDI' in mappings[location] and re.findall(cocos_rule, mappings[location]['TDI']):
+                        mappings[location]['COCOSIO'] = mappings['__cocos_rules__'][cocos_rule]['TDI']
                         cocos_defined = True
                         break
                 if not cocos_defined:

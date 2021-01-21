@@ -22,9 +22,11 @@ __all__ = [
     'load_omas_dx', 'save_omas_dx', 'through_omas_dx', 'ods_2_odx', 'odx_2_ods',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
+    'omas_service', 'omas_service_script',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'omas_service', 'omas_service_script', 'latexit'
+    'latexit'
 ]
 # fmt: on
 
@@ -2726,4 +2728,5 @@ from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
 from .omas_service import *
+from .omas_machine import *
 from . import omas_structure
