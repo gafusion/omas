@@ -44,8 +44,16 @@
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.ip.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.IPMEAS)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.global_quantities.ip": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.li_3": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.LI3)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.magnetic_axis.r": {
