@@ -3,8 +3,8 @@
 """
 Dynamic loading of experimental data
 ====================================
-This example illustrates how OMAS can load in memory only the data when it is first requested.
-This approach can also be used to transfer data on demand.
+This example illustrates how OMAS can load experimental data on demand.
+Only the data that is queried in the ODS will be loaded.
 """
 
 import os
