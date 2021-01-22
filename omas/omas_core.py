@@ -1794,7 +1794,7 @@ class ODS(MutableMapping):
         elif homogeneous == 'full':
             fupaths = numpy.unique(list(map(l2u, fpaths)))
         else:
-            raise ValueError("OMAS dataset homogeneous attribute can only be [False, None, 'time', 'full']")
+            raise ValueError("OMAS dataset homogeneous attribute can only be [False, 'time', 'full', None]")
         upaths = fupaths
         if self.location:
             n = len(self.location)
@@ -1812,17 +1812,19 @@ class ODS(MutableMapping):
         DS = xarray.Dataset()
         for fukey, ukey in zip(fupaths, upaths):
             if not len(omas_info_node(o2u(fukey))):
-                printe('WARNING: %s is not part of IMAS' % o2i(fukey))
+                printe(f'WARNING: {o2i(fukey)} is not part of IMAS')
                 continue
             data = self[ukey]  # OMAS data slicing at work
             for k, c in enumerate(coordinates[fukey]):
                 if c not in DS:
                     DS[c] = xarray.DataArray(numpy.arange(data.shape[k]), dims=c)
             try:
-                DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
-            except Exception:
-                printe('Error with %s with coordinates %s' % (fukey, coordinates[fukey]))
-                raise
+                try:
+                    DS[fukey] = xarray.DataArray(data, dims=coordinates[fukey])
+                except Exception:
+                    raise
+            except Exception as _excp:
+                raise ValueError(f'Error collecting `{fukey}` which has coordinates {coordinates[fukey]}. Are coordinates not homogeneous?\n'+str(_excp))
         return DS
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
@@ -2111,13 +2113,23 @@ class ODS(MutableMapping):
 
         return '\n'.join(txt)
 
-    def to_odx(self):
+    def to_odx(self, homogeneous=None):
         '''
         Generate a ODX from current ODS
 
+        :param homogeneous: * False: flat representation of the ODS
+                                      (data is not collected across arrays of structures)
+                            * 'time': collect arrays of structures only along the time dimension
+                                      (always valid for homogeneous_time=True)
+                            * 'full': collect arrays of structures along all dimensions
+                                      (may be valid in many situations, especially related to
+                                       simulation data with homogeneous_time=True and where
+                                       for example number of ions, sources, etc. do not vary)
+                            * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
+
         :return: ODX
         '''
-        return ods_2_odx(self)
+        return ods_2_odx(self, homogeneous=homogeneous)
 
 
 omas_dictstate = dir(ODS)

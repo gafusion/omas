@@ -120,15 +120,25 @@ def save_omas_dx(odx, filename):
     return odx.omas_data.to_netcdf(filename)
 
 
-def ods_2_odx(ods):
+def ods_2_odx(ods, homogeneous=None):
     """
     Map ODS to an ODX
 
     :param ods: OMAS data set
 
+    :param homogeneous: * False: flat representation of the ODS
+                                  (data is not collected across arrays of structures)
+                        * 'time': collect arrays of structures only along the time dimension
+                                  (always valid for homogeneous_time=True)
+                        * 'full': collect arrays of structures along all dimensions
+                                  (may be valid in many situations, especially related to
+                                   simulation data with homogeneous_time=True and where
+                                   for example number of ions, sources, etc. do not vary)
+                        * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
+
     :return: OMAS data xarray
     """
-    return ODX(ods.dataset())
+    return ODX(ods.dataset(homogeneous=homogeneous))
 
 
 def odx_2_ods(odx, consistency_check=True):
