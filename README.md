@@ -1,5 +1,5 @@
 ![OMAS version](https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&color=blue)
-![IMAS version](https://img.shields.io/badge/IMAS-3.30.0-yellow)
+![IMAS version](https://img.shields.io/badge/IMAS-3.31.0-yellow)
 
 [![Build Status](https://travis-ci.org/gafusion/omas.svg?branch=master)](https://travis-ci.org/gafusion/omas)
 [![Codecov](https://codecov.io/gh/gafusion/omas/branch/master/graph/badge.svg)](https://codecov.io/gh/gafusion/omas)
