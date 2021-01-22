@@ -2015,7 +2015,7 @@ class ODS(MutableMapping):
                 self[item].from_structure(structure[item], depth=depth + 1)
             elif isinstance(structure[item], list):
                 # identify if this is a leaf
-                if len(structure[item]) and not isinstance(structure[item][0], dict):
+                if (len(structure[item]) and not isinstance(structure[item][0], dict)) or not len(structure[item]):
                     self.setraw(item, numpy.array(structure[item]))
                 # or a node in the IMAS tree
                 else:
