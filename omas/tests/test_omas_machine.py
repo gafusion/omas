@@ -48,7 +48,7 @@ class TestOmasMachine(UnittestCaseOmas):
         assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, None)[0]
 
         # access machine description that should fail
-        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'machine')[0]  # this test will fail when we delete this branch
+        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')[0]
 
     def test_user_mappings(self):
         location = 'dataset_description.data_entry.machine'
