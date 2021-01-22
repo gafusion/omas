@@ -980,7 +980,7 @@ class ODS(MutableMapping):
             cocos=self._cocos,
             cocosio=self._cocosio,
             coordsio=self._coordsio,
-            dynamic=self._dynamic,
+            dynamic=self.dynamic,
         )
 
     def setraw(self, key, value):
@@ -1532,11 +1532,7 @@ class ODS(MutableMapping):
         :return: self
         """
         for item in omas_ods_attrs:
-            try:
-                setattr(self, item, getattr(ods, item, None))
-            except:
-                print(item)
-                raise
+            setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):
