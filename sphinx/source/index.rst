@@ -23,16 +23,19 @@ Learn More:
 
 ---------------------------------
 
-.. image:: https://img.shields.io/conda/vn/conda-forge/omas.svg?color=blue&label=version
+.. image:: https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&color=blue
   :target: https://github.com/gafusion/omas
 
-.. image:: https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue
-  :target: https://github.com/gafusion/omas
+.. image:: https://img.shields.io/badge/IMAS-3.31.0-yellow
+  :target: https://imas.iter.org
 
 .. image:: https://img.shields.io/travis/gafusion/omas.svg
   :target: https://travis-ci.org/gafusion/omas
 
 .. image:: https://img.shields.io/codecov/c/github/gafusion/omas.svg
   :target: https://codecov.io/gh/gafusion/omas
+
+.. image:: https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue
+  :target: https://github.com/gafusion/omas
 
 ---------------------------------

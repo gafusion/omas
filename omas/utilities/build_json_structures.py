@@ -33,9 +33,10 @@ for imas_version in imas_versions:
 # generate symlinks between imas versions
 symlink_imas_structure_versions(test=False)
 
-# update IMAS badge in README.md file with latest verison
-with open(omas_dir + os.sep + 'README.md', 'r') as f:
-    readme = f.read()
-readme = re.sub('IMAS-([0-9\.]+)-yellow', 'IMAS-' + list(imas_versions.keys())[-1] + '-yellow', readme)
-with open(omas_dir + os.sep + 'README.md', 'w') as f:
-    f.write(readme)
+# update IMAS badge in README.md and index.rst file with latest verison
+for filename in [omas_dir + '/README.md', omas_dir + '/sphinx/source/index.rst']:
+    with open(filename, 'r') as f:
+        txt = f.read()
+    txt = re.sub('IMAS-([0-9\.]+)-yellow', 'IMAS-' + list(imas_versions.keys())[-1] + '-yellow', txt)
+    with open(filename, 'w') as f:
+        f.write(txt)
