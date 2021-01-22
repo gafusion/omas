@@ -562,7 +562,7 @@ def load_omas_imas(
                     if verbose:
                         if tqdm is not None:
                             progress_fetch_paths.set_description(joined_fetch_paths[k])
-                        elif (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
+                        elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
                             print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
                     # uncertain data is loaded as part of the nominal value of the data
                     if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):

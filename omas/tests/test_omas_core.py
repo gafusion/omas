@@ -295,6 +295,10 @@ class TestOmasCore(UnittestCaseOmas):
         assert ods['pf_active'].homogeneous_time() is False, 'sample pf_active data should have non-homogeneous time'
         assert ods['pf_active.coil'][0]['current'].homogeneous_time() is True
 
+        # sample ic_antennas data has non-homogeneous times
+        ods.sample_ic_antennas()
+        assert ods['ic_antennas'].homogeneous_time() is False, 'sample ic_antennas data should have non-homogeneous time'
+
         ods.sample_dataset_description()
         ods['dataset_description'].satisfy_imas_requirements()
         assert ods['dataset_description.ids_properties.homogeneous_time'] is not None

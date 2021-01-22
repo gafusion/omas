@@ -251,87 +251,109 @@ class ODS(MutableMapping):
             raise LookupError('Must specify a location in the ODS to get the time of')
         utimes_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0] + '.')]
 
-        # get time nodes with actual numbers for indeces of arrays of structures and identify time index
+        # get time nodes with actual numbers for indexes of arrays of structures and identify time index
         times_ds = list(map(lambda item: u2o(item, l2o(subtree)), utimes_ds))
         try:
             time_array_index = int(re.sub('.*\.([0-9]+)\.time.*', r'\1', ' '.join(times_ds)))
         except Exception:
             time_array_index = None
 
-        # traverse ODS upstream until time information is found
-        time = {}
-        for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
-            times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
-            this_subtree = l2o(sub)
+        try:
+            try:
+                # traverse ODS upstream until time information is found
+                time = {}
+                for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
+                    times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
+                    this_subtree = l2o(sub)
 
-            # get time data from ods
-            times = {}
-            n = len(location)
-            for item in times_sub_ds:
-                otem = u2o(item, this_subtree)[n:]
-                if otem.replace(':', '0') not in self:
-                    continue
-                try:
-                    time = self.__getitem__(otem, None)  # traverse ODS
-                    if isinstance(time, numpy.ndarray):
-                        if time.size == 0:
+                    # get time data from ods
+                    times = {}
+                    n = len(location)
+                    for item in times_sub_ds:
+                        otem = u2o(item, this_subtree)[n:]
+                        if otem.replace(':', '0') not in self:
                             continue
-                        # if time is still multidimensional
-                        # (eg. because we are querying the time across different diagnostic channels)
-                        # squash the multidimensional time arrays if they are all the same
-                        if len(time.shape) > 1:
-                            time = numpy.reshape(time, (-1, time.shape[-1]))
-                            if all([numpy.allclose(time[0], t) for t in time[1:]]):
-                                time = time[0]
-                    times[item] = time
-                except ValueError as _excp:
-                    if 'has no data' in repr(_excp):
-                        pass
-                    else:
-                        # return False if time is not homogeneous
-                        extra_info['homogeneous_time'] = False
+                        try:
+                            time = self.__getitem__(otem, None)  # traverse ODS
+                            if isinstance(time, numpy.ndarray):
+                                if time.size == 0:
+                                    continue
+                                # if time is still multidimensional
+                                # (eg. because we are querying the time across different diagnostic channels)
+                                # squash the multidimensional time arrays if they are all the same
+                                if len(time.shape) > 1:
+                                    time = numpy.reshape(time, (-1, time.shape[-1]))
+                                    if all([numpy.allclose(time[0], t) for t in time[1:]]):
+                                        time = time[0]
+                            times[item] = time
+                        except ValueError as _excp:
+                            if 'has no data' in repr(_excp):
+                                pass
+                            else:
+                                # return False if time is not homogeneous
+                                extra_info['homogeneous_time'] = False
+                                return None
+                    times_values = list(times.values())
+                    extra_info['location'] = times.keys()
+
+                    # no time data defined
+                    if not len(times_values):
+                        extra_info['homogeneous_time'] = None
                         return None
-            times_values = list(times.values())
 
-            extra_info['location'] = times.keys()
-            # no time data defined
-            if not len(times_values):
-                time = None
-                extra_info['homogeneous_time'] = None
-            # We crossed [:] or something and picked up a 2D time array
-            elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
-                # Make a 1D reference time0 that can be comapred against other time arrays
-                time0 = list(times.values())[0]
-                # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
-                while len(time0.shape) > 1:
-                    time0 = numpy.take(time0, 0, axis=0)
-                if all([time.size == time0.size for time in times.values()]):
-                    for time in times.values():
-                        # Make sure all time arrays are close to the time0 we identified
-                        assert abs(time - time0).max() < 1e-7
-                    extra_info['homogeneous_time'] = True
-                    if isinstance(time0, (float, int)):
-                        return time0
-                    elif time_array_index is not None:
-                        return time0[time_array_index]
-                    return time0
-                else:  # Similar to ValueError exception caught above
-                    extra_info['homogeneous_time'] = False
-                    return None
-            # if the time entries that are all consistent with one another
-            elif all([len(numpy.asarray(time).shape) == 1 and numpy.allclose(times_values[0], time) for time in times_values[1:]]):
-                time = times_values[0]
-                extra_info['homogeneous_time'] = True
-                if isinstance(time, (float, int)):
-                    return time
-                elif time_array_index is not None:
-                    return time[time_array_index]
-                return time
-            # there are inconsistencies with different ways of specifying times in the IDS
-            else:
-                raise ValueError('Inconsistent time definitions in:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()]))
+                    # We crossed [:] or something and picked up a 2D time array
+                    elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
+                        # Make a 1D reference time0 that can be comapred against other time arrays
+                        time0 = list(times.values())[0]
+                        # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
+                        while len(time0.shape) > 1:
+                            time0 = numpy.take(time0, 0, axis=0)
+                        if all([time.size == time0.size for time in times.values()]):
+                            for time in times.values():
+                                # Make sure all time arrays are close to the time0 we identified
+                                assert abs(time - time0).max() < 1e-7
+                            extra_info['homogeneous_time'] = True
+                            if isinstance(time0, (float, int)):
+                                return time0
+                            elif time_array_index is not None:
+                                return time0[time_array_index]
+                            return time0
+                        else:  # Similar to ValueError exception caught above
+                            extra_info['homogeneous_time'] = False
+                            return None
 
-        return None
+                    # if the time entries that are all consistent with one another
+                    elif all([len(numpy.asarray(time).shape) == 1] for time in times_values):
+                        # if the time entries that are all consistent with one another
+                        if all(
+                            [
+                                numpy.array_equiv(times_values[0], time) and numpy.allclose(times_values[0], time)
+                                for time in times_values[1:]
+                            ]
+                        ):
+                            time = times_values[0]
+                            extra_info['homogeneous_time'] = True
+                            if isinstance(time, (float, int)):
+                                return time
+                            elif time_array_index is not None:
+                                return time[time_array_index]
+                            return time
+                        # if the time entries are not consistent with one another
+                        else:
+                            extra_info['homogeneous_time'] = False
+                            return None
+
+                    # We should never end up here
+                    else:
+                        raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()]))
+
+            except Exception:
+                raise
+        except Exception as _excp:
+            raise _excp.__class__(f'Error setting time for `{l2o(subtree)}`')
+
+        # We should never end up here
+        raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`')
 
     def slice_at_time(self, time=None, time_index=None):
         """

@@ -168,6 +168,25 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
 
 
 @add_to_ODS
+def ic_antennas(ods):
+    """
+    Add sample ic_antennas data
+    This method operates in in-place.
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with profiles added
+    """
+    from omas import load_omas_json
+
+    ods.update(load_omas_json(imas_json_dir + '/../samples/sample_ic_antennas_ods.json', consistency_check=False))
+
+    return ods
+
+
+@add_to_ODS
 def core_sources(ods, time_index=0):
     """
     Add sample core_profiles data
