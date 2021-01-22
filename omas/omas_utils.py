@@ -709,8 +709,11 @@ def structures_filenames(imas_version):
         if not len(paths):
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
-        _structures_filenames[imas_version] = {structure: structures[structure] for structure in structures if not structure.startswith('_')}
+        _structures_filenames[imas_version] = {
+            structure: structures[structure] for structure in structures if not structure.startswith('_')
+        }
     return _structures_filenames[imas_version]
+
 
 def load_structure(filename, imas_version):
     """
@@ -994,7 +997,7 @@ def i2o(path):
 
     :return: ODS path format
     """
-    return path.replace(']','').replace('[','.')
+    return path.replace(']', '').replace('[', '.')
 
 
 def o2i(path):

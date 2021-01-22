@@ -345,7 +345,9 @@ class ODS(MutableMapping):
 
                     # We should never end up here
                     else:
-                        raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()]))
+                        raise ValueError(
+                            f'Error handling time in OMAS for `{l2o(subtree)}`:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()])
+                        )
 
             except Exception:
                 raise
@@ -1820,7 +1822,10 @@ class ODS(MutableMapping):
                 except Exception:
                     raise
             except Exception as _excp:
-                raise ValueError(f'Error collecting `{fukey}` which has coordinates {coordinates[fukey]}. Are coordinates not homogeneous?\n'+str(_excp))
+                raise ValueError(
+                    f'Error collecting `{fukey}` which has coordinates {coordinates[fukey]}. Are coordinates not homogeneous?\n'
+                    + str(_excp)
+                )
         return DS
 
     def satisfy_imas_requirements(self, attempt_fix=True, raise_errors=True):
@@ -2076,7 +2081,7 @@ class ODS(MutableMapping):
 
         # remove IDSs that do not have the same homogeneous_time property as requested
         if homogeneous_time is not None:
-            self.physics_consistent_times() # to add homogeneous_time info
+            self.physics_consistent_times()  # to add homogeneous_time info
             for ds in list(self.keys()):
                 if self[ds]['ids_properties']['homogeneous_time'] != homogeneous_time:
                     del self[ds]
