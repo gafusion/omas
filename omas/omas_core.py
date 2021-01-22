@@ -2057,11 +2057,13 @@ class ODS(MutableMapping):
         except Exception as _excp:
             printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
 
-    def sample(self, ntimes=1):
+    def sample(self, ntimes=1, homogeneous_time=None):
         """
         Populates the ods with sample data
 
         :param ntimes: number of time slices to generate
+
+        :param homogeneous_time: only return samples that have ids_properties.homogeneous_time either True or False
 
         :return: self
         """
@@ -2073,6 +2075,14 @@ class ODS(MutableMapping):
                     getattr(self, 'sample_' + func)(time_index=k)
             else:
                 getattr(self, 'sample_' + func)()
+
+        # remove IDSs that do not have the same homogeneous_time property as requested
+        if homogeneous_time is not None:
+            self.physics_consistent_times() # to add homogeneous_time info
+            for ds in list(self.keys()):
+                if self[ds]['ids_properties']['homogeneous_time'] != homogeneous_time:
+                    del self[ds]
+
         return self
 
     def document(self, what=['coordinates', 'data_type', 'documentation', 'units']):

@@ -55,7 +55,7 @@ class TestOmasSuite(UnittestCaseOmas):
             raise AssertionError('h5 through difference')
 
     def test_omas_ds(self):
-        ods = ODS().sample()
+        ods = ODS().sample(homogeneous_time=True)
         ods1 = through_omas_ds(ods)
         diff = ods.diff(ods1)
         if diff:
@@ -79,10 +79,10 @@ class TestOmasSuite(UnittestCaseOmas):
             raise AssertionError(f'ascii through difference for one file')
 
     def test_omas_dx(self):
-        ods = ODS().sample()
-        odx = ods_2_odx(ods)
+        ods = ODS().sample(homogeneous_time=True)
+        odx = ods.to_odx()
         odx1 = through_omas_dx(odx)
-        ods1 = odx_2_ods(odx1)
+        ods1 = odx1.to_ods()
         diff = ods.diff(ods1)
         if diff:
             print('\n'.join(diff))
