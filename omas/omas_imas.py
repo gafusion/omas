@@ -613,8 +613,7 @@ def load_omas_imas(
 class dynamic_omas_imas(dynamic_ODS):
     """
     Class that provides dynamic data loading from IMAS
-    This class is not to be used by itself, but via the
-    ODS.open() method.
+    This class is not to be used by itself, but via the ODS.open() method.
     """
 
     def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, verbose=True):

@@ -22,9 +22,11 @@ __all__ = [
     'load_omas_dx', 'save_omas_dx', 'through_omas_dx', 'ods_2_odx', 'odx_2_ods',
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
+    'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
+    'omas_service', 'omas_service_script',
     'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'omas_service', 'omas_service_script', 'latexit'
+    'latexit'
 ]
 # fmt: on
 
@@ -719,21 +721,42 @@ class ODS(MutableMapping):
         if not len(key):
             return self
 
-        # negative numbers are used to address arrays of structures from the end
-        if isinstance(key[0], int) and key[0] < 0:
-            if self.omas_data is None:
-                key[0] = 0
-            elif isinstance(self.omas_data, list):
-                if not len(self.omas_data):
+        if isinstance(key[0], int):
+            # negative numbers are used to address arrays of structures from the end
+            if key[0] < 0:
+                if self.omas_data is None:
                     key[0] = 0
+                elif isinstance(self.omas_data, list):
+                    if not len(self.omas_data):
+                        key[0] = 0
+                    else:
+                        key[0] = len(self.omas_data) + key[0]
+        else:
+            # '+' is used to append new entry in array structure
+            if key[0] == '+':
+                if self.omas_data is None:
+                    key[0] = 0
+                elif isinstance(self.omas_data, list):
+                    key[0] = len(self.omas_data)
+            # ':' is used to slice
+            elif ':' in key[0]:
+                if not self.keys():
+                    if key[0] == ':':
+                        key[0] = [0]
+                    else:
+                        key[0] = list(range(slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':'))).stop))
                 else:
-                    key[0] = len(self.omas_data) + key[0]
-        # '+' is used to append new entry in array structure
-        elif key[0] == '+':
-            if self.omas_data is None:
-                key[0] = 0
-            elif isinstance(self.omas_data, list):
-                key[0] = len(self.omas_data)
+                    key[0] = slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':')))
+
+        # handle data slicing on write
+        if isinstance(key[0], list):
+            for k in key[0]:
+                self.__setitem__([k] + key[1:], value)
+            return
+        elif isinstance(key[0], slice):
+            for k in self.keys()[key[0]]:
+                self.__setitem__([k] + key[1:], value)
+            return
 
         # handle dynamic path creation for .code.parameters leaf
         if (
@@ -908,7 +931,7 @@ class ODS(MutableMapping):
                         else:
                             printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                    elif ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                    elif not self.dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
@@ -1088,15 +1111,18 @@ class ODS(MutableMapping):
                     key[0] = 0
                 else:
                     key[0] = len(self.omas_data) + key[0]
+        # slice
+        elif isinstance(key[0], str) and ':' in key[0]:
+            key[0] = slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':')))
 
         dynamically_created = False
 
         # data slicing
-        if key[0] == ':':
+        if isinstance(key[0], slice):
             data0 = []
-            for k, item in enumerate(self.keys(dynamic=True)):
+            for k in self.keys(dynamic=True)[key[0]]:
                 try:
-                    data0.append(self.__getitem__([item] + key[1:], cocos_and_coords))
+                    data0.append(self.__getitem__([k] + key[1:], cocos_and_coords))
                 except ValueError:
                     data0.append([])
             # raise an error if no data is returned
@@ -1160,6 +1186,11 @@ class ODS(MutableMapping):
                 if self.dynamic is not None and self.dynamic.__contains__(location):
                     value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
+                elif self.dynamic is not None and o2u(location).endswith(':'):
+                    dynamically_created = True
+                    for k in self.keys(dynamic=True):
+                        if k not in self.keys():
+                            self.__setitem__(k, self.same_init_ods())
                 else:
                     dynamically_created = True
                     self.__setitem__(key[0], self.same_init_ods())
@@ -1377,15 +1408,21 @@ class ODS(MutableMapping):
     def __contains__(self, key):
         key = p2l(key)
         h = self
-        for k in key:
+        for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys():
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
             else:
-                return False
+                if self.dynamic:
+                    if k in self.dynamic.keys(l2o(p2l(self.location) + key[:c])):
+                        continue
+                    else:
+                        return False
+                else:
+                    return False
         # return False if checking existance of a leaf and the leaf exists but is unassigned
-        if isinstance(h, ODS) and h.omas_data is None:
+        if not self.dynamic and isinstance(h, ODS) and h.omas_data is None:
             return False
         return True
 
@@ -1952,7 +1989,7 @@ class ODS(MutableMapping):
         # figure out format used
         ext, args = _handle_extension(*args)
 
-        if ext in ['nc', 'imas']:
+        if ext in ['nc', 'imas', 'machine']:
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
@@ -2309,6 +2346,10 @@ class dynamic_ODS_factory:
             from omas.omas_imas import dynamic_omas_imas
 
             tmp = dynamic_omas_imas(*args, **kw)
+        elif ext == 'machine':
+            from omas.omas_machine import dynamic_omas_machine
+
+            tmp = dynamic_omas_machine(*args, **kw)
         if idc not in pyro_cases:
             pyro_cases[idc] = tmp
         return self
@@ -2732,4 +2773,5 @@ from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
 from .omas_service import *
+from .omas_machine import *
 from . import omas_structure

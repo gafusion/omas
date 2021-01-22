@@ -110,6 +110,10 @@ class IMAS_json_dir(str):
 
 imas_json_dir = IMAS_json_dir(os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/'))
 
+omas_git_repo = False
+if os.path.exists(imas_json_dir + '/../../.git') and os.access(imas_json_dir + '/../../.git', os.W_OK):
+    omas_git_repo = True
+
 
 class IMAS_versions(OrderedDict):
     """
@@ -159,7 +163,7 @@ omas_rcparams.update(
         'cocos': 11,
         'consistency_check': True,
         'dynamic_path_creation': True,
-        'tmp_imas_dir': os.environ.get(
+        'tmp_omas_dir': os.environ.get(
             'OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(), os.environ.get('USER', 'dummy_user'), 'OMAS_TMP_DIR'])
         ),
         'fake_imas_dir': os.environ.get(
