@@ -68,7 +68,7 @@ def python_tdi_namespace(branch):
     return _python_tdi_namespace
 
 
-def update_mapping(machine, location, value):
+def update_mapping(machine, location, value, cocosio=None):
     '''
     Utility function that updates the local mapping file of a given machine with the mapping info of a given location
 
@@ -78,9 +78,14 @@ def update_mapping(machine, location, value):
 
     :param value: dictionary with mapping info
 
+    :param cocosio: if integer and location has COCOS transform it adds it
+
     :return: dictionary with updated raw mappings
     '''
     location = l2u(p2l(location))
+    if cocosio and location in cocos_signals and cocos_signals[location] is not None:
+        assert isinstance(cocosio, int)
+        value['COCOSIO'] = cocosio
     new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
     new_raw_mappings[location] = value
     filename, branch = machines(machine, None)
