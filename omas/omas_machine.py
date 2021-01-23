@@ -91,7 +91,7 @@ def update_mapping(machine, location, value, cocosio=None):
     filename, branch = machines(machine, None)
     with open(filename, 'w') as f:
         json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
-    print(f"Updated {filename}")
+    print(f"Updated {machine} mapping for {location}")
     return new_raw_mappings
 
 

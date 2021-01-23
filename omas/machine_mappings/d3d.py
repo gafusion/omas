@@ -25,6 +25,7 @@ def printq(*args):
 
 # ====================
 
+
 @make_available
 def setup_gas_injection_hardware_description_d3d(ods, shot):
     """
@@ -315,6 +316,7 @@ def setup_pf_active_hardware_description_d3d(ods, *args):
     from classes.omfit_omas_utils import pf_coils_to_ods
 
     # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08  D. Eldon
+    # fmt: off
     fc_dat = np.array(
         [  # R        Z       dR      dZ    tilt1  tilt2
             [0.8608, 0.16830, 0.0508, 0.32106, 0.0, 0.0],  # 0 in the last column really means 90 degrees.
@@ -337,6 +339,7 @@ def setup_pf_active_hardware_description_d3d(ods, *args):
             [1.6889, -1.5780, 0.16940, 0.13310, 0.0, 0.0],
         ]
     )
+    # fmt: on
 
     ods = pf_coils_to_ods(ods, fc_dat)
 
@@ -426,4 +429,95 @@ def setup_thomson_scattering_hardware_description_d3d(ods, shot, revision='BLESS
             for pos in ['R', 'Z', 'PHI']:
                 ch['position'][pos.lower()] = tsdat[sub][pos].data()[j] * (-np.pi / 180.0 if pos == 'PHI' else 1)
             i += 1
+    return {}
+
+
+@make_available
+def setup_charge_exchange_hardware_description_d3d(ods, shot, analysis_type='CERQUICK'):
+    """
+    Gathers DIII-D CER measurement locations from MDSplus and loads them into OMAS
+
+    :param analysis_type: string
+        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    printq('Setting up DIII-D CER locations...')
+
+    cerdat = OMFITmds(server='DIII-D', treename='IONS', shot=shot)['CER'][analysis_type]
+
+    subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
+
+    i = 0
+    for sub in subsystems:
+        try:
+            channels = [k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k]
+        except (TypeError, KeyError):
+            channels = []
+        for j, channel in enumerate(channels):
+            inc = 0
+            for pos in ['R', 'Z', 'VIEW_PHI']:
+                postime = cerdat[sub][channel]['TIME'].data()
+                posdat = cerdat[sub][channel][pos].data()
+                if postime is not None:
+                    inc = 1
+                    ch = ods['charge_exchange']['channel'][i]
+                    ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=j + 1)
+                    ch['identifier'] = '{}{:02d}'.format(sub[0], j + 1)
+                    chpos = ch['position'][pos.lower().split('_')[-1]]
+                    chpos['time'] = postime / 1000.0  # Convert ms to s
+                    chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
+            i += inc
+    return {}
+
+
+@make_available
+def setup_langmuir_probes_hardware_description_d3d(ods, shot):
+    """
+    Load DIII-D Langmuir probe locations into an ODS
+
+    :param ods: ODS instance
+
+    :param shot: int
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    import MDSplus
+
+    if compare_version(ods.imas_version, '3.25.0') < 0:
+        printe('langmuir_probes.embedded requires a newer version of IMAS. It was added by 3.25.0.')
+        printe('ABORTED setup_langmuir_probes_hardware_description_d3d due to old IMAS version.')
+        return {}
+
+    tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
+    # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
+    printq('Setting up Langmuir probes hardware description, shot {}; checking availability, TDI={}'.format(shot, tdi))
+    m = OMFITmdsValue(server='DIII-D', shot=shot, treename='LANGMUIR', TDI=tdi)
+    try:
+        data_present = m.data() > 0
+    except MDSplus.MdsException:
+        data_present = []
+    nprobe = len(data_present)
+    printq('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, shot))
+    j = 0
+    for i in range(nprobe):
+        if data_present[i]:
+            r = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i))
+            chk = r.check(debug=True, check_dim_of=-1)  # Don't check dimensions on these data
+            if chk['result'] and r.data() > 0:
+                # Don't bother gathering more if r is junk
+                z = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i))
+                pnum = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i))
+                label = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i))
+                printq('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()))
+                ods['langmuir_probes.embedded'][j]['position.r'] = r.data()[0]
+                ods['langmuir_probes.embedded'][j]['position.z'] = z.data()[0]
+                ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum.data()[0])
+                ods['langmuir_probes.embedded'][j]['name'] = str(label.data()[0]).strip()
+                j += 1
+            else:
+                printq('Probe i={i:}, j={j:}, r={r:} failed the check with chk={chk:}'.format(**locals()))
     return {}
