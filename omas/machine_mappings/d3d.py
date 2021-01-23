@@ -25,7 +25,6 @@ def printq(*args):
 
 # ====================
 
-# Hardware descriptor functions
 @make_available
 def setup_gas_injection_hardware_description_d3d(ods, shot):
     """
@@ -392,4 +391,39 @@ def setup_interferometer_hardware_description_d3d(ods, shot):
             'have been the same, though, so there has not been a problem yet (I think).'
         )
 
+    return {}
+
+
+@make_available
+def setup_thomson_scattering_hardware_description_d3d(ods, shot, revision='BLESSED'):
+    """
+    Gathers DIII-D Thomson measurement locations from MDSplus and loads them into OMAS
+
+    :param revision: string
+        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    printq('Setting up DIII-D Thomson locations...')
+
+    tsdat = OMFITmds(server='DIII-D', treename='ELECTRONS', shot=shot)['TS'][revision]
+
+    is_subsys = np.array([np.all([item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']]) for k in list(tsdat.keys())])
+    subsystems = np.array(list(tsdat.keys()))[is_subsys]
+
+    i = 0
+    for sub in subsystems:
+        lenses = find_thomson_lens_d3d(shot, sub, revision)
+        try:
+            nc = len(tsdat[sub]['R'].data())
+        except (TypeError, KeyError):
+            nc = 0
+        for j in range(nc):
+            ch = ods['thomson_scattering']['channel'][i]
+            ch['name'] = 'TS_{sub:}_r{lens:+0d}_{ch:}'.format(sub=sub.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
+            ch['identifier'] = '{}{:02d}'.format(sub[0], j)
+            for pos in ['R', 'Z', 'PHI']:
+                ch['position'][pos.lower()] = tsdat[sub][pos].data()[j] * (-np.pi / 180.0 if pos == 'PHI' else 1)
+            i += 1
     return {}
