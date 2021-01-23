@@ -132,6 +132,35 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
   "treename": "{EFIT_tree}"
  },
+ "gas_injection.pipe.:.exit_position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.name": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:.identifier": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:.name": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, shot = {pulse})"
+ },
  "interferometer.channel.:.identifier": {
   "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
  },
