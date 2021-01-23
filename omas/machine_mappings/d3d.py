@@ -45,3 +45,48 @@ def setup_interferometer_hardware_description_d3d(ods, shot):
         )
 
     return {}
+
+def setup_pf_active_hardware_description_d3d(ods, *args):
+    r"""
+    Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
+    :param ods: ODS instance
+
+    :param \*args: catch unused args to allow a consistent call signature for hardware description functions
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    from classes.omfit_omas_utils import pf_coils_to_ods
+
+    # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08  D. Eldon
+    fc_dat = np.array(
+        [  # R        Z       dR      dZ    tilt1  tilt2
+            [0.8608, 0.16830, 0.0508, 0.32106, 0.0, 0.0],  # 0 in the last column really means 90 degrees.
+            [0.8614, 0.50810, 0.0508, 0.32106, 0.0, 0.0],
+            [0.8628, 0.84910, 0.0508, 0.32106, 0.0, 0.0],
+            [0.8611, 1.1899, 0.0508, 0.32106, 0.0, 0.0],
+            [1.0041, 1.5169, 0.13920, 0.11940, 45.0, 0.0],
+            [2.6124, 0.4376, 0.17320, 0.1946, 0.0, 92.40],
+            [2.3733, 1.1171, 0.1880, 0.16920, 0.0, 108.06],
+            [1.2518, 1.6019, 0.23490, 0.08510, 0.0, 0.0],
+            [1.6890, 1.5874, 0.16940, 0.13310, 0.0, 0.0],
+            [0.8608, -0.17370, 0.0508, 0.32106, 0.0, 0.0],
+            [0.8607, -0.51350, 0.0508, 0.32106, 0.0, 0.0],
+            [0.8611, -0.85430, 0.0508, 0.32106, 0.0, 0.0],
+            [0.8630, -1.1957, 0.0508, 0.32106, 0.0, 0.0],
+            [1.0025, -1.5169, 0.13920, 0.11940, -45.0, 0.0],
+            [2.6124, -0.4376, 0.17320, 0.1946, 0.0, -92.40],
+            [2.3834, -1.1171, 0.1880, 0.16920, 0.0, -108.06],
+            [1.2524, -1.6027, 0.23490, 0.08510, 0.0, 0.0],
+            [1.6889, -1.5780, 0.16940, 0.13310, 0.0, 0.0],
+        ]
+    )
+
+    ods = pf_coils_to_ods(ods, fc_dat)
+
+    for i in range(len(fc_dat[:, 0])):
+        fcid = 'F{}{}'.format((i % 9) + 1, 'AB'[int(fc_dat[i, 1] < 0)])
+        ods['pf_active.coil'][i]['name'] = ods['pf_active.coil'][i]['identifier'] = fcid
+        ods['pf_active.coil'][i]['element.0.identifier'] = fcid
+
+    return {}

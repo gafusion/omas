@@ -80,6 +80,7 @@ def update_mapping(machine, location, value):
 
     :return: dictionary with updated raw mappings
     '''
+    location = l2u(p2l(location))
     new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
     new_raw_mappings[location] = value
     filename, branch = machines(machine, None)
