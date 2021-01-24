@@ -23,9 +23,9 @@ for machine, filename in machines().items():
         with open(os.path.splitext(filename)[0] + '.py', 'r') as f:
             exec(f.read(), namespace)
         for function in namespace['__all__']:
-            print('-' * len(function))
-            print(function)
-            print('-' * len(function))
+            print('-' * (len(machine) + len(function) + 2))
+            print(f'{machine}: {function}')
+            print('-' * (len(machine) + len(function) + 2))
 
             mapped = False
             for item in mappings:

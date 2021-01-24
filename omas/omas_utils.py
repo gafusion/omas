@@ -1051,10 +1051,11 @@ def u2n(upath, list_of_n):
     i = 0
     for k in range(len(ul)):
         if ul[k] == ':' or isinstance(ul[k], int):
-            if ul[k] == ':' and i<len(list_of_n):
+            if ul[k] == ':' and i < len(list_of_n):
                 ul[k] = list_of_n[i]
             i += 1
     return l2o(ul)
+
 
 def trim_common_path(p1, p2):
     """

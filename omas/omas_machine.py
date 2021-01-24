@@ -68,7 +68,7 @@ def python_tdi_namespace(branch):
     return _python_tdi_namespace
 
 
-def update_mapping(machine, location, value, cocosio=None):
+def update_mapping(machine, location, value, cocosio=None, update_path=False):
     '''
     Utility function that updates the local mapping file of a given machine with the mapping info of a given location
 
@@ -80,18 +80,34 @@ def update_mapping(machine, location, value, cocosio=None):
 
     :param cocosio: if integer and location has COCOS transform it adds it
 
+    :param update_path: use the same value for the arrays of structures leading to this location
+
     :return: dictionary with updated raw mappings
     '''
-    location = l2u(p2l(location))
-    if cocosio and location in cocos_signals and cocos_signals[location] is not None:
+    ulocation = l2u(p2l(location))
+    if cocosio and ulocation in cocos_signals and cocos_signals[ulocation] is not None:
         assert isinstance(cocosio, int)
         value['COCOSIO'] = cocosio
+
+    # operate on the raw mappings
     new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
-    new_raw_mappings[location] = value
+
+    # if the definition is the same do not do anythinig
+    if ulocation in new_raw_mappings and repr(value) == repr(new_raw_mappings[ulocation]):
+        return new_raw_mappings
+
+    # add definition for new/updated location and update the .json file
+    new_raw_mappings[ulocation] = value
     filename, branch = machines(machine, None)
     with open(filename, 'w') as f:
         json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
-    print(f"Updated {machine} mapping for {location}")
+    print(f"Updated {machine} mapping for {ulocation}")
+
+    # add the same call for arrays of structures going upstream
+    if update_path:
+        for uloc in [':'.join(ulocation.split(':')[: k + 1]) + ':' for k, l in enumerate(ulocation.split(':')[:-1])]:
+            update_mapping(machine, uloc, value, cocosio, update_path=False)
+
     return new_raw_mappings
 
 
@@ -152,7 +168,7 @@ def mdsvalue(machine, treename, shot, TDI):
     return MDSplus.Data.data(conn.get(TDI))
 
 
-def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None):
+def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None, cache=None):
     '''
     Routine to convert machine data to ODS
 
@@ -170,6 +186,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     :param user_mappings: allow specification of external mappings
 
+    :param cache: if cache is a dictionary, this will be used to establiish a cash
+
     :return: updated ODS and data before being assigned to the ODS
     '''
     if user_machine_mappings is None:
@@ -182,7 +200,11 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
     mapped = mappings[location]
 
+    # cocosio
     cocosio = None
+    if mapped.get('COCOSIO', False):
+        if isinstance(mapped['COCOSIO'], int):
+            cocosio = mapped['COCOSIO']
 
     # CONSTANT VALUE
     if 'VALUE' in mapped:
@@ -196,19 +218,31 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
 
     # PYTHON
     elif 'PYTHON' in mapped:
-        namespace = {}
-        namespace.update(_namespace_mappings[machine])
-        namespace['ods'] = ODS()
-        exec(mapped['PYTHON'].format(**options_with_defaults), namespace)
-        data0 = namespace[mapped.get('RETURN', 'ods')]
-        data = data0[location]
+        call = mapped['PYTHON'].format(**options_with_defaults)
+        # python functions tend to set multiple locations at once
+        # it is thus very beneficial to cache that
+        if cache and call in cache:
+            ods = cache[call]
+        else:
+            namespace = {}
+            namespace.update(_namespace_mappings[machine])
+            namespace['ods'] = ODS()
+            exec(call, namespace)
+            ods = namespace[mapped.get('RETURN', 'ods')]
+            if isinstance(cache, dict):
+                cache[call] = ods
 
         # if this python function generated an ODS with multiple enties populated,
         # then we automatically update all other mapping entries that were not populated before
         if omas_git_repo:
-            for loc in numpy.unique(list(map(o2u, data0.flat().keys()))):
+            for loc in numpy.unique(list(map(o2u, ods.flat().keys()))):
                 if loc not in mappings:
-                    update_mapping(machine, loc, mapped)
+                    update_mapping(machine, loc, mapped, cocosio, update_path=True)
+
+        if location.endswith(':'):
+            return int(len(ods[u2n(location[:-2], [0] * 100)])), {'raw_data': ods, 'processed_data': ods, 'cocosio': cocosio}
+        else:
+            return ods, {'raw_data': ods, 'processed_data': ods, 'cocosio': cocosio}
 
     # MDS+
     elif 'TDI' in mapped:
@@ -238,11 +272,9 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     if mapped.get('NANFILTER', False):
         nanfilter = lambda x: x[~numpy.isnan(x)]
 
-    # cocos
-    if mapped.get('COCOSIO', False):
-        if isinstance(mapped['COCOSIO'], int):
-            cocosio = mapped['COCOSIO']
-        elif 'TDI' in mapped:
+    # cocosio
+    if cocosio is None:
+        if 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
             cocosio = int(mdsvalue(machine=machine, shot=pulse, treename=treename, TDI=TDI))
         else:
@@ -314,7 +346,16 @@ class dynamic_omas_machine(dynamic_ODS):
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         if o2u(key) not in self.cache:
             printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
-            ods, _ = machine_to_omas(ODS(), self.kw['machine'], self.kw['pulse'], o2u(key), self.kw['options'], self.kw['branch'])
+            ods, _ = machine_to_omas(
+                ODS(),
+                self.kw['machine'],
+                self.kw['pulse'],
+                o2u(key),
+                self.kw['options'],
+                self.kw['branch'],
+                self.kw['user_machine_mappings'],
+                self.cache,
+            )
             self.cache[o2u(key)] = ods
         if isinstance(self.cache[o2u(key)], int):
             return self.cache[o2u(key)]
@@ -332,7 +373,9 @@ class dynamic_omas_machine(dynamic_ODS):
     def keys(self, location):
         ulocation = o2u(location)
         if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
-            return list(range(self[ulocation + '.:']))
+            return list(
+                range(self[ulocation + '.:'])
+            )
         else:
             return numpy.unique(
                 [
