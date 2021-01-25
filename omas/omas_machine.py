@@ -337,7 +337,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         nanfilter = lambda x: x[~numpy.isnan(x)]
 
     # cocosio
-    if cocosio is None:
+    if cocosio is None and mapped.get('COCOSIO', False):
         if 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
             cocosio = int(mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI))
