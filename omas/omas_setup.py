@@ -134,17 +134,19 @@ class IMAS_versions(OrderedDict):
                     self[_item.replace('_', '.')] = _item
 
 
+# imas versions
 imas_versions = IMAS_versions()
-
+if len(list(imas_versions.keys())):
+    latest_imas_version = list(imas_versions.keys())[-1]
+else:
+    latest_imas_version = '0.0.0'
 if 'OMAS_IMAS_VERSION' in os.environ:
     _default_imas_version = os.environ['OMAS_IMAS_VERSION']
 else:
-    try:
+    if len(list(imas_versions.keys())):
         _default_imas_version = list(imas_versions.keys())[-1]
-    except IndexError:
-        # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
-        _default_imas_version = ''
-
+    else:
+        _default_imas_version = '0.0.0'
 
 # --------------------------------------------
 # rcparams

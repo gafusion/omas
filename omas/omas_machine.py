@@ -313,7 +313,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI)
+            data0 = data = mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI).raw()
             if data is None:
                 raise ValueError('data is None')
         except Exception:
@@ -340,7 +340,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     if cocosio is None and mapped.get('COCOSIO', False):
         if 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
-            cocosio = int(mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI))
+            cocosio = int(mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI).raw())
         else:
             raise ValueError('COCOSIO should be an integer or a TDI expression')
 

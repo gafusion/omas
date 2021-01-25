@@ -24,7 +24,7 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine', 'mdstree', 'mdsvalue', 'machine_mapping_function',
     'omas_service', 'omas_service_script',
-    'imas_json_dir', 'imas_versions', 'IMAS_versions', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
+    'imas_json_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit'
 ]
