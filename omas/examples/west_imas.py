@@ -22,4 +22,4 @@ with ods.open('imas', 'public', 'west', 55866, 0):
 from matplotlib import pyplot
 
 pyplot.plot(x, y)
-pyplot.show()SZ
+pyplot.show()

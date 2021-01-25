@@ -88,6 +88,9 @@ testpypi:
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 
+hash:
+	pip hash dist/omas-$(VERSION).tar.gz
+
 release: tests requirements json cocos docs tag
 	@echo 'Make release done'
 

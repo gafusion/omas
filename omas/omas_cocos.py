@@ -65,7 +65,7 @@ _cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='?'         
 _cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='?'                                 #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
 _cocos_signals['charge_exchange.channel.:.momentum_tor.data']='?'                                       #[ADD?]# 2.500000 # momentum  _tor  [kg.m^-1.s^-1]
 _cocos_signals['charge_exchange.aperture.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]
-_cocos_signals['charge_exchange.channel.:.position.phi.data']='?'                                       #[ADD?]# 1.800000 # phi  [rad]
+_cocos_signals['charge_exchange.channel.:.position.phi.data']='TOR'                                            # 1.800000 # phi  [rad]
 
 # COILS_NON_AXISYMMETRIC
 _cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.elements.centres.phi']='TOR'                           # 2.000000 # phi  [rad]
@@ -647,7 +647,7 @@ _cocos_signals['langmuir_probes.embedded.:.heat_flux_parallel.data']='?'        
 _cocos_signals['lh_antennas.antenna.:.row.:.n_pol']='?'                                   #[ADD?]# 2.000000 # _pol  [-]
 _cocos_signals['lh_antennas.antenna.:.row.:.n_tor']='?'                                   #[ADD?]# 2.000000 # _tor  [-]
 _cocos_signals['lh_antennas.antenna.:.row.:.position.phi']='TOR'                                 # 2.000000 # phi  [rad]
-_cocos_signals['lh_antennas.antenna.:.position.phi.data']='?'                             #[ADD?]# 1.800000 # phi  [rad]
+_cocos_signals['lh_antennas.antenna.:.position.phi.data']='TOR'                                  # 1.800000 # phi  [rad]
 
 # MAGNETICS
 _cocos_signals['magnetics.b_field_pol_probe.:.non_linear_response.b_field_linear']='?'              #[ADD?]# 3.500000 # b  b_field  b  b_field  [T]
