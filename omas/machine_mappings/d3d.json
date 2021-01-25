@@ -6,7 +6,9 @@
  },
  "__options__": {
   "EFIT_tree": "EFIT01",
-  "default_tree": "D3D"
+  "analysis_type": "CERQUICK",
+  "default_tree": "D3D",
+  "revision": "BLESSED"
  },
  "bolometer.channel.:": {
   "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
@@ -224,38 +226,41 @@
  "gas_injection.pipe.:.valve.:.name": {
   "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
  },
+ "interferometer.channel.:": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
  "interferometer.channel.:.identifier": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods,{pulse})"
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
  },
  "langmuir_probes.embedded.:": {
   "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"

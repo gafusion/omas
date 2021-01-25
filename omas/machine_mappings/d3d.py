@@ -7,28 +7,17 @@ from omas import *
 __all__ = []
 
 
-# Decorators
-def _id(obj):
-    """Trivial decorator as an alternative to make_available()"""
-    return obj
-
-
-def make_available(f):
-    """Decorator for listing a function in __all__ so it will be readily available in other scripts"""
-    __all__.append(f.__name__)
-    return f
-
-
-# Utilities
 def printq(*args):
-    return
+    from omas.omas_utils import printd
+
+    return printd(*args, topic=os.path.splitext(os.path.split(__file__)[1])[0])
 
 
 # ====================
 
 
-@make_available
-def setup_gas_injection_hardware_description_d3d(ods, shot):
+@machine_mapping_function(__all__)
+def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
     """
     Sets up DIII-D gas injector data.
 
@@ -49,7 +38,7 @@ def setup_gas_injection_hardware_description_d3d(ods, shot):
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
-    if shot < 100775:
+    if pulse < 100775:
         warnings.warn('DIII-D Gas valve locations not applicable for shots earlier than 100775 (2000 JAN 17)')
 
     i = 0
@@ -359,13 +348,13 @@ def pf_coils_to_ods(ods, coil_data):
     return ods
 
 
-@make_available
-def setup_pf_active_hardware_description_d3d(ods, *args):
+@machine_mapping_function(__all__)
+def setup_pf_active_hardware_description_d3d(ods):
     r"""
     Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
     :param ods: ODS instance
 
-    :param \*args: catch unused args to allow a consistent call signature for hardware description functions
+    :param pulse: int
 
     :return: dict
         Information or instructions for follow up in central hardware description setup
@@ -406,8 +395,8 @@ def setup_pf_active_hardware_description_d3d(ods, *args):
     return {}
 
 
-@make_available
-def setup_interferometer_hardware_description_d3d(ods, shot):
+@machine_mapping_function(__all__)
+def setup_interferometer_hardware_description_d3d(ods, pulse=133221):
     """
     Writes DIII-D CO2 interferometer chord locations into ODS.
 
@@ -418,7 +407,7 @@ def setup_interferometer_hardware_description_d3d(ods, shot):
 
     :param ods: an OMAS ODS instance
 
-    :param shot: int
+    :param pulse: int
 
     :return: dict
         Information or instructions for follow up in central hardware description setup
@@ -443,17 +432,36 @@ def setup_interferometer_hardware_description_d3d(ods, shot):
         ch = ods['interferometer.channel'][i]
         ch['line_of_sight.third_point'] = copy.copy(ch['line_of_sight.first_point'])
 
-    if shot < 125406:
+    if pulse < 125406:
         printw(
-            'DIII-D CO2 pointnames were different before shot 125406. The physical locations of the chords seems to '
+            'DIII-D CO2 pointnames were different before pulse 125406. The physical locations of the chords seems to '
             'have been the same, though, so there has not been a problem yet (I think).'
         )
 
     return {}
 
 
-@make_available
-def setup_thomson_scattering_hardware_description_d3d(ods, shot, revision='BLESSED'):
+def find_thomson_lens_d3d(pulse, hw_call_sys, hw_revision='blessed'):
+    """Read the Thomson scattering hardware map to figure out which lens each chord looks through"""
+    cal_call = '.ts.{}.header.calib_nums'.format(hw_revision)
+    cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
+    hwi_call = '.{}.hwmapints'.format(hw_call_sys)
+    printq('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call))
+    try:
+        hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
+    except MDSplus.MdsException:
+        printw('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
+        return None
+    else:
+        if len(np.shape(hw_ints)) < 2:
+            # Contingency needed for cases where all view-chords are taken off of divertor laser and reassigned to core
+            hw_ints = hw_ints.reshape(1, -1)
+        hw_lens = hw_ints[:, 2]
+        return hw_lens
+
+
+@machine_mapping_function(__all__)
+def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revision='BLESSED'):
     """
     Gathers DIII-D Thomson measurement locations from MDSplus and loads them into OMAS
 
@@ -465,14 +473,14 @@ def setup_thomson_scattering_hardware_description_d3d(ods, shot, revision='BLESS
     """
     printq('Setting up DIII-D Thomson locations...')
 
-    tsdat = OMFITmds(server='DIII-D', treename='ELECTRONS', shot=shot)['TS'][revision]
+    tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
 
     is_subsys = np.array([np.all([item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']]) for k in list(tsdat.keys())])
     subsystems = np.array(list(tsdat.keys()))[is_subsys]
 
     i = 0
     for sub in subsystems:
-        lenses = find_thomson_lens_d3d(shot, sub, revision)
+        lenses = find_thomson_lens_d3d(pulse, sub, revision)
         try:
             nc = len(tsdat[sub]['R'].data())
         except (TypeError, KeyError):
@@ -487,8 +495,8 @@ def setup_thomson_scattering_hardware_description_d3d(ods, shot, revision='BLESS
     return {}
 
 
-@make_available
-def setup_charge_exchange_hardware_description_d3d(ods, shot, analysis_type='CERQUICK'):
+@machine_mapping_function(__all__)
+def setup_charge_exchange_hardware_description_d3d(ods, pulse=133221, analysis_type='CERQUICK'):
     """
     Gathers DIII-D CER measurement locations from MDSplus and loads them into OMAS
 
@@ -500,7 +508,7 @@ def setup_charge_exchange_hardware_description_d3d(ods, shot, analysis_type='CER
     """
     printq('Setting up DIII-D CER locations...')
 
-    cerdat = OMFITmds(server='DIII-D', treename='IONS', shot=shot)['CER'][analysis_type]
+    cerdat = mdstree('d3d', treename='IONS', pulse=pulse)['CER'][analysis_type]
 
     subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
 
@@ -509,11 +517,14 @@ def setup_charge_exchange_hardware_description_d3d(ods, shot, analysis_type='CER
         try:
             channels = [k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k]
         except (TypeError, KeyError):
-            channels = []
+            continue
         for j, channel in enumerate(channels):
+            try:
+                postime = cerdat[sub][channel]['TIME'].data()
+            except Exception:
+                continue
             inc = 0
             for pos in ['R', 'Z', 'VIEW_PHI']:
-                postime = cerdat[sub][channel]['TIME'].data()
                 posdat = cerdat[sub][channel][pos].data()
                 if postime is not None:
                     inc = 1
@@ -527,52 +538,60 @@ def setup_charge_exchange_hardware_description_d3d(ods, shot, analysis_type='CER
     return {}
 
 
-@make_available
-def setup_langmuir_probes_hardware_description_d3d(ods, shot):
+@machine_mapping_function(__all__)
+def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
     """
     Load DIII-D Langmuir probe locations into an ODS
 
     :param ods: ODS instance
 
-    :param shot: int
+    :param pulse: int
 
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
     import MDSplus
 
-    if compare_version(ods.imas_version, '3.25.0') < 0:
-        printe('langmuir_probes.embedded requires a newer version of IMAS. It was added by 3.25.0.')
-        printe('ABORTED setup_langmuir_probes_hardware_description_d3d due to old IMAS version.')
-        return {}
-
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printq('Setting up Langmuir probes hardware description, shot {}; checking availability, TDI={}'.format(shot, tdi))
-    m = OMFITmdsValue(server='DIII-D', shot=shot, treename='LANGMUIR', TDI=tdi)
+    printq('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi))
+    m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printq('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, shot))
+    printq('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse))
     j = 0
     for i in range(nprobe):
         if data_present[i]:
-            r = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i))
-            chk = r.check(debug=True, check_dim_of=-1)  # Don't check dimensions on these data
-            if chk['result'] and r.data() > 0:
+            try:
+                r = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i)).data()
+            except Exception:
+                continue
+            if r > 0:
                 # Don't bother gathering more if r is junk
-                z = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i))
-                pnum = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i))
-                label = OMFITmdsValue(server='DIII-D', shot=shot, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i))
+                z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
+                pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
+                label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
                 printq('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()))
-                ods['langmuir_probes.embedded'][j]['position.r'] = r.data()[0]
-                ods['langmuir_probes.embedded'][j]['position.z'] = z.data()[0]
+                ods['langmuir_probes.embedded'][j]['position.r'] = r
+                ods['langmuir_probes.embedded'][j]['position.z'] = z
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
-                ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum.data()[0])
-                ods['langmuir_probes.embedded'][j]['name'] = str(label.data()[0]).strip()
+                ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
+                ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 j += 1
-            else:
-                printq('Probe i={i:}, j={j:}, r={r:} failed the check with chk={chk:}'.format(**locals()))
     return {}
+
+
+if __name__ == '__main__':
+    for func in __all__:
+        from omas.omas_utils import o2u
+        from pprint import pprint
+
+        print('=' * len(func))
+        print(func)
+        print('=' * len(func))
+        ods = ODS()
+        eval(func)(ods)
+        pprint(np.unique(list(map(o2u, ods.flat().keys()))).tolist())

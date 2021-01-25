@@ -5,7 +5,15 @@ from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
 
-__all__ = ['machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine']
+__all__ = [
+    'machine_expression_types',
+    'machines',
+    'machine_mappings',
+    'load_omas_machine',
+    'machine_mapping_function',
+    'mdstree',
+    'mdsvalue',
+]
 
 _python_tdi_namespace = {}
 
@@ -68,7 +76,7 @@ def python_tdi_namespace(branch):
     return _python_tdi_namespace
 
 
-def update_mapping(machine, location, value, cocosio=None, update_path=False):
+def update_mapping(machine, location, value, cocosio=None, default_options=None, update_path=False):
     '''
     Utility function that updates the local mapping file of a given machine with the mapping info of a given location
 
@@ -92,8 +100,16 @@ def update_mapping(machine, location, value, cocosio=None, update_path=False):
     # operate on the raw mappings
     new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
 
+    # assign default options
+    updated_defaults = False
+    if default_options:
+        for item in default_options:
+            if item not in new_raw_mappings['__options__'] and item not in ['machine', 'pulse', 'location']:
+                new_raw_mappings['__options__'][item] = default_options[item]
+                updated_defaults = True
+
     # if the definition is the same do not do anythinig
-    if ulocation in new_raw_mappings and repr(value) == repr(new_raw_mappings[ulocation]):
+    if not updated_defaults and ulocation in new_raw_mappings and repr(value) == repr(new_raw_mappings[ulocation]):
         return new_raw_mappings
 
     # add definition for new/updated location and update the .json file
@@ -106,7 +122,10 @@ def update_mapping(machine, location, value, cocosio=None, update_path=False):
     # add the same call for arrays of structures going upstream
     if update_path:
         for uloc in [':'.join(ulocation.split(':')[: k + 1]) + ':' for k, l in enumerate(ulocation.split(':')[:-1])]:
-            update_mapping(machine, uloc, value, cocosio, update_path=False)
+            if 'COCOSIO' in value:
+                value = copy.copy(value)
+                del value['COCOSIO']
+            update_mapping(machine, uloc, value, None, None, update_path=False)
 
     return new_raw_mappings
 
@@ -125,47 +144,100 @@ def mds_machine_to_server_mapping(machine, treename):
         mapping = {'d3d': 'atlas.gat.com:8000'}
         return mapping[machine]
     except KeyError:
-        raise KeyError(
-            machine
-            + ' machine does not have a MDS+ server assigned. Assign at least a dummy one in the `mds_machine_to_server_mapping()` function.'
-        )
+        if '.' in machine:
+            return machine
+        else:
+            raise KeyError(
+                machine
+                + ' machine does not have a MDS+ server assigned. Assign at least a dummy one in the `mds_machine_to_server_mapping()` function.'
+            )
 
 
 _mds_connection_cache = {}
 
 
-def mdsvalue(machine, treename, shot, TDI):
+class mdstree(dict):
     '''
-    Fetch data from MDS+ with connection caching
-
-    :param machine: machine name (use mds_machine_to_server_mapping)
-
-    :param treename:
-
-    :param shot:
-
-    :param TDI:
-
-    :return:
+    Returns the structure of an MDS+ tree.
+    Leaves in this tree are OMFITmdsValue objects
     '''
-    import MDSplus
 
-    server = mds_machine_to_server_mapping(machine, treename)
-    for fallback in [0, 1]:
-        if (server, treename, shot) not in _mds_connection_cache:
-            conn = MDSplus.Connection(server)
-            if treename is not None:
-                conn.openTree(treename, shot)
-            _mds_connection_cache[(server, treename, shot)] = conn
+    def __init__(self, server, treename, pulse):
+        for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
+            TDI = TDI.decode('utf8').strip()
+            path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
+            h = self
+            for p in path[1:-1]:
+                h = h.setdefault(p, mdsvalue(server, treename, pulse, ''))
+            if path[-1] not in h:
+                h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
+            else:
+                h[path[-1]].TDI = TDI
+
+
+class mdsvalue(dict):
+    def __init__(self, machine, treename, pulse, TDI):
+        self.machine = machine
+        self.treename = treename
+        self.pulse = pulse
+        self.TDI = TDI
+        self.server = mds_machine_to_server_mapping(self.machine, self.treename)
+
+    def data(self):
+        return self.raw(f'data({self.TDI})')
+
+    def dim_of(self, dim):
+        return self.raw(f'dim_of({self.TDI},{dim})')
+
+    def units(self):
+        return self.raw(f'units({self.TDI})')
+
+    def error(self):
+        return self.raw(f'error({self.TDI})')
+
+    def error_dim_of(self, dim):
+        return self.raw(f'error_dim_of({self.TDI},{dim})')
+
+    def units_dim_of(self, dim):
+        return self.raw(f'units_dim_of({self.TDI},{dim})')
+
+    def raw(self, TDI=None):
+        '''
+        Fetch data from MDS+ with connection caching
+
+        :param TDI: string
+            MDS+ TDI expression (overrides the one passed when the object was instantiated)
+
+        :return: result of TDI expression
+        '''
+        import MDSplus
+
+        if TDI is None:
+            TDI = self.TDI
+
+        for fallback in [0, 1]:
+            if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
+                conn = MDSplus.Connection(self.server)
+                if self.treename is not None:
+                    conn.openTree(self.treename, self.pulse)
+                _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+            try:
+                conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                break
+            except Exception:
+                if (self.server, self.treename, self.pulse) in _mds_connection_cache:
+                    del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                if fallback:
+                    raise
+
         try:
-            conn = _mds_connection_cache[(server, treename, shot)]
-            break
-        except Exception:
-            if (server, treename, shot) in _mds_connection_cache:
-                del _mds_connection_cache[(server, treename, shot)]
-            if fallback:
-                raise
-    return MDSplus.Data.data(conn.get(TDI))
+            return MDSplus.Data.data(conn.get(TDI))
+        except Exception as _excp:
+            txt = []
+            for item in ['machine', 'server', 'treename', 'pulse']:
+                txt += [f' - {item}: {getattr(self, item)}']
+            txt += [f' - TDI: {TDI}']
+            raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
 
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user_machine_mappings=None, cache=None):
@@ -231,14 +303,6 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             ods = namespace[mapped.get('RETURN', 'ods')]
             if isinstance(cache, dict):
                 cache[call] = ods
-
-        # if this python function generated an ODS with multiple enties populated,
-        # then we automatically update all other mapping entries that were not populated before
-        if omas_git_repo:
-            for loc in numpy.unique(list(map(o2u, ods.flat().keys()))):
-                if loc not in mappings:
-                    update_mapping(machine, loc, mapped, cocosio, update_path=True)
-
         if location.endswith(':'):
             return int(len(ods[u2n(location[:-2], [0] * 100)])), {'raw_data': ods, 'processed_data': ods, 'cocosio': cocosio}
         else:
@@ -249,7 +313,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine=machine, shot=pulse, treename=treename, TDI=TDI)
+            data0 = data = mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI)
             if data is None:
                 raise ValueError('data is None')
         except Exception:
@@ -276,7 +340,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     if cocosio is None:
         if 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
-            cocosio = int(mdsvalue(machine=machine, shot=pulse, treename=treename, TDI=TDI))
+            cocosio = int(mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI))
         else:
             raise ValueError('COCOSIO should be an integer or a TDI expression')
 
@@ -297,6 +361,38 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
                     ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
 
     return ods, {'raw_data': data0, 'processed_data': data, 'cocosio': cocosio}
+
+
+def machine_mapping_function(__all__):
+    """
+    Decorator for identifying mapping functions
+    """
+
+    def machine_mapping_decorator(f, __all__):
+        __all__.append(f.__name__)
+
+        def machine_mapping_caller(*args, **kwargs):
+            if omas_git_repo:
+                import inspect
+
+                argspec = inspect.getfullargspec(f)
+                f_args_str = ", ".join('{%s}' % item for item in argspec.args)
+                call = f"{f.__qualname__}({f_args_str})".replace('{ods}', 'ods')
+                default_options = None
+                if argspec.defaults:
+                    default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
+
+            out = f(*args, **kwargs)
+
+            if omas_git_repo:
+                for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
+                    update_mapping('d3d', ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
+
+            return out
+
+        return machine_mapping_caller
+
+    return lambda x: machine_mapping_decorator(x, __all__)
 
 
 def load_omas_machine(
@@ -373,9 +469,7 @@ class dynamic_omas_machine(dynamic_ODS):
     def keys(self, location):
         ulocation = o2u(location)
         if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
-            return list(
-                range(self[ulocation + '.:'])
-            )
+            return list(range(self[ulocation + '.:']))
         else:
             return numpy.unique(
                 [
