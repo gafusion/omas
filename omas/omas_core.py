@@ -680,7 +680,10 @@ class ODS(MutableMapping):
 
         :return: dynamic_ODS object
         """
+        # pyro_cases[self._dynamic.idc].active
         if not hasattr(self, '_dynamic'):
+            self._dynamic = None
+        if self._dynamic is not None and self._dynamic.idc not in pyro_cases:
             self._dynamic = None
         return self._dynamic
 
@@ -689,7 +692,7 @@ class ODS(MutableMapping):
         self._dynamic = dynamic
         for item in self.keys():
             if isinstance(self.getraw(item), ODS):
-                self.getraw(item).dynamic = dynamic
+                self.getraw(item)._dynamic = dynamic
 
     @property
     def ulocation(self):
