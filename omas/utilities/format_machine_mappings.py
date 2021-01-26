@@ -10,7 +10,10 @@ from pprint import pprint
 from omas import ODS, machines, machine_mappings
 
 for machine, filename in machines().items():
-    print(machine, filename)
+    print()
+    print('=' * (len(machine) + len(filename) + 2))
+    print(f'{machine}: {filename}')
+    print('=' * (len(machine) + len(filename) + 2))
     with open(filename, 'r') as f:
         tmp = json.load(f)
     with open(filename, 'w') as f:
