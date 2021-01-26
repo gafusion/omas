@@ -152,6 +152,7 @@ class mdstree(dict):
     Class to handle the structure of an MDS+ tree.
     Nodes in this tree are mdsvalue objects
     '''
+
     def __init__(self, server, treename, pulse):
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
             TDI = TDI.decode('utf8').strip()
@@ -169,6 +170,7 @@ class mdsvalue(dict):
     '''
     Execute MDS+ TDI functions
     '''
+
     def __init__(self, server, treename, pulse, TDI):
         self.machine = server
         self.treename = treename
@@ -295,7 +297,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             namespace = {}
             namespace.update(_namespace_mappings[machine])
             namespace['ods'] = ODS()
-            exec(call, namespace)
+            namespace['__file__'] = machines(machine, branch)[0][:-5] + '.py'
+            print(machines(machine, branch)[0][:-5] + '.py')
+            tmp = compile(call, machines(machine, branch)[0][:-5] + '.py', 'exec')
+            exec(tmp, namespace)
             ods = namespace[mapped.get('RETURN', 'ods')]
             if isinstance(cache, dict):
                 cache[call] = ods
@@ -309,7 +314,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
         try:
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI).raw()
+            data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
         except Exception:
@@ -336,7 +341,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
     if cocosio is None and mapped.get('COCOSIO', False):
         if 'TDI' in mapped:
             TDI = mapped['COCOSIO'].format(**options_with_defaults)
-            cocosio = int(mdsvalue(machine=machine, pulse=pulse, treename=treename, TDI=TDI).raw())
+            cocosio = int(mdsvalue(machine, treename, pulse, TDI).raw())
         else:
             raise ValueError('COCOSIO should be an integer or a TDI expression')
 
@@ -370,16 +375,26 @@ def machine_mapping_function(__all__):
         def machine_mapping_caller(*args, **kwargs):
             if omas_git_repo:
                 import inspect
-                argspec = inspect.getfullargspec(f)
+
+                # figure out the machine name from where the function `f` is defined
                 machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
+                if (
+                    machine == '<string>'
+                ):  # if `f` is called via exec then we need to look at the call stack to figure out the macchine name
+                    machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
+
+                # call signature
+                argspec = inspect.getfullargspec(f)
                 f_args_str = ", ".join('{%s}' % item for item in argspec.args)
                 call = f"{f.__qualname__}({f_args_str})".replace('{ods}', 'ods')
                 default_options = None
                 if argspec.defaults:
                     default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
 
+            # call
             out = f(*args, **kwargs)
 
+            # update mappings definitions
             if omas_git_repo:
                 for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
                     update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
@@ -425,14 +440,14 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
 
 
 def load_omas_machine(
-        machine,
-        pulse,
-        options={},
-        consistency_check=True,
-        imas_version=omas_rcparams['default_imas_version'],
-        cls=ODS,
-        branch=None,
-        user_machine_mappings=None,
+    machine,
+    pulse,
+    options={},
+    consistency_check=True,
+    imas_version=omas_rcparams['default_imas_version'],
+    cls=ODS,
+    branch=None,
+    user_machine_mappings=None,
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
@@ -502,7 +517,7 @@ class dynamic_omas_machine(dynamic_ODS):
         else:
             return numpy.unique(
                 [
-                    convert_int(k[len(ulocation):].lstrip('.').split('.')[0])
+                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
                     if k.startswith(ulocation)
                 ]
@@ -593,10 +608,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         user_machine_mappings = {}
 
     if (
-            return_raw_mappings
-            or machine not in _machine_mappings
-            or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
-            != _machine_mappings[machine]['__user_machine_mappings__']
+        return_raw_mappings
+        or machine not in _machine_mappings
+        or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
+        != _machine_mappings[machine]['__user_machine_mappings__']
     ):
 
         # figure out mapping file
