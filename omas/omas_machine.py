@@ -172,11 +172,16 @@ class mdsvalue(dict):
     '''
 
     def __init__(self, server, treename, pulse, TDI):
-        self.machine = server
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
-        self.server = mds_machine_to_server_mapping(machine_mappings(self.machine, None)['__mdsserver__'], self.treename)
+        try:
+            # handle the case that server is just the machine name
+            server = machine_mappings(server, None)['__mdsserver__']
+        except NotImplementedError:
+            if '.' not in server:
+                raise
+        self.server = mds_machine_to_server_mapping(server, self.treename)
 
     def data(self):
         return self.raw(f'data({self.TDI})')
@@ -213,22 +218,22 @@ class mdsvalue(dict):
         if TDI is None:
             TDI = self.TDI
 
-        for fallback in [0, 1]:
-            if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                conn = MDSplus.Connection(self.server)
-                if self.treename is not None:
-                    conn.openTree(self.treename, self.pulse)
-                _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
-            try:
-                conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                break
-            except Exception:
-                if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                    del _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                if fallback:
-                    raise
-
         try:
+            for fallback in [0, 1]:
+                if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
+                    conn = MDSplus.Connection(self.server)
+                    if self.treename is not None:
+                        conn.openTree(self.treename, self.pulse)
+                    _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                try:
+                    conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                    break
+                except Exception as _excp:
+                    if (self.server, self.treename, self.pulse) in _mds_connection_cache:
+                        del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                    if fallback:
+                        raise
+
             return MDSplus.Data.data(conn.get(TDI))
         except Exception as _excp:
             txt = []
