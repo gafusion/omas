@@ -2173,6 +2173,16 @@ class ODS(MutableMapping):
         '''
         return ods_2_odx(self, homogeneous=homogeneous)
 
+    def info(self, location):
+        '''
+        return node info
+
+        :param location: location of the node to return info of
+
+        :return: dictionary with info
+        '''
+        return omas_info_node((self.location + '.' + location).lstrip('.'))
+
 
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
