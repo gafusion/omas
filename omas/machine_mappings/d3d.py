@@ -1,19 +1,9 @@
 import numpy as np
 import copy
 from omas import *
-
-# ===============
+from omas.omas_utils import printd
 
 __all__ = []
-
-
-def printq(*args):
-    from omas.omas_utils import printd
-
-    return printd(*args, topic=os.path.splitext(os.path.split(__file__)[1])[0])
-
-
-# ====================
 
 
 @machine_mapping_function(__all__)
@@ -433,7 +423,7 @@ def setup_interferometer_hardware_description_d3d(ods, pulse=133221):
         ch['line_of_sight.third_point'] = copy.copy(ch['line_of_sight.first_point'])
 
     if pulse < 125406:
-        printw(
+        printe(
             'DIII-D CO2 pointnames were different before pulse 125406. The physical locations of the chords seems to '
             'have been the same, though, so there has not been a problem yet (I think).'
         )
@@ -446,11 +436,11 @@ def find_thomson_lens_d3d(pulse, hw_call_sys, hw_revision='blessed'):
     cal_call = '.ts.{}.header.calib_nums'.format(hw_revision)
     cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
     hwi_call = '.{}.hwmapints'.format(hw_call_sys)
-    printq('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call))
+    printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), 'd3d')
     try:
         hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
     except MDSplus.MdsException:
-        printw('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
+        printe('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
         return None
     else:
         if len(np.shape(hw_ints)) < 2:
@@ -471,7 +461,7 @@ def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revisio
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
-    printq('Setting up DIII-D Thomson locations...')
+    printd('Setting up DIII-D Thomson locations...', 'd3d')
 
     tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
 
@@ -506,7 +496,7 @@ def setup_charge_exchange_hardware_description_d3d(ods, pulse=133221, analysis_t
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
-    printq('Setting up DIII-D CER locations...')
+    printd('Setting up DIII-D CER locations...', 'd3d')
 
     cerdat = mdstree('d3d', treename='IONS', pulse=pulse)['CER'][analysis_type]
 
@@ -554,14 +544,14 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printq('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi))
+    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), 'd3d')
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printq('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse))
+    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), 'd3d')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -574,7 +564,7 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
                 z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
                 pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
                 label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
-                printq('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()))
+                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), 'd3d')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
@@ -585,13 +575,4 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
 
 
 if __name__ == '__main__':
-    for func in __all__:
-        from omas.omas_utils import o2u
-        from pprint import pprint
-
-        print('=' * len(func))
-        print(func)
-        print('=' * len(func))
-        ods = ODS()
-        eval(func)(ods)
-        pprint(np.unique(list(map(o2u, ods.flat().keys()))).tolist())
+    test_machine_mapping_functions(__all__, globals(), locals())

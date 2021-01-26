@@ -4,6 +4,7 @@
    "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
   }
  },
+ "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
   "EFIT_tree": "EFIT01",
   "analysis_type": "CERQUICK",

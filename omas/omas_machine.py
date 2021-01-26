@@ -11,6 +11,7 @@ __all__ = [
     'machine_mappings',
     'load_omas_machine',
     'machine_mapping_function',
+    'test_machine_mapping_functions',
     'mdstree',
     'mdsvalue',
 ]
@@ -130,9 +131,9 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     return new_raw_mappings
 
 
-def mds_machine_to_server_mapping(machine, treename):
+def mds_machine_to_server_mapping(server, treename):
     '''
-    Translate machine to MDS+ server
+    Resolve MDS+ server
 
     :param machine: machine name
 
@@ -140,17 +141,7 @@ def mds_machine_to_server_mapping(machine, treename):
 
     :return: string with MDS+ server and port to be used
     '''
-    try:
-        mapping = {'d3d': 'atlas.gat.com:8000'}
-        return mapping[machine]
-    except KeyError:
-        if '.' in machine:
-            return machine
-        else:
-            raise KeyError(
-                machine
-                + ' machine does not have a MDS+ server assigned. Assign at least a dummy one in the `mds_machine_to_server_mapping()` function.'
-            )
+    return server.format(**os.environ)
 
 
 _mds_connection_cache = {}
@@ -158,10 +149,9 @@ _mds_connection_cache = {}
 
 class mdstree(dict):
     '''
-    Returns the structure of an MDS+ tree.
-    Leaves in this tree are OMFITmdsValue objects
+    Class to handle the structure of an MDS+ tree.
+    Nodes in this tree are mdsvalue objects
     '''
-
     def __init__(self, server, treename, pulse):
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
             TDI = TDI.decode('utf8').strip()
@@ -176,12 +166,15 @@ class mdstree(dict):
 
 
 class mdsvalue(dict):
-    def __init__(self, machine, treename, pulse, TDI):
-        self.machine = machine
+    '''
+    Execute MDS+ TDI functions
+    '''
+    def __init__(self, server, treename, pulse, TDI):
+        self.machine = server
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
-        self.server = mds_machine_to_server_mapping(self.machine, self.treename)
+        self.server = mds_machine_to_server_mapping(machine_mappings(self.machine, None)['__mdsserver__'], self.treename)
 
     def data(self):
         return self.raw(f'data({self.TDI})')
@@ -200,6 +193,9 @@ class mdsvalue(dict):
 
     def units_dim_of(self, dim):
         return self.raw(f'units_dim_of({self.TDI},{dim})')
+
+    def size(self, dim):
+        return self.raw(f'size({self.TDI})')
 
     def raw(self, TDI=None):
         '''
@@ -374,8 +370,8 @@ def machine_mapping_function(__all__):
         def machine_mapping_caller(*args, **kwargs):
             if omas_git_repo:
                 import inspect
-
                 argspec = inspect.getfullargspec(f)
+                machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
                 f_args_str = ", ".join('{%s}' % item for item in argspec.args)
                 call = f"{f.__qualname__}({f_args_str})".replace('{ods}', 'ods')
                 default_options = None
@@ -386,7 +382,7 @@ def machine_mapping_function(__all__):
 
             if omas_git_repo:
                 for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
-                    update_mapping('d3d', ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
+                    update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
 
             return out
 
@@ -395,15 +391,48 @@ def machine_mapping_function(__all__):
     return lambda x: machine_mapping_decorator(x, __all__)
 
 
+def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+    '''
+    Function used to test python mapping functions
+
+    :param __all__: list of functionss to test
+
+    :param namespace: testing namespace
+    '''
+    from pprint import pprint
+
+    for func in __all__:
+        print('=' * len(func))
+        print(func)
+        print('=' * len(func))
+        ods = ODS()
+        func = eval(func, global_namespace, local_namespace)
+        try:
+            try:
+                func(ods)
+            except Exception:
+                raise
+        except TypeError as _excp:
+            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
+                raise _excp.__class__(
+                    str(_excp)
+                    + '\n'
+                    + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
+                )
+            else:
+                raise
+        pprint(numpy.unique(list(map(o2u, ods.flat().keys()))).tolist())
+
+
 def load_omas_machine(
-    machine,
-    pulse,
-    options={},
-    consistency_check=True,
-    imas_version=omas_rcparams['default_imas_version'],
-    cls=ODS,
-    branch=None,
-    user_machine_mappings=None,
+        machine,
+        pulse,
+        options={},
+        consistency_check=True,
+        imas_version=omas_rcparams['default_imas_version'],
+        cls=ODS,
+        branch=None,
+        user_machine_mappings=None,
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
@@ -473,7 +502,7 @@ class dynamic_omas_machine(dynamic_ODS):
         else:
             return numpy.unique(
                 [
-                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
+                    convert_int(k[len(ulocation):].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
                     if k.startswith(ulocation)
                 ]
@@ -564,10 +593,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         user_machine_mappings = {}
 
     if (
-        return_raw_mappings
-        or machine not in _machine_mappings
-        or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
-        != _machine_mappings[machine]['__user_machine_mappings__']
+            return_raw_mappings
+            or machine not in _machine_mappings
+            or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys())
+            != _machine_mappings[machine]['__user_machine_mappings__']
     ):
 
         # figure out mapping file
