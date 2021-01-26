@@ -15,16 +15,28 @@ from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
+# access some experimental data
+pyplot.figure()
+ods = ODS()
+with ods.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT01'}):
+    pyplot.plot(ods['equilibrium.time'], ods['equilibrium.time_slice.:.global_quantities.ip'])
+    pyplot.xlabel(f"[{ods.info('equilibrium.time')['units']}]")
+    pyplot.ylabel(f"[{ods.info('equilibrium.time_slice.:.global_quantities.ip')['units']}]")
+pyplot.show()
+
+# generate a gEQDSK file from experimental data
 ods1 = ODS()
 with ods1.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT01'}):
-    g1 = OMFITgeqdsk(None).from_omas(ods1, time=2.1)
+    g0 = OMFITgeqdsk(None).from_omas(ods1, time=1.1)
+    g1 = OMFITgeqdsk(None).from_omas(ods1, time=2.1)  # notice that subsequent MDS+ calls for the same data are cachced
 
+# generate another one gEQDSK file from experimental data
 ods2 = ODS()
 with ods2.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
     g2 = OMFITgeqdsk(None).from_omas(ods2, time=2.1)
 
-pprint(list(ods2.flat().keys()))
-
+pyplot.figure()
+g0.plot()
 g1.plot()
 g2.plot()
 pyplot.show()
