@@ -1,5 +1,9 @@
 {
- "__cocos_rules__": {},
+ "__cocos_rules__": {
+  "::TOP\\.RESULTS\\..?EQDSK": {
+   "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
+  }
+ },
  "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
   "EFIT_tree": "EFIT01",
@@ -14,6 +18,7 @@
   "ENVIRON": "USER"
  },
  "dataset_description.ids_properties.comment": {
+  "COMMENT": "Python function defined in the sample.py file",
   "PYTHON": "sample_function(ods, {pulse}, {user_argument})"
  },
  "equilibrium.time_slice.:": {
@@ -27,7 +32,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_1d.psi": {
-  "COMENT": "eval2TDI allows defining python functions can be evaluated on the MDS+ server side. These functions are defined in python_tdi.py",
+  "COMMENT": "eval2TDI allows defining python functions can be evaluated on the MDS+ server side. These functions are defined in python_tdi.py",
   "eval2TDI": "py2tdi(geqdsk_psi,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
   "treename": "{EFIT_tree}"
  }
