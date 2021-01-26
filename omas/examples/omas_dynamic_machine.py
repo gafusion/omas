@@ -11,7 +11,6 @@ import os
 from omas import *
 from omfit.classes.omfit_eqdsk import OMFITgeqdsk
 from matplotlib import pyplot
-from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
@@ -28,7 +27,8 @@ pyplot.show()
 ods1 = ODS()
 with ods1.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT01'}):
     g0 = OMFITgeqdsk(None).from_omas(ods1, time=1.1)
-    g1 = OMFITgeqdsk(None).from_omas(ods1, time=2.1)  # notice that subsequent MDS+ calls for the same data are cachced
+    # notice that subsequent MDS+ calls for the same data are cached
+    g1 = OMFITgeqdsk(None).from_omas(ods1, time=2.1)
 
 # generate another one gEQDSK file from experimental data
 ods2 = ODS()
