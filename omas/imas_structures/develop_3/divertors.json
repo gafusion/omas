@@ -2,7 +2,7 @@
  "divertors": {
   "documentation": "Description of divertors",
   "full_path": "divertors",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.31.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.31.0",
   "maxoccur": "2"
@@ -1911,7 +1911,7 @@
   "full_path": "divertors/divertor(i1)/target(i2)/wetted_area",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].target[:].wetted_area.data": {
   "coordinates": [
@@ -1923,7 +1923,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].target[:].wetted_area.data_error_index": {
   "data_type": "INT_TYPE",
@@ -1942,7 +1942,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].target[:].wetted_area.data_error_upper": {
   "coordinates": [
@@ -1954,7 +1954,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].target[:].wetted_area.time": {
   "coordinates": [
@@ -1974,7 +1974,7 @@
   "full_path": "divertors/divertor(i1)/wetted_area",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].wetted_area.data": {
   "coordinates": [
@@ -1986,7 +1986,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].wetted_area.data_error_index": {
   "data_type": "INT_TYPE",
@@ -2005,7 +2005,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].wetted_area.data_error_upper": {
   "coordinates": [
@@ -2017,7 +2017,7 @@
   "lifecycle_status": "alpha",
   "timebasepath": "wetted_area/time",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "m^2"
  },
  "divertors.divertor[:].wetted_area.time": {
   "coordinates": [
