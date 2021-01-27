@@ -237,7 +237,7 @@ class mdsvalue(dict):
             return MDSplus.Data.data(conn.get(TDI))
         except Exception as _excp:
             txt = []
-            for item in ['machine', 'server', 'treename', 'pulse']:
+            for item in ['server', 'treename', 'pulse']:
                 txt += [f' - {item}: {getattr(self, item)}']
             txt += [f' - TDI: {TDI}']
             raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
@@ -303,7 +303,6 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch=None, user
             namespace.update(_namespace_mappings[machine])
             namespace['ods'] = ODS()
             namespace['__file__'] = machines(machine, branch)[0][:-5] + '.py'
-            print(machines(machine, branch)[0][:-5] + '.py')
             tmp = compile(call, machines(machine, branch)[0][:-5] + '.py', 'exec')
             exec(tmp, namespace)
             ods = namespace[mapped.get('RETURN', 'ods')]
