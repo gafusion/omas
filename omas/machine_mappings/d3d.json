@@ -9,6 +9,7 @@
   "EFIT_tree": "EFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
+  "quiet": false,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
@@ -284,6 +285,13 @@
  },
  "pf_active.coil.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
+ },
+ "pf_active.coil.:.current.time": {
+  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
  },
  "pf_active.coil.:.element.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"

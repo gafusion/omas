@@ -519,5 +519,27 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
     return {}
 
 
+@machine_mapping_function(__all__)
+def pf_active_coil_current_data_d3d(ods, pulse=133221, quiet=False):
+    """
+    Load DIII-D poloidal field coil currents
+
+    :param ods: ODS instance
+
+    :param pulse: int
+    """
+    import tqdm
+
+    r18 = range(18)
+    if not quiet:
+        r18 = tqdm.tqdm(r18)
+
+    time = mdsvalue('d3d', 'D3D', pulse, f'ptdata2("PCF1A",{pulse})').dim_of(0)
+    for k in r18:
+        fcid = 'F{}{}'.format((k % 9) + 1, 'AB'[int(k // 9)])
+        ods[f'pf_active.coil[{k}].current.data'] = mdsvalue('d3d', 'D3D', pulse, f'ptdata2("PC{fcid}",{pulse})').data()
+        ods[f'pf_active.coil[{k}].current.time'] = time
+
+
 if __name__ == '__main__':
     test_machine_mapping_functions(__all__, globals(), locals())
