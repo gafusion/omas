@@ -123,6 +123,8 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     # add the same call for arrays of structures going upstream
     if update_path:
         for uloc in [':'.join(ulocation.split(':')[: k + 1]) + ':' for k, l in enumerate(ulocation.split(':')[:-1])]:
+            if uloc in new_raw_mappings:
+                continue
             if 'COCOSIO' in value:
                 value = copy.copy(value)
                 del value['COCOSIO']
