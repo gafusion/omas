@@ -28,32 +28,53 @@ class TestOmasMachine(UnittestCaseOmas):
     machine = 'd3d'
     pulse = 168830
 
-    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
-    def test_load_omas_machine(self):
-        ods = load_omas_machine(self.machine, self.pulse)
-
     def test_machines_list(self):
         assert self.machine in machines()
 
     def test_machines(self):
         # access machine description that should fail
-        for branch in [None, 'master', 'dummy']:
+        for branch in ['', 'master', 'dummy']:
             try:
-                machines('machine_that_does_not_exist', None)
+                machines('machine_that_does_not_exist', branch)
                 raise ValueError('error in machines()')
             except NotImplementedError:
                 pass
 
-        # local machine returns file
-        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, None)[0]
+        # with branch=None return file in current repo
+        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, '')[0]
 
-        # access machine description that should fail
+        # with branch='master' return file in temp dir
         assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')[0]
+
+    def test_remote_machine_mappings(self):
+        # access machine description remotely
+        location = 'dataset_description.data_entry.machine'
+
+        # load local machine mapping
+        machine_mappings(self.machine, '')
+        # show that the data for the location is there
+        ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
+        assert ods[location] == self.machine
+
+        # now let's remove that mapping from the local machine mapping cache
+        # so that we can force fallback on the remote master branch
+        from omas.omas_machine import _machine_mappings
+
+        try:
+            tmp = copy.deepcopy(_machine_mappings[self.machine, ''])
+            del _machine_mappings[self.machine, ''][location]
+
+            # now let's access the same node again. The data should come from the `master` branch
+            ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
+            assert ods[location] == self.machine
+            assert info['branch'] == 'master'
+        finally:
+            _machine_mappings[self.machine, ''] = tmp
 
     def test_user_mappings(self):
         location = 'dataset_description.data_entry.machine'
         for user_machine_mappings in [{}, {"dataset_description.data_entry.machine": {"VALUE": "{machine}123"}}]:
-            ods, _ = machine_to_omas(ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings)
+            ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings)
             if not user_machine_mappings:
                 assert ods[location] == self.machine
             else:
@@ -61,14 +82,14 @@ class TestOmasMachine(UnittestCaseOmas):
 
     def test_value(self):
         location = 'dataset_description.data_entry.pulse'
-        ods, data = machine_to_omas(ODS(), self.machine, self.pulse, location)
+        ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
         print(ods[location])
 
     def test_python(self):
         location = 'interferometer.channel.:.identifier'
-        ods, data = machine_to_omas(ODS(), self.machine, self.pulse, location)
+        ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
 
     def test_tdi(self):
         # make sure all machines have a MDS+ server assigned
         for machine in machines():
-            mds_machine_to_server_mapping(machine, None)
+            mds_machine_to_server_mapping(machine, '')
