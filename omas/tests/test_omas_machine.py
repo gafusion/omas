@@ -28,10 +28,10 @@ class TestOmasMachine(UnittestCaseOmas):
     machine = 'd3d'
     pulse = 168830
 
-    def test_machines_list(self):
+    def test_machines(self):
+        # list local machines
         assert self.machine in machines()
 
-    def test_machines(self):
         # access machine description that should fail
         for branch in ['', 'master', 'dummy']:
             try:
@@ -41,10 +41,10 @@ class TestOmasMachine(UnittestCaseOmas):
                 pass
 
         # with branch=None return file in current repo
-        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, '')[0]
+        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, '')
 
         # with branch='master' return file in temp dir
-        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')[0]
+        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')
 
     def test_remote_machine_mappings(self):
         # access machine description remotely
