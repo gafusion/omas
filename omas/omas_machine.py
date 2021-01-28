@@ -371,7 +371,10 @@ def machine_mapping_function(__all__):
         __all__.append(f.__name__)
 
         def machine_mapping_caller(*args, **kwargs):
-            if omas_git_repo:
+            clean_ods = True
+            if len(args[0]):
+                clean_ods = False
+            if clean_ods and omas_git_repo:
                 import inspect
 
                 # figure out the machine name from where the function `f` is defined
@@ -393,7 +396,7 @@ def machine_mapping_function(__all__):
             out = f(*args, **kwargs)
 
             # update mappings definitions
-            if omas_git_repo:
+            if clean_ods and omas_git_repo:
                 for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
                     update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
 
