@@ -22,25 +22,28 @@ all:
 
 TEST_FLAGS=-s omas/tests -v -f
 
-tests:
+test:
 	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
-tests_core:
+test_core:
 	python3 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
 
-tests_plot:
+test_plot:
 	python3 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
-tests_physics:
+test_physics:
 	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
-tests_utils:
+test_machine:
+	python3 -m unittest discover --pattern="*_machine.py" ${TEST_FLAGS}
+
+test_utils:
 	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
-tests_examples:
+test_examples:
 	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
 
-tests_suite:
+test_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
 requirements:
