@@ -19,7 +19,7 @@ for machine, filename in machines().items():
     with open(filename, 'w') as f:
         json.dump(tmp, f, indent=1, separators=(',', ': '), sort_keys=True)
 
-    mappings = machine_mappings(machine, None)
+    mappings = machine_mappings(machine, '')
 
     if os.path.exists(os.path.splitext(filename)[0] + '.py'):
         namespace = {}

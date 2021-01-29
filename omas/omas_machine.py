@@ -261,6 +261,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
             mapped = mappings[location]
+            break
         except KeyError:
             if branch == 'master':
                 raise
