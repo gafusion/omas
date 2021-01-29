@@ -98,8 +98,8 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
     elif time is not None and len(time):
         self['time'] = time
         self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
-    elif attempt_fix and ds in ['dataset_description', 'wall']:
-        self['time'] = [0.0]
+    elif attempt_fix:
+        self['time'] = [-1.0]
         extra_info['homogeneous_time'] = True
         self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
         return None
