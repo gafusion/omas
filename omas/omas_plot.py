@@ -2063,10 +2063,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     if ax is None:
         ax = pyplot.gca()
 
-    overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
     special_subs = ['position_control']
     for hw_sys in list_structures(ods.imas_version) + special_subs:
-        if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
+        if kw.get(hw_sys, debug_all_plots):
             overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
             try:
                 overlay_function = eval('{}_overlay'.format(hw_sys))
@@ -2082,19 +2081,19 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
 
 @add_to__ODS__
-def wall_CX(ods, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, ax=None):
+def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None):
     '''
     Plot walls on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
+
+    :param ax: axes instance into which to plot (default: gca())
 
     :param component_index: list of index of components to plot
 
     :param types: list with one or more of ['limiter','mobile','vessel']
 
     :param unit_index: list of index of units of the component to plot
-
-    :param ax: axes instance into which to plot (default: gca())
 
     :return: axes handler
     '''
@@ -2127,72 +2126,6 @@ def wall_CX(ods, component_index=None, types=['limiter', 'mobile', 'vessel'], un
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
                     'k',
                 )
-
-    ax.set_aspect('equal')
-
-    return {'ax': ax}
-
-
-@add_to__ODS__
-def magnetics_CX(
-    ods,
-    ax=None,
-    flux_loop_style={'color': 'b', 'marker': 's'},
-    pol_probe_style={'color': 'r'},
-    tor_probe_style={'color': 'm', 'marker': '.'},
-):
-    '''
-    Plot magnetics on a tokamak cross section plot
-
-    :param ods: OMAS ODS instance
-
-    :param flux_loop_style: dictionary with matplotlib options to render flux loops
-
-    :param pol_probe_style: dictionary with matplotlib options to render poloidal magnetic probes
-
-    :param tor_probe_style: dictionary with matplotlib options to render toroidal magnetic probes
-
-    :param ax: axes to plot in (active axes is generated if `ax is None`)
-
-    :return: axes handler
-    '''
-    from matplotlib import pyplot
-
-    if ax is None:
-        ax = pyplot.gca()
-
-    if 'flux_loop' in ods['magnetics']:
-        for k in ods['magnetics.flux_loop']:
-            ax.plot(
-                ods[f'magnetics.flux_loop[{k}].position[0].r'],
-                ods[f'magnetics.flux_loop[{k}].position[0].z'],
-                label='_' + ods.get(f'magnetics.flux_loop[{k}].name', str(k)),
-                **flux_loop_style,
-            )
-
-    if 'b_field_pol_probe' in ods['magnetics']:
-        b_field_pol_probe = ods['magnetics.b_field_pol_probe']
-        ods['magnetics.b_field_pol_probe.:.position.r']
-    elif 'bpol_probe' in ods['magnetics']:
-        b_field_pol_probe = ods['magnetics.bpol_probe']
-
-    from .omas_physics import probe_endpoints
-
-    PX, PY = probe_endpoints(
-        b_field_pol_probe['[:].position.r'],
-        b_field_pol_probe['[:].position.z'],
-        b_field_pol_probe['[:].poloidal_angle'],
-        b_field_pol_probe['[:].length'],
-        ods.cocosio,
-    )
-
-    pol_probes_index = b_field_pol_probe['[:].toroidal_angle'] == 0.0
-
-    for k, (px, py) in enumerate(zip(PX, PY)):
-        if not len(pol_probes_index) or pol_probes_index[k]:
-            ax.plot(px, py, label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **pol_probe_style)
-        else:
-            ax.plot(mean(px), mean(py), '.m', label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **tor_probe_style)
 
     ax.set_aspect('equal')
 
@@ -2368,8 +2301,6 @@ def pf_active_overlay(ods, ax=None, **kw):
         * Remaining keywords are passed to matplotlib.patches.Polygon call
             Hint: you may want to set facecolor instead of just color
     """
-    # Make sure there is something to plot or else just give up and return
-
     import matplotlib
     from matplotlib import pyplot
 
@@ -2447,6 +2378,7 @@ def pf_active_overlay(ods, ax=None, **kw):
         ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
 
     ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
+    ax.set_aspect('equal')
 
     return {'ax': ax}
 
@@ -2455,96 +2387,128 @@ def pf_active_overlay(ods, ax=None, **kw):
 def magnetics_overlay(
     ods,
     ax=None,
-    show_bpol_probe=True,
     show_flux_loop=True,
-    bpol_probe_color=None,
-    flux_loop_color=None,
-    bpol_probe_marker='s',
-    flux_loop_marker='o',
+    show_bpol_probe=True,
+    show_btor_probe=True,
+    flux_loop_style={'marker': 's'},
+    pol_probe_style={},
+    tor_probe_style={'marker': '.'},
     **kw,
 ):
-    r"""
-    Plots overlays of magnetics: B_pol probes and flux loops
+    '''
+    Plot magnetics on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
 
-    :param ax: axes instance into which to plot (default: gca())
+    :param flux_loop_style: dictionary with matplotlib options to render flux loops
 
-    :param show_bpol_probe: bool
-        Turn display of B_pol probes on/off
+    :param pol_probe_style: dictionary with matplotlib options to render poloidal magnetic probes
 
-    :param show_flux_loop: bool
-        Turn display of flux loops on/off
+    :param tor_probe_style: dictionary with matplotlib options to render toroidal magnetic probes
 
-    :param bpol_probe_color: matplotlib color specification for B_pol probes
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
 
-    :param flux_loop_color: matplotlib color specification for flux loops
-
-    :param bpol_probe_marker: matplotlib marker specification for B_pol probes
-
-    :param flux_loop_marker: matplotlib marker specification for flux loops
-
-    :param \**kw: Additional keywords
-
-        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
-
-        * Remaining keywords are passed to plot call
-    """
-
+    :return: axes handler
+    '''
     from matplotlib import pyplot
+
+    kw0 = copy.copy(kw)
 
     if ax is None:
         ax = pyplot.gca()
 
-    # Make sure there is something to plot or else just give up and return
-    nbp = 0
-    if compare_version(ods.imas_version, '3.23.3') > 0:
-        nbp = get_channel_count(
-            ods,
-            'magnetics',
-            check_loc='magnetics.b_field_pol_probe.0.position.r',
-            channels_name='b_field_pol_probe',
-            test_checker='~numpy.isnan(checker)',
-        )
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop', test_checker='~numpy.isnan(checker)'
     )
-    if max([nbp, nfl]) == 0:
-        return {'ax': ax}
+    if 'b_field_pol_probe' in ods['magnetics']:
+        b_field_pol_probe = ods['magnetics.b_field_pol_probe']
+    elif 'bpol_probe' in ods['magnetics']:
+        b_field_pol_probe = ods['magnetics.bpol_probe']
+    nbp = get_channel_count(
+        ods,
+        'magnetics',
+        check_loc='magnetics.b_field_pol_probe.0.position.r',
+        channels_name='b_field_pol_probe',
+        test_checker='~numpy.isnan(checker)',
+    ) + get_channel_count(
+        ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe', test_checker='~numpy.isnan(checker)'
+    )
 
-    color = kw.pop('color', None)
-    bpol_probe_color = color if bpol_probe_color is None else bpol_probe_color
-    flux_loop_color = color if flux_loop_color is None else flux_loop_color
-    kw.pop('marker', None)
-    kw.setdefault('linestyle', ' ')
-    labelevery = kw.pop('labelevery', 0)
-    mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
-    notesize = kw.pop('notesize', 'xx-small')
-    label_ha, label_va, kw = text_alignment_setup(nbp + nfl, **kw)
-    label_dr, label_dz = label_shifter(nbp + nfl, kw)
+    # flux loops
+    if show_flux_loop and nfl:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nfl, **kw)
+        label_dr, label_dz = label_shifter(nfl, kw)
 
-    def show_mag(n, topname, posroot, label, color_, marker, mask_):
-        r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
-        z = numpy.array([ods[topname][i][posroot]['z'] for i in range(n)])
-        mark = ax.plot(r[mask_], z[mask_], color=color_, label=label, marker=marker, **kw)
-        color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        for i in range(sum(mask_)):
-            if (labelevery > 0) and ((i % labelevery) == 0):
+        for k, (r, z) in enumerate(zip(ods[f'magnetics.flux_loop.:.position[0].r'], ods[f'magnetics.flux_loop.:.position[0].z'])):
+
+            ax.plot(r, z, **flux_loop_style)
+            flux_loop_style.setdefault('color', ax.lines[-1].get_color())
+            if (labelevery > 0) and ((k % labelevery) == 0):
                 ax.text(
-                    r[mask_][i] + label_dr[i],
-                    z[mask_][i] + label_dz[i],
-                    ods[topname][i]['identifier'],
-                    color=color_,
+                    r + label_dr[k],
+                    z + label_dz[k],
+                    b_field_pol_probe.get(f'magnetics.flux_loop.{k}.identifier', str(k)),
+                    color=flux_loop_style['color'],
                     fontsize=notesize,
-                    ha=label_ha[i],
-                    va=label_va[i],
+                    ha=label_ha[k],
+                    va=label_va[k],
                 )
 
-    if show_bpol_probe:
-        show_mag(nbp, 'magnetics.b_field_pol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker, mask[:nbp])
-    if show_flux_loop:
-        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
+    # magnetic probes
+    if nbp:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nbp, **kw)
+        label_dr, label_dz = label_shifter(nbp, kw)
 
+        from .omas_physics import probe_endpoints
+
+        PX, PY = probe_endpoints(
+            b_field_pol_probe['[:].position.r'],
+            b_field_pol_probe['[:].position.z'],
+            b_field_pol_probe['[:].poloidal_angle'],
+            b_field_pol_probe['[:].length'],
+            ods.cocosio,
+        )
+
+        pol_probes_index = b_field_pol_probe['[:].toroidal_angle'] == 0.0
+        for k, (px, py) in enumerate(zip(PX, PY)):
+            r = numpy.mean(px)
+            z = numpy.mean(py)
+            if not len(pol_probes_index) or pol_probes_index[k]:
+                if show_bpol_probe:
+                    ax.plot(px, py, label='_' + b_field_pol_probe.get(f'[{k}].identifier', str(k)), **pol_probe_style, **kw)
+                    pol_probe_style.setdefault('color', ax.lines[-1].get_color())
+                    if (labelevery > 0) and ((k % labelevery) == 0):
+                        ax.text(
+                            r + label_dr[k],
+                            z + label_dz[k],
+                            b_field_pol_probe.get(f'[{k}].name', str(k)),
+                            color=pol_probe_style['color'],
+                            fontsize=notesize,
+                            ha=label_ha[k],
+                            va=label_va[k],
+                        )
+            else:
+                if show_btor_probe:
+                    ax.plot(mean(px), mean(py), '.m', label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **tor_probe_style, **kw)
+                    tor_probe_style.setdefault('color', ax.lines[-1].get_color())
+                    if (labelevery > 0) and ((k % labelevery) == 0):
+                        ax.text(
+                            r + label_dr[k],
+                            z + label_dz[k],
+                            n,
+                            color=tor_probe_style['color'],
+                            fontsize=notesize,
+                            ha=label_ha[k],
+                            va=label_va[k],
+                        )
+
+    ax.set_aspect('equal')
     return {'ax': ax}
 
 

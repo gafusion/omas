@@ -116,12 +116,6 @@ class TestOmasPlot(UnittestCaseOmas):
 
     def test_all_overlays(self):
         ods2 = copy.deepcopy(self.ods)
-        for hw_sys in list_structures(ods2.imas_version):
-            try:
-                sample_func = getattr(ODS, 'sample_{}'.format(hw_sys))
-                ods2 = sample_func(ods2)
-            except AttributeError:
-                pass
         ods2.plot_overlay(debug_all_plots=True)
 
     def test_gas_arrow(self):
@@ -280,13 +274,8 @@ class TestOmasPlot(UnittestCaseOmas):
         mag_ods.sample_magnetics()
         mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
         # Test keywords
-        mag_ods.plot_overlay(
-            thomson_scattering=False, magnetics=dict(bpol_probe_color='r', bpol_probe_marker='x', show_flux_loop=False, labelevery=1)
-        )
-        mag_ods.plot_overlay(
-            thomson_scattering=False,
-            magnetics=dict(bpol_probe_color='m', flux_loop_marker='+', show_bpol_probe=False, notesize=9, labelevery=1),
-        )
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_flux_loop=False, labelevery=1))
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_bpol_probe=False, notesize=9, labelevery=1))
         # Test direct call
         mag_ods.plot_magnetics_overlay()
         # Test empty one; make sure fail is graceful
@@ -516,14 +505,6 @@ class TestOmasPlot(UnittestCaseOmas):
 
         # omas plot for transport fluxes
         ods.plot_core_transport_fluxes()
-
-    def test_ods_magnetics_plot(self):
-        # Prep sample data
-        ods = ODS()
-        ods.sample_magnetics()
-
-        # omas plot for magnetics CX
-        ods.plot_magnetics_CX()
 
 
 if __name__ == '__main__':

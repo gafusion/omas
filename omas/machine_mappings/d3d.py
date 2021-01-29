@@ -470,6 +470,7 @@ def setup_charge_exchange_hardware_description_d3d(ods, pulse=133221, analysis_t
             i += inc
     return {}
 
+
 @machine_mapping_function(__all__)
 def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
     """
@@ -482,7 +483,7 @@ def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
-    printd('Setting up DIII-D bolometer locations...',topic='d3d')
+    printd('Setting up DIII-D bolometer locations...', topic='d3d')
 
     if pulse < 91000:
         xangle = (
