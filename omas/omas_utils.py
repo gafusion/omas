@@ -852,14 +852,16 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
             _global_quantities[imas_version] = extract_global_quantities(imas_version)
     return _global_quantities[imas_version]
 
+
 try:
     import pyximport
 except ModuleNotFoundError:
-    with open(os.path.split(__file__)[0]+os.sep+'omas_cython.pyx','r') as f:
-        exec(f.read(),globals())
+    with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
+        exec(f.read(), globals())
 else:
     pyximport.install(language_level=3)
     from .omas_cython import *
+
 
 def l2ut(path):
     """

@@ -19,7 +19,7 @@ install_requires = [
     'setuptools>=41.2',
     'pyro5',
     'tqdm',
-    'Cython'
+    'Cython',
 ]
 
 extras_require = {
