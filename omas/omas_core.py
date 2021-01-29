@@ -477,7 +477,7 @@ class ODS(MutableMapping):
     @imas_version.setter
     def imas_version(self, imas_version_value):
         self._imas_version = imas_version_value
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 if 'code.parameters' in self.getraw(item).location:
                     continue
@@ -510,7 +510,7 @@ class ODS(MutableMapping):
             # set ._consistency_check for this ODS
             self._consistency_check = consistency_value
             # set .consistency_check
-            for item in list(self.keys()):
+            for item in list(self.keys(dynamic=0)):
                 if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
                     # consistency_check=True makes sure that code.parameters is of type CodeParameters
                     if consistency_value:
@@ -589,7 +589,7 @@ class ODS(MutableMapping):
         except Exception as _excp:
             # restore existing consistency_check value in case of error
             if old_consistency_check != consistency_value:
-                for item in self.keys():
+                for item in self.keys(dynamic=0):
                     if isinstance(self.getraw(item), ODS):
                         self.getraw(item).consistency_check = old_consistency_check
                 self.consistency_check = old_consistency_check
@@ -627,7 +627,7 @@ class ODS(MutableMapping):
         if cocosio_value is None:
             cocosio_value = omas_rcparams['cocos']  # default value for cocosio
         self._cocosio = cocosio_value
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 self.getraw(item).cocosio = cocosio_value
 
@@ -647,7 +647,7 @@ class ODS(MutableMapping):
         if unitsio_value is None:
             unitsio_value = {}  # default value for unitsio
         self._unitsio = unitsio_value
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 self.getraw(item).unitsio = unitsio_value
 
@@ -669,7 +669,7 @@ class ODS(MutableMapping):
         elif not isinstance(coordsio_value, (list, tuple)):
             coordsio_value = (self, coordsio_value)
         self._coordsio = coordsio_value
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 self.getraw(item).coordsio = coordsio_value
 
@@ -690,7 +690,7 @@ class ODS(MutableMapping):
     @dynamic.setter
     def dynamic(self, dynamic):
         self._dynamic = dynamic
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 self.getraw(item)._dynamic = dynamic
 
@@ -711,7 +711,7 @@ class ODS(MutableMapping):
 
         :param go_deep: check value up to its leaves
         """
-        for key in value.keys():
+        for key in value.keys(dynamic=0):
             structure_key = o2u(key)
             if go_deep and isinstance(value[key], ODS) and value[key].consistency_check:
                 value._validate(value[key], structure[structure_key])
@@ -957,11 +957,11 @@ class ODS(MutableMapping):
 
         # check if the branch/node was dynamically created
         dynamically_created = False
-        if key[0] not in self.keys() and len(key) > 1:
+        if key[0] not in self.keys(dynamic=0) and len(key) > 1:
             dynamically_created = True
 
         # assign values to this ODS
-        if key[0] not in self.keys() or len(key) == 1:
+        if key[0] not in self.keys(dynamic=0) or len(key) == 1:
             self.setraw(key[0], value)
 
         # pass the value one level deeper
@@ -975,7 +975,7 @@ class ODS(MutableMapping):
                 raise
 
         # if the value is an ODS strucutre
-        if isinstance(value, ODS) and value.omas_data is not None and len(value):
+        if isinstance(value, ODS) and value.omas_data is not None and len(value.keys(dynamic=0)):
             # we purposly do not force value.consistency_check = self.consistency_check
             # because sub-ODSs could be shared among ODSs that have different settings of consistency_check
             if False and value.consistency_check != self.consistency_check:
@@ -1027,7 +1027,7 @@ class ODS(MutableMapping):
         # accept path as list of keys
         if isinstance(key, list):
             if len(key) > 1:
-                if key[0] not in self:
+                if key[0] not in self.keys(dynamic=False):
                     self.setraw(key[0], self.same_init_ods())
                 return self.getraw(key[0]).setraw(key[1:], value)
             else:
@@ -1124,7 +1124,7 @@ class ODS(MutableMapping):
         # data slicing
         if isinstance(key[0], slice):
             data0 = []
-            for k in self.keys(dynamic=True)[key[0]]:
+            for k in self.keys(dynamic=1)[key[0]]:
                 try:
                     data0.append(self.__getitem__([k] + key[1:], cocos_and_coords))
                 except ValueError:
@@ -1183,7 +1183,7 @@ class ODS(MutableMapping):
             return data
 
         # dynamic path creation
-        elif key[0] not in self.keys():
+        elif key[0] not in self.keys(dynamic=0):
             if omas_rcparams['dynamic_path_creation']:
                 if self.dynamic:
                     location = l2o([self.location, key[0]])
@@ -1192,8 +1192,8 @@ class ODS(MutableMapping):
                     self.__setitem__(key[0], value)
                 elif self.dynamic is not None and o2u(location).endswith(':'):
                     dynamically_created = True
-                    for k in self.keys(dynamic=True):
-                        if k not in self.keys():
+                    for k in self.keys(dynamic=1):
+                        if k not in self.keys(dynamic=0):
                             self.__setitem__(k, self.same_init_ods())
                 else:
                     dynamically_created = True
@@ -1414,7 +1414,7 @@ class ODS(MutableMapping):
         h = self
         for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
-            if h.omas_data is not None and k in h.keys():
+            if h.omas_data is not None and k in h.keys(dynamic=0):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
             else:
@@ -1430,7 +1430,19 @@ class ODS(MutableMapping):
             return False
         return True
 
-    def keys(self, dynamic=False):
+    def keys(self, dynamic=True):
+        '''
+        Return list of keys
+
+        :param dynamic: whether dynamic loaded key should be shown.
+                        This is `True` by default because this should be the case for calls that are facing the user.
+                        Within the inner workings of OMAS we thus need to be careful and keep track of when this should not be the case.
+                        Throughout the library we use `dynamic=1` or `dynamic=0` for debug purposes, since one can place a conditional
+                        breakpoint in this function checking if `dynamic is True and self.dynamic` to verfy that indeed the `dynamic=True`
+                        calls come from the user and not from within the library itself.
+
+        :return: list of keys
+        '''
         dynamic_keys = []
         if dynamic and self.dynamic:
             dynamic_keys = list(self.dynamic.keys(self.location))
@@ -1448,8 +1460,11 @@ class ODS(MutableMapping):
             else:
                 return []
 
-    def values(self):
-        return [self[item] for item in self.keys()]
+    def values(self, dynamic=True):
+        return [self[item] for item in self.keys(dynamic=dynamic)]
+
+    def items(self, dynamic=True):
+        return [(item, self[item]) for item in self.keys(dynamic=dynamic)]
 
     def __str__(self):
         return self.location
@@ -1474,7 +1489,7 @@ class ODS(MutableMapping):
         """
         OMFIT tree keys display dynamic
         """
-        return self.keys(dynamic=True)
+        return self.keys(dynamic=1)
 
     def get(self, key, default=None):
         r"""
@@ -1585,7 +1600,7 @@ class ODS(MutableMapping):
         :return: number of branches that were pruned
         """
         n = 0
-        for item in self.keys():
+        for item in self.keys(dynamic=0):
             if isinstance(self.getraw(item), ODS):
                 n += self.getraw(item).prune()
                 if not len(self.getraw(item).keys()):
@@ -1786,7 +1801,7 @@ class ODS(MutableMapping):
 
         if not self.location:
             DS = xarray.Dataset()
-            for ds in self:
+            for ds in self.keys(dynamic=0):
                 DS.update(self[ds].dataset(homogeneous=homogeneous))
             return DS
 
@@ -2073,7 +2088,7 @@ class ODS(MutableMapping):
         Convert code.parameters to a XML string
         """
         if not self.location:
-            for item in self:
+            for item in self.keys(dynamic=0):
                 self[item].codeparams2xml()
             return
         elif 'code.parameters' in self and isinstance(self['code.parameters'], CodeParameters):
@@ -2088,7 +2103,7 @@ class ODS(MutableMapping):
         import xml
 
         if not self.location:
-            for item in self:
+            for item in self.keys(dynamic=0):
                 self[item].codeparams2dict()
             return
         try:
@@ -2204,7 +2219,7 @@ class ODC(ODS):
 
     @consistency_check.setter
     def consistency_check(self, consistency_value):
-        for item in self:
+        for item in self.keys(dynamic=0):
             self[item].consistency_check = consistency_value
         self._consistency_check = consistency_value
 
