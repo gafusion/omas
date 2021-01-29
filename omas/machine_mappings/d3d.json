@@ -283,6 +283,59 @@
  "langmuir_probes.embedded.:.position.z": {
   "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
  },
+ "magnetics.b_field_pol_probe.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.identifier": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.length": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.name": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.poloidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.r": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.z": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.toroidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.turns": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.type.index": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.identifier": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.name": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.r": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.z": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.type.index": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
  "pf_active.coil.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
  },

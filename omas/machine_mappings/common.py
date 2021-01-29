@@ -1,4 +1,6 @@
 import numpy as np
+
+
 def pf_coils_to_ods(ods, coil_data):
     """
     Transfers poloidal field coil geometry data from a standard format used by efitviewer to ODS.

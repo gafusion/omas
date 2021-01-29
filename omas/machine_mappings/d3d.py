@@ -289,8 +289,6 @@ def setup_pf_active_hardware_description_d3d(ods):
     Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
     :param ods: ODS instance
 
-    :param pulse: int
-
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
@@ -539,6 +537,140 @@ def pf_active_coil_current_data_d3d(ods, pulse=133221, quiet=False):
         fcid = 'F{}{}'.format((k % 9) + 1, 'AB'[int(k // 9)])
         ods[f'pf_active.coil[{k}].current.data'] = mdsvalue('d3d', 'D3D', pulse, f'ptdata2("PC{fcid}",{pulse})').data()
         ods[f'pf_active.coil[{k}].current.time'] = time
+
+
+@machine_mapping_function(__all__)
+def setup_magnetics_hardware_description_d3d(ods):
+    r"""
+    Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
+    :param ods: ODS instance
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat
+    # fmt: off
+    R_flux_loop = [0.8929, 0.8936, 0.895, 0.8932, 1.0106, 2.511, 2.285, 1.2517,
+                   1.6885, 0.8929, 0.8928, 0.8933, 0.8952, 1.0152, 2.509, 2.297,
+                   1.2491, 1.6882, 0.9247, 0.9247, 0.9247, 0.9247, 0.9621, 1.1212,
+                   1.6978, 2.209, 2.1933, 2.501, 2.4347, 0.9247, 0.9247, 0.9247,
+                   0.9611, 1.1199, 1.8559, 2.215, 2.1933, 2.501, 2.4328, 1.3828,
+                   1.5771, 1.3929, 1.5983, 1.7759]
+
+    Z_flux_loop = [0.1683, 0.5092, 0.85, 1.1909, 1.4475, 0.332, 1.018,
+                   1.5517, 1.5169, -0.1726, -0.5135, -0.8543, -1.1953, -1.4536,
+                   -0.335, -1.01, -1.5527, -1.5075, 0., 0.3429, 0.6858,
+                   1.0287, 1.3208, 1.4646, 1.4646, 1.213, 1.0629, 0.527,
+                   0.4902, -0.3429, -0.6858, -1.0287, -1.3198, -1.4625, -1.4625,
+                   -1.214, -1.0602, -0.524, -0.4909, -1.4625, -1.4625, -1.3057,
+                   -1.3057, -1.3053]
+
+    name_flux_loop = ['PSF1A', 'PSF2A', 'PSF3A', 'PSF4A',
+                      'PSF5A', 'PSF6NA', 'PSF7NA', 'PSF8A',
+                      'PSF9A', 'PSF1B', 'PSF2B', 'PSF3B',
+                      'PSF4B', 'PSF5B', 'PSF6NB', 'PSF7NB',
+                      'PSF8B', 'PSF9B', 'PSI11M', 'PSI12A',
+                      'PSI23A', 'PSI34A', 'PSI45A', 'PSI58A',
+                      'PSI9A', 'PSF7FA', 'PSI7A', 'PSF6FA',
+                      'PSI6A', 'PSI12B', 'PSI23B', 'PSI34B',
+                      'PSI45B', 'PSI58B', 'PSI9B', 'PSF7FB',
+                      'PSI7B', 'PSF6FB', 'PSI6B', 'PSI89FB',
+                      'PSI89NB', 'PSI1L', 'PSI2L', 'PSI3L']
+    # fmt: on
+
+    for k, (r, z, name) in enumerate(zip(R_flux_loop, Z_flux_loop, name_flux_loop)):
+        ods[f'magnetics.flux_loop.{k}.identifier'] = ods[f'magnetics.flux_loop.{k}.name'] = name
+        ods[f'magnetics.flux_loop.{k}.position[0].r'] = r
+        ods[f'magnetics.flux_loop.{k}.position[0].z'] = z
+        ods[f'magnetics.flux_loop.{k}.type.index'] = 1
+
+    # fmt: off
+    R_magnetic = [0.9729, 0.9787, 0.9726, 0.9767, 0.9793, 0.9764, 0.9785, 2.413,
+                  1.7617, 2.2124, 2.2641, 2.2655, 2.3137, 2.4066, 2.4133, 0.9771,
+                  0.9722, 0.9792, 0.9769, 0.9801, 0.9774, 2.4129, 0.9719, 2.0436,
+                  2.2089, 2.2596, 2.2624, 2.3119, 2.414, 1.2194, 1.4017, 1.5841,
+                  1.7825, 1.9243, 2.0673, 2.2193, 2.2702, 2.3189, 2.4159, 2.4182,
+                  2.4162, 2.3154, 2.2631, 2.212, 2.0848, 1.894, 1.6989, 1.4769,
+                  1.2541, 1.0479, 0.9724, 0.974, 0.9748, 0.9737, 0.9732, 0.9741,
+                  0.9742, 0.9745, 0.9722, 1.0511, 1.445, 1.56, 1.723, 1.873,
+                  1.506, 1.59, 1.73, 1.877, 1.218, 1.075, 0.976, 1.185,
+                  1.086, 1.5104, 1.6103, 1.7103]
+
+    Z_magnetic = [-3.7000e-03, 6.9900e-02, 5.1800e-01, 2.0940e-01, 3.4710e-01,
+                  4.8510e-01, 7.5910e-01, -2.5000e-03, 1.3123e+00, 8.7320e-01,
+                  7.5980e-01, 7.5780e-01, 6.2850e-01, 2.5440e-01, 2.9000e-03,
+                  -6.9100e-02, -5.1650e-01, -2.0700e-01, -3.4280e-01, -4.8180e-01,
+                  -7.5700e-01, -1.0000e-03, -1.8310e-01, -1.1098e+00, -8.6690e-01,
+                  -7.5380e-01, -7.5100e-01, -6.2020e-01, -2.4410e-01, 1.4055e+00,
+                  1.4070e+00, 1.4084e+00, 1.3230e+00, 1.2064e+00, 1.0904e+00,
+                  8.6980e-01, 7.4620e-01, 6.2280e-01, 2.4920e-01, -9.0000e-04,
+                  -2.4380e-01, -6.2400e-01, -7.4870e-01, -8.7250e-01, -1.1020e+00,
+                  -1.3327e+00, -1.4063e+00, -1.4055e+00, -1.4047e+00, -1.3302e+00,
+                  -1.1589e+00, -8.5420e-01, -5.1220e-01, -1.8700e-01, -2.3000e-03,
+                  1.8170e-01, 5.1160e-01, 8.5030e-01, 1.1609e+00, 1.3304e+00,
+                  1.2770e+00, 1.1870e+00, 1.1120e+00, 1.1160e+00, 1.2700e+00,
+                  1.1980e+00, 1.1420e+00, 1.1330e+00, 1.2980e+00, 1.2020e+00,
+                  9.7900e-01, 1.2860e+00, 1.2280e+00, -1.2915e+00, -1.2915e+00,
+                  -1.2918e+00]
+
+    A_magnetic = [90., 90.26, 89.8, 89.87, 90.07, 90.01,
+                  89.74, -90.5, -39.5, -67.55, -67.8, -67.6,
+                  -67.59, -89.39, -89.9, 90.01, 90.3, 89.59,
+                  90.05, 89.86, 89.79, -89.78, 89.55, -129.1,
+                  -112.57, -112.8, -112.6, -113., -89.58, 0.3,
+                  0.667, 0.617, -39.283, -39.167, -39.417, -68.1,
+                  -67.9, -68., -89.333, -89.9, 269.25, -113.4,
+                  -112.8, -113.5, 230.817, 230.467, 179.867, 180.083,
+                  180.033, 136.383, 89.567, 89.75, 90.267, 90.117,
+                  89.933, 90.017, 89.7, 90.15, 90.483, 44.617,
+                  -40.55, -40.77, -3.3, -2.75, 49.53, 49.53,
+                  92.3, 90.5, 66.303, 0.729, 90.259, 156.55,
+                  90.4, 180.01, 180.25, 181.03]
+
+    S_magnetic = [0.1408, 0.1419, 0.1404, 0.1408, 0.1412, 0.1409, 0.1414,
+                  0.1402, 0.1534, 0.1385, 0.1561, 0.155, 0.1399, 0.1406,
+                  0.1409, 0.1418, 0.1392, 0.1414, 0.1411, 0.1407, 0.142,
+                  0.1375, 0.1408, 0.1537, 0.1422, 0.1549, 0.1557, 0.1398,
+                  0.1407, 0.1394, 0.1145, 0.1403, 0.1409, 0.1141, 0.1398,
+                  0.1403, 0.1407, 0.1402, 0.1407, 0.1399, 0.1399, 0.1403,
+                  0.14, 0.1407, 0.1403, 0.1406, 0.1415, 0.1403, 0.1403,
+                  0.1403, 0.1405, 0.1402, 0.1404, 0.14, 0.1153, 0.14,
+                  0.1403, 0.1404, 0.1404, 0.1407, 0.027, 0.027, 0.027,
+                  0.054, -0.094, -0.088, -0.106, -0.1955, 0.027, 0.027,
+                  0.027, -0.091, -0.107, 0.0271, 0.0277, 0.0273]
+
+    name_magnetic = ['MPI11M067', 'MPI1A139', 'MPI2A067', 'MPI2A139',
+                     'MPI3A139', 'MPI4A139', 'MPI5A139', 'MPI66M247',
+                     'MPI79A147', 'MPI7NA142', 'MPI67A3', 'MPI67A067',
+                     'MPI6FA142', 'MPI6NA157', 'MPI66M067', 'MPI1B139',
+                     'MPI2B067', 'MPI2B139', 'MPI3B139', 'MPI4B139',
+                     'MPI5B139', 'MPI66M157', 'MPI1B157', 'MPI79B142',
+                     'MPI7NB142', 'MPI67B3', 'MPI67B067', 'MPI6FB142',
+                     'MPI6NB157', 'MPI8A322', 'MPI89A322', 'MPI9A322',
+                     'MPI79FA322', 'MPI79NA322', 'MPI7FA322', 'MPI7NA322',
+                     'MPI67A322', 'MPI6FA322', 'MPI6NA322', 'MPI66M322',
+                     'MPI6NB322', 'MPI6FB322', 'MPI67B322', 'MPI7NB322',
+                     'MPI7FB322', 'MPI79B322', 'MPI9B322', 'MPI89B322',
+                     'MPI8B322', 'MPI5B322', 'MPI4B322', 'MPI3B322',
+                     'MPI2B322', 'MPI1B322', 'MPI11M322', 'MPI1A322',
+                     'MPI2A322', 'MPI3A322', 'MPI4A322', 'MPI5A322', 'MPI1U157',
+                     'MPI2U157', 'MPI3U157', 'MPI4U157', 'DSL1U180', 'DSL2U180',
+                     'DSL3U180', 'DSL4U157', 'MPI5U157', 'MPI6U157', 'MPI7U157',
+                     'DSL5U157', 'DSL6U157', 'MPI1L180', 'MPI2L180', 'MPI3L180']
+    # fmt: on
+
+    with omas_environment(ods, cocosio=2):
+        for k, (r, z, a, s, name) in enumerate(zip(R_magnetic, Z_magnetic, A_magnetic, S_magnetic, name_magnetic)):
+            ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
+            ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
+            ods[f'magnetics.b_field_pol_probe.{k}.position.z'] = z
+            ods[f'magnetics.b_field_pol_probe.{k}.length'] = s
+            ods[f'magnetics.b_field_pol_probe.{k}.poloidal_angle'] = a / 180 * np.pi
+            ods[f'magnetics.b_field_pol_probe.{k}.toroidal_angle'] = 0.0 / 180 * np.pi
+            ods[f'magnetics.b_field_pol_probe.{k}.type.index'] = 1
+            ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
+
+    return {}
 
 
 if __name__ == '__main__':
