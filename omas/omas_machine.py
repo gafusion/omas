@@ -546,7 +546,7 @@ def machines(machine=None, branch=''):
     if branch in _machines_dict:
         if machine is None:
             return _machines_dict[branch]
-        elif machine in _machines_dict:
+        elif machine in _machines_dict[branch]:
             return _machines_dict[branch][machine]
 
     # local mappings
