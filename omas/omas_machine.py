@@ -158,7 +158,7 @@ class mdsvalue(dict):
         self.TDI = TDI
         try:
             # handle the case that server is just the machine name
-            server = machine_mappings(server, None)['__mdsserver__']
+            server = machine_mappings(server, '')['__mdsserver__']
         except NotImplementedError:
             if '.' not in server:
                 raise
