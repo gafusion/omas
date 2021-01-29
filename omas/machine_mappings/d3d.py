@@ -30,7 +30,7 @@ def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
         Information or instructions for follow up in central hardware description setup
     """
     if pulse < 100775:
-        warnings.warn('DIII-D Gas valve locations not applicable for shots earlier than 100775 (2000 JAN 17)')
+        warnings.warn('DIII-D Gas valve locations not applicable for pulses earlier than 100775 (2000 JAN 17)')
 
     i = 0
 
@@ -469,6 +469,439 @@ def setup_charge_exchange_hardware_description_d3d(ods, pulse=133221, analysis_t
                     chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
             i += inc
     return {}
+
+@machine_mapping_function(__all__)
+def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
+    """
+    Load DIII-D bolometer chord locations into the ODS
+
+    Data sources:
+    - iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/bolometerpaths.pro
+    - OMFIT-source/modules/_PCS_prad_control/SETTINGS/PHYSICS/reference/DIII-D/bolometer_geo , access 2018June11 Eldon
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    printd('Setting up DIII-D bolometer locations...',topic='d3d')
+
+    if pulse < 91000:
+        xangle = (
+            np.array(
+                [
+                    292.40,
+                    288.35,
+                    284.30,
+                    280.25,
+                    276.20,
+                    272.15,
+                    268.10,
+                    264.87,
+                    262.27,
+                    259.67,
+                    257.07,
+                    254.47,
+                    251.87,
+                    249.27,
+                    246.67,
+                    243.81,
+                    235.81,
+                    227.81,
+                    219.81,
+                    211.81,
+                    203.81,
+                    195.81,
+                    187.81,
+                    179.80,
+                    211.91,
+                    206.41,
+                    200.91,
+                    195.41,
+                    189.91,
+                    184.41,
+                    178.91,
+                    173.41,
+                    167.91,
+                    162.41,
+                    156.91,
+                    156.30,
+                    149.58,
+                    142.86,
+                    136.14,
+                    129.77,
+                    126.77,
+                    123.77,
+                    120.77,
+                    117.77,
+                    114.77,
+                    111.77,
+                    108.77,
+                    102.25,
+                ]
+            )
+            * np.pi
+            / 180.0
+        )  # Converted to rad
+
+        xangle_width = None
+
+        zxray = (
+            np.array(
+                [
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    124.968,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    129.870,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -81.153,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                    -72.009,
+                ]
+            )
+            / 100.0
+        )  # Converted to m
+
+        rxray = (
+            np.array(
+                [
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    196.771,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    190.071,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    230.720,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                    232.900,
+                ]
+            )
+            / 100.0
+        )  # Converted to m
+
+    else:
+        xangle = (
+            np.array(
+                [  # There is a bigger step before the very last channel. Found in two different sources.
+                    269.4,
+                    265.6,
+                    261.9,
+                    258.1,
+                    254.4,
+                    250.9,
+                    247.9,
+                    244.9,
+                    241.9,
+                    238.9,
+                    235.9,
+                    232.9,
+                    228.0,
+                    221.3,
+                    214.5,
+                    208.2,
+                    201.1,
+                    194.0,
+                    187.7,
+                    182.2,
+                    176.7,
+                    171.2,
+                    165.7,
+                    160.2,
+                    213.7,
+                    210.2,
+                    206.7,
+                    203.2,
+                    199.7,
+                    194.4,
+                    187.4,
+                    180.4,
+                    173.4,
+                    166.4,
+                    159.4,
+                    156.0,
+                    149.2,
+                    142.4,
+                    135.8,
+                    129.6,
+                    126.6,
+                    123.6,
+                    120.6,
+                    117.6,
+                    114.6,
+                    111.6,
+                    108.6,
+                    101.9,
+                ]
+            )
+            * np.pi
+            / 180.0
+        )  # Converted to rad
+
+        xangle_width = (
+            np.array(
+                [
+                    3.082,
+                    3.206,
+                    3.317,
+                    3.414,
+                    3.495,
+                    2.866,
+                    2.901,
+                    2.928,
+                    2.947,
+                    2.957,
+                    2.960,
+                    2.955,
+                    6.497,
+                    6.342,
+                    6.103,
+                    6.331,
+                    6.697,
+                    6.979,
+                    5.510,
+                    5.553,
+                    5.546,
+                    5.488,
+                    5.380,
+                    5.223,
+                    3.281,
+                    3.348,
+                    3.402,
+                    3.444,
+                    3.473,
+                    6.950,
+                    6.911,
+                    6.768,
+                    6.526,
+                    6.188,
+                    5.757,
+                    5.596,
+                    5.978,
+                    6.276,
+                    6.490,
+                    2.979,
+                    2.993,
+                    2.998,
+                    2.995,
+                    2.984,
+                    2.965,
+                    2.938,
+                    2.902,
+                    6.183,
+                ]
+            )
+            * np.pi
+            / 180.0
+        )  # Angular full width of the view-chord: calculations assume it's a symmetric cone.
+
+        zxray = (
+            np.array(
+                [
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    72.817,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    82.332,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -77.254,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                    -66.881,
+                ]
+            )
+            / 100.0
+        )  # Converted to m
+
+        rxray = (
+            np.array(
+                [
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    234.881,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.206,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    231.894,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                    234.932,
+                ]
+            )
+            / 100.0
+        )  # Converted to m
+
+    line_len = 3  # m  Make this long enough to go past the box for all chords.
+
+    phi = np.array([60, 75])[(zxray > 0).astype(int)] * -np.pi / 180.0  # Convert to CCW radians
+    fan = np.array(['Lower', 'Upper'])[(zxray > 0).astype(int)]
+    fan_offset = np.array([0, int(len(rxray) // 2)])[(zxray < 0).astype(int)].astype(int)
+
+    for i in range(len(zxray)):
+        cnum = i + 1 - fan_offset[i]
+        ods['bolometer']['channel'][i]['identifier'] = '{}{:02d}'.format(fan[i][0], cnum)
+        ods['bolometer']['channel'][i]['name'] = '{} fan ch#{:02d}'.format(fan[i], cnum)
+        cls = ods['bolometer']['channel'][i]['line_of_sight']  # Shortcut
+        cls['first_point.r'] = rxray[i]
+        cls['first_point.z'] = zxray[i]
+        cls['first_point.phi'] = phi[i]
+        cls['second_point.r'] = rxray[i] + line_len * np.cos(xangle[i])
+        cls['second_point.z'] = zxray[i] + line_len * np.sin(xangle[i])
+        cls['second_point.phi'] = cls['first_point.phi']
+
+    return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
 
 @machine_mapping_function(__all__)
