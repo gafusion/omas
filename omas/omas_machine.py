@@ -189,12 +189,18 @@ class mdsvalue(dict):
         '''
         Fetch data from MDS+ with connection caching
 
-        :param TDI: string
-            MDS+ TDI expression (overrides the one passed when the object was instantiated)
+        :param TDI: string or list of strings
+            MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
 
-        :return: result of TDI expression
+        :return: result of TDI expression, or dictionary with results of TDI expressions
         '''
         import MDSplus
+
+        def mdsk(value):
+            '''
+            Translate strings to MDS+ bytes
+            '''
+            return str(str(value).encode('utf8'))
 
         if TDI is None:
             TDI = self.TDI
@@ -214,8 +220,14 @@ class mdsvalue(dict):
                         del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                     if fallback:
                         raise
-
-            return MDSplus.Data.data(conn.get(TDI))
+            if isinstance(TDI, (list, tuple)):
+                conns = conn.getMany()
+                for expr in TDI:
+                    conns.append(str(expr.__hash__()), expr)
+                res = conns.execute()
+                return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+            else:
+                return MDSplus.Data.data(conn.get(TDI))
         except Exception as _excp:
             txt = []
             for item in ['server', 'treename', 'pulse']:
