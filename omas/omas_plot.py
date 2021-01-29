@@ -1955,6 +1955,15 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
+    '''
+    Plot summary of NBI power time traces
+
+    :param ods: input ods
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :return: axes handler
+    '''
     from matplotlib import pyplot
 
     if ax is None:
@@ -2045,6 +2054,8 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
                     If the list/array of offsets is too short, it will be padded with 0s.
 
             * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
+
+    :return: axes handler
     """
 
     from matplotlib import pyplot
@@ -2070,6 +2081,56 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     return {'ax': ax}
 
 
+@add_to__ODS__
+def wall_CX(ods, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, ax=None):
+    '''
+    Plot walls on a tokamak cross section plot
+
+    :param ods: OMAS ODS instance
+
+    :param component_index: list of index of components to plot
+
+    :param types: list with one or more of ['limiter','mobile','vessel']
+
+    :param unit_index: list of index of units of the component to plot
+
+    :param ax: axes instance into which to plot (default: gca())
+
+    :return: axes handler
+    '''
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    if component_index is None:
+        component_index = ods['wall.description_2d'].keys()
+    elif isinstance(component_index, int):
+        component_index = [component_index]
+    elif isinstance(component_index, str):
+        component_index = [ods['wall.description_2d[:].limiter.type.name'].index(component_index)]
+
+    for component in component_index:
+        for type in types:
+            if type not in ods[f'wall.description_2d[{component}]']:
+                continue
+            if unit_index is None:
+                unit_index = ods[f'wall.description_2d[{component}].{type}.unit'].keys()
+            elif isinstance(unit_index, int):
+                component_index = [unit_index]
+            elif isinstance(unit_index, str):
+                component_index = [ods[f'wall.description_2d[{component}].{type}.unit[{unit}].type.name'].index(component_index)]
+
+            for unit in ods[f'wall.description_2d[{component}].{type}.unit']:
+                ax.plot(
+                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
+                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
+                    'k',
+                )
+
+    ax.set_aspect('equal')
+
+    return {'ax': ax}
 
 
 @add_to__ODS__
