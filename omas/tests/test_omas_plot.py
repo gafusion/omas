@@ -20,7 +20,10 @@ import copy
 # Use Agg backend to avoid opening up figures
 import matplotlib
 
-matplotlib.use('Agg')
+interactive = False
+
+if not interactive:
+    matplotlib.use('Agg')
 from matplotlib import pyplot
 
 # OMAS imports
@@ -44,6 +47,8 @@ class TestOmasPlot(UnittestCaseOmas):
             self.fig = pyplot.figure(test_name)
 
     def tearDown(self):
+        if interactive:
+            pyplot.show()
         pyplot.close()
 
     def test_quantity(self):
@@ -511,6 +516,14 @@ class TestOmasPlot(UnittestCaseOmas):
 
         # omas plot for transport fluxes
         ods.plot_core_transport_fluxes()
+
+    def test_ods_magnetics_plot(self):
+        # Prep sample data
+        ods = ODS()
+        ods.sample_magnetics()
+
+        # omas plot for magnetics CX
+        ods.plot_magnetics_CX()
 
 
 if __name__ == '__main__':

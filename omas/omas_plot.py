@@ -2070,6 +2070,74 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     return {'ax': ax}
 
 
+
+
+@add_to__ODS__
+def magnetics_CX(
+    ods,
+    ax=None,
+    flux_loop_style={'color': 'b', 'marker': 's'},
+    pol_probe_style={'color': 'r'},
+    tor_probe_style={'color': 'm', 'marker': '.'},
+):
+    '''
+    Plot magnetics on a tokamak cross section plot
+
+    :param ods: OMAS ODS instance
+
+    :param flux_loop_style: dictionary with matplotlib options to render flux loops
+
+    :param pol_probe_style: dictionary with matplotlib options to render poloidal magnetic probes
+
+    :param tor_probe_style: dictionary with matplotlib options to render toroidal magnetic probes
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :return: axes handler
+    '''
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    if 'flux_loop' in ods['magnetics']:
+        for k in ods['magnetics.flux_loop']:
+            ax.plot(
+                ods[f'magnetics.flux_loop[{k}].position[0].r'],
+                ods[f'magnetics.flux_loop[{k}].position[0].z'],
+                label='_' + ods.get(f'magnetics.flux_loop[{k}].name', str(k)),
+                **flux_loop_style,
+            )
+
+    if 'b_field_pol_probe' in ods['magnetics']:
+        b_field_pol_probe = ods['magnetics.b_field_pol_probe']
+        ods['magnetics.b_field_pol_probe.:.position.r']
+    elif 'bpol_probe' in ods['magnetics']:
+        b_field_pol_probe = ods['magnetics.bpol_probe']
+
+    from .omas_physics import probe_endpoints
+
+    PX, PY = probe_endpoints(
+        b_field_pol_probe['[:].position.r'],
+        b_field_pol_probe['[:].position.z'],
+        b_field_pol_probe['[:].poloidal_angle'],
+        b_field_pol_probe['[:].length'],
+        ods.cocosio,
+    )
+
+    pol_probes_index = b_field_pol_probe['[:].toroidal_angle'] == 0.0
+
+    for k, (px, py) in enumerate(zip(PX, PY)):
+        if not len(pol_probes_index) or pol_probes_index[k]:
+            ax.plot(px, py, label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **pol_probe_style)
+        else:
+            ax.plot(mean(px), mean(py), '.m', label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **tor_probe_style)
+
+    ax.set_aspect('equal')
+
+    return {'ax': ax}
+
+
 @add_to__ODS__
 def gas_injection_overlay(
     ods,

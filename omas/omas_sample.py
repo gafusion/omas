@@ -337,35 +337,9 @@ def magnetics(ods):
     :return: ODS instance with fake magnetics hardware information added
     """
 
-    nbp = 12
-    nfl = 7
+    from .machine_mappings.d3d import setup_magnetics_hardware_description_d3d
 
-    r0 = 1.5
-    z0 = 0.0
-    abp = 0.8
-    afl = 1.0
-
-    angle_bp = numpy.linspace(0, 2 * numpy.pi, nbp + 1)[:-1]
-    rp = r0 + abp * numpy.cos(angle_bp)
-    zp = z0 + abp * numpy.sin(angle_bp)
-
-    angle_fl = numpy.linspace(0, 2 * numpy.pi, nfl + 1)[:-1]
-    rf = r0 + afl * numpy.cos(angle_fl)
-    zf = z0 + afl * numpy.sin(angle_fl)
-
-    for i in range(nbp):
-        ods['magnetics.b_field_pol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
-        ods['magnetics.b_field_pol_probe'][i]['position.r'] = rp[i]
-        ods['magnetics.b_field_pol_probe'][i]['position.z'] = zp[i]
-        ods['magnetics.b_field_pol_probe'][i]['position.phi'] = 6.5
-
-    for i in range(nfl):
-        ods['magnetics.flux_loop'][i]['identifier'] = 'FAKE flux loop {}'.format(i)
-        ods['magnetics.flux_loop'][i]['position.0.r'] = rf[i]
-        ods['magnetics.flux_loop'][i]['position.0.z'] = zf[i]
-
-    ods['magnetics.time'] = [0]
-
+    setup_magnetics_hardware_description_d3d(ods)
     return ods
 
 

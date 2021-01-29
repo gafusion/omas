@@ -1394,6 +1394,46 @@ def check_iter_scenario_requirements(ods):
 
 
 @add_to__ALL__
+def probe_endpoints(r0, z0, a0, l0, cocos):
+    '''
+    Transform r,z,a,l arrays commonly used to describe poloidal magnetic
+    probes geometry to actual r,z coordinates of the end-points of the probes.
+    This is useful for plotting purposes.
+
+    :param r0: r coordinates [m]
+
+    :param z0: Z coordinates [m]
+
+    :param a0: poloidal angles [radiants]
+
+    :param l0: lenght [m]
+
+    :param cocos: cocos convention
+
+    :return: list of 2-points r and z coordinates of individual probes
+    '''
+    theta_convention = 1
+    if cocos in [1, 4, 6, 7, 11, 14, 16, 17]:
+        theta_convention = -1
+
+    boo = (1 - numpy.sign(l0)) / 2.0
+    cor = boo * numpy.pi / 2.0
+    # then, compute the two-point arrays to build the partial rogowskis
+    # as segments rather than single points, applying the correction
+    px = r0 - l0 / 2.0 * numpy.cos(theta_convention * (a0 + cor))
+    py = z0 - l0 / 2.0 * numpy.sin(theta_convention * (a0 + cor))
+    qx = r0 + l0 / 2.0 * numpy.cos(theta_convention * (a0 + cor))
+    qy = z0 + l0 / 2.0 * numpy.sin(theta_convention * (a0 + cor))
+    segx = []
+    segy = []
+    for k in range(len(r0)):
+        segx.append([px[k], qx[k]])
+        segy.append([py[k], qy[k]])
+
+    return segx, segy
+
+
+@add_to__ALL__
 def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_bootstrap=False):
     """
     Given <Jt/R> returns <J.B>, or vice versa
