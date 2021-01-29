@@ -610,7 +610,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
 
     if (
         return_raw_mappings
-        or machine not in _machine_mappings
+        or idm not in _machine_mappings
         or list(_user_machine_mappings.keys()) + list(user_machine_mappings.keys()) != _machine_mappings[idm]['__user_machine_mappings__']
     ):
 
