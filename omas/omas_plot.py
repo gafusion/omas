@@ -219,7 +219,7 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
             checker = ods[check_loc]
             if test_checker is not None:
                 assert eval(test_checker)
-    except (TypeError, AssertionError, ValueError):
+    except (TypeError, AssertionError, ValueError, IndexError, KeyError):
         nc = 0
 
     if nc == 0:
