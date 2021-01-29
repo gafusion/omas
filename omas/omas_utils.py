@@ -853,9 +853,6 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
     return _global_quantities[imas_version]
 
 
-_p2l_cache = {}
-
-
 def p2l(key):
     """
     Converts the many different ways of addressing an ODS path to a list of keys ['bla',0,'bla']
@@ -885,10 +882,6 @@ def p2l(key):
     if isinstance(key, dict):
         raise TypeError('OMAS key cannot be of type dictionary')
 
-    key0 = ''.join(key)
-    if key0 in _p2l_cache:
-        return copy.deepcopy(_p2l_cache[key0])
-
     if not isinstance(key, (list, tuple)):
         key = str(key).replace('[', '.').replace(']', '').split('.')
 
@@ -898,10 +891,6 @@ def p2l(key):
             key[k] = int(item)
         except ValueError:
             pass
-
-    if len(_p2l_cache) > 1000:
-        _p2l_cache.clear()
-    _p2l_cache[key0] = copy.deepcopy(key)
 
     return key
 
