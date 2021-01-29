@@ -340,6 +340,7 @@ def magnetics(ods):
     from .machine_mappings.d3d import setup_magnetics_hardware_description_d3d
 
     setup_magnetics_hardware_description_d3d(ods)
+    ods['magnetics.time'] = [0.0]
     return ods
 
 
