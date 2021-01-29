@@ -675,10 +675,10 @@ _cocos_signals['magnetics.b_field_pol_probe.:.length']=None                     
 _cocos_signals['magnetics.b_field_tor_probe.:.area']=None                                                  # 1.666667 # b  b_field  [m^2]
 _cocos_signals['magnetics.b_field_tor_probe.:.bandwidth_3db']='?'                                   #[ADD?]# 1.666667 # b  b_field  [Hz]
 _cocos_signals['magnetics.b_field_tor_probe.:.length']=None                                                # 1.666667 # b  b_field  [m]
-_cocos_signals['magnetics.b_field_pol_probe.:.field.data']='?'                                      #[ADD?]# 1.500000 # b  b_field  [T]
-_cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
-_cocos_signals['magnetics.b_field_tor_probe.:.field.data']='?'                                      #[ADD?]# 1.500000 # b  b_field  [T]
-_cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='?'                                    #[ADD?]# 1.500000 # b  b_field  [V]
+_cocos_signals['magnetics.b_field_pol_probe.:.field.data']='POL'                                           # 1.500000 # b  b_field  [T]
+_cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='POL'                                         # 1.500000 # b  b_field  [V]
+_cocos_signals['magnetics.b_field_tor_probe.:.field.data']='TOR'                                           # 1.500000 # b  b_field  [T]
+_cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='TOR'                                         # 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.ip.:.data']='?'                                                           #[ADD?]# 1.333333 # ip  [A]
 
 # MHD
