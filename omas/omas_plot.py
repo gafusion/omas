@@ -2388,7 +2388,7 @@ def magnetics_overlay(
     ods,
     ax=None,
     show_flux_loop=True,
-    show_bpol_probe=True,
+    show_bpol_probe=False,
     show_btor_probe=True,
     flux_loop_style={'marker': 's'},
     pol_probe_style={},
@@ -2417,24 +2417,10 @@ def magnetics_overlay(
     if ax is None:
         ax = pyplot.gca()
 
+    # flux loops
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop', test_checker='~numpy.isnan(checker)'
     )
-    if 'b_field_pol_probe' in ods['magnetics']:
-        b_field_pol_probe = ods['magnetics.b_field_pol_probe']
-    elif 'bpol_probe' in ods['magnetics']:
-        b_field_pol_probe = ods['magnetics.bpol_probe']
-    nbp = get_channel_count(
-        ods,
-        'magnetics',
-        check_loc='magnetics.b_field_pol_probe.0.position.r',
-        channels_name='b_field_pol_probe',
-        test_checker='~numpy.isnan(checker)',
-    ) + get_channel_count(
-        ods, 'magnetics', check_loc='magnetics.bpol_probe.0.position.r', channels_name='bpol_probe', test_checker='~numpy.isnan(checker)'
-    )
-
-    # flux loops
     if show_flux_loop and nfl:
         kw = copy.copy(kw0)
         labelevery = kw.pop('labelevery', 0)
@@ -2450,15 +2436,22 @@ def magnetics_overlay(
                 ax.text(
                     r + label_dr[k],
                     z + label_dz[k],
-                    b_field_pol_probe.get(f'magnetics.flux_loop.{k}.identifier', str(k)),
+                    ods.get(f'magnetics.flux_loop.{k}.identifier', str(k)),
                     color=flux_loop_style['color'],
                     fontsize=notesize,
                     ha=label_ha[k],
                     va=label_va[k],
                 )
 
-    # magnetic probes
-    if nbp:
+    # poloidal magnetic probes
+    nbp = get_channel_count(
+        ods,
+        'magnetics',
+        check_loc='magnetics.b_field_pol_probe.0.position.r',
+        channels_name='b_field_pol_probe',
+        test_checker='~numpy.isnan(checker)',
+    )
+    if show_bpol_probe and nbp:
         kw = copy.copy(kw0)
         labelevery = kw.pop('labelevery', 0)
         notesize = kw.pop('notesize', 'xx-small')
@@ -2468,45 +2461,57 @@ def magnetics_overlay(
         from .omas_physics import probe_endpoints
 
         PX, PY = probe_endpoints(
-            b_field_pol_probe['[:].position.r'],
-            b_field_pol_probe['[:].position.z'],
-            b_field_pol_probe['[:].poloidal_angle'],
-            b_field_pol_probe['[:].length'],
+            ods['magnetics.b_field_pol_probe[:].position.r'],
+            ods['magnetics.b_field_pol_probe[:].position.z'],
+            ods['magnetics.b_field_pol_probe[:].poloidal_angle'],
+            ods['magnetics.b_field_pol_probe[:].length'],
             ods.cocosio,
         )
 
-        pol_probes_index = b_field_pol_probe['[:].toroidal_angle'] == 0.0
         for k, (px, py) in enumerate(zip(PX, PY)):
             r = numpy.mean(px)
             z = numpy.mean(py)
-            if not len(pol_probes_index) or pol_probes_index[k]:
-                if show_bpol_probe:
-                    ax.plot(px, py, label='_' + b_field_pol_probe.get(f'[{k}].identifier', str(k)), **pol_probe_style, **kw)
-                    pol_probe_style.setdefault('color', ax.lines[-1].get_color())
-                    if (labelevery > 0) and ((k % labelevery) == 0):
-                        ax.text(
-                            r + label_dr[k],
-                            z + label_dz[k],
-                            b_field_pol_probe.get(f'[{k}].name', str(k)),
-                            color=pol_probe_style['color'],
-                            fontsize=notesize,
-                            ha=label_ha[k],
-                            va=label_va[k],
-                        )
-            else:
-                if show_btor_probe:
-                    ax.plot(mean(px), mean(py), '.m', label='_' + b_field_pol_probe.get(f'[{k}].name', str(k)), **tor_probe_style, **kw)
-                    tor_probe_style.setdefault('color', ax.lines[-1].get_color())
-                    if (labelevery > 0) and ((k % labelevery) == 0):
-                        ax.text(
-                            r + label_dr[k],
-                            z + label_dz[k],
-                            n,
-                            color=tor_probe_style['color'],
-                            fontsize=notesize,
-                            ha=label_ha[k],
-                            va=label_va[k],
-                        )
+            if show_bpol_probe:
+                ax.plot(px, py, label='_' + ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)), **pol_probe_style, **kw)
+                pol_probe_style.setdefault('color', ax.lines[-1].get_color())
+                if (labelevery > 0) and ((k % labelevery) == 0):
+                    ax.text(
+                        r + label_dr[k],
+                        z + label_dz[k],
+                        ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)),
+                        color=pol_probe_style['color'],
+                        fontsize=notesize,
+                        ha=label_ha[k],
+                        va=label_va[k],
+                    )
+
+    # toroidal magnetic probes
+    nbt = get_channel_count(
+        ods,
+        'magnetics',
+        check_loc='magnetics.b_field_tor_probe.0.position.r',
+        channels_name='b_field_tor_probe',
+        test_checker='~numpy.isnan(checker)',
+    )
+    if show_btor_probe and nbt:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nbt, **kw)
+        label_dr, label_dz = label_shifter(nbt, kw)
+        for k, (r, z) in enumerate(zip(ods['magnetics.b_field_tor_probe[:].position.r'], ods['magnetics.b_field_tor_probe[:].position.z'])):
+            ax.plot(r, z, '.m', label='_' + ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)), **tor_probe_style, **kw)
+            tor_probe_style.setdefault('color', ax.lines[-1].get_color())
+            if (labelevery > 0) and ((k % labelevery) == 0):
+                ax.text(
+                    r + label_dr[k],
+                    z + label_dz[k],
+                    ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)),
+                    color=tor_probe_style['color'],
+                    fontsize=notesize,
+                    ha=label_ha[k],
+                    va=label_va[k],
+                )
 
     ax.set_aspect('equal')
     return {'ax': ax}

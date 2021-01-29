@@ -1254,6 +1254,37 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
     return ods
 
 
+@add_to__ODS__
+@preprocess_ods('magnetics')
+def magnetics_sanitize(ods, remove_bpol_probe=True):
+    '''
+    Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe
+
+    :param ods: ODS to update in-place
+
+    :return: updated ods
+    '''
+    if 'magnetics.bpol_probe' not in ods:
+        return ods
+
+    if 'magnetics.b_field_pol_probe' in ods:
+        ods['magnetics.b_field_pol_probe'].clear()
+    if 'magnetics.b_field_tor_probe' in ods:
+        ods['magnetics.b_field_tor_probe'].clear()
+
+    tor_angle = ods['magnetics.bpol_probe[:].toroidal_angle']
+    for k in ods['magnetics.bpol_probe']:
+        if abs(numpy.sin(ods.get(f'magnetics.bpol_probe.{k}.toroidal_angle', 0.0))) < numpy.sin(numpy.pi / 4):
+            ods[f'magnetics.b_field_pol_probe.+'] = ods['magnetics.bpol_probe'][k]
+        else:
+            ods[f'magnetics.b_field_tor_probe.+'] = ods['magnetics.bpol_probe'][k]
+
+    if remove_bpol_probe:
+        del ods['magnetics.bpol_probe']
+
+    return ods
+
+
 def delete_ggd(ods, ds=None):
     """
     delete all .ggd and .grids_ggd entries
