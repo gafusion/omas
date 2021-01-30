@@ -286,6 +286,16 @@
  "magnetics.b_field_pol_probe.:": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
+ "magnetics.b_field_pol_probe.:.field.data": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.time": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.validity": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
  "magnetics.b_field_pol_probe.:.identifier": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },

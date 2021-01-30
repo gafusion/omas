@@ -1,5 +1,6 @@
 import numpy as np
 import copy
+import inspect
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings.common import *
@@ -983,6 +984,7 @@ def setup_magnetics_hardware_description_d3d(ods):
         Information or instructions for follow up in central hardware description setup
     """
     # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat
+    # https://nomos.gat.com/DIII-D/diag/magnetics/magnetics.html
     # fmt: off
     R_flux_loop = [0.8929, 0.8936, 0.895, 0.8932, 1.0106, 2.511, 2.285, 1.2517,
                    1.6885, 0.8929, 0.8928, 0.8933, 0.8952, 1.0152, 2.509, 2.297,
@@ -1105,6 +1107,32 @@ def setup_magnetics_hardware_description_d3d(ods):
             ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
 
     return {}
+
+
+@machine_mapping_function(__all__)
+def magnetics_probes_data(ods, pulse=133221):
+    ods1 = ODS()
+    inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
+
+    with omas_environment(ods, cocosio=2):
+        time = None
+        TDIs = []
+        for stage in ['fetch', 'assign']:
+            for k in ods1['magnetics.b_field_pol_probe']:
+                identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier']
+                TDI = f'ptdata2("{identifier}",{pulse})'
+                TDIs.append(TDI)
+                if stage == 'fetch' and time is None:
+                    time = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
+                if stage == 'assign':
+                    if len(tmp[TDI]) > 1:
+                        ods[f'magnetics.b_field_pol_probe.{k}.field.time'] = time / 1000.0
+                        ods[f'magnetics.b_field_pol_probe.{k}.field.data'] = tmp[TDI]
+                        ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = 0
+                    else:
+                        ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
+            if stage == 'fetch':
+                tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
 
 
 if __name__ == '__main__':

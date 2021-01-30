@@ -1,6 +1,7 @@
 # https://confluence.iter.org/display/IMP/UDA+data+mapping+tutorial
 
 import subprocess
+import functools
 import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
@@ -377,12 +378,16 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
 def machine_mapping_function(__all__):
     """
-    Decorator for identifying mapping functions
+    Decorator used to identify machine mapping functions
+
+    NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
+          from another function decorated with `@machine_mapping_function`
     """
 
     def machine_mapping_decorator(f, __all__):
         __all__.append(f.__name__)
 
+        @functools.wraps(f)
         def machine_mapping_caller(*args, **kwargs):
             clean_ods = True
             if len(args[0]):
@@ -417,7 +422,7 @@ def machine_mapping_function(__all__):
 
         return machine_mapping_caller
 
-    return lambda x: machine_mapping_decorator(x, __all__)
+    return lambda f: machine_mapping_decorator(f, __all__)
 
 
 def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
