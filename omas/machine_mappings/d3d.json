@@ -346,6 +346,15 @@
  "magnetics.flux_loop.:.type.index": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
+ "magnetics.ip.:.data": {
+  "COCOSIO": 2,
+  "TDI": "[ptdata2(\"ip\",{pulse})]",
+  "treename": "D3D"
+ },
+ "magnetics.ip.:.time": {
+  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)]",
+  "treename": "D3D"
+ },
  "pf_active.coil.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
  },
