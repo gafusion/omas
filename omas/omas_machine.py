@@ -79,7 +79,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
         value['COCOSIO'] = cocosio
 
     # operate on the raw mappings
-    new_raw_mappings = machine_mappings(machine, None, None, return_raw_mappings=True)
+    new_raw_mappings = machine_mappings(machine, '', None, return_raw_mappings=True)
 
     # assign default options
     updated_defaults = False
@@ -556,7 +556,7 @@ def machines(machine=None, branch=''):
     :param branch: GitHub branch from which to load the machine mapping information
 
     :return: if `machine==None` returns dictionary with list of machines and their json mapping files
-             if `machine` is a string, then returns json mapping filename and branch
+             if `machine` is a string, then returns json mapping filename
     '''
 
     # return cached results
