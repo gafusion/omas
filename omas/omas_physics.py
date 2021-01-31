@@ -2053,34 +2053,36 @@ _cocos_signals = {}
 """
         ]
 
+        skip_signals = [
+            'chi_squared',
+            'standard_deviation',
+            'weight',
+            'coefficients',
+            'beta_tor',
+            'beta_pol',
+            'radial',
+            'rho_tor_norm',
+            'darea_drho_tor',
+            'dvolume_drho_tor',
+            'ratio',
+            'fraction',
+            'rate',
+            'd',
+            'flux',
+            'v',
+            'b_field_max',
+            'b_field_r',
+            'b_field_z',
+            'b_r',
+            'b_z',
+            'width_tor',
+        ]
+
         # loop over structures
         for structure in structures:
             print('Updating COCOS info for: ' + structure)
             text.extend(['', '# ' + structure.upper()])
             csig.extend(['', '# ' + structure.upper()])
-
-            skip_signals = [
-                'chi_squared',
-                'standard_deviation',
-                'weight',
-                'coefficients',
-                'r',
-                'z',
-                'beta_tor',
-                'beta_pol',
-                'radial',
-                'rho_tor_norm',
-                'darea_drho_tor',
-                'dvolume_drho_tor',
-                'ratio',
-                'fraction',
-                'rate',
-                'd',
-                'flux',
-                'v',
-                'b_field_max',
-                'width_tor',
-            ]
 
             out[structure] = {}
             ods[structure]
@@ -2107,6 +2109,8 @@ _cocos_signals = {}
                     elif units in [None, 's']:
                         out[structure].setdefault(-1, []).append((item, '[%s]' % units))
                         continue
+                    elif re.match('.*\.[rz]$', item):
+                        continue
                     elif any([(item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in skip_signals]):
                         out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
                         continue
@@ -2115,7 +2119,7 @@ _cocos_signals = {}
                         continue
                     n = item.count('.')
                     for pnt, key in enumerate(p2l(item)):
-                        pnt = pnt / float(n)
+                        pnt = pnt / n
                         for case in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
                             if key == case:
                                 rationale += [case]

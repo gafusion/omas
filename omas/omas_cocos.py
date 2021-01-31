@@ -687,8 +687,12 @@ _cocos_signals['mhd.ggd.:.j_tor.:.values']='?'                                  
 _cocos_signals['mhd.ggd.:.velocity_parallel.:.values']='?'                                       #[ADD?]# 2.200000 # velocity  parallel  [m.s^-1]
 _cocos_signals['mhd.ggd.:.velocity_tor.:.values']='?'                                            #[ADD?]# 2.200000 # velocity  _tor  [m.s^-1]
 _cocos_signals['mhd.ggd.:.a_field_tor.:.values']='?'                                             #[ADD?]# 1.600000 # _tor  [T.m]
+_cocos_signals['mhd.ggd.:.j_r.:.values']='?'                                                     #[ADD?]# 1.600000 # j  [A.m^-2]
+_cocos_signals['mhd.ggd.:.j_z.:.values']='?'                                                     #[ADD?]# 1.600000 # j  [A.m^-2]
 _cocos_signals['mhd.ggd.:.phi_potential.:.values']='?'                                           #[ADD?]# 1.600000 # phi  [V]
 _cocos_signals['mhd.ggd.:.psi.:.values']='?'                                                     #[ADD?]# 1.600000 # psi  [Wb]
+_cocos_signals['mhd.ggd.:.velocity_r.:.values']='?'                                              #[ADD?]# 1.600000 # velocity  [m.s^-1]
+_cocos_signals['mhd.ggd.:.velocity_z.:.values']='?'                                              #[ADD?]# 1.600000 # velocity  [m.s^-1]
 
 # MHD_LINEAR
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.b_field_perturbed.coordinate1.coefficients_imaginary']='?'           #[ADD?]# 2.875000 # toroidal  b  b_field  [T]
@@ -949,6 +953,8 @@ _cocos_signals['spectrometer_visible.channel.:.fibre_image.outline.phi']='TOR'  
 _cocos_signals['spectrometer_visible.channel.:.light_collection_efficiencies.positions.phi']='TOR'                            # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.line_of_sight.first_point.phi']='TOR'                                          # 2.000000 # phi  [rad]
 _cocos_signals['spectrometer_visible.channel.:.line_of_sight.second_point.phi']='TOR'                                         # 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.e_field_lh_r']='?'                            #[ADD?]# 2.000000 # e_field  [V.m^-1]
+_cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.e_field_lh_z']='?'                            #[ADD?]# 2.000000 # e_field  [V.m^-1]
 _cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocity_cold_neutrals']='?'                  #[ADD?]# 2.000000 # velocity  [m.s^-1]
 _cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocity_hot_neutrals']='?'                   #[ADD?]# 2.000000 # velocity  [m.s^-1]
 _cocos_signals['spectrometer_visible.channel.:.polarizer.centre.phi']='TOR'                                                   # 2.000000 # phi  [rad]
