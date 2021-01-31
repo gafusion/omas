@@ -2428,7 +2428,7 @@ def magnetics_overlay(
     ods,
     ax=None,
     show_flux_loop=True,
-    show_bpol_probe=False,
+    show_bpol_probe=True,
     show_btor_probe=True,
     flux_loop_style={'marker': 's'},
     pol_probe_style={},
