@@ -334,6 +334,15 @@
  "magnetics.flux_loop.:": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
+ "magnetics.flux_loop.:.flux.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.time": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.validity": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },

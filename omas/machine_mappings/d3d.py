@@ -1134,6 +1134,30 @@ def magnetics_probes_data(ods, pulse=133221):
             if stage == 'fetch':
                 tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
 
+@machine_mapping_function(__all__)
+def magnetics_floops_data(ods, pulse=133221):
+    ods1 = ODS()
+    inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
+
+    with omas_environment(ods, cocosio=2):
+        time = None
+        TDIs = []
+        for stage in ['fetch', 'assign']:
+            for k in ods1['magnetics.flux_loop']:
+                identifier = ods1[f'magnetics.flux_loop.{k}.identifier']
+                TDI = f'ptdata2("{identifier}",{pulse})'
+                TDIs.append(TDI)
+                if stage == 'fetch' and time is None:
+                    time = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
+                if stage == 'assign':
+                    if len(tmp[TDI]) > 1:
+                        ods[f'magnetics.flux_loop.{k}.flux.time'] = time / 1000.0
+                        ods[f'magnetics.flux_loop.{k}.flux.data'] = tmp[TDI]
+                        ods[f'magnetics.flux_loop.{k}.flux.validity'] = 0
+                    else:
+                        ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
+            if stage == 'fetch':
+                tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
 
 if __name__ == '__main__':
     test_machine_mapping_functions(__all__, globals(), locals())
