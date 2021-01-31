@@ -1082,7 +1082,8 @@ _cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_sauter.t
 # TEMPORARY
 
 # TF
-_cocos_signals['tf.field_map.:.b_field_tor.:.values']='?'                                             #[ADD?]# 2.800000 # b  b_field  _tor  [T]
+_cocos_signals['tf.field_map.:.b_field_tor.:.values']='TOR'                                                  # 2.800000 # b  b_field  _tor  [T]
+_cocos_signals['tf.b_field_tor_vacuum_r.data']='TOR'                                                         # 2.000000 # b  b_field  [T.m]
 _cocos_signals['tf.coil.:.conductor.:.elements.centres.phi']='TOR'                                           # 2.000000 # phi  [rad]
 _cocos_signals['tf.coil.:.conductor.:.elements.end_points.phi']='TOR'                                        # 2.000000 # phi  [rad]
 _cocos_signals['tf.coil.:.conductor.:.elements.intermediate_points.phi']='TOR'                               # 2.000000 # phi  [rad]
@@ -1090,6 +1091,7 @@ _cocos_signals['tf.coil.:.conductor.:.elements.start_points.phi']='TOR'         
 _cocos_signals['tf.coil.:.conductor.:.current.data']='?'                                              #[ADD?]# 1.833333 # current  [A]
 _cocos_signals['tf.coil.:.current.data']='?'                                                          #[ADD?]# 1.750000 # current  [A]
 _cocos_signals['tf.field_map.:.a_field_tor.:.values']='?'                                             #[ADD?]# 1.600000 # _tor  [T.m]
+_cocos_signals['tf.delta_b_field_tor_vacuum_r.data']='TOR'                                                   # 1.500000 # b_field  [T.m]
 
 # THOMSON_SCATTERING
 _cocos_signals['thomson_scattering.channel.:.delta_position.phi']='TOR'                       # 2.000000 # phi  [rad]

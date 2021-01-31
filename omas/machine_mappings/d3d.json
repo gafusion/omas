@@ -348,12 +348,10 @@
  },
  "magnetics.ip.:.data": {
   "COCOSIO": 2,
-  "TDI": "[ptdata2(\"ip\",{pulse})]",
-  "treename": "D3D"
+  "TDI": "[ptdata2(\"ip\",{pulse})]"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)]",
-  "treename": "D3D"
+  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)]"
  },
  "pf_active.coil.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
@@ -397,6 +395,16 @@
  },
  "pf_active.coil.:.name": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "tf.b_field_tor_vacuum_r.data": {
+  "COCOSIO": 2,
+  "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
+ },
+ "tf.b_field_tor_vacuum_r.time": {
+  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)"
+ },
+ "tf.r0": {
+  "VALUE": 1.6955
  },
  "thomson_scattering.channel.:": {
   "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
