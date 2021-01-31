@@ -226,12 +226,18 @@ class mdsvalue(dict):
                 for expr in TDI:
                     conns.append(str(expr.__hash__()), expr)
                 res = conns.execute()
-                return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+                try:
+                    return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+                except KeyError:
+                    return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
             elif isinstance(TDI, dict):
                 for name, expr in TDI.items():
                     conns.append(name, expr)
                 res = conns.execute()
-                return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
+                try:
+                    return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
+                except KeyError:
+                    return {expr: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
             else:
                 return MDSplus.Data.data(conn.get(TDI))
         except Exception as _excp:
