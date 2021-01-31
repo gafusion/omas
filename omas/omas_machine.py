@@ -190,7 +190,7 @@ class mdsvalue(dict):
         '''
         Fetch data from MDS+ with connection caching
 
-        :param TDI: string or list of strings
+        :param TDI: string, list or dict of strings
             MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
 
         :return: result of TDI expression, or dictionary with results of TDI expressions
@@ -227,6 +227,11 @@ class mdsvalue(dict):
                     conns.append(str(expr.__hash__()), expr)
                 res = conns.execute()
                 return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+            elif isinstance(TDI, dict):
+                for name, expr in TDI.items():
+                    conns.append(name, expr)
+                res = conns.execute()
+                return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
             else:
                 return MDSplus.Data.data(conn.get(TDI))
         except Exception as _excp:
