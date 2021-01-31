@@ -885,28 +885,37 @@ def l2ut(path):
     return l2o(lpath)
 
 
-def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version']):
+def omas_info(structures=None, hide_obsolescent=True, cumulative_queries=False, imas_version=omas_rcparams['default_imas_version']):
     """
     This function returns an ods with the leaf nodes filled with their property informations
+
+    :param hide_obsolescent: hide obsolescent entries
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
                        if None, then all structures are returned
 
-    :return: ods
+    :param cumulative_queries: return all IDSs that have been queried
+
+    :param imas_version: IMAS version to look up
+
+    :return: ods showcasing IDS structure
     """
+
+    from omas import ODS
 
     if not structures:
         structures = sorted(list(structures_filenames(imas_version).keys()))
     elif isinstance(structures, str):
         structures = [structures]
 
-    # caching
-    if imas_version not in _info_structures:
-        from omas import ODS
+    # caching based on imas version and obsolescence
+    if (imas_version, hide_obsolescent) not in _info_structures:
+        _info_structures[imas_version, hide_obsolescent] = ODS(imas_version=imas_version, consistency_check=False)
+    ods = _info_structures[imas_version, hide_obsolescent]
 
-        _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
-    ods = _info_structures[imas_version]
+    ods_out = ODS(imas_version=imas_version, consistency_check=False)
 
+    # generate ODS with info
     for structure in structures:
         if structure not in ods:
             tmp = load_structure(structure, imas_version)[0]
@@ -921,9 +930,18 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
                         break
                 if parent:
                     continue
+                if hide_obsolescent and omas_info_node(item).get('lifecycle_status', '') == 'obsolescent':
+                    continue
                 ods[item.replace(':', '0')] = tmp[item]
+        ods_out[structure] = ods[structure]
 
-    return copy.deepcopy(ods)
+    # cumulative queries
+    if cumulative_queries:
+        for structure in ods:
+            if structure not in ods_out:
+                ods_out[structure] = ods[structure]
+
+    return ods_out
 
 
 def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
