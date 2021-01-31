@@ -244,7 +244,6 @@ def summary_greenwald(ods, update=True):
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
-
     """
     Calculates line-average electron density for each time slice and stores them in the summary ods
 
@@ -1965,6 +1964,9 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
 
     :return: dictionary structure with tally of score and reason for scoring for every entry
     """
+    # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
+    from .omas_cocos import _cocos_signals
+
     # update OMAS cocos information with the one stored in IMAS
     from .omas_structure import extract_cocos
 
@@ -2193,20 +2195,31 @@ _cocos_signals = {}
         _extra_structures.update(_extra_structures_bkp)
 
 
-# cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
-from .omas_cocos import _cocos_signals
-
-
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
 class CocosSignals(dict):
+    def __init__(self):
+        self.reload()
+
     def __getitem__(self, key):
         value = dict.__getitem__(self, key)
         if value == '?':
-            warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py' % key)
+            warnings.warn(
+                f'''
+`{key}` may require defining its COCOS transform in {os.path.split(__file__)[0] + os.sep}omas_cocos.py
+Once done, you can reload the cocos definitions with:
+> from omas.omas_physics import cocos_signals; cocos_signals.reload()
+'''.strip()
+            )
         return value
+
+    def reload(self):
+        namespace = {}
+        with open(os.path.split(__file__)[0] + os.sep + 'omas_cocos.py', 'r') as f:
+            exec(f.read(), namespace)
+        self.clear()
+        self.update(namespace['_cocos_signals'])
 
 
 # cocos_signals is the actual dictionary
 cocos_signals = CocosSignals()
-cocos_signals.update(_cocos_signals)
