@@ -6,7 +6,7 @@ __all__ = []
 # Use the @machine_mapping_function to automatically fill out the .json mapping file
 # All these functions must accept `ods` as their first argument
 # All other arguments should have a default value defined, as this serves two purposes:
-#  1. run the test_machine_mapping_functions
+#  1. run the run_machine_mapping_functions
 #  2. automatically fill the __options__ entry in the .json mapping file
 
 
@@ -17,4 +17,4 @@ def sample_function(ods, pulse=123456, user_argument='this is a test'):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    run_machine_mapping_functions(__all__, globals(), locals())

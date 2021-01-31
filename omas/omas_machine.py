@@ -13,7 +13,7 @@ __all__ = [
     'machine_mappings',
     'load_omas_machine',
     'machine_mapping_function',
-    'test_machine_mapping_functions',
+    'run_machine_mapping_functions',
     'mdstree',
     'mdsvalue',
 ]
@@ -425,7 +425,7 @@ def machine_mapping_function(__all__):
     return lambda f: machine_mapping_decorator(f, __all__)
 
 
-def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     '''
     Function used to test python mapping functions
 
