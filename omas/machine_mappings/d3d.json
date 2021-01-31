@@ -325,6 +325,12 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
+ "magnetics.diamagnetic_flux.:.data": {
+  "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
+ },
+ "magnetics.diamagnetic_flux.:.time": {
+  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)]"
+ },
  "magnetics.flux_loop.:": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
