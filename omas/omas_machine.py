@@ -90,7 +90,9 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
                 updated_defaults = True
 
     # if the definition is the same do not do anythinig
-    if not updated_defaults and ulocation in new_raw_mappings and repr(value) == repr(new_raw_mappings[ulocation]):
+    # use `sorted(repr(dict))` as a cheap recursive dictionary diff
+    # sorted is needed because starting with Python3.7 dictionaries are sorted and we cannot guarantee that value and mappings have same sorting
+    if not updated_defaults and ulocation in new_raw_mappings and sorted(repr(value)) == sorted(repr(new_raw_mappings[ulocation])):
         return new_raw_mappings
 
     # add definition for new/updated location and update the .json file
@@ -98,7 +100,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     filename = machines(machine, '')
     with open(filename, 'w') as f:
         json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
-    print(f"Updated {machine} mapping for {ulocation}")
+    print(f'Updated {machine} mapping for {ulocation}')
 
     # add the same call for arrays of structures going upstream
     if update_path:
