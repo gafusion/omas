@@ -1,0 +1,38 @@
+﻿omas.omas\_cython
+=================
+
+.. automodule:: omas.omas_cython
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      i2o
+      l2i
+      l2o
+      l2u
+      o2i
+      o2u
+      p2l
+      trim_common_path
+      u2n
+      u2o
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

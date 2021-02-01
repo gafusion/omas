@@ -1,0 +1,37 @@
+﻿omas.omas\_hdc
+==============
+
+.. automodule:: omas.omas_hdc
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_omas_hdc
+      save_omas_hdc
+      through_omas_hdc
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      HDC
+   
+   
+
+   
+   
+   
+
+
+

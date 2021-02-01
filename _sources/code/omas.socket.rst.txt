@@ -1,0 +1,52 @@
+﻿omas.socket
+===========
+
+.. automodule:: omas.socket
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_connection
+      fromfd
+      getaddrinfo
+      getfqdn
+      socketpair
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AddressFamily
+      AddressInfo
+      MsgFlag
+      SocketIO
+      SocketKind
+      socket
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      gaierror
+      herror
+      timeout
+   
+   
+
+
+

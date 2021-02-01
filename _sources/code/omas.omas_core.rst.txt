@@ -1,0 +1,47 @@
+﻿omas.omas\_core
+===============
+
+.. automodule:: omas.omas_core
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      codeparams_xml_load
+      codeparams_xml_save
+      consistency_checker
+      force_imas_type
+      load_omas_pkl
+      save_omas_imas
+      save_omas_pkl
+      through_omas_pkl
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CodeParameters
+      ODC
+      ODS
+      dynamic_ODS
+      dynamic_ODS_factory
+      dynamic_ODS_wrapper
+   
+   
+
+   
+   
+   
+
+
+

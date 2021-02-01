@@ -1,0 +1,6 @@
+﻿omas.omas\_testdir
+==================
+
+.. currentmodule:: omas
+
+.. autofunction:: omas_testdir

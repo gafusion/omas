@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OMAS: Ordered Multidimensional Array Structures &#8212; OMAS</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery-dataframe.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img height=40, src="_static/OMAS_logo.png">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="how.html">Concept</a></li>
+                <li><a href="auto_examples/index.html">Examples</a></li>
+                <li><a href="install.html">Installation</a></li>
+                <li><a href="iter.html">ITER</a></li>
+                <li><a href="omfit.html">OMFIT</a></li>
+                <li><a href="schema.html">Data schema</a></li>
+                <li><a href="code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">OMAS: Ordered Multidimensional Array Structures</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="omas-ordered-multidimensional-array-structures">
+<h1>OMAS: Ordered Multidimensional Array Structures<a class="headerlink" href="#omas-ordered-multidimensional-array-structures" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center">
+<a class="reference external image-reference" href="https://omfit.io/"><img alt="OMAS simplifies the interface between third-party codes with ITER IMAS" src="_images/omas_concept.png" style="width: 95%;" /></a>
+</div>
+<p>OMAS is a Python library to interface with the <a class="reference external" href="http://iter.org">ITER</a> Integrated Modeling and Analysis Suite (<a class="reference external" href="https://confluence.iter.org/display/IMP">IMAS</a>):</p>
+<ul class="simple">
+<li><p>Store data compatibly with the IMAS data model</p></li>
+<li><p>Offers convenient services/features beyond data storage</p></li>
+<li><p>Does not require a local IMAS installation</p></li>
+</ul>
+<p>Learn More:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://youtu.be/kGVbEu1dG4c">Video of a talk</a> given at the 2020 American Physical Society meeting and associated <a class="reference external" href="https://www.dropbox.com/s/n0i5yc0kv0vehgc/OMAS_APS2020.pdf?dl=0">slides</a></p></li>
+<li><p>Read more details in the appendix of <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1741-4326/abb918/meta">“Meneghini et al. Nuclear Fusion (2020)”</a> publication.</p></li>
+</ul>
+<hr class="docutils" />
+<a class="reference external image-reference" href="https://github.com/gafusion/omas"><img alt="https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&amp;color=blue" src="https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&amp;color=blue" /></a>
+<a class="reference external image-reference" href="https://imas.iter.org"><img alt="https://img.shields.io/badge/IMAS-3.31.0-yellow" src="https://img.shields.io/badge/IMAS-3.31.0-yellow" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/gafusion/omas"><img alt="https://img.shields.io/travis/gafusion/omas.svg" src="https://img.shields.io/travis/gafusion/omas.svg" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/gafusion/omas"><img alt="https://img.shields.io/codecov/c/github/gafusion/omas.svg" src="https://img.shields.io/codecov/c/github/gafusion/omas.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/gafusion/omas"><img alt="https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue" src="https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue" /></a>
+<hr class="docutils" />
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2021 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 01, 2021.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

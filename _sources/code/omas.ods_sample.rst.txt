@@ -1,0 +1,6 @@
+﻿omas.ods\_sample
+================
+
+.. currentmodule:: omas
+
+.. autofunction:: ods_sample

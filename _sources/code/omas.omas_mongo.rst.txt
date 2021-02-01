@@ -1,0 +1,32 @@
+﻿omas.omas\_mongo
+================
+
+.. automodule:: omas.omas_mongo
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_mongo_credentials
+      load_omas_mongo
+      save_omas_mongo
+      through_omas_mongo
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

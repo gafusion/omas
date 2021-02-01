@@ -1,0 +1,71 @@
+﻿omas.omas\_physics
+==================
+
+.. automodule:: omas.omas_physics
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_to__ALL__
+      add_to__ODS__
+      check_iter_scenario_requirements
+      cocos_transform
+      consistent_times
+      core_profiles_consistent
+      core_profiles_currents
+      core_profiles_densities
+      core_profiles_pressures
+      core_profiles_zeff
+      current_from_eq
+      define_cocos
+      delete_ggd
+      equilibrium_consistent
+      equilibrium_ggd_to_rectangular
+      equilibrium_stored_energy
+      equilibrium_transpose_RZ
+      generate_cocos_signals
+      grids_ggd_points_triangles
+      identify_cocos
+      imas_info
+      magnetics_sanitize
+      omas_environment
+      preprocess_ods
+      probe_endpoints
+      scatter_to_rectangular
+      search_in_array_structure
+      search_ion
+      summary_consistent_global_quantities
+      summary_global_quantities
+      summary_greenwald
+      summary_lineaverage_density
+      summary_taue
+      summary_total_powers
+      transform_current
+      wall_add
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CocosSignals
+      constants
+   
+   
+
+   
+   
+   
+
+
+

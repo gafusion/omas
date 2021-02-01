@@ -1,0 +1,6 @@
+﻿omas.del\_omas\_s3
+==================
+
+.. currentmodule:: omas
+
+.. autofunction:: del_omas_s3

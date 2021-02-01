@@ -1,0 +1,6 @@
+﻿omas.get\_actor\_io\_ids
+========================
+
+.. currentmodule:: omas
+
+.. autofunction:: get_actor_io_ids

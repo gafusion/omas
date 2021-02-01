@@ -1,0 +1,35 @@
+﻿omas.omas\_symbols
+==================
+
+.. automodule:: omas.omas_symbols
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      nth_repl
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      PhysicsSymbols
+   
+   
+
+   
+   
+   
+
+
+

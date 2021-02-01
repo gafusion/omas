@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.os &#8212; OMAS</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><img height=40, src="../_static/OMAS_logo.png">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">omas.os</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="module-omas.os">
+<span id="omas-os"></span><h1>omas.os<a class="headerlink" href="#module-omas.os" title="Permalink to this headline">¶</a></h1>
+<p>OS routines for NT or Posix depending on what system we’re on.</p>
+<dl class="simple">
+<dt>This exports:</dt><dd><ul class="simple">
+<li><p>all functions from posix or nt, e.g. unlink, stat, etc.</p></li>
+<li><p>os.path is either posixpath or ntpath</p></li>
+<li><p>os.name is either ‘posix’ or ‘nt’</p></li>
+<li><p>os.curdir is a string representing the current directory (always ‘.’)</p></li>
+<li><p>os.pardir is a string representing the parent directory (always ‘..’)</p></li>
+<li><p>os.sep is the (or a most common) pathname separator (‘/’ or ‘')</p></li>
+<li><p>os.extsep is the extension separator (always ‘.’)</p></li>
+<li><p>os.altsep is the alternate pathname separator (None or ‘/’)</p></li>
+<li><p>os.pathsep is the component separator used in $PATH etc</p></li>
+<li><p>os.linesep is the line separator in text files (‘r’ or ‘n’ or ‘rn’)</p></li>
+<li><p>os.defpath is the default search path for executables</p></li>
+<li><p>os.devnull is the file path of the null device (‘/dev/null’, etc.)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Programs that import and use ‘os’ stand a better chance of being
+portable between different platforms.  Of course, they must then
+only use functions that are defined by all platforms (e.g., unlink
+and opendir), and leave all pathname manipulation to os.path
+(e.g., split and join).</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execl</span></code>(file, *args)</p></td>
+<td><p>Execute the executable file with argument list args, replacing the current process.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execle</span></code>(file, *args, env)</p></td>
+<td><p>Execute the executable file with argument list args and environment env, replacing the current process.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execlp</span></code>(file, *args)</p></td>
+<td><p>Execute the executable file (which is searched for along $PATH) with argument list args, replacing the current process.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execlpe</span></code>(file, *args, env)</p></td>
+<td><p>Execute the executable file (which is searched for along $PATH) with argument list args and environment env, replacing the current process.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execvp</span></code>(file, args)</p></td>
+<td><p>Execute the executable file (which is searched for along $PATH) with argument list args, replacing the current process.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">execvpe</span></code>(file, args, env)</p></td>
+<td><p>Execute the executable file (which is searched for along $PATH) with argument list args and environment env, replacing the current process.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fdopen</span></code>(fd, *args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fsdecode</span></code>(filename)</p></td>
+<td><p>Decode filename (an os.PathLike, bytes, or str) from the filesystem encoding with ‘surrogateescape’ error handler, return str unchanged.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fsencode</span></code>(filename)</p></td>
+<td><p>Encode filename (an os.PathLike, bytes, or str) to the filesystem encoding with ‘surrogateescape’ error handler, return bytes unchanged.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fwalk</span></code>([top, topdown, onerror, …])</p></td>
+<td><p>Directory tree generator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_exec_path</span></code>([env])</p></td>
+<td><p>Returns the sequence of directories that will be searched for the named executable (similar to a shell) when launching a process.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getenv</span></code>(key[, default])</p></td>
+<td><p>Get an environment variable, return None if it doesn’t exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getenvb</span></code>(key[, default])</p></td>
+<td><p>Get an environment variable, return None if it doesn’t exist.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">makedirs</span></code>(name [[, mode, exist_ok])</p></td>
+<td><p>Super-mkdir; create a leaf directory and all intermediate ones.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">popen</span></code>(cmd[, mode, buffering])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">removedirs</span></code>(name)</p></td>
+<td><p>Super-rmdir; remove a leaf directory and all empty intermediate ones.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">renames</span></code>(old, new)</p></td>
+<td><p>Super-rename; create directories as necessary and delete any left empty.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnl</span></code>(mode, file, *args)</p></td>
+<td><p>Execute file with arguments from args in a subprocess.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnle</span></code>(mode, file, *args, env)</p></td>
+<td><p>Execute file with arguments from args in a subprocess with the supplied environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnlp</span></code>(mode, file, *args)</p></td>
+<td><p>Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnlpe</span></code>(mode, file, *args, env)</p></td>
+<td><p>Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnv</span></code>(mode, file, args)</p></td>
+<td><p>Execute file with arguments from args in a subprocess.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnve</span></code>(mode, file, args, env)</p></td>
+<td><p>Execute file with arguments from args in a subprocess with the specified environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnvp</span></code>(mode, file, args)</p></td>
+<td><p>Execute file (which is looked for along $PATH) with arguments from args in a subprocess.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spawnvpe</span></code>(mode, file, args, env)</p></td>
+<td><p>Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code>(top[, topdown, onerror, followlinks])</p></td>
+<td><p>Directory tree generator.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PathLike</span></code>()</p></td>
+<td><p>Abstract base class for implementing the file system path protocol.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stat_result</span></code>([iterable])</p></td>
+<td><p>stat_result: Result from stat, fstat, or lstat.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">statvfs_result</span></code>([iterable])</p></td>
+<td><p>statvfs_result: Result from statvfs or fstatvfs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminal_size</span></code>([iterable])</p></td>
+<td><p>A tuple of (columns, lines) for holding terminal window size</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2021 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 01, 2021.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿omas.define\_cocos
+==================
+
+.. currentmodule:: omas
+
+.. autofunction:: define_cocos

@@ -1,0 +1,6 @@
+﻿omas.load\_omas\_iter\_scenario
+===============================
+
+.. currentmodule:: omas
+
+.. autofunction:: load_omas_iter_scenario

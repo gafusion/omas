@@ -1,0 +1,6 @@
+﻿omas.latest\_imas\_version
+==========================
+
+.. currentmodule:: omas
+
+.. autodata:: latest_imas_version

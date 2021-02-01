@@ -1,0 +1,33 @@
+﻿omas.omas\_h5
+=============
+
+.. automodule:: omas.omas_h5
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      convertDataset
+      dict2hdf5
+      load_omas_h5
+      save_omas_h5
+      through_omas_h5
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,39 @@
+﻿omas.omas\_uda
+==============
+
+.. automodule:: omas.omas_uda
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      filled_paths_in_uda
+      load_omas_uda
+      offset
+      uda_get
+      uda_get_shape
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      pyuda
+   
+   
+
+   
+   
+   
+
+
+

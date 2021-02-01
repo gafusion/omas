@@ -1,0 +1,34 @@
+﻿omas.omas\_s3
+=============
+
+.. automodule:: omas.omas_s3
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      del_omas_s3
+      list_omas_s3
+      load_omas_s3
+      remote_uri
+      save_omas_s3
+      through_omas_s3
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

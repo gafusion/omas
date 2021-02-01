@@ -1,0 +1,38 @@
+﻿omas.omas\_nc
+=============
+
+.. automodule:: omas.omas_nc
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_ds_item
+      load_omas_nc
+      save_omas_nc
+      through_omas_nc
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      dynamic_omas_nc
+   
+   
+
+   
+   
+   
+
+
+

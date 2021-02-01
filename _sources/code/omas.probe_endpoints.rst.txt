@@ -1,0 +1,6 @@
+﻿omas.probe\_endpoints
+=====================
+
+.. currentmodule:: omas
+
+.. autofunction:: probe_endpoints

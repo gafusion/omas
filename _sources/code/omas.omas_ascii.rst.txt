@@ -1,0 +1,35 @@
+﻿omas.omas\_ascii
+================
+
+.. automodule:: omas.omas_ascii
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      identify_imas_type
+      imas_ascii_key_sorter
+      imas_eval
+      imas_fmt
+      load_omas_ascii
+      save_omas_ascii
+      through_omas_ascii
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

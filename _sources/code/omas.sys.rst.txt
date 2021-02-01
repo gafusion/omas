@@ -1,0 +1,61 @@
+﻿omas.sys
+========
+
+.. automodule:: omas.sys
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      breakpointhook
+      call_tracing
+      callstats
+      displayhook
+      exc_info
+      excepthook
+      exit
+      get_asyncgen_hooks
+      get_coroutine_origin_tracking_depth
+      get_coroutine_wrapper
+      getallocatedblocks
+      getcheckinterval
+      getdefaultencoding
+      getdlopenflags
+      getfilesystemencodeerrors
+      getfilesystemencoding
+      getprofile
+      getrecursionlimit
+      getrefcount
+      getsizeof
+      getswitchinterval
+      gettrace
+      intern
+      is_finalizing
+      set_asyncgen_hooks
+      set_coroutine_origin_tracking_depth
+      set_coroutine_wrapper
+      setcheckinterval
+      setdlopenflags
+      setprofile
+      setrecursionlimit
+      setswitchinterval
+      settrace
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

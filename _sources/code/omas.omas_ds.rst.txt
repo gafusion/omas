@@ -1,0 +1,42 @@
+﻿omas.omas\_ds
+=============
+
+.. automodule:: omas.omas_ds
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_omas_ds
+      load_omas_dx
+      ods_2_odx
+      odx_2_ods
+      save_omas_ds
+      save_omas_dx
+      through_omas_ds
+      through_omas_dx
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ODX
+   
+   
+
+   
+   
+   
+
+
+

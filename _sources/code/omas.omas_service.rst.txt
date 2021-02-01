@@ -1,0 +1,6 @@
+﻿omas.omas\_service
+==================
+
+.. currentmodule:: omas
+
+.. autofunction:: omas_service

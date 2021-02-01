@@ -1,0 +1,6 @@
+﻿omas.machine\_mapping\_function
+===============================
+
+.. currentmodule:: omas
+
+.. autofunction:: machine_mapping_function

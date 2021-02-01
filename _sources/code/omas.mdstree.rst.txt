@@ -1,0 +1,33 @@
+﻿omas.mdstree
+============
+
+.. currentmodule:: omas
+
+.. autoclass:: mdstree
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~mdstree.__init__
+      ~mdstree.clear
+      ~mdstree.copy
+      ~mdstree.fromkeys
+      ~mdstree.get
+      ~mdstree.items
+      ~mdstree.keys
+      ~mdstree.pop
+      ~mdstree.popitem
+      ~mdstree.setdefault
+      ~mdstree.update
+      ~mdstree.values
+   
+   
+
+   
+   
+   

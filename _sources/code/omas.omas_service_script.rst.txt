@@ -1,0 +1,6 @@
+﻿omas.omas\_service\_script
+==========================
+
+.. currentmodule:: omas
+
+.. autodata:: omas_service_script

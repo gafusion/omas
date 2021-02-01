@@ -1,0 +1,6 @@
+﻿omas.imas\_json\_dir
+====================
+
+.. currentmodule:: omas
+
+.. autodata:: imas_json_dir

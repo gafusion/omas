@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.omas_physics &#8212; OMAS</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><img height=40, src="../_static/OMAS_logo.png">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">omas.omas_physics</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="module-omas.omas_physics">
+<span id="omas-omas-physics"></span><h1>omas.omas_physics<a class="headerlink" href="#module-omas.omas_physics" title="Permalink to this headline">¶</a></h1>
+<p>physics-based ODS methods and utilities</p>
+<hr class="docutils" />
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_to__ALL__</span></code>(f)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_to__ODS__</span></code>(f)</p></td>
+<td><p>anything wrapped here will be available as a ODS method with name ‘<a href="#id1"><span class="problematic" id="id2">physics_</span></a>’+f.__name__</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_iter_scenario_requirements</span></code>(ods)</p></td>
+<td><p>Check that the current ODS satisfies the ITER scenario database requirements as defined in <a class="reference external" href="https://confluence.iter.org/x/kQqOE">https://confluence.iter.org/x/kQqOE</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cocos_transform</span></code>(cocosin_index, cocosout_index)</p></td>
+<td><p>Returns a dictionary with coefficients for how various quantities should get multiplied in order to go from cocosin_index to cocosout_index</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">consistent_times</span></code>(self[, attempt_fix, …])</p></td>
+<td><p>Assign .time and .ids_properties.homogeneous_time info for top-level structures since these are required for writing an IDS to IMAS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_consistent</span></code>(ods[, update, …])</p></td>
+<td><p>Calls all core_profiles consistency functions including</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_currents</span></code>(ods[, time_index, …])</p></td>
+<td><p>This function sets currents in ods[‘core_profiles’][‘profiles_1d’][time_index]</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_densities</span></code>(ods[, update])</p></td>
+<td><p>Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_pressures</span></code>(ods[, update])</p></td>
+<td><p>Calculates individual ions pressures</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_zeff</span></code>(ods[, update, …])</p></td>
+<td><p>calculates effective charge</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_from_eq</span></code>(ods, time_index)</p></td>
+<td><p>This function sets the currents in ods[‘core_profiles’][‘profiles_1d’][time_index] using ods[‘equilibrium’][‘time_slice’][time_index][‘profiles_1d’][‘j_tor’]</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">define_cocos</span></code>(cocos_ind)</p></td>
+<td><p>Returns dictionary with COCOS coefficients given a COCOS index</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_ggd</span></code>(ods[, ds])</p></td>
+<td><p>delete all .ggd and .grids_ggd entries</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_consistent</span></code>(ods)</p></td>
+<td><p>Calculate missing derived quantities for equilibrium IDS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_ggd_to_rectangular</span></code>(ods[, …])</p></td>
+<td><p>Convert GGD data to profiles 2D</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_stored_energy</span></code>(ods[, update])</p></td>
+<td><p>Calculate MHD stored energy from equilibrium pressure and volume</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_transpose_RZ</span></code>(ods[, flip_dims])</p></td>
+<td><p>Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_cocos_signals</span></code>([structures, …])</p></td>
+<td><p>This is a utility function for generating the omas_cocos.py Python file</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">grids_ggd_points_triangles</span></code>(grid)</p></td>
+<td><p>Return points and triangles in grids_ggd structure</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">identify_cocos</span></code>(B0, Ip, q, psi[, …])</p></td>
+<td><p>Utility function to identify COCOS coordinate system If multiple COCOS are possible, then all are returned.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imas_info</span></code>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_sanitize</span></code>(ods[, remove_bpol_probe])</p></td>
+<td><p>Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas_environment</span></code>(ods[, cocosio, coordsio, …])</p></td>
+<td><p>Provides environment for data input/output to/from OMAS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_ods</span></code>(*require[, require_mode])</p></td>
+<td><p>Decorator function that:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">probe_endpoints</span></code>(r0, z0, a0, l0, cocos)</p></td>
+<td><p>Transform r,z,a,l arrays commonly used to describe poloidal magnetic probes geometry to actual r,z coordinates of the end-points of the probes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scatter_to_rectangular</span></code>(r, z, data, R, Z[, …])</p></td>
+<td><p>Interpolate scattered data points to rectangular grid</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_in_array_structure</span></code>(ods, conditions[, …])</p></td>
+<td><p>search for the index in an array structure that matches some conditions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_ion</span></code>(ion_ods[, label, Z, A, …])</p></td>
+<td><p>utility function used to identify the ion number and element numbers given the ion label and or their Z and/or A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_consistent_global_quantities</span></code>(ods[, …])</p></td>
+<td><p>Generate summary.global_quantities from global_quantities of other IDSs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_global_quantities</span></code>(ods[, update])</p></td>
+<td><p>Calculates global quantities for each time slice and stores them in the summary ods:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_greenwald</span></code>(ods[, update])</p></td>
+<td><p>Calculates Greenwald Fraction for each time slice and stores them in the summary ods.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_lineaverage_density</span></code>(ods[, …])</p></td>
+<td><p>Calculates line-average electron density for each time slice and stores them in the summary ods</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_taue</span></code>(ods[, update])</p></td>
+<td><p>Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary_total_powers</span></code>(ods[, update])</p></td>
+<td><p>Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform_current</span></code>(rho[, JtoR, JparB, …])</p></td>
+<td><p>Given &lt;Jt/R&gt; returns &lt;J.B&gt;, or vice versa Transformation obeys &lt;J.B&gt; = (1/f)*(&lt;B^2&gt;/&lt;1/R^2&gt;)*(&lt;Jt/R&gt; + dp/dpsi*(1 - f^2*&lt;1/R^2&gt;/&lt;B^2&gt;)) N.B.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wall_add</span></code>(ods[, machine])</p></td>
+<td><p>Add wall information to the ODS</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CocosSignals</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">constants</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2021 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 01, 2021.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

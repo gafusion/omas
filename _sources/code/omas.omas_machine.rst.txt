@@ -1,0 +1,45 @@
+﻿omas.omas\_machine
+==================
+
+.. automodule:: omas.omas_machine
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_omas_machine
+      machine_mapping_function
+      machine_mappings
+      machine_to_omas
+      machines
+      mds_machine_to_server_mapping
+      python_tdi_namespace
+      run_machine_mapping_functions
+      update_mapping
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      dynamic_omas_machine
+      mdstree
+      mdsvalue
+   
+   
+
+   
+   
+   
+
+
+

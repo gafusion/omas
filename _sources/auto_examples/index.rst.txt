@@ -1,0 +1,741 @@
+:orphan:
+
+
+
+.. _sphx_glr_auto_examples:
+
+.. _examples-index:
+
+Gallery of Examples
+===================
+
+.. _general_examples:
+
+General-purpose and introductory examples from OMAS
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="To run this, make sure to first::">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_west_imas_thumb.png
+     :alt: Extracting selected data from WEST
+
+     :ref:`sphx_glr_auto_examples_west_imas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/west_imas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="UDA Universal Data Access">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_uda_example_thumb.png
+     :alt: UDA Universal Data Access
+
+     :ref:`sphx_glr_auto_examples_omas_uda_example.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_uda_example
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Please refer to the ITER page: &lt;iter&gt;.">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_iter_scenario_thumb.png
+     :alt: Work with ITER IMAS scenario database
+
+     :ref:`sphx_glr_auto_examples_iter_scenario.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/iter_scenario
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Access data across multiple ODSs">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_across_ODSs_thumb.png
+     :alt: Access data across multiple ODSs
+
+     :ref:`sphx_glr_auto_examples_across_ODSs.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/across_ODSs
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="IDS info">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_info_thumb.png
+     :alt: IDS info
+
+     :ref:`sphx_glr_auto_examples_omas_info.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_info
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sample OMAS data">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_ods_sample_thumb.png
+     :alt: Sample OMAS data
+
+     :ref:`sphx_glr_auto_examples_ods_sample.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/ods_sample
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="OMAS plot examples">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_omas_thumb.png
+     :alt: OMAS plot examples
+
+     :ref:`sphx_glr_auto_examples_plot_omas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_omas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Input data processing">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_ods_process_input_data_thumb.png
+     :alt: Input data processing
+
+     :ref:`sphx_glr_auto_examples_ods_process_input_data.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/ods_process_input_data
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="OMAS plot overlays">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_omas_overlays_thumb.png
+     :alt: OMAS plot overlays
+
+     :ref:`sphx_glr_auto_examples_plot_omas_overlays.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_omas_overlays
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Interpolate whole ODS">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_resample_thumb.png
+     :alt: Interpolate whole ODS
+
+     :ref:`sphx_glr_auto_examples_omas_resample.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_resample
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Prior running this script, the following commands must be typed at the teriminal &gt; import IMAS ...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_geqdsk_to_from_imas_thumb.png
+     :alt: OMFIT gEQDSK and IMAS
+
+     :ref:`sphx_glr_auto_examples_geqdsk_to_from_imas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/geqdsk_to_from_imas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Prior running this script, the following commands must be typed at the teriminal &gt; import IMAS ...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_solps_imas_thumb.png
+     :alt: SOLPS and IMAS
+
+     :ref:`sphx_glr_auto_examples_solps_imas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/solps_imas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rapid plot">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_quantity_thumb.png
+     :alt: Rapid plot
+
+     :ref:`sphx_glr_auto_examples_plot_quantity.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_quantity
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="OMFIT classes and plotting">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_omas_omfit_thumb.png
+     :alt: OMFIT classes and plotting
+
+     :ref:`sphx_glr_auto_examples_plot_omas_omfit.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_omas_omfit
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="gEQDSK + statefile to input.profiles">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_g_s_2_ip_thumb.png
+     :alt: gEQDSK + statefile to input.profiles
+
+     :ref:`sphx_glr_auto_examples_plot_g_s_2_ip.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_g_s_2_ip
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="NOTE: There is an OMFIT script that does this (works also remotely) and can be called with::">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_west_geqdsk_thumb.png
+     :alt: gEQDSK file from IMAS WEST data
+
+     :ref:`sphx_glr_auto_examples_west_geqdsk.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/west_geqdsk
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This examples instantiates a sample ODS, and saves it and loads it trhough the different system...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_save_load_through_thumb.png
+     :alt: Save through data systems
+
+     :ref:`sphx_glr_auto_examples_save_load_through.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/save_load_through
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Units conversions">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_units_thumb.png
+     :alt: Units conversions
+
+     :ref:`sphx_glr_auto_examples_omas_units.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_units
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Dynamic loading of experimental data">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_dynamic_machine_thumb.png
+     :alt: Dynamic loading of experimental data
+
+     :ref:`sphx_glr_auto_examples_omas_dynamic_machine.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_dynamic_machine
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Dynamic loading of IMAS data">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_dynamic_imas_thumb.png
+     :alt: Dynamic loading of IMAS data
+
+     :ref:`sphx_glr_auto_examples_omas_dynamic_imas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_dynamic_imas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Uncertain data">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_uncertain_thumb.png
+     :alt: Uncertain data
+
+     :ref:`sphx_glr_auto_examples_uncertain.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/uncertain
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Interface with GKDB">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_connect_gkdb_thumb.png
+     :alt: Interface with GKDB
+
+     :ref:`sphx_glr_auto_examples_connect_gkdb.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/connect_gkdb
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Dynamic loading of NetCDF data">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_dynamic_nc_thumb.png
+     :alt: Dynamic loading of NetCDF data
+
+     :ref:`sphx_glr_auto_examples_omas_dynamic_nc.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_dynamic_nc
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="OMAS data collection">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_collection_thumb.png
+     :alt: OMAS data collection
+
+     :ref:`sphx_glr_auto_examples_omas_collection.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_collection
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how XML code.parameters are handled withing OMAS">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_parse_codeparameters_thumb.png
+     :alt: OMAS handling of code parameters
+
+     :ref:`sphx_glr_auto_examples_parse_codeparameters.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/parse_codeparameters
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="COCOS transformations">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_cocos_thumb.png
+     :alt: COCOS transformations
+
+     :ref:`sphx_glr_auto_examples_omas_cocos.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_cocos
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="* **consistency_check = False**: no consistency check. False can be used to use OMAS for other ...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_consistency_check_thumb.png
+     :alt: IMAS consistency check
+
+     :ref:`sphx_glr_auto_examples_consistency_check.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/consistency_check
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Prior running this script, the following commands must be typed at the teriminal &gt; import IMAS ...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_simple_imas_thumb.png
+     :alt: Simple IMAS
+
+     :ref:`sphx_glr_auto_examples_simple_imas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/simple_imas
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="As an example we illustrate storage of GKDB data in this format.">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_mongo_example_thumb.png
+     :alt: MongoDB storage and discovery
+
+     :ref:`sphx_glr_auto_examples_omas_mongo_example.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_mongo_example
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Time in OMAS">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_time_thumb.png
+     :alt: Time in OMAS
+
+     :ref:`sphx_glr_auto_examples_omas_time.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_time
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Coordinates interpolation">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_omas_coordinates_thumb.png
+     :alt: Coordinates interpolation
+
+     :ref:`sphx_glr_auto_examples_omas_coordinates.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/omas_coordinates
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Test all save/load systems">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_save_load_all_thumb.png
+     :alt: Test all save/load systems
+
+     :ref:`sphx_glr_auto_examples_save_load_all.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/save_load_all
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="showcase paths">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_showcase_paths_thumb.png
+     :alt: showcase paths
+
+     :ref:`sphx_glr_auto_examples_showcase_paths.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/showcase_paths
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The **hierarchical organization of the IMAS data** structure can in some situations hinder IMAS...">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_plot_saveload_scaling_thumb.png
+     :alt: Scaling IMAS performance
+
+     :ref:`sphx_glr_auto_examples_plot_saveload_scaling.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_saveload_scaling
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

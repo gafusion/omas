@@ -1,0 +1,6 @@
+﻿omas.codeparams\_xml\_load
+==========================
+
+.. currentmodule:: omas
+
+.. autofunction:: codeparams_xml_load

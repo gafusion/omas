@@ -1,0 +1,39 @@
+﻿omas.omas\_setup
+================
+
+.. automodule:: omas.omas_setup
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      b2s
+      omas_testdir
+      rcparams_environment
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      IMAS_json_dir
+      IMAS_versions
+      OMAS_rc_params
+   
+   
+
+   
+   
+   
+
+
+

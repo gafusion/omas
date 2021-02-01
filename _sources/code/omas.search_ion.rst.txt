@@ -1,0 +1,6 @@
+﻿omas.search\_ion
+================
+
+.. currentmodule:: omas
+
+.. autofunction:: search_ion
