@@ -557,15 +557,15 @@ def handle_time(ods, time_location, time_index, time):
     if time is not None:
         tds = ods.time(time_location)
         time_index = []
-        for t in numpy.atleast1d(time):
-            time_index.append(numpy.argmin(abs(tds - ti)))
+        for t in numpy.atleast_1d(time):
+            time_index.append(numpy.argmin(abs(tds - t)))
     if time_index is None:
         time = ods.time(time_location)
         if time is None:
             time_index = 0
         else:
             time_index = numpy.arange(len(time))
-    return time_index, time
+    return time_index, numpy.atleast_1d(time)
 
 
 @add_to__ODS__
