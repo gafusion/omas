@@ -49,7 +49,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 
 packages = ['omas', 'omas.examples', 'omas.samples', 'omas.tests', 'omas.utilities']
 package_data = {
-    'omas': ['*.py', 'version'],
+    'omas': ['*.py', '*.pyx', 'version'],
     'omas.examples': ['*.py'],
     'omas.samples': ['*'],
     'omas.tests': ['*.py'],
