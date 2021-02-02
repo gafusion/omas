@@ -801,7 +801,7 @@ class ODS(MutableMapping):
 
             except (LookupError, TypeError):
                 txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
-                if self.consistency_check == 'warn':
+                if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
                     printe(txt)
                     if isinstance(value, ODS):
                         value.consistency_check = False
@@ -858,7 +858,7 @@ class ODS(MutableMapping):
                 ):
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
-                        if self.consistency_check == 'warn':
+                        if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
