@@ -1134,6 +1134,7 @@ def magnetics_probes_data(ods, pulse=133221):
             if stage == 'fetch':
                 tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
 
+
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
@@ -1158,6 +1159,7 @@ def magnetics_floops_data(ods, pulse=133221):
                         ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
             if stage == 'fetch':
                 tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
+
 
 if __name__ == '__main__':
     test_machine_mapping_functions(__all__, globals(), locals())

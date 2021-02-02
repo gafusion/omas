@@ -329,7 +329,7 @@
   "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
  },
  "magnetics.diamagnetic_flux.:.time": {
-  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)]"
+  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
  },
  "magnetics.flux_loop.:": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
@@ -361,12 +361,15 @@
  "magnetics.flux_loop.:.type.index": {
   "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
  },
+ "magnetics.ip.:": {
+  "VALUE": 1
+ },
  "magnetics.ip.:.data": {
   "COCOSIO": 2,
   "TDI": "[ptdata2(\"ip\",{pulse})]"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)]"
+  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)/1000.]"
  },
  "pf_active.coil.:": {
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
@@ -416,7 +419,7 @@
   "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)"
+  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)/1000."
  },
  "tf.r0": {
   "VALUE": 1.6955
