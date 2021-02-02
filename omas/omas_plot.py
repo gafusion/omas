@@ -2030,7 +2030,7 @@ def nbi_summary(ods, ax=None):
 # Hardware overlays
 # ================================
 @add_to__ODS__
-def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
+def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_overlay_list=False, **kw):
     r"""
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
 
@@ -2044,6 +2044,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
     :param debug_all_plots: bool
         Individual hardware systems are on by default instead of off by default.
+
+    :param return_overlay_list:
+        Return list of possible overlays that could be plotted
 
     :param \**kw: additional keywords for selecting plots.
 
@@ -2098,6 +2101,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     :return: axes handler
     """
 
+    if return_overlay_list:
+        return [k.replace('_overlay', '') for k in __ods__ if k.endswith('_overlay') and k.replace('_overlay', '') in ods]
+
     from matplotlib import pyplot
 
     if ax is None:
@@ -2106,22 +2112,24 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
     special_subs = ['position_control']
     for hw_sys in list_structures(ods.imas_version) + special_subs:
         if kw.get(hw_sys, debug_all_plots):
-            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
             try:
                 overlay_function = eval('{}_overlay'.format(hw_sys))
             except NameError:
-                pass
-            else:
-                if allow_autoscale and hw_sys in ['pf_active', 'gas_injection']:  # Not all systems need expanded range to fit everything
-                    ax.set_xlim(auto=True)
-                    ax.set_ylim(auto=True)
-                overlay_function(ods, ax, **overlay_kw)
+                continue
+            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
+            for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
+                if k in kw and k not in overlay_kw:
+                    overlay_kw[k] = kw[k]
+            if allow_autoscale and hw_sys in ['pf_active', 'gas_injection']:  # Not all systems need expanded range to fit everything
+                ax.set_xlim(auto=True)
+                ax.set_ylim(auto=True)
+            overlay_function(ods, ax, **overlay_kw)
 
     return {'ax': ax}
 
 
 @add_to__ODS__
-def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None):
+def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
     '''
     Plot walls on a tokamak cross section plot
 
@@ -2138,6 +2146,10 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
     :return: axes handler
     '''
     from matplotlib import pyplot
+
+    for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
+        kw.pop(k, None)
+    kw.setdefault('color', 'k')
 
     if ax is None:
         ax = pyplot.gca()
@@ -2164,7 +2176,7 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                 ax.plot(
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
-                    'k',
+                    **kw
                 )
 
     ax.set_aspect('equal')
@@ -2469,7 +2481,6 @@ def magnetics_overlay(
         label_dr, label_dz = label_shifter(nfl, kw)
 
         for k, (r, z) in enumerate(zip(ods[f'magnetics.flux_loop.:.position[0].r'], ods[f'magnetics.flux_loop.:.position[0].z'])):
-
             ax.plot(r, z, **flux_loop_style)
             flux_loop_style.setdefault('color', ax.lines[-1].get_color())
             if (labelevery > 0) and ((k % labelevery) == 0):
