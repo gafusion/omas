@@ -405,6 +405,7 @@ def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revisio
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
+    import MDSplus
     printd('Setting up DIII-D Thomson locations...', 'd3d')
 
     tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
@@ -417,7 +418,7 @@ def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revisio
         lenses = find_thomson_lens_d3d(pulse, sub, revision)
         try:
             nc = len(tsdat[sub]['R'].data())
-        except (TypeError, KeyError):
+        except MDSplus.MdsException:
             nc = 0
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]

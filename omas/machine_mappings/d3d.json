@@ -42,32 +42,32 @@
   "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
  },
  "charge_exchange.channel.:": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.identifier": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.data": {
   "COCOSIO": 11,
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.data": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.data": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type})"
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
  },
  "dataset_description.data_entry.machine": {
   "VALUE": "{machine}"
@@ -425,23 +425,23 @@
   "VALUE": 1.6955
  },
  "thomson_scattering.channel.:": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision})"
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
   "VALUE": 1

@@ -417,8 +417,8 @@ def machine_mapping_function(__all__):
 
                 # call signature
                 argspec = inspect.getfullargspec(f)
-                f_args_str = ", ".join('{%s}' % item for item in argspec.args)
-                call = f"{f.__qualname__}({f_args_str})".replace('{ods}', 'ods')
+                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args)
+                call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
                 default_options = None
                 if argspec.defaults:
                     default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))

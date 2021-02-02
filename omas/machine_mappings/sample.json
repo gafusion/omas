@@ -19,7 +19,7 @@
  },
  "dataset_description.ids_properties.comment": {
   "COMMENT": "Python function defined in the sample.py file",
-  "PYTHON": "sample_function(ods, {pulse}, {user_argument})"
+  "PYTHON": "sample_function(ods, {pulse}, {user_argument!r})"
  },
  "equilibrium.time_slice.:": {
   "COMMENT": "We always must define how many elements there are in arrays of structures.",
