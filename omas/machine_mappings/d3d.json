@@ -365,7 +365,7 @@
   "VALUE": 1
  },
  "magnetics.ip.:.data": {
-  "COCOSIO": 2,
+  "COCOSIO": 1,
   "TDI": "[ptdata2(\"ip\",{pulse})]"
  },
  "magnetics.ip.:.time": {
@@ -415,7 +415,7 @@
   "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
  },
  "tf.b_field_tor_vacuum_r.data": {
-  "COCOSIO": 2,
+  "COCOSIO": 1,
   "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
  },
  "tf.b_field_tor_vacuum_r.time": {

@@ -1095,7 +1095,7 @@ def setup_magnetics_hardware_description_d3d(ods):
                      'DSL5U157', 'DSL6U157', 'MPI1L180', 'MPI2L180', 'MPI3L180']
     # fmt: on
 
-    with omas_environment(ods, cocosio=2):
+    with omas_environment(ods, cocosio=1):
         for k, (r, z, a, s, name) in enumerate(zip(R_magnetic, Z_magnetic, A_magnetic, S_magnetic, name_magnetic)):
             ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
             ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
@@ -1114,7 +1114,7 @@ def magnetics_probes_data(ods, pulse=133221):
     ods1 = ODS()
     inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
 
-    with omas_environment(ods, cocosio=2):
+    with omas_environment(ods, cocosio=1):
         time = None
         TDIs = []
         for stage in ['fetch', 'assign']:
@@ -1140,7 +1140,7 @@ def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
     inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
 
-    with omas_environment(ods, cocosio=2):
+    with omas_environment(ods, cocosio=1):
         time = None
         TDIs = []
         for stage in ['fetch', 'assign']:
