@@ -1106,16 +1106,24 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
 
     plotting_list = []
     label_name = []
+    label_name_z = []
     unit_list = []
     for q in quantities:
         if 'density' in q or 'temperature' in q:
             for index, specie in enumerate(species_in_tree):
                 unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
                 if q in prof1d[specie]:
-                    plotting_list.append(prof1d[specie][q])
+                    if 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.:
+                        plotting_list.append(prof1d[specie][q] * prof1d[specie]['element[0].z_n'])
+                        label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
+                    else:
+                        plotting_list.append(prof1d[specie][q])
+                        label_name_z.append("")
+                    label_name.append(f'{names[index]} {q.capitalize()}')
+
                 else:
                     plotting_list.append(numpy.zeros(len(rho)))
-                label_name.append(f'{names[index]} {q.capitalize()}')
+                    
         else:
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
@@ -1136,7 +1144,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
         if "Temp" in label_name[index]:
             ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
+            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index] )
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
@@ -1476,7 +1484,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
             return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs ** kw)
 
     colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
-    lss = ['-', '--']
+    lss = ['-', '--', 'dotted']
     colors, lss = numpy.meshgrid(colors, lss)
     if len(ods[f'core_sources.source']) > len(colors):
         colors = colors.T
@@ -1484,17 +1492,22 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
     colors = colors.flatten()
     lss = lss.flatten()
 
+    # if list is too small use all colors
+    if len(ods[f'core_sources.source']) > len(colors):
+        import matplotlib.colors as mcolors
+        colors =list(mcolors.CSS4_COLORS.keys())
+
     for k, s in enumerate(ods['core_sources.source']):
         rho = ods[f'core_sources.source.{s}.profiles_1d.{time_index}.grid.rho_tor_norm']
         label = ods[f'core_sources.source.{s}.identifier.name']
 
         tmp = {}
-        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.energy'] = ('$q_e$', 'symlog')
-        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.total_ion_energy'] = ('$q_i$', 'symlog')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.energy'] = ('$q_e$', 'linear')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.total_ion_energy'] = ('$q_i$', 'linear')
         tmp[None] = None
-        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.particles'] = ('$p_e$', 'symlog')
-        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.j_parallel'] = ('$J_\parallel$', 'symlog')
-        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.momentum_tor'] = (r'$\pi_i$', 'symlog')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.electrons.particles'] = ('$p_e$', 'linear')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.j_parallel'] = ('$J_\parallel$', 'linear')
+        tmp[f'core_sources.source.{s}.profiles_1d.{time_index}.momentum_tor'] = (r'$\pi_i$', 'linear')
 
         ax = None
         for kp, item in enumerate(tmp):
