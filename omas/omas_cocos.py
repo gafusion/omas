@@ -169,6 +169,7 @@ _cocos_signals['core_profiles.vacuum_toroidal_field.b0']='TOR'                  
 _cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.diamagnetic']='TOR'                                    # 1.875000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.diamagnetic']='TOR'                                # 1.875000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.diamagnetic']='TOR'                                            # 1.833333 # velocity  [m.s^-1]
+_cocos_signals['core_profiles.profiles_1d.:.rotation_frequency_tor_sonic']='TOR'                                          # added by hand # frequency  [rad.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.diamagnetic']='TOR'                                        # 1.833333 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.diamagnetic']='TOR'                                        # 1.800000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.e_field.diamagnetic']='TOR'                                                   # 1.750000 # e_field  [V.m^-1]
