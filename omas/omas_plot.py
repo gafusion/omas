@@ -219,7 +219,7 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
             checker = ods[check_loc]
             if test_checker is not None:
                 assert eval(test_checker)
-    except (TypeError, AssertionError, ValueError):
+    except (TypeError, AssertionError, ValueError, IndexError, KeyError):
         nc = 0
 
     if nc == 0:
@@ -444,7 +444,7 @@ def label_shifter(n, kw):
 _stimes = []
 
 
-def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
+def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
     r"""
     Utility function for generating time dependent plots
 
@@ -452,11 +452,11 @@ def ods_time_plot(ods_plot_function, time, ods, time_index, **kw):
     this function must accept ax (either a single or a list of axes)
     and must return the axes (or list of axes) it used
 
-    :param time: array of times
-
     :param ods: ods
 
     :param time_index: time indexes to be scanned
+
+    :param time: array of times
 
     :param \**kw: extra aruments to passed to ods_plot_function
 
@@ -541,10 +541,38 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ================================
 # ODSs' plotting methods
 # ================================
+def handle_time(ods, time_location, time_index, time):
+    '''
+    Given either time_index or time returns both time_index and time consistent with one another
+    NOTE: time takes precedence over time_index
+
+    :param time_location: location of which to get the time
+
+    :param time_index: int or list of ints
+
+    :param time: float or list of floats
+
+    :return: time_index, time
+    '''
+    if time is not None:
+        tds = ods.time(time_location)
+        time_index = []
+        for t in numpy.atleast_1d(time):
+            time_index.append(numpy.argmin(abs(tds - t)))
+    if time_index is None:
+        time = ods.time(time_location)
+        if time is None:
+            time_index = 0
+        else:
+            time_index = numpy.arange(len(time))
+    return time_index, numpy.atleast_1d(time)
+
+
 @add_to__ODS__
 def equilibrium_CX(
     ods,
     time_index=None,
+    time=None,
     levels=None,
     contour_quantity='rho_tor_norm',
     allow_fallback=True,
@@ -563,8 +591,12 @@ def equilibrium_CX(
     :param ods: ODS instance
         input ods containing equilibrium data
 
-    :param time_index: int
-        time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param levels: sorted numeric iterable
         values to pass to 2D plot as contour levels
@@ -609,21 +641,16 @@ def equilibrium_CX(
         allow_fallback = 'psi'
 
     # time animation
-    if time_index is None:
-        time = ods['equilibrium'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    time_index, time = handle_time(ods, 'equilibrium', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
                 equilibrium_CX,
-                time,
                 ods,
                 time_index,
+                time,
                 levels=levels,
                 contour_quantity=contour_quantity,
                 allow_fallback=allow_fallback,
@@ -808,7 +835,7 @@ def equilibrium_CX(
 
 
 @add_to__ODS__
-def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
+def equilibrium_CX_topview(ods, time_index=None, time=None, ax=None, **kw):
     r"""
     Plot equilibrium toroidal cross-section
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -816,8 +843,12 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
     :param ods: ODS instance
         input ods containing equilibrium data
 
-    :param time_index: int
-        time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: Axes instance [optional]
         axes to plot in (active axes is generated if `ax is None`)
@@ -826,12 +857,8 @@ def equilibrium_CX_topview(ods, time_index=None, ax=None, **kw):
 
     :return: Axes instance
     """
-    if time_index is None:
-        time = ods['equilibrium'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'equilibrium', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
@@ -907,14 +934,19 @@ nice_names = {
 
 
 @add_to__ODS__
-def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=None, **kw):
+def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_triangles=None, **kw):
     """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
@@ -934,23 +966,20 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
 
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
-    axs = kw.pop('ax', {})
-
-    if time_index is None:
-        time = ods['equilibrium'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'equilibrium', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
-                equilibrium_summary, time, ods, time_index, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw
+                equilibrium_summary, ods, time_index, time, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw
             )
 
     ax = cached_add_subplot(fig, axs, 1, 3, 1)
@@ -1014,7 +1043,7 @@ def equilibrium_summary(ods, time_index=None, fig=None, ggd_points_triangles=Non
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
+def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -1023,7 +1052,12 @@ def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quan
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ods_species: list of ion specie indices as listed in the core_profiles ods (electron index = -1)
         if None selected plot all the ion speciess
@@ -1037,23 +1071,20 @@ def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quan
 
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
-    axs = kw.pop('ax', {})
-
-    if time_index is None:
-        time = ods['core_profiles'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
-                core_profiles_summary, time, ods, time_index, fig=fig, ods_species=ods_species, quantities=quantities, ax=axs, **kw
+                core_profiles_summary, ods, time_index, time, fig=fig, ods_species=ods_species, quantities=quantities, ax=axs, **kw
             )
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1114,17 +1145,22 @@ def core_profiles_summary(ods, time_index=None, fig=None, ods_species=None, quan
         ax.legend(loc='lower center')
     ax.set_xlim([0, 1])
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 @add_to__ODS__
-def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
+def core_profiles_pressures(ods, time_index=None, time=None, ax=None, **kw):
     """
     Plot pressures in `ods['core_profiles']['profiles_1d'][time_index]`
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1133,17 +1169,13 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
 
-    if time_index is None:
-        time = ods['core_profiles'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_profiles_pressures, time, ods, time_index, ax=ax)
+            return ods_time_plot(core_profiles_pressures, ods, time_index, time, ax=ax)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1186,15 +1218,20 @@ def core_profiles_pressures(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=True, plot_zeff=False, **kw):
+def core_transport_fluxes(ods, time_index=None, time=None, fig=None, show_total_density=True, plot_zeff=False, **kw):
     """
     Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.
 
     :param ods: input ods
 
-    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
 
-    :param time_index: time slice to plot
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
     :param show_total_density: bool
         Show total thermal+fast in addition to thermal/fast breakdown if available
@@ -1207,26 +1244,23 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
     """
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
-    axs = kw.pop('ax', {})
-
-    if time_index is None:
-        time = ods['core_profiles'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
                 core_transport_fluxes,
-                time,
                 ods,
                 time_index,
+                time,
                 fig=fig,
                 ax=axs,
                 show_total_density=show_total_density,
@@ -1401,19 +1435,24 @@ def core_transport_fluxes(ods, time_index=None, fig=None, show_total_density=Tru
 
             ax.set_xlim(0, 1)
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 @add_to__ODS__
-def core_sources_summary(ods, time_index=None, fig=None, **kw):
+def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
     """
     Plot sources for electrons and all ion species
 
     :param ods: input ods
 
-    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
 
-    :param time_index: time slice to plot
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
     :param kw: arguments passed to matplotlib plot statements
 
@@ -1422,22 +1461,19 @@ def core_sources_summary(ods, time_index=None, fig=None, **kw):
     import matplotlib
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
-    axs = kw.pop('ax', {})
-
-    if time_index is None:
-        time = ods['core_sources'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'core_sources', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_sources, time, ods, time_index, fig=fig, ax=axs ** kw)
+            return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs ** kw)
 
     colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
     lss = ['-', '--']
@@ -1473,7 +1509,7 @@ def core_sources_summary(ods, time_index=None, fig=None, **kw):
             ax.set_yscale(tmp[item][1])
 
         ax.legend(loc=0)
-    return {'ax': axs}
+    return {'ax': axs, 'fig': fig}
 
 
 # ================================
@@ -1482,13 +1518,18 @@ def core_sources_summary(ods, time_index=None, fig=None, **kw):
 
 
 @add_to__ODS__
-def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
+def pellets_trajectory_CX(ods, time_index=None, time=None, ax=None, **kw):
     """
     Plot pellets trajectory in poloidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1497,17 +1538,13 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
     :return: axes handler
     """
 
-    if time_index is None:
-        time = ods['pellets'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'pellets', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(pellets_trajectory_CX, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(pellets_trajectory_CX, ods, time_index, time, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1527,13 +1564,18 @@ def pellets_trajectory_CX(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
+def pellets_trajectory_CX_topview(ods, time_index=None, time=None, ax=None, **kw):
     """
     Plot  pellet trajectory in toroidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1541,17 +1583,13 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['pellets'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'pellets', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(pellets_trajectory_CX_topview, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(pellets_trajectory_CX_topview, ods, time_index, time, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1577,13 +1615,18 @@ def pellets_trajectory_CX_topview(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def lh_antennas_CX(ods, time_index=None, ax=None, antenna_trajectory=None, **kw):
+def lh_antennas_CX(ods, time_index=None, time=None, ax=None, antenna_trajectory=None, **kw):
     """
     Plot LH antenna position in poloidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1593,17 +1636,13 @@ def lh_antennas_CX(ods, time_index=None, ax=None, antenna_trajectory=None, **kw)
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['lh_antennas'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'lh_antennas', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX, ods, time_index, time, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1637,13 +1676,18 @@ def lh_antennas_CX(ods, time_index=None, ax=None, antenna_trajectory=None, **kw)
 
 
 @add_to__ODS__
-def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=None, **kw):
+def lh_antennas_CX_topview(ods, time_index=None, time=None, ax=None, antenna_trajectory=None, **kw):
     """
     Plot LH antenna in toroidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1653,17 +1697,13 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['lh_antennas'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'lh_antennas', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(lh_antennas_CX_topview, time, ods, time_index, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
+            return ods_time_plot(lh_antennas_CX_topview, ods, time_index, time, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1692,13 +1732,18 @@ def lh_antennas_CX_topview(ods, time_index=None, ax=None, antenna_trajectory=Non
 
 
 @add_to__ODS__
-def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
     """
     Plot EC launchers in poloidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1708,17 +1753,13 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['ec_launchers'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'ec_launchers', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1750,13 +1791,18 @@ def ec_launchers_CX(ods, time_index=None, ax=None, launcher_trajectory=None, **k
 
 
 @add_to__ODS__
-def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
     """
     Plot EC launchers in toroidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1766,18 +1812,13 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
 
     :return: axes handler
     """
-
-    if time_index is None:
-        time = ods['ec_launchers'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'ec_launchers', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, time, ods, time_index, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1808,13 +1849,18 @@ def ec_launchers_CX_topview(ods, time_index=None, ax=None, launcher_trajectory=N
 # Heating and current drive
 # ================================
 @add_to__ODS__
-def waves_beam_CX(ods, time_index=None, ax=None, **kw):
+def waves_beam_CX(ods, time_index=None, time=None, ax=None, **kw):
     """
     Plot waves beams in poloidal cross-section
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
@@ -1822,17 +1868,13 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['waves'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'waves', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_CX, time, ods, time_index, ax=ax, **kw)
+            return ods_time_plot(waves_beam_CX, ods, time_index, time, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1852,13 +1894,18 @@ def waves_beam_CX(ods, time_index=None, ax=None, **kw):
 
 
 @add_to__ODS__
-def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_parallel_density'][0], ax=None, **kw):
+def waves_beam_profile(ods, time_index=None, time=None, what=['power_density', 'current_parallel_density'][0], ax=None, **kw):
     """
     Plot 1d profiles of waves beams given quantity
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param quantity: quantity to plot
 
@@ -1868,17 +1915,13 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
 
     :return: axes handler
     """
-    if time_index is None:
-        time = ods['waves'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'waves', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_profile, time, ods, time_index, what=what, ax=ax, **kw)
+            return ods_time_plot(waves_beam_profile, ods, time_index, time, what=what, ax=ax, **kw)
 
     import matplotlib
     from matplotlib import pyplot
@@ -1899,13 +1942,18 @@ def waves_beam_profile(ods, time_index=None, what=['power_density', 'current_par
 
 
 @add_to__ODS__
-def waves_beam_summary(ods, time_index=None, fig=None, **kw):
+def waves_beam_summary(ods, time_index=None, time=None, fig=None, **kw):
     """
     Plot waves beam summary: CX, power_density, and current_parallel_density
 
     :param ods: input ods
 
-    :param time_index: time slice to plot
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
 
@@ -1916,22 +1964,19 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
 
     from matplotlib import pyplot
 
-    if fig is None:
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
         fig = pyplot.figure()
 
-    if time_index is None:
-        time = ods['waves'].time()
-        if time is None:
-            time_index = 0
-        else:
-            time_index = numpy.arange(len(time))
+    # time animation
+    time_index, time = handle_time(ods, 'waves', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(waves_beam_summary, time, ods, time_index, fig=fig, ax={}, **kw)
-
-    axs = kw.pop('ax', {})
+            return ods_time_plot(waves_beam_summary, ods, time_index, time, fig=fig, ax={}, **kw)
 
     ax = cached_add_subplot(fig, axs, 1, 2, 1)
     waves_beam_CX(ods, time_index=time_index, ax=ax, **kw)
@@ -1950,6 +1995,15 @@ def waves_beam_summary(ods, time_index=None, fig=None, **kw):
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
+    '''
+    Plot summary of NBI power time traces
+
+    :param ods: input ods
+
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
+
+    :return: axes handler
+    '''
     from matplotlib import pyplot
 
     if ax is None:
@@ -1976,7 +2030,7 @@ def nbi_summary(ods, ax=None):
 # Hardware overlays
 # ================================
 @add_to__ODS__
-def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
+def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_overlay_list=False, **kw):
     r"""
     Plots overlays of hardware/diagnostic locations on a tokamak cross section plot
 
@@ -1990,6 +2044,9 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
 
     :param debug_all_plots: bool
         Individual hardware systems are on by default instead of off by default.
+
+    :param return_overlay_list:
+        Return list of possible overlays that could be plotted
 
     :param \**kw: additional keywords for selecting plots.
 
@@ -2040,27 +2097,89 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, **kw):
                     If the list/array of offsets is too short, it will be padded with 0s.
 
             * Additional keywords are passed to the function that does the drawing; usually matplotlib.axes.Axes.plot().
+
+    :return: axes handler
     """
+
+    if return_overlay_list:
+        return [k.replace('_overlay', '') for k in __ods__ if k.endswith('_overlay') and k.replace('_overlay', '') in ods]
 
     from matplotlib import pyplot
 
     if ax is None:
         ax = pyplot.gca()
 
-    overlay_on_by_default = ['thomson_scattering']  # List of strings describing default hardware to be shown
     special_subs = ['position_control']
     for hw_sys in list_structures(ods.imas_version) + special_subs:
-        if kw.get(hw_sys, ((hw_sys in overlay_on_by_default) or debug_all_plots)):
-            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
+        if kw.get(hw_sys, debug_all_plots):
             try:
                 overlay_function = eval('{}_overlay'.format(hw_sys))
             except NameError:
-                pass
-            else:
-                if allow_autoscale and hw_sys in ['pf_active', 'gas_injection']:  # Not all systems need expanded range to fit everything
-                    ax.set_xlim(auto=True)
-                    ax.set_ylim(auto=True)
-                overlay_function(ods, ax, **overlay_kw)
+                continue
+            overlay_kw = kw.get(hw_sys, {}) if isinstance(kw.get(hw_sys, {}), dict) else {}
+            for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
+                if k in kw and k not in overlay_kw:
+                    overlay_kw[k] = kw[k]
+            if allow_autoscale and hw_sys in ['pf_active', 'gas_injection']:  # Not all systems need expanded range to fit everything
+                ax.set_xlim(auto=True)
+                ax.set_ylim(auto=True)
+            overlay_function(ods, ax, **overlay_kw)
+
+    return {'ax': ax}
+
+
+@add_to__ODS__
+def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
+    '''
+    Plot walls on a tokamak cross section plot
+
+    :param ods: OMAS ODS instance
+
+    :param ax: axes instance into which to plot (default: gca())
+
+    :param component_index: list of index of components to plot
+
+    :param types: list with one or more of ['limiter','mobile','vessel']
+
+    :param unit_index: list of index of units of the component to plot
+
+    :return: axes handler
+    '''
+    from matplotlib import pyplot
+
+    for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
+        kw.pop(k, None)
+    kw.setdefault('color', 'k')
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    if component_index is None:
+        component_index = ods['wall.description_2d'].keys()
+    elif isinstance(component_index, int):
+        component_index = [component_index]
+    elif isinstance(component_index, str):
+        component_index = [ods['wall.description_2d[:].limiter.type.name'].index(component_index)]
+
+    for component in component_index:
+        for type in types:
+            if type not in ods[f'wall.description_2d[{component}]']:
+                continue
+            if unit_index is None:
+                unit_index = ods[f'wall.description_2d[{component}].{type}.unit'].keys()
+            elif isinstance(unit_index, int):
+                component_index = [unit_index]
+            elif isinstance(unit_index, str):
+                component_index = [ods[f'wall.description_2d[{component}].{type}.unit[{unit}].type.name'].index(component_index)]
+
+            for unit in ods[f'wall.description_2d[{component}].{type}.unit']:
+                ax.plot(
+                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
+                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
+                    **kw
+                )
+
+    ax.set_aspect('equal')
 
     return {'ax': ax}
 
@@ -2193,7 +2312,7 @@ def gas_injection_overlay(
     # For each unique poloidal location, draw a marker and write a label describing all the injectors at this location.
     default_color = kw.pop('color', None)
     colors = numpy.atleast_1d(default_color if colors is None else colors).tolist()
-    colors *= int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
+    colors2 = colors * int(numpy.ceil(len(locations) / float(len(colors))))  # Make sure the list is long enough.
     for i, loc in enumerate(locations):
         r, z = numpy.array(loc.split('_')).astype(float)
         if show_all_pipes_in_group:
@@ -2203,9 +2322,9 @@ def gas_injection_overlay(
         label = '{spacer:}\n{spacer:}'.format(spacer=' ' * label_spacer).join([''] + show_locs + [''])
         if draw_arrow:
             kw.update(draw_arrow if isinstance(draw_arrow, dict) else {})
-            gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors[i], **kw)
+            gas_mark = gas_arrow(ods, r, z, r2=locations[loc][-2], z2=locations[loc][-1], ax=ax, color=colors2[i], **kw)
         else:
-            gas_mark = ax.plot(r, z, color=colors[i], **kw)
+            gas_mark = ax.plot(r, z, color=colors2[i], **kw)
         kw.pop('label', None)  # Prevent label from being applied every time through the loop to avoid spammy legend
         if (labelevery > 0) and ((i % labelevery) == 0):
             label = '\n' * label_spacer + label if label_va[i] == 'top' else label + '\n' * label_spacer
@@ -2234,8 +2353,6 @@ def pf_active_overlay(ods, ax=None, **kw):
         * Remaining keywords are passed to matplotlib.patches.Polygon call
             Hint: you may want to set facecolor instead of just color
     """
-    # Make sure there is something to plot or else just give up and return
-
     import matplotlib
     from matplotlib import pyplot
 
@@ -2313,6 +2430,7 @@ def pf_active_overlay(ods, ax=None, **kw):
         ax.add_patch(p)  # Using patch collection breaks auto legend labeling, so add patches individually.
 
     ax.autoscale_view(scalex=scalex, scaley=scaley)  # add_patch doesn't include this
+    ax.set_aspect('equal')
 
     return {'ax': ax}
 
@@ -2321,96 +2439,132 @@ def pf_active_overlay(ods, ax=None, **kw):
 def magnetics_overlay(
     ods,
     ax=None,
-    show_bpol_probe=True,
     show_flux_loop=True,
-    bpol_probe_color=None,
-    flux_loop_color=None,
-    bpol_probe_marker='s',
-    flux_loop_marker='o',
+    show_bpol_probe=True,
+    show_btor_probe=True,
+    flux_loop_style={'marker': 's'},
+    pol_probe_style={},
+    tor_probe_style={'marker': '.'},
     **kw,
 ):
-    r"""
-    Plots overlays of magnetics: B_pol probes and flux loops
+    '''
+    Plot magnetics on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
 
-    :param ax: axes instance into which to plot (default: gca())
+    :param flux_loop_style: dictionary with matplotlib options to render flux loops
 
-    :param show_bpol_probe: bool
-        Turn display of B_pol probes on/off
+    :param pol_probe_style: dictionary with matplotlib options to render poloidal magnetic probes
 
-    :param show_flux_loop: bool
-        Turn display of flux loops on/off
+    :param tor_probe_style: dictionary with matplotlib options to render toroidal magnetic probes
 
-    :param bpol_probe_color: matplotlib color specification for B_pol probes
+    :param ax: axes to plot in (active axes is generated if `ax is None`)
 
-    :param flux_loop_color: matplotlib color specification for flux loops
-
-    :param bpol_probe_marker: matplotlib marker specification for B_pol probes
-
-    :param flux_loop_marker: matplotlib marker specification for flux loops
-
-    :param \**kw: Additional keywords
-
-        * Accepts standard omas_plot overlay keywords listed in overlay() documentation: mask, labelevery, ...
-
-        * Remaining keywords are passed to plot call
-    """
-
+    :return: axes handler
+    '''
     from matplotlib import pyplot
+
+    kw0 = copy.copy(kw)
 
     if ax is None:
         ax = pyplot.gca()
 
-    # Make sure there is something to plot or else just give up and return
-    nbp = 0
-    if compare_version(ods.imas_version, '3.23.3') > 0:
-        nbp = get_channel_count(
-            ods,
-            'magnetics',
-            check_loc='magnetics.b_field_pol_probe.0.position.r',
-            channels_name='b_field_pol_probe',
-            test_checker='~numpy.isnan(checker)',
-        )
+    # flux loops
     nfl = get_channel_count(
         ods, 'magnetics', check_loc='magnetics.flux_loop.0.position.0.r', channels_name='flux_loop', test_checker='~numpy.isnan(checker)'
     )
-    if max([nbp, nfl]) == 0:
-        return {'ax': ax}
+    if show_flux_loop and nfl:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nfl, **kw)
+        label_dr, label_dz = label_shifter(nfl, kw)
 
-    color = kw.pop('color', None)
-    bpol_probe_color = color if bpol_probe_color is None else bpol_probe_color
-    flux_loop_color = color if flux_loop_color is None else flux_loop_color
-    kw.pop('marker', None)
-    kw.setdefault('linestyle', ' ')
-    labelevery = kw.pop('labelevery', 0)
-    mask = kw.pop('mask', numpy.ones(nbp + nfl, bool))
-    notesize = kw.pop('notesize', 'xx-small')
-    label_ha, label_va, kw = text_alignment_setup(nbp + nfl, **kw)
-    label_dr, label_dz = label_shifter(nbp + nfl, kw)
-
-    def show_mag(n, topname, posroot, label, color_, marker, mask_):
-        r = numpy.array([ods[topname][i][posroot]['r'] for i in range(n)])
-        z = numpy.array([ods[topname][i][posroot]['z'] for i in range(n)])
-        mark = ax.plot(r[mask_], z[mask_], color=color_, label=label, marker=marker, **kw)
-        color_ = mark[0].get_color()  # If this was None before, the cycler will have given us something. Lock it in.
-        for i in range(sum(mask_)):
-            if (labelevery > 0) and ((i % labelevery) == 0):
+        for k, (r, z) in enumerate(zip(ods[f'magnetics.flux_loop.:.position[0].r'], ods[f'magnetics.flux_loop.:.position[0].z'])):
+            ax.plot(r, z, **flux_loop_style)
+            flux_loop_style.setdefault('color', ax.lines[-1].get_color())
+            if (labelevery > 0) and ((k % labelevery) == 0):
                 ax.text(
-                    r[mask_][i] + label_dr[i],
-                    z[mask_][i] + label_dz[i],
-                    ods[topname][i]['identifier'],
-                    color=color_,
+                    r + label_dr[k],
+                    z + label_dz[k],
+                    ods.get(f'magnetics.flux_loop.{k}.identifier', str(k)),
+                    color=flux_loop_style['color'],
                     fontsize=notesize,
-                    ha=label_ha[i],
-                    va=label_va[i],
+                    ha=label_ha[k],
+                    va=label_va[k],
                 )
 
-    if show_bpol_probe:
-        show_mag(nbp, 'magnetics.b_field_pol_probe', 'position', '$B_{pol}$ probes', bpol_probe_color, bpol_probe_marker, mask[:nbp])
-    if show_flux_loop:
-        show_mag(nfl, 'magnetics.flux_loop', 'position.0', 'Flux loops', flux_loop_color, flux_loop_marker, mask[nbp:])
+    # poloidal magnetic probes
+    nbp = get_channel_count(
+        ods,
+        'magnetics',
+        check_loc='magnetics.b_field_pol_probe.0.position.r',
+        channels_name='b_field_pol_probe',
+        test_checker='~numpy.isnan(checker)',
+    )
+    if show_bpol_probe and nbp:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nbp, **kw)
+        label_dr, label_dz = label_shifter(nbp, kw)
 
+        from .omas_physics import probe_endpoints
+
+        PX, PY = probe_endpoints(
+            ods['magnetics.b_field_pol_probe[:].position.r'],
+            ods['magnetics.b_field_pol_probe[:].position.z'],
+            ods['magnetics.b_field_pol_probe[:].poloidal_angle'],
+            ods['magnetics.b_field_pol_probe[:].length'],
+            ods.cocosio,
+        )
+
+        for k, (px, py) in enumerate(zip(PX, PY)):
+            r = numpy.mean(px)
+            z = numpy.mean(py)
+            if show_bpol_probe:
+                ax.plot(px, py, label='_' + ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)), **pol_probe_style, **kw)
+                pol_probe_style.setdefault('color', ax.lines[-1].get_color())
+                if (labelevery > 0) and ((k % labelevery) == 0):
+                    ax.text(
+                        r + label_dr[k],
+                        z + label_dz[k],
+                        ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)),
+                        color=pol_probe_style['color'],
+                        fontsize=notesize,
+                        ha=label_ha[k],
+                        va=label_va[k],
+                    )
+
+    # toroidal magnetic probes
+    nbt = get_channel_count(
+        ods,
+        'magnetics',
+        check_loc='magnetics.b_field_tor_probe.0.position.r',
+        channels_name='b_field_tor_probe',
+        test_checker='~numpy.isnan(checker)',
+    )
+    if show_btor_probe and nbt:
+        kw = copy.copy(kw0)
+        labelevery = kw.pop('labelevery', 0)
+        notesize = kw.pop('notesize', 'xx-small')
+        label_ha, label_va, kw = text_alignment_setup(nbt, **kw)
+        label_dr, label_dz = label_shifter(nbt, kw)
+        for k, (r, z) in enumerate(zip(ods['magnetics.b_field_tor_probe[:].position.r'], ods['magnetics.b_field_tor_probe[:].position.z'])):
+            ax.plot(r, z, '.m', label='_' + ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)), **tor_probe_style, **kw)
+            tor_probe_style.setdefault('color', ax.lines[-1].get_color())
+            if (labelevery > 0) and ((k % labelevery) == 0):
+                ax.text(
+                    r + label_dr[k],
+                    z + label_dz[k],
+                    ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)),
+                    color=tor_probe_style['color'],
+                    fontsize=notesize,
+                    ha=label_ha[k],
+                    va=label_va[k],
+                )
+
+    ax.set_aspect('equal')
     return {'ax': ax}
 
 
@@ -2687,11 +2841,10 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     ncm = len(r1)
 
     if colors is None:
-        colors = [kw.pop('color', None)] * nc
-    else:
-        colors *= nc  # Just make sure that this will always be long enough.
+        colors = [kw.pop('color', None)]
     ci = 0
-    color = colors[ci]
+    colors2 = colors * nc
+    color = colors2[ci]  # Multiplying list by nc makes sure it's always long enough.
     kw.setdefault('alpha', 0.8)
     default_label = kw.pop('label', None)
     labelevery = kw.pop('labelevery', 2)
@@ -2703,7 +2856,7 @@ def bolometer_overlay(ods, ax=None, reset_fan_color=True, colors=None, **kw):
     for i in range(ncm):
         if (i > 0) and (bolo_id[i][0] != bolo_id[i - 1][0]) and reset_fan_color:
             ci += 1
-            color = colors[ci]  # Allow color to reset when changing fans
+            color = colors2[ci]  # Allow color to reset when changing fans
             new_label = True
         else:
             new_label = False
@@ -2815,11 +2968,9 @@ def langmuir_probes_overlay(ods, ax=None, embedded_probes=None, colors=None, sho
 
     # Handle plot keywords
     if colors is None:
-        colors = [kw.pop('color', None)] * nc
-    else:
-        colors *= nc  # Just make sure that this will always be long enough.
+        colors = [kw.pop('color', None)]
     ci = 0
-    color = colors[ci]
+    color = (colors * nc)[ci]  # Multiplying list by nc makes sure it's always long enough.
     kw.setdefault('alpha', 0.8)
     kw.setdefault('marker', '*')
     kw.setdefault('linestyle', ' ')
@@ -2935,8 +3086,10 @@ def position_control_overlay(
             t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
         except (ValueError, IndexError):
             t = 0
+
     if ax is None:
         ax = pyplot.gca()
+
     # Handle multi-slice request
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay setup 1')
@@ -3165,13 +3318,16 @@ def summary(ods, fig=None, quantity=None, **kw):
 
     from matplotlib import pyplot
 
-    if fig is None:
-        fig = pyplot.figure()
     if quantity is None:
         quantity = ods['summary.global_quantities']
 
-    # two passes, one for counting number of plots the second for actual plotting
     axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
+
+    # two passes, one for counting number of plots the second for actual plotting
     n = 0
     for step in ['count', 'plot']:
         k = 0
@@ -3190,7 +3346,7 @@ def summary(ods, fig=None, quantity=None, **kw):
                     ax.set_title(q)
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
 
-    return {'ax': axs}
+    return {'ax': axs, 'fig': figg}
 
 
 @add_to__ODS__
@@ -3281,6 +3437,6 @@ def quantity(
     return {'ax': ax}
 
 
-# this test is here to prevent
+# this test is here to prevent importing matplotlib at the top of this file
 if 'matplotlib' in locals() or 'pyplot' in locals() or 'plt' in locals():
     raise Exception('Do not import matplotlib at the top level of %s' % os.path.split(__file__)[1])

@@ -4,14 +4,31 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS
+from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_ODS, omas_environment
 from .omas_utils import _extra_structures
+
+
+class IDS:
+    def __init__(self, DBentry, occurrence):
+        self.DBentry = DBentry
+        self.occurrence = occurrence
+
+    def __getattr__(self, key):
+        import imas
+
+        printd(f"{key} = imas.{key}()", topic='imas_code')
+        tmp = getattr(imas, key)()
+        setattr(self, key, tmp)
+        return tmp
+
+    def close(self):
+        self.DBentry.close()
 
 
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verbose=True):
+def imas_open(user, machine, pulse, run, occurrence={}, new=False, imas_major_version='3', backend='MDSPLUS', verbose=True):
     """
     function to open an IMAS
 
@@ -25,7 +42,9 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
 
     :param new: whether the open should create a new IMAS tree
 
-    :param imas_major_version: IMAS major version
+    :param imas_major_version: IMAS major version (string)
+
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
     :param verbose: print open parameters
 
@@ -40,60 +59,25 @@ def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', verb
 
     import imas
 
-    printd("ids = imas.ids(%d,%d)" % (pulse, run), topic='imas_code')
-    ids = imas.ids(pulse, run)
+    printd(
+        f"DBentry = imas.DBEntry(imas.imasdef.{backend}_BACKEND, {repr(machine)}, {pulse}, {run}, {repr(user)}, {repr(imas_major_version)})",
+        topic='imas_code',
+    )
+    DBentry = imas.DBEntry(getattr(imas.imasdef, backend + '_BACKEND'), machine, pulse, run, user, imas_major_version)
 
-    if user is None and machine is None:
-        pass
-    elif user is None or machine is None:
-        raise Exception(
-            'user={user}, machine={machine}, imas_major_version={imas_major_version}\n'
-            'Either specify all or none of `user`, `machine`, `imas_version`\n'
-            'If none of them are specified then use `imasdb` command to set '
-            'MDSPLUS_TREE_BASE_? environmental variables'.format(
-                user=repr(user), machine=repr(machine), pulse=pulse, run=run, imas_major_version=imas_major_version
-            )
-        )
-
-    # This approach of opening IDSs has been deprecated
-    if user is None and machine is None:
-        if new:
-            printd("ids.create()", topic='imas_code')
-            ids.create()
-        else:
-            printd("ids.open()", topic='imas_code')
-            try:
-                ids.open()
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError('Error opening imas pulse %d run %d' % (pulse, run))
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database '
-                '(pulse:{pulse} run:{run}, DB:{db})'.format(pulse=pulse, run=run, db=os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2])
-            )
-
-    # The new approach always requires specifying user and machine
+    if new:
+        printd(f"DBentry.create()", topic='imas_code')
+        ret_code = DBentry.create()[0]
     else:
-        if new:
-            printd("ids.create_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            ids.create_env(user, machine, imas_major_version)
-        else:
-            printd("ids.open_env(%s, %s, %s)" % (repr(user), repr(machine), repr(imas_major_version)), topic='imas_code')
-            try:
-                ids.open_env(user, machine, imas_major_version)
-            except Exception as _excp:
-                if 'Error opening imas pulse' in str(_excp):
-                    raise IOError(
-                        'Error opening imas pulse (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                        % (user, machine, pulse, run, imas_major_version)
-                    )
-        if not ids.isConnected():
-            raise Exception(
-                'Failed to establish connection to IMAS database (user:%s machine:%s pulse:%s run:%s, imas_major_version:%s)'
-                % (user, machine, pulse, run, imas_major_version)
-            )
-    return ids
+        printd(f"DBentry.open()", topic='imas_code')
+        ret_code = DBentry.open()[0]
+
+    if ret_code < 0:
+        raise IOError(
+            'Error opening imas entry (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
+            % (user, machine, pulse, run, imas_major_version, backend)
+        )
+    return IDS(DBentry, occurrence)
 
 
 def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
@@ -129,7 +113,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time.resize(1)
@@ -249,7 +233,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 
     debug_path = ''
     if hasattr(ids, ds):
-        debug_path += 'ids.%s' % ds
+        debug_path += '%s' % ds
         m = getattr(ids, ds)
     elif skip_missing_nodes is not False:
         if skip_missing_nodes is None:
@@ -290,7 +274,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False, imas_version=None, verbose=True):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, new=False, imas_version=None, verbose=True):
     """
     Save OMAS data to IMAS
 
@@ -303,6 +287,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     :param pulse: IMAS pulse (reads ods['dataset_description.data_entry.pulse'] if pulse is None)
 
     :param run: IMAS run (reads ods['dataset_description.data_entry.run'] if run is None and finally fallsback on 0)
+
+    :param occurrence: dictinonary with the occurrence to save for each IDS
 
     :param new: whether the open should create a new IMAS tree
 
@@ -338,12 +324,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
     if imas_version is not None and 'dataset_description.imas_version' not in ods:
         ods['dataset_description.imas_version'] = ods.imas_version
 
-    if user is not None and machine is not None:
-        printd(
-            'Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
-        )
-    elif user is None and machine is None:
-        printd('Saving to IMAS (pulse:%d run:%d, DB:%s)' % (pulse, run, os.environ.get('MDSPLUS_TREE_BASE_0', '???')[:-2]), topic='imas')
+    printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
     ods.satisfy_imas_requirements()
@@ -353,7 +334,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=new, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -397,14 +378,14 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, new=False
 
             # actual write of IDS data to IMAS database
             for ds in ods.keys():
-                occ = ods.get('ids_properties.occurrence', 0)
-                printd(f"ids.{ds}.put({occ})", topic='imas_code')
-                getattr(ids, ds).put(occ)
+                occ = ids.occurrence.get(ds, ods.get('ids_properties.occurrence', 0))
+                printd(f"{ds}.put({occ}, DBentry)", topic='imas_code')
+                getattr(ids, ds).put(occ, ids.DBentry)
 
         finally:
             # close connection to IMAS database
-            printd("ids.close()", topic='imas_code')
-            ids.close()
+            printd("DBentry.close()", topic='imas_code')
+            ids.DBentry.close()
 
     return set_paths
 
@@ -448,18 +429,18 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
 
         # ids.get()
         if time is None:
-            printd(f"ids.{ds}.get()", topic='imas_code')
+            printd(f"{ds}.get({occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).get(occ)
+                getattr(ids, ds).get(occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on get')  # not sure why some IDSs fail on .get()... it's not about them being empty
                 continue
 
         # ids.getSlice()
         else:
-            printd(f"ids.{ds}.getSlice({occ}, {time}, 1)", topic='imas_code')
+            printd(f"ids.{ds}.getSlice({time}, 1, {occ}, DBentry)", topic='imas_code')
             try:
-                getattr(ids, ds).getSlice(occ, time, 1)
+                getattr(ids, ds).getSlice(time, 1, occ, ids.DBentry)
             except ValueError as _excp:
                 print(f'x {ds.ljust(ndss)} IDS failed on getSlice')
                 continue
@@ -498,9 +479,6 @@ def load_omas_imas(
     """
     Load OMAS data from IMAS
 
-    NOTE: Either specify both or none of `user` and `machine`
-    If none of them are specified then use `imasdb` command to set the `MDSPLUS_TREE_BASE_?` environmental variables
-
     :param user: IMAS username
 
     :param machine: IMAS machine
@@ -534,7 +512,7 @@ def load_omas_imas(
     )
 
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
 
         if imas_version is None:
             try:
@@ -574,27 +552,37 @@ def load_omas_imas(
             )
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
-            for k, path in enumerate(fetch_paths):
-                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
-                    continue
-                if verbose and (k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1):
-                    print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
-                # get data from IDS
-                data = imas_get(ids, path, None)
-                # continue for empty data
-                if data is None:
-                    continue
-                # add uncertainty
-                if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
-                    stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
-                    if stdata is not None:
-                        try:
-                            data = uarray(data, stdata)
-                        except uncertainties.core.NegativeStdDev as _excp:
-                            printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
-                # assign data to ODS
-                # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
-                ods.setraw(path, data)
+            if verbose and tqdm is not None:
+                progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
+            else:
+                progress_fetch_paths = fetch_paths
+            with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+                for k, path in enumerate(progress_fetch_paths):
+                    # print progress
+                    if verbose:
+                        if tqdm is not None:
+                            progress_fetch_paths.set_description(joined_fetch_paths[k])
+                        elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
+                            print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                    # uncertain data is loaded as part of the nominal value of the data
+                    if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
+                        continue
+                    # get data from IDS
+                    data = imas_get(ids, path, None)
+                    # continue for empty data
+                    if data is None:
+                        continue
+                    # add uncertainty
+                    if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
+                        stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
+                        if stdata is not None:
+                            try:
+                                data = uarray(data, stdata)
+                            except uncertainties.core.NegativeStdDev as _excp:
+                                printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
+                    # assign data to ODS
+                    # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
+                    ods.setraw(path, data)
 
         finally:
             # close connection to IMAS database
@@ -614,10 +602,6 @@ def load_omas_imas(
         if 'ids_properties' in ods[ds]:
             ods[ds]['ids_properties.occurrence'] = occurrence.get(ds, 0)
 
-    # must manually call set_child_locations since
-    # we used the ODS.setraw that does not do that for us
-    ods.set_child_locations()
-
     try:
         ods.consistency_check = consistency_check
     except LookupError as _excp:
@@ -628,13 +612,12 @@ def load_omas_imas(
 
 class dynamic_omas_imas(dynamic_ODS):
     """
-    Class that provides dynamic data loading from NC file
-    This class is not to be used by itself, but via the
-    ODS.open() method.
+    Class that provides dynamic data loading from IMAS
+    This class is not to be used by itself, but via the ODS.open() method.
     """
 
-    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, verbose=True):
-        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose}
+    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, verbose=True):
+        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence': occurrence}
         self.ids = None
         self.active = False
         self.open_ids = []
@@ -664,9 +647,11 @@ class dynamic_omas_imas(dynamic_ODS):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         path = p2l(key)
-        if path[0] not in self.open_ids:
-            getattr(self.ids, path[0]).get()
-            self.open_ids.append(path[0])
+        ds = path[0]
+        if ds not in self.open_ids:
+            occ = self.ids.occurrence.get(ds, 0)
+            getattr(self.ids, ds).get(occ, self.ids.DBentry)
+            self.open_ids.append(ds)
         return imas_empty(imas_get(self.ids, path)) is not None
 
     def keys(self, location):
@@ -745,7 +730,7 @@ def load_omas_iter_scenario(
     pulse, run=0, paths=None, imas_version=os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']), verbose=True
 ):
     """
-    Load OMAS data set from ITER IMAS scenario database
+    Load ODS from ITER IMAS scenario database
 
     :param pulse: IMAS pulse
 
@@ -916,12 +901,13 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
     # if no location is passed, then we see if the IDSs are filled at all
     if not len(location):
         filled_keys = []
-        for structure in list_structures(imas_version=imas_version):
-            if not hasattr(ids, structure):
+        for ds in list_structures(imas_version=imas_version):
+            if not hasattr(ids, ds):
                 continue
-            getattr(ids, structure).get()
-            if getattr(ids, structure).ids_properties.homogeneous_time != -999999999:
-                filled_keys.append(structure)
+            occ = ids.occurrence.get(ds, 0)
+            getattr(ids, ds).get(occ, ids.DBentry)
+            if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
+                filled_keys.append(ds)
         return filled_keys
 
     path = p2l(location)
@@ -954,7 +940,7 @@ def through_omas_imas(ods, method=['function', 'class_method'][1]):
     machine = 'ITER'
     pulse = 1
     run = 0
-
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         paths = save_omas_imas(ods, user=user, machine=machine, pulse=pulse, run=run, new=True)
         ods1 = load_omas_imas(user=user, machine=machine, pulse=pulse, run=run, paths=paths)
@@ -962,3 +948,74 @@ def through_omas_imas(ods, method=['function', 'class_method'][1]):
         paths = ods.save('imas', user=user, machine=machine, pulse=pulse, run=run, new=True)
         ods1 = ODS().load('imas', user=user, machine=machine, pulse=pulse, run=run, paths=paths)
     return ods1
+
+
+# List IDS fields that have to be present to add datasets in the ITER scenario database
+# as defined here: from https://confluence.iter.org/x/kQqOE
+iter_scenario_requirements = [
+    'equilibrium.time_slice.:.global_quantities.ip',
+    'equilibrium.time_slice.:.profiles_2d.:.phi',
+    'equilibrium.time_slice.:.profiles_2d.:.psi',
+    'equilibrium.time_slice.:.profiles_2d.:.r',
+    'equilibrium.time_slice.:.profiles_2d.:.z',
+    'equilibrium.vacuum_toroidal_field.r0',
+    'equilibrium.vacuum_toroidal_field.b0',
+    'core_profiles.global_quantities.beta_pol',
+    'core_profiles.global_quantities.beta_tor_norm',
+    'core_profiles.global_quantities.current_bootstrap',
+    'core_profiles.global_quantities.current_non_inductive',
+    'core_profiles.global_quantities.energy_diamagnetic',
+    'core_profiles.global_quantities.ip',
+    'core_profiles.global_quantities.v_loop',
+    'core_profiles.profiles_1d.:.e_field.radial',
+    'core_profiles.profiles_1d.:.electrons.density',
+    'core_profiles.profiles_1d.:.electrons.pressure',
+    'core_profiles.profiles_1d.:.electrons.pressure_fast_parallel',
+    'core_profiles.profiles_1d.:.electrons.pressure_fast_perpendicular',
+    'core_profiles.profiles_1d.:.electrons.pressure_thermal',
+    'core_profiles.profiles_1d.:.electrons.temperature',
+    'core_profiles.profiles_1d.:.grid.rho_tor',
+    'core_profiles.profiles_1d.:.grid.rho_tor_norm',
+    'core_profiles.profiles_1d.:.grid.psi',
+    'core_profiles.profiles_1d.:.grid.volume',
+    'core_profiles.profiles_1d.:.ion.:.density',
+    'core_profiles.profiles_1d.:.ion.:.element.:.a',
+    'core_profiles.profiles_1d.:.ion.:.element.:.z_n',
+    'core_profiles.profiles_1d.:.ion.:.pressure',
+    'core_profiles.profiles_1d.:.ion.:.pressure_fast_parallel',
+    'core_profiles.profiles_1d.:.ion.:.pressure_fast_perpendicular',
+    'core_profiles.profiles_1d.:.ion.:.pressure_thermal',
+    'core_profiles.profiles_1d.:.ion.:.temperature',
+    'core_profiles.profiles_1d.:.ion.:.velocity.diamagnetic',
+    'core_profiles.profiles_1d.:.ion.:.velocity.poloidal',
+    'core_profiles.profiles_1d.:.ion.:.velocity.toroidal',
+    'core_profiles.profiles_1d.:.j_bootstrap',
+    'core_profiles.profiles_1d.:.j_non_inductive',
+    'core_profiles.profiles_1d.:.j_ohmic',
+    'core_profiles.profiles_1d.:.j_total',
+    'core_profiles.profiles_1d.:.magnetic_shear',
+    'core_profiles.profiles_1d.:.pressure_ion_total',
+    'core_profiles.profiles_1d.:.pressure_parallel',
+    'core_profiles.profiles_1d.:.pressure_perpendicular',
+    'core_profiles.profiles_1d.:.pressure_thermal',
+    'core_profiles.profiles_1d.:.q',
+    'core_profiles.profiles_1d.:.t_i_average',
+    'core_profiles.profiles_1d.:.zeff',
+    'summary.global_quantities.b0.value',
+    'summary.global_quantities.r0.value',
+    'summary.global_quantities.beta_pol.value',
+    'summary.global_quantities.beta_tor_norm.value',
+    'summary.global_quantities.current_bootstrap.value',
+    'summary.global_quantities.current_non_inductive.value',
+    'summary.global_quantities.current_ohm.value',
+    'summary.global_quantities.energy_diamagnetic.value',
+    'summary.global_quantities.energy_thermal.value',
+    'summary.global_quantities.energy_total.value',
+    'summary.global_quantities.h_98.value',
+    'summary.global_quantities.h_mode.value',
+    'summary.global_quantities.ip.value',
+    'summary.global_quantities.tau_energy.value',
+    'summary.global_quantities.v_loop.value',
+    'summary.local.separatrix.n_e.value',
+    'summary.local.separatrix.zeff.value',
+]

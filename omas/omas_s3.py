@@ -84,7 +84,7 @@ def remote_uri(uri, filename, action):
                 bucket.put_object(Key=s3filename, Body=data)  # , Metadata=meta)
 
 
-def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_imas_dir'], **kw):
+def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_dir=omas_rcparams['tmp_omas_dir'], **kw):
     """
     Save an OMAS object to pickle and upload it to S3
 
@@ -107,7 +107,7 @@ def save_omas_s3(ods, filename, user=os.environ.get('USER', 'dummy_user'), tmp_d
 
 
 def load_omas_s3(
-    filename, user=os.environ.get('USER', 'dummy_user'), consistency_check=None, imas_version=None, tmp_dir=omas_rcparams['tmp_imas_dir']
+    filename, user=os.environ.get('USER', 'dummy_user'), consistency_check=None, imas_version=None, tmp_dir=omas_rcparams['tmp_omas_dir']
 ):
     """
     Download an OMAS object from S3 and read it as pickle
@@ -165,12 +165,11 @@ def through_omas_s3(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = 'test.pkl'
-
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_s3(ods, filename, user='omas_test')
         ods1 = load_omas_s3(filename, user='omas_test')
     else:
         ods.save('s3', filename=filename, user='omas_test')
         ods1 = ODS().load('s3', filename=filename, user='omas_test')
-
     return ods1

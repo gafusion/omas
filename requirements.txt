@@ -16,6 +16,8 @@ xmltodict                # required
 xarray                   # required
 setuptools>=41.2         # required
 pyro5                    # required
+tqdm                     # required
+Cython                   # required
 
 #bs4                     # build_structures
 #pyhdc                   # hdc

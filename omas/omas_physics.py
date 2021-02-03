@@ -65,6 +65,65 @@ class constants(object):
 
 
 @add_to__ODS__
+def consistent_times(self, attempt_fix=True, raise_errors=True):
+    """
+    Assign .time and .ids_properties.homogeneous_time info for top-level structures
+    since these are required for writing an IDS to IMAS
+
+    :param attempt_fix: fix dataset_description and wall IDS to have 0 times if none is set
+
+    :param raise_errors: raise errors if could not satisfy IMAS requirements
+
+    :return: `True` if all is good, `False` if requirements are not satisfied, `None` if fixes were applied
+    """
+
+    # if called at top level, loop over all data structures
+    if not len(self.location):
+        out = {}
+        for ds in self:
+            out[ds] = self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        if any([k is False for k in out.values()]):
+            return False
+        elif any([k is None for k in out.values()]):
+            return None
+        else:
+            return True
+
+    ds = p2l(self.location)[0]
+
+    extra_info = {}
+    time = self.time(extra_info=extra_info)
+    if extra_info['homogeneous_time'] is False:
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+    elif time is not None and len(time):
+        self['time'] = time
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+    elif attempt_fix:
+        self['time'] = [-1.0]
+        extra_info['homogeneous_time'] = True
+        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        return None
+    elif raise_errors:
+        raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+    else:
+        return False
+    return True
+
+
+@add_to__ODS__
+def imas_info(self):
+    # if called at top level, loop over all data structures
+    if not len(self.location):
+        for ds in self:
+            self.getraw(ds).physics_imas_info()
+        return
+    else:
+        self['ids_properties.version_put.access_layer'] = 'N/A'
+        self['ids_properties.version_put.access_layer_language'] = 'OMAS'
+        self['ids_properties.version_put.data_dictionary'] = self.imas_version
+
+
+@add_to__ODS__
 @preprocess_ods('equilibrium')
 def equilibrium_stored_energy(ods, update=True):
     """
@@ -91,57 +150,6 @@ def equilibrium_stored_energy(ods, update=True):
         )  # [J]
 
     return ods_n
-
-
-@add_to__ODS__
-def calc_line_den(ods, R1, R2, Z1, Z2, line_grid=2000, time_index=0):
-    ods_n = ods
-    if not update:
-        from omas import ODS
-
-        ods_n = ODS().copy_attrs_from(ods)
-
-    Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
-    Zb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['z']
-
-    Rline = (R2-R1) * numpy.linspace(0, 1, line_grid) + R1
-    Zline = (Z2-Z1) * numpy.linspace(0, 1, line_grid) + Z1
-    dist = numpy.zeros(line_grid)
-
-    for i, Rval in enumerate(Rline):
-        dist[i]= numpy.min((Rline[i]-Rb)**2 + (Zline[i]-Zb)**2 )
-
-    a = numpy.argpartition(dist, 4)[0: 3]
-    i1 =  a[0]
-    i2 = a[1]
-    if abs(i2-i1) == -1:
-        i2 = a[3]
-
-    Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
-    Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
-
-    psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Rgrid, Zgrid, psi2d)
-    psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
-    rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
-    rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-    ne = ods['core_profiles']['profiles_1d'][0]['electrons']['density_thermal']
-    ne = numpy.interp(rhon_eq, rhon_cp, ne)
-    tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
-    ne_line = 0.
-    for i in range(i1, i2, numpy.sign(i2-i1)):
-        psival = psi_interp(Rline[i], Zline[i])[0]
-        ne_interp  = scipy.interpolate.splev(psival, tck)
-        ne_line  += ne_interp
-    ne_line /= abs(i2-i1)*sqrt((Rline[i2]-Rline[i1])**2+(Zline[i2]-Zline[i1])**2)
-
-
-    if 'summary.line_average.n_e' in ods:
-        ods_n['summary.line_average.n_e'][time_index] = ne_line
-    else:
-        ods_n['summary.line_average.n_e'][time_index] = numpy.atleast1d(ne_line)
-        
-    return ne_line
 
 
 @add_to__ODS__
@@ -211,6 +219,7 @@ def summary_greenwald(ods, update=True):
 
     :return: updated ods
     """
+
     ods_n = ods
     if not update:
         from omas import ODS
@@ -234,7 +243,100 @@ def summary_greenwald(ods, update=True):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
-def summary_taue(ods, update=True, PRINTFLAG=False):
+def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
+    """
+    Calculates line-average electron density for each time slice and stores them in the summary ods
+
+    :param ods: input ods
+    
+    :param line_grid: number of points to calculate line average density over (includes point outside of boundary)
+    
+    :param time_index: time slices to process
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    import scipy
+
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    if time_index is None:
+        for time_index in range(len(ods['core_profiles']['profiles_1d'])):
+            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=False)
+        return ods_n
+
+    Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
+    Zb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['z']
+
+    Rgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim1']
+    Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
+
+    psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
+    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
+    rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
+    rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
+    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+    ne = numpy.interp(rhon_eq, rhon_cp, ne)
+    tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
+
+    if 'time' not in ods['interferometer']:
+        ods_n['interferometer.ids_properties.homogeneous_time'] = 1
+        ods_n['interferometer']['time'] = copy.copy(ods['core_profiles']['time'])
+
+    ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point']]
+    for channel in ods['interferometer']['channel']:
+        ne_line_paths = []
+        dist_paths = []
+        for ifpath in ifpaths:
+            R1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['r']
+            Z1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['z']
+            phi1 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[0]]['phi']
+            x1 = R1 * numpy.cos(phi1)
+            y1 = R1 * numpy.sin(phi1)
+
+            R2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['r']
+            Z2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['z']
+            phi2 = ods['interferometer']['channel'][channel]['line_of_sight'][ifpath[1]]['phi']
+            x2 = R2 * numpy.cos(phi2)
+            y2 = R2 * numpy.sin(phi2)
+
+            xline = numpy.linspace(x1, x2, line_grid)
+            yline = numpy.linspace(y1, y2, line_grid)
+            Rline = numpy.linspace(R1, R2, line_grid)
+            Zline = numpy.linspace(Z1, Z2, line_grid)
+            dist = numpy.zeros(line_grid)
+
+            for i, Rval in enumerate(Rline):
+                dist[i] = numpy.min((Rline[i] - Rb) ** 2 + (Zline[i] - Zb) ** 2)
+
+            zero_crossings = numpy.where(numpy.diff(numpy.sign(numpy.gradient(dist))))[0]
+            i1 = zero_crossings[0]
+            i2 = zero_crossings[-1]
+
+            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            ne_interp = scipy.interpolate.splev(psival, tck)
+            ne_line = numpy.trapz(ne_interp)
+            ne_line /= abs(i2 - i1)
+            ne_line_paths.append(ne_line)
+            dist_paths.append(numpy.sqrt((xline[i2] - xline[i1]) ** 2 + (yline[i2] - yline[i1]) ** 2 + (Zline[i2] - Zline[i1]) ** 2))
+
+        ne_line = numpy.average(ne_line_paths, weights=dist_paths)
+        if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods_n:
+            ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods_n['interferometer']['time']))
+
+        ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
+    return ods_n
+
+
+@add_to__ODS__
+@preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
+def summary_taue(ods, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
@@ -285,14 +387,8 @@ def summary_taue(ods, update=True, PRINTFLAG=False):
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
             # Get total power from ods function:
-            if 'core_sources' not in ods:
-                if 'summary.global_quantities.power_steady.value' not in ods:
-                    raise Exception('No core sources nor total power in ods, unable to calculate tau_e')
-                printw("Not recalculating heating power, reusing ods['summary.global_quantities.power_steady.value']")
-                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
-            else:
-                ods.physics_summary_heating_power()
-                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            ods.physics_summary_total_powers()
+            total_power = ods['summary.global_quantities.power_steady.value'][time_index]
 
             # Calculate tau_e
             tau_e = abs(
@@ -300,16 +396,15 @@ def summary_taue(ods, update=True, PRINTFLAG=False):
                 * (abs(ip) / 1e6) ** 0.93
                 * abs(bt) ** 0.15
                 * (ne_vol_avg / 1e19) ** 0.41
-                * (heating_power / 1e6) ** -0.69
+                * (total_power / 1e6) ** -0.69
                 * r_major ** 1.97
                 * kappa ** 0.78
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            if PRINTFLAG:
-                print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
+            # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
             tau_e_scaling.append(tau_e)
-            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / heating_power)
+            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / total_power)
 
     # assign quantities in the ODS
     ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
@@ -323,14 +418,13 @@ def summary_taue(ods, update=True, PRINTFLAG=False):
 
     return ods_n
 
-@add_to__ODS__
-@preprocess_ods('core_profiles')
 
 @add_to__ODS__
 @preprocess_ods('core_sources')
-def summary_heating_power(ods, update=True):
+def summary_total_powers(ods, update=True):
     """
-    Integrate power densities to calculate the total heating and individual H&CD systems, stores values in ods.summary
+    Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities
+
     :param ods: input ods
 
     :param update: operate in place
@@ -343,37 +437,47 @@ def summary_heating_power(ods, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    sources = ods_n['core_sources']['source']
-    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6:'fusion', 7:'ohmic'}
-    power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    if 'core_sources.source.0' not in ods_n:
+        return ods_n
+
+    sources = ods_n['core_sources.source']
+    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
+    power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
+    q_init = numpy.zeros(len(sources['0.profiles_1d.0.grid.volume']))
     q_dict = {
-        'total_heating': copy.deepcopy(q_init),
+        'total': copy.deepcopy(q_init),
         'nbi': copy.deepcopy(q_init),
         'ec': copy.deepcopy(q_init),
         'lh': copy.deepcopy(q_init),
         'ic': copy.deepcopy(q_init),
     }
+    ignore_indices = list(range(100, 108)) + list(range(900, 910))
 
-    for time_index in sources[0]['profiles_1d']:
-        vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
+    for time_index in sources['0.profiles_1d']:
+        vol = sources[f'0.profiles_1d.{time_index}.grid.volume']
         for source in sources:
-            source_1d = sources[source]['profiles_1d'][time_index]
-            if sources[source]['identifier.index'] in index_dict:
-                if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
-                    q_dict['total_heating'] += source_1d['electrons']['energy']
-                    if sources[source]['identifier.index'] in power_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
-                if 'total_ion_energy' in source_1d:
-                    q_dict['total_heating'] += source_1d['total_ion_energy']
-                    if sources[source]['identifier.index'] in power_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
+            if sources[f'{source}.identifier.index'] in ignore_indices:
+                # Skip the combined sources to prevent double counting
+                continue
+            if f'{source}.profiles_1d.{time_index}.electrons.energy' in sources:
+                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.electrons.energy']
+                if sources[f'{source}.identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
+                        f'{source}.profiles_1d.{time_index}.electrons.energy'
+                    ]
+            if f'{source}.profiles_1d.{time_index}.total_ion_energy' in sources:
+                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.total_ion_energy']
+                if sources[f'{source}.identifier.index'] in index_dict:
+                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
+                        f'{source}.profiles_1d.{time_index}.total_ion_energy'
+                    ]
 
         for key, value in power_dict.items():
             power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
+
     for key, value in power_dict.items():
         if numpy.sum(value) > 0:
-            if key is 'total_heating':
+            if key == 'total':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
@@ -388,6 +492,8 @@ def summary_global_quantities(ods, update=True):
     Calculates global quantities for each time slice and stores them in the summary ods:
      - Greenwald Fraction
      - Energy confinement time estimated from the IPB98(y,2) scaling
+     - Integrate power densities to the totals
+     - Generate summary.global_quantities from global_quantities of other IDSs
 
     :param ods: input ods
 
@@ -395,10 +501,62 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods.physics_summary_greenwald()
-    ods.physics_summary_taue()
+    ods_n = ods.physics_summary_greenwald(update=update)
+    ods_n.physics_summary_taue(update=True)
+    ods_n.physics_summary_total_powers(update=True)
+    ods_n.physics_summary_consistent_global_quantities(update=True)
+    return ods_n
 
-    return ods
+
+@add_to__ODS__
+def summary_consistent_global_quantities(ods, ds=None, update=True):
+    """
+    Generate summary.global_quantities from global_quantities of other IDSs
+
+    :param ods: input ods
+
+    :param ds: IDS from which to update summary.global_quantities. All IDSs if `None`.
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    global_quantities = copy.copy(omas_global_quantities(ods.imas_version))
+
+    if ds is None:
+        ds = set(map(lambda x: x.split('.')[0], global_quantities))
+    ds = set(ds)
+    if 'summary' in ds:
+        ds.remove('summary')
+
+    # global_quantities destinations
+    dst = []
+    for item in global_quantities:
+        path = item.split('.')
+        if path[0] == 'summary':
+            dst.append(path[-1])
+
+    # global_quantities sources
+    src = []
+    for item in global_quantities:
+        path = item.split('.')
+        if path[0] in ds and path[0] in ods and path[-1] in dst:
+            src.append(item)
+
+    # copy global_quantities from other IDSs to summary
+    for item in src:
+        if item.replace(':', '0') in ods:
+            path = item.split('.')
+            ods_n[f'summary.global_quantities.{path[-1]}.value'] = ods[item]
+            ods_n[f'summary.global_quantities.{path[-1]}.source'] = 'Consistency with ' + path[0]
+
+    return ods_n
 
 
 @add_to__ODS__
@@ -406,8 +564,8 @@ def summary_global_quantities(ods, update=True):
 def core_profiles_consistent(ods, update=True, use_electrons_density=False):
     """
     Calls all core_profiles consistency functions including
-      - core_profiles_pressures
       - core_profiles_densities
+      - core_profiles_pressures
       - core_profiles_zeff
 
     :param ods: input ods
@@ -420,8 +578,8 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
 
     :return: updated ods
     """
-    ods = core_profiles_pressures(ods, update=update)
-    core_profiles_densities(ods)
+    ods = core_profiles_densities(ods, update=update)
+    core_profiles_pressures(ods)
     core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
     return ods
 
@@ -1095,6 +1253,37 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
     return ods
 
 
+@add_to__ODS__
+@preprocess_ods('magnetics')
+def magnetics_sanitize(ods, remove_bpol_probe=True):
+    '''
+    Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe
+
+    :param ods: ODS to update in-place
+
+    :return: updated ods
+    '''
+    if 'magnetics.bpol_probe' not in ods:
+        return ods
+
+    if 'magnetics.b_field_pol_probe' in ods:
+        ods['magnetics.b_field_pol_probe'].clear()
+    if 'magnetics.b_field_tor_probe' in ods:
+        ods['magnetics.b_field_tor_probe'].clear()
+
+    tor_angle = ods['magnetics.bpol_probe[:].toroidal_angle']
+    for k in ods['magnetics.bpol_probe']:
+        if abs(numpy.sin(ods.get(f'magnetics.bpol_probe.{k}.toroidal_angle', 0.0))) < numpy.sin(numpy.pi / 4):
+            ods[f'magnetics.b_field_pol_probe.+'] = ods['magnetics.bpol_probe'][k]
+        else:
+            ods[f'magnetics.b_field_tor_probe.+'] = ods['magnetics.bpol_probe'][k]
+
+    if remove_bpol_probe:
+        del ods['magnetics.bpol_probe']
+
+    return ods
+
+
 def delete_ggd(ods, ds=None):
     """
     delete all .ggd and .grids_ggd entries
@@ -1142,6 +1331,7 @@ def grids_ggd_points_triangles(grid):
 
     :return: tuple with points and triangles
     """
+    # objects_per_dimension: 0 = nodes, 1 = edges, 2 = faces, 3 = cells / volumes
     points = grid['space[0].objects_per_dimension[0].object[:].geometry']
     triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
     return points, triangles
@@ -1213,6 +1403,64 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     if return_cache:
         return R[0, :], Z[:, 0], intepolated_data, cache
     return R[0, :], Z[:, 0], intepolated_data
+
+
+@add_to__ODS__
+def check_iter_scenario_requirements(ods):
+    '''
+    Check that the current ODS satisfies the ITER scenario database requirements as defined in https://confluence.iter.org/x/kQqOE
+
+    :return: list of elements that are missing to satisfy the ITER scenario requirements
+    '''
+    from .omas_imas import iter_scenario_requirements
+
+    fail = []
+    for item in iter_scenario_requirements:
+        try:
+            ods[item]  # acccessing a leaf that has no data will raise an error
+        except Exception:
+            fail.append(item)
+    return fail
+
+
+@add_to__ALL__
+def probe_endpoints(r0, z0, a0, l0, cocos):
+    '''
+    Transform r,z,a,l arrays commonly used to describe poloidal magnetic
+    probes geometry to actual r,z coordinates of the end-points of the probes.
+    This is useful for plotting purposes.
+
+    :param r0: r coordinates [m]
+
+    :param z0: Z coordinates [m]
+
+    :param a0: poloidal angles [radiants]
+
+    :param l0: lenght [m]
+
+    :param cocos: cocos convention
+
+    :return: list of 2-points r and z coordinates of individual probes
+    '''
+    theta_convention = 1
+    if cocos in [1, 4, 6, 7, 11, 14, 16, 17]:
+        theta_convention = -1
+
+    boo = (1 - numpy.sign(l0)) / 2.0
+    cor = boo * numpy.pi / 2.0
+    # then, compute the two-point arrays to build the partial rogowskis
+    # as segments rather than single points, applying the correction
+    px = r0 - l0 / 2.0 * numpy.cos(theta_convention * (a0 + cor))
+    py = z0 - l0 / 2.0 * numpy.sin(theta_convention * (a0 + cor))
+    qx = r0 + l0 / 2.0 * numpy.cos(theta_convention * (a0 + cor))
+    qy = z0 + l0 / 2.0 * numpy.sin(theta_convention * (a0 + cor))
+    segx = []
+    segy = []
+    for k in range(len(r0)):
+        segx.append([px[k], qx[k]])
+        segy.append([py[k], qy[k]])
+
+    return segx, segy
 
 
 @add_to__ALL__
@@ -1601,7 +1849,9 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 
 @add_to__ALL__
 @contextmanager
-def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, **kw):
+def omas_environment(
+    ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw
+):
     """
     Provides environment for data input/output to/from OMAS
 
@@ -1615,6 +1865,11 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
 
     :param xmlcodeparams: view code.parameters as an XML string while in this environment
 
+    :param dynamic_path_creation: whether to dynamically create the path when setting an item
+                                  * False: raise an error when trying to access a structure element that does not exists
+                                  * True (default): arrays of structures can be incrementally extended by accessing at the next element in the array
+                                  * 'dynamic_array_structures': arrays of structures can be dynamically extended
+
     :param kw: extra keywords set attributes of the ods (eg. 'consistency_check', 'dynamic_path_creation', 'imas_version')
 
     :return: ODS with environment set
@@ -1625,8 +1880,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         from omas import ODS
 
         tmp = ODS(cocos=ods.cocos)
-        tmp.dynamic_path_creation = 'dynamic_array_structures'
-        with omas_environment(tmp, cocosio=cocosio):
+        with omas_environment(tmp, cocosio=cocosio, dynamic_path_creation='dynamic_array_structures'):
             tmp.update(coordsio)
         coordsio = tmp
 
@@ -1634,6 +1888,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         raise ValueError('cocosio can only be an integer')
 
     # backup attributes
+    bkp_dynamic_path_creation = omas_rcparams['dynamic_path_creation']
     bkp_cocosio = ods.cocosio
     bkp_coordsio = ods.coordsio
     bkp_unitsio = ods.unitsio
@@ -1650,6 +1905,8 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         ods.coordsio = (ods, coordsio)
     if unitsio is not None:
         ods.unitsio = unitsio
+    if dynamic_path_creation is not None:
+        omas_rcparams['dynamic_path_creation'] = dynamic_path_creation
 
     # set input_data_process_functions
     if input_data_process_functions is not None:
@@ -1674,6 +1931,7 @@ def omas_environment(ods, cocosio=None, coordsio=None, unitsio=None, input_data_
         if xmlcodeparams:
             ods.codeparams2dict()
         # restore attributes
+        omas_rcparams['dynamic_path_creation'] = bkp_dynamic_path_creation
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio
@@ -1706,6 +1964,9 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
 
     :return: dictionary structure with tally of score and reason for scoring for every entry
     """
+    # cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
+    from .omas_cocos import _cocos_signals
+
     # update OMAS cocos information with the one stored in IMAS
     from .omas_structure import extract_cocos
 
@@ -1742,7 +2003,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
     # if generate_cocos_signals is run after omas has been used for something else
     # (eg. when running test_examples) it may be that _extra_structures is not empty
     # Thus, we clear _structures and _extra_structures to make sure that
-    # dict_structures() is not polluted by _extra_structures
+    # structures_filenames() is not polluted by _extra_structures
     _structures_bkp = copy.deepcopy(_structures)
     _extra_structures_bkp = copy.deepcopy(_extra_structures)
     try:
@@ -1792,41 +2053,42 @@ _cocos_signals = {}
 """
         ]
 
+        skip_signals = [
+            'chi_squared',
+            'standard_deviation',
+            'weight',
+            'coefficients',
+            'beta_tor',
+            'beta_pol',
+            'radial',
+            'rho_tor_norm',
+            'darea_drho_tor',
+            'dvolume_drho_tor',
+            'ratio',
+            'fraction',
+            'rate',
+            'd',
+            'flux',
+            'v',
+            'b_field_max',
+            'b_field_r',
+            'b_field_z',
+            'b_r',
+            'b_z',
+            'width_tor',
+        ]
+
         # loop over structures
         for structure in structures:
             print('Updating COCOS info for: ' + structure)
             text.extend(['', '# ' + structure.upper()])
             csig.extend(['', '# ' + structure.upper()])
 
-            skip_signals = [
-                'chi_squared',
-                'standard_deviation',
-                'weight',
-                'coefficients',
-                'r',
-                'z',
-                'beta_tor',
-                'beta_pol',
-                'radial',
-                'rho_tor_norm',
-                'darea_drho_tor',
-                'dvolume_drho_tor',
-                'ratio',
-                'fraction',
-                'rate',
-                'd',
-                'flux',
-                'v',
-                'b_field_max',
-                'width_tor',
-            ]
-
             out[structure] = {}
             ods[structure]
-            d = dict_structures(imas_version=omas_rcparams['default_imas_version'])
             m = 0
             # generate score and add reason for scoring
-            for item in sorted(list(_structures[(structure, omas_rcparams['default_imas_version'])].keys())):
+            for item in sorted(list(load_structure(structure, omas_rcparams['default_imas_version'])[0].keys())):
                 item = i2o(item)
                 item_ = item
                 if any([item.endswith(k) for k in [':.values', ':.value', ':.data']]):
@@ -1847,6 +2109,8 @@ _cocos_signals = {}
                     elif units in [None, 's']:
                         out[structure].setdefault(-1, []).append((item, '[%s]' % units))
                         continue
+                    elif re.match('.*\.[rz]$', item):
+                        continue
                     elif any([(item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in skip_signals]):
                         out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
                         continue
@@ -1855,7 +2119,7 @@ _cocos_signals = {}
                         continue
                     n = item.count('.')
                     for pnt, key in enumerate(p2l(item)):
-                        pnt = pnt / float(n)
+                        pnt = pnt / n
                         for case in ['q', 'ip', 'b0', 'phi', 'psi', 'f', 'f_df']:
                             if key == case:
                                 rationale += [case]
@@ -1935,20 +2199,31 @@ _cocos_signals = {}
         _extra_structures.update(_extra_structures_bkp)
 
 
-# cocos_signals contains the IMAS locations and the corresponding `cocos_transform` function
-from .omas_cocos import _cocos_signals
-
-
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
 class CocosSignals(dict):
+    def __init__(self):
+        self.reload()
+
     def __getitem__(self, key):
         value = dict.__getitem__(self, key)
         if value == '?':
-            warnings.warn('`%s` may require defining its COCOS transform in omas/omas_cocos.py' % key)
+            warnings.warn(
+                f'''
+`{key}` may require defining its COCOS transform in {os.path.split(__file__)[0] + os.sep}omas_cocos.py
+Once done, you can reload the cocos definitions with:
+> from omas.omas_physics import cocos_signals; cocos_signals.reload()
+'''.strip()
+            )
         return value
+
+    def reload(self):
+        namespace = {}
+        with open(os.path.split(__file__)[0] + os.sep + 'omas_cocos.py', 'r') as f:
+            exec(f.read(), namespace)
+        self.clear()
+        self.update(namespace['_cocos_signals'])
 
 
 # cocos_signals is the actual dictionary
 cocos_signals = CocosSignals()
-cocos_signals.update(_cocos_signals)

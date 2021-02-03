@@ -168,6 +168,25 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
 
 
 @add_to_ODS
+def ic_antennas(ods):
+    """
+    Add sample ic_antennas data
+    This method operates in in-place.
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with profiles added
+    """
+    from omas import load_omas_json
+
+    ods.update(load_omas_json(imas_json_dir + '/../samples/sample_ic_antennas_ods.json', consistency_check=False))
+
+    return ods
+
+
+@add_to_ODS
 def core_sources(ods, time_index=0):
     """
     Add sample core_profiles data
@@ -318,35 +337,10 @@ def magnetics(ods):
     :return: ODS instance with fake magnetics hardware information added
     """
 
-    nbp = 12
-    nfl = 7
+    from .machine_mappings.d3d import setup_magnetics_hardware_description_d3d
 
-    r0 = 1.5
-    z0 = 0.0
-    abp = 0.8
-    afl = 1.0
-
-    angle_bp = numpy.linspace(0, 2 * numpy.pi, nbp + 1)[:-1]
-    rp = r0 + abp * numpy.cos(angle_bp)
-    zp = z0 + abp * numpy.sin(angle_bp)
-
-    angle_fl = numpy.linspace(0, 2 * numpy.pi, nfl + 1)[:-1]
-    rf = r0 + afl * numpy.cos(angle_fl)
-    zf = z0 + afl * numpy.sin(angle_fl)
-
-    for i in range(nbp):
-        ods['magnetics.b_field_pol_probe'][i]['identifier'] = 'FAKE bpol probe {}'.format(i)
-        ods['magnetics.b_field_pol_probe'][i]['position.r'] = rp[i]
-        ods['magnetics.b_field_pol_probe'][i]['position.z'] = zp[i]
-        ods['magnetics.b_field_pol_probe'][i]['position.phi'] = 6.5
-
-    for i in range(nfl):
-        ods['magnetics.flux_loop'][i]['identifier'] = 'FAKE flux loop {}'.format(i)
-        ods['magnetics.flux_loop'][i]['position.0.r'] = rf[i]
-        ods['magnetics.flux_loop'][i]['position.0.z'] = zf[i]
-
-    ods['magnetics.time'] = [0]
-
+    setup_magnetics_hardware_description_d3d(ods)
+    ods['magnetics.time'] = [0.0]
     return ods
 
 
@@ -386,7 +380,7 @@ def charge_exchange(ods, nc=10):
 
     :param ods: ODS instance
 
-    :param nc: Number of channels to add.
+    :param nc: Number of channels to add
 
     :return: ODS instance with fake CER hardware information added
     """
@@ -402,7 +396,7 @@ def charge_exchange(ods, nc=10):
         ch['position.phi.data'] = numpy.array([6.5])
         ch['position.r.data'] = numpy.array([r[i]])
         ch['position.z.data'] = numpy.array([z[i]])
-
+    ods['charge_exchange.time'] = [0.0]
     return ods
 
 
@@ -579,42 +573,19 @@ def wall(ods):
 
     :return: ODS instance with added wall description
     """
+    ods['wall.time'] = [0.0]
     ods['wall.description_2d[0].limiter.type.description'] = 'first wall'
     ods['wall.description_2d[0].limiter.type.index'] = 0
     ods['wall.description_2d[0].limiter.type.name'] = 'first_wall'
     ods['wall.description_2d[0].limiter.unit[0].outline.r'] = [
-        1.0,
-        1.0,
-        1.3,
-        1.4,
-        1.6,
-        2.15,
-        2.35,
-        2.35,
-        2.15,
-        1.800,
-        1.350,
-        1.35,
-        1.10,
-        1.00,
-        1.0,
+        # fmt: off
+        1.0, 1.0, 1.3, 1.4, 1.6, 2.15, 2.35, 2.35, 2.15, 1.800, 1.350, 1.35, 1.10, 1.00, 1.0
+        # fmt: on
     ]
     ods['wall.description_2d[0].limiter.unit[0].outline.z'] = [
-        0.0,
-        1.4,
-        1.4,
-        1.3,
-        1.1,
-        1.00,
-        0.50,
-        -0.5,
-        -1.0,
-        -1.25,
-        -1.25,
-        -1.4,
-        -1.4,
-        -1.3,
-        0.0,
+        # fmt: off
+        0.0, 1.4, 1.4, 1.3, 1.1, 1.00, 0.50, -0.5, -1.0, -1.25, -1.25, -1.4, -1.4, -1.3, 0.0
+        # fmt: on
     ]
 
     return ods

@@ -8,6 +8,7 @@ A final report summarizes if some storage systems combinations have errors.
 """
 
 import os
+import copy
 import numpy
 from pprint import pprint
 from omas import *
@@ -27,11 +28,12 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
 
     if ods is None:
         ods = ODS().sample()
+    ods = copy.deepcopy(ods)  # make a copy to make sure throuhs do not alter original ODS
 
     if test_type in _tests:
         os.environ['OMAS_DEBUG_TOPIC'] = test_type
         ods1 = globals()['through_omas_' + test_type](ods)
-        difference = different_ods(ods, ods1)
+        difference = ods.diff(ods1)
         if not chedifferenceck:
             print('OMAS data got saved and loaded correctly')
         else:
@@ -59,7 +61,7 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
                         raise failed1
                     ods2 = globals()['through_omas_' + t2](ods1)
 
-                    different = different_ods(ods1, ods2)
+                    different = ods1.diff(ods2)
                     if not different:
                         print('FROM %s TO %s : OK' % (t1.center(5), t2.center(5)))
                         results[k1, k2] = 1.0

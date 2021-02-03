@@ -20,36 +20,35 @@ ods = ODS()
 
 # without dynamic path creation one must use Python approach to create nested dictionaries
 # this can be extremely tedious!
-ods.dynamic_path_creation = False
-ods['equilibrium'] = ODS()
-ods['equilibrium']['time_slice'] = ODS()
-ods['equilibrium']['time_slice'][0] = ODS()
-ods['equilibrium']['time_slice'][0]['time'] = 1000
-assert ods['equilibrium']['time_slice'][0]['time'] == 1000.0
+with omas_environment(ods, dynamic_path_creation=False):
+    ods['equilibrium'] = ODS()
+    ods['equilibrium']['time_slice'] = ODS()
+    ods['equilibrium']['time_slice'][0] = ODS()
+    ods['equilibrium']['time_slice'][0]['time'] = 1000
+    assert ods['equilibrium']['time_slice'][0]['time'] == 1000.0
 
 # Dynamic path creation (True by default) makes life easier.
 # NOTE: OMAS supports different data access syntaxes
-ods.dynamic_path_creation = True
+with omas_environment(ods, dynamic_path_creation=True):
+    # access data as dictionary
+    ods['equilibrium']['time_slice'][0]['time'] = 1000.0
+    assert ods['equilibrium']['time_slice'][0]['time'] == 1000.0
 
-# access data as dictionary
-ods['equilibrium']['time_slice'][0]['time'] = 1000.0
-assert ods['equilibrium']['time_slice'][0]['time'] == 1000.0
+    # access data as string
+    ods['equilibrium.time_slice.1.time'] = 2000.0
+    assert ods['equilibrium.time_slice.1.time'] == 2000.0
 
-# access data as string
-ods['equilibrium.time_slice.1.time'] = 2000.0
-assert ods['equilibrium.time_slice.1.time'] == 2000.0
+    # access data as string (square brackets for arrays of structures)
+    ods['equilibrium.time_slice[2].time'] = 3000.0
+    assert ods['equilibrium.time_slice[2].time'] == 3000.0
 
-# access data as string (square brackets for arrays of structures)
-ods['equilibrium.time_slice[2].time'] = 3000.0
-assert ods['equilibrium.time_slice[2].time'] == 3000.0
+    # access data with path list
+    ods[['equilibrium', 'time_slice', 3, 'time']] = 4000.0
+    assert ods[['equilibrium', 'time_slice', 3, 'time']] == 4000.0
 
-# access data with path list
-ods[['equilibrium', 'time_slice', 3, 'time']] = 4000.0
-assert ods[['equilibrium', 'time_slice', 3, 'time']] == 4000.0
-
-# access data with mix and match approach
-ods['equilibrium']['time_slice.4.time'] = 5000.0
-assert ods['equilibrium']['time_slice.4.time'] == 5000.0
+    # access data with mix and match approach
+    ods['equilibrium']['time_slice.4.time'] = 5000.0
+    assert ods['equilibrium']['time_slice.4.time'] == 5000.0
 
 # =============
 # Data slicing

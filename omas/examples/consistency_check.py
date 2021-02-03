@@ -22,7 +22,6 @@ print('consistency_check = False')
 print('*' * 20)
 ods = ODS().sample()
 ods.consistency_check = False
-ods.dynamic_path_creation = 'dynamic_array_structures'
 # can add entry with wrong dimensions
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
 # can add entry that is obsolescent
@@ -35,7 +34,6 @@ print("consistency_check = 'warn'")
 print('*' * 20)
 ods = ODS().sample()
 ods.consistency_check = 'warn'
-ods.dynamic_path_creation = 'dynamic_array_structures'
 # can add entry with wrong dimensions but warning message is printed
 ods['equilibrium.time_slice[0].profiles_2d[0].b_tor'] = 1
 # can add entry that is obsolescent but warning message is printed

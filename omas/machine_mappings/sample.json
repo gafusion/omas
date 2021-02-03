@@ -1,0 +1,39 @@
+{
+ "__cocos_rules__": {
+  "::TOP\\.RESULTS\\..?EQDSK": {
+   "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
+  }
+ },
+ "__mdsserver__": "atlas.gat.com:8000",
+ "__options__": {
+  "EFIT_tree": "EFIT01",
+  "user_argument": "this is a test"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "COMMENT": "VALUE is used for constants",
+  "VALUE": "test"
+ },
+ "dataset_description.data_entry.user": {
+  "COMMENT": "ENVIRON gets environmental variables",
+  "ENVIRON": "USER"
+ },
+ "dataset_description.ids_properties.comment": {
+  "COMMENT": "Python function defined in the sample.py file",
+  "PYTHON": "sample_function(ods, {pulse}, {user_argument!r})"
+ },
+ "equilibrium.time_slice.:": {
+  "COMMENT": "We always must define how many elements there are in arrays of structures.",
+  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.ip": {
+  "COMMENT": "TDI functions to access MDS+",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.psi": {
+  "COMMENT": "eval2TDI allows defining python functions can be evaluated on the MDS+ server side. These functions are defined in python_tdi.py",
+  "eval2TDI": "py2tdi(geqdsk_psi,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
+  "treename": "{EFIT_tree}"
+ }
+}

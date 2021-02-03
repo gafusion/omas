@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import ODS, omas_environment
 import itertools
 
 
@@ -21,7 +21,7 @@ class ODX(MutableMapping):
                 self.ucache.setdefault(o2u(k), []).append(k)
 
     def __delitem__(self, key):
-        pass
+        return self.omas_data.__delitem__(key)
 
     def __getitem__(self, key):
         # return data if key is exactly in dataset
@@ -44,11 +44,17 @@ class ODX(MutableMapping):
         # return data
         return tmp
 
+    def __getattr__(self, attr):
+        # avoid picking up deepcopy and pickling methods from dataset
+        if attr in ['__deepcopy__', '__getstate__', '__setstate__']:
+            raise AttributeError('bad attribute `%s`' % attr)
+        return getattr(self.omas_data, attr)
+
     def __iter__(self):
-        pass
+        return self.omas_data.__iter__()
 
     def __len__(self):
-        return None
+        return self.omas_data.__len__()
 
     def __setitem__(self, key, value):
         if key in self.omas_data.data_vars:
@@ -61,6 +67,16 @@ class ODX(MutableMapping):
         ods = load_omas_dx(*args, **kw)
         self.omas_data = ods.omas_data
         return self
+
+    def to_ods(self, consistency_check=True):
+        '''
+        Generate a ODS from current ODX
+
+        :param consistency_check: use consistency_check flag in ODS
+
+        :return: ODS
+        '''
+        return odx_2_ods(self, consistency_check=consistency_check)
 
 
 def save_omas_ds(ods, filename):
@@ -104,15 +120,25 @@ def save_omas_dx(odx, filename):
     return odx.omas_data.to_netcdf(filename)
 
 
-def ods_2_odx(ods):
+def ods_2_odx(ods, homogeneous=None):
     """
     Map ODS to an ODX
 
     :param ods: OMAS data set
 
+    :param homogeneous: * False: flat representation of the ODS
+                                  (data is not collected across arrays of structures)
+                        * 'time': collect arrays of structures only along the time dimension
+                                  (always valid for homogeneous_time=True)
+                        * 'full': collect arrays of structures along all dimensions
+                                  (may be valid in many situations, especially related to
+                                   simulation data with homogeneous_time=True and where
+                                   for example number of ions, sources, etc. do not vary)
+                        * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
+
     :return: OMAS data xarray
     """
-    return ODX(ods.dataset())
+    return ODX(ods.dataset(homogeneous=homogeneous))
 
 
 def odx_2_ods(odx, consistency_check=True):
@@ -127,22 +153,21 @@ def odx_2_ods(odx, consistency_check=True):
     """
     DS = odx.omas_data
     ods = ODS(consistency_check=False)
-    ods.dynamic_path_creation = 'dynamic_array_structures'
-    for uitem in DS.data_vars:
-        depth = uitem.count(':')
-        value = DS[uitem].values
-        if not depth:
-            ods[uitem] = value
-            continue
-        # unroll
-        for kkk in itertools.product(*map(range, DS[uitem].shape[:depth])):
-            item = uitem.replace(':', '{}').format(*kkk)
-            tmp = value
-            for k in kkk:
-                tmp = tmp[k]
-            ods[item] = tmp
+    with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+        for uitem in DS.data_vars:
+            depth = uitem.count(':')
+            value = DS[uitem].values
+            if not depth:
+                ods[uitem] = value
+                continue
+            # unroll
+            for kkk in itertools.product(*map(range, DS[uitem].shape[:depth])):
+                item = uitem.replace(':', '{}').format(*kkk)
+                tmp = value
+                for k in kkk:
+                    tmp = tmp[k]
+                ods[item] = tmp
     ods.consistency_check = consistency_check
-    ods.dynamic_path_creation = True
     return ods
 
 
@@ -168,13 +193,14 @@ def load_omas_ds(filename, consistency_check=True):
 
 def through_omas_ds(ods, method=['function', 'class_method'][1]):
     """
-    Test save and load OMAS data set via xarray file format
+    Test save and load ODS via xarray file format
 
     :param ods: OMAS data set
 
     :return: OMAS data set
     """
     filename = omas_testdir(__file__) + '/test.ds'
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_ds(ods, filename)
         ods1 = load_omas_ds(filename)
@@ -193,6 +219,7 @@ def through_omas_dx(odx, method=['function', 'class_method'][1]):
     :return: OMAS data xarray
     """
     filename = omas_testdir(__file__) + '/test.dx'
+    odx = copy.deepcopy(odx)  # make a copy to make sure save does not alter entering ODX
     if method == 'function':
         save_omas_dx(odx, filename)
         odx1 = load_omas_dx(filename)

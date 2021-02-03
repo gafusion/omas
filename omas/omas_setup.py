@@ -12,6 +12,13 @@ import sys
 with open(os.path.abspath(str(os.path.dirname(__file__)) + os.sep + 'version'), 'r') as _f:
     __version__ = _f.read().strip()
 
+# Add minor version revisions here
+# This is done to keep track of changes between OMAS PYPI releases
+# the if statements for these minor revisions can be deleted
+# as the OMAS PYPI version increases
+if __version__ == '0.66.0':
+    __version__ += '.1'
+
 if sys.version_info < (3, 5):
     raise Exception(
         '''
@@ -36,6 +43,13 @@ import ast
 import base64
 import traceback
 import difflib
+import weakref
+import unittest
+
+try:
+    import tqdm
+except ImportError:
+    tqdm = None
 
 try:
     import Pyro5.api
@@ -96,6 +110,10 @@ class IMAS_json_dir(str):
 
 imas_json_dir = IMAS_json_dir(os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/'))
 
+omas_git_repo = False
+if os.path.exists(imas_json_dir + '/../../.git') and os.access(imas_json_dir + '/../../.git', os.W_OK):
+    omas_git_repo = True
+
 
 class IMAS_versions(OrderedDict):
     """
@@ -116,17 +134,19 @@ class IMAS_versions(OrderedDict):
                     self[_item.replace('_', '.')] = _item
 
 
+# imas versions
 imas_versions = IMAS_versions()
-
+if len(list(imas_versions.keys())):
+    latest_imas_version = list(imas_versions.keys())[-1]
+else:
+    latest_imas_version = '0.0.0'
 if 'OMAS_IMAS_VERSION' in os.environ:
     _default_imas_version = os.environ['OMAS_IMAS_VERSION']
 else:
-    try:
+    if len(list(imas_versions.keys())):
         _default_imas_version = list(imas_versions.keys())[-1]
-    except IndexError:
-        # IndexError will occur if `imas_json_dir` is empty: we must allow going forward, at least to build_json_structures
-        _default_imas_version = ''
-
+    else:
+        _default_imas_version = '0.0.0'
 
 # --------------------------------------------
 # rcparams
@@ -145,7 +165,7 @@ omas_rcparams.update(
         'cocos': 11,
         'consistency_check': True,
         'dynamic_path_creation': True,
-        'tmp_imas_dir': os.environ.get(
+        'tmp_omas_dir': os.environ.get(
             'OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(), os.environ.get('USER', 'dummy_user'), 'OMAS_TMP_DIR'])
         ),
         'fake_imas_dir': os.environ.get(

@@ -1,0 +1,89 @@
+{
+ "__cocos_rules__": {},
+ "__mdsserver__": "mds.ipp.ac.cn:8000",
+ "__options__": {},
+ "dataset_description.data_entry.user": {
+  "ENVIRON": "USER"
+ },
+ "gas_injection.pipe.:": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.name": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:.identifier": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.identifier": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.name": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.r": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.z": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_east(ods, {pulse})"
+ },
+ "pf_active.coil.:": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.geometry_type": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.height": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.r": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.width": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.z": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.identifier": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ },
+ "pf_active.coil.:.name": {
+  "PYTHON": "setup_pf_active_hardware_description_east(ods)"
+ }
+}

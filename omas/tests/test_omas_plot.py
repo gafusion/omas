@@ -12,7 +12,6 @@ Test script for omas/omas_plot.py
 """
 
 # Basic imports
-import unittest
 import os
 import numpy
 import warnings
@@ -21,7 +20,10 @@ import copy
 # Use Agg backend to avoid opening up figures
 import matplotlib
 
-matplotlib.use('Agg')
+interactive = False
+
+if not interactive:
+    matplotlib.use('Agg')
 from matplotlib import pyplot
 
 # OMAS imports
@@ -30,7 +32,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasPlot(unittest.TestCase):
+class TestOmasPlot(UnittestCaseOmas):
     """
     Test suite for omas_plot.py
     """
@@ -45,6 +47,8 @@ class TestOmasPlot(unittest.TestCase):
             self.fig = pyplot.figure(test_name)
 
     def tearDown(self):
+        if interactive:
+            pyplot.show()
         pyplot.close()
 
     def test_quantity(self):
@@ -112,12 +116,6 @@ class TestOmasPlot(unittest.TestCase):
 
     def test_all_overlays(self):
         ods2 = copy.deepcopy(self.ods)
-        for hw_sys in list_structures(ods2.imas_version):
-            try:
-                sample_func = getattr(ODS, 'sample_{}'.format(hw_sys))
-                ods2 = sample_func(ods2)
-            except AttributeError:
-                pass
         ods2.plot_overlay(debug_all_plots=True)
 
     def test_gas_arrow(self):
@@ -276,13 +274,8 @@ class TestOmasPlot(unittest.TestCase):
         mag_ods.sample_magnetics()
         mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
         # Test keywords
-        mag_ods.plot_overlay(
-            thomson_scattering=False, magnetics=dict(bpol_probe_color='r', bpol_probe_marker='x', show_flux_loop=False, labelevery=1)
-        )
-        mag_ods.plot_overlay(
-            thomson_scattering=False,
-            magnetics=dict(bpol_probe_color='m', flux_loop_marker='+', show_bpol_probe=False, notesize=9, labelevery=1),
-        )
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_flux_loop=False, labelevery=1))
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_bpol_probe=False, notesize=9, labelevery=1))
         # Test direct call
         mag_ods.plot_magnetics_overlay()
         # Test empty one; make sure fail is graceful

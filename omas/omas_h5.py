@@ -77,7 +77,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
 def save_omas_h5(ods, filename):
     """
-    Save an OMAS data set to HDF5
+    Save an ODS to HDF5
 
     :param ods: OMAS data set
 
@@ -133,7 +133,6 @@ def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['d
     ods = cls(imas_version=imas_version, consistency_check=False)
     with h5py.File(filename, 'r') as data:
         convertDataset(ods, data)
-    ods.set_child_locations()
     ods.consistency_check = consistency_check
     return ods
 
@@ -147,6 +146,7 @@ def through_omas_h5(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = omas_testdir(__file__) + '/test.h5'
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_h5(ods, filename)
         ods1 = load_omas_h5(filename)

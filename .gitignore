@@ -8,13 +8,11 @@ __pycache__/
 \#*
 build/
 .DS_Store
-site-packages/
-
-omas_doc.html
+/site-packages/
+/tmp
 
 omas/data-dictionary
 omas/Saxon*
-omas/imas_structures/*/*.html
 omas/imas_structures/*/*.xml
 
 sphinx/build/
@@ -24,6 +22,7 @@ sphinx/source/code.rst
 sphinx/source/usage.rst
 sphinx/source/scenarios.rst
 sphinx/source/schema.rst
+sphinx/source/iter_scenario_requirements.rst
 sphinx/source/schema/
 sphinx/source/auto_examples/
 

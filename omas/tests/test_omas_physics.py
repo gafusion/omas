@@ -11,7 +11,6 @@ Test script for omas/omas_physics.py
 -------
 """
 
-import unittest
 import os
 import numpy
 import warnings
@@ -32,10 +31,23 @@ except ImportError as _excp:
     failed_PINT = _excp
 
 
-class TestOmasPhysics(unittest.TestCase):
+class TestOmasPhysics(UnittestCaseOmas):
     """
     Test suite for omas_physics.py
     """
+
+    def test_check_iter_scenario_requirements(self):
+        from omas.omas_imas import iter_scenario_requirements
+
+        ods = ODS()
+        tmp = ods.physics_check_iter_scenario_requirements()
+        assert tmp == iter_scenario_requirements
+
+        ods.sample_equilibrium()
+        ods.sample_core_profiles()
+        ods.physics_summary_consistent_global_quantities()
+        tmp = ods.physics_check_iter_scenario_requirements()
+        assert tmp != iter_scenario_requirements
 
     def test_equilibrium_consistent(self):
         ods = ODS()
@@ -177,6 +189,7 @@ class TestOmasPhysics(unittest.TestCase):
         ods = ODS().sample()
         ods.physics_summary_global_quantities()
         assert ods['summary']['global_quantities']['tau_energy']['value'] is not None
+        assert ods['summary.global_quantities.beta_tor.value'] is not None
         return
 
     def test_current_from_eq(self):

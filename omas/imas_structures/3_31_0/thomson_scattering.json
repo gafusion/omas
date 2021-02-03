@@ -1,0 +1,595 @@
+{
+ "thomson_scattering": {
+  "documentation": "Thomson scattering diagnostic",
+  "full_path": "thomson_scattering",
+  "lifecycle_last_change": "3.29.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.0.4",
+  "maxoccur": "3"
+ },
+ "thomson_scattering.channel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of channels (lines-of-sight)",
+  "full_path": "thomson_scattering/channel(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "150",
+  "structure_reference": "thomson_scattering_channel"
+ },
+ "thomson_scattering.channel[:].delta_position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Incremental variation of the position of the measurements, due to e.g. different lasers not intersecting the line of sight at the same position. The actual position is then the static position + delta_position",
+  "full_path": "thomson_scattering/channel(i1)/delta_position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_dynamic_aos1_common_time"
+ },
+ "thomson_scattering.channel[:].delta_position.phi": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.phi_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].delta_position.r": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.r_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time for the R,Z,phi coordinates",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "thomson_scattering.channel[:].delta_position.z": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].delta_position.z_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].delta_position.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/delta_position/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_position/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the channel",
+  "full_path": "thomson_scattering/channel(i1)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.channel[:].n_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron density",
+  "full_path": "thomson_scattering/channel(i1)/n_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m^-3"
+ },
+ "thomson_scattering.channel[:].n_e.data": {
+  "coordinates": [
+   "thomson_scattering.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "thomson_scattering/channel(i1)/n_e/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "thomson_scattering.channel[:].n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/n_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].n_e.data_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/n_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "thomson_scattering.channel[:].n_e.data_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/n_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "thomson_scattering.channel[:].n_e.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "thomson_scattering/channel(i1)/n_e/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "thomson_scattering.channel[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the channel",
+  "full_path": "thomson_scattering/channel(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.channel[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Average position of the measurements (intersection between laser beam and line of sight)",
+  "full_path": "thomson_scattering/channel(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "thomson_scattering.channel[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "thomson_scattering/channel(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].t_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron temperature",
+  "full_path": "thomson_scattering/channel(i1)/t_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "eV"
+ },
+ "thomson_scattering.channel[:].t_e.data": {
+  "coordinates": [
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "thomson_scattering/channel(i1)/t_e/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "thomson_scattering.channel[:].t_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/t_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].t_e.data_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/t_e/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "thomson_scattering.channel[:].t_e.data_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/t_e/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "thomson_scattering.channel[:].t_e.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "thomson_scattering/channel(i1)/t_e/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "thomson_scattering.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "thomson_scattering/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "thomson_scattering.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "thomson_scattering/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "thomson_scattering/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "thomson_scattering.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "thomson_scattering/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "thomson_scattering/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "thomson_scattering/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "thomson_scattering/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "thomson_scattering/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "thomson_scattering/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.output_flag": {
+  "coordinates": [
+   "thomson_scattering.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "thomson_scattering/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "thomson_scattering.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "thomson_scattering/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "thomson_scattering/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "thomson_scattering/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "thomson_scattering/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "thomson_scattering.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "thomson_scattering/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "thomson_scattering/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "thomson_scattering/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "thomson_scattering.ids_properties.occurrence"
+ },
+ "thomson_scattering.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "thomson_scattering/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "thomson_scattering/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.version_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "thomson_scattering/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "thomson_scattering.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "thomson_scattering/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "thomson_scattering/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "thomson_scattering/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Generic time",
+  "full_path": "thomson_scattering/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

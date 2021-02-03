@@ -1,0 +1,460 @@
+{
+ "__cocos_rules__": {
+  "::TOP\\.RESULTS\\..?EQDSK": {
+   "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
+  }
+ },
+ "__mdsserver__": "atlas.gat.com:8000",
+ "__options__": {
+  "EFIT_tree": "EFIT01",
+  "analysis_type": "CERQUICK",
+  "default_tree": "D3D",
+  "quiet": false,
+  "revision": "BLESSED"
+ },
+ "bolometer.channel.:": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.identifier": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.first_point.r": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.first_point.z": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.second_point.r": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.line_of_sight.second_point.z": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "bolometer.channel.:.name": {
+  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "charge_exchange.channel.:": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.identifier": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.name": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.phi.data": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.phi.time": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.r.data": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.r.time": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.z.data": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.position.z.time": {
+  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+ },
+ "dataset_description.data_entry.machine": {
+  "VALUE": "{machine}"
+ },
+ "dataset_description.data_entry.pulse": {
+  "VALUE": "{pulse}"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "VALUE": "pulse"
+ },
+ "dataset_description.data_entry.user": {
+  "ENVIRON": "USER"
+ },
+ "equilibrium.code.name": {
+  "VALUE": "{EFIT_tree}"
+ },
+ "equilibrium.code.version": {
+  "VALUE": "{EFIT_tree}"
+ },
+ "equilibrium.time": {
+  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:": {
+  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary.outline.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary.outline.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.IPMEAS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.ip": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.li_3": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.LI3)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.r": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RMAXIS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.z": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZMAXIS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.psi_axis": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.psi_boundary": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dpressure_dpsi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PPRIME)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.f": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.FPOL)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.f_df_dpsi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.FFPRIM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.pressure": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PRES)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.psi": {
+  "eval2TDI": "py2tdi(geqdsk_psi,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.q": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.QPSI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RHOVN)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:": {
+  "VALUE": 1
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
+  "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
+  "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
+  "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.psi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIRZ)",
+  "TRANSPOSE": [
+   0,
+   2,
+   1
+  ],
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.vacuum_toroidal_field.b0": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.vacuum_toroidal_field.r0": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
+  "treename": "{EFIT_tree}"
+ },
+ "gas_injection.pipe.:": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.exit_position.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.name": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.r": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.second_point.z": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:.identifier": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "gas_injection.pipe.:.valve.:.name": {
+  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.identifier": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.first_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.first_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.second_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.second_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.third_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.third_point.r": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "interferometer.channel.:.line_of_sight.third_point.z": {
+  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.identifier": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.name": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.r": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.position.z": {
+  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.field.data": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.time": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.validity": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.identifier": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.length": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.name": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.poloidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.r": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.z": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.toroidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.turns": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.type.index": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.diamagnetic_flux.:.data": {
+  "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
+ },
+ "magnetics.diamagnetic_flux.:.time": {
+  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
+ },
+ "magnetics.flux_loop.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.flux.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.time": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.validity": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.identifier": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.name": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.r": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.z": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.flux_loop.:.type.index": {
+  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+ },
+ "magnetics.ip.:": {
+  "VALUE": 1
+ },
+ "magnetics.ip.:.data": {
+  "COCOSIO": 1,
+  "TDI": "[ptdata2(\"ip\",{pulse})]"
+ },
+ "magnetics.ip.:.time": {
+  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)/1000.]"
+ },
+ "pf_active.coil.:": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
+ },
+ "pf_active.coil.:.current.time": {
+  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
+ },
+ "pf_active.coil.:.element.:": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.geometry_type": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.r": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.z": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.height": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.r": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.width": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.z": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.identifier": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "pf_active.coil.:.name": {
+  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+ },
+ "tf.b_field_tor_vacuum_r.data": {
+  "COCOSIO": 1,
+  "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
+ },
+ "tf.b_field_tor_vacuum_r.time": {
+  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)/1000."
+ },
+ "tf.r0": {
+  "VALUE": 1.6955
+ },
+ "thomson_scattering.channel.:": {
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.identifier": {
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.name": {
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.position.r": {
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.position.z": {
+  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+ },
+ "wall.description_2d.:": {
+  "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.unit.:": {
+  "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.r": {
+  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",
+  "treename": "{EFIT_tree}"
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.z": {
+  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[1,])",
+  "treename": "{EFIT_tree}"
+ }
+}

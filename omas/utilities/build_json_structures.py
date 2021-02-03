@@ -3,7 +3,8 @@ from pprint import pprint
 
 os.environ['OMAS_DEBUG_TOPIC'] = '*'
 
-sys.path.insert(0, os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0])
+omas_dir = os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0]
+sys.path.insert(0, omas_dir)
 from omas import *
 from omas.omas_structure import *
 
@@ -31,3 +32,11 @@ for imas_version in imas_versions:
 
 # generate symlinks between imas versions
 symlink_imas_structure_versions(test=False)
+
+# update IMAS badge in README.md and index.rst file with latest verison
+for filename in [omas_dir + '/README.md', omas_dir + '/sphinx/source/index.rst']:
+    with open(filename, 'r') as f:
+        txt = f.read()
+    txt = re.sub('IMAS-([0-9\.]+)-yellow', 'IMAS-' + list(imas_versions.keys())[-1] + '-yellow', txt)
+    with open(filename, 'w') as f:
+        f.write(txt)

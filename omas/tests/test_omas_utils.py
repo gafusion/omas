@@ -11,7 +11,6 @@ Test script for omas/omas_utils.py
 -------
 """
 
-import unittest
 import os
 import numpy
 import warnings
@@ -23,7 +22,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 
 
-class TestOmasUtils(unittest.TestCase):
+class TestOmasUtils(UnittestCaseOmas):
     """
     Test suite for omas_utils.py
     """
@@ -97,15 +96,15 @@ class TestOmasUtils(unittest.TestCase):
         self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
         return
 
-    def test_list_structures(self):  # Also tests dict_structures
+    def test_list_structures(self):  # Also tests structures_filenames
         struct_list = list_structures(omas_rcparams['default_imas_version'])
         struct_list2 = list_structures(self.specific_test_version)
         assert isinstance(struct_list, list)
         assert isinstance(struct_list2, list)
         assert isinstance(struct_list[0], str)
         assert 'pf_active' in struct_list2
-        struct_dict = dict_structures(omas_rcparams['default_imas_version'])
-        struct_dict2 = dict_structures(self.specific_test_version)
+        struct_dict = structures_filenames(omas_rcparams['default_imas_version'])
+        struct_dict2 = structures_filenames(self.specific_test_version)
         assert isinstance(struct_dict, dict)
         assert isinstance(struct_dict2, dict)
         assert 'pf_active' in struct_dict2.keys()

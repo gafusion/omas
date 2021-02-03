@@ -10,6 +10,7 @@ all:
 	@echo ' - make docs          : generate sphinx documentation and pushes it online'
 	@echo ' - make tag           : tag git repository with omas/version and push'
 	@echo ' - make cocos         : generate list of COCOS transformations'
+	@echo ' - make machines      : format machine mappings files'
 	@echo ' - make release       : all of the above, in order'
 	@echo ' - make pypi          : upload to pypi'
 	@echo ' - make html          : generate sphinx documentation'
@@ -21,25 +22,28 @@ all:
 
 TEST_FLAGS=-s omas/tests -v -f
 
-tests:
+test:
 	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
-tests_core:
+test_core:
 	python3 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
 
-tests_plot:
+test_plot:
 	python3 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
-tests_physics:
+test_physics:
 	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
-tests_utils:
+test_machine:
+	python3 -m unittest discover --pattern="*_machine.py" ${TEST_FLAGS}
+
+test_utils:
 	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
-tests_examples:
+test_examples:
 	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
 
-tests_suite:
+test_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
 requirements:
@@ -65,6 +69,9 @@ json:
 cocos: symbols
 	cd omas/utilities && python3 generate_cocos_signals.py
 
+machines:
+	cd omas/utilities && python3 format_machine_mappings.py
+
 symbols:
 	cd omas/utilities && python3 sort_symbols.py
 
@@ -84,13 +91,16 @@ testpypi:
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 
+hash:
+	pip hash dist/omas-$(VERSION).tar.gz
+
 release: tests requirements json cocos docs tag
 	@echo 'Make release done'
 
 fmt:
 	black -S -l 140 .
 
-format:fmt cocos
+format:fmt cocos machines
 
 .PHONY: site-packages
 

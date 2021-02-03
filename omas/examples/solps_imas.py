@@ -7,7 +7,6 @@ Using OMAS to load data from a SOLPS simulation stored in the ITER scenario data
 
 Prior running this script, the following commands must be typed at the teriminal
 > import IMAS OMAS
-> imasdb ITER
 """
 
 import os
@@ -16,7 +15,8 @@ from numpy import *
 from omas import *
 
 # load an ITER scenario that has SOLPS data in an ODS
-ods = load_omas_iter_scenario(pulse=102292, run=1, verbose=False)
+# NOTE: loading the ggd data structure can take some time
+ods = load_omas_iter_scenario(pulse=102292, run=1)
 
 # print paths
 pprint(ods.pretty_paths())

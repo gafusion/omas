@@ -12,7 +12,7 @@ from .omas_core import ODS, ODC, dynamic_ODS
 # --------------------------------------------
 def save_omas_nc(ods, filename, **kw):
     """
-    Save an OMAS data set to NetCDF file
+    Save an ODS to NetCDF file
 
     :param ods: OMAS data set
 
@@ -100,7 +100,6 @@ def load_omas_nc(filename, consistency_check=True, imas_version=omas_rcparams['d
             if item.endswith('_error_upper'):
                 continue
             ods.setraw(p2l(item), get_ds_item(dataset, item))
-    ods.set_child_locations()
     ods.consistency_check = consistency_check
     return ods
 
@@ -108,8 +107,7 @@ def load_omas_nc(filename, consistency_check=True, imas_version=omas_rcparams['d
 class dynamic_omas_nc(dynamic_ODS):
     """
     Class that provides dynamic data loading from NC file
-    This class is not to be used by itself, but via the
-    ODS.open() method.
+    This class is not to be used by itself, but via the ODS.open() method.
     """
 
     def __init__(self, filename):
@@ -158,6 +156,7 @@ def through_omas_nc(ods, method=['function', 'class_method'][1]):
     :return: ods
     """
     filename = omas_testdir(__file__) + '/test.nc'
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_json(ods, filename)
         ods1 = load_omas_json(filename)

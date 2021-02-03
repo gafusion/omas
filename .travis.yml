@@ -4,7 +4,7 @@ python:
     - "3.7"
 
 install:
- - pip install .
+ - pip install --upgrade --force-reinstall .
  - pip install coverage codecov
 
 dist: xenial # required for xvfb and Python 3.7

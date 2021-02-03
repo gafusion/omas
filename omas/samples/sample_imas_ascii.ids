@@ -1,0 +1,256 @@
+bolometer/ids_properties/homogeneous_time
+	type: 51 (INTEGER_DATA)
+	dim: 0
+1
+bolometer/ids_properties/version_put/data_dictionary
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 6
+3.28.1
+bolometer/ids_properties/version_put/access_layer
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 5
+4.8.1
+bolometer/ids_properties/version_put/access_layer_language
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 6
+python
+bolometer/channel
+	size: 10
+bolometer/channel[0]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 0
+bolometer/channel[0]/aperture
+	size: 0
+bolometer/channel[0]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[0]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.0000000000000003e-02
+bolometer/channel[0]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.7928932188134525e+00
+bolometer/channel[0]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+7.5710678118654762e-01
+bolometer/channel[1]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 1
+bolometer/channel[1]/aperture
+	size: 0
+bolometer/channel[1]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[1]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.1000000000000004e-02
+bolometer/channel[1]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.6808479557110085e+00
+bolometer/channel[1]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+6.2457643635104643e-01
+bolometer/channel[2]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 2
+bolometer/channel[2]/aperture
+	size: 0
+bolometer/channel[2]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[2]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.2000000000000005e-02
+bolometer/channel[2]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5936922129633500e+00
+bolometer/channel[2]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+4.7461826174069949e-01
+bolometer/channel[3]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 3
+bolometer/channel[3]/aperture
+	size: 0
+bolometer/channel[3]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[3]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.3000000000000005e-02
+bolometer/channel[3]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5340741737109318e+00
+bolometer/channel[3]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+3.1181904510252101e-01
+bolometer/channel[4]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 4
+bolometer/channel[4]/aperture
+	size: 0
+bolometer/channel[4]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[4]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.4000000000000006e-02
+bolometer/channel[4]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5038053019082545e+00
+bolometer/channel[4]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.4115574274765819e-01
+bolometer/channel[5]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 5
+bolometer/channel[5]/aperture
+	size: 0
+bolometer/channel[5]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[5]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.5000000000000000e-02
+bolometer/channel[5]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5038053019082545e+00
+bolometer/channel[5]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+-3.2155742747657944e-02
+bolometer/channel[6]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 6
+bolometer/channel[6]/aperture
+	size: 0
+bolometer/channel[6]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[6]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.6000000000000001e-02
+bolometer/channel[6]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5340741737109316e+00
+bolometer/channel[6]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+-2.0281904510252036e-01
+bolometer/channel[7]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 7
+bolometer/channel[7]/aperture
+	size: 0
+bolometer/channel[7]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[7]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.7000000000000002e-02
+bolometer/channel[7]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.5936922129633500e+00
+bolometer/channel[7]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+-3.6561826174069928e-01
+bolometer/channel[8]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 11
+fake bolo 8
+bolometer/channel[8]/aperture
+	size: 0
+bolometer/channel[8]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[8]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.8000000000000003e-02
+bolometer/channel[8]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.6808479557110081e+00
+bolometer/channel[8]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+-5.1557643635104611e-01
+bolometer/channel[9]/identifier
+	type: 50 (CHAR_DATA)
+	dim: 1
+	size: 15
+bolo fan 2 fake
+bolometer/channel[9]/aperture
+	size: 0
+bolometer/channel[9]/line_of_sight/first_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+2.5000000000000000e+00
+bolometer/channel[9]/line_of_sight/first_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+5.9000000000000004e-02
+bolometer/channel[9]/line_of_sight/second_point/r
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+1.7928932188134523e+00
+bolometer/channel[9]/line_of_sight/second_point/z
+	type: 52 (DOUBLE_DATA)
+	dim: 0
+-6.4810678118654741e-01
+bolometer/time
+	type: 52 (DOUBLE_DATA)
+	dim: 1
+	size: 1
+0.0000000000000000e+00

@@ -12,7 +12,6 @@ Test script for omas/examples/...
 """
 
 # Basic imports
-import unittest
 import os
 
 # Use Agg backend to avoid opening up figures
@@ -27,7 +26,7 @@ from omas.omas_utils import *
 from omas.tests.failed_imports import *
 
 
-class TestOmasExamples(unittest.TestCase):
+class TestOmasExamples(UnittestCaseOmas):
     """
     Test suite for examples files
     """
@@ -54,6 +53,7 @@ class TestOmasExamples(unittest.TestCase):
         from omas.examples import parse_codeparameters
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_solps_imas(self):
         from omas.examples import solps_imas
 
@@ -109,6 +109,7 @@ class TestOmasExamples(unittest.TestCase):
         from omas.examples import omas_cocos
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_iter_scenario(self):
         from omas.examples import iter_scenario
 
@@ -135,10 +136,19 @@ class TestOmasExamples(unittest.TestCase):
 
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_dynamic_imas(self):
-        from omas.examples import test_omas_dynamic_imas
+        from omas.examples import omas_dynamic_imas
+
+    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
+    def test_omas_dynamic_machine(self):
+        from omas.examples import omas_dynamic_machine
 
     def test_omas_collection(self):
         from omas.examples import omas_collection
+
+    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
+    @unittest.skipIf(not_running_on_cea_cluster, str(not_running_on_cea_cluster))
+    def test_west_geqdsk(self):
+        from omas.examples import west_geqdsk
 
 
 # for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):

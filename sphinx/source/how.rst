@@ -27,9 +27,14 @@ The `ODS` class extends native Python dictionary and list classes with:
    .. code-block:: python
 
        ods['equilibrium']['time_slice'][0]['profiles_2d'][0]['psi']   # standard Python dictionary syntax
-       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
-       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # dot separated string syntax
        ods[['equilibrium','time_slice',0,'profiles_2d',0,'psi']]      # list of nodes syntax
+       ods['equilibrium.time_slice[0].profiles_2d[0].psi']            # IMAS hierarchical tree syntax
+       ods['equilibrium.time_slice.0.profiles_2d.0.psi']              # . separated string syntax
+
+       NOTE: Python3.6+ f-strings can be very handy when looping over arrays of structures. For example:
+       for time_index in range(len(ods[f'equilibrium.time_slice'])):
+           for grid_index in range(len(ods[f'equilibrium.time_slice.{time_index}.profiles_2d'])):
+               print(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
 
 4. **Extract sigle time slice** from whole data structure:
 
@@ -87,7 +92,7 @@ The `ODS` class extends native Python dictionary and list classes with:
 
         ods['equilibrium.time_slice.0.profiles_1d.q'] = uarray(nom_value, std_dev)
 
-12. Evaluate **derived quantities** from more fundamental ones:
+12. Evaluate **derived physics quantities** from more fundamental ones:
 
     .. code-block:: python
 
@@ -118,28 +123,39 @@ The `ODS` class extends native Python dictionary and list classes with:
     
         ods.plot_core_profiles_summary()
 
-17. Save/load ODSs to/from **different storage systems**:
+17. **On the fly data mapping** of experimental data `from native database <https://github.com/gafusion/omas/blob/master/omas/machine_mappings/d3d.json>`_:
+
+    .. code-block:: python
+
+        with ods1.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT01'}):
+            plot(ods['equilibrium.time_slice.0.global_quantities.ip'])
+
+18. Save/load ODSs to/from **different backend storage systems**:
 
 .. _omas_formats:
 
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| OMAS format   | Description                                                  | Storage type           | Remote storage |  Python Requirements  |
-+===============+==============================================================+========================+================+=======================+
-| **pickle**    | Files using native Python serialization tools                | Python binary file     |       no       |                       |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **Json**      | Using Json format for representing hierarchical data         | ASCII file             |       no       |                       |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **NetCDF**    | Files using binary NetCDF format (flat data structure)       | Binary file            |       no       |        netCDF4        |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **HDF5**      | Files using binary HDF5 format (hierarchical data structure) | Binary file            |       no       |          h5py         |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **S3**        | Cloud storage using Amazon Simple Storage Service            | Object Store           |       yes      |         boto3         |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **MongoDB**   | Document-based distributed database                          | MongoDB Database       |       yes      |        pymongo        |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **HDC**       | Hierarchical Dynamic Containers                              | Memory                 |       no       |   pyhdc (optional)    |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **UDA**       | Universal Data Access                                        | UDA Database           |       yes      |   pyuda (optional)    |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
-| **IMAS**      | ITER data storage system                                     | IMAS Database          |       no       |    imas (optional)    |
-+---------------+--------------------------------------------------------------+------------------------+----------------+-----------------------+
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| OMAS format   | Description                                                                          | Storage type                  | Remote storage |  Python Requirements  |
++===============+======================================================================================+===============================+================+=======================+
+| **pickle**    | Files using native Python serialization tools                                        | Python binary file            |       no       |                       |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **Json**      | Using Json format for representing hierarchical data                                 | ASCII file                    |       no       |                       |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **NetCDF**    | Files using binary NetCDF format (flat data structure)                               | Binary file                   |       no       |        netCDF4        |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **HDF5**      | Files using binary HDF5 format (hierarchical data structure)                         | Binary file                   |       no       |          h5py         |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **S3**        | Cloud storage using Amazon Simple Storage Service                                    | Object Store                  |       yes      |         boto3         |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **MongoDB**   | Document-based distributed database                                                  | MongoDB Database              |       yes      |        pymongo        |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **HDC**       | Hierarchical Dynamic Containers                                                      | Memory                        |       no       |   pyhdc (optional)    |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **UDA**       | Universal Data Access                                                                | UDA Database                  |       yes      |   pyuda (optional)    |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **ASCII**     | Format used by the IMAS AL 4.0.x ASCII backend                                       | ASCII file                    |       no       |                       |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **MACHINE**   | Access tokamaks experimental data with imas syntax                                   | Native experimental databases |       yes      |    MDSplus            |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
+| **IMAS**      | `ITER data storage system <https://user.iter.org/?uid=YSQENW&action=get_document>`_  | IMAS Database                 |       no       |    imas (optional)    |
++---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+

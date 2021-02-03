@@ -15,7 +15,7 @@ from .omas_core import ODS
 # -----------------------------
 def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['default_mongo_server']):
     """
-    Save an OMAS data set to MongoDB
+    Save an ODS to MongoDB
 
     :param ods: OMAS data set
 
@@ -65,7 +65,7 @@ def load_omas_mongo(
     limit=None,
 ):
     """
-    Load an OMAS data set from MongoDB
+    Load an ODS from MongoDB
 
     :param find: dictionary to find data in the database
 
@@ -177,6 +177,7 @@ def through_omas_mongo(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         _id = save_omas_mongo(ods, collection='test', database='test')
         results = load_omas_mongo({'_id': _id}, collection='test', database='test')

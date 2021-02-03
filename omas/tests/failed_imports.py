@@ -2,6 +2,18 @@ from omas.omas_setup import omas_rcparams
 import os
 import warnings
 from omas.tests.warning_setup import hard_warnings, set_omas_warnings
+import socket
+
+if 'iter' in socket.gethostname():
+    not_running_on_iter_cluster = False
+else:
+    not_running_on_iter_cluster = 'Not running on ITER cluster'
+
+if 'partnaires.cea.rf' in socket.gethostname():
+    not_running_on_cea_cluster = False
+else:
+    not_running_on_cea_cluster = 'Not running on CEA cluster'
+
 
 try:
     import imas
@@ -55,4 +67,13 @@ with warnings.catch_warnings():
     except ImportError as _excp:
         failed_OMFIT = _excp
 
-__all__ = ['failed_IMAS', 'failed_HDC', 'failed_S3', 'failed_MONGO', 'failed_OMFIT', 'failed_UDA']
+__all__ = [
+    'failed_IMAS',
+    'failed_HDC',
+    'failed_S3',
+    'failed_MONGO',
+    'failed_OMFIT',
+    'failed_UDA',
+    'not_running_on_iter_cluster',
+    'not_running_on_cea_cluster',
+]

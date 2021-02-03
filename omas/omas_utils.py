@@ -7,11 +7,25 @@ from .omas_setup import *
 from .omas_setup import __version__
 import sys
 
-
 # --------------------------------------------
 # ODS utilities
 # --------------------------------------------
-def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_path_string=''):
+default_keys_to_ignore = [
+    'dataset_description.data_entry.user',
+    'dataset_description.data_entry.run',
+    'dataset_description.data_entry.machine',
+    'dataset_description.ids_properties',
+    'dataset_description.imas_version',
+    'dataset_description.time',
+    'ids_properties.homogeneous_time',
+    'ids_properties.occurrence',
+    'ids_properties.version_put.data_dictionary',
+    'ids_properties.version_put.access_layer',
+    'ids_properties.version_put.access_layer_language',
+]
+
+
+def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True):
     """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
@@ -23,6 +37,11 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
 
     :param ignore_empty: ignore emptry nodes
 
+    :param ignore_keys: ignore the following keys
+
+    :param ignore_default_keys: ignores the following keys from the comparison
+                            %s
+
     :return: string with reason for difference, or False otherwise
     """
     from omas import ODS, CodeParameters
@@ -30,34 +49,116 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, prepend_pat
     ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
     ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
 
+    keys_to_ignore = []
+    keys_to_ignore.extend(ignore_keys)
+    if ignore_default_keys:
+        keys_to_ignore.extend(default_keys_to_ignore)
+
+    def is_ignored(k):
+        return any([o2u(k).endswith(end) for end in keys_to_ignore])
+
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())
     differences = []
     for k in k1.difference(k2):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])):
-            differences.append('DIFF: key `%s` missing in 2nd ods' % (prepend_path_string + k))
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])) and not is_ignored(k):
+            differences.append(f'DIFF: key `{k}` missing in 2nd ods')
     for k in k2.difference(k1):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])):
-            differences.append('DIFF: key `%s` missing in 1st ods' % (prepend_path_string + k))
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])) and not is_ignored(k):
+            differences.append(f'DIFF: key `{k}` missing in 1st ods')
     for k in k1.intersection(k2):
         try:
-            if ods1[k] is None and ods2[k] is None:
+            if is_ignored(k):
+                pass
+            elif ods1[k] is None and ods2[k] is None:
                 pass
             elif isinstance(ods1[k], str) and isinstance(ods2[k], str):
                 if ods1[k] != ods2[k]:
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+                    differences.append(f'DIFF: `{k}` differ in value')
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-                differences.append('DIFF: `%s` differ in type (%s,%s)' % ((prepend_path_string + k), type(ods1[k]), type(ods2[k])))
+                differences.append(f'DIFF: `{f}` differ in type: {type(ods1[k])} vs type(ods2[k])')
             elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
-                if not numpy.allclose(nominal_values(ods1[k]), nominal_values(ods2[k]), equal_nan=True) or not numpy.allclose(
-                    std_devs(ods1[k]), std_devs(ods2[k]), equal_nan=True
-                ):
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
+                v1 = nominal_values(ods1[k])
+                v2 = nominal_values(ods2[k])
+                d1 = std_devs(ods1[k])
+                d2 = std_devs(ods1[k])
+                s1 = v1.shape
+                s2 = v2.shape
+                if s1 != s2:
+                    differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
+                elif not numpy.allclose(v1, v2, equal_nan=True) or not numpy.allclose(d1, d2, equal_nan=True):
+                    differences.append(f'DIFF: `{k}` differ in value')
             else:
-                if not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
-                    differences.append('DIFF: `%s` differ in value' % (prepend_path_string + k))
-        except Exception:
-            raise Exception(f'Error comparing {k}')
+                v1 = nominal_values(ods1[k])
+                v2 = nominal_values(ods2[k])
+                s1 = v1.shape
+                s2 = v2.shape
+                if v1.shape != v2.shape:
+                    differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
+                elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
+                    differences.append(f'DIFF: `{k}` differ in value')
+        except Exception as _excp:
+            raise Exception(f'Error comparing {k}: ' + repr(_excp))
+    if len(differences):
+        return differences
+    else:
+        return False
+
+
+different_ods.__doc__ = different_ods.__doc__ % '\n                            '.join(default_keys_to_ignore)
+
+
+def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
+    '''
+    Checks if two ODSs have any difference in their attributes
+
+    :param ods1: first ods to check
+
+    :param ods2: second ods to check
+
+    :param attrs: list of attributes to compare
+
+    :param verbose: print differences to stdout
+
+    :return: dictionary with list of attriibutes that have differences, or False otherwise
+    '''
+
+    if isinstance(attrs, str):
+        attrs = [attrs]
+    elif attrs is None:
+        from .omas_core import omas_ods_attrs
+
+        attrs = omas_ods_attrs
+
+    if '_parent' in attrs:
+        attrs.pop(attrs.index('_parent'))
+
+    n = max(list(map(lambda x: len(x), attrs)))
+    l1 = set(list(map(lambda x: l2i(x[:-1]), ods1.paths(return_empty_leaves=True, traverse_code_parameters=False))))
+    l2 = set(list(map(lambda x: l2i(x[:-1]), ods2.paths(return_empty_leaves=True, traverse_code_parameters=False))))
+    paths = sorted(list(l1.intersection(l2)))
+
+    differences = {}
+    for item in paths:
+        first = True
+        try:
+            for k in attrs:
+                a1 = getattr(ods1[item], k)
+                a2 = getattr(ods2[item], k)
+                if a1 != a2:
+                    if first:
+                        if verbose:
+                            print('-' * 20)
+                            print(item)
+                            print('-' * 20)
+                        differences[item] = []
+                        first = False
+                    differences[item].append(k)
+                    if verbose:
+                        print(k.ljust(n) + ': * %s' % a1)
+                        print('`%s * %s' % (' '.ljust(n), a2))
+        except:
+            raise
     if len(differences):
         return differences
     else:
@@ -546,12 +647,18 @@ _structures = {}
 # * list of structures as `:`
 # * the leafs are empty dictionaries
 _structures_dict = {}
+# cache structures filenames
+_structures_filenames = {}
+# cache for structure()
+_ods_structure_cache = {}
 # similar to `_structures_dict` but for use in omas_info
 _info_structures = {}
 # dictionary that contains all the coordinates defined within the data dictionary
 _coordinates = {}
 # dictionary that contains all the times defined within the data dictionary
 _times = {}
+# dictionary that contains all the _global_quantities defined within the data dictionary
+_global_quantities = {}
 
 # extra structures that python modules using omas can define
 # by setting omas.omas_utils._extra_structures equal to a
@@ -589,19 +696,23 @@ def list_structures(imas_version):
     return structures
 
 
-def dict_structures(imas_version):
+def structures_filenames(imas_version):
     """
-    maps structure names to json filenames
+    Maps structure names to json filenames
 
     :param imas_version: imas version
 
     :return: dictionary maps structure names to json filenames
     """
-    paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
-    if not len(paths):
-        raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
-    structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
-    return {structure: structures[structure] for structure in structures if not structure.startswith('_')}
+    if imas_version not in _structures_filenames:
+        paths = glob.glob(imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '*' + '.json')
+        if not len(paths):
+            raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
+        structures = dict(zip(list(map(lambda x: os.path.splitext(os.path.split(x)[1])[0], paths)), paths))
+        _structures_filenames[imas_version] = {
+            structure: structures[structure] for structure in structures if not structure.startswith('_')
+        }
+    return _structures_filenames[imas_version]
 
 
 def load_structure(filename, imas_version):
@@ -617,15 +728,16 @@ def load_structure(filename, imas_version):
 
     from .omas_physics import cocos_signals
 
-    filename0 = filename
-    id = (filename0, imas_version)
+    # translate DS to filename
+    if os.sep not in filename:
+        filename = structures_filenames(imas_version)[filename]
+
+    # check if _structures and _structures_dict already have this in cache
+    id = (filename, imas_version)
     if id in _structures and id in _structures_dict:
         return _structures[id], _structures_dict[id]
 
-    if os.sep not in filename:
-        filename = dict_structures(imas_version)[filename]
-
-    if filename not in _structures:
+    else:
         with open(filename, 'r') as f:
             dump_string = f.read()
         # load flat definitions from json file
@@ -651,6 +763,31 @@ def load_structure(filename, imas_version):
                 h = h[step]
 
     return _structures[id], _structures_dict[id]
+
+
+def imas_structure(imas_version, location):
+    '''
+    Returns a dictionary with the IMAS structure given a location
+
+    :param imas_version: imas version
+
+    :param location: path in OMAS format
+
+    :return: dictionary as loaded by load_structure() at location
+    '''
+    if imas_version not in _ods_structure_cache:
+        _ods_structure_cache[imas_version] = {}
+    ulocation = o2u(location)
+    if ulocation not in _ods_structure_cache[imas_version]:
+        if not ulocation:
+            structure = {k: k for k in list_structures(imas_version=imas_version)}
+        else:
+            path = p2l(ulocation)
+            structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
+            for key in path[1:]:
+                structure = structure[key]
+        _ods_structure_cache[imas_version][ulocation] = structure
+    return _ods_structure_cache[imas_version][ulocation]
 
 
 def omas_coordinates(imas_version=omas_rcparams['default_imas_version']):
@@ -695,91 +832,40 @@ def omas_times(imas_version=omas_rcparams['default_imas_version']):
     return _times[imas_version]
 
 
-_p2l_cache = {}
-
-
-def p2l(key):
+def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
     """
-    Converts the many different ways of addressing an ODS path to a list of keys (['bla',0,'bla'])
+    return list of times
 
-    :param key: ods location in some format
+    :param imas_version: IMAS version to look up
 
-    :return: list of keys that make the ods path
+    :return: list of strings with IMAS times
     """
-    if isinstance(key, list):
-        return key
-
-    if isinstance(key, tuple):
-        return list(key)
-
-    if isinstance(key, (int, numpy.integer)):
-        return [int(key)]
-
-    if isinstance(key, str) and not ('.' in key or '[' in key):
-        if len(key):
-            return [key]
+    # caching
+    if imas_version not in _global_quantities:
+        filename = imas_json_dir + os.sep + imas_versions.get(imas_version, imas_version) + os.sep + '_global_quantities.json'
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                _global_quantities[imas_version] = json.load(f)
         else:
-            return []
+            from .omas_structure import extract_global_quantities
 
-    if key is None:
-        raise TypeError('OMAS key cannot be None')
-
-    if isinstance(key, dict):
-        raise TypeError('OMAS key cannot be of type dictionary')
-
-    key0 = ''.join(key)
-    if key0 in _p2l_cache:
-        return copy.deepcopy(_p2l_cache[key0])
-
-    if not isinstance(key, (list, tuple)):
-        key = str(key).replace('[', '.').replace(']', '').split('.')
-
-    key = [k for k in key if k]
-    for k, item in enumerate(key):
-        try:
-            key[k] = int(item)
-        except ValueError:
-            pass
-
-    if len(_p2l_cache) > 1000:
-        _p2l_cache.clear()
-    _p2l_cache[key0] = copy.deepcopy(key)
-
-    return key
+            _global_quantities[imas_version] = extract_global_quantities(imas_version)
+    return _global_quantities[imas_version]
 
 
-def l2i(path):
-    """
-    Formats a list (['bla',0,'bla']) into a IMAS path ('bla[0].bla')
-
-    :param path: ODS path format
-
-    :return: IMAS path format
-    """
-    ipath = ''
-    for step in path:
-        if isinstance(step, int) or step == ':':
-            ipath += "[%s]" % step
-        else:
-            ipath += '.%s' % step
-    return ipath
-
-
-def l2u(path):
-    """
-    Formats a list (['bla',0,'bla']) into a universal ODS path format ('bla.:.bla')
-    NOTE: a universal ODS path substitutes lists indices with :
-
-    :param path: list of strings and integers
-
-    :return: universal ODS path format
-    """
-    return o2u(l2o(path))
+try:
+    import pyximport
+except ModuleNotFoundError:
+    with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
+        exec(f.read(), globals())
+else:
+    pyximport.install(language_level=3)
+    from .omas_cython import *
 
 
 def l2ut(path):
     """
-    Formats IMAS time lists (['bla',0,'time_slice',5,'quantity']) with universal ODS path ('bla.0.time_slice.:.quantity')
+    Formats IMAS time lists ['bla',0,'time_slice',5,'quantity'] with universal ODS path 'bla.0.time_slice.:.quantity'
 
     :param path: list of strings and integers
 
@@ -787,7 +873,6 @@ def l2ut(path):
     """
     lpath = p2l(path)
     opath = l2o(lpath)
-    upath = o2u(path)
     for k, key in enumerate(lpath):
         if not isinstance(key, int):
             continue
@@ -800,123 +885,37 @@ def l2ut(path):
     return l2o(lpath)
 
 
-def l2o(path):
-    """
-    Formats a list (['bla',0,'bla']) into an ODS path format ('bla.0.bla')
-
-    :param path: list of strings and integers
-
-    :return: ODS path format
-    """
-    return '.'.join(filter(None, map(str, path)))
-
-
-_o2u_pattern = re.compile(r'\.[0-9:]+')
-_o2u_pattern_no_split = re.compile(r'^[0-9:]+')
-_i2o_pattern = re.compile(r'\[([:0-9]+)\]')
-_o2i_pattern = re.compile(r'\.([:0-9]+)')
-
-
-def o2u(path):
-    """
-    Converts an ODS path format ('bla.0.bla') into a universal path format ('bla.:.bla')
-
-    :param path: ODS path format
-
-    :return: universal ODS path format
-    """
-    path = str(path)
-    if '.' in path:
-        return re.sub(_o2u_pattern, '.:', path)
-    else:
-        return re.sub(_o2u_pattern_no_split, ':', path)
-
-
-def i2o(path):
-    """
-    Formats a IMAS path ('bla[0].bla') format into an ODS path ('bla.0.bla')
-
-    :param path: IMAS path format
-
-    :return: ODS path format
-    """
-    return re.sub(_i2o_pattern, r'.\1', path)
-
-
-def o2i(path):
-    """
-    Formats a ODS path ('bla.0.bla') format into an IMAS path ('bla[0].bla')
-
-    :param path: ODS path format
-
-    :return: IMAS path format
-    """
-    return re.sub(_o2i_pattern, r'[\1]', path)
-
-
-def u2o(upath, path):
-    """
-    Replaces `:` and integers in `upath` with ':' and integers from in `path`
-    e.g. uo2('a.:.b.:.c.1.d.1.e','f.:.g.1.h.1.i.:.k')) becomes ('bla.1.hello.2.bla')
-
-    :param upath: universal ODS path
-
-    :param path: ODS path
-
-    :return: filled in ODS path
-    """
-    if upath.startswith('1...'):
-        return upath
-    ul = p2l(upath)
-    ol = p2l(path)
-    for k in range(min([len(ul), len(ol)])):
-        if (ul[k] == ':' or isinstance(ul[k], int)) and (ol[k] == ':' or isinstance(ol[k], int)):
-            ul[k] = ol[k]
-        elif ul[k] == ol[k]:
-            continue
-        else:
-            break
-    return l2o(ul)
-
-
-def trim_common_path(p1, p2):
-    """
-    return paths in lists format trimmed of the common first path between paths p1 and p2
-
-    :param p1: ODS path
-
-    :param p2: ODS path
-
-    :return: paths in list format trimmed of common part
-    """
-    p1 = p2l(p1)
-    p2 = p2l(p2)
-    both = [x if x[0] == x[1] else None for x in zip(p1, p2)] + [None]
-    return p1[both.index(None) :], p2[both.index(None) :]
-
-
-def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version']):
+def omas_info(structures=None, hide_obsolescent=True, cumulative_queries=False, imas_version=omas_rcparams['default_imas_version']):
     """
     This function returns an ods with the leaf nodes filled with their property informations
+
+    :param hide_obsolescent: hide obsolescent entries
 
     :param structures: list with ids names or string with ids name of which to retrieve the info
                        if None, then all structures are returned
 
-    :return: ods
+    :param cumulative_queries: return all IDSs that have been queried
+
+    :param imas_version: IMAS version to look up
+
+    :return: ods showcasing IDS structure
     """
 
+    from omas import ODS
+
     if not structures:
-        structures = sorted(list(dict_structures(imas_version).keys()))
+        structures = sorted(list(structures_filenames(imas_version).keys()))
     elif isinstance(structures, str):
         structures = [structures]
 
-    # caching
-    if imas_version not in _info_structures:
-        from omas import ODS
+    # caching based on imas version and obsolescence
+    if (imas_version, hide_obsolescent) not in _info_structures:
+        _info_structures[imas_version, hide_obsolescent] = ODS(imas_version=imas_version, consistency_check=False)
+    ods = _info_structures[imas_version, hide_obsolescent]
 
-        _info_structures[imas_version] = ODS(imas_version=imas_version, consistency_check=False)
-    ods = _info_structures[imas_version]
+    ods_out = ODS(imas_version=imas_version, consistency_check=False)
 
+    # generate ODS with info
     for structure in structures:
         if structure not in ods:
             tmp = load_structure(structure, imas_version)[0]
@@ -931,9 +930,18 @@ def omas_info(structures=None, imas_version=omas_rcparams['default_imas_version'
                         break
                 if parent:
                     continue
+                if hide_obsolescent and omas_info_node(item).get('lifecycle_status', '') == 'obsolescent':
+                    continue
                 ods[item.replace(':', '0')] = tmp[item]
+        ods_out[structure] = ods[structure]
 
-    return copy.deepcopy(ods)
+    # cumulative queries
+    if cumulative_queries:
+        for structure in ods:
+            if structure not in ods_out:
+                ods_out[structure] = ods[structure]
+
+    return ods_out
 
 
 def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
@@ -946,12 +954,10 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
 
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     """
-    tmp = {}
     try:
-        tmp.update(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
+        return copy.copy(load_structure(key.split('.')[0], imas_version)[0][o2i(key)])
     except KeyError:
-        pass
-    return tmp
+        return {}
 
 
 def recursive_interpreter(me, interpret_method=ast.literal_eval, dict_cls=OrderedDict):
@@ -1055,3 +1061,16 @@ def get_actor_io_ids(filename):
         elif line.strip().startswith(':param '):
             ids_in.append(line.split(':')[2].strip())
     return ids_in, ids_out
+
+
+class UnittestCaseOmas(unittest.TestCase):
+    """
+    Base class for unittest.TestCase within OMAS
+    """
+
+    def setUp(self):
+        name = self.__class__.__name__ + '.' + self._testMethodName
+        print('')
+        print('~' * len(name))
+        print(name)
+        print('~' * len(name))

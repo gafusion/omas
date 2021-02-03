@@ -1,0 +1,337 @@
+{
+ "spectrometer_mass": {
+  "documentation": "Mass spectrometer diagnostic",
+  "full_path": "spectrometer_mass",
+  "lifecycle_last_change": "3.29.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.29.0",
+  "maxoccur": "4"
+ },
+ "spectrometer_mass.a": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of atomic masses for which partial pressures are recorded by the spectrometer",
+  "full_path": "spectrometer_mass/a(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.a_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "spectrometer_mass/a_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.a_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "spectrometer_mass/a_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.a_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "spectrometer_mass/a_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "spectrometer_mass/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "spectrometer_mass.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_mass/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "spectrometer_mass/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "spectrometer_mass.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_mass/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "spectrometer_mass/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_mass/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_mass/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_mass/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "spectrometer_mass/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.output_flag": {
+  "coordinates": [
+   "spectrometer_mass.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "spectrometer_mass/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "spectrometer_mass.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_mass/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_mass/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_mass/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.identifier": {
+  "data_type": "STR_0D",
+  "documentation": "ID of the spectrometer",
+  "full_path": "spectrometer_mass/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_mass.ids_properties": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "spectrometer_mass/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "spectrometer_mass.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "spectrometer_mass/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "spectrometer_mass/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "spectrometer_mass/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "spectrometer_mass.ids_properties.occurrence"
+ },
+ "spectrometer_mass.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "spectrometer_mass/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "spectrometer_mass/ids_properties/source",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.version_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "spectrometer_mass/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "spectrometer_mass.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "spectrometer_mass/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "spectrometer_mass/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "spectrometer_mass/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the spectrometer",
+  "full_path": "spectrometer_mass/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_mass.pressures_partial": {
+  "coordinates": [
+   "spectrometer_mass.a"
+  ],
+  "data_type": "STRUCTURE",
+  "documentation": "Partial pressures recorded by the spectrometer",
+  "full_path": "spectrometer_mass/pressures_partial",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d_validity",
+  "units": "Pa"
+ },
+ "spectrometer_mass.pressures_partial.data": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_mass.pressures_partial.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "spectrometer_mass/pressures_partial/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressures_partial/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.pressures_partial.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "spectrometer_mass/pressures_partial/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.pressures_partial.data_error_lower": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_mass.pressures_partial.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "spectrometer_mass/pressures_partial/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressures_partial/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.pressures_partial.data_error_upper": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_mass.pressures_partial.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "spectrometer_mass/pressures_partial/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressures_partial/time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.pressures_partial.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "spectrometer_mass/pressures_partial/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressures_partial/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_mass.pressures_partial.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "spectrometer_mass/pressures_partial/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.pressures_partial.validity_timed": {
+  "coordinates": [
+   "spectrometer_mass.pressures_partial.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "spectrometer_mass/pressures_partial/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "pressures_partial/time",
+  "type": "dynamic"
+ },
+ "spectrometer_mass.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Generic time",
+  "full_path": "spectrometer_mass/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}

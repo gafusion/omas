@@ -96,6 +96,7 @@ def through_omas_hdc(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
+    ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         hdc = save_omas_hdc(ods)
         ods1 = load_omas_hdc(hdc)
