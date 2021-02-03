@@ -336,7 +336,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
-def summary_taue(ods, update=True):
+def summary_taue(ods, update=True, PRINTFLAG=False):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
@@ -505,7 +505,7 @@ def summary_global_quantities(ods, update=True):
     """
     ods_n = ods.physics_summary_greenwald(update=update)
     ods_n.physics_summary_taue(update=True)
-    ods_n.physics_summary_total_powers(update=True)
+    ods_n.physics_summary_heating_power(update=True)
     ods_n.physics_summary_consistent_global_quantities(update=True)
     return ods_n
 
