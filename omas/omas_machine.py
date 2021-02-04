@@ -197,57 +197,63 @@ class mdsvalue(dict):
 
         :return: result of TDI expression, or dictionary with results of TDI expressions
         '''
-        import MDSplus
-
-        def mdsk(value):
-            '''
-            Translate strings to MDS+ bytes
-            '''
-            return str(str(value).encode('utf8'))
-
-        if TDI is None:
-            TDI = self.TDI
-
         try:
-            for fallback in [0, 1]:
-                if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                    conn = MDSplus.Connection(self.server)
-                    if self.treename is not None:
-                        conn.openTree(self.treename, self.pulse)
-                    _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
-                try:
-                    conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                    break
-                except Exception as _excp:
-                    if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                        del _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                    if fallback:
-                        raise
-            if isinstance(TDI, (list, tuple)):
-                conns = conn.getMany()
-                for expr in TDI:
-                    conns.append(str(expr.__hash__()), expr)
-                res = conns.execute()
-                try:
-                    return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
-                except KeyError:
-                    return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
-            elif isinstance(TDI, dict):
-                for name, expr in TDI.items():
-                    conns.append(name, expr)
-                res = conns.execute()
-                try:
-                    return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
-                except KeyError:
-                    return {expr: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
-            else:
-                return MDSplus.Data.data(conn.get(TDI))
-        except Exception as _excp:
-            txt = []
-            for item in ['server', 'treename', 'pulse']:
-                txt += [f' - {item}: {getattr(self, item)}']
-            txt += [f' - TDI: {TDI}']
-            raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
+            import time
+
+            t0 = time.time()
+            import MDSplus
+
+            def mdsk(value):
+                '''
+                Translate strings to MDS+ bytes
+                '''
+                return str(str(value).encode('utf8'))
+
+            if TDI is None:
+                TDI = self.TDI
+
+            try:
+                for fallback in [0, 1]:
+                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
+                        conn = MDSplus.Connection(self.server)
+                        if self.treename is not None:
+                            conn.openTree(self.treename, self.pulse)
+                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                    try:
+                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        break
+                    except Exception as _excp:
+                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
+                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        if fallback:
+                            raise
+                if isinstance(TDI, (list, tuple)):
+                    conns = conn.getMany()
+                    for expr in TDI:
+                        conns.append(str(expr.__hash__()), expr)
+                    res = conns.execute()
+                    try:
+                        return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+                    except KeyError:
+                        return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
+                elif isinstance(TDI, dict):
+                    for name, expr in TDI.items():
+                        conns.append(name, expr)
+                    res = conns.execute()
+                    try:
+                        return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
+                    except KeyError:
+                        return {expr: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
+                else:
+                    return MDSplus.Data.data(conn.get(TDI))
+            except Exception as _excp:
+                txt = []
+                for item in ['server', 'treename', 'pulse']:
+                    txt += [f' - {item}: {getattr(self, item)}']
+                txt += [f' - TDI: {TDI}']
+                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
+        finally:
+            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', 'mds')
 
 
 machine_expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
