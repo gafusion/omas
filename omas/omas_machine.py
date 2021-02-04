@@ -18,9 +18,13 @@ __all__ = [
     'mdsvalue',
 ]
 
-url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url_{branch}'])
+machine_expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
 
-_python_tdi_namespace = {}
+_url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url_{branch}'])
+
+# ===================
+# mapping engine
+# ===================
 
 
 def python_tdi_namespace(branch):
@@ -48,215 +52,13 @@ def python_tdi_namespace(branch):
         machines(None, branch)
 
         # import from temporary directory
-        dir = url_dir.format(branch=branch)
+        dir = _url_dir.format(branch=branch)
         if dir + os.sep + '..' not in sys.path:
             sys.path.insert(0, dir + os.sep + '..')
 
         exec(f'from omas_machine_mappings_url_{branch}.python_tdi import *', _python_tdi_namespace[branch])
 
     return _python_tdi_namespace[branch]
-
-
-def update_mapping(machine, location, value, cocosio=None, default_options=None, update_path=False):
-    '''
-    Utility function that updates the local mapping file of a given machine with the mapping info of a given location
-
-    :param machine: machine name
-
-    :param location: ODS location to be updated
-
-    :param value: dictionary with mapping info
-
-    :param cocosio: if integer and location has COCOS transform it adds it
-
-    :param update_path: use the same value for the arrays of structures leading to this location
-
-    :return: dictionary with updated raw mappings
-    '''
-    ulocation = l2u(p2l(location))
-    if cocosio and ulocation in cocos_signals and cocos_signals[ulocation] is not None:
-        assert isinstance(cocosio, int)
-        value['COCOSIO'] = cocosio
-
-    # operate on the raw mappings
-    new_raw_mappings = machine_mappings(machine, '', None, return_raw_mappings=True)
-
-    # assign default options
-    updated_defaults = False
-    if default_options:
-        for item in default_options:
-            if item not in new_raw_mappings['__options__'] and item not in ['machine', 'pulse', 'location']:
-                new_raw_mappings['__options__'][item] = default_options[item]
-                updated_defaults = True
-
-    # if the definition is the same do not do anythinig
-    # use `sorted(repr(dict))` as a cheap recursive dictionary diff
-    # sorted is needed because starting with Python3.7 dictionaries are sorted and we cannot guarantee that value and mappings have same sorting
-    if not updated_defaults and ulocation in new_raw_mappings and sorted(repr(value)) == sorted(repr(new_raw_mappings[ulocation])):
-        return new_raw_mappings
-
-    # add definition for new/updated location and update the .json file
-    new_raw_mappings[ulocation] = value
-    filename = machines(machine, '')
-    with open(filename, 'w') as f:
-        json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
-    print(f'Updated {machine} mapping for {ulocation}')
-
-    # add the same call for arrays of structures going upstream
-    if update_path:
-        for uloc in [':'.join(ulocation.split(':')[: k + 1]) + ':' for k, l in enumerate(ulocation.split(':')[:-1])]:
-            if uloc in new_raw_mappings:
-                continue
-            if 'COCOSIO' in value:
-                value = copy.copy(value)
-                del value['COCOSIO']
-            update_mapping(machine, uloc, value, None, None, update_path=False)
-
-    return new_raw_mappings
-
-
-def mds_machine_to_server_mapping(server, treename):
-    '''
-    Resolve MDS+ server
-
-    :param machine: machine name
-
-    :param treename: treename (in case treename affects server to be used)
-
-    :return: string with MDS+ server and port to be used
-    '''
-    return server.format(**os.environ)
-
-
-_mds_connection_cache = {}
-
-
-class mdstree(dict):
-    '''
-    Class to handle the structure of an MDS+ tree.
-    Nodes in this tree are mdsvalue objects
-    '''
-
-    def __init__(self, server, treename, pulse):
-        for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
-            TDI = TDI.decode('utf8').strip()
-            path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
-            h = self
-            for p in path[1:-1]:
-                h = h.setdefault(p, mdsvalue(server, treename, pulse, ''))
-            if path[-1] not in h:
-                h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
-            else:
-                h[path[-1]].TDI = TDI
-
-
-class mdsvalue(dict):
-    '''
-    Execute MDS+ TDI functions
-    '''
-
-    def __init__(self, server, treename, pulse, TDI):
-        self.treename = treename
-        self.pulse = pulse
-        self.TDI = TDI
-        try:
-            # handle the case that server is just the machine name
-            server = machine_mappings(server, '')['__mdsserver__']
-        except NotImplementedError:
-            if '.' not in server:
-                raise
-        self.server = mds_machine_to_server_mapping(server, self.treename)
-
-    def data(self):
-        return self.raw(f'data({self.TDI})')
-
-    def dim_of(self, dim):
-        return self.raw(f'dim_of({self.TDI},{dim})')
-
-    def units(self):
-        return self.raw(f'units({self.TDI})')
-
-    def error(self):
-        return self.raw(f'error({self.TDI})')
-
-    def error_dim_of(self, dim):
-        return self.raw(f'error_dim_of({self.TDI},{dim})')
-
-    def units_dim_of(self, dim):
-        return self.raw(f'units_dim_of({self.TDI},{dim})')
-
-    def size(self, dim):
-        return self.raw(f'size({self.TDI})')
-
-    def raw(self, TDI=None):
-        '''
-        Fetch data from MDS+ with connection caching
-
-        :param TDI: string, list or dict of strings
-            MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
-
-        :return: result of TDI expression, or dictionary with results of TDI expressions
-        '''
-        try:
-            import time
-
-            t0 = time.time()
-            import MDSplus
-
-            def mdsk(value):
-                '''
-                Translate strings to MDS+ bytes
-                '''
-                return str(str(value).encode('utf8'))
-
-            if TDI is None:
-                TDI = self.TDI
-
-            try:
-                for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                        conn = MDSplus.Connection(self.server)
-                        if self.treename is not None:
-                            conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
-                    try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        break
-                    except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        if fallback:
-                            raise
-                if isinstance(TDI, (list, tuple)):
-                    conns = conn.getMany()
-                    for expr in TDI:
-                        conns.append(str(expr.__hash__()), expr)
-                    res = conns.execute()
-                    try:
-                        return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
-                    except KeyError:
-                        return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
-                elif isinstance(TDI, dict):
-                    for name, expr in TDI.items():
-                        conns.append(name, expr)
-                    res = conns.execute()
-                    try:
-                        return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
-                    except KeyError:
-                        return {expr: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
-                else:
-                    return MDSplus.Data.data(conn.get(TDI))
-            except Exception as _excp:
-                txt = []
-                for item in ['server', 'treename', 'pulse']:
-                    txt += [f' - {item}: {getattr(self, item)}']
-                txt += [f' - TDI: {TDI}']
-                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
-        finally:
-            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', 'mds')
-
-
-machine_expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
 
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
@@ -395,242 +197,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     return ods, {'raw_data': data0, 'processed_data': data, 'cocosio': cocosio, 'branch': mappings['__branch__']}
 
 
-def machine_mapping_function(__all__):
-    """
-    Decorator used to identify machine mapping functions
-
-    NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
-          from another function decorated with `@machine_mapping_function`
-    """
-
-    def machine_mapping_decorator(f, __all__):
-        __all__.append(f.__name__)
-
-        @functools.wraps(f)
-        def machine_mapping_caller(*args, **kwargs):
-            clean_ods = True
-            if len(args[0]):
-                clean_ods = False
-            if clean_ods and omas_git_repo:
-                import inspect
-
-                # figure out the machine name from where the function `f` is defined
-                machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
-                if (
-                    machine == '<string>'
-                ):  # if `f` is called via exec then we need to look at the call stack to figure out the macchine name
-                    machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
-
-                # call signature
-                argspec = inspect.getfullargspec(f)
-                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args)
-                call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
-                default_options = None
-                if argspec.defaults:
-                    default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
-
-            # call
-            out = f(*args, **kwargs)
-
-            # update mappings definitions
-            if clean_ods and omas_git_repo:
-                for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
-                    update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
-
-            return out
-
-        return machine_mapping_caller
-
-    return lambda f: machine_mapping_decorator(f, __all__)
-
-
-def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
-    '''
-    Function used to test python mapping functions
-
-    :param __all__: list of functionss to test
-
-    :param namespace: testing namespace
-    '''
-    from pprint import pprint
-
-    for func in __all__:
-        print('=' * len(func))
-        print(func)
-        print('=' * len(func))
-        ods = ODS()
-        func = eval(func, global_namespace, local_namespace)
-        try:
-            try:
-                func(ods)
-            except Exception:
-                raise
-        except TypeError as _excp:
-            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
-                raise _excp.__class__(
-                    str(_excp)
-                    + '\n'
-                    + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
-                )
-            else:
-                raise
-        tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
-        n = max(map(lambda x: len(x), tmp))
-        for item in tmp:
-            try:
-                print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
-            except Exception:
-                print(f'{item.ljust(n)}   mixed')
-
-
-def load_omas_machine(
-    machine,
-    pulse,
-    options={},
-    consistency_check=True,
-    imas_version=omas_rcparams['default_imas_version'],
-    cls=ODS,
-    branch='',
-    user_machine_mappings=None,
-):
-    printd('Loading from %s' % machine, topic='machine')
-    ods = cls(imas_version=imas_version, consistency_check=consistency_check)
-    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
-        if location.endswith(':'):
-            continue
-        print(location)
-        machine_to_omas(ods, machine, pulse, location, options, branch)
-    return ods
-
-
-class dynamic_omas_machine(dynamic_ODS):
-    """
-    Class that provides dynamic data loading from machine mappings
-    This class is not to be used by itself, but via the ODS.open() method.
-    """
-
-    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
-        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
-        self.active = False
-        self.cache = {}
-
-    def open(self):
-        printd('Dynamic open  %s' % self.kw, topic='dynamic')
-        self.active = True
-        return self
-
-    def close(self):
-        printd('Dynamic close %s' % self.kw, topic='dynamic')
-        self.active = False
-        self.cache.clear()
-        return self
-
-    def __getitem__(self, key):
-        if not self.active:
-            raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        if o2u(key) not in self.cache:
-            printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
-            ods, _ = machine_to_omas(
-                ODS(),
-                self.kw['machine'],
-                self.kw['pulse'],
-                o2u(key),
-                self.kw['options'],
-                self.kw['branch'],
-                self.kw['user_machine_mappings'],
-                self.cache,
-            )
-            self.cache[o2u(key)] = ods
-        if isinstance(self.cache[o2u(key)], int):
-            return self.cache[o2u(key)]
-        else:
-            return self.cache[o2u(key)][key]
-
-    def __contains__(self, location):
-        ulocation = o2u(location)
-        if not self.active:
-            raise RuntimeError('Dynamic link broken: %s' % self.kw)
-        if ulocation.endswith(':'):
-            return False
-        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
-
-    def keys(self, location):
-        ulocation = o2u(location)
-        if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
-            return list(range(self[ulocation + '.:']))
-        else:
-            return numpy.unique(
-                [
-                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
-                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
-                    if k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
-                ]
-            )
-
-
-_machines_dict = {}
-
-
-def machines(machine=None, branch=''):
-    '''
-    Function to get machines that have their mappings defined
-    This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested
-
-    :param machine: string with machine name or None
-
-    :param branch: GitHub branch from which to load the machine mapping information
-
-    :return: if `machine==None` returns dictionary with list of machines and their json mapping files
-             if `machine` is a string, then returns json mapping filename
-    '''
-
-    # return cached results
-    if branch in _machines_dict:
-        if machine is None:
-            return _machines_dict[branch]
-        elif machine in _machines_dict[branch]:
-            return _machines_dict[branch][machine]
-
-    # local mappings
-    if not branch:
-        dir = imas_json_dir + '/../machine_mappings'
-
-    # remote mappings from GitHub
-    else:
-        if branch == 'master':
-            svn_branch = 'trunk'
-        else:
-            svn_branch = 'branches/' + branch
-
-        dir = url_dir.format(branch=branch)
-        if os.path.exists(dir):
-            shutil.rmtree(dir)
-        subprocess.Popen(
-            f'''
-svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machine_mappings/ {dir}
-''',
-            stdout=subprocess.PIPE,
-            shell=True,
-        ).communicate()[0]
-
-    # go through machine files
-    _machines_dict[branch] = {}
-    for filename in glob.glob(f'{dir}/*.json'):
-        _machines_dict[branch][os.path.splitext(os.path.split(filename)[1])[0]] = os.path.abspath(filename)
-
-    # return list of supported machines
-    if machine is None:
-        return _machines_dict[branch]
-    # return filename with mappings for this machine
-    else:
-        if machine not in _machines_dict[branch]:
-            raise NotImplementedError(f'Machine `{machine}` has no mapping defined')
-        return _machines_dict[branch][machine]
-
-
 _machine_mappings = {}
 _namespace_mappings = {}
 _user_machine_mappings = {}
+_python_tdi_namespace = {}
 
 
 def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False):
@@ -736,3 +306,448 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         _machine_mappings[idm] = mappings
 
     return _machine_mappings[idm]
+
+
+# ===================
+# list machines and update machine files
+# ===================
+_machines_dict = {}
+
+
+def machines(machine=None, branch=''):
+    '''
+    Function to get machines that have their mappings defined
+    This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested
+
+    :param machine: string with machine name or None
+
+    :param branch: GitHub branch from which to load the machine mapping information
+
+    :return: if `machine==None` returns dictionary with list of machines and their json mapping files
+             if `machine` is a string, then returns json mapping filename
+    '''
+
+    # return cached results
+    if branch in _machines_dict:
+        if machine is None:
+            return _machines_dict[branch]
+        elif machine in _machines_dict[branch]:
+            return _machines_dict[branch][machine]
+
+    # local mappings
+    if not branch:
+        dir = imas_json_dir + '/../machine_mappings'
+
+    # remote mappings from GitHub
+    else:
+        if branch == 'master':
+            svn_branch = 'trunk'
+        else:
+            svn_branch = 'branches/' + branch
+
+        dir = _url_dir.format(branch=branch)
+        if os.path.exists(dir):
+            shutil.rmtree(dir)
+        subprocess.Popen(
+            f'''
+svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machine_mappings/ {dir}
+''',
+            stdout=subprocess.PIPE,
+            shell=True,
+        ).communicate()[0]
+
+    # go through machine files
+    _machines_dict[branch] = {}
+    for filename in glob.glob(f'{dir}/*.json'):
+        _machines_dict[branch][os.path.splitext(os.path.split(filename)[1])[0]] = os.path.abspath(filename)
+
+    # return list of supported machines
+    if machine is None:
+        return _machines_dict[branch]
+    # return filename with mappings for this machine
+    else:
+        if machine not in _machines_dict[branch]:
+            raise NotImplementedError(f'Machine `{machine}` has no mapping defined')
+        return _machines_dict[branch][machine]
+
+
+def update_mapping(machine, location, value, cocosio=None, default_options=None, update_path=False):
+    '''
+    Utility function that updates the local mapping file of a given machine with the mapping info of a given location
+
+    :param machine: machine name
+
+    :param location: ODS location to be updated
+
+    :param value: dictionary with mapping info
+
+    :param cocosio: if integer and location has COCOS transform it adds it
+
+    :param update_path: use the same value for the arrays of structures leading to this location
+
+    :return: dictionary with updated raw mappings
+    '''
+    ulocation = l2u(p2l(location))
+    if cocosio and ulocation in cocos_signals and cocos_signals[ulocation] is not None:
+        assert isinstance(cocosio, int)
+        value['COCOSIO'] = cocosio
+
+    # operate on the raw mappings
+    new_raw_mappings = machine_mappings(machine, '', None, return_raw_mappings=True)
+
+    # assign default options
+    updated_defaults = False
+    if default_options:
+        for item in default_options:
+            if item not in new_raw_mappings['__options__'] and item not in ['machine', 'pulse', 'location']:
+                new_raw_mappings['__options__'][item] = default_options[item]
+                updated_defaults = True
+
+    # if the definition is the same do not do anythinig
+    # use `sorted(repr(dict))` as a cheap recursive dictionary diff
+    # sorted is needed because starting with Python3.7 dictionaries are sorted and we cannot guarantee that value and mappings have same sorting
+    if not updated_defaults and ulocation in new_raw_mappings and sorted(repr(value)) == sorted(repr(new_raw_mappings[ulocation])):
+        return new_raw_mappings
+
+    # add definition for new/updated location and update the .json file
+    new_raw_mappings[ulocation] = value
+    filename = machines(machine, '')
+    with open(filename, 'w') as f:
+        json.dump(new_raw_mappings, f, indent=1, separators=(',', ': '), sort_keys=True)
+    print(f'Updated {machine} mapping for {ulocation}')
+
+    # add the same call for arrays of structures going upstream
+    if update_path:
+        for uloc in [':'.join(ulocation.split(':')[: k + 1]) + ':' for k, l in enumerate(ulocation.split(':')[:-1])]:
+            if uloc in new_raw_mappings:
+                continue
+            if 'COCOSIO' in value:
+                value = copy.copy(value)
+                del value['COCOSIO']
+            update_mapping(machine, uloc, value, None, None, update_path=False)
+
+    return new_raw_mappings
+
+
+# ===================
+# machine mapping functions
+# ===================
+def machine_mapping_function(__all__):
+    """
+    Decorator used to identify machine mapping functions
+
+    NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
+          from another function decorated with `@machine_mapping_function`
+    """
+
+    def machine_mapping_decorator(f, __all__):
+        __all__.append(f.__name__)
+
+        @functools.wraps(f)
+        def machine_mapping_caller(*args, **kwargs):
+            clean_ods = True
+            if len(args[0]):
+                clean_ods = False
+            if clean_ods and omas_git_repo:
+                import inspect
+
+                # figure out the machine name from where the function `f` is defined
+                machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
+                if (
+                    machine == '<string>'
+                ):  # if `f` is called via exec then we need to look at the call stack to figure out the macchine name
+                    machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
+
+                # call signature
+                argspec = inspect.getfullargspec(f)
+                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args)
+                call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
+                default_options = None
+                if argspec.defaults:
+                    default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
+
+            # call
+            out = f(*args, **kwargs)
+
+            # update mappings definitions
+            if clean_ods and omas_git_repo:
+                for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
+                    update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
+
+            return out
+
+        return machine_mapping_caller
+
+    return lambda f: machine_mapping_decorator(f, __all__)
+
+
+def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
+    '''
+    Function used to test python mapping functions
+
+    :param __all__: list of functionss to test
+
+    :param namespace: testing namespace
+    '''
+    os.environ['OMAS_DEBUG_TOPIC'] = 'mapping'
+    from pprint import pprint
+
+    for func in __all__:
+        print('=' * len(func))
+        print(func)
+        print('=' * len(func))
+        ods = ODS()
+        func = eval(func, global_namespace, local_namespace)
+        try:
+            try:
+                func(ods)
+            except Exception:
+                raise
+        except TypeError as _excp:
+            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
+                raise _excp.__class__(
+                    str(_excp)
+                    + '\n'
+                    + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
+                )
+            else:
+                raise
+        tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
+        n = max(map(lambda x: len(x), tmp))
+        for item in tmp:
+            try:
+                print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
+            except Exception:
+                print(f'{item.ljust(n)}   mixed')
+
+
+# ===================
+# MDS+ functions
+# ===================
+def mds_machine_to_server_mapping(server, treename):
+    '''
+    Resolve MDS+ server
+
+    :param machine: machine name
+
+    :param treename: treename (in case treename affects server to be used)
+
+    :return: string with MDS+ server and port to be used
+    '''
+    return server.format(**os.environ)
+
+
+_mds_connection_cache = {}
+
+
+class mdstree(dict):
+    '''
+    Class to handle the structure of an MDS+ tree.
+    Nodes in this tree are mdsvalue objects
+    '''
+
+    def __init__(self, server, treename, pulse):
+        for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
+            TDI = TDI.decode('utf8').strip()
+            path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
+            h = self
+            for p in path[1:-1]:
+                h = h.setdefault(p, mdsvalue(server, treename, pulse, ''))
+            if path[-1] not in h:
+                h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
+            else:
+                h[path[-1]].TDI = TDI
+
+
+class mdsvalue(dict):
+    '''
+    Execute MDS+ TDI functions
+    '''
+
+    def __init__(self, server, treename, pulse, TDI):
+        self.treename = treename
+        self.pulse = pulse
+        self.TDI = TDI
+        try:
+            # handle the case that server is just the machine name
+            server = machine_mappings(server, '')['__mdsserver__']
+        except NotImplementedError:
+            if '.' not in server:
+                raise
+        self.server = mds_machine_to_server_mapping(server, self.treename)
+
+    def data(self):
+        return self.raw(f'data({self.TDI})')
+
+    def dim_of(self, dim):
+        return self.raw(f'dim_of({self.TDI},{dim})')
+
+    def units(self):
+        return self.raw(f'units({self.TDI})')
+
+    def error(self):
+        return self.raw(f'error({self.TDI})')
+
+    def error_dim_of(self, dim):
+        return self.raw(f'error_dim_of({self.TDI},{dim})')
+
+    def units_dim_of(self, dim):
+        return self.raw(f'units_dim_of({self.TDI},{dim})')
+
+    def size(self, dim):
+        return self.raw(f'size({self.TDI})')
+
+    def raw(self, TDI=None):
+        '''
+        Fetch data from MDS+ with connection caching
+
+        :param TDI: string, list or dict of strings
+            MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
+
+        :return: result of TDI expression, or dictionary with results of TDI expressions
+        '''
+        try:
+            import time
+
+            t0 = time.time()
+            import MDSplus
+
+            def mdsk(value):
+                '''
+                Translate strings to MDS+ bytes
+                '''
+                return str(str(value).encode('utf8'))
+
+            if TDI is None:
+                TDI = self.TDI
+
+            try:
+                for fallback in [0, 1]:
+                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
+                        conn = MDSplus.Connection(self.server)
+                        if self.treename is not None:
+                            conn.openTree(self.treename, self.pulse)
+                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                    try:
+                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        break
+                    except Exception as _excp:
+                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
+                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        if fallback:
+                            raise
+                if isinstance(TDI, (list, tuple)):
+                    conns = conn.getMany()
+                    for expr in TDI:
+                        conns.append(str(expr.__hash__()), expr)
+                    res = conns.execute()
+                    try:
+                        return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
+                    except KeyError:
+                        return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
+                elif isinstance(TDI, dict):
+                    for name, expr in TDI.items():
+                        conns.append(name, expr)
+                    res = conns.execute()
+                    try:
+                        return {expr: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
+                    except KeyError:
+                        return {expr: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
+                else:
+                    return MDSplus.Data.data(conn.get(TDI))
+            except Exception as _excp:
+                txt = []
+                for item in ['server', 'treename', 'pulse']:
+                    txt += [f' - {item}: {getattr(self, item)}']
+                txt += [f' - TDI: {TDI}']
+                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
+        finally:
+            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='mapping')
+
+
+# ===================
+# Loading machine data in ODSs
+# ===================
+class dynamic_omas_machine(dynamic_ODS):
+    """
+    Class that provides dynamic data loading from machine mappings
+    This class is not to be used by itself, but via the ODS.open() method.
+    """
+
+    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
+        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
+        self.active = False
+        self.cache = {}
+
+    def open(self):
+        printd('Dynamic open  %s' % self.kw, topic='dynamic')
+        self.active = True
+        return self
+
+    def close(self):
+        printd('Dynamic close %s' % self.kw, topic='dynamic')
+        self.active = False
+        self.cache.clear()
+        return self
+
+    def __getitem__(self, key):
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        if o2u(key) not in self.cache:
+            printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
+            ods, _ = machine_to_omas(
+                ODS(),
+                self.kw['machine'],
+                self.kw['pulse'],
+                o2u(key),
+                self.kw['options'],
+                self.kw['branch'],
+                self.kw['user_machine_mappings'],
+                self.cache,
+            )
+            self.cache[o2u(key)] = ods
+        if isinstance(self.cache[o2u(key)], int):
+            return self.cache[o2u(key)]
+        else:
+            return self.cache[o2u(key)][key]
+
+    def __contains__(self, location):
+        ulocation = o2u(location)
+        if not self.active:
+            raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        if ulocation.endswith(':'):
+            return False
+        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+
+    def keys(self, location):
+        ulocation = o2u(location)
+        if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
+            return list(range(self[ulocation + '.:']))
+        else:
+            return numpy.unique(
+                [
+                    convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
+                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+                    if k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
+                ]
+            )
+
+
+def load_omas_machine(
+    machine,
+    pulse,
+    options={},
+    consistency_check=True,
+    imas_version=omas_rcparams['default_imas_version'],
+    cls=ODS,
+    branch='',
+    user_machine_mappings=None,
+):
+    printd('Loading from %s' % machine, topic='machine')
+    ods = cls(imas_version=imas_version, consistency_check=consistency_check)
+    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
+        if location.endswith(':'):
+            continue
+        print(location)
+        machine_to_omas(ods, machine, pulse, location, options, branch)
+    return ods

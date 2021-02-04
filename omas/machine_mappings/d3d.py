@@ -395,7 +395,7 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
         cal_call = f'.ts.{revision}.header.calib_nums'
         cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
         hwi_call = f'.{hw_call_sys}.hwmapints'
-        printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), 'd3d')
+        printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), topic='mapping')
         try:
             hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
         except MDSplus.MdsException:
@@ -408,7 +408,7 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
             hw_lens = hw_ints[:, 2]
             return hw_lens
 
-    printd('Setting up DIII-D Thomson locations...', 'd3d')
+    printd('Setting up DIII-D Thomson locations...', topic='mapping')
 
     tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
 
@@ -562,14 +562,14 @@ def langmuir_probes_hardware(ods, pulse=176235):
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), 'd3d')
+    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='mapping')
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), 'd3d')
+    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='mapping')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -582,7 +582,7 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
                 pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
                 label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
-                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), 'd3d')
+                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='mapping')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
@@ -621,7 +621,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
     import MDSplus
 
-    printd('Setting up DIII-D CER locations...', 'd3d')
+    printd('Setting up DIII-D CER locations...', topic='mapping')
 
     cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
 
