@@ -468,7 +468,13 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
                 )
             else:
                 raise
-        pprint(numpy.unique(list(map(o2u, ods.flat().keys()))).tolist())
+        tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
+        n = max(map(lambda x: len(x), tmp))
+        for item in tmp:
+            try:
+                print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
+            except Exception:
+                print(f'{item.ljust(n)}   mixed')
 
 
 def load_omas_machine(
