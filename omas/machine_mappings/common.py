@@ -1,4 +1,5 @@
 import numpy as np
+from omas import *
 
 
 def pf_coils_to_ods(ods, coil_data):
@@ -53,5 +54,51 @@ def pf_coils_to_ods(ods, coil_data):
                 fdat[1] - fdat[3] / 2.0 + fdat[2] / 2.0 * np.tan(-fdat[4]),
             ]
             ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = outline_code
+
+    return ods
+
+
+def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity):
+    '''
+    Utility function to get data from a list of TDI signals which all share the same time basis
+
+    :param ods: ODS that will hold the data
+
+    :param ods1: ODS that contains the channels information
+
+    :param pulse: pulse number
+
+    :param channels: location in `ods1` where the channels are defined
+
+    :param identifier: location in `ods1` with the name of the signal to be retrieved
+
+    :param time: location in `ods` where to set the time info
+
+    :param data: location in `ods` where to set the data
+
+    :param validity: location in `ods` where to set the validity flag
+
+    :return: ODS instance
+    '''
+    t = None
+    TDIs = []
+    for stage in ['fetch', 'assign']:
+        for channel in ods1[channels]:
+            TDI = f'ptdata2("{ods1[identifier.format(**locals())]}",{pulse})'
+            TDIs.append(TDI)
+            if stage == 'fetch' and t is None:
+                t = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
+                if len(t) <= 1:
+                    t = None
+            if stage == 'assign':
+                if len(tmp[TDI]) > 1:
+                    ods[time.format(**locals())] = t / 1000.0
+                    ods[data.format(**locals())] = tmp[TDI]
+                    if validity is not None:
+                        ods[validity.format(**locals())] = 0
+                elif validity is not None:
+                    ods[validity.format(**locals())] = -2
+        if stage == 'fetch':
+            tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
 
     return ods

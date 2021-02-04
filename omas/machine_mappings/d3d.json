@@ -9,65 +9,64 @@
   "EFIT_tree": "EFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
-  "quiet": false,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.identifier": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.first_point.r": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.first_point.z": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.second_point.r": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.line_of_sight.second_point.z": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "bolometer.channel.:.name": {
-  "PYTHON": "setup_bolometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
  "charge_exchange.channel.:": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.identifier": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.data": {
   "COCOSIO": 11,
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.data": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.data": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.time": {
-  "PYTHON": "setup_charge_exchange_hardware_description_d3d(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "dataset_description.data_entry.machine": {
   "VALUE": "{machine}"
@@ -194,97 +193,97 @@
   "treename": "{EFIT_tree}"
  },
  "gas_injection.pipe.:": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.exit_position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.exit_position.r": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.exit_position.z": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.name": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.second_point.r": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.second_point.z": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.valve.:": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.valve.:.identifier": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "gas_injection.pipe.:.valve.:.name": {
-  "PYTHON": "setup_gas_injection_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "interferometer.channel.:": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.identifier": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.r": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.z": {
-  "PYTHON": "setup_interferometer_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:": {
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.identifier": {
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.name": {
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.r": {
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.z": {
-  "PYTHON": "setup_langmuir_probes_hardware_description_d3d(ods, {pulse})"
+  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "magnetics.b_field_pol_probe.:": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.field.data": {
   "COCOSIO": 11,
@@ -297,33 +296,33 @@
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
  "magnetics.b_field_pol_probe.:.identifier": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.length": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.name": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.poloidal_angle": {
   "COCOSIO": 11,
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.position.r": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.position.z": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.toroidal_angle": {
   "COCOSIO": 11,
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.turns": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.b_field_pol_probe.:.type.index": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.diamagnetic_flux.:.data": {
   "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
@@ -332,7 +331,7 @@
   "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
  },
  "magnetics.flux_loop.:": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.flux.data": {
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
@@ -344,22 +343,22 @@
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.identifier": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.name": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.position.:": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.position.:.r": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.position.:.z": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "setup_magnetics_hardware_description_d3d(ods)"
+  "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.ip.:": {
   "VALUE": 1
@@ -372,47 +371,47 @@
   "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)/1000.]"
  },
  "pf_active.coil.:": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
-  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.current.time": {
-  "PYTHON": "pf_active_coil_current_data_d3d(ods, {pulse}, {quiet})"
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.element.:": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.geometry_type": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.outline.r": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.outline.z": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.rectangle.height": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.rectangle.r": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.rectangle.width": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.rectangle.z": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.identifier": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.identifier": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.name": {
-  "PYTHON": "setup_pf_active_hardware_description_d3d(ods)"
+  "PYTHON": "pf_active_hardware(ods)"
  },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 1,
@@ -425,23 +424,23 @@
   "VALUE": 1.6955
  },
  "thomson_scattering.channel.:": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "setup_thomson_scattering_hardware_description_d3d(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
   "VALUE": 1
