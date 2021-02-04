@@ -489,36 +489,43 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
 
     :param namespace: testing namespace
     '''
+    old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC',None)
     os.environ['OMAS_DEBUG_TOPIC'] = 'mapping'
-    from pprint import pprint
+    try:
+        from pprint import pprint
 
-    for func in __all__:
-        print('=' * len(func))
-        print(func)
-        print('=' * len(func))
-        ods = ODS()
-        func = eval(func, global_namespace, local_namespace)
-        try:
+        for func in __all__:
+            print('=' * len(func))
+            print(func)
+            print('=' * len(func))
+            ods = ODS()
+            func = eval(func, global_namespace, local_namespace)
             try:
-                func(ods)
-            except Exception:
-                raise
-        except TypeError as _excp:
-            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
-                raise _excp.__class__(
-                    str(_excp)
-                    + '\n'
-                    + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
-                )
-            else:
-                raise
-        tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
-        n = max(map(lambda x: len(x), tmp))
-        for item in tmp:
-            try:
-                print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
-            except Exception:
-                print(f'{item.ljust(n)}   mixed')
+                try:
+                    func(ods)
+                except Exception:
+                    raise
+            except TypeError as _excp:
+                if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
+                    raise _excp.__class__(
+                        str(_excp)
+                        + '\n'
+                        + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
+                    )
+                else:
+                    raise
+            tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
+            n = max(map(lambda x: len(x), tmp))
+            for item in tmp:
+                try:
+                    print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
+                except Exception:
+                    print(f'{item.ljust(n)}   mixed')
+    finally:
+        if old_OMAS_DEBUG_TOPIC is None:
+            del os.environ['OMAS_DEBUG_TOPIC']
+        else:
+            os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
 
 
 # ===================
