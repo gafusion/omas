@@ -230,8 +230,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         filename = machines(machine, branch)
 
         # load mappings from file
-        with open(filename, 'r') as f:
+        with open(os.path.split(filename)[0]+os.sep+'common.json', 'r') as f:
             mappings = json.load(f)
+        with open(filename, 'r') as f:
+            mappings.update(json.load(f))
         for item in ['__cocos_rules__', '__options__']:
             mappings.setdefault(item, {})
 
@@ -359,11 +361,14 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     # go through machine files
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
-        _machines_dict[branch][os.path.splitext(os.path.split(filename)[1])[0]] = os.path.abspath(filename)
+        m = os.path.splitext(os.path.split(filename)[1])[0]
+        if m != 'common':
+            _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines
     if machine is None:
         return _machines_dict[branch]
+
     # return filename with mappings for this machine
     else:
         if machine not in _machines_dict[branch]:

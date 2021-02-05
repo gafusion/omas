@@ -1,7 +1,5 @@
 import numpy as np
-import copy
 import inspect
-from pprint import pprint
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings.common import *
@@ -366,7 +364,7 @@ def interferometer_hardware(ods, pulse=133221):
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
-        ch['line_of_sight.third_point'] = copy.copy(ch['line_of_sight.first_point'])
+        ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
 
     if pulse < 125406:
         printe(

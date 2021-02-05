@@ -68,18 +68,6 @@
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
- "dataset_description.data_entry.machine": {
-  "VALUE": "{machine}"
- },
- "dataset_description.data_entry.pulse": {
-  "VALUE": "{pulse}"
- },
- "dataset_description.data_entry.pulse_type": {
-  "VALUE": "pulse"
- },
- "dataset_description.data_entry.user": {
-  "ENVIRON": "USER"
- },
  "equilibrium.code.name": {
   "VALUE": "{EFIT_tree}"
  },
