@@ -1113,7 +1113,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
             for index, specie in enumerate(species_in_tree):
                 unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
                 if q in prof1d[specie]:
-                    if 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.:
+                    if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.:
                         plotting_list.append(prof1d[specie][q] * prof1d[specie]['element[0].z_n'])
                         label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     else:
