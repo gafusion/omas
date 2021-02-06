@@ -1,6 +1,68 @@
 import numpy as np
 from omas import *
 
+_MDS_gEQDSK_COCOS_identify_cache = {}
+
+
+def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
+    '''
+    Python function that queries MDS+ EFIT tree to figure
+    out COCOS convention used for a particular reconstruction
+
+    :param machine: machine name
+
+    :param pulse: pulse
+
+    :param EFIT_tree: MDS+ EFIT tree name
+
+    :return: integer cocos convention
+    '''
+    if (machine, pulse, EFIT_tree) in _MDS_gEQDSK_COCOS_identify_cache:
+        print('cache hit')
+        return _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)]
+    TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
+    res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+    bt = res['bt']
+    ip = res['ip']
+    g_cocos = {(+1, +1): 1, (+1, -1): 3, (-1, +1): 5, (-1, -1): 7, (+1, 0): 1, (-1, 0): 3}
+    sign_Bt = int(np.sign(bt))
+    sign_Ip = int(np.sign(ip))
+    cocosio = g_cocos.get((sign_Bt, sign_Ip), None)
+    _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)] = cocosio
+    return cocosio
+
+
+def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
+    '''
+    evaluate EFIT psi
+
+    :param ODS: input ODS
+
+    :param machine: machine name
+
+    :param pulse: pulse
+
+    :param EFIT_tree: MDS+ EFIT tree name
+
+    :return: integer cocos convention
+    '''
+    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree)
+    with omas_environment(ods, cocosio=cocosio):
+        TDIs = {
+            'psi_axis': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG',
+            'psi_boundary': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY',
+            'rho_tor_norm': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN',
+        }
+        res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+        n = res['rho_tor_norm'].shape[1]
+        for k in range(len(res['psi_axis'])):
+            ods[f'equilibrium.time_slice.{k}.global_quantities.psi_axis'] = res['psi_axis'][k]
+            ods[f'equilibrium.time_slice.{k}.global_quantities.psi_boundary'] = res['psi_boundary'][k]
+            ods[f'equilibrium.time_slice.{k}.profiles_1d.rho_tor_norm'] = res['rho_tor_norm'][k]
+            ods[f'equilibrium.time_slice.{k}.profiles_1d.psi'] = res['psi_axis'][k] + np.linspace(0, 1, n) * (
+                res['psi_boundary'][k] - res['psi_axis'][k]
+            )
+
 
 def pf_coils_to_ods(ods, coil_data):
     """

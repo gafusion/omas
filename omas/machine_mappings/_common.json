@@ -1,6 +1,6 @@
 {
  "dataset_description.data_entry.machine": {
-  "VALUE": "{machine}"
+  "VALUE": "{machine!r}"
  },
  "dataset_description.data_entry.pulse": {
   "VALUE": "{pulse}"

@@ -2,7 +2,7 @@ import numpy as np
 import inspect
 from omas import *
 from omas.omas_utils import printd
-from omas.machine_mappings.common import *
+from omas.machine_mappings._common import *
 
 __all__ = []
 
@@ -225,7 +225,7 @@ def gas_injection_hardware(ods, pulse=133221):
     pipe_rfcomb['name'] = 'RF_COMB_'
     pipe_rfcomb['exit_position']['r'] = 2.38  # m
     pipe_rfcomb['exit_position']['z'] = -0.13  # m
-    pipe_rfcomb['exit_position']['phi'] = np.nan #Unknown, sorry
+    pipe_rfcomb['exit_position']['phi'] = np.nan  # Unknown, sorry
     pipe_rfcomb['valve'][0]['identifier'] = 'LOB2'
     # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
     i += 1
@@ -606,6 +606,7 @@ def pf_active_coil_current_data(ods, pulse=133221):
             validity=None,
         )
 
+
 @machine_mapping_function(__all__)
 def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
@@ -649,6 +650,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
                     chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
             i += inc
     return {}
+
 
 @machine_mapping_function(__all__)
 def magnetics_hardware(ods):

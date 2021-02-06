@@ -15,10 +15,13 @@ __all__ = []
 
 
 @machine_mapping_function(__all__)
-def sample_function(ods, pulse=123456, user_argument='this is a test'):
-    ods['dataset_description.ids_properties.comment'] = f'Comment for {pulse}: {user_argument}'
+def MDS_gEQDSK_psi_nstx(ods, pulse=139047, EFIT_tree='EFIT01'):
+    return MDS_gEQDSK_psi(ods, 'nstx-u', pulse, EFIT_tree)
 
 
 # =====================
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    ods = ODS()
+    with ods.open('machine', 'nstx-u', 139047):
+        print(ods['equilibrium.time_slice.:.profiles_1d.psi'])
+    # run_machine_mapping_functions(['MDS_gEQDSK_psi_nstx'], globals(), locals())

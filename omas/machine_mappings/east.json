@@ -1,6 +1,7 @@
 {
  "__cocos_rules__": {},
  "__mdsserver__": "mds.ipp.ac.cn:8000",
+ "__include__": ["_common"],
  "__options__": {},
  "gas_injection.pipe.:": {
   "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"

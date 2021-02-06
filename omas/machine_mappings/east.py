@@ -1,7 +1,7 @@
 import numpy as np
 from omas import *
 from omas.omas_utils import printd
-from omas.machine_mappings.common import *
+from omas.machine_mappings._common import *
 
 __all__ = []
 

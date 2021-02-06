@@ -2176,7 +2176,7 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                 ax.plot(
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
-                    **kw
+                    **kw,
                 )
 
     ax.set_aspect('equal')
