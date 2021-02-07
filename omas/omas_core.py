@@ -203,11 +203,11 @@ class ODS(MutableMapping):
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         self._parent = None
-        self._imas_version = imas_version
-        self._cocos = cocos
-        self._cocosio = cocosio
+        self.imas_version = imas_version
+        self.cocos = cocos
+        self.cocosio = cocosio
         self._coordsio = coordsio
-        self._unitsio = unitsio
+        self.unitsio = unitsio
         self._dynamic = dynamic
 
     def homogeneous_time(self, key='', default=True):
@@ -434,6 +434,9 @@ class ODS(MutableMapping):
 
     @property
     def location(self):
+        '''
+        Property which returns instance of parent ODS
+        '''
         parent = self.parent
         if isinstance(parent, ODC):
             return ''
@@ -460,7 +463,22 @@ class ODS(MutableMapping):
                 return str(loc)
 
     @property
+    def top(self):
+        '''
+        Property which returns instance of top level ODS
+        '''
+        top = self
+        parent = self.parent
+        while parent is not None:
+            top=parent
+            parent=parent.parent
+        return top
+
+    @property
     def structure(self, location):
+        '''
+        Property which returns structure of current ODS
+        '''
         return imas_structure(self.imas_version, self.location)
 
     @property
@@ -471,18 +489,15 @@ class ODS(MutableMapping):
         :return: string with imas_version
         """
         if not hasattr(self, '_imas_version'):
-            self._imas_version = omas_rcparams['default_imas_version']
+            self.top._imas_version = omas_rcparams['default_imas_version']
+        self._imas_version = self.top._imas_version
         return self._imas_version
 
     @imas_version.setter
     def imas_version(self, imas_version_value):
-        self._imas_version = imas_version_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                if 'code.parameters' in self.getraw(item).location:
-                    continue
-                else:
-                    self.getraw(item).imas_version = imas_version_value
+        if imas_version_value is None:
+            imas_version_value = omas_rcparams['default_imas_version']  # default value for imas_version
+        self.top._imas_version = imas_version_value
 
     @property
     def consistency_check(self):
@@ -604,12 +619,15 @@ class ODS(MutableMapping):
         :return: cocos value
         """
         if not hasattr(self, '_cocos'):
-            self._cocos = omas_rcparams['cocos']
+            self.top._cocos = omas_rcparams['cocos']  # default value for cocos
+        self._cocos = self.top._cocos
         return self._cocos
 
     @cocos.setter
     def cocos(self, cocos_value):
-        raise AttributeError('cocos parameter is readonly!')
+        if cocos_value is None:
+            cocos_value = omas_rcparams['cocos']  # default value for cocos
+        self.top._cocos = cocos_value
 
     @property
     def cocosio(self):
@@ -618,18 +636,16 @@ class ODS(MutableMapping):
 
         :return: cocosio value
         """
-        if not hasattr(self, '_cocosio') or self._cocosio is None:
-            self.cocosio = None
+        if not hasattr(self, '_cocosio'):
+            self.top._cocosio = omas_rcparams['cocos']  # default value for cocosio
+        self._cocosio = self.top._cocosio
         return self._cocosio
 
     @cocosio.setter
     def cocosio(self, cocosio_value):
         if cocosio_value is None:
             cocosio_value = omas_rcparams['cocos']  # default value for cocosio
-        self._cocosio = cocosio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).cocosio = cocosio_value
+        self.top._cocosio = cocosio_value
 
     @property
     def unitsio(self):
@@ -638,18 +654,16 @@ class ODS(MutableMapping):
 
         :return: unitsio value
         """
-        if not hasattr(self, '_unitsio') or self._unitsio is None:
-            self.unitsio = None
+        if not hasattr(self, '_unitsio'):
+            self.top.unitsio = {}  # default value for unitsio
+        self._unitsio = self.top._unitsio
         return self._unitsio
 
     @unitsio.setter
     def unitsio(self, unitsio_value):
         if unitsio_value is None:
             unitsio_value = {}  # default value for unitsio
-        self._unitsio = unitsio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).unitsio = unitsio_value
+        self.top._unitsio = unitsio_value
 
     @property
     def coordsio(self):

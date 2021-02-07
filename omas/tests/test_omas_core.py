@@ -548,6 +548,21 @@ class TestOmasCore(UnittestCaseOmas):
         ods1.consistency_check = False
         assert ods.diff_attrs(ods1, verbose=True)
 
+    def test_top(self):
+        ods = ODS()
+        ods['equilibrium.time_slice.0.global_quantities.ip'] = 1.0
+        assert ods['equilibrium.time_slice.0.global_quantities'].top is ods
+        assert ods['equilibrium.time_slice.0.global_quantities'].top is not ods['equilibrium']
+
+    def test_imas_version(self):
+        ods = ODS()
+        assert ods.imas_version == omas_rcparams['default_imas_version']
+        assert ods['equilibrium.time_slice.0.global_quantities'].imas_version == omas_rcparams['default_imas_version']
+
+        ods['equilibrium.time_slice.0.global_quantities'].imas_version = 'test'
+        assert ods.imas_version == 'test'
+        assert ods['equilibrium.time_slice.0.global_quantities'].imas_version == 'test'
+
     # End of TestOmasCore class
 
 
