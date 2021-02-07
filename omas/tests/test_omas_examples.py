@@ -138,7 +138,7 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_dynamic_imas(self):
         from omas.examples import omas_dynamic_imas
 
-    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
+    @unittest.skipIf(failed_D3D_MDS, str(failed_D3D_MDS))
     def test_omas_dynamic_machine(self):
         from omas.examples import omas_dynamic_machine
 
