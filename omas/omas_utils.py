@@ -77,7 +77,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
                     differences.append(f'DIFF: `{k}` differ in value')
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
                 differences.append(f'DIFF: `{f}` differ in type: {type(ods1[k])} vs type(ods2[k])')
-            elif numpy.atleast_1d(is_uncertain(ods1[k])).any() or numpy.atleast_1d(is_uncertain(ods2[k])).any():
+            elif is_uncertain(ods1[k]) or is_uncertain(ods2[k]):
                 v1 = nominal_values(ods1[k])
                 v2 = nominal_values(ods2[k])
                 d1 = std_devs(ods1[k])
@@ -216,8 +216,7 @@ def is_uncertain(var):
     """
     :param var: Variable or array to test
 
-    :return: True if variable is instance of uncertainties or
-             array of shape var with elements indicating uncertainty
+    :return: True if input variable or array is uncertain
     """
 
     def _uncertain_check(x):
@@ -225,10 +224,13 @@ def is_uncertain(var):
 
     if isinstance(var, str):
         return False
-    elif numpy.iterable(var):
-        tmp = numpy.array(var).flat
-        tmp = numpy.array(list(map(_uncertain_check, tmp)))
-        return numpy.reshape(tmp, numpy.array(var).shape)
+    elif numpy.iterable(var) or isinstance(var, numpy.ndarray):  # isinstance needed for 0D arrays from squeeze
+        tmp = numpy.array(var)
+        if tmp.dtype not in ['O', 'object']:
+            return False
+        else:
+            # the argument of any is a generator object (using a list slows things down)
+            return any(_uncertain_check(x) for x in tmp.flat)
     else:
         return _uncertain_check(var)
 
@@ -307,9 +309,8 @@ def json_dumper(obj, objects_encode=True):
             return obj.toJSON()
 
     else:
-        tmp = is_uncertain(obj)
-        if numpy.any(numpy.atleast_1d(tmp)):
-            if not len(numpy.array(tmp).shape):
+        if is_uncertain(obj):
+            if not len(numpy.array(obj).shape):
                 return dict(__ufloat__=nominal_values(obj), __ufloat_std__=std_devs(obj))
             else:
                 nomv = nominal_values(obj)

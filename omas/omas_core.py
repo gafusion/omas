@@ -90,7 +90,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     """
     # force type consistent with data dictionary
     txt = ''
-    if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
+    if is_uncertain(value) or 'data_type' not in info:
         pass
     elif isinstance(value, numpy.ndarray):
         if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
@@ -1272,7 +1272,7 @@ class ODS(MutableMapping):
                                         value,
                                     )
                                 except TypeError:
-                                    if numpy.atleast_1d(is_uncertain(value)).any():
+                                    if is_uncertain(value):
                                         v = omas_interp1d(
                                             output_coordinates.__getitem__(coordinate, None),
                                             ods_coordinates.__getitem__(coordinate, None),

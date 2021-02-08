@@ -60,7 +60,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
             if tmp.dtype.name.lower().startswith('u') or tmp.dtype.name.lower().startswith('s'):
                 tmp = tmp.astype('S')
             elif tmp.dtype.name.lower().startswith('o'):
-                if numpy.atleast_1d(is_uncertain(tmp)).any():
+                if is_uncertain(tmp):
                     g.create_dataset(key + '_error_upper', std_devs(tmp).shape, dtype=std_devs(tmp).dtype, compression=compression)[
                         ...
                     ] = std_devs(tmp)

@@ -100,7 +100,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     :return: path if set was done, otherwise None
     """
     # handle uncertain data
-    if numpy.atleast_1d(is_uncertain(value)).any():
+    if is_uncertain(value):
         path = copy.deepcopy(path)
         tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
         path[-1] = path[-1] + '_error_upper'
