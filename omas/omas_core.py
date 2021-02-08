@@ -207,7 +207,7 @@ class ODS(MutableMapping):
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
-        self._dynamic = dynamic
+        self.dynamic = dynamic
 
     def homogeneous_time(self, key='', default=True):
         """
