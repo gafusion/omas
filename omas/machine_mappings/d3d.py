@@ -410,7 +410,7 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
 
     tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
 
-    is_subsys = np.array([np.all(item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']) for k in list(tsdat.keys())])
+    is_subsys = np.array([all(item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']) for k in list(tsdat.keys())])
     subsystems = np.array(list(tsdat.keys()))[is_subsys]
 
     i = 0
@@ -822,4 +822,4 @@ def magnetics_floops_data(ods, pulse=133221):
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    run_machine_mapping_functions(__all__, globals(), locals())

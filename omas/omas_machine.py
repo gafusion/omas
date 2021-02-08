@@ -573,6 +573,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
 def mds_machine_to_server_mapping(server, treename):
     '''
     Resolve MDS+ server
+    NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
 
     :param machine: machine name
 
@@ -580,6 +581,15 @@ def mds_machine_to_server_mapping(server, treename):
 
     :return: string with MDS+ server and port to be used
     '''
+    try:
+        import omfit_classes.omfit_mds
+    except (ImportError, ModuleNotFound):
+        return server.format(**os.environ)
+    else:
+        server0 = omfit_classes.omfit_mds.translate_MDSserver(server, treename)
+        tunneled_server = omfit_classes.omfit_mds.tunneled_MDSserver(server0, quiet=False)
+        return tunneled_server
+
     return server.format(**os.environ)
 
 
