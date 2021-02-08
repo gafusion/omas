@@ -1521,11 +1521,11 @@ class ODS(MutableMapping):
         state = {}
         for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
-                # we do not want to carry with us this information
-                if item in ['_cocosio', '_coordsio', '_unitsio', '_parent']:
-                    state[item] = None
-                else:
+                # we do not want to carry with us information other than
+                if item in ['_consistency_check', '_imas_version', '_cocos']:
                     state[item] = self.__dict__[item]
+                else:
+                    state[item] = None
         return state
 
     def __setstate__(self, state):
@@ -1587,7 +1587,8 @@ class ODS(MutableMapping):
         :return: self
         """
         for item in omas_ods_attrs:
-            setattr(self, item, getattr(ods, item, None))
+            if item not in ['_parent']:
+                setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):

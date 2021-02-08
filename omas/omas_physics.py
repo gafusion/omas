@@ -1863,6 +1863,8 @@ def omas_environment(
 
     :param unitsio: True/False whether data read from OMAS should have units
 
+    :param input_data_process_functions: list of functions that are used to process data that is passed to the ODS
+
     :param xmlcodeparams: view code.parameters as an XML string while in this environment
 
     :param dynamic_path_creation: whether to dynamically create the path when setting an item
